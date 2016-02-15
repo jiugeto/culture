@@ -11,7 +11,7 @@
             @if($action->child)
                 @foreach($action->child as $sub_action)
             <li>
-                <a href="/admin/{{strtolower($sub_action->controller_prefix)}}@if($sub_action->action!='index'){{'/'.$sub_action->action}}@endif" class="{{$sub_action->style_class}}">
+                <a href="/admin/{{$sub_action->url}}@if($sub_action->action!='index'){{'/'.$sub_action->action}}@endif" class="{{$sub_action->style_class}}">
                     <span class="am-icon-check"></span> {{ $sub_action->name }}
                     <span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span>
                 </a>

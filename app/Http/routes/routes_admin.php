@@ -35,4 +35,9 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
     Route::resource('link','LinkController');
     //消息路由之心声管理
     Route::resource('voice','VoiceController');
+    //广告管理
+    Route::resource('ad','AdController');
+    //广告位管理
+    Route::get('place/create','AdPlaceController@create');
+    Route::resource('place','AdPlaceController');
 });

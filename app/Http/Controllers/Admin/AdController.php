@@ -3,6 +3,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Models\ActionModel;
+use App\Models\AdModel;
+use App\Models\AdPlaceModel;
 
 class AdController extends BaseController
 {
@@ -26,10 +28,20 @@ class AdController extends BaseController
 
     public function index()
     {
+        $datas = AdModel::where('del',0)
+            ->orderBy('id','desc')
+            ->paginate($this->limit);
+        $crumb = $this->crumb;
+        $crumb['function']['name'] = '广告列表';
+        $crumb['function']['url'] = '';
         $result = [
             'actions'=> $this->actions(),
-            'datas'=> $this->actions(),
+            'datas'=> $datas,
+            'crumb'=> $crumb,
+            'prefix_url'=> '/admin/ad',
         ];
         return view('admin.ad.index', $result);
     }
+
+    public function create(){}
 }

@@ -44,9 +44,6 @@ class ActionController extends BaseController
             'crumb'=> $crumb,
             'prefix_url'=> $prefix_url,
         ];
-//        return view('admin.action.index', compact(
-//            'actions','datas','crumb','prefix_url'
-//        ));
         return view('admin.action.index', $result);
     }
 
@@ -62,13 +59,6 @@ class ActionController extends BaseController
         ));
     }
 
-//    public function store(Request $request)
-//    {
-//        $actionModel = $this->getData($request);
-//        $actionModel->created_at = date('Y-m-d H:m:s', time());
-//        $actionModel->save();
-//        return redirect('/admin/action');
-//    }
     public function store(Request $request)
     {
         $data = $this->getData($request);
@@ -103,13 +93,6 @@ class ActionController extends BaseController
         ));
     }
 
-//    public function update(Request $request, $id)
-//    {
-//        $actionModel = $this->getData($request);
-//        $actionModel->updated_at = date('Y-m-d H:m:s', time());
-//        $actionModel->save();
-//        return redirect('/admin/action');
-//    }
     public function update(Request $request, $id)
     {
         $data = $this->getData($request);
@@ -136,20 +119,6 @@ class ActionController extends BaseController
     /**
      * 收集数据
      */
-//    public function getData(Request $request)
-//    {
-//        $model = $this->model;
-//        if (!$request->style_class) { $request->style_class = ''; }
-//        if (!$request->intro) { $request->intro = ''; }
-//        $model->name = $request->name;
-//        $model->intro = $request->intro;
-//        $model->namespace = $request->namespace;
-//        $model->controller_prefix = substr($request->controller_prefix,0,-10);
-//        $model->action = $request->action;
-//        $model->style_class = $request->style_class;
-//        $model->pid = $request->pid;
-//        return $model;
-//    }
     public function getData(Request $request)
     {
         $data = $request->all();
@@ -160,6 +129,7 @@ class ActionController extends BaseController
             'intro'=> $data['intro'],
             'namespace'=> $data['namespace'],
             'controller_prefix'=> substr($data['controller_prefix'],0,-10),
+            'url'=> $data['url'],
             'action'=> $data['action'],
             'style_class'=> $data['style_class'],
             'pid'=> $data['pid'],

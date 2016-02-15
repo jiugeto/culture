@@ -29,6 +29,11 @@
                         </div>
 
                         <div class="am-form-group">
+                            <label>访问路径部分url / Url：</label>
+                            <input type="text" placeholder="小写，例：action" pattern="^[a-z_]+$" required name="url" value="{{ $data->url }}"/>
+                        </div>
+
+                        <div class="am-form-group">
                             <label>方法名 / Function Name：</label>
                             <input type="text" placeholder="例：index" pattern="^[a-zA-Z_]+$" required name="action" value="{{ $data->action }}"/>
                         </div>

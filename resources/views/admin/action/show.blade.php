@@ -37,6 +37,10 @@
                     <td>{{ $data->controller_prefix }}</td>
                 </tr>
                 <tr>
+                    <td class="am-hide-sm-only">访问路径url / Url：</td>
+                    <td>{{ '/admin/'.$data->url }}</td>
+                </tr>
+                <tr>
                     <td class="am-hide-sm-only">方法名称 / Action：</td>
                     <td>{{ $data->action }}</td>
                 </tr>
