@@ -21,6 +21,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+/**
+ * home代表首页
+ */
+
 //载入前台路由
 include("routes/routes_home.php");
 

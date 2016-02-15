@@ -38,9 +38,16 @@ class ActionController extends BaseController
         $crumb['function']['name'] = '权限列表';
         $crumb['function']['url'] = '';
         $prefix_url = '/admin/action';
-        return view('admin.action.index', compact(
-            'actions','datas','crumb','prefix_url'
-        ));
+        $result = [
+            'actions'=> $actions,
+            'datas'=> $datas,
+            'crumb'=> $crumb,
+            'prefix_url'=> $prefix_url,
+        ];
+//        return view('admin.action.index', compact(
+//            'actions','datas','crumb','prefix_url'
+//        ));
+        return view('admin.action.index', $result);
     }
 
     public function create($pid=0)
