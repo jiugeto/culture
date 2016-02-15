@@ -22,6 +22,7 @@ class LinkController extends BaseController
             'name'=> '链接管理',
             'url'=> 'link',
         ],
+        'prefix'=> '链接',
     ];
 
     public function __construct()
@@ -88,6 +89,22 @@ class LinkController extends BaseController
         $data['updated_at'] = date('Y-m-d', time());
         LinkModel::where('id',$id)->update($data);
         return redirect('/admin/link');
+    }
+
+    public function show($id)
+    {
+        $data = LinkModel::find($id);
+        $data['type'] = $this->model->type();
+        $crumb = $this->crumb;
+        $crumb['function']['name'] = $crumb['prefix'].'详情';
+        $crumb['function']['url'] = 'link/show';
+        $result = [
+            'actions'=> $this->actions(),
+            'data'=> $data,
+            'crumb'=> $crumb,
+        ];
+        dd($result);
+        return view('admin.link.show', $result);
     }
 
 
