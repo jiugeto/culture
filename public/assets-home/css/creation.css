@@ -1,0 +1,83 @@
+/*============创作窗口============*/
+
+
+/*=======tab菜单列表======*/
+.con_tab {
+    margin-bottom:5px;
+    width:1000px;height:35px;
+    background:rgb(230,230,230);
+}
+.con_tab_menu {
+    padding:23px;
+    position:relative;top:9px;
+}
+.con_text_color {
+    color:grey;
+}
+.con_text_color_red {
+    color:white;
+    background:#434a54;
+}
+/*=======tab菜单列表======*/
+
+/*=======窗口菜单======*/
+.con_menu {
+    width:1000px;height:32px;
+}
+.con_menu_toggle {
+    padding:8px 15px;
+    color:white;
+    position:relative;top:7px;
+    background:black;
+}
+.con_menu_list {
+    padding:5px;
+    color:grey;
+    border:1px solid grey;
+    position:relative;top:7px;
+}
+/*=======窗口菜单======*/
+
+/*=======创作窗口======*/
+.con_create {
+    width:1000px;height:610px;
+    background:#434a54;
+}
+.con_win {      /*制作窗口*/
+    width:1000px;height:562.5px;
+    background:lightgrey;
+    overflow:hidden;
+}
+/*=====创作窗口z-index：100-1000=====*/
+.con_time {
+    width:1000px;height:37.5px;
+    background:black;
+}
+.con_time_menu {
+    padding:10px 15px;
+    color:white;
+    background:#434a54;
+    position:relative;top:9px;
+}
+.con_timeline {
+    width:780px;height:36px;
+    background:blue;
+    position:relative;bottom:18px;left:75px;
+}
+.con_time_rand {
+    color:grey;
+    position:relative;top:10px;left:780px;
+}
+.con_time_voice {
+    color:grey;
+    position:relative;top:10px;left:790px;
+}
+/*=======创作窗口======*/
+
+/*=======收藏窗口======*/
+.con_collection {}
+/*=======收藏窗口======*/
+
+/*=======专辑(口袋)窗口======*/
+.con_pocket {}
+/*=======专辑(口袋)窗口======*/
