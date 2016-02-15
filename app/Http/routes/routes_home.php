@@ -10,4 +10,6 @@
 Route::group(['namespace'=>'Home'],function(){
     //前台首页路由
     Route::any('/','HomeController@index');
+    Route::any('/home','HomeController@index');
+    Route::any('/creation','CreationController@index');
 });
