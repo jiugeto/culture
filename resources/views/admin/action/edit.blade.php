@@ -30,7 +30,7 @@
 
                         <div class="am-form-group">
                             <label>访问路径部分url / Url：</label>
-                            <input type="text" placeholder="小写，例：action" pattern="^[a-z_]+$" required name="url" value="{{ $data->url }}"/>
+                            <input type="text" placeholder="例：action" pattern="^[a-zA-Z_]+$" required name="url" value="{{ $data->url }}"/>
                         </div>
 
                         <div class="am-form-group">
