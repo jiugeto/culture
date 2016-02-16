@@ -7,7 +7,7 @@
 //    return 'member';
 //});
 
-Route::group(['prefix'=>'member'], function(){
+Route::group(['prefix'=>'member','namespace'=>'Member'], function(){
     Route::get('/','HomeController@index');
     Route::get('/home','HomeController@index');
 });
