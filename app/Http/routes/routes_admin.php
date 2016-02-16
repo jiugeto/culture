@@ -26,6 +26,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
     //供求管理之供应路由
     //供求管理之需求路由
     //内部产品路由
+    Route::resource('product','ProductController');
     //租赁路由
     //娱乐路由
     //设计路由

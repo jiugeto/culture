@@ -4,3 +4,39 @@
 .icon { width:15px; }
 .list_center { text-align:center; }
 .pic_size_small { width:100px; }
+
+/*=======action层叠列表========*/
+.action_pos {
+    float:right;
+}
+.action_span {
+    padding:5px 10px;
+    border:1px solid lightgray;
+    cursor:pointer;
+}
+.action_change { margin:10px; }
+.action_sub {
+    margin:10px;
+    padding:10px;
+    width:40%;
+    border:1px solid lightgray;
+    background:rgb(245,245,245);
+    float:left;
+}
+.action_sub_btn {
+    padding:3px 10px;
+    border:1px solid lightgray;
+    background:rgb(240,240,240);
+}
+.action_blue {
+    color:rgb(14,144,210);
+}
+.action_red {
+    color:rgb(220,80,75);
+}
+.clear {
+    clear:both;
+}
+.action_border {
+    border-bottom:0;
+}

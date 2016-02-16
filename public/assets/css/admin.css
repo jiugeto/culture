@@ -69,7 +69,7 @@ ul {
 .admin-content {
   width: auto;
   overflow: hidden;
-  height: 100%;
+  /*height: 100%;*/
   background: #fff;
 }
 
