@@ -48,13 +48,20 @@ class TypeController extends BaseController
 
     public function create($table_name='')
     {
+        $tablename = ''; $field = '';
+        if ($table_name) {
+            $tableIds = explode('-',$table_name);
+            $tablename = $tableIds[0];
+            $field = $tableIds[1];
+        }
         $crumb = $this->crumb;
         $crumb['function']['name'] = '添加';
         $crumb['function']['url'] = 'type/create';
         $result = [
             'actions'=> $this->actions(),
             'crumb'=> $crumb,
-            'table_name'=> $table_name,
+            'table_name'=> $tablename,
+            'field'=> $field,
         ];
         return view('admin.type.create', $result);
     }

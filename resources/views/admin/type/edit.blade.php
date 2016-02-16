@@ -27,7 +27,7 @@
 
                         <div class="am-form-group">
                             <label>所在数据表名称 / Table：</label>
-                            <input type="text" placeholder="至少2个字母字符" pattern="^[a-z_]{2,}$" required name="table_name" value="{{ $data->table_name }}">
+                            <input type="text" placeholder="至少2个字符" minlength="2" required name="table_name" value="{{ $data->table_name }}">
                             <label>字段名称 / Field：</label>
                             <input type="text" placeholder="至少2个字母字符" pattern="^[a-z_]{2,}$" required name="field" value="{{ $data->field }}">
                         </div>

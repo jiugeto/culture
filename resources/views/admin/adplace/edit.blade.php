@@ -26,7 +26,8 @@
                         </div>
 
                         <div class="am-form-group">
-                            <label>广告位类型 / Type：</label>
+                            <label>广告位类型 / Type：
+                                <a href="/admin/type/create/{{'广告位-type_id'}}">[+添加类别]</a></label>
                             <select required name="type_id">
                                 @foreach($types as $type)
                                     <option value="{{ $type->id }}"

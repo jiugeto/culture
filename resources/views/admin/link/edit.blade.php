@@ -21,7 +21,8 @@
                         </div>
 
                         <div class="am-form-group">
-                            <label>鼠标移动显示 / Title：</label>
+                            <label>鼠标移动显示 / Title：
+                                <a href="/admin/type/create/{{'网站链接-type'}}">[+添加类别]</a></label>
                             <input type="text" name="title" value="{{ $data->title }}"/>
                         </div>
 
