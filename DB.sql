@@ -127,6 +127,66 @@ LOCK TABLES `ba_role_action` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `bs_actor_pic`
+--
+
+DROP TABLE IF EXISTS `bs_actor_pic`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bs_actor_pic` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `actor_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '演员id',
+  `pic_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '图片id',
+  `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='演员图片关联表 bs_actor_pic';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bs_actor_pic`
+--
+
+LOCK TABLES `bs_actor_pic` WRITE;
+/*!40000 ALTER TABLE `bs_actor_pic` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bs_actor_pic` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bs_actors`
+--
+
+DROP TABLE IF EXISTS `bs_actors`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bs_actors` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL COMMENT '演员名称',
+  `sex` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '性别：1男，2女',
+  `realname` varchar(255) DEFAULT NULL COMMENT '真实名字',
+  `origin` varchar(255) DEFAULT NULL COMMENT '籍贯',
+  `education` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '学历',
+  `school` varchar(255) DEFAULT NULL COMMENT '毕业学校',
+  `hobby` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '爱好',
+  `job` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '职业',
+  `area` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '所在地',
+  `height` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '身高，单位cm',
+  `work` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '作品',
+  `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
+  `updated_at` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='演员表 bs_actors';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bs_actors`
+--
+
+LOCK TABLES `bs_actors` WRITE;
+/*!40000 ALTER TABLE `bs_actors` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bs_actors` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `bs_ad_places`
 --
 
@@ -196,6 +256,83 @@ LOCK TABLES `bs_ads` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `bs_entertain_actor`
+--
+
+DROP TABLE IF EXISTS `bs_entertain_actor`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bs_entertain_actor` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `entertain_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '娱乐id',
+  `actor_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '演员id',
+  `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='娱乐演员关联表 bs_entertain_actor';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bs_entertain_actor`
+--
+
+LOCK TABLES `bs_entertain_actor` WRITE;
+/*!40000 ALTER TABLE `bs_entertain_actor` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bs_entertain_actor` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bs_entertain_pic`
+--
+
+DROP TABLE IF EXISTS `bs_entertain_pic`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bs_entertain_pic` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `entertain_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '娱乐id',
+  `pic_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '图片id',
+  `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='娱乐图片关联表 bs_entertain_pic';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bs_entertain_pic`
+--
+
+LOCK TABLES `bs_entertain_pic` WRITE;
+/*!40000 ALTER TABLE `bs_entertain_pic` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bs_entertain_pic` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bs_entertains`
+--
+
+DROP TABLE IF EXISTS `bs_entertains`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bs_entertains` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL COMMENT '娱乐标题',
+  `content` varchar(500) NOT NULL COMMENT '内容',
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布方id',
+  `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
+  `updated_at` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='娱乐表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bs_entertains`
+--
+
+LOCK TABLES `bs_entertains` WRITE;
+/*!40000 ALTER TABLE `bs_entertains` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bs_entertains` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `bs_links`
 --
 
@@ -261,6 +398,38 @@ CREATE TABLE `bs_message` (
 LOCK TABLES `bs_message` WRITE;
 /*!40000 ALTER TABLE `bs_message` DISABLE KEYS */;
 /*!40000 ALTER TABLE `bs_message` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bs_orders`
+--
+
+DROP TABLE IF EXISTS `bs_orders`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bs_orders` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL COMMENT '订单名称',
+  `serial` int(20) unsigned NOT NULL DEFAULT '0' COMMENT '订单编号',
+  `seller` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '卖家id ',
+  `seller_name` varchar(255) NOT NULL COMMENT '卖家名称',
+  `buyer` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '买家id',
+  `buyer_name` varchar(255) NOT NULL COMMENT '买家名称',
+  `number` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '数量',
+  `status` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '订单状态：申请，协商，确定，交易，结果',
+  `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
+  `updated_at` date NOT NULL DEFAULT '0000-00-00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单表 bs_orders';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bs_orders`
+--
+
+LOCK TABLES `bs_orders` WRITE;
+/*!40000 ALTER TABLE `bs_orders` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bs_orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -348,6 +517,61 @@ CREATE TABLE `bs_products_attr` (
 LOCK TABLES `bs_products_attr` WRITE;
 /*!40000 ALTER TABLE `bs_products_attr` DISABLE KEYS */;
 /*!40000 ALTER TABLE `bs_products_attr` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bs_rent_pic`
+--
+
+DROP TABLE IF EXISTS `bs_rent_pic`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bs_rent_pic` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `rent_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '租赁id',
+  `pic_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '图片id',
+  `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='租赁图片关联表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bs_rent_pic`
+--
+
+LOCK TABLES `bs_rent_pic` WRITE;
+/*!40000 ALTER TABLE `bs_rent_pic` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bs_rent_pic` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bs_rents`
+--
+
+DROP TABLE IF EXISTS `bs_rents`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bs_rents` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL COMMENT '设备名称',
+  `genre` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '类型：1供应，2需求',
+  `intro` varchar(500) NOT NULL COMMENT '设备介绍',
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布者id',
+  `price` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '价格，单位元',
+  `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站功能：0不放入回收站，1放入回收站',
+  `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
+  `updated_at` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='租赁表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bs_rents`
+--
+
+LOCK TABLES `bs_rents` WRITE;
+/*!40000 ALTER TABLE `bs_rents` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bs_rents` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -476,4 +700,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-02-16 23:14:15
+-- Dump completed on 2016-02-17  3:06:35
