@@ -6,18 +6,34 @@ use App\Models\ProductAttrModel;
 
 class ProductModel extends Model
 {
-    protected $table = 'bs_Products';
+    protected $table = 'bs_products';
     public $timestamps = false;
     protected $fillable = [
         'id','name','intro','uid','css_id','js_id','del','created_at','updated_at',
     ];
 
+//    /**
+//     * css样式，js文件
+//     */
+//    public function type()
+//    {
+//        return $this->hasOne('App\Models\TypeModel', 'id', 'type_id');
+//    }
+
     /**
-     * css样式，js文件
+     * 由css_id得到一条css记录
      */
-    public function type()
+    public function getOneCss($css_id)
     {
-        return $this->hasOne('App\Models\TypeModel', 'id', 'type_id');
+        return ProductAttrModel::where('id', $css_id)->first();
+    }
+
+    /**
+     * 由js_id得到一条js记录
+     */
+    public function getOneJs($js_id)
+    {
+        return ProductAttrModel::where('id', $js_id)->first();
     }
 
     /**

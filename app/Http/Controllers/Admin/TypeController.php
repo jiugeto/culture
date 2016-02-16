@@ -42,15 +42,18 @@ class TypeController extends BaseController
         ));
     }
 
-    public function create()
+    public function create($table_name='')
     {
         $actions = $this->actions();
         $crumb = $this->crumb;
         $crumb['function']['name'] = '添加';
         $crumb['function']['url'] = 'type/create';
-        return view('admin.type.create', compact(
-            'actions','crumb'
-        ));
+        $result = [
+            'actions'=> $this->actions(),
+            'crumb'=> $crumb,
+            'table_name'=> $table_name,
+        ];
+        return view('admin.type.create', $result);
     }
 
     public function store(Request $request)

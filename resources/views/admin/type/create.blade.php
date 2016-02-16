@@ -20,6 +20,17 @@
                             <textarea name="intro" cols="50" rows="5"></textarea>
                         </div>
 
+                        <div class="am-form-group">
+                            <label>所在数据表名称 / Table：</label>
+                            @if($table_name)
+                                <input type="text" placeholder="至少2个字母字符" pattern="^[a-z_]{2,}$" required name="table_name" value="{{ $table_name }}" readonly>
+                            @else
+                                <input type="text" placeholder="至少2个字母字符" pattern="^[a-z_]{2,}$" required name="table_name">
+                            @endif
+                            <label>字段名称 / Field：</label>
+                            <input type="text" placeholder="至少2个字母字符" pattern="^[a-z_]{2,}$" required name="field">
+                        </div>
+
                         <button type="submit" class="am-btn am-btn-primary">保存添加</button>
                     </fieldset>
                 </form>
