@@ -2,6 +2,10 @@
 @section('content')
     <div class="admin-content">
         @include('admin.common.crumb')
+        <div class="am-g">
+            @include('admin.common.menu')
+            {{--@include('admin.type.search')--}}
+        </div>
         <hr/>
 
         <div class="am-g">
@@ -16,9 +20,22 @@
                         </div>
 
                         <div class="am-form-group">
+                            <label>类型划分依据 / Type：
+                                <a href="/admin/type/create/{{'bs_videos_category'}}">[+添加依据]</a>
+                            </label>
+                            <select name="type_id">
+                                <option value="">-选择-</option>
+                                @foreach($types as $type)
+                                    <option value="{{ $type->id }}">{{ $type->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="am-form-group">
                             <label>父id / Category：</label>
                             <select name="cate_id">
-                                <option value="0">-选择-</option>
+                                <option value="">-选择-</option>
+                                <option value="0">-0级类型-</option>
                                 @foreach($pcates as $pcate)
                                     <option value="{{ $pcate->id }}">{{ $pcate->name }}</option>
                                 @endforeach

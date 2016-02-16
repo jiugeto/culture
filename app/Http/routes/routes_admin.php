@@ -15,6 +15,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
     Route::post('type/{id}','TypeController@update');
     Route::get('type/create/{id}','TypeController@create');
     Route::resource('type','TypeController');
+    Route::get('type/tableid/{table_id}','TypeController@index');
     //权限管理之管理员路由
     Route::resource('admin','AdminController');
     //权限管理之角色路由

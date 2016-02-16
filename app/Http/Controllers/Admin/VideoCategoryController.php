@@ -52,6 +52,7 @@ class VideoCategoryController extends BaseController
             'actions'=> $this->actions(),
             'crumb'=> $crumb,
             'pcates'=> VideoCategoryModel::where('pid', 0)->get(),      //暂时父级pid==0
+            'types'=> $this->model->getTypes(),
         ];
         return view('admin.videoCate.create', $result);
     }

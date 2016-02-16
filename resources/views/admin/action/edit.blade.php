@@ -2,6 +2,9 @@
 @section('content')
     <div class="admin-content">
         @include('admin.common.crumb')
+        <div class="am-g">
+            @include('admin.common.menu')
+        </div>
         <hr/>
 
         <div class="am-g">
