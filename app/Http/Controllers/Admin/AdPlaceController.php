@@ -11,23 +11,12 @@ class AdPlaceController extends BaseController
      * 系统后台广告管理
      */
 
-    /**
-     * 面包屑导航
-     */
-    protected $crumb = [
-        'main'=> [
-            'name'=> '系统后台',
-            'url'=> '',
-        ],
-        'category'=> [
-            'name'=> '广告位管理',
-            'url'=> 'place',
-        ],
-    ];
-
     public function __construct()
     {
         $this->model = new AdPlaceModel();
+        $this->crumb['']['name'] = '广告位列表';
+        $this->crumb['category']['name'] = '广告位管理';
+        $this->crumb['category']['url'] = 'place';
     }
 
     public function index()
@@ -35,27 +24,27 @@ class AdPlaceController extends BaseController
         $datas = AdPlaceModel::where('del',0)
             ->orderBy('id','desc')
             ->paginate($this->limit);
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '广告位列表';
-        $crumb['function']['url'] = '';
+        $curr['name'] = $this->crumb['']['name'];
+        $curr['url'] = $this->crumb['']['url'];
         $result = [
             'actions'=> $this->actions(),
             'datas'=> $datas,
-            'crumb'=> $crumb,
             'prefix_url'=> '/admin/place',
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
         ];
         return view('admin.adplace.index', $result);
     }
 
     public function create()
     {
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '添加';
-        $crumb['function']['url'] = 'place/create';
+        $curr['name'] = $this->crumb['create']['name'];
+        $curr['url'] = $this->crumb['create']['url'];
         $result = [
             'actions'=> $this->actions(),
-            'crumb'=> $crumb,
             'types'=> $this->model->getTypes(),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
         ];
         return view('admin.adplace.create', $result);
     }
@@ -64,14 +53,14 @@ class AdPlaceController extends BaseController
 
     public function edit($id)
     {
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '修改';
-        $crumb['function']['url'] = 'place/edit';
+        $curr['name'] = $this->crumb['edit']['name'];
+        $curr['url'] = $this->crumb['edit']['url'];
         $result = [
             'actions'=> $this->actions(),
-            'crumb'=> $crumb,
             'types'=> $this->model->type(),
             'data'=> AdPlaceModel::find($id),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
         ];
         return view('admin.adplace.edit', $result);
     }
@@ -80,13 +69,13 @@ class AdPlaceController extends BaseController
 
     public function show($id)
     {
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '详情';
-        $crumb['function']['url'] = 'place/show';
+        $curr['name'] = $this->crumb['show']['name'];
+        $curr['url'] = $this->crumb['show']['url'];
         $result = [
             'actions'=> $this->actions(),
-            'crumb'=> $crumb,
             'data'=> AdPlaceModel::find($id),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
         ];
         return view('admin.adplace.show', $result);
     }

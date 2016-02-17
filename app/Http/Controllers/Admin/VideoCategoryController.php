@@ -10,49 +10,38 @@ class VideoCategoryController extends BaseController
      * 系统后台视频管理
      */
 
-    /**
-     * 面包屑导航
-     */
-    protected $crumb = [
-        'main'=> [
-            'name'=> '系统后台',
-            'url'=> '',
-        ],
-        'category'=> [
-            'name'=> '视频类型管理',
-            'url'=> 'videocate',
-        ],
-    ];
-
     public function __construct()
     {
         $this->model = new VideoCategoryModel();
+        $this->crumb['']['name'] = '视频类型列表';
+        $this->crumb['category']['name'] = '视频类型管理';
+        $this->crumb['category']['url'] = 'videocate';
     }
 
     public function index()
     {
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '视频类型列表';
-        $crumb['function']['url'] = '';
+        $curr['name'] = $this->crumb['']['name'];
+        $curr['url'] = $this->crumb['']['url'];
         $result = [
             'actions'=> $this->actions(),
-            'crumb'=> $crumb,
             'datas'=> $this->query(),
             'prefix_url'=> '/admin/videocate',
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
         ];
         return view('admin.videoCate.index', $result);
     }
 
     public function create()
     {
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '视频类型添加';
-        $crumb['function']['url'] = 'videocate/create';
+        $curr['name'] = $this->crumb['create']['name'];
+        $curr['url'] = $this->crumb['create']['url'];
         $result = [
             'actions'=> $this->actions(),
-            'crumb'=> $crumb,
             'pcates'=> VideoCategoryModel::where('pid', 0)->get(),      //暂时父级pid==0
             'types'=> $this->model->getTypes(),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
         ];
         return view('admin.videoCate.create', $result);
     }
@@ -66,13 +55,13 @@ class VideoCategoryController extends BaseController
 
     public function edit($id)
     {
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '视频类型修改';
-        $crumb['function']['url'] = 'videocate/create';
+        $curr['name'] = $this->crumb['edit']['name'];
+        $curr['url'] = $this->crumb['edit']['url'];
         $result = [
             'actions'=> $this->actions(),
-            'crumb'=> $crumb,
             'data'=> VideoCategoryModel::find($id),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
         ];
         return view('admin.videoCate,edit', $result);
     }
@@ -87,13 +76,13 @@ class VideoCategoryController extends BaseController
 
     public function show($id)
     {
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '视频类型详情';
-        $crumb['function']['url'] = 'videocate/show';
+        $curr['name'] = $this->crumb['show']['name'];
+        $curr['url'] = $this->crumb['show']['url'];
         $result = [
             'actions'=> $this->actions(),
-            'crumb'=> $crumb,
             'data'=> VideoCategoryModel::find($id),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
         ];
         return view('admin.videoCate.show', $result);
     }

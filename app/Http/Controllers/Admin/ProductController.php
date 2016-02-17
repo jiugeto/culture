@@ -27,34 +27,37 @@ class ProductController extends BaseController
     public function __construct()
     {
         $this->model = new ProductModel();
+        $this->crumb['']['name'] = '产品列表';
+        $this->crumb['category']['name'] = '产品管理';
+        $this->crumb['category']['url'] = 'product';
     }
 
     public function index()
     {
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '内部产品列表';
-        $crumb['function']['url'] = '';
+        $curr['name'] = $this->crumb['']['name'];
+        $curr['url'] = $this->crumb['']['url'];
         $result = [
             'actions'=> $this->actions(),
             'cssList'=> $this->model->cssList(),
             'jsList'=> $this->model->jsList(),
-            'crumb'=> $crumb,
             'datas'=> $this->query(0),
             'prefix_url'=> '/admin/product',
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
         ];
         return view('admin.product.index', $result);
     }
 
     public function create()
     {
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '产品添加';
-        $crumb['function']['url'] = 'product/create';
+        $curr['name'] = $this->crumb['create']['name'];
+        $curr['url'] = $this->crumb['create']['url'];
         $result = [
             'actions'=> $this->actions(),
-            'crumb'=> $crumb,
             'cssList'=> $this->model->cssList(),
             'jsList'=> $this->model->jsList(),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
         ];
         return view('admin.product.create', $result);
     }
@@ -72,13 +75,13 @@ class ProductController extends BaseController
         $data = ProductModel::find($id);
         $data->css = $this->model->getOneCss($data->css_id);
         $data->js = $this->model->getOneJs($data->js_id);
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '产品修改';
-        $crumb['function']['url'] = 'product/edit';
+        $curr['name'] = $this->crumb['edit']['name'];
+        $curr['url'] = $this->crumb['edit']['url'];
         $result = [
             'actions'=> $this->actions(),
-            'crumb'=> $crumb,
             'data'=> $data,
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
         ];
         return view('admin.product.edit', $result);
     }
@@ -93,24 +96,28 @@ class ProductController extends BaseController
 
     public function show($id)
     {
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '产品详情';
-        $crumb['function']['url'] = 'product/show';
         $data = ProductModel::find($id);
         $data->css = $this->model->getOneCss($data->css_id);
         $data->js = $this->model->getOneJs($data->js_id);
+        $curr['name'] = $this->crumb['show']['name'];
+        $curr['url'] = $this->crumb['show']['url'];
         $result = [
             'actions'=> $this->actions(),
-            'crumb'=> $crumb,
             'data'=> $data,
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
         ];
         return view('admin.product.show', $result);
     }
 
     public function trash()
     {
+        $curr['name'] = $this->crumb['trash']['name'];
+        $curr['url'] = $this->crumb['trash']['url'];
         $result = [
             'actions'=> $this->actions(),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
         ];
         return view('admin.product.trash', $result);
     }

@@ -11,47 +11,36 @@ class AuthorizationController extends BaseController
      * 系统后台所有细分功能的权限控制统一管理
      */
 
-    /**
-     * 面包屑导航
-     */
-    protected $crumb = [
-        'main'=> [
-            'name'=> '系统后台',
-            'url'=> '',
-        ],
-        'category'=> [
-            'name'=> '用户权限',
-            'url'=> 'authorization',
-        ],
-    ];
-
     public function __construct()
     {
         $this->model = new AuthorizationModel();
+        $this->crumb['']['name'] = '用户权限列表';
+        $this->crumb['category']['name'] = '用户权限管理';
+        $this->crumb['category']['url'] = 'authorization';
     }
 
     public function index()
     {
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '功能权限列表';
-        $crumb['function']['url'] = '';
+        $curr['name'] = $this->crumb['']['name'];
+        $curr['url'] = $this->crumb['']['url'];
         $result = [
             'actions'=> $this->actions(),
-            'crumb'=> $crumb,
             'datas'=> $this->query($del=0),
             'prefix_url'=> '/admin/authorization',
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
         ];
         return view('admin.authorization.index', $result);
     }
 
     public function create()
     {
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '添加';
-        $crumb['function']['url'] = 'authorization/create';
+        $curr['name'] = $this->crumb['create']['name'];
+        $curr['url'] = $this->crumb['create']['url'];
         $result = [
             'actions'=> $this->actions(),
-            'crumb'=> $crumb,
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
         ];
         return view('admin.authorization.create', $result);
     }

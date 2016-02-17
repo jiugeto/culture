@@ -10,48 +10,37 @@ class ProductAttrController extends BaseController
      * 系统后台内部产品属性管理
      */
 
-    /**
-     * 面包屑导航
-     */
-    protected $crumb = [
-        'main'=> [
-            'name'=> '系统后台',
-            'url'=> '',
-        ],
-        'category'=> [
-            'name'=> '产品属性管理',
-            'url'=> 'productattr',
-        ],
-    ];
-
     public function __construct()
     {
         $this->model = new ProductAttrModel();
+        $this->crumb['']['name'] = '产品属性列表';
+        $this->crumb['category']['name'] = '产品属性';
+        $this->crumb['category']['url'] = 'productattr';
     }
 
     public function index()
     {
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '产品属性列表';
-        $crumb['function']['url'] = '';
+        $curr['name'] = $this->crumb['']['name'];
+        $curr['url'] = $this->crumb['']['url'];
         $result = [
             'actions'=> $this->actions(),
-            'crumb'=> $crumb,
             'datas'=> $this->query(0),
             'prefix_url'=> '/admin/productattr',
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
         ];
         return view('admin.productAttr.index', $result);
     }
 
     public function create()
     {
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '产品属性添加';
-        $crumb['function']['url'] = 'productattr/create';
+        $curr['name'] = $this->crumb['create']['name'];
+        $curr['url'] = $this->crumb['create']['url'];
         $result = [
             'actions'=> $this->actions(),
-            'crumb'=> $crumb,
             'types'=> $this->model->getTypes(),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
         ];
        return view('admin.productAttr.create', $result);
     }

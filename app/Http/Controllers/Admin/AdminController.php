@@ -13,35 +13,25 @@ class AdminController extends BaseController
      * 管理员管理
      */
 
-    /**
-     * 面包屑导航
-     */
-    protected $crumb = [
-        'main'=> [
-            'name'=> '系统后台',
-            'url'=> '',
-        ],
-        'category'=> [
-            'name'=> '管理员管理',
-            'url'=> 'admin',
-        ],
-    ];
-
     public function __construct()
     {
         $this->model = new RoleModel();
+        $this->crumb['']['name'] = '管理员列表';
+        $this->crumb['category']['name'] = '管理员管理';
+        $this->crumb['category']['url'] = 'admin';
     }
 
     public function index()
     {
-        $actions = $this->actions();
-        $datas = RoleModel::paginate($this->limit);
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '管理员列表';
-        $crumb['function']['url'] = '';
-        $prefix_url = '/admin/admin';
-        return view('admin.admin.index', compact(
-            'actions','datas','crumb','prefix_url'
-        ));
+        $curr['name'] = $this->crumb['']['name'];
+        $curr['url'] = $this->crumb['']['url'];
+        $result = [
+            'actions'=> $this->actions(),
+            'datas'=> RoleModel::paginate($this->limit),
+            'prefix_url'=> '/admin/admin',
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.admin.index', $result);
     }
 }

@@ -7,6 +7,6 @@
         <strong class="am-text-primary am-text-lg">{{ $crumb['main']['name'] }}</strong> /
         {{--<small>Action Add</small>--}}
         <strong class="am-text-primary am-text-lg">{{ $crumb['category']['name'] }}</strong> /
-        <strong class="am-text-primary am-text-lg">{{ $crumb['function']['name'] }}</strong> /
+        <strong class="am-text-primary am-text-lg">{{ $curr['name'] }}</strong>
     </div>
 </div>

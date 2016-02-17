@@ -28,32 +28,35 @@ class VideoController extends BaseController
     public function __construct()
     {
         $this->model = new VideoModel();
+        $this->crumb['']['name'] = '视频列表';
+        $this->crumb['category']['name'] = '视频管理';
+        $this->crumb['category']['url'] = 'video';
     }
 
     public function index()
     {
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '视频列表';
-        $crumb['function']['url'] = '';
+        $curr['name'] = $this->crumb['']['name'];
+        $curr['url'] = $this->crumb['']['url'];
         $result = [
             'actions'=> $this->actions(),
-            'crumb'=> $crumb,
             'datas'=> $this->query(0),
             'cate'=> $this->model->cate(),
             'prefix_url'=> '/admin/video',
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
         ];
         return view('admin.video.index', $result);
     }
 
     public function create()
     {
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '视频添加';
-        $crumb['function']['url'] = 'video/create';
+        $curr['name'] = $this->crumb['create']['name'];
+        $curr['url'] = $this->crumb['create']['url'];
         $result = [
             'actions'=> $this->actions(),
-            'crumb'=> $crumb,
             'cates'=> VideoCategoryModel::all(),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
         ];
        return view('admin.video.create', $result);
     }
@@ -67,14 +70,14 @@ class VideoController extends BaseController
 
     public function edit($id)
     {
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '视频修改';
-        $crumb['function']['url'] = 'video/create';
+        $curr['name'] = $this->crumb['edit']['name'];
+        $curr['url'] = $this->crumb['edit']['url'];
         $result = [
             'actions'=> $this->actions(),
-            'crumb'=> $crumb,
             'cates'=> VideoCategoryModel::all(),
             'data'=> VideoModel::find($id),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
         ];
         return view('admin.video,edit', $result);
     }
@@ -89,13 +92,13 @@ class VideoController extends BaseController
 
     public function show($id)
     {
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '视频详情';
-        $crumb['function']['url'] = 'video/show';
+        $curr['name'] = $this->crumb['show']['name'];
+        $curr['url'] = $this->crumb['show']['url'];
         $result = [
             'actions'=> $this->actions(),
-            'crumb'=> $crumb,
             'data'=> VideoModel::find($id),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
         ];
         return view('admin.video.show', $result);
     }

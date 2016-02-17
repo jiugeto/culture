@@ -11,43 +11,36 @@ class EntertainController extends BaseController
      * 系统后台租赁管理
      */
 
-    /**
-     * 面包屑导航
-     */
-    protected $crumb = [
-        'main'=> [
-            'name'=> '系统后台',
-            'url'=> '',
-        ],
-        'category'=> [
-            'name'=> '租赁管理',
-            'url'=> 'entertain',
-        ],
-    ];
+    public function __construct()
+    {
+        $this->crumb['']['name'] = '娱乐列表';
+        $this->crumb['category']['name'] = '娱乐管理';
+        $this->crumb['category']['url'] = 'entertain';
+    }
 
     public function index()
     {
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '娱乐列表';
-        $crumb['function']['url'] = '';
+        $curr['name'] = $this->crumb['']['name'];
+        $curr['url'] = $this->crumb['']['url'];
         $result = [
             'actions'=> $this->actions(),
-            'crumb'=> $crumb,
             'datas'=> $this->query($del=0),
             'prefix_url'=> '/admin/entertain',
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
         ];
         return view('admin.entertain.index', $result);
     }
 
     public function show($id)
     {
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '娱乐详情';
-        $crumb['function']['url'] = 'entertain/show';
+        $curr['name'] = $this->crumb['show']['name'];
+        $curr['url'] = $this->crumb['show']['url'];
         $result = [
             'actions'=> $this->actions(),
-            'crumb'=> $crumb,
             'data'=> EntertainModel::find($id),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
         ];
         return view('admin.entertain.show', $result);
     }

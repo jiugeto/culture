@@ -10,38 +10,27 @@ class TypeController extends BaseController
      * 类型管理
      */
 
-    /**
-     * 面包屑导航
-     */
-    protected $crumb = [
-        'main'=> [
-            'name'=> '系统后台',
-            'url'=> '',
-        ],
-        'category'=> [
-            'name'=> '类型管理',
-            'url'=> 'type',
-        ],
-    ];
-
     public function __construct()
     {
 //        $this->model = new TypeModel();
         $this->model = TypeModel::where('del',0)->orderBy('id','desc')->get();
+        $this->crumb['']['name'] = '类型列表';
+        $this->crumb['category']['name'] = '类型管理';
+        $this->crumb['category']['url'] = 'type';
     }
 
     public function index($table_id=0)
     {
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '类型列表';
-        $crumb['function']['url'] = '';
+        $curr['name'] = $this->crumb['']['name'];
+        $curr['url'] = $this->crumb['']['url'];
         $result = [
             'actions'=> $this->actions(),
-            'crumb'=> $crumb,
             'datas'=> $this->query($table_id),
             'prefix_url'=> '/admin/type',
             'table_id'=> $table_id,
             'tableIds'=> $this->getTableIds(),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
         ];
         return view('admin.type.index', $result);
     }
@@ -54,14 +43,13 @@ class TypeController extends BaseController
             $tablename = $tableIds[0];
             $field = $tableIds[1];
         }
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '添加';
-        $crumb['function']['url'] = 'type/create';
+        $curr['name'] = $this->crumb['create']['name'];
+        $curr['url'] = $this->crumb['create']['url'];
         $result = [
             'actions'=> $this->actions(),
-            'crumb'=> $crumb,
             'table_name'=> $tablename,
             'field'=> $field,
+            'crumb'=> $this->crumb,
         ];
         return view('admin.type.create', $result);
     }
@@ -76,13 +64,13 @@ class TypeController extends BaseController
 
     public function edit($id)
     {
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '编辑';
-        $crumb['function']['url'] = 'type/edit';
+        $curr['name'] = $this->crumb['edit']['name'];
+        $curr['url'] = $this->crumb['edit']['url'];
         $result = [
             'actions'=> $this->actions(),
-            'crumb'=> $crumb,
             'data'=> TypeModel::find($id),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
         ];
         return view('admin.type.edit', $result);
     }
@@ -97,13 +85,13 @@ class TypeController extends BaseController
 
     public function show($id)
     {
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '类型详情';
-        $crumb['function']['url'] = 'type/show';
+        $curr['name'] = $this->crumb['show']['name'];
+        $curr['url'] = $this->crumb['show']['url'];
         $result = [
             'actions'=> $this->actions(),
-            'crumb'=> $crumb,
             'data'=> TypeModel::find($id),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
         ];
         return view('admin.type.show', $result);
     }

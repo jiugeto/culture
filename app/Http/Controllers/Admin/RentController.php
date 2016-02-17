@@ -11,43 +11,36 @@ class RentController extends BaseController
      * 系统后台租赁管理
      */
 
-    /**
-     * 面包屑导航
-     */
-    protected $crumb = [
-        'main'=> [
-            'name'=> '系统后台',
-            'url'=> '',
-        ],
-        'category'=> [
-            'name'=> '租赁管理',
-            'url'=> 'rent',
-        ],
-    ];
+    public function __construct()
+    {
+        $this->crumb['']['name'] = '租赁列表';
+        $this->crumb['category']['name'] = '租赁管理';
+        $this->crumb['category']['url'] = 'rent';
+    }
 
     public function index()
     {
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '租赁列表';
-        $crumb['function']['url'] = '';
+        $curr['name'] = $this->crumb['']['name'];
+        $curr['url'] = $this->crumb['']['url'];
         $result = [
             'actions'=> $this->actions(),
-            'crumb'=> $crumb,
             'datas'=> $this->query($del=0),
             'prefix_url'=> '/admin/rent',
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
         ];
         return view('admin.rent.index', $result);
     }
 
     public function show($id)
     {
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '租赁详情';
-        $crumb['function']['url'] = 'rent/show';
+        $curr['name'] = $this->crumb['show']['name'];
+        $curr['url'] = $this->crumb['show']['url'];
         $result = [
             'actions'=> $this->actions(),
-            'crumb'=> $crumb,
             'data'=> RentModel::find($id),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
         ];
         return view('admin.rent.show', $result);
     }

@@ -10,54 +10,43 @@ class LinkController extends BaseController
      * 网站链接管理
      */
 
-    /**
-     * 面包屑导航
-     */
-    protected $crumb = [
-        'main'=> [
-            'name'=> '系统后台',
-            'url'=> '',
-        ],
-        'category'=> [
-            'name'=> '链接管理',
-            'url'=> 'link',
-        ],
-        'prefix'=> '链接',
-    ];
-
     public function __construct()
     {
         $this->model = new LinkModel();
+        $this->crumb['']['name'] = '链接列表';
+        $this->crumb['category']['name'] = '链接管理';
+        $this->crumb['category']['url'] = 'link';
+        $this->crumb['prefix'] = '链接';
     }
 
     public function index()
     {
-        $actions = $this->actions();
-        $datas = LinkModel::paginate($this->limit);
-//        $types = $this->model['types'];
-        $types = $this->model->type();
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '链接列表';
-        $crumb['function']['url'] = '';
-        $prefix_url = '/admin/link';
-        return view('admin.link.index', compact(
-            'actions','datas','types','crumb','prefix_url'
-        ));
+        $curr['name'] = $this->crumb['']['name'];
+        $curr['url'] = $this->crumb['']['url'];
+        $result = [
+            'actions'=> $this->actions(),
+            'types'=> $this->model->type(),
+            'datas'=> LinkModel::paginate($this->limit),
+            'prefix_url'=> '/admin/link',
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.link.index', $result);
     }
 
     public function create()
     {
-        $actions = $this->actions();
-        $plinks = LinkModel::where('pid',0)->get();      //得到父链接
-//        $types = $this->model['types'];
-        $types = $this->model->type();
-        $pics = $this->model->pic();
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '添加';
-        $crumb['function']['url'] = 'link/create';
-        return view('admin.link.create', compact(
-            'actions','plinks','types','pics','crumb'
-        ));
+        $curr['name'] = $this->crumb['create']['name'];
+        $curr['url'] = $this->crumb['create']['url'];
+        $result = [
+            'actions'=> $this->actions(),
+            'plinks'=> LinkModel::where('pid',0)->get(),      //得到父链接
+            'types'=> $this->model->type(),
+            'pics'=> $this->model->pic(),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.link.create', $result);
     }
 
     public function store(Request $request)
@@ -70,14 +59,17 @@ class LinkController extends BaseController
 
     public function edit($id)
     {
-        $actions = $this->actions();
-        $plinks = LinkModel::where('pid',0)->get();      //得到父链接
-        $data = LinkModel::find($id);
-        $types = $this->model->type();
-        $pics = $this->model->pic();
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '修改';
-        $crumb['function']['url'] = 'link/edit';
+        $curr['name'] = $this->crumb['edit']['name'];
+        $curr['url'] = $this->crumb['edit']['url'];
+        $result =[
+            'actions'=> $this->actions(),
+            'plinks'=> LinkModel::where('pid',0)->get(),      //得到父链接
+            'types'=> $this->model->type(),
+            'pics'=> $this->model->pic(),
+            'data'=> LinkModel::find($id),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
         return view('admin.link.edit', compact(
             'actions','plinks','data','types','pics','crumb'
         ));
@@ -95,15 +87,14 @@ class LinkController extends BaseController
     {
         $data = LinkModel::find($id);
         $data['type'] = $this->model->type();
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = $crumb['prefix'].'详情';
-        $crumb['function']['url'] = 'link/show';
+        $curr['name'] = $this->crumb['show']['name'];
+        $curr['url'] = $this->crumb['show']['url'];
         $result = [
             'actions'=> $this->actions(),
             'data'=> $data,
-            'crumb'=> $crumb,
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
         ];
-        dd($result);
         return view('admin.link.show', $result);
     }
 

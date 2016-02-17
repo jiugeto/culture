@@ -10,49 +10,41 @@ class PicController extends BaseController
      * 图片管理
      */
 
-    /**
-     * 面包屑导航
-     */
-    protected $crumb = [
-        'main'=> [
-            'name'=> '系统后台',
-            'url'=> '',
-        ],
-        'category'=> [
-            'name'=> '图片管理',
-            'url'=> 'pic',
-        ],
-    ];
-
     public function __construct()
     {
         $this->model = new PicModel();
+        $this->crumb['']['name'] = '图片列表';
+        $this->crumb['category']['name'] = '图片管理';
+        $this->crumb['category']['url'] = 'pic';
     }
 
     public function index()
     {
-        $actions = $this->actions();
-        $datas = PicModel::paginate($this->limit);
-        $types = $this->model->type();
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '图片列表';
-        $crumb['function']['url'] = '';
-        $prefix_url = '/admin/pic';
-        return view('admin.pic.index', compact(
-            'actions','datas','types','crumb','prefix_url'
-        ));
+        $curr['name'] = $this->crumb['']['name'];
+        $curr['url'] = $this->crumb['']['url'];
+        $result = [
+            'actions'=> $this->actions(),
+            'types'=> $this->model->type(),
+            'datas'=> PicModel::paginate($this->limit),
+            'prefix_url'=> '/admin/pic',
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.pic.index', $result);
     }
 
     public function create($type_id=0)
     {
-        $actions = $this->actions();
-        $types = $this->model->type();
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '添加';
-        $crumb['function']['url'] = 'pic/create';
-        return view('admin.pic.create', compact(
-            'actions','types','crumb','type_id'
-        ));
+        $curr['name'] = $this->crumb['create']['name'];
+        $curr['url'] = $this->crumb['create']['url'];
+        $result = [
+            'actions'=> $this->actions(),
+            'types'=> $this->model->type(),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+            'type_id'=> $type_id,
+        ];
+        return view('admin.pic.create', $result);
     }
 
     public function store(Request $request)
@@ -64,15 +56,16 @@ class PicController extends BaseController
 
     public function edit($id)
     {
-        $actions = $this->actions();
-        $data = PicModel::find($id);
-        $types = $this->model->type();
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '修改';
-        $crumb['function']['url'] = 'pic/edit';
-        return view('admin.pic.edit', compact(
-            'actions','data','types','crumb'
-        ));
+        $curr['name'] = $this->crumb['edit']['name'];
+        $curr['url'] = $this->crumb['edit']['url'];
+        $result = [
+            'actions'=> $this->actions(),
+            'types'=> $this->model->type(),
+            'data'=> PicModel::find($id),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.pic.edit', $result);
     }
 
     public function update(Request $request, $id)

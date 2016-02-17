@@ -11,52 +11,39 @@ class ActionController extends BaseController
      * 权限管理
      */
 
-    /**
-     * 面包屑导航
-     */
-    protected $crumb = [
-        'main'=> [
-                'name'=> '系统后台',
-                'url'=> '',
-            ],
-        'category'=> [
-                'name'=> '权限管理',
-                'url'=> 'action',
-            ],
-    ];
-
     public function __construct()
     {
         $this->model = new ActionModel();
+        $this->crumb['']['name'] = '权限列表';
+        $this->crumb['category']['name'] = '权限管理';
+        $this->crumb['category']['url'] = 'action';
     }
 
     public function index()
     {
-        $actions = $this->actions();
-        $datas = ActionModel::paginate($this->limit);
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '权限列表';
-        $crumb['function']['url'] = '';
-        $prefix_url = '/admin/action';
+        $curr['name'] = $this->crumb['']['name'];
+        $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'actions'=> $actions,
-            'datas'=> $datas,
-            'crumb'=> $crumb,
-            'prefix_url'=> $prefix_url,
+            'actions'=> $this->actions(),
+            'datas'=> ActionModel::paginate($this->limit),
+            'prefix_url'=> '/admin/action',
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
         ];
         return view('admin.action.index', $result);
     }
 
     public function create($pid=0)
     {
-        $actions = $this->actions();
-        $parent = $this->parent($pid);
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '添加操作';
-        $crumb['function']['url'] = 'action/create';
-        return view('admin.action.create', compact(
-            'actions','parent','crumb'
-        ));
+        $curr['name'] = $this->crumb['create']['name'];
+        $curr['url'] = $this->crumb['create']['url'];
+        $result = [
+            'actions'=> $this->actions(),
+            'parent'=> $this->parent($pid),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.action.create', $result);
     }
 
     public function store(Request $request)
@@ -69,28 +56,29 @@ class ActionController extends BaseController
 
     public function show($id)
     {
-        $actions = $this->actions();
-        $data = ActionModel::find($id);
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '操作细节';
-        $crumb['function']['url'] = 'action/show';
-        return view('admin.action.show', compact(
-            'actions','data','crumb'
-        ));
+        $curr['name'] = $this->crumb['show']['name'];
+        $curr['url'] = $this->crumb['show']['url'];
+        $result = [
+            'actions'=> $this->actions(),
+            'datas'=> ActionModel::find($id),
+            'crumb'=> $this->crumb,
+        ];
+        return view('admin.action.show', $result);
     }
 
     public function edit($id)
     {
-        $actions = $this->actions();
-        $pactions = ActionModel::where('pid',0)->get();
-        $data = ActionModel::find($id);
-        $parent = $this->parent($id);
-        $crumb = $this->crumb;
-        $crumb['function']['name'] = '修改操作';
-        $crumb['function']['url'] = 'action/edit';
-        return view('admin.action.edit', compact(
-            'actions','pactions','data','parent','crumb'
-        ));
+        $curr['name'] = $this->crumb['edit']['name'];
+        $curr['url'] = $this->crumb['edit']['url'];
+        $result = [
+            'actions'=> $this->actions(),
+            'pactions'=> ActionModel::where('pid',0)->get(),
+            'parent'=> $this->parent($id),
+            'data'=> ActionModel::find($id),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.action.edit', $result);
     }
 
     public function update(Request $request, $id)
