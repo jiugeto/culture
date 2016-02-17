@@ -13,13 +13,13 @@ abstract class Controller extends BaseController
     /**
      * 顶部链接，头部菜单链接，左部菜单链接，底部链接
      */
-    public function links($type)
+    public function links()
     {
         return [
             'tops'=> $this->tops(),
             'headers'=> $this->headers(),
             'footers'=> $this->footers(),
-            'menus'=> $this->menus($type),
+            'menus'=> $this->menus(),
         ];
     }
 
@@ -48,10 +48,10 @@ abstract class Controller extends BaseController
     }
 
     /**
-     * 底部链接：type_id==3
+     * 底部链接：type_id==4
      */
-    public function menus($type)
+    public function menus()
     {
-        return LinkModel::where('type_id', $type)->get();
+        return LinkModel::where('type_id', 4)->get();
     }
 }

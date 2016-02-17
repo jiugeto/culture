@@ -10,7 +10,7 @@ class HomeController extends BaseController
     public function index()
     {
         $result = [
-            'links'=> $this->links($type=4),
+            'links'=> $this->links(),
         ];
         return view('member.home.index', $result);
     }

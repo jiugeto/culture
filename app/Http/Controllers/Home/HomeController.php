@@ -21,6 +21,7 @@ class HomeController extends BaseController
             'headers'=> $this->header(),
             'navigates'=> $this->navigate(),
             'footers'=> $this->footer(),
+            'menus'=> $this->menus($type=4),
         ];
     }
 }

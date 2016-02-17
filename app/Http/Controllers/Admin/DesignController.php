@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 //use Illuminate\Http\Request;
-use App\Models\RentModel;
+use App\Models\DesignModel;
 
-class RentController extends BaseController
+class DesignController extends BaseController
 {
     /**
-     * 系统后台租赁管理
+     * 系统后台设计管理
      */
 
     /**
@@ -20,36 +20,36 @@ class RentController extends BaseController
             'url'=> '',
         ],
         'category'=> [
-            'name'=> '租赁管理',
-            'url'=> 'rent',
+            'name'=> '设计管理',
+            'url'=> 'design',
         ],
     ];
 
     public function index()
     {
         $crumb = $this->crumb;
-        $crumb['function']['name'] = '租赁列表';
+        $crumb['function']['name'] = '设计列表';
         $crumb['function']['url'] = '';
         $result = [
             'actions'=> $this->actions(),
             'crumb'=> $crumb,
             'datas'=> $this->query($del=0),
-            'prefix_url'=> '/admin/rent',
+            'prefix_url'=> '/admin/design',
         ];
-        return view('admin.rent.index', $result);
+        return view('admin.design.index', $result);
     }
 
     public function show($id)
     {
         $crumb = $this->crumb;
-        $crumb['function']['name'] = '租赁详情';
-        $crumb['function']['url'] = 'rent/show';
+        $crumb['function']['name'] = '设计详情';
+        $crumb['function']['url'] = 'design/show';
         $result = [
             'actions'=> $this->actions(),
             'crumb'=> $crumb,
-            'data'=> RentModel::find($id),
+            'data'=> DesignModel::find($id),
         ];
-        return view('admin.rent.show', $result);
+        return view('admin.design.show', $result);
     }
 
 
@@ -67,7 +67,7 @@ class RentController extends BaseController
      */
     public function query($del=0)
     {
-        return RentModel::where('del',$del)
+        return DesignModel::where('del',$del)
             ->orderBy('id','desc')
             ->paginate($this->limit);
     }

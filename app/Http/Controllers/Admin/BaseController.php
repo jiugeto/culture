@@ -16,7 +16,7 @@ class BaseController extends Controller
     protected $uploadSizeLimit = 1024*1024*1;       //上传文件大小限制 1M
 
     /**
-     *获取权限数据列表
+     * 获取权限数据列表
      */
     public function actions()
     {
@@ -27,12 +27,12 @@ class BaseController extends Controller
     }
 
     /**
-     *获取链接数据列表
+     * 获取链接数据列表
      */
     public function links()
     {
         if ($links = LinkModel::all()) {
-            return Tools::getChild($actions,$pid=0);
+            return Tools::getChild($links,$pid=0);
         }
         return [];
     }

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 //use Illuminate\Http\Request;
-use App\Models\RentModel;
+use App\Models\EntertainModel;
 
-class RentController extends BaseController
+class EntertainController extends BaseController
 {
     /**
      * 系统后台租赁管理
@@ -21,35 +21,35 @@ class RentController extends BaseController
         ],
         'category'=> [
             'name'=> '租赁管理',
-            'url'=> 'rent',
+            'url'=> 'entertain',
         ],
     ];
 
     public function index()
     {
         $crumb = $this->crumb;
-        $crumb['function']['name'] = '租赁列表';
+        $crumb['function']['name'] = '娱乐列表';
         $crumb['function']['url'] = '';
         $result = [
             'actions'=> $this->actions(),
             'crumb'=> $crumb,
             'datas'=> $this->query($del=0),
-            'prefix_url'=> '/admin/rent',
+            'prefix_url'=> '/admin/entertain',
         ];
-        return view('admin.rent.index', $result);
+        return view('admin.entertain.index', $result);
     }
 
     public function show($id)
     {
         $crumb = $this->crumb;
-        $crumb['function']['name'] = '租赁详情';
-        $crumb['function']['url'] = 'rent/show';
+        $crumb['function']['name'] = '娱乐详情';
+        $crumb['function']['url'] = 'entertain/show';
         $result = [
             'actions'=> $this->actions(),
             'crumb'=> $crumb,
-            'data'=> RentModel::find($id),
+            'data'=> EntertainModel::find($id),
         ];
-        return view('admin.rent.show', $result);
+        return view('admin.entertain.show', $result);
     }
 
 
@@ -67,7 +67,7 @@ class RentController extends BaseController
      */
     public function query($del=0)
     {
-        return RentModel::where('del',$del)
+        return EntertainModel::where('del',$del)
             ->orderBy('id','desc')
             ->paginate($this->limit);
     }

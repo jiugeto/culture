@@ -4,7 +4,7 @@
         @include('admin.common.crumb')
         <div class="am-g">
             @include('admin.common.menu')
-            @include('admin.type.search')
+            {{--@include('admin.type.search')--}}
         </div>
 
         {{--<hr>

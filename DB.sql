@@ -35,7 +35,7 @@ CREATE TABLE `ba_action` (
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL DEFAULT '0000-00-00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +44,7 @@ CREATE TABLE `ba_action` (
 
 LOCK TABLES `ba_action` WRITE;
 /*!40000 ALTER TABLE `ba_action` DISABLE KEYS */;
-INSERT INTO `ba_action` VALUES (1,'首页','','App\\Http\\Controllers\\Admin','Home','home','index','am-cf',0,'2016-01-09','0000-00-00'),(2,'权限管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,'2016-01-09','0000-00-00'),(3,'操作管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',2,'2016-01-10','2016-01-12'),(4,'资料审核','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,'0000-00-00','2016-01-10'),(5,'供求管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,'0000-00-00','2016-01-12'),(6,'角色管理','','App\\Http\\Controllers\\Admin','Role','role','index','am-cf',2,'0000-00-00','2016-01-12'),(7,'管理员管理','','App\\Http\\Controllers\\Admin','Admin','admin','index','am-cf',2,'2016-01-12','2016-01-12'),(8,'产品管理','','App\\Http\\Controllers\\Admin','Product','action','index','am-cf',0,'2016-01-12','2016-02-16'),(9,'租赁管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,'2016-01-12','0000-00-00'),(10,'娱乐管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,'2016-01-12','0000-00-00'),(11,'设计管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,'2016-01-12','0000-00-00'),(12,'消息管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,'2016-01-12','0000-00-00'),(13,'消息管理','','App\\Http\\Controllers\\Admin','Message','message','index','am-cf',12,'2016-01-12','0000-00-00'),(14,'链接管理','','App\\Http\\Controllers\\Admin','Link','link','index','am-cf',12,'2016-01-12','0000-00-00'),(15,'心声管理','','App\\Http\\Controllers\\Admin','Voice','voice','index','am-cf',12,'2016-01-12','0000-00-00'),(16,'类型管理','','App\\Http\\Controllers\\Admin','Type','type','index','am-cf',1,'2016-01-13','0000-00-00'),(17,'图片管理','','App\\Http\\Controllers\\Admin','Pic','pic','index','am-cf',1,'2016-01-13','0000-00-00'),(18,'广告管理','','App\\Http\\Controllers\\Admin','Ad','ad','index','am-cf',0,'2016-02-15','0000-00-00'),(19,'广告管理','','App\\Http\\Controllers\\Admin','Ad','ad','index','am-cf',18,'2016-02-15','0000-00-00'),(20,'广告位管理','','App\\Http\\Controllers\\Admin','AdPlace','place','index','am-cf',18,'2016-02-15','0000-00-00'),(21,'内部产品','','App\\Http\\Controllers\\Admin','Product','product','index','',8,'2016-02-16','2016-02-16'),(22,'产品属性','','App\\Http\\Controllers\\Admin','ProductAttr','productattr','index','',8,'2016-02-16','0000-00-00'),(23,'视频管理','','App\\Http\\Controllers\\Admin','Video','video','index','',8,'2016-02-16','0000-00-00'),(24,'视频类型','','App\\Http\\Controllers\\Admin','VideoCategory','videocate','index','',8,'2016-02-16','2016-02-16');
+INSERT INTO `ba_action` VALUES (1,'首页','','App\\Http\\Controllers\\Admin','Home','home','index','am-cf',0,'2016-01-09','0000-00-00'),(2,'权限管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,'2016-01-09','0000-00-00'),(3,'操作管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',2,'2016-01-10','2016-01-12'),(4,'资料审核','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,'0000-00-00','2016-01-10'),(5,'供求管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,'0000-00-00','2016-01-12'),(6,'角色管理','','App\\Http\\Controllers\\Admin','Role','role','index','am-cf',2,'0000-00-00','2016-01-12'),(7,'管理员管理','','App\\Http\\Controllers\\Admin','Admin','admin','index','am-cf',2,'2016-01-12','2016-01-12'),(8,'产品管理','','App\\Http\\Controllers\\Admin','Product','action','index','am-cf',0,'2016-01-12','2016-02-16'),(9,'租赁管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,'2016-01-12','0000-00-00'),(10,'娱乐管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,'2016-01-12','0000-00-00'),(11,'设计管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,'2016-01-12','0000-00-00'),(12,'消息管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,'2016-01-12','0000-00-00'),(13,'消息管理','','App\\Http\\Controllers\\Admin','Message','message','index','am-cf',12,'2016-01-12','0000-00-00'),(14,'链接管理','','App\\Http\\Controllers\\Admin','Link','link','index','am-cf',12,'2016-01-12','0000-00-00'),(15,'心声管理','','App\\Http\\Controllers\\Admin','Voice','voice','index','am-cf',12,'2016-01-12','0000-00-00'),(16,'类型管理','','App\\Http\\Controllers\\Admin','Type','type','index','am-cf',1,'2016-01-13','0000-00-00'),(17,'图片管理','','App\\Http\\Controllers\\Admin','Pic','pic','index','am-cf',1,'2016-01-13','0000-00-00'),(18,'广告管理','','App\\Http\\Controllers\\Admin','Ad','ad','index','am-cf',0,'2016-02-15','0000-00-00'),(19,'广告管理','','App\\Http\\Controllers\\Admin','Ad','ad','index','am-cf',18,'2016-02-15','0000-00-00'),(20,'广告位管理','','App\\Http\\Controllers\\Admin','AdPlace','place','index','am-cf',18,'2016-02-15','0000-00-00'),(21,'内部产品','','App\\Http\\Controllers\\Admin','Product','product','index','',8,'2016-02-16','2016-02-16'),(22,'产品属性','','App\\Http\\Controllers\\Admin','ProductAttr','productattr','index','',8,'2016-02-16','0000-00-00'),(23,'视频管理','','App\\Http\\Controllers\\Admin','Video','video','index','',8,'2016-02-16','0000-00-00'),(24,'视频类型','','App\\Http\\Controllers\\Admin','VideoCategory','videocate','index','',8,'2016-02-16','2016-02-16'),(25,'租赁管理','','App\\Http\\Controllers\\Admin','Rent','rent','index','',9,'2016-02-16','0000-00-00'),(26,'娱乐管理','','App\\Http\\Controllers\\Admin','Entertain','entertain','index','',10,'2016-02-16','0000-00-00'),(27,'设计管理','','App\\Http\\Controllers\\Admin','Design','design','index','',11,'2016-02-17','0000-00-00');
 /*!40000 ALTER TABLE `ba_action` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -253,6 +253,37 @@ CREATE TABLE `bs_ads` (
 LOCK TABLES `bs_ads` WRITE;
 /*!40000 ALTER TABLE `bs_ads` DISABLE KEYS */;
 /*!40000 ALTER TABLE `bs_ads` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bs_designs`
+--
+
+DROP TABLE IF EXISTS `bs_designs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bs_designs` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL COMMENT '设计名称',
+  `genre` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '供求类型：1供应，2需求',
+  `type_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '设计类型：房产，效果图，平面，漫游',
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布者id',
+  `intro` varchar(1000) DEFAULT NULL COMMENT '设计简介',
+  `price` decimal(10,0) unsigned NOT NULL DEFAULT '0' COMMENT '价格，单位元',
+  `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站功能：0不放入回收站，1放入回收站',
+  `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
+  `updated_at` date NOT NULL DEFAULT '0000-00-00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='设计表 bs_designs';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bs_designs`
+--
+
+LOCK TABLES `bs_designs` WRITE;
+/*!40000 ALTER TABLE `bs_designs` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bs_designs` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -700,4 +731,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-02-17  3:06:35
+-- Dump completed on 2016-02-17  8:23:53
