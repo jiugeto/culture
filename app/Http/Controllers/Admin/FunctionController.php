@@ -2,10 +2,10 @@
 namespace App\Http\Controllers\Admin;
 
 //use Illuminate\Http\Request;
-use App\Models\Admin\AuthorizationModel;
+//use App\Models\Admin\AuthorizationModel;
 use App\Models\Admin\FunctionModel;
 
-class AuthorizationController extends BaseController
+class FunctionController extends BaseController
 {
     /**
      * 系统后台所有细分功能的权限控制统一管理
@@ -20,40 +20,40 @@ class AuthorizationController extends BaseController
             'url'=> '',
         ],
         'category'=> [
-            'name'=> '用户权限',
-            'url'=> 'authorization',
+            'name'=> '前台功能',
+            'url'=> 'function',
         ],
     ];
 
     public function __construct()
     {
-        $this->model = new AuthorizationModel();
+        $this->model = new FunctionModel();
     }
 
     public function index()
     {
         $crumb = $this->crumb;
-        $crumb['function']['name'] = '功能权限列表';
+        $crumb['function']['name'] = '所有功能';
         $crumb['function']['url'] = '';
         $result = [
             'actions'=> $this->actions(),
             'crumb'=> $crumb,
             'datas'=> $this->query($del=0),
-            'prefix_url'=> '/admin/authorization',
+            'prefix_url'=> '/admin/function',
         ];
-        return view('admin.authorization.index', $result);
+        return view('admin.function.index', $result);
     }
 
     public function create()
     {
         $crumb = $this->crumb;
         $crumb['function']['name'] = '添加';
-        $crumb['function']['url'] = 'authorization/create';
+        $crumb['function']['url'] = 'function/create';
         $result = [
             'actions'=> $this->actions(),
             'crumb'=> $crumb,
         ];
-        return view('admin.authorization.create', $result);
+        return view('admin.function.create', $result);
     }
 
 
@@ -71,16 +71,8 @@ class AuthorizationController extends BaseController
      */
     public function query($del=0)
     {
-        $datas = [];
-        if ($levelIds = $this->model->getFuncs()) {
-            $datas = FunctionModel::where('del',$del)
-                ->whereIn('id',$levelIds)
-                ->orderBy('id','desc')
-                ->paginate($this->limit);
-        }
-        if (empty($datas)) {
-            $datas = AuthorizationModel::paginate($this->limit);
-        }
-        return $datas;
+        return FunctionModel::where('del',$del)
+            ->orderBy('id','desc')
+            ->paginate($this->limit);
     }
 }

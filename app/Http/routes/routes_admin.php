@@ -27,6 +27,8 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
     Route::resource('action','ActionController');
         //用户权限分配
     Route::resource('authorization','AuthorizationController');
+        //前台功能
+    Route::resource('function','FunctionController');
     //供求管理之供应路由
     //供求管理之需求路由
     //内部产品路由
