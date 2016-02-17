@@ -1,11 +1,11 @@
 <?php
-namespace App\Http\Controllers\Member;
+namespace App\Http\Controllers\Person;
 
 use App\Http\Controllers\Controller;
 
 class BaseController extends Controller
 {
     /**
-     * 会员后台基础控制器
+     * 个人后台基础控制器
      */
 }

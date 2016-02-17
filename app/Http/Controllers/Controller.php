@@ -10,6 +10,10 @@ abstract class Controller extends BaseController
 {
     use DispatchesCommands, ValidatesRequests;
 
+    protected $limit = 10;       //每页显示记录数
+    protected $model;       //数据模型
+    protected $uploadSizeLimit = 1024*1024*1;       //上传文件大小限制 1M
+
     /**
      * 顶部链接，头部菜单链接，左部菜单链接，底部链接
      */

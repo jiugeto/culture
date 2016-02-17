@@ -7,7 +7,7 @@ namespace App\Http\Controllers\Admin;
 class AuthorizationController extends BaseController
 {
     /**
-     * 系统后台所有功能的权限控制统一管理
+     * 系统后台所有细分功能的权限控制统一管理
      */
 
     /**
