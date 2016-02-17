@@ -16,14 +16,17 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
     Route::get('type/create/{id}','TypeController@create');
     Route::resource('type','TypeController');
     Route::get('type/tableid/{table_id}','TypeController@index');
-    //权限管理之管理员路由
+    //权限管理
+        //管理员路由
     Route::resource('admin','AdminController');
-        //权限管理之角色路由
+        //角色路由
     Route::resource('role','RoleController');
-        //权限管理之操作路由
+        //操作路由
     Route::get('action/create/{pid}','ActionController@create');
     Route::post('action/{id}','ActionController@update');
     Route::resource('action','ActionController');
+        //用户权限分配
+    Route::resource('authorization','AuthorizationController');
     //供求管理之供应路由
     //供求管理之需求路由
     //内部产品路由

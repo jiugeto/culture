@@ -19,7 +19,7 @@
         <!-- 在线创作 -->
         <div class="online">
             <p class="floor">
-                <img src="images/floor_red.png" class="floor_img">
+                <img src="/assets-home/images/floor_red.png" class="floor_img">
                 <span class="floor_text">1F</span>
                 <span class="floor_text2">&nbsp;在线创作</span>
             </p>
@@ -39,7 +39,7 @@
         <!-- 特色产品：产品样片 -->
         <div class="trait">
             <p class="floor">
-                <img src="images/floor_red.png" class="floor_img">
+                <img src="/assets-home/images/floor_red.png" class="floor_img">
                 <span class="floor_text">2F</span>
                 <span class="floor_text2">&nbsp;特色产品</span>
             </p>
@@ -56,7 +56,7 @@
         <!-- 热门品牌：供应单位 -->
         <div class="hot">
             <p class="floor">
-                <img src="images/floor_red.png" class="floor_img">
+                <img src="/assets-home/images/floor_red.png" class="floor_img">
                 <span class="floor_text">3F</span>
                 <span class="floor_text2">&nbsp;热门品牌</span>
             </p>
@@ -65,7 +65,7 @@
         <!-- 推荐产品 -->
         <div class="recommend">
             <p class="floor">
-                <img src="images/floor_red.png" class="floor_img">
+                <img src="/assets-home/images/floor_red.png" class="floor_img">
                 <span class="floor_text">4F</span>
                 <span class="floor_text2">&nbsp;推荐产品</span>
             </p>
@@ -75,7 +75,7 @@
         <!-- 样片需求 -->
         <div class="recommend">
             <p class="floor">
-                <img src="images/floor_red.png" class="floor_img">
+                <img src="/assets-home/images/floor_red.png" class="floor_img">
                 <span class="floor_text">4F</span>
                 <span class="floor_text2">&nbsp;样片需求</span>
             </p>
@@ -84,7 +84,7 @@
         <!-- 娱乐信息：演员、广告、媒体等 -->
         <div class="recommend">
             <p class="floor">
-                <img src="images/floor_red.png" class="floor_img">
+                <img src="/assets-home/images/floor_red.png" class="floor_img">
                 <span class="floor_text">4F</span>
                 <span class="floor_text2">&nbsp;娱乐信息</span>
             </p>
@@ -93,7 +93,7 @@
         <!-- 租赁信息：拍摄器材 -->
         <div class="recommend">
             <p class="floor">
-                <img src="images/floor_red.png" class="floor_img">
+                <img src="/assets-home/images/floor_red.png" class="floor_img">
                 <span class="floor_text">4F</span>
                 <span class="floor_text2">&nbsp;娱乐信息</span>
             </p>
@@ -102,7 +102,7 @@
         <!-- 设计信息：建筑、效果图、平面 -->
         <div class="recommend">
             <p class="floor">
-                <img src="images/floor_red.png" class="floor_img">
+                <img src="/assets-home/images/floor_red.png" class="floor_img">
                 <span class="floor_text">4F</span>
                 <span class="floor_text2">&nbsp;娱乐信息</span>
             </p>
@@ -111,7 +111,7 @@
         <!-- 实时数据 -->
         <div class="realtime">
             <p class="floor">
-                <img src="images/floor_red.png" class="floor_img">
+                <img src="/assets-home/images/floor_red.png" class="floor_img">
                 <span class="floor_text">5F</span>
                 <span class="floor_text2">&nbsp;实时数据</span>
             </p>
@@ -120,7 +120,7 @@
         <!-- 合作机构 -->
         <div class="cooperation">
             <p class="floor">
-                <img src="images/floor_red.png" class="floor_img">
+                <img src="/assets-home/images/floor_red.png" class="floor_img">
                 <span class="floor_text">6F</span>
                 <span class="floor_text2">&nbsp;合作单位</span>
             </p>
@@ -129,7 +129,7 @@
         <!-- 用户心声 -->
         <div class="voice">
             <p class="floor">
-                <img src="images/floor_red.png" class="floor_img">
+                <img src="/assets-home/images/floor_red.png" class="floor_img">
                 <span class="floor_text">7F</span>
                 <span class="floor_text2">&nbsp;用户心声</span>
             </p>

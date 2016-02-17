@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Models\ActionModel;
-use App\Tools;
+use App\Models\Admin\ActionModel;
 
 class ActionController extends BaseController
 {

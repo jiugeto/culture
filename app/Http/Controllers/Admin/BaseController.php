@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\ActionModel;
+use App\Models\Admin\ActionModel;
 use App\Models\LinkModel;
 use App\Tools;
 

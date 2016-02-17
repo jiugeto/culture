@@ -16,11 +16,13 @@
                         </button>
                     </a>
                 @else
+                    @if($crumb['category']['url']=='type')
                     <a onclick="history.go(-1)">
                         <button type="button" class="am-btn am-btn-default">
                             <img src="/assets/images/files.png" class="icon">返回上页
                         </button>
                     </a>&nbsp;
+                    @endif
                     <a href="/admin/{{$crumb['category']['url']}}">
                         <button type="button" class="am-btn am-btn-default">
                             <img src="/assets/images/files.png" class="icon">
