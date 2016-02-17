@@ -13,8 +13,8 @@
                     <tr>
                         <th class="table-check"><input type="checkbox"/></th>
                         <th class="table-id">ID</th>
-                        <th class="table-title">用户id</th>
-                        <th class="table-type">所在数据表</th>
+                        <th class="table-title">用户名称</th>
+                        <th class="table-type">功能</th>
                         <th class="table-date am-hide-sm-only">添加时间</th>
                         <th class="table-set">操作</th>
                     </tr>
@@ -25,10 +25,10 @@
                     <tr>
                         <td class="am-hide-sm-only"><input type="checkbox" /></td>
                         <td class="am-hide-sm-only">{{ $data->id }}</td>
-                        <td class="am-hide-sm-only">{{ $data->name }}
+                        <td class="am-hide-sm-only">
                             <a href=""></a>
                         </td>
-                        <td class="am-hide-sm-only">{{ $data->intro }}</td>
+                        <td class="am-hide-sm-only"></td>
                         <td class="am-hide-sm-only">{{ $data->created_at }}</td>
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">

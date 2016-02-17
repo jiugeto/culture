@@ -21,6 +21,7 @@ class AuthorizationController extends BaseController
         ],
         'category'=> [
             'name'=> '用户权限分配',
+            'name'=> '功能权限',
             'url'=> 'authorization',
         ],
     ];
@@ -33,7 +34,7 @@ class AuthorizationController extends BaseController
     public function index()
     {
         $crumb = $this->crumb;
-        $crumb['function']['name'] = '权限分配';
+        $crumb['function']['name'] = '功能权限列表';
         $crumb['function']['url'] = '';
         $result = [
             'actions'=> $this->actions(),
