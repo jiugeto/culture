@@ -90,4 +90,18 @@ class AdPlaceController extends BaseController
         ];
         return view('admin.adplace.show', $result);
     }
+
+
+
+
+
+    /**
+     * =================
+     * 以下是公用方法
+     * =================
+     */
+
+    /**
+     * 收集数据
+     */
 }
