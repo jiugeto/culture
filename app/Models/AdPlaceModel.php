@@ -18,4 +18,16 @@ class AdPlaceModel extends Model
     {
         return $this->hasOne('App\Models\TypeModel','id','type_id');
     }
+
+    /**
+     * 类别关联 表id==3
+     */
+    public function getTypes()
+    {
+        return TypeModel::where([
+            'table_id'=> 3,
+            'field'=> 'type_id',
+        ])
+            ->get();
+    }
 }

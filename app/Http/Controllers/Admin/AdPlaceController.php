@@ -55,7 +55,7 @@ class AdPlaceController extends BaseController
         $result = [
             'actions'=> $this->actions(),
             'crumb'=> $crumb,
-            'types'=> $this->model->type(),
+            'types'=> $this->model->getTypes(),
         ];
         return view('admin.adplace.create', $result);
     }

@@ -21,12 +21,12 @@ class VideoCategoryModel extends Model
    }
 
     /**
-     * 类别依据关联
+     * 类别依据关联 表id==2
      */
    public function getTypes()
    {
        return TypeModel::where([
-                       'table_name'=> 'bs_videos_category',
+                       'table_id'=> 2,
                        'field'=> 'type_id',
                    ])
                    ->get();

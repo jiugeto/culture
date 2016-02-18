@@ -25,24 +25,14 @@
                         </div>
 
                         <div class="am-form-group">
-                            <label>链接类型 / Type：</label>
-                            <select name="type" required>
+                            <label>链接类型 / Type：
+                                <a href="/admin/type/create/{{'网站链接-type_id'}}">[+添加类别]</a></label>
+                            <select name="type_id" required>
                                 @foreach($types as $kt=>$type)
                                     <option value="{{ $kt }}">{{ $type }}</option>
                                 @endforeach
                             </select>
                         </div>
-
-                        {{--<script type="text/javascript" src="/assets/js/local_pre.js"></script>
-                        <div class="am-form-group">
-                            <label for="url_ori">链接图片 / Link Pictures：</label>
-                            <small class="am-form-help">注意：先添加，再编辑可用图片尺寸。<br>
-                                提示：图片尺寸不要大于1M，否则出错。</small>
-                            <input type="text" placeholder="本地图片地址" readonly name="url_file">
-                            <input type="button" value="[找图]" onclick="path.click()" class="am-btn am-btn-primary">
-                            <input type="file" id="path" style="display:none" onchange="url_file.value=this.value;loadImageFile();" name="url_ori">
-                            <div id="preview" style="margin: 5px; width: 160px; height: 120px; border:1px dotted #5bc0de ; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);"></div>
-                        </div>--}}
 
                         <div class="am-form-group">
                             <label>图片id / Picture：
