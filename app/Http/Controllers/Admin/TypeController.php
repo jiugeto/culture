@@ -26,31 +26,37 @@ class TypeController extends BaseController
 
     public function __construct()
     {
-        $this->model = new TypeModel();
+//        $this->model = new TypeModel();
+        $this->model = TypeModel::where('del',0)->orderBy('id','desc')->get();
     }
 
-    public function index()
+    public function index($table_id=0)
     {
-        $actions = $this->actions();
-        $datas = TypeModel::paginate($this->limit);
         $crumb = $this->crumb;
         $crumb['function']['name'] = '类型列表';
         $crumb['function']['url'] = '';
-        $prefix_url = '/admin/type';
-        return view('admin.type.index', compact(
-            'actions','datas','crumb','prefix_url'
-        ));
+        $result = [
+            'actions'=> $this->actions(),
+            'crumb'=> $crumb,
+            'datas'=> $this->query($table_id),
+            'prefix_url'=> '/admin/type',
+            'table_id'=> $table_id,
+            'tableIds'=> $this->getTableIds(),
+        ];
+        return view('admin.type.index', $result);
     }
 
-    public function create()
+    public function create($table_name='')
     {
-        $actions = $this->actions();
         $crumb = $this->crumb;
         $crumb['function']['name'] = '添加';
         $crumb['function']['url'] = 'type/create';
-        return view('admin.type.create', compact(
-            'actions','crumb'
-        ));
+        $result = [
+            'actions'=> $this->actions(),
+            'crumb'=> $crumb,
+            'table_name'=> $table_name,
+        ];
+        return view('admin.type.create', $result);
     }
 
     public function store(Request $request)
@@ -63,14 +69,15 @@ class TypeController extends BaseController
 
     public function edit($id)
     {
-        $actions = $this->actions();
-        $data = TypeModel::find($id);
         $crumb = $this->crumb;
         $crumb['function']['name'] = '编辑';
         $crumb['function']['url'] = 'type/edit';
-        return view('admin.type.edit', compact(
-            'actions','data','crumb'
-        ));
+        $result = [
+            'actions'=> $this->actions(),
+            'crumb'=> $crumb,
+            'data'=> TypeModel::find($id),
+        ];
+        return view('admin.type.edit', $result);
     }
 
     public function update(Request $request, $id)
@@ -79,6 +86,19 @@ class TypeController extends BaseController
         $data['updated_at'] = date('Y-m-d', time());
         TypeModel::where('id',$id)->update($data);
         return redirect('/admin/type');
+    }
+
+    public function show($id)
+    {
+        $crumb = $this->crumb;
+        $crumb['function']['name'] = '类型详情';
+        $crumb['function']['url'] = 'type/show';
+        $result = [
+            'actions'=> $this->actions(),
+            'crumb'=> $crumb,
+            'data'=> TypeModel::find($id),
+        ];
+        return view('admin.type.show', $result);
     }
 
 
@@ -97,10 +117,59 @@ class TypeController extends BaseController
     public function getData(Request $request)
     {
         $data = $request->all();
+        $models = [];
+        foreach ($this->model as $v) {
+            if ($v->table_name==$data['table_name']) {
+                $models[] = $v;
+                $data['table_id'] = $v->table_id;
+            }
+        }
+        if (empty($models) && !empty($this->model)) {
+             $maxTableId = TypeModel::where('del',0)
+                ->orderBy('table_id','desc')
+                ->first()->table_id;
+            $data['table_id'] = $maxTableId + 1;
+        }
         $type = [
             'name'=> $data['name'],
+            'table_id'=> $data['table_id'],
+            'table_name'=> $data['table_name'],
+            'field'=> $data['field'],
             'intro'=> $data['intro'],
         ];
         return $type;
+    }
+
+    /**
+     * 查询方法
+     */
+    public function query($table_id)
+    {
+        if ($table_id==0) {
+            $datas = TypeModel::where('del', 0)
+                ->orderBy('id','desc')
+                ->paginate($this->limit);
+        } else {
+            $datas = TypeModel::where([
+                'del'=> 0,
+                'table_id'=> $table_id,
+            ])
+                ->orderBy('id','desc')
+                ->paginate($this->limit);
+        }
+        return $datas;
+    }
+
+    /**
+     * 收集table_id
+     */
+    public function getTableIds()
+    {
+        $tableIds = [];
+        foreach ($this->model as $model) {
+            $tableIds[$model->table_id] = $model->table_name;
+        }
+        array_unique($tableIds);
+        return $tableIds;
     }
 }

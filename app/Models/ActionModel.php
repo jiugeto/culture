@@ -8,7 +8,7 @@ class ActionModel extends Model
     protected $table = 'ba_action';
     public $timestamps = false;
     protected $fillable = [
-        'id','name','intro','namespace','controller_prefix','action','style_class','pid','created_at','updated_at',
+        'id','name','intro','namespace','controller_prefix','url','action','style_class','pid','created_at','updated_at',
     ];
 
 //    public function child()

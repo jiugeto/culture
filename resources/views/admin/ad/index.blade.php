@@ -2,6 +2,10 @@
 @section('content')
     <div class="admin-content">
         @include('admin.common.crumb')
+        <div class="am-g">
+            @include('admin.common.menu')
+            {{--@include('admin.type.search')--}}
+        </div>
 
         <div class="am-g">
             <div class="am-u-sm-12">
