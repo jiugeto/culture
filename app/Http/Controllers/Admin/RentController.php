@@ -38,9 +38,28 @@ class RentController extends BaseController
         return view('admin.rent.index', $result);
     }
 
+    public function show($id)
+    {
+        $crumb = $this->crumb;
+        $crumb['function']['name'] = '租赁详情';
+        $crumb['function']['url'] = 'rent/show';
+        $result = [
+            'actions'=> $this->actions(),
+            'crumb'=> $crumb,
+            'data'=> RentModel::find($id),
+        ];
+        return view('admin.rent.show', $result);
+    }
 
 
 
+
+
+    /**
+     * ===================
+     * 以下是公用方法
+     * ===================
+     */
 
     /**
      * 查询方法

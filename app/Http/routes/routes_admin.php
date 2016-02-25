@@ -18,9 +18,9 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
     Route::get('type/tableid/{table_id}','TypeController@index');
     //权限管理之管理员路由
     Route::resource('admin','AdminController');
-    //权限管理之角色路由
+        //权限管理之角色路由
     Route::resource('role','RoleController');
-    //权限管理之操作路由
+        //权限管理之操作路由
     Route::get('action/create/{pid}','ActionController@create');
     Route::post('action/{id}','ActionController@update');
     Route::resource('action','ActionController');
@@ -30,22 +30,24 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
     Route::resource('product','ProductController');
         //内部产品属性路由
     Route::resource('productattr','ProductAttrController');
-    //上传的视频路由
+        //上传的视频路由
     Route::resource('video','VideoController');
         //上传的视频路由
     Route::resource('videocate','VideoCategoryController');
     //租赁路由
+    Route::resource('rent','RentController');
     //娱乐路由
+    Route::resource('entertain','EntertainController');
     //设计路由
     //消息路由之消息管理
     Route::resource('message','MessageController');
-    //消息路由之链接管理
+        //消息路由之链接管理
     Route::resource('link','LinkController');
-    //消息路由之心声管理
+        //消息路由之心声管理
     Route::resource('voice','VoiceController');
     //广告管理
     Route::resource('ad','AdController');
-    //广告位管理
+        //广告位管理
     Route::get('place/create','AdPlaceController@create');
     Route::resource('place','AdPlaceController');
 });
