@@ -19,8 +19,20 @@ class AuthorizationController extends BaseController
             'url'=> '',
         ],
         'category'=> [
-            'name'=> '权限控制',
+            'name'=> '功能权限',
             'url'=> 'authorization',
         ],
     ];
+
+    public function index()
+    {
+        $crumb = $this->crumb;
+        $crumb['function']['name'] = '功能权限列表';
+        $crumb['function']['url'] = '';
+        $result = [
+            'actions'=> $this->actions(),
+            'crumb'=> $crumb,
+        ];
+        return view('admin.authorization.index', $result);
+    }
 }

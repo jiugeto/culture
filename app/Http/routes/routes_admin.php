@@ -16,7 +16,8 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
     Route::get('type/create/{id}','TypeController@create');
     Route::resource('type','TypeController');
     Route::get('type/tableid/{table_id}','TypeController@index');
-    //权限管理之管理员路由
+    //权限管理路由
+        //权限管理之管理员路由
     Route::resource('admin','AdminController');
         //权限管理之角色路由
     Route::resource('role','RoleController');
@@ -24,6 +25,8 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
     Route::get('action/create/{pid}','ActionController@create');
     Route::post('action/{id}','ActionController@update');
     Route::resource('action','ActionController');
+        //权限管理之功能权限路由
+    Route::resource('authorization','AuthorizationController');
     //供求管理之供应路由
     //供求管理之需求路由
     //内部产品路由
