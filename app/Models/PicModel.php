@@ -1,12 +1,11 @@
 <?php
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+//use Illuminate\Database\Eloquent\Model;
 
-class PicModel extends Model
+class PicModel extends BaseModel
 {
     protected $table = 'bs_pics';
-    public $timestamps = false;
     protected $fillable = [
         'id','name','type_id','url','intro','created_at',
     ];

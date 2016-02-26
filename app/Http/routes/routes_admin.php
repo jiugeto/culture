@@ -46,6 +46,8 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
     //娱乐路由
     Route::resource('entertain','EntertainController');
     //设计路由
+    Route::get('design/trash','DesignController@trash');
+    Route::resource('design','DesignController');
     //消息路由之消息管理
     Route::resource('message','MessageController');
         //消息路由之链接管理

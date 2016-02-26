@@ -1,9 +1,10 @@
 <?php
 namespace App\Models\Admin;
 
-use Illuminate\Database\Eloquent\Model;
+//use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseModel;
 
-class UserLevelModel extends Model
+class UserLevelModel extends BaseModel
 {
     protected $table = 'bs_user_lavel';
     protected $fillable = [

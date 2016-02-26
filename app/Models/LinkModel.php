@@ -1,12 +1,11 @@
 <?php
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+//use Illuminate\Database\Eloquent\Model;
 
-class LinkModel extends Model
+class LinkModel extends BaseModel
 {
     protected $table = 'bs_links';
-    public $timestamps = false;
     protected $fillable = [
         'id','name','title','type','pic','intro','link','display_way','isshow','pid','created_at','updated_at',
     ];

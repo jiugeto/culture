@@ -1,12 +1,12 @@
 <?php
 namespace App\Models\Admin;
 
-use Illuminate\Database\Eloquent\Model;
+//use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseModel;
 
-class ActionModel extends Model
+class ActionModel extends BaseModel
 {
     protected $table = 'ba_action';
-    public $timestamps = false;
     protected $fillable = [
         'id','name','intro','namespace','controller_prefix','url','action','style_class','pid','created_at','updated_at',
     ];

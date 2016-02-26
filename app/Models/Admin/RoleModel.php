@@ -1,12 +1,13 @@
 <?php
 namespace App\Models\Admin;
 
-use Illuminate\Database\Eloquent\Model;
+//use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseModel;
 
-class RoleModel extends Model
+class RoleModel extends BaseModel
 {
     protected $table = 'ba_role';
     protected $fillable = [
-        'name','password','created_at','updated_at',
+        'id','name','password','created_at','updated_at',
     ];
 }

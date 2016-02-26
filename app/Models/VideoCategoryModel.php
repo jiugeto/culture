@@ -1,13 +1,12 @@
 <?php
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use App\Models\TypeModel;
+//use Illuminate\Database\Eloquent\Model;
+//use App\Models\TypeModel;
 
-class VideoCategoryModel extends Model
+class VideoCategoryModel extends BaseModel
 {
     protected $table = 'bs_videos_category';
-    public $timestamps = false;
     protected $fillable = [
         'id','name','type_id','pid','intro','created_at','updated_at',
     ];

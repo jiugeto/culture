@@ -1,9 +1,9 @@
 <?php
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+//use Illuminate\Database\Eloquent\Model;
 
-class RentModel extends Model
+class RentModel extends BaseModel
 {
     protected $table = 'bs_rents';
     protected $fillable = [

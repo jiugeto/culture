@@ -1,13 +1,13 @@
 <?php
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+//use Illuminate\Database\Eloquent\Model;
 
-class RentPicModel extends Model
+class RentPicModel extends BaseModel
 {
     protected $table = 'bs_rent_pic';
     protected $fillable = [
-        'rent_id','pic_id','created_at',
+        'id','rent_id','pic_id','created_at',
     ];
 
     /**

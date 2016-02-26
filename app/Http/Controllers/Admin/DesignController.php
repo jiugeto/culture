@@ -32,6 +32,20 @@ class DesignController extends BaseController
         return view('admin.design.index', $result);
     }
 
+    public function trash()
+    {
+        $curr['name'] = $this->crumb['trash']['name'];
+        $curr['url'] = $this->crumb['trash']['url'];
+        $result = [
+            'actions'=> $this->actions(),
+            'datas'=> $this->query($del=0),
+            'prefix_url'=> '/admin/design/trash',
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.design.index', $result);
+    }
+
     public function show($id)
     {
         $curr['name'] = $this->crumb['show']['name'];

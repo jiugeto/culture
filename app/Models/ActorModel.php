@@ -1,13 +1,14 @@
 <?php
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+//use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseModel;
 
-class ActorModel extends Model
+class ActorModel extends BaseModel
 {
     protected $table = 'bs_actors';
     protected $fillable = [
-        'name','sex','realname','origin','education','school','hobby',
+        'id','name','sex','realname','origin','education','school','hobby',
         'job','area','height','work','del','created_at','updated_at',
     ];
 }

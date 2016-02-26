@@ -1,9 +1,10 @@
 <?php
 namespace App\Models\Admin;
 
-use Illuminate\Database\Eloquent\Model;
+//use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseModel;
 
-class AuthorizationModel extends Model
+class AuthorizationModel extends BaseModel
 {
     protected $table = 'bs_authorizations';
     protected $fillable = [

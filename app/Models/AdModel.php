@@ -1,12 +1,11 @@
 <?php
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+//use Illuminate\Database\Eloquent\Model;
 
-class AdModel extends Model
+class AdModel extends BaseModel
 {
     protected $table = 'bs_ads';
-    public $timestamps = false;
     protected $fillable = [
         'id','name','ad_place_id','intro','pic_id','link','fromtime','totime','uid','auth','status','created_at','updated_at',
     ];

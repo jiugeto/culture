@@ -1,13 +1,12 @@
 <?php
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+//use Illuminate\Database\Eloquent\Model;
 use App\Models\TypeModel;
 
-class ProductAttrModel extends Model
+class ProductAttrModel extends BaseModel
 {
     protected $table = 'bs_products_attr';
-    public $timestamps = false;
     protected $fillable = [
         'id','name','type_id','url','intro','created_at','updated_at',
     ];

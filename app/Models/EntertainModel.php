@@ -1,12 +1,12 @@
 <?php
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+//use Illuminate\Database\Eloquent\Model;
 
-class EntertainModel extends Model
+class EntertainModel extends BaseModel
 {
     protected $table = 'bs_entertains';
     protected $fillable = [
-        'title','content','uid','created_at','updated_at',
+        'id','title','content','uid','created_at','updated_at',
     ];
 }
