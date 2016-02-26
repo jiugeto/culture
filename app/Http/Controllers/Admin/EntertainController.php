@@ -32,6 +32,48 @@ class EntertainController extends BaseController
         return view('admin.entertain.index', $result);
     }
 
+    public function create()
+    {
+        $curr['name'] = $this->crumb['create']['name'];
+        $curr['url'] = $this->crumb['create']['url'];
+        $result = [
+            'actions'=> $this->actions(),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.entertain.create', $result);
+    }
+
+    public function store(Request $request)
+    {
+        $data = $this->getData($request);
+        $data['created_at'] = date('Y-m-d', time());
+        EntertainModel::create($data);
+        return view('/admin/entertain');
+    }
+
+    public function edit($id)
+    {
+        $data = EntertainModel::find($id);
+        $curr['name'] = $this->crumb['edit']['name'];
+        $curr['url'] = $this->crumb['edit']['url'];
+        $result = [
+            'actions'=> $this->actions(),
+            'data'=> $data,
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.entertain.edit', $result);
+    }
+
+    public function update(Request $request,$id)
+    {
+        $data = $this->getData($request);
+        $data['updated_at'] = date('Y-m-d', time());
+        EntertainModel::where('id',$id)->update($data);
+        return redirect('/admin/entertain');
+    }
+
     public function show($id)
     {
         $curr['name'] = $this->crumb['show']['name'];
@@ -44,8 +86,6 @@ class EntertainController extends BaseController
         ];
         return view('admin.entertain.show', $result);
     }
-
-    public function create(){}
 
 
 
@@ -64,6 +104,7 @@ class EntertainController extends BaseController
     {
         $data = $request->all();
         //uname 转为 uid
+        $data['uid'] = 0;       //测试，暂为0
         $entertain = [
             'title'=> $data['title'],
             'content'=> $data['content'],

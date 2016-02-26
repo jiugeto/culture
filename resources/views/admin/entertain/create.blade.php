@@ -10,45 +10,40 @@
         <div class="am-g">
             @include('admin.common.info')
             <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
-                <form class="am-form" data-am-validator method="POST" action="/admin/design" enctype="multipart/form-data">
+                <form class="am-form" data-am-validator method="POST" action="/admin/entertain" enctype="multipart/form-data">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <fieldset>
                         <div class="am-form-group">
-                            <label>设计名称 / Name：</label>
-                            <input type="text" placeholder="至少2个字符" minlength="2" required name="name"/>
+                            <label>娱乐标题 / Title：</label>
+                            <input type="text" placeholder="至少2个字符" minlength="2" required name="title"/>
                         </div>
 
-                        <div class="am-form-group">
-                            <label>供求类型 / Genre：</label>
-                            <input type="radio" name="genre" value="1" checked/> 供应商&nbsp;&nbsp;
-                            <input type="radio" name="genre" value="2"/> 需求方&nbsp;&nbsp;
-                        </div>
+                        {{--<div class="am-form-group">
+                            <label>设计说明 / Content：</label>
+                            <textarea name="content" cols="50" rows="5"></textarea>
+                        </div>--}}
 
                         <div class="am-form-group">
-                            <label>设计类型 / Type：</label>
-                            <select name="type_id">
-                                <option value="">-请选择-</option>
-                            @if($types)
-                                @foreach($types as $type)
-                                        <option value="{{ $type->id }}">{{ $type->name }}</option>
-                                @endforeach
-                            @endif
-                            </select>
+                            <label for="content">动态内容 / Activity Content：</label>
+                            @include('UEditor::head')
+                            <script id="container" name="content" type="text/plain"></script>
+                            <!-- 实例化编辑器 -->
+                            <script type="text/javascript">
+                                var ue = UE.getEditor('container',{
+                                    //initialFrameWidth:500,
+                                    //initialFrameHeight:200,
+//                                    toolbars:[['redo','undo','bold','italic','underline','strikethrough','horizontal','forecolor','fontfamily','fontsize','priview','directionality','paragraph','searchreplace','pasteplain','help']]
+                                });
+                                ue.ready(function() {
+                                    //此处为支持laravel5 csrf ,根据实际情况修改,目的就是设置 _token 值.
+                                    ue.execCommand('serverparam', '_token', '{{ csrf_token() }}');
+                                });
+                            </script>
                         </div>
 
                         <div class="am-form-group">
                             <label>用户名称 / User Name：</label>
-                            <input type="text" placeholder="用户名称" minlength="2" name="uname">
-                        </div>
-
-                        <div class="am-form-group">
-                            <label>设计说明 / Introduce：</label>
-                            <textarea name="intro" cols="50" rows="5"></textarea>
-                        </div>
-
-                        <div class="am-form-group">
-                            <label>价格 / Price：</label>
-                            <input type="text" placeholder="数字" pattern="^\d+\(\d+\.\d{1,2})$" required name="price"/>
+                            <input type="text" placeholder="至少2个字符" minlength="2" required name="uname"/>
                         </div>
 
                         <button type="submit" class="am-btn am-btn-primary">保存添加</button>

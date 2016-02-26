@@ -17,20 +17,16 @@
                     <td>{{ $data->id }}</td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">设计名称 / Name：</td>
-                    <td>{{ $data->name }}</td>
+                    <td class="am-hide-sm-only">娱乐标题 / Title：</td>
+                    <td>{{ $data->title }}</td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">供求类型  / Genre：</td>
-                    <td>{{ $data->genre==1 ? '供应方' : '需求方' }}</td>
+                    <td class="am-hide-sm-only">内容 / Content：</td>
+                    <td>{!! $data->content !!}</td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">设计类型 / Type：</td>
-                    <td>{{ $data->type_name }}</td>
-                </tr>
-                <tr>
-                    <td class="am-hide-sm-only">价格 / Price：</td>
-                    <td>{{ $data->price }}</td>
+                    <td class="am-hide-sm-only">发布者 / User Name：</td>
+                    <td>{{ $data->uname }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">创建时间 / Create Time：</td>

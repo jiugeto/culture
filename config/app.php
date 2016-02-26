@@ -145,6 +145,8 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        //百度编辑器
+        Stevenyangecho\UEditor\UEditorServiceProvider::class,
 
     ],
 

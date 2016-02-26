@@ -44,6 +44,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
     //租赁路由
     Route::resource('rent','RentController');
     //娱乐路由
+    Route::post('entertain/{id}','EntertainController@update');
     Route::resource('entertain','EntertainController');
     //设计路由
     Route::post('design/{id}','DesignController@update');
