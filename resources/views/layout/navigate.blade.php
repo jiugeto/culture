@@ -8,6 +8,7 @@
     <hr class="hr_style">
     <div class="nav_body">
         <img src="assets-home/images/logo.png" class="logo">
+        <span class="nav_qiehuan"><a href="">导航</a></span>
         <form action="">
         <span class="nav_search">
           <input type="text" class="global_search" name="global_search" placeholder="&nbsp;&nbsp;&nbsp;想要啥效果，赶紧找哦">

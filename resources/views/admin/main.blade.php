@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="/assets/css/amazeui.min.css"/>
   <link rel="stylesheet" href="/assets/css/admin.css">
   <link rel="stylesheet" href="/assets/css/admin_cus.css">
-  {{--<script type="text/javascript" src="assets/js/jquery-1.10.2.min.js"></script>--}}
+  <script src="/assets/js/jquery-1.10.2.min.js"></script>
 </head>
 <body>
 <!--[if lte IE 9]>
@@ -51,8 +51,8 @@
 
 @include('admin.partials.footer')
 
-<script src="assets/js/jquery.js"></script>
-<script src="assets/js/amazeui.js') }}"></script>
-<script src="assets/js/app.js"></script>
+<script src="/assets/js/jquery.js"></script>
+<script src="/assets/js/amazeui.js') }}"></script>
+<script src="/assets/js/app.js"></script>
 </body>
 </html>
