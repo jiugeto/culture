@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-//use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 use App\Models\EntertainModel;
 
 class EntertainController extends BaseController
@@ -45,6 +45,8 @@ class EntertainController extends BaseController
         return view('admin.entertain.show', $result);
     }
 
+    public function create(){}
+
 
 
 
@@ -54,6 +56,21 @@ class EntertainController extends BaseController
      * 以下是公用方法
      * ===================
      */
+
+    /**
+     * 收集数据
+     */
+    public function getData(Request $request)
+    {
+        $data = $request->all();
+        //uname 转为 uid
+        $entertain = [
+            'title'=> $data['title'],
+            'content'=> $data['content'],
+            'uid'=> $data['uid'],
+        ];
+        return $entertain;
+    }
 
     /**
      * 查询方法

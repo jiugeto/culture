@@ -51,6 +51,13 @@
                             <input type="text" placeholder="数字" pattern="^\d+\(\d+\.\d{1,2})$" required name="price"/>
                         </div>
 
+                        <div class="am-form-group">
+                            <label>租赁起始时间 / Start Time：</label>
+                            <input type="text" placeholder="如：2016-01-01 01:01" pattern="^\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}$" required name="fromtime"/>
+                            <label>租赁结束时间 / End Time：</label>
+                            <input type="text" placeholder="如：2016-02-02 02:02" pattern="^\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}$" required name="totime"/>
+                        </div>
+
                         <button type="submit" class="am-btn am-btn-primary">保存添加</button>
                     </fieldset>
                 </form>
