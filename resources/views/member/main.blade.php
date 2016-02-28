@@ -11,13 +11,13 @@
 <body>
     @include('layout.header')
     @include('layout.navigate')
-        <div class="content">
-            @include('member.partials.menu')
+    <div class="content">
+        @include('member.partials.menu')
 
-            <!-- 中间内容 -->
-            @yield('content')
-            <!-- 中间内容 -->
-        </div>
+        <!-- 中间内容 -->
+        @yield('content')
+        <!-- 中间内容 -->
+    </div>
     @include('layout.footer')
 </body>
 </html>
