@@ -33,3 +33,9 @@ include("routes/routes_admin.php");
 
 //载入会员路由
 include("routes/routes_member.php");
+
+//载入个人后台路由
+include("routes/routes_person.php");
+
+//载入企业后台路由
+include("routes/routes_company.php");
