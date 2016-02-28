@@ -1,12 +1,18 @@
 /*============= 会员后台 member.css ===============*/
 
 
-.mem_left { padding:0; }
+.mem_float {
+    float:left;
+}
+
+/*=========左侧菜单栏==========*/
+.mem_left,.mem_right { background:rgb(240,240,240); }
+.mem_left { padding-left:4px; }
 .mem_leftmenus {
     margin:0;
     padding:0;
-    width:150px;height:500px;
-    border:1px solid rgb(255,150,0);
+    width:150px;height:600px;
+    background:white;
 }
 .mem_leftmenus li {
     padding:10px 20px;
@@ -16,12 +22,24 @@ a {
     text-decoration:none;
     color:black;
 }
-a:hover {
-    text-decoration:underline;
-}
-.a_li {
-    background:rgb(245,245,245);
-}
-.a_li_curr {
+a:hover {}
+a li.a_li {}
+a:hover li.a_li,a li.a_li_curr {
+    color:white;
     background:rgb(255,100,0);
 }
+/*=========左侧菜单栏==========*/
+
+
+/*=========右侧窗口==========*/
+.mem_right {
+    width:830px;height:600px;
+    padding:5px 0 0 15px;
+}
+.mem_win {
+    padding:10px;
+    width:800px;height:600px;
+    background:white;
+    border-radius:5px;
+}
+/*=========右侧窗口==========*/
