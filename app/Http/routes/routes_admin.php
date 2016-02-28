@@ -31,10 +31,12 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
     Route::post('function/{id}','FunctionController@update');
     Route::get('function/trash','FunctionController@trash');
     Route::resource('function','FunctionController');
-    //供求管理之供应路由
-    //供求管理之需求路由
+    //供求管理
+        //供应路由
+        //需求路由
     //内部产品路由
     Route::resource('product','ProductController');
+    //产品管理
         //内部产品属性路由
     Route::resource('productattr','ProductAttrController');
         //上传的视频路由
@@ -50,13 +52,15 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
     Route::post('design/{id}','DesignController@update');
     Route::get('design/trash','DesignController@trash');
     Route::resource('design','DesignController');
-    //消息路由之消息管理
+    //消息路由
+        //消息管理
     Route::resource('message','MessageController');
-        //消息路由之链接管理
+        //链接管理
     Route::resource('link','LinkController');
-        //消息路由之心声管理
+        //心声管理
     Route::resource('voice','VoiceController');
-    //广告管理
+    //广告路由
+        //广告管理
     Route::resource('ad','AdController');
         //广告位管理
     Route::get('place/create','AdPlaceController@create');

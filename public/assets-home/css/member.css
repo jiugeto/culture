@@ -1,0 +1,11 @@
+/*============= 会员后台 member.css ===============*/
+
+
+.mem_leftmenus {
+    width:150px;height:500px;
+    border:1px solid red;
+}
+.mem_leftmenus li {
+    padding:10px;
+    list-style:none;
+}

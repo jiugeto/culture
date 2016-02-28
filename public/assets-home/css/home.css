@@ -30,12 +30,12 @@ body { margin:0; }
     position:fixed;z-index:99;top:10px;
 }
 .baidi {    /*白底*/
-    width:100%;height:180px;
+    width:100%;height:150px;
     background:white;
 }
 .hr_style {
     border:1px solid pink;
-    position:relative;bottom:16px;
+    position:relative;bottom:12px;
 }
 .nav_body {
     margin:0 auto;
@@ -43,11 +43,11 @@ body { margin:0; }
     position:relative;bottom:175px;
 }
 .logo {
-    padding-top:10px;
+    padding-top:30px;
     width:200px;
 }
 .nav_search {
-    position:relative;bottom:60px;left:300px;
+    position:relative;bottom:70px;left:300px;
 }
 .global_search {
     width:300px;height:40px;
@@ -70,7 +70,7 @@ body { margin:0; }
 }
 .navigate {
     margin:10px auto;
-    position:relative;bottom:46px;
+    position:relative;bottom:62px;
 }
 a.nav_a {
     padding:11px 12px;
@@ -94,7 +94,7 @@ a.curr {
 .content {
     margin:0 auto;
     width:1000px;
-    position:relative;top:190px;
+    position:relative;top:165px;
 }
 .content_kongbai {
     margin:5px 0;
