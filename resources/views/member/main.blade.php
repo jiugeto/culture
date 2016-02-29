@@ -11,7 +11,7 @@
 <body>
     @include('layout.header')
     @include('layout.navigate')
-    <div class="content">
+    <div class="mem_con">
         @include('member.partials.menu')
 
         <!-- 中间内容 -->

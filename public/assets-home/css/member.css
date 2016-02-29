@@ -1,6 +1,11 @@
 /*============= 会员后台 member.css ===============*/
 
 
+.mem_con {
+    margin:0 auto;
+    width:1000px;
+    position:relative;top:117px;
+}
 .mem_float {
     float:left;
 }
