@@ -361,8 +361,10 @@ php artisan make:controller Admin/ActionController
 cd /usr/local/mysql/bin/
 -- 导出数据库
 mysqldump -uroot -p cul_business > /var/wwwnew/culture/DB.sql
+mysqldump -uroot -p cul_user > /var/wwwnew/culture/DB_user.sql
 -- 导入数据库
 mysqldump -uroot -p cul_business < /var/wwwnew/culture/DB.sql
+mysqldump -uroot -p cul_user < /var/wwwnew/culture/DB_user.sql
 ======================================
 -- 添加环境变量
 -- 当前会话有用
