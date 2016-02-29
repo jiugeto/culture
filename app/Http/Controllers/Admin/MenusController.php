@@ -19,14 +19,15 @@ class MenusController extends BaseController
         $this->crumb['']['name'] = '前台菜单列表';
     }
 
-    public function index()
+    public function index($type=0)
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'datas'=> MenusModel::paginate($this->limit),
+            'datas'=> $this->query($type),
             'prefix_url'=> '/admin/menus',
             'types'=> $this->model['types'],
+            'type_curr'=> $type,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -140,5 +141,13 @@ class MenusController extends BaseController
     /**
      *查询方法
      */
-//    public function query(){}
+    public function query($type=0)
+    {
+        if ($type) {
+            $datas =  MenusModel::where('type',$type)->paginate($this->limit);
+        } else {
+            $datas =  MenusModel::paginate($this->limit);
+        }
+        return $datas;
+    }
 }

@@ -4,6 +4,28 @@
         @include('admin.common.crumb')
         <div class="am-g">
             @include('admin.common.menu')
+            <div>
+                类型
+                <select name="type">
+                    @foreach($types as $kt=>$type)
+                            <option value="{{ $kt }}"
+                                    {{ $type_curr==$kt ? 'selected' : '' }}>
+                                {{ $type }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <script>
+                $(document).ready(function(){
+                    var type = $("select[name='type']");
+                    type.change(function(){
+                        if(type.val()==0){
+                            window.location.href = '/admin/menus';
+                        } else {
+                            window.location.href = '/admin/'+type.val()+'/menus';
+                        }
+                    });
+                });
+            </script>
         </div>
 
         {{--<hr>

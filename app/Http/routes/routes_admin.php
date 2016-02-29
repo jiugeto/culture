@@ -32,6 +32,9 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
     Route::get('function/trash','FunctionController@trash');
     Route::resource('function','FunctionController');
         //前台左侧菜单链接功能
+    Route::get('menus/trash','MenusController@trash');
+    Route::get('{type}/menus/trash','MenusController@trash');
+    Route::get('{type}/menus','MenusController@index');
     Route::resource('menus','MenusController');
     //供求管理
         //供应路由
