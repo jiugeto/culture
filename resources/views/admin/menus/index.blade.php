@@ -44,7 +44,7 @@
                         <th class="table-title">菜单名称</th>
                         <th class="table-title">菜单类型</th>
                         <th class="table-type">控制器名称</th>
-                        <th class="table-type">菜单方法</th>
+                        {{--<th class="table-type">菜单方法</th>--}}
                         <th class="table-author am-hide-sm-only">父ID</th>
                         <th class="table-author am-hide-sm-only">前台是否显示</th>
                         <th class="table-date am-hide-sm-only">添加时间</th>
@@ -64,7 +64,7 @@
                             @endforeach
                         </td>
                         <td class="am-hide-sm-only">{{ $data->controller_prefix.'Controller' }}</td>
-                        <td class="am-hide-sm-only">{{ $data->action }}</td>
+                        {{--<td class="am-hide-sm-only">{{ $data->action }}</td>--}}
                         <td class="am-hide-sm-only">{{ $data->pid }}</td>
                         <td class="am-hide-sm-only">{{ $data->isshow==0 ? '不显示' : '显示' }}</td>
                         <td class="am-hide-sm-only">{{ $data->created_at }}</td>

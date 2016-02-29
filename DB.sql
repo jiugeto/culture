@@ -497,12 +497,12 @@ CREATE TABLE `bs_menus` (
   `url` varchar(255) NOT NULL COMMENT '访问路径的部分 url',
   `action` varchar(255) NOT NULL COMMENT '操作方法名称',
   `style_class` varchar(255) DEFAULT NULL COMMENT 'class样式名称',
-  `pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '上级ID',
+  `pid` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '上级ID',
   `isshow` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '前台是否显示：0不显示，1显示',
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL DEFAULT '0000-00-00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='前台左侧菜单控制表 bs_menus';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='前台左侧菜单控制表 bs_menus';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -511,7 +511,7 @@ CREATE TABLE `bs_menus` (
 
 LOCK TABLES `bs_menus` WRITE;
 /*!40000 ALTER TABLE `bs_menus` DISABLE KEYS */;
-INSERT INTO `bs_menus` VALUES (1,'账户首页',1,'会员后台左侧菜单控制','App\\Http\\Controllers\\Member','Home','home','index','',1,0,'2016-03-06','2016-03-06');
+INSERT INTO `bs_menus` VALUES (1,'账户首页',1,'会员后台左侧菜单控制','App\\Http\\Controllers\\Member','Home','home','index','',0,1,'2016-03-06','2016-03-06'),(2,'会员认证',1,'','App\\Http\\Controllers\\Member','MemberAuth','memberauth','index','',0,1,'2016-02-29','2016-02-29'),(3,'个人主页',1,'','App\\Http\\Controllers\\Member','Person','person','index','',0,1,'2016-02-29','0000-00-00');
 /*!40000 ALTER TABLE `bs_menus` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -877,4 +877,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-06 21:29:54
+-- Dump completed on 2016-02-29 22:14:32

@@ -33,6 +33,7 @@
                         <div class="am-form-group">
                             <label>父级菜单的ID / Pid：</label>
                             <select name="pid">
+                                <option value="0" {{ $data->pid==0 ? 'selected' : '' }}>-0级菜单-</option>
                                 @foreach($pids as $pid)
                                     <option value="{{ $pid->id }}"
                                             {{ $data->pid==$pid->id ? 'selected' : '' }}>

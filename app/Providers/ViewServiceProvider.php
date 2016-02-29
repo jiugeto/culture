@@ -16,6 +16,22 @@ class ViewServiceProvider extends ServiceProvider
         View::composer(
             'admin.partials.menu', 'App\Http\ViewComposers\AdminMenuComposer'
         );
+        //会员后台左侧菜单数据
+        View::composer(
+            'member.partials.menu', 'App\Http\ViewComposers\MemberMenuComposer'
+        );
+        //前台顶部header链接
+        View::composer(
+            'layout.header', 'App\Http\ViewComposers\HeaderComposer'
+        );
+        //前台navigate链接
+        View::composer(
+            'layout.navigate', 'App\Http\ViewComposers\NavigateComposer'
+        );
+        //前台底部footer链接
+        View::composer(
+            'layout.footer', 'App\Http\ViewComposers\FooterComposer'
+        );
     }
 
     public function register()

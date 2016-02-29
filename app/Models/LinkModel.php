@@ -9,6 +9,7 @@ class LinkModel extends BaseModel
     protected $fillable = [
         'id','name','title','type','pic','intro','link','display_way','isshow','pid','created_at','updated_at',
     ];
+
 //    protected $types = [
 //        1=>'header头链接','navigate菜单导航栏链接','footer脚部链接',
 //    ];
@@ -27,5 +28,50 @@ class LinkModel extends BaseModel
     public function pic()
     {
         return $this->hasOne('App\Models\PicModel', 'id', 'pic_id');
+    }
+
+//    /**
+//     * 顶部链接，头部菜单链接，左部菜单链接，底部链接
+//     */
+//    public function links()
+//    {
+//        return [
+//            'headers'=> $this->headers(),
+//            'navigates'=> $this->navigates(),
+//            'footers'=> $this->footers(),
+//            'menus'=> $this->menus(),
+//        ];
+//    }
+
+    /**
+     * 顶部链接：type_id==1
+     */
+    public static function headers()
+    {
+        return LinkModel::where('type_id', 1)->get();
+    }
+
+    /**
+     * 头部链接：type_id==2
+     */
+    public static function navigates()
+    {
+        return LinkModel::where('type_id', 2)->get();
+    }
+
+    /**
+     * 底部链接：type_id==3
+     */
+    public static function footers()
+    {
+        return LinkModel::where('type_id', 3)->get();
+    }
+
+    /**
+     * 底部链接：type_id==4
+     */
+    public static function menus()
+    {
+        return LinkModel::where('type_id', 4)->get();
     }
 }
