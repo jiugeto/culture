@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\RoleModel;
-use Illuminate\Http\Request;
+use App\Models\Admin\RoleModel;
+//use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Models\ActionModel;
+//use App\Models\Admin\ActionModel;
 
 class AdminController extends BaseController
 {

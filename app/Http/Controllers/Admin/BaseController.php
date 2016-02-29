@@ -1,7 +1,8 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
+use App\Models\Admin\MenusModel;
+//use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\ActionModel;
 use App\Models\LinkModel;
@@ -65,6 +66,17 @@ class BaseController extends Controller
     {
         if ($links = LinkModel::all()) {
             return Tools::getChild($links,$pid=0);
+        }
+        return [];
+    }
+
+    /**
+     * 获取前台控制菜单列表
+     */
+    public function menus()
+    {
+        if ($menus = MenusModel::all()) {
+            return Tools::getChild($menus,$pid=0);
         }
         return [];
     }

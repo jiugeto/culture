@@ -2,7 +2,7 @@
 namespace App\Http\ViewComposers;
 
 use Illuminate\Contracts\View\View;
-use App\Models\ActionModel;
+use App\Models\Admin\ActionModel;
 use App\Tools;
 //use Illuminate\Support\Facades\DB;
 

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Models\Admin\ActionModel;
+use App\Models\Admin\MenusModel;
 
-class ActionController extends BaseController
+class MenusController extends BaseController
 {
     /**
      * 权限管理
@@ -13,10 +13,10 @@ class ActionController extends BaseController
 
     public function __construct()
     {
-        $this->model = new ActionModel();
-        $this->crumb['']['name'] = '权限列表';
-        $this->crumb['category']['name'] = '权限管理';
-        $this->crumb['category']['url'] = 'action';
+        $this->model = new MenusModel();
+        $this->crumb['category']['name'] = '前台控制菜单';
+        $this->crumb['category']['url'] = 'menus';
+        $this->crumb['']['name'] = '前台菜单列表';
     }
 
     public function index()
@@ -24,13 +24,13 @@ class ActionController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-//            'actions'=> $this->actions(),
-            'datas'=> ActionModel::paginate($this->limit),
-            'prefix_url'=> '/admin/action',
+            'datas'=> MenusModel::paginate($this->limit),
+            'prefix_url'=> '/admin/menus',
+            'types'=> $this->model['types'],
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
-        return view('admin.action.index', $result);
+        return view('admin.menus.index', $result);
     }
 
     public function create($pid=0)
@@ -38,20 +38,19 @@ class ActionController extends BaseController
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
-//            'actions'=> $this->actions(),
-            'parent'=> $this->parent($pid),
+            'types'=> $this->model['types'],
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
-        return view('admin.action.create', $result);
+        return view('admin.menus.create', $result);
     }
 
     public function store(Request $request)
     {
         $data = $this->getData($request);
         $data['created_at'] = date('Y-m-d H:m:s', time());
-        ActionModel::create($data);
-        return redirect('/admin/action');
+        MenusModel::create($data);
+        return redirect('/admin/menus');
     }
 
     public function show($id)
@@ -59,11 +58,10 @@ class ActionController extends BaseController
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
         $result = [
-//            'actions'=> $this->actions(),
-            'datas'=> ActionModel::find($id),
+            'datas'=> MenusModel::find($id),
             'crumb'=> $this->crumb,
         ];
-        return view('admin.action.show', $result);
+        return view('admin.menus.show', $result);
     }
 
     public function edit($id)
@@ -71,27 +69,25 @@ class ActionController extends BaseController
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
         $result = [
-//            'actions'=> $this->actions(),
-            'pactions'=> ActionModel::where('pid',0)->get(),
-            'parent'=> $this->parent($id),
-            'data'=> ActionModel::find($id),
+            'pactions'=> MenusModel::where('pid',0)->get(),
+            'data'=> MenusModel::find($id),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
-        return view('admin.action.edit', $result);
+        return view('admin.menus.edit', $result);
     }
 
     public function update(Request $request, $id)
     {
         $data = $this->getData($request);
         $data['updated_at'] = date('Y-m-d H:m:s', time());
-        ActionModel::find($id)->update($data);
-        return redirect('/admin/action');
+        MenusModel::find($id)->update($data);
+        return redirect('/admin/menus');
     }
 
     public function forceDelete($id)
     {
-        ActionModel::find($id)->delete();
+        MenusModel::find($id)->delete();
     }
 
 
@@ -114,6 +110,7 @@ class ActionController extends BaseController
         if (!$data['intro']) { $data['intro'] = ''; }
         $data = [
             'name'=> $data['name'],
+            'type'=> $data['type'],
             'intro'=> $data['intro'],
             'namespace'=> $data['namespace'],
             'controller_prefix'=> substr($data['controller_prefix'],0,-10),
@@ -131,7 +128,7 @@ class ActionController extends BaseController
     public function parent($pid)
     {
         if ($pid) {        //获取上级操作名称
-            $pname = ActionModel::where('id',$pid)->first()->name;
+            $pname = MenusModel::where('id',$pid)->first()->name;
         } else {
             $pname = '0级操作';
         }

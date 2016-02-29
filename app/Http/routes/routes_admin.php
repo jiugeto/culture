@@ -31,6 +31,8 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
     Route::post('function/{id}','FunctionController@update');
     Route::get('function/trash','FunctionController@trash');
     Route::resource('function','FunctionController');
+        //前台左侧菜单链接功能
+    Route::resource('menus','MenusController');
     //供求管理
         //供应路由
         //需求路由

@@ -26,20 +26,21 @@ create database cul_business;
 -- 权限管理表设计
 -- 管理员组表 ba_admin
 php artisan make:migration create_ba_admin_table --create=ba_admin
-	$table->string('name')->comment('管理员名称');
-	$table->string('password')->comment('登陆密码');
+  $table->string('name')->comment('管理员名称');
+  $table->string('password')->comment('登陆密码');
 php artisan migrate
 
 -- 角色表 ba_role
 php artisan make:migration create_ba_role_table --create=ba_role
-	$table->string('name')->comment('角色名称');
-	$table->string('password')->comment('登陆密码');
-	$table->integer('admin_id')->comment('管理员ID，关联管理员表ba_admin');
+  $table->string('name')->comment('角色名称');
+  $table->string('password')->comment('登陆密码');
+  $table->integer('admin_id')->comment('管理员ID，关联管理员表ba_admin');
 php artisan migrate
 
 -- 权限表 ba_action（系统管理员权限）
 php artisan make:migration create_ba_action_table --create=ba_action
   $table->string('name')->comment('权限名称');
+  -- $table->string('type')->comment('类型：1系统后台admin，2会员后台member，3个人后台person，4企业后台company');
   $table->string('intro')->comment('说明');
   $table->string('namespace')->comment('命名空间');
   $table->string('controller_prefix')->comment('控制器前缀');
@@ -107,7 +108,7 @@ php artisan migrate
 -- 个人表 bs_members
 php artisan make:migration create_bs_members_table --create=bs_members
   $table->string('realname')->comment('真实姓名');
-  $table->integer('type_id')->comment('个人类型：，1普通会员，2设计师会员');
+  $table->integer('type_id')->comment('个人类型：1普通会员，2设计师会员');
   $table->integer('sex')->comment('性别：1男，2女');
   $table->string('idcard')->comment('身份证号码，18位');
   $table->string('idfront')->comment('身份证正面照');
@@ -123,6 +124,20 @@ php artisan make:migration create_bs_companys_table --create=bs_companys
   $table->string('address')->comment('详细地址');
   $table->string('yyzzpic')->comment('营业执照图片');
   $table->integer('isauth')->comment('是否认证：0未认证，1未通过认证，2通过认证');
+php artisan migrate
+
+
+-- 菜单表 bs_menus
+-- (会员后台菜单、个人后台菜单、企业后台菜单)
+php artisan make:migration create_bs_menus_table --create=bs_menus
+  $table->string('name')->comment('菜单名称');
+  $table->string('type')->comment('菜单类型：1会员后台member，2个人后台person，3企业后台company');
+  $table->string('intro')->comment('说明');
+  $table->string('namespace')->comment('命名空间');
+  $table->string('controller_prefix')->comment('控制器前缀');
+  $table->string('action')->comment('操作方法');
+  $table->string('style_class')->comment('class样式');
+  $table->integer('pid')->comment('父ID');
 php artisan migrate
 
 

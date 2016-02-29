@@ -35,7 +35,7 @@ CREATE TABLE `ba_action` (
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL DEFAULT '0000-00-00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COMMENT='系统管理员权限表';
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COMMENT='系统管理员权限表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,8 +44,41 @@ CREATE TABLE `ba_action` (
 
 LOCK TABLES `ba_action` WRITE;
 /*!40000 ALTER TABLE `ba_action` DISABLE KEYS */;
-INSERT INTO `ba_action` VALUES (1,'首页','','App\\Http\\Controllers\\Admin','Home','home','index','am-cf',0,'2016-01-09','0000-00-00'),(2,'权限管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,'2016-01-09','0000-00-00'),(3,'操作管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',2,'2016-01-10','2016-01-12'),(4,'资料审核','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,'0000-00-00','2016-01-10'),(5,'供求管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,'0000-00-00','2016-01-12'),(6,'角色管理','','App\\Http\\Controllers\\Admin','Role','role','index','am-cf',2,'0000-00-00','2016-01-12'),(7,'管理员管理','','App\\Http\\Controllers\\Admin','Admin','admin','index','am-cf',2,'2016-01-12','2016-01-12'),(8,'产品管理','','App\\Http\\Controllers\\Admin','Product','action','index','am-cf',0,'2016-01-12','2016-02-16'),(9,'租赁管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,'2016-01-12','0000-00-00'),(10,'娱乐管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,'2016-01-12','0000-00-00'),(11,'设计管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,'2016-01-12','0000-00-00'),(12,'消息管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,'2016-01-12','0000-00-00'),(13,'消息管理','','App\\Http\\Controllers\\Admin','Message','message','index','am-cf',12,'2016-01-12','0000-00-00'),(14,'链接管理','','App\\Http\\Controllers\\Admin','Link','link','index','am-cf',12,'2016-01-12','0000-00-00'),(15,'心声管理','','App\\Http\\Controllers\\Admin','Voice','voice','index','am-cf',12,'2016-01-12','0000-00-00'),(16,'类型管理','','App\\Http\\Controllers\\Admin','Type','type','index','am-cf',1,'2016-01-13','0000-00-00'),(17,'图片管理','','App\\Http\\Controllers\\Admin','Pic','pic','index','am-cf',1,'2016-01-13','0000-00-00'),(18,'广告管理','','App\\Http\\Controllers\\Admin','Ad','ad','index','am-cf',0,'2016-02-15','0000-00-00'),(19,'广告管理','','App\\Http\\Controllers\\Admin','Ad','ad','index','am-cf',18,'2016-02-15','0000-00-00'),(20,'广告位管理','','App\\Http\\Controllers\\Admin','AdPlace','place','index','am-cf',18,'2016-02-15','0000-00-00'),(21,'内部产品','','App\\Http\\Controllers\\Admin','Product','product','index','',8,'2016-02-16','2016-02-16'),(22,'产品属性','','App\\Http\\Controllers\\Admin','ProductAttr','productattr','index','',8,'2016-02-16','0000-00-00'),(23,'视频管理','','App\\Http\\Controllers\\Admin','Video','video','index','',8,'2016-02-16','0000-00-00'),(24,'视频类型','','App\\Http\\Controllers\\Admin','VideoCategory','videocate','index','',8,'2016-02-16','2016-02-16'),(25,'租赁管理','','App\\Http\\Controllers\\Admin','Rent','rent','index','',9,'2016-02-16','0000-00-00'),(26,'娱乐管理','','App\\Http\\Controllers\\Admin','Entertain','entertain','index','',10,'2016-02-16','0000-00-00'),(27,'设计管理','','App\\Http\\Controllers\\Admin','Design','design','index','',11,'2016-02-17','0000-00-00'),(28,'用户权限','','App\\Http\\Controllers\\Admin','Authorization','authorization','index','',2,'2016-02-17','0000-00-00'),(29,'前台功能','','App\\Http\\Controllers\\Admin','Function','function','index','',2,'2016-02-17','0000-00-00');
+INSERT INTO `ba_action` VALUES (1,'首页','','App\\Http\\Controllers\\Admin','Home','home','index','am-cf',0,'2016-01-09','0000-00-00'),(2,'权限管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,'2016-01-09','0000-00-00'),(3,'操作管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',2,'2016-01-10','2016-01-12'),(4,'资料审核','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,'0000-00-00','2016-01-10'),(5,'供求管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,'0000-00-00','2016-01-12'),(6,'角色管理','','App\\Http\\Controllers\\Admin','Role','role','index','am-cf',2,'0000-00-00','2016-01-12'),(7,'管理员管理','','App\\Http\\Controllers\\Admin','Admin','admin','index','am-cf',2,'2016-01-12','2016-01-12'),(8,'产品管理','','App\\Http\\Controllers\\Admin','Product','action','index','am-cf',0,'2016-01-12','2016-02-16'),(9,'租赁管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,'2016-01-12','0000-00-00'),(10,'娱乐管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,'2016-01-12','0000-00-00'),(11,'设计管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,'2016-01-12','0000-00-00'),(12,'消息管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,'2016-01-12','0000-00-00'),(13,'消息管理','','App\\Http\\Controllers\\Admin','Message','message','index','am-cf',12,'2016-01-12','0000-00-00'),(14,'链接管理','','App\\Http\\Controllers\\Admin','Link','link','index','am-cf',12,'2016-01-12','0000-00-00'),(15,'心声管理','','App\\Http\\Controllers\\Admin','Voice','voice','index','am-cf',12,'2016-01-12','0000-00-00'),(16,'类型管理','','App\\Http\\Controllers\\Admin','Type','type','index','am-cf',1,'2016-01-13','0000-00-00'),(17,'图片管理','','App\\Http\\Controllers\\Admin','Pic','pic','index','am-cf',1,'2016-01-13','0000-00-00'),(18,'广告管理','','App\\Http\\Controllers\\Admin','Ad','ad','index','am-cf',0,'2016-02-15','0000-00-00'),(19,'广告管理','','App\\Http\\Controllers\\Admin','Ad','ad','index','am-cf',18,'2016-02-15','0000-00-00'),(20,'广告位管理','','App\\Http\\Controllers\\Admin','AdPlace','place','index','am-cf',18,'2016-02-15','0000-00-00'),(21,'内部产品','','App\\Http\\Controllers\\Admin','Product','product','index','',8,'2016-02-16','2016-02-16'),(22,'产品属性','','App\\Http\\Controllers\\Admin','ProductAttr','productattr','index','',8,'2016-02-16','0000-00-00'),(23,'视频管理','','App\\Http\\Controllers\\Admin','Video','video','index','',8,'2016-02-16','0000-00-00'),(24,'视频类型','','App\\Http\\Controllers\\Admin','VideoCategory','videocate','index','',8,'2016-02-16','2016-02-16'),(25,'租赁管理','','App\\Http\\Controllers\\Admin','Rent','rent','index','',9,'2016-02-16','0000-00-00'),(26,'娱乐管理','','App\\Http\\Controllers\\Admin','Entertain','entertain','index','',10,'2016-02-16','0000-00-00'),(27,'设计管理','','App\\Http\\Controllers\\Admin','Design','design','index','',11,'2016-02-17','0000-00-00'),(28,'用户权限','','App\\Http\\Controllers\\Admin','Authorization','authorization','index','',2,'2016-02-17','0000-00-00'),(29,'前台功能','','App\\Http\\Controllers\\Admin','Function','function','index','',2,'2016-02-17','0000-00-00'),(30,'前台控制菜单','','App\\Http\\Controllers\\Admin','Menus','menus','index','',2,'2016-02-29','0000-00-00');
 /*!40000 ALTER TABLE `ba_action` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ba_action_copy`
+--
+
+DROP TABLE IF EXISTS `ba_action_copy`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ba_action_copy` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL COMMENT '权限名称',
+  `intro` varchar(255) DEFAULT NULL COMMENT '权限说明',
+  `namespace` varchar(255) NOT NULL COMMENT '命名空间',
+  `controller_prefix` varchar(255) NOT NULL DEFAULT '' COMMENT '控制器名称',
+  `url` varchar(255) NOT NULL COMMENT '访问路径的部分 url',
+  `action` varchar(255) NOT NULL COMMENT '操作方法名称',
+  `style_class` varchar(255) DEFAULT NULL COMMENT 'class样式名称',
+  `pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '上级ID',
+  `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
+  `updated_at` date NOT NULL DEFAULT '0000-00-00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COMMENT='系统管理员权限表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ba_action_copy`
+--
+
+LOCK TABLES `ba_action_copy` WRITE;
+/*!40000 ALTER TABLE `ba_action_copy` DISABLE KEYS */;
+INSERT INTO `ba_action_copy` VALUES (1,'首页','','App\\Http\\Controllers\\Admin','Home','home','index','am-cf',0,'2016-01-09','0000-00-00'),(2,'权限管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,'2016-01-09','0000-00-00'),(3,'操作管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',2,'2016-01-10','2016-01-12'),(4,'资料审核','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,'0000-00-00','2016-01-10'),(5,'供求管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,'0000-00-00','2016-01-12'),(6,'角色管理','','App\\Http\\Controllers\\Admin','Role','role','index','am-cf',2,'0000-00-00','2016-01-12'),(7,'管理员管理','','App\\Http\\Controllers\\Admin','Admin','admin','index','am-cf',2,'2016-01-12','2016-01-12'),(8,'产品管理','','App\\Http\\Controllers\\Admin','Product','action','index','am-cf',0,'2016-01-12','2016-02-16'),(9,'租赁管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,'2016-01-12','0000-00-00'),(10,'娱乐管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,'2016-01-12','0000-00-00'),(11,'设计管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,'2016-01-12','0000-00-00'),(12,'消息管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,'2016-01-12','0000-00-00'),(13,'消息管理','','App\\Http\\Controllers\\Admin','Message','message','index','am-cf',12,'2016-01-12','0000-00-00'),(14,'链接管理','','App\\Http\\Controllers\\Admin','Link','link','index','am-cf',12,'2016-01-12','0000-00-00'),(15,'心声管理','','App\\Http\\Controllers\\Admin','Voice','voice','index','am-cf',12,'2016-01-12','0000-00-00'),(16,'类型管理','','App\\Http\\Controllers\\Admin','Type','type','index','am-cf',1,'2016-01-13','0000-00-00'),(17,'图片管理','','App\\Http\\Controllers\\Admin','Pic','pic','index','am-cf',1,'2016-01-13','0000-00-00'),(18,'广告管理','','App\\Http\\Controllers\\Admin','Ad','ad','index','am-cf',0,'2016-02-15','0000-00-00'),(19,'广告管理','','App\\Http\\Controllers\\Admin','Ad','ad','index','am-cf',18,'2016-02-15','0000-00-00'),(20,'广告位管理','','App\\Http\\Controllers\\Admin','AdPlace','place','index','am-cf',18,'2016-02-15','0000-00-00'),(21,'内部产品','','App\\Http\\Controllers\\Admin','Product','product','index','',8,'2016-02-16','2016-02-16'),(22,'产品属性','','App\\Http\\Controllers\\Admin','ProductAttr','productattr','index','',8,'2016-02-16','0000-00-00'),(23,'视频管理','','App\\Http\\Controllers\\Admin','Video','video','index','',8,'2016-02-16','0000-00-00'),(24,'视频类型','','App\\Http\\Controllers\\Admin','VideoCategory','videocate','index','',8,'2016-02-16','2016-02-16'),(25,'租赁管理','','App\\Http\\Controllers\\Admin','Rent','rent','index','',9,'2016-02-16','0000-00-00'),(26,'娱乐管理','','App\\Http\\Controllers\\Admin','Entertain','entertain','index','',10,'2016-02-16','0000-00-00'),(27,'设计管理','','App\\Http\\Controllers\\Admin','Design','design','index','',11,'2016-02-17','0000-00-00'),(28,'用户权限','','App\\Http\\Controllers\\Admin','Authorization','authorization','index','',2,'2016-02-17','0000-00-00'),(29,'前台功能','','App\\Http\\Controllers\\Admin','Function','function','index','',2,'2016-02-17','0000-00-00');
+/*!40000 ALTER TABLE `ba_action_copy` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -398,8 +431,9 @@ DROP TABLE IF EXISTS `bs_entertains`;
 CREATE TABLE `bs_entertains` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL COMMENT '娱乐标题',
-  `content` varchar(500) NOT NULL COMMENT '内容',
+  `content` text NOT NULL COMMENT '内容',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布方id',
+  `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站：0为不放入回收站，1为放入回收站',
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL,
   PRIMARY KEY (`id`)
@@ -477,6 +511,39 @@ LOCK TABLES `bs_links` WRITE;
 /*!40000 ALTER TABLE `bs_links` DISABLE KEYS */;
 INSERT INTO `bs_links` VALUES (1,'首页','',1,0,'','/#',1,1,0,'2016-01-13','0000-00-00');
 /*!40000 ALTER TABLE `bs_links` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bs_menus`
+--
+
+DROP TABLE IF EXISTS `bs_menus`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bs_menus` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL COMMENT '权限名称',
+  `type` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '菜单类型：1会员后台member，2个人后台person，3企业后台company',
+  `intro` varchar(255) DEFAULT NULL COMMENT '权限说明',
+  `namespace` varchar(255) NOT NULL COMMENT '命名空间',
+  `controller_prefix` varchar(255) NOT NULL DEFAULT '' COMMENT '控制器名称',
+  `url` varchar(255) NOT NULL COMMENT '访问路径的部分 url',
+  `action` varchar(255) NOT NULL COMMENT '操作方法名称',
+  `style_class` varchar(255) DEFAULT NULL COMMENT 'class样式名称',
+  `pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '上级ID',
+  `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
+  `updated_at` date NOT NULL DEFAULT '0000-00-00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='系统管理员权限表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bs_menus`
+--
+
+LOCK TABLES `bs_menus` WRITE;
+/*!40000 ALTER TABLE `bs_menus` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bs_menus` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -671,6 +738,8 @@ CREATE TABLE `bs_rents` (
   `intro` varchar(500) NOT NULL COMMENT '设备介绍',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布者id',
   `price` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '价格，单位元',
+  `fromtime` int(20) unsigned NOT NULL DEFAULT '0' COMMENT '租赁开始时间',
+  `totime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '租赁结束时间',
   `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站功能：0不放入回收站，1放入回收站',
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL,
@@ -839,4 +908,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-02-17 22:47:39
+-- Dump completed on 2016-02-29 19:08:17
