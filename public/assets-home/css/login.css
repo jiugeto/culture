@@ -1,0 +1,39 @@
+/*========== 登陆、注册样式 login.css ==========*/
+
+
+.login {
+    margin:20px auto;
+    padding:100px 0;
+    width:1000px;height:400px;
+}
+.login_text {
+    padding:40px 20px;
+}
+.login_right a {
+    margin:10px 30px;
+    padding:10px;
+    /*border-bottom:3px solid lightblue;*/
+    border-bottom:3px solid pink;
+    text-decoration:none;
+    color:black;
+    text-align:center;
+    font-family:'微软雅黑';
+    font-size:25px;
+}
+.login_right input {
+    width:300px;height:40px;
+    border:1px solid lightgrey;
+}
+.login_first {
+    border-top-left-radius:5px;
+    border-top-right-radius:5px;
+}
+.login_last {
+    border-bottom-left-radius:5px;
+    border-bottom-right-radius:5px;
+}
+.regist {
+    border-radius:10px;
+    background:crimson;
+    color:white;
+}
