@@ -9,6 +9,9 @@
 .login_text {
     padding:40px 20px;
 }
+.login_right {
+    padding:0 40px;
+}
 .login_right a {
     margin:10px 30px;
     padding:10px;
@@ -20,9 +23,15 @@
     font-family:'微软雅黑';
     font-size:25px;
 }
-.login_right input {
-    width:300px;height:40px;
+.login_div {
+    width:300px;height:50px;
     border:1px solid lightgrey;
+}
+.login_right input {
+    margin:15px;
+    border:none;outline:medium;
+    font-family:'微软雅黑';
+    font-size:15px;
 }
 .login_first {
     border-top-left-radius:5px;
@@ -33,7 +42,9 @@
     border-bottom-right-radius:5px;
 }
 .regist {
+    padding:10px 100px;
     border-radius:10px;
     background:crimson;
     color:white;
+    cursor:pointer;
 }
