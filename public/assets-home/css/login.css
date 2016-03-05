@@ -12,10 +12,9 @@
 .login_right {
     padding:0 40px;
 }
-.login_right a {
+.login_text a {
     margin:10px 30px;
     padding:10px;
-    /*border-bottom:3px solid lightblue;*/
     border-bottom:3px solid pink;
     text-decoration:none;
     color:black;
@@ -47,4 +46,9 @@
     background:crimson;
     color:white;
     cursor:pointer;
+}
+
+/*=====验证码=====*/
+.captcha {
+    position:relative;top:10px;
 }

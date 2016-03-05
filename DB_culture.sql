@@ -90,6 +90,42 @@ php artisan migrate
 -- 备注：用户组bs_auth_func中有记录，说明该用户有此功能
 
 
+-- 用户表 bs_users
+php artisan make:migration create_bs_users_table --create=bs_users
+  $table->string('username')->comment('用户名');
+  $table->string('password')->comment('密码，hash加密');
+  $table->string('email')->comment('邮箱');
+  $table->string('qq')->comment('qq号码');
+  $table->integer('tel')->comment('电话');
+  $table->integer('mobile')->comment('手机号码');
+  $table->integer('isauth')->comment('用户认证：0未认证，1待认证，2认证失败，2认证成功');
+  $table->integer('emailck')->comment('邮箱认证：0未认证，1认证失败，2认证成功');
+  $table->integer('mid')->comment('会员id，关联bs_members：0代表未认证');
+  $table->integer('cid')->comment('企业id，关联bs_companys：0代表未认证');
+php artisan migrate
+
+-- 个人表 bs_members
+php artisan make:migration create_bs_members_table --create=bs_members
+  $table->string('realname')->comment('真实姓名');
+  $table->integer('type_id')->comment('个人类型：，1普通会员，2设计师会员');
+  $table->integer('sex')->comment('性别：1男，2女');
+  $table->string('idcard')->comment('身份证号码，18位');
+  $table->string('idfront')->comment('身份证正面照');
+  $table->integer('isauth')->comment('是否认证：0未认证，1未通过认证，2通过认证');
+php artisan migrate
+
+-- 企业表 bs_companys
+php artisan make:migration create_bs_companys_table --create=bs_companys
+  $table->string('name')->comment('公司名称');
+  $table->integer('type_id')->comment('公司类型：1普通企业，2租赁公司，3经纪公司，4制作公司，5电视台，6电影公司');
+  $table->integer('yyzzid')->comment('营业执照注册码');
+  $table->integer('area')->comment('所在地ID');
+  $table->string('address')->comment('详细地址');
+  $table->string('yyzzpic')->comment('营业执照图片');
+  $table->integer('isauth')->comment('是否认证：0未认证，1未通过认证，2通过认证');
+php artisan migrate
+
+
 -- 网站链接表 bs_links
 php artisan make:migration create_bs_links_table --create=bs_links
   $table->string('name')->comment('链接名称');
