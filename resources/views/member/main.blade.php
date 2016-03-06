@@ -15,7 +15,13 @@
         @include('member.partials.menu')
 
         <!-- 中间内容 -->
-        @yield('content')
+        <div class="mem_float">
+            <div class="mem_right">
+                <div class="mem_win">
+                    @yield('content')
+                </div>
+            </div>
+        </div>
         <!-- 中间内容 -->
     </div>
     @include('layout.footer')

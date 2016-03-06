@@ -11,8 +11,13 @@
 }
 
 /*=========左侧菜单栏==========*/
-.mem_left,.mem_right { background:rgb(240,240,240); }
-.mem_left { padding-left:4px; }
+/*.mem_left {}*/
+.mem_left,.mem_right {
+    padding:4px 0 4px 4px;
+    background:rgb(230,230,230);
+}
+.mem_left { border-top-left-radius:3px;border-bottom-left-radius:3px; }
+.mem_right { border-top-right-radius:3px;border-bottom-right-radius:3px; }
 .mem_leftmenus {
     margin:0;
     padding:0;
@@ -29,21 +34,19 @@ a {
     font-family:'微软雅黑';
     font-size:15px;
 }
-a:hover {}
-a li.a_li {}
+/*a:hover {}
+a li.a_li {}*/
 a:hover li.a_li,a li.a_li_curr {
     color:white;
     background:rgb(255,100,0);
 }
-.li_home {
-    border-left:4px solid red;
-    background:rgb(245,245,245);
-}
+.li_home,.li_one,.li_sub { background:rgb(245,245,245); }
+.li_home { border-left:4px solid red; }
 .li_one {
     margin:1px 5px;
     border-left:4px solid pink;
-    background:rgb(245,245,245);
 }
+.li_sub { margin:1px 10px; }
 .a_li img {
     width:15px;
     position:relative;top:2px;
@@ -53,13 +56,22 @@ a:hover li.a_li,a li.a_li_curr {
 
 /*=========右侧窗口==========*/
 .mem_right {
-    width:830px;height:600px;
-    padding:5px 0 0 15px;
+    width:824px;height:600px;
 }
 .mem_win {
     padding:10px;
-    width:800px;height:600px;
+    width:800px;height:580px;
     background:white;
     border-radius:5px;
+}
+.mem_chart,.crumb { margin-left:10px;width:100%; }
+.chart1,.mem_info {
+    margin:10px 10px 10px 0;
+    padding:5px 20px;
+    width:140px;height:30px;
+    border:1px solid lightgrey;
+    /*font-family:'微软雅黑';*/
+    /*font-size:20px;*/
+    float:left;
 }
 /*=========右侧窗口==========*/
