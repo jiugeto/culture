@@ -10,7 +10,7 @@
         <div class="am-g">
             @include('admin.common.info')
             <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
-                <form class="am-form" data-am-validator method="POST" action="{{ url('/admin/action') }}" enctype="multipart/form-data">
+                <form class="am-form" data-am-validator method="POST" action="{{ url('/admin/menus') }}" enctype="multipart/form-data">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <fieldset>
                         <div class="am-form-group">
@@ -23,6 +23,16 @@
                             <select name="type" required>
                                 @foreach($types as $kt=>$type)
                                     <option value="{{ $kt }}">{{ $type }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label>父级菜单 / Pid：</label>
+                            <select name="pid">
+                                <option value="0">-0级菜单-</option>
+                                @foreach($pids as $pid)
+                                    <option value="{{ $pid->id }}">{{ $pid->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -55,6 +65,12 @@
                         <div class="am-form-group">
                             <label>描述 / Introduce：</label>
                             <textarea name="intro" cols="50" rows="5"></textarea>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label>前台是否显示 / Is Show：</label>
+                            <label><input type="radio" name="isshow" value="0"/> 不显示&nbsp;&nbsp;</label>
+                            <label><input type="radio" name="isshow" value="1" checked/> 显示&nbsp;&nbsp;</label>
                         </div>
 
                         <button type="submit" class="am-btn am-btn-primary">保存添加</button>

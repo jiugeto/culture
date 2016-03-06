@@ -17,15 +17,23 @@
                     <td>{{ $data->id }}</td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">权限名称 / Action Name：</td>
+                    <td class="am-hide-sm-only">菜单名称 / Menus Name：</td>
                     <td>{{ $data->name }}</td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">父id / Parent Id：</td>
+                    <td class="am-hide-sm-only">类型 / Menus Name：</td>
+                    <td>
+                        @foreach($types as $kt=>$type)
+                            @if($data->type==$kt) {{ $type }} @endif
+                        @endforeach
+                    </td>
+                </tr>
+                <tr>
+                    <td class="am-hide-sm-only">父id / Pid：</td>
                     <td>{{ $data->pid }}</td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">权限简介  / Intro：</td>
+                    <td class="am-hide-sm-only">菜单简介  / Intro：</td>
                     <td>{{ $data->intro }}</td>
                 </tr>
                 <tr>
@@ -47,6 +55,10 @@
                 <tr>
                     <td class="am-hide-sm-only">class样式名称 / Class Name：</td>
                     <td>{{ $data->style_class }}</td>
+                </tr>
+                <tr>
+                    <td class="am-hide-sm-only">前台是否显示 / Class Name：</td>
+                    <td>{{ $data->isshow==0 ? '不显示' : '显示' }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">创建时间 / Create Time：</td>

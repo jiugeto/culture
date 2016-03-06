@@ -39,6 +39,7 @@ class MenusController extends BaseController
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
+            'pids'=> $this->parents(),
             'types'=> $this->model['types'],
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -59,7 +60,8 @@ class MenusController extends BaseController
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
         $result = [
-            'datas'=> MenusModel::find($id),
+            'data'=> MenusModel::find($id),
+            'types'=> $this->model['types'],
             'crumb'=> $this->crumb,
         ];
         return view('admin.menus.show', $result);
@@ -70,8 +72,9 @@ class MenusController extends BaseController
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
         $result = [
-            'pactions'=> MenusModel::where('pid',0)->get(),
             'data'=> MenusModel::find($id),
+            'pids'=> $this->parents(),
+            'types'=> $this->model['types'],
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -82,7 +85,7 @@ class MenusController extends BaseController
     {
         $data = $this->getData($request);
         $data['updated_at'] = date('Y-m-d H:m:s', time());
-        MenusModel::find($id)->update($data);
+        MenusModel::where('id',$id)->update($data);
         return redirect('/admin/menus');
     }
 
@@ -119,24 +122,33 @@ class MenusController extends BaseController
             'action'=> $data['action'],
             'style_class'=> $data['style_class'],
             'pid'=> $data['pid'],
+            'isshow'=> $data['isshow'],
         ];
         return $data;
     }
 
     /**
-     * 得到父操作
+     * 第一级菜单
      */
-    public function parent($pid)
+    public function parents()
     {
-        if ($pid) {        //获取上级操作名称
-            $pname = MenusModel::where('id',$pid)->first()->name;
-        } else {
-            $pname = '0级操作';
-        }
-        $parent['id'] = $pid;
-        $parent['name'] = $pname;
-        return $parent;
+        return MenusModel::where('pid',0)->get();
     }
+
+//    /**
+//     * 得到父操作
+//     */
+//    public function parent($pid)
+//    {
+//        if ($pid) {        //获取上级操作名称
+//            $pname = MenusModel::where('id',$pid)->first()->name;
+//        } else {
+//            $pname = '0级操作';
+//        }
+//        $parent['id'] = $pid;
+//        $parent['name'] = $pname;
+//        return $parent;
+//    }
 
     /**
      *查询方法

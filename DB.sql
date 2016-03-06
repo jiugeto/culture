@@ -35,7 +35,7 @@ CREATE TABLE `ba_action` (
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL DEFAULT '0000-00-00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COMMENT='系统管理员权限表';
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COMMENT='系统管理员权限表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -498,10 +498,11 @@ CREATE TABLE `bs_menus` (
   `action` varchar(255) NOT NULL COMMENT '操作方法名称',
   `style_class` varchar(255) DEFAULT NULL COMMENT 'class样式名称',
   `pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '上级ID',
+  `isshow` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '前台是否显示：0不显示，1显示',
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL DEFAULT '0000-00-00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='系统管理员权限表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='前台左侧菜单控制表 bs_menus';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -510,6 +511,7 @@ CREATE TABLE `bs_menus` (
 
 LOCK TABLES `bs_menus` WRITE;
 /*!40000 ALTER TABLE `bs_menus` DISABLE KEYS */;
+INSERT INTO `bs_menus` VALUES (1,'账户首页',1,'会员后台左侧菜单控制','App\\Http\\Controllers\\Member','Home','home','index','',1,0,'2016-03-06','2016-03-06');
 /*!40000 ALTER TABLE `bs_menus` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -875,4 +877,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-02-29 19:08:17
+-- Dump completed on 2016-03-06 21:29:54

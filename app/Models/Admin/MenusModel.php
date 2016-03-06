@@ -17,4 +17,28 @@ class MenusModel extends BaseModel
     {
         return $this->belongsTo($this, 'pid');
     }
+
+    /**
+     * 得到会员后台左侧菜单 type==1
+     */
+    public function MemberMenus()
+    {
+        return MenusModel::where(['type'=>1,'isshow'=>1])->get();
+    }
+
+    /**
+     * 得到个人后台左侧菜单 type==2
+     */
+    public function PersonMenus()
+    {
+        return MenusModel::where(['type'=>2,'isshow'=>1])->get();
+    }
+
+    /**
+     * 得到公司后台左侧菜单 type==3
+     */
+    public function CompanyMenus()
+    {
+        return MenusModel::where(['type'=>3,'isshow'=>1])->get();
+    }
 }

@@ -12,7 +12,7 @@
                         {{ $crumb['create']['name'] }}
                     </button>
                 </a>
-                @if($crumb['category']['url']!='action')
+                @if(!in_array($crumb['category']['url'],['action','menus']))
                 <a href="/admin/{{$crumb['category']['url']}}/{{$crumb['trash']['url']}}">
                     <button type="button" class="am-btn am-btn-default">
                         <img src="/assets/images/del.png" class="icon">

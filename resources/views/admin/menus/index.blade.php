@@ -7,10 +7,11 @@
             <div>
                 类型
                 <select name="type">
+                    <option value="0">所有</option>
                     @foreach($types as $kt=>$type)
-                            <option value="{{ $kt }}"
-                                    {{ $type_curr==$kt ? 'selected' : '' }}>
-                                {{ $type }}</option>
+                        <option value="{{ $kt }}"
+                                {{ $type_curr==$kt ? 'selected' : '' }}>
+                            {{ $type }}</option>
                     @endforeach
                 </select>
             </div>
@@ -45,6 +46,7 @@
                         <th class="table-type">控制器名称</th>
                         <th class="table-type">菜单方法</th>
                         <th class="table-author am-hide-sm-only">父ID</th>
+                        <th class="table-author am-hide-sm-only">前台是否显示</th>
                         <th class="table-date am-hide-sm-only">添加时间</th>
                         <th class="table-set">操作</th>
                     </tr>
@@ -55,7 +57,7 @@
                     <tr>
                         <td class="am-hide-sm-only"><input type="checkbox" /></td>
                         <td class="am-hide-sm-only">{{ $data->id }}</td>
-                        <td class="am-hide-sm-only"><a href="/admin/action/{{$data->id}}">{{ $data->name }}</a></td>
+                        <td class="am-hide-sm-only"><a href="/admin/menus/{{$data->id}}">{{ $data->name }}</a></td>
                         <td class="am-hide-sm-only">
                             @foreach($types as $kt=>$type)
                                 @if($data->type==$kt) {{ $type }} @endif
@@ -64,16 +66,14 @@
                         <td class="am-hide-sm-only">{{ $data->controller_prefix.'Controller' }}</td>
                         <td class="am-hide-sm-only">{{ $data->action }}</td>
                         <td class="am-hide-sm-only">{{ $data->pid }}</td>
+                        <td class="am-hide-sm-only">{{ $data->isshow==0 ? '不显示' : '显示' }}</td>
                         <td class="am-hide-sm-only">{{ $data->created_at }}</td>
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
-                                    @if($data->pid==0)
-                                    <a href="/admin/action/create/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="/assets/images/add.png" class="icon"> 新增子操作</button></a>
-                                    @endif
-                                    <a href="/admin/action/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="/assets/images/show.png" class="icon"> 查看</button></a>
-                                    <a href="/admin/action/{{$data->id}}/edit"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="/assets/images/edit.png" class="icon"> 编辑</button></a>
-                                    <a href="/admin/action/{{$data->id}}/forceDelete"><button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><img src="/assets/images/forceDelete_red.png" class="icon"> 销毁记录</button></a>
+                                    <a href="/admin/menus/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="/assets/images/show.png" class="icon"> 查看</button></a>
+                                    <a href="/admin/menus/{{$data->id}}/edit"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="/assets/images/edit.png" class="icon"> 编辑</button></a>
+                                    <a href="/admin/menus/{{$data->id}}/forceDelete"><button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><img src="/assets/images/forceDelete_red.png" class="icon"> 销毁记录</button></a>
                                 </div>
                             </div>
                         </td>
