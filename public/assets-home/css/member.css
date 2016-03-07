@@ -22,6 +22,8 @@
     margin:0;
     padding:0;
     width:150px;height:600px;
+    border-radius:3px;
+    border:1px solid lightgrey;
     background:white;
 }
 .mem_leftmenus li {
@@ -56,22 +58,69 @@ a:hover li.a_li,a li.a_li_curr {
 
 /*=========右侧窗口==========*/
 .mem_right {
-    width:824px;height:600px;
+    width:830px;height:602px;
 }
 .mem_win {
     padding:10px;
     width:800px;height:580px;
     background:white;
-    border-radius:5px;
+    border-radius:3px;
+    border:1px solid lightgrey;
+}
+.mem_crumb {
+    margin:0 auto;
+    padding:5px 10px;
+    width:760px;
+    border:1px solid rgb(235,235,235);
+    border-radius:4px;
+    font-family:'微软雅黑';
+    background:rgb(240,240,240);
 }
 .mem_chart,.crumb { margin-left:10px;width:100%; }
 .chart1,.mem_info {
     margin:10px 10px 10px 0;
+    width:160px;height:50px;
+    border:1px solid rgb(240,240,240);
+    background:rgb(250,250,250);
+    border-radius:3px;
+}
+.chart1 { float:left;margin-right:20px; }
+.mem_info { float:right;margin-right:20px; }
+.circle {
+    width:50px;height:50px;
+    border-top-left-radius:3px;
+    border-bottom-left-radius:3px;
+}
+.circle1 { background:rgb(220,110,30); }
+.circle2 { background:rgb(225,200,85); }
+.circle3 { background:rgb(45,195,230); }
+.chart_text,.mem_user {
     padding:5px 20px;
-    width:140px;height:30px;
-    border:1px solid lightgrey;
-    /*font-family:'微软雅黑';*/
-    /*font-size:20px;*/
-    float:left;
+    font-family:'微软雅黑';
+}
+.chart_text {
+    font-size:15px;
+    position:relative;top:-40px;left:50px;
+}
+.mem_user {
+    font-size:12px;
+    position:relative;top:-40px;left:35px;
+}
+.company_info {
+    margin:0 auto;
+    width:780px;height:50px;
+    border-radius:3px;
+    border:1px solid rgb(240,240,240);
+    background:rgb(245,245,245);
+    clear:both;
+}
+.companybtn {
+    margin:15px 40%;
+    padding:5px 10px;
+    border:1px solid orangered;
+    border-radius:3px;
+    color:white;
+    background:orangered;
+    cursor:pointer;
 }
 /*=========右侧窗口==========*/
