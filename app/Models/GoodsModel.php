@@ -18,4 +18,9 @@ class GoodsModel extends BaseModel
         //产品主体：1个人需求，2设计师供应，3企业需求，4企业供应
         1=>'个人需求','设计师供应','企业需求','企业供应',
     ];
+
+    public function cates()
+    {
+        return $this->hasOne('\App\Models\CategoryModel','id','cate_id');
+    }
 }

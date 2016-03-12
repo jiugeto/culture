@@ -40,7 +40,10 @@ class PersonDemandController extends BaseGoodsController
 
     public function create()
     {
-        $result = ['menus'=> $this->list,];
+        $result = [
+            'menus'=> $this->list,
+            'cates'=> $this->model->cates(),
+        ];
         return view('member.persondemand.create', $result);
     }
 
@@ -50,5 +53,52 @@ class PersonDemandController extends BaseGoodsController
         $data['created_at'] = date('Y-m-d', time());
         GoodsModel::create($data);
         return redirect('/member/persondemand');
+    }
+
+    public function show($id)
+    {
+        $data = GoodsModel::find($id);
+        $result = [
+            'data'=> $data,
+            'menus'=> $this->list,
+        ];
+        return view('member.persondemand.show', $result);
+    }
+
+    public function edit($id)
+    {
+        $data = GoodsModel::find($id);
+        $result = [
+            'data'=> $data,
+            'menus'=> $this->list,
+            'cates'=> $this->model->cates(),
+        ];
+        return view('member.persondemand.edit', $result);
+    }
+
+    public function update(Request $request,$id)
+    {
+        $data = $this->getData($request,$id);
+        $data['updated_at'] = date('Y-m-d H:i:s', time());
+        GoodsModel::where('id',$id)->update($data);
+        return redirect('/member/persondemand');
+    }
+
+    public function destory($id)
+    {
+        GoodsModel::where('id',$id)->update(['del'=> 1]);
+        return redirect('/member/persondemand');
+    }
+
+    public function restore($id)
+    {
+        GoodsModel::where('id',$id)->update(['del'=> 0]);
+        return redirect('/member/persondemand/trash');
+    }
+
+    public function forceDelete($id)
+    {
+        GoodsModel::where('id',$id)->delete();
+        return redirect('/member/persondemand/trash');
     }
 }
