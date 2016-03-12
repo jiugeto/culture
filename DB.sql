@@ -502,7 +502,7 @@ CREATE TABLE `bs_menus` (
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL DEFAULT '0000-00-00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='前台左侧菜单控制表 bs_menus';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='前台左侧菜单控制表 bs_menus';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -511,7 +511,7 @@ CREATE TABLE `bs_menus` (
 
 LOCK TABLES `bs_menus` WRITE;
 /*!40000 ALTER TABLE `bs_menus` DISABLE KEYS */;
-INSERT INTO `bs_menus` VALUES (1,'账户首页',1,'会员后台左侧菜单控制','App\\Http\\Controllers\\Member','Home','home','index','',0,1,'2016-03-06','2016-03-06'),(2,'会员认证',1,'','App\\Http\\Controllers\\Member','MemberAuth','memberauth','index','',0,1,'2016-02-29','2016-02-29'),(3,'个人主页',1,'','App\\Http\\Controllers\\Member','Person','person','index','',0,1,'2016-02-29','0000-00-00'),(4,'企业主页',1,'','App\\Http\\Controllers\\Member','Company','company','index','',0,1,'2016-03-12','0000-00-00'),(5,'个人需求',1,'','App\\Http\\Controllers\\Member','PersonDemand','persondemand','index','',3,1,'2016-03-12','0000-00-00'),(6,'作品供应',1,'','App\\Http\\Controllers\\Member','Works','works','index','',3,1,'2016-03-12','0000-00-00'),(7,'企业需求',1,'','App\\Http\\Controllers\\Member','CompanyDemand','companydemand','index','',4,1,'2016-03-12','0000-00-00'),(8,'企业产品',1,'','App\\Http\\Controllers\\Member','CompanyProduct','companyproduct','index','',4,1,'2016-03-12','0000-00-00');
+INSERT INTO `bs_menus` VALUES (1,'账户首页',1,'会员后台左侧菜单控制','App\\Http\\Controllers\\Member','Home','home','index','',0,1,'2016-03-06','2016-03-06'),(2,'会员认证',1,'','App\\Http\\Controllers\\Member','MemberAuth','memberauth','index','',0,1,'2016-02-29','2016-02-29'),(3,'视频在线',1,'','App\\Http\\Controllers\\Member','Product','product','index','',0,1,'2016-03-12','0000-00-00'),(4,'个人供求',1,'','App\\Http\\Controllers\\Member','Person','person','index','',0,1,'2016-02-29','2016-03-12'),(5,'企业供求',1,'','App\\Http\\Controllers\\Member','Company','company','index','',0,1,'2016-03-12','2016-03-12'),(6,'个人需求',1,'','App\\Http\\Controllers\\Member','PersonDemand','persondemand','index','',4,1,'2016-03-12','0000-00-00'),(7,'作品供应',1,'','App\\Http\\Controllers\\Member','Works','works','index','',4,1,'2016-03-12','0000-00-00'),(8,'企业需求',1,'','App\\Http\\Controllers\\Member','CompanyDemand','companydemand','index','',5,1,'2016-03-12','0000-00-00'),(9,'企业产品',1,'','App\\Http\\Controllers\\Member','CompanyProduct','companyproduct','index','',5,1,'2016-03-12','0000-00-00');
 /*!40000 ALTER TABLE `bs_menus` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -619,6 +619,7 @@ DROP TABLE IF EXISTS `bs_products`;
 CREATE TABLE `bs_products` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL COMMENT '视频名称',
+  `genre` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '发布者身份：1个人，2企业',
   `intro` varchar(1000) DEFAULT NULL COMMENT '视频简介',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '提供者：需求用户，设计师，公司',
   `uname` varchar(255) DEFAULT NULL COMMENT '提供者名称',
@@ -877,4 +878,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-12 17:35:28
+-- Dump completed on 2016-03-12 23:06:16

@@ -6,4 +6,9 @@ class PersonDemandController extends BaseController
     /**
      * 个人会员需求管理
      */
+
+    public function index()
+    {
+        return view('member.persondemand.');
+    }
 }

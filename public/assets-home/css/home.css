@@ -1,6 +1,9 @@
 /*==========前台首页 home.css============*/
 
-body { margin:0; }
+body {
+    margin:0;
+    font-family:'微软雅黑';
+}
 
 /*=======header头========*/
 .header {
@@ -82,7 +85,7 @@ a.curr {
     border:1px solid lightgray;
     background:white;
     cursor:pointer;
-    position:fixed;z-index:120;top:30px;left:330px;
+    position:fixed;z-index:120;top:27px;left:380px;
 }
 .nav_qh {
     background:white;
@@ -98,7 +101,7 @@ a.curr {
 /*=======切换========*/
 /*=======search搜索========*/
 .search {
-    position:fixed;z-index:110;top:40px;left:450px;
+    position:fixed;z-index:110;top:40px;left:500px;
 }
 .global_search {
     width:250px;height:40px;

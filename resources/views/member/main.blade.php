@@ -20,6 +20,8 @@
                 <div class="mem_win">
                     @yield('content')
                 </div>
+                <!-- 空白 -->
+                <div class="content_kongbai">&nbsp;</div>
             </div>
         </div>
         <!-- 中间内容 -->

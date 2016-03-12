@@ -11,7 +11,6 @@
 }
 
 /*=========左侧菜单栏==========*/
-/*.mem_left {}*/
 .mem_left,.mem_right {
     padding:4px 0 4px 4px;
     background:rgb(230,230,230);
@@ -21,7 +20,7 @@
 .mem_leftmenus {
     margin:0;
     padding:0;
-    width:150px;height:600px;
+    width:150px;height:700px;
     border-radius:3px;
     border:1px solid lightgrey;
     background:white;
@@ -33,7 +32,6 @@
 a {
     text-decoration:none;
     color:black;
-    font-family:'微软雅黑';
     font-size:15px;
 }
 /*a:hover {}
@@ -59,13 +57,13 @@ a:hover li.a_li,a li.a_li_curr {
 /*=========左侧菜单栏==========*/
 
 
-/*=========右侧窗口==========*/
+/*=========右侧账户首页窗口==========*/
 .mem_right {
-    width:830px;height:602px;
+    width:830px;height:701px;
 }
 .mem_win {
     padding:10px;
-    width:800px;height:580px;
+    width:800px;height:680px;
     background:white;
     border-radius:3px;
     border:1px solid lightgrey;
@@ -76,7 +74,6 @@ a:hover li.a_li,a li.a_li_curr {
     width:760px;
     border:1px solid rgb(235,235,235);
     border-radius:4px;
-    font-family:'微软雅黑';
     background:rgb(240,240,240);
 }
 .mem_chart,.crumb { margin-left:10px;width:100%; }
@@ -99,7 +96,6 @@ a:hover li.a_li,a li.a_li_curr {
 .circle3 { background:rgb(45,195,230); }
 .chart_text,.mem_user {
     padding:5px 20px;
-    font-family:'微软雅黑';
 }
 .chart_text {
     font-size:15px;
@@ -126,4 +122,38 @@ a:hover li.a_li,a li.a_li_curr {
     background:orangered;
     cursor:pointer;
 }
-/*=========右侧窗口==========*/
+/*=========右侧账户首页窗口==========*/
+
+
+/*=========右侧视频在线窗口==========*/
+.search_type {
+    margin:10px;
+    padding:10px;
+    border-bottom:1px solid lightgrey;
+}
+.mem_tab { margin-top:-5px; }
+.mem_tab li { list-style:none;float:left; }
+.mem_tab a li {
+    padding:0 10px 10px 10px;
+    border-bottom:1px solid lightgrey;
+}
+.hr_tab {
+    clear:both;
+    margin:0 10px;
+    height:2px;
+    background:rgb(240,240,240);
+}
+.list_kongbai {
+    width:100%;height:5px;
+}
+.list {
+    margin:5px 20px;
+    font-size:12px;
+}
+.list_tab { width:100%;border-collapse:collapse; }
+.list_tab tr {
+    border-top:1px solid lightgrey;
+    border-bottom:1px solid lightgrey;
+}
+.list_tab td { padding:5px 10px;font-size:14px; }
+/*=========右侧视频在线窗口==========*/
