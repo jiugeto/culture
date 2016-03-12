@@ -1,7 +1,6 @@
 @extends('member.main')
 @section('content')
-    <div class="mem_crumb">会员后台 / 视频在线</div>
-    @include('member.product.search')
+    <div class="mem_crumb">会员后台 / 个人需求</div>
     <div class="mem_tab">
         <ul>
             @foreach($menus as $kmenu=>$menu)
@@ -16,9 +15,9 @@
         <table class="list_tab">
             <tr>
                 <td>编号</td>
-                <td>视频名称</td>
-                <td>gif缩略图</td>
-                <td>视频主体</td>
+                <td>需求名称</td>
+                <td>类型</td>
+                <td>分类</td>
                 <td>发布人</td>
                 <td>创建时间</td>
             </tr>
@@ -27,8 +26,8 @@
             <tr>
                 <td>{{ $data->id }}</td>
                 <td>{{ $data->name }}</td>
-                <td>{{ $data->gif }}</td>
-                <td>{{ $data->genre==1 ? '个人' :'企业' }}</td>
+                <td>{{ $data->type }}</td>
+                <td>{{ $data->cate_id }}</td>
                 <td>{{ $data->uname }}</td>
                 <td>{{ $data->created_at }}</td>
             </tr>

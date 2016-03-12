@@ -308,6 +308,33 @@ LOCK TABLES `bs_authorizations` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `bs_category`
+--
+
+DROP TABLE IF EXISTS `bs_category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bs_category` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL COMMENT '视频分类名称',
+  `pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '父id',
+  `intro` varchar(1000) DEFAULT NULL COMMENT '分类简介',
+  `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
+  `updated_at` date NOT NULL DEFAULT '0000-00-00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='分类表 bs_category';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bs_category`
+--
+
+LOCK TABLES `bs_category` WRITE;
+/*!40000 ALTER TABLE `bs_category` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bs_category` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `bs_designs`
 --
 
@@ -447,6 +474,37 @@ INSERT INTO `bs_functions` VALUES (1,'ffffffrgfgrefvdbf','','bs_videos_category'
 UNLOCK TABLES;
 
 --
+-- Table structure for table `bs_goods`
+--
+
+DROP TABLE IF EXISTS `bs_goods`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bs_goods` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL COMMENT '视频名称',
+  `cate_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '视频分类：关联bs_videos_category',
+  `intro` varchar(1000) DEFAULT NULL COMMENT '视频简介',
+  `link_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '链接id，关联图片表bs_pics、视频表bs_videos',
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布人：需求用户，设计师，公司',
+  `uname` varchar(255) NOT NULL COMMENT '发布人名称',
+  `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站功能：0不放入回收站，1放入回收站',
+  `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
+  `updated_at` date NOT NULL DEFAULT '0000-00-00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='上传的视频表：供应方提供的产品、需求方提供的需求样片';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bs_goods`
+--
+
+LOCK TABLES `bs_goods` WRITE;
+/*!40000 ALTER TABLE `bs_goods` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bs_goods` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `bs_links`
 --
 
@@ -502,7 +560,7 @@ CREATE TABLE `bs_menus` (
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL DEFAULT '0000-00-00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='前台左侧菜单控制表 bs_menus';
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='前台左侧菜单控制表 bs_menus';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -511,7 +569,7 @@ CREATE TABLE `bs_menus` (
 
 LOCK TABLES `bs_menus` WRITE;
 /*!40000 ALTER TABLE `bs_menus` DISABLE KEYS */;
-INSERT INTO `bs_menus` VALUES (1,'账户首页',1,'会员后台左侧菜单控制','App\\Http\\Controllers\\Member','Home','home','index','',0,1,'2016-03-06','2016-03-06'),(2,'会员认证',1,'','App\\Http\\Controllers\\Member','MemberAuth','memberauth','index','',0,1,'2016-02-29','2016-02-29'),(3,'视频在线',1,'','App\\Http\\Controllers\\Member','Product','product','index','',0,1,'2016-03-12','0000-00-00'),(4,'个人供求',1,'','App\\Http\\Controllers\\Member','Person','person','index','',0,1,'2016-02-29','2016-03-12'),(5,'企业供求',1,'','App\\Http\\Controllers\\Member','Company','company','index','',0,1,'2016-03-12','2016-03-12'),(6,'个人需求',1,'','App\\Http\\Controllers\\Member','PersonDemand','persondemand','index','',4,1,'2016-03-12','0000-00-00'),(7,'作品供应',1,'','App\\Http\\Controllers\\Member','Works','works','index','',4,1,'2016-03-12','0000-00-00'),(8,'企业需求',1,'','App\\Http\\Controllers\\Member','CompanyDemand','companydemand','index','',5,1,'2016-03-12','0000-00-00'),(9,'企业产品',1,'','App\\Http\\Controllers\\Member','CompanyProduct','companyproduct','index','',5,1,'2016-03-12','0000-00-00');
+INSERT INTO `bs_menus` VALUES (1,'账户首页',1,'会员后台左侧菜单控制','App\\Http\\Controllers\\Member','Home','home','index','',0,1,'2016-03-06','2016-03-06'),(2,'会员认证',1,'','App\\Http\\Controllers\\Member','MemberAuth','memberauth','index','',0,1,'2016-02-29','2016-02-29'),(3,'视频在线',1,'','App\\Http\\Controllers\\Member','Product','product','index','',0,1,'2016-03-12','0000-00-00'),(4,'个人供求',1,'','App\\Http\\Controllers\\Member','Person','person','index','',0,1,'2016-02-29','2016-03-12'),(5,'企业供求',1,'','App\\Http\\Controllers\\Member','Company','company','index','',0,1,'2016-03-12','2016-03-12'),(6,'个人需求',1,'','App\\Http\\Controllers\\Member','PersonDemand','persondemand','index','',4,1,'2016-03-12','0000-00-00'),(7,'作品供应',1,'','App\\Http\\Controllers\\Member','Works','works','index','',4,1,'2016-03-12','0000-00-00'),(8,'企业需求',1,'','App\\Http\\Controllers\\Member','CompanyDemand','companydemand','index','',5,1,'2016-03-12','0000-00-00'),(9,'企业产品',1,'','App\\Http\\Controllers\\Member','CompanyProduct','companyproduct','index','',5,1,'2016-03-12','0000-00-00'),(10,'租赁供求',1,'','App\\Http\\Controllers\\Member','RentD','rentD','index','',5,1,'2016-03-12','0000-00-00'),(11,'娱乐供求',1,'','App\\Http\\Controllers\\Member','EntertainD','entertainD','index','',5,1,'2016-03-12','2016-03-12');
 /*!40000 ALTER TABLE `bs_menus` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -591,13 +649,14 @@ DROP TABLE IF EXISTS `bs_pics`;
 CREATE TABLE `bs_pics` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL COMMENT '图片名称',
-  `type_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '类型id：关联bs_types',
+  `type` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '类型：1图片，2视频',
+  `cate_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '类型id：关联bs_types',
   `url` varchar(255) NOT NULL COMMENT '图片路径',
   `intro` varchar(500) DEFAULT NULL COMMENT '图片介绍',
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='图片表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='图片视频表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -620,6 +679,7 @@ CREATE TABLE `bs_products` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL COMMENT '视频名称',
   `genre` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '发布者身份：1个人，2企业',
+  `gif` int(10) unsigned NOT NULL DEFAULT '0' COMMENT ' 动态缩略图，关联图片表bs_pics',
   `intro` varchar(1000) DEFAULT NULL COMMENT '视频简介',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '提供者：需求用户，设计师，公司',
   `uname` varchar(255) DEFAULT NULL COMMENT '提供者名称',
@@ -809,65 +869,6 @@ LOCK TABLES `bs_user_voice` WRITE;
 /*!40000 ALTER TABLE `bs_user_voice` DISABLE KEYS */;
 /*!40000 ALTER TABLE `bs_user_voice` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `bs_videos`
---
-
-DROP TABLE IF EXISTS `bs_videos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `bs_videos` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL COMMENT '视频名称',
-  `cate_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '视频分类：关联bs_videos_category',
-  `intro` varchar(1000) DEFAULT NULL COMMENT '视频简介',
-  `link` varchar(255) NOT NULL COMMENT '视频链接地址',
-  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '提供者：需求用户，设计师，公司',
-  `uname` varchar(255) NOT NULL COMMENT '提供者名称',
-  `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站功能：0不放入回收站，1放入回收站',
-  `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
-  `updated_at` date NOT NULL DEFAULT '0000-00-00',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='上传的视频表：供应方提供的产品、需求方提供的需求样片';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `bs_videos`
---
-
-LOCK TABLES `bs_videos` WRITE;
-/*!40000 ALTER TABLE `bs_videos` DISABLE KEYS */;
-/*!40000 ALTER TABLE `bs_videos` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `bs_videos_category`
---
-
-DROP TABLE IF EXISTS `bs_videos_category`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `bs_videos_category` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL COMMENT '视频分类名称',
-  `type_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '类型划分依据，关联bs_types',
-  `pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '父id',
-  `intro` varchar(1000) DEFAULT NULL COMMENT '分类简介',
-  `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
-  `updated_at` date NOT NULL DEFAULT '0000-00-00',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='视频分类表bs_videos_category';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `bs_videos_category`
---
-
-LOCK TABLES `bs_videos_category` WRITE;
-/*!40000 ALTER TABLE `bs_videos_category` DISABLE KEYS */;
-/*!40000 ALTER TABLE `bs_videos_category` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -878,4 +879,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-12 23:06:16
+-- Dump completed on 2016-03-13  3:00:32

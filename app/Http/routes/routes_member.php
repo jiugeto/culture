@@ -22,8 +22,20 @@ Route::group(['prefix'=>'member','namespace'=>'Member'], function(){
     Route::resource('product','ProductController');
     //个人供求
         //个人需求
+    Route::resource('persondemand','PersonDemandController');
         //作品供应
+    Route::resource('works','WorksController');
     //企业供求
-        //个人需求
-        //作品供应
+        //企业需求
+    Route::resource('companydemand','CompanyDemandController');
+        //企业产品
+    Route::resource('companyproduct','CompanyProductController');
+        //租赁供求之需求
+    Route::resource('rentD','RentDController');
+        //租赁供求之供应
+    Route::resource('rentS','RentSController');
+        //娱乐供求之需求
+    Route::resource('entertainD','EntertainDController');
+        //娱乐供求之需求
+    Route::resource('entertainS','EntertainSController');
 });

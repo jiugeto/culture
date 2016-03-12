@@ -4,11 +4,11 @@ namespace App\Models;
 //use Illuminate\Database\Eloquent\Model;
 //use App\Models\TypeModel;
 
-class VideoCategoryModel extends BaseModel
+class CategoryModel extends BaseModel
 {
-    protected $table = 'bs_videos_category';
+    protected $table = 'bs_category';
     protected $fillable = [
-        'id','name','type_id','pid','intro','created_at','updated_at',
+        'id','name','pid','intro','created_at','updated_at',
     ];
 
     /**

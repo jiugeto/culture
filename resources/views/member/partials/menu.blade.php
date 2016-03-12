@@ -12,7 +12,7 @@
             </a>
                 @if($memberMenu->child)
                     @foreach($memberMenu->child as $subMenu)
-                    <a href="/member/{{$memberMenu->url}}">
+                    <a href="/member/{{$subMenu->url}}">
                             <li class="a_li li_sub">{{ $subMenu->name }}</li>
                     </a>
                     @endforeach

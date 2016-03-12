@@ -8,7 +8,7 @@ class ProductModel extends BaseModel
 {
     protected $table = 'bs_products';
     protected $fillable = [
-        'id','name','genre','intro','uid','uname','css_id','js_id','del','created_at','updated_at',
+        'id','name','genre','gif','intro','uid','uname','css_id','js_id','del','created_at','updated_at',
     ];
 
 //    /**
