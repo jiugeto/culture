@@ -19,10 +19,6 @@
                 @endif
             @endif
         @endforeach
-            {{--<a href="#"><li class="a_li"><img src="#"> 首页</li></a>--}}
-            {{--<a href="#"><li class="a_li_curr"><img src="#"> 个人用户</li></a>--}}
-            {{--<a href="#"><li class="a_li"><img src="#"> 企业用户</li></a>--}}
-            {{--<a href="#"><li class="a_li"><img src="#"> 用户</li></a>--}}
         </ul>
     </div>
 </div>

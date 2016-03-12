@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>微文化--系统后台管理</title>
-  <link rel="icon" type="image/png" href="assets/images/icon.png">
+  <link rel="icon" type="image/png" href="/assets/images/icon.png">
   <link rel="stylesheet" href="/assets/css/amazeui.min.css"/>
   <link rel="stylesheet" href="/assets/css/admin.css">
   <link rel="stylesheet" href="/assets/css/admin_cus.css">

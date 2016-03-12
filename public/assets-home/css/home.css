@@ -82,7 +82,7 @@ a.curr {
     border:1px solid lightgray;
     background:white;
     cursor:pointer;
-    position:fixed;z-index:120;top:30px;left:400px;
+    position:fixed;z-index:120;top:30px;left:330px;
 }
 .nav_qh {
     background:white;
@@ -94,10 +94,11 @@ a.curr {
     padding:10px 0;
     display:none;
 }
+.imgMiniSize { width:15px; }
 /*=======切换========*/
 /*=======search搜索========*/
 .search {
-    position:fixed;z-index:110;top:40px;left:520px;
+    position:fixed;z-index:110;top:40px;left:450px;
 }
 .global_search {
     width:250px;height:40px;
