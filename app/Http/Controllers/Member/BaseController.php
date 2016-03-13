@@ -22,7 +22,7 @@ class BaseController extends Controller
             ],
         'show'=> [
                 'url'=> 'show',
-                'name'=> '查看',
+                'name'=> '查看详情',
             ],
     ];
 }

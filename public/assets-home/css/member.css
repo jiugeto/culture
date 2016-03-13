@@ -77,6 +77,8 @@ a:hover li.a_li,a li.a_li_curr {
     border-radius:4px;
     background:rgb(240,240,240);
 }
+.mem_crumb a { font-size:16px; }
+.mem_crumb a:hover { color:red;text-decoration:underline; }
 .mem_chart,.crumb { margin-left:10px;width:100%; }
 .chart1,.mem_info {
     margin:10px 10px 10px 0;
@@ -171,8 +173,10 @@ a.list_btn:hover { background:darkred; }
 .mem_create a {
     margin:0 20px;
     padding:5px 10px;
-    background:lightseagreen;
+    background:red;
+    color:white;
 }
+.mem_create a:hover { background:darkred; }
 .table_create {
     margin:10px auto;
     padding:10px 50px;
