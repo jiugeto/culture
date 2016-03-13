@@ -1,7 +1,10 @@
 <?php
 namespace App\Http\Controllers\Member;
 
+//use App\Http\Requests\Request;
+use Illuminate\Http\Request;
 use App\Models\GoodsModel;
+//use App\Models\CategoryModel;
 
 class CompanyDController extends BaseGoodsController
 {
@@ -30,5 +33,34 @@ class CompanyDController extends BaseGoodsController
             'curr'=> '',
         ];
         return view('member.companySD.index', $result);
+    }
+
+    public function trash($cate_id=0)
+    {
+        $result = [
+            'datas'=> $this->query($del=0,$this->type,$cate_id),
+            'prefix_url'=> '/member/companyD/trash',
+            'menus'=> $this->list,
+            'curr'=> 'trash',
+        ];
+        return view('member.companySD.index', $result);
+    }
+
+    public function create()
+    {
+        $result = [
+            'categorys'=> $this->model->categorys(),
+            'menus'=> $this->list,
+            'curr'=> 'create',
+        ];
+        return view('member.companySD.create', $result);
+    }
+
+    public function store(Request $request)
+    {
+        $data = $this->getData($request,$this->type);
+        $data['created_at'] = date('Y-m-d', time());
+        GoodsModel::create($data);
+        return redirect('/member/companyD');
     }
 }

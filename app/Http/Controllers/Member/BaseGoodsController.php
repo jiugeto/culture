@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Member;
 
+use App\Models\CategoryModel;
 use App\Models\GoodsModel;
 use Illuminate\Http\Request;
 
@@ -11,16 +12,32 @@ class BaseGoodsController extends BaseController
      * 产品基础控制器
      */
 
+    protected $cateModels;
+
     /**
      * 查询方法
      */
     public function query($del=0,$type,$cate_id=0)
     {
-        return GoodsModel::where('del',$del)
-            ->where('type',$type)
-            ->where('cate_id',$cate_id)
-            ->orderBy('id','desc')
-            ->paginate($this->limit);
+        if ($cate_id) {
+            $goods =  GoodsModel::where('del',$del)
+                ->where('type',$type)
+                ->where('cate_id',$cate_id)
+                ->orderBy('id','desc')
+                ->paginate($this->limit);
+        } else {
+            $goods =  GoodsModel::where('del',$del)
+                ->where('type',$type)
+                ->orderBy('id','desc')
+                ->paginate($this->limit);
+        }
+        foreach ($goods as $good) {
+            $good->catename = '';
+            if ($good->cate_id) {
+                $good->catename = CategoryModel::find($good->cate_id)->name;
+            }
+        }
+        return $goods;
     }
 
     /**

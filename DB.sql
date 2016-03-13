@@ -496,7 +496,7 @@ CREATE TABLE `bs_goods` (
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL DEFAULT '0000-00-00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='上传的视频表：供应方提供的产品、需求方提供的需求样片';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='上传的视频表：供应方提供的产品、需求方提供的需求样片';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -505,7 +505,7 @@ CREATE TABLE `bs_goods` (
 
 LOCK TABLES `bs_goods` WRITE;
 /*!40000 ALTER TABLE `bs_goods` DISABLE KEYS */;
-INSERT INTO `bs_goods` VALUES (1,'作品1',0,0,'v部分的白癜风b',0,0,'',0,'2016-03-12','0000-00-00');
+INSERT INTO `bs_goods` VALUES (1,'作品1',0,0,'v部分的白癜风b',0,0,'',0,'2016-03-12','0000-00-00'),(2,'企业需求001',3,4,'',1,0,'',0,'2016-03-13','0000-00-00'),(3,'企业作品001',4,4,'',1,0,'',0,'2016-03-13','0000-00-00');
 /*!40000 ALTER TABLE `bs_goods` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -885,4 +885,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-13 17:32:07
+-- Dump completed on 2016-03-13 19:24:19

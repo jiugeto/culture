@@ -31,10 +31,10 @@ class EntertainController extends BaseController
         return view('member.entertain.index', $result);
     }
 
-    public function trash()
+    public function trash($genre=0)
     {
         $result = [
-            'datas'=> $this->query($del=1),
+            'datas'=> $this->query($del=1,$genre),
             'prefix_url'=> '/admin/entertain',
             'menus'=> $this->list,
             'curr'=> 'trash',
