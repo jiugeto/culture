@@ -51,8 +51,7 @@ Route::group(['prefix'=>'member','namespace'=>'Member'], function(){
         //租赁供求
     Route::get('{genre}/rent','RentController@index');
     Route::resource('rent','RentController');
-        //娱乐供求之需求
-    Route::resource('entertainD','EntertainDController');
-        //娱乐供求之需求
-    Route::resource('entertainS','EntertainSController');
+        //娱乐供求
+    Route::get('{genre}/entertain','EntertainController@index');
+    Route::resource('entertain','EntertainController');
 });

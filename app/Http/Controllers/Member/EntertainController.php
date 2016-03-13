@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Member;
 use Illuminate\Http\Request;
 use App\Models\EntertainModel;
 
-class EntertainSController extends BaseController
+class EntertainController extends BaseController
 {
     /**
      * 系统后台租赁管理
@@ -13,33 +13,41 @@ class EntertainSController extends BaseController
 
     public function __construct()
     {
-        $this->crumb['']['name'] = '娱乐列表';
-        $this->crumb['category']['name'] = '娱乐管理';
-        $this->crumb['category']['url'] = 'entertain';
+        $this->list['func']['name'] = '娱乐供求';
+        $this->list['func']['url'] = 'entertain';
+        $this->list['create']['name'] = '发布需求';
     }
 
-    public function index()
+    public function index($genre=0)
     {
-        $curr['name'] = $this->crumb['']['name'];
-        $curr['url'] = $this->crumb['']['url'];
         $result = [
 //            'actions'=> $this->actions(),
-            'datas'=> $this->query($del=0),
+            'datas'=> $this->query($del=0,$genre),
             'prefix_url'=> '/admin/entertain',
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
+            'menus'=> $this->list,
+            'curr'=> '',
+            'genre'=> $genre,
+        ];
+        return view('member.entertain.index', $result);
+    }
+
+    public function trash()
+    {
+        $result = [
+            'datas'=> $this->query($del=1),
+            'prefix_url'=> '/admin/entertain',
+            'menus'=> $this->list,
+            'curr'=> 'trash',
+            'genre'=> $genre,
         ];
         return view('member.entertain.index', $result);
     }
 
     public function create()
     {
-        $curr['name'] = $this->crumb['create']['name'];
-        $curr['url'] = $this->crumb['create']['url'];
         $result = [
-//            'actions'=> $this->actions(),
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
+            'menus'=> $this->list,
+            'curr'=> 'create',
         ];
         return view('member.entertain.create', $result);
     }
@@ -54,14 +62,10 @@ class EntertainSController extends BaseController
 
     public function edit($id)
     {
-        $data = EntertainModel::find($id);
-        $curr['name'] = $this->crumb['edit']['name'];
-        $curr['url'] = $this->crumb['edit']['url'];
         $result = [
-//            'actions'=> $this->actions(),
-            'data'=> $data,
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
+            'data'=> EntertainModel::find($id),
+            'menus'=> $this->list,
+            'curr'=> 'edit',
         ];
         return view('member.entertain.edit', $result);
     }
@@ -76,13 +80,10 @@ class EntertainSController extends BaseController
 
     public function show($id)
     {
-        $curr['name'] = $this->crumb['show']['name'];
-        $curr['url'] = $this->crumb['show']['url'];
         $result = [
-//            'actions'=> $this->actions(),
             'data'=> EntertainModel::find($id),
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
+            'menus'=> $this->list,
+            'curr'=> 'show',
         ];
         return view('member.entertain.show', $result);
     }
@@ -116,10 +117,18 @@ class EntertainSController extends BaseController
     /**
      * 查询方法
      */
-    public function query($del=0)
+    public function query($del=0,$genre)
     {
-        return EntertainModel::where('del',$del)
-            ->orderBy('id','desc')
-            ->paginate($this->limit);
+        if ($genre) {
+            $entertains =  EntertainModel::where('del',$del)
+                ->where('genre',$genre)
+                ->orderBy('id','desc')
+                ->paginate($this->limit);
+        } else {
+            $entertains =  EntertainModel::where('del',$del)
+                ->orderBy('id','desc')
+                ->paginate($this->limit);
+        }
+        return $entertains;
     }
 }
