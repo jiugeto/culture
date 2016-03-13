@@ -118,10 +118,12 @@ a:hover li.a_li,a li.a_li_curr {
 }
 .companybtn {
     /*margin:15px 40%;*/
-    padding:5px 10px;
+    padding:5px 20px;
     border:1px solid orangered;
     border-radius:3px;
     color:white;
+    font-family:'微软雅黑';
+    font-size:20px;
     background:orangered;
     cursor:pointer;
 }
@@ -140,6 +142,7 @@ a:hover li.a_li,a li.a_li_curr {
     padding:0 10px 10px 10px;
     border-bottom:1px solid lightgrey;
 }
+.mem_tab a:hover li { color:red; }
 .hr_tab {
     clear:both;
     margin:0 10px;

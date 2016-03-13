@@ -123,6 +123,7 @@ class MenusController extends BaseController
             'style_class'=> $data['style_class'],
             'pid'=> $data['pid'],
             'isshow'=> $data['isshow'],
+            'sort'=> $data['sort'],
         ];
         return $data;
     }

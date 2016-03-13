@@ -29,8 +29,15 @@ Route::group(['prefix'=>'member','namespace'=>'Member'], function(){
     Route::get('persondemand/trash','PersonDemandController@trash');
     Route::resource('persondemand','PersonDemandController');
         //作品供应
+    Route::post('works/{id}','WorksController@update');
+    Route::get('works/trash','WorksController@trash');
     Route::resource('works','WorksController');
         //作品类型
+    Route::post('category/{id}','CategoryController@update');
+    Route::get('category/trash','CategoryController@trash');
+    Route::get('category/{id}/destroy','CategoryController@destroy');
+    Route::get('category/{id}/restore','CategoryController@restore');
+    Route::get('category/{id}/forceDelete','CategoryController@forceDelete');
     Route::resource('category','CategoryController');
     //企业供求
         //企业需求

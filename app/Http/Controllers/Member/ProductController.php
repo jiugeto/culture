@@ -22,6 +22,7 @@ class ProductController extends BaseController
             'datas'=> $this->query($del=0),
             'menus'=> $this->list,
             'prefix_url'=> '/member/product',
+            'curr'=> '',
         ];
         return view('member.product.index', $result);
     }

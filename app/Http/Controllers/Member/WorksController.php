@@ -24,6 +24,7 @@ class WorksController extends BaseGoodsController
             'datas'=> $this->query($del=0,$type,$cate_id),
             'menus'=> $this->list,
             'prefix_url'=> '/member/works',
+            'curr'=> '',
         ];
         return view('member.works.index', $result);
     }
@@ -34,6 +35,7 @@ class WorksController extends BaseGoodsController
             'datas'=> $this->query($del=1,$type,$cate_id),
             'menus'=> $this->list,
             'prefix_url'=> '/member/works/trash',
+            'curr'=> 'trash',
         ];
         return view('member.works.index', $result);
     }

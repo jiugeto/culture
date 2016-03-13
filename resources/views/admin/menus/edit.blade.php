@@ -78,6 +78,11 @@
                             <label><input type="radio" name="isshow" value="1" {{ $data->isshow==1 ? 'checked' : '' }}/> 显示&nbsp;&nbsp;</label>
                         </div>
 
+                        <div class="am-form-group">
+                            <label>排序 / Sort：</label>
+                            <input type="text" pattern="^\d+$" name="sort" required value="{{ $data->sort }}"/>
+                        </div>
+
                         <button type="submit" class="am-btn am-btn-primary">保存修改</button>
                     </fieldset>
                 </form>

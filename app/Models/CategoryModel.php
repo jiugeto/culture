@@ -8,7 +8,7 @@ class CategoryModel extends BaseModel
 {
     protected $table = 'bs_category';
     protected $fillable = [
-        'id','name','pid','intro','created_at','updated_at',
+        'id','name','pid','intro','del','created_at','updated_at',
     ];
 
     /**
@@ -18,4 +18,12 @@ class CategoryModel extends BaseModel
    {
        return $this->hasOne('App\Models\VideoCategoryModel','id','pid');
    }
+
+    /**
+     * 分类一级
+     */
+    public function pidone()
+    {
+        return CategoryModel::where('del',0)->where('pid',0)->get();
+    }
 }

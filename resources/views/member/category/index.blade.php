@@ -18,13 +18,17 @@
             @foreach($datas as $data)
             <tr>
                 <td>{{ $data->id }}</td>
-                <td>{{ $data->name }}</td>
-                <td>{{ $data->cate_id }}</td>
+                <td><a href="/member/category/{{$data->id}}">
+                        @if(mb_strlen($data->name)<6) {{ $data->name }}
+                        @else {{ mb_substr($data->name,0,5,'utf-8').'...' }}
+                        @endif
+                    </a></td>
+                <td>{{ $data->pid }}</td>
                 <td>{{ $data->created_at }}</td>
                 <td>
-                    <a href="/member/persondemand/{{ $data->id }}" class="list_btn">查看</a>
-                    <a href="/member/persondemand/{{ $data->id }}/edit" class="list_btn">编辑</a>
-                    <a href="/member/persondemand/{{ $data->id }}/destroy" class="list_btn">删除</a>
+                    <a href="/member/category/{{ $data->id }}" class="list_btn">查看</a>
+                    <a href="/member/category/{{ $data->id }}/edit" class="list_btn">编辑</a>
+                    <a href="/member/category/{{ $data->id }}/destroy" class="list_btn">删除</a>
                 </td>
             </tr>
             @endforeach

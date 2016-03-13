@@ -73,6 +73,11 @@
                             <label><input type="radio" name="isshow" value="1" checked/> 显示&nbsp;&nbsp;</label>
                         </div>
 
+                        <div class="am-form-group">
+                            <label>排序 / Sort：</label>
+                            <input type="text" pattern="^\d+$" name="sort" required value="10"/>
+                        </div>
+
                         <button type="submit" class="am-btn am-btn-primary">保存添加</button>
                     </fieldset>
                 </form>

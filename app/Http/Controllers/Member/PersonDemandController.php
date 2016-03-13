@@ -27,6 +27,7 @@ class PersonDemandController extends BaseGoodsController
             'datas'=> $this->query($del=0,$this->type,$cate_id),
             'menus'=> $this->list,
             'prefix_url'=> '/member/persondemand',
+            'curr'=> '',
         ];
         return view('member.persondemand.index', $result);
     }
@@ -37,6 +38,7 @@ class PersonDemandController extends BaseGoodsController
             'datas'=> $this->query($del=1,$this->type,$cate_id),
             'menus'=> $this->list,
             'prefix_url'=> '/member/persondemand/trash',
+            'curr'=> 'trash',
         ];
         return view('member.persondemand.index', $result);
     }
