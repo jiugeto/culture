@@ -156,4 +156,11 @@ a:hover li.a_li,a li.a_li_curr {
     border-bottom:1px solid lightgrey;
 }
 .list_tab td { padding:5px 10px;font-size:14px; }
+.table_create {
+    margin:10px auto;
+    padding:10px 50px;
+    width:780px;
+    border:1px solid rgb(240,240,240);
+    border-radius:3px;
+}
 /*=========右侧视频在线窗口==========*/

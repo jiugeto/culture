@@ -2,13 +2,7 @@
 @section('content')
     <div class="mem_crumb">会员后台 / 视频在线</div>
     @include('member.product.search')
-    <div class="mem_tab">
-        <ul>
-            @foreach($menus as $kmenu=>$menu)
-            <a href="/member/{{$kmenu}}"><li>{{$menu}}</li></a><li>|</li>
-            @endforeach
-        </ul>
-    </div>
+    <div class="mem_tab">@include('member.common.menus')</div>
     <div class="hr_tab"></div>
     <!-- 空白 -->
     <div class="list_kongbai">&nbsp;</div>
