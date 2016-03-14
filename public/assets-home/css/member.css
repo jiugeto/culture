@@ -125,7 +125,7 @@ a:hover li.a_li,a li.a_li_curr {
 /*=========右侧账户首页窗口==========*/
 
 
-/*=========右侧视频在线窗口==========*/
+/*=========右侧列表窗口==========*/
 .search_type {
     margin:10px;
     padding:10px;
@@ -156,6 +156,15 @@ a:hover li.a_li,a li.a_li_curr {
     border-bottom:1px solid lightgrey;
 }
 .list_tab td { padding:5px 10px;font-size:14px; }
+/*=========右侧列表窗口==========*/
+
+/*=========右侧创建窗口==========*/
+.mem_create { float:right; }
+.mem_create a {
+    margin:0 20px;
+    padding:5px 10px;
+    background:lightseagreen;
+}
 .table_create {
     margin:10px auto;
     padding:10px 50px;
@@ -163,4 +172,8 @@ a:hover li.a_li,a li.a_li_curr {
     border:1px solid rgb(240,240,240);
     border-radius:3px;
 }
-/*=========右侧视频在线窗口==========*/
+input,textarea,select {
+    border:1px solid lightgrey;
+    border-radius:3px;
+}
+/*=========右侧创建窗口==========*/

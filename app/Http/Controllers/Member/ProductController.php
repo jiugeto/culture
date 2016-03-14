@@ -9,19 +9,18 @@ class ProductController extends BaseController
     /**
      * 会员后台在线视频动画产品管理
      */
-    protected $menus;
 
     public function __construct()
     {
-        $this->menus = $this->list;
-        $this->menus['creation'] = '去创作';
+        $this->list['func']['name'] = '在线创作';
+        $this->list['func']['url'] = 'product';
     }
 
     public function index()
     {
         $result = [
             'datas'=> $this->query($del=0),
-            'menus'=> $this->menus,
+            'menus'=> $this->list,
             'prefix_url'=> '/member/product',
         ];
         return view('member.product.index', $result);

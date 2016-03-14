@@ -10,6 +10,12 @@ class PersonDemandController extends BaseGoodsController
      * goods 商品、货物，代表文化类产品
      */
 
+    public function __construct()
+    {
+        $this->list['func']['name'] = '个人需求';
+        $this->list['func']['url'] = 'persondemand';
+    }
+
     public function index($type=0,$cate_id=0)
     {
         $result = [
@@ -32,6 +38,7 @@ class PersonDemandController extends BaseGoodsController
 
     public function create()
     {
-        return view('member.persondemand.create');
+        $result = ['menus'=> $this->list,];
+        return view('member.persondemand.create', $result);
     }
 }

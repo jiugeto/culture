@@ -1,6 +1,6 @@
 @extends('member.main')
 @section('content')
-    <div class="mem_crumb">会员后台 / 视频在线</div>
+    @include('member.common.crumb')
     @include('member.product.search')
     <div class="mem_tab">@include('member.common.menus')</div>
     <div class="hr_tab"></div>
