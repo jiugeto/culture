@@ -1,7 +1,8 @@
 <?php
 namespace App\Http\Controllers\Member;
 
-//use App\Models\GoodsModel;
+use Illuminate\Http\Request;
+use App\Models\GoodsModel;
 
 class PersonDemandController extends BaseGoodsController
 {
@@ -14,6 +15,7 @@ class PersonDemandController extends BaseGoodsController
     {
         $this->list['func']['name'] = '个人需求';
         $this->list['func']['url'] = 'persondemand';
+        $this->model = new GoodsModel();
     }
 
     public function index($type=0,$cate_id=0)
@@ -40,5 +42,13 @@ class PersonDemandController extends BaseGoodsController
     {
         $result = ['menus'=> $this->list,];
         return view('member.persondemand.create', $result);
+    }
+
+    public function store(Request $request)
+    {
+        $data = $this->getData($request,$this->model['types'][1]);
+        $data['created_at'] = date('Y-m-d', time());
+        GoodsModel::create($data);
+        return redirect('/member/persondemand');
     }
 }

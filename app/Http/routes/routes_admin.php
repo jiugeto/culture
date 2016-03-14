@@ -24,6 +24,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
         //操作路由
     Route::get('action/create/{pid}','ActionController@create');
     Route::post('action/{id}','ActionController@update');
+    Route::get('action/{id}/forceDelete','ActionController@forceDelete');
     Route::resource('action','ActionController');
         //用户权限分配
     Route::resource('authorization','AuthorizationController');
@@ -46,10 +47,8 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
     //产品管理
         //内部产品属性路由
     Route::resource('productattr','ProductAttrController');
-        //上传的视频路由
-    Route::resource('video','VideoController');
-        //上传的视频路由
-    Route::resource('videocate','VideoCategoryController');
+        //产品类型路由
+    Route::resource('category','CategoryController');
     //租赁路由
     Route::resource('rent','RentController');
     //娱乐路由

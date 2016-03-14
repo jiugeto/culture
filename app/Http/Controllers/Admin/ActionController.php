@@ -85,13 +85,14 @@ class ActionController extends BaseController
     {
         $data = $this->getData($request);
         $data['updated_at'] = date('Y-m-d H:m:s', time());
-        ActionModel::find($id)->update($data);
+        ActionModel::where('id',$id)->update($data);
         return redirect('/admin/action');
     }
 
     public function forceDelete($id)
     {
-        ActionModel::find($id)->delete();
+        ActionModel::where('id',$id)->delete();
+        return redirect('/admin/action');
     }
 
 

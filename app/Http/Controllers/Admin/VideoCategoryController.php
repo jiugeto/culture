@@ -2,9 +2,9 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Models\VideoCategoryModel;
+use App\Models\CategoryModel;
 
-class VideoCategoryController extends BaseController
+class CategoryController extends BaseController
 {
     /**
      * 系统后台视频管理
@@ -12,10 +12,10 @@ class VideoCategoryController extends BaseController
 
     public function __construct()
     {
-        $this->model = new VideoCategoryModel();
-        $this->crumb['']['name'] = '视频类型列表';
-        $this->crumb['category']['name'] = '视频类型管理';
-        $this->crumb['category']['url'] = 'videocate';
+        $this->model = new CategoryModel();
+        $this->crumb['']['name'] = '产品类型列表';
+        $this->crumb['category']['name'] = '产品类型管理';
+        $this->crumb['category']['url'] = 'category';
     }
 
     public function index()
@@ -25,11 +25,11 @@ class VideoCategoryController extends BaseController
         $result = [
             'actions'=> $this->actions(),
             'datas'=> $this->query(),
-            'prefix_url'=> '/admin/videocate',
+            'prefix_url'=> '/admin/category',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
-        return view('admin.videoCate.index', $result);
+        return view('admin.category.index', $result);
     }
 
     public function create()
@@ -38,19 +38,19 @@ class VideoCategoryController extends BaseController
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
             'actions'=> $this->actions(),
-            'pcates'=> VideoCategoryModel::where('pid', 0)->get(),      //暂时父级pid==0
+            'pcates'=> CategoryModel::where('pid', 0)->get(),      //暂时父级pid==0
             'types'=> $this->model->getTypes(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
-        return view('admin.videoCate.create', $result);
+        return view('admin.category.create', $result);
     }
 
     public function store(Request $request)
     {
         $data = $this->getData($request);
         $data['created_at'] = date('Y-m-d', time());
-        return redirect('/admin/videocate');
+        return redirect('/admin/category');
     }
 
     public function edit($id)
@@ -59,19 +59,19 @@ class VideoCategoryController extends BaseController
         $curr['url'] = $this->crumb['edit']['url'];
         $result = [
             'actions'=> $this->actions(),
-            'data'=> VideoCategoryModel::find($id),
+            'data'=> CategoryModel::find($id),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
-        return view('admin.videoCate,edit', $result);
+        return view('admin.category.edit', $result);
     }
 
     public function update(Request $request, $id)
     {
         $data = $this->getData($request);
         $data['updated_at'] = date('Y-m-d', time());
-        VideoCategoryModel::where('id',$id)->update($data);
-        return redirect('/admin/videocate');
+        CategoryModel::where('id',$id)->update($data);
+        return redirect('/admin/category');
     }
 
     public function show($id)
@@ -80,11 +80,11 @@ class VideoCategoryController extends BaseController
         $curr['url'] = $this->crumb['show']['url'];
         $result = [
             'actions'=> $this->actions(),
-            'data'=> VideoCategoryModel::find($id),
+            'data'=> CategoryModel::find($id),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
-        return view('admin.videoCate.show', $result);
+        return view('admin.category.show', $result);
     }
 
 
@@ -116,6 +116,6 @@ class VideoCategoryController extends BaseController
      */
     public function query()
     {
-        return VideoCategoryModel::paginate($this->limit);
+        return CategoryModel::paginate($this->limit);
     }
 }

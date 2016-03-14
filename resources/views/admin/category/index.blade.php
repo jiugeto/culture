@@ -4,7 +4,6 @@
         @include('admin.common.crumb')
         <div class="am-g">
             @include('admin.common.menu')
-            {{--@include('admin.type.search')--}}
         </div>
         <hr>
 
@@ -15,7 +14,7 @@
                     <tr>
                         <th class="table-check"><input type="checkbox"/></th>
                         <th class="table-id">ID</th>
-                        <th class="table-title">视频类型名称</th>
+                        <th class="table-title">类型名称</th>
                         <th class="table-type">父级id</th>
                         <th class="table-date am-hide-sm-only">添加时间</th>
                         <th class="table-set">操作</th>

@@ -25,6 +25,8 @@ Route::group(['prefix'=>'member','namespace'=>'Member'], function(){
     Route::resource('persondemand','PersonDemandController');
         //作品供应
     Route::resource('works','WorksController');
+        //作品类型
+    Route::resource('category','CategoryController');
     //企业供求
         //企业需求
     Route::resource('companydemand','CompanyDemandController');

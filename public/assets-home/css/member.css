@@ -156,6 +156,12 @@ a:hover li.a_li,a li.a_li_curr {
     border-bottom:1px solid lightgrey;
 }
 .list_tab td { padding:5px 10px;font-size:14px; }
+.list_btn {
+    padding:0 10px;
+    background:orangered;
+    border-radius:2px;
+    color:white;
+}
 /*=========右侧列表窗口==========*/
 
 /*=========右侧创建窗口==========*/
@@ -176,4 +182,6 @@ input,textarea,select {
     border:1px solid lightgrey;
     border-radius:3px;
 }
+input { height:20px; }
+select { height:25px; }
 /*=========右侧创建窗口==========*/

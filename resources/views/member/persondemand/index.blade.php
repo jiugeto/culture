@@ -14,6 +14,7 @@
                 <td>分类</td>
                 <td>发布人</td>
                 <td>创建时间</td>
+                <td>操作</td>
             </tr>
         @if($datas->total())
             @foreach($datas as $data)
@@ -24,6 +25,10 @@
                 <td>{{ $data->cate_id }}</td>
                 <td>{{ $data->uname }}</td>
                 <td>{{ $data->created_at }}</td>
+                <td>
+                    <a href="/member/persondemand" class="list_btn">查看</a>
+                    <a href="" class="list_btn">删除</a>
+                </td>
             </tr>
             @endforeach
         @else @include('member.common.norecord')

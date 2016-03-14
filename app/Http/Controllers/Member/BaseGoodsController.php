@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Member;
 
 use App\Models\GoodsModel;
+use Illuminate\Http\Request;
 
 class BaseGoodsController extends BaseController
 {
@@ -20,5 +21,25 @@ class BaseGoodsController extends BaseController
             ->where('cate_id',$cate_id)
             ->orderBy('id','desc')
             ->paginate($this->limit);
+    }
+
+    /**
+     * 收集数据
+     */
+    public function getData(Request $request,$type=1,$id=null)
+    {
+        $data = $request->all();
+        //uid暂且为10,uname暂且为''
+        $uid = 0; $uname = '';
+        $goods = [
+            'name'=> $data['name'],
+            'type'=> $type,
+            'cate_id'=> $data['cate_id'],
+            'intro'=> $data['intro'],
+            'link_id'=> $data['link_id'],
+            'uid'=> $uid,
+            'uname'=> $uname,
+        ];
+        return $goods;
     }
 }
