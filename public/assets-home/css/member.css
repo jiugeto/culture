@@ -9,6 +9,7 @@
 .mem_float {
     float:left;
 }
+.center { text-align:center; }
 
 /*=========左侧菜单栏==========*/
 .mem_left,.mem_right {
@@ -157,11 +158,12 @@ a:hover li.a_li,a li.a_li_curr {
 }
 .list_tab td { padding:5px 10px;font-size:14px; }
 .list_btn {
-    padding:0 10px;
+    padding:2px 15px;
     background:orangered;
     border-radius:2px;
     color:white;
 }
+a.list_btn:hover { background:darkred; }
 /*=========右侧列表窗口==========*/
 
 /*=========右侧创建窗口==========*/
@@ -185,3 +187,12 @@ input,textarea,select {
 input { height:20px; }
 select { height:25px; }
 /*=========右侧创建窗口==========*/
+
+/*=========右侧查看窗口==========*/
+/*.table_show { border-collapse:collapse; }*/
+.table_show td {
+    padding:10px 50px;
+    /*width:50%;*/
+    border-bottom:1px solid lightgrey;
+}
+/*=========右侧查看窗口==========*/

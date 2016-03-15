@@ -23,9 +23,10 @@ Route::group(['prefix'=>'member','namespace'=>'Member'], function(){
     //个人供求
         //个人需求
     Route::post('persondemand/{id}','PersonDemandController@update');
-    Route::get('persondemand/{id}/destory','PersonDemandController@destory');
+    Route::get('persondemand/{id}/destroy','PersonDemandController@destroy');
     Route::get('persondemand/{id}/restore','PersonDemandController@restore');
     Route::get('persondemand/{id}/forceDelete','PersonDemandController@forceDelete');
+    Route::get('persondemand/trash','PersonDemandController@trash');
     Route::resource('persondemand','PersonDemandController');
         //作品供应
     Route::resource('works','WorksController');

@@ -33,7 +33,7 @@ class PersonDemandController extends BaseGoodsController
         $result = [
             'datas'=> $this->query($del=1,$type,$cate_id),
             'menus'=> $this->list,
-            'prefix_url'=> '/member/persondemand',
+            'prefix_url'=> '/member/persondemand/trash',
         ];
         return view('member.persondemand.index', $result);
     }
@@ -84,7 +84,7 @@ class PersonDemandController extends BaseGoodsController
         return redirect('/member/persondemand');
     }
 
-    public function destory($id)
+    public function destroy($id)
     {
         GoodsModel::where('id',$id)->update(['del'=> 1]);
         return redirect('/member/persondemand');

@@ -4,7 +4,7 @@
 <ul>
     @foreach($menus as $kmenu=>$menu)
         @if(!in_array($kmenu,['func','create','edit','show']))
-        <a href="/member/{{$kmenu}}"><li>{{$menu}}</li></a><li>|</li>
+        <a href="/member/{{$menus['func']['url']}}/{{$kmenu}}"><li>{{$menu}}</li></a><li>|</li>
         @endif
     @endforeach
 </ul>
