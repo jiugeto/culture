@@ -58,7 +58,10 @@
             </tr>
             <tr><td></td></tr>
 
-            <tr><td colspan="2" style="text-align:center;"><button type="submit" class="companybtn">保存添加</button></td></tr>
+            <tr><td colspan="2" style="text-align:center;">
+                    <button class="companybtn" onclick="history.go(-1)">返 &nbsp;&nbsp;&nbsp;回</button>
+                    <button type="submit" class="companybtn">保存修改</button>
+                </td></tr>
         </table>
     </form>
 @stop

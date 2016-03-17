@@ -18,16 +18,4 @@ class CategoryModel extends BaseModel
    {
        return $this->hasOne('App\Models\VideoCategoryModel','id','pid');
    }
-
-    /**
-     * 类别依据关联 表id==2
-     */
-   public function getTypes()
-   {
-       return TypeModel::where([
-                       'table_id'=> 2,
-                       'field'=> 'type_id',
-                   ])
-                   ->get();
-   }
 }

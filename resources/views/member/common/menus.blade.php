@@ -8,4 +8,4 @@
         @endif
     @endforeach
 </ul>
-<div class="mem_create"><a href="/member/{{$menus['func']['url']}}/create">创建作品</a></div>
+<div class="mem_create"><a href="/member/{{$menus['func']['url']}}/create">{{$menus['create']['name']}}</a></div>

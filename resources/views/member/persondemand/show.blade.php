@@ -37,7 +37,8 @@
             <td>{{ $data->updated_at ? '未更新' : $data->updated_at }}</td>
         </tr>
         <tr><td class="center" colspan="2" style="border:0;cursor:pointer;">
-                <a class="list_btn" onclick="history.go(-1)">返回</a>
+                {{--<a class="list_btn" onclick="history.go(-1)">返回</a>--}}
+                <button class="companybtn" onclick="history.go(-1)">返 &nbsp;&nbsp;&nbsp;回</button>
             </td></tr>
     </table>
 @stop

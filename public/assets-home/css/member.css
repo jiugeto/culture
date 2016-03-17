@@ -117,7 +117,7 @@ a:hover li.a_li,a li.a_li_curr {
     clear:both;
 }
 .companybtn {
-    margin:15px 40%;
+    /*margin:15px 40%;*/
     padding:5px 10px;
     border:1px solid orangered;
     border-radius:3px;

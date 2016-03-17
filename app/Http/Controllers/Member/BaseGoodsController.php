@@ -14,7 +14,7 @@ class BaseGoodsController extends BaseController
     /**
      * 查询方法
      */
-    public function query($del=0,$type=0,$cate_id=0)
+    public function query($del=0,$type,$cate_id=0)
     {
         return GoodsModel::where('del',$del)
             ->where('type',$type)
@@ -26,7 +26,7 @@ class BaseGoodsController extends BaseController
     /**
      * 收集数据
      */
-    public function getData(Request $request,$type=1,$id=null)
+    public function getData(Request $request,$type,$id=null)
     {
         $data = $request->all();
         //uid暂且为10,uname暂且为''

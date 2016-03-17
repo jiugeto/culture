@@ -11,6 +11,9 @@ class PersonDemandController extends BaseGoodsController
      * goods 商品、货物，代表文化类产品
      */
 
+    //产品主体：1个人需求，2设计师供应，3企业需求，4企业供应
+    protected $type = 1;
+
     public function __construct()
     {
         $this->list['func']['name'] = '个人需求';
@@ -18,20 +21,20 @@ class PersonDemandController extends BaseGoodsController
         $this->model = new GoodsModel();
     }
 
-    public function index($type=0,$cate_id=0)
+    public function index($cate_id=0)
     {
         $result = [
-            'datas'=> $this->query($del=0,$type,$cate_id),
+            'datas'=> $this->query($del=0,$this->type,$cate_id),
             'menus'=> $this->list,
             'prefix_url'=> '/member/persondemand',
         ];
         return view('member.persondemand.index', $result);
     }
 
-    public function trash($type=0,$cate_id=0)
+    public function trash($cate_id=0)
     {
         $result = [
-            'datas'=> $this->query($del=1,$type,$cate_id),
+            'datas'=> $this->query($del=1,$this->type,$cate_id),
             'menus'=> $this->list,
             'prefix_url'=> '/member/persondemand/trash',
         ];
@@ -49,7 +52,7 @@ class PersonDemandController extends BaseGoodsController
 
     public function store(Request $request)
     {
-        $data = $this->getData($request,$this->model['types'][1]);
+        $data = $this->getData($request,$this->type);
         $data['created_at'] = date('Y-m-d', time());
         GoodsModel::create($data);
         return redirect('/member/persondemand');
@@ -78,7 +81,7 @@ class PersonDemandController extends BaseGoodsController
 
     public function update(Request $request,$id)
     {
-        $data = $this->getData($request,$id);
+        $data = $this->getData($request,$this->type,$id);
         $data['updated_at'] = date('Y-m-d H:i:s', time());
         GoodsModel::where('id',$id)->update($data);
         return redirect('/member/persondemand');

@@ -27,6 +27,14 @@ class CategoryController extends BaseController
         return view('member.category.index', $result);
     }
 
+    public function create()
+    {
+        $result = [
+            'menus'=> $this->list,
+        ];
+        return view('member.category.create', $result);
+    }
+
 
 
 
