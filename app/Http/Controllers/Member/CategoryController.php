@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Member;
 
+use App\Tools;
 use Illuminate\Http\Request;
 use App\Models\CategoryModel;
 
@@ -12,18 +13,20 @@ class CategoryController extends BaseController
 
     public function __construct()
     {
+        $this->model = new CategoryModel();
+        //面包屑处理
         $this->list['func']['name'] = '类型管理';
         $this->list['func']['url'] = 'category';
         $this->list['create']['name'] = '添加类型';
-        $this->model = new CategoryModel();
+        $this->list['edit']['name'] = '修改分类';
     }
 
     public function index()
     {
         $result = [
             'datas'=> $this->query($del=0),
-            'menus'=> $this->list,
             'prefix_url'=> '/member/category',
+            'menus'=> $this->list,
             'curr'=> '',
         ];
         return view('member.category.index', $result);
@@ -33,8 +36,8 @@ class CategoryController extends BaseController
     {
         $result = [
             'datas'=> $this->query($del=1),
-            'menus'=> $this->list,
             'prefix_url'=> '/member/category/trash',
+            'menus'=> $this->list,
             'curr'=> 'trash',
         ];
         return view('member.category.index', $result);
@@ -43,8 +46,9 @@ class CategoryController extends BaseController
     public function create()
     {
         $result = [
-            'menus'=> $this->list,
             'pidone'=> $this->model->pidone(),
+            'menus'=> $this->list,
+            'curr'=> 'create',
         ];
         return view('member.category.create', $result);
     }
@@ -61,8 +65,9 @@ class CategoryController extends BaseController
     {
         $result = [
             'data'=> CategoryModel::find($id),
-            'menus'=> $this->list,
             'pidone'=> $this->model->pidone(),
+            'menus'=> $this->list,
+            'curr'=> 'edit',
         ];
         return view('member.category.edit', $result);
     }
@@ -80,6 +85,7 @@ class CategoryController extends BaseController
         $result = [
             'data'=> CategoryModel::find($id),
             'menus'=> $this->list,
+            'curr'=> 'show',
         ];
         return view('member.category.show', $result);
     }
@@ -135,6 +141,8 @@ class CategoryController extends BaseController
      */
     public function query($del=0)
     {
-        return CategoryModel::where('del',$del)->paginate($this->limit);
+        $categorys = CategoryModel::where('del',$del)->paginate($this->limit);
+//        $categorys = Tools::getChild($categorys);       //子分类放在父分类下面
+        return $categorys;
     }
 }

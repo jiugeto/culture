@@ -163,7 +163,7 @@ a:hover li.a_li,a li.a_li_curr {
 }
 .list_tab td { padding:5px 10px;font-size:14px; }
 .list_btn {
-    padding:2px 15px;
+    padding:4px 20px;
     background:orangered;
     border-radius:2px;
     color:white;

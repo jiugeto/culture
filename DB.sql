@@ -323,7 +323,7 @@ CREATE TABLE `bs_category` (
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL DEFAULT '0000-00-00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='分类表 bs_category';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='分类表 bs_category';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -332,7 +332,7 @@ CREATE TABLE `bs_category` (
 
 LOCK TABLES `bs_category` WRITE;
 /*!40000 ALTER TABLE `bs_category` DISABLE KEYS */;
-INSERT INTO `bs_category` VALUES (1,'专业',0,'按专业分类',0,'2016-03-13','2016-03-13');
+INSERT INTO `bs_category` VALUES (1,'专业',0,'按专业分类',0,'2016-03-13','2016-03-13'),(2,'行业',0,'按行业分类',0,'2016-03-17','0000-00-00'),(3,'年龄',0,'按年龄分类',0,'2016-03-17','0000-00-00'),(4,'视频',1,'视频组',0,'2016-03-17','0000-00-00'),(5,'平面设计',1,'平面组',0,'2016-03-17','0000-00-00'),(6,'建筑设计',1,'建筑组',0,'2016-03-17','0000-00-00'),(7,'房产漫游',1,'房产组，包括效果图',0,'2016-03-17','0000-00-00'),(8,'游戏制作',1,'游戏组，包括Unity 3D',0,'2016-03-17','0000-00-00');
 /*!40000 ALTER TABLE `bs_category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -884,4 +884,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-13 12:43:45
+-- Dump completed on 2016-03-17 19:33:40

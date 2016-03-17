@@ -22,8 +22,8 @@ class WorksController extends BaseGoodsController
     {
         $result = [
             'datas'=> $this->query($del=0,$type,$cate_id),
-            'menus'=> $this->list,
             'prefix_url'=> '/member/works',
+            'menus'=> $this->list,
             'curr'=> '',
         ];
         return view('member.works.index', $result);
@@ -33,8 +33,8 @@ class WorksController extends BaseGoodsController
     {
         $result = [
             'datas'=> $this->query($del=1,$type,$cate_id),
-            'menus'=> $this->list,
             'prefix_url'=> '/member/works/trash',
+            'menus'=> $this->list,
             'curr'=> 'trash',
         ];
         return view('member.works.index', $result);
@@ -43,8 +43,9 @@ class WorksController extends BaseGoodsController
     public function create()
     {
         $result = [
-            'menus'=> $this->list,
             'cates'=> $this->model->cates(),
+            'menus'=> $this->list,
+            'curr'=> 'create',
         ];
         return view('member.works.create', $result);
     }
@@ -57,23 +58,14 @@ class WorksController extends BaseGoodsController
         return redirect('/member/works');
     }
 
-    public function show($id)
-    {
-        $data = GoodsModel::find($id);
-        $result = [
-            'data'=> $data,
-            'menus'=> $this->list,
-        ];
-        return view('member.works.show', $result);
-    }
-
     public function edit($id)
     {
         $data = GoodsModel::find($id);
         $result = [
             'data'=> $data,
-            'menus'=> $this->list,
             'cates'=> $this->model->cates(),
+            'menus'=> $this->list,
+            'curr'=> 'edit',
         ];
         return view('member.works.edit', $result);
     }
@@ -84,6 +76,17 @@ class WorksController extends BaseGoodsController
         $data['updated_at'] = date('Y-m-d H:i:s', time());
         GoodsModel::where('id',$id)->update($data);
         return redirect('/member/works');
+    }
+
+    public function show($id)
+    {
+        $data = GoodsModel::find($id);
+        $result = [
+            'data'=> $data,
+            'menus'=> $this->list,
+            'curr'=> 'show',
+        ];
+        return view('member.works.show', $result);
     }
 
     public function destroy($id)

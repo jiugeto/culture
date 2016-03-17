@@ -3,6 +3,8 @@ namespace App\Models;
 
 //use Illuminate\Database\Eloquent\Model;
 
+use App\Tools;
+
 class GoodsModel extends BaseModel
 {
     /**
@@ -22,5 +24,16 @@ class GoodsModel extends BaseModel
     public function cates()
     {
         return $this->hasOne('\App\Models\CategoryModel','id','cate_id');
+    }
+
+    /**
+     * 得到所有分类
+     */
+    public function categorys()
+    {
+        $categorys =  CategoryModel::where('del',0)->get();
+//        $categorys = Tools::category($categorys);
+        $categorys = Tools::getChild($categorys);
+        return $categorys;
     }
 }

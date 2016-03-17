@@ -25,8 +25,8 @@ class PersonDemandController extends BaseGoodsController
     {
         $result = [
             'datas'=> $this->query($del=0,$this->type,$cate_id),
-            'menus'=> $this->list,
             'prefix_url'=> '/member/persondemand',
+            'menus'=> $this->list,
             'curr'=> '',
         ];
         return view('member.persondemand.index', $result);
@@ -36,8 +36,8 @@ class PersonDemandController extends BaseGoodsController
     {
         $result = [
             'datas'=> $this->query($del=1,$this->type,$cate_id),
-            'menus'=> $this->list,
             'prefix_url'=> '/member/persondemand/trash',
+            'menus'=> $this->list,
             'curr'=> 'trash',
         ];
         return view('member.persondemand.index', $result);
@@ -46,9 +46,12 @@ class PersonDemandController extends BaseGoodsController
     public function create()
     {
         $result = [
+//            'cates'=> $this->model->cates(),
+            'categorys'=> $this->model->categorys(),
             'menus'=> $this->list,
-            'cates'=> $this->model->cates(),
+            'curr'=> 'create',
         ];
+//        dd($this->model->categorys());
         return view('member.persondemand.create', $result);
     }
 
@@ -60,23 +63,14 @@ class PersonDemandController extends BaseGoodsController
         return redirect('/member/persondemand');
     }
 
-    public function show($id)
-    {
-        $data = GoodsModel::find($id);
-        $result = [
-            'data'=> $data,
-            'menus'=> $this->list,
-        ];
-        return view('member.persondemand.show', $result);
-    }
-
     public function edit($id)
     {
         $data = GoodsModel::find($id);
         $result = [
             'data'=> $data,
-            'menus'=> $this->list,
             'cates'=> $this->model->cates(),
+            'menus'=> $this->list,
+            'curr'=> 'edit',
         ];
         return view('member.persondemand.edit', $result);
     }
@@ -87,6 +81,17 @@ class PersonDemandController extends BaseGoodsController
         $data['updated_at'] = date('Y-m-d H:i:s', time());
         GoodsModel::where('id',$id)->update($data);
         return redirect('/member/persondemand');
+    }
+
+    public function show($id)
+    {
+        $data = GoodsModel::find($id);
+        $result = [
+            'data'=> $data,
+            'menus'=> $this->list,
+            'curr'=> 'show',
+        ];
+        return view('member.persondemand.show', $result);
     }
 
     public function destroy($id)

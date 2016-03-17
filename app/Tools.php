@@ -46,6 +46,25 @@ class Tools
     }
 
     /**
+     * 重组数组，无限极分类
+     * 数组变为多维数组
+     * @param array $arr
+     * @param int $parent_id
+     * @return array $list
+     */
+    public static function childList($arr,$pid = 0){
+        $list = array();
+        foreach ($arr as $v){
+            if ($v['parent_id'] == $pid) {
+                //找到子节点,继续找该子节点的后代节点
+                $v['child'] = Tools::childList($arr,$v['id']);
+                $list[] = $v;
+            }
+        }
+        return $list;
+    }
+
+    /**
      * 对象转为数组
      * @param array $arrs
      * @return array $array
@@ -63,25 +82,6 @@ class Tools
     }
 
     /**
-     * 重组数组，无限极分类
-     * 数组变为多维数组
-     * @param array $arr
-     * @param int $pid
-     * @return array $list
-     */
-    public static function childList($arr,$pid = 0){
-        $list = array();
-        foreach ($arr as $v){
-            if ($v['parent_id'] == $pid) {
-                //找到子节点,继续找该子节点的后代节点
-                $v['child'] = Tools::childList($arr,$v['id']);
-                $list[] = $v;
-            }
-        }
-        return $list;
-    }
-
-    /**
      * 得到前一页面路由
      */
     public static function url()
@@ -89,7 +89,6 @@ class Tools
         //得到当前页面路由片段
         $urls = $_SERVER['REQUEST_URI'];
         $url_arr = explode('/',$urls);
-        dd($url_arr);
         if ($url_arr[3]=='index') {
             $url = '';
         } else {

@@ -16,6 +16,20 @@
                 <td>
                     <select name="cate_id">
                         <option value="0">-请选择-</option>
+                        @foreach($categorys as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @if($category->child)
+                                @foreach($category->child as $subcate)
+                                    <option value="{{ $subcate->id }}">{{ '&nbsp;=='.$subcate->name }}</option>
+                                    @if($subcate->child)
+                                        @foreach($subcate->child as $subcate2)
+                                            <option value="{{ $subcate2->id }}">
+                                                {{ '&nbsp;&nbsp;&nbsp;&nbsp;=='.$subcate2->name }}</option>
+                                        @endforeach
+                                    @endif
+                                @endforeach
+                            @endif
+                        @endforeach
                     </select>
                     <a href="/member/category/create/{{'个人需求'}}">[+添加类型]</a>
                 </td>
