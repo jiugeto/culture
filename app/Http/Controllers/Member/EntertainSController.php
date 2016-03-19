@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Member;
 use Illuminate\Http\Request;
 use App\Models\EntertainModel;
 
-class EntertainDController extends BaseController
+class EntertainSController extends BaseController
 {
     /**
      * 系统后台租赁管理
