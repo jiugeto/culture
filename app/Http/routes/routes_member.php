@@ -48,10 +48,9 @@ Route::group(['prefix'=>'member','namespace'=>'Member'], function(){
     Route::resource('companyD','CompanyDController');
         //企业产品
     Route::resource('companyS','CompanySController');
-        //租赁供求之需求
-    Route::resource('rentD','RentDController');
-        //租赁供求之供应
-    Route::resource('rentS','RentSController');
+        //租赁供求
+    Route::get('{genre}/rent','RentController@index');
+    Route::resource('rent','RentController');
         //娱乐供求之需求
     Route::resource('entertainD','EntertainDController');
         //娱乐供求之需求
