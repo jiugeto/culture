@@ -31,7 +31,7 @@
                             @endif
                         @endforeach
                     </select>
-                    <a href="/member/category/create/{{'个人需求'}}">[+添加类型]</a>
+                    {{--<a href="/member/category/create/{{'个人需求'}}">[+添加类型]</a>--}}
                 </td>
             </tr>
             <tr><td></td></tr>

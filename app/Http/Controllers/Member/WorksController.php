@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Member;
 
 use Illuminate\Http\Request;
 use App\Models\GoodsModel;
+use App\Models\CategoryModel;
 
 class WorksController extends BaseGoodsController
 {
@@ -43,7 +44,8 @@ class WorksController extends BaseGoodsController
     public function create()
     {
         $result = [
-            'cates'=> $this->model->cates(),
+//            'cates'=> $this->model->cates(),
+            'categorys'=> $this->model->categorys(),
             'menus'=> $this->list,
             'curr'=> 'create',
         ];
@@ -63,7 +65,9 @@ class WorksController extends BaseGoodsController
         $data = GoodsModel::find($id);
         $result = [
             'data'=> $data,
-            'cates'=> $this->model->cates(),
+//            'cates'=> $this->model->cates(),
+//            'categorys'=> $this->model->categorys(),
+            'categorys'=> CategoryModel::all(),
             'menus'=> $this->list,
             'curr'=> 'edit',
         ];

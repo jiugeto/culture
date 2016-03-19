@@ -19,5 +19,7 @@
             <div class="mem_user">MEMBER INFO<br>会员信息</div>
         </div>
     </div>
-    <div class="company_info"><button class="companybtn">公司信息</button></div>
+    <div class="company_info">
+        <button class="companybtn companybtnpos">公司信息</button>
+    </div>
 @stop

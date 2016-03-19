@@ -19,13 +19,13 @@
                         <option value="0"
                                 {{ $data->cate_id==0 ? 'selected' : '' }}>
                             -请选择-</option>
-                        @foreach($cates as $cate)
-                            <option value="{{ $cate->id }}"
-                                    {{ $data->cate_id==$cate->id ? 'selected' : '' }}>
-                                {{ $cate->name }}</option>
+                        @foreach($categorys as $category)
+                            <option value="{{ $category->id }}"
+                                    {{ $data->cate_id==$category->id ? 'selected' : '' }}>
+                                {{ $category->name }}</option>
                         @endforeach
                     </select>
-                    <a href="/member/category/create/{{'个人需求'}}">[+添加类型]</a>
+                    {{--<a href="/member/category/create/{{'个人需求'}}">[+添加类型]</a>--}}
                 </td>
             </tr>
             <tr><td></td></tr>

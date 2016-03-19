@@ -46,7 +46,7 @@ class CategoryController extends BaseController
     public function create()
     {
         $result = [
-            'pidone'=> $this->model->pidone(),
+            'pidone'=> $this->model->pidone(),      //父ID一级
             'menus'=> $this->list,
             'curr'=> 'create',
         ];

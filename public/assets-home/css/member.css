@@ -110,14 +110,13 @@ a:hover li.a_li,a li.a_li_curr {
 }
 .company_info {
     margin:0 auto;
-    width:780px;height:50px;
+    width:780px;height:80px;
     border-radius:3px;
     border:1px solid rgb(240,240,240);
     background:rgb(245,245,245);
     clear:both;
 }
 .companybtn {
-    /*margin:15px 40%;*/
     padding:5px 20px;
     border:1px solid orangered;
     border-radius:3px;
@@ -127,6 +126,7 @@ a:hover li.a_li,a li.a_li_curr {
     background:orangered;
     cursor:pointer;
 }
+.companybtnpos { margin:20px 40%; }
 /*=========右侧账户首页窗口==========*/
 
 

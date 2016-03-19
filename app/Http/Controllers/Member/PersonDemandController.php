@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Member;
 
+use App\Models\CategoryModel;
 use Illuminate\Http\Request;
 use App\Models\GoodsModel;
 
@@ -68,7 +69,8 @@ class PersonDemandController extends BaseGoodsController
         $data = GoodsModel::find($id);
         $result = [
             'data'=> $data,
-            'cates'=> $this->model->cates(),
+//            'cates'=> $this->model->cates(),
+            'categorys'=> CategoryModel::all(),
             'menus'=> $this->list,
             'curr'=> 'edit',
         ];
