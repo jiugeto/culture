@@ -35,8 +35,8 @@ a {
     color:black;
     font-size:15px;
 }
-/*a:hover {}
-a li.a_li {}*/
+a:hover {}
+a li.a_li {}
 a:hover li.a_li,a li.a_li_curr {
     color:white;
     background:rgb(255,100,0);

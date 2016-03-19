@@ -5,17 +5,18 @@ use Illuminate\Http\Request;
 use App\Models\GoodsModel;
 use App\Models\CategoryModel;
 
-class WorksController extends BaseGoodsController
+class PersonSController extends BaseGoodsController
 {
     /**
-     * 个人作品管理
+     * 个人作品供应管理
      * goods 商品、货物，代表文化类产品
      */
 
     public function __construct()
     {
         $this->list['func']['name'] = '个人作品';
-        $this->list['func']['url'] = 'works';
+        $this->list['func']['url'] = 'personS';
+        $this->list['create']['name'] = '发布作品';
         $this->model = new GoodsModel();
     }
 
@@ -23,22 +24,22 @@ class WorksController extends BaseGoodsController
     {
         $result = [
             'datas'=> $this->query($del=0,$type,$cate_id),
-            'prefix_url'=> '/member/works',
+            'prefix_url'=> '/member/personS',
             'menus'=> $this->list,
             'curr'=> '',
         ];
-        return view('member.works.index', $result);
+        return view('member.personSD.index', $result);
     }
 
     public function trash($type=0,$cate_id=0)
     {
         $result = [
             'datas'=> $this->query($del=1,$type,$cate_id),
-            'prefix_url'=> '/member/works/trash',
+            'prefix_url'=> '/member/personS/trash',
             'menus'=> $this->list,
             'curr'=> 'trash',
         ];
-        return view('member.works.index', $result);
+        return view('member.personSD.index', $result);
     }
 
     public function create()
@@ -49,7 +50,7 @@ class WorksController extends BaseGoodsController
             'menus'=> $this->list,
             'curr'=> 'create',
         ];
-        return view('member.works.create', $result);
+        return view('member.personSD.create', $result);
     }
 
     public function store(Request $request)
@@ -57,7 +58,7 @@ class WorksController extends BaseGoodsController
         $data = $this->getData($request,$this->model['types'][1]);
         $data['created_at'] = date('Y-m-d', time());
         GoodsModel::create($data);
-        return redirect('/member/works');
+        return redirect('/member/personS');
     }
 
     public function edit($id)
@@ -71,7 +72,7 @@ class WorksController extends BaseGoodsController
             'menus'=> $this->list,
             'curr'=> 'edit',
         ];
-        return view('member.works.edit', $result);
+        return view('member.personSD.edit', $result);
     }
 
     public function update(Request $request,$id)
@@ -79,7 +80,7 @@ class WorksController extends BaseGoodsController
         $data = $this->getData($request,$id);
         $data['updated_at'] = date('Y-m-d H:i:s', time());
         GoodsModel::where('id',$id)->update($data);
-        return redirect('/member/works');
+        return redirect('/member/personS');
     }
 
     public function show($id)
@@ -90,24 +91,24 @@ class WorksController extends BaseGoodsController
             'menus'=> $this->list,
             'curr'=> 'show',
         ];
-        return view('member.works.show', $result);
+        return view('member.personSD.show', $result);
     }
 
     public function destroy($id)
     {
         GoodsModel::where('id',$id)->update(['del'=> 1]);
-        return redirect('/member/works');
+        return redirect('/member/personS');
     }
 
     public function restore($id)
     {
         GoodsModel::where('id',$id)->update(['del'=> 0]);
-        return redirect('/member/works/trash');
+        return redirect('/member/personS/trash');
     }
 
     public function forceDelete($id)
     {
         GoodsModel::where('id',$id)->delete();
-        return redirect('/member/works/trash');
+        return redirect('/member/personS/trash');
     }
 }

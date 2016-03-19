@@ -2,12 +2,13 @@
 @section('content')
     @include('member.common.crumb')
 
-    <form data-am-validator method="POST" action="/member/persondemand" enctype="multipart/form-data">
+    <form data-am-validator method="POST" action="/member/personD/{{ $data->id }}" enctype="multipart/form-data">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="_method" value="POST">
         <table class="table_create">
             <tr>
                 <td><label>作品名称 / Name：</label></td>
-                <td><input type="text" placeholder="至少2个字符" minlength="2" required name="name"/></td>
+                <td><input type="text" placeholder="至少2个字符" minlength="2" required name="name" value="{{ $data->name }}"/></td>
             </tr>
             <tr><td></td></tr>
 
@@ -15,20 +16,13 @@
                 <td><label>作品类型 / Category：</label></td>
                 <td>
                     <select name="cate_id">
-                        <option value="0">-请选择-</option>
+                        <option value="0"
+                                {{ $data->cate_id==0 ? 'selected' : '' }}>
+                            -请选择-</option>
                         @foreach($categorys as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                            @if($category->child)
-                                @foreach($category->child as $subcate)
-                                    <option value="{{ $subcate->id }}">{{ '&nbsp;=='.$subcate->name }}</option>
-                                    @if($subcate->child)
-                                        @foreach($subcate->child as $subcate2)
-                                            <option value="{{ $subcate2->id }}">
-                                                {{ '&nbsp;&nbsp;&nbsp;&nbsp;=='.$subcate2->name }}</option>
-                                        @endforeach
-                                    @endif
-                                @endforeach
-                            @endif
+                            <option value="{{ $category->id }}"
+                                    {{ $data->cate_id==$category->id ? 'selected' : '' }}>
+                                {{ $category->name }}</option>
                         @endforeach
                     </select>
                     {{--<a href="/member/category/create/{{'个人需求'}}">[+添加类型]</a>--}}
@@ -39,7 +33,7 @@
             <tr>
                 <td><label>设计说明 / Introduce：</label></td>
                 <td>
-                    <textarea name="intro" cols="50" rows="5"></textarea>
+                    <textarea name="intro" cols="50" rows="5">{{ $data->intro }}</textarea>
                     {{--@include('UEditor::head')
                     <script id="container" name="content" type="text/plain"></script>
                     <!-- 实例化编辑器 -->
@@ -60,13 +54,13 @@
 
             <tr>
                 <td><label>作品链接 / Link：</label></td>
-                <td><input type="text" placeholder="至少2个字符" minlength="2" required name="link_id"/></td>
+                <td><input type="text" placeholder="至少2个字符" minlength="2" required name="link_id" value="{{ $data->link_id }}"/></td>
             </tr>
             <tr><td></td></tr>
 
             <tr><td colspan="2" style="text-align:center;">
                     <button class="companybtn" onclick="history.go(-1)">返 &nbsp;&nbsp;&nbsp;回</button>
-                    <button type="submit" class="companybtn">保存添加</button>
+                    <button type="submit" class="companybtn">保存修改</button>
                 </td></tr>
         </table>
     </form>

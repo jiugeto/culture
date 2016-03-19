@@ -15,7 +15,7 @@ class CategoryController extends BaseController
     {
         $this->model = new CategoryModel();
         //面包屑处理
-        $this->list['func']['name'] = '类型管理';
+        $this->list['func']['name'] = '分类管理';
         $this->list['func']['url'] = 'category';
         $this->list['create']['name'] = '添加类型';
         $this->list['edit']['name'] = '修改分类';

@@ -14,6 +14,7 @@ class ProductController extends BaseController
     {
         $this->list['func']['name'] = '在线创作';
         $this->list['func']['url'] = 'product';
+        $this->list['create']['name'] = '开始创作';
     }
 
     public function index()
