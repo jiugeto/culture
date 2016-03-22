@@ -56,7 +56,7 @@ class EntertainController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = date('Y-m-d', time());
         EntertainModel::create($data);
-        return view('/member/entertain');
+        return redirect('/member/entertain');
     }
 
     public function edit($id)
@@ -87,6 +87,24 @@ class EntertainController extends BaseController
         return view('member.entertain.show', $result);
     }
 
+    public function destroy($id)
+    {
+        EntertainModel::where('id',$id)->update(['del'=> 1]);
+        return redirect('/member/entertain');
+    }
+
+    public function restore($id)
+    {
+        EntertainModel::where('id',$id)->update(['del'=> 0]);
+        return redirect('/member/entertain/trash');
+    }
+
+    public function forceDelete($id)
+    {
+        EntertainModel::where('id',$id)->delete();
+        return redirect('/member/entertain/trash');
+    }
+
 
 
 
@@ -107,6 +125,7 @@ class EntertainController extends BaseController
         $data['uid'] = 0;       //测试，暂为0
         $entertain = [
             'title'=> $data['title'],
+            'genre'=> $data['genre'],
             'content'=> $data['content'],
             'uid'=> $data['uid'],
         ];

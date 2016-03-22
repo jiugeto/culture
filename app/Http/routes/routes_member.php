@@ -67,6 +67,11 @@ Route::group(['prefix'=>'member','namespace'=>'Member'], function(){
     Route::get('{genre}/rent','RentController@index');
     Route::resource('rent','RentController');
         //娱乐供求
+    Route::post('entertain/{id}','EntertainController@update');
+    Route::get('entertain/{id}/destroy','EntertainController@destroy');
+    Route::get('entertain/{id}/restore','EntertainController@restore');
+    Route::get('entertain/{id}/forceDelete','EntertainController@forceDelete');
+    Route::get('entertain/trash','EntertainController@trash');
     Route::get('{genre}/entertain','EntertainController@index');
     Route::resource('entertain','EntertainController');
 });

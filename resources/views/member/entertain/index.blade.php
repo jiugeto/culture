@@ -20,8 +20,8 @@
             @foreach($datas as $data)
             <tr>
                 <td>{{ $data->id }}</td>
-                <td>{{ $data->name }}</td>
-                <td>{{ $data->genre }}</td>
+                <td>{{ $data->title }}</td>
+                <td>{{ $data->genre==1 ? '娱乐供应' : '娱乐需求' }}</td>
                 <td>{{ $data->uname }}</td>
                 <td>{{ $data->created_at }}</td>
                 <td>
