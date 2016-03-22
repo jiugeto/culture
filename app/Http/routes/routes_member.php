@@ -59,6 +59,11 @@ Route::group(['prefix'=>'member','namespace'=>'Member'], function(){
     Route::get('companyS/trash','CompanySController@trash');
     Route::resource('companyS','CompanySController');
         //租赁供求
+    Route::post('rent/{id}','RentController@update');
+    Route::get('rent/{id}/destroy','RentController@destroy');
+    Route::get('rent/{id}/restore','RentController@restore');
+    Route::get('rent/{id}/forceDelete','RentController@forceDelete');
+    Route::get('rent/trash','RentController@trash');
     Route::get('{genre}/rent','RentController@index');
     Route::resource('rent','RentController');
         //娱乐供求

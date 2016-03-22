@@ -10,7 +10,7 @@
         <table class="list_tab">
             <tr>
                 <td>编号</td>
-                <td>器材名称</td>
+                <td>设备名称</td>
                 <td>供求关系</td>
                 <td>发布人</td>
                 <td>创建时间</td>

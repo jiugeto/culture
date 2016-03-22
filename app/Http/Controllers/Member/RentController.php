@@ -22,11 +22,29 @@ class RentController extends BaseController
     {
         $result = [
             'datas'=> $this->query($del=0,$genre),
+            'genre'=> $genre,
             'menus'=> $this->list,
             'curr'=> '',
-            'genre'=> $genre,
         ];
         return view('member.rent.index', $result);
+    }
+
+    public function trash($genre=0)
+    {
+        $result = [
+            'datas'=> $this->query($del=1,$genre),
+            'genre'=> $genre,
+            'menus'=> $this->list,
+            'curr'=> 'trash',
+        ];
+        return view('member.rent.index', $result);
+    }
+
+    public function create()
+    {
+        $result = [
+        ];
+        return view('member.rent.create', $result);
     }
 
 
