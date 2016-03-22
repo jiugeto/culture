@@ -1,0 +1,34 @@
+/*=================== 这里是个人后台样式 ======================*/
+
+
+.per_body {
+    margin:10px auto;
+    margin-top:40px;
+    width:1000px;height:500px;
+    background:ghostwhite;
+}
+/*页面顶部布局*/
+.per_top {
+    width:998px;
+    border:1px solid lightblue;
+}
+/*页面主体布局*/
+.per_main {
+    width:1000%; height:500px;
+    background:lightgrey;
+}
+/*页面左边布局*/
+.per_left {
+    width:200px;
+    border:1px solid lightblue;
+}
+/*页面中间布局*/
+.per_center {
+    width:600px;
+    border:1px solid lightblue;
+}
+/*页面右侧布局*/
+.per_right {
+    width:200px;
+    border:1px solid lightblue;
+}
