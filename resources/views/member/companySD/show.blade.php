@@ -2,7 +2,7 @@
 @section('content')
     @include('member.common.crumb')
 
-    <h3 class="center">个人需求详情页</h3>
+    <h3 class="center">{{ $menus['func']['name'] }}详情页</h3>
     <table class="table_create table_show" cellspacing="0" cellpadding="0">
         <tr>
             <td style="width:100px;">作品名称：</td>
@@ -10,7 +10,11 @@
         </tr>
         <tr>
             <td>类 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型：</td>
-            <td>{{ $data->type }}</td>
+            <td>{{ $data->type }}
+                @foreach($types as $ktype=>$type)
+                    @if($data->type==$ktype) {{ $type }} @endif
+                @endforeach
+            </td>
         </tr>
         <tr>
             <td>分 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类：</td>

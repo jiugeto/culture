@@ -19,19 +19,19 @@
             @foreach($datas as $data)
             <tr>
                 <td>{{ $data->id }}</td>
-                <td>{{ $data->name }}</td>
+                <td><a href="/member/{{$menus['func']['url']}}/{{ $data->id }}">{{ $data->name }}</a></td>
                 <td>{{ $data->catename==''?'暂无':$data->catename }}</td>
                 <td>{{ $data->uname }}</td>
                 <td>{{ $data->created_at }}</td>
                 <td>
                     @if($curr=='')
-                        <a href="/member/companyS/{{ $data->id }}/pre" class="list_btn">预览</a>
-                        <a href="/member/companyS/{{ $data->id }}" class="list_btn">查看</a>
-                        <a href="/member/companyS/{{ $data->id }}/edit" class="list_btn">编辑</a>
-                        <a href="/member/companyS/{{ $data->id }}/destroy" class="list_btn">删除</a>
+                        <a href="/member/{{$menus['func']['url']}}/{{ $data->id }}/pre" class="list_btn">预览</a>
+                        <a href="/member/{{$menus['func']['url']}}/{{ $data->id }}" class="list_btn">查看</a>
+                        <a href="/member/{{$menus['func']['url']}}/{{ $data->id }}/edit" class="list_btn">编辑</a>
+                        <a href="/member/{{$menus['func']['url']}}/{{ $data->id }}/destroy" class="list_btn">删除</a>
                     @elseif($curr=='trash')
-                        <a href="/member/companyS/{{ $data->id }}/restore" class="list_btn">还原</a>
-                        <a href="/member/companyS/{{ $data->id }}/forceDelete" class="list_btn">销毁记录</a>
+                        <a href="/member/{{$menus['func']['url']}}/{{ $data->id }}/restore" class="list_btn">还原</a>
+                        <a href="/member/{{$menus['func']['url']}}/{{ $data->id }}/forceDelete" class="list_btn">销毁记录</a>
                     @endif
                 </td>
             </tr>

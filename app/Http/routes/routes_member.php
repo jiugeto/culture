@@ -45,6 +45,10 @@ Route::group(['prefix'=>'member','namespace'=>'Member'], function(){
     Route::resource('category','CategoryController');
     //企业供求
         //企业需求
+    Route::post('companyD/{id}','CompanyDController@update');
+    Route::get('companyD/{id}/destroy','CompanyDController@destroy');
+    Route::get('companyD/{id}/restore','CompanyDController@restore');
+    Route::get('companyD/{id}/forceDelete','CompanyDController@forceDelete');
     Route::resource('companyD','CompanyDController');
         //企业产品
     Route::resource('companyS','CompanySController');
