@@ -49,8 +49,14 @@ Route::group(['prefix'=>'member','namespace'=>'Member'], function(){
     Route::get('companyD/{id}/destroy','CompanyDController@destroy');
     Route::get('companyD/{id}/restore','CompanyDController@restore');
     Route::get('companyD/{id}/forceDelete','CompanyDController@forceDelete');
+    Route::get('companyD/trash','CompanyDController@trash');
     Route::resource('companyD','CompanyDController');
         //企业产品
+    Route::post('companyS/{id}','CompanySController@update');
+    Route::get('companyS/{id}/destroy','CompanySController@destroy');
+    Route::get('companyS/{id}/restore','CompanySController@restore');
+    Route::get('companyS/{id}/forceDelete','CompanySController@forceDelete');
+    Route::get('companyS/trash','CompanySController@trash');
     Route::resource('companyS','CompanySController');
         //租赁供求
     Route::get('{genre}/rent','RentController@index');

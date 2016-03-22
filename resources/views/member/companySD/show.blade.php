@@ -9,7 +9,7 @@
             <td>{{ $data->name }}</td>
         </tr>
         <tr>
-            <td>类 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型：</td>
+            <td>类 &nbsp;型：</td>
             <td>{{ $data->type }}
                 @foreach($types as $ktype=>$type)
                     @if($data->type==$ktype) {{ $type }} @endif
@@ -17,11 +17,11 @@
             </td>
         </tr>
         <tr>
-            <td>分 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类：</td>
+            <td>分 &nbsp;类：</td>
             <td>{{ $data->cate_id }}</td>
         </tr>
         <tr>
-            <td>介 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;绍：</td>
+            <td>介 &nbsp;绍：</td>
             <td>{{ $data->intro }}</td>
         </tr>
         <tr>
