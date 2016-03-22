@@ -36,5 +36,6 @@
             <div class="per_right2">最近访客</div>
             <div class="per_right3">小组</div>
         </div>
+        <div class="per_bottom"><p>底部</p></div>
     </div>
 @stop

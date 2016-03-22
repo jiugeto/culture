@@ -45,10 +45,18 @@
 .per_center1,.per_center2,.per_center3 { width:596px; }
 .per_center1 { height:50px; }
 .per_center2 { height:400px; }
-.per_center3 { height:140px; }
+.per_center3 { height:136px; }
 /*页面右侧布局*/
 .per_right { width:200px; }
 .per_right1,.per_right2,.per_right3 { width:196px; }
 .per_right1 { height:300px; }
 .per_right2 { height:200px; }
-.per_right3 { height:90px; }
+.per_right3 { height:86px; }
+/*页面底部布局*/
+
+.per_bottom {
+    margin-top:600px;
+    margin-bottom:100px;
+    width:100%;height:200px;
+    /*border:1px solid lightblue;*/
+}
