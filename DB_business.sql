@@ -434,7 +434,7 @@ CREATE TABLE `bs_entertains` (
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='娱乐表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='娱乐表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -443,6 +443,7 @@ CREATE TABLE `bs_entertains` (
 
 LOCK TABLES `bs_entertains` WRITE;
 /*!40000 ALTER TABLE `bs_entertains` DISABLE KEYS */;
+INSERT INTO `bs_entertains` VALUES (1,'娱乐001',1,'rthyngrthg',0,0,'2016-03-22','2016-03-22');
 /*!40000 ALTER TABLE `bs_entertains` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -886,4 +887,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-23 23:31:19
+-- Dump completed on 2016-03-22 19:44:59

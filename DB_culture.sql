@@ -138,6 +138,7 @@ php artisan make:migration create_bs_menus_table --create=bs_menus
   $table->string('action')->comment('操作方法');
   $table->string('style_class')->comment('class样式');
   $table->integer('pid')->comment('父ID');
+  $table->integer('isshow')->comment('前台是否显示：0不显示，1显示');
 php artisan migrate
 
 
@@ -375,10 +376,10 @@ php artisan make:controller Admin/ActionController
 ======================================
 cd /usr/local/mysql/bin/
 -- 导出数据库
-mysqldump -uroot -p cul_business > /var/wwwnew/culture/DB.sql
+mysqldump -uroot -p cul_business > /var/wwwnew/culture/DB_business.sql
 mysqldump -uroot -p cul_user > /var/wwwnew/culture/DB_user.sql
 -- 导入数据库
-mysqldump -uroot -p cul_business < /var/wwwnew/culture/DB.sql
+mysqldump -uroot -p cul_business < /var/wwwnew/culture/DB_business.sql
 mysqldump -uroot -p cul_user < /var/wwwnew/culture/DB_user.sql
 ======================================
 -- 添加环境变量
