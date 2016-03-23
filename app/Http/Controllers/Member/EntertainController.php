@@ -15,13 +15,12 @@ class EntertainController extends BaseController
     {
         $this->list['func']['name'] = '娱乐供求';
         $this->list['func']['url'] = 'entertain';
-        $this->list['create']['name'] = '发布需求';
+        $this->list['create']['name'] = '娱乐发布';
     }
 
     public function index($genre=0)
     {
         $result = [
-//            'actions'=> $this->actions(),
             'datas'=> $this->query($del=0,$genre),
             'prefix_url'=> '/admin/entertain',
             'menus'=> $this->list,

@@ -1,32 +1,27 @@
 @extends('member.main')
 @section('content')
     @include('member.common.crumb')
-
     <h3 class="center">{{$menus['func']['name']}}详情页</h3>
     <table class="table_create table_show" cellspacing="0" cellpadding="0">
         <tr>
-            <td style="width:100px;">作品名称：</td>
+            <td style="width:100px;">设备名称：</td>
             <td>{{ $data->name }}</td>
         </tr>
         <tr>
-            <td>类 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型：</td>
-            <td>{{ $data->type }}</td>
+            <td>供求关系：</td>
+            <td>{{ $data->genre==1 ? '供应' : '需求' }}</td>
         </tr>
         <tr>
-            <td>分 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类：</td>
-            <td>{{ $data->cate_id }}</td>
-        </tr>
-        <tr>
-            <td>介 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;绍：</td>
+            <td>简 &nbsp;介：</td>
             <td>{{ $data->intro }}</td>
         </tr>
         <tr>
-            <td>文件链接：</td>
-            <td>{{ $data->link_id }}</td>
+            <td>发布者：</td>
+            <td>{{ $data->uid }}</td>
         </tr>
         <tr>
-            <td>用户名称：</td>
-            <td>{{ $data->uid }}</td>
+            <td>价 &nbsp;格：</td>
+            <td>{{ $data->price }}</td>
         </tr>
         <tr>
             <td>创建时间：</td>
