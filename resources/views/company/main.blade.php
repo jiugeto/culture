@@ -10,9 +10,9 @@
 </head>
 <body>
     @include('layout.header')
-    {{--@include('layout.navigate')--}}
+    @include('company.partials.top')
+    <div class="content_kongbai" style="height:100px;">&nbsp;</div>
     <div class="mem_con">
-
         <!-- 中间内容 -->
         <div class="mem_float">
             <div class="mem_right">
@@ -25,6 +25,6 @@
         </div>
         <!-- 中间内容 -->
     </div>
-    @include('layout.footer')
+    @include('company.partials.footer')
 </body>
 </html>
