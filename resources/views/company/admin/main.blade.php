@@ -13,18 +13,12 @@
     @include('layout.header')
     @include('company.admin.partials.top')
     <div class="content_kongbai" style="height:100px;">&nbsp;</div>
-    <div class="mem_con">
-        <!-- 中间内容 -->
-        <div class="mem_float">
-            <div class="mem_right">
-                <div class="mem_win">
-                    @yield('content')
-                </div>
-                <!-- 空白 -->
-                <div class="content_kongbai">&nbsp;</div>
-            </div>
-        </div>
-        <!-- 中间内容 -->
+    <div class="com_admin_con">
+        @include('company.admin.partials.left')
+
+        <div class="com_admin_right">@yield('content')</div>
+
+        <div class="content_kongbai">&nbsp;</div>
     </div>
     @include('company.partials.footer')
 </body>

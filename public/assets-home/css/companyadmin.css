@@ -1,8 +1,81 @@
 /*===================== 企业后台控制管理中心样式 =====================*/
 
 
+/*===== 顶部样式 =====*/
 .com_admin_top {
-    width:100%;height:50px;
-    background:rgb(220,2420,220);
+    width:100%;height:60px;
+    background:rgb(220,220,220);
     border:2px solid rgb(200,200,200);
+    position:fixed;top:30px;z-index:1;
+}
+.com_admin_top table {
+    margin:0 auto;
+    width:1000px;
+}
+.com_admin_top td {
+    height:20px;
+    font-size:20px;
+}
+.com_admin_top .right { text-align:right; }
+
+/*===== 左部样式 =====*/
+.com_admin_con {
+    margin:0 auto;
+    width:1000px;
+    height:700px;
+    position:relative;top:-15px;
+}
+.com_admin_left,.com_admin_right { float:left; }
+.com_admin_left {
+    width:180px;
+    height:650px;
+    background:rgb(250,250,250);
+    border-left:2px solid lightgrey;
+}
+.com_admin_left a { text-decoration:none; }
+.com_admin_left a:hover div { background:lightgrey; }
+.com_admin_left a div {
+    padding:5px 40px;
+    width:100px;height:40px;
+    border-bottom:1px solid lightgray;
+    font-size:20px;
+    color:black;
+    line-height:40px;
+}
+
+/*===== 右部样式 =====*/
+.com_admin_right {
+    width:800px;
+    height:700px;
+}
+.com_admin_home {
+    margin:0 5px;
+    width:800px;
+    height:650px;
+    background:rgb(250,250,250);
+    border-right:2px solid lightgrey;
+}
+.com_space {
+    margin:0 20px;
+    padding:0 20px;
+}
+.com_admin_home div.bottom {
+    width:700px;height:30px;
+    background:rgb(230,230,230);
+}
+.com_admin_home div.top1 {
+    width:140px;height:30px;
+    background:orange;
+}
+.com_admin_home div.top2 {
+    width:210px;height:30px;
+    background:forestgreen;
+}
+.com_admin_home div.top3 {
+    width:280px;height:30px;
+    background:#00b7ee;
+}
+.com_admin_home div.top4 {
+    width:350px;height:30px;
+    background:crimson;
 }
