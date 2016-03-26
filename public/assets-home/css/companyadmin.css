@@ -74,7 +74,7 @@
 /*===== 右部样式 =====*/
 .com_admin_right {
     width:840px;
-    height:700px;
+    /*height:700px;*/
     float:right;
 }
 .com_admin_home {

@@ -9,19 +9,9 @@ class HomeController extends BaseController
 
     public function index()
     {
-        return view('home.home.index');
+        $result = [
+            'curr'=> 'home',
+        ];
+        return view('home.home.index', $result);
     }
-
-//    /**
-//     * 获得首页数据
-//     */
-//    public function getData()
-//    {
-//        return [
-//            'headers'=> $this->header(),
-//            'navigates'=> $this->navigate(),
-//            'footers'=> $this->footer(),
-//            'menus'=> $this->menus($type=4),
-//        ];
-//    }
 }

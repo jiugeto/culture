@@ -12,9 +12,11 @@
 <body>
     @include('layout.header')
     @include('layout.navigate')
-        <!-- 中间内容 -->
-        @yield('content')
-        <!-- 中间内容 -->
+
+    <!-- 中间内容 -->
+    @yield('content')
+    <!-- 中间内容 -->
+
     @include('layout.footer')
 </body>
 </html>

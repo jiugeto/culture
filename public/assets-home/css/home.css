@@ -29,7 +29,7 @@ body {
 
 /*=======navigate菜单导航栏========*/
 .nav {
-    padding:2px 0;
+    padding:1px 0;
     width:100%;
     background:white;
     border-bottom:2px solid pink;
@@ -45,7 +45,7 @@ body {
 }
 .nav_body div { float:left; }
 .nav_right {
-    position:relative;top:25px;left:450px;
+    position:relative;top:-20px;left:450px;
 }
 .nav_right a {
     color:black;
@@ -55,11 +55,12 @@ body {
 .navigate {
     clear:both;
     padding-top:5px;
-    border-bottom:2px solid pink;
+    /*border-bottom:2px solid pink;*/
 }
 .navigate_a {
     margin:10px auto;
     width:1000px;
+    font-size:20px;
 }
 a.nav_a {
     padding:11px 12px;
@@ -95,13 +96,14 @@ a.curr {
 .nav_hide {
     margin:5px auto;
     padding:10px 0;
-    display:none;
+    /*display:none;*/
 }
 .imgMiniSize { width:15px; }
 /*=======切换========*/
 /*=======search搜索========*/
 .search {
-    position:fixed;z-index:110;top:40px;left:500px;
+    /*margin:0 auto;*/
+    position:relative;z-index:110;top:10px;left:100px;
 }
 .global_search {
     width:250px;height:40px;
@@ -120,7 +122,7 @@ a.curr {
 .key_word {
     font-size:14px;
     color:grey;
-    position:relative;top:60px;left:140px;
+    position:relative;top:10px;left:100px;
 }
 /*=======search搜索========*/
 
@@ -129,7 +131,7 @@ a.curr {
 .content {
     margin:0 auto;
     width:1000px;
-    position:relative;top:160px;
+    position:relative;top:180px;
 }
 .content_kongbai {
     margin:5px 0;

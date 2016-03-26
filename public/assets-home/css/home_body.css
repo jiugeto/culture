@@ -3,33 +3,47 @@
 
 /*=======幻灯片========*/
 .ppt {
+    width:1920px;
     height:400px;
+    overflow:hidden;
     background:pink;
+    position:relative;top:168px;
 }
+.ppt_pic { width:3840px; }
+.ppt_pic li { list-style:none;float:left;position:relative;left:-40px;top:-15px; }
 .ppt_change {
-    position:relative;top:350px;
+    margin:0 auto;
+    width:1000px;
+    position:relative;top:325px;
 }
 .ppt_change_bg {
-    width:1000px;height:50px;
+    width:100%;height:60px;
     background:black;
-}
-.jiantou_left {
-    color:white;
-    position:relative;bottom:35px;left:10px;
-}
-.jiantou_right {
-    color:white;
-    position:relative;bottom:35px;left:955px;
+    filter:alpha(opacity=40);opacity:0.40;
 }
 .ppt_change_pic {
-    position:relative;bottom:78px;
+    position:absolute;bottom:-12px;left:-35px;
 }
 .ppt_change_pic li {
     margin:2px;
-    width:25px;height:25px;
-    border:3px solid white;
+    width:100px;height:45px;
+    border:2px solid white;
     list-style:none;
     float:left;
+    overflow:hidden;
+    cursor:pointer;
+}
+.ppt_change_pic img {
+    width:250px;
+    position:relative;left:-60px;
+}
+.jiantou_left {
+    color:white;
+    position:relative;bottom:40px;left:10px;
+}
+.jiantou_right {
+    color:white;
+    position:relative;bottom:40px;left:955px;
 }
 /*=======幻灯片========*/
 
@@ -50,18 +64,26 @@
 }
 .online {}
 .online_con {
-    width:100%;
+    width:70%;
     height:300px;
     border:1px solid red;
 }
-.online_con td {
-    border:1px solid red;
-}
+.online_con td { border:1px solid red; }
 .online_con td.con_first {
     width:30%;
 }
+.online_con td.img div {
+    width:150px;height:150px;
+    overflow:hidden;
+}
+.online_con td.img img { width:150px; }
+/*.online_con td.con_last {*/
+    /*border:1px solid red;*/
+    /*width:230px;height:300px;*/
+/*}*/
 .trait {}
 .trait_con {
+    width:78%;
     height:100px;
     border:1px solid red;
 }
