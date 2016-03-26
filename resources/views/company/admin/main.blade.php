@@ -16,7 +16,10 @@
     <div class="com_admin_con">
         @include('company.admin.partials.left')
 
-        <div class="com_admin_right">@yield('content')</div>
+        <div class="com_admin_right">
+            @include('company.admin.common.crumb')
+            @yield('content')
+        </div>
 
         <div class="content_kongbai">&nbsp;</div>
     </div>

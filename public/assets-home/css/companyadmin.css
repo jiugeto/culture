@@ -4,8 +4,9 @@
 /*===== 顶部样式 =====*/
 .com_admin_top {
     width:100%;height:60px;
-    background:rgb(220,220,220);
+    background:rgb(45,195,230);
     border:2px solid rgb(200,200,200);
+    color:white;
     position:fixed;top:30px;z-index:1;
 }
 .com_admin_top table {
@@ -18,42 +19,69 @@
 }
 .com_admin_top .right { text-align:right; }
 
-/*===== 左部样式 =====*/
+
+/*===== 下面样式 =====*/
 .com_admin_con {
     margin:0 auto;
     width:1000px;
-    height:700px;
+    height:800px;
+    background:rgb(240,240,240);
     position:relative;top:-15px;
 }
-.com_admin_left,.com_admin_right { float:left; }
+
+
+/*===== 左部样式 =====*/
 .com_admin_left {
-    width:180px;
-    height:650px;
+    width:150px;
+    height:800px;
     background:rgb(250,250,250);
-    border-left:2px solid lightgrey;
+    float:left;
 }
-.com_admin_left a { text-decoration:none; }
-.com_admin_left a:hover div { background:lightgrey; }
+.com_admin_left span { position:relative;top:2px; }
+.com_admin_left img { padding-right:5px;width:15px; }
 .com_admin_left a div {
-    padding:5px 40px;
-    width:100px;height:40px;
-    border-bottom:1px solid lightgray;
-    font-size:20px;
-    color:black;
-    line-height:40px;
+    padding:10px 23px;
+    border-left:4px solid rgb(220,220,220);
+    border-bottom:1px solid lightgrey;
 }
+.com_admin_left a:hover div {
+    background:rgb(220,220,220);
+    border-left:4px solid rgb(45,195,230);
+}
+.com_admin_left  a {
+    color:black;
+    text-decoration:none;
+}
+.com_admin_left .level2 { padding-left:30px; }
+.com_admin_left .none {
+    height:355px;
+    border-left:4px solid rgb(220,220,220);
+}
+
+
+/*===== 右部面包屑样式 =====*/
+.com_admin_crumb_bai { width:100%;height:2px; }
+.com_admin_crumb {
+    margin:0 auto;
+    width:830px;
+    background:white;
+}
+.com_admin_crumb p {
+    padding:5px 20px;
+}
+
 
 /*===== 右部样式 =====*/
 .com_admin_right {
-    width:800px;
+    width:840px;
     height:700px;
+    float:right;
 }
 .com_admin_home {
-    margin:0 5px;
-    width:800px;
-    height:650px;
+    margin:5px;
+    width:830px;
+    height:400px;
     background:rgb(250,250,250);
-    border-right:2px solid lightgrey;
 }
 .com_space {
     margin:0 20px;
