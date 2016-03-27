@@ -85,6 +85,7 @@
             <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
         </div>
         <br style="clear:both;"><br>
+
         <!-- 特色产品：产品样片 -->
         <div class="trait">
             <p class="floor">
@@ -107,28 +108,30 @@
             </div>
         </div>
         <br style="clear:both;">
+        
         <!-- 热门品牌：供应单位 -->
-        <div class="hot">
-            <p class="floor">
-                <img src="/assets-home/images/floor_red.png" class="floor_img">
-                <span class="floor_text">3F</span>
-                <span class="floor_text2">&nbsp;热门品牌</span>
-            </p>
-            <div class="trait_con">
-                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
-                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
-                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
-                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
-                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
-                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+        {{--<div class="hot">--}}
+            {{--<p class="floor">--}}
+                {{--<img src="/assets-home/images/floor_red.png" class="floor_img">--}}
+                {{--<span class="floor_text">3F</span>--}}
+                {{--<span class="floor_text2">&nbsp;热门品牌</span>--}}
+            {{--</p>--}}
+            {{--<div class="trait_con">--}}
+                {{--<div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>--}}
+                {{--<div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>--}}
+                {{--<div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>--}}
+                {{--<div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>--}}
+                {{--<div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>--}}
+                {{--<div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>--}}
                 {{--箭头--}}
-                <div class="arrow">
-                    <div class="con_left"> ◀ </div>
-                    <div class="con_right"> ▶ </div>
-                </div>
-            </div>
-        </div>
-        <br style="clear:both;">
+                {{--<div class="arrow">--}}
+                    {{--<div class="con_left"> ◀ </div>--}}
+                    {{--<div class="con_right"> ▶ </div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+        {{--<br style="clear:both;">--}}
+
         <!-- 推荐产品 -->
         <div class="recommend">
             <p class="floor">
@@ -151,6 +154,7 @@
             </div>
         </div>
         <br style="clear:both;">
+
         <!-- 样片需求 -->
         <div class="demand">
             <p class="floor">
@@ -169,51 +173,235 @@
         {{-- 排行列表 --}}
         <div class="list">
             <p>排行列表</p>
-            <div class="img_text">
-                <div class="img_num">1</div>
-                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
-                <a href="">需求需求</a><br>
-                <a href="" class="click">点击量 <span>10</span></a>
-            </div>
-            <div class="img_text">
-                {{--<div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>--}}
-                <a href="">需求需求</a><br>
-                <a href="" class="click">点击量 <span>10</span></a>
-            </div>
-            <div class="img_text">
-                {{--<div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>--}}
-                <a href="">需求需求</a><br>
-                {{--<a href="" class="click">点击量 <span>10</span></a>--}}
+            <div class="list_div">
+                <div class="img_text">
+                    <div class="img_num"> 1 </div>
+                    <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                    <a href="">需求需求</a><br>
+                    <a href="" class="click">点击量 <span>10</span></a>
+                </div>
+                <div class="img_text">
+                    <div class="img_num"> 2 </div>
+                    {{--<div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>--}}
+                    <a href="">需求需求</a><br>
+                    {{--<a href="" class="click">点击量 <span>10</span></a>--}}
+                </div>
+                <div class="img_text">
+                    <div class="img_num"> 3 </div>
+                    {{--<div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>--}}
+                    <a href="">需求需求</a><br>
+                    {{--<a href="" class="click">点击量 <span>10</span></a>--}}
+                </div>
+                <div class="img_text">
+                    <div class="img_num"> 4 </div>
+                    {{--<div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>--}}
+                    <a href="">需求需求</a><br>
+                    {{--<a href="" class="click">点击量 <span>10</span></a>--}}
+                </div>
+                <div class="img_text">
+                    <div class="img_num"> 5 </div>
+                    {{--<div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>--}}
+                    <a href="">需求需求</a><br>
+                    {{--<a href="" class="click">点击量 <span>10</span></a>--}}
+                </div>
+                <div class="img_text">
+                    <div class="img_num"> 6 </div>
+                    {{--<div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>--}}
+                    <a href="">需求需求</a><br>
+                    {{--<a href="" class="click">点击量 <span>10</span></a>--}}
+                </div>
             </div>
         </div>
-        <br style="clear:both;"><br>
+        <br style="clear:both;">
+
         <!-- 娱乐信息：演员、广告、媒体等 -->
-        <div class="recommend">
+        <div class="fun">
             <p class="floor">
                 <img src="/assets-home/images/floor_red.png" class="floor_img">
                 <span class="floor_text">6F</span>
                 <span class="floor_text2">&nbsp;娱乐信息</span>
             </p>
-            <div class="trait_con"></div>
+            <div class="fun_con">
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    <div class="con_text"><a href="">娱乐娱乐</a></div>
+                </div>
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    <div class="con_text"><a href="">娱乐娱乐</a></div>
+                </div>
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    <div class="con_text"><a href="">娱乐娱乐</a></div>
+                </div>
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    <div class="con_text"><a href="">娱乐娱乐</a></div>
+                </div>
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    <div class="con_text"><a href="">娱乐娱乐</a></div>
+                </div>
+            </div>
         </div>
+        {{--独家--}}
+        <div class="sole">
+            <p>独家策划</p>
+            <div class="img_text">
+                <div class="img">
+                    <a href=""><img src="/upload/images/online1.png"></a>
+                </div>
+                <div class="con_text"><a href="">娱乐娱乐</a></div>
+            </div>
+        </div>
+        <br style="clear:both;"><br>
+
         <!-- 租赁信息：拍摄器材 -->
-        <div class="recommend">
+        <div class="rent">
             <p class="floor">
                 <img src="/assets-home/images/floor_red.png" class="floor_img">
                 <span class="floor_text">7F</span>
-                <span class="floor_text2">&nbsp;娱乐信息</span>
+                <span class="floor_text2">&nbsp;租赁信息</span>
             </p>
-            <div class="trait_con"></div>
+            <div class="rent_con">
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    <div class="con_text"><a href="">租赁租赁</a></div>
+                </div>
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    <div class="con_text"><a href="">租赁租赁</a></div>
+                </div>
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    <div class="con_text"><a href="">租赁租赁</a></div>
+                </div>
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    <div class="con_text"><a href="">租赁租赁</a></div>
+                </div>
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    <div class="con_text"><a href="">租赁租赁</a></div>
+                </div>
+            </div>
         </div>
+        {{--文字信息--}}
+        <div class="rentinfo">
+            <p>文字信息</p>
+            <div class="img_text">
+                {{--<div class="img">--}}
+                    {{--<a href=""><img src="/upload/images/online1.png"></a>--}}
+                {{--</div>--}}
+                <div class="con_text"><a href=""><span>1</span> 租赁租赁</a></div>
+            </div>
+            <div class="img_text">
+                {{--<div class="img">--}}
+                    {{--<a href=""><img src="/upload/images/online1.png"></a>--}}
+                {{--</div>--}}
+                <div class="con_text"><a href=""><span>1</span> 租赁租赁</a></div>
+            </div>
+            <div class="img_text">
+                {{--<div class="img">--}}
+                    {{--<a href=""><img src="/upload/images/online1.png"></a>--}}
+                {{--</div>--}}
+                <div class="con_text"><a href=""><span>1</span> 租赁租赁</a></div>
+            </div>
+            <div class="img_text">
+                {{--<div class="img">--}}
+                    {{--<a href=""><img src="/upload/images/online1.png"></a>--}}
+                {{--</div>--}}
+                <div class="con_text"><a href=""><span>1</span> 租赁租赁</a></div>
+            </div>
+        </div>
+        <br style="clear:both;"><br>
+
         <!-- 设计信息：建筑、效果图、平面 -->
-        <div class="recommend">
+        <div class="design">
             <p class="floor">
                 <img src="/assets-home/images/floor_red.png" class="floor_img">
                 <span class="floor_text">8F</span>
-                <span class="floor_text2">&nbsp;娱乐信息</span>
+                <span class="floor_text2">&nbsp;设计信息</span>
             </p>
-            <div class="trait_con"></div>
+            <div class="design_con">
+                <div class="img_text_first">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    {{--<div class="con_text"><a href="">租赁租赁</a></div>--}}
+                </div>
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    {{--<div class="con_text"><a href="">租赁租赁</a></div>--}}
+                </div>
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    {{--<div class="con_text"><a href="">租赁租赁</a></div>--}}
+                </div>
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    {{--<div class="con_text"><a href="">租赁租赁</a></div>--}}
+                </div>
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    {{--<div class="con_text"><a href="">租赁租赁</a></div>--}}
+                </div>
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    {{--<div class="con_text"><a href="">租赁租赁</a></div>--}}
+                </div>
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    {{--<div class="con_text"><a href="">租赁租赁</a></div>--}}
+                </div>
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    {{--<div class="con_text"><a href="">租赁租赁</a></div>--}}
+                </div>
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    {{--<div class="con_text"><a href="">租赁租赁</a></div>--}}
+                </div>
+            </div>
         </div>
+        <br style="clear:both;">
+
         <!-- 实时数据 -->
         <div class="realtime">
             <p class="floor">
@@ -221,8 +409,17 @@
                 <span class="floor_text">9F</span>
                 <span class="floor_text2">&nbsp;实时数据</span>
             </p>
-            <div class="trait_con"></div>
+            <div class="realtime_con">
+                <ul class="title">
+                    <li>单号</li>
+                    <li>名称</li>
+                    <li>时间</li>
+                </ul>
+                <div class="con_wrap"></div>
+            </div>
         </div>
+        <br style="clear:both;">
+
         <!-- 合作机构 -->
         <div class="cooperation">
             <p class="floor">
@@ -230,8 +427,29 @@
                 <span class="floor_text">10F</span>
                 <span class="floor_text2">&nbsp;合作单位</span>
             </p>
-            <div class="trait_con"></div>
+            <div class="cooperation_con">
+                <div class="img">
+                    <a href=""><img src="/upload/images/online1.png"></a>
+                </div>
+                <div class="img">
+                    <a href=""><img src="/upload/images/online1.png"></a>
+                </div>
+                <div class="img">
+                    <a href=""><img src="/upload/images/online1.png"></a>
+                </div>
+                <div class="img">
+                    <a href=""><img src="/upload/images/online1.png"></a>
+                </div>
+                <div class="img">
+                    <a href=""><img src="/upload/images/online1.png"></a>
+                </div>
+                <div class="img">
+                    <a href=""><img src="/upload/images/online1.png"></a>
+                </div>
+            </div>
         </div>
+        <br style="clear:both;">
+
         <!-- 用户心声 -->
         <div class="voice">
             <p class="floor">

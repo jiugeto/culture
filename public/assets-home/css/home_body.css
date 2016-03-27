@@ -102,10 +102,11 @@
     text-decoration:underline;
     color:red;
 }
+/*===精选===*/
 .selected {
     width:200px;height:300px;
     /*overflow:hidden;*/
-    position:relative;top:22px;
+    position:relative;top:15px;
 }
 .selected p {
     padding:5px;
@@ -162,41 +163,46 @@
 }
 
 
-/*===== 产品需求 =====*/
+/*===== 产品需求(样片需求) =====*/
 .demand,.list,.demand_con .img,.img_num { float:left; }
 .demand_con {
-    width:760px;height:300px;
+    width:760px;height:280px;
     /*border:1px solid red;*/
 }
 .demand_con .img {
     margin-right:4px;
-    width:148px;height:300px;
+    width:148px;height:280px;
     overflow:hidden;
 }
 .demand_con img {
-    height:300px;
+    height:250px;
     position:relative;left:-100px;
 }
+/*===排行列表===*/
 .list {
-    width:230px;height:365px;
-    /*border:1px solid red;*/
-    position:relative;top:22px;
+    width:230px;height:314px;
+    /*border-bottom:1px solid rgb(230,230,230);*/
+    overflow:hidden;
+    position:relative;top:15px;
 }
-.list p {
+.list p,.sole p,.sole p,.rentinfo p {
     padding:5px;
     border-bottom:2px solid rgb(250,250,250);
 }
+.list_div {
+    background:rgb(250,250,250);
+}
 .list .img_text {
-    padding:0 2px;
-    width:97%;height:60px;
-    border:1px solid red;
-    border-bottom:1px solid rgb(240,240,240);
+    padding:8px;
+    width:200px;
+    border-left:4px solid rgb(230,230,230);
+    border-bottom:1px solid rgb(230,230,230);
 }
 .list .img_text .img_num {
     width:10px;
 }
 .list .img {
-    width:60px;height:50px;
+    width:80px;height:45px;
     overflow:hidden;
     float:left;
 }
@@ -211,4 +217,105 @@
     color:grey;
     font-size:8px;
 }
-.img_text .click span { color:red; }
+.img_text .click span,.img_num,.rentinfo span { color:red; }
+
+
+/*===== 娱乐信息，租赁信息 =====*/
+.fun,.sole,.rent,.rentinfo { float:left; }
+.fun_con,.rent_con { width:760px; }
+.fun_con .img_text,.rent_con .img_text {
+    margin-right:4px;
+    /*width:150px;*/
+    background:rgb(250,250,250);
+    border-bottom:1px dashed lightgrey;
+    float:left;
+}
+.fun_con .img,.rent_con .img {
+    width:148px;height:100px;
+    /*border:1px solid red;*/
+    overflow:hidden;
+}
+.fun_con img,.rent_con img { width:160px; }
+.img_text .con_text {
+    padding:4px 0;
+    text-align:center;
+    color:black;
+}
+/*===独家策划===*/
+.sole,.rentinfo {
+    width:230px;
+    position:relative;top:16px;
+}
+.sole .img_text,.rentinfo .img_text {
+    background:rgb(250,250,250);
+    border-bottom:1px dashed lightgrey;
+}
+.sole .img {
+    width:230px;height:100px;
+    overflow:hidden;
+}
+.sole img { width:250px; }
+
+
+/*===== 租赁信息 =====*/
+.rentinfo .img_text { border-left:4px solid lightgrey; }
+.rentinfo .con_text {
+    padding:5px;
+    text-align:left;
+}
+
+
+/*===== 设计信息 =====*/
+.design {}
+.design_con {
+    width:1000px;height:250px;
+}
+.design_con .img_text,.design_con .img_text_first {
+    margin-right:4px;
+    /*border:1px solid red;*/
+    overflow:hidden;
+    float:left;
+}
+.design_con .img_text {
+    margin-bottom:10px;
+    width:165px;height:120px;
+}
+.design_con .img_text_first {
+    width:300px;height:250px;
+}
+.design_con .img_text img { width:170px; }
+.design_con .img_text_first img { width:300px; }
+
+
+/*===== 实时数据 =====*/
+.realtime {}
+.realtime ul {
+    width:1000px;
+    position:relative;left:-40px;
+}
+.realtime li {
+    padding:0 150px;
+    list-style:none;
+    float:left;
+}
+.realtime ul.title li { background:lightgrey; }
+.realtime .con_wrap {
+    width:994px;height:200px;
+    border:1px solid lightgrey;
+    overflow:auto;
+}
+
+
+/*===== 合作单位 =====*/
+.cooperation {}
+.cooperation_con {
+    width:1000px;height:100px;
+    /*border:1px solid red;*/
+}
+.cooperation_con .img {
+    margin-right:4px;
+    width:160px;height:100px;
+    overflow:hidden;
+    float:left;
+}
+.cooperation_con img { width:180px; }
