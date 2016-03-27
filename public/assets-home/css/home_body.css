@@ -294,21 +294,19 @@
     position:relative;left:-40px;
 }
 .realtime li {
-    margin-right:3px;
+    margin-right:1px;
     list-style:none;
     text-align:center;
     float:left;
 }
 .realtime ul.title li { background:lightgrey; }
 .con_wrap {
-    width:994px;height:200px;
+    width:995px;height:200px;
     border:1px solid lightgrey;
     position:relative;top:-20px;
-    overflow:auto;
+    overflow:hidden;
 }
-.realtime_con .t1 { width:330px; }
-.realtime_con .t2 { width:330px; }
-.realtime_con .t3 { width:330px; }
+.realtime_con .t1,.realtime_con .t2,.realtime_con .t3 { width:33.2%; }
 .animate li { border-bottom:1px dashed lightgrey; }
 
 

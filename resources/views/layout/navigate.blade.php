@@ -10,7 +10,8 @@
             <img src="/assets/images/daohang.png" class="imgMiniSize"> 导航
         </div>
         <div class="nav_qh">
-            <div class="nav_hide" style="display:{{$curr=='home'?'none':'block'}};">
+            {{--<div class="nav_hide" style="display:{{$curr=='home'?'none':'block'}};">--}}
+            <div class="nav_hide" style="display:none;">
                 <a href="" class="curr">首&nbsp;页</a>
                 <a href="" class="nav_a">产品样片</a>
                 <a href="creation" class="nav_a">创作窗口</a>
