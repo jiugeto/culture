@@ -17,6 +17,12 @@
             </ul>
         </div>
     </div>
+    <script>
+        $(document).ready(function(){
+            var clientWidth = document.body.clientWidth;
+            $(".ppt").css('width',clientWidth);
+        });
+    </script>
     <!-- 广告PPT -->
 
     <div class="content">
@@ -27,20 +33,58 @@
                 <span class="floor_text">1F</span>
                 <span class="floor_text2">&nbsp;在线创作</span>
             </p>
-            <table class="online_con">
-                <tr>
-                    <td rowspan="2" class="con_first"><a href="" title="online1"><img src="/upload/images/online1.png"></a></td>
-                    <td class="img"><a href="" title="online2"><div><img src="/upload/images/online2.png"></div></a></td>
-                    <td class="img"><a href="" title="online3"><div><img src="/upload/images/online3.png"></div></a></td>
-                    <td class="img"><a href="" title="online4"><div><img src="/upload/images/online4.png"></div></a></td>
-                </tr>
-                <tr>
-                    <td class="img"><a href="" title="online2"><div><img src="/upload/images/online2.png"></div></a></td>
-                    <td class="img"><a href="" title="online3"><div><img src="/upload/images/online3.png"></div></a></td>
-                    <td class="img"><a href="" title="online4"><div><img src="/upload/images/online4.png"></div></a></td>
-                </tr>
-            </table>
+            <div class="online_con">
+                <div class="online_first">
+                    <a href="" title="online1">
+                        <div class="con_img"><img src="/upload/images/online1.png"></div>
+                    </a>
+                </div>
+                <div class="online_div">
+                    <a href="" title="online1">
+                        <div class="con_img"><img src="/upload/images/online2.png"></div>
+                        <div class="con_text"><a href="">样片</a></div>
+                    </a>
+                </div>
+                <div class="online_div">
+                    <a href="" title="online1">
+                        <div class="con_img"><img src="/upload/images/online3.png"></div>
+                        <div class="con_text"><a href="">样片</a></div>
+                    </a>
+                </div>
+                <div class="online_div">
+                    <a href="" title="online1">
+                        <div class="con_img"><img src="/upload/images/online4.png"></div>
+                        <div class="con_text"><a href="">样片</a></div>
+                    </a>
+                </div>
+                <div class="online_div">
+                    <a href="" title="online1">
+                        <div class="con_img"><img src="/upload/images/online2.png"></div>
+                        <div class="con_text"><a href="">样片</a></div>
+                    </a>
+                </div>
+                <div class="online_div">
+                    <a href="" title="online1">
+                        <div class="con_img"><img src="/upload/images/online3.png"></div>
+                        <div class="con_text"><a href="">样片</a></div>
+                    </a>
+                </div>
+                <div class="online_div">
+                    <a href="" title="online1">
+                        <div class="con_img"><img src="/upload/images/online4.png"></div>
+                        <div class="con_text"><a href="">样片</a></div>
+                    </a>
+                </div>
+            </div>
         </div>
+        {{-- 精选 --}}
+        <div class="selected">
+            <p>精选</p>
+            <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+            <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+            <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+        </div>
+        <br style="clear:both;"><br>
         <!-- 特色产品：产品样片 -->
         <div class="trait">
             <p class="floor">
@@ -49,15 +93,20 @@
                 <span class="floor_text2">&nbsp;特色产品</span>
             </p>
             <div class="trait_con">
-                <table>
-                    <tr>
-                        <td><span>◀</span></td>
-                        <td></td>
-                        <td><span>▶</span></td>
-                    </tr>
-                </table>
+                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                {{--箭头--}}
+                <div class="arrow">
+                    <div class="con_left"> ◀ </div>
+                    <div class="con_right"> ▶ </div>
+                </div>
             </div>
         </div>
+        <br style="clear:both;">
         <!-- 热门品牌：供应单位 -->
         <div class="hot">
             <p class="floor">
@@ -65,8 +114,21 @@
                 <span class="floor_text">3F</span>
                 <span class="floor_text2">&nbsp;热门品牌</span>
             </p>
-            <div class="trait_con"></div>
+            <div class="trait_con">
+                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                {{--箭头--}}
+                <div class="arrow">
+                    <div class="con_left"> ◀ </div>
+                    <div class="con_right"> ▶ </div>
+                </div>
+            </div>
         </div>
+        <br style="clear:both;">
         <!-- 推荐产品 -->
         <div class="recommend">
             <p class="floor">
@@ -75,17 +137,56 @@
                 <span class="floor_text2">&nbsp;推荐产品</span>
             </p>
             <div class="trait_con">
+                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                {{--箭头--}}
+                <div class="arrow">
+                    <div class="con_left"> ◀ </div>
+                    <div class="con_right"> ▶ </div>
+                </div>
             </div>
         </div>
+        <br style="clear:both;">
         <!-- 样片需求 -->
-        <div class="recommend">
+        <div class="demand">
             <p class="floor">
                 <img src="/assets-home/images/floor_red.png" class="floor_img">
                 <span class="floor_text">5F</span>
                 <span class="floor_text2">&nbsp;样片需求</span>
             </p>
-            <div class="trait_con"></div>
+            <div class="demand_con">
+                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+            </div>
         </div>
+        {{-- 排行列表 --}}
+        <div class="list">
+            <p>排行列表</p>
+            <div class="img_text">
+                <div class="img_num">1</div>
+                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                <a href="">需求需求</a><br>
+                <a href="" class="click">点击量 <span>10</span></a>
+            </div>
+            <div class="img_text">
+                {{--<div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>--}}
+                <a href="">需求需求</a><br>
+                <a href="" class="click">点击量 <span>10</span></a>
+            </div>
+            <div class="img_text">
+                {{--<div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>--}}
+                <a href="">需求需求</a><br>
+                {{--<a href="" class="click">点击量 <span>10</span></a>--}}
+            </div>
+        </div>
+        <br style="clear:both;"><br>
         <!-- 娱乐信息：演员、广告、媒体等 -->
         <div class="recommend">
             <p class="floor">

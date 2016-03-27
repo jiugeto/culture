@@ -49,7 +49,7 @@
 
 
 /*=======在线创作========*/
-.floor { clear:both; }
+.floor { clear:both;border-bottom:2px solid ghostwhite; }
 .floor_img { width:60px; }
 .floor_text {
     color:white;
@@ -62,38 +62,153 @@
     font-family:'黑体';
     position:relative;top:-5px;left:-30px;
 }
-.online {}
+.online,.selected { float:left; }
+.online { width:790px; }
 .online_con {
-    width:70%;
-    height:300px;
-    border:1px solid red;
+    width:780px;
+    height:250px;
+    /*border:1px solid red;*/
 }
-.online_con td { border:1px solid red; }
-.online_con td.con_first {
-    width:30%;
+.online_first,.online_div {
+    margin:2px;
+    float:left;
 }
-.online_con td.img div {
-    width:150px;height:150px;
+.online_first {
+    width:250px;height:250px;
     overflow:hidden;
 }
-.online_con td.img img { width:150px; }
-/*.online_con td.con_last {*/
-    /*border:1px solid red;*/
-    /*width:230px;height:300px;*/
-/*}*/
+.online_first img { width:250px; }
+.online_div {
+    width:170px;height:125px;
+    /*overflow:hidden;*/
+}
+.online_div .con_img {
+    width:100%;height:100px;
+    overflow:hidden;
+}
+.online_div img { width:180px; }
+.online_div .con_text {
+    height:22px;
+    text-align:center;
+    background:rgb(250,250,250);
+    overflow:hidden;
+}
+.con_text a {
+    text-decoration:none;
+    color:black;
+    font-size:14px;
+}
+.con_text a:hover {
+    text-decoration:underline;
+    color:red;
+}
+.selected {
+    width:200px;height:300px;
+    /*overflow:hidden;*/
+    position:relative;top:22px;
+}
+.selected p {
+    padding:5px;
+    border-bottom:2px solid rgb(250,250,250);
+}
+.selected div {
+    margin:4px 2px;
+    border:1px solid rgb(240,240,240);
+}
+.selected .img {
+    width:190px;height:80px;
+    overflow:hidden;
+}
+.selected img {
+    width:200px;
+    position:relative;top:-30px;
+}
+
+
+/*===== 特色产品 =====*/
 .trait {}
 .trait_con {
-    width:78%;
+    width:100%;
     height:100px;
-    border:1px solid red;
+    /*border:1px solid red;*/
 }
-.trait_con td {
-    width:92px;height:92px;
-    border:1px solid red;
+.trait_con .img {
+    margin-right:4px;
+    width:148px;height:100px;
+    overflow:hidden;
+    float:left;
 }
-.trait_con td span {
+.trait_con img { width:160px; }
+.trait_con .con_text {
     padding:30px;
     font-size:30px;
     color:lightgrey;
 }
-/*=======在线创作========*/
+.arrow {
+    margin-right:5px;
+    width:80px;height:100px;
+    /*border:1px solid red;*/
+    float:right;
+}
+.con_left,.con_right {
+    margin:4px 0;
+    padding:6px 0;
+    color:grey;
+    font-size:20px;
+    text-align:center;
+    background:rgb(250,250,250);
+    border:1px solid rgb(240,240,240);
+    cursor:pointer;
+}
+
+
+/*===== 产品需求 =====*/
+.demand,.list,.demand_con .img,.img_num { float:left; }
+.demand_con {
+    width:760px;height:300px;
+    /*border:1px solid red;*/
+}
+.demand_con .img {
+    margin-right:4px;
+    width:148px;height:300px;
+    overflow:hidden;
+}
+.demand_con img {
+    height:300px;
+    position:relative;left:-100px;
+}
+.list {
+    width:230px;height:365px;
+    /*border:1px solid red;*/
+    position:relative;top:22px;
+}
+.list p {
+    padding:5px;
+    border-bottom:2px solid rgb(250,250,250);
+}
+.list .img_text {
+    padding:0 2px;
+    width:97%;height:60px;
+    border:1px solid red;
+    border-bottom:1px solid rgb(240,240,240);
+}
+.list .img_text .img_num {
+    width:10px;
+}
+.list .img {
+    width:60px;height:50px;
+    overflow:hidden;
+    float:left;
+}
+.list img { width:80px; }
+.list a {
+    padding:0 5px;
+    color:black;
+    text-decoration:none;
+    font-size:14px;
+}
+.img_text .click {
+    color:grey;
+    font-size:8px;
+}
+.img_text .click span { color:red; }
