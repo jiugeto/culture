@@ -411,11 +411,19 @@
             </p>
             <div class="realtime_con">
                 <ul class="title">
-                    <li>单号</li>
-                    <li>名称</li>
-                    <li>时间</li>
+                    <li class="t1">单号</li>
+                    <li class="t2">名称</li>
+                    <li class="t3">时间</li>
                 </ul>
-                <div class="con_wrap"></div>
+                <div class="con_wrap">
+                    <div class="animate">
+                        <ul>
+                            <li class="t1">单号1</li>
+                            <li class="t2">名称1</li>
+                            <li class="t3">时间1</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
         <br style="clear:both;">
@@ -457,7 +465,11 @@
                 <span class="floor_text">11F</span>
                 <span class="floor_text2">&nbsp;用户心声</span>
             </p>
-            <div class="trait_con"></div>
+            <div class="voice_con">
+                <div class="img"><img src="/upload/images/online1.png"></div>
+                <div class="text">文字</div>
+                <div class="con">内容</div>
+            </div>
         </div>
         <!-- 空白 -->
         <div class="content_kongbai">&nbsp;</div>
