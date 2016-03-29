@@ -114,11 +114,15 @@
             </div>
             {{-- 公司信息 --}}
             <div class="pro_com">
-                <div class="privateInfo"></div>
+                <div class="privateInfo">
+                    <div class="title">公司</div>
+                </div>
             </div>
             {{-- 设计师信息 --}}
             <div class="pro_per">
-                <div class="privateInfo"></div>
+                <div class="privateInfo">
+                    <div class="title">个人</div>
+                </div>
             </div>
         </div>
 
