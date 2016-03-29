@@ -27,7 +27,7 @@
             </div>
             <div class="pro_big">
                 <div class="img"><img src="/upload/images/online1.png"></div>
-                <a href="">的女警的女</a>
+                <a href="">巨大那部分的加班费</a>
             </div>
             <div class="pro_big2">
                 <div class="img_text">
@@ -56,5 +56,75 @@
                 </div>
             </div>
         </div>
+        <br style="clear:both;"><br>
+
+        {{-- 二楼：原创 --}}
+        <div class="pro_floor">
+            <div class="title">原创</div>
+            {{-- 原创视频 --}}
+            <div class="original">
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    <div class="text"><a href="">原创视频</a></div>
+                </div>
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    <div class="text"><a href="">原创视频</a></div>
+                </div>
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    <div class="text"><a href="">原创视频</a></div>
+                </div>
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    <div class="text"><a href="">原创视频</a></div>
+                </div>
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    <div class="text"><a href="">原创视频</a></div>
+                </div>
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    <div class="text"><a href="">原创视频</a></div>
+                </div>
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    <div class="text"><a href="">原创视频</a></div>
+                </div>
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    <div class="text"><a href="">原创视频</a></div>
+                </div>
+            </div>
+            {{-- 公司信息 --}}
+            <div class="pro_com">
+                <div class="privateInfo"></div>
+            </div>
+            {{-- 设计师信息 --}}
+            <div class="pro_per">
+                <div class="privateInfo"></div>
+            </div>
+        </div>
+
+        {{-- 猜你喜欢 --}}
+
+        <!-- 空白 -->
+        <div class="content_kongbai">&nbsp;</div>
     </div>
 @stop

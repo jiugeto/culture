@@ -96,10 +96,11 @@ a.curr {
 .nav_hide {
     margin:5px auto;
     padding:10px 0;
-    /*display:none;*/
+    display:none;
 }
 .imgMiniSize { width:15px; }
 /*=======切换========*/
+
 /*=======search搜索========*/
 .search {
     /*margin:0 auto;*/
@@ -136,6 +137,7 @@ a.curr {
 .content_kongbai {
     margin:5px 0;
     width:100%;height:110px;
+    clear:both;
 }
 /*=======body 内容主题========*/
 

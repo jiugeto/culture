@@ -2,7 +2,7 @@
 
 
 <!-- navigate菜单导航栏 -->
-<div class="nav" style="">
+<div class="nav">
     <hr>
     <div class="nav_body">
         <div><img src="/assets-home/images/logo.png" class="logo"></div>
@@ -10,8 +10,7 @@
             <img src="/assets/images/daohang.png" class="imgMiniSize"> 导航
         </div>
         <div class="nav_qh">
-            {{--<div class="nav_hide" style="display:{{$curr=='home'?'none':'block'}};">--}}
-            <div class="nav_hide" style="display:none;">
+            <div class="nav_hide">
                 <a href="" class="curr">首&nbsp;页</a>
                 <a href="" class="nav_a">产品样片</a>
                 <a href="creation" class="nav_a">创作窗口</a>
@@ -53,6 +52,7 @@
 
 <script>
     $(document).ready(function(){
+        //菜单栏切换
         var nav_qiehuan = $(".nav_qiehuan");
         var nav_qh = $(".nav_qh");
         var nav_hide = $(".nav_hide");
@@ -64,5 +64,12 @@
             nav_hide.hide();
             nav_qiehuan.css('border-bottom','1px solid lightgray');
         });
+        //根据浏览器宽度设置菜单位置
+        var clientWidth = document.body.clientWidth;
+//        alert(clientWidth);
+        nav_qiehuan.css('position','fixed');
+        nav_qiehuan.css('left',(clientWidth-1000)/2+200+'px');
+        nav_qh.css('position','fixed');
+        nav_qh.css('left',(clientWidth-1000)/2+20+'px');
     });
 </script>
