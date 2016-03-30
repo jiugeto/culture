@@ -58,7 +58,7 @@
         </div>
         <br style="clear:both;"><br>
 
-        {{-- 二楼：原创 --}}
+        {{-- 二楼：原创产品集 --}}
         <div class="pro_floor">
             <div class="title">原创</div>
             {{-- 原创视频 --}}
@@ -116,17 +116,222 @@
             <div class="pro_com">
                 <div class="privateInfo">
                     <div class="title">公司</div>
+                    <div class="img_text">
+                        {{--<div class="img_num"> 1 </div>--}}
+                        <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                        <a href="">供应供应</a>
+                        <a href="" class="click">点击量<span>10</span></a>
+                    </div>
+                    <div class="img_text">
+                        {{--<div class="img_num"> 1 </div>--}}
+                        <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                        <a href="">供应供应</a>
+                        <a href="" class="click">点击量<span>10</span></a>
+                    </div>
+                    <div class="img_text">
+                        {{--<div class="img_num"> 1 </div>--}}
+                        <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                        <a href="">供应供应</a>
+                        <a href="" class="click">点击量<span>10</span></a>
+                    </div>
+                    <div class="img_text">
+                        {{--<div class="img_num"> 1 </div>--}}
+                        <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                        <a href="">供应供应</a>
+                        <a href="" class="click">点击量<span>10</span></a>
+                    </div>
+                    <div class="img_text">
+                        {{--<div class="img_num"> 1 </div>--}}
+                        <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                        <a href="">供应供应</a>
+                        <a href="" class="click">点击量<span>10</span></a>
+                    </div>
+                    <div class="img_text">
+                        {{--<div class="img_num"> 1 </div>--}}
+                        <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                        <a href="">供应供应</a>
+                        <a href="" class="click">点击量<span>10</span></a>
+                    </div>
+                    <div class="img_text">
+                        {{--<div class="img_num"> 1 </div>--}}
+                        <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                        <a href="">供应供应</a>
+                        <a href="" class="click">点击量<span>10</span></a>
+                    </div>
                 </div>
             </div>
             {{-- 设计师信息 --}}
             <div class="pro_per">
                 <div class="privateInfo">
                     <div class="title">个人</div>
+                    <div class="img_text">
+                        {{--<div class="img_num"> 1 </div>--}}
+                        <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                        <a href="">需求需求</a>
+                        <a href="" class="click">点击量<span>10</span></a>
+                    </div>
+                    <div class="img_text">
+                        {{--<div class="img_num"> 1 </div>--}}
+                        <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                        <a href="">需求需求</a>
+                        <a href="" class="click">点击量<span>10</span></a>
+                    </div>
+                    <div class="img_text">
+                        {{--<div class="img_num"> 1 </div>--}}
+                        <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                        <a href="">需求需求</a>
+                        <a href="" class="click">点击量<span>10</span></a>
+                    </div>
+                    <div class="img_text">
+                        {{--<div class="img_num"> 1 </div>--}}
+                        <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                        <a href="">需求需求</a>
+                        <a href="" class="click">点击量<span>10</span></a>
+                    </div>
+                    <div class="img_text">
+                        {{--<div class="img_num"> 1 </div>--}}
+                        <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                        <a href="">需求需求</a>
+                        <a href="" class="click">点击量<span>10</span></a>
+                    </div>
+                    <div class="img_text">
+                        {{--<div class="img_num"> 1 </div>--}}
+                        <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                        <a href="">需求需求</a>
+                        <a href="" class="click">点击量<span>10</span></a>
+                    </div>
+                    <div class="img_text">
+                        {{--<div class="img_num"> 1 </div>--}}
+                        <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                        <a href="">需求需求</a>
+                        <a href="" class="click">点击量<span>10</span></a>
+                    </div>
                 </div>
             </div>
         </div>
+        <br style="clear:both;"><br>
 
         {{-- 猜你喜欢 --}}
+        <div class="pro_floor">
+            <div class="title">猜你喜欢</div>
+            <div class="guess">
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    <div class="text"><a href="">原创视频</a></div>
+                </div>
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    <div class="text"><a href="">原创视频</a></div>
+                </div>
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    <div class="text"><a href="">原创视频</a></div>
+                </div>
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    <div class="text"><a href="">原创视频</a></div>
+                </div>
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    <div class="text"><a href="">原创视频</a></div>
+                </div>
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    <div class="text"><a href="">原创视频</a></div>
+                </div>
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    <div class="text"><a href="">原创视频</a></div>
+                </div>
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    <div class="text"><a href="">原创视频</a></div>
+                </div>
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    <div class="text"><a href="">原创视频</a></div>
+                </div>
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    <div class="text"><a href="">原创视频</a></div>
+                </div>
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    <div class="text"><a href="">原创视频</a></div>
+                </div>
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><img src="/upload/images/online1.png"></a>
+                    </div>
+                    <div class="text"><a href="">原创视频</a></div>
+                </div>
+            </div>
+        </div>
+        <br style="clear:both;"><br>
+
+        {{-- 宣传片 --}}
+        <div class="pro_floor">
+            <div class="title">宣传片</div>
+            <div class=""></div>
+        </div>
+        <br style="clear:both;"><br>
+
+        {{-- 广告片 --}}
+        <div class="pro_floor">
+            <div class="title">广告片</div>
+            <div class=""></div>
+        </div>
+        <br style="clear:both;"><br>
+
+        {{-- 微电影 --}}
+        <div class="pro_floor">
+            <div class="title">微电影</div>
+            <div class=""></div>
+        </div>
+        <br style="clear:both;"><br>
+
+        {{-- 汇报片 --}}
+        <div class="pro_floor">
+            <div class="title">汇报片</div>
+            <div class=""></div>
+        </div>
+        <br style="clear:both;"><br>
+
+        {{-- 晚会视频 --}}
+        <div class="pro_floor">
+            <div class="title">晚会视频</div>
+            <div class=""></div>
+        </div>
+        <br style="clear:both;"><br>
+
+        {{-- 淘宝视频 --}}
+        <div class="pro_floor">
+            <div class="title">淘宝视频</div>
+            <div class=""></div>
+        </div>
+        <br style="clear:both;"><br>
 
         <!-- 空白 -->
         <div class="content_kongbai">&nbsp;</div>

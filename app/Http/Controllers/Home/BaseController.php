@@ -10,34 +10,15 @@ class BaseController extends Controller
     /**
      * 前台页面基础控制器
      */
-
-//    /**
-//     * header头部 页面数据
-//     */
-//    public function header()
-//    {
-//        $headers = [];
-//        $headers = LinkModel::where('type_id',1)->get();
-//        return $headers;
-//    }
-//
-//    /**
-//     * navigate菜单导航栏 页面数据
-//     */
-//    public function navigate()
-//    {
-//        $navigates = [];
-//        $navigates = LinkModel::where('type_id',2)->get();
-//        return $navigates;
-//    }
-//
-//    /**
-//     * footer脚部 页面数据
-//     */
-//    public function footer()
-//    {
-//        $footers = [];
-//        $footers = LinkModel::where('type_id',3)->get();
-//        return $footers;
-//    }
+    protected $list= [
+        'home'=> '首 页',
+        'product'=> '产品样片',
+        'creation'=> '在线作品',
+        'supply'=> '供应单位',
+        'demand'=> '需求信息',
+        'entertain'=> '娱乐频道',
+        'rent'=> '租赁频道',
+        'design'=> '设计频道',
+        'about'=> '关于我们',
+    ];
 }

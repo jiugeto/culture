@@ -11,15 +11,18 @@
         </div>
         <div class="nav_qh">
             <div class="nav_hide">
-                <a href="" class="curr">首&nbsp;页</a>
-                <a href="" class="nav_a">产品样片</a>
-                <a href="creation" class="nav_a">创作窗口</a>
-                <a href="" class="nav_a">供应单位</a>
-                <a href="" class="nav_a">需求信息</a>
-                <a href="" class="nav_a">娱乐频道</a>
-                <a href="" class="nav_a">租赁频道</a>
-                <a href="" class="nav_a">设计频道</a>
-                <a href="" class="nav_a">关于我们</a>
+                {{--<a href="/" class="curr">首&nbsp;页</a>--}}
+                {{--<a href="" class="nav_a">产品样片</a>--}}
+                {{--<a href="creation" class="nav_a">在线作品</a>--}}
+                {{--<a href="" class="nav_a">供应单位</a>--}}
+                {{--<a href="" class="nav_a">需求信息</a>--}}
+                {{--<a href="" class="nav_a">娱乐频道</a>--}}
+                {{--<a href="" class="nav_a">租赁频道</a>--}}
+                {{--<a href="" class="nav_a">设计频道</a>--}}
+                {{--<a href="" class="nav_a">关于我们</a>--}}
+                @foreach($menus as $kmenu=>$menu)
+                    <a href="/{{$kmenu}}" class="{{$curr==$kmenu?'curr':'nav_a'}}">{{ $menu }}</a>
+                @endforeach
             </div>
         </div>
         <form action="" class="search">
@@ -34,15 +37,18 @@
         </div>
         <div class="navigate">
             <div class="navigate_a" style="display:{{$curr=='home'?'block':'none'}};">
-                <a href="" class="curr">首&nbsp;页</a>
-                <a href="" class="nav_a">产品样片</a>
-                <a href="creation" class="nav_a">创作窗口</a>
-                <a href="" class="nav_a">供应单位</a>
-                <a href="" class="nav_a">需求信息</a>
-                <a href="" class="nav_a">娱乐频道</a>
-                <a href="" class="nav_a">租赁频道</a>
-                <a href="" class="nav_a">设计频道</a>
-                <a href="" class="nav_a">关于我们</a>
+                {{--<a href="" class="curr">首&nbsp;页</a>--}}
+                {{--<a href="" class="nav_a">产品样片</a>--}}
+                {{--<a href="creation" class="nav_a">在线作品</a>--}}
+                {{--<a href="" class="nav_a">供应单位</a>--}}
+                {{--<a href="" class="nav_a">需求信息</a>--}}
+                {{--<a href="" class="nav_a">娱乐频道</a>--}}
+                {{--<a href="" class="nav_a">租赁频道</a>--}}
+                {{--<a href="" class="nav_a">设计频道</a>--}}
+                {{--<a href="" class="nav_a">关于我们</a>--}}
+                @foreach($menus as $kmenu=>$menu)
+                    <a href="/{{$kmenu}}" class="{{$curr==$kmenu?'curr':'nav_a'}}">{{ $menu }}</a>
+                @endforeach
             </div>
         </div>
     </div>

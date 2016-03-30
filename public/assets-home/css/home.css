@@ -52,16 +52,6 @@ body {
     text-decoration:none;
 }
 .logo { width:200px; }
-.navigate {
-    clear:both;
-    padding-top:5px;
-    /*border-bottom:2px solid pink;*/
-}
-.navigate_a {
-    margin:10px auto;
-    width:1000px;
-    font-size:20px;
-}
 a.nav_a {
     padding:11px 12px;
     color:black;
@@ -76,6 +66,20 @@ a.curr {
     color:red;
     text-decoration:none;
     border-bottom:2px solid #e34220;
+}
+.navigate {
+    clear:both;
+    padding-top:5px;
+    /*border-bottom:2px solid pink;*/
+}
+.navigate_a {
+    margin:10px auto;
+    width:1000px;
+    font-size:20px;
+}
+.navigate_a a {
+    padding:12px 18px;
+    font-size:18px;
 }
 /*=======navigate菜单导航栏========*/
 
@@ -95,7 +99,8 @@ a.curr {
 }
 .nav_hide {
     margin:5px auto;
-    padding:10px 0;
+    padding:11px 0;
+    border-bottom:2px solid pink;
     display:none;
 }
 .imgMiniSize { width:15px; }

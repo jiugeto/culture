@@ -10,6 +10,7 @@ class HomeController extends BaseController
     public function index()
     {
         $result = [
+            'menus'=> $this->list,
             'curr'=> 'home',
         ];
         return view('home.home.index', $result);
