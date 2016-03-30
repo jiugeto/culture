@@ -1,0 +1,33 @@
+/*========== 这里是供应单位样式s(supply) ==========*/
+
+
+/*===== 供应单位面包屑 =====*/
+.s_crumb {
+    padding:5px;
+    width:100%;
+    background:rgb(250,250,250);
+    border-bottom:1px solid lightgrey;
+}
+.s_crumb .crumb {
+    margin:0 auto;
+    width:1000px;
+    color:grey;
+}
+
+
+/*===== 供应单位主体 =====*/
+.s_con {
+    margin:0 auto;
+    width:1000px;
+}
+/*=== 搜索 ===*/
+.s_search {
+    padding:5px 30px;
+    width:100%;
+    background:rgb(250,250,250);
+    border-radius:3px;
+    border:1px solid rgb(240,240,240);
+}
+/*=== 列表 ===*/
+.s_list { width:1000px; }
+.record {}

@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="/assets-home/css/home_body.css">
     <link rel="stylesheet" type="text/css" href="/assets-home/css/product.css">
     <link rel="stylesheet" type="text/css" href="/assets-home/css/creation.css">
+    <link rel="stylesheet" type="text/css" href="/assets-home/css/supply.css">
     <script src="/assets/js/jquery-1.10.2.min.js"></script>
 </head>
 <body>

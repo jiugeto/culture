@@ -16,4 +16,6 @@ Route::group(['namespace'=>'Home'],function(){
     Route::any('product','ProductController@index');
     //在线作品
     Route::any('creation','CreationController@index');
+    //供应单位
+    Route::any('supply','SupplyController@index');
 });
