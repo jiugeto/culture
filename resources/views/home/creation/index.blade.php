@@ -1,31 +1,74 @@
 @extends('home.main')
 @section('content')
-    <div class="content">
-        <!-- 菜单栏 -->
-        <div class="con_tab">
-            <span class="con_tab_menu con_text_color_red">创作视频</span>
-            <span class="con_tab_menu con_text_color">我的收藏</span>
-            <span class="con_tab_menu con_text_color">我的专辑</span>
+    {{-- 在线作品模板 --}}
+    <div class="cre_content">
+        {{-- 用户类型 --}}
+        <div class="cre_kong">&nbsp;{{--10px高度留空--}}</div>
+        <div class="cre_select">
+            <button class="cre_gener">普通用户 | 免费 <img src="/assets-home/images/gener_x.png"></button>
+            <button class="cre_jiantou1">=></button>
+            <button class="cre_per">个人会员 | 免费 <img src="/assets-home/images/person_x.png"></button>
+            <button class="cre_jiantou2">=></button>
+            <button class="cre_com">企业会员 | 免费 <img src="/assets-home/images/company_x.png"></button>
         </div>
-        <!-- 创作窗口 -->
-        <div class="con_create">
-            <div class="con_menu">
-                <span class="con_menu_toggle">菜单显示：</span>
-                <span class="con_menu_list">视频属性</span>
-            </div>
-            <div class="con_win"></div>
-            <div class="con_time">
-                <span class="con_time_menu">时间线</span>
-                <span class="con_time_rand">时长01:00</span>
-                <span class="con_time_voice">声音</span>
-                <div class="con_timeline"></div>
+
+        {{-- 片源类型 --}}
+        <div class="cre_kong">&nbsp;{{--10px高度留空--}}</div>
+        <div class="cre_cate">
+            <p class="title"><b>片源类型</b></p>
+            <div class="cate">
+                <div class="img"><img src="/upload/images/online1.png"></div>
+                <p class="title">体会过副本</p>
+                <p>提货人公分你是他如何规范内部</p>
             </div>
         </div>
-        <!-- 我的收藏窗口 -->
-        <div class="con_collection"></div>
-        <!-- 我的专辑(口袋)窗口 -->
-        <div class="con_pocket"></div>
-        <!-- 空白 -->
-        <div class="content_kongbai">&nbsp;</div>
+
+        {{-- 在线片源 --}}
+        <div class="cre_kong">&nbsp;{{--10px高度留空--}}</div>
+        <div class="cre_source">
+            <div class="source">
+                <div class="title"><b>最新上线</b></div>
+                <div class="cre_con">
+                    <div class="img"><img src="/upload/images/online1.png"></div>
+                    <div class="text">热带风暴VC</div>
+                </div>
+                <div class="cre_con">
+                    <div class="img"><img src="/upload/images/online1.png"></div>
+                    <div class="text">热带风暴VC</div>
+                </div>
+                <div class="cre_con">
+                    <div class="img"><img src="/upload/images/online1.png"></div>
+                    <div class="text">热带风暴VC</div>
+                </div>
+                <div class="cre_con">
+                    <div class="img"><img src="/upload/images/online1.png"></div>
+                    <div class="text">热带风暴VC</div>
+                </div>
+                <div class="cre_con">
+                    <div class="img"><img src="/upload/images/online1.png"></div>
+                    <div class="text">热带风暴VC</div>
+                </div>
+                <div class="cre_con">
+                    <div class="img"><img src="/upload/images/online1.png"></div>
+                    <div class="text">热带风暴VC</div>
+                </div>
+                <div class="cre_con">
+                    <div class="img"><img src="/upload/images/online1.png"></div>
+                    <div class="text">热带风暴VC</div>
+                </div>
+                <div class="cre_con">
+                    <div class="img"><img src="/upload/images/online1.png"></div>
+                    <div class="text">热带风暴VC</div>
+                </div>
+                <div class="cre_con">
+                    <div class="img"><img src="/upload/images/online1.png"></div>
+                    <div class="text">热带风暴VC</div>
+                </div>
+                <div class="cre_con">
+                    <div class="img"><img src="/upload/images/online1.png"></div>
+                    <div class="text">热带风暴VC</div>
+                </div>
+            </div>
+        </div>
     </div>
 @stop

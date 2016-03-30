@@ -1,83 +1,84 @@
-/*============创作窗口============*/
+/*========== 这里是在线作品样式 ==========*/
 
 
-/*=======tab菜单列表======*/
-.con_tab {
-    margin-bottom:5px;
-    width:1000px;height:35px;
-    background:rgb(230,230,230);
+.cre_content {
+    margin:0 auto;
+    width:1000px;
 }
-.con_tab_menu {
-    padding:23px;
-    position:relative;top:9px;
+.cre_kong { width:100%;height:10px;clear:both; }
+
+
+/*===== 用户类型 =====*/
+.cre_select {
+    width:100%;height:100px;
+    background:rgb(250,250,250);
 }
-.con_text_color {
+.cre_select img { width:20px;position:relative;top:4px; }
+.cre_gener,.cre_per,.cre_com {
+    padding:10px 20px;
+    text-align:center;
+    border:1px solid rgb(220,220,220);
+    background:white;
+    font-size:20px;
+    font-family:'微软雅黑';
     color:grey;
+    cursor:pointer;
+    float:left;
 }
-.con_text_color_red {
-    color:white;
-    background:#434a54;
+.cre_gener { position:relative;top:25px;left:100px; }
+.cre_per { position:relative;top:25px;left:200px; }
+.cre_com { position:relative;top:25px;left:300px; }
+.cre_jiantou1,.cre_jiantou2 {
+    border:0;
+    background:0;
+    color:lightgrey;
+    font-size:15px;
 }
-/*=======tab菜单列表======*/
+.cre_jiantou1 { position:relative;top:35px;left:-270px; }
+.cre_jiantou2 { position:relative;top:35px;left:0; }
 
-/*=======窗口菜单======*/
-.con_menu {
-    width:1000px;height:32px;
-}
-.con_menu_toggle {
-    padding:8px 15px;
-    color:white;
-    position:relative;top:7px;
-    background:black;
-}
-.con_menu_list {
-    padding:5px;
-    color:grey;
-    border:1px solid grey;
-    position:relative;top:7px;
-}
-/*=======窗口菜单======*/
 
-/*=======创作窗口======*/
-.con_create {
-    width:1000px;height:610px;
-    background:#434a54;
+/*===== 片源类型 =====*/
+.cre_cate,.cre_source {
+    width:100%;height:265px;
+    background:rgb(250,250,250);
 }
-.con_win {      /*制作窗口*/
-    width:1000px;height:562.5px;
-    background:lightgrey;
+.cre_cate .cate {
+    width:248px;height:228px;
+    border:1px solid rgb(240,240,240);
+    float:left;
+}
+.cre_cate .img {
+    margin:20px auto;
+    width:150px;height:120px;
     overflow:hidden;
 }
-/*=====创作窗口z-index：100-1000=====*/
-.con_time {
-    width:1000px;height:37.5px;
-    background:black;
-}
-.con_time_menu {
-    padding:10px 15px;
-    color:white;
-    background:#434a54;
-    position:relative;top:9px;
-}
-.con_timeline {
-    width:780px;height:36px;
-    background:blue;
-    position:relative;bottom:18px;left:75px;
-}
-.con_time_rand {
+.cre_cate img { width:200px; }
+.cre_cate p {
+    margin:10px 40px;
+    text-align:center;
     color:grey;
-    position:relative;top:10px;left:780px;
+    font-size:12px;
 }
-.con_time_voice {
-    color:grey;
-    position:relative;top:10px;left:790px;
+.cre_cate p.title { font-size:18px; }
+
+
+/*===== 在线片源 =====*/
+.cre_source { width:100%;border:1px solid rgb(240,240,240); }
+.cre_source .source,.cre_source .title { width:990px; }
+.source {
+    padding:10px 4px;
+    height:300px;
 }
-/*=======创作窗口======*/
-
-/*=======收藏窗口======*/
-.con_collection {}
-/*=======收藏窗口======*/
-
-/*=======专辑(口袋)窗口======*/
-.con_pocket {}
-/*=======专辑(口袋)窗口======*/
+.source .title { padding:0 5px; }
+.source .cre_con {
+    margin:3px;
+    width:192px;
+    float:left;
+}
+.source .img {
+    width:192px;height:110px;
+    overflow:hidden;
+}
+.source img { height:200px; }
+.cre_cate text { margin:0 auto;width:100%; }

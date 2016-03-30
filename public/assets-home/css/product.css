@@ -5,7 +5,7 @@
 .pro_content {
     margin:0 auto;
     width:1000px;
-    position:relative;top:120px;
+    /*position:relative;top:120px;*/
 }
 .pro_ad { width:100%;height:300px; }
 .pro_ad_pic {

@@ -7,7 +7,7 @@
     height:400px;
     overflow:hidden;
     background:pink;
-    position:relative;top:168px;
+    position:relative;top:45px;
 }
 .ppt_pic { width:3840px; }
 .ppt_pic li { list-style:none;float:left;position:relative;left:-40px;top:-15px; }

@@ -98,7 +98,7 @@ a.curr {
     position:fixed;z-index:115;top:88px;left:200px;
 }
 .nav_hide {
-    margin:5px auto;
+    margin:2px auto;
     padding:11px 0;
     border-bottom:2px solid pink;
     display:none;

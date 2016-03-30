@@ -332,8 +332,5 @@
             <div class=""></div>
         </div>
         <br style="clear:both;"><br>
-
-        <!-- 空白 -->
-        <div class="content_kongbai">&nbsp;</div>
     </div>
 @stop
