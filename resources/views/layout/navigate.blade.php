@@ -26,7 +26,7 @@
             </div>
         </div>
         <form action="" class="search">
-            <input type="text" class="global_search" name="global_search" placeholder="&nbsp;&nbsp;&nbsp;想要啥效果，赶紧找哦">
+            <input type="text" class="global_search" name="global_search" placeholder="想要啥效果，赶紧找哦">
             <input type="submit" class="global_search_text" value="搜 索">
         </form>
         <div class="key_word">搜索关键词：</div>

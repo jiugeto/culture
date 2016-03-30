@@ -10,8 +10,11 @@
 }
 .s_crumb .crumb {
     margin:0 auto;
-    width:1000px;
+    width:1000px;height:25px;
+}
+.s_crumb .right {
     color:grey;
+    float:right;
 }
 
 
@@ -20,14 +23,33 @@
     margin:0 auto;
     width:1000px;
 }
+
 /*=== 搜索 ===*/
 .s_search {
-    padding:5px 30px;
-    width:100%;
+    padding:10px 30px;
+    width:938px;
     background:rgb(250,250,250);
     border-radius:3px;
     border:1px solid rgb(240,240,240);
 }
+
 /*=== 列表 ===*/
-.s_list { width:1000px; }
-.record {}
+.s_list { width:730px; }
+.record {
+    margin:10px 0;
+    padding:10px;
+    width:708px;
+    border:1px solid rgb(230,230,230);
+    border-radius:3px;
+}
+.record td {
+    padding:5px;
+    width:226px;
+}
+
+.s_right {
+    width:280px;height:500px;
+    overflow:hidden;
+    /*position:absolute;top:225px;right:0;*/
+}
+.s_right { height:500px; }

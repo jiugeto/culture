@@ -112,6 +112,7 @@ a.curr {
     position:relative;z-index:110;top:10px;left:100px;
 }
 .global_search {
+    padding-left:20px;
     width:250px;height:40px;
     border:2px solid #e34220;
 }

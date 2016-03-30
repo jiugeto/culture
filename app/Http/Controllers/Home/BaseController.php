@@ -14,7 +14,7 @@ class BaseController extends Controller
         'home'=> '首 页',
         'product'=> '产品样片',
         'creation'=> '在线作品',
-        'supply'=> '供应单位',
+        'supply'=> '供应企业',
         'demand'=> '需求信息',
         'entertain'=> '娱乐频道',
         'rent'=> '租赁频道',

@@ -1,9 +1,9 @@
 @extends('home.main')
 @section('content')
-    {{-- 供应单位模板 --}}
+    {{-- 需求信息模板 --}}
     <div class="s_crumb">
         <div class="crumb">
-            <div class="right">首页 / 供应企业</div>
+            <div class="right">首页 / 需求信息</div>
         </div>
     </div>
 
@@ -22,33 +22,9 @@
         <div class="s_list">
             <table class="record">
                 <tr>
-                    <td>公司名称：</td>
+                    <td>需求片名：</td>
                     <td>地址：</td>
-                    <td>职能：</td>
-                </tr>
-                <tr>
-                    <td>地区：</td>
-                    <td>时间：</td>
-                    <td></td>
-                </tr>
-            </table>
-            <table class="record">
-                <tr>
-                    <td>公司名称：</td>
-                    <td>地址：</td>
-                    <td>职能：</td>
-                </tr>
-                <tr>
-                    <td>地区：</td>
-                    <td>时间：</td>
-                    <td></td>
-                </tr>
-            </table>
-            <table class="record">
-                <tr>
-                    <td>公司名称：</td>
-                    <td>地址：</td>
-                    <td>职能：</td>
+                    <td>需求方：</td>
                 </tr>
                 <tr>
                     <td>地区：</td>

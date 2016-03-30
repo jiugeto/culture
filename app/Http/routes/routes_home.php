@@ -18,4 +18,14 @@ Route::group(['namespace'=>'Home'],function(){
     Route::any('creation','CreationController@index');
     //供应单位
     Route::any('supply','SupplyController@index');
+    //需求信息
+    Route::any('demand','DemandController@index');
+    //娱乐频道
+    Route::any('entertain','EntertainController@index');
+    //租赁频道
+    Route::any('rent','RentController@index');
+    //设计频道
+    Route::any('design','DesignController@index');
+    //关于我们
+    Route::any('about','AboutController@index');
 });
