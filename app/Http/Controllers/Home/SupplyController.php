@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Home;
 class SupplyController extends BaseController
 {
     /**
-     * 网站前台创作窗口
+     * 网站前台供应企业
      */
 
     public function index()

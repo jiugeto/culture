@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Home;
 class DemandController extends BaseController
 {
     /**
-     * 网站前台创作窗口
+     * 网站前台需求信息
      */
 
     public function index()
