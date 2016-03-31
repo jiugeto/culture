@@ -3,7 +3,7 @@
     {{-- 需求信息模板 --}}
     <div class="s_crumb">
         <div class="crumb">
-            <div class="right">首页 / 需求信息</div>
+            <div class="right">首页 / 租赁频道</div>
         </div>
     </div>
 
@@ -11,28 +11,42 @@
         {{-- 搜索 --}}
         <div class="cre_kong">&nbsp;{{--10px高度留空--}}</div>
         <div class="s_search">
-            搜索：
-            <select name="">
-                <option value="0">-请选择-</option>
+            租赁供求：
+            <select name="genre">
+                <option value="0" {{ $genre==0 ? 'selected' : '' }}>-请选择-</option>
+                <option value="1" {{ $genre==1 ? 'selected' : '' }}>设备供应</option>
+                <option value="2" {{ $genre==2 ? 'selected' : '' }}>设备需求</option>
             </select>
+            <script>
+                $(document).ready(function(){
+                    var genre = $("select[name='genre']");
+                    genre.change(function(){
+                        if(genre.val()==0){
+                            window.location.href = '/rent';
+                        } else {
+                            //SD就是SupplyDemand
+                            window.location.href = '/rent/SD/'+genre.val();
+                        }
+                    });
+                });
+            </script>
         </div>
 
         {{-- 列表 --}}
         <div class="cre_kong">&nbsp;{{--10px高度留空--}}</div>
-        <div class="r_list">
+        <div class="s_list">
             <table class="record">
                 <tr>
-                    <td rowspan="2" class="img"><img src="/upload/images/online1.png"></td>
-                </tr>
-                <tr>
+                    <td rowspan="2" class="td_r_img">
+                        <div class="r_img"><img src="/upload/images/online1.png"></div>
+                    </td>
                     <td>设备名称：</td>
-                    <td>租赁公司：</td>
-                    <td>公司地址：</td>
+                    <td>供求关系：</td>
                 </tr>
                 <tr>
+                    <td>租赁公司：</td>
                     <td>地区：</td>
-                    <td>时间：</td>
-                    <td></td>
+                    <td>公司地址：</td>
                 </tr>
             </table>
         </div>

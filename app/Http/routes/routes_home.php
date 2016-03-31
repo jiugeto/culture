@@ -23,6 +23,7 @@ Route::group(['namespace'=>'Home'],function(){
     //娱乐频道
     Route::any('entertain','EntertainController@index');
     //租赁频道
+    Route::any('rent/SD/{genre}','RentController@index');
     Route::any('rent','RentController@index');
     //设计频道
     Route::any('design','DesignController@index');

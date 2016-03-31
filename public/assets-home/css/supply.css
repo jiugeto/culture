@@ -82,7 +82,14 @@
 }
 .e_list p.title { font-size:18px; }
 /*租赁列表rent*/
-.r_list td.img {}
+.s_list .td_r_img {
+    width:60px;height:60px;
+}
+.s_list .r_img {
+    margin:0 auto;
+    width:50px;height:50px;
+    overflow:hidden;
+}
 
 /*=== 广告 ===*/
 /*供应广告supply*/

@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Home;
 
-class RentController extends BaseController
+class DesignController extends BaseController
 {
     /**
      * 网站前台租赁频道
@@ -11,9 +11,9 @@ class RentController extends BaseController
     {
         $result = [
             'menus'=> $this->list,
-            'curr'=> 'rent',
+            'curr'=> 'design',
             'genre'=> $genre,
         ];
-        return view('home.rent.index', $result);
+        return view('home.design.index', $result);
     }
 }
