@@ -47,7 +47,10 @@
         <div class="de_right">
             <div class="cate">
                 <div class="title">分类信息</div>
-                <div class="con"></div>
+                <div class="con">
+                    <div class="de_con"><div></div>视频</div>
+                    <div class="de_con"><div></div>平面</div>
+                </div>
             </div>
             <div class="img"><img src="/upload/images/ppt.png"></div>
         </div>

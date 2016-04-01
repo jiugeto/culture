@@ -36,7 +36,18 @@
     border:1px solid rgb(240,240,240);
     background:rgb(250,250,250);
 }
-.de_right .title { padding:5px; }
+.de_right .title { padding:10px; }
+.de_right .cate .con div.de_con {
+    margin:0 10px;
+    padding:10px 0;
+    border-bottom:1px dashed lightgrey;
+}
+.de_right .cate .con div.de_con div {
+    margin:8px 10px;
+    width:7px;height:7px;
+    background:grey;
+    float:left;
+}
 .de_right .img {
     margin:10px 0;
     width:260px;height:500px;

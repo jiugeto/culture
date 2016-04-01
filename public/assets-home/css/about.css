@@ -1,0 +1,9 @@
+/*========== 这里是关于我们样式a(about) ==========*/
+
+
+.a_con {
+    margin:0 auto;
+    width:1000px;height:1000px;
+    border-left:1px solid lightgrey;
+    border-right:1px solid lightgrey;
+}
