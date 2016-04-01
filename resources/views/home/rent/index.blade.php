@@ -51,6 +51,7 @@
             </table>
         </div>
         <div class="s_right">
+            <div class="cate"></div>
             <img src="/upload/images/ppt.png">
         </div>
     </div>
