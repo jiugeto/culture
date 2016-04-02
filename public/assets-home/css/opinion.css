@@ -42,3 +42,12 @@
     background:orangered;
 }
 .opinion_list .record a:hover { background:darkred; }
+/*发布意见按钮*/
+.s_search a.opinion_create {
+    padding:5px 20px;
+    color:white;
+    text-decoration:none;
+    background:red;
+    /*position:absolute;right:0;*/
+}
+.s_search a:hover.opinion_create { background:darkred; }

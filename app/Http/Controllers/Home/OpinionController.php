@@ -20,6 +20,7 @@ class OpinionController extends BaseController
             'datas'=> $this->query($status),
             'menus'=> $this->list,
             'curr'=> 'opinion',
+            'status'=> $status,
         ];
         return view('home.opinion.index', $result);
     }

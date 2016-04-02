@@ -166,7 +166,8 @@ a.curr {
 .content {
     margin:0 auto;
     width:1000px;
-    position:relative;top:180px;
+    /*position:relative;top:180px;*/
+    position:relative;top:80px;
 }
 .content_kongbai {
     margin:5px 0;
