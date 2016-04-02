@@ -45,12 +45,13 @@ body {
 }
 .nav_body div { float:left; }
 .nav_right {
-    position:relative;top:-20px;left:450px;
+    position:absolute;top:50px;right:200px;
 }
 .nav_right a {
     color:black;
     text-decoration:none;
 }
+.nav_right a:hover { text-decoration:underline; }
 .logo { width:200px; }
 a.nav_a {
     padding:11px 12px;
@@ -81,6 +82,7 @@ a.curr {
     padding:12px 18px;
     font-size:18px;
 }
+/*用户对本站的意见栏*/
 /*=======navigate菜单导航栏========*/
 
 /*=======切换========*/
@@ -104,12 +106,16 @@ a.curr {
     display:none;
 }
 .imgMiniSize { width:15px; }
+.opinion {
+    padding:5px 20px;
+    color:white;
+    background:red;
+}
 /*=======切换========*/
 
 /*=======search搜索========*/
 .search {
-    /*margin:0 auto;*/
-    position:relative;z-index:110;top:10px;left:100px;
+    position:relative;z-index:110;top:10px;left:120px;
 }
 .global_search {
     padding-left:20px;
@@ -130,6 +136,28 @@ a.curr {
     font-size:14px;
     color:grey;
     position:relative;top:10px;left:100px;
+}
+.search_input {
+    padding-left:20px;
+    width:250px;height:40px;
+    border:2px solid #e34220;
+}
+.search_text {
+    width:100px;height:46px;
+    border:2px solid #e34220;
+    color:white;
+    font-size:20px;
+    font-family:'黑体';
+    background:#e34220;
+    position:relative;top:2px;left:-8px;
+    cursor:pointer;
+}
+.keyword_pos {
+    width:370px;height:30px;
+    font-size:14px;
+    color:grey;
+    overflow:hidden;
+    position:relative;top:60px;left:-250px;
 }
 /*=======search搜索========*/
 

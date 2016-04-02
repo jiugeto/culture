@@ -1,5 +1,6 @@
 @extends('home.main')
 @section('content')
+    @include('home.common.crumb')
     {{-- 在线作品模板 --}}
     <div class="cre_content">
         {{-- 用户类型 --}}

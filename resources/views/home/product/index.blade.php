@@ -1,5 +1,7 @@
 @extends('home.main')
 @section('content')
+    @include('home.common.crumb')
+    <br>
     <div class="pro_content">
         {{-- 产品广告位 --}}
         <div class="pro_ad">

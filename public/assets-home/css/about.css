@@ -1,9 +1,15 @@
 /*========== 这里是关于我们样式a(about) ==========*/
 
 
-.a_con {
+.about_con {
     margin:0 auto;
-    width:1000px;height:1000px;
-    border-left:1px solid lightgrey;
-    border-right:1px solid lightgrey;
+    width:1000px;
+    /*border-left:1px solid lightgrey;*/
+    /*border-right:1px solid lightgrey;*/
 }
+.about_con h3 {
+    padding:10px;
+    text-align:center;
+    border-bottom:1px solid lightgrey;
+}
+.about_con p { text-indent:2em; }
