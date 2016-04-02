@@ -1,0 +1,44 @@
+/*========== 这里是关于我们样式a(about) ==========*/
+
+
+.opinion_con {
+    margin:0 auto;
+    width:1000px;
+}
+
+
+/*=== 列表 ===*/
+/*意见列表opinion*/
+.opinion_list { width:100%; }
+.opinion_list .record {
+    margin:10px 0;
+    padding:10px;
+    width:998px;
+    border:1px solid rgb(230,230,230);
+    border-radius:3px;
+}
+/*.opinion_list td {*/
+    /*text-align:center;*/
+    /*border:1px solid red;*/
+/*}*/
+.opinion_list .text {
+    padding-left:10px;
+    text-align:left;
+}
+.opinion_list .first { width:70px; }
+.opinion_list .first div {
+    margin:5px;
+    padding-right:20px;
+    width:60px;height:40px;
+    border-right:1px solid lightgrey;
+    overflow:hidden;
+}
+.opinion_list .first img { width:60px; }
+.opinion_list .record .detail { width:120px; }
+.opinion_list .record a {
+    padding:5px 20px;
+    color:white;
+    text-decoration:none;
+    background:orangered;
+}
+.opinion_list .record a:hover { background:darkred; }

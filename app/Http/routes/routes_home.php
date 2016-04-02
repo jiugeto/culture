@@ -30,5 +30,6 @@ Route::group(['namespace'=>'Home'],function(){
     //关于我们
     Route::any('about','AboutController@index');
     //用户对本站的意见栏
+    Route::get('{genre}/opinion','OpinionController@index');
     Route::any('opinion','OpinionController@index');
 });

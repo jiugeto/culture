@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="/assets-home/css/supply.css">
     <link rel="stylesheet" type="text/css" href="/assets-home/css/design.css">
     <link rel="stylesheet" type="text/css" href="/assets-home/css/about.css">
+    <link rel="stylesheet" type="text/css" href="/assets-home/css/opinion.css">
     <script src="/assets/js/jquery-1.10.2.min.js"></script>
 </head>
 <body>
