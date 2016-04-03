@@ -24,7 +24,7 @@ class DesignController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'datas'=> $this->query($del=0),
             'prefix_url'=> '/admin/design',
             'crumb'=> $this->crumb,
@@ -38,7 +38,7 @@ class DesignController extends BaseController
         $curr['name'] = $this->crumb['trash']['name'];
         $curr['url'] = $this->crumb['trash']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'datas'=> $this->query($del=0),
             'prefix_url'=> '/admin/design/trash',
             'crumb'=> $this->crumb,
@@ -52,7 +52,7 @@ class DesignController extends BaseController
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'types'=> $this->model->types(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -73,7 +73,7 @@ class DesignController extends BaseController
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'types'=> $this->model->types(),
             'data'=> DesignModel::find($id),
             'crumb'=> $this->crumb,
@@ -97,7 +97,7 @@ class DesignController extends BaseController
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'data'=> $data,
             'crumb'=> $this->crumb,
             'curr'=> $curr,

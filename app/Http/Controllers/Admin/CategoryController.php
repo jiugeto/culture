@@ -23,7 +23,7 @@ class CategoryController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'datas'=> $this->query(),
             'prefix_url'=> '/admin/category',
             'crumb'=> $this->crumb,
@@ -37,7 +37,7 @@ class CategoryController extends BaseController
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'pcates'=> CategoryModel::where('pid', 0)->get(),      //暂时父级pid==0
             'types'=> $this->model->getTypes(),
             'crumb'=> $this->crumb,
@@ -58,7 +58,7 @@ class CategoryController extends BaseController
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'data'=> CategoryModel::find($id),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -79,7 +79,7 @@ class CategoryController extends BaseController
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'data'=> CategoryModel::find($id),
             'crumb'=> $this->crumb,
             'curr'=> $curr,

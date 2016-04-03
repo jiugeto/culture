@@ -42,18 +42,51 @@
                     <td class="first"><div><img src="/uploads/images/2016/online1.png"></div></td>
                     <td class="text">意见标题：{{ $data->name }}</td>
                     <td class="text">状态：{{ $data->status() }}</td>
-                    <td class="text">回复：{{ $data->reply() }}</td>
+                    <td class="text">回复：{{ count($data->replyModels()) }}
+                        {{--{{ $data->reply==0 ? 0 : $data->reply() }}--}}
+                    </td>
                     <td class="text">发布时间：{{ $data->created_at }}</td>
                     <td class="detail">
                         <a href="/opinion/{{$data->id}}">查看</a>
-                        <a href="/opinion/{{$data->id}}/edit">修改</a>
+                        @if($data->status==1)
+                            <a href="/opinion/{{$data->id}}/edit">修改</a>
+                        @elseif($data->status==4)
+                            <a href="/opinion/create/{{$data->id}}">回复</a>
+                        @endif
                     </td>
                 </tr>
+                @if($data->reply)
+                    <tr><td colspan="10">
+                            <div class="div_hr">
+                                <span class="open">展开</span>
+                                <span class="close" style="display:none;">合起</span>
+                                {{ count($data->replyModels()) }}
+                            </div>
+                        </td></tr>
+                    @foreach($data->replyModels as $replyModel)
+                    <tr class="reply" style="display:none;">
+                        <td>&nbsp;</td>
+                        <td class="text">意见标题：{{ $replyModel->name }}</td>
+                        <td class="text">状态：{{ $replyModel->status() }}</td>
+                        <td class="text">发布时间：{{ $data->created_at }}</td>
+                        <td class="detail">
+                            <a href="/opinion/{{$replyModel->id}}">查看</a>
+                        </td>
+                    </tr>
+                    @endforeach
+                    <script>
+                        $(document).ready(function(){
+                            $(".open").toggle();
+                            $(".close").toggle();
+                            $(".reply").toggle();
+                        });
+                    </script>
+                @endif
             </table>
                 @endforeach
             @else
             <table class="record">
-                <tr><td colspan="10" style="text-align:center;">没有记录</td></tr>
+                <tr><td colspan="10" class="center">没有记录</td></tr>
             </table>
             @endif
 

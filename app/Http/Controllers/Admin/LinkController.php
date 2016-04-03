@@ -24,7 +24,7 @@ class LinkController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'types'=> $this->model->type(),
             'datas'=> LinkModel::paginate($this->limit),
             'prefix_url'=> '/admin/link',
@@ -39,7 +39,7 @@ class LinkController extends BaseController
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'plinks'=> LinkModel::where('pid',0)->get(),      //得到父链接
             'types'=> $this->model->type(),
             'pics'=> $this->model->pic(),
@@ -62,7 +62,7 @@ class LinkController extends BaseController
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
         $result =[
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'plinks'=> LinkModel::where('pid',0)->get(),      //得到父链接
             'types'=> $this->model->type(),
             'pics'=> $this->model->pic(),
@@ -90,7 +90,7 @@ class LinkController extends BaseController
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'data'=> $data,
             'crumb'=> $this->crumb,
             'curr'=> $curr,

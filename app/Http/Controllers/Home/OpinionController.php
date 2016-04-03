@@ -28,8 +28,10 @@ class OpinionController extends BaseController
         return view('home.opinion.index', $result);
     }
 
-    public function create($isreply=0)
+    public function create($reply=0)
     {
+        //如果 reply 是0。则无此记录，为新意见 isreply==0 ，否则是 isreply==1
+        if (OpinionModel::find($reply)) { $isreply = 1; }else{ $isreply = 0; }
         $this->list['create'] = '发布意见';
         $result = [
             'menus'=> $this->list,
@@ -73,7 +75,6 @@ class OpinionController extends BaseController
     {
         $data = $this->getData($request,$id);
         $data['updated_at'] = date('Y-m-d', time());
-        dd($data);
         OpinionModel::where('id',$id)->update($data);
         return redirect('/opinion');
     }
@@ -171,7 +172,7 @@ class OpinionController extends BaseController
                 ])
                 ->where('status',5)
                 ->paginate($this->limit);
-        } else { $datas = []; }
+        }
         return $datas;
     }
 }

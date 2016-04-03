@@ -24,7 +24,7 @@ class RoleController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'datas'=> RoleModel::paginate($this->limit),
             'prefix_url'=> '/admin/role',
             'crumb'=> $this->crumb,
@@ -38,7 +38,7 @@ class RoleController extends BaseController
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'roles'=> RoleModel::paginate($this->limit),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -50,7 +50,7 @@ class RoleController extends BaseController
 
     public function store(Request $request)
     {
-        $actions = $this->actions();
+//        $actions = $this->actions();
         $roleModel = $this->getData($request);
         $roleModel->created_at = date('Y-m-d H:m:s', time());
         $roleModel->save();

@@ -26,7 +26,7 @@ class AdminController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'datas'=> RoleModel::paginate($this->limit),
             'prefix_url'=> '/admin/admin',
             'crumb'=> $this->crumb,

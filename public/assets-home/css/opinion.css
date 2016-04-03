@@ -36,7 +36,7 @@
 .opinion_list .first img { width:60px; }
 .opinion_list .record .detail { width:180px; }
 .opinion_list .record a {
-    margin:0 5px;
+    /*margin:0 5px;*/
     padding:5px 20px;
     color:white;
     text-decoration:none;

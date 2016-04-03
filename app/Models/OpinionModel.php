@@ -23,9 +23,14 @@ class OpinionModel extends BaseModel
 
     public function reply()
     {
-        if ($this->reply_id) {
-            $replys = explode(',',$this->reply_id);
+        return $this->hasOne('\App\Models\OpinionModel','id','reply');
+    }
+
+    public function replyModels()
+    {
+        if ($this->reply) {
+            $opinions = OpinionModel::where('id',$this->reply)->get();
         }
-        return isset($replys) ? count($replys) : 0;
+        return isset($opinions) ? $opinions : [];
     }
 }

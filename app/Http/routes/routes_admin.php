@@ -71,4 +71,6 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
         //广告位管理
     Route::get('place/create','AdPlaceController@create');
     Route::resource('place','AdPlaceController');
+        //用户意见管理
+    Route::resource('opinions','OpinionsController');
 });

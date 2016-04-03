@@ -23,7 +23,7 @@ class PicController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'types'=> $this->model->type(),
             'datas'=> PicModel::paginate($this->limit),
             'prefix_url'=> '/admin/pic',
@@ -38,7 +38,7 @@ class PicController extends BaseController
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'types'=> $this->model->type(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -59,7 +59,7 @@ class PicController extends BaseController
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'types'=> $this->model->type(),
             'data'=> PicModel::find($id),
             'crumb'=> $this->crumb,

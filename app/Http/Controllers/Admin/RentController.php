@@ -23,7 +23,7 @@ class RentController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'datas'=> $this->query($del=0),
             'prefix_url'=> '/admin/rent',
             'crumb'=> $this->crumb,
@@ -37,7 +37,7 @@ class RentController extends BaseController
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'data'=> RentModel::find($id),
             'crumb'=> $this->crumb,
             'curr'=> $curr,

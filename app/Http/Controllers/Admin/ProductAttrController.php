@@ -23,7 +23,7 @@ class ProductAttrController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'datas'=> $this->query(0),
             'prefix_url'=> '/admin/productattr',
             'crumb'=> $this->crumb,
@@ -37,7 +37,7 @@ class ProductAttrController extends BaseController
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'types'=> $this->model->getTypes(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,

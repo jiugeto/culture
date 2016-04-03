@@ -27,7 +27,7 @@ class AdPlaceController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'datas'=> $datas,
             'prefix_url'=> '/admin/place',
             'crumb'=> $this->crumb,
@@ -41,7 +41,7 @@ class AdPlaceController extends BaseController
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'types'=> $this->model->getTypes(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -56,7 +56,7 @@ class AdPlaceController extends BaseController
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'types'=> $this->model->type(),
             'data'=> AdPlaceModel::find($id),
             'crumb'=> $this->crumb,
@@ -72,7 +72,7 @@ class AdPlaceController extends BaseController
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'data'=> AdPlaceModel::find($id),
             'crumb'=> $this->crumb,
             'curr'=> $curr,

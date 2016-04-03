@@ -38,7 +38,7 @@ class VideoController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'datas'=> $this->query(0),
             'cate'=> $this->model->cate(),
             'prefix_url'=> '/admin/video',
@@ -53,7 +53,7 @@ class VideoController extends BaseController
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'cates'=> VideoCategoryModel::all(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -73,7 +73,7 @@ class VideoController extends BaseController
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'cates'=> VideoCategoryModel::all(),
             'data'=> VideoModel::find($id),
             'crumb'=> $this->crumb,
@@ -95,7 +95,7 @@ class VideoController extends BaseController
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'data'=> VideoModel::find($id),
             'crumb'=> $this->crumb,
             'curr'=> $curr,

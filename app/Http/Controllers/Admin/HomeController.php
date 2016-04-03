@@ -11,7 +11,6 @@ class HomeController extends BaseController
 
     public function index()
     {
-        $actions = $this->actions();
-        return view('admin.home', compact('actions'));
+        return view('admin.home');
     }
 }

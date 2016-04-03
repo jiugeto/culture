@@ -24,7 +24,7 @@ class TypeController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'datas'=> $this->query($table_id),
             'prefix_url'=> '/admin/type',
             'table_id'=> $table_id,
@@ -46,7 +46,7 @@ class TypeController extends BaseController
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'table_name'=> $tablename,
             'field'=> $field,
             'crumb'=> $this->crumb,
@@ -67,7 +67,7 @@ class TypeController extends BaseController
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'data'=> TypeModel::find($id),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -88,7 +88,7 @@ class TypeController extends BaseController
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'data'=> TypeModel::find($id),
             'crumb'=> $this->crumb,
             'curr'=> $curr,

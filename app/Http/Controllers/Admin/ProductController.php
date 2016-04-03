@@ -37,7 +37,7 @@ class ProductController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'cssList'=> $this->model->cssList(),
             'jsList'=> $this->model->jsList(),
             'datas'=> $this->query(0),
@@ -53,7 +53,7 @@ class ProductController extends BaseController
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'cssList'=> $this->model->cssList(),
             'jsList'=> $this->model->jsList(),
             'crumb'=> $this->crumb,
@@ -78,7 +78,7 @@ class ProductController extends BaseController
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'data'=> $data,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -102,7 +102,7 @@ class ProductController extends BaseController
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'data'=> $data,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -115,7 +115,7 @@ class ProductController extends BaseController
         $curr['name'] = $this->crumb['trash']['name'];
         $curr['url'] = $this->crumb['trash']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];

@@ -27,7 +27,7 @@ class AdController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'datas'=> $datas,
             'prefix_url'=> '/admin/ad',
             'crumb'=> $this->crumb,

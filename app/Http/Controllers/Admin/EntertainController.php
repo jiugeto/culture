@@ -23,7 +23,7 @@ class EntertainController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'datas'=> $this->query($del=0),
             'prefix_url'=> '/admin/entertain',
             'crumb'=> $this->crumb,
@@ -37,7 +37,7 @@ class EntertainController extends BaseController
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -58,7 +58,7 @@ class EntertainController extends BaseController
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'data'=> $data,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -79,7 +79,7 @@ class EntertainController extends BaseController
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
         $result = [
-            'actions'=> $this->actions(),
+//            'actions'=> $this->actions(),
             'data'=> EntertainModel::find($id),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
