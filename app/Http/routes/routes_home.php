@@ -30,8 +30,8 @@ Route::group(['namespace'=>'Home'],function(){
     //关于我们
     Route::any('about','AboutController@index');
     //用户对本站的意见栏
-    Route::any('opinion/create/{reply}','OpinionController@create');
-    Route::any('opinion/create','OpinionController@create');
-    Route::any('{status}/opinion','OpinionController@index');
-    Route::any('opinion','OpinionController@index');
+    Route::get('opinion/create/{reply}','OpinionController@create');
+    Route::get('opinion/create','OpinionController@create');
+    Route::get('{status}/opinion','OpinionController@index');
+    Route::resource('opinion','OpinionController');
 });

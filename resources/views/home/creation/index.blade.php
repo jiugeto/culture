@@ -18,7 +18,7 @@
         <div class="cre_cate">
             <p class="title"><b>片源类型</b></p>
             <div class="cate">
-                <div class="img"><img src="/upload/images/online1.png"></div>
+                <div class="img"><img src="/uploads/images/2016/online1.png"></div>
                 <p class="title">体会过副本</p>
                 <p>提货人公分你是他如何规范内部</p>
             </div>
@@ -30,43 +30,43 @@
             <div class="source">
                 <div class="title"><b>最新上线</b></div>
                 <div class="cre_con">
-                    <div class="img"><img src="/upload/images/online1.png"></div>
+                    <div class="img"><img src="/uploads/images/2016/online1.png"></div>
                     <div class="text">热带风暴VC</div>
                 </div>
                 <div class="cre_con">
-                    <div class="img"><img src="/upload/images/online1.png"></div>
+                    <div class="img"><img src="/uploads/images/2016/online1.png"></div>
                     <div class="text">热带风暴VC</div>
                 </div>
                 <div class="cre_con">
-                    <div class="img"><img src="/upload/images/online1.png"></div>
+                    <div class="img"><img src="/uploads/images/2016/online1.png"></div>
                     <div class="text">热带风暴VC</div>
                 </div>
                 <div class="cre_con">
-                    <div class="img"><img src="/upload/images/online1.png"></div>
+                    <div class="img"><img src="/uploads/images/2016/online1.png"></div>
                     <div class="text">热带风暴VC</div>
                 </div>
                 <div class="cre_con">
-                    <div class="img"><img src="/upload/images/online1.png"></div>
+                    <div class="img"><img src="/uploads/images/2016/online1.png"></div>
                     <div class="text">热带风暴VC</div>
                 </div>
                 <div class="cre_con">
-                    <div class="img"><img src="/upload/images/online1.png"></div>
+                    <div class="img"><img src="/uploads/images/2016/online1.png"></div>
                     <div class="text">热带风暴VC</div>
                 </div>
                 <div class="cre_con">
-                    <div class="img"><img src="/upload/images/online1.png"></div>
+                    <div class="img"><img src="/uploads/images/2016/online1.png"></div>
                     <div class="text">热带风暴VC</div>
                 </div>
                 <div class="cre_con">
-                    <div class="img"><img src="/upload/images/online1.png"></div>
+                    <div class="img"><img src="/uploads/images/2016/online1.png"></div>
                     <div class="text">热带风暴VC</div>
                 </div>
                 <div class="cre_con">
-                    <div class="img"><img src="/upload/images/online1.png"></div>
+                    <div class="img"><img src="/uploads/images/2016/online1.png"></div>
                     <div class="text">热带风暴VC</div>
                 </div>
                 <div class="cre_con">
-                    <div class="img"><img src="/upload/images/online1.png"></div>
+                    <div class="img"><img src="/uploads/images/2016/online1.png"></div>
                     <div class="text">热带风暴VC</div>
                 </div>
             </div>

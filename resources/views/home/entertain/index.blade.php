@@ -39,12 +39,12 @@
                 <tr><td colspan="4" class="title"><b>公司供应</b></td></tr>
                 <tr>
                     <td>
-                        <div class="img"><img src="/upload/images/online1.png"></div>
+                        <div class="img"><img src="/uploads/images/2016/online1.png"></div>
                         <p class="title">公司名称</p>
                         <p>供应：</p>
                     </td>
                     <td>
-                        <div class="img"><img src="/upload/images/online1.png"></div>
+                        <div class="img"><img src="/uploads/images/2016/online1.png"></div>
                         <p class="title">公司名称</p>
                         <p>供应：</p>
                     </td>
@@ -56,12 +56,12 @@
                 <tr><td colspan="4" class="title"><b>公司需求</b></td></tr>
                 <tr>
                     <td>
-                        <div class="img"><img src="/upload/images/online1.png"></div>
+                        <div class="img"><img src="/uploads/images/2016/online1.png"></div>
                         <p class="title">公司名称</p>
                         <p>供应：</p>
                     </td>
                     <td>
-                        <div class="img"><img src="/upload/images/online1.png"></div>
+                        <div class="img"><img src="/uploads/images/2016/online1.png"></div>
                         <p class="title">公司名称</p>
                         <p>供应：</p>
                     </td>
@@ -71,7 +71,7 @@
             </table>
         </div>
         <div class="e_right">
-            <img src="/upload/images/ppt.png">
+            <img src="/uploads/images/2016/ppt.png">
         </div>
     </div>
 

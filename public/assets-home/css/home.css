@@ -199,5 +199,26 @@ a.curr {
 /*=======footer网站脚部========*/
 
 
+/*=======创建页面========*/
+td.head { text-align:center; }
+/*=== 公用：div_hr ===*/
+.div_hr {
+    margin-bottom:20px;
+    width:100%;height:20px;
+    border-bottom:1px solid rgb(240,240,240);
+}
 /*=== 公用：星号 ===*/
 .star { color:red; }
+/*=== 公用：上传图片的样式 ===*/
+.readonly {
+    border:1px solid rgb(200,200,200);
+    background:rgb(240,240,240);
+}
+.uploadpic {
+    margin:2px;
+    padding:5px 20px;
+    border:1px solid rgb(14,144,210);
+    background:rgb(14,144,210);
+    color:white;
+    cursor:pointer;
+}

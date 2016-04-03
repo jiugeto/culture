@@ -25,7 +25,7 @@
             <table class="record">
                 <tr>
                     <td rowspan="3">
-                        <div class="img"><img src="/upload/images/online1.png"></div>
+                        <div class="img"><img src="/uploads/images/2016/online1.png"></div>
                     </td>
                     <td class="text1"><b>c4d作品</b></td>
                 </tr>
@@ -46,7 +46,7 @@
                     <div class="de_con"><div></div>平面</div>
                 </div>
             </div>
-            <div class="img"><img src="/upload/images/ppt.png"></div>
+            <div class="img"><img src="/uploads/images/2016/ppt.png"></div>
         </div>
     </div>
 

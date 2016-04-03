@@ -28,7 +28,7 @@
             </table>
         </div>
         <div class="s_right">
-            <img src="/upload/images/ppt.png">
+            <img src="/uploads/images/2016/ppt.png">
         </div>
     </div>
 

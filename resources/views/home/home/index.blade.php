@@ -3,8 +3,8 @@
     <!-- 广告PPT -->
     <div class="ppt">
         <ul class="ppt_pic">
-            <li><a href="" title="ppt"><img src="/upload/images/ppt.png"></a></li>
-            <li><a href="" title="ppt2"><img src="/upload/images/ppt2.png"></a></li>
+            <li><a href="" title="ppt"><img src="/uploads/images/2016/ppt.png"></a></li>
+            <li><a href="" title="ppt2"><img src="/uploads/images/2016/ppt2.png"></a></li>
             <li></li>
         </ul>
         <div class="ppt_change">
@@ -12,8 +12,8 @@
             {{--<span class="jiantou_left">◀</span>--}}
             {{--<span class="jiantou_right">▶</span>--}}
             <ul class="ppt_change_pic">
-                <a href="##"><li><img src="/upload/images/ppt.png"></li></a>
-                <a href=""><li><img src="/upload/images/ppt2.png"></li></a>
+                <a href="##"><li><img src="/uploads/images/2016/ppt.png"></li></a>
+                <a href=""><li><img src="/uploads/images/2016/ppt2.png"></li></a>
             </ul>
         </div>
     </div>
@@ -36,42 +36,42 @@
             <div class="online_con">
                 <div class="online_first">
                     <a href="" title="online1">
-                        <div class="con_img"><img src="/upload/images/online1.png"></div>
+                        <div class="con_img"><img src="/uploads/images/2016/online1.png"></div>
                     </a>
                 </div>
                 <div class="online_div">
                     <a href="" title="online1">
-                        <div class="con_img"><img src="/upload/images/online2.png"></div>
+                        <div class="con_img"><img src="/uploads/images/2016/online2.png"></div>
                         <div class="con_text"><a href="">样片</a></div>
                     </a>
                 </div>
                 <div class="online_div">
                     <a href="" title="online1">
-                        <div class="con_img"><img src="/upload/images/online3.png"></div>
+                        <div class="con_img"><img src="/uploads/images/2016/online3.png"></div>
                         <div class="con_text"><a href="">样片</a></div>
                     </a>
                 </div>
                 <div class="online_div">
                     <a href="" title="online1">
-                        <div class="con_img"><img src="/upload/images/online4.png"></div>
+                        <div class="con_img"><img src="/uploads/images/2016/online4.png"></div>
                         <div class="con_text"><a href="">样片</a></div>
                     </a>
                 </div>
                 <div class="online_div">
                     <a href="" title="online1">
-                        <div class="con_img"><img src="/upload/images/online2.png"></div>
+                        <div class="con_img"><img src="/uploads/images/2016/online2.png"></div>
                         <div class="con_text"><a href="">样片</a></div>
                     </a>
                 </div>
                 <div class="online_div">
                     <a href="" title="online1">
-                        <div class="con_img"><img src="/upload/images/online3.png"></div>
+                        <div class="con_img"><img src="/uploads/images/2016/online3.png"></div>
                         <div class="con_text"><a href="">样片</a></div>
                     </a>
                 </div>
                 <div class="online_div">
                     <a href="" title="online1">
-                        <div class="con_img"><img src="/upload/images/online4.png"></div>
+                        <div class="con_img"><img src="/uploads/images/2016/online4.png"></div>
                         <div class="con_text"><a href="">样片</a></div>
                     </a>
                 </div>
@@ -80,9 +80,9 @@
         {{-- 精选 --}}
         <div class="selected">
             <p>精选</p>
-            <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
-            <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
-            <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+            <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
+            <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
+            <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
         </div>
         <br style="clear:both;"><br>
 
@@ -94,12 +94,12 @@
                 <span class="floor_text2">&nbsp;特色产品</span>
             </p>
             <div class="trait_con">
-                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
-                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
-                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
-                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
-                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
-                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
                 {{--箭头--}}
                 <div class="arrow">
                     <div class="con_left"> ◀ </div>
@@ -117,12 +117,12 @@
                 {{--<span class="floor_text2">&nbsp;热门品牌</span>--}}
             {{--</p>--}}
             {{--<div class="trait_con">--}}
-                {{--<div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>--}}
-                {{--<div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>--}}
-                {{--<div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>--}}
-                {{--<div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>--}}
-                {{--<div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>--}}
-                {{--<div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>--}}
+                {{--<div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>--}}
+                {{--<div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>--}}
+                {{--<div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>--}}
+                {{--<div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>--}}
+                {{--<div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>--}}
+                {{--<div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>--}}
                 {{--箭头--}}
                 {{--<div class="arrow">--}}
                     {{--<div class="con_left"> ◀ </div>--}}
@@ -140,12 +140,12 @@
                 <span class="floor_text2">&nbsp;推荐产品</span>
             </p>
             <div class="trait_con">
-                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
-                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
-                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
-                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
-                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
-                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
                 {{--箭头--}}
                 <div class="arrow">
                     <div class="con_left"> ◀ </div>
@@ -163,11 +163,11 @@
                 <span class="floor_text2">&nbsp;样片需求</span>
             </p>
             <div class="demand_con">
-                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
-                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
-                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
-                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
-                <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
             </div>
         </div>
         {{-- 排行列表 --}}
@@ -224,31 +224,31 @@
             <div class="fun_con">
                 <div class="img_text">
                     <div class="img">
-                        <a href=""><img src="/upload/images/online1.png"></a>
+                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
                     </div>
                     <div class="con_text"><a href="">娱乐娱乐</a></div>
                 </div>
                 <div class="img_text">
                     <div class="img">
-                        <a href=""><img src="/upload/images/online1.png"></a>
+                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
                     </div>
                     <div class="con_text"><a href="">娱乐娱乐</a></div>
                 </div>
                 <div class="img_text">
                     <div class="img">
-                        <a href=""><img src="/upload/images/online1.png"></a>
+                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
                     </div>
                     <div class="con_text"><a href="">娱乐娱乐</a></div>
                 </div>
                 <div class="img_text">
                     <div class="img">
-                        <a href=""><img src="/upload/images/online1.png"></a>
+                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
                     </div>
                     <div class="con_text"><a href="">娱乐娱乐</a></div>
                 </div>
                 <div class="img_text">
                     <div class="img">
-                        <a href=""><img src="/upload/images/online1.png"></a>
+                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
                     </div>
                     <div class="con_text"><a href="">娱乐娱乐</a></div>
                 </div>
@@ -259,7 +259,7 @@
             <p>独家策划</p>
             <div class="img_text">
                 <div class="img">
-                    <a href=""><img src="/upload/images/online1.png"></a>
+                    <a href=""><img src="/uploads/images/2016/online1.png"></a>
                 </div>
                 <div class="con_text"><a href="">娱乐娱乐</a></div>
             </div>
@@ -276,31 +276,31 @@
             <div class="rent_con">
                 <div class="img_text">
                     <div class="img">
-                        <a href=""><img src="/upload/images/online1.png"></a>
+                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
                     </div>
                     <div class="con_text"><a href="">租赁租赁</a></div>
                 </div>
                 <div class="img_text">
                     <div class="img">
-                        <a href=""><img src="/upload/images/online1.png"></a>
+                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
                     </div>
                     <div class="con_text"><a href="">租赁租赁</a></div>
                 </div>
                 <div class="img_text">
                     <div class="img">
-                        <a href=""><img src="/upload/images/online1.png"></a>
+                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
                     </div>
                     <div class="con_text"><a href="">租赁租赁</a></div>
                 </div>
                 <div class="img_text">
                     <div class="img">
-                        <a href=""><img src="/upload/images/online1.png"></a>
+                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
                     </div>
                     <div class="con_text"><a href="">租赁租赁</a></div>
                 </div>
                 <div class="img_text">
                     <div class="img">
-                        <a href=""><img src="/upload/images/online1.png"></a>
+                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
                     </div>
                     <div class="con_text"><a href="">租赁租赁</a></div>
                 </div>
@@ -311,25 +311,25 @@
             <p>文字信息</p>
             <div class="img_text">
                 {{--<div class="img">--}}
-                    {{--<a href=""><img src="/upload/images/online1.png"></a>--}}
+                    {{--<a href=""><img src="/uploads/images/2016/online1.png"></a>--}}
                 {{--</div>--}}
                 <div class="con_text"><a href=""><span>1</span> 租赁租赁</a></div>
             </div>
             <div class="img_text">
                 {{--<div class="img">--}}
-                    {{--<a href=""><img src="/upload/images/online1.png"></a>--}}
+                    {{--<a href=""><img src="/uploads/images/2016/online1.png"></a>--}}
                 {{--</div>--}}
                 <div class="con_text"><a href=""><span>1</span> 租赁租赁</a></div>
             </div>
             <div class="img_text">
                 {{--<div class="img">--}}
-                    {{--<a href=""><img src="/upload/images/online1.png"></a>--}}
+                    {{--<a href=""><img src="/uploads/images/2016/online1.png"></a>--}}
                 {{--</div>--}}
                 <div class="con_text"><a href=""><span>1</span> 租赁租赁</a></div>
             </div>
             <div class="img_text">
                 {{--<div class="img">--}}
-                    {{--<a href=""><img src="/upload/images/online1.png"></a>--}}
+                    {{--<a href=""><img src="/uploads/images/2016/online1.png"></a>--}}
                 {{--</div>--}}
                 <div class="con_text"><a href=""><span>1</span> 租赁租赁</a></div>
             </div>
@@ -346,55 +346,55 @@
             <div class="design_con">
                 <div class="img_text_first">
                     <div class="img">
-                        <a href=""><img src="/upload/images/online1.png"></a>
+                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
                     </div>
                     {{--<div class="con_text"><a href="">租赁租赁</a></div>--}}
                 </div>
                 <div class="img_text">
                     <div class="img">
-                        <a href=""><img src="/upload/images/online1.png"></a>
+                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
                     </div>
                     {{--<div class="con_text"><a href="">租赁租赁</a></div>--}}
                 </div>
                 <div class="img_text">
                     <div class="img">
-                        <a href=""><img src="/upload/images/online1.png"></a>
+                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
                     </div>
                     {{--<div class="con_text"><a href="">租赁租赁</a></div>--}}
                 </div>
                 <div class="img_text">
                     <div class="img">
-                        <a href=""><img src="/upload/images/online1.png"></a>
+                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
                     </div>
                     {{--<div class="con_text"><a href="">租赁租赁</a></div>--}}
                 </div>
                 <div class="img_text">
                     <div class="img">
-                        <a href=""><img src="/upload/images/online1.png"></a>
+                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
                     </div>
                     {{--<div class="con_text"><a href="">租赁租赁</a></div>--}}
                 </div>
                 <div class="img_text">
                     <div class="img">
-                        <a href=""><img src="/upload/images/online1.png"></a>
+                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
                     </div>
                     {{--<div class="con_text"><a href="">租赁租赁</a></div>--}}
                 </div>
                 <div class="img_text">
                     <div class="img">
-                        <a href=""><img src="/upload/images/online1.png"></a>
+                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
                     </div>
                     {{--<div class="con_text"><a href="">租赁租赁</a></div>--}}
                 </div>
                 <div class="img_text">
                     <div class="img">
-                        <a href=""><img src="/upload/images/online1.png"></a>
+                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
                     </div>
                     {{--<div class="con_text"><a href="">租赁租赁</a></div>--}}
                 </div>
                 <div class="img_text">
                     <div class="img">
-                        <a href=""><img src="/upload/images/online1.png"></a>
+                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
                     </div>
                     {{--<div class="con_text"><a href="">租赁租赁</a></div>--}}
                 </div>
@@ -437,22 +437,22 @@
             </p>
             <div class="cooperation_con">
                 <div class="img">
-                    <a href=""><img src="/upload/images/online1.png"></a>
+                    <a href=""><img src="/uploads/images/2016/online1.png"></a>
                 </div>
                 <div class="img">
-                    <a href=""><img src="/upload/images/online1.png"></a>
+                    <a href=""><img src="/uploads/images/2016/online1.png"></a>
                 </div>
                 <div class="img">
-                    <a href=""><img src="/upload/images/online1.png"></a>
+                    <a href=""><img src="/uploads/images/2016/online1.png"></a>
                 </div>
                 <div class="img">
-                    <a href=""><img src="/upload/images/online1.png"></a>
+                    <a href=""><img src="/uploads/images/2016/online1.png"></a>
                 </div>
                 <div class="img">
-                    <a href=""><img src="/upload/images/online1.png"></a>
+                    <a href=""><img src="/uploads/images/2016/online1.png"></a>
                 </div>
                 <div class="img">
-                    <a href=""><img src="/upload/images/online1.png"></a>
+                    <a href=""><img src="/uploads/images/2016/online1.png"></a>
                 </div>
             </div>
         </div>
@@ -466,7 +466,7 @@
                 <span class="floor_text2">&nbsp;用户心声</span>
             </p>
             <div class="voice_con">
-                <div class="img"><img src="/upload/images/online1.png"></div>
+                <div class="img"><img src="/uploads/images/2016/online1.png"></div>
                 <div class="text">文字</div>
                 <div class="con">内容</div>
             </div>

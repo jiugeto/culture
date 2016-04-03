@@ -39,7 +39,7 @@
                 @foreach($datas as $data)
             <table class="record">
                 <tr>
-                    <td class="first"><div><img src="/upload/images/online1.png"></div></td>
+                    <td class="first"><div><img src="/uploads/images/2016/online1.png"></div></td>
                     <td class="text">意见标题：{{ $data->name }}</td>
                     <td class="text">状态：{{ $data->status() }}</td>
                     <td class="text">回复：{{ $data->reply() }}</td>

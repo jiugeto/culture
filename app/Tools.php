@@ -1,6 +1,8 @@
 <?php
 namespace App;
 
+use Intervention\Image\ImageManagerStatic as Image;
+
 class Tools
 {
     /**
@@ -95,5 +97,87 @@ class Tools
             $url = $url_arr[3];
         }
         return $url;
+    }
+
+    /**
+     * 图片上传
+     * @param string $file 表单中上传的文件
+     * @return string $filePath 上传文件保存的路径
+     */
+    public static function upload($file)
+    {
+        //上传，并处理文件
+//        dd($file->getRealPath());
+        if($file->isValid()){
+            $allowed_extensions = ["png", "jpg", "gif", "bmp", "jpeg", "jpe"];
+            if ($file->getClientOriginalExtension() && !in_array($file->getClientOriginalExtension(), $allowed_extensions)) {
+//                return '你的图片格式不对：png，jpg，gif，bmp，jpeg，jpe。';
+                $jump['module'] = '图片上传';
+                $jump['msg'] = '你的图片格式不对：png，jpg，gif，bmp，jpeg，jpe。';
+                return view('member.common.jump', compact('jump'));
+            }
+            $extension       = $file->getClientOriginalExtension() ?: 'png';
+            $folderName      = '/uploads/images/'.date('Y-m-d', time()).'/';
+            $destinationPath = public_path().$folderName;
+            $safeName        = uniqid().'.'.$extension;
+            $file->move($destinationPath, $safeName);
+            $filePath = $folderName.$safeName;
+            return $filePath;
+        } else {
+            echo "你的图片格式不对，请选择图片。";
+            return view('admin.index');
+        }
+    }
+
+    /**
+     * 文件上传
+     * @param string $file 表单中上传的文件
+     * @return string $filePath 上传文件保存的路径
+     */
+    public static function uploadFile($file)
+    {
+        //上传，并处理文件
+        if($file->isValid()){
+            $allowed_extensions = ["txt", "doc", "xls", "zip", "rar", "ppt", "jnt"];
+            if ($file->getClientOriginalExtension() && !in_array($file->getClientOriginalExtension(), $allowed_extensions)) {
+//                return '你的文件格式不对：txt，doc，xls，zip，rar，ppt，jnt。';
+                $jump['module'] = '图片上传';
+                $jump['msg'] = '你的文件格式不对：txt，doc，xls，zip，rar，ppt，jnt。';
+                return view('member.common.jump', compact('jump'));
+            }
+            $extension       = $file->getClientOriginalExtension() ?: 'png';
+            $folderName      = '/uploads/files/'.date('Y-m-d', time()).'/';
+            $destinationPath = public_path().$folderName;
+            $safeName        = uniqid().'.'.$extension;
+            $file->move($destinationPath, $safeName);
+            $filePath = $folderName.$safeName;
+            return $filePath;
+        } else {
+            echo "你的文件格式不对，请重新选择。";
+            return view('admin.index');
+        }
+    }
+
+    /**
+     * 缩略图处理
+     * @param string $filePath 已上传的原始文件
+     * @param int $width 缩略图宽度
+     * @param int $height 缩略图高度
+     * @return string '/'.$thumb_path 缩略图保存路径
+     */
+    public static function thumb($filePath, $width, $height){
+        if ($filePath) {
+            //得到文件名
+            $url = explode('/',$filePath);
+            $safeName = $url[count($url)-1];
+            //重新拼接路径
+            unset($url[0]);
+            $url_new = implode('/',$url);
+            $thumb_path = 'uploads/images/'.date('Y-m-d', time()).'/thumb_'.$safeName;
+            Image::make($url_new)
+                ->resize($width, $height)
+                ->save($thumb_path);
+            return '/'.$thumb_path;
+        }
     }
 }

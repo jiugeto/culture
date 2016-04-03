@@ -32,7 +32,7 @@
             <table class="record">
                 <tr>
                     <td rowspan="2" class="td_r_img">
-                        <div class="r_img"><img src="/upload/images/online1.png"></div>
+                        <div class="r_img"><img src="/uploads/images/2016/online1.png"></div>
                     </td>
                     <td>设备名称：</td>
                     <td>供求关系：</td>
@@ -46,7 +46,7 @@
         </div>
         <div class="s_right">
             <div class="cate"></div>
-            <img src="/upload/images/ppt.png">
+            <img src="/uploads/images/2016/ppt.png">
         </div>
     </div>
 
