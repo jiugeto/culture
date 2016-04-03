@@ -35,10 +35,14 @@
                 <td>{{ $data->remarks }}</td>
             </tr>
             @endif
-            @if($data->reply_id)
             <tr>
-                <td>不满意缘由：</td>
-                <td>{{ $data->remarks }}</td>
+                <td>是否回复：</td>
+                <td>{{ $data->isreply==0 ? '无回复' : '有回复' }}</td>
+            </tr>
+            @if($data->isreply)
+            <tr>
+                <td>回复数量：</td>
+                <td>{{ count($data->replyModels) }}</td>
             </tr>
             @endif
             <tr>

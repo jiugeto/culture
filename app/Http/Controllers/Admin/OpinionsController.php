@@ -18,12 +18,12 @@ class OpinionsController extends BaseController
         $this->crumb['category']['url'] = 'opinions';
     }
 
-    public function index()
+    public function index($isshow=1)
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'datas'=> $this->query($del=0),
+            'datas'=> $this->query($isshow),
             'prefix_url'=> '/admin/opinions',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -31,9 +31,41 @@ class OpinionsController extends BaseController
         return view('admin.opinions.index', $result);
     }
 
-    public function query()
+    public function edit($id)
     {
-        $datas = OpinionModel::where('del',0)->paginate($this->limit);
+        $curr['name'] = $this->crumb['edit']['name'];
+        $curr['url'] = $this->crumb['edit']['url'];
+        $result = [
+            'data'=> OpinionModel::find($id),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.opinions.edit', $result);
+    }
+
+    public function show($id)
+    {
+        $curr['name'] = $this->crumb['show']['name'];
+        $curr['url'] = $this->crumb['show']['url'];
+        $result = [
+            'data'=> OpinionModel::find($id),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.opinions.show', $result);
+    }
+
+    public function destroy($id)
+    {
+        OpinionModel::where('id',$id)->update(['del'=> 1]);
+        return redirect('/admin/opinions');
+    }
+
+    public function query($isshow)
+    {
+        $datas = OpinionModel::where('del',0)
+                ->where('isshow',$isshow)
+                ->paginate($this->limit);
         return $datas;
     }
 }

@@ -72,5 +72,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
     Route::get('place/create','AdPlaceController@create');
     Route::resource('place','AdPlaceController');
         //用户意见管理
+    Route::post('opinions/{id}','OpinionsController@update');
+    Route::get('opinions/{id}/destroy','OpinionsController@destroy');
     Route::resource('opinions','OpinionsController');
 });

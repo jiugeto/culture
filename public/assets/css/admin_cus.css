@@ -5,6 +5,7 @@
 .list_center { text-align:center; }
 .pic_size_small { width:100px; }
 
+
 /*=======action层叠列表========*/
 .action_pos {
     float:right;
@@ -39,4 +40,17 @@
 }
 .action_border {
     border-bottom:0;
+}
+
+
+/*=== 返回键 back ===*/
+button.backbtn {
+    padding:5px 20px;
+    border:1px solid orangered;
+    border-radius:3px;
+    color:white;
+    font-family:'微软雅黑';
+    font-size:20px;
+    cursor:pointer;
+    background:orangered;
 }

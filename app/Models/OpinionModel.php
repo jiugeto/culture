@@ -21,10 +21,10 @@ class OpinionModel extends BaseModel
         return $this->statuss[$this->status];
     }
 
-    public function reply()
-    {
-        return $this->hasOne('\App\Models\OpinionModel','id','reply');
-    }
+//    public function reply()
+//    {
+//        return $this->hasOne('\App\Models\OpinionModel','id','reply');
+//    }
 
     public function replyModels()
     {
