@@ -623,21 +623,18 @@ DROP TABLE IF EXISTS `bs_opinions`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `bs_opinions` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL COMMENT '标题',
-  `content` varchar(2000) NOT NULL COMMENT '内容',
+  `name` varchar(255) NOT NULL COMMENT '标题',
+  `intro` varchar(2000) NOT NULL COMMENT '内容',
   `pic` varchar(255) DEFAULT NULL COMMENT '截图',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户id',
-  `from_type` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '评论主体类型，供应方：0本站，1设计师，2制作公司，3经纪公司，4租赁公司',
-  `from_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '供应方来源表中的id，默认0代表本站',
-  `from_name` varchar(255) NOT NULL COMMENT '供应方名称',
-  `status` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '意见状态：1新意见，2已查看，3已处理，4不满意，5满意',
+  `status` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '意见状态：1新意见，2已查看，3处理中，4不满意，5满意',
   `remarks` varchar(255) DEFAULT NULL COMMENT '不满意理由',
   `reply_id` varchar(255) NOT NULL DEFAULT '0' COMMENT '关联本表id组成的字符串',
   `isshow` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '在前台列表是否显示：0不显示，1显示',
   `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站功能：0不放入回收站，1放入回收站',
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户意见表 (bs_opinions)';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户意见表 (bs_opinions)：用户对本站的意见';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -922,4 +919,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-02 18:58:15
+-- Dump completed on 2016-04-03 11:37:25

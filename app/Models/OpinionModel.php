@@ -10,7 +10,7 @@ class OpinionModel extends BaseModel
      */
     protected $table = 'bs_opinions';
     protected $fillable = [
-        'id','title','content','pic','uid','from_type','from_id','status','remarks','reply_id','isshow','del','created_at',
+        'id','name','intro','pic','uid','status','remarks','reply_id','isshow','del','created_at',
     ];
     protected $statuss = [
         1=>'新意见','已查看','处理中','不满意','满意',

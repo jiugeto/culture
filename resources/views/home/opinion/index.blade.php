@@ -35,20 +35,26 @@
 
         {{-- 意见列表 --}}
         <div class="opinion_list">
-        @if($datas->total())
-            @foreach($datas as $data)
+            @if($datas->total())
+                @foreach($datas as $data)
             <table class="record">
                 <tr>
                     <td class="first"><div><img src="/upload/images/online1.png"></div></td>
-                    <td class="text">意见标题：{{ $data->title }}</td>
+                    <td class="text">意见标题：{{ $data->name }}</td>
                     <td class="text">状态：{{ $data->status() }}</td>
                     <td class="text">回复：{{ $data->reply() }}</td>
                     <td class="text">发布时间：{{ $data->created_at }}</td>
                     <td class="detail"><a href="/opinion/{{$data->id}}">查看详情</a></td>
                 </tr>
             </table>
-            @endforeach
-        @endif
+                @endforeach
+            @else
+            <table class="record">
+                <tr><td colspan="10" style="text-align:center;">没有记录</td></tr>
+            </table>
+            @endif
+
+            @include('home.common.page')
         </div>
     </div>
 @stop

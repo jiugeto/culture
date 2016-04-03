@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Home;
 
 use App\Models\OpinionModel;
+use Illuminate\Http\Request;
 
 class OpinionController extends BaseController
 {
@@ -25,9 +26,39 @@ class OpinionController extends BaseController
         return view('home.opinion.index', $result);
     }
 
+    public function create($reply=0)
+    {
+        $result = [
+            'menus'=> $this->list,
+            'curr'=> 'opinion',
+            'reply'=> $reply,
+        ];
+        return view('home.opinion.create', $result);
+    }
+
+    public function store(Request $request)
+    {
+        $data = $this->getData($request);
+        OpinionModel::create($data);
+        return redirect('/opinion');
+    }
 
 
 
+
+
+    /**
+     * 收集数据
+     */
+    public function getData(Request $request,$id=null)
+    {
+        //上传图片
+        $data = [
+            'name'=> $request->name,
+            'intro'=> $request->intro,
+        ];
+        return $data;
+    }
 
     /**
      * 查询方法，提取对本站的意见
