@@ -32,6 +32,7 @@ Route::group(['namespace'=>'Home'],function(){
     //用户对本站的意见栏
     Route::get('opinion/create/{reply}','OpinionController@create');
     Route::get('opinion/create','OpinionController@create');
+    Route::post('opinion/{id}','OpinionController@update');
     Route::get('{status}/opinion','OpinionController@index');
     Route::resource('opinion','OpinionController');
 });

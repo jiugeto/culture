@@ -629,12 +629,14 @@ CREATE TABLE `bs_opinions` (
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户id',
   `status` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '意见状态：1新意见，2已查看，3处理中，4不满意，5满意',
   `remarks` varchar(255) DEFAULT NULL COMMENT '不满意理由',
-  `reply_id` varchar(255) NOT NULL DEFAULT '0' COMMENT '关联本表id组成的字符串',
+  `isreply` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回复id：0表示无回复，1表示有回复',
+  `reply` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '回复id，关联本表上级id，0是无回复',
   `isshow` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '在前台列表是否显示：0不显示，1显示',
   `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站功能：0不放入回收站，1放入回收站',
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
+  `updated_at` date DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户意见表 (bs_opinions)：用户对本站的意见';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户意见表 (bs_opinions)：用户对本站的意见';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -643,6 +645,7 @@ CREATE TABLE `bs_opinions` (
 
 LOCK TABLES `bs_opinions` WRITE;
 /*!40000 ALTER TABLE `bs_opinions` DISABLE KEYS */;
+INSERT INTO `bs_opinions` VALUES (1,'意见001','<p>ergtbfrgtbf</p>','/uploads/images/2016-04-03/5700c2d90606d.png',0,1,'',0,0,1,0,'2016-04-03',NULL);
 /*!40000 ALTER TABLE `bs_opinions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -919,4 +922,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-03 11:37:25
+-- Dump completed on 2016-04-03 18:13:34

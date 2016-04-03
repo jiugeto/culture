@@ -10,6 +10,7 @@ class OpinionController extends BaseController
     /**
      * 网站前台需求信息
      */
+    protected $url_curr = 'opinion';
 
     public function __construct()
     {
@@ -21,19 +22,19 @@ class OpinionController extends BaseController
         $result = [
             'datas'=> $this->query($status),
             'menus'=> $this->list,
-            'curr'=> 'opinion',
+            'curr'=> $this->url_curr,
             'status'=> $status,
         ];
         return view('home.opinion.index', $result);
     }
 
-    public function create($reply=0)
+    public function create($isreply=0)
     {
         $this->list['create'] = '发布意见';
         $result = [
             'menus'=> $this->list,
-            'curr'=> 'opinion',
-            'reply'=> $reply,
+            'curr'=> $this->url_curr,
+            'isreply'=> $isreply,
         ];
         return view('home.opinion.create', $result);
     }
@@ -43,6 +44,37 @@ class OpinionController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = date('Y-m-d', time());
         OpinionModel::create($data);
+        return redirect('/opinion');
+    }
+
+    public function show($id)
+    {
+        $this->list['show'] = '意见详情';
+        $result = [
+            'data'=> OpinionModel::find($id),
+            'menus'=> $this->list,
+            'curr'=> $this->url_curr,
+        ];
+        return view('home.opinion.show', $result);
+    }
+
+    public function edit($id)
+    {
+        $this->list['edit'] = '修改意见';
+        $result = [
+            'data'=> OpinionModel::find($id),
+            'menus'=> $this->list,
+            'curr'=> $this->url_curr,
+        ];
+        return view('home.opinion.edit', $result);
+    }
+
+    public function update(Request $request,$id)
+    {
+        $data = $this->getData($request,$id);
+        $data['updated_at'] = date('Y-m-d', time());
+        dd($data);
+        OpinionModel::where('id',$id)->update($data);
         return redirect('/opinion');
     }
 
@@ -61,6 +93,9 @@ class OpinionController extends BaseController
         }
         //用户uid，暂时默认为0
         $uid = 0;
+        //回复isreply，0是无回复，1是有回复
+        $isreply = 0;
+        $reply = 0;
         //上传图片
         if($request->hasFile('url_ori')){  //判断图片存在
             foreach ($_FILES as $pic1) {
@@ -80,6 +115,12 @@ class OpinionController extends BaseController
 //            if ($rst['state']=='SUCCESS') { $data['pic'] = $rst['url']; }
 //            else { echo "<script>alert('图片上传错误，".$rst['state']."！');history.go(-1);</script>";exit; }
         }
+        if ($id) {
+            $opinion = OpinionModel::find($id);
+            $isreply = $opinion->isreply;
+            $reply = $opinion->reply;
+            if (!isset($pic)) { $pic = $opinion->pic; }
+        }
         $data = [
             'name'=> $request->name,
             'intro'=> $request->intro,
@@ -87,7 +128,8 @@ class OpinionController extends BaseController
             'uid'=> $uid,
             'status'=> 1,       //1是新发布
             'remarks'=> '',
-            'reply_id'=> '',
+            'isreply'=> $isreply,
+            'reply'=> $reply,
             'isshow'=> 1,       //1是前台列表显示
         ];
         return $data;

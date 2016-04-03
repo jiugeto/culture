@@ -44,7 +44,10 @@
                     <td class="text">状态：{{ $data->status() }}</td>
                     <td class="text">回复：{{ $data->reply() }}</td>
                     <td class="text">发布时间：{{ $data->created_at }}</td>
-                    <td class="detail"><a href="/opinion/{{$data->id}}">查看详情</a></td>
+                    <td class="detail">
+                        <a href="/opinion/{{$data->id}}">查看</a>
+                        <a href="/opinion/{{$data->id}}/edit">修改</a>
+                    </td>
                 </tr>
             </table>
                 @endforeach
