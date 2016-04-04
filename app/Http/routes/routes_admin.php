@@ -74,5 +74,8 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
         //用户意见管理
     Route::post('opinions/{id}','OpinionsController@update');
     Route::get('opinions/{id}/destroy','OpinionsController@destroy');
+    Route::get('opinions/{id}/restore','OpinionsController@restore');
+    Route::get('opinions/{id}/forceDelete','OpinionsController@forceDelete');
+    Route::get('opinions/trash','OpinionsController@trash');
     Route::resource('opinions','OpinionsController');
 });

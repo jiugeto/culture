@@ -23,8 +23,21 @@ class OpinionsController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'datas'=> $this->query($isshow),
+            'datas'=> $this->query($isshow,$del=0),
             'prefix_url'=> '/admin/opinions',
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.opinions.index', $result);
+    }
+
+    public function trash($isshow=1)
+    {
+        $curr['name'] = $this->crumb['trash']['name'];
+        $curr['url'] = $this->crumb['trash']['url'];
+        $result = [
+            'datas'=> $this->query($isshow,$del=1),
+            'prefix_url'=> '/admin/opinions/trash',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -61,9 +74,21 @@ class OpinionsController extends BaseController
         return redirect('/admin/opinions');
     }
 
-    public function query($isshow)
+    public function restore($id)
     {
-        $datas = OpinionModel::where('del',0)
+        OpinionModel::where('id',$id)->update(['del'=> 0]);
+        return redirect('/admin/opinions/trash');
+    }
+
+    public function forceDelete($id)
+    {
+        OpinionModel::where('id',$id)->delete;
+        return redirect('/admin/opinions/trash');
+    }
+
+    public function query($isshow,$del)
+    {
+        $datas = OpinionModel::where('del',$del)
                 ->where('isshow',$isshow)
                 ->paginate($this->limit);
         return $datas;
