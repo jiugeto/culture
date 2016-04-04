@@ -16,8 +16,8 @@
                     <fieldset>
                         <div class="am-form-group">
                             <label>前台显示否 / Is Show：</label>
-                            <label><input type="radio" name="isshow" value="0" {{ $data->isshow==0 ? 'checked' : '' }}/> 前台不显示&nbsp;&nbsp;</label>
-                            <label><input type="radio" name="isshow" value="1" {{ $data->isshow==1 ? 'checked' : '' }}/> 前台显示&nbsp;&nbsp;</label>
+                            <label><input type="radio" name="isshow" value="0" {{ $data->isshow==1 ? 'checked' : '' }}/> 前台不显示&nbsp;&nbsp;</label>
+                            <label><input type="radio" name="isshow" value="1" {{ $data->isshow==2 ? 'checked' : '' }}/> 前台显示&nbsp;&nbsp;</label>
                         </div>
 
                         <button type="submit" class="am-btn am-btn-primary">保存修改</button>

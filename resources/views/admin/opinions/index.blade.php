@@ -5,6 +5,33 @@
         <div class="am-g">
             @include('admin.common.menu')
             {{--@include('admin.type.search')--}}
+            <div class="am-u-sm-12 am-u-md-3">
+                <div class="am-form-group">
+                    前台显示否：
+                    <select name="isshow">
+                        <option value="0" {{ $isshow==0 ? 'selected' : '' }}>所有意见</option>
+                        <option value="1" {{ $isshow==1 ? 'selected' : '' }}>前台不显示</option>
+                        <option value="2" {{ $isshow==2 ? 'selected' : '' }}>前台显示</option>
+                    </select>
+                    {{--意见状态：--}}
+                    {{--<select name="status">--}}
+                        {{--<option value="0" {{ $status==0 ? 'selected' : '' }}>所有状态</option>--}}
+                    {{--</select>--}}
+                    <script>
+                        $(document).ready(function(){
+                            var isshow = $("select[name='isshow']");
+//                            var status = $("select[name='status']");
+                            isshow.change(function(){
+                                if(isshow.val()==0){
+                                    window.location.href = '/admin/opinions';
+                                } else {
+                                    window.location.href = '/admin/'+isshow.val()+'/opinions';
+                                }
+                            });
+                        });
+                    </script>
+                </div>
+            </div>
         </div>
         <hr>
 
@@ -29,7 +56,12 @@
                     <tr>
                         <td class="am-hide-sm-only"><input type="checkbox" /></td>
                         <td class="am-hide-sm-only">{{ $data->id }}</td>
-                        <td class="am-hide-sm-only"><a href="/admin/opinions/{{$data->id}}">{{ $data->name }}</a></td>
+                        <td class="am-hide-sm-only">
+                        @if($curr['url']=='')
+                            <a href="/admin/opinions/{{$data->id}}">{{ $data->name }}</a>
+                        @else {{ $data->name }}
+                        @endif
+                        </td>
                         <td class="am-hide-sm-only">{{ $data->uid }}</td>
                         <td class="am-hide-sm-only">{{ $data->status() }}</td>
                         <td class="am-hide-sm-only">{{ $data->isshow==0 ? '不显示' : '显示' }}</td>

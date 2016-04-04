@@ -131,7 +131,7 @@ class OpinionController extends BaseController
             'remarks'=> '',
             'isreply'=> $isreply,
             'reply'=> $reply,
-            'isshow'=> 1,       //1是前台列表显示
+            'isshow'=> 2,       //2是前台列表显示
         ];
         return $data;
     }
@@ -145,14 +145,14 @@ class OpinionController extends BaseController
             //所有意见
             $datas = OpinionModel::where([
                     'del'=> 0,
-                    'isshow'=> 1,
+                    'isshow'=> 2,
                 ])
                 ->paginate($this->limit);
         } elseif ($status==2) {
             //未处理
             $datas = OpinionModel::where([
                     'del'=> 0,
-                    'isshow'=> 1,
+                    'isshow'=> 2,
                 ])
                 ->where('status','<',3)
                 ->paginate($this->limit);
@@ -160,7 +160,7 @@ class OpinionController extends BaseController
             //已处理
             $datas = OpinionModel::where([
                     'del'=> 0,
-                    'isshow'=> 1,
+                    'isshow'=> 2,
                 ])
                 ->where('status','>',3)
                 ->paginate($this->limit);
@@ -168,7 +168,7 @@ class OpinionController extends BaseController
             //处理并且满意
             $datas = OpinionModel::where([
                     'del'=> 0,
-                    'isshow'=> 1,
+                    'isshow'=> 2,
                 ])
                 ->where('status',5)
                 ->paginate($this->limit);

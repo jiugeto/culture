@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\OpinionModel;
-//use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 //use App\Tools;
 
 class OpinionsController extends BaseController
@@ -18,7 +18,7 @@ class OpinionsController extends BaseController
         $this->crumb['category']['url'] = 'opinions';
     }
 
-    public function index($isshow=1)
+    public function index($isshow=0)
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
@@ -27,11 +27,12 @@ class OpinionsController extends BaseController
             'prefix_url'=> '/admin/opinions',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
+            'isshow'=> $isshow,
         ];
         return view('admin.opinions.index', $result);
     }
 
-    public function trash($isshow=1)
+    public function trash($isshow=0)
     {
         $curr['name'] = $this->crumb['trash']['name'];
         $curr['url'] = $this->crumb['trash']['url'];
@@ -40,6 +41,7 @@ class OpinionsController extends BaseController
             'prefix_url'=> '/admin/opinions/trash',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
+            'isshow'=> $isshow,
         ];
         return view('admin.opinions.index', $result);
     }
@@ -54,6 +56,13 @@ class OpinionsController extends BaseController
             'curr'=> $curr,
         ];
         return view('admin.opinions.edit', $result);
+    }
+
+    public function update(Request $request,$id)
+    {
+        $data = ['isshow'=>$request->isshow];
+        OpinionModel::where('id',$id)->update($data);
+        return redirect('/admin/opinions');
     }
 
     public function show($id)
@@ -88,9 +97,14 @@ class OpinionsController extends BaseController
 
     public function query($isshow,$del)
     {
-        $datas = OpinionModel::where('del',$del)
+        if ($isshow) {
+            $datas = OpinionModel::where('del',$del)
                 ->where('isshow',$isshow)
                 ->paginate($this->limit);
+        } else {
+            $datas = OpinionModel::where('del',$del)
+                ->paginate($this->limit);
+        }
         return $datas;
     }
 }
