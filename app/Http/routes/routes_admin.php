@@ -1,8 +1,17 @@
 <?php
 /**
+ * 系统后台权限
+ */
+Route::group(['prefix' => 'admin','namespace'=>'Admin'], function(){
+    Route::get('login', 'LoginController@login');
+    Route::post('login', 'LoginController@dologin');
+    Route::get('logout', 'LoginController@dologout');
+});
+
+/**
  * 这里是系统后台路由
  */
-
+//Route::group(['prefix'=>'admin','middleware' => 'admin','namespace'=>'Admin'],function(){
 Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
     //系统后台首页路由
     Route::get('/','HomeController@index');

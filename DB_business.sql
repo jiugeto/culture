@@ -57,7 +57,9 @@ DROP TABLE IF EXISTS `ba_admin`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ba_admin` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL COMMENT '管理员名称',
+  `username` varchar(255) NOT NULL COMMENT '管理员名称',
+  `realname` varchar(255) NOT NULL COMMENT '真实名字',
+  `email` varchar(255) NOT NULL COMMENT '邮箱',
   `password` varchar(255) NOT NULL COMMENT '登陆密码',
   `role_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '管理员组别，关联ba_role',
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
@@ -922,4 +924,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-04 15:03:16
+-- Dump completed on 2016-04-04 17:45:49

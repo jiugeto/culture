@@ -3,8 +3,8 @@
 <ul class="am-list admin-sidebar-list">
     @foreach($actions as $action)
     <li class="admin-parent">
-        <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}">
-            <span class="am-icon-file"></span>{{ $action->name }}
+        <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}" href="/admin/{{$action->url}}">
+            <span class="am-icon-file"></span>  {{ $action->name }}
             <span class="am-icon-angle-right am-fr am-margin-right"></span>
         </a>
         <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
