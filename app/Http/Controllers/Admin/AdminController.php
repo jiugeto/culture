@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Admin\RoleModel;
 //use Illuminate\Http\Request;
 use App\Http\Requests;
 //use App\Models\Admin\ActionModel;
+use App\Models\Admin\AdminModel;
+use App\Models\Admin\RoleModel;
+use Symfony\Component\HttpFoundation\Request;
 
 class AdminController extends BaseController
 {
@@ -33,5 +35,87 @@ class AdminController extends BaseController
             'curr'=> $curr,
         ];
         return view('admin.admin.index', $result);
+    }
+
+    public function create()
+    {
+        $curr['name'] = $this->crumb['create']['name'];
+        $curr['url'] = $this->crumb['create']['url'];
+        $result = [
+            'roleModels'=> RoleModel::all(),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.admin.create', $result);
+    }
+
+    public function store(Request $request)
+    {
+        $data = $this->getData($request);
+        $data['created_at'] = date('Y-m-d', time());
+        AdminModel::create($data);
+        return redirect('/admin/admin');
+    }
+
+    public function show($id)
+    {
+        $curr['name'] = $this->crumb['show']['name'];
+        $curr['url'] = $this->crumb['show']['url'];
+        $result = [
+            'datas'=> AdminModel::find($id),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.admin.show');
+    }
+
+    public function edit($id)
+    {
+        $curr['name'] = $this->crumb['edit']['name'];
+        $curr['url'] = $this->crumb['edit']['url'];
+        $result = [
+            'datas'=> AdminModel::find($id),
+            'roleModels'=> RoleModel::all(),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.admin.edit', $result);
+    }
+
+    public function update(Request $request,$id)
+    {
+        $data = $this->getData($request);
+        $data['updated_at'] = date('Y-m-d', time());
+        AdminModel::where('id',$id)->update($data);
+        return redirect('/admin/admin');
+    }
+
+//    public function destroy($id)
+//    {
+//        AdminModel::where('id',$id)->update(['del'=>1]);
+//        return redirect('/admin/admin');
+//    }
+
+    public function forceDelete($id)
+    {
+        AdminModel::where('id',$id)->delete();
+        return redirect('/admin/admin');
+    }
+
+
+
+
+
+    /**
+     * 收集数据
+     */
+    public function getData(Request $request)
+    {
+        $data = [
+            'name'=> $request->name,
+            'password'=> $request->password,
+            'role_id'=> $request->role_id,
+        ];
+        return $data;
     }
 }

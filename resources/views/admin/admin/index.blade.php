@@ -16,9 +16,9 @@
                         <th class="table-id">ID</th>
                         <th class="table-title">管理员名称</th>
                         {{--<th class="table-type">密码</th>--}}
-                        {{--<th class="table-type">操作方法</th>--}}
+                        <th class="table-type">所在角色组</th>
                         <th class="table-date am-hide-sm-only">添加时间</th>
-                        <th class="table-date am-hide-sm-only">更新时间</th>
+                        {{--<th class="table-date am-hide-sm-only">更新时间</th>--}}
                         <th class="table-set">操作</th>
                     </tr>
                     </thead>
@@ -30,9 +30,9 @@
                         <td class="am-hide-sm-only">{{ $data->id }}</td>
                         <td class="am-hide-sm-only"><a href="/admin/role/{{$data->id}}">{{ $data->name }}</a></td>
                         {{--<td class="am-hide-sm-only">{{ $data->controller_prefix.'Controller' }}</td>--}}
-{{--                        <td class="am-hide-sm-only">{{ $data->action }}</td>--}}
+                        <td class="am-hide-sm-only">{{ $data->role() }}</td>
                         <td class="am-hide-sm-only">{{ $data->created_at }}</td>
-                        <td class="am-hide-sm-only">{{ $data->updated_at }}</td>
+                        {{--<td class="am-hide-sm-only">{{ $data->updated_at }}</td>--}}
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">

@@ -10,4 +10,9 @@ class AdminModel extends BaseModel
     protected $fillable = [
         'id','name','password','role_id','created_at','updated_at',
     ];
+
+    public function role()
+    {
+        return RoleModel::find($this->role_id);
+    }
 }

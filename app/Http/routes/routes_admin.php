@@ -27,8 +27,13 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
     Route::get('type/tableid/{table_id}','TypeController@index');
     //权限管理
         //管理员路由
+    Route::post('admin/{id}','AdminController@update');
+//    Route::get('admin/{id}/destroy','AdminController@destroy');
+    Route::get('admin/{id}/forceDelete','AdminController@forceDelete');
     Route::resource('admin','AdminController');
         //角色路由
+    Route::post('role/{id}','RoleController@update');
+    Route::get('role/{id}/forceDelete','RoleController@forceDelete');
     Route::resource('role','RoleController');
         //操作路由
     Route::get('action/create/{pid}','ActionController@create');

@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Models\RoleModel;
+use App\Models\Admin\RoleModel;
 
 class RoleController extends BaseController
 {
@@ -39,27 +39,57 @@ class RoleController extends BaseController
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
 //            'actions'=> $this->actions(),
-            'roles'=> RoleModel::paginate($this->limit),
+//            'roles'=> RoleModel::paginate($this->limit),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
-        return view('admin.role.create', compact(
-            'actions','roles','crumb'
-        ));
+        return view('admin.role.create', $result);
     }
 
     public function store(Request $request)
     {
 //        $actions = $this->actions();
-        $roleModel = $this->getData($request);
-        $roleModel->created_at = date('Y-m-d H:m:s', time());
-        $roleModel->save();
-        return view('admin.role.index', compact('actions'));
+        $data = $this->getData($request);
+        $data['created_at'] = date('Y-m-d H:m:s', time());
+        RoleModel::create($data);
+        return redirect('/admin/role');
+    }
+
+    public function show($id)
+    {
+        $curr['name'] = $this->crumb['show']['name'];
+        $curr['url'] = $this->crumb['show']['url'];
+        $result = [
+            'data'=> RoleModel::find($id),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.role.show',$result);
+    }
+
+    public function edit($id)
+    {
+        $curr['name'] = $this->crumb['edit']['name'];
+        $curr['url'] = $this->crumb['edit']['url'];
+        $result = [
+            'data'=> RoleModel::paginate($this->limit),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.role.edit', $result);
+    }
+
+    public function update(Request $request,$id)
+    {
+        $data = $this->getData($request);
+        $data['updated_at'] = date('Y-m-d H:m:s', time());
+        RoleModel::where('id',$id)->update($data);
+        return redirect('/admin/role');
     }
 
     public function forceDelete($id)
     {
-        RoleModel::find($id)->delete();
+        RoleModel::where('id',$id)->delete();
     }
 
 
