@@ -21,9 +21,14 @@
                         </div>
 
                         <div class="am-form-group">
-                            <label>密码 / Password：</label>
-                            <input type="text" placeholder="至少6字符" minlength="6" required name="password" value="{{ $data->password }}"/>
+                            <label>角色介绍 / Introduce：</label>
+                            <textarea name="intro" cols="50" rows="5">{{ $data->intro }}</textarea>
                         </div>
+
+                        {{--<div class="am-form-group">--}}
+                            {{--<label>密码 / Password：</label>--}}
+                            {{--<input type="text" placeholder="至少6字符" minlength="6" required name="password" value="{{ $data->password }}"/>--}}
+                        {{--</div>--}}
 
                         {{--<div class="am-form-group">--}}
                             {{--<label>管理员id / Admin Id：</label>--}}
@@ -35,6 +40,7 @@
                             {{--</select>--}}
                         {{--</div>--}}
 
+                        <button class="am-btn am-btn-primary" onclick="history.go(-1);">返回</button>
                         <button type="submit" class="am-btn am-btn-primary">保存修改</button>
                     </fieldset>
                 </form>

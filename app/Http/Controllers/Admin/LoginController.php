@@ -34,6 +34,7 @@ class LoginController extends BaseController
         if ($admin && $request->password==$admin->password) {
             Session::put('admin.username',$request->username);
             Session::put('admin.password',$request->password);
+            dd(Session::get('admin'));
             return redirect('/admin');
         } else {
             return redirect('/admin/login');

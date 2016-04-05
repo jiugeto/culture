@@ -36,7 +36,7 @@
 
                         <div class="am-form-group">
                             <label>所在角色组 / Role：</label>
-                            <select name="role_id">
+                            <select name="role_id" required>
                             @foreach($roleModels as $roleModel)
                                 <option value="{{ $roleModel->id }}"
                                         {{ $data->role_id==$roleModel->id ? 'selected' : '' }}>
@@ -45,6 +45,12 @@
                             </select>
                         </div>
 
+                        <div class="am-form-group">
+                            <label>该管理员备注 / Introduce：</label>
+                            <textarea name="intro" cols="50" rows="5">{{ $data->intro }}</textarea>
+                        </div>
+
+                        <button class="am-btn am-btn-primary" onclick="history.go(-1);">返回</button>
                         <button type="submit" class="am-btn am-btn-primary">保存修改</button>
                     </fieldset>
                 </form>

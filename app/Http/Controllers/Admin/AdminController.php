@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-//use Illuminate\Http\Request;
-use App\Http\Requests;
-//use App\Models\Admin\ActionModel;
+use Illuminate\Http\Request;
 use App\Models\Admin\AdminModel;
 use App\Models\Admin\RoleModel;
-use Symfony\Component\HttpFoundation\Request;
+//use Symfony\Component\HttpFoundation\Request;
 
 class AdminController extends BaseController
 {
@@ -29,7 +27,7 @@ class AdminController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $result = [
 //            'actions'=> $this->actions(),
-            'datas'=> RoleModel::paginate($this->limit),
+            'datas'=> AdminModel::orderBy('id','desc')->paginate($this->limit),
             'prefix_url'=> '/admin/admin',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -62,11 +60,11 @@ class AdminController extends BaseController
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
         $result = [
-            'datas'=> AdminModel::find($id),
+            'data'=> AdminModel::find($id),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
-        return view('admin.admin.show');
+        return view('admin.admin.show', $result);
     }
 
     public function edit($id)
@@ -74,7 +72,7 @@ class AdminController extends BaseController
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
         $result = [
-            'datas'=> AdminModel::find($id),
+            'data'=> AdminModel::find($id),
             'roleModels'=> RoleModel::all(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -112,9 +110,12 @@ class AdminController extends BaseController
     public function getData(Request $request)
     {
         $data = [
-            'name'=> $request->name,
+            'username'=> $request->username,
+            'realname'=> $request->realname,
             'password'=> $request->password,
+            'email'=> $request->email,
             'role_id'=> $request->role_id,
+            'intro'=> $request->intro,
         ];
         return $data;
     }

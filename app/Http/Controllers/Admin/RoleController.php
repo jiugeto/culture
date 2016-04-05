@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
+//use App\Http\Requests;
 use App\Models\Admin\RoleModel;
 
 class RoleController extends BaseController
@@ -25,7 +25,7 @@ class RoleController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $result = [
 //            'actions'=> $this->actions(),
-            'datas'=> RoleModel::paginate($this->limit),
+            'datas'=> RoleModel::orderBy('id','desc')->paginate($this->limit),
             'prefix_url'=> '/admin/role',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -50,7 +50,8 @@ class RoleController extends BaseController
     {
 //        $actions = $this->actions();
         $data = $this->getData($request);
-        $data['created_at'] = date('Y-m-d H:m:s', time());
+//        $data['created_at'] = date('Y-m-d H:m:s', time());
+        $data['created_at'] = date('Y-m-d', time());
         RoleModel::create($data);
         return redirect('/admin/role');
     }
@@ -72,7 +73,7 @@ class RoleController extends BaseController
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
         $result = [
-            'data'=> RoleModel::paginate($this->limit),
+            'data'=> RoleModel::find($id),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -82,7 +83,8 @@ class RoleController extends BaseController
     public function update(Request $request,$id)
     {
         $data = $this->getData($request);
-        $data['updated_at'] = date('Y-m-d H:m:s', time());
+//        $data['updated_at'] = date('Y-m-d H:m:s', time());
+        $data['updated_at'] = date('Y-m-d', time());
         RoleModel::where('id',$id)->update($data);
         return redirect('/admin/role');
     }
@@ -107,12 +109,11 @@ class RoleController extends BaseController
      */
     public function getData(Request $request)
     {
-        $model = $this->model;
-        $model->name = $request->name;
-        //这里密码要更换 hash 算法
-        $model->password = $request->password;
-        $model->admin_id = $request->admin_id;
-        return $model;
+        $data = [
+            'name'=> $request->name,
+            'intro'=> $request->intro,
+        ];
+        return $data;
     }
 
     /**

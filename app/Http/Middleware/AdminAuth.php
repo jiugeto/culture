@@ -10,108 +10,25 @@ namespace App\Http\Middleware;
 
 
 use Closure;
-use App\Models\Admin\ActionModel;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\View;
+//use App\Models\Admin\ActionModel;
+//use Illuminate\Support\Facades\Route;
+//use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class AdminAuth
 {
-    function __construct()
-    {
-        // TODO: Implement __construct() method.
-    }
-
-
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Closure $next
-     * @return mixed
-     */
     public function handle($request, Closure $next)
     {
-        if (!Auth::check()) {
-            Session::flash('msg', '请先登录');
-
-            return redirect('admin/login');
+        //判断系统后台有无此登录的用户
+        if(!Session::has('admin.username')){
+            return redirect('/admin/login');
         }
-        $user = Auth::user();
-
-        $currentAction = Route::currentRouteAction();
-
-        if ($user->is_admin) {
-            $actions = ActionModel::where('pid', 0)->with('children')->get();
-        } else {
-
-            $user->load('role.actions.children');
-
-            $actions = $this->buildTree($user->role->actions);
-
-            if (!$this->checkPermission($currentAction, $actions)) {
-
-                Session::flash('msg', '对不起,你没有权限访问该资源');
-
-                return redirect('admin/login');
-            }
+        //验证
+        if(Session::get('admin.password')!=$request->password){
+            Session::put('admin.username', $request->username);
+            Session::put('admin.password', $request->password);
         }
-
-        View::share('actions', $actions);
-
         return $next($request);
-    }
-
-    /**
-     * 将所有的操作递归成树形结构
-     * @param $actions
-     * @param int $pid
-     * @return \Illuminate\Support\Collection
-     */
-    private function buildTree($actions, $pid = 0)
-    {
-        $returnValue = array();
-        foreach ($actions as $action) {
-            if ($action->pid == $pid) {
-                $children = $this->buildTree($actions, $action->id);
-                if ($children) {
-                    $action->children = $children;
-                }
-                $returnValue[] = $action;
-            }
-        }
-
-        return collect($returnValue);
-
-    }
-
-    /**
-     * 检查用户的操作中是否有当前操作的权限
-     * @param $currentAction
-     * @param $actions
-     * @param int $level
-     * @return bool
-     */
-    private function checkPermission($currentAction, $actions, $level = 1)
-    {
-        $flag = false;
-        foreach ($actions as $action) {
-            //这里因为我多加了一层，权限判断的时候要去掉这一层
-//            $flag = $currentAction === $action->action_namespace . '\\' . $action->action;
-//            print_r($action);exit;
-            $flag = $currentAction === $action->action_namespace . '\\' . $action->action_class . '@'. $action->action_method;
-            if (!$flag && $action->children
-                && !$action->children->isEmpty()
-            ) {
-                $flag = $this->checkPermission($currentAction, $action->children);
-            }
-            if ($flag) {
-                break;
-            }
-        }
-
-        return $flag;
-
     }
 }

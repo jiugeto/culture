@@ -30,8 +30,16 @@
                     <td>{{ $data->password }}</td>
                 </tr>
                 <tr>
+                    <td class="am-hide-sm-only">邮箱 / Email：</td>
+                    <td>{{ $data->email }}</td>
+                </tr>
+                <tr>
                     <td class="am-hide-sm-only">角色组 / Role：</td>
                     <td>{{ $data->role() }}</td>
+                </tr>
+                <tr>
+                    <td class="am-hide-sm-only">该管理员备注 / Introduce：</td>
+                    <td>{{ $data->intro }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">创建时间 / Create Time：</td>
@@ -43,6 +51,7 @@
                 </tr>
                 </tbody>
             </table>
+            <button class="am-btn am-btn-primary" onclick="history.go(-1);">返回</button>
         </div>
     </div>
 @stop
