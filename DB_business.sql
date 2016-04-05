@@ -62,10 +62,11 @@ CREATE TABLE `ba_admin` (
   `email` varchar(255) NOT NULL COMMENT '邮箱',
   `password` varchar(255) NOT NULL COMMENT '登陆密码',
   `role_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '管理员组别，关联ba_role',
+  `intro` varchar(255) DEFAULT NULL COMMENT '管理员介绍',
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='系统后台管理员表（登陆者）';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='系统后台管理员表（登陆者）';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -74,6 +75,7 @@ CREATE TABLE `ba_admin` (
 
 LOCK TABLES `ba_admin` WRITE;
 /*!40000 ALTER TABLE `ba_admin` DISABLE KEYS */;
+INSERT INTO `ba_admin` VALUES (1,'jiuge','jiuge','','jiuge',1,'','2016-04-04 16:00:00','0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `ba_admin` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -87,11 +89,11 @@ DROP TABLE IF EXISTS `ba_role`;
 CREATE TABLE `ba_role` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL COMMENT '角色名称',
-  `password` varchar(255) NOT NULL COMMENT '登陆密码',
+  `intro` varchar(255) NOT NULL COMMENT '角色简介',
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='系统后台角色表（管理组别）';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='系统后台角色表（管理组别）';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -100,6 +102,7 @@ CREATE TABLE `ba_role` (
 
 LOCK TABLES `ba_role` WRITE;
 /*!40000 ALTER TABLE `ba_role` DISABLE KEYS */;
+INSERT INTO `ba_role` VALUES (1,'超级管理员','最高权限','2016-04-05','0000-00-00');
 /*!40000 ALTER TABLE `ba_role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -924,4 +927,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-04 17:45:49
+-- Dump completed on 2016-04-05 23:17:24
