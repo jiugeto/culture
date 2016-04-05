@@ -31,7 +31,7 @@
 
                         <div class="am-form-group">
                             <label>Email / email：</label>
-                            <input type="text" placeholder="例：12345@qq.com" pattern="^[0-9a-zA-Z-_]+@([0-9a-zA-Z-_])+(.[0-9a-zA-Z-_])+$" required name="email" value="{{ $data->email }}"/>
+                            <input type="text" placeholder="例：12345@qq.com" pattern="^[0-9a-zA-Z-_]+@([0-9a-zA-Z-_])+(.[0-9a-zA-Z-_])+$" name="email" value="{{ $data->email }}"/>
                         </div>
 
                         <div class="am-form-group">

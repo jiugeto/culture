@@ -4,8 +4,8 @@
  */
 Route::group(['prefix' => 'admin','namespace'=>'Admin'], function(){
     Route::get('login', 'LoginController@login');
-//    Route::post('login', 'LoginController@dologin');
-//    Route::get('logout', 'LoginController@dologout');
+    Route::post('login', 'LoginController@dologin');
+    Route::get('logout', 'LoginController@dologout');
 });
 
 /**
