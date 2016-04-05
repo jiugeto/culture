@@ -3,8 +3,12 @@ namespace App\Models;
 
 class UserModel extends BaseModel
 {
-    protected $table = 'bs_user';
+    /**
+     * 这是用户表model
+     */
+
+    protected $table = 'users';
     protected $fillable = [
-        'id','name','password','created_at','updated_at',
+        'id','username','password','email','qq','tel','mobile','isauth','emailck','pid','cid','isauth','created_at','updated_at',
     ];
 }

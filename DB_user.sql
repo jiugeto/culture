@@ -49,10 +49,10 @@ UNLOCK TABLES;
 -- Table structure for table `members`
 --
 
-DROP TABLE IF EXISTS `members`;
+DROP TABLE IF EXISTS `persons`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `members` (
+CREATE TABLE `persons` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `realname` varchar(255) NOT NULL COMMENT '真实名称',
   `type_id` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '个人类型：1普通会员，2设计师会员',
@@ -63,7 +63,7 @@ CREATE TABLE `members` (
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='个人表 bs_members';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='个人表 bs_persons';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

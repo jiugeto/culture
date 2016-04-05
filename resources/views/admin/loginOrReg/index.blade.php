@@ -29,17 +29,20 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="">Home</a></li>
+                {{--<li><a href="">Home</a></li>--}}
+                <li><a href="">后台登陆</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                    <li><a href="">Login</a></li>
-                    <li><a href="">Register</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                        </ul>
-                    </li>
+                {{--<li><a href="">Login</a></li>--}}
+                {{--<li><a href="">Register</a></li>--}}
+                {{--<li><a href="/admin/login">登陆</a></li>--}}
+                {{--<li><a href="/admin/register">注册</a></li>--}}
+                {{--<li class="dropdown">--}}
+                    {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="caret"></span></a>--}}
+                    {{--<ul class="dropdown-menu" role="menu">--}}
+                    {{--</ul>--}}
+                {{--</li>--}}
             </ul>
         </div>
     </div>
