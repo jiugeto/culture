@@ -12,6 +12,8 @@ Route::group(['prefix'=>'login'], function(){
 });
 Route::group(['prefix'=>'regist'], function(){
     Route::resource('/','RegisterController');
+    Route::resource('doregist','RegisterController@doregist');
+    Route::get('success','RegisterController@success');
 });
 
 

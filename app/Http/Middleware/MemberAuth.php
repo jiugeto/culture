@@ -11,6 +11,7 @@ namespace App\Http\Middleware;
 use Session;
 use App\Models\UserModel;
 use Closure;
+use Hash;
 
 class MemberAuth
 {
@@ -24,9 +25,11 @@ class MemberAuth
         }
         //验证密码
         $username = Session::get('user.username');
+        $password = Session::get('user.password');
         $adminModel = UserModel::where('username',$username)->first();
-        if (!$adminModel) { return redirect('/login'); }
-        if(Session::get('user.password')!=$adminModel->password){
+//        dd($password,Hash::make($password),$adminModel);
+        if(!$adminModel || !(Hash::check($password,$adminModel->password))){
+            dd('密码错误');
             return redirect('/login');
         }
         return $next($request);

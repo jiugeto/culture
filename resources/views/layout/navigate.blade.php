@@ -6,7 +6,7 @@
     <hr>
     <div class="nav_body">
         <div><img src="/assets-home/images/logo.png" class="logo"></div>
-        <div class="nav_qiehuan" style="display:{{$curr=='home'?'none':'block'}};">
+        <div class="nav_qiehuan" style="display:{{explode('/',$_SERVER['REQUEST_URI'])[1]==''?'none':'block'}};">
             <img src="/assets/images/daohang.png" class="imgMiniSize"> 导航
         </div>
         <div class="nav_qh">
@@ -20,9 +20,11 @@
                 {{--<a href="" class="nav_a">租赁频道</a>--}}
                 {{--<a href="" class="nav_a">设计频道</a>--}}
                 {{--<a href="" class="nav_a">关于我们</a>--}}
-                @foreach($menus as $kmenu=>$menu)
+                @if(in_array(explode('/',$_SERVER['REQUEST_URI'])[1],['product','creation','supply','demand','entertain','rent','design','about']))
+                    @foreach($menus as $kmenu=>$menu)
                     <a href="/{{$kmenu}}" class="{{$curr==$kmenu?'curr':'nav_a'}}">{{ $menu }}</a>
-                @endforeach
+                    @endforeach
+                @endif
             </div>
         </div>
         {{--<form action="" class="search">--}}
@@ -34,18 +36,23 @@
             <input type="text" class="search_input" name="global_search" placeholder="想要啥效果，赶紧找哦">
             <input type="submit" class="search_text" value="搜 索">
         </div>
-        <div class="keyword_pos">搜索关键词：</div>
+        <div class="keyword_pos">搜索关键词：{{explode('/',$_SERVER['REQUEST_URI'])[1]}}</div>
         <div class="nav_right">
-            <a href="/login"><img src="/assets/images/key.png" class="imgMiniSize">登陆/注册</a>&nbsp;
+            {{--<a href="/login"><img src="/assets/images/key.png" class="imgMiniSize">登陆/注册</a>&nbsp;--}}
+            <a href="/{{ Session::has('user.username') ? 'member' : 'login' }}">
+                <img src="/assets/images/key.png" class="imgMiniSize">
+                {{ Session::has('user.username') ? Session::get('user.username') : '登录/注册' }}</a>&nbsp;
             {{--<a href="/"><img src="/assets/images/msg.png" class="imgMiniSize">消息</a>&nbsp;--}}
             {{--<img src="/assets/images/record.png" class="imgMiniSize"><a href="/">记录</a>--}}
             &nbsp;&nbsp;<a href="/opinion" class="opinion" style="color:white;">用户意见</a>
         </div>
         <div class="navigate">
-            <div class="navigate_a" style="display:{{$curr=='home'?'block':'none'}};">
-                @foreach($menus as $kmenu=>$menu)
+            <div class="navigate_a" style="display:{{explode('/',$_SERVER['REQUEST_URI'])[1]==''?'block':'none'}};">
+                @if(explode('/',$_SERVER['REQUEST_URI'])[1]=='home')
+                    @foreach($menus as $kmenu=>$menu)
                     <a href="/{{$kmenu}}" class="{{$curr==$kmenu?'curr':'nav_a'}}">{{ $menu }}</a>
-                @endforeach
+                    @endforeach
+                @endif
             </div>
         </div>
     </div>

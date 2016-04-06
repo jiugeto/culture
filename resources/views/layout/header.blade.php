@@ -5,7 +5,13 @@
     <div class="header_text text_color">
       <span>
         <div class="head_left"><a href="">欢迎来逛逛</a></div>
-        <div class="head_left"><a href="/regist">免费注册</a></div>
+        <div class="head_left">
+            @if(Session::has('user.username'))
+                <a href="/member">{{ Session::get('user.username') }}</a>
+            @else
+                <a href="/regist">免费注册</a>
+            @endif
+        </div>
       </span>
       <span class="header_right">
         {{--<div class="head_right"><a href="">购物车</a></div>--}}

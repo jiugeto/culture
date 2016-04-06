@@ -17,6 +17,7 @@ class HomeController extends BaseController
     {
         $result = [
             'menus'=> $this->list,
+            'curr'=> 'member',
         ];
         return view('member.home.index', $result);
     }
