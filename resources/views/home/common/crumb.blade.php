@@ -5,7 +5,7 @@
     <div class="crumb">
         <div class="right">
             <a href="/">首页</a> /
-            <a href="/{{$curr}}">{{ $menus[$curr] }}</a>
+            <a href="/{{$curr_menu}}">{{ $menus[$curr_menu] }}</a>
             @if(isset($menus['create']) && $menus['create']=='发布意见')
                 @if($isreply==0)  / 发布新意见 @else {{ isset($reply) ? ' / 意见'.$reply.'的回复' : '' }} @endif
             @endif

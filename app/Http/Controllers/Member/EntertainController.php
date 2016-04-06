@@ -13,9 +13,9 @@ class EntertainController extends BaseController
 
     public function __construct()
     {
-        $this->list['func']['name'] = '娱乐供求';
-        $this->list['func']['url'] = 'entertain';
-        $this->list['create']['name'] = '娱乐发布';
+        $this->lists['func']['name'] = '娱乐供求';
+        $this->lists['func']['url'] = 'entertain';
+        $this->lists['create']['name'] = '娱乐发布';
     }
 
     public function index($genre=0)
@@ -23,9 +23,10 @@ class EntertainController extends BaseController
         $result = [
             'datas'=> $this->query($del=0,$genre),
             'prefix_url'=> '/admin/entertain',
-            'menus'=> $this->list,
-            'curr'=> '',
+            'lists'=> $this->lists,
+            'curr_list'=> '',
             'genre'=> $genre,
+            'menus'=> $this->menus,
         ];
         return view('member.entertain.index', $result);
     }
@@ -35,9 +36,10 @@ class EntertainController extends BaseController
         $result = [
             'datas'=> $this->query($del=1,$genre),
             'prefix_url'=> '/admin/entertain',
-            'menus'=> $this->list,
-            'curr'=> 'trash',
+            'lists'=> $this->lists,
+            'curr_list'=> 'trash',
             'genre'=> $genre,
+            'menus'=> $this->menus,
         ];
         return view('member.entertain.index', $result);
     }
@@ -45,8 +47,9 @@ class EntertainController extends BaseController
     public function create()
     {
         $result = [
-            'menus'=> $this->list,
-            'curr'=> 'create',
+            'lists'=> $this->lists,
+            'curr_list'=> 'create',
+            'menus'=> $this->menus,
         ];
         return view('member.entertain.create', $result);
     }
@@ -63,8 +66,9 @@ class EntertainController extends BaseController
     {
         $result = [
             'data'=> EntertainModel::find($id),
-            'menus'=> $this->list,
-            'curr'=> 'edit',
+            'lists'=> $this->lists,
+            'curr_list'=> 'edit',
+            'menus'=> $this->menus,
         ];
         return view('member.entertain.edit', $result);
     }
@@ -81,8 +85,9 @@ class EntertainController extends BaseController
     {
         $result = [
             'data'=> EntertainModel::find($id),
-            'menus'=> $this->list,
-            'curr'=> 'show',
+            'lists'=> $this->lists,
+            'curr_list'=> 'show',
+            'menus'=> $this->menus,
         ];
         return view('member.entertain.show', $result);
     }

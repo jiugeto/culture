@@ -9,15 +9,16 @@ class HomeController extends BaseController
 
     public function __construct()
     {
-        $this->list['func']['name'] = '账户首页';
-        $this->list['func']['url'] = '';
+        $this->lists['func']['name'] = '账户首页';
+        $this->lists['func']['url'] = '';
     }
 
     public function index()
     {
         $result = [
-            'menus'=> $this->list,
-            'curr'=> 'member',
+            'lists'=> $this->lists,
+            'curr_list'=> 'member',
+            'menus'=> $this->menus,
         ];
         return view('member.home.index', $result);
     }

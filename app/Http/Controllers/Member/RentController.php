@@ -13,9 +13,9 @@ class RentController extends BaseController
 
     public function __construct()
     {
-        $this->list['func']['name'] = '租赁供求';
-        $this->list['func']['url'] = 'rent';
-        $this->list['create']['name'] = '租赁发布';
+        $this->lists['func']['name'] = '租赁供求';
+        $this->lists['func']['url'] = 'rent';
+        $this->lists['create']['name'] = '租赁发布';
         $this->model = new RentModel();
     }
 
@@ -24,8 +24,9 @@ class RentController extends BaseController
         $result = [
             'datas'=> $this->query($del=0,$genre),
             'genre'=> $genre,
-            'menus'=> $this->list,
-            'curr'=> '',
+            'lists'=> $this->lists,
+            'curr_list'=> '',
+            'menus'=> $this->menus,
         ];
         return view('member.rent.index', $result);
     }
@@ -35,8 +36,9 @@ class RentController extends BaseController
         $result = [
             'datas'=> $this->query($del=1,$genre),
             'genre'=> $genre,
-            'menus'=> $this->list,
-            'curr'=> 'trash',
+            'lists'=> $this->lists,
+            'curr_list'=> 'trash',
+            'menus'=> $this->menus,
         ];
         return view('member.rent.index', $result);
     }
@@ -44,8 +46,9 @@ class RentController extends BaseController
     public function create()
     {
         $result = [
-            'menus'=> $this->list,
-            'curr'=> 'create',
+            'lists'=> $this->lists,
+            'curr_list'=> 'create',
+            'menus'=> $this->menus,
         ];
         return view('member.rent.create', $result);
     }
@@ -63,8 +66,9 @@ class RentController extends BaseController
         $data = RentModel::find($id);
         $result = [
             'data'=> $data,
-            'menus'=> $this->list,
-            'curr'=> 'create',
+            'lists'=> $this->lists,
+            'curr_list'=> 'create',
+            'menus'=> $this->menus,
         ];
         return view('member.rent.edit', $result);
     }
@@ -82,8 +86,9 @@ class RentController extends BaseController
         $data = RentModel::find($id);
         $result = [
             'data'=> $data,
-            'menus'=> $this->list,
-            'curr'=> 'show',
+            'lists'=> $this->lists,
+            'curr_list'=> 'show',
+            'menus'=> $this->menus,
         ];
         return view('member.rent.show', $result);
     }

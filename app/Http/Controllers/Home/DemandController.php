@@ -10,8 +10,8 @@ class DemandController extends BaseController
     public function index()
     {
         $result = [
-            'menus'=> $this->list,
-            'curr'=> 'demand',
+            'menus'=> $this->menus,
+            'curr_menu'=> 'demand',
         ];
         return view('home.demand.index', $result);
     }

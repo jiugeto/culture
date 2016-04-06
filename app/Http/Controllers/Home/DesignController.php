@@ -10,8 +10,8 @@ class DesignController extends BaseController
     public function index($genre=0)
     {
         $result = [
-            'menus'=> $this->list,
-            'curr'=> 'design',
+            'menus'=> $this->menus,
+            'curr_menu'=> 'design',
             'genre'=> $genre,
         ];
         return view('home.design.index', $result);

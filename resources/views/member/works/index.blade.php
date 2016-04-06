@@ -1,7 +1,7 @@
 @extends('member.main')
 @section('content')
     @include('member.common.crumb')
-    <div class="mem_tab">@include('member.common.menus')</div>
+    <div class="mem_tab">@include('member.common.lists')</div>
     <div class="hr_tab"></div>
     <!-- 空白 -->
     <div class="list_kongbai">&nbsp;</div>

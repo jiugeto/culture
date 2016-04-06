@@ -17,9 +17,9 @@ class PersonDController extends BaseGoodsController
 
     public function __construct()
     {
-        $this->list['func']['name'] = '个人需求';
-        $this->list['func']['url'] = 'personD';
-        $this->list['create']['name'] = '发布需求';
+        $this->lists['func']['name'] = '个人需求';
+        $this->lists['func']['url'] = 'personD';
+        $this->lists['create']['name'] = '发布需求';
         $this->model = new GoodsModel();
     }
 
@@ -28,8 +28,9 @@ class PersonDController extends BaseGoodsController
         $result = [
             'datas'=> $this->query($del=0,$this->type,$cate_id),
             'prefix_url'=> '/member/personD',
-            'menus'=> $this->list,
-            'curr'=> '',
+            'lists'=> $this->lists,
+            'menus'=> $this->menus,
+            'curr_list'=> '',
         ];
         return view('member.personSD.index', $result);
     }
@@ -39,8 +40,9 @@ class PersonDController extends BaseGoodsController
         $result = [
             'datas'=> $this->query($del=1,$this->type,$cate_id),
             'prefix_url'=> '/member/personD/trash',
-            'menus'=> $this->list,
-            'curr'=> 'trash',
+            'lists'=> $this->lists,
+            'curr_list'=> 'trash',
+            'menus'=> $this->menus,
         ];
         return view('member.personSD.index', $result);
     }
@@ -50,8 +52,9 @@ class PersonDController extends BaseGoodsController
         $result = [
 //            'cates'=> $this->model->cates(),
             'categorys'=> $this->model->categorys(),
-            'menus'=> $this->list,
-            'curr'=> 'create',
+            'lists'=> $this->lists,
+            'curr_list'=> 'create',
+            'menus'=> $this->menus,
         ];
 //        dd($this->model->categorys());
         return view('member.personSD.create', $result);
@@ -72,8 +75,9 @@ class PersonDController extends BaseGoodsController
             'data'=> $data,
 //            'cates'=> $this->model->cates(),
             'categorys'=> CategoryModel::all(),
-            'menus'=> $this->list,
-            'curr'=> 'edit',
+            'lists'=> $this->lists,
+            'curr_list'=> 'edit',
+            'menus'=> $this->menus,
         ];
         return view('member.personSD.edit', $result);
     }
@@ -91,8 +95,8 @@ class PersonDController extends BaseGoodsController
         $data = GoodsModel::find($id);
         $result = [
             'data'=> $data,
-            'menus'=> $this->list,
-            'curr'=> 'show',
+            'lists'=> $this->lists,
+            'curr_list'=> 'show',
         ];
         return view('member.personD.show', $result);
     }

@@ -10,8 +10,8 @@ class CreationController extends BaseController
     public function index()
     {
         $result = [
-            'menus'=> $this->list,
-            'curr'=> 'creation',
+            'menus'=> $this->menus,
+            'curr_menu'=> 'creation',
         ];
         return view('home.creation.index', $result);
     }

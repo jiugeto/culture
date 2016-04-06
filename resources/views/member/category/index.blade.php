@@ -1,7 +1,7 @@
 @extends('member.main')
 @section('content')
     @include('member.common.crumb')
-    <div class="mem_tab">@include('member.common.menus')</div>
+    <div class="mem_tab">@include('member.common.lists')</div>
     <div class="hr_tab"></div>
     <!-- 空白 -->
     <div class="list_kongbai">&nbsp;</div>
@@ -26,11 +26,11 @@
                 <td>{{ $data->pid }}</td>
                 <td>{{ $data->created_at }}</td>
                 <td>
-                    @if($curr=='')
+                    @if($curr_list=='')
                         <a href="/member/category/{{ $data->id }}" class="list_btn">查看</a>
                         <a href="/member/category/{{ $data->id }}/edit" class="list_btn">编辑</a>
                         <a href="/member/category/{{ $data->id }}/destroy" class="list_btn">删除</a>
-                    @elseif($curr=='trash')
+                    @elseif($curr_list=='trash')
                         <a href="/member/category/{{ $data->id }}/restore" class="list_btn">还原</a>
                         <a href="/member/category/{{ $data->id }}/forceDelete" class="list_btn">销毁记录</a>
                     @endif

@@ -10,8 +10,8 @@ class AboutController extends BaseController
     public function index($genre=0)
     {
         $result = [
-            'menus'=> $this->list,
-            'curr'=> 'about',
+            'menus'=> $this->menus,
+            'curr_menu'=> 'about',
         ];
         return view('home.about.index', $result);
     }

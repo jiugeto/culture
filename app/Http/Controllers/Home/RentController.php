@@ -10,8 +10,8 @@ class RentController extends BaseController
     public function index($genre=0)
     {
         $result = [
-            'menus'=> $this->list,
-            'curr'=> 'rent',
+            'menus'=> $this->menus,
+            'curr_menu'=> 'rent',
             'genre'=> $genre,
         ];
         return view('home.rent.index', $result);

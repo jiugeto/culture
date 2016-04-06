@@ -1,7 +1,7 @@
 @extends('member.main')
 @section('content')
     @include('member.common.crumb')
-    <div class="mem_tab">@include('member.common.menus')</div>
+    <div class="mem_tab">@include('member.common.lists')</div>
     <div class="hr_tab"></div>
     <!-- 空白 -->
     <div class="list_kongbai">&nbsp;</div>
@@ -19,19 +19,19 @@
             @foreach($datas as $data)
             <tr>
                 <td>{{ $data->id }}</td>
-                <td><a href="/member/{{$menus['func']['url']}}/{{ $data->id }}">{{ $data->name }}</a></td>
+                <td><a href="/member/{{$lists['func']['url']}}/{{ $data->id }}">{{ $data->name }}</a></td>
                 <td>{{ $data->catename==''?'暂无':$data->catename }}</td>
                 <td>{{ $data->uname }}</td>
                 <td>{{ $data->created_at }}</td>
                 <td>
-                    @if($curr=='')
-                        <a href="/member/{{$menus['func']['url']}}/{{ $data->id }}/pre" class="list_btn">预览</a>
-                        <a href="/member/{{$menus['func']['url']}}/{{ $data->id }}" class="list_btn">查看</a>
-                        <a href="/member/{{$menus['func']['url']}}/{{ $data->id }}/edit" class="list_btn">编辑</a>
-                        <a href="/member/{{$menus['func']['url']}}/{{ $data->id }}/destroy" class="list_btn">删除</a>
-                    @elseif($curr=='trash')
-                        <a href="/member/{{$menus['func']['url']}}/{{ $data->id }}/restore" class="list_btn">还原</a>
-                        <a href="/member/{{$menus['func']['url']}}/{{ $data->id }}/forceDelete" class="list_btn">销毁记录</a>
+                    @if($curr_list=='')
+                        <a href="/member/{{$lists['func']['url']}}/{{ $data->id }}/pre" class="list_btn">预览</a>
+                        <a href="/member/{{$lists['func']['url']}}/{{ $data->id }}" class="list_btn">查看</a>
+                        <a href="/member/{{$lists['func']['url']}}/{{ $data->id }}/edit" class="list_btn">编辑</a>
+                        <a href="/member/{{$lists['func']['url']}}/{{ $data->id }}/destroy" class="list_btn">删除</a>
+                    @elseif($curr_list=='trash')
+                        <a href="/member/{{$lists['func']['url']}}/{{ $data->id }}/restore" class="list_btn">还原</a>
+                        <a href="/member/{{$lists['func']['url']}}/{{ $data->id }}/forceDelete" class="list_btn">销毁记录</a>
                     @endif
                 </td>
             </tr>

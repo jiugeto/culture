@@ -18,9 +18,9 @@ class CompanySController extends BaseGoodsController
 
     public function __construct()
     {
-        $this->list['func']['name'] = '企业作品';
-        $this->list['func']['url'] = 'companyS';
-        $this->list['create']['name'] = '发布作品';
+        $this->lists['func']['name'] = '企业作品';
+        $this->lists['func']['url'] = 'companyS';
+        $this->lists['create']['name'] = '发布作品';
         $this->model = new GoodsModel();
         $this->cateModels = new CategoryModel();
     }
@@ -31,8 +31,9 @@ class CompanySController extends BaseGoodsController
             'datas'=> $this->query($del=0,$this->type,$cate_id),
             'cateModels'=> $this->cateModels,
             'prefix_url'=> '/member/companyS',
-            'menus'=> $this->list,
-            'curr'=> '',
+            'lists'=> $this->lists,
+            'curr_list'=> '',
+            'menus'=> $this->menus,
         ];
 //        dd($this->query($del=0,$this->type,$cate_id),$this->model->cates());
         return view('member.companySD.index', $result);
@@ -44,8 +45,9 @@ class CompanySController extends BaseGoodsController
             'datas'=> $this->query($del=1,$this->type,$cate_id),
             'cateModels'=> $this->cateModels,
             'prefix_url'=> '/member/companyS/trash',
-            'menus'=> $this->list,
-            'curr'=> 'trash',
+            'lists'=> $this->lists,
+            'curr_list'=> 'trash',
+            'menus'=> $this->menus,
         ];
         return view('member.companySD.index', $result);
     }
@@ -54,8 +56,9 @@ class CompanySController extends BaseGoodsController
     {
         $result = [
             'categorys'=> $this->model->categorys(),
-            'menus'=> $this->list,
-            'curr'=> 'create',
+            'lists'=> $this->lists,
+            'curr_list'=> 'create',
+            'menus'=> $this->menus,
         ];
         return view('member.companySD.create', $result);
     }
@@ -73,8 +76,9 @@ class CompanySController extends BaseGoodsController
         $result = [
             'data'=> GoodsModel::find($id),
             'categorys'=> $this->model->categorys(),
-            'menus'=> $this->list,
-            'curr'=> 'edit',
+            'lists'=> $this->lists,
+            'curr_list'=> 'edit',
+            'menus'=> $this->menus,
         ];
         return view('member.companySD.edit', $result);
     }
@@ -94,8 +98,9 @@ class CompanySController extends BaseGoodsController
         $result = [
             'data'=> $data,
             'types'=> $this->model['types'],
-            'menus'=> $this->list,
-            'curr'=> 'show',
+            'lists'=> $this->lists,
+            'curr_list'=> 'show',
+            'menus'=> $this->menus,
         ];
         return view('member.companySD.show', $result);
     }

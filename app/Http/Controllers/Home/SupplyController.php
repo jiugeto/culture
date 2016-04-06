@@ -10,8 +10,8 @@ class SupplyController extends BaseController
     public function index()
     {
         $result = [
-            'menus'=> $this->list,
-            'curr'=> 'supply',
+            'menus'=> $this->menus,
+            'curr_menu'=> 'supply',
         ];
         return view('home.supply.index', $result);
     }

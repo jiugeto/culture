@@ -14,15 +14,15 @@ class OpinionController extends BaseController
 
     public function __construct()
     {
-        $this->list['opinion'] = '用户意见';
+        $this->menus['opinion'] = '用户意见';
     }
 
     public function index($status=0)
     {
         $result = [
             'datas'=> $this->query($status),
-            'menus'=> $this->list,
-            'curr'=> $this->url_curr,
+            'menus'=> $this->menus,
+            'curr_menu'=> $this->url_curr,
             'status'=> $status,
         ];
         return view('home.opinion.index', $result);
@@ -32,10 +32,10 @@ class OpinionController extends BaseController
     {
         //如果 reply 是0。则无此记录，为新意见 isreply==0 ，否则是 isreply==1
         if (OpinionModel::find($reply)) { $isreply = 1; }else{ $isreply = 0; }
-        $this->list['create'] = '发布意见';
+        $this->menus['create'] = '发布意见';
         $result = [
-            'menus'=> $this->list,
-            'curr'=> $this->url_curr,
+            'menus'=> $this->menus,
+            'curr_menu'=> $this->url_curr,
             'isreply'=> $isreply,
         ];
         return view('home.opinion.create', $result);
@@ -51,22 +51,22 @@ class OpinionController extends BaseController
 
     public function show($id)
     {
-        $this->list['show'] = '意见详情';
+        $this->menus['show'] = '意见详情';
         $result = [
             'data'=> OpinionModel::find($id),
-            'menus'=> $this->list,
-            'curr'=> $this->url_curr,
+            'menus'=> $this->menus,
+            'curr_menu'=> $this->url_curr,
         ];
         return view('home.opinion.show', $result);
     }
 
     public function edit($id)
     {
-        $this->list['edit'] = '修改意见';
+        $this->menus['edit'] = '修改意见';
         $result = [
             'data'=> OpinionModel::find($id),
-            'menus'=> $this->list,
-            'curr'=> $this->url_curr,
+            'menus'=> $this->menus,
+            'curr_menu'=> $this->url_curr,
         ];
         return view('home.opinion.edit', $result);
     }

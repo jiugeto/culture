@@ -12,18 +12,19 @@ class ProductController extends BaseController
 
     public function __construct()
     {
-        $this->list['func']['name'] = '在线创作';
-        $this->list['func']['url'] = 'product';
-        $this->list['create']['name'] = '开始创作';
+        $this->lists['func']['name'] = '在线创作';
+        $this->lists['func']['url'] = 'product';
+        $this->lists['create']['name'] = '开始创作';
     }
 
     public function index()
     {
         $result = [
             'datas'=> $this->query($del=0),
-            'menus'=> $this->list,
+            'lists'=> $this->lists,
             'prefix_url'=> '/member/product',
-            'curr'=> '',
+            'curr_list'=> '',
+            'menus'=> $this->menus,
         ];
         return view('member.product.index', $result);
     }

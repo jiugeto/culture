@@ -15,10 +15,10 @@ class CategoryController extends BaseController
     {
         $this->model = new CategoryModel();
         //面包屑处理
-        $this->list['func']['name'] = '分类管理';
-        $this->list['func']['url'] = 'category';
-        $this->list['create']['name'] = '添加类型';
-        $this->list['edit']['name'] = '修改分类';
+        $this->lists['func']['name'] = '分类管理';
+        $this->lists['func']['url'] = 'category';
+        $this->lists['create']['name'] = '添加类型';
+        $this->lists['edit']['name'] = '修改分类';
     }
 
     public function index()
@@ -26,8 +26,9 @@ class CategoryController extends BaseController
         $result = [
             'datas'=> $this->query($del=0),
             'prefix_url'=> '/member/category',
-            'menus'=> $this->list,
-            'curr'=> '',
+            'lists'=> $this->lists,
+            'curr_list'=> '',
+            'menus'=> $this->menus,
         ];
         return view('member.category.index', $result);
     }
@@ -37,8 +38,9 @@ class CategoryController extends BaseController
         $result = [
             'datas'=> $this->query($del=1),
             'prefix_url'=> '/member/category/trash',
-            'menus'=> $this->list,
-            'curr'=> 'trash',
+            'lists'=> $this->lists,
+            'curr_list'=> 'trash',
+            'menus'=> $this->menus,
         ];
         return view('member.category.index', $result);
     }
@@ -47,8 +49,9 @@ class CategoryController extends BaseController
     {
         $result = [
             'pidone'=> $this->model->pidone(),      //父ID一级
-            'menus'=> $this->list,
-            'curr'=> 'create',
+            'lists'=> $this->lists,
+            'curr_list'=> 'create',
+            'menus'=> $this->menus,
         ];
         return view('member.category.create', $result);
     }
@@ -66,8 +69,9 @@ class CategoryController extends BaseController
         $result = [
             'data'=> CategoryModel::find($id),
             'pidone'=> $this->model->pidone(),
-            'menus'=> $this->list,
-            'curr'=> 'edit',
+            'lists'=> $this->lists,
+            'curr_list'=> 'edit',
+            'menus'=> $this->menus,
         ];
         return view('member.category.edit', $result);
     }
@@ -84,8 +88,9 @@ class CategoryController extends BaseController
     {
         $result = [
             'data'=> CategoryModel::find($id),
-            'menus'=> $this->list,
-            'curr'=> 'show',
+            'lists'=> $this->lists,
+            'curr_list'=> 'show',
+            'menus'=> $this->menus,
         ];
         return view('member.category.show', $result);
     }
