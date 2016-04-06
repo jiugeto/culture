@@ -11,7 +11,24 @@
 <body>
     @include('layout.header')
 
-    @yield('content')
+    <div class="login">
+        <table>
+            <tr>
+                <td><img src="/assets-home/images/register-login-left1.png"></td>
+                <td>
+                    <table class="login_right">
+                        <tr>
+                            <td class="login_text">
+                                <a href="/regist" class="{{$_SERVER['REQUEST_URI']=='/regist'?'a_curr':''}}">注册</a>
+                                <a href="/login" class="{{$_SERVER['REQUEST_URI']=='/login'?'a_curr':''}}">登陆</a>
+                            </td>
+                        </tr>
+                        <tr><td>@yield('content')</td></tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
 
     @include('layout.footer')
 </body>

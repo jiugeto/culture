@@ -25,9 +25,6 @@
  * home代表首页
  */
 
-//载入注册、登陆路由
-include("routes/routes_login.php");
-
 //载入前台路由
 include("routes/routes_home.php");
 

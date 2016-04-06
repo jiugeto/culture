@@ -10,11 +10,16 @@ body {
     width:100%;height:30px;
     background:rgb(240,240,240);
     position:fixed;z-index:100;top:0;
+    border-bottom:1px solid lightgrey;
 }
 .header_text {
     margin:0 auto;
     padding:5px;
     width:1000px;
+}
+.head_left {
+    margin:0 5px;
+    float:left;
 }
 .header a {
     /*color:black;*/
@@ -23,6 +28,10 @@ body {
 }
 .header_right {
     position:relative;left:540px;
+}
+.head_right {
+    margin:0 5px;
+    float:right;
 }
 /*=======header头========*/
 

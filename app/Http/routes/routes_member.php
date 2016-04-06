@@ -1,13 +1,25 @@
 <?php
-/**
- * 这里是会员路由
- */
 
 //Route::get('member',function(){
 //    return 'member';
 //});
 
-Route::group(['prefix'=>'member','namespace'=>'Member'], function(){
+/**
+ * 这里是注册、登陆路由
+ */
+Route::group(['prefix'=>'login'], function(){
+    Route::resource('/','LoginController');
+});
+Route::group(['prefix'=>'regist'], function(){
+    Route::resource('/','RegisterController');
+});
+
+
+/**
+ * 这里是会员路由
+ */
+Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Member'], function(){
+//Route::group(['prefix'=>'member','namespace'=>'Member'], function(){
     //账户首页
     Route::get('/','HomeController@index');
     Route::get('/home','HomeController@index');

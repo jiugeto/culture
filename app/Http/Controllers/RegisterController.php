@@ -12,13 +12,12 @@ class RegisterController extends Controller
 
     public function index()
     {
-        return view('loginOrRegist.regist.index');
+        return view('loginOrRegist.regist');
     }
 
     public function store(Request $request)
     {
-        $data = $request->all();
-        dd($data);
+        dd($request->all());
         return redirect('/');
     }
 }

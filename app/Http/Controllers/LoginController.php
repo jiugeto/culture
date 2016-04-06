@@ -12,7 +12,7 @@ class LoginController extends Controller
 
     public function index()
     {
-        return view('loginOrRegist.login.index');
+        return view('loginOrRegist.login');
     }
 
     public function store(Request $request)
