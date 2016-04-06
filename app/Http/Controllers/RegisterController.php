@@ -26,7 +26,7 @@ class RegisterController extends Controller
         //查看是否有此用户
         if ($userModel) { echo "<script>alert('此用户已经注册！');history.go(-1);</script>";exit; }
         //验证密码正确否
-        if ($userModel && Input::get('password')!=$userModel->password) {
+        if (!(Hash::check(Input::get('password'),$userModel->password))) {
             echo "<script>alert('密码错误！');history.go(-1);</script>";exit;
         }
         //查看2次密码输入是否一致
@@ -69,11 +69,6 @@ class RegisterController extends Controller
             return redirect('/regist');
         }
 
-        //加入session
-        Session::put('user.username',Input::get('username'));
-        Session::put('user.password',Input::get('password'));
-        Session::put('user.email',Input::get('email'));
-
         //数据写入用户表
         $data = [
             'username'=> Input::get('username'),
@@ -82,6 +77,13 @@ class RegisterController extends Controller
             'created_at'=> date('Y-m-d H:i:s', time()),
         ];
         UserModel::create($data);
+
+        //加入session
+        $userinfo = UserModel::where('username',Input::get('username'))->first();
+        Session::put('user.uid',$userinfo->id);
+        Session::put('user.username',Input::get('username'));
+        Session::put('user.password',Input::get('password'));
+        Session::put('user.email',Input::get('email'));
 
         return redirect('/regist/success');
     }

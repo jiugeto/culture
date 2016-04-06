@@ -1000,7 +1000,7 @@ CREATE TABLE `users` (
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表 bs_users';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户表 bs_users';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1009,6 +1009,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'jiuge','$2y$10$x1ms1XxDrlGGnlZ5efkp2uxIp59K1Rp.s99sfC0KRYXcWkMIULcMG','jiuge@qq.com',NULL,0,0,0,0,0,0,'2016-04-06','0000-00-00');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -1021,4 +1022,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-05 23:52:21
+-- Dump completed on 2016-04-06 23:46:16

@@ -9,6 +9,8 @@
  */
 Route::group(['prefix'=>'login'], function(){
     Route::resource('/','LoginController');
+    Route::resource('dologin','LoginController@dologin');
+    Route::resource('dologout','LoginController@dologout');
 });
 Route::group(['prefix'=>'regist'], function(){
     Route::resource('/','RegisterController');

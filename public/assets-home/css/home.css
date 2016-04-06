@@ -240,3 +240,20 @@ td.head { text-align:center; }
     text-decoration:none;
 }
 .crumb a:hover { color:red; }
+
+
+/*=======用户资料========*/
+.login_hide {
+    margin:5px;
+    padding:5px 0;
+    border:1px solid grey;
+    background:ghostwhite;
+    position:absolute;left:0;
+    /*display:none;*/
+}
+.login_hide a { padding:5px 15px; }
+.login_hide a:hover {
+    padding:2px 15px;
+    color:white;
+    background:darkred;
+}

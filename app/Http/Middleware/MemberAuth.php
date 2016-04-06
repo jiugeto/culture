@@ -26,10 +26,10 @@ class MemberAuth
         //验证密码
         $username = Session::get('user.username');
         $password = Session::get('user.password');
-        $adminModel = UserModel::where('username',$username)->first();
+        $userModel = UserModel::where('username',$username)->first();
 //        dd($password,Hash::make($password),$adminModel);
-        if(!$adminModel || !(Hash::check($password,$adminModel->password))){
-            dd('密码错误');
+        if(!$userModel || !(Hash::check($password,$userModel->password))){
+//            dd('密码错误');
             return redirect('/login');
         }
         return $next($request);

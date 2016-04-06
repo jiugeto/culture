@@ -39,6 +39,10 @@
             <a href="/{{ Session::has('user.username') ? 'member' : 'login' }}">
                 <img src="/assets/images/key.png" class="imgMiniSize">
                 {{ Session::has('user.username') ? Session::get('user.username') : '登录/注册' }}</a>&nbsp;
+            {{--<div class="login_hide">--}}
+                {{--<a href="">资料</a><br>--}}
+                {{--<a href="">退出</a>--}}
+            {{--</div>--}}
             {{--<a href="/login"><img src="/assets/images/key.png" class="imgMiniSize">登陆/注册</a>&nbsp;--}}
             {{--<a href="/"><img src="/assets/images/msg.png" class="imgMiniSize">消息</a>&nbsp;--}}
             {{--<img src="/assets/images/record.png" class="imgMiniSize"><a href="/">记录</a>--}}
