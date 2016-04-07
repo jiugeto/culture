@@ -1,4 +1,9 @@
 @extends('online.main')
 @section('content')
-    <div class="online_win"></div>
+    {{--  在线创建窗口 --}}
+    <div class="online_win">
+        <div class="online_menu">
+            <span></span>
+        </div>
+    </div>
 @stop
