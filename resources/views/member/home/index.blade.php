@@ -15,9 +15,18 @@
             <div class="chart_text">订单</div>
         </div>
         <div class="mem_info">
-            <div class="circle"><img src="/assets/images/person.png" style="width:50px;"></div>
+            <div class="circle"><img src="/assets/images/person.png" style="width:40px;"></div>
             <div class="mem_user">MEMBER INFO<br>会员信息</div>
+            <div class="detail">详情</div>
+            <div class="userInfoDetail">
+                <div>用户名：</div>
+            </div>
         </div>
+        <script>
+            $(".detail").click(function(){
+                $(".userInfoDetail").toggle();
+            });
+        </script>
     </div>
     <div class="company_info">
         <button class="companybtn companybtnpos">公司信息</button>

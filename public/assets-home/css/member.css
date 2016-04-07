@@ -82,15 +82,34 @@ a:hover li.a_li,a li.a_li_curr {
 .mem_chart,.crumb { margin-left:10px;width:100%; }
 .chart1,.mem_info {
     margin:10px 10px 10px 0;
-    width:160px;height:50px;
+    width:160px;
     border:1px solid rgb(240,240,240);
     background:rgb(250,250,250);
     border-radius:3px;
 }
-.chart1 { float:left;margin-right:20px; }
-.mem_info { float:right;margin-right:20px; }
+.chart1 { float:left;margin-right:20px;height:50px; }
+.mem_info { float:right;margin-right:20px;height:70px; }
+.mem_info .detail {
+    padding:2px 60px;
+    background:rgb(240,240,240);
+    border-bottom-left-radius:3px;
+    border-bottom-right-radius:3px;
+    cursor:pointer;
+    position:relative;bottom:45px;
+}
+.userInfoDetail {
+    margin:2px 0;
+    padding:5px 10px;
+    background:white;
+    border:1px solid lightgrey;
+    border-top:2px solid orangered;
+    border-radius:5px;
+    position:relative;bottom:45px;
+    display:none;
+}
 .circle {
-    width:50px;height:50px;
+    padding:5px;
+    width:40px;height:40px;
     border-top-left-radius:3px;
     border-bottom-left-radius:3px;
 }
@@ -106,7 +125,7 @@ a:hover li.a_li,a li.a_li_curr {
 }
 .mem_user {
     font-size:12px;
-    position:relative;top:-40px;left:35px;
+    position:relative;top:-50px;left:35px;
 }
 .company_info {
     margin:0 auto;

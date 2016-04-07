@@ -20,10 +20,20 @@ Route::group(['prefix'=>'regist'], function(){
 
 
 /**
+ * 在线创作路由
+ */
+Route::group(['prefix'=>'online','middleware' =>'MemberAuth','namespace'=>'Online'],function(){
+    //主窗口
+    Route::get('/','HomeController@index');
+    Route::get('home','HomeController@index');
+});
+
+
+/**
  * 这里是会员路由
  */
-//Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Member'], function(){
-Route::group(['prefix'=>'member','namespace'=>'Member'], function(){
+Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Member'], function(){
+//Route::group(['prefix'=>'member','namespace'=>'Member'], function(){
     //账户首页
     Route::get('/','HomeController@index');
     Route::get('/home','HomeController@index');

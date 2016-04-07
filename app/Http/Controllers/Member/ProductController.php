@@ -29,6 +29,11 @@ class ProductController extends BaseController
         return view('member.product.index', $result);
     }
 
+//    public function create()
+//    {
+//        return redirect('/online');
+//    }
+
 
     /**
      * 查询方法
