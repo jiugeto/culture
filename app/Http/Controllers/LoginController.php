@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 //use Illuminate\Http\Request;
 use App\Models\UserModel;
+use App\Models\UserlogModel;
 use Session;
 use Hash;
 use Illuminate\Support\Facades\Input;
@@ -48,20 +49,38 @@ class LoginController extends Controller
         }
 //        dd(Input::all());
 
+        $serial = date('YmdHis',time()).rand(0,10000);
         //加入session
         Session::put('user.uid',$userModel->id);
         Session::put('user.username',Input::get('username'));
         Session::put('user.password',Input::get('password'));
         Session::put('user.email',$userModel->email);
+        Session::put('user.serial',$serial);
+
+        //登陆加入用户日志表
+        $userlog = [
+            'uid'=> $userModel->id,
+            'uname'=> Input::get('username'),
+            'loginTime'=> date('Y-m-d',time()),
+            'serial'=> $serial,
+        ];
+        UserlogModel::create($userlog);
+
         return redirect('/member');
     }
 
     public function dologout()
     {
+        //更新用户日志表
+        $logoutTime = date('Y-m-d',time());
+        UserlogModel::where('serial',Input::get('user.serial'))
+                    ->update(['logoutTime'=>$logoutTime]);
+        //去除session
         Session::forget('user.uid');
         Session::forget('user.username');
         Session::forget('user.password');
         Session::forget('user.email');
+        Session::forget('user.serial');
         return redirect('/login');
     }
 }

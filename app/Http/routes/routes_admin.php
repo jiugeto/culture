@@ -94,4 +94,6 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::get('opinions/{isshow}/trash','OpinionsController@trash');
     Route::get('{isshow}/opinions','OpinionsController@index');
     Route::resource('opinions','OpinionsController');
+        //用户日志管理
+    Route::resource('userlog','UserlogController');
 });
