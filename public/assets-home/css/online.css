@@ -3,22 +3,47 @@
 
 /*========== 窗口定位 ==========*/
 .online_bg {
-    padding:50px 0;
+    padding:20px 0;
     width:100%;
     height:800px;
-    background:rgb(30,30,30);
+    background:rgb(40,40,40);
 }
 .online_win {
-    margin:30px auto;
-    width:995px;
-    height:595px;
-    border:5px solid black;
+    margin:50px auto;
+    width:960px;
+    border:10px solid black;
     background:rgb(50,50,50);
-    overflow:hidden;
     /*box-shadow: 10px 10px 5px #888888;*/
 }
-.online_menu {}
-.online_animate {}
+.online_win .timeline {
+    height:35px;
+    color:grey;
+    background:black;
+}
+.online_win .animate {
+    width:960px;
+    height:540px;
+    background:lightgrey;
+    overflow:hidden;
+}
+.timeline div { float:left; }
+.timeline .start,.timeline .stop {
+    padding:0 10px;
+    font-size:30px;
+}
+.timeline .stop { display:none; }
+.timeline .time,.timeline .time div {
+    width:860px;
+    height:30px;
+    filter:alpha(opacity:40);opacity:0.4;-moz-opacity:0.4;-khtml-opacity:0.4;
+}
+.timeline .time { margin:5px;background:blue; }
+.timeline .time div {
+    width:800px;
+    background:deepskyblue;
+    filter:alpha(opacity:60);opacity:0.6;-moz-opacity:0.86;-khtml-opacity:0.6;
+}
+.timeline .right img { width:40px; }
 
 
 /*========== 动画内容 ==========*/
