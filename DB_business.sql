@@ -927,6 +927,7 @@ DROP TABLE IF EXISTS `bs_userlog`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `bs_userlog` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `plat` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '平台标识：1管理员登录，2用户登录',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户id',
   `uname` varchar(255) NOT NULL COMMENT '用户名称',
   `serial` varchar(20) NOT NULL COMMENT '序号，唯一标识',
@@ -934,7 +935,7 @@ CREATE TABLE `bs_userlog` (
   `logoutTime` date NOT NULL DEFAULT '0000-00-00' COMMENT '退出时间',
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -943,6 +944,7 @@ CREATE TABLE `bs_userlog` (
 
 LOCK TABLES `bs_userlog` WRITE;
 /*!40000 ALTER TABLE `bs_userlog` DISABLE KEYS */;
+INSERT INTO `bs_userlog` VALUES (1,1,1,'jiuge','201604080052091302','2016-04-08','0000-00-00','2016-04-05');
 /*!40000 ALTER TABLE `bs_userlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1050,4 +1052,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-08  0:49:19
+-- Dump completed on 2016-04-08  9:08:29
