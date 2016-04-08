@@ -29,6 +29,18 @@ class UserlogController extends BaseController
         return view('admin.userlog.index', $result);
     }
 
+    public function show($id)
+    {
+        $curr['name'] = $this->crumb['show']['name'];
+        $curr['url'] = $this->crumb['show']['url'];
+        $result = [
+            'data'=> UserlogModel::find($id),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.userlog.show', $result);
+    }
+
     public function query()
     {
         return UserlogModel::orderBy('id','desc')->paginate($this->limit);

@@ -3,11 +3,12 @@ namespace App\Http\Controllers\Admin;
 
 //use App\Http\Controllers\Controller;
 //use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Support\Facades\Input;
 //use Illuminate\Support\Facades\Session;
+//use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use Session;
 use App\Models\Admin\AdminModel;
-//use Illuminate\Http\Request;
+use App\Models\UserlogModel;
 
 class LoginController extends BaseController
 {
@@ -41,9 +42,24 @@ class LoginController extends BaseController
         if ($adminModel && $password!=$adminModel->password) {
             echo "<script>alert('密码错误！');history.go(-1);</script>";exit;
         }
-//        dd(Session::get('admin'));
+
+        //加入session
+        $serial = date('YmdHis',time()).rand(0,10000);
         Session::put('admin.username',$username);
         Session::put('admin.password',$password);
+        Session::put('admin.serial',$serial);
+
+        //登陆加入用户日志表
+        $userlog = [
+            'plat'=> 1,     //1管理员登录
+            'uid'=> $adminModel->id,
+            'uname'=> Input::get('username'),
+            'loginTime'=> date('Y-m-d',time()),
+            'serial'=> $serial,
+            'created_at'=> $adminModel->created_at,
+        ];
+        UserlogModel::create($userlog);
+
         return redirect('/admin/');
     }
 
@@ -56,8 +72,14 @@ class LoginController extends BaseController
 //    }
     public function dologout()
     {
+        //更新用户日志表
+        $logoutTime = date('Y-m-d',time());
+        UserlogModel::where('serial',Input::get('user.serial'))
+            ->update(['logoutTime'=>$logoutTime]);
+        //去除session
         Session::forget('admin.username');
         Session::forget('admin.password');
+        Session::forget('admin.serial');
         return Redirect('/admin/login');
     }
 }

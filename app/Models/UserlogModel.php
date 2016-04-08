@@ -9,6 +9,6 @@ class UserlogModel extends BaseModel
 
     protected $table = 'bs_userlog';
     protected $fillable = [
-        'id','uid','uname','loginTime','logoutTime','created_at',
+        'id','plat','uid','uname','serial','loginTime','logoutTime','created_at',
     ];
 }

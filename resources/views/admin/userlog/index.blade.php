@@ -15,6 +15,7 @@
                         <th class="table-check"><input type="checkbox"/></th>
                         <th class="table-id">ID</th>
                         <th class="table-title">用户名称</th>
+                        <th class="table-title">平台类型</th>
                         <th class="table-type">登陆时间</th>
                         <th class="table-date am-hide-sm-only">退出时间</th>
                         <th class="table-date am-hide-sm-only">创建时间</th>
@@ -28,6 +29,7 @@
                         <td class="am-hide-sm-only"><input type="checkbox" /></td>
                         <td class="am-hide-sm-only">{{ $data->id }}</td>
                         <td class="am-hide-sm-only">{{ $data->uname }}</td>
+                        <td class="am-hide-sm-only">{{ $data->plat==1 ? '管理员' : '用户' }}</td>
                         <td class="am-hide-sm-only">{{ $data->loginTime }}</td>
                         <td class="am-hide-sm-only">{{ $data->logoutTime }}</td>
                         <td class="am-hide-sm-only">{{ $data->created_at }}</td>

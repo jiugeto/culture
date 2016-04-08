@@ -24,14 +24,14 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label">用户名</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" minlength="2" required name="username" value="">
+                                    <input type="text" class="form-control" placeholder="至少是2位字符" minlength="2" required name="username" value="{{ Session::has('admin.uid') ? Session::get('admin.uid') : '' }}">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-md-4 control-label">密码</label>
                                 <div class="col-md-6">
-                                    <input type="password" class="form-control" minlength="5" required name="password">
+                                    <input type="password" class="form-control" placeholder="至少是5位字符" minlength="5" required name="password">
                                 </div>
                             </div>
 
