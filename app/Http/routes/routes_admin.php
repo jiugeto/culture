@@ -76,11 +76,12 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::resource('design','DesignController');
     //消息路由
         //消息管理
+    Route::get('message/trash','MessageController@trash');
     Route::resource('message','MessageController');
         //链接管理
     Route::resource('link','LinkController');
         //心声管理
-    Route::resource('voice','VoiceController');
+    Route::resource('uservoice','UserVoiceController');
     //广告路由
         //广告管理
     Route::resource('ad','AdController');
