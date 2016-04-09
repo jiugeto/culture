@@ -8,7 +8,7 @@ class ActionModel extends BaseModel
 {
     protected $table = 'ba_action';
     protected $fillable = [
-        'id','name','intro','namespace','controller_prefix','url','action','style_class','pid','created_at','updated_at',
+        'id','name','intro','namespace','controller_prefix','url','action','style_class','pid','sort','created_at','updated_at',
     ];
 
 //    public function child()

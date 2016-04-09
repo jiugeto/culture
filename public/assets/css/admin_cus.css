@@ -54,3 +54,13 @@ button.backbtn {
     cursor:pointer;
     background:orangered;
 }
+
+
+/*=== 增加 increase ===*/
+.increase,.reduce {
+    padding:2px 5px;
+    font-size:12px;
+    border:1px solid lightgrey;
+}
+a:hover.increase,a:hover.reduce { background:white; }
+/*=== 增加 reduce ===*/

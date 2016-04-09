@@ -39,6 +39,8 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::get('action/create/{pid}','ActionController@create');
     Route::post('action/{id}','ActionController@update');
     Route::get('action/{id}/forceDelete','ActionController@forceDelete');
+    Route::get('action/increase/{id}','ActionController@increase');
+    Route::get('action/reduce/{id}','ActionController@reduce');
     Route::resource('action','ActionController');
         //用户权限分配
     Route::resource('authorization','AuthorizationController');

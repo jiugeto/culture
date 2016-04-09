@@ -145,4 +145,22 @@ class ActionController extends BaseController
      *查询方法
      */
 //    public function query(){}
+
+    /**
+     * 排序 +1 increase
+     */
+    public function increase($id)
+    {
+        ActionModel::where('id', $id)->increment('sort', 1);
+        return redirect('/admin/action');
+    }
+
+    /**
+     * 排序 +1 increase
+     */
+    public function reduce($id)
+    {
+        ActionModel::where('id', $id)->increment('sort', -1);
+        return redirect('/admin/action');
+    }
 }

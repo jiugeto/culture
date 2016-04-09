@@ -23,6 +23,7 @@
                         <th class="table-type">控制器名称</th>
                         <th class="table-type">操作方法</th>
                         <th class="table-author am-hide-sm-only">父ID</th>
+                        <th class="table-author am-hide-sm-only">排序</th>
                         <th class="table-date am-hide-sm-only">添加时间</th>
                         <th class="table-set">操作</th>
                     </tr>
@@ -37,6 +38,10 @@
                         <td class="am-hide-sm-only">{{ $data->controller_prefix.'Controller' }}</td>
                         <td class="am-hide-sm-only">{{ $data->action }}</td>
                         <td class="am-hide-sm-only">{{ $data->pid }}</td>
+                        <td class="am-hide-sm-only">{{ $data->sort }}
+                            <a href="/admin/action/increase/{{ $data->id }}" class="increase" title="增加1">▲</a>
+                            <a href="/admin/action/reduce/{{ $data->id }}" class="reduce" title="减少1">▼</a>
+                        </td>
                         <td class="am-hide-sm-only">{{ $data->created_at }}</td>
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">
