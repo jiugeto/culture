@@ -38,13 +38,10 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
     Route::get('/','HomeController@index');
     Route::get('/home','HomeController@index');
     //会员认证
-//    Route::resource('auth','AuthController');
-    Route::get('setting','SettingController@edit');
-        //个人设计师认证
-        //企业需求认证
-        //制作企业认证
-        //娱乐公司(文化传媒)认证
-        //租赁公司认证
+    Route::post('setting/{id}','SettingController@update');
+    Route::get('setting/pwd/{id}','SettingController@pwd');
+    Route::resource('setting','SettingController');
+    //个人设计师、制作企业、经纪公司、租赁公司认证
     //在线视频制作
     Route::resource('product','ProductController');
     //个人供求

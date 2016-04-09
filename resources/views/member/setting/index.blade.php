@@ -8,10 +8,14 @@
 
         <table class="table_create">
             {{--基本信息--}}
-            <tr><td colspan="2"><p class="center"><b>基本设置</b></p></td></tr>
+            <tr><td colspan="2">
+                    <p class="center"><b>基本设置</b></p>
+                </td></tr>
             <tr>
-                <td><label>用户名 / User Name：</label></td>
-                <td><input type="text" placeholder="至少2个字符" minlength="2" required name="username" value="{{ $data->username }}"/></td>
+                <td style="width:40%;"><label>用户名 / User Name：</label></td>
+                <td>{{ $data->username }}
+                    {{--<input type="text" placeholder="至少2个字符" minlength="2" required name="username" value="{{ $data->username }}"/>--}}
+                </td>
             </tr>
             <tr><td>&nbsp;</td></tr>
             <tr>
@@ -37,30 +41,33 @@
             <tr>
                 <td><label>用户类型 / Genre：</label></td>
                 <td>
-                    <input type="radio" name="genre" value="1"> 普通用户&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="radio" name="genre" value="2"> 普通用户&nbsp;&nbsp;&nbsp;&nbsp;
+                    @foreach($isusers as $key=>$isuser)
+                        <label><input type="radio" name="isuser" value="{{$key}}">{{ $isuser }}</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        @if($key%3==0) <br> @endif
+                    @endforeach
+                    {{--<select name="isuser" required>--}}
+                        {{--<option value="">请选择</option>--}}
+                        {{--@foreach($isusers as $key=>$isuser)--}}
+                            {{--<option value="{{ $key }}">{{ $isuser }}</option>--}}
+                        {{--@endforeach--}}
+                    {{--</select>--}}
                 </td>
             </tr>
             <tr><td>&nbsp;</td></tr>
 
-            {{--密码--}}
             <tr><td colspan="2"><div class="div_hr"></div></td></tr>
-            <tr><td colspan="2"><p class="center"><b>密码修改</b></p></td></tr>
-            <tr>
-                <td><label>旧密码 / PWD：</label></td>
-                <td><input type="text" placeholder="6-12字符" minlength="2" maxlength="12" name="password"/></td>
-            </tr>
-            <tr>
-                <td><label>新密码 / PWD：</label></td>
-                <td><input type="text" placeholder="6-12字符" minlength="2" maxlength="12" name="password2"/></td>
-            </tr>
-            <tr><td>&nbsp;</td></tr>
+            <tr><td colspan="2" class="center">
+                    <a href="/member/setting/pwd/{{ $data->id }}"><button class="companybtn">更新密码</button></a>
+                </td></tr>
+            {{--<tr><td colspan="2"><p class="center">--}}
+            {{--<a href="/member/setting/pwd/{{ $data->id }}" class="">更新密码</a>--}}
+            {{--</p></td></tr>--}}
 
             <tr><td colspan="2"><div class="div_hr"></div></td></tr>
             <tr><td>&nbsp;</td></tr>
             <tr><td colspan="2" class="center">
                     <button class="companybtn" onclick="history.go(-1)">返 &nbsp;&nbsp;&nbsp;回</button>
-                    <button type="submit" class="companybtn">保存修改</button>
+                    <button type="submit" class="companybtn" name="submit" value="basic">保存修改</button>
                 </td></tr>
         </table>
     </form>

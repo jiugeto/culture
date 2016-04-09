@@ -9,6 +9,15 @@ class UserModel extends BaseModel
 
     protected $table = 'users';
     protected $fillable = [
-        'id','username','password','email','qq','tel','mobile','isauth','emailck','pid','cid','isauth','created_at','updated_at',
+        'id','username','password','email','qq','tel','mobile','isauth','emailck','isuser','isvip','isauth','created_at','updated_at',
     ];
+
+    protected $isusers = [
+        1=>'个人消费者','普通企业','设计师','制作公司','广告公司','影视公司','租赁公司',
+    ];
+
+    public function isuser()
+    {
+        return $this->isusers[$this->isuser];
+    }
 }
