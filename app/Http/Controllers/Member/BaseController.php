@@ -8,6 +8,7 @@ class BaseController extends Controller
     /**
      * 会员后台基础控制器
      */
+    protected $uid;     //登录用户的id
 
 //    protected $list = [
 //        ''=> '所有列表',

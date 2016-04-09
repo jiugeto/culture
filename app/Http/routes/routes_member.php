@@ -38,8 +38,8 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
     Route::get('/','HomeController@index');
     Route::get('/home','HomeController@index');
     //会员认证
-        //个人需求认证
-    Route::resource('auth','AuthController');
+//    Route::resource('auth','AuthController');
+    Route::get('setting','SettingController@edit');
         //个人设计师认证
         //企业需求认证
         //制作企业认证
