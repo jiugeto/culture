@@ -36,4 +36,12 @@ class GoodsModel extends BaseModel
         $categorys = Tools::getChild($categorys);
         return $categorys;
     }
+
+    /**
+     * 发布单位类型
+     */
+    public function type()
+    {
+        return $this->type ? $this->types[$this->type] : '';
+    }
 }

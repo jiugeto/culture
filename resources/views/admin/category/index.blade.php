@@ -29,7 +29,7 @@
                         <td class="am-hide-sm-only">
                             <a href="/admin/videocate/{{$data->id}}">{{ $data->name }}</a>
                         </td>
-                        <td class="am-hide-sm-only">{{ $data->pid->name }}</td>
+                        <td class="am-hide-sm-only">{{ $data->pid ? $data->parent()->name : '顶级分类' }}</td>
                         <td class="am-hide-sm-only">{{ $data->created_at }}</td>
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">

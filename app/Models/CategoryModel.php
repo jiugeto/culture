@@ -20,6 +20,14 @@ class CategoryModel extends BaseModel
    }
 
     /**
+     * 父分类关联
+     */
+   public function parent()
+   {
+       return CategoryModel::find($this->pid);
+   }
+
+    /**
      * 分类一级
      */
     public function pidone()

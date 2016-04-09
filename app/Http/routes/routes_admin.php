@@ -55,12 +55,12 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::get('{type}/menus/trash','MenusController@trash');
     Route::get('{type}/menus','MenusController@index');
     Route::resource('menus','MenusController');
-    //供求管理
-        //供应路由
-        //需求路由
-    //内部产品路由
+    //资料审核
+    //作品管理（制作公司和设计师的）
+    Route::get('{type}/goods','GoodsController@index');
+    Route::resource('goods','GoodsController');
+    //内部产品管理
     Route::resource('product','ProductController');
-    //产品管理
         //内部产品属性路由
     Route::resource('productattr','ProductAttrController');
         //产品类型路由
