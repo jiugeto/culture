@@ -936,7 +936,7 @@ CREATE TABLE `bs_userlog` (
   `logoutTime` date NOT NULL DEFAULT '0000-00-00' COMMENT '退出时间',
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -945,7 +945,7 @@ CREATE TABLE `bs_userlog` (
 
 LOCK TABLES `bs_userlog` WRITE;
 /*!40000 ALTER TABLE `bs_userlog` DISABLE KEYS */;
-INSERT INTO `bs_userlog` VALUES (1,1,1,'jiuge','201604090047077935','2016-04-09','2016-04-09','2016-04-05'),(2,1,1,'jiuge','20160409004918108','2016-04-09','0000-00-00','2016-04-05'),(3,1,1,'jiuge','201604090437083847','2016-04-09','0000-00-00','2016-04-05'),(4,1,1,'jiuge','201604091015518376','2016-04-09','0000-00-00','2016-04-05'),(5,2,1,'jiuge','201604091059097936','2016-04-09','0000-00-00','2016-04-06');
+INSERT INTO `bs_userlog` VALUES (1,1,1,'jiuge','201604090047077935','2016-04-09','2016-04-09','2016-04-05'),(2,1,1,'jiuge','20160409004918108','2016-04-09','0000-00-00','2016-04-05'),(3,1,1,'jiuge','201604090437083847','2016-04-09','0000-00-00','2016-04-05'),(4,1,1,'jiuge','201604091015518376','2016-04-09','0000-00-00','2016-04-05'),(5,2,1,'jiuge','201604091059097936','2016-04-09','0000-00-00','2016-04-06'),(6,2,1,'jiuge','201604091412047608','2016-04-09','0000-00-00','2016-04-06'),(7,2,1,'jiuge','201604100215434109','2016-04-10','0000-00-00','2016-04-06');
 /*!40000 ALTER TABLE `bs_userlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -959,11 +959,10 @@ DROP TABLE IF EXISTS `companys`;
 CREATE TABLE `companys` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL COMMENT '公司名称',
-  `type_id` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '公司类型：1普通企业，2租赁公司，3经纪公司，4制作公司，5电视台，6电影公司',
+  `genre` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '公司类型(对应users表isuser）：2普通企业，4广告公司，5影视公司，6租赁公司',
   `area` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '所在地ID',
   `address` varchar(255) DEFAULT NULL COMMENT '详细地址',
   `yyzzid` varchar(255) DEFAULT NULL COMMENT '营业执照注册码',
-  `isauth` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '是否认证：0未认证，1未通过认证，2通过认证',
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '更新时间',
   PRIMARY KEY (`id`)
@@ -989,11 +988,10 @@ DROP TABLE IF EXISTS `persons`;
 CREATE TABLE `persons` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `realname` varchar(255) NOT NULL COMMENT '真实名称',
-  `type_id` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '个人类型：1普通会员，2设计师会员',
+  `genre` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '个人类型(对应users表isuser）：1个人消费者，3设计师',
   `sex` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '性别：1男，2女',
   `idcard` char(18) NOT NULL COMMENT '身份证号码，18位',
   `idfront` varchar(255) NOT NULL COMMENT '身份证正面照',
-  `isauth` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '是否认证：0未认证，1未通过认证，2通过认证',
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '更新时间',
   PRIMARY KEY (`id`)
@@ -1026,8 +1024,9 @@ CREATE TABLE `users` (
   `mobile` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '手机号码',
   `isauth` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '用户认证：0未认证，1待认证，2认证失败，2认证成功',
   `emailck` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '邮箱认证：0未认证，1认证失败，2认证成功',
-  `pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '个人id，关联persons：0代表非个人认证',
-  `cid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '企业id，关联companys：0代表非企业认证',
+  `isuser` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '会员身份：1个人消费者，2普通企业，3设计师，4广告公司，5影视公司，6租赁公司',
+  `memberid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '个人persons或者企业companys表id',
+  `isvip` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '是否vip：0非VIP，1是VIP',
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '更新时间',
   PRIMARY KEY (`id`)
@@ -1040,7 +1039,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'jiuge','$2y$10$x1ms1XxDrlGGnlZ5efkp2uxIp59K1Rp.s99sfC0KRYXcWkMIULcMG','jiuge@qq.com',NULL,0,0,0,0,0,0,'2016-04-06','0000-00-00');
+INSERT INTO `users` VALUES (1,'jiuge','$2y$10$x1ms1XxDrlGGnlZ5efkp2uxIp59K1Rp.s99sfC0KRYXcWkMIULcMG','jiuge@qq.com','946493655',63929131,4294967295,0,0,1,0,0,'2016-04-06','0000-00-00');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -1053,4 +1052,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-09 19:34:14
+-- Dump completed on 2016-04-10 12:19:58

@@ -2,7 +2,7 @@
 @section('content')
     @include('member.common.crumb')
 
-    <form data-am-validator method="POST" action="/member/setting/{{ $data->id }}" enctype="multipart/form-data">
+    <form data-am-validator method="POST" action="/member/setting/updatepwd/{{ $data->id }}" enctype="multipart/form-data">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="_method" value="POST">
 
@@ -29,7 +29,7 @@
             <tr><td>&nbsp;</td></tr>
             <tr><td colspan="2" class="center">
                     <button class="companybtn" onclick="history.go(-1)">返 &nbsp;&nbsp;&nbsp;回</button>
-                    <button type="submit" class="companybtn" name="submit" value="pwd">保存修改</button>
+                    <button type="submit" class="companybtn">保存修改</button>
                 </td></tr>
         </table>
     </form>

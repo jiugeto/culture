@@ -38,9 +38,12 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
     Route::get('/','HomeController@index');
     Route::get('/home','HomeController@index');
     //会员认证
+    Route::get('setting','SettingController@show');
+    Route::get('setting/{id}/auth','SettingController@auth');
     Route::post('setting/{id}','SettingController@update');
     Route::get('setting/pwd/{id}','SettingController@pwd');
-    Route::resource('setting','SettingController');
+    Route::post('setting/updatepwd/{id}','SettingController@updatepwd');
+//    Route::resource('setting','SettingController');
     //个人设计师、制作企业、经纪公司、租赁公司认证
     //在线视频制作
     Route::resource('product','ProductController');
