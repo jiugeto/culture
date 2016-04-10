@@ -6,7 +6,7 @@
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="_method" value="POST">
 
-        <table class="table_create" style="overflow:auto;">
+        <table class="table_create">
             {{--基本信息--}}
             <tr><td colspan="2">
                     <p class="center"><b>基本设置</b>(带<span class="star">*</span>的是必填项)</p>
@@ -42,67 +42,85 @@
                 <td><label>用户类型<span class="star">(*)</span>：</label></td>
                 <td>
                     @foreach($isusers as $key=>$isuser)
-                        <label><input type="radio" name="isuser" value="{{$key}}">{{ $isuser }}</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <label><input type="radio" name="isuser" value="{{$key}}" onclick="change(this.value);">{{ $isuser }}</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         @if($key%3==0) <br> @endif
                     @endforeach
                 </td>
             </tr>
             <tr><td>&nbsp;</td></tr>
+        </table>
 
-            {{--个人信息--}}
-            {{--<tr><td colspan="2">--}}
-                    {{--<p class="center"><b>个人信息</b></p>--}}
-                {{--</td></tr>--}}
-            {{--<tr>--}}
-                {{--<td><label>真实名字<span class="star">(*)</span>：</label></td>--}}
-                {{--<td><input type="text" name="qq" placeholder="至少5位" minlength="5"/></td>--}}
-            {{--</tr>--}}
-            {{--<tr><td>&nbsp;</td></tr>--}}
-            {{--<tr>--}}
-                {{--<td><label>性别<span class="star">(*)</span>：</label></td>--}}
-                {{--<td>--}}
-                    {{--<label><input type="radio" name="sex" value="1" checked/>男&nbsp;&nbsp;</label>--}}
-                    {{--<label><input type="radio" name="sex" value="2"/>女&nbsp;&nbsp;</label>--}}
-                {{--</td>--}}
-            {{--</tr>--}}
-            {{--<tr><td>&nbsp;</td></tr>--}}
-            {{--<tr>--}}
-                {{--<td><label>身份证<span class="star">(*)</span>：</label></td>--}}
-                {{--<td><input type="text" name="idcard" pattern="^\d{18}|(\d{17}x)$"/></td>--}}
-            {{--</tr>--}}
-            {{--<tr><td>&nbsp;</td></tr>--}}
+        {{--个人信息--}}
+        <table class="table_create mem_person" style="display:none;">
+            <tr><td colspan="2">
+                    <p class="center"><b>个人信息</b></p>
+                </td></tr>
+            <tr>
+                <td><label>真实名字<span class="star">(*)</span>：</label></td>
+                <td><input type="text" name="realname" placeholder="至少2位" minlength="2"/></td>
+            </tr>
+            <tr><td>&nbsp;</td></tr>
+            <tr>
+                <td><label>性别<span class="star">(*)</span>：</label></td>
+                <td>
+                    <label><input type="radio" name="sex" value="1" checked/>男&nbsp;&nbsp;</label>
+                    <label><input type="radio" name="sex" value="2"/>女&nbsp;&nbsp;</label>
+                </td>
+            </tr>
+            <tr><td>&nbsp;</td></tr>
+            <tr>
+                <td><label>身份证<span class="star">(*)</span>：</label></td>
+                <td><input type="text" name="idcard" pattern="^\d{18}|(\d{17}x)$"/></td>
+            </tr>
+            <tr><td>&nbsp;</td></tr>
             {{--<tr>--}}
                 {{--<td><label>身份证正面照：</label></td>--}}
-                {{--<td><input type="text" name="infront"/></td>--}}
+                {{--<td><input type="file"/></td>--}}
             {{--</tr>--}}
             {{--<tr><td>&nbsp;</td></tr>--}}
+        </table>
 
-            {{--企业信息--}}
-            {{--<tr><td colspan="2">--}}
-                    {{--<p class="center"><b>企业信息</b></p>--}}
-                {{--</td></tr>--}}
-            {{--<tr>--}}
-                {{--<td><label>公司名称：</label></td>--}}
-                {{--<td><input type="text" name="name" placeholder="至少2个字符" minlength="2"/></td>--}}
-            {{--</tr>--}}
-            {{--<tr><td>&nbsp;</td></tr>--}}
-            {{--<tr>--}}
-                {{--<td><label>地区：</label></td>--}}
-                {{--<td><input type="text" name="area"/></td>--}}
-            {{--</tr>--}}
-            {{--<tr><td>&nbsp;</td></tr>--}}
-            {{--<tr>--}}
-                {{--<td><label>具体地址：</label></td>--}}
-                {{--<td><input type="text" name="address" placeholder="至少2位字符" minlength="2"/></td>--}}
-            {{--</tr>--}}
-            {{--<tr><td>&nbsp;</td></tr>--}}
-            {{--<tr>--}}
-                {{--<td><label>营业执照号码：</label></td>--}}
-                {{--<td><input type="text" name="yyzzid"/></td>--}}
-            {{--</tr>--}}
-            {{--<tr><td>&nbsp;</td></tr>--}}
+        {{--企业信息--}}
+        <table class="table_create mem_company" style="display:none;">
+            <tr><td colspan="2">
+                    <p class="center"><b>企业信息</b></p>
+                </td></tr>
+            <tr>
+                <td><label>公司名称<span class="star">(*)</span>：</label></td>
+                <td><input type="text" name="name" placeholder="至少2个字符" minlength="2"/></td>
+            </tr>
+            <tr><td>&nbsp;</td></tr>
+            <tr>
+                <td><label>地区<span class="star">(*)</span>：</label></td>
+                <td><input type="text" name="area"/></td>
+            </tr>
+            <tr><td>&nbsp;</td></tr>
+            <tr>
+                <td><label>具体地址<span class="star">(*)</span>：</label></td>
+                <td><input type="text" name="address" placeholder="至少2位字符" minlength="2"/></td>
+            </tr>
+            <tr><td>&nbsp;</td></tr>
+            <tr>
+                <td><label>营业执照号码<span class="star">(*)</span>：</label></td>
+                <td><input type="text" name="yyzzid"/></td>
+            </tr>
+            <tr><td>&nbsp;</td></tr>
+        </table>
+        <script>
+            function change(value){
+//                alert(value);
+                if(value==1 || value==3){
+                    $(".mem_person").show();
+                    $(".mem_company").hide();
+                } else {
+                    $(".mem_person").hide();
+                    $(".mem_company").show();
+                }
+            }
+        </script>
 
-            {{--更改密码--}}
+        {{--更改密码--}}
+        <table class="table_create">
             <tr><td colspan="2"><div class="div_hr"></div></td></tr>
             <tr><td colspan="2" class="center">
                     <a href="/member/setting/pwd/{{ $data->id }}"><button class="companybtn">更新密码</button></a>
