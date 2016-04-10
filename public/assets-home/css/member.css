@@ -222,3 +222,6 @@ select { height:25px; }
     border-bottom:1px solid lightgrey;
 }
 /*=========右侧查看窗口==========*/
+
+/*=== *号备注 ===*/
+.star { color:red; }
