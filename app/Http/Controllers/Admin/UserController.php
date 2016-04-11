@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
+use App\Models\CompanyModel;
+use App\Models\PersonModel;
 use App\Models\UserModel;
 
 class UserController extends BaseController
@@ -33,12 +35,20 @@ class UserController extends BaseController
     {
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
+        $userModel = UserModel::find($id);
+        if (in_array($userModel->isuser,[1,3])) {
+            $personModel = PersonModel::where('uid',$id)->first();
+        } elseif(in_array($userModel->isuser,[2,4,5,6])) {
+            $companyModel = CompanyModel::where('uid',$id)->first();
+        }
         $result = [
-            'data'=> UserModel::find($id),
+            'data'=> $userModel,
+            'personModel'=> isset($personModel) ? $personModel : '',
+            'companyModel'=> isset($companyModel) ? $companyModel : '',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
-        return view('admin.userlog.show', $result);
+        return view('admin.user.show', $result);
     }
 
     public function query()

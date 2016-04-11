@@ -29,11 +29,13 @@
                         <td class="am-hide-sm-only">{{ $data->id }}</td>
                         <td class="am-hide-sm-only">{{ $data->username }}</td>
                         <td class="am-hide-sm-only">{{ $data->isuser() }}</td>
-                        <td class="am-hide-sm-only">{{ $data->isuser() }}</td>
+                        <td class="am-hide-sm-only">{{ $data->isauth() }}</td>
                         <td class="am-hide-sm-only">{{ $data->created_at }}</td>
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
+                                    <a href="/admin/user/pass/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="/assets/images/edit.png" class="icon">通过</button></a>
+                                    <a href="/admin/user/noauth/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="/assets/images/edit.png" class="icon">拒绝</button></a>
                                     <a href="/admin/user/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="/assets/images/show.png" class="icon"> 查看</button></a>
                                 </div>
                             </div>
