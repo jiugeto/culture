@@ -25,10 +25,11 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::get('type/create/{id}','TypeController@create');
     Route::resource('type','TypeController');
     Route::get('type/tableid/{table_id}','TypeController@index');
+        //用户日志管理
+    Route::resource('userlog','UserlogController');
     //权限管理
         //管理员路由
     Route::post('admin/{id}','AdminController@update');
-//    Route::get('admin/{id}/destroy','AdminController@destroy');
     Route::get('admin/{id}/forceDelete','AdminController@forceDelete');
     Route::resource('admin','AdminController');
         //角色路由
@@ -56,6 +57,8 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::get('{type}/menus','MenusController@index');
     Route::resource('menus','MenusController');
     //资料审核
+        //会员管理
+    Route::resource('user','UserController');
     //作品管理（制作公司和设计师的）
     Route::get('{type}/goods','GoodsController@index');
     Route::resource('goods','GoodsController');
@@ -74,7 +77,7 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::post('design/{id}','DesignController@update');
     Route::get('design/trash','DesignController@trash');
     Route::resource('design','DesignController');
-    //消息路由
+    //功能管理
         //消息管理
     Route::get('message/trash','MessageController@trash');
     Route::resource('message','MessageController');
@@ -82,12 +85,6 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::resource('link','LinkController');
         //心声管理
     Route::resource('uservoice','UserVoiceController');
-    //广告路由
-        //广告管理
-    Route::resource('ad','AdController');
-        //广告位管理
-    Route::get('place/create','AdPlaceController@create');
-    Route::resource('place','AdPlaceController');
         //用户意见管理
     Route::post('opinions/{id}','OpinionsController@update');
     Route::get('opinions/{id}/destroy','OpinionsController@destroy');
@@ -97,6 +94,12 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::get('opinions/{isshow}/trash','OpinionsController@trash');
     Route::get('{isshow}/opinions','OpinionsController@index');
     Route::resource('opinions','OpinionsController');
-        //用户日志管理
-    Route::resource('userlog','UserlogController');
+        //地区管理
+    Route::resource('area','AreaController');
+    //广告路由
+        //广告管理
+    Route::resource('ad','AdController');
+        //广告位管理
+    Route::get('place/create','AdPlaceController@create');
+    Route::resource('place','AdPlaceController');
 });
