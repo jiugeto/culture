@@ -13,20 +13,28 @@ class UserController extends BaseController
 
     public function __construct()
     {
+        $this->model = new UserModel();
         $this->crumb['']['name'] = '会员列表';
         $this->crumb['category']['name'] = '会员管理';
         $this->crumb['category']['url'] = 'user';
     }
 
-    public function index()
+    public function index($data='-')
     {
+        $data = explode('-',$data);
+        $isuser = $data[0];
+        $isauth = $data[1];
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'datas'=> $this->query(),
+            'datas'=> $this->query($isuser,$isauth),
             'crumb'=> $this->crumb,
             'prefix_url'=> '/admin/user',
             'curr'=> $curr,
+            'isusers'=> $this->model['isusers'],
+            'isuser'=> $isuser,
+            'isauths'=> $this->model['isauths'],
+            'isauth'=> $isauth,
         ];
         return view('admin.user.index', $result);
     }
@@ -51,8 +59,50 @@ class UserController extends BaseController
         return view('admin.user.show', $result);
     }
 
-    public function query()
+
+
+
+
+    /**
+     * 通过认证 isauth==2
+     */
+    public function toauth($id)
     {
-        return UserModel::orderBy('id','desc')->paginate($this->limit);
+        UserModel::where('id',$id)->update(['isauth'=>3]);
+        return redirect('/admin/user');
+    }
+    /**
+     * 拒绝通过认证 isauth==1
+     */
+    public function noauth($id)
+    {
+        UserModel::where('id',$id)->update(['isauth'=>2]);
+        return redirect('/admin/user');
+    }
+
+    public function query($isuser,$isauth)
+    {
+        if ($isuser=='') {
+            if ($isauth=='') {
+                $datas = UserModel::orderBy('id','desc')
+                    ->paginate($this->limit);
+            } else {
+                $datas = UserModel::orderBy('id','desc')
+                    ->where('isauth',$isauth)
+                    ->paginate($this->limit);
+            }
+        } else {
+            if ($isauth=='') {
+                $datas = UserModel::where('isuser',$isuser)
+                    ->orderBy('id','desc')
+                    ->paginate($this->limit);
+            } else {
+                $datas = UserModel::where('isuser',$isuser)
+                    ->where('isauth',$isauth)
+                    ->orderBy('id','desc')
+                    ->paginate($this->limit);
+            }
+        }
+        return $datas;
     }
 }

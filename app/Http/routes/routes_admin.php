@@ -58,6 +58,9 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::resource('menus','MenusController');
     //资料审核
         //会员管理
+    Route::get('user/toauth/{id}','UserController@toauth');
+    Route::get('user/noauth/{id}','UserController@noauth');
+    Route::get('{data}/user','UserController@index');
     Route::resource('user','UserController');
     //作品管理（制作公司和设计师的）
     Route::get('{type}/goods','GoodsController@index');

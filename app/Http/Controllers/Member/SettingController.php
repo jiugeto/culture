@@ -73,6 +73,7 @@ class SettingController extends BaseController
             'tel'=> $request->tel,
             'mobile'=> $request->mobile,
             'isuser'=> $request->isuser,
+            'isauth'=> 1,       //1是认证中
         ];
         UserModel::where('id',$id)->update($user);
 
