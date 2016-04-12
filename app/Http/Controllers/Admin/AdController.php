@@ -14,6 +14,7 @@ class AdController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
         $this->crumb['']['name'] = '广告列表';
         $this->crumb['category']['name'] = '广告管理';
         $this->crumb['category']['url'] = 'ad';

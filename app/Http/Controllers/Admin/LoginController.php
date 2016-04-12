@@ -12,10 +12,10 @@ use App\Models\UserlogModel;
 
 class LoginController extends BaseController
 {
-//    public function __construct(Guard $auth)
-//    {
-//        $this->auth = $auth;
-//    }
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     public function login()
     {
@@ -48,6 +48,7 @@ class LoginController extends BaseController
         Session::put('admin.username',$username);
         Session::put('admin.password',$password);
         Session::put('admin.serial',$serial);
+        Session::put('admin.limit',$adminModel->limit);
 
         //登陆加入用户日志表
         $userlog = [
@@ -80,6 +81,7 @@ class LoginController extends BaseController
         Session::forget('admin.username');
         Session::forget('admin.password');
         Session::forget('admin.serial');
+        Session::forget('admin.limit');
         return Redirect('/admin/login');
     }
 }

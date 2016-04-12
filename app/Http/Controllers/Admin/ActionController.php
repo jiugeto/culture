@@ -13,6 +13,7 @@ class ActionController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
         $this->model = new ActionModel();
         $this->crumb['']['name'] = '权限列表';
         $this->crumb['category']['name'] = '权限管理';

@@ -13,6 +13,7 @@ class AdPlaceController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
         $this->model = new AdPlaceModel();
         $this->crumb['']['name'] = '广告位列表';
         $this->crumb['category']['name'] = '广告位管理';

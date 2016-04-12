@@ -12,6 +12,7 @@ class ProductController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
         $this->model = new ProductModel();
         $this->crumb['']['name'] = '产品列表';
         $this->crumb['category']['name'] = '产品管理';

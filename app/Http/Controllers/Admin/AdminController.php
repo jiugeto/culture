@@ -15,6 +15,7 @@ class AdminController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
         $this->model = new RoleModel();
         $this->crumb['']['name'] = '管理员列表';
         $this->crumb['category']['name'] = '管理员管理';

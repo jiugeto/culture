@@ -13,6 +13,7 @@ class OpinionsController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
         $this->crumb['']['name'] = '意见列表';
         $this->crumb['category']['name'] = '意见管理';
         $this->crumb['category']['url'] = 'opinions';

@@ -11,6 +11,7 @@ class UserVoiceController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
         $this->crumb['']['name'] = '用户心声';
         $this->crumb['category']['name'] = '心声管理';
         $this->crumb['category']['url'] = 'uservoice';

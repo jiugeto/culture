@@ -9,6 +9,7 @@ class HomeController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
         $this->lists['func']['name'] = '账户首页';
         $this->lists['func']['url'] = '';
     }

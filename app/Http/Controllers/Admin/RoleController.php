@@ -13,6 +13,7 @@ class RoleController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
         $this->model = new RoleModel();
         $this->crumb['']['name'] = '角色列表';
         $this->crumb['category']['name'] = '角色管理';

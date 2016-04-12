@@ -12,7 +12,7 @@ class TypeController extends BaseController
 
     public function __construct()
     {
-//        $this->model = new TypeModel();
+        parent::__construct();
         $this->model = TypeModel::where('del',0)->orderBy('id','desc')->get();
         $this->crumb['']['name'] = '类型列表';
         $this->crumb['category']['name'] = '类型管理';

@@ -12,6 +12,7 @@ class ProductController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
         $this->lists['func']['name'] = '在线创作';
         $this->lists['func']['url'] = 'product';
         $this->lists['create']['name'] = '开始创作';

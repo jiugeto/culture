@@ -12,6 +12,7 @@ class CategoryController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
         $this->model = new CategoryModel();
         $this->crumb['']['name'] = '产品类型列表';
         $this->crumb['category']['name'] = '产品类型管理';

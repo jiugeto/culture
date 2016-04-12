@@ -13,6 +13,7 @@ class EntertainController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
         $this->crumb['']['name'] = '娱乐列表';
         $this->crumb['category']['name'] = '娱乐管理';
         $this->crumb['category']['url'] = 'entertain';

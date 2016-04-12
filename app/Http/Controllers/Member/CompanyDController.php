@@ -19,6 +19,7 @@ class CompanyDController extends BaseGoodsController
 
     public function __construct()
     {
+        parent::__construct();
         $this->lists['func']['name'] = '企业需求';
         $this->lists['func']['url'] = 'companyD';
         $this->lists['create']['name'] = '发布需求';

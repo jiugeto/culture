@@ -13,6 +13,7 @@ class EntertainController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
         $this->lists['func']['name'] = '娱乐供求';
         $this->lists['func']['url'] = 'entertain';
         $this->lists['create']['name'] = '娱乐发布';

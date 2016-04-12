@@ -13,6 +13,7 @@ class UserController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
         $this->model = new UserModel();
         $this->crumb['']['name'] = '会员列表';
         $this->crumb['category']['name'] = '会员管理';

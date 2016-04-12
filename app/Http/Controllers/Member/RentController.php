@@ -13,6 +13,7 @@ class RentController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
         $this->lists['func']['name'] = '租赁供求';
         $this->lists['func']['url'] = 'rent';
         $this->lists['create']['name'] = '租赁发布';

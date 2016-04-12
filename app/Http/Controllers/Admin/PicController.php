@@ -12,6 +12,7 @@ class PicController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
         $this->model = new PicModel();
         $this->crumb['']['name'] = '图片列表';
         $this->crumb['category']['name'] = '图片管理';

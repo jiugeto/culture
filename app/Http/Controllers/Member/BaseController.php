@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
+use App\Models\UserModel;
 
 class BaseController extends Controller
 {
@@ -26,4 +27,11 @@ class BaseController extends Controller
 //                'name'=> '查看详情',
 //            ],
 //    ];
+
+    public function __construct()
+    {
+        if (\Session::has('user.limit')) {
+            $this->limit = UserModel::where('username',\Session::get('user.username'))->first()->limit;
+        }
+    }
 }

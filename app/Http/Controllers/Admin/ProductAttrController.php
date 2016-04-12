@@ -12,6 +12,7 @@ class ProductAttrController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
         $this->model = new ProductAttrModel();
         $this->crumb['']['name'] = '产品属性列表';
         $this->crumb['category']['name'] = '产品属性';

@@ -27,6 +27,7 @@ class VideoController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
         $this->model = new VideoModel();
         $this->crumb['']['name'] = '视频列表';
         $this->crumb['category']['name'] = '视频管理';

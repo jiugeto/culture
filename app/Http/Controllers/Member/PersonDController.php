@@ -17,6 +17,7 @@ class PersonDController extends BaseGoodsController
 
     public function __construct()
     {
+        parent::__construct();
         $this->lists['func']['name'] = '个人需求';
         $this->lists['func']['url'] = 'personD';
         $this->lists['create']['name'] = '发布需求';

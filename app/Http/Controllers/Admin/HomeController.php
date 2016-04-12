@@ -9,6 +9,11 @@ class HomeController extends BaseController
      * 系统后台首页
      */
 
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     public function index()
     {
         return view('admin.home');

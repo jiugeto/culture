@@ -12,6 +12,7 @@ class LinkController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
         $this->model = new LinkModel();
         $this->crumb['']['name'] = '链接列表';
         $this->crumb['category']['name'] = '链接管理';

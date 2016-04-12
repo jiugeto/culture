@@ -56,6 +56,7 @@ class LoginController extends Controller
         Session::put('user.password',Input::get('password'));
         Session::put('user.email',$userModel->email);
         Session::put('user.serial',$serial);
+        Session::put('user.limit',$userModel->limit);
 
         //登陆加入用户日志表
         $userlog = [
@@ -83,6 +84,7 @@ class LoginController extends Controller
         Session::forget('user.password');
         Session::forget('user.email');
         Session::forget('user.serial');
+        Session::forget('user.limit');
         return redirect('/login');
     }
 }

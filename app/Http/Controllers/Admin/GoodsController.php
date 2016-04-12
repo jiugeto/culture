@@ -11,6 +11,7 @@ class GoodsController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
         $this->model = new GoodsModel();
         $this->crumb['']['name'] = '作品列表';
         $this->crumb['category']['name'] = '用户作品';

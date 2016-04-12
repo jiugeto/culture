@@ -12,6 +12,7 @@ class FunctionController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
         $this->model = new FunctionModel();
         $this->crumb['']['name'] = '所有功能列表';
         $this->crumb['category']['name'] = '前台功能';

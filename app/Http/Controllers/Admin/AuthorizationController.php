@@ -13,6 +13,7 @@ class AuthorizationController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
         $this->model = new AuthorizationModel();
         $this->crumb['']['name'] = '用户权限列表';
         $this->crumb['category']['name'] = '用户权限管理';

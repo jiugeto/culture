@@ -13,6 +13,7 @@ class DesignController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
         $this->model = new DesignModel();
         $this->crumb['']['name'] = '设计列表';
         $this->crumb['category']['name'] = '设计管理';

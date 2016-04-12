@@ -17,6 +17,7 @@ class SettingController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
         if ($this->uid) { return redirect('/login'); }
 
         $this->model = new UserModel();

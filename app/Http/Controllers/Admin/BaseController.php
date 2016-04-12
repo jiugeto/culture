@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Admin\AdminModel;
 use App\Models\Admin\MenusModel;
 //use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -47,6 +48,13 @@ class BaseController extends Controller
             'url'=> 'trash',
         ],
     ];
+
+    public function __construct()
+    {
+        if (\Session::has('admin.limit')) {
+            $this->limit = AdminModel::where('username',\Session::get('admin.username'))->first()->limit;
+        }
+    }
 
     /**
      * 获取权限数据列表

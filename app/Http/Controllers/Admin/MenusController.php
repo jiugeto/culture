@@ -13,6 +13,7 @@ class MenusController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
         $this->model = new MenusModel();
         $this->crumb['category']['name'] = '前台控制菜单';
         $this->crumb['category']['url'] = 'menus';
