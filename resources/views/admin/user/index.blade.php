@@ -48,6 +48,7 @@
                         <th class="table-title">会员名称</th>
                         <th class="table-type">是否认证</th>
                         <th class="table-type">是否会员</th>
+                        <th class="table-type">每页记录数</th>
                         <th class="table-date am-hide-sm-only">创建时间</th>
                         <th class="table-set">操作</th>
                     </tr>
@@ -61,10 +62,15 @@
                         <td class="am-hide-sm-only">{{ $data->username }}</td>
                         <td class="am-hide-sm-only">{{ $data->isauth() }}</td>
                         <td class="am-hide-sm-only">{{ $data->isuser() }}</td>
+                        <td class="am-hide-sm-only">
+                            <input type="text" style="width:50px;border:0;" readonly value="{{ $data->limit }}">
+                            <a href="/admin/user/increase/{{ $data->id }}" class="increase" title="增加1">▲</a><a href="/admin/user/reduce/{{ $data->id }}" class="reduce" title="减少1">▼</a>
+                        </td>
                         <td class="am-hide-sm-only">{{ $data->created_at }}</td>
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
+                                    <a href="/admin/user/{{$data->id}}/edit"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="/assets/images/edit.png" class="icon">设置</button></a>
                                     <a href="/admin/user/toauth/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="/assets/images/edit.png" class="icon">通过</button></a>
                                     <a href="/admin/user/noauth/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="/assets/images/edit.png" class="icon">拒绝</button></a>
                                     <a href="/admin/user/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="/assets/images/show.png" class="icon"> 查看</button></a>

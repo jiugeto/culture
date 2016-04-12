@@ -60,6 +60,12 @@ class UserController extends BaseController
         return view('admin.user.show', $result);
     }
 
+    public function edit($id)
+    {
+        dd($id);
+        return view('admin.user.edit');
+    }
+
 
 
 
@@ -105,5 +111,32 @@ class UserController extends BaseController
             }
         }
         return $datas;
+    }
+
+    /**
+     * +1 increase
+     */
+    public function increase($id)
+    {
+        UserModel::where('id', $id)->increment('limit', 1);
+        return redirect('/admin/user');
+    }
+
+    /**
+     * +1 increase
+     */
+    public function reduce($id)
+    {
+        UserModel::where('id', $id)->increment('limit', -1);
+        return redirect('/admin/user');
+    }
+
+    /**
+     * 修改limit
+     */
+    public function limit($id,$limit)
+    {
+        UserModel::where('id', $id)->update(['limit'=>$limit]);
+        return redirect('/admin/user');
     }
 }
