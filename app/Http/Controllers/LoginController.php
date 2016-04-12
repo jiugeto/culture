@@ -75,7 +75,7 @@ class LoginController extends Controller
     {
         //更新用户日志表
         $logoutTime = date('Y-m-d',time());
-        UserlogModel::where('serial',Input::get('user.serial'))
+        UserlogModel::where('serial',Session::get('user.serial'))
                     ->update(['logoutTime'=>$logoutTime]);
         //去除session
         Session::forget('user.uid');

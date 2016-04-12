@@ -8,7 +8,7 @@ class AdminModel extends BaseModel
 {
     protected $table = 'ba_admin';
     protected $fillable = [
-        'id','username','realname','password','email','role_id','intro','created_at','updated_at',
+        'id','username','realname','password','email','role_id','intro','limit','created_at','updated_at',
     ];
 
     public function role()
