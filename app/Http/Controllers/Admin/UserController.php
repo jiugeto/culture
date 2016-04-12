@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\CompanyModel;
 use App\Models\PersonModel;
 use App\Models\UserModel;
+use Illuminate\Http\Request;
 
 class UserController extends BaseController
 {
@@ -62,8 +63,20 @@ class UserController extends BaseController
 
     public function edit($id)
     {
-        dd($id);
-        return view('admin.user.edit');
+        $curr['name'] = $this->crumb['edit']['name'];
+        $curr['url'] = $this->crumb['edit']['url'];
+        $result = [
+            'data'=> UserModel::find($id),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.user.edit', $result);
+    }
+
+    public function update(Request $request,$id)
+    {
+        UserModel::where('id',$id)->update(['limit'=> $request->limit]);
+        return redirect('/admin/user');
     }
 
 

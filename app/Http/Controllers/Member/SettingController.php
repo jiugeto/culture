@@ -138,4 +138,27 @@ class SettingController extends BaseController
         UserModel::where('id',$id)->update(['password'=> Hash::make($request->password2)]);
         return redirect('/member/setting');
     }
+
+    /**
+     * 参数修改
+     */
+    public function info($id)
+    {
+        $result = [
+            'data'=> UserModel::find($id),
+            'lists'=> $this->lists,
+            'curr_list'=> '',
+            'menus'=> $this->menus,
+        ];
+        return view('member.setting.info', $result);
+    }
+
+    /**
+     * 参数更新
+     */
+    public function updateinfo(Request $request,$id)
+    {
+        UserModel::where('id',$id)->update(['limit'=> $request->limit]);
+        return redirect('/member/setting');
+    }
 }

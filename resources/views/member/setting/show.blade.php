@@ -84,10 +84,23 @@
             </tr>
         @endif
 
+        {{--其他信息--}}
+        <tr><td colspan="2">
+                <p class="center"><b>其他信息</b></p>
+            </td></tr>
+        <tr>
+            <td><label>列表每页显示记录数：</label></td>
+            <td>{{ $data->limit }}</td>
+        </tr>
+        <tr><td>&nbsp;</td></tr>
+
         <tr><td colspan="2"><div class="div_hr"></div></td></tr>
         <tr><td colspan="2" class="center">
                 <a href="/member/setting/{{ $data->id }}/auth">
                     <button class="companybtn">完善资料</button>
+                </a>
+                <a href="/member/setting/info/{{ $data->id }}">
+                    <button class="companybtn">其他更新</button>
                 </a>
                 <a href="/member/setting/pwd/{{ $data->id }}">
                     <button class="companybtn">更新密码</button>

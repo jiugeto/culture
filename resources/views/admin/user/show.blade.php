@@ -55,6 +55,10 @@
                     <td>{{ $data->isvip() }}</td>
                 </tr>
                 <tr>
+                    <td class="am-hide-sm-only">列表每页显示记录数  / Limit：</td>
+                    <td>{{ $data->limit }}</td>
+                </tr>
+                <tr>
                     <td class="am-hide-sm-only">创建时间 / Create Time：</td>
                     <td>{{ $data->created_at }}</td>
                 </tr>
