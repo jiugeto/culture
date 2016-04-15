@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Admin\VersionlogModel;
 
-class UserlogController extends BaseController
+class VersionlogController extends BaseController
 {
     /**
      * 用户日志管理
@@ -12,7 +12,7 @@ class UserlogController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->crumb['']['name'] = '版本日志';
+        $this->crumb['']['name'] = '版本日志列表';
         $this->crumb['category']['name'] = '版本日志管理';
         $this->crumb['category']['url'] = 'versionlog';
     }
@@ -29,6 +29,19 @@ class UserlogController extends BaseController
         ];
         return view('admin.versionlog.index', $result);
     }
+
+    public function create()
+    {
+        $curr['name'] = $this->crumb['create']['name'];
+        $curr['url'] = $this->crumb['create']['url'];
+        $result = [
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+       return view('admin.versionlog.create', $result);
+    }
+
+    public function store(){}
 
     public function show($id)
     {

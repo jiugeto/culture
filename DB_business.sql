@@ -36,7 +36,7 @@ CREATE TABLE `ba_action` (
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL DEFAULT '0000-00-00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COMMENT='系统管理员权限表';
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8 COMMENT='系统管理员权限表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +45,7 @@ CREATE TABLE `ba_action` (
 
 LOCK TABLES `ba_action` WRITE;
 /*!40000 ALTER TABLE `ba_action` DISABLE KEYS */;
-INSERT INTO `ba_action` VALUES (1,'首页','','App\\Http\\Controllers\\Admin','Home','home','index','am-cf',0,0,'2016-01-09','0000-00-00'),(2,'权限管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,0,'2016-01-09','0000-00-00'),(3,'操作管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',2,0,'2016-01-10','2016-01-12'),(4,'资料审核','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,0,'0000-00-00','2016-01-10'),(5,'作品管理','企业，设计师的','App\\Http\\Controllers\\Admin','Goods','goods','index','am-cf',0,0,'0000-00-00','2016-04-09'),(6,'角色管理','','App\\Http\\Controllers\\Admin','Role','role','index','am-cf',2,0,'0000-00-00','2016-01-12'),(7,'管理员管理','','App\\Http\\Controllers\\Admin','Admin','admin','index','am-cf',2,0,'2016-01-12','2016-01-12'),(8,'产品管理','','App\\Http\\Controllers\\Admin','Product','action','index','am-cf',0,0,'2016-01-12','2016-02-16'),(9,'租赁管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,0,'2016-01-12','0000-00-00'),(10,'娱乐管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,0,'2016-01-12','0000-00-00'),(11,'设计管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,0,'2016-01-12','0000-00-00'),(12,'功能管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,0,'2016-01-12','2016-04-04'),(13,'消息管理','','App\\Http\\Controllers\\Admin','Message','message','index','am-cf',12,0,'2016-01-12','0000-00-00'),(14,'链接管理','','App\\Http\\Controllers\\Admin','Link','link','index','am-cf',12,0,'2016-01-12','0000-00-00'),(15,'心声管理','','App\\Http\\Controllers\\Admin','UserVoice','uservoice','index','am-cf',12,0,'2016-01-12','2016-04-09'),(16,'类型管理','','App\\Http\\Controllers\\Admin','Type','type','index','am-cf',12,0,'2016-01-13','2016-04-11'),(17,'图片管理','','App\\Http\\Controllers\\Admin','Pic','pic','index','am-cf',12,0,'2016-01-13','2016-04-11'),(18,'广告管理','','App\\Http\\Controllers\\Admin','Ad','ad','index','am-cf',0,0,'2016-02-15','0000-00-00'),(19,'广告管理','','App\\Http\\Controllers\\Admin','Ad','ad','index','am-cf',18,0,'2016-02-15','0000-00-00'),(20,'广告位管理','','App\\Http\\Controllers\\Admin','AdPlace','place','index','am-cf',18,0,'2016-02-15','0000-00-00'),(21,'内部产品','','App\\Http\\Controllers\\Admin','Product','product','index','',8,0,'2016-02-16','2016-02-16'),(22,'产品属性','','App\\Http\\Controllers\\Admin','ProductAttr','productattr','index','',8,0,'2016-02-16','0000-00-00'),(23,'作品管理','制作公司，设计师的','App\\Http\\Controllers\\Admin','Goods','goods','index','',5,0,'2016-02-16','2016-04-09'),(24,'产品类型','','App\\Http\\Controllers\\Admin','Category','category','index','',12,5,'2016-02-16','2016-04-11'),(25,'租赁管理','','App\\Http\\Controllers\\Admin','Rent','rent','index','',9,0,'2016-02-16','0000-00-00'),(26,'娱乐管理','','App\\Http\\Controllers\\Admin','Entertain','entertain','index','',10,0,'2016-02-16','0000-00-00'),(27,'设计管理','','App\\Http\\Controllers\\Admin','Design','design','index','',11,0,'2016-02-17','0000-00-00'),(28,'用户权限','','App\\Http\\Controllers\\Admin','Authorization','authorization','index','',2,0,'2016-02-17','0000-00-00'),(29,'前台功能','','App\\Http\\Controllers\\Admin','Function','function','index','',2,0,'2016-02-17','0000-00-00'),(30,'前台控制菜单','','App\\Http\\Controllers\\Admin','Menus','menus','index','',2,0,'2016-02-29','0000-00-00'),(31,'意见管理','','App\\Http\\Controllers\\Admin','Opinions','opinions','index','',12,0,'2016-04-04','0000-00-00'),(32,'用户日志','','App\\Http\\Controllers\\Admin','Userlog','userlog','index','',12,0,'2016-04-07','2016-04-11'),(33,'会员管理','','App\\Http\\Controllers\\Admin','User','user','index','',4,0,'2016-04-11','0000-00-00'),(34,'地区管理','','App\\Http\\Controllers\\Admin','Area','area','index','',12,0,'2016-04-11','0000-00-00');
+INSERT INTO `ba_action` VALUES (1,'首页','','App\\Http\\Controllers\\Admin','Home','home','index','am-cf',0,0,'2016-01-09','0000-00-00'),(2,'权限管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,0,'2016-01-09','0000-00-00'),(3,'操作管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',2,0,'2016-01-10','2016-01-12'),(4,'资料审核','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,0,'0000-00-00','2016-01-10'),(5,'供求管理','企业，设计师的','App\\Http\\Controllers\\Admin','Goods','goods','index','am-cf',0,0,'0000-00-00','2016-04-09'),(6,'角色管理','','App\\Http\\Controllers\\Admin','Role','role','index','am-cf',2,0,'0000-00-00','2016-01-12'),(7,'管理员管理','','App\\Http\\Controllers\\Admin','Admin','admin','index','am-cf',2,0,'2016-01-12','2016-01-12'),(8,'产品管理','','App\\Http\\Controllers\\Admin','Product','action','index','am-cf',0,0,'2016-01-12','2016-02-16'),(9,'系统管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,0,'2016-01-12','0000-00-00'),(10,'其他管理1','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,0,'2016-01-12','0000-00-00'),(11,'其他管理2','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,0,'2016-01-12','0000-00-00'),(12,'功能管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,0,'2016-01-12','2016-04-04'),(13,'消息管理','','App\\Http\\Controllers\\Admin','Message','message','index','am-cf',12,0,'2016-01-12','0000-00-00'),(14,'链接管理','','App\\Http\\Controllers\\Admin','Link','link','index','am-cf',12,0,'2016-01-12','0000-00-00'),(15,'心声管理','','App\\Http\\Controllers\\Admin','UserVoice','uservoice','index','am-cf',12,0,'2016-01-12','2016-04-09'),(16,'类型管理','','App\\Http\\Controllers\\Admin','Type','type','index','am-cf',12,0,'2016-01-13','2016-04-11'),(17,'图片管理','','App\\Http\\Controllers\\Admin','Pic','pic','index','am-cf',12,0,'2016-01-13','2016-04-11'),(18,'广告管理','','App\\Http\\Controllers\\Admin','Ad','ad','index','am-cf',0,0,'2016-02-15','0000-00-00'),(19,'广告管理','','App\\Http\\Controllers\\Admin','Ad','ad','index','am-cf',18,0,'2016-02-15','0000-00-00'),(20,'广告位管理','','App\\Http\\Controllers\\Admin','AdPlace','place','index','am-cf',18,0,'2016-02-15','0000-00-00'),(21,'内部产品','','App\\Http\\Controllers\\Admin','Product','product','index','',8,0,'2016-02-16','2016-02-16'),(22,'产品属性','','App\\Http\\Controllers\\Admin','ProductAttr','productattr','index','',8,0,'2016-02-16','0000-00-00'),(23,'作品管理','制作公司，设计师的','App\\Http\\Controllers\\Admin','Goods','goods','index','',5,0,'2016-02-16','2016-04-09'),(24,'产品类型','','App\\Http\\Controllers\\Admin','Category','category','index','',12,5,'2016-02-16','2016-04-11'),(25,'租赁管理','','App\\Http\\Controllers\\Admin','Rent','rent','index','',5,0,'2016-02-16','0000-00-00'),(26,'娱乐管理','','App\\Http\\Controllers\\Admin','Entertain','entertain','index','',5,0,'2016-02-16','0000-00-00'),(27,'设计管理','','App\\Http\\Controllers\\Admin','Design','design','index','',5,0,'2016-02-17','0000-00-00'),(28,'用户权限','','App\\Http\\Controllers\\Admin','Authorization','authorization','index','',2,0,'2016-02-17','0000-00-00'),(29,'前台功能','','App\\Http\\Controllers\\Admin','Function','function','index','',2,0,'2016-02-17','0000-00-00'),(30,'前台控制菜单','','App\\Http\\Controllers\\Admin','Menus','menus','index','',2,0,'2016-02-29','0000-00-00'),(31,'意见管理','','App\\Http\\Controllers\\Admin','Opinions','opinions','index','',12,0,'2016-04-04','0000-00-00'),(32,'用户日志','','App\\Http\\Controllers\\Admin','Userlog','userlog','index','',9,0,'2016-04-07','2016-04-11'),(33,'会员管理','','App\\Http\\Controllers\\Admin','User','user','index','',4,0,'2016-04-11','0000-00-00'),(34,'地区管理','','App\\Http\\Controllers\\Admin','Area','area','index','',12,0,'2016-04-11','0000-00-00'),(35,'版本管理','','App\\Http\\Controllers\\Admin','Versionlog','versionlog','index','',9,0,'2016-04-15','0000-00-00');
 /*!40000 ALTER TABLE `ba_action` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1007,6 +1007,36 @@ LOCK TABLES `bs_user_voice` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `bs_userlog`
+--
+
+DROP TABLE IF EXISTS `bs_userlog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bs_userlog` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `plat` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '平台标识：1管理员登录，2用户登录',
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户id',
+  `uname` varchar(255) NOT NULL COMMENT '用户名称',
+  `serial` varchar(20) NOT NULL COMMENT '序号，唯一标识',
+  `loginTime` date NOT NULL DEFAULT '0000-00-00' COMMENT '登陆时间',
+  `logoutTime` date NOT NULL DEFAULT '0000-00-00' COMMENT '退出时间',
+  `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bs_userlog`
+--
+
+LOCK TABLES `bs_userlog` WRITE;
+/*!40000 ALTER TABLE `bs_userlog` DISABLE KEYS */;
+INSERT INTO `bs_userlog` VALUES (1,1,1,'jiuge','201604090047077935','2016-04-09','2016-04-09','2016-04-05'),(2,1,1,'jiuge','20160409004918108','2016-04-09','0000-00-00','2016-04-05'),(3,1,1,'jiuge','201604090437083847','2016-04-09','0000-00-00','2016-04-05'),(4,1,1,'jiuge','201604091015518376','2016-04-09','0000-00-00','2016-04-05'),(5,2,1,'jiuge','201604091059097936','2016-04-09','0000-00-00','2016-04-06'),(6,2,1,'jiuge','201604091412047608','2016-04-09','0000-00-00','2016-04-06'),(7,2,1,'jiuge','201604100215434109','2016-04-10','0000-00-00','2016-04-06'),(8,2,1,'jiuge','201604101055219452','2016-04-10','0000-00-00','2016-04-06'),(9,2,1,'jiuge','20160410132948873','2016-04-10','0000-00-00','2016-04-06'),(10,1,1,'jiuge','201604110108163281','2016-04-11','0000-00-00','2016-04-05'),(11,1,1,'jiuge','201604110902034586','2016-04-11','0000-00-00','2016-04-05'),(12,1,1,'jiuge','201604111319349561','2016-04-11','0000-00-00','2016-04-05'),(13,2,1,'jiuge','201604120033529357','2016-04-12','0000-00-00','2016-04-06'),(14,1,1,'jiuge','201604120034091653','2016-04-12','2016-04-12','2016-04-05'),(15,2,1,'jiuge','201604120037364998','2016-04-12','2016-04-12','2016-04-06'),(16,1,1,'jiuge','201604121543466480','2016-04-12','2016-04-12','2016-04-05'),(17,2,1,'jiuge','201604121623313154','2016-04-12','2016-04-12','2016-04-06'),(18,1,1,'jiuge','201604121631211713','2016-04-12','0000-00-00','2016-04-13'),(19,2,1,'jiuge','201604121634096116','2016-04-12','2016-04-12','2016-04-06'),(20,2,1,'jiuge','201604121637137906','2016-04-12','0000-00-00','2016-04-06');
+/*!40000 ALTER TABLE `bs_userlog` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `companys`
 --
 
@@ -1110,4 +1140,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-15 18:23:28
+-- Dump completed on 2016-04-16  0:31:22
