@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Admin\UserlogModel;
+use App\Models\Admin\VersionlogModel;
 
 class UserlogController extends BaseController
 {
@@ -12,9 +12,9 @@ class UserlogController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->crumb['']['name'] = '用户日志';
-        $this->crumb['category']['name'] = '用户日志管理';
-        $this->crumb['category']['url'] = 'userlog';
+        $this->crumb['']['name'] = '版本日志';
+        $this->crumb['category']['name'] = '版本日志管理';
+        $this->crumb['category']['url'] = 'versionlog';
     }
 
     public function index()
@@ -24,10 +24,10 @@ class UserlogController extends BaseController
         $result = [
             'datas'=> $this->query(),
             'crumb'=> $this->crumb,
-            'prefix_url'=> '/admin/userlog',
+            'prefix_url'=> '/admin/versionlog',
             'curr'=> $curr,
         ];
-        return view('admin.userlog.index', $result);
+        return view('admin.versionlog.index', $result);
     }
 
     public function show($id)
@@ -35,15 +35,15 @@ class UserlogController extends BaseController
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
         $result = [
-            'data'=> UserlogModel::find($id),
+            'data'=> VersionlogModel::find($id),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
-        return view('admin.userlog.show', $result);
+        return view('admin.versionlog.show', $result);
     }
 
     public function query()
     {
-        return UserlogModel::orderBy('id','desc')->paginate($this->limit);
+        return VersionlogModel::orderBy('id','desc')->paginate($this->limit);
     }
 }

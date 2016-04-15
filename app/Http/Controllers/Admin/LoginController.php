@@ -8,7 +8,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Support\Facades\Input;
 use Session;
 use App\Models\Admin\AdminModel;
-use App\Models\UserlogModel;
+use App\Models\Admin\UserlogModel;
 
 class LoginController extends BaseController
 {
