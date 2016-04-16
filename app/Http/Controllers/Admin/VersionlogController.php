@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Admin\VersionlogModel;
+use Illuminate\Http\Request;
 
 class VersionlogController extends BaseController
 {
@@ -41,7 +42,16 @@ class VersionlogController extends BaseController
        return view('admin.versionlog.create', $result);
     }
 
-    public function store(){}
+    public function store(Request $request)
+    {
+        if (!$request->intro) { echo "<script>alert('内容不能为空！');history.go(-1)</script>";exit; }
+        dd($request->all());
+        $versionlog = [
+            'name'=> $request->name,
+        ];
+        VersionlogModel::create($data);
+        return redirect('/admin/versionlog');
+    }
 
     public function show($id)
     {
