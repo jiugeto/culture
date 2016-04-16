@@ -103,4 +103,6 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
     Route::get('entertain/trash','EntertainController@trash');
     Route::get('{genre}/entertain','EntertainController@index');
     Route::resource('entertain','EntertainController');
+        //创意管理
+    Route::resource('idea','IdeaController');
 });

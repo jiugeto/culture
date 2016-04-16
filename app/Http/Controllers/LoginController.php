@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 
 //use Illuminate\Http\Request;
 use App\Models\UserModel;
-use App\Models\UserlogModel;
+use App\Models\Admin\UserlogModel;
 use Session;
 use Hash;
 use Illuminate\Support\Facades\Input;

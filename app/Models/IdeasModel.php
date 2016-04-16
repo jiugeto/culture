@@ -9,8 +9,13 @@ class IdeasModel extends BaseModel
 
     protected $table = 'bs_ideas';
     protected $fillable = [
-        'id','name','cate_id','content','uid','read','click','created_at','updated_at',
+        'id','name','cate_id','content','uid','read','click','del','created_at','updated_at',
     ];
+
+    public function categorys()
+    {
+        return CategoryModel::all();
+    }
 
     public function cate()
     {
