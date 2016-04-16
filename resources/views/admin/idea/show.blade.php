@@ -3,7 +3,7 @@
 <div class="admin-content">
     @include('admin.common.crumb')
     <div class="am-g">
-        @include('admin.common.menu')
+        {{--@include('admin.common.menu')--}}
         {{--@include('admin.type.search')--}}
     </div>
     <hr/>
@@ -18,20 +18,32 @@
                     <td>{{ $data->id }}</td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">用户名 / Name：</td>
+                    <td class="am-hide-sm-only">创意名称 / Name：</td>
                     <td>{{ $data->name }}</td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">内容 / Introduce：</td>
-                    <td>{!! $data->intro !!}</td>
+                    <td class="am-hide-sm-only">发布人 / User：</td>
+                    <td>{{ $data->uid }}</td>
+                </tr>
+                <tr>
+                    <td class="am-hide-sm-only">浏览次数 / Reads：</td>
+                    <td>{{ $data->read }}</td>
+                </tr>
+                <tr>
+                    <td class="am-hide-sm-only">点赞次数 / Clicks：</td>
+                    <td>{{ $data->click }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">创建时间 / Create Time：</td>
                     <td>{{ $data->created_at }}</td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">创建时间 / Update Time：</td>
-                    <td>{{ $data->updated_at=='0000-00-00 00:00:00' ? '未修改' : $data->updated_at }}</td>
+                    <td class="am-hide-sm-only">修改时间 / Update Time：</td>
+                    <td>{{ $data->updated_at }}</td>
+                </tr>
+                <tr>
+                    <td class="am-hide-sm-only">修改时间 / Update Time：</td>
+                    <td>{{ $data->updated_at!='0000-00-00' ? $data->updated_at : '未修改' }}</td>
                 </tr>
                 </tbody>
             </table>

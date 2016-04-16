@@ -44,12 +44,15 @@ class VersionlogController extends BaseController
 
     public function store(Request $request)
     {
-        if (!$request->intro) { echo "<script>alert('内容不能为空！');history.go(-1)</script>";exit; }
-        dd($request->all());
+        if (!$request->intro) {
+            echo "<script>alert('内容不能为空！');history.go(-1)</script>";exit;
+        }
         $versionlog = [
             'name'=> $request->name,
+            'intro'=> $request->intro,
+            'created_at'=> date('Y-m-d H:i:s', time()),
         ];
-        VersionlogModel::create($data);
+        VersionlogModel::create($versionlog);
         return redirect('/admin/versionlog');
     }
 
@@ -64,6 +67,39 @@ class VersionlogController extends BaseController
         ];
         return view('admin.versionlog.show', $result);
     }
+
+    public function edit($id)
+    {
+        $curr['name'] = $this->crumb['edit']['name'];
+        $curr['url'] = $this->crumb['edit']['url'];
+        $result = [
+            'data'=> VersionlogModel::find($id),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.versionlog.edit', $result);
+    }
+
+    public function update(Request $request,$id)
+    {
+        if (!$request->intro) {
+            echo "<script>alert('内容不能为空！');history.go(-1)</script>";exit;
+        }
+        $versionlog = [
+            'name'=> $request->name,
+            'intro'=> $request->intro,
+            'updated_at'=> date('Y-m-d H:i:s', time()),
+        ];
+        VersionlogModel::where('id',$id)->update($versionlog);
+        return redirect('/admin/versionlog');
+    }
+
+    public function forceDelete($id)
+    {
+        VersionlogModel::where('id',$id)->delete();
+        return redirect('/admin/versionlog');
+    }
+
 
     public function query()
     {

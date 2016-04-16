@@ -110,5 +110,9 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::get('place/create','AdPlaceController@create');
     Route::resource('place','AdPlaceController');
         //修改（版本）日志管理
-    Route:resource('versionlog','VersionlogController');
+    Route::get('versionlog/{id}/forceDelete','VersionlogController@forceDelete');
+    Route::post('versionlog/{id}','VersionlogController@update');
+    Route::resource('versionlog','VersionlogController');
+        //创意管理
+    Route::resource('idea','IdeaController');
 });

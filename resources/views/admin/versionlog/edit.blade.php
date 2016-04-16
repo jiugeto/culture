@@ -23,7 +23,7 @@
                         <div class="am-form-group">
                             <label for="content">内容 / Content：</label>
                             @include('UEditor::head')
-                            <script id="container" name="content" type="text/plain">
+                            <script id="container" name="intro" type="text/plain">
                                 {!! $data->intro !!}
                             </script>
                             <!-- 实例化编辑器 -->
