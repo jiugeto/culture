@@ -50,9 +50,11 @@
         </div>
         <div class="navigate">
             <div class="navigate_a" style="display:{{explode('/',$_SERVER['REQUEST_URI'])[1]?'none':'block'}};">
-                @foreach($menus as $kmenu=>$menu)
+            @foreach($menus as $kmenu=>$menu)
+                @if(in_array($kmenu,['home','product','creation','supply','demand','entertain','rent','design','about']))
                 <a href="/{{$kmenu}}" class="@if(isset($curr_menu) && $curr_menu==$kmenu) curr @else nav_a @endif">{{ $menu }}</a>
-                @endforeach
+                @endif
+            @endforeach
             </div>
         </div>
     </div>

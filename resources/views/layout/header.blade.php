@@ -8,6 +8,7 @@
         <div class="head_left">
             @if(Session::has('user.username'))
                 <a href="/member">{{ Session::get('user.username') }}</a>
+                <a href="/member">会员中心</a>
                 <a href="/login/dologout">退出</a>
             @else
                 <a href="/regist">免费注册</a>
@@ -16,7 +17,9 @@
       </span>
       <span class="header_right">
         {{--<div class="head_right"><a href="">购物车</a></div>--}}
-        <div class="head_right"><a href="">网站导航</a></div>
+        {{--<div class="head_right">--}}
+            {{--<a href="">网站导航</a>--}}
+        {{--</div>--}}
       </span>
     </div>
 </div>

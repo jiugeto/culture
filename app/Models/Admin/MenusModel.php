@@ -23,7 +23,7 @@ class MenusModel extends BaseModel
      */
     public static function MemberMenus()
     {
-        return MenusModel::where(['type'=>1,'isshow'=>1])->get();
+        return MenusModel::where(['type'=>1,'isshow'=>1])->orderBy('sort','desc')->get();
     }
 
     /**
@@ -31,7 +31,7 @@ class MenusModel extends BaseModel
      */
     public static function PersonMenus()
     {
-        return MenusModel::where(['type'=>2,'isshow'=>1])->get();
+        return MenusModel::where(['type'=>2,'isshow'=>1])->orderBy('sort','desc')->get();
     }
 
     /**
@@ -39,6 +39,6 @@ class MenusModel extends BaseModel
      */
     public static function CompanyMenus()
     {
-        return MenusModel::where(['type'=>3,'isshow'=>1])->get();
+        return MenusModel::where(['type'=>3,'isshow'=>1])->orderBy('sort','desc')->get();
     }
 }
