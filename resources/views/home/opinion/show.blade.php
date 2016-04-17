@@ -3,7 +3,7 @@
     @include('home.common.crumb')
 
     <div class="show_con">
-        <h3 class="center">{{ $menus[$curr] }}详情页</h3>
+        <h3 class="center">用户意见详情页</h3>
         <table class="table_create table_show" cellspacing="0" cellpadding="0">
             <tr>
                 <td style="width:100px;">序号：</td>

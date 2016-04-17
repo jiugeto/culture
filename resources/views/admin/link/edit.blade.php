@@ -29,10 +29,10 @@
 
                         <div class="am-form-group">
                             <label>链接类型 / Type：</label>
-                            <select name="type">
+                            <select name="type_id">
                                 @foreach($types as $kt=>$type)
                                     <option value="{{ $kt }}"
-                                            {{ $data->type==$kt ? 'selected' : '' }}>
+                                            {{ $data->type_id==$kt ? 'selected' : '' }}>
                                         {{ $type }}</option>
                                 @endforeach
                             </select>

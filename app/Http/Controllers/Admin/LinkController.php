@@ -42,7 +42,8 @@ class LinkController extends BaseController
         $result = [
 //            'actions'=> $this->actions(),
             'plinks'=> LinkModel::where('pid',0)->get(),      //得到父链接
-            'types'=> $this->model->type(),
+//            'types'=> $this->model->type(),
+            'types'=> $this->model['types'],
             'pics'=> $this->model->pic(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -65,8 +66,9 @@ class LinkController extends BaseController
         $result =[
 //            'actions'=> $this->actions(),
             'plinks'=> LinkModel::where('pid',0)->get(),      //得到父链接
-            'types'=> $this->model->type(),
+//            'types'=> $this->model->type(),
             'pics'=> $this->model->pic(),
+            'types'=> $this->model['types'],
             'data'=> LinkModel::find($id),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -85,12 +87,13 @@ class LinkController extends BaseController
     public function show($id)
     {
         $data = LinkModel::find($id);
-        $data['type'] = $this->model->type();
+//        $data['type'] = $this->model->type();
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
         $result = [
 //            'actions'=> $this->actions(),
             'data'=> $data,
+            'types'=> $this->model['types'],
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -134,7 +137,7 @@ class LinkController extends BaseController
         $data = [
             'name'=> $data['name'],
             'title'=> $data['title'],
-//            'type'=> $data['type'],
+            'type_id'=> $data['type_id'],
 //            'pic'=> $data['url_ori'],
             'intro'=> $data['intro'],
             'link'=> $data['link'],

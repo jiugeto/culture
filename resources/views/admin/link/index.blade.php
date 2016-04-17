@@ -16,10 +16,8 @@
                         <th class="table-check"><input type="checkbox"/></th>
                         <th class="table-id">ID</th>
                         <th class="table-title">链接名称</th>
-                        <th class="table-type">链接用途</th>
                         <th class="table-type">显示方式</th>
                         <th class="table-type">前台是否显示</th>
-                        <th class="table-author am-hide-sm-only">有无子链接</th>
                         <th class="table-date am-hide-sm-only">添加时间</th>
                         <th class="table-set">操作</th>
                     </tr>
@@ -31,14 +29,8 @@
                         <td class="am-hide-sm-only"><input type="checkbox" /></td>
                         <td class="am-hide-sm-only">{{ $data->id }}</td>
                         <td class="am-hide-sm-only"><a href="/admin/action/{{$data->id}}">{{ $data->name }}</a></td>
-                        <td class="am-hide-sm-only">
-                            @foreach($types as $kt=>$type)
-                                @if($kt==$data->type) {{ $type }} @endif
-                            @endforeach
-                        </td>
                         <td class="am-hide-sm-only">{{ $data->display_way==1 ? '文字方式显示' : '图片方式显示' }}</td>
                         <td class="am-hide-sm-only">{{ $data->isshow==1 ? '前台显示' : '前台不显示' }}</td>
-                        <td class="am-hide-sm-only">{{ $data->pid==0 ? '有' : '无' }}</td>
                         <td class="am-hide-sm-only">{{ $data->created_at }}</td>
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">

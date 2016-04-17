@@ -16,7 +16,7 @@
         </div>
         <div class="mem_info">
             <div class="circle"><img src="/assets/images/person.png" style="width:40px;"></div>
-            <div class="mem_user">MEMBER INFO<br>会员信息</div>
+            <div class="mem_user">MEMBER INFO<br>{{ Session::get('user.username') }}</div>
             <div class="detail">详情</div>
             <div class="userInfoDetail">
                 <div>用户名：</div>
@@ -29,6 +29,6 @@
         </script>
     </div>
     <div class="company_info">
-        <button class="companybtn companybtnpos">公司信息</button>
+        <button class="companybtn companybtnpos">详细信息</button>
     </div>
 @stop

@@ -5,31 +5,20 @@
 <div class="nav">
     <hr>
     <div class="nav_body">
-        <div><img src="/assets-home/images/logo.png" class="logo"></div>
+        <div><a href="/"><img src="/assets-home/images/logo.png" class="logo"></a></div>
         <div class="nav_qiehuan" style="display:{{explode('/',$_SERVER['REQUEST_URI'])[1]?'block':'none'}};">
             <img src="/assets/images/daohang.png" class="imgMiniSize"> 导航
         </div>
         <div class="nav_qh">
             <div class="nav_hide">
-                {{--<a href="/" class="curr">首&nbsp;页</a>--}}
-                {{--<a href="" class="nav_a">产品样片</a>--}}
-                {{--<a href="creation" class="nav_a">在线作品</a>--}}
-                {{--<a href="" class="nav_a">供应单位</a>--}}
-                {{--<a href="" class="nav_a">需求信息</a>--}}
-                {{--<a href="" class="nav_a">娱乐频道</a>--}}
-                {{--<a href="" class="nav_a">租赁频道</a>--}}
-                {{--<a href="" class="nav_a">设计频道</a>--}}
-                {{--<a href="" class="nav_a">关于我们</a>--}}
-                @foreach($menus as $kmenu=>$menu)
-                <a href="/{{$kmenu}}" class="@if(isset($curr_menu) && $curr_menu==$kmenu) curr @else nav_a @endif">{{ $menu }}</a>
+                @foreach($navigates as $navigate)
+                    <a href="{{ $navigate->link }}" class="@if(isset($curr_menu) && $curr_menu==$navigate->link) curr @else nav_a @endif">{{ $navigate->name }}</a>
                 @endforeach
+                {{--@foreach($menus as $kmenu=>$menu)--}}
+                {{--<a href="/{{$kmenu}}" class="@if(isset($curr_menu) && $curr_menu==$kmenu) curr @else nav_a @endif">{{ $menu }}</a>--}}
+                {{--@endforeach--}}
             </div>
         </div>
-        {{--<form action="" class="search">--}}
-            {{--<input type="text" class="global_search" name="global_search" placeholder="想要啥效果，赶紧找哦">--}}
-            {{--<input type="submit" class="global_search_text" value="搜 索">--}}
-        {{--</form>--}}
-        {{--<div class="key_word">搜索关键词：</div>--}}
         <div class="search">
             <input type="text" class="search_input" name="global_search" placeholder="想要啥效果，赶紧找哦">
             <input type="submit" class="search_text" value="搜 索">
@@ -50,11 +39,16 @@
         </div>
         <div class="navigate">
             <div class="navigate_a" style="display:{{explode('/',$_SERVER['REQUEST_URI'])[1]?'none':'block'}};">
-            @foreach($menus as $kmenu=>$menu)
-                @if(in_array($kmenu,['home','product','creation','supply','demand','entertain','rent','design','about']))
-                <a href="/{{$kmenu}}" class="@if(isset($curr_menu) && $curr_menu==$kmenu) curr @else nav_a @endif">{{ $menu }}</a>
-                @endif
-            @endforeach
+                @foreach($navigates as $navigate)
+                    @if($navigate->id<10)
+                    <a href="/{{ $navigate->link }}" class="@if(isset($curr_menu) && $curr_menu==$navigate->link) curr @else nav_a @endif">{{ $navigate->name }}</a>
+                    @endif
+                @endforeach
+            {{--@foreach($menus as $kmenu=>$menu)--}}
+                {{--@if(in_array($kmenu,['home','product','creation','supply','demand','entertain','rent','design','about']))--}}
+                {{--<a href="/{{$kmenu}}" class="@if(isset($curr_menu) && $curr_menu==$kmenu) curr @else nav_a @endif">{{ $menu }}</a>--}}
+                {{--@endif--}}
+            {{--@endforeach--}}
             </div>
         </div>
     </div>
@@ -75,6 +69,9 @@
         nav_qh.mouseleave(function(){
             nav_hide.hide();
             nav_qiehuan.css('border-bottom','1px solid lightgray');
+        });
+        nav_qiehuan.click(function(){
+            nav_hide.toggle();
         });
         //根据浏览器宽度设置菜单位置
         var clientWidth = document.body.clientWidth;

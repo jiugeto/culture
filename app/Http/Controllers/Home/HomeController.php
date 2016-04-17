@@ -10,8 +10,8 @@ class HomeController extends BaseController
     public function index()
     {
         $result = [
-            'menus'=> $this->menus,
-            'curr_menu'=> 'home',
+//            'menus'=> $this->menus,
+            'curr_menu'=> '/',
         ];
         return view('home.home.index', $result);
     }

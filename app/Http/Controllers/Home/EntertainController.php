@@ -10,7 +10,7 @@ class EntertainController extends BaseController
     public function index()
     {
         $result = [
-            'menus'=> $this->menus,
+//            'menus'=> $this->menus,
             'curr_menu'=> 'entertain',
         ];
         return view('home.entertain.index', $result);

@@ -10,7 +10,7 @@ class ProductController extends BaseController
     public function index()
     {
         $result = [
-            'menus'=> $this->menus,
+//            'menus'=> $this->menus,
             'curr_menu'=> 'product',
         ];
         return view('home.product.index', $result);

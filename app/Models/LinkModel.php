@@ -7,12 +7,12 @@ class LinkModel extends BaseModel
 {
     protected $table = 'bs_links';
     protected $fillable = [
-        'id','name','title','type','pic','intro','link','display_way','isshow','pid','created_at','updated_at',
+        'id','name','title','type_id','pic','intro','link','display_way','isshow','pid','created_at','updated_at',
     ];
 
-//    protected $types = [
-//        1=>'header头链接','navigate菜单导航栏链接','footer脚部链接',
-//    ];
+    protected $types = [
+        1=>'header头链接','navigate菜单导航栏链接','footer脚部链接',
+    ];
 
     /**
      * 关联类型表
@@ -67,11 +67,11 @@ class LinkModel extends BaseModel
         return LinkModel::where('type_id', 3)->get();
     }
 
-    /**
-     * 底部链接：type_id==4
-     */
-    public static function menus()
-    {
-        return LinkModel::where('type_id', 4)->get();
-    }
+//    /**
+//     * 底部链接：type_id==4
+//     */
+//    public static function menus()
+//    {
+//        return LinkModel::where('type_id', 4)->get();
+//    }
 }

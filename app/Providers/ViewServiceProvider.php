@@ -26,7 +26,7 @@ class ViewServiceProvider extends ServiceProvider
         );
         //前台navigate链接
         View::composer(
-            'layout.navigate', 'App\Http\ViewComposers\NavigateComposer'
+            ['layout.navigate','home.common.crumb'], 'App\Http\ViewComposers\NavigateComposer'
         );
         //前台底部footer链接
         View::composer(
