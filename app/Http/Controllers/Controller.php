@@ -44,5 +44,6 @@ abstract class Controller extends BaseController
         'rent'=> '租赁频道',
         'design'=> '设计频道',
         'about'=> '关于我们',
+        'idea'=> '创意点子',
     ];
 }

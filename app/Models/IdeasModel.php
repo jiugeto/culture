@@ -12,9 +12,20 @@ class IdeasModel extends BaseModel
         'id','name','cate_id','content','uid','read','click','del','created_at','updated_at',
     ];
 
+//    public function categorys()
+//    {
+//        return CategoryModel::all();
+//    }
+
+    /**
+     * 得到所有分类
+     */
     public function categorys()
     {
-        return CategoryModel::all();
+        $categorys =  CategoryModel::where('del',0)->get();
+//        $categorys = Tools::category($categorys);
+        $categorys = \App\Tools::getChild($categorys);
+        return $categorys;
     }
 
     public function cate()

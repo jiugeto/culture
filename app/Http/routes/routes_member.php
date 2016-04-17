@@ -104,5 +104,10 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
     Route::get('{genre}/entertain','EntertainController@index');
     Route::resource('entertain','EntertainController');
         //创意管理
+    Route::post('idea/{id}','IdeaController@update');
+    Route::get('idea/{id}/destroy','IdeaController@destroy');
+    Route::get('idea/{id}/restore','IdeaController@restore');
+    Route::get('idea/{id}/forceDelete','IdeaController@forceDelete');
+    Route::get('idea/trash','IdeaController@trash');
     Route::resource('idea','IdeaController');
 });

@@ -2,7 +2,7 @@
 @section('content')
     @include('member.common.crumb')
 
-    <h3 class="center">{{ $menus['func']['name'] }}详情页</h3>
+    <h3 class="center">{{ $lists['func']['name'] }}详情页</h3>
     <table class="table_create table_show" cellspacing="0" cellpadding="0">
         <tr>
             <td style="width:100px;">作品名称：</td>
