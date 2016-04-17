@@ -56,7 +56,7 @@ class LinkModel extends BaseModel
      */
     public static function navigates()
     {
-        return LinkModel::where('type_id', 2)->orderBy('sort','desc')->paginate(10);
+        return LinkModel::where('type_id', 2)->orderBy('sort','desc')->paginate(11);
     }
 
     /**

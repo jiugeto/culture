@@ -116,4 +116,6 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::resource('versionlog','VersionlogController');
         //创意管理
     Route::resource('idea','IdeaController');
+        //话题管理
+    Route::resource('talk','TalkController');
 });

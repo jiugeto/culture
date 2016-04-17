@@ -23,7 +23,9 @@
             <input type="text" class="search_input" name="global_search" placeholder="想要啥效果，赶紧找哦">
             <input type="submit" class="search_text" value="搜 索">
         </div>
-        <div class="keyword_pos">搜索关键词：{{explode('/',$_SERVER['REQUEST_URI'])[1]}}</div>
+        <div class="keyword_pos">搜索关键词：
+            {{--{{explode('/',$_SERVER['REQUEST_URI'])[1]}}--}}
+        </div>
         <div class="nav_right">
             <a href="/{{ Session::has('user.username') ? 'member' : 'login' }}">
                 <img src="/assets/images/key.png" class="imgMiniSize">
@@ -35,6 +37,7 @@
             {{--<a href="/login"><img src="/assets/images/key.png" class="imgMiniSize">登陆/注册</a>&nbsp;--}}
             {{--<a href="/"><img src="/assets/images/msg.png" class="imgMiniSize">消息</a>&nbsp;--}}
             {{--<img src="/assets/images/record.png" class="imgMiniSize"><a href="/">记录</a>--}}
+            &nbsp;&nbsp;<a href="/idea" style="color:red;">创意</a>
             &nbsp;&nbsp;<a href="/opinion" class="opinion" style="color:white;">用户意见</a>
         </div>
         <div class="navigate">

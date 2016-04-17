@@ -31,16 +31,12 @@ body {
     color:red;
     text-decoration:underline;
 }
-.header_right {
-    position:relative;left:540px;
-}
+/*.header_right { position:relative;left:540px; }*/
 .head_right {
     margin:0 5px;
     float:right;
 }
-.head_right a {
-    cursor:pointer;
-}
+.head_right a { cursor:pointer; }
 /*=======header头========*/
 
 

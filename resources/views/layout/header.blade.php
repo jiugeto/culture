@@ -4,7 +4,7 @@
 <div class="header">
     <div class="header_text text_color">
       <span>
-        <div class="head_left"><a href="">欢迎来逛逛</a></div>
+        <div class="head_left">欢迎来逛逛</div>
         <div class="head_left">
             @if(Session::has('user.username'))
                 <a href="/member">{{ Session::get('user.username') }}</a>
@@ -17,6 +17,7 @@
       </span>
       <span class="header_right">
         <div class="head_right"><a href="/" style="color:red;">淘文化首页</a></div>
+        {{--<div class="head_right"><a href="talk">话题</a></div>--}}
       </span>
     </div>
 </div>

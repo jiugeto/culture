@@ -35,4 +35,6 @@ Route::group(['prefix'=>'','namespace'=>'Home'],function(){
     Route::post('opinion/{id}','OpinionController@update');
     Route::get('{status}/opinion','OpinionController@index');
     Route::resource('opinion','OpinionController');
+    //创意路由
+    Route::resource('idea','IdeaController');
 });
