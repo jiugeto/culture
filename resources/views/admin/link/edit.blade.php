@@ -22,13 +22,14 @@
 
                         <div class="am-form-group">
                             <label>鼠标移动显示 / Title：
-                                <a href="/admin/type/create/{{'网站链接-type'}}">[+添加类别]</a></label>
+                                {{--<a href="/admin/type/create/{{'网站链接-type'}}">[+添加类别]</a>--}}
+                            </label>
                             <input type="text" name="title" value="{{ $data->title }}"/>
                         </div>
 
                         <div class="am-form-group">
                             <label>链接类型 / Type：</label>
-                            <select name="type" required>
+                            <select name="type">
                                 @foreach($types as $kt=>$type)
                                     <option value="{{ $kt }}"
                                             {{ $data->type==$kt ? 'selected' : '' }}>
@@ -54,7 +55,7 @@
 
                         <div class="am-form-group">
                             <label>图片id / Picture：
-                                (无满意图片？<a href="/admin/pic/create">此处添加</a>)
+                                {{--(无满意图片？<a href="/admin/pic/create">此处添加</a>)--}}
                             </label>
                             <select name="pic_id">
                                 <option value="0"
@@ -77,7 +78,7 @@
 
                         <div class="am-form-group">
                             <label>访问链接地址 / Link：</label>
-                            <input type="text" placeholder="至少2个字符('/#'代表首页)" minlength="2" required name="link" value="{{ $data->link }}"/>
+                            <input type="text" placeholder="至少2个字符('/#'代表首页)"{{-- minlength="2"--}} required name="link" value="{{ $data->link }}"/>
                         </div>
 
                         <div class="am-form-group">

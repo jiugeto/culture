@@ -43,25 +43,27 @@ class LoginController extends BaseController
             echo "<script>alert('密码错误！');history.go(-1);</script>";exit;
         }
 
-        //加入session
         $serial = date('YmdHis',time()).rand(0,10000);
-        Session::put('admin.username',$username);
-        Session::put('admin.password',$password);
-        Session::put('admin.serial',$serial);
-        Session::put('admin.limit',$adminModel->limit);
-
+        $loginTime = date('Y-m-d H:i:s',time());
         //登陆加入用户日志表
         $userlog = [
             'plat'=> 1,     //1管理员登录
             'uid'=> $adminModel->id,
             'uname'=> Input::get('username'),
-            'loginTime'=> date('Y-m-d',time()),
+            'loginTime'=> $loginTime,
             'serial'=> $serial,
             'created_at'=> $adminModel->created_at,
         ];
         UserlogModel::create($userlog);
+        //加入session
+        Session::put('admin.username',$username);
+        Session::put('admin.password',$password);
+        Session::put('admin.serial',$serial);
+        Session::put('admin.limit',$adminModel->limit);
+        Session::put('admin.created_at',$adminModel->created_at);
+        Session::put('admin.loginTime',$loginTime);
 
-        return redirect('/admin/');
+        return redirect('/admin');
     }
 
 //    public function dologout()
@@ -82,6 +84,8 @@ class LoginController extends BaseController
         Session::forget('admin.password');
         Session::forget('admin.serial');
         Session::forget('admin.limit');
+        Session::forget('admin.created_at');
+        Session::forget('admin.loginTime');
         return Redirect('/admin/login');
     }
 }

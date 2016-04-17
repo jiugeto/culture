@@ -71,9 +71,7 @@ class LinkController extends BaseController
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
-        return view('admin.link.edit', compact(
-            'actions','plinks','data','types','pics','crumb'
-        ));
+        return view('admin.link.edit', $result);
     }
 
     public function update(Request $request, $id)
@@ -117,27 +115,27 @@ class LinkController extends BaseController
         $data = $request->all();
         if (!$data['title']) { $data['title'] = ''; }
         if (!$data['intro']) { $data['intro'] = ''; }
-        /*//获取图片文件名
-        $data['url_ori'] = '';
-        if($request->hasFile('url_ori')){  //判断文件存在
-            //验证图片大小
-            foreach ($_FILES as $pic) {
-                if ($pic['size'] > $this->uploadSizeLimit) {
-                    echo "<script>alert(\"对不起，你上传的图片过大，请重新选择\");history.go(-1);</script>";exit;
-                }
-            }
-            $file = $request->file('url_ori');  //获取文件
-            $data['url_ori'] = $this->upload($file);
-        }*/
+//        //获取图片文件名
+//        $data['url_ori'] = '';
+//        if($request->hasFile('url_ori')){  //判断文件存在
+//            //验证图片大小
+//            foreach ($_FILES as $pic) {
+//                if ($pic['size'] > $this->uploadSizeLimit) {
+//                    echo "<script>alert(\"对不起，你上传的图片过大，请重新选择\");history.go(-1);</script>";exit;
+//                }
+//            }
+//            $file = $request->file('url_ori');  //获取文件
+//            $data['url_ori'] = $this->upload($file);
+//        }
         //pic为0时，display_way不能为2
-        if (!$data['url_ori'] && $data['display_way']==2) {
-            echo "<script>alert(\"对不起，您未上传图片，不能以图片方式显示在前台，请重新选择\");history.go(-1);</script>";exit;
-        }
+//        if (!$data['url_ori'] && $data['display_way']==2) {
+//            echo "<script>alert(\"对不起，您未上传图片，不能以图片方式显示在前台，请重新选择\");history.go(-1);</script>";exit;
+//        }
         $data = [
             'name'=> $data['name'],
             'title'=> $data['title'],
-            'type'=> $data['type'],
-            'pic'=> $data['url_ori'],
+//            'type'=> $data['type'],
+//            'pic'=> $data['url_ori'],
             'intro'=> $data['intro'],
             'link'=> $data['link'],
             'display_way'=> $data['display_way'],

@@ -89,6 +89,7 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::get('message/trash','MessageController@trash');
     Route::resource('message','MessageController');
         //链接管理
+    Route::post('link/{id}','LinkController@update');
     Route::resource('link','LinkController');
         //心声管理
     Route::resource('uservoice','UserVoiceController');

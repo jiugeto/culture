@@ -27,6 +27,34 @@
                         <td>{{ $data->title }}</td>
                     </tr>
                     <tr>
+                        <td class="am-hide-sm-only">类型 / Type：</td>
+                        <td>{{ $data->type_id }}</td>
+                    </tr>
+                    <tr>
+                        <td class="am-hide-sm-only">图片 / Picture：</td>
+                        <td>{{ $data->pic_id }}</td>
+                    </tr>
+                    <tr>
+                        <td class="am-hide-sm-only">介绍 / Introduce：</td>
+                        <td>{{ $data->intro }}</td>
+                    </tr>
+                    <tr>
+                        <td class="am-hide-sm-only">访问路径地址 / Url：</td>
+                        <td>{{ $data->link }}</td>
+                    </tr>
+                    <tr>
+                        <td class="am-hide-sm-only">显示方式 / Way：</td>
+                        <td>{{ $data->way }}</td>
+                    </tr>
+                    <tr>
+                        <td class="am-hide-sm-only">前台显示否 / Is Show：</td>
+                        <td>{{ $data->isshow }}</td>
+                    </tr>
+                    <tr>
+                        <td class="am-hide-sm-only">父id / Parent Id：</td>
+                        <td>{{ $data->pid }}</td>
+                    </tr>
+                    <tr>
                         <td class="am-hide-sm-only">添加时间 / Create Time：</td>
                         <td>{{ $data->created_at }}</td>
                     </tr>
