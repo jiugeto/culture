@@ -23,9 +23,9 @@
                             <label>菜单类型 / Type：</label>
                             <select name="type" required>
                                 @foreach($types as $kt=>$type)
-                                    @if($data->type==$kt)
-                                    <option value="{{ $kt }}">{{ $type }}</option>
-                                    @endif
+                                    <option value="{{ $kt }}"
+                                            {{ $data->type==$kt ? 'selected' : '' }}>
+                                        {{ $type }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -53,6 +53,11 @@
                         </div>
 
                         <div class="am-form-group">
+                            <label>平台路由 / Plat Url：</label>
+                            <input type="text" placeholder="例：member" pattern="^[a-zA-Z_]+$" required name="platUrl" value="{{ $data->platUrl }}"/>
+                        </div>
+
+                        <div class="am-form-group">
                             <label>访问路径部分url / Url：</label>
                             <input type="text" placeholder="例：action" pattern="^[a-zA-Z_]+$" required name="url" value="{{ $data->url }}"/>
                         </div>
@@ -73,7 +78,7 @@
                         </div>
 
                         <div class="am-form-group">
-                            <label>前台是否显示 / Is Show：</label>
+                            <label>会员后台是否显示 / Is Show：</label>
                             <label><input type="radio" name="isshow" value="0" {{ $data->isshow==0 ? 'checked' : '' }}/> 不显示&nbsp;&nbsp;</label>
                             <label><input type="radio" name="isshow" value="1" {{ $data->isshow==1 ? 'checked' : '' }}/> 显示&nbsp;&nbsp;</label>
                         </div>

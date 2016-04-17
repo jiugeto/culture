@@ -53,6 +53,11 @@
                         </div>
 
                         <div class="am-form-group">
+                            <label>平台路由 / Plat Url：</label>
+                            <input type="text" placeholder="例：member" pattern="^[a-zA-Z_]+$" required name="platUrl"/>
+                        </div>
+
+                        <div class="am-form-group">
                             <label>方法名 / Function Name：</label>
                             <input type="text" placeholder="例：index" pattern="^[a-zA-Z_]+$" required name="action"/>
                         </div>
@@ -68,7 +73,7 @@
                         </div>
 
                         <div class="am-form-group">
-                            <label>前台是否显示 / Is Show：</label>
+                            <label>会员后台是否显示 / Is Show：</label>
                             <label><input type="radio" name="isshow" value="0"/> 不显示&nbsp;&nbsp;</label>
                             <label><input type="radio" name="isshow" value="1" checked/> 显示&nbsp;&nbsp;</label>
                         </div>

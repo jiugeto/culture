@@ -46,7 +46,7 @@
                         <th class="table-type">控制器名称</th>
                         {{--<th class="table-type">菜单方法</th>--}}
                         <th class="table-author am-hide-sm-only">父ID</th>
-                        <th class="table-author am-hide-sm-only">前台是否显示</th>
+                        <th class="table-author am-hide-sm-only">会员后台是否显示</th>
                         <th class="table-date am-hide-sm-only">添加时间</th>
                         <th class="table-set">操作</th>
                     </tr>

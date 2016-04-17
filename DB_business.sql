@@ -150,7 +150,7 @@ CREATE TABLE `ba_userlog` (
   `logoutTime` date NOT NULL DEFAULT '0000-00-00' COMMENT '退出时间',
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -159,7 +159,7 @@ CREATE TABLE `ba_userlog` (
 
 LOCK TABLES `ba_userlog` WRITE;
 /*!40000 ALTER TABLE `ba_userlog` DISABLE KEYS */;
-INSERT INTO `ba_userlog` VALUES (1,1,1,'jiuge','201604090047077935','2016-04-09','2016-04-09','2016-04-05'),(2,1,1,'jiuge','20160409004918108','2016-04-09','0000-00-00','2016-04-05'),(3,1,1,'jiuge','201604090437083847','2016-04-09','0000-00-00','2016-04-05'),(4,1,1,'jiuge','201604091015518376','2016-04-09','0000-00-00','2016-04-05'),(5,2,1,'jiuge','201604091059097936','2016-04-09','0000-00-00','2016-04-06'),(6,2,1,'jiuge','201604091412047608','2016-04-09','0000-00-00','2016-04-06'),(7,2,1,'jiuge','201604100215434109','2016-04-10','0000-00-00','2016-04-06'),(8,2,1,'jiuge','201604101055219452','2016-04-10','0000-00-00','2016-04-06'),(9,2,1,'jiuge','20160410132948873','2016-04-10','0000-00-00','2016-04-06'),(10,1,1,'jiuge','201604110108163281','2016-04-11','0000-00-00','2016-04-05'),(11,1,1,'jiuge','201604110902034586','2016-04-11','0000-00-00','2016-04-05'),(12,1,1,'jiuge','201604111319349561','2016-04-11','0000-00-00','2016-04-05'),(13,2,1,'jiuge','201604120033529357','2016-04-12','0000-00-00','2016-04-06'),(14,1,1,'jiuge','201604120034091653','2016-04-12','2016-04-12','2016-04-05'),(15,2,1,'jiuge','201604120037364998','2016-04-12','2016-04-12','2016-04-06'),(16,1,1,'jiuge','201604121221289312','2016-04-12','2016-04-12','2016-04-05'),(17,2,1,'jiuge','201604121231351384','2016-04-12','2016-04-12','2016-04-06'),(18,1,1,'jiuge','201604121233022375','2016-04-12','2016-04-12','2016-04-05'),(19,1,1,'jiuge','201604150217508806','2016-04-15','0000-00-00','2016-04-05'),(20,1,1,'jiuge','201604160759374265','2016-04-16','0000-00-00','2016-04-05'),(21,2,1,'jiuge','201604161520191699','2016-04-16','0000-00-00','2016-04-06'),(22,1,1,'jiuge','201604161522083742','2016-04-16','2016-04-16','2016-04-05'),(23,1,1,'jiuge','201604161527372619','2016-04-16','2016-04-16','2016-04-05');
+INSERT INTO `ba_userlog` VALUES (1,1,1,'jiuge','201604090047077935','2016-04-09','2016-04-09','2016-04-05'),(2,1,1,'jiuge','20160409004918108','2016-04-09','0000-00-00','2016-04-05'),(3,1,1,'jiuge','201604090437083847','2016-04-09','0000-00-00','2016-04-05'),(4,1,1,'jiuge','201604091015518376','2016-04-09','0000-00-00','2016-04-05'),(5,2,1,'jiuge','201604091059097936','2016-04-09','0000-00-00','2016-04-06'),(6,2,1,'jiuge','201604091412047608','2016-04-09','0000-00-00','2016-04-06'),(7,2,1,'jiuge','201604100215434109','2016-04-10','0000-00-00','2016-04-06'),(8,2,1,'jiuge','201604101055219452','2016-04-10','0000-00-00','2016-04-06'),(9,2,1,'jiuge','20160410132948873','2016-04-10','0000-00-00','2016-04-06'),(10,1,1,'jiuge','201604110108163281','2016-04-11','0000-00-00','2016-04-05'),(11,1,1,'jiuge','201604110902034586','2016-04-11','0000-00-00','2016-04-05'),(12,1,1,'jiuge','201604111319349561','2016-04-11','0000-00-00','2016-04-05'),(13,2,1,'jiuge','201604120033529357','2016-04-12','0000-00-00','2016-04-06'),(14,1,1,'jiuge','201604120034091653','2016-04-12','2016-04-12','2016-04-05'),(15,2,1,'jiuge','201604120037364998','2016-04-12','2016-04-12','2016-04-06'),(16,1,1,'jiuge','201604121221289312','2016-04-12','2016-04-12','2016-04-05'),(17,2,1,'jiuge','201604121231351384','2016-04-12','2016-04-12','2016-04-06'),(18,1,1,'jiuge','201604121233022375','2016-04-12','2016-04-12','2016-04-05'),(19,1,1,'jiuge','201604150217508806','2016-04-15','0000-00-00','2016-04-05'),(20,1,1,'jiuge','201604160759374265','2016-04-16','0000-00-00','2016-04-05'),(21,2,1,'jiuge','201604161520191699','2016-04-16','2016-04-16','2016-04-06'),(22,1,1,'jiuge','201604161522083742','2016-04-16','2016-04-16','2016-04-05'),(23,1,1,'jiuge','201604161527372619','2016-04-16','2016-04-16','2016-04-05'),(24,2,1,'jiuge','2016041700561299','2016-04-17','0000-00-00','2016-04-06'),(25,1,1,'jiuge','201604170248081428','2016-04-17','0000-00-00','2016-04-05');
 /*!40000 ALTER TABLE `ba_userlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -623,7 +623,7 @@ CREATE TABLE `bs_ideas` (
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='创意表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='创意表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -632,6 +632,7 @@ CREATE TABLE `bs_ideas` (
 
 LOCK TABLES `bs_ideas` WRITE;
 /*!40000 ALTER TABLE `bs_ideas` DISABLE KEYS */;
+INSERT INTO `bs_ideas` VALUES (1,'创意1',4,'<p>而非v代表</p>',1,0,0,0,'2016-04-17 01:46:45','2016-04-17 02:24:47');
 /*!40000 ALTER TABLE `bs_ideas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -683,6 +684,7 @@ CREATE TABLE `bs_menus` (
   `intro` varchar(255) DEFAULT NULL COMMENT '权限说明',
   `namespace` varchar(255) NOT NULL COMMENT '命名空间',
   `controller_prefix` varchar(255) NOT NULL DEFAULT '' COMMENT '控制器名称',
+  `platUrl` varchar(255) NOT NULL COMMENT '平台路由',
   `url` varchar(255) NOT NULL COMMENT '访问路径的部分 url',
   `action` varchar(255) NOT NULL COMMENT '操作方法名称',
   `style_class` varchar(255) DEFAULT NULL COMMENT 'class样式名称',
@@ -692,7 +694,7 @@ CREATE TABLE `bs_menus` (
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL DEFAULT '0000-00-00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='前台左侧菜单控制表 bs_menus';
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COMMENT='前台左侧菜单控制表 bs_menus';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -701,7 +703,7 @@ CREATE TABLE `bs_menus` (
 
 LOCK TABLES `bs_menus` WRITE;
 /*!40000 ALTER TABLE `bs_menus` DISABLE KEYS */;
-INSERT INTO `bs_menus` VALUES (1,'账户首页',1,'会员后台左侧菜单控制','App\\Http\\Controllers\\Member','Home','home','index','',0,1,10,'2016-03-06','2016-03-06'),(2,'会员账户',1,'','App\\Http\\Controllers\\Member','Setting','setting','index','',0,1,10,'2016-02-29','2016-04-12'),(3,'在线创作',1,'','App\\Http\\Controllers\\Member','Product','product','index','',0,1,10,'2016-03-12','2016-03-14'),(4,'个人供求',1,'','App\\Http\\Controllers\\Member','PersonD','personD','index','',0,1,10,'2016-02-29','2016-03-19'),(5,'企业供求',1,'','App\\Http\\Controllers\\Member','CompanyD','companyD','index','',0,1,10,'2016-03-12','2016-03-19'),(6,'个人需求',1,'','App\\Http\\Controllers\\Member','PersonD','personD','index','',4,1,10,'2016-03-12','2016-03-19'),(7,'个人作品',1,'','App\\Http\\Controllers\\Member','PersonS','personS','index','',4,1,10,'2016-03-12','2016-03-19'),(8,'企业需求',1,'','App\\Http\\Controllers\\Member','CompanyD','companyD','index','',5,1,10,'2016-03-12','2016-03-19'),(9,'企业作品',1,'','App\\Http\\Controllers\\Member','CompanyS','companyS','index','',5,1,10,'2016-03-12','2016-03-19'),(10,'租赁供求',1,'','App\\Http\\Controllers\\Member','Rent','rent','index','',5,1,10,'2016-03-12','2016-03-19'),(11,'娱乐供求',1,'','App\\Http\\Controllers\\Member','Entertain','entertain','index','',5,1,10,'2016-03-12','2016-03-13'),(12,'基本管理',1,'','App\\Http\\Controllers\\Member','Category','category','index','',0,1,10,'2016-03-13','0000-00-00'),(13,'分类管理',1,'','App\\Http\\Controllers\\Member','Category','category','index','',12,1,10,'2016-03-13','2016-03-19'),(14,'创意管理',1,'','App\\Http\\Controllers\\Member','Idea','idea','index','',12,1,10,'2016-04-16','0000-00-00');
+INSERT INTO `bs_menus` VALUES (1,'账户首页',1,'会员后台左侧菜单控制','App\\Http\\Controllers\\Member','Home','member','home','index','',0,1,10,'2016-03-06','2016-03-06'),(2,'会员账户',1,'','App\\Http\\Controllers\\Member','Setting','member','setting','index','',0,1,10,'2016-02-29','2016-04-12'),(3,'在线创作',1,'','App\\Http\\Controllers\\Member','Product','member','product','index','',0,1,10,'2016-03-12','2016-03-14'),(4,'个人供求',1,'','App\\Http\\Controllers\\Member','PersonD','member','personD','index','',0,1,10,'2016-02-29','2016-03-19'),(5,'企业供求',1,'','App\\Http\\Controllers\\Member','CompanyD','member','companyD','index','',0,1,10,'2016-03-12','2016-03-19'),(6,'个人需求',1,'','App\\Http\\Controllers\\Member','PersonD','member','personD','index','',4,1,10,'2016-03-12','2016-03-19'),(7,'个人作品',1,'','App\\Http\\Controllers\\Member','PersonS','member','personS','index','',4,1,10,'2016-03-12','2016-03-19'),(8,'企业需求',1,'','App\\Http\\Controllers\\Member','CompanyD','member','companyD','index','',5,1,10,'2016-03-12','2016-03-19'),(9,'企业作品',1,'','App\\Http\\Controllers\\Member','CompanyS','member','companyS','index','',5,1,10,'2016-03-12','2016-03-19'),(10,'租赁供求',1,'','App\\Http\\Controllers\\Member','Rent','member','rent','index','',5,1,10,'2016-03-12','2016-03-19'),(11,'娱乐供求',1,'','App\\Http\\Controllers\\Member','Entertain','member','entertain','index','',5,1,10,'2016-03-12','2016-03-13'),(12,'基本管理',1,'','App\\Http\\Controllers\\Member','Category','member','category','index','',0,1,10,'2016-03-13','0000-00-00'),(13,'分类管理',1,'','App\\Http\\Controllers\\Member','Category','member','category','index','',12,1,10,'2016-03-13','2016-03-19'),(14,'创意管理',1,'','App\\Http\\Controllers\\Member','Idea','member','idea','index','',12,1,10,'2016-04-16','0000-00-00'),(15,'个人资料',1,'','App\\Http\\Controllers\\Person','Home','person','home','index','',4,1,10,'2016-04-17','2016-04-17');
 /*!40000 ALTER TABLE `bs_menus` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1172,4 +1174,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-17  0:06:51
+-- Dump completed on 2016-04-17 11:22:43

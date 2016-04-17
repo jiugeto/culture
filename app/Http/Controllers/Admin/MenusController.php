@@ -119,6 +119,7 @@ class MenusController extends BaseController
             'intro'=> $data['intro'],
             'namespace'=> $data['namespace'],
             'controller_prefix'=> substr($data['controller_prefix'],0,-10),
+            'platUrl'=> $data['platUrl'],
             'url'=> $data['url'],
             'action'=> $data['action'],
             'style_class'=> $data['style_class'],

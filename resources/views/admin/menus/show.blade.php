@@ -57,7 +57,7 @@
                     <td>{{ $data->style_class }}</td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">前台是否显示 / Class Name：</td>
+                    <td class="am-hide-sm-only">会员后台是否显示 / Class Name：</td>
                     <td>{{ $data->isshow==0 ? '不显示' : '显示' }}</td>
                 </tr>
                 <tr>

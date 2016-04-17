@@ -14,7 +14,7 @@
             </a>
                 @if($memberMenu->child)
                     @foreach($memberMenu->child as $subMenu)
-                    <a href="/member/{{$subMenu->url}}">
+                    <a href="/{{$subMenu->platUrl}}/{{$subMenu->url}}">
                             <li class="a_li li_sub">{{ $subMenu->name }} @if($lists['func']['name']==$subMenu->name) ✔ @endif</li>
                     </a>
                     @endforeach
