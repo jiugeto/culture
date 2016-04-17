@@ -19,7 +19,7 @@ class HomeController extends BaseController
         $result = [
             'lists'=> $this->lists,
             'curr_list'=> 'member',
-            'menus'=> $this->menus,
+//            'menus'=> $this->menus,
         ];
         return view('member.home.index', $result);
     }

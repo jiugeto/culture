@@ -7,7 +7,7 @@ class LinkModel extends BaseModel
 {
     protected $table = 'bs_links';
     protected $fillable = [
-        'id','name','title','type_id','pic','intro','link','display_way','isshow','pid','created_at','updated_at',
+        'id','name','title','type_id','pic','intro','link','display_way','isshow','pid','sort','created_at','updated_at',
     ];
 
     protected $types = [
@@ -48,7 +48,7 @@ class LinkModel extends BaseModel
      */
     public static function headers()
     {
-        return LinkModel::where('type_id', 1)->get();
+        return LinkModel::where('type_id', 1)->orderBy('sort','desc')->get();
     }
 
     /**
@@ -56,7 +56,7 @@ class LinkModel extends BaseModel
      */
     public static function navigates()
     {
-        return LinkModel::where('type_id', 2)->get();
+        return LinkModel::where('type_id', 2)->orderBy('sort','desc')->paginate(10);
     }
 
     /**
@@ -64,7 +64,7 @@ class LinkModel extends BaseModel
      */
     public static function footers()
     {
-        return LinkModel::where('type_id', 3)->get();
+        return LinkModel::where('type_id', 3)->orderBy('sort','desc')->paginate(10);
     }
 
 //    /**

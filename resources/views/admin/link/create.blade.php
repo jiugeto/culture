@@ -79,6 +79,11 @@
                             </select>
                         </div>
 
+                        <div class="am-form-group">
+                            <label>排序数字 / Sort：</label>
+                            <input type="text" placeholder="例：10" pattern="^\d+$" required name="sort" value="10"/>
+                        </div>
+
                         <button type="submit" class="am-btn am-btn-primary">保存添加</button>
                     </fieldset>
                 </form>

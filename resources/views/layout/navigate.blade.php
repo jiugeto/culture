@@ -12,7 +12,7 @@
         <div class="nav_qh">
             <div class="nav_hide">
                 @foreach($navigates as $navigate)
-                    <a href="{{ $navigate->link }}" class="@if(isset($curr_menu) && $curr_menu==$navigate->link) curr @else nav_a @endif">{{ $navigate->name }}</a>
+                    <a href="{{ $navigate->link }}" class="@if(isset($curr_menu) && $curr_menu==$navigate->link) curr @else nav_a @endif" title="{{ $navigate->title }}">{{ $navigate->name }}</a>
                 @endforeach
                 {{--@foreach($menus as $kmenu=>$menu)--}}
                 {{--<a href="/{{$kmenu}}" class="@if(isset($curr_menu) && $curr_menu==$kmenu) curr @else nav_a @endif">{{ $menu }}</a>--}}
@@ -41,7 +41,7 @@
             <div class="navigate_a" style="display:{{explode('/',$_SERVER['REQUEST_URI'])[1]?'none':'block'}};">
                 @foreach($navigates as $navigate)
                     @if($navigate->id<10)
-                    <a href="/{{ $navigate->link }}" class="@if(isset($curr_menu) && $curr_menu==$navigate->link) curr @else nav_a @endif">{{ $navigate->name }}</a>
+                    <a href="/{{ $navigate->link }}" class="@if(isset($curr_menu) && $curr_menu==$navigate->link) curr @else nav_a @endif" title="{{ $navigate->title }}">{{ $navigate->name }}</a>
                     @endif
                 @endforeach
             {{--@foreach($menus as $kmenu=>$menu)--}}

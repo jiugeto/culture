@@ -144,6 +144,7 @@ class LinkController extends BaseController
             'display_way'=> $data['display_way'],
             'isshow'=> $data['isshow'],
             'pid'=> $data['pid'],
+            'sort'=> $data['sort'],
         ];
         return $data;
     }

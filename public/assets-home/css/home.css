@@ -207,11 +207,16 @@ a.curr {
 }
 .footer_pic {}
 .footer_text a {
-    color:white;
+    margin:0 5px;
+    color:lightgrey;
     text-decoration:none;
 }
-.footer_beizhu {
+.footer_text a:hover {
     color:white;
+    text-decoration:underline;
+}
+.footer_beizhu {
+    color:lightgrey;
 }
 /*=======footer网站脚部========*/
 

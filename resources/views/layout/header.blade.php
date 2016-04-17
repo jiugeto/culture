@@ -16,10 +16,7 @@
         </div>
       </span>
       <span class="header_right">
-        {{--<div class="head_right"><a href="">购物车</a></div>--}}
-        {{--<div class="head_right">--}}
-            {{--<a href="">网站导航</a>--}}
-        {{--</div>--}}
+        <div class="head_right"><a href="/" style="color:red;">淘文化首页</a></div>
       </span>
     </div>
 </div>

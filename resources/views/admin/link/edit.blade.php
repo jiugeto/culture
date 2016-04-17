@@ -103,7 +103,12 @@
                             </select>
                         </div>
 
-                        <button type="submit" class="am-btn am-btn-primary">保存添加</button>
+                        <div class="am-form-group">
+                            <label>排序数字 / Sort：</label>
+                            <input type="text" placeholder="例：10" pattern="^\d+$" required name="sort" value="{{ $data->sort }}"/>
+                        </div>
+
+                        <button type="submit" class="am-btn am-btn-primary">保存修改</button>
                     </fieldset>
                 </form>
             </div>

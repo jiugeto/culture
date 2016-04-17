@@ -55,6 +55,10 @@
                         <td>{{ $data->pid }}</td>
                     </tr>
                     <tr>
+                        <td class="am-hide-sm-only">排序 / Sort：</td>
+                        <td>{{ $data->sort }}</td>
+                    </tr>
+                    <tr>
                         <td class="am-hide-sm-only">添加时间 / Create Time：</td>
                         <td>{{ $data->created_at }}</td>
                     </tr>
