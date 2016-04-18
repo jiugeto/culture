@@ -102,3 +102,37 @@
     border:1px solid rgb(240,240,240);
     overflow:auto;
 }
+
+
+/*=== 创意列表页面 ===*/
+.opinion_list p.cate {
+    padding:5px 20px;
+    border:1px solid lightgrey;
+}
+.opinion_list table.idea {
+    padding:10px 0;
+    width:100%;
+    border:1px solid lightgrey;
+    color:grey;
+}
+.opinion_list table.idea .img { width:220px; }
+.opinion_list table.idea div {
+    width:200px;height:100px;
+    overflow:hidden;
+}
+.opinion_list table.idea .small {
+    color:darkgrey;
+    font-size:12px;
+}
+.opinion_list table.idea .con { margin:15px 0;font-size:14px; }
+.opinion_list table.idea .right {
+    margin:0 10px;float:right;color:darkgrey;
+}
+.opinion_list table.idea a {
+    color:black;
+    text-decoration:none;
+}
+.opinion_list table.idea a:hover {
+    color:black;
+    text-decoration:none;
+}

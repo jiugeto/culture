@@ -37,4 +37,6 @@ Route::group(['prefix'=>'','namespace'=>'Home'],function(){
     Route::resource('opinion','OpinionController');
     //创意路由
     Route::resource('idea','IdeaController');
+    //话题路由
+    Route::resource('talk','TalkController');
 });

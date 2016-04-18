@@ -58,7 +58,7 @@ body {
 }
 .nav_body div { float:left; }
 .nav_right {
-    position:absolute;top:50px;right:200px;
+    position:absolute;top:50px;right:150px;
 }
 .nav_right a {
     color:black;
