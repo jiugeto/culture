@@ -1,0 +1,68 @@
+/*========== 这里是话题样式talk ==========*/
+
+
+.talk_con {
+    margin:20px auto;
+    width:1000px;
+}
+.talk_left {
+    width:798px;
+    float:left;
+}
+.talk_left div.head {
+    margin:10px auto;
+    padding:10px 5px;
+    color:grey;
+    font-size:20px;
+    border-bottom:1px solid darkgrey;
+}
+.talk_left table {
+    padding:5px;
+    width:788px;
+    border-bottom:1px dashed lightgrey;
+}
+.talk_left table .img { width:50px; }
+.talk_left table .img div {
+    width:50px;height:50px;
+    overflow:hidden;
+    float:left;
+}
+.talk_left td { padding:0 5px; }
+.talk_left p {
+    text-align:center;
+    color:rgb(35,120,160);
+}
+.talk_left .title {
+    color:rgb(35,120,160);
+    font-size:20px;
+}
+.talk_left .small {
+    color:darkgrey;
+    font-size:14px;
+}
+.talk_left .small span.right { float:right; }
+.talk_left .small span.right a {
+    padding:0 10px;
+    color:grey;
+    text-decoration:none;
+}
+.talk_left .small span.right a:hover {
+    color:red;
+    background:lightgrey;
+}
+ .talk_right {
+    width:198px;
+    float:right;
+}
+.talk_right .theme {
+    margin-top:20px;
+    margin-left:40px;
+    padding:10px 0;
+    width:190px;
+    border-bottom:1px solid lightgrey;
+}
+.talk_right .theme p {
+    margin:0;
+    padding-bottom:10px;
+    color:grey;
+}

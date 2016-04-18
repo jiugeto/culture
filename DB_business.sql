@@ -976,6 +976,7 @@ CREATE TABLE `bs_talks` (
   `thank` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '要感谢的用户id',
   `share` varchar(255) NOT NULL DEFAULT '0' COMMENT '分享其他用户id组合',
   `report` varchar(255) NOT NULL DEFAULT '0' COMMENT '举报者id组合，默认0无举报',
+  `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序字段，值越大越靠前，默认10',
   `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站功能：0不放入回收站，1放入回收站',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   `updated_at` datetime NOT NULL,
@@ -989,7 +990,7 @@ CREATE TABLE `bs_talks` (
 
 LOCK TABLES `bs_talks` WRITE;
 /*!40000 ALTER TABLE `bs_talks` DISABLE KEYS */;
-INSERT INTO `bs_talks` VALUES (1,'话题1','<p>而非v代表</p>',1,0,0,'',0,'0','0',0,'2016-04-17 01:46:45','2016-04-17 02:24:47');
+INSERT INTO `bs_talks` VALUES (1,'话题1','<p>而非v代表</p>',1,0,0,'',0,'0','0',10,0,'2016-04-17 01:46:45','2016-04-17 02:24:47');
 /*!40000 ALTER TABLE `bs_talks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1211,4 +1212,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-18 10:07:55
+-- Dump completed on 2016-04-18 23:04:11
