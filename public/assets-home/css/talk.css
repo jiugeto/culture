@@ -32,10 +32,13 @@
     text-align:center;
     color:rgb(35,120,160);
 }
-.talk_left .title {
+.talk_left .title a {
     color:rgb(35,120,160);
     font-size:20px;
+    text-decoration:none;
+    cursor:pointer;
 }
+.talk_left .title a:hover { color:red; }
 .talk_left .small {
     color:darkgrey;
     font-size:14px;
@@ -74,7 +77,7 @@
     text-decoration:none;
 }
 .talk_right .theme a div {
-    padding:2px 110px 2px 5px;
+    padding:5px 110px 5px 10px;
     color:grey;
 }
 .talk_right .theme a:hover div {
@@ -87,4 +90,21 @@
 }
 .talk_left .small a:hover {
     color:red;
+}
+
+
+.talk_input {
+    padding:5px 10px;
+    width:780px;height:30px;
+    border:1px solid lightgrey;
+    border-radius:3px;
+}
+.talk_con div.head {
+    margin-top:-10px;
+    margin-bottom:10px;
+    padding:10px 0;
+    width:800px;
+    color:grey;
+    border-bottom:1px solid lightgrey;
+    font-size:20px;
 }
