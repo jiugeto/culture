@@ -18,6 +18,11 @@ class TalkController extends BaseController
         return view('home.talk.index', $result);
     }
 
+    public function show($id)
+    {
+        return view('home.talk.show', array('data'=>TalksModel::find($id)));
+    }
+
 
     public function query()
     {

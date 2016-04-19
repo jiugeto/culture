@@ -1,41 +1,8 @@
 @extends('person.main')
 @section('content')
     <div class="per_body">
-        {{--页面顶部布局--}}
-        <div class="per_top">
-            <p>个人后台</p>
-        </div>
-        {{--页面左边布局--}}
-        <div class="per_left">
-            <div class="per_left1">
-                <p>头像</p>
-                <div><img src="##"></div>
-            </div>
-            <div class="per_left2">
-                <p>统计信息</p>
-            </div>
-            <div class="per_left3">
-                <p>相册</p>
-            </div>
-        </div>
-        {{--页面中间布局--}}
-        <div class="per_center">
-            <div class="per_center1">
-                <p>资料</p>
-            </div>
-            <div class="per_center2">
-                <p>动态</p>
-            </div>
-            <div class="per_center3">
-                <p>留言板</p>
-            </div>
-        </div>
-        {{--页面右侧布局--}}
-        <div class="per_right">
-            <div class="per_right1">好友</div>
-            <div class="per_right2">最近访客</div>
-            <div class="per_right3">小组</div>
-        </div>
-        <div class="per_bottom"><p>底部</p></div>
+        个人首页：选项依据：年龄（满月、幼年、童年、少年、成年、中年、老年）；
+        <br>节日（元旦、情人节、除夕、春节、元宵节、妇女节、植树节、315、愚人节、清明节、劳动节、儿童节、教师节、中秋节、国庆节、光棍节、感恩节、平安夜、圣诞节）
+        <br>个人设置
     </div>
 @stop

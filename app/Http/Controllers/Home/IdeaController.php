@@ -1,7 +1,9 @@
 <?php
 namespace App\Http\Controllers\Home;
 
+use App\Models\CategoryModel;
 use App\Models\IdeasModel;
+use App\Tools;
 use Illuminate\Http\Request;
 
 class IdeaController extends BaseController
@@ -14,8 +16,14 @@ class IdeaController extends BaseController
     {
         $result = [
             'datas'=> $this->query(),
+            'cates'=> Tools::getChild(CategoryModel::all()),
         ];
         return view('home.idea.index', $result);
+    }
+
+    public function show($id)
+    {
+        return view('home.idea.show',array('data'=>IdeasModel::find($id)));
     }
 
 
