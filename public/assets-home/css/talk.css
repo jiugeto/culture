@@ -80,3 +80,11 @@
 .talk_right .theme a:hover div {
     background:rgb(240,240,240);
 }
+.talk_left .small a {
+    color:grey;
+    text-decoration:none;
+    cursor:pointer;
+}
+.talk_left .small a:hover {
+    color:red;
+}

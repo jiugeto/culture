@@ -12,10 +12,7 @@ class TalkController extends BaseController
 
     public function index()
     {
-        $result = [
-            'datas'=> $this->query(),
-        ];
-        return view('home.talk.index', $result);
+        return view('home.talk.index', array('datas'=> $this->query()));
     }
 
     public function show($id)
@@ -23,6 +20,35 @@ class TalkController extends BaseController
         return view('home.talk.show', array('data'=>TalksModel::find($id)));
     }
 
+    /**
+     * 关注话题
+     */
+    public function follow($id){}
+
+    /**
+     * 感谢话题
+     */
+    public function thank($id){}
+
+    /**
+     * 点赞话题
+     */
+    public function click($id){}
+
+    /**
+     * 分享话题
+     */
+    public function share($id){}
+
+    /**
+     * 举报话题
+     */
+    public function report($id){}
+
+    /**
+     * 收藏话题
+     */
+    public function collect($id){}
 
     public function query()
     {
