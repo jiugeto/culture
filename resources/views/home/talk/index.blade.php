@@ -30,12 +30,14 @@
         </div>
         <div class="talk_right">
             <div class="theme">
-                <p>我的关注</p>
-                <p>我的收藏</p>
+                {{--<p>我的关注</p>--}}
+                <a href=""><div>我的关注</div></a>
+                <a href=""><div>我的收藏</div></a>
             </div>
             <div class="theme">
-                <p>我的关注</p>
-                <p>我的收藏</p>
+                <p class="title"><b>话题专栏</b></p>
+                <a href=""><div>专栏·发现</div></a>
+                <a href=""><div>写话题</div></a>
             </div>
         </div>
     </div>

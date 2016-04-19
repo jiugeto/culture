@@ -61,8 +61,22 @@
     width:190px;
     border-bottom:1px solid lightgrey;
 }
+.talk_right .theme .title {
+    font-size:20px;
+    /*color:black;*/
+}
 .talk_right .theme p {
     margin:0;
     padding-bottom:10px;
     color:grey;
+}
+.talk_right .theme a {
+    text-decoration:none;
+}
+.talk_right .theme a div {
+    padding:2px 110px 2px 5px;
+    color:grey;
+}
+.talk_right .theme a:hover div {
+    background:rgb(240,240,240);
 }

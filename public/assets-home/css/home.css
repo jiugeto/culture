@@ -132,7 +132,7 @@ a.curr {
 }
 .global_search {
     padding-left:20px;
-    width:250px;height:40px;
+    width:220px;height:40px;
     border:2px solid #e34220;
 }
 .global_search_text {
@@ -152,7 +152,7 @@ a.curr {
 }
 .search_input {
     padding-left:20px;
-    width:250px;height:40px;
+    width:220px;height:40px;
     border:2px solid #e34220;
 }
 .search_text {
@@ -170,7 +170,7 @@ a.curr {
     font-size:14px;
     color:grey;
     overflow:hidden;
-    position:relative;top:60px;left:-250px;
+    position:relative;top:60px;left:-220px;
 }
 /*=======search搜索========*/
 
