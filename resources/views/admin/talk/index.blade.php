@@ -31,13 +31,13 @@
                         <td class="am-hide-sm-only">{{ $data->name }}</td>
                         <td class="am-hide-sm-only">{{ $data->uid }}</td>
                         <td class="am-hide-sm-only">{{ $data->read }}</td>
-                        <td class="am-hide-sm-only">{{ $data->click }}</td>
+                        <td class="am-hide-sm-only">{{ count($data->click()) }}</td>
                         <td class="am-hide-sm-only">{{ $data->created_at }}</td>
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
                                     <a href="/admin/talk/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="/assets/images/show.png" class="icon"> 查看</button></a>
-                                    {{--<a href="/admin/talk/{{$data->id}}/edit"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="/assets/images/edit.png" class="icon"> 编辑</button></a>--}}
+                                    <a href="/admin/talk/{{$data->id}}/edit"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="/assets/images/edit.png" class="icon"> 编辑</button></a>
                                     {{--<a href="/admin/talk/{{$data->id}}/forceDelete"><button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><img src="/assets/images/forceDelete_red.png" class="icon"> 销毁记录</button></a>--}}
                                 </div>
                             </div>

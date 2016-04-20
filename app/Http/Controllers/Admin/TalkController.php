@@ -1,8 +1,9 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-//use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 use App\Models\TalksModel;
+//use Symfony\Component\HttpFoundation\Request;
 
 class TalkController extends BaseController
 {
@@ -30,6 +31,24 @@ class TalkController extends BaseController
             'curr'=> $curr,
         ];
         return view('admin.talk.index', $result);
+    }
+
+    public function edit($id)
+    {
+        $curr['name'] = $this->crumb['edit']['name'];
+        $curr['url'] = $this->crumb['edit']['url'];
+        $result = [
+            'data'=> TalksModel::find($id),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.talk.edit', $result);
+    }
+
+    public function update(Request $request,$id)
+    {
+        TalksModel::where('id',$id)->update(['isshow'=> $request->isshow]);
+        return redirect('/admin/talk');
     }
 
     public function show($id)

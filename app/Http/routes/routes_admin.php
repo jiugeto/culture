@@ -117,5 +117,6 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
         //创意管理
     Route::resource('idea','IdeaController');
         //话题管理
+    Route::post('talk/{id}','TalkController@update');
     Route::resource('talk','TalkController');
 });

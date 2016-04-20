@@ -35,23 +35,23 @@
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">点赞次数 / Click：</td>
-                    <td>{{ $data->click }}</td>
+                    <td>{{ count($data->click()) }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">关注着 / Follow：</td>
-                    <td>{{ $data->follow }}</td>
+                    <td>{{ count($data->follow()) }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">感谢人 / Thank：</td>
-                    <td>{{ $data->thank }}</td>
+                    <td>{{ count($data->thank()) }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">分享此话题的用户 / Share：</td>
-                    <td>{{ $data->share }}</td>
+                    <td>{{ count($data->share()) }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">此话题的举报者 / report：</td>
-                    <td>{{ $data->report }}</td>
+                    <td>{{ count($data->report()) }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">创建时间 / Create Time：</td>
