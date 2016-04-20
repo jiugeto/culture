@@ -26,12 +26,40 @@
     <!-- 广告PPT -->
 
     <div class="content">
+        <!-- 推荐创意 -->
+        <div class="idea">
+            <p class="floor">
+                <img src="/assets-home/images/floor_red.png" class="floor_img">
+                <span class="floor_text">{{ $number[1] }}F</span>
+                <span class="floor_text2">&nbsp;{{ $floors[$number[1]] }}</span>
+            </p>
+            <div class="idea_con">
+                <div class="left">主窗口</div>
+                <div class="right">多记录</div>
+            </div>
+        </div>
+        <br style="clear:both;"><br>
+
+        <!-- 最新话题 -->
+        <div class="talk">
+            <p class="floor">
+                <img src="/assets-home/images/floor_red.png" class="floor_img">
+                <span class="floor_text">{{ $number[2] }}F</span>
+                <span class="floor_text2">&nbsp;{{ $floors[$number[2]] }}</span>
+            </p>
+            <div class="talk_con">
+                <div class="left">多记录</div>
+                <div class="right">内容</div>
+            </div>
+        </div>
+        <br style="clear:both;"><br>
+
         <!-- 在线创作 -->
         <div class="online">
             <p class="floor">
                 <img src="/assets-home/images/floor_red.png" class="floor_img">
-                <span class="floor_text">1F</span>
-                <span class="floor_text2">&nbsp;在线创作</span>
+                <span class="floor_text">{{ $number[3] }}F</span>
+                <span class="floor_text2">&nbsp;{{ $floors[$number[3]] }}</span>
             </p>
             <div class="online_con">
                 <div class="online_first">
@@ -90,8 +118,8 @@
         <div class="trait">
             <p class="floor">
                 <img src="/assets-home/images/floor_red.png" class="floor_img">
-                <span class="floor_text">2F</span>
-                <span class="floor_text2">&nbsp;特色产品</span>
+                <span class="floor_text">{{ $number[4] }}F</span>
+                <span class="floor_text2">&nbsp;{{ $floors[$number[4]] }}</span>
             </p>
             <div class="trait_con">
                 <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
@@ -136,8 +164,8 @@
         <div class="recommend">
             <p class="floor">
                 <img src="/assets-home/images/floor_red.png" class="floor_img">
-                <span class="floor_text">4F</span>
-                <span class="floor_text2">&nbsp;推荐产品</span>
+                <span class="floor_text">{{ $number[5] }}F</span>
+                <span class="floor_text2">&nbsp;{{ $floors[$number[5]] }}</span>
             </p>
             <div class="trait_con">
                 <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
@@ -159,8 +187,8 @@
         <div class="demand">
             <p class="floor">
                 <img src="/assets-home/images/floor_red.png" class="floor_img">
-                <span class="floor_text">5F</span>
-                <span class="floor_text2">&nbsp;样片需求</span>
+                <span class="floor_text">{{ $number[6] }}F</span>
+                <span class="floor_text2">&nbsp;{{ $floors[$number[6]] }}</span>
             </p>
             <div class="demand_con">
                 <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
@@ -218,8 +246,8 @@
         <div class="fun">
             <p class="floor">
                 <img src="/assets-home/images/floor_red.png" class="floor_img">
-                <span class="floor_text">6F</span>
-                <span class="floor_text2">&nbsp;娱乐信息</span>
+                <span class="floor_text">{{ $number[7] }}F</span>
+                <span class="floor_text2">&nbsp;{{ $floors[$number[7]] }}</span>
             </p>
             <div class="fun_con">
                 <div class="img_text">
@@ -270,8 +298,8 @@
         <div class="rent">
             <p class="floor">
                 <img src="/assets-home/images/floor_red.png" class="floor_img">
-                <span class="floor_text">7F</span>
-                <span class="floor_text2">&nbsp;租赁信息</span>
+                <span class="floor_text">{{ $number[8] }}F</span>
+                <span class="floor_text2">&nbsp;{{ $floors[$number[8]] }}</span>
             </p>
             <div class="rent_con">
                 <div class="img_text">
@@ -340,8 +368,8 @@
         <div class="design">
             <p class="floor">
                 <img src="/assets-home/images/floor_red.png" class="floor_img">
-                <span class="floor_text">8F</span>
-                <span class="floor_text2">&nbsp;设计信息</span>
+                <span class="floor_text">{{ $number[9] }}F</span>
+                <span class="floor_text2">&nbsp;{{ $floors[$number[9]] }}</span>
             </p>
             <div class="design_con">
                 <div class="img_text_first">
@@ -406,8 +434,8 @@
         <div class="realtime">
             <p class="floor">
                 <img src="/assets-home/images/floor_red.png" class="floor_img">
-                <span class="floor_text">9F</span>
-                <span class="floor_text2">&nbsp;实时数据</span>
+                <span class="floor_text">{{ $number[10] }}F</span>
+                <span class="floor_text2">&nbsp;{{ $floors[$number[10]] }}</span>
             </p>
             <div class="realtime_con">
                 <ul class="title">
@@ -432,8 +460,8 @@
         <div class="cooperation">
             <p class="floor">
                 <img src="/assets-home/images/floor_red.png" class="floor_img">
-                <span class="floor_text">10F</span>
-                <span class="floor_text2">&nbsp;合作单位</span>
+                <span class="floor_text">{{ $number[11] }}F</span>
+                <span class="floor_text2">&nbsp;{{ $floors[$number[11]] }}</span>
             </p>
             <div class="cooperation_con">
                 <div class="img">
@@ -462,8 +490,8 @@
         <div class="voice">
             <p class="floor">
                 <img src="/assets-home/images/floor_red.png" class="floor_img">
-                <span class="floor_text">11F</span>
-                <span class="floor_text2">&nbsp;用户心声</span>
+                <span class="floor_text">{{ $number[12] }}F</span>
+                <span class="floor_text2">&nbsp;{{ $floors[$number[12]] }}</span>
             </p>
             <div class="voice_con">
                 <div class="img"><img src="/uploads/images/2016/online1.png"></div>

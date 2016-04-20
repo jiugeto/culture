@@ -352,3 +352,27 @@
     width:200px;height:80px;
     border-left:1px solid rgb(220,220,220);
 }
+
+
+/*===== 推荐创意 =====*/
+.idea {}
+.idea_con .left,.idea_con .right {
+    margin-right:5px;
+    border:1px solid lightgrey;
+    height:98px;
+    float:left;
+}
+.idea_con .left { width:693px; }
+.idea_con .right { width:293px; }
+
+
+/*===== 最新话题 =====*/
+.talk {}
+.talk_con .left,.talk_con .right {
+    margin-right:5px;
+    border:1px solid lightgrey;
+    height:98px;
+    float:left;
+}
+.talk_con .left { width:293px; }
+.talk_con .right { width:693px; }

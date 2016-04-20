@@ -17,7 +17,7 @@
       </span>
       <span class="header_right">
         <div class="head_right"><a href="/" style="color:red;">淘文化首页</a></div>
-        {{--<div class="head_right"><a href="talk">话题</a></div>--}}
+        <div class="head_right"><a href="">新手点这里</a></div>
       </span>
     </div>
 </div>
