@@ -18,6 +18,7 @@
                         <th class="table-type">发布人</th>
                         <th class="table-type">阅读</th>
                         <th class="table-type">点赞</th>
+                        <th class="table-type">前台是否显示</th>
                         <th class="table-date am-hide-sm-only">添加时间</th>
                         <th class="table-set">操作</th>
                     </tr>
@@ -32,6 +33,7 @@
                         <td class="am-hide-sm-only">{{ $data->uid }}</td>
                         <td class="am-hide-sm-only">{{ $data->read }}</td>
                         <td class="am-hide-sm-only">{{ count($data->click()) }}</td>
+                        <td class="am-hide-sm-only">{{ $data->isshow ? '显示' : '不显示' }}</td>
                         <td class="am-hide-sm-only">{{ $data->created_at }}</td>
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">

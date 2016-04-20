@@ -27,11 +27,19 @@
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">浏览次数 / Reads：</td>
-                    <td>{{ $data->read }}</td>
+                    <td>{{ count($data->read()) }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">点赞次数 / Clicks：</td>
-                    <td>{{ $data->click }}</td>
+                    <td>{{ count($data->click()) }}</td>
+                </tr>
+                <tr>
+                    <td class="am-hide-sm-only">收藏次数 / Collect：</td>
+                    <td>{{ count($data->collect()) }}</td>
+                </tr>
+                <tr>
+                    <td class="am-hide-sm-only">前台列表是否显示 / Is Show：</td>
+                    <td>{{ $data->isshow ? '显示' : '不显示' }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">创建时间 / Create Time：</td>

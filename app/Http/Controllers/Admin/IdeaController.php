@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\IdeasModel;
-//use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 
 class IdeaController extends BaseController
 {
@@ -29,6 +29,24 @@ class IdeaController extends BaseController
             'curr'=> $curr,
         ];
         return view('admin.idea.index', $result);
+    }
+
+    public function edit($id)
+    {
+        $curr['name'] = $this->crumb['edit']['name'];
+        $curr['url'] = $this->crumb['edit']['url'];
+        $result = [
+            'data'=> IdeasModel::find($id),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.idea.edit', $result);
+    }
+
+    public function update(Request $request,$id)
+    {
+        IdeasModel::where('id',$id)->update(['isshow'=> $request->isshow]);
+        return redirect('/admin/idea');
     }
 
     public function show($id)

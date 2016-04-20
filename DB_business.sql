@@ -150,7 +150,7 @@ CREATE TABLE `ba_userlog` (
   `logoutTime` date NOT NULL DEFAULT '0000-00-00' COMMENT '退出时间',
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -159,7 +159,7 @@ CREATE TABLE `ba_userlog` (
 
 LOCK TABLES `ba_userlog` WRITE;
 /*!40000 ALTER TABLE `ba_userlog` DISABLE KEYS */;
-INSERT INTO `ba_userlog` VALUES (1,1,1,'jiuge','201604090047077935','2016-04-09','2016-04-09','2016-04-05'),(2,1,1,'jiuge','20160409004918108','2016-04-09','0000-00-00','2016-04-05'),(3,1,1,'jiuge','201604090437083847','2016-04-09','0000-00-00','2016-04-05'),(4,1,1,'jiuge','201604091015518376','2016-04-09','0000-00-00','2016-04-05'),(5,2,1,'jiuge','201604091059097936','2016-04-09','0000-00-00','2016-04-06'),(6,2,1,'jiuge','201604091412047608','2016-04-09','0000-00-00','2016-04-06'),(7,2,1,'jiuge','201604100215434109','2016-04-10','0000-00-00','2016-04-06'),(8,2,1,'jiuge','201604101055219452','2016-04-10','0000-00-00','2016-04-06'),(9,2,1,'jiuge','20160410132948873','2016-04-10','0000-00-00','2016-04-06'),(10,1,1,'jiuge','201604110108163281','2016-04-11','0000-00-00','2016-04-05'),(11,1,1,'jiuge','201604110902034586','2016-04-11','0000-00-00','2016-04-05'),(12,1,1,'jiuge','201604111319349561','2016-04-11','0000-00-00','2016-04-05'),(13,2,1,'jiuge','201604120033529357','2016-04-12','0000-00-00','2016-04-06'),(14,1,1,'jiuge','201604120034091653','2016-04-12','2016-04-12','2016-04-05'),(15,2,1,'jiuge','201604120037364998','2016-04-12','2016-04-12','2016-04-06'),(16,1,1,'jiuge','201604121221289312','2016-04-12','2016-04-12','2016-04-05'),(17,2,1,'jiuge','201604121231351384','2016-04-12','2016-04-12','2016-04-06'),(18,1,1,'jiuge','201604121233022375','2016-04-12','2016-04-12','2016-04-05'),(19,1,1,'jiuge','201604150217508806','2016-04-15','0000-00-00','2016-04-05'),(20,1,1,'jiuge','201604160759374265','2016-04-16','0000-00-00','2016-04-05'),(21,2,1,'jiuge','201604161520191699','2016-04-16','2016-04-16','2016-04-06'),(22,1,1,'jiuge','201604161522083742','2016-04-16','2016-04-16','2016-04-05'),(23,1,1,'jiuge','201604161527372619','2016-04-16','2016-04-16','2016-04-05'),(24,2,1,'jiuge','2016041700561299','2016-04-17','2016-04-17','2016-04-06'),(25,1,1,'jiuge','201604170248081428','2016-04-17','2016-04-17','2016-04-05'),(26,1,1,'jiuge','201604171200175488','2016-04-17','2016-04-17','2016-04-05'),(27,2,1,'jiuge','201604171203246134','2016-04-17','2016-04-17','2016-04-06'),(28,2,1,'jiuge','201604191526236409','2016-04-19','0000-00-00','2016-04-06'),(29,2,1,'jiuge','201604200124491317','2016-04-20','0000-00-00','2016-04-06'),(30,1,1,'jiuge','201604201245341735','2016-04-20','2016-04-20','2016-04-05');
+INSERT INTO `ba_userlog` VALUES (1,1,1,'jiuge','201604090047077935','2016-04-09','2016-04-09','2016-04-05'),(2,1,1,'jiuge','20160409004918108','2016-04-09','0000-00-00','2016-04-05'),(3,1,1,'jiuge','201604090437083847','2016-04-09','0000-00-00','2016-04-05'),(4,1,1,'jiuge','201604091015518376','2016-04-09','0000-00-00','2016-04-05'),(5,2,1,'jiuge','201604091059097936','2016-04-09','0000-00-00','2016-04-06'),(6,2,1,'jiuge','201604091412047608','2016-04-09','0000-00-00','2016-04-06'),(7,2,1,'jiuge','201604100215434109','2016-04-10','0000-00-00','2016-04-06'),(8,2,1,'jiuge','201604101055219452','2016-04-10','0000-00-00','2016-04-06'),(9,2,1,'jiuge','20160410132948873','2016-04-10','0000-00-00','2016-04-06'),(10,1,1,'jiuge','201604110108163281','2016-04-11','0000-00-00','2016-04-05'),(11,1,1,'jiuge','201604110902034586','2016-04-11','0000-00-00','2016-04-05'),(12,1,1,'jiuge','201604111319349561','2016-04-11','0000-00-00','2016-04-05'),(13,2,1,'jiuge','201604120033529357','2016-04-12','0000-00-00','2016-04-06'),(14,1,1,'jiuge','201604120034091653','2016-04-12','2016-04-12','2016-04-05'),(15,2,1,'jiuge','201604120037364998','2016-04-12','2016-04-12','2016-04-06'),(16,1,1,'jiuge','201604121221289312','2016-04-12','2016-04-12','2016-04-05'),(17,2,1,'jiuge','201604121231351384','2016-04-12','2016-04-12','2016-04-06'),(18,1,1,'jiuge','201604121233022375','2016-04-12','2016-04-12','2016-04-05'),(19,1,1,'jiuge','201604150217508806','2016-04-15','0000-00-00','2016-04-05'),(20,1,1,'jiuge','201604160759374265','2016-04-16','0000-00-00','2016-04-05'),(21,2,1,'jiuge','201604161520191699','2016-04-16','2016-04-16','2016-04-06'),(22,1,1,'jiuge','201604161522083742','2016-04-16','2016-04-16','2016-04-05'),(23,1,1,'jiuge','201604161527372619','2016-04-16','2016-04-16','2016-04-05'),(24,2,1,'jiuge','2016041700561299','2016-04-17','2016-04-17','2016-04-06'),(25,1,1,'jiuge','201604170248081428','2016-04-17','2016-04-17','2016-04-05'),(26,1,1,'jiuge','201604171200175488','2016-04-17','2016-04-17','2016-04-05'),(27,2,1,'jiuge','201604171203246134','2016-04-17','2016-04-17','2016-04-06'),(28,2,1,'jiuge','201604191526236409','2016-04-19','0000-00-00','2016-04-06'),(29,2,1,'jiuge','201604200124491317','2016-04-20','0000-00-00','2016-04-06'),(30,1,1,'jiuge','201604201245341735','2016-04-20','2016-04-20','2016-04-05'),(31,1,1,'jiuge','201604201400413759','2016-04-20','2016-04-20','2016-04-05');
 /*!40000 ALTER TABLE `ba_userlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -617,9 +617,8 @@ CREATE TABLE `bs_ideas` (
   `cate_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分类，关联分类表category',
   `content` text NOT NULL COMMENT '创意内容',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布的用户id',
-  `read` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '浏览次数',
-  `click` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '点赞次数',
   `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序，值越大越靠前，默认10',
+  `isshow` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '前台列表是否显示：0前台列表不显示，1前台列表显示',
   `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站功能：0不放入回收站，1放入回收站',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   `updated_at` datetime NOT NULL,
@@ -633,8 +632,122 @@ CREATE TABLE `bs_ideas` (
 
 LOCK TABLES `bs_ideas` WRITE;
 /*!40000 ALTER TABLE `bs_ideas` DISABLE KEYS */;
-INSERT INTO `bs_ideas` VALUES (1,'创意1',4,'<p>而非v代表</p>',1,0,0,10,0,'2016-04-17 01:46:45','2016-04-17 02:24:47');
+INSERT INTO `bs_ideas` VALUES (1,'创意1',4,'<p>而非v代表</p>',1,10,1,0,'2016-04-17 01:46:45','2016-04-17 02:24:47');
 /*!40000 ALTER TABLE `bs_ideas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bs_ideas_click`
+--
+
+DROP TABLE IF EXISTS `bs_ideas_click`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bs_ideas_click` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `ideaid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创意id',
+  `clickid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '被点赞的话题id',
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '登录用户id',
+  `otherid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '所点赞的话题用户id',
+  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='创意点赞表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bs_ideas_click`
+--
+
+LOCK TABLES `bs_ideas_click` WRITE;
+/*!40000 ALTER TABLE `bs_ideas_click` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bs_ideas_click` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bs_ideas_collect`
+--
+
+DROP TABLE IF EXISTS `bs_ideas_collect`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bs_ideas_collect` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `ideaid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创意id',
+  `collectid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '被收藏的话题id',
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '登录用户id',
+  `otherid` int(10) unsigned NOT NULL COMMENT '所收集的创意用户id',
+  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='创意收藏表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bs_ideas_collect`
+--
+
+LOCK TABLES `bs_ideas_collect` WRITE;
+/*!40000 ALTER TABLE `bs_ideas_collect` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bs_ideas_collect` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bs_ideas_copy 备份`
+--
+
+DROP TABLE IF EXISTS `bs_ideas_copy 备份`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bs_ideas_copy 备份` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL COMMENT '名称',
+  `cate_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分类，关联分类表category',
+  `content` text NOT NULL COMMENT '创意内容',
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布的用户id',
+  `read` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '浏览次数',
+  `click` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '点赞次数',
+  `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序，值越大越靠前，默认10',
+  `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站功能：0不放入回收站，1放入回收站',
+  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='创意表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bs_ideas_copy 备份`
+--
+
+LOCK TABLES `bs_ideas_copy 备份` WRITE;
+/*!40000 ALTER TABLE `bs_ideas_copy 备份` DISABLE KEYS */;
+INSERT INTO `bs_ideas_copy 备份` VALUES (1,'创意1',4,'<p>而非v代表</p>',1,0,0,10,0,'2016-04-17 01:46:45','2016-04-17 02:24:47');
+/*!40000 ALTER TABLE `bs_ideas_copy 备份` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bs_ideas_read`
+--
+
+DROP TABLE IF EXISTS `bs_ideas_read`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bs_ideas_read` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `ideaid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创意id',
+  `readid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '被阅读的话题id',
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '登录用户id',
+  `otherid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '所阅读的话题用户id',
+  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='创意阅读表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bs_ideas_read`
+--
+
+LOCK TABLES `bs_ideas_read` WRITE;
+/*!40000 ALTER TABLE `bs_ideas_read` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bs_ideas_read` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1409,4 +1522,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-20 21:15:25
+-- Dump completed on 2016-04-20 22:14:40

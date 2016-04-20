@@ -9,7 +9,7 @@ class IdeasModel extends BaseModel
 
     protected $table = 'bs_ideas';
     protected $fillable = [
-        'id','name','cate_id','content','uid','read','click','sort','del','created_at','updated_at',
+        'id','name','cate_id','content','uid','sort','isshow','del','created_at','updated_at',
     ];
 
 //    public function categorys()
@@ -31,5 +31,20 @@ class IdeasModel extends BaseModel
     public function cate()
     {
         return $this->hasOne('\App\Models\CategoryModel','id','cate_id');
+    }
+
+    public function read()
+    {
+        return IdeasReadModel::where('ideaid',$this->id)->get();
+    }
+
+    public function click()
+    {
+        return IdeasClickModel::where('ideaid',$this->id)->get();
+    }
+
+    public function collect()
+    {
+        return IdeasCollectModel::where('ideaid',$this->id)->get();
     }
 }

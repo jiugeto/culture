@@ -115,6 +115,7 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::post('versionlog/{id}','VersionlogController@update');
     Route::resource('versionlog','VersionlogController');
         //创意管理
+    Route::post('idea/{id}','IdeaController@update');
     Route::resource('idea','IdeaController');
         //话题管理
     Route::post('talk/{id}','TalkController@update');

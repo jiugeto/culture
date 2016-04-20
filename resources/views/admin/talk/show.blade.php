@@ -54,6 +54,10 @@
                     <td>{{ count($data->report()) }}</td>
                 </tr>
                 <tr>
+                    <td class="am-hide-sm-only">前台列表是否显示 / Is Show：</td>
+                    <td>{{ $data->isshow ? '显示' : '不显示' }}</td>
+                </tr>
+                <tr>
                     <td class="am-hide-sm-only">创建时间 / Create Time：</td>
                     <td>{{ $data->created_at }}</td>
                 </tr>
