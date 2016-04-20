@@ -7,6 +7,6 @@ class TalksCollectModel extends BaseModel
 {
     protected $table = 'bs_talks_collect';
     protected $fillable = [
-        'id','talkid','collectid','created_at',
+        'id','talkid','collectid','uid','otherid','created_at',
     ];
 }

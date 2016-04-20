@@ -7,6 +7,6 @@ class TalksShareModel extends BaseModel
 {
     protected $table = 'bs_talks_share';
     protected $fillable = [
-        'id','talkid','shareid','created_at',
+        'id','talkid','shareid','uid','otherid','created_at',
     ];
 }

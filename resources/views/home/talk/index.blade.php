@@ -27,7 +27,7 @@
                         {{--举报：&nbsp;&nbsp;&nbsp;&nbsp;--}}
                     {{--</td></tr>--}}
             {{--</table>--}}
-            @if($datas->total())
+            @if(count($datas))
                 @foreach($datas as $data)
             <table>
                 <tr>
@@ -35,7 +35,7 @@
                         <div><img src="/uploads/images/2016/online1.png"></div>
                         <p>{{--数量--}}{{ $data->read }}</p>
                     </td>
-                    <td class="small">话题来自
+                    <td class="small">话题来自 {{ $data->areatoname()  }}
                         <span class="right"><a href="/talk/{{$data->id}}/destroy" title="删除此话题">×</a></span>
                     </td>
                 </tr>
@@ -49,14 +49,29 @@
                         @endif
                     </td></tr>
                 <tr><td>&nbsp;</td><td class="small">
-                        <a title="点击关注" onclick="window.location.href='';">关注</a>：{{ $data->follow }}&nbsp;&nbsp;&nbsp;&nbsp;
+                    @if($curr=='')
+                        <a title="点击关注" onclick="window.location.href='';">关注</a>：
+                        {{ count($data->follow()) }} &nbsp;&nbsp;&nbsp;&nbsp;
                         {{--评论：&nbsp;&nbsp;&nbsp;&nbsp;--}}
-                        <a title="点击感谢" onclick="window.location.href='';">感谢</a>：{{ $data->thank }}&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a title="点击点赞" onclick="window.location.href='';">点赞</a>：{{ $data->click }}&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a title="点击分享" onclick="window.location.href='';">分享</a>：{{ $data->share }}&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a title="点击收藏" onclick="window.location.href='';">收藏</a>：{{ $data->collect }}&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a title="点击举报" onclick="window.location.href='';">举报</a>：{{ $data->report }}
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a title="点击感谢" onclick="window.location.href='';">感谢</a>：
+                        {{ count($data->thank()) }} &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a title="点击点赞" onclick="window.location.href='';">点赞</a>：
+                        {{ count($data->click()) }} &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a title="点击分享" onclick="window.location.href='';">分享</a>：
+                        {{ count($data->share()) }} &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a title="点击收藏" onclick="window.location.href='';">收藏</a>：
+                        {{ count($data->collect()) }} &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a title="点击举报" onclick="window.location.href='';">举报</a>：
+                        {{ count($data->report()) }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    @else
+                        关注：{{ $data->followStr() }} &nbsp;&nbsp;&nbsp;&nbsp;
+                        {{--评论：&nbsp;&nbsp;&nbsp;&nbsp;--}}
+                        感谢：{{ $data->thank }} &nbsp;&nbsp;&nbsp;&nbsp;
+                        点赞：{{ $data->click }} &nbsp;&nbsp;&nbsp;&nbsp;
+                        分享：{{ $data->shareStr() }} &nbsp;&nbsp;&nbsp;&nbsp;
+                        收藏：{{ $data->collectStr() }} &nbsp;&nbsp;&nbsp;&nbsp;
+                        举报：{{ $data->reportStr() }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    @endif
                         发布时间：{{ $data->created_at }}
                     </td></tr>
             </table>

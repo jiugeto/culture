@@ -1,7 +1,10 @@
 <?php
 namespace App\Http\Controllers\Home;
 
+use App\Models\TalksCollectModel;
+use App\Models\TalksFollowModel;
 use App\Models\TalksModel;
+use App\Models\UserModel;
 use Illuminate\Http\Request;
 
 class TalkController extends BaseController
@@ -31,13 +34,40 @@ class TalkController extends BaseController
 
     public function follow()
     {
-        $datas = TalksModel::where('del',0)
-            ->orderBy('sort','desc')
-            ->orderBy('id','desc')
-            ->paginate($this->limit);
+        $follows = TalksFollowModel::where('uid',$this->userid)->get();
+        if (count($follows)) {
+            foreach ($follows as $follow) { $followIds[] = $follow->talkid; }
+        }
+        if (isset($followIds)) {
+            $datas = TalksModel::where('del',0)
+                ->whereId('id',$followIds)
+                ->orderBy('sort','desc')
+                ->orderBy('id','desc')
+                ->paginate($this->limit);
+        }
         $result = [
-            'datas'=> $datas,
+            'datas'=> isset($datas) ? $datas : [],
             'curr'=> 'follow',
+        ];
+        return view('home.talk.index', $result);
+    }
+
+    public function collect()
+    {
+        $collects = TalksCollectModel::where('uid',$this->userid)->get();
+        if (count($collects)) {
+            foreach ($collects as $collect) { $collectIds[] = $collect->talkid; }
+        }
+        if (isset($collects)) {
+            $datas = TalksModel::where('del',0)
+                ->whereId('id',$collectIds)
+                ->orderBy('sort','desc')
+                ->orderBy('id','desc')
+                ->paginate($this->limit);
+        }
+        $result = [
+            'datas'=> isset($datas) ? $datas : [],
+            'curr'=> 'collect',
         ];
         return view('home.talk.index', $result);
     }
