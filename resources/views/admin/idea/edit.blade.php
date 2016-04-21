@@ -21,6 +21,11 @@
                             <label><input type="radio" name="isshow" value="1" {{ $data->isshow==1 ? 'checked' : '' }}> 前台列表显示&nbsp;&nbsp;</label>
                         </div>
 
+                        <div class="am-form-group">
+                            <label>排序 / Sort：</label>
+                            <input type="text" placeholder="排序，值越大越靠前" pattern="^\d+$" name="sort" value="{{ $data->sort }}">
+                        </div>
+
                         <button type="submit" class="am-btn am-btn-primary">保存修改</button>
                     </fieldset>
                 </form>

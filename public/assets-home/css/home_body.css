@@ -362,8 +362,22 @@
     height:98px;
     float:left;
 }
-.idea_con .left { width:693px; }
+.idea_con .left { width:693px;overflow:hidden; }
+.idea_con .left td {
+    padding:5px 10px;
+    width:90%;height:40px;
+    /*border-bottom:1px dashed lightgrey;*/
+}
+.idea_con .left td.title {
+    width:200px;
+    border-right:1px dashed lightgrey;
+}
 .idea_con .right { width:293px; }
+.idea_con .right div {
+    padding:5px 10px;
+    width:273px;
+    border-bottom:1px dotted lightgrey;
+}
 
 
 /*===== 最新话题 =====*/
@@ -375,4 +389,10 @@
     float:left;
 }
 .talk_con .left { width:293px; }
-.talk_con .right { width:693px; }
+.talk_con .left div {
+    padding:5px 10px;
+    width:273px;
+    border-bottom:1px dashed lightgrey;
+}
+.talk_con .right { width:693px;height:95px;overflow:hidden; }
+.talk_con .right div { padding:10px; }

@@ -36,7 +36,10 @@
                         <p>{{--数量--}}{{ $data->read }}</p>
                     </td>
                     <td class="small">话题来自 {{ $data->areatoname()  }}
-                        <span class="right"><a href="/talk/{{$data->id}}/destroy" title="删除此话题">×</a></span>
+                        <span class="right_close"><a href="/talk/{{$data->id}}/destroy" title="删除此话题">×</a></span>
+                        @if($curr=='')
+                        <span class="right_close"><a href="/talk/{{$data->id}}/edit" title="修改此话题">修改</a></span>
+                        @endif
                     </td>
                 </tr>
                 <tr><td class="title"><a href="">话题名称：{{ $data->name }}</a></td></tr>

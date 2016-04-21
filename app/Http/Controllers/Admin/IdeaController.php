@@ -45,7 +45,11 @@ class IdeaController extends BaseController
 
     public function update(Request $request,$id)
     {
-        IdeasModel::where('id',$id)->update(['isshow'=> $request->isshow]);
+        $data = [
+            'isshow'=> $request->isshow,
+            'sort'=> $request->sort,
+        ];
+        IdeasModel::where('id',$id)->update($data);
         return redirect('/admin/idea');
     }
 

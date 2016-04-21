@@ -43,13 +43,13 @@
     color:darkgrey;
     font-size:14px;
 }
-.talk_left .small span.right { float:right; }
-.talk_left .small span.right a {
+.talk_left .small span.right_close { float:right; }
+.talk_left .small span.right_close a {
     padding:0 10px;
     color:grey;
     text-decoration:none;
 }
-.talk_left .small span.right a:hover {
+.talk_left .small span.right_close a:hover {
     color:red;
     background:lightgrey;
 }

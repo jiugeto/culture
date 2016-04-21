@@ -16,9 +16,19 @@ class HomeController extends BaseController
     public function index()
     {
         $result = [
-            'ideas'=> $this->getIdeas(),
-            'talks'=> $this->getTalks(),
-            'onlines'=> $this->getOnlines(),
+            'ideas'=> $this->getIdeas(3),
+            'talks'=> $this->getTalks(3),
+            'products'=> $this->getProducts(10),
+            'goods'=> $this->getGoods(6),
+            'companys'=> $this->getCompanys(6),
+            'recommends'=> $this->getRecommendProducts(6),
+            'demands'=> $this->getDemands(6),
+            'entertains'=> $this->getEntertains(6),
+            'rents'=> $this->getRents(5),
+            'designs'=> $this->getDesigns(9),
+            'orders'=> $this->getOrders(10),
+            'cooperations'=> $this->getCooperations(6),
+            'uservoices'=> $this->getUserVoices(5),
 //            'menus'=> $this->menus,
             'curr_menu'=> '/',
             'number'=> $this->number,
@@ -30,130 +40,163 @@ class HomeController extends BaseController
     /**
      * 获取创意
      */
-    public function getIdeas()
+    public function getIdeas($limit)
     {
-        return \App\Models\IdeasModel::where(['del'=>0, 'isshow'=>1])
+        $datas = \App\Models\IdeasModel::where(['del'=>0, 'isshow'=>1])
                     ->orderBy('sort','desc')
                     ->orderBy('id','desc')
-                    ->get();
-//                    ->paginate($this->limit);
+//                    ->get();
+                    ->paginate($limit);
+        static $number = 1;
+        if (count($datas)) {
+            foreach ($datas as $data) { $data->number = $number ++; }
+        }
+        return $datas;
     }
 
     /**
      * 获取话题
      */
-    public function getTalks()
+    public function getTalks($limit)
     {
-        return \App\Models\TalksModel::where(['del'=>0, 'isshow'=>1])
+        $datas =  \App\Models\TalksModel::where(['del'=>0, 'isshow'=>1])
                     ->orderBy('sort','desc')
                     ->orderBy('id','desc')
-                    ->get();
+//                    ->get();
+                    ->paginate($limit);
+        static $number = 1;
+        if (count($datas)) {
+            foreach ($datas as $data) { $data->number = $number ++; }
+        }
+        return $datas;
     }
 
     /**
      * 获取在线创作
      */
-    public function getProducts()
+    public function getProducts($limit)
     {
         return \App\Models\ProductModel::where(['del'=>0, 'isshow'=>1])
                     ->orderBy('sort','desc')
                     ->orderBy('id','desc')
-                    ->get();
+//                    ->get();
+                    ->paginate($limit);
     }
 
     /**
      * 获取产品样片 设计师供应type==2，制作公司供应type==4
      */
-    public function getGoods()
+    public function getGoods($limit)
     {
         return \App\Models\GoodsModel::where(['del'=>0, 'isshow'=>1])
                     ->whereIn('type',[2,4])
                     ->orderBy('sort','desc')
                     ->orderBy('id','desc')
-                    ->get();
+//                    ->get();
+                    ->paginate($limit);
     }
 
     /**
      * 获取供应单位
      */
-    public function getCompanys()
+    public function getCompanys($limit)
     {
         return \App\Models\CompanyModel::orderBy('sort','desc')
                     ->orderBy('id','desc')
-                    ->get();
+//                    ->get();
+                    ->paginate($limit);
     }
 
     /**
      * 获取推荐产品 设计师供应type==2，制作公司供应type==4
      */
-    public function getRecommendProducts()
+    public function getRecommendProducts($limit)
     {
         return \App\Models\GoodsModel::where('recommend',1)
                     ->whereIn('type',[2,4])
                     ->orderBy('sort','desc')
                     ->orderBy('id','desc')
-                    ->get();
+//                    ->get();
+                    ->paginate($limit);
     }
 
     /**
      * 获取样片需求 个人需求type==1，企业需求type==3
      */
-    public function getDemands()
+    public function getDemands($limit)
     {
         return \App\Models\GoodsModel::whereIn('type',[1,3])
                     ->orderBy('sort','desc')
                     ->orderBy('id','desc')
-                    ->get();
+//                    ->get();
+                    ->paginate($limit);
     }
 
     /**
      * 获取娱乐信息
      */
-    public function getEntertains()
+    public function getEntertains($limit)
     {
         return \App\Models\EntertainModel::where('del',0)
                     ->orderBy('sort','desc')
                     ->orderBy('id','desc')
-                    ->get();
+//                    ->get();
+                    ->paginate($limit);
     }
 
     /**
      * 获取租赁信息
      */
-    public function getRents()
+    public function getRents($limit)
     {
         return \App\Models\RentModel::where('del',0)
                     ->orderBy('sort','desc')
                     ->orderBy('id','desc')
-                    ->get();
+//                    ->get();
+                    ->paginate($limit);
     }
 
     /**
      * 获取设计信息
      */
-    public function getDesigns()
+    public function getDesigns($limit)
     {
         return \App\Models\DesignModel::where('del',0)
                     ->orderBy('sort','desc')
                     ->orderBy('id','desc')
-                    ->get();
+//                    ->get();
+                    ->paginate($limit);
     }
 
     /**
      * 获取实时数据 来自订单表
      */
-    public function getOrders()
+    public function getOrders($limit)
     {
         return \App\Models\OrderModel::where('isshow',1)
                     ->orderBy('id','desc')
-                    ->get();
+//                    ->get();
+                    ->paginate($limit);
     }
 
     /**
      * 获取合作单位和个人设计师
      */
-    public function getCooperations()
+    public function getCooperations($limit)
     {
-        $users = \App\Models\UserModel::whereIn('isuser',[3,4,5,6])->get();
+        return \App\Models\UserModel::whereIn('isuser',[3,4,5,6])
+//                    ->get();
+                    ->paginate($limit);
+    }
+
+    /**
+     * 获取用户心声
+     */
+    public function getUserVoices($limit)
+    {
+        return \App\Models\UserVoiceModel::where('isshow',1)
+                    ->orderBy('sort','desc')
+//                    ->get();
+                    ->paginate($limit);
     }
 }

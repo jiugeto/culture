@@ -12,7 +12,9 @@
             {{--<span class="jiantou_left">◀</span>--}}
             {{--<span class="jiantou_right">▶</span>--}}
             <ul class="ppt_change_pic">
-                <a href="##"><li><img src="/uploads/images/2016/ppt.png"></li></a>
+                <a href=""><li><img src="/uploads/images/2016/ppt.png"></li></a>
+                <a href=""><li><img src="/uploads/images/2016/ppt2.png"></li></a>
+                <a href=""><li><img src="/uploads/images/2016/ppt.png"></li></a>
                 <a href=""><li><img src="/uploads/images/2016/ppt2.png"></li></a>
             </ul>
         </div>
@@ -34,8 +36,29 @@
                 <span class="floor_text2">&nbsp;{{ $floors[$number[1]] }}</span>
             </p>
             <div class="idea_con">
-                <div class="left">主窗口</div>
-                <div class="right">多记录</div>
+                <div class="left">
+                @if(count($ideas))
+                    @foreach($ideas as $idea)
+                    <table>
+                        <tr>
+                            <td class="title">{{ $idea->name }}</td>
+                            <td colspan="2">{{ strip_tags($idea->content) }}</td>
+                        </tr>
+                        <tr><td class="title"></td></tr>
+                    </table>
+                    @endforeach
+                @endif
+                </div>
+                <div class="right">
+                @if(count($ideas))
+                    @foreach($ideas as $idea)
+                    <div>
+                        <span style="color:red;">{{ $idea->number }}</span>.
+                        {{ $idea->name }}
+                    </div>
+                    @endforeach
+                @endif
+                </div>
             </div>
         </div>
         <br style="clear:both;"><br>
@@ -48,8 +71,23 @@
                 <span class="floor_text2">&nbsp;{{ $floors[$number[2]] }}</span>
             </p>
             <div class="talk_con">
-                <div class="left">多记录</div>
-                <div class="right">内容</div>
+                <div class="left">
+                @if(count($talks))
+                    @foreach($talks as $talk)
+                    <div>
+                        <span style="color:red;">{{ $talk->number }}</span>.
+                        {{ $talk->name }}
+                    </div>
+                    @endforeach
+                @endif
+                </div>
+                <div class="right">
+                @if(count($talks))
+                    @foreach($talks as $talk)
+                    <div>{{ strip_tags($talk->content) }}</div>
+                    @endforeach
+                @endif
+                </div>
             </div>
         </div>
         <br style="clear:both;"><br>

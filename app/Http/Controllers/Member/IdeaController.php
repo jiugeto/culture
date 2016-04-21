@@ -25,7 +25,7 @@ class IdeaController extends BaseController
             'datas'=> $this->query($del=0,$cate_id),
             'prefix_url'=> '/member/idea',
             'lists'=> $this->lists,
-            'menus'=> $this->menus,
+//            'menus'=> $this->menus,
             'curr_list'=> '',
         ];
         return view('member.idea.index', $result);
@@ -37,7 +37,7 @@ class IdeaController extends BaseController
             'datas'=> $this->query($del=1,$cate_id),
             'prefix_url'=> '/member/idea/trash',
             'lists'=> $this->lists,
-            'menus'=> $this->menus,
+//            'menus'=> $this->menus,
             'curr_list'=> 'trash',
         ];
         return view('member.idea.index', $result);
@@ -49,7 +49,7 @@ class IdeaController extends BaseController
             'categorys'=> $this->model->categorys(),
             'lists'=> $this->lists,
             'curr_list'=> 'create',
-            'menus'=> $this->menus,
+//            'menus'=> $this->menus,
         ];
         return view('member.idea.create', $result);
     }
@@ -69,7 +69,7 @@ class IdeaController extends BaseController
             'categorys'=> $this->model->categorys(),
             'lists'=> $this->lists,
             'curr_list'=> 'edit',
-            'menus'=> $this->menus,
+//            'menus'=> $this->menus,
         ];
         return view('member.idea.edit', $result);
     }
@@ -88,7 +88,7 @@ class IdeaController extends BaseController
             'data'=> IdeasModel::find($id),
             'lists'=> $this->lists,
             'curr_list'=> 'show',
-            'menus'=> $this->menus,
+//            'menus'=> $this->menus,
         ];
         return view('member.idea.show', $result);
     }
