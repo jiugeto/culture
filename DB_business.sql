@@ -445,6 +445,7 @@ CREATE TABLE `bs_designs` (
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布者id',
   `intro` varchar(1000) DEFAULT NULL COMMENT '设计简介',
   `price` decimal(10,0) unsigned NOT NULL DEFAULT '0' COMMENT '价格，单位元',
+  `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序字段，值越大越靠前，默认10',
   `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站功能：0不放入回收站，1放入回收站',
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL DEFAULT '0000-00-00',
@@ -524,6 +525,7 @@ CREATE TABLE `bs_entertains` (
   `genre` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '供求列表：1需求，2供应',
   `content` text NOT NULL COMMENT '内容',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布方id',
+  `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序字段，值越大越靠前，默认10',
   `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站：0为不放入回收站，1为放入回收站',
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL,
@@ -537,7 +539,7 @@ CREATE TABLE `bs_entertains` (
 
 LOCK TABLES `bs_entertains` WRITE;
 /*!40000 ALTER TABLE `bs_entertains` DISABLE KEYS */;
-INSERT INTO `bs_entertains` VALUES (1,'娱乐001',1,'rthyngrthg',0,0,'2016-03-22','2016-03-22');
+INSERT INTO `bs_entertains` VALUES (1,'娱乐001',1,'rthyngrthg',0,10,0,'2016-03-22','2016-03-22');
 /*!40000 ALTER TABLE `bs_entertains` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -587,6 +589,9 @@ CREATE TABLE `bs_goods` (
   `link_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '链接id，关联图片表bs_pics、视频表bs_videos',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布人：需求用户，设计师，公司',
   `uname` varchar(255) NOT NULL COMMENT '发布人名称',
+  `recommend` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '是否推荐：0不推荐，1不推荐，默认0',
+  `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序字段，值越大越靠前，默认10',
+  `isshow` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '前台列表是否显示：0不显示，1显示，默认1',
   `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站功能：0不放入回收站，1放入回收站',
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL DEFAULT '0000-00-00',
@@ -600,7 +605,7 @@ CREATE TABLE `bs_goods` (
 
 LOCK TABLES `bs_goods` WRITE;
 /*!40000 ALTER TABLE `bs_goods` DISABLE KEYS */;
-INSERT INTO `bs_goods` VALUES (1,'作品1',0,0,'v部分的白癜风b',0,0,'',0,'2016-03-12','0000-00-00'),(2,'企业需求001',3,4,'',1,0,'',0,'2016-03-13','0000-00-00'),(3,'企业作品001',4,4,'',1,0,'',0,'2016-03-13','0000-00-00');
+INSERT INTO `bs_goods` VALUES (1,'作品1',0,0,'v部分的白癜风b',0,0,'',0,10,1,0,'2016-03-12','0000-00-00'),(2,'企业需求001',3,4,'',1,0,'',0,10,1,0,'2016-03-13','0000-00-00'),(3,'企业作品001',4,4,'',1,0,'',0,10,1,0,'2016-03-13','0000-00-00');
 /*!40000 ALTER TABLE `bs_goods` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -903,11 +908,12 @@ CREATE TABLE `bs_orders` (
   `name` varchar(255) NOT NULL COMMENT '订单名称',
   `serial` int(20) unsigned NOT NULL DEFAULT '0' COMMENT '订单编号',
   `seller` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '卖家id ',
-  `seller_name` varchar(255) NOT NULL COMMENT '卖家名称',
+  `sellerName` varchar(255) NOT NULL COMMENT '卖家名称',
   `buyer` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '买家id',
-  `buyer_name` varchar(255) NOT NULL COMMENT '买家名称',
+  `buyerName` varchar(255) NOT NULL COMMENT '买家名称',
   `number` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '数量',
   `status` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '订单状态：申请，协商，确定，交易，结果',
+  `isshow` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '前台列表是否显示：0不显示，1显示，默认1',
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL DEFAULT '0000-00-00',
   PRIMARY KEY (`id`)
@@ -969,6 +975,8 @@ CREATE TABLE `bs_products` (
   `uname` varchar(255) DEFAULT NULL COMMENT '提供者名称',
   `css_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'css样式id',
   `js_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'js文件id',
+  `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序字段，值越大越靠前，默认10',
+  `isshow` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '前台列表是否显示：0不显示，1显示',
   `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站功能：0不放入回收站，1放入回收站',
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL DEFAULT '0000-00-00',
@@ -1054,6 +1062,7 @@ CREATE TABLE `bs_rents` (
   `price` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '价格，单位元',
   `fromtime` int(20) unsigned NOT NULL DEFAULT '0' COMMENT '租赁开始时间',
   `totime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '租赁结束时间',
+  `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序字段，值越大越靠前，默认10',
   `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站功能：0不放入回收站，1放入回收站',
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL,
@@ -1067,7 +1076,7 @@ CREATE TABLE `bs_rents` (
 
 LOCK TABLES `bs_rents` WRITE;
 /*!40000 ALTER TABLE `bs_rents` DISABLE KEYS */;
-INSERT INTO `bs_rents` VALUES (1,'租赁供应0323',1,'yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy',0,0.00,0,0,0,'2016-03-23','2016-03-23');
+INSERT INTO `bs_rents` VALUES (1,'租赁供应0323',1,'yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy',0,0.00,0,0,10,0,'2016-03-23','2016-03-23');
 /*!40000 ALTER TABLE `bs_rents` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1430,6 +1439,7 @@ CREATE TABLE `companys` (
   `address` varchar(255) NOT NULL COMMENT '详细地址',
   `yyzzid` varchar(255) NOT NULL COMMENT '营业执照注册码',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '会员id',
+  `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序字段，值越大越靠前，默认10',
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '更新时间',
   PRIMARY KEY (`id`)
@@ -1522,4 +1532,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-20 23:56:24
+-- Dump completed on 2016-04-21 19:43:09

@@ -7,7 +7,7 @@ class DesignModel extends BaseModel
 {
     protected $table = 'bs_designs';
     protected $fillable = [
-        'id','name','genre','type_id','uid','intro','price','del','created_at','updated_at',
+        'id','name','genre','type_id','uid','intro','price','sort','del','created_at','updated_at',
     ];
 
     /**

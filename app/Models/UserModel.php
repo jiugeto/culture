@@ -35,4 +35,14 @@ class UserModel extends BaseModel
     {
         return $this->isvips[$this->isvip];
     }
+
+    public function person()
+    {
+        return $this->hasOne('\App\Models\PersonModel','id','uid');
+    }
+
+    public function company()
+    {
+        return $this->hasOne('\App\Models\CompanyModel','id','uid');
+    }
 }

@@ -7,7 +7,7 @@ class RentModel extends BaseModel
 {
     protected $table = 'bs_rents';
     protected $fillable = [
-        'id','name','genre','intro','uid','price','del','created_at','updated_at',
+        'id','name','genre','intro','uid','price','sort','del','created_at','updated_at',
     ];
 
     /**
