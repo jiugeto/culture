@@ -12,6 +12,7 @@
                 <a href="/login/dologout">退出</a>
             @else
                 <a href="/regist">免费注册</a>
+                <a href="/login">登录</a>
             @endif
         </div>
       </span>

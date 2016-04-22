@@ -55,6 +55,7 @@
                     <div>
                         <span style="color:red;">{{ $idea->number }}</span>.
                         {{ $idea->name }}
+                        <span class="right_time">{{ explode(' ',$idea->created_at)[0] }}</span>
                     </div>
                     @endforeach
                 @endif
@@ -77,6 +78,7 @@
                     <div>
                         <span style="color:red;">{{ $talk->number }}</span>.
                         {{ $talk->name }}
+                        <span class="right_time">{{ explode(' ',$talk->created_at)[0] }}</span>
                     </div>
                     @endforeach
                 @endif

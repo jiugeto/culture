@@ -7,6 +7,6 @@ class TalksFollowModel extends BaseModel
 {
     protected $table = 'bs_talks_follow';
     protected $fillable = [
-        'id','talkid','followid','uid','otherid','created_at',
+        'id','talkid','uid','created_at',
     ];
 }

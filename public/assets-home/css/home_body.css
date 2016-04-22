@@ -372,11 +372,16 @@
     width:200px;
     border-right:1px dashed lightgrey;
 }
-.idea_con .right { width:293px; }
+.idea_con .right { width:293px;overflow:hidden; }
 .idea_con .right div {
-    padding:5px 10px;
+    padding:6px 10px;
     width:273px;
     border-bottom:1px dotted lightgrey;
+}
+.idea_con .right span.right_time,.talk_con .left span.right_time {
+    float:right;
+    font-size:12px;
+    color:lightgrey;
 }
 
 
@@ -394,5 +399,5 @@
     width:273px;
     border-bottom:1px dashed lightgrey;
 }
-.talk_con .right { width:693px;height:95px;overflow:hidden; }
-.talk_con .right div { padding:10px; }
+.talk_con .right { width:693px;height:98px;overflow:hidden; }
+.talk_con .right div { padding:10px;height:98px; }

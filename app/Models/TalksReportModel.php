@@ -7,6 +7,6 @@ class TalksReportModel extends BaseModel
 {
     protected $table = 'bs_talks_report';
     protected $fillable = [
-        'id','talkid','reportid','uid','otherid','created_at',
+        'id','talkid','uid','created_at',
     ];
 }

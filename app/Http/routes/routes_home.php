@@ -38,7 +38,11 @@ Route::group(['prefix'=>'','namespace'=>'Home'],function(){
     //创意路由
     Route::resource('idea','IdeaController');
     //话题路由
+    Route::post('talk/{id}','TalkController@update');
     Route::get('talk/follow','TalkController@follow');
     Route::get('talk/collect','TalkController@collect');
+    Route::get('talk/{id}/destroy','TalkController@destroy');
+    Route::get('talk/{id}/restore','TalkController@restore');
+    Route::get('talk/{id}/forceDelete','TalkController@froceDelete');
     Route::resource('talk','TalkController');
 });

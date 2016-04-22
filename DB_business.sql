@@ -150,7 +150,7 @@ CREATE TABLE `ba_userlog` (
   `logoutTime` date NOT NULL DEFAULT '0000-00-00' COMMENT '退出时间',
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -159,7 +159,7 @@ CREATE TABLE `ba_userlog` (
 
 LOCK TABLES `ba_userlog` WRITE;
 /*!40000 ALTER TABLE `ba_userlog` DISABLE KEYS */;
-INSERT INTO `ba_userlog` VALUES (1,1,1,'jiuge','201604090047077935','2016-04-09','2016-04-09','2016-04-05'),(2,1,1,'jiuge','20160409004918108','2016-04-09','0000-00-00','2016-04-05'),(3,1,1,'jiuge','201604090437083847','2016-04-09','0000-00-00','2016-04-05'),(4,1,1,'jiuge','201604091015518376','2016-04-09','0000-00-00','2016-04-05'),(5,2,1,'jiuge','201604091059097936','2016-04-09','0000-00-00','2016-04-06'),(6,2,1,'jiuge','201604091412047608','2016-04-09','0000-00-00','2016-04-06'),(7,2,1,'jiuge','201604100215434109','2016-04-10','0000-00-00','2016-04-06'),(8,2,1,'jiuge','201604101055219452','2016-04-10','0000-00-00','2016-04-06'),(9,2,1,'jiuge','20160410132948873','2016-04-10','0000-00-00','2016-04-06'),(10,1,1,'jiuge','201604110108163281','2016-04-11','0000-00-00','2016-04-05'),(11,1,1,'jiuge','201604110902034586','2016-04-11','0000-00-00','2016-04-05'),(12,1,1,'jiuge','201604111319349561','2016-04-11','0000-00-00','2016-04-05'),(13,2,1,'jiuge','201604120033529357','2016-04-12','0000-00-00','2016-04-06'),(14,1,1,'jiuge','201604120034091653','2016-04-12','2016-04-12','2016-04-05'),(15,2,1,'jiuge','201604120037364998','2016-04-12','2016-04-12','2016-04-06'),(16,1,1,'jiuge','201604121221289312','2016-04-12','2016-04-12','2016-04-05'),(17,2,1,'jiuge','201604121231351384','2016-04-12','2016-04-12','2016-04-06'),(18,1,1,'jiuge','201604121233022375','2016-04-12','2016-04-12','2016-04-05'),(19,1,1,'jiuge','201604150217508806','2016-04-15','0000-00-00','2016-04-05'),(20,1,1,'jiuge','201604160759374265','2016-04-16','0000-00-00','2016-04-05'),(21,2,1,'jiuge','201604161520191699','2016-04-16','2016-04-16','2016-04-06'),(22,1,1,'jiuge','201604161522083742','2016-04-16','2016-04-16','2016-04-05'),(23,1,1,'jiuge','201604161527372619','2016-04-16','2016-04-16','2016-04-05'),(24,2,1,'jiuge','2016041700561299','2016-04-17','2016-04-17','2016-04-06'),(25,1,1,'jiuge','201604170248081428','2016-04-17','2016-04-17','2016-04-05'),(26,1,1,'jiuge','201604171200175488','2016-04-17','2016-04-17','2016-04-05'),(27,2,1,'jiuge','201604171203246134','2016-04-17','2016-04-17','2016-04-06'),(28,2,1,'jiuge','201604191526236409','2016-04-19','0000-00-00','2016-04-06'),(29,2,1,'jiuge','201604200124491317','2016-04-20','0000-00-00','2016-04-06'),(30,1,1,'jiuge','201604201245341735','2016-04-20','2016-04-20','2016-04-05'),(31,1,1,'jiuge','201604201400413759','2016-04-20','2016-04-20','2016-04-05'),(32,2,1,'jiuge','201604211438122098','2016-04-21','0000-00-00','2016-04-06');
+INSERT INTO `ba_userlog` VALUES (1,1,1,'jiuge','201604090047077935','2016-04-09','2016-04-09','2016-04-05'),(2,1,1,'jiuge','20160409004918108','2016-04-09','0000-00-00','2016-04-05'),(3,1,1,'jiuge','201604090437083847','2016-04-09','0000-00-00','2016-04-05'),(4,1,1,'jiuge','201604091015518376','2016-04-09','0000-00-00','2016-04-05'),(5,2,1,'jiuge','201604091059097936','2016-04-09','0000-00-00','2016-04-06'),(6,2,1,'jiuge','201604091412047608','2016-04-09','0000-00-00','2016-04-06'),(7,2,1,'jiuge','201604100215434109','2016-04-10','0000-00-00','2016-04-06'),(8,2,1,'jiuge','201604101055219452','2016-04-10','0000-00-00','2016-04-06'),(9,2,1,'jiuge','20160410132948873','2016-04-10','0000-00-00','2016-04-06'),(10,1,1,'jiuge','201604110108163281','2016-04-11','0000-00-00','2016-04-05'),(11,1,1,'jiuge','201604110902034586','2016-04-11','0000-00-00','2016-04-05'),(12,1,1,'jiuge','201604111319349561','2016-04-11','0000-00-00','2016-04-05'),(13,2,1,'jiuge','201604120033529357','2016-04-12','0000-00-00','2016-04-06'),(14,1,1,'jiuge','201604120034091653','2016-04-12','2016-04-12','2016-04-05'),(15,2,1,'jiuge','201604120037364998','2016-04-12','2016-04-12','2016-04-06'),(16,1,1,'jiuge','201604121221289312','2016-04-12','2016-04-12','2016-04-05'),(17,2,1,'jiuge','201604121231351384','2016-04-12','2016-04-12','2016-04-06'),(18,1,1,'jiuge','201604121233022375','2016-04-12','2016-04-12','2016-04-05'),(19,1,1,'jiuge','201604150217508806','2016-04-15','0000-00-00','2016-04-05'),(20,1,1,'jiuge','201604160759374265','2016-04-16','0000-00-00','2016-04-05'),(21,2,1,'jiuge','201604161520191699','2016-04-16','2016-04-16','2016-04-06'),(22,1,1,'jiuge','201604161522083742','2016-04-16','2016-04-16','2016-04-05'),(23,1,1,'jiuge','201604161527372619','2016-04-16','2016-04-16','2016-04-05'),(24,2,1,'jiuge','2016041700561299','2016-04-17','2016-04-17','2016-04-06'),(25,1,1,'jiuge','201604170248081428','2016-04-17','2016-04-17','2016-04-05'),(26,1,1,'jiuge','201604171200175488','2016-04-17','2016-04-17','2016-04-05'),(27,2,1,'jiuge','201604171203246134','2016-04-17','2016-04-17','2016-04-06'),(28,2,1,'jiuge','201604191526236409','2016-04-19','0000-00-00','2016-04-06'),(29,2,1,'jiuge','201604200124491317','2016-04-20','0000-00-00','2016-04-06'),(30,1,1,'jiuge','201604201245341735','2016-04-20','2016-04-20','2016-04-05'),(31,1,1,'jiuge','201604201400413759','2016-04-20','2016-04-20','2016-04-05'),(32,2,1,'jiuge','201604211438122098','2016-04-21','0000-00-00','2016-04-06'),(33,2,1,'jiuge','20160422014040960','2016-04-22','0000-00-00','2016-04-06');
 /*!40000 ALTER TABLE `ba_userlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1099,7 +1099,7 @@ CREATE TABLE `bs_talks` (
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='话题表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='话题表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1108,7 +1108,7 @@ CREATE TABLE `bs_talks` (
 
 LOCK TABLES `bs_talks` WRITE;
 /*!40000 ALTER TABLE `bs_talks` DISABLE KEYS */;
-INSERT INTO `bs_talks` VALUES (1,'话题1','<p>而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表</p>',1,0,10,1,0,'2016-04-17 01:46:45','2016-04-17 02:24:47'),(2,'标题2 ','<p>不服该办法呢GV热豆腐还不太高和今年投入富家女我我的是女附近的八个人工我可v别沮丧的v比对方不能交电费表肯定是你鄙视吧v那地方就不能hiu二个IE人根据IE如何隔日给举动被GV的人覅偶包过户的人发货不固定不v个is独具不</p>',1,0,10,1,0,'2016-04-19 15:27:53','0000-00-00 00:00:00');
+INSERT INTO `bs_talks` VALUES (1,'话题1','<p>而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表</p>',1,0,10,1,0,'2016-04-17 01:46:45','2016-04-17 02:24:47'),(2,'话题2 222222222222','<p>不服该办法呢GV热豆腐还不太高和今年投入富家女我我的是女附近的八个人工我可v别沮丧的v比对方不能交电费表肯定是你鄙视吧v那地方就不能hiu二个IE人根据IE如何隔日给举动被GV的人覅偶包过户的人发货不固定不v个is独具不</p><p>55555555555555555555555555555</p>',1,0,10,1,0,'2016-04-19 15:27:53','2016-04-22 01:44:00'),(3,'话题3333333','<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;这里可以排版文字，插入或粘贴图片\r\n &nbsp; &nbsp;&nbsp;</p><p>5151516515615165156165561562626516516515 &nbsp; &nbsp; &nbsp;&nbsp;</p>',1,0,10,1,0,'2016-04-22 01:44:27','2016-04-22 01:45:06');
 /*!40000 ALTER TABLE `bs_talks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1122,9 +1122,7 @@ DROP TABLE IF EXISTS `bs_talks_click`;
 CREATE TABLE `bs_talks_click` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `talkid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '话题id',
-  `clickid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '被点赞的话题id',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '登录用户id',
-  `otherid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '所点赞的话题用户id',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='话题点赞表';
@@ -1149,9 +1147,7 @@ DROP TABLE IF EXISTS `bs_talks_collect`;
 CREATE TABLE `bs_talks_collect` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `talkid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '话题id',
-  `collectid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '被收藏的话题id',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '登录用户id',
-  `otherid` int(10) unsigned NOT NULL COMMENT '所收集的话题用户id',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='话题收藏表';
@@ -1213,9 +1209,7 @@ DROP TABLE IF EXISTS `bs_talks_follow`;
 CREATE TABLE `bs_talks_follow` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `talkid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '话题id',
-  `followid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '被关注的话题id',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '登录用户id',
-  `otherid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '所关注的话题用户id',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='话题关注表';
@@ -1240,9 +1234,7 @@ DROP TABLE IF EXISTS `bs_talks_report`;
 CREATE TABLE `bs_talks_report` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `talkid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '话题id',
-  `reportid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '被举报的话题id',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '登录用户id',
-  `otherid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '所举报的话题用户id',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='话题举报表';
@@ -1267,9 +1259,7 @@ DROP TABLE IF EXISTS `bs_talks_share`;
 CREATE TABLE `bs_talks_share` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `talkid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '话题id',
-  `shareid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '被分享的话题id',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '登录用户的id',
-  `otherid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '所分享的话题用户id',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='话题分享表';
@@ -1294,9 +1284,7 @@ DROP TABLE IF EXISTS `bs_talks_thank`;
 CREATE TABLE `bs_talks_thank` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `talkid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '话题id',
-  `thankid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '被感谢的话题id',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '登录用户id',
-  `otherid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '所感谢的话题用户id',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='话题感谢表';
@@ -1533,4 +1521,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-21 23:32:49
+-- Dump completed on 2016-04-22 15:52:01

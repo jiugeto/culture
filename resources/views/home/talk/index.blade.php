@@ -37,7 +37,7 @@
                     </td>
                     <td class="small">话题来自 {{ $data->areatoname()  }}
                         <span class="right_close"><a href="/talk/{{$data->id}}/destroy" title="删除此话题">×</a></span>
-                        @if($curr=='')
+                        @if($curr!='mytalk')
                         <span class="right_close"><a href="/talk/{{$data->id}}/edit" title="修改此话题">修改</a></span>
                         @endif
                     </td>
@@ -52,7 +52,7 @@
                         @endif
                     </td></tr>
                 <tr><td>&nbsp;</td><td class="small">
-                    @if($curr=='')
+                    @if($curr!='mytalk')
                         <a title="点击关注" onclick="window.location.href='';">关注</a>：
                         {{ count($data->follow()) }} &nbsp;&nbsp;&nbsp;&nbsp;
                         {{--评论：&nbsp;&nbsp;&nbsp;&nbsp;--}}
@@ -84,13 +84,13 @@
         <div class="talk_right">
             <div class="theme">
                 {{--<p>我的关注</p>--}}
-                <a href="/talk"><div>我的话题</div></a>
+                <a href="/talk/mytalk"><div>我的话题</div></a>
                 <a href="/talk/follow"><div>我的关注</div></a>
                 <a href="/talk/collect"><div>我的收藏</div></a>
             </div>
             <div class="theme">
                 <p class="title"><b>话题专栏</b></p>
-                <a href=""><div>专栏·发现</div></a>
+                <a href="/talk"><div>专栏·发现</div></a>
                 <a href="/talk/create"><div>写话题</div></a>
             </div>
         </div>
