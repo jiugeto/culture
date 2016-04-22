@@ -651,9 +651,7 @@ DROP TABLE IF EXISTS `bs_ideas_click`;
 CREATE TABLE `bs_ideas_click` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `ideaid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创意id',
-  `clickid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '被点赞的话题id',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '登录用户id',
-  `otherid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '所点赞的话题用户id',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='创意点赞表';
@@ -678,9 +676,7 @@ DROP TABLE IF EXISTS `bs_ideas_collect`;
 CREATE TABLE `bs_ideas_collect` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `ideaid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创意id',
-  `collectid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '被收藏的话题id',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '登录用户id',
-  `otherid` int(10) unsigned NOT NULL COMMENT '所收集的创意用户id',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='创意收藏表';
@@ -738,9 +734,7 @@ DROP TABLE IF EXISTS `bs_ideas_read`;
 CREATE TABLE `bs_ideas_read` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `ideaid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创意id',
-  `readid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '被阅读的话题id',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '登录用户id',
-  `otherid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '所阅读的话题用户id',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='创意阅读表';
@@ -753,6 +747,31 @@ CREATE TABLE `bs_ideas_read` (
 LOCK TABLES `bs_ideas_read` WRITE;
 /*!40000 ALTER TABLE `bs_ideas_read` DISABLE KEYS */;
 /*!40000 ALTER TABLE `bs_ideas_read` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bs_ideas_show`
+--
+
+DROP TABLE IF EXISTS `bs_ideas_show`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bs_ideas_show` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `ideaid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创意id',
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '允许查看的用户id',
+  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='创意查看权限表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bs_ideas_show`
+--
+
+LOCK TABLES `bs_ideas_show` WRITE;
+/*!40000 ALTER TABLE `bs_ideas_show` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bs_ideas_show` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1521,4 +1540,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-22 15:52:01
+-- Dump completed on 2016-04-22 18:34:17

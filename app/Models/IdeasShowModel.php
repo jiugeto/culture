@@ -1,13 +1,13 @@
 <?php
 namespace App\Models;
 
-class IdeasClickModel extends BaseModel
+class IdeasShowModel extends BaseModel
 {
     /**
-     * 这是创意点赞表 model
+     * 这是创意查看权限表 model
      */
 
-    protected $table = 'bs_ideas_click';
+    protected $table = 'bs_ideas_show';
     protected $fillable = [
         'id','ideadid','uid','created_at',
     ];

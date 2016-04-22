@@ -36,6 +36,8 @@ Route::group(['prefix'=>'','namespace'=>'Home'],function(){
     Route::get('{status}/opinion','OpinionController@index');
     Route::resource('opinion','OpinionController');
     //创意路由
+    Route::get('idea/click/{id}','IdeaController@click');
+    Route::get('idea/collect/{id}','IdeaController@collect');
     Route::resource('idea','IdeaController');
     //话题路由
     Route::post('talk/{id}','TalkController@update');
@@ -43,6 +45,6 @@ Route::group(['prefix'=>'','namespace'=>'Home'],function(){
     Route::get('talk/collect','TalkController@collect');
     Route::get('talk/{id}/destroy','TalkController@destroy');
     Route::get('talk/{id}/restore','TalkController@restore');
-    Route::get('talk/{id}/forceDelete','TalkController@froceDelete');
+    Route::get('talk/{id}/forceDelete','TalkController@forceDelete');
     Route::resource('talk','TalkController');
 });

@@ -31,13 +31,15 @@
                     <td>
                         <a href="/idea/{{$data->id}}"><b>{{ $data->name }}</b></a>
                         {{--<span class="right">浏览量</span>--}}
-                        <span class="right">{{ $data->read }}</span>
+                        <span class="right">{{ count($data->read()) }}</span>
                         <span class="right"><a href="/idea/{{$data->id}}">查看</a></span>
                     </td>
                 </tr>
                 <tr><td class="con">{!! $data->content !!}</td></tr>
                 <tr>
-                    <td class="small">关注：{{ $data->click }}
+                    <td class="small">
+                        <a href="/idea/click/{{$data->id}}">关注</a>：{{ count($data->click()) }}
+                        <a href="/idea/collect/{{$data->id}}">收藏</a>：{{ coount($data->collect()) }}
                         <span class="right">时间：{{ $data->created_at }}&nbsp;&nbsp;发布人：{{ $data->uid }}</span>
                     </td>
                 </tr>

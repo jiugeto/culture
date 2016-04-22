@@ -9,6 +9,6 @@ class IdeasReadModel extends BaseModel
 
     protected $table = 'bs_ideas_read';
     protected $fillable = [
-        'id','ideadid','readid','uid','otherid','created_at',
+        'id','ideadid','uid','created_at',
     ];
 }
