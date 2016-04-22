@@ -150,7 +150,7 @@ CREATE TABLE `ba_userlog` (
   `logoutTime` date NOT NULL DEFAULT '0000-00-00' COMMENT '退出时间',
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -159,7 +159,7 @@ CREATE TABLE `ba_userlog` (
 
 LOCK TABLES `ba_userlog` WRITE;
 /*!40000 ALTER TABLE `ba_userlog` DISABLE KEYS */;
-INSERT INTO `ba_userlog` VALUES (1,1,1,'jiuge','201604090047077935','2016-04-09','2016-04-09','2016-04-05'),(2,1,1,'jiuge','20160409004918108','2016-04-09','0000-00-00','2016-04-05'),(3,1,1,'jiuge','201604090437083847','2016-04-09','0000-00-00','2016-04-05'),(4,1,1,'jiuge','201604091015518376','2016-04-09','0000-00-00','2016-04-05'),(5,2,1,'jiuge','201604091059097936','2016-04-09','0000-00-00','2016-04-06'),(6,2,1,'jiuge','201604091412047608','2016-04-09','0000-00-00','2016-04-06'),(7,2,1,'jiuge','201604100215434109','2016-04-10','0000-00-00','2016-04-06'),(8,2,1,'jiuge','201604101055219452','2016-04-10','0000-00-00','2016-04-06'),(9,2,1,'jiuge','20160410132948873','2016-04-10','0000-00-00','2016-04-06'),(10,1,1,'jiuge','201604110108163281','2016-04-11','0000-00-00','2016-04-05'),(11,1,1,'jiuge','201604110902034586','2016-04-11','0000-00-00','2016-04-05'),(12,1,1,'jiuge','201604111319349561','2016-04-11','0000-00-00','2016-04-05'),(13,2,1,'jiuge','201604120033529357','2016-04-12','0000-00-00','2016-04-06'),(14,1,1,'jiuge','201604120034091653','2016-04-12','2016-04-12','2016-04-05'),(15,2,1,'jiuge','201604120037364998','2016-04-12','2016-04-12','2016-04-06'),(16,1,1,'jiuge','201604121221289312','2016-04-12','2016-04-12','2016-04-05'),(17,2,1,'jiuge','201604121231351384','2016-04-12','2016-04-12','2016-04-06'),(18,1,1,'jiuge','201604121233022375','2016-04-12','2016-04-12','2016-04-05'),(19,1,1,'jiuge','201604150217508806','2016-04-15','0000-00-00','2016-04-05'),(20,1,1,'jiuge','201604160759374265','2016-04-16','0000-00-00','2016-04-05'),(21,2,1,'jiuge','201604161520191699','2016-04-16','2016-04-16','2016-04-06'),(22,1,1,'jiuge','201604161522083742','2016-04-16','2016-04-16','2016-04-05'),(23,1,1,'jiuge','201604161527372619','2016-04-16','2016-04-16','2016-04-05'),(24,2,1,'jiuge','2016041700561299','2016-04-17','2016-04-17','2016-04-06'),(25,1,1,'jiuge','201604170248081428','2016-04-17','2016-04-17','2016-04-05'),(26,1,1,'jiuge','201604171200175488','2016-04-17','2016-04-17','2016-04-05'),(27,2,1,'jiuge','201604171203246134','2016-04-17','2016-04-17','2016-04-06'),(28,2,1,'jiuge','201604191526236409','2016-04-19','0000-00-00','2016-04-06'),(29,2,1,'jiuge','201604200124491317','2016-04-20','0000-00-00','2016-04-06'),(30,1,1,'jiuge','201604201245341735','2016-04-20','2016-04-20','2016-04-05'),(31,1,1,'jiuge','201604201400413759','2016-04-20','2016-04-20','2016-04-05'),(32,2,1,'jiuge','201604211438122098','2016-04-21','0000-00-00','2016-04-06'),(33,2,1,'jiuge','20160422014040960','2016-04-22','0000-00-00','2016-04-06');
+INSERT INTO `ba_userlog` VALUES (1,1,1,'jiuge','201604090047077935','2016-04-09','2016-04-09','2016-04-05'),(2,1,1,'jiuge','20160409004918108','2016-04-09','0000-00-00','2016-04-05'),(3,1,1,'jiuge','201604090437083847','2016-04-09','0000-00-00','2016-04-05'),(4,1,1,'jiuge','201604091015518376','2016-04-09','0000-00-00','2016-04-05'),(5,2,1,'jiuge','201604091059097936','2016-04-09','0000-00-00','2016-04-06'),(6,2,1,'jiuge','201604091412047608','2016-04-09','0000-00-00','2016-04-06'),(7,2,1,'jiuge','201604100215434109','2016-04-10','0000-00-00','2016-04-06'),(8,2,1,'jiuge','201604101055219452','2016-04-10','0000-00-00','2016-04-06'),(9,2,1,'jiuge','20160410132948873','2016-04-10','0000-00-00','2016-04-06'),(10,1,1,'jiuge','201604110108163281','2016-04-11','0000-00-00','2016-04-05'),(11,1,1,'jiuge','201604110902034586','2016-04-11','0000-00-00','2016-04-05'),(12,1,1,'jiuge','201604111319349561','2016-04-11','0000-00-00','2016-04-05'),(13,2,1,'jiuge','201604120033529357','2016-04-12','0000-00-00','2016-04-06'),(14,1,1,'jiuge','201604120034091653','2016-04-12','2016-04-12','2016-04-05'),(15,2,1,'jiuge','201604120037364998','2016-04-12','2016-04-12','2016-04-06'),(16,1,1,'jiuge','201604121221289312','2016-04-12','2016-04-12','2016-04-05'),(17,2,1,'jiuge','201604121231351384','2016-04-12','2016-04-12','2016-04-06'),(18,1,1,'jiuge','201604121233022375','2016-04-12','2016-04-12','2016-04-05'),(19,1,1,'jiuge','201604150217508806','2016-04-15','0000-00-00','2016-04-05'),(20,1,1,'jiuge','201604160759374265','2016-04-16','0000-00-00','2016-04-05'),(21,2,1,'jiuge','201604161520191699','2016-04-16','2016-04-16','2016-04-06'),(22,1,1,'jiuge','201604161522083742','2016-04-16','2016-04-16','2016-04-05'),(23,1,1,'jiuge','201604161527372619','2016-04-16','2016-04-16','2016-04-05'),(24,2,1,'jiuge','2016041700561299','2016-04-17','2016-04-17','2016-04-06'),(25,1,1,'jiuge','201604170248081428','2016-04-17','2016-04-17','2016-04-05'),(26,1,1,'jiuge','201604171200175488','2016-04-17','2016-04-17','2016-04-05'),(27,2,1,'jiuge','201604171203246134','2016-04-17','2016-04-17','2016-04-06'),(28,2,1,'jiuge','201604191526236409','2016-04-19','0000-00-00','2016-04-06'),(29,2,1,'jiuge','201604200124491317','2016-04-20','0000-00-00','2016-04-06'),(30,1,1,'jiuge','201604201245341735','2016-04-20','2016-04-20','2016-04-05'),(31,1,1,'jiuge','201604201400413759','2016-04-20','2016-04-20','2016-04-05'),(32,2,1,'jiuge','201604211438122098','2016-04-21','0000-00-00','2016-04-06'),(33,2,1,'jiuge','20160422014040960','2016-04-22','0000-00-00','2016-04-06'),(34,2,1,'jiuge','201604221345581795','2016-04-22','0000-00-00','2016-04-06'),(35,1,1,'jiuge','201604221436379033','2016-04-22','0000-00-00','2016-04-05');
 /*!40000 ALTER TABLE `ba_userlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -216,6 +216,31 @@ LOCK TABLES `bs_actor_pic` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `bs_actor_work`
+--
+
+DROP TABLE IF EXISTS `bs_actor_work`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bs_actor_work` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `actorid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '演员id',
+  `workid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '影视作品id',
+  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='演员作品关联表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bs_actor_work`
+--
+
+LOCK TABLES `bs_actor_work` WRITE;
+/*!40000 ALTER TABLE `bs_actor_work` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bs_actor_work` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `bs_actors`
 --
 
@@ -234,7 +259,6 @@ CREATE TABLE `bs_actors` (
   `job` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '职业',
   `area` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '所在地',
   `height` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '身高，单位cm',
-  `work` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '作品',
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL,
   PRIMARY KEY (`id`)
@@ -471,8 +495,8 @@ DROP TABLE IF EXISTS `bs_entertain_actor`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `bs_entertain_actor` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `entertain_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '娱乐id',
-  `actor_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '演员id',
+  `entertainid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '娱乐id',
+  `actorid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '演员id',
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='娱乐演员关联表 bs_entertain_actor';
@@ -510,6 +534,31 @@ CREATE TABLE `bs_entertain_pic` (
 LOCK TABLES `bs_entertain_pic` WRITE;
 /*!40000 ALTER TABLE `bs_entertain_pic` DISABLE KEYS */;
 /*!40000 ALTER TABLE `bs_entertain_pic` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bs_entertain_work`
+--
+
+DROP TABLE IF EXISTS `bs_entertain_work`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bs_entertain_work` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `entertainid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '娱乐id',
+  `workid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '影视作品id',
+  `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='娱乐公司与作品关联表 bs_entertain_work';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bs_entertain_work`
+--
+
+LOCK TABLES `bs_entertain_work` WRITE;
+/*!40000 ALTER TABLE `bs_entertain_work` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bs_entertain_work` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -842,7 +891,7 @@ CREATE TABLE `bs_menus` (
 
 LOCK TABLES `bs_menus` WRITE;
 /*!40000 ALTER TABLE `bs_menus` DISABLE KEYS */;
-INSERT INTO `bs_menus` VALUES (1,'账户首页',1,'会员后台左侧菜单控制','App\\Http\\Controllers\\Member','Home','member','home','index','',0,1,10,'2016-03-06','2016-03-06'),(2,'会员账户',1,'','App\\Http\\Controllers\\Member','Setting','member','setting','index','',0,1,10,'2016-02-29','2016-04-12'),(3,'在线创作',1,'','App\\Http\\Controllers\\Member','Product','member','product','index','',0,1,10,'2016-03-12','2016-03-14'),(4,'个人供求',1,'','App\\Http\\Controllers\\Member','PersonD','member','personD','index','',0,1,10,'2016-02-29','2016-03-19'),(5,'企业供求',1,'','App\\Http\\Controllers\\Member','CompanyD','member','companyD','index','',0,1,10,'2016-03-12','2016-03-19'),(6,'个人需求',1,'','App\\Http\\Controllers\\Member','PersonD','member','personD','index','',4,1,10,'2016-03-12','2016-03-19'),(7,'个人作品',1,'','App\\Http\\Controllers\\Member','PersonS','member','personS','index','',4,1,10,'2016-03-12','2016-03-19'),(8,'企业需求',1,'','App\\Http\\Controllers\\Member','CompanyD','member','companyD','index','',5,1,10,'2016-03-12','2016-03-19'),(9,'企业作品',1,'','App\\Http\\Controllers\\Member','CompanyS','member','companyS','index','',5,1,10,'2016-03-12','2016-03-19'),(10,'租赁供求',1,'','App\\Http\\Controllers\\Member','Rent','member','rent','index','',5,1,10,'2016-03-12','2016-03-19'),(11,'娱乐供求',1,'','App\\Http\\Controllers\\Member','Entertain','member','entertain','index','',5,1,10,'2016-03-12','2016-03-13'),(12,'基本管理',1,'','App\\Http\\Controllers\\Member','Category','member','category','index','',0,1,10,'2016-03-13','0000-00-00'),(13,'分类管理',1,'','App\\Http\\Controllers\\Member','Category','member','category','index','',12,1,10,'2016-03-13','2016-03-19'),(14,'创意管理',1,'','App\\Http\\Controllers\\Member','Idea','member','idea','index','',12,1,10,'2016-04-16','0000-00-00'),(15,'个人资料',1,'','App\\Http\\Controllers\\Person','Home','person','home','index','',4,1,20,'2016-04-17','2016-04-17'),(16,'企业主页',1,'','App\\Http\\Controllers\\Company','Home','company','home','index','',5,1,20,'2016-04-17','2016-04-17');
+INSERT INTO `bs_menus` VALUES (1,'账户首页',1,'会员后台左侧菜单控制','App\\Http\\Controllers\\Member','Home','member','home','index','',0,1,10,'2016-03-06','2016-03-06'),(2,'会员账户',1,'','App\\Http\\Controllers\\Member','Setting','member','setting','index','',0,1,10,'2016-02-29','2016-04-12'),(3,'在线创作',1,'','App\\Http\\Controllers\\Member','Product','member','product','index','',0,1,10,'2016-03-12','2016-03-14'),(4,'个人供求',1,'','App\\Http\\Controllers\\Member','PersonD','member','personD','index','',0,1,10,'2016-02-29','2016-03-19'),(5,'企业供求',1,'','App\\Http\\Controllers\\Member','CompanyD','member','companyD','index','',0,1,10,'2016-03-12','2016-03-19'),(6,'个人需求',1,'','App\\Http\\Controllers\\Member','PersonD','member','personD','index','',4,1,10,'2016-03-12','2016-03-19'),(7,'个人作品',1,'','App\\Http\\Controllers\\Member','PersonS','member','personS','index','',4,1,10,'2016-03-12','2016-03-19'),(8,'企业需求',1,'','App\\Http\\Controllers\\Member','CompanyD','member','companyD','index','',5,1,10,'2016-03-12','2016-03-19'),(9,'企业作品',1,'','App\\Http\\Controllers\\Member','CompanyS','member','companyS','index','',5,1,10,'2016-03-12','2016-03-19'),(10,'租赁供求',1,'','App\\Http\\Controllers\\Member','Rent','member','rent','index','',5,1,10,'2016-03-12','2016-03-19'),(11,'娱乐供求',1,'','App\\Http\\Controllers\\Member','Entertain','member','entertain','index','',5,1,10,'2016-03-12','2016-03-13'),(12,'基本管理',1,'','App\\Http\\Controllers\\Member','Category','member','category','index','',0,1,10,'2016-03-13','0000-00-00'),(13,'分类管理',1,'','App\\Http\\Controllers\\Member','Category','member','category','index','',12,1,10,'2016-03-13','2016-03-19'),(14,'创意管理',1,'','App\\Http\\Controllers\\Member','Idea','member','idea','index','',12,1,10,'2016-04-16','0000-00-00'),(15,'个人主页',1,'','App\\Http\\Controllers\\Person','Home','person','home','index','',4,1,20,'2016-04-17','2016-04-22'),(16,'企业主页',1,'','App\\Http\\Controllers\\Company','Home','company','home','index','',5,1,20,'2016-04-17','2016-04-17');
 /*!40000 ALTER TABLE `bs_menus` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1434,6 +1483,36 @@ INSERT INTO `bs_userlog` VALUES (1,1,1,'jiuge','201604090047077935','2016-04-09'
 UNLOCK TABLES;
 
 --
+-- Table structure for table `bs_works`
+--
+
+DROP TABLE IF EXISTS `bs_works`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bs_works` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL COMMENT '名称',
+  `type` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '影片类型：1电视剧，2电影，3微电影，4广告',
+  `detail` varchar(255) NOT NULL COMMENT '故事情节',
+  `intro` varchar(255) DEFAULT NULL COMMENT '简单介绍',
+  `startTime` datetime NOT NULL COMMENT '拍摄时间',
+  `showTime` datetime NOT NULL COMMENT '开播时间',
+  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='影视作品表 works';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bs_works`
+--
+
+LOCK TABLES `bs_works` WRITE;
+/*!40000 ALTER TABLE `bs_works` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bs_works` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `companys`
 --
 
@@ -1540,4 +1619,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-22 18:34:17
+-- Dump completed on 2016-04-22 23:41:00

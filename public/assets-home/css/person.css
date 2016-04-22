@@ -6,9 +6,20 @@
     margin-top:40px;
     width:1000px;height:700px;
     /*background:ghostwhite;*/
-    background:rgb(250,250,250);
+    /*background:rgb(250,250,250);*/
     /*border:1px solid lightblue;*/
+    font-size:20px;
 }
+.per_menu {
+    margin:0 auto;
+    width:800px;
+}
+.per_menu span a {
+    color:#00b7ee;
+    text-decoration:none;
+}
+.per_menu .right { float:right; }
+
 .per_body p {
     margin:0;
     padding:5px 10px;
