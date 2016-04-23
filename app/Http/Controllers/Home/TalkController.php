@@ -141,6 +141,20 @@ class TalkController extends BaseController
         return view('home.talk.themelist', $result);
     }
 
+    /**
+     * 收藏话题
+     */
+    public function tomycollect($talkid)
+    {
+        $data = [
+            'talkid'=> $talkid,
+            'uid'=> $this->userid,
+            'created_at'=> date('Y-m-d H:i:s', time()),
+        ];
+        TalksCollectModel::create($data);
+        return redirect('/talk/collect');
+    }
+
     public function create()
     {
         $this->islogin();

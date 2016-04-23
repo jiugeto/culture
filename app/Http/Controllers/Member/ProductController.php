@@ -25,7 +25,7 @@ class ProductController extends BaseController
             'lists'=> $this->lists,
             'prefix_url'=> '/member/product',
             'curr_list'=> '',
-            'menus'=> $this->menus,
+//            'menus'=> $this->menus,
         ];
         return view('member.product.index', $result);
     }

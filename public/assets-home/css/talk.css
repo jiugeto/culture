@@ -122,6 +122,8 @@
     font-size:20px;
     border-bottom:1px solid lightgrey;
 }
+.talk_theme .title a { color:grey;text-decoration:none; }
+.talk_theme .title a:hover { color:red; }
 .talk_theme .list {
     width:250px;
     float:left;
@@ -139,11 +141,11 @@
     border:0;
     text-align:center;
 }
-.theme a {
+.theme .totheme a {
     padding:5px 10px;
     border:1px solid orangered;
     border-radius:5px;
 }
-.theme a:hover {
+.theme .totheme a:hover {
     background:pink;
 }

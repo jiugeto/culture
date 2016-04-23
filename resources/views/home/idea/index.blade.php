@@ -46,6 +46,7 @@
             </table>
             @endforeach
             @endif
+            @include('home.common.page')
         </div>
     </div>
 @stop

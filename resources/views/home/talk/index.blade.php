@@ -80,6 +80,7 @@
             </table>
                 @endforeach
             @endif
+            @include('home.common.page')
         </div>
         <div class="talk_right">
             <div class="theme">

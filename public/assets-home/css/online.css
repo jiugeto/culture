@@ -47,3 +47,19 @@
 
 
 /*========== 动画内容 ==========*/
+.img {
+    width:218px;
+    height:198px;
+    background:gainsboro;
+    border:1px solid darkgrey;
+}
+.img div {
+    /*margin:0 auto;*/
+    /*padding-top:10px;*/
+    /*width:200px;*/
+    /*height:150px;*/
+    /*overflow:hidden;*/
+}
+.img .title {
+    /*text-align:center;*/
+}

@@ -51,6 +51,7 @@ Route::group(['prefix'=>'','namespace'=>'Home'],function(){
     Route::get('talk/toshare','TalkController@toshare');
     Route::get('talk/toreport','TalkController@toreport');
     Route::get('talk/tocollect','TalkController@tocollect');
+    Route::get('talk/mycollect/{id}','TalkController@tomycollect');
     Route::get('talk/{id}/destroy','TalkController@destroy');
     Route::get('talk/{id}/restore','TalkController@restore');
     Route::get('talk/{id}/forceDelete','TalkController@forceDelete');
