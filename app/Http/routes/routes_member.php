@@ -110,4 +110,6 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
     Route::get('idea/{id}/forceDelete','IdeaController@forceDelete');
     Route::get('idea/trash','IdeaController@trash');
     Route::resource('idea','IdeaController');
+        //演员管理
+    Route::resource('actor','ActorController');
 });

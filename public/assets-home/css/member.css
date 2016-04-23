@@ -206,12 +206,15 @@ a.list_btn:hover { background:darkred; }
     border:1px solid rgb(240,240,240);
     border-radius:3px;
 }
+.table_create td { padding:5px 10px; }
+.table_create td.field_name { width:200px;text-align:end; }
 input,textarea,select {
     border:1px solid lightgrey;
     border-radius:3px;
 }
-input { height:20px; }
-select { height:25px; }
+input,select { height:30px; }
+input.field_value { width:300px; }
+select { font-size:20px;font-family:'微软雅黑'; }
 /*=========右侧创建窗口==========*/
 
 /*=========右侧查看窗口==========*/

@@ -56,6 +56,7 @@ class LoginController extends BaseController
         ];
         UserlogModel::create($userlog);
         //加入session
+        Session::put('admin.adminid',$adminModel->id);
         Session::put('admin.username',$username);
         Session::put('admin.password',$password);
         Session::put('admin.serial',$serial);
@@ -80,6 +81,7 @@ class LoginController extends BaseController
         UserlogModel::where('serial',Session::get('admin.serial'))
             ->update(['logoutTime'=>$logoutTime]);
         //去除session
+        Session::forget('admin.adminid');
         Session::forget('admin.username');
         Session::forget('admin.password');
         Session::forget('admin.serial');

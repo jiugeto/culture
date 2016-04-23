@@ -120,4 +120,6 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
         //话题管理
     Route::post('talk/{id}','TalkController@update');
     Route::resource('talk','TalkController');
+        //演员管理
+    Route::resource('actor','ActorController');
 });
