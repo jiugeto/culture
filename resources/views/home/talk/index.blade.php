@@ -53,27 +53,27 @@
                     </td></tr>
                 <tr><td>&nbsp;</td><td class="small">
                     @if($curr!='mytalk')
-                        <a title="点击关注" onclick="window.location.href='';">关注</a>：
+                        <a title="点击关注" onclick="window.location.href='/talk/tofollow';">关注</a>：
                         {{ count($data->follow()) }} &nbsp;&nbsp;&nbsp;&nbsp;
                         {{--评论：&nbsp;&nbsp;&nbsp;&nbsp;--}}
-                        <a title="点击感谢" onclick="window.location.href='';">感谢</a>：
+                        <a title="点击感谢" onclick="window.location.href='/talk/tothank';">感谢</a>：
                         {{ count($data->thank()) }} &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a title="点击点赞" onclick="window.location.href='';">点赞</a>：
+                        <a title="点击点赞" onclick="window.location.href='/talk/toclick';">点赞</a>：
                         {{ count($data->click()) }} &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a title="点击分享" onclick="window.location.href='';">分享</a>：
+                        <a title="点击分享" onclick="window.location.href='/talk/toshare';">分享</a>：
                         {{ count($data->share()) }} &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a title="点击收藏" onclick="window.location.href='';">收藏</a>：
+                        <a title="点击收藏" onclick="window.location.href='/talk/toreport';">收藏</a>：
                         {{ count($data->collect()) }} &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a title="点击举报" onclick="window.location.href='';">举报</a>：
+                        <a title="点击举报" onclick="window.location.href='/talk/tocollect';">举报</a>：
                         {{ count($data->report()) }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     @else
-                        关注：{{ $data->followStr() }} &nbsp;&nbsp;&nbsp;&nbsp;
+                        关注：{{ $data->follow() }} &nbsp;&nbsp;&nbsp;&nbsp;
                         {{--评论：&nbsp;&nbsp;&nbsp;&nbsp;--}}
-                        感谢：{{ $data->thank }} &nbsp;&nbsp;&nbsp;&nbsp;
-                        点赞：{{ $data->click }} &nbsp;&nbsp;&nbsp;&nbsp;
-                        分享：{{ $data->shareStr() }} &nbsp;&nbsp;&nbsp;&nbsp;
-                        收藏：{{ $data->collectStr() }} &nbsp;&nbsp;&nbsp;&nbsp;
-                        举报：{{ $data->reportStr() }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        感谢：{{ $data->thank() }} &nbsp;&nbsp;&nbsp;&nbsp;
+                        点赞：{{ $data->click() }} &nbsp;&nbsp;&nbsp;&nbsp;
+                        分享：{{ $data->share() }} &nbsp;&nbsp;&nbsp;&nbsp;
+                        收藏：{{ $data->collect() }} &nbsp;&nbsp;&nbsp;&nbsp;
+                        举报：{{ $data->report() }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     @endif
                         发布时间：{{ $data->created_at }}
                     </td></tr>
@@ -90,7 +90,7 @@
             </div>
             <div class="theme">
                 <p class="title"><b>话题专栏</b></p>
-                <a href="/talk"><div>专栏·发现</div></a>
+                <a href="/talk/theme"><div>专栏·发现</div></a>
                 <a href="/talk/create"><div>写话题</div></a>
             </div>
         </div>

@@ -41,8 +41,16 @@ Route::group(['prefix'=>'','namespace'=>'Home'],function(){
     Route::resource('idea','IdeaController');
     //话题路由
     Route::post('talk/{id}','TalkController@update');
+    Route::get('talk/mytalk','TalkController@mytalk');
     Route::get('talk/follow','TalkController@follow');
+    Route::get('talk/theme','TalkController@theme');
     Route::get('talk/collect','TalkController@collect');
+    Route::get('talk/tofollow','TalkController@tofollow');
+    Route::get('talk/tothank','TalkController@tothank');
+    Route::get('talk/toclick','TalkController@toclick');
+    Route::get('talk/toshare','TalkController@toshare');
+    Route::get('talk/toreport','TalkController@toreport');
+    Route::get('talk/tocollect','TalkController@tocollect');
     Route::get('talk/{id}/destroy','TalkController@destroy');
     Route::get('talk/{id}/restore','TalkController@restore');
     Route::get('talk/{id}/forceDelete','TalkController@forceDelete');

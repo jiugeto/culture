@@ -39,7 +39,7 @@
                 <tr>
                     <td class="small">
                         <a href="/idea/click/{{$data->id}}">关注</a>：{{ count($data->click()) }}
-                        <a href="/idea/collect/{{$data->id}}">收藏</a>：{{ coount($data->collect()) }}
+                        <a href="/idea/collect/{{$data->id}}">收藏</a>：{{ count($data->collect()) }}
                         <span class="right">时间：{{ $data->created_at }}&nbsp;&nbsp;发布人：{{ $data->uid }}</span>
                     </td>
                 </tr>

@@ -18,7 +18,7 @@ class IdeaController extends BaseController
 
     public function islogin()
     {
-        if (!\Session::has('user.uid')) { echo "<script>alert('您还没有登录，请先登录！');</script>";exit; }
+        if (!\Session::has('user.uid')) { echo "<script>alert('您还没有登录，请先登录！');window.location.href='/login';</script>";exit; }
     }
 
     public function index()
@@ -84,6 +84,7 @@ class IdeaController extends BaseController
      */
     public function tolimit($id,$msg)
     {
+        $this->islogin();
         $ideaModel = IdeasModel::find($id);
         if ($this->userid==$ideaModel->uid) { echo "<script>alert('".$msg."！');history.go(-1);</script>";exit; }
         return array(

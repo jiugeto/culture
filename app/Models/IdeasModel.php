@@ -35,16 +35,19 @@ class IdeasModel extends BaseModel
 
     public function read()
     {
-        return IdeasReadModel::where('ideaid',$this->id)->get();
+        $datas = IdeasReadModel::where('ideaid',$this->id)->get();
+        return count($datas) ? $datas : 0;
     }
 
     public function click()
     {
-        return IdeasClickModel::where('ideaid',$this->id)->get();
+        $datas = IdeasClickModel::where('ideaid',$this->id)->get();
+        return count($datas) ? $datas : 0;
     }
 
     public function collect()
     {
-        return IdeasCollectModel::where('ideaid',$this->id)->get();
+        $datas = IdeasCollectModel::where('ideaid',$this->id)->get();
+        return count($datas) ? $datas : 0;
     }
 }

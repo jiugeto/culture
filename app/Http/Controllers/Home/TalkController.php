@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Home;
 use App\Models\TalksClickModel;
 use App\Models\TalksCollectModel;
 use App\Models\TalksFollowModel;
+use App\Models\ThemeModel;
 use App\Models\TalksModel;
 use App\Models\TalksReportModel;
 use App\Models\TalksShareModel;
 use App\Models\TalksThankModel;
+use App\Models\ThemeTalkModel;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
 
@@ -43,6 +45,9 @@ class TalkController extends BaseController
         return view('home.talk.index', $result);
     }
 
+    /**
+     * 自己的话题
+     */
     public function mytalk()
     {
         $this->islogin();
@@ -58,6 +63,9 @@ class TalkController extends BaseController
         return view('home.talk.index', $result);
     }
 
+    /**
+     * 关注的话题
+     */
     public function follow()
     {
         $this->islogin();
@@ -65,7 +73,7 @@ class TalkController extends BaseController
         if (count($follows)) {
             foreach ($follows as $follow) { $followIds[] = $follow->talkid; }
         }
-        if (isset($followIds)) {
+        if (isset($followIds) && $followIds) {
             $datas = TalksModel::where('del',0)
                 ->whereId('id',$followIds)
                 ->orderBy('sort','desc')
@@ -79,6 +87,9 @@ class TalkController extends BaseController
         return view('home.talk.index', $result);
     }
 
+    /**
+     * 收藏的话题
+     */
     public function collect()
     {
         $this->islogin();
@@ -86,7 +97,7 @@ class TalkController extends BaseController
         if (count($collects)) {
             foreach ($collects as $collect) { $collectIds[] = $collect->talkid; }
         }
-        if (isset($collects)) {
+        if (isset($collectIds) && $collectIds) {
             $datas = TalksModel::where('del',0)
                 ->whereId('id',$collectIds)
                 ->orderBy('sort','desc')
@@ -98,6 +109,36 @@ class TalkController extends BaseController
             'curr'=> 'collect',
         ];
         return view('home.talk.index', $result);
+    }
+
+    /**
+     * 话题主题发现
+     */
+    public function theme()
+    {
+        $result = [
+            'datas'=> ThemeModel::where(['isshow'=>1])
+                                ->orderBy('sort','desc')
+                                ->orderBy('id','desc')
+                                ->paginate($this->limit * 2),
+            'curr'=> 'theme',
+        ];
+        return view('home.talk.theme', $result);
+    }
+
+    /**
+     * 我收藏的话题
+     */
+    public function themelist($themeid)
+    {
+        $result = [
+            'datas'=> ThemeModel::where(['isshow'=>1, 'themeid'=>$themeid])
+                                ->orderBy('sort','desc')
+                                ->orderBy('id','desc')
+                                ->paginate($this->limit * 2),
+            'curr'=> 'themelist',
+        ];
+        return view('home.talk.themelist', $result);
     }
 
     public function create()
@@ -206,6 +247,7 @@ class TalkController extends BaseController
      */
     public function tolimit($id,$msg)
     {
+        $this->islogin();
         $talkModel = TalksModel::find($id);
         if ($this->userid==$talkModel->uid) { echo "<script>alert('".$msg."！');history.go(-1);</script>";exit; }
         return array(

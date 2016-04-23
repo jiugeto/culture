@@ -15,7 +15,8 @@ class TalksModel extends BaseModel
      */
     public function follow()
     {
-        return TalksFollowModel::where('talkid',$this->id)->get();
+        $datas = TalksFollowModel::where('talkid',$this->id)->get();
+        return count($datas) ? $datas : 0;
     }
 
     /**
@@ -23,7 +24,8 @@ class TalksModel extends BaseModel
      */
     public function share()
     {
-        return TalksShareModel::where('talkid',$this->id)->get();
+        $datas = TalksShareModel::where('talkid',$this->id)->get();
+        return count($datas) ? $datas : 0;
     }
 
     /**
@@ -31,7 +33,8 @@ class TalksModel extends BaseModel
      */
     public function report()
     {
-        return TalksReportModel::where('talkid',$this->id)->get();
+        $datas = TalksReportModel::where('talkid',$this->id)->get();
+        return count($datas) ? $datas : 0;
     }
 
     /**
@@ -39,7 +42,8 @@ class TalksModel extends BaseModel
      */
     public function collect()
     {
-        return TalksCollectModel::where('talkid',$this->id)->get();
+        $datas = TalksCollectModel::where('talkid',$this->id)->get();
+        return count($datas) ? $datas : 0;
     }
 
     /**
@@ -47,7 +51,8 @@ class TalksModel extends BaseModel
      */
     public function thank()
     {
-        return TalksThankModel::where('talkid',$this->id)->get();
+        $datas = TalksThankModel::where('talkid',$this->id)->get();
+        return count($datas) ? $datas : 0;
     }
 
     /**
@@ -55,7 +60,8 @@ class TalksModel extends BaseModel
      */
     public function click()
     {
-        return TalksClickModel::where('talkid',$this->id)->get();
+        $datas = TalksClickModel::where('talkid',$this->id)->get();
+        return count($datas) ? $datas : 0;
     }
 
 //    public function followStr()
