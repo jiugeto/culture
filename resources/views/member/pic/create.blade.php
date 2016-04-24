@@ -11,27 +11,33 @@
             </tr>
             <tr><td></td></tr>
 
+            {{--<tr>--}}
+                {{--<td class="field_name"><label>分类：</label></td>--}}
+                {{--<td>--}}
+                    {{--<select name="cate_id">--}}
+                        {{--<option value="0">-请选择-</option>--}}
+                        {{--@foreach($categorys as $category)--}}
+                            {{--<option value="{{ $category->id }}">{{ $category->name }}</option>--}}
+                            {{--@if($category->child)--}}
+                                {{--@foreach($category->child as $subcate)--}}
+                                    {{--<option value="{{ $subcate->id }}">{{ '&nbsp;=='.$subcate->name }}</option>--}}
+                                    {{--@if($subcate->child)--}}
+                                        {{--@foreach($subcate->child as $subcate2)--}}
+                                            {{--<option value="{{ $subcate2->id }}">--}}
+                                                {{--{{ '&nbsp;&nbsp;&nbsp;&nbsp;=='.$subcate2->name }}</option>--}}
+                                        {{--@endforeach--}}
+                                    {{--@endif--}}
+                                {{--@endforeach--}}
+                            {{--@endif--}}
+                        {{--@endforeach--}}
+                    {{--</select>--}}
+                {{--</td>--}}
+            {{--</tr>--}}
+            {{--<tr><td></td></tr>--}}
+
             <tr>
-                <td class="field_name"><label>分类：</label></td>
-                <td>
-                    <select name="cate_id">
-                        <option value="0">-请选择-</option>
-                        @foreach($categorys as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                            @if($category->child)
-                                @foreach($category->child as $subcate)
-                                    <option value="{{ $subcate->id }}">{{ '&nbsp;=='.$subcate->name }}</option>
-                                    @if($subcate->child)
-                                        @foreach($subcate->child as $subcate2)
-                                            <option value="{{ $subcate2->id }}">
-                                                {{ '&nbsp;&nbsp;&nbsp;&nbsp;=='.$subcate2->name }}</option>
-                                        @endforeach
-                                    @endif
-                                @endforeach
-                            @endif
-                        @endforeach
-                    </select>
-                </td>
+                <td class="field_name"><label>网址：</label></td>
+                <td><input type="text" class="field_value" placeholder="数字，至少2个字符" minlegth="2" required name="url"/></td>
             </tr>
             <tr><td></td></tr>
 
@@ -54,12 +60,6 @@
                         });
                     </script>--}}
                 </td>
-            </tr>
-            <tr><td></td></tr>
-
-            <tr>
-                <td class="field_name"><label>网址：</label></td>
-                <td><input type="text" class="field_value" placeholder="数字，至少2个字符" minlegth="2" required name="url"/></td>
             </tr>
             <tr><td></td></tr>
 

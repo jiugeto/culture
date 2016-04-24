@@ -9,7 +9,7 @@ class BaseController extends Controller
     /**
      * 会员后台基础控制器
      */
-    protected $uid;     //登录用户的id
+//    protected $uid;     //登录用户的id
 
 //    protected $list = [
 //        ''=> '所有列表',
@@ -33,5 +33,6 @@ class BaseController extends Controller
         if (\Session::has('user.limit')) {
             $this->limit = UserModel::where('username',\Session::get('user.username'))->first()->limit;
         }
+        $this->userid = \Session::has('user.uid') ? \Session::get('user.uid') : redirect('/login');
     }
 }

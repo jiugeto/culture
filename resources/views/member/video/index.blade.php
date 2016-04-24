@@ -9,7 +9,7 @@
         <table class="list_tab">
             <tr>
                 <td>编号</td>
-                <td>图片名称</td>
+                <td>视频名称</td>
                 <td>创建时间</td>
                 <td>操作</td>
             </tr>
@@ -17,16 +17,16 @@
             @foreach($datas as $data)
             <tr>
                 <td>{{ $data->id }}</td>
-                <td><a href="/member/pic/{{ $data->id }}">{{ $data->name }}</a></td>
+                <td><a href="/member/video/{{ $data->id }}">{{ $data->name }}</a></td>
                 <td>{{ $data->created_at }}</td>
                 <td>
                     @if($curr_list=='')
-                        <a href="/member/pic/{{ $data->id }}" class="list_btn">查看</a>
-                        <a href="/member/pic/{{ $data->id }}/edit" class="list_btn">编辑</a>
-                        <a href="/member/pic/{{ $data->id }}/destroy" class="list_btn">删除</a>
+                        <a href="/member/video/{{ $data->id }}" class="list_btn">查看</a>
+                        <a href="/member/video/{{ $data->id }}/edit" class="list_btn">编辑</a>
+                        <a href="/member/video/{{ $data->id }}/destroy" class="list_btn">删除</a>
                     @elseif($curr_list=='trash')
-                        <a href="/member/pic/{{ $data->id }}/restore" class="list_btn">还原</a>
-                        <a href="/member/pic/{{ $data->id }}/forceDelete" class="list_btn">销毁记录</a>
+                        <a href="/member/video/{{ $data->id }}/restore" class="list_btn">还原</a>
+                        <a href="/member/video/{{ $data->id }}/forceDelete" class="list_btn">销毁记录</a>
                     @endif
                 </td>
             </tr>

@@ -28,7 +28,7 @@ class CategoryController extends BaseController
             'prefix_url'=> '/member/category',
             'lists'=> $this->lists,
             'curr_list'=> '',
-            'menus'=> $this->menus,
+//            'menus'=> $this->menus,
         ];
         return view('member.category.index', $result);
     }
@@ -40,7 +40,7 @@ class CategoryController extends BaseController
             'prefix_url'=> '/member/category/trash',
             'lists'=> $this->lists,
             'curr_list'=> 'trash',
-            'menus'=> $this->menus,
+//            'menus'=> $this->menus,
         ];
         return view('member.category.index', $result);
     }
@@ -51,7 +51,7 @@ class CategoryController extends BaseController
             'pidone'=> $this->model->pidone(),      //父ID一级
             'lists'=> $this->lists,
             'curr_list'=> 'create',
-            'menus'=> $this->menus,
+//            'menus'=> $this->menus,
         ];
         return view('member.category.create', $result);
     }
@@ -71,7 +71,7 @@ class CategoryController extends BaseController
             'pidone'=> $this->model->pidone(),
             'lists'=> $this->lists,
             'curr_list'=> 'edit',
-            'menus'=> $this->menus,
+//            'menus'=> $this->menus,
         ];
         return view('member.category.edit', $result);
     }

@@ -2,6 +2,8 @@
 namespace App\Http\Controllers;
 
 //use Illuminate\Http\Request;
+use App\Models\CompanyModel;
+use App\Models\PersonModel;
 use App\Models\UserModel;
 use App\Models\Admin\UserlogModel;
 use Session;
@@ -47,7 +49,24 @@ class LoginController extends Controller
             echo "<script>alert('验证码错误！');history.go(-1);</script>";exit;
             return redirect('/login');
         }
-//        dd(Input::all());
+        //个人资料
+        if (in_array($userModel->isuser,[1,3])) {
+            $personModel = PersonModel::where('uid',$userModel->id)->first();
+            $persons['realname'] = $personModel->realname;
+            $persons['sex'] = $personModel->sex;
+            $persons['idcard'] = $personModel->idcard;
+            $persons['idfront'] = $personModel->idfront;
+        }
+        $userperson = isset($persons) ? serialize($persons) : [];
+        //企业资料
+        if (in_array($userModel->isuser,[2,4])) {
+            $companyModel = CompanyModel::where('isuser',$userModel->uid)->first();
+            $companys['realname'] = $companyModel->realname;
+            $companys['area'] = $companyModel->area;
+            $companys['address'] = $companyModel->address;
+            $companys['yyzzid'] = $companyModel->yyzzid;
+        }
+        $usercompany = isset($companys) ? serialize($companys) : [];
 
         $serial = date('YmdHis',time()).rand(0,10000);
         //加入session
@@ -59,6 +78,8 @@ class LoginController extends Controller
         Session::put('user.limit',$userModel->limit);
         Session::put('user.area',$userModel->area);
         Session::put('user.address',$userModel->address);
+        Session::put('user.person',$userperson);
+        Session::put('user.company',$usercompany);
 
         //登陆加入用户日志表
         $userlog = [
@@ -89,6 +110,8 @@ class LoginController extends Controller
         Session::forget('user.limit');
         Session::forget('user.area');
         Session::forget('user.address');
+        Session::forget('user.userperson');
+        Session::forget('user.usercompany');
         return redirect('/login');
     }
 }

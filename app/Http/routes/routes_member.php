@@ -113,7 +113,17 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
         //演员管理
     Route::resource('actor','ActorController');
         //图片管理
+    Route::post('pic/{id}','PicController@update');
+    Route::get('pic/{id}/destroy','PicController@destroy');
+    Route::get('pic/{id}/restore','PicController@restore');
+    Route::get('pic/{id}/forceDelete','PicController@forceDelete');
+    Route::get('pic/trash','PicController@trash');
     Route::resource('pic','PicController');
         //视频管理
+    Route::post('video/{id}','VideoController@update');
+    Route::get('video/{id}/destroy','VideoController@destroy');
+    Route::get('video/{id}/restore','VideoController@restore');
+    Route::get('video/{id}/forceDelete','VideoController@forceDelete');
+    Route::get('video/trash','VideoController@trash');
     Route::resource('video','VideoController');
 });
