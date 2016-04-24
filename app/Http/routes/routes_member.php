@@ -112,4 +112,8 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
     Route::resource('idea','IdeaController');
         //演员管理
     Route::resource('actor','ActorController');
+        //图片管理
+    Route::resource('pic','PicController');
+        //视频管理
+    Route::resource('video','VideoController');
 });

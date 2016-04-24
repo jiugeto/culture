@@ -30,7 +30,6 @@ class PersonDController extends BaseGoodsController
             'datas'=> $this->query($del=0,$this->type,$cate_id),
             'prefix_url'=> '/member/personD',
             'lists'=> $this->lists,
-            'menus'=> $this->menus,
             'curr_list'=> '',
         ];
         return view('member.personSD.index', $result);
@@ -43,7 +42,6 @@ class PersonDController extends BaseGoodsController
             'prefix_url'=> '/member/personD/trash',
             'lists'=> $this->lists,
             'curr_list'=> 'trash',
-            'menus'=> $this->menus,
         ];
         return view('member.personSD.index', $result);
     }
@@ -51,13 +49,12 @@ class PersonDController extends BaseGoodsController
     public function create()
     {
         $result = [
-//            'cates'=> $this->model->cates(),
             'categorys'=> $this->model->categorys(),
+            'pics'=> count($this->model->pics()) ? $this->model->pics() : [],
+            'videos'=> count($this->model->videos()) ? $this->model->videos() : [],
             'lists'=> $this->lists,
             'curr_list'=> 'create',
-            'menus'=> $this->menus,
         ];
-//        dd($this->model->categorys());
         return view('member.personSD.create', $result);
     }
 
@@ -71,14 +68,13 @@ class PersonDController extends BaseGoodsController
 
     public function edit($id)
     {
-        $data = GoodsModel::find($id);
         $result = [
-            'data'=> $data,
-//            'cates'=> $this->model->cates(),
+            'data'=> GoodsModel::find($id),
+            'pics'=> count($this->model->pics()) ? $this->model->pics() : [],
+            'videos'=> count($this->model->videos()) ? $this->model->videos() : [],
             'categorys'=> CategoryModel::all(),
             'lists'=> $this->lists,
             'curr_list'=> 'edit',
-            'menus'=> $this->menus,
         ];
         return view('member.personSD.edit', $result);
     }
@@ -93,9 +89,10 @@ class PersonDController extends BaseGoodsController
 
     public function show($id)
     {
-        $data = GoodsModel::find($id);
         $result = [
-            'data'=> $data,
+            'data'=> GoodsModel::find($id),
+            'pics'=> count($this->model->pics()) ? $this->model->pics() : [],
+            'videos'=> count($this->model->videos()) ? $this->model->videos() : [],
             'lists'=> $this->lists,
             'curr_list'=> 'show',
         ];

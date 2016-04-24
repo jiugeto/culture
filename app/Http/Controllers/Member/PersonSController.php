@@ -28,7 +28,7 @@ class PersonSController extends BaseGoodsController
             'prefix_url'=> '/member/personS',
             'lists'=> $this->lists,
             'curr_list'=> '',
-            'menus'=> $this->menus,
+//            'menus'=> $this->menus,
         ];
         return view('member.personSD.index', $result);
     }
@@ -40,7 +40,7 @@ class PersonSController extends BaseGoodsController
             'prefix_url'=> '/member/personS/trash',
             'lists'=> $this->lists,
             'curr_list'=> 'trash',
-            'menus'=> $this->menus,
+//            'menus'=> $this->menus,
         ];
         return view('member.personSD.index', $result);
     }
@@ -52,7 +52,7 @@ class PersonSController extends BaseGoodsController
             'categorys'=> $this->model->categorys(),
             'lists'=> $this->lists,
             'curr_list'=> 'create',
-            'menus'=> $this->menus,
+//            'menus'=> $this->menus,
         ];
         return view('member.personSD.create', $result);
     }
@@ -75,7 +75,7 @@ class PersonSController extends BaseGoodsController
             'categorys'=> CategoryModel::all(),
             'lists'=> $this->lists,
             'curr_list'=> 'edit',
-            'menus'=> $this->menus,
+//            'menus'=> $this->menus,
         ];
         return view('member.personSD.edit', $result);
     }
@@ -95,7 +95,7 @@ class PersonSController extends BaseGoodsController
             'data'=> $data,
             'lists'=> $this->lists,
             'curr_list'=> 'show',
-            'menus'=> $this->menus,
+//            'menus'=> $this->menus,
         ];
         return view('member.personSD.show', $result);
     }

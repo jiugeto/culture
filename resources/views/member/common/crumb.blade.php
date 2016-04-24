@@ -11,6 +11,6 @@
     {{--@if(!isset($prefix_url) && isset($menus['create']['name']) && !is_numeric(explode('/',$_SERVER['REQUEST_URI'])[3])) {{ ' / '.$menus['create']['name'] }} @endif
     @if(isset(explode('/',$_SERVER['REQUEST_URI'])[3]) && is_numeric(explode('/',$_SERVER['REQUEST_URI'])[3])) {{ '/'.$menus['show']['name'] }} @endif--}}
     {{--具体操作页--}}
-    @if(in_array($curr_list,['create','edit','show','pre'])) {{ '/'.$lists[$curr_list]['name'] }} @endif
-    @if($curr_list=='trash') {{ '/'.$lists['trash'] }} @endif
+    @if(in_array($curr_list,['create','edit','show','pre'])) {{ ' / '.$lists[$curr_list]['name'] }} @endif
+    @if($curr_list=='trash') {{ ' / '.$lists['trash'] }} @endif
 </div>

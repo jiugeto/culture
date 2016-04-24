@@ -53,7 +53,9 @@ class BaseGoodsController extends BaseController
             'type'=> $type,
             'cate_id'=> $data['cate_id'],
             'intro'=> $data['intro'],
-            'link_id'=> $data['link_id'],
+            'title'=> $data['title'],
+            'pic_id'=> $data['pic_id'],
+            'video_id'=> $data['video_id'],
             'uid'=> $uid,
             'uname'=> $uname,
         ];

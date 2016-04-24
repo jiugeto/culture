@@ -13,7 +13,7 @@ class GoodsModel extends BaseModel
 
     protected $table = 'bs_goods';
     protected $fillable = [
-        'id','name','type','cate_id','intro','pic_id','video_id','uid','uname','recommend','sort','isshow','del','created_at','updated_at',
+        'id','name','type','cate_id','intro','title','pic_id','video_id','uid','uname','recommend','sort','isshow','del','created_at','updated_at',
     ];
 
     protected $types = [
@@ -48,9 +48,25 @@ class GoodsModel extends BaseModel
     /**
      * 图片
      */
+    public function pics()
+    {
+        return PicModel::where('uid',$this->uid)->get();
+    }
+
+    /**
+     * 视频
+     */
+    public function videos()
+    {
+        return VideoModel::where('uid',$this->uid)->get();
+    }
+
+    /**
+     * 图片
+     */
     public function pic()
     {
-        return $this->hasOne('\App\Models\PicModel','id','pic_id');;
+        return $this->hasOne('\App\Models\PicModel','id','pic_id');
     }
 
     /**
@@ -58,6 +74,6 @@ class GoodsModel extends BaseModel
      */
     public function video()
     {
-        return $this->hasOne('\App\Models\VideoModel','id','video_id');;
+        return $this->hasOne('\App\Models\VideoModel','id','video_id');
     }
 }
