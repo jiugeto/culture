@@ -2,22 +2,17 @@
 namespace App\Models;
 
 //use Illuminate\Database\Eloquent\Model;
-use App\Models\ProductAttrModel;
+//use App\Models\ProductAttrModel;
 
 class ProductModel extends BaseModel
 {
     protected $table = 'bs_products';
     protected $fillable = [
-        'id','name','genre','gif','intro','uid','uname','css_id','js_id','sort','isshow','del','created_at','updated_at',
+        'id','name','genre','gif','intro','uid','uname','isauth','sort','isshow','del','created_at','updated_at',
     ];
-
-//    /**
-//     * css样式，js文件
-//     */
-//    public function type()
-//    {
-//        return $this->hasOne('App\Models\TypeModel', 'id', 'type_id');
-//    }
+    protected $isauths = [
+        '未审核','未通过审核','通过审核',
+    ];
 
     /**
      * 由css_id得到一条css记录

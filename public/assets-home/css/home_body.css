@@ -51,6 +51,13 @@
 
 /*=======在线创作========*/
 .floor { clear:both;border-bottom:2px solid ghostwhite; }
+.floor span.more {
+    float:right;
+    cursor:pointer;
+    color:grey;
+    font-size:16px;
+    border-bottom:1px solid grey;
+}
 .floor_img { width:60px; }
 .floor_text {
     color:white;
@@ -64,9 +71,10 @@
     position:relative;top:-5px;left:-30px;
 }
 .online,.selected { float:left; }
-.online { width:790px; }
+.online { /*width:790px;*/width:990px; }
 .online_con {
-    width:780px;
+    /*width:780px;*/
+    width:980px;
     height:250px;
     /*border:1px solid red;*/
 }
@@ -75,12 +83,12 @@
     float:left;
 }
 .online_first {
-    width:250px;height:250px;
+    width:260px;height:250px;
     overflow:hidden;
 }
-.online_first img { width:250px; }
+.online_first img { width:260px; }
 .online_div {
-    width:170px;height:125px;
+    width:175px;height:125px;
     /*overflow:hidden;*/
 }
 .online_div .con_img {

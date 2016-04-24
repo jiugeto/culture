@@ -13,7 +13,7 @@ class GoodsModel extends BaseModel
 
     protected $table = 'bs_goods';
     protected $fillable = [
-        'id','name','type','cate_id','intro','link_id','uid','uname','recommend','sort','isshow','del','created_at','updated_at',
+        'id','name','type','cate_id','intro','pic_id','video_id','uid','uname','recommend','sort','isshow','del','created_at','updated_at',
     ];
 
     protected $types = [
@@ -43,5 +43,21 @@ class GoodsModel extends BaseModel
     public function type()
     {
         return $this->type ? $this->types[$this->type] : '';
+    }
+
+    /**
+     * 图片
+     */
+    public function pic()
+    {
+        return $this->hasOne('\App\Models\PicModel','id','pic_id');;
+    }
+
+    /**
+     * 视频
+     */
+    public function video()
+    {
+        return $this->hasOne('\App\Models\VideoModel','id','video_id');;
     }
 }

@@ -3,9 +3,9 @@ namespace App\Models;
 
 //use Illuminate\Database\Eloquent\Model;
 
-class PicModel extends BaseModel
+class VideoModel extends BaseModel
 {
-    protected $table = 'bs_pics';
+    protected $table = 'bs_videos';
     protected $fillable = [
         'id','name','cate_id','url','intro','created_at',
     ];

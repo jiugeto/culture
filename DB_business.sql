@@ -635,8 +635,9 @@ CREATE TABLE `bs_goods` (
   `name` varchar(255) NOT NULL COMMENT '视频名称',
   `type` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '产品主体：1个人需求，2设计师供应，3企业需求，4企业供应',
   `cate_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '视频分类：关联bs_videos_category',
-  `intro` varchar(1000) DEFAULT NULL COMMENT '视频简介',
-  `link_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '链接id，关联图片表bs_pics、视频表bs_videos',
+  `intro` varchar(1000) NOT NULL COMMENT '视频简介',
+  `pic_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '图片链接id，关联图片表bs_pics',
+  `video_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '视频链接id，链接视频表bs_videos',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布人：需求用户，设计师，公司',
   `uname` varchar(255) NOT NULL COMMENT '发布人名称',
   `recommend` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '是否推荐：0不推荐，1不推荐，默认0',
@@ -655,7 +656,7 @@ CREATE TABLE `bs_goods` (
 
 LOCK TABLES `bs_goods` WRITE;
 /*!40000 ALTER TABLE `bs_goods` DISABLE KEYS */;
-INSERT INTO `bs_goods` VALUES (1,'作品1',0,0,'v部分的白癜风b',0,0,'',0,10,1,0,'2016-03-12','0000-00-00'),(2,'企业需求001',3,4,'',1,0,'',0,10,1,0,'2016-03-13','0000-00-00'),(3,'企业作品001',4,4,'',1,0,'',0,10,1,0,'2016-03-13','0000-00-00');
+INSERT INTO `bs_goods` VALUES (1,'作品1',0,0,'v部分的白癜风b',0,0,0,'',0,10,1,0,'2016-03-12','0000-00-00'),(2,'企业需求001',3,4,'',1,0,0,'',0,10,1,0,'2016-03-13','0000-00-00'),(3,'企业作品001',4,4,'',1,0,0,'',0,10,1,0,'2016-03-13','0000-00-00');
 /*!40000 ALTER TABLE `bs_goods` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -739,39 +740,6 @@ CREATE TABLE `bs_ideas_collect` (
 LOCK TABLES `bs_ideas_collect` WRITE;
 /*!40000 ALTER TABLE `bs_ideas_collect` DISABLE KEYS */;
 /*!40000 ALTER TABLE `bs_ideas_collect` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `bs_ideas_copy 备份`
---
-
-DROP TABLE IF EXISTS `bs_ideas_copy 备份`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `bs_ideas_copy 备份` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL COMMENT '名称',
-  `cate_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分类，关联分类表category',
-  `content` text NOT NULL COMMENT '创意内容',
-  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布的用户id',
-  `read` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '浏览次数',
-  `click` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '点赞次数',
-  `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序，值越大越靠前，默认10',
-  `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站功能：0不放入回收站，1放入回收站',
-  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
-  `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='创意表';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `bs_ideas_copy 备份`
---
-
-LOCK TABLES `bs_ideas_copy 备份` WRITE;
-/*!40000 ALTER TABLE `bs_ideas_copy 备份` DISABLE KEYS */;
-INSERT INTO `bs_ideas_copy 备份` VALUES (1,'创意1',4,'<p>而非v代表</p>',1,0,0,10,0,'2016-04-17 01:46:45','2016-04-17 02:24:47');
-/*!40000 ALTER TABLE `bs_ideas_copy 备份` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1067,14 +1035,13 @@ DROP TABLE IF EXISTS `bs_pics`;
 CREATE TABLE `bs_pics` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL COMMENT '图片名称',
-  `type` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '类型：1图片，2视频',
-  `cate_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '类型id：关联bs_types',
+  `cate_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '类型id：关联bs_category',
   `url` varchar(255) NOT NULL COMMENT '图片路径',
   `intro` varchar(500) DEFAULT NULL COMMENT '图片介绍',
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='图片视频表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='图片管理表（暂用QQ空间相册）';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1098,11 +1065,10 @@ CREATE TABLE `bs_products` (
   `name` varchar(255) NOT NULL COMMENT '视频名称',
   `genre` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '发布者身份：1个人，2企业',
   `gif` int(10) unsigned NOT NULL DEFAULT '0' COMMENT ' 动态缩略图，关联图片表bs_pics',
-  `intro` varchar(1000) DEFAULT NULL COMMENT '视频简介',
+  `intro` varchar(1000) NOT NULL COMMENT '视频简介',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '提供者：需求用户，设计师，公司',
-  `uname` varchar(255) DEFAULT NULL COMMENT '提供者名称',
-  `css_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'css样式id',
-  `js_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'js文件id',
+  `uname` varchar(255) NOT NULL COMMENT '提供者名称',
+  `isauth` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '审核：0未审核，1未通过审核，2通过审核',
   `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序字段，值越大越靠前，默认10',
   `isshow` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '前台列表是否显示：0不显示，1显示',
   `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站功能：0不放入回收站，1放入回收站',
@@ -1598,6 +1564,34 @@ INSERT INTO `bs_userlog` VALUES (1,1,1,'jiuge','201604090047077935','2016-04-09'
 UNLOCK TABLES;
 
 --
+-- Table structure for table `bs_videos`
+--
+
+DROP TABLE IF EXISTS `bs_videos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bs_videos` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL COMMENT '视频名称',
+  `cate_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '类型id：关联bs_category',
+  `url` varchar(255) NOT NULL COMMENT '视频链接',
+  `intro` varchar(500) DEFAULT NULL COMMENT '图片介绍',
+  `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
+  `updated_at` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='视频表（先将视频链接到优酷）';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bs_videos`
+--
+
+LOCK TABLES `bs_videos` WRITE;
+/*!40000 ALTER TABLE `bs_videos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bs_videos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `bs_works`
 --
 
@@ -1734,4 +1728,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-24  2:13:53
+-- Dump completed on 2016-04-24 11:14:06
