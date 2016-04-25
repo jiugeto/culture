@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Company;
 
-class HomeController extends BaseController
+class ProductController extends BaseController
 {
     /**
      * 企业后台首页
@@ -9,16 +9,16 @@ class HomeController extends BaseController
 
     public function __construct()
     {
-        $this->list['func']['name'] = '企业首页';
-        $this->list['func']['url'] = '';
+        $this->list['func']['name'] = '产品';
+        $this->list['func']['url'] = 'product';
     }
 
     public function index()
     {
         $result = [
             'topmenus'=> $this->topmenus,
-            'curr'=> 'home',
+            'curr'=> 'product',
         ];
-        return view('company.home.index', $result);
+        return view('company.product.index', $result);
     }
 }

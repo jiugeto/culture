@@ -17,7 +17,7 @@
         <div class="mem_float">
             <div class="mem_right">
                 <div class="mem_win">
-                    @yield('content')
+                    <div class="com_body">@yield('content')</div>
                 </div>
                 <!-- 空白 -->
                 <div class="content_kongbai">&nbsp;</div>
