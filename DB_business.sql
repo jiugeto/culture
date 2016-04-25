@@ -1638,6 +1638,7 @@ CREATE TABLE `companys` (
   `area` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '所在地ID',
   `address` varchar(255) NOT NULL COMMENT '详细地址',
   `yyzzid` varchar(255) NOT NULL COMMENT '营业执照注册码',
+  `logo` varchar(255) NOT NULL COMMENT '公司logo',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '会员id',
   `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序字段，值越大越靠前，默认10',
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
@@ -1732,4 +1733,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-25 20:01:55
+-- Dump completed on 2016-04-25 23:42:20

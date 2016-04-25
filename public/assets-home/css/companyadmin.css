@@ -87,6 +87,17 @@
     margin:0 20px;
     padding:0 20px;
 }
+.com_space a {
+    padding:5px 20px;
+    color:dimgrey;
+    text-decoration:none;
+    border-radius:3px;
+    background:orange;
+}
+.com_space a:hover {
+    color:white;
+    background:darkred;
+}
 .com_admin_home div.bottom {
     width:700px;height:30px;
     background:rgb(230,230,230);

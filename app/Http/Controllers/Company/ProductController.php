@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Company;
 class ProductController extends BaseController
 {
     /**
-     * 企业后台首页
+     * 企业后台产品
      */
 
     public function __construct()
