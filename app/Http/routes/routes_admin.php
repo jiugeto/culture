@@ -104,6 +104,9 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::resource('opinions','OpinionsController');
         //地区管理
     Route::resource('area','AreaController');
+        //企业页面功能管理
+    Route::post('comfunction/{id}','ComFunctionController@update');
+    Route::resource('comfunction','ComFunctionController');
     //广告路由
         //广告管理
     Route::resource('ad','AdController');
