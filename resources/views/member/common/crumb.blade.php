@@ -5,9 +5,9 @@
     <a href="/member">会员后台</a>
     @if(isset($lists['func'])) / @endif
     {{--功能模块--}}
-    <a href="/member/{{$lists['func']['url']}}">
-    @if(isset($lists['func'])) {{ $lists['func']['name'] }} @endif
-    </a>
+    @if(isset($lists['func']))
+        <a href="/member/{{$lists['func']['url']}}"> {{ $lists['func']['name'] }} </a>
+    @endif
     {{--@if(!isset($prefix_url) && isset($menus['create']['name']) && !is_numeric(explode('/',$_SERVER['REQUEST_URI'])[3])) {{ ' / '.$menus['create']['name'] }} @endif
     @if(isset(explode('/',$_SERVER['REQUEST_URI'])[3]) && is_numeric(explode('/',$_SERVER['REQUEST_URI'])[3])) {{ '/'.$menus['show']['name'] }} @endif--}}
     {{--具体操作页--}}

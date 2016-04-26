@@ -4,9 +4,9 @@
 /*===== 顶部样式 =====*/
 .com_admin_top {
     width:100%;height:60px;
-    background:rgb(45,195,230);
+    background:rgb(50,50,50);
     border:2px solid rgb(200,200,200);
-    color:white;
+    color:lightgrey;
     position:fixed;top:30px;z-index:1;
 }
 .com_admin_top table {
@@ -18,14 +18,25 @@
     font-size:20px;
 }
 .com_admin_top .right { text-align:right; }
+.com_admin_top .right a {
+    padding:5px 10px;
+    color:dimgrey;
+    font-weight:bold;
+    text-decoration:none;
+    background:white;
+    border-radius:5px;
+}
+.com_admin_top .right a:hover {
+    color:black;
+}
 
 
 /*===== 下面样式 =====*/
 .com_admin_con {
     margin:0 auto;
     width:1000px;
-    height:800px;
-    background:rgb(240,240,240);
+    height:810px;
+    background:rgb(200,200,200);
     position:relative;top:-15px;
 }
 
@@ -35,13 +46,14 @@
     width:150px;
     height:800px;
     background:rgb(250,250,250);
+    border-top:4px solid rgb(200,200,200);
     float:left;
 }
 .com_admin_left span { position:relative;top:2px; }
 .com_admin_left img { padding-right:5px;width:15px; }
 .com_admin_left a div {
     padding:10px 23px;
-    border-left:4px solid rgb(220,220,220);
+    border-left:4px solid rgb(200,200,200);
     border-bottom:1px solid lightgrey;
 }
 .com_admin_left a:hover div {
@@ -74,13 +86,12 @@
 /*===== 右部样式 =====*/
 .com_admin_right {
     width:840px;
-    /*height:700px;*/
     float:right;
 }
 .com_admin_home {
     margin:5px;
     width:830px;
-    height:400px;
+    height:740px;
     background:rgb(250,250,250);
 }
 .com_space {
@@ -118,3 +129,22 @@
     width:350px;height:30px;
     background:crimson;
 }
+
+
+/*===== 右部分列表 =====*/
+.com_admin_list {
+    margin:5px;
+    width:830px;
+    height:740px;
+    background:rgb(250,250,250);
+}
+.com_admin_list table {
+    padding:20px;
+    width:800px;
+}
+.com_admin_list td {
+    padding:5px;
+    border-bottom:1px solid lightgrey;
+    text-align:center;
+}
+/*===== 右部分列表 =====*/

@@ -18,22 +18,20 @@ class SettingController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        if ($this->uid) { return redirect('/login'); }
-
+        if ($this->userid) { return redirect('/login'); }
         $this->model = new UserModel();
         $this->lists['func']['name'] = '用户设置';
         $this->lists['func']['url'] = 'setting';
-        $this->uid = \Session::has('user.uid');
     }
 
     public function show()
     {
-        $data = UserModel::find($this->uid);
+        $data = UserModel::find($this->userid);
         if (in_array($data->isuser,[1,3])) {
-            $personModel = PersonModel::where('uid',$this->uid)->first();
+            $personModel = PersonModel::where('uid',$this->userid)->first();
         }
         if(in_array($data->isuser,[2,4,5,6])) {
-            $companyModel = CompanyModel::where('uid',$this->uid)->first();
+            $companyModel = CompanyModel::where('uid',$this->userid)->first();
         }
         $result = [
             'data'=> $data,
@@ -41,18 +39,19 @@ class SettingController extends BaseController
             'companyModel'=> isset($companyModel) ? $companyModel : '',
             'lists'=> $this->lists,
             'curr_list'=> '',
-            'menus'=> $this->menus,
+//            'menus'=> $this->menus,
         ];
         return view('member.setting.show', $result);
     }
 
     public function auth($id)
     {
+        $this->model = new UserModel();
         $result = [
             'data'=> UserModel::find($id),
             'lists'=> $this->lists,
             'curr_list'=> '',
-            'menus'=> $this->menus,
+//            'menus'=> $this->menus,
             'isusers'=> $this->model['isusers'],
         ];
         return view('member.setting.auth', $result);
@@ -118,7 +117,7 @@ class SettingController extends BaseController
             'data'=> UserModel::find($id),
             'lists'=> $this->lists,
             'curr_list'=> '',
-            'menus'=> $this->menus,
+//            'menus'=> $this->menus,
         ];
         return view('member.setting.pwd', $result);
     }
@@ -148,7 +147,7 @@ class SettingController extends BaseController
             'data'=> UserModel::find($id),
             'lists'=> $this->lists,
             'curr_list'=> '',
-            'menus'=> $this->menus,
+//            'menus'=> $this->menus,
         ];
         return view('member.setting.info', $result);
     }

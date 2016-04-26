@@ -12,7 +12,7 @@
 <body>
     @include('layout.header')
     @include('company.admin.partials.top')
-    <div class="content_kongbai" style="height:100px;">&nbsp;</div>
+    <div class="content_kongbai" style="height:105px;">&nbsp;</div>
     <div class="com_admin_con">
         @include('company.admin.partials.left')
 
@@ -21,7 +21,7 @@
             @yield('content')
         </div>
 
-        <div class="content_kongbai">&nbsp;</div>
+        <div class="content_kongbai" style="height:50px;">&nbsp;</div>
     </div>
     @include('company.partials.footer')
 </body>

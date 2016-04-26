@@ -18,14 +18,14 @@
     @foreach($companyMenus as $companyMenu)
         @if($companyMenu->pid==0)
             @if($companyMenu->pid==0)
-            <a href="/company/{{$companyMenu->url}}"><div>
+            <a href="/{{$companyMenu->platUrl}}/{{$companyMenu->url}}"><div>
                 <span>@if($companyMenu->url=='home')<img src="/assets/images/home.png">@elseif(in_array($companyMenu->url,['auth','info','content']))<img src="/assets/images/tool.png">@endif</span>
-                {{ $companyMenu->name }} @if($lists['func']['name']==$companyMenu->name) ✔ @endif
+                {{ $companyMenu->name }}
                 </div></a>
             @if($companyMenu->child)
                 @foreach($companyMenu->child as $subMenu)
                     <a href="/{{$subMenu->platUrl}}/{{$subMenu->url}}">
-                        <div class="level2">﹂{{ $subMenu->name }} @if($lists['func']['name']==$subMenu->name) ✔ @endif</div>
+                        <div class="level2">﹂{{ $subMenu->name }}</div>
                     </a>
                 @endforeach
             @endif

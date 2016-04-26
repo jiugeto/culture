@@ -42,7 +42,7 @@
                 <td><label>用户类型<span class="star">(*)</span>：</label></td>
                 <td>
                     @foreach($isusers as $key=>$isuser)
-                        <label><input type="radio" name="isuser" value="{{$key}}" onclick="change(this.value);">{{ $isuser }}</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <label><input type="radio" name="isuser" value="{{$key}}" onclick="change(this.value);" {{ $data->isuser==$key ? 'checked' : '' }}>{{ $isuser }}</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         @if($key%3==0) <br> @endif
                     @endforeach
                 </td>

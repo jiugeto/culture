@@ -28,18 +28,18 @@ Route::group(['prefix'=>'company','namespace'=>'Company'], function(){
     Route::group(['prefix'=>'admin','namespace'=>'Admin'], function(){
         //后台首页路由
         Route::get('/','HomeController@index');
-        Route::get('/home','HomeController@index');
+        Route::get('home','HomeController@index');
         //权限路由
-        Route::get('/auth','AuthController@index');
+        Route::resource('auth','AuthController');
         //公司信息路由
-        Route::get('/info','InfoController@index');
+        Route::resource('info','InfoController');
             //布局路由
-        Route::get('/layout','LayoutController@index');
+        Route::resource('layout','LayoutController');
             //基本设置路由
-        Route::get('/basic','BasicController@index');
+        Route::resource('basic','BasicController');
             //添加单页路由
-        Route::get('/single','SingleController@index');
+        Route::resource('single','SingleController');
         //公司内容设置路由
-        Route::get('/content','ContentController@index');
+        Route::resource('content','ContentController');
     });
 });

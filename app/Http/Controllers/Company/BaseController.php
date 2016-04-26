@@ -19,4 +19,13 @@ class BaseController extends Controller
         'product'=> '产品',
         'home'=> '首页',
     ];
+
+    /**
+     * 判断是否已有公司页面，无则给默认页面
+     */
+    public function iscompany()
+    {
+        if (!\Session::get('user.uid')) { return redirect('/login'); }
+        if (!\Session::get('user.cid')) { return redirect(''); }
+    }
 }
