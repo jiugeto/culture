@@ -29,13 +29,44 @@
 
                         <div class="am-form-group">
                             <label>父级菜单 / Pid：</label>
-                            <select name="pid">
+                            <select name="pid" id="pid1">
                                 <option value="0">-0级菜单-</option>
                                 @foreach($pids as $pid)
+                                    @if($pid->type==1)
                                     <option value="{{ $pid->id }}">{{ $pid->name }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                            <select name="pid" id="pid2" style="display:none;">
+                                <option value="0">-0级菜单-</option>
+                                @foreach($pids as $pid)
+                                    @if($pid->type==2)
+                                    <option value="{{ $pid->id }}">{{ $pid->name }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                            <select name="pid" id="pid3" style="display:none;">
+                                <option value="0">-0级菜单-</option>
+                                @foreach($pids as $pid)
+                                    @if($pid->type==3)
+                                    <option value="{{ $pid->id }}">{{ $pid->name }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
+                        <script>
+                            $(document).ready(function(){
+                                var type = $("select[name='type']");
+                                var pid1 = $("#pid1");
+                                var pid2 = $("#pid2");
+                                var pid3 = $("#pid3");
+                                type.change(function(){
+                                    if(type.val()==1){ pid1.show(); pid2.hide(); pid3.hide(); }
+                                    if(type.val()==2){ pid1.hide(); pid2.show(); pid3.hide(); }
+                                    if(type.val()==3){ pid1.hide(); pid2.hide(); pid3.show(); }
+                                });
+                            });
+                        </script>
 
                         <div class="am-form-group">
                             <label>命名空间 / Namespace：</label>

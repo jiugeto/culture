@@ -32,6 +32,10 @@ class ViewServiceProvider extends ServiceProvider
         View::composer(
             'layout.footer', 'App\Http\ViewComposers\FooterComposer'
         );
+        //企业后台左侧菜单数据
+        View::composer(
+            'company.admin.partials.left', 'App\Http\ViewComposers\CompanyMenuComposer'
+        );
     }
 
     public function register()

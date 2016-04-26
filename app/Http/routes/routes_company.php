@@ -8,7 +8,7 @@
 //});
 
 Route::group(['prefix'=>'company','namespace'=>'Company'], function(){
-    //企业后台展示
+    //企业页面展示
         //首页路由
     Route::get('/','HomeController@index');
     Route::get('home','HomeController@index');
@@ -26,7 +26,10 @@ Route::group(['prefix'=>'company','namespace'=>'Company'], function(){
     Route::resource('contact','ContactController');
     //企业后台控制
     Route::group(['prefix'=>'admin','namespace'=>'Admin'], function(){
+        //后台首页路由
         Route::get('/','HomeController@index');
         Route::get('/home','HomeController@index');
+        //布局路由
+        Route::get('/layout','LayoutController@index');
     });
 });

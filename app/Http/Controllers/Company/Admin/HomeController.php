@@ -16,7 +16,7 @@ class HomeController extends BaseController
     public function index()
     {
         $result = [
-            'menus'=> $this->list,
+            'lists'=> $this->list,
         ];
         return view('company.admin.home.index', $result);
     }
