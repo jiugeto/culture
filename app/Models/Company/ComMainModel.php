@@ -11,6 +11,6 @@ class ComMainModel extends BaseModel
 
     protected $table = 'bs_com_main';
     protected $fillable = [
-        'id','uid','cid','cname','title','keyword','description','logo','sort','istop','isshow','isshow2','created_at','updated_at',
+        'id','uid','cid','cname','title','keyword','description','logo','job','sort','istop','isshow','isshow2','created_at','updated_at',
     ];
 }

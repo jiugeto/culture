@@ -36,7 +36,7 @@ CREATE TABLE `ba_action` (
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL DEFAULT '0000-00-00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8 COMMENT='系统管理员权限表';
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8 COMMENT='系统管理员权限表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +45,7 @@ CREATE TABLE `ba_action` (
 
 LOCK TABLES `ba_action` WRITE;
 /*!40000 ALTER TABLE `ba_action` DISABLE KEYS */;
-INSERT INTO `ba_action` VALUES (1,'首页','','App\\Http\\Controllers\\Admin','Home','home','index','am-cf',0,0,'2016-01-09','0000-00-00'),(2,'权限管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,0,'2016-01-09','0000-00-00'),(3,'操作管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',2,0,'2016-01-10','2016-01-12'),(4,'资料审核','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,0,'0000-00-00','2016-01-10'),(5,'供求管理','企业，设计师的','App\\Http\\Controllers\\Admin','Goods','goods','index','am-cf',0,0,'0000-00-00','2016-04-09'),(6,'角色管理','','App\\Http\\Controllers\\Admin','Role','role','index','am-cf',2,0,'0000-00-00','2016-01-12'),(7,'管理员管理','','App\\Http\\Controllers\\Admin','Admin','admin','index','am-cf',2,0,'2016-01-12','2016-01-12'),(8,'产品管理','','App\\Http\\Controllers\\Admin','Product','action','index','am-cf',0,0,'2016-01-12','2016-02-16'),(9,'系统管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,0,'2016-01-12','0000-00-00'),(10,'话题管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,0,'2016-01-12','0000-00-00'),(11,'其他管理2','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,0,'2016-01-12','0000-00-00'),(12,'功能管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,0,'2016-01-12','2016-04-04'),(13,'消息管理','','App\\Http\\Controllers\\Admin','Message','message','index','am-cf',12,0,'2016-01-12','0000-00-00'),(14,'链接管理','','App\\Http\\Controllers\\Admin','Link','link','index','am-cf',12,0,'2016-01-12','0000-00-00'),(15,'心声管理','','App\\Http\\Controllers\\Admin','UserVoice','uservoice','index','am-cf',12,0,'2016-01-12','2016-04-09'),(16,'类型管理','','App\\Http\\Controllers\\Admin','Type','type','index','am-cf',12,0,'2016-01-13','2016-04-11'),(17,'图片管理','','App\\Http\\Controllers\\Admin','Pic','pic','index','am-cf',12,0,'2016-01-13','2016-04-11'),(18,'广告管理','','App\\Http\\Controllers\\Admin','Ad','ad','index','am-cf',0,0,'2016-02-15','0000-00-00'),(19,'广告管理','','App\\Http\\Controllers\\Admin','Ad','ad','index','am-cf',18,0,'2016-02-15','0000-00-00'),(20,'广告位管理','','App\\Http\\Controllers\\Admin','AdPlace','place','index','am-cf',18,0,'2016-02-15','0000-00-00'),(21,'内部产品','','App\\Http\\Controllers\\Admin','Product','product','index','',8,0,'2016-02-16','2016-02-16'),(22,'产品属性','','App\\Http\\Controllers\\Admin','ProductAttr','productattr','index','',8,0,'2016-02-16','0000-00-00'),(23,'作品管理','制作公司，设计师的','App\\Http\\Controllers\\Admin','Goods','goods','index','',5,0,'2016-02-16','2016-04-09'),(24,'产品类型','','App\\Http\\Controllers\\Admin','Category','category','index','',12,5,'2016-02-16','2016-04-11'),(25,'租赁管理','','App\\Http\\Controllers\\Admin','Rent','rent','index','',5,0,'2016-02-16','0000-00-00'),(26,'娱乐管理','','App\\Http\\Controllers\\Admin','Entertain','entertain','index','',5,0,'2016-02-16','0000-00-00'),(27,'设计管理','','App\\Http\\Controllers\\Admin','Design','design','index','',5,0,'2016-02-17','0000-00-00'),(28,'用户权限','','App\\Http\\Controllers\\Admin','Authorization','authorization','index','',2,0,'2016-02-17','0000-00-00'),(29,'前台功能','','App\\Http\\Controllers\\Admin','Function','function','index','',2,0,'2016-02-17','0000-00-00'),(30,'前台控制菜单','','App\\Http\\Controllers\\Admin','Menus','menus','index','',2,0,'2016-02-29','0000-00-00'),(31,'意见管理','','App\\Http\\Controllers\\Admin','Opinions','opinions','index','',12,0,'2016-04-04','0000-00-00'),(32,'用户日志','','App\\Http\\Controllers\\Admin','Userlog','userlog','index','',9,0,'2016-04-07','2016-04-11'),(33,'会员管理','','App\\Http\\Controllers\\Admin','User','user','index','',4,0,'2016-04-11','0000-00-00'),(34,'地区管理','','App\\Http\\Controllers\\Admin','Area','area','index','',12,0,'2016-04-11','0000-00-00'),(35,'版本管理','','App\\Http\\Controllers\\Admin','Versionlog','versionlog','index','',9,0,'2016-04-15','0000-00-00'),(36,'创意管理','','App\\Http\\Controllers\\Admin','Idea','idea','index','',5,0,'2016-04-16','0000-00-00'),(37,'话题列表','','App\\Http\\Controllers\\Admin','Talk','talk','index','',10,0,'2016-04-17','0000-00-00'),(38,'演员管理','','App\\Http\\Controllers\\Admin','Actor','actor','index','',5,0,'2016-04-23','0000-00-00'),(39,'企业功能管理','','App\\Http\\Controllers\\Admin','ComFunction','comfunction','index','',12,0,'2016-04-26','0000-00-00');
+INSERT INTO `ba_action` VALUES (1,'首页','','App\\Http\\Controllers\\Admin','Home','home','index','am-cf',0,0,'2016-01-09','0000-00-00'),(2,'权限管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,0,'2016-01-09','0000-00-00'),(3,'操作管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',2,0,'2016-01-10','2016-01-12'),(4,'资料审核','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,0,'0000-00-00','2016-01-10'),(5,'供求管理','企业，设计师的','App\\Http\\Controllers\\Admin','Goods','goods','index','am-cf',0,0,'0000-00-00','2016-04-09'),(6,'角色管理','','App\\Http\\Controllers\\Admin','Role','role','index','am-cf',2,0,'0000-00-00','2016-01-12'),(7,'管理员管理','','App\\Http\\Controllers\\Admin','Admin','admin','index','am-cf',2,0,'2016-01-12','2016-01-12'),(8,'产品管理','','App\\Http\\Controllers\\Admin','Product','action','index','am-cf',0,0,'2016-01-12','2016-02-16'),(9,'系统管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,0,'2016-01-12','0000-00-00'),(10,'话题管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,0,'2016-01-12','0000-00-00'),(11,'企业功能管理','','App\\Http\\Controllers\\Admin','ComInfo','cominfo','index','am-cf',0,0,'2016-01-12','2016-04-26'),(12,'功能管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,0,'2016-01-12','2016-04-04'),(13,'消息管理','','App\\Http\\Controllers\\Admin','Message','message','index','am-cf',12,0,'2016-01-12','0000-00-00'),(14,'链接管理','','App\\Http\\Controllers\\Admin','Link','link','index','am-cf',12,0,'2016-01-12','0000-00-00'),(15,'心声管理','','App\\Http\\Controllers\\Admin','UserVoice','uservoice','index','am-cf',12,0,'2016-01-12','2016-04-09'),(16,'类型管理','','App\\Http\\Controllers\\Admin','Type','type','index','am-cf',12,0,'2016-01-13','2016-04-11'),(17,'图片管理','','App\\Http\\Controllers\\Admin','Pic','pic','index','am-cf',12,0,'2016-01-13','2016-04-11'),(18,'广告管理','','App\\Http\\Controllers\\Admin','Ad','ad','index','am-cf',0,0,'2016-02-15','0000-00-00'),(19,'广告管理','','App\\Http\\Controllers\\Admin','Ad','ad','index','am-cf',18,0,'2016-02-15','0000-00-00'),(20,'广告位管理','','App\\Http\\Controllers\\Admin','AdPlace','place','index','am-cf',18,0,'2016-02-15','0000-00-00'),(21,'内部产品','','App\\Http\\Controllers\\Admin','Product','product','index','',8,0,'2016-02-16','2016-02-16'),(22,'产品属性','','App\\Http\\Controllers\\Admin','ProductAttr','productattr','index','',8,0,'2016-02-16','0000-00-00'),(23,'作品管理','制作公司，设计师的','App\\Http\\Controllers\\Admin','Goods','goods','index','',5,0,'2016-02-16','2016-04-09'),(24,'产品类型','','App\\Http\\Controllers\\Admin','Category','category','index','',12,5,'2016-02-16','2016-04-11'),(25,'租赁管理','','App\\Http\\Controllers\\Admin','Rent','rent','index','',5,0,'2016-02-16','0000-00-00'),(26,'娱乐管理','','App\\Http\\Controllers\\Admin','Entertain','entertain','index','',5,0,'2016-02-16','0000-00-00'),(27,'设计管理','','App\\Http\\Controllers\\Admin','Design','design','index','',5,0,'2016-02-17','0000-00-00'),(28,'用户权限','','App\\Http\\Controllers\\Admin','Authorization','authorization','index','',2,0,'2016-02-17','0000-00-00'),(29,'前台功能','','App\\Http\\Controllers\\Admin','Function','function','index','',2,0,'2016-02-17','0000-00-00'),(30,'前台控制菜单','','App\\Http\\Controllers\\Admin','Menus','menus','index','',2,0,'2016-02-29','0000-00-00'),(31,'意见管理','','App\\Http\\Controllers\\Admin','Opinions','opinions','index','',12,0,'2016-04-04','0000-00-00'),(32,'用户日志','','App\\Http\\Controllers\\Admin','Userlog','userlog','index','',9,0,'2016-04-07','2016-04-11'),(33,'会员管理','','App\\Http\\Controllers\\Admin','User','user','index','',4,0,'2016-04-11','0000-00-00'),(34,'地区管理','','App\\Http\\Controllers\\Admin','Area','area','index','',12,0,'2016-04-11','0000-00-00'),(35,'版本管理','','App\\Http\\Controllers\\Admin','Versionlog','versionlog','index','',9,0,'2016-04-15','0000-00-00'),(36,'创意管理','','App\\Http\\Controllers\\Admin','Idea','idea','index','',5,0,'2016-04-16','0000-00-00'),(37,'话题列表','','App\\Http\\Controllers\\Admin','Talk','talk','index','',10,0,'2016-04-17','0000-00-00'),(38,'演员管理','','App\\Http\\Controllers\\Admin','Actor','actor','index','',5,0,'2016-04-23','0000-00-00'),(39,'企业信息','','App\\Http\\Controllers\\Admin','ComInfo','cominfo','index','',11,0,'2016-04-26','2016-04-26'),(40,'企业主体','','App\\Http\\Controllers\\Admin','ComMain','commain','index','',11,0,'2016-04-26','0000-00-00'),(41,'企业服务','','App\\Http\\Controllers\\Admin','ComFirm','comfirm','index','',11,0,'2016-04-26','0000-00-00');
 /*!40000 ALTER TABLE `ba_action` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,7 +150,7 @@ CREATE TABLE `ba_userlog` (
   `logoutTime` date NOT NULL DEFAULT '0000-00-00' COMMENT '退出时间',
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -159,7 +159,7 @@ CREATE TABLE `ba_userlog` (
 
 LOCK TABLES `ba_userlog` WRITE;
 /*!40000 ALTER TABLE `ba_userlog` DISABLE KEYS */;
-INSERT INTO `ba_userlog` VALUES (1,1,1,'jiuge','201604090047077935','2016-04-09','2016-04-09','2016-04-05'),(2,1,1,'jiuge','20160409004918108','2016-04-09','0000-00-00','2016-04-05'),(3,1,1,'jiuge','201604090437083847','2016-04-09','0000-00-00','2016-04-05'),(4,1,1,'jiuge','201604091015518376','2016-04-09','0000-00-00','2016-04-05'),(5,2,1,'jiuge','201604091059097936','2016-04-09','0000-00-00','2016-04-06'),(6,2,1,'jiuge','201604091412047608','2016-04-09','0000-00-00','2016-04-06'),(7,2,1,'jiuge','201604100215434109','2016-04-10','0000-00-00','2016-04-06'),(8,2,1,'jiuge','201604101055219452','2016-04-10','0000-00-00','2016-04-06'),(9,2,1,'jiuge','20160410132948873','2016-04-10','0000-00-00','2016-04-06'),(10,1,1,'jiuge','201604110108163281','2016-04-11','0000-00-00','2016-04-05'),(11,1,1,'jiuge','201604110902034586','2016-04-11','0000-00-00','2016-04-05'),(12,1,1,'jiuge','201604111319349561','2016-04-11','0000-00-00','2016-04-05'),(13,2,1,'jiuge','201604120033529357','2016-04-12','0000-00-00','2016-04-06'),(14,1,1,'jiuge','201604120034091653','2016-04-12','2016-04-12','2016-04-05'),(15,2,1,'jiuge','201604120037364998','2016-04-12','2016-04-12','2016-04-06'),(16,1,1,'jiuge','201604121221289312','2016-04-12','2016-04-12','2016-04-05'),(17,2,1,'jiuge','201604121231351384','2016-04-12','2016-04-12','2016-04-06'),(18,1,1,'jiuge','201604121233022375','2016-04-12','2016-04-12','2016-04-05'),(19,1,1,'jiuge','201604150217508806','2016-04-15','0000-00-00','2016-04-05'),(20,1,1,'jiuge','201604160759374265','2016-04-16','0000-00-00','2016-04-05'),(21,2,1,'jiuge','201604161520191699','2016-04-16','2016-04-16','2016-04-06'),(22,1,1,'jiuge','201604161522083742','2016-04-16','2016-04-16','2016-04-05'),(23,1,1,'jiuge','201604161527372619','2016-04-16','2016-04-16','2016-04-05'),(24,2,1,'jiuge','2016041700561299','2016-04-17','2016-04-17','2016-04-06'),(25,1,1,'jiuge','201604170248081428','2016-04-17','2016-04-17','2016-04-05'),(26,1,1,'jiuge','201604171200175488','2016-04-17','2016-04-17','2016-04-05'),(27,2,1,'jiuge','201604171203246134','2016-04-17','2016-04-17','2016-04-06'),(28,2,1,'jiuge','201604191526236409','2016-04-19','0000-00-00','2016-04-06'),(29,2,1,'jiuge','201604200124491317','2016-04-20','0000-00-00','2016-04-06'),(30,1,1,'jiuge','201604201245341735','2016-04-20','2016-04-20','2016-04-05'),(31,1,1,'jiuge','201604201400413759','2016-04-20','2016-04-20','2016-04-05'),(32,2,1,'jiuge','201604211438122098','2016-04-21','0000-00-00','2016-04-06'),(33,2,1,'jiuge','20160422014040960','2016-04-22','0000-00-00','2016-04-06'),(34,2,1,'jiuge','201604221345581795','2016-04-22','0000-00-00','2016-04-06'),(35,1,1,'jiuge','201604221436379033','2016-04-22','0000-00-00','2016-04-05'),(36,2,1,'jiuge','201604230059124482','2016-04-23','0000-00-00','2016-04-06'),(37,2,1,'jiuge','201604230818162321','2016-04-23','0000-00-00','2016-04-06'),(38,2,1,'jiuge','201604231516405256','2016-04-23','2016-04-23','2016-04-06'),(39,1,1,'jiuge','201604231634069910','2016-04-23','2016-04-23','2016-04-05'),(40,2,1,'jiuge','201604240632454964','2016-04-24','0000-00-00','2016-04-06'),(41,2,1,'jiuge','201604240936291571','2016-04-24','0000-00-00','2016-04-06'),(42,1,1,'jiuge','201604240953088133','2016-04-24','0000-00-00','2016-04-05'),(43,1,1,'jiuge','201604260033068564','2016-04-26','2016-04-26','2016-04-05'),(44,1,1,'jiuge','201604260230152501','2016-04-26','0000-00-00','2016-04-05'),(45,2,1,'jiuge','201604260807408861','2016-04-26','0000-00-00','2016-04-06'),(46,1,1,'jiuge','201604260910178072','2016-04-26','0000-00-00','2016-04-05');
+INSERT INTO `ba_userlog` VALUES (1,1,1,'jiuge','201604090047077935','2016-04-09','2016-04-09','2016-04-05'),(2,1,1,'jiuge','20160409004918108','2016-04-09','0000-00-00','2016-04-05'),(3,1,1,'jiuge','201604090437083847','2016-04-09','0000-00-00','2016-04-05'),(4,1,1,'jiuge','201604091015518376','2016-04-09','0000-00-00','2016-04-05'),(5,2,1,'jiuge','201604091059097936','2016-04-09','0000-00-00','2016-04-06'),(6,2,1,'jiuge','201604091412047608','2016-04-09','0000-00-00','2016-04-06'),(7,2,1,'jiuge','201604100215434109','2016-04-10','0000-00-00','2016-04-06'),(8,2,1,'jiuge','201604101055219452','2016-04-10','0000-00-00','2016-04-06'),(9,2,1,'jiuge','20160410132948873','2016-04-10','0000-00-00','2016-04-06'),(10,1,1,'jiuge','201604110108163281','2016-04-11','0000-00-00','2016-04-05'),(11,1,1,'jiuge','201604110902034586','2016-04-11','0000-00-00','2016-04-05'),(12,1,1,'jiuge','201604111319349561','2016-04-11','0000-00-00','2016-04-05'),(13,2,1,'jiuge','201604120033529357','2016-04-12','0000-00-00','2016-04-06'),(14,1,1,'jiuge','201604120034091653','2016-04-12','2016-04-12','2016-04-05'),(15,2,1,'jiuge','201604120037364998','2016-04-12','2016-04-12','2016-04-06'),(16,1,1,'jiuge','201604121221289312','2016-04-12','2016-04-12','2016-04-05'),(17,2,1,'jiuge','201604121231351384','2016-04-12','2016-04-12','2016-04-06'),(18,1,1,'jiuge','201604121233022375','2016-04-12','2016-04-12','2016-04-05'),(19,1,1,'jiuge','201604150217508806','2016-04-15','0000-00-00','2016-04-05'),(20,1,1,'jiuge','201604160759374265','2016-04-16','0000-00-00','2016-04-05'),(21,2,1,'jiuge','201604161520191699','2016-04-16','2016-04-16','2016-04-06'),(22,1,1,'jiuge','201604161522083742','2016-04-16','2016-04-16','2016-04-05'),(23,1,1,'jiuge','201604161527372619','2016-04-16','2016-04-16','2016-04-05'),(24,2,1,'jiuge','2016041700561299','2016-04-17','2016-04-17','2016-04-06'),(25,1,1,'jiuge','201604170248081428','2016-04-17','2016-04-17','2016-04-05'),(26,1,1,'jiuge','201604171200175488','2016-04-17','2016-04-17','2016-04-05'),(27,2,1,'jiuge','201604171203246134','2016-04-17','2016-04-17','2016-04-06'),(28,2,1,'jiuge','201604191526236409','2016-04-19','0000-00-00','2016-04-06'),(29,2,1,'jiuge','201604200124491317','2016-04-20','0000-00-00','2016-04-06'),(30,1,1,'jiuge','201604201245341735','2016-04-20','2016-04-20','2016-04-05'),(31,1,1,'jiuge','201604201400413759','2016-04-20','2016-04-20','2016-04-05'),(32,2,1,'jiuge','201604211438122098','2016-04-21','0000-00-00','2016-04-06'),(33,2,1,'jiuge','20160422014040960','2016-04-22','0000-00-00','2016-04-06'),(34,2,1,'jiuge','201604221345581795','2016-04-22','0000-00-00','2016-04-06'),(35,1,1,'jiuge','201604221436379033','2016-04-22','0000-00-00','2016-04-05'),(36,2,1,'jiuge','201604230059124482','2016-04-23','0000-00-00','2016-04-06'),(37,2,1,'jiuge','201604230818162321','2016-04-23','0000-00-00','2016-04-06'),(38,2,1,'jiuge','201604231516405256','2016-04-23','2016-04-23','2016-04-06'),(39,1,1,'jiuge','201604231634069910','2016-04-23','2016-04-23','2016-04-05'),(40,2,1,'jiuge','201604240632454964','2016-04-24','0000-00-00','2016-04-06'),(41,2,1,'jiuge','201604240936291571','2016-04-24','0000-00-00','2016-04-06'),(42,1,1,'jiuge','201604240953088133','2016-04-24','0000-00-00','2016-04-05'),(43,1,1,'jiuge','201604260033068564','2016-04-26','2016-04-26','2016-04-05'),(44,1,1,'jiuge','201604260230152501','2016-04-26','0000-00-00','2016-04-05'),(45,2,1,'jiuge','201604260807408861','2016-04-26','0000-00-00','2016-04-06'),(46,1,1,'jiuge','201604260910178072','2016-04-26','0000-00-00','2016-04-05'),(47,1,1,'jiuge','201604261322036681','2016-04-26','0000-00-00','2016-04-05');
 /*!40000 ALTER TABLE `ba_userlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -456,92 +456,102 @@ INSERT INTO `bs_citys` VALUES (1,0,'北京市',110000,0,0,'0000-00-00','0000-00-
 UNLOCK TABLES;
 
 --
--- Table structure for table `bs_com_albums`
+-- Table structure for table `bs_com_extends`
 --
 
-DROP TABLE IF EXISTS `bs_com_albums`;
+DROP TABLE IF EXISTS `bs_com_extends`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `bs_com_albums` (
+CREATE TABLE `bs_com_extends` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL COMMENT '名称',
   `cid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '公司id',
-  `type` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '图片类型：1公司产品，2合作单位，3服务图片，4广告，5其他',
-  `pic_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '图片id，关联表bs_pics',
-  `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='企业表 bs_companys';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `bs_com_albums`
---
-
-LOCK TABLES `bs_com_albums` WRITE;
-/*!40000 ALTER TABLE `bs_com_albums` DISABLE KEYS */;
-/*!40000 ALTER TABLE `bs_com_albums` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `bs_com_func`
---
-
-DROP TABLE IF EXISTS `bs_com_func`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `bs_com_func` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL COMMENT '模块名称',
-  `cid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '公司id',
-  `menuid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'company后台左侧菜单id',
-  `intro` varchar(2000) NOT NULL COMMENT '模块内容',
+  `intro` varchar(2000) NOT NULL COMMENT '详情介绍',
+  `pic_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '图片，关联bs_pics',
   `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序字段，值越大越靠前，默认10',
   `isshow` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '系统后台控制是否显示：0不显示，1显示',
   `isshow2` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '用户的公司后台控制是否显示：0不显示，1显示',
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='企业功能表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='企业功能扩展表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `bs_com_func`
+-- Dumping data for table `bs_com_extends`
 --
 
-LOCK TABLES `bs_com_func` WRITE;
-/*!40000 ALTER TABLE `bs_com_func` DISABLE KEYS */;
-/*!40000 ALTER TABLE `bs_com_func` ENABLE KEYS */;
+LOCK TABLES `bs_com_extends` WRITE;
+/*!40000 ALTER TABLE `bs_com_extends` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bs_com_extends` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `bs_com_functions`
+-- Table structure for table `bs_com_firms`
 --
 
-DROP TABLE IF EXISTS `bs_com_functions`;
+DROP TABLE IF EXISTS `bs_com_firms`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `bs_com_functions` (
+CREATE TABLE `bs_com_firms` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL COMMENT '模块名称',
-  `detail` varchar(255) NOT NULL COMMENT '细节描述',
-  `title` varchar(255) NOT NULL COMMENT '标题',
-  `intro` varchar(2000) NOT NULL COMMENT '模块内容',
-  `small` varchar(255) NOT NULL COMMENT '介绍中的小字',
-  `pic_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '图片id',
-  `isdefault` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '是否为默认功能：1默认功能，2扩展功能',
-  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
-  `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '更新时间',
+  `name` varchar(255) NOT NULL COMMENT '名称',
+  `cid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '公司id',
+  `intro` varchar(255) NOT NULL COMMENT '介绍',
+  `title` varchar(255) NOT NULL COMMENT '小标题，多组用|隔开',
+  `detail` varchar(1000) NOT NULL COMMENT '细节详情',
+  `small1` varchar(255) NOT NULL COMMENT '标题小字1，多组|隔开',
+  `small2` varchar(255) NOT NULL COMMENT '标题小字2，多组|隔开',
+  `small3` varchar(255) NOT NULL COMMENT '标题小字3，多组|隔开',
+  `small4` varchar(255) NOT NULL COMMENT '标题小字4，多组|隔开',
+  `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序字段，值越大越靠前，默认10',
+  `isshow` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '系统后台控制是否显示：0不显示，1显示',
+  `isshow2` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '用户的公司后台控制是否显示：0不显示，1显示',
+  `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
+  `updated_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='企业所有功能表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='企业服务功能表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `bs_com_functions`
+-- Dumping data for table `bs_com_firms`
 --
 
-LOCK TABLES `bs_com_functions` WRITE;
-/*!40000 ALTER TABLE `bs_com_functions` DISABLE KEYS */;
-INSERT INTO `bs_com_functions` VALUES (1,'服务项目','潍坊人共同规范和输入的风格\r\nertfgnhgrtfgnhdfgdfg','小标题','efrfgbnedrfbgnhefrfg','小字',0,1,'2016-04-26 00:00:00','2016-04-26 00:00:00');
-/*!40000 ALTER TABLE `bs_com_functions` ENABLE KEYS */;
+LOCK TABLES `bs_com_firms` WRITE;
+/*!40000 ALTER TABLE `bs_com_firms` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bs_com_firms` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bs_com_infos`
+--
+
+DROP TABLE IF EXISTS `bs_com_infos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bs_com_infos` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL COMMENT '名称',
+  `cid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '公司id',
+  `type` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '信息类型：1公司介绍，2资质荣誉，3历程，4公司新闻，5行业咨询，6团队',
+  `intro` varchar(2000) NOT NULL COMMENT '详情介绍',
+  `pic_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '图片，关联bs_pics',
+  `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序字段，值越大越靠前，默认10',
+  `isshow` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '系统后台控制是否显示：0不显示，1显示',
+  `isshow2` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '用户的公司后台控制是否显示：0不显示，1显示',
+  `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
+  `updated_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='企业信息功能表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bs_com_infos`
+--
+
+LOCK TABLES `bs_com_infos` WRITE;
+/*!40000 ALTER TABLE `bs_com_infos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bs_com_infos` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -559,7 +569,8 @@ CREATE TABLE `bs_com_main` (
   `title` varchar(255) NOT NULL COMMENT '鼠标移动显示',
   `keyword` varchar(255) NOT NULL COMMENT '关键字',
   `description` varchar(255) NOT NULL COMMENT '描述',
-  `logo` varchar(255) NOT NULL DEFAULT '' COMMENT '公司logo',
+  `logo` varchar(255) NOT NULL COMMENT '公司logo',
+  `job` varchar(1000) NOT NULL COMMENT '岗位需求，序列化存储',
   `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序字段，值越大越靠前，默认10',
   `istop` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '是否置顶：0不置定，1置顶',
   `isshow` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '系统后台控制是否显示：0不显示，1显示',
@@ -757,6 +768,7 @@ DROP TABLE IF EXISTS `bs_goods`;
 CREATE TABLE `bs_goods` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL COMMENT '视频名称',
+  `genre` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '片源类型：1产品，2花絮',
   `type` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '产品主体：1个人需求，2设计师供应，3企业需求，4企业供应',
   `cate_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '视频分类：关联bs_videos_category',
   `intro` varchar(1000) NOT NULL COMMENT '视频简介',
@@ -768,11 +780,12 @@ CREATE TABLE `bs_goods` (
   `recommend` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '是否推荐：0不推荐，1不推荐，默认0',
   `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序字段，值越大越靠前，默认10',
   `isshow` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '前台列表是否显示：0不显示，1显示，默认1',
+  `isshow2` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '用户企业控制前台列表是否显示：0不显示，1显示，默认1',
   `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站功能：0不放入回收站，1放入回收站',
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL DEFAULT '0000-00-00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='上传的视频表：供应方提供的产品、需求方提供的需求样片';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='产品表（上传的视频）：供应方提供的产品、需求方提供的需求样片';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -781,7 +794,7 @@ CREATE TABLE `bs_goods` (
 
 LOCK TABLES `bs_goods` WRITE;
 /*!40000 ALTER TABLE `bs_goods` DISABLE KEYS */;
-INSERT INTO `bs_goods` VALUES (1,'作品1',0,0,'v部分的白癜风b','',0,0,0,'',0,10,1,0,'2016-03-12','0000-00-00'),(2,'企业需求001',3,4,'','',1,0,0,'',0,10,1,0,'2016-03-13','0000-00-00'),(3,'企业作品001',4,4,'','',1,0,0,'',0,10,1,0,'2016-03-13','0000-00-00');
+INSERT INTO `bs_goods` VALUES (1,'作品1',1,0,0,'v部分的白癜风b','',0,0,0,'',0,10,1,1,0,'2016-03-12','0000-00-00'),(2,'企业需求001',1,3,4,'','',1,0,0,'',0,10,1,1,0,'2016-03-13','0000-00-00'),(3,'企业作品001',1,4,4,'','',1,0,0,'',0,10,1,1,0,'2016-03-13','0000-00-00');
 /*!40000 ALTER TABLE `bs_goods` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -865,39 +878,6 @@ CREATE TABLE `bs_ideas_collect` (
 LOCK TABLES `bs_ideas_collect` WRITE;
 /*!40000 ALTER TABLE `bs_ideas_collect` DISABLE KEYS */;
 /*!40000 ALTER TABLE `bs_ideas_collect` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `bs_ideas_copy备份`
---
-
-DROP TABLE IF EXISTS `bs_ideas_copy备份`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `bs_ideas_copy备份` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL COMMENT '名称',
-  `cate_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分类，关联分类表category',
-  `content` text NOT NULL COMMENT '创意内容',
-  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布的用户id',
-  `read` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '浏览次数',
-  `click` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '点赞次数',
-  `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序，值越大越靠前，默认10',
-  `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站功能：0不放入回收站，1放入回收站',
-  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
-  `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='创意表';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `bs_ideas_copy备份`
---
-
-LOCK TABLES `bs_ideas_copy备份` WRITE;
-/*!40000 ALTER TABLE `bs_ideas_copy备份` DISABLE KEYS */;
-INSERT INTO `bs_ideas_copy备份` VALUES (1,'创意1',4,'<p>而非v代表</p>',1,0,0,10,0,'2016-04-17 01:46:45','2016-04-17 02:24:47');
-/*!40000 ALTER TABLE `bs_ideas_copy备份` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1385,43 +1365,6 @@ LOCK TABLES `bs_talks_collect` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `bs_talks_copy备份`
---
-
-DROP TABLE IF EXISTS `bs_talks_copy备份`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `bs_talks_copy备份` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL COMMENT '名称',
-  `content` text NOT NULL COMMENT '创意内容',
-  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布的用户id',
-  `read` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '浏览次数',
-  `click` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '点赞次数',
-  `follow` varchar(255) NOT NULL DEFAULT '0' COMMENT '关注此话题的用户id组合',
-  `thank` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '要感谢的用户id',
-  `share` varchar(255) NOT NULL DEFAULT '0' COMMENT '分享其他用户id组合',
-  `report` varchar(255) NOT NULL DEFAULT '0' COMMENT '举报者id组合，默认0无举报',
-  `collect` varchar(255) NOT NULL DEFAULT '0' COMMENT '收藏此话题的用户id集合',
-  `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序字段，值越大越靠前，默认10',
-  `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站功能：0不放入回收站，1放入回收站',
-  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
-  `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='话题表';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `bs_talks_copy备份`
---
-
-LOCK TABLES `bs_talks_copy备份` WRITE;
-/*!40000 ALTER TABLE `bs_talks_copy备份` DISABLE KEYS */;
-INSERT INTO `bs_talks_copy备份` VALUES (1,'话题1','<p>而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表</p>',1,0,0,'0',0,'0','0','0',10,0,'2016-04-17 01:46:45','2016-04-17 02:24:47'),(2,'标题2 ','<p>不服该办法呢GV热豆腐还不太高和今年投入富家女我我的是女附近的八个人工我可v别沮丧的v比对方不能交电费表肯定是你鄙视吧v那地方就不能hiu二个IE人根据IE如何隔日给举动被GV的人覅偶包过户的人发货不固定不v个is独具不</p>',1,0,0,'0',0,'0','0','0',10,0,'2016-04-19 15:27:53','0000-00-00 00:00:00');
-/*!40000 ALTER TABLE `bs_talks_copy备份` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `bs_talks_follow`
 --
 
@@ -1763,6 +1706,12 @@ CREATE TABLE `companys` (
   `address` varchar(255) NOT NULL COMMENT '详细地址',
   `yyzzid` varchar(255) NOT NULL COMMENT '营业执照注册码',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '会员id',
+  `tel` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '座机',
+  `QQ` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '企业QQ',
+  `web` varchar(255) NOT NULL COMMENT '公司官网',
+  `fax` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '传真',
+  `zipcode` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '邮编',
+  `email` varchar(255) NOT NULL COMMENT '企业邮箱',
   `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序字段，值越大越靠前，默认10',
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '更新时间',
@@ -1857,4 +1806,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-26 18:41:16
+-- Dump completed on 2016-04-26 23:55:59
