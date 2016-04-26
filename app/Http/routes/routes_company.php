@@ -29,7 +29,17 @@ Route::group(['prefix'=>'company','namespace'=>'Company'], function(){
         //后台首页路由
         Route::get('/','HomeController@index');
         Route::get('/home','HomeController@index');
-        //布局路由
+        //权限路由
+        Route::get('/auth','AuthController@index');
+        //公司信息路由
+        Route::get('/info','InfoController@index');
+            //布局路由
         Route::get('/layout','LayoutController@index');
+            //基本设置路由
+        Route::get('/basic','BasicController@index');
+            //添加单页路由
+        Route::get('/single','SingleController@index');
+        //公司内容设置路由
+        Route::get('/content','ContentController@index');
     });
 });
