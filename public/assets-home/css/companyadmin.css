@@ -147,4 +147,49 @@
     border-bottom:1px solid lightgrey;
     text-align:center;
 }
+/*列表按钮*/
+.list_btn {
+    padding:2px 20px;
+    background:orangered;
+    border-radius:2px;
+    color:white;
+    text-decoration:none;
+}
+a.list_btn:hover { background:darkred; }
+/*内容设置中招聘的详情页面*/
+.com_admin_list .pos { padding-top:40px; }
+.companybtn {
+    padding:5px 20px;
+    border:1px solid orangered;
+    border-radius:3px;
+    color:white;
+    font-family:'微软雅黑';
+    font-size:20px;
+    background:orangered;
+    cursor:pointer;
+}
+a:hover .companybtn {
+    border:1px solid darkred;
+    background:darkred;
+}
+.com_admin_list .field_name { width:200px;text-align:end; }
+.com_admin_list .table_create {
+    margin:10px auto;
+    padding:10px 50px;
+    width:780px;
+    border:1px solid rgb(240,240,240);
+    border-radius:3px;
+}
+.com_admin_list a {
+    margin:0 5px;
+    color:rgb(14,144,210);
+    text-decoration:none;
+}
+.com_admin_list a:hover {
+    color:red;
+    text-decoration:underline;
+}
 /*===== 右部分列表 =====*/
+
+
+.center { text-align:center; }

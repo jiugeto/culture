@@ -13,4 +13,9 @@ class ComFirmModel extends BaseModel
     protected $fillable = [
         'id','name','cid','intro','detail','sort','small1','small2','small3','small4','isshow','isshow2','created_at','updated_at',
     ];
+
+    public function company()
+    {
+        return \App\Models\CompanyModel::find($this->cid);
+    }
 }

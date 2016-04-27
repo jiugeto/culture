@@ -7,7 +7,7 @@ use App\Models\Admin\MenusModel;
 use App\Tools;
 //use Illuminate\Support\Facades\DB;
 
-class CompanyMenuComposer
+class CompanyAdminMenuComposer
 {
     /**
      * 绑定系统后台左侧菜单的数据

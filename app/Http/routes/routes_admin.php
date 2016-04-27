@@ -108,15 +108,12 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
 //    Route::post('comfunction/{id}','ComFunctionController@update');
 //    Route::resource('comfunction','ComFunctionController');
         //企业主页路由
+    Route::post('commain/{id}','ComMainController@update');
     Route::resource('commain','ComMainController');
         //企业信息管理路由
     Route::resource('cominfo','ComInfoController');
         //企业服务项目路由
     Route::resource('comfirm','ComFirmController');
-        //企业产品路由
-    Route::resource('comproduct','ComProductController');
-        //企业联系方式路由
-    Route::resource('comcontact','ComContactController');
     //广告路由
         //广告管理
     Route::resource('ad','AdController');

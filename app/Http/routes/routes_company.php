@@ -41,5 +41,10 @@ Route::group(['prefix'=>'company','namespace'=>'Company'], function(){
         Route::resource('single','SingleController');
         //公司内容设置路由
         Route::resource('content','ContentController');
+            //招聘路由
+        Route::get('job/create/{id}','JobController@create');
+        Route::get('job/{id}/del','JobController@del');
+        Route::post('job/{id}','JobController@update');
+        Route::resource('job','JobController');
     });
 });

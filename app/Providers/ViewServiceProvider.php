@@ -34,7 +34,7 @@ class ViewServiceProvider extends ServiceProvider
         );
         //企业后台左侧菜单数据
         View::composer(
-            'company.admin.partials.left', 'App\Http\ViewComposers\CompanyMenuComposer'
+            'company.admin.partials.left', 'App\Http\ViewComposers\CompanyAdminMenuComposer'
         );
     }
 
