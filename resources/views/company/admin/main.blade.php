@@ -17,7 +17,7 @@
         @include('company.admin.partials.left')
 
         <div class="com_admin_right">
-            @include('company.admin.common.crumb')
+            {{--@include('company.admin.common.crumb')--}}
             @yield('content')
         </div>
 

@@ -35,6 +35,14 @@ abstract class Controller extends BaseController
             'url'=> 'show',
             'name'=> '查看详情',
         ],
+        'category'=> [
+            'url'=> '',
+            'name'=> '',
+        ],
+        'func'=> [
+            'url'=> '',
+            'name'=> '',
+        ],
     ];
 
 //    protected $menus = [    //菜单

@@ -15,32 +15,32 @@ class JobController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->list['func']['name'] = '招聘编辑';
-        $this->list['func']['url'] = 'job';
+        $this->lists['category']['name'] = '内容设置';
+        $this->lists['category']['url'] = 'content';
+        $this->lists['func']['name'] = '招聘编辑';
+        $this->lists['func']['url'] = 'job';
     }
 
     public function index()
     {
-        $curr_list['show']['name'] = '招聘';
-        $curr_list['show']['url'] = 'show';
+        $curr['name'] = $this->lists['show']['name'];
+        $curr['url'] = $this->lists['show']['url'];
         $result = [
             'data'=> $this->query(),
-            'lists'=> $this->list,
-            'curr_list'=> $curr_list,
-            'curr_url'=> $this->curr_url,
+            'lists'=> $this->lists,
+            'curr'=> $curr,
         ];
         return view('company.admin.job.index', $result);
     }
 
     public function create($id)
     {
-        $curr_list['create']['name'] = '招聘添加';
-        $curr_list['create']['url'] = 'create';
+        $curr['name'] = $this->lists['create']['name'];
+        $curr['url'] = $this->lists['create']['url'];
         $result = [
-            'lists'=> $this->list,
-            'curr_list'=> $curr_list,
+            'lists'=> $this->lists,
+            'curr'=> $curr,
             'id'=> $id,
-            'curr_url'=> $this->curr_url,
         ];
         return view('company.admin.job.create', $result);
     }
@@ -69,8 +69,8 @@ class JobController extends BaseController
 
     public function edit($id)
     {
-        $curr_list['show']['name'] = '招聘修改';
-        $curr_list['show']['url'] = 'edit';
+        $curr['name'] = $this->lists['edit']['name'];
+        $curr['url'] = $this->lists['edit']['url'];
         $arr = explode('-',$id); $index = $arr[1];
         $data = ComMainModel::find($arr[0]);
         $jobs = explode('|',$data->job);
@@ -81,10 +81,9 @@ class JobController extends BaseController
         $data->require = $jobRequires[$index];
         $result = [
             'data'=> $data,
-            'lists'=> $this->list,
-            'curr_list'=> $curr_list,
+            'lists'=> $this->lists,
+            'curr'=> $curr,
             'index'=> $arr[1],
-            'curr_url'=> $this->curr_url,
         ];
         return view('company.admin.job.edit', $result);
     }

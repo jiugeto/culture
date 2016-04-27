@@ -13,7 +13,7 @@ class GoodsModel extends BaseModel
 
     protected $table = 'bs_goods';
     protected $fillable = [
-        'id','name','type','cate_id','intro','title','pic_id','video_id','uid','uname','recommend','sort','isshow','del','created_at','updated_at',
+        'id','name','genre','type','cate_id','intro','title','pic_id','video_id','uid','uname','recommend','sort','isshow','isshow2','del','created_at','updated_at',
     ];
 
     protected $types = [
@@ -21,9 +21,10 @@ class GoodsModel extends BaseModel
         1=>'个人需求','设计师供应','企业需求','企业供应',
     ];
 
-    public function cates()
+    public function cate()
     {
-        return $this->hasOne('\App\Models\CategoryModel','id','cate_id');
+//        return $this->hasOne('\App\Models\CategoryModel','id','cate_id');
+        return $this->cate_id?CategoryModel::find($this->cate_id):'';
     }
 
     /**

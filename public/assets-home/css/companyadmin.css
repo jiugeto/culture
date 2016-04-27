@@ -139,7 +139,8 @@
     background:rgb(250,250,250);
 }
 .com_admin_list table {
-    padding:20px;
+    padding:10px 20px;
+    padding-top:0;
     width:800px;
 }
 .com_admin_list td {
@@ -147,8 +148,17 @@
     border-bottom:1px solid lightgrey;
     text-align:center;
 }
+.com_admin_list .search_type {
+    margin:10px;
+    padding:10px;
+    padding-top:20px;
+    border-bottom:1px solid lightgrey;
+}
+.com_admin_list .search_type select { height:30px; }
+.com_admin_list .search_type span.create_right { float:right; }
+.com_admin_list .search_type span.create_right a { padding:5px 20px; }
 /*列表按钮*/
-.list_btn {
+.com_admin_list a.list_btn {
     padding:2px 20px;
     background:orangered;
     border-radius:2px;
@@ -156,6 +166,14 @@
     text-decoration:none;
 }
 a.list_btn:hover { background:darkred; }
+a.list_a {
+    color:rgb(14,144,210);
+    text-decoration:none;
+}
+a.list_a:hover {
+    color:red;
+    text-decoration:underline;
+}
 /*内容设置中招聘的详情页面*/
 .com_admin_list .pos { padding-top:40px; }
 .companybtn {
@@ -173,6 +191,14 @@ a:hover .companybtn {
     background:darkred;
 }
 .com_admin_list .field_name { width:200px;text-align:end; }
+.com_admin_list .right { text-align:left; }
+input,textarea,select {
+    border:1px solid lightgrey;
+    border-radius:3px;
+}
+input,select { height:30px; }
+input.field_value { width:300px; }
+select { font-size:20px;font-family:'微软雅黑'; }
 .com_admin_list .table_create {
     margin:10px auto;
     padding:10px 50px;
@@ -180,12 +206,12 @@ a:hover .companybtn {
     border:1px solid rgb(240,240,240);
     border-radius:3px;
 }
-.com_admin_list a {
+.com_admin_list a.job {
     margin:0 5px;
     color:rgb(14,144,210);
     text-decoration:none;
 }
-.com_admin_list a:hover {
+.com_admin_list a.job:hover {
     color:red;
     text-decoration:underline;
 }
