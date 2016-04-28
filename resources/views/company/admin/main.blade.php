@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="/assets-home/css/home.css">
     <link rel="stylesheet" type="text/css" href="/assets-home/css/company.css">
     <link rel="stylesheet" type="text/css" href="/assets-home/css/companyadmin.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/video.css">
     <script src="/assets/js/jquery-1.10.2.min.js"></script>
 </head>
 <body>

@@ -67,7 +67,8 @@ class GoodsModel extends BaseModel
      */
     public function pic()
     {
-        return $this->hasOne('\App\Models\PicModel','id','pic_id');
+//        return $this->hasOne('\App\Models\PicModel','id','pic_id');
+        return $this->pic_id ? PicModel::find($this->pic_id) : '';
     }
 
     /**
@@ -75,6 +76,7 @@ class GoodsModel extends BaseModel
      */
     public function video()
     {
-        return $this->hasOne('\App\Models\VideoModel','id','video_id');
+        return $this->video_id ? VideoModel::find($this->video_id) : '';
+//        return $this->hasOne('\App\Models\VideoModel','id','video_id');
     }
 }

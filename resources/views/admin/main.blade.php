@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="/assets/css/amazeui.min.css"/>
   <link rel="stylesheet" href="/assets/css/admin.css">
   <link rel="stylesheet" href="/assets/css/admin_cus.css">
+  <link rel="stylesheet" type="text/css" href="/assets/css/video.css">
   <script src="/assets/js/jquery-1.10.2.min.js"></script>
 </head>
 <body>

@@ -1,0 +1,8 @@
+/*===================== 这里是视频预览样式 =====================*/
+
+
+.video {
+    width:720px;height:405px;
+    background:black;
+    position:fixed;margin:auto;left:0;right:0;top:0;bottom:0;
+}

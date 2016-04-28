@@ -98,7 +98,7 @@
 
                         <div class="am-form-group">
                             <label>平台路由 / Plat Url：</label>
-                            <input type="text" placeholder="例：member" pattern="^[a-zA-Z_]+$" required name="platUrl" value="{{ $data->platUrl }}"/>
+                            <input type="text" placeholder="例：member" pattern="^[a-zA-Z_/]+$" required name="platUrl" value="{{ $data->platUrl }}"/>
                         </div>
 
                         <div class="am-form-group">

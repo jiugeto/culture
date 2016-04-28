@@ -42,6 +42,11 @@ Route::group(['prefix'=>'company','namespace'=>'Company'], function(){
         //公司内容设置路由
         Route::resource('content','ContentController');
             //产品路由
+        Route::get('product/trash','ProductController@trash');
+        Route::get('product/{id}/destroy','ProductController@destroy');
+        Route::get('product/{id}/restore','ProductController@restore');
+        Route::get('product/{id}/forceDelete','ProductController@forceDelete');
+        Route::post('product/{id}','ProductController@update');
         Route::resource('product','ProductController');
             //招聘路由
         Route::get('job/create/{id}','JobController@create');

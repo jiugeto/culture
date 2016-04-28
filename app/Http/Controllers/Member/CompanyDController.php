@@ -33,7 +33,7 @@ class CompanyDController extends BaseGoodsController
             'prefix_url'=> '/member/companyD',
             'lists'=> $this->lists,
             'curr_list'=> '',
-            'menus'=> $this->menus,
+//            'menus'=> $this->menus,
         ];
         return view('member.companySD.index', $result);
     }
@@ -45,7 +45,7 @@ class CompanyDController extends BaseGoodsController
             'prefix_url'=> '/member/companyD/trash',
             'lists'=> $this->lists,
             'curr_list'=> 'trash',
-            'menus'=> $this->menus,
+//            'menus'=> $this->menus,
         ];
         return view('member.companySD.index', $result);
     }
@@ -56,7 +56,7 @@ class CompanyDController extends BaseGoodsController
             'categorys'=> $this->model->categorys(),
             'lists'=> $this->lists,
             'curr_list'=> 'create',
-            'menus'=> $this->menus,
+//            'menus'=> $this->menus,
         ];
         return view('member.companySD.create', $result);
     }
@@ -76,7 +76,7 @@ class CompanyDController extends BaseGoodsController
             'categorys'=> $this->model->categorys(),
             'lists'=> $this->lists,
             'curr_list'=> 'edit',
-            'menus'=> $this->menus,
+//            'menus'=> $this->menus,
         ];
         return view('member.companySD.edit', $result);
     }
@@ -98,7 +98,7 @@ class CompanyDController extends BaseGoodsController
             'types'=> $this->model['types'],
             'lists'=> $this->lists,
             'curr_list'=> 'show',
-            'menus'=> $this->menus,
+//            'menus'=> $this->menus,
         ];
         return view('member.companySD.show', $result);
     }

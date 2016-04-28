@@ -6,6 +6,7 @@
     <link rel="icon" type="image/png" href="/assets/images/icon.png">
     <link rel="stylesheet" type="text/css" href="/assets-home/css/home.css">
     <link rel="stylesheet" type="text/css" href="/assets-home/css/member.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/video.css">
     <script src="/assets/js/jquery-1.10.2.min.js"></script>
 </head>
 <body>
