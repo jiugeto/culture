@@ -21,26 +21,12 @@
                         </div>
 
                         <div class="am-form-group">
-                            <label>图片类型 / Type：</label>
-                            <select name="type_id">
-                                <option value="0"
-                                        {{ $data->type==0 ? 'selected' : '' }}>
-                                    -请选择-</option>
-                                @foreach($types as $type)
-                                    <option value="{{ $type->id }}"
-                                            {{ $data->type==$type->id ? 'selected' : '' }}>
-                                        {{ $type->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="am-form-group">
                             <label for="url_ori">图片上传 / Upload Pictures：</label>
                             <script src="/assets/js/local_pre.js"></script>
                         @if($data->url)
                             <img src="{{ $data->url }}">
-                            {{--<span onclick="pic()">更换图片</span>
-                            <div id="newPic"></div>--}}
+                            {{--<a style="cursor:pointer;" id="change">更换图片</a>--}}
+                            {{--<div id="newPic"></div>--}}
                         @else
                             <small class="am-form-help">注意：先添加，再编辑可用图片尺寸。<br>
                                 提示：图片尺寸不要大于1M，否则出错。</small>
@@ -50,19 +36,18 @@
                             <div id="preview" style="margin: 5px; width: 160px; height: 120px; border:1px dotted #5bc0de ; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);"></div>
                         @endif
                         </div>
-                        {{--<script>
-                            var newPic = document.getElementById('newPic');
-                            var addPic = '';
-                            addPic += '<small class="am-form-help">此处添加图片，将替换此处原图片位置，添加后再编辑可用图片尺寸</small>';
-                            addPic += '<input type="text" placeholder="本地图片地址" readonly name="url_file">';
-                            addPic += '<input type="button" value="[找图]" onclick="path.click()" class="am-btn am-btn-primary">';
-                            addPic += '<input type="file" id="path" style="display:none" onchange="url_file.value=this.value;loadImageFile();" name="url_ori">';
-                            addPic += '<div id="preview" style="margin: 5px; width: 160px; height: 120px; border:1px dotted #5bc0de ; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);"></div>';
-                            addPic += '';
-                            function pic(){
-                                newPic[0].innerHTML = addPic;
-                            }
-                        </script>--}}
+                        {{--<script>--}}
+                            {{--$(document).ready(function(){--}}
+                                {{--var addPic = '';--}}
+                                {{--addPic += '<small class="am-form-help">此处添加图片，将替换此处原图片位置，添加后再编辑可用图片尺寸</small>';--}}
+                                {{--addPic += '<input type="text" placeholder="本地图片地址" readonly name="url_file">';--}}
+                                {{--addPic += '<input type="button" value="[找图]" onclick="path.click()" class="am-btn am-btn-primary">';--}}
+                                {{--addPic += '<input type="file" id="path" style="display:none" onchange="url_file.value=this.value;loadImageFile();" name="url_ori">';--}}
+                                {{--addPic += '<div id="preview" style="margin: 5px; width: 160px; height: 120px; border:1px dotted #5bc0de ; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);"></div>';--}}
+                                {{--addPic += '';--}}
+                                {{--$("#change").click(function(){ $("#newPic")[0].innerHTML = addPic; });--}}
+                            {{--});--}}
+                        {{--</script>--}}
 
                         <div class="am-form-group">
                             <label>图片介绍 / Introduce：</label>

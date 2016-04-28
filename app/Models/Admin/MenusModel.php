@@ -39,6 +39,6 @@ class MenusModel extends BaseModel
      */
     public static function CompanyMenus()
     {
-        return MenusModel::where(['type'=>3,'isshow'=>1])->orderBy('sort','desc')->get();
+        return MenusModel::where(['type'=>3,'isshow'=>1])->orderBy('sort2','desc')->get();
     }
 }

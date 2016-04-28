@@ -9,17 +9,17 @@
                 <option value="">所有</option>
             </select>
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="/company/admin/product" class="list_btn">产品列表</a>
-            <a href="/company/admin/product/trash" class="list_btn">回收站</a>
+            <a href="/company/admin/part" class="list_btn">花絮列表</a>
+            <a href="/company/admin/part/trash" class="list_btn">回收站</a>
             @if($curr['url']!='trash')
-            <span class="create_right"><a href="/company/admin/product/create" class="list_btn">发布产品</a></span>
+            <span class="create_right"><a href="/company/admin/product/create" class="list_btn">发布花絮</a></span>
             @endif
         </div>
         <table cellspacing="0">
             <tr>
                 <td>序号</td>
-                <td>产品名称</td>
-                <td>产品类型</td>
+                <td>花絮名称</td>
+                <td>花絮类型</td>
                 <td>在前台公司页面显示否</td>
                 <td>创建时间</td>
                 <td>操作</td>

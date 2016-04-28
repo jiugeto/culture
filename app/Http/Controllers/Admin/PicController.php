@@ -24,8 +24,6 @@ class PicController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-//            'actions'=> $this->actions(),
-            'types'=> $this->model->type(),
             'datas'=> PicModel::paginate($this->limit),
             'prefix_url'=> '/admin/pic',
             'crumb'=> $this->crumb,
@@ -39,8 +37,6 @@ class PicController extends BaseController
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
-//            'actions'=> $this->actions(),
-            'types'=> $this->model->type(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
             'type_id'=> $type_id,
@@ -51,6 +47,7 @@ class PicController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
+        $data['created_at'] = date('Y-m-d H:i:s', time());
         PicModel::create($data);
         return redirect('/admin/pic');
     }
@@ -60,8 +57,6 @@ class PicController extends BaseController
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
         $result = [
-//            'actions'=> $this->actions(),
-            'types'=> $this->model->type(),
             'data'=> PicModel::find($id),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -72,8 +67,21 @@ class PicController extends BaseController
     public function update(Request $request, $id)
     {
         $data = $this->getData($request);
+        $data['updated_at'] = date('Y-m-d H:i:s', time());
         PicModel::where('id',$id)->update($data);
         return redirect('/admin/pic');
+    }
+
+    public function show($id)
+    {
+        $curr['name'] = $this->crumb['show']['name'];
+        $curr['url'] = $this->crumb['show']['url'];
+        $result = [
+            'data'=> PicModel::find($id),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.pic.show', $result);
     }
 
 
@@ -102,14 +110,13 @@ class PicController extends BaseController
                 }
             }
             $file = $request->file('url_ori');  //获取文件
-            $data['url_ori'] = $this->upload($file);
+            $data['url_ori'] = \App\Tools::upload($file);
         }
         if (!$data['url_ori']) {
             echo "<script>alert('对不起，您还没上传图片！');history.go(-1);</script>";exit;
         }
         $pic = [
             'name'=> $data['name'],
-            'type_id'=> $data['type_id'],
             'url'=> $data['url_ori'],
             'intro'=> $data['intro'],
         ];

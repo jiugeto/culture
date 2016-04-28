@@ -35,7 +35,7 @@
 .com_admin_con {
     margin:0 auto;
     width:1000px;
-    height:810px;
+    height:1010px;
     background:rgb(200,200,200);
     position:relative;top:-15px;
 }
@@ -44,7 +44,7 @@
 /*===== 左部样式 =====*/
 .com_admin_left {
     width:150px;
-    height:800px;
+    height:1000px;
     background:rgb(250,250,250);
     border-top:4px solid rgb(200,200,200);
     float:left;
@@ -66,7 +66,7 @@
 }
 .com_admin_left .level2 { padding-left:30px; }
 .com_admin_left .none {
-    height:255px;
+    height:340px;
     border-left:4px solid rgb(220,220,220);
 }
 
@@ -75,7 +75,7 @@
 .com_admin_crumb_bai { width:100%;height:2px; }
 .com_admin_crumb {
     margin:0 auto;
-    width:830px;
+    width:1030px;
     background:white;
 }
 .com_admin_crumb p {
@@ -91,7 +91,7 @@
 .com_admin_home {
     margin:5px;
     width:830px;
-    height:740px;
+    height:1000px;
     background:rgb(250,250,250);
 }
 .com_space {
@@ -135,7 +135,7 @@
 .com_admin_list {
     margin:5px;
     width:830px;
-    height:740px;
+    height:940px;
     background:rgb(250,250,250);
 }
 .com_admin_list table {

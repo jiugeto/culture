@@ -27,4 +27,14 @@ class ComInfoModel extends BaseModel
     {
         return \App\Models\CompanyModel::find($this->cid);
     }
+
+    public function pics()
+    {
+        return \App\Models\PicModel::all();
+    }
+
+    public function pic($pic_id)
+    {
+        return $pic_id ? \App\Models\PicModel::find($pic_id) : '';
+    }
 }

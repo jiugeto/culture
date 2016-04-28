@@ -16,17 +16,6 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     //系统后台首页路由
     Route::get('/','HomeController@index');
     Route::get('home','HomeController@index');
-        //图片管理
-    Route::post('pic/{id}','PicController@update');
-    Route::get('pic/create/{id}','PicController@create');
-    Route::resource('pic','PicController');
-        //类型管理
-    Route::post('type/{id}','TypeController@update');
-    Route::get('type/create/{id}','TypeController@create');
-    Route::resource('type','TypeController');
-    Route::get('type/tableid/{table_id}','TypeController@index');
-        //用户日志管理
-    Route::resource('userlog','UserlogController');
     //权限管理
         //管理员路由
     Route::post('admin/{id}','AdminController@update');
@@ -102,15 +91,25 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::get('opinions/{isshow}/trash','OpinionsController@trash');
     Route::get('{isshow}/opinions','OpinionsController@index');
     Route::resource('opinions','OpinionsController');
+        //图片管理
+    Route::post('pic/{id}','PicController@update');
+    Route::get('pic/create/{id}','PicController@create');
+    Route::resource('pic','PicController');
+        //类型管理
+    Route::post('type/{id}','TypeController@update');
+    Route::get('type/create/{id}','TypeController@create');
+    Route::resource('type','TypeController');
+    Route::get('type/tableid/{table_id}','TypeController@index');
+        //用户日志管理
+    Route::resource('userlog','UserlogController');
         //地区管理
     Route::resource('area','AreaController');
-//        //企业页面功能管理
-//    Route::post('comfunction/{id}','ComFunctionController@update');
-//    Route::resource('comfunction','ComFunctionController');
+    //企业页面功能管理
         //企业主页路由
     Route::post('commain/{id}','ComMainController@update');
     Route::resource('commain','ComMainController');
         //企业信息管理路由
+    Route::post('cominfo/{id}','ComInfoController@update');
     Route::resource('cominfo','ComInfoController');
         //企业服务项目路由
     Route::resource('comfirm','ComFirmController');

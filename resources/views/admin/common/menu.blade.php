@@ -28,6 +28,11 @@
                     </button>
                 </a>
             @endif
+            @if($crumb['category']['url']=='pic')
+                <a onclick="history.go(-1)">
+                    <button type="button" class="am-btn am-btn-default">返回上一页</button>
+                </a>
+            @endif
         </div>
         {{--<div class="am-btn-group am-btn-group-xs">
             @if(array_key_exists('trash',$crumb))

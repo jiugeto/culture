@@ -20,20 +20,6 @@
                         </div>
 
                         <div class="am-form-group">
-                            <label>图片类型 / Type：</label>
-                            <select name="type_id">
-                                <option value="0"
-                                        {{ $type_id==0 ? 'selected' : '' }}>
-                                    -请选择-</option>
-                                @foreach($types as $type)
-                                    <option value="{{ $type->id }}"
-                                            {{ $type_id==$type->id ? 'selected' : '' }}>
-                                        {{ $type->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="am-form-group">
                             <label for="url_ori">图片上传 / Upload Pictures：</label>
                             <small class="am-form-help">注意：先添加，再编辑可用图片尺寸。<br>
                                 提示：图片尺寸不要大于1M，否则出错。</small>

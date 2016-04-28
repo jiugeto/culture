@@ -34,8 +34,8 @@
                                 @endif
                             </a></td>
                         <td class="am-hide-sm-only">{{ $data->type() }}</td>
-                        <td class="am-hide-sm-only">{{ $data->company()->name }}</td>
-                        <td class="am-hide-sm-only">{{ $data->isshow==1 ? '显示' : '不显示' }}</td>
+                        <td class="am-hide-sm-only">{{ $data->company() ? $data->company()->name : '默认初始化记录' }}</td>
+                        <td class="am-hide-sm-only">{{ $data->isshow ? '显示' : '不显示' }}</td>
                         <td class="am-hide-sm-only">{{ $data->created_at }}</td>
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">

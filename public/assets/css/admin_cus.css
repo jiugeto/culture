@@ -3,7 +3,7 @@
 
 .icon { width:15px; }
 .list_center { text-align:center; }
-.pic_size_small { width:100px; }
+.pic_size_small { width:30px; }
 
 
 /*=======action层叠列表========*/
@@ -64,3 +64,12 @@ button.backbtn {
 }
 a:hover.increase,a:hover.reduce { background:white; }
 /*=== 增加 reduce ===*/
+
+
+/*=== 系统后台详情页面的内容 ===*/
+.admin_show_con {
+    width:400px;height:200px;
+    border:1px solid lightgrey;
+    overflow:auto;
+}
+/*=== 系统后台详情页面的内容 ===*/
