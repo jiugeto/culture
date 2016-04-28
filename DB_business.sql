@@ -498,6 +498,7 @@ CREATE TABLE `bs_com_firms` (
   `name` varchar(255) NOT NULL COMMENT '名称',
   `cid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '公司id',
   `intro` varchar(255) NOT NULL COMMENT '介绍',
+  `pic` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '图片',
   `title` varchar(255) NOT NULL COMMENT '小标题，多组用|隔开',
   `detail` varchar(1000) NOT NULL COMMENT '细节详情',
   `small1` varchar(255) NOT NULL COMMENT '标题小字1，多组|隔开',
@@ -1816,4 +1817,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-28 19:18:59
+-- Dump completed on 2016-04-28 19:26:43

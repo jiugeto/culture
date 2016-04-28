@@ -18,4 +18,9 @@ class ComFirmModel extends BaseModel
     {
         return \App\Models\CompanyModel::find($this->cid);
     }
+
+    public function pic()
+    {
+        return $this->pic ? \App\Models\PicModel::find($this->pic) :'';
+    }
 }

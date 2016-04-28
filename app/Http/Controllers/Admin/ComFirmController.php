@@ -33,25 +33,37 @@ class ComFirmController extends BaseController
         return view('admin.comfirm.index', $result);
     }
 
+    public function create()
+    {
+        $curr['name'] = $this->crumb['create']['name'];
+        $curr['url'] = $this->crumb['create']['url'];
+        $result = [
+            'pics'=> $this->model->pics(),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.cominfo.create', $result);
+    }
 
 
 
-//    /**
-//     * 收集数据
-//     */
-//    public function getData(Request $request)
-//    {
-//        $data = [
-//            'name'=> $request->name,
-//            'detail'=> $request->detail,
-//            'title'=> $request->title,
-//            'intro'=> $request->intro,
-//            'small'=> $request->small,
-//            'pic_id'=> $request->pic_id?$request->pic_id:0,
-//            'isdefault'=> $request->isdefault,
-//        ];
-//        return $data;
-//    }
+
+    /**
+     * 收集数据
+     */
+    public function getData(Request $request)
+    {
+        $data = [
+            'name'=> $request->name,
+            'detail'=> $request->detail,
+            'title'=> $request->title,
+            'intro'=> $request->intro,
+            'small'=> $request->small,
+            'pic_id'=> $request->pic_id?$request->pic_id:0,
+            'isdefault'=> $request->isdefault,
+        ];
+        return $data;
+    }
 
     /**
      * 查询方法
