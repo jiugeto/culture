@@ -2,6 +2,7 @@
 namespace App\Models\Company;
 
 use App\Models\BaseModel;
+use App\Models\PicModel;
 
 class ComFirmModel extends BaseModel
 {
@@ -11,7 +12,7 @@ class ComFirmModel extends BaseModel
 
     protected $table = 'bs_com_firms';
     protected $fillable = [
-        'id','name','cid','intro','detail','sort','small1','small2','small3','small4','isshow','isshow2','created_at','updated_at',
+        'id','name','cid','intro','title','pic_id','detail','sort','small','isshow','isshow2','created_at','updated_at',
     ];
 
     public function company()
@@ -19,8 +20,13 @@ class ComFirmModel extends BaseModel
         return \App\Models\CompanyModel::find($this->cid);
     }
 
+    public function pics()
+    {
+        return PicModel::all();
+    }
+
     public function pic()
     {
-        return $this->pic ? \App\Models\PicModel::find($this->pic) :'';
+        return $this->pic_id ? PicModel::find($this->pic_id) :'';
     }
 }

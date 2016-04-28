@@ -112,6 +112,8 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::post('cominfo/{id}','ComInfoController@update');
     Route::resource('cominfo','ComInfoController');
         //企业服务项目路由
+    Route::post('comfirm/{id}','ComFirmController@update');
+    Route::get('comfirm/{id}/forceDelete','ComFirmController@forceDelete');
     Route::resource('comfirm','ComFirmController');
     //广告路由
         //广告管理

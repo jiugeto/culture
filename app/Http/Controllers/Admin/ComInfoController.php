@@ -8,7 +8,7 @@ use App\Models\Company\ComInfoModel;
 class ComInfoController extends BaseController
 {
     /**
-     * 系统后台企业主体
+     * 系统后台企业信息 company infomation
      */
 
     public function __construct()

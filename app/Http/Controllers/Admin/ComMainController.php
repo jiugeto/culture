@@ -8,7 +8,7 @@ use App\Models\Company\ComMainModel;
 class ComMainController extends BaseController
 {
     /**
-     * 系统后台企业主体
+     * 系统后台企业主体 company main
      */
 
     public function __construct()
