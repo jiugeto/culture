@@ -29,25 +29,27 @@
                         </div>
 
                         <div class="am-form-group">
-                            <label>图片 / Picture：<a href="">添加图片</a></label>
+                            <label>图片 / Picture (最多6张)：<a href="/admin/pic">图片列表</a></label>
                             <select name="pic_id">
                                 <option value="">选择图片</option>
                                 @if($pics)
-                                @foreach($pics as $kpic=>$pic)
-                                    <option value="{{ $kpic }}">{{ $pic }}</option>
+                                @foreach($pics as $pic)
+                                    <option value="{{ $pic->name }}">{{ $pic->name }}</option>
                                 @endforeach
                                 @endif
                             </select>
-                            <input type="hidden" name="picNum" value="1">
+                            <input type="hidden" name="numPic" value="1">
                             <span id="more"></span>
                             <br> <a class="am-btn am-btn-primary" id="add">更多图片</a>
                             <script>
                                 $(document).ready(function(){
                                     $("#add").click(function(){
-                                        var picNum = $("input[name='picNum']");
+                                        var numPic = $("input[name='numPic']");
                                         var picHtml = '';
-                                        picHtml += '<br>图片('+picNum.val()+')';
-                                        picHtml += '<select name="pic_id'+picNum.val()+'">';
+                                        numPic[0].value = numPic.val()*1+1;
+                                        if(numPic.val()>6){ alert('图片限制6张！');return false; }
+                                        picHtml += '<br>图片(第'+numPic.val()+'张)';
+                                        picHtml += '<select name="pic_id'+numPic.val()+'">';
                                         picHtml += '<option value="">选择图片</option>';
                                         picHtml += '@if($pics)';
                                         picHtml += '@foreach($pics as $kpic=>$pic)';
@@ -57,7 +59,6 @@
                                         picHtml += '</select>';
                                         picHtml += '';
                                         $("#more").append(picHtml);
-                                        picNum[0].value = picNum.val()*1+1;
                                     });
                                 });
                             </script>

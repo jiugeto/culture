@@ -44,7 +44,10 @@ Route::group(['prefix'=>'company','namespace'=>'Company'], function(){
             //公司简介路由
         Route::resource('intro','IntroController');
             //新闻路由
-        Route::resource('contact','ContactController');
+        Route::get('{type}/info','InfoController@index');
+        Route::get('info/create/{type}','InfoController@create');
+        Route::post('info/{id}','InfoController@update');
+        Route::resource('info','InfoController');
             //联系路由
         Route::resource('contact','ContactController');
             //荣誉路由

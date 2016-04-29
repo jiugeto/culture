@@ -64,8 +64,12 @@ class ComInfoController extends BaseController
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
         $data = ComInfoModel::find($id);
-        $data->pics = $data->pic?explode('|',$data->pic):[];
-        $data->picNum = $data->pic?count(explode('|',$data->pic)):1;
+        $data->pics = array(); $data->numPic = 1;
+        if ($data->pic) {
+            $data->pics = explode('|',$data->pic);
+            $data->pics = array_filter($data->pics);
+            $data->numPic = count($data->pics);
+        }
         $result = [
             'data'=> $data,
             'types'=> $this->model['types'],
@@ -131,7 +135,7 @@ class ComInfoController extends BaseController
     {
         $data = $request->all();
         foreach ($data as $k=>$v) {
-            if (substr($k,0,6)=='pic_id') { $pics[] = $v; }
+            if (substr($k,0,6)=='pic_id' && !in_array($v,['',0])) { $pics[] = $v; }
         }
         return isset($pics) ? $pics : [];
     }

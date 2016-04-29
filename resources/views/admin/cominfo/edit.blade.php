@@ -30,31 +30,42 @@
                         </div>
 
                         <div class="am-form-group">
-                            <label>图片 / Picture：<a href="/admin/pic">图片列表</a>
+                            <label>图片 / Picture (最多6张)：<a href="/admin/pic">图片列表</a>
                             </label>
                             @if($data->pic && isset($data->pics) && $data->pics)
                                 @foreach($data->pics as $kpic=>$vpic)
-                            <select name="pic_id{{$kpic+1}}">
-                                <option value="" {{ $vpic=='' ? 'selected' : '' }}>选择图片</option>
-                                @if($pics)
-                                    @foreach($pics as $pic)
-                                        <option value="{{ $pic->id }}"
-                                                {{ $pic->id==$vpic ? 'selected' : '' }}>{{ $pic->name }}</option>
-                                    @endforeach
-                                @endif
-                            </select>
+                                <select name="pic_id{{$kpic+1}}">
+                                    <option value="" {{ $vpic=='' ? 'selected' : '' }}>选择图片</option>
+                                    @if($pics)
+                                        @foreach($pics as $pic)
+                                            <option value="{{ $pic->id }}"
+                                                    {{ $pic->id==$vpic ? 'selected' : '' }}>{{ $pic->name }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
                                 @endforeach
+                            @else
+                                <select name="pic_id">
+                                    <option value="">选择图片</option>
+                                    @if($pics)
+                                        @foreach($pics as $pic)
+                                            <option value="{{ $pic->name }}">{{ $pic->name }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
                             @endif
-                            <input type="hidden" name="picNum" value="{{ $data->picNum }}">
+                            <input type="hidden" name="numPic" value="{{ $data->numPic }}">
                             <span id="more"></span>
                             <br> <a class="am-btn am-btn-primary" id="add">更多图片</a>
                             <script>
                                 $(document).ready(function(){
                                     $("#add").click(function(){
-                                        var picNum = $("input[name='picNum']");
+                                        var numPic = $("input[name='numPic']");
                                         var picHtml = '';
-                                        picHtml += '<br>图片('+picNum.val()+')';
-                                        picHtml += '<select name="pic_id'+picNum.val()+'">';
+                                        numPic[0].value = numPic.val()*1+1;
+                                        if(numPic.val()>6){ alert('图片限制6张！');return false; }
+                                        picHtml += '<br>图片(第'+numPic.val()+'张)';
+                                        picHtml += '<select name="pic_id'+numPic.val()+'">';
                                         picHtml += '<option value="">选择图片</option>';
                                         picHtml += '@if($pics)';
                                         picHtml += '@foreach($pics as $pic)';
@@ -64,7 +75,6 @@
                                         picHtml += '</select>';
                                         picHtml += '';
                                         $("#more").append(picHtml);
-                                        picNum[0].value = picNum.val()*1+1;
                                     });
                                 });
                             </script>

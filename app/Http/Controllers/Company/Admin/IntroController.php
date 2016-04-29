@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Company\Admin;
 use App\Models\Company\ComInfoModel;
 use Illuminate\Http\Request;
 
-class IntroController extends InfoController
+class IntroController extends BaseController
 {
     /**
      *  公司简介
@@ -41,5 +41,15 @@ class IntroController extends InfoController
             'curr'=> $curr,
         ];
         return view('company.admin.intro.edit', $result);
+    }
+
+
+
+
+
+    public function query($type)
+    {
+//        $this->cid = 0;     //假如默认0
+        return ComInfoModel::where('cid',$this->cid)->where('type',$type)->first();
     }
 }

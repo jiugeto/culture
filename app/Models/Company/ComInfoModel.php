@@ -11,7 +11,7 @@ class ComInfoModel extends BaseModel
 
     protected $table = 'bs_com_infos';
     protected $fillable = [
-        'id','name','cid','type','intro','pic_id','sort','isshow','isshow2','created_at','updated_at',
+        'id','name','cid','type','intro','pic','sort','sort2','isshow','isshow2','created_at','updated_at',
     ];
     //信息类型：1公司介绍，2资质荣誉，3历程，4公司新闻，5行业咨询，6团队
     protected $types = [

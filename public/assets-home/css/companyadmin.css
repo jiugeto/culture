@@ -164,6 +164,7 @@
     border-radius:2px;
     color:white;
     text-decoration:none;
+    cursor:pointer;
 }
 a.list_btn:hover { background:darkred; }
 a.list_a {
@@ -198,7 +199,7 @@ input,textarea,select {
 }
 input,select { height:30px; }
 input.field_value { width:300px; }
-select { font-size:20px;font-family:'微软雅黑'; }
+select { margin:5px auto;font-size:20px;font-family:'微软雅黑'; }
 .com_admin_list .table_create {
     margin:10px auto;
     padding:10px 50px;

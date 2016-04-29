@@ -25,7 +25,7 @@ class PartController extends BaseController
         $curr['name'] = $this->lists['']['name'];
         $curr['url'] = $this->lists['']['url'];
         $result = [
-            'datas'=> $this->query($swl=0),
+            'datas'=> $this->query($del=0),
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
