@@ -48,10 +48,9 @@ class BaseController extends Controller
     public function __construct()
     {
         $this->userid = \Session::get('user.uid');
-        if (\Session::has('user.cid')) {
-            $this->cid = \Session::get('user.cid');
-//            $this->company['basic'] = CompanyModel::find($this->cid);
-            $this->company['basic'] = unserialize(\Session::get('user.usercompany'));
+        if (\Session::has('user.company')) {
+            $this->company = unserialize(\Session::get('user.company'));
+            $this->cid = $this->company['cid'];
         } else {
 //            echo "<script>alert('你还木有做公司认证！');</script>";exit;
 //            return redirect('/member/setting/'.$this->userid.'/auth');

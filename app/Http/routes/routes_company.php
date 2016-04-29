@@ -42,6 +42,7 @@ Route::group(['prefix'=>'company','namespace'=>'Company'], function(){
         //公司内容设置路由
         Route::resource('content','ContentController');
             //公司简介路由
+        Route::post('intro/{id}','IntroController@update');
         Route::resource('intro','IntroController');
             //新闻路由
         Route::get('{type}/info','InfoController@index');
@@ -49,11 +50,12 @@ Route::group(['prefix'=>'company','namespace'=>'Company'], function(){
         Route::post('info/{id}','InfoController@update');
         Route::resource('info','InfoController');
             //联系路由
+        Route::post('contact/{id}','ContactController@update');
         Route::resource('contact','ContactController');
-            //荣誉路由
-        Route::resource('honor','HonorController');
-            //团队路由
-        Route::resource('team','TeamController');
+//            //荣誉路由
+//        Route::resource('honor','HonorController');
+//            //团队路由
+//        Route::resource('team','TeamController');
             //产品路由
         Route::get('product/trash','ProductController@trash');
         Route::get('product/{id}/destroy','ProductController@destroy');
@@ -73,5 +75,8 @@ Route::group(['prefix'=>'company','namespace'=>'Company'], function(){
         Route::get('job/{id}/del','JobController@del');
         Route::post('job/{id}','JobController@update');
         Route::resource('job','JobController');
+            //图片管理路由
+        Route::resource('pic','PicController');
+            //视频管理路由
     });
 });

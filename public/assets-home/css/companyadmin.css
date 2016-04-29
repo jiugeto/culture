@@ -75,7 +75,7 @@
 .com_admin_crumb_bai { width:100%;height:2px; }
 .com_admin_crumb {
     margin:0 auto;
-    width:1030px;
+    width:830px;
     background:white;
 }
 .com_admin_crumb p {
@@ -198,7 +198,7 @@ input,textarea,select {
     border-radius:3px;
 }
 input,select { height:30px; }
-input.field_value { width:300px; }
+input.field_value { padding:0 5px;width:290px; }
 select { margin:5px auto;font-size:20px;font-family:'微软雅黑'; }
 .com_admin_list .table_create {
     margin:10px auto;
@@ -220,3 +220,12 @@ select { margin:5px auto;font-size:20px;font-family:'微软雅黑'; }
 
 
 .center { text-align:center; }
+
+
+/*===企业后台详情页面的内容 ===*/
+.admin_show_con {
+    width:400px;height:200px;
+    border:1px solid lightgrey;
+    overflow:auto;
+}
+/*=== 企业后台详情页面的内容 ===*/

@@ -43,13 +43,14 @@ class IntroController extends BaseController
         return view('company.admin.intro.edit', $result);
     }
 
+    public function update(){}
+
 
 
 
 
     public function query($type)
     {
-//        $this->cid = 0;     //假如默认0
         return ComInfoModel::where('cid',$this->cid)->where('type',$type)->first();
     }
 }

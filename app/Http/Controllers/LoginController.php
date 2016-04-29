@@ -52,6 +52,7 @@ class LoginController extends Controller
         //个人资料
         if (in_array($userModel->isuser,[1,3])) {
             $personModel = PersonModel::where('uid',$userModel->id)->first();
+            $persons['per_id'] = $personModel->id;
             $persons['realname'] = $personModel->realname;
             $persons['sex'] = $personModel->sex;
             $persons['idcard'] = $personModel->idcard;
@@ -60,8 +61,9 @@ class LoginController extends Controller
         $userperson = isset($persons) ? serialize($persons) : [];
         //企业资料
         if (in_array($userModel->isuser,[2,4])) {
-            $companyModel = CompanyModel::where('isuser',$userModel->uid)->first();
-            $companys['realname'] = $companyModel->realname;
+            $companyModel = CompanyModel::where('uid',$userModel->id)->first();
+            $companys['cid'] = $companyModel->id;
+            $companys['name'] = $companyModel->name;
             $companys['area'] = $companyModel->area;
             $companys['address'] = $companyModel->address;
             $companys['yyzzid'] = $companyModel->yyzzid;
@@ -110,8 +112,8 @@ class LoginController extends Controller
         Session::forget('user.limit');
         Session::forget('user.area');
         Session::forget('user.address');
-        Session::forget('user.userperson');
-        Session::forget('user.usercompany');
+        Session::forget('user.person');
+        Session::forget('user.company');
         return redirect('/login');
     }
 }
