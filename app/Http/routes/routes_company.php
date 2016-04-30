@@ -52,8 +52,8 @@ Route::group(['prefix'=>'company','namespace'=>'Company'], function(){
             //联系路由
         Route::post('contact/{id}','ContactController@update');
         Route::resource('contact','ContactController');
-//            //荣誉路由
-//        Route::resource('honor','HonorController');
+            //服务路由
+        Route::resource('firm','FirmController');
 //            //团队路由
 //        Route::resource('team','TeamController');
             //产品路由

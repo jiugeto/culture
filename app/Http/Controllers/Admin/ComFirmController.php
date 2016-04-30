@@ -36,8 +36,8 @@ class ComFirmController extends BaseController
     public function create()
     {
         //记录数限制
-        if (count(ComFirmModel::all())>9) {
-            echo "<script>alert('已满10条记录！');history.go(-1);</script>";exit;
+        if (count(ComFirmModel::all())>$this->firmNum-1) {
+            echo "<script>alert('已满".$this->firmNum."条记录！');history.go(-1);</script>";exit;
         }
         //获取部分字段
         $firmModel = ComFirmModel::orderBy('id','asc')->first();;

@@ -14,46 +14,18 @@ class ContentController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->list['func']['name'] = '内容设置';
-        $this->list['func']['url'] = 'content';
+        $this->lists['func']['name'] = '内容设置';
+        $this->lists['func']['url'] = 'content';
     }
 
     public function index()
     {
         $result = [
             'datas'=> $this->query(),
-            'lists'=> $this->list,
+            'lists'=> $this->lists,
         ];
         return view('company.admin.content.index', $result);
     }
-
-//    /**
-//     * 招聘详情
-//     */
-//    public function showjob()
-//    {
-//        $data = $this->queryMain();
-//        $curr['name'] = '招聘';
-//        $result = [
-//            'data'=> $data,
-//            'lists'=> $this->list,
-//            'curr'=> $curr,
-//        ];
-//        return view('company.admin.content.showjob', $result);
-//    }
-
-//    /**
-//     * 招聘编辑
-//     */
-//    public function editjob()
-//    {
-//        $data = $this->queryMain();
-//        $result = [
-//            'data'=> $data,
-//            'lists'=> $this->list,
-//        ];
-//        return view('company.admin.content.editjob', $result);
-//    }
 
 
 

@@ -20,6 +20,7 @@ abstract class Controller extends BaseController
     protected $cid;
     protected $person;
     protected $company;
+    protected $firmNum = 3;     //企业服务记录数
 
     protected $lists = [      //数据列表
         ''=> '所有列表',

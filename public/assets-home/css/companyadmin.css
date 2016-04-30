@@ -159,7 +159,7 @@
 .com_admin_list .search_type span.create_right a { padding:5px 20px; }
 /*列表按钮*/
 .com_admin_list a.list_btn {
-    padding:2px 20px;
+    padding:5px 20px;
     background:orangered;
     border-radius:2px;
     color:white;
