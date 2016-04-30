@@ -7,7 +7,7 @@ class VideoModel extends BaseModel
 {
     protected $table = 'bs_videos';
     protected $fillable = [
-        'id','uid','name','cate_id','url','intro','created_at',
+        'id','uid','name','url','intro','del','created_at','updated_at',
     ];
 
     /**

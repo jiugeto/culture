@@ -7,6 +7,6 @@ class PicModel extends BaseModel
 {
     protected $table = 'bs_pics';
     protected $fillable = [
-        'id','uid','name','url','intro','del','created_at',
+        'id','uid','name','url','intro','del','created_at','updated_at',
     ];
 }

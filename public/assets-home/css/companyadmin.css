@@ -198,7 +198,11 @@ input,textarea,select {
     border-radius:3px;
 }
 input,select { height:30px; }
-input.field_value { padding:0 5px;width:290px; }
+input.field_value {
+    margin:5px auto;
+    padding:0 5px;
+    width:290px;
+}
 select { margin:5px auto;font-size:20px;font-family:'微软雅黑'; }
 .com_admin_list .table_create {
     margin:10px auto;
@@ -220,6 +224,16 @@ select { margin:5px auto;font-size:20px;font-family:'微软雅黑'; }
 
 
 .center { text-align:center; }
+
+
+/*=== 企业后台图片找图按钮 ===*/
+.pic_find {
+    padding:5px 20px;
+    color:white;
+    background:red;
+    cursor:pointer;
+}
+/*=== 企业后台图片找图按钮 ===*/
 
 
 /*===企业后台详情页面的内容 ===*/

@@ -53,6 +53,7 @@ Route::group(['prefix'=>'company','namespace'=>'Company'], function(){
         Route::post('contact/{id}','ContactController@update');
         Route::resource('contact','ContactController');
             //服务路由
+        Route::post('firm/{id}','FirmController@update');
         Route::resource('firm','FirmController');
 //            //团队路由
 //        Route::resource('team','TeamController');
@@ -76,7 +77,18 @@ Route::group(['prefix'=>'company','namespace'=>'Company'], function(){
         Route::post('job/{id}','JobController@update');
         Route::resource('job','JobController');
             //图片管理路由
+        Route::get('pic/trash','PicController@trash');
+        Route::get('pic/{id}/destroy','PicController@destroy');
+        Route::get('pic/{id}/restore','PicController@restore');
+        Route::get('pic/{id}/forceDelete','PicController@forceDelete');
+        Route::post('pic/{id}','PicController@update');
         Route::resource('pic','PicController');
             //视频管理路由
+        Route::get('video/trash','VideoController@trash');
+        Route::get('video/{id}/destroy','VideoController@destroy');
+        Route::get('video/{id}/restore','VideoController@restore');
+        Route::get('video/{id}/forceDelete','VideoController@forceDelete');
+        Route::post('video/{id}','VideoController@update');
+        Route::resource('video','VideoController');
     });
 });

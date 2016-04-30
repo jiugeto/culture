@@ -159,6 +159,35 @@ class Tools
     }
 
     /**
+     * 文件上传
+     * @param string $file 表单中上传的文件
+     * @return string $filePath 上传文件保存的路径
+     */
+    public static function uploadVideo($file)
+    {
+        //上传，并处理文件
+        if($file->isValid()){
+            $allowed_extensions = ["flv", "mpeg4", "mkv", "avi", "rm", "wmv", "mov"];
+            if ($file->getClientOriginalExtension() && !in_array($file->getClientOriginalExtension(), $allowed_extensions)) {
+//                return '你的文件格式不对：txt，doc，xls，zip，rar，ppt，jnt。';
+                $jump['module'] = '图片上传';
+                $jump['msg'] = '你的文件格式不对：flv，mpeg4，mkv，avi，rm，wmv，mov。';
+                return view('member.common.jump', compact('jump'));
+            }
+            $extension       = $file->getClientOriginalExtension() ?: 'png';
+            $folderName      = '/uploads/videos/'.date('Y-m-d', time()).'/';
+            $destinationPath = public_path().$folderName;
+            $safeName        = uniqid().'.'.$extension;
+            $file->move($destinationPath, $safeName);
+            $filePath = $folderName.$safeName;
+            return $filePath;
+        } else {
+            echo "你的文件格式不对，请重新选择。";
+            return view('admin.index');
+        }
+    }
+
+    /**
      * 缩略图处理
      * @param string $filePath 已上传的原始文件
      * @param int $width 缩略图宽度
