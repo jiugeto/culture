@@ -115,6 +115,13 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::post('comfirm/{id}','ComFirmController@update');
     Route::get('comfirm/{id}/forceDelete','ComFirmController@forceDelete');
     Route::resource('comfirm','ComFirmController');
+        //企业宣传路由
+    Route::get('comppt/trash','ComPptController@trash');
+    Route::post('comppt/{id}','ComPptController@update');
+    Route::get('comppt/{id}/destroy','OpinionsController@destroy');
+    Route::get('comppt/{id}/restore','OpinionsController@restore');
+    Route::get('comppt/{id}/forceDelete','OpinionsController@forceDelete');
+    Route::resource('comppt','ComPptController');
     //广告路由
         //广告管理
     Route::resource('ad','AdController');

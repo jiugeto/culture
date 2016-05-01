@@ -2,47 +2,63 @@
 @section('content')
     <div class="com_ppt">
         <div class="com_ad">
-            <a href="##"><img src="##"></a>
+            @foreach($ppts as $ppt)
+            <div class="ppt_img">
+                <div class="img"><a href="{{ $ppt->url }}"><img src="{{ $ppt->pic()?$ppt->pic()->url:'' }}"></a></div>
+            </div>
+            @endforeach
         </div>
         <div class="com_ppt_point">
             <ul>
-                <li class="li_curr"></li>
+                @foreach($ppts as $ppt)
+                {{--<li class="li_curr"></li>--}}
                 <li></li>
-                <li></li>
-                <li></li>
+                @endforeach
             </ul>
         </div>
     </div>
 
     <div class="com_floor1">
         <br><hr>
-        <p>→ OUR SERVICE 某某服务板块 <span class="float_right"><a href="">详情</a></span></p>
-        <div class="com_floor">
+        <p>→ OUR SERVICE 服务项目 <span class="float_right"><a href="">详情</a></span></p>
+        <a class="com_floor">
+            @foreach($firms as $firm)
             <span class="service">
-                <div>
-                    <p class="title">标题</p>
-                    <p>内容内容内容内容内容内容内容内容内容内容</p>
+                <div class="serve">
+                    <p class="title">{{ $firm->name }}</p>
+                    <p>{{ $firm->detail }}</p>
                 </div>
             </span>
+            @endforeach
         </div>
     </div>
 
     <div class="com_floor2">
         <br><hr>
-        <p>→ OUR NEWS 某某新闻 <span class="float_right"><a href="">更多</a></span></p>
+        <p>→ OUR NEWS 新闻咨询 <span class="float_right"><a href="">更多</a></span></p>
         <div class="com_floor">
             <div class="com_news">
                 <div><img src="/uploads/images/2016/ppt.png"></div>
             </div>
             <div class="com_news_text">
                 <p class="title">公司新闻</p>
-                <p>1 regbfrgfb</p>
-                <p>2 regbfrgfb</p>
+                @foreach($news as $new)
+                    @if($new->type==4)
+                    <p>{{ $new->name }}
+                        <span style="float:right;">{{ $new->created_at }}</span>
+                    </p>
+                    @endif
+                @endforeach
             </div>
             <div class="trade_news">
                 <p class="title">行业资讯</p>
-                <p>1 rgtnhtrnhg</p>
-                <p>2 rgtnhtrnhg</p>
+                @foreach($news as $new)
+                    @if($new->type==5)
+                    <p>{{ $new->name }}
+                        <span style="float:right;">{{ $new->created_at }}</span>
+                    </p>
+                    @endif
+                @endforeach
             </div>
         </div>
     </div>

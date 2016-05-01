@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>微文化-个人页面</title>
+    <title>微文化-企业{{ Session::has('user.cid')?unserialize(Session::get('user.company'))['name']:'' }}页面</title>
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="/assets/images/icon.png">
     <link rel="stylesheet" type="text/css" href="/assets-home/css/home.css">

@@ -26,14 +26,28 @@
 /*===== 主体样式 =====*/
 .com_body {
     margin:0 auto;
-    width:1000px;/*height:700px;*/
+    width:1000px;
+    /*height:700px;*/
     /*background:rgb(250,250,250);*/
 }
 .com_ppt {
     width:100%;height:300px;
     border:1px solid rgb(50,50,50);
 }
-.com_ad { width:100%;height:100%;background:rgb(150,150,150); }
+.com_ad {
+    width:1000px;height:300px;
+    background:rgb(150,150,150);
+    overflow:hidden;
+}
+.com_ad div.ppt_img {
+    width:3000px;
+    height:300px;
+    float:left;
+}
+.com_ad div.img {
+    width:1000px;height:300px;
+    overflow:hidden;
+}
 .com_ppt_point {
     width:100%;height:30px;
     background:rgb(50,50,50);
@@ -44,10 +58,15 @@
     margin:10px 5px;
     width:10px;height:10px;
     background:gray;
-    list-style:none;float:left;
+    list-style:none;
+    float:left;
 }
 .com_ppt_point li.li_curr { background:white; }
-.com_floor1,.com_floor2,.com_floor3 { clear:both; }
+.com_floor1,.com_floor2,.com_floor3,.com_buttom {
+    margin:20px auto;
+    width:1000px;
+    clear:both;
+}
 .com_floor1 p,.com_floor2 p,.com_floor3 p { border-bottom:1px solid lightgrey; }
 .com_floor1 div.com_floor,.com_floor2 div.com_floor,.com_floor3 div.com_floor {
     /*height:200px;*/
@@ -55,6 +74,11 @@
 }
 /*=== 服务 ===*/
 .com_floor .service { float:left; }
+.com_floor div.serve {
+    margin-right:20px;
+    width:208px;height:198px;
+    border:1px solid lightgrey;
+}
 .com_floor div {
     margin-right:20px;
     width:210px;height:200px;

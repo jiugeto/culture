@@ -71,6 +71,7 @@ class LoginController extends Controller
         $usercompany = isset($companys) ? serialize($companys) : [];
 
         $serial = date('YmdHis',time()).rand(0,10000);
+        $loginTime = date('Y-m-d H:i:s',time());
         //加入session
         Session::put('user.uid',$userModel->id);
         Session::put('user.username',Input::get('username'));
@@ -80,6 +81,8 @@ class LoginController extends Controller
         Session::put('user.limit',$userModel->limit);
         Session::put('user.area',$userModel->area);
         Session::put('user.address',$userModel->address);
+        Session::put('user.cid',isset($companyModel)?$companyModel->id:'');
+        Session::put('user.loginTime',date('Y/m/d H:i:s', time()));
         Session::put('user.person',$userperson);
         Session::put('user.company',$usercompany);
 
@@ -88,7 +91,7 @@ class LoginController extends Controller
             'plat'=> 2,     //1用户登录
             'uid'=> $userModel->id,
             'uname'=> Input::get('username'),
-            'loginTime'=> date('Y-m-d',time()),
+            'loginTime'=> date('Y-m-d H:i:s',time()),
             'serial'=> $serial,
             'created_at'=> $userModel->created_at,
         ];
@@ -100,7 +103,7 @@ class LoginController extends Controller
     public function dologout()
     {
         //更新用户日志表
-        $logoutTime = date('Y-m-d',time());
+        $logoutTime = date('Y-m-d H:i:s',time());
         UserlogModel::where('serial',Session::get('user.serial'))
                     ->update(['logoutTime'=>$logoutTime]);
         //去除session
@@ -112,6 +115,8 @@ class LoginController extends Controller
         Session::forget('user.limit');
         Session::forget('user.area');
         Session::forget('user.address');
+        Session::forget('user.cid');
+        Session::forget('user.loginTime');
         Session::forget('user.person');
         Session::forget('user.company');
         return redirect('/login');

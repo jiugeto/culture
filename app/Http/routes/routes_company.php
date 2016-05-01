@@ -15,7 +15,7 @@ Route::group(['prefix'=>'company','namespace'=>'Company'], function(){
         //产品路由
     Route::resource('product','ProductController');
         //花絮路由
-    Route::resource('brief','BriefController');
+    Route::resource('part','PartController');
         //服务路由
     Route::resource('firm','FirmController');
         //团队路由
@@ -32,7 +32,7 @@ Route::group(['prefix'=>'company','namespace'=>'Company'], function(){
         //权限路由
         Route::resource('auth','AuthController');
         //公司信息路由
-//        Route::resource('info','InfoController');
+        Route::resource('cominfo','ComInfoController');
             //布局路由
         Route::resource('layout','LayoutController');
             //基本设置路由
@@ -55,8 +55,6 @@ Route::group(['prefix'=>'company','namespace'=>'Company'], function(){
             //服务路由
         Route::post('firm/{id}','FirmController@update');
         Route::resource('firm','FirmController');
-//            //团队路由
-//        Route::resource('team','TeamController');
             //产品路由
         Route::get('product/trash','ProductController@trash');
         Route::get('product/{id}/destroy','ProductController@destroy');
@@ -90,5 +88,12 @@ Route::group(['prefix'=>'company','namespace'=>'Company'], function(){
         Route::get('video/{id}/forceDelete','VideoController@forceDelete');
         Route::post('video/{id}','VideoController@update');
         Route::resource('video','VideoController');
+            //宣传编辑
+        Route::get('ppt/trash','PptController@trash');
+        Route::get('ppt/{id}/destroy','PptController@destroy');
+        Route::get('ppt/{id}/restore','PptController@restore');
+        Route::get('ppt/{id}/forceDelete','PptController@forceDelete');
+        Route::post('ppt/{id}','PptController@update');
+        Route::resource('ppt','PptController');
     });
 });

@@ -19,7 +19,7 @@
         @if($companyMenu->pid==0)
             @if($companyMenu->pid==0)
             <a href="/{{$companyMenu->platUrl}}/{{$companyMenu->url}}"><div>
-                <span>@if($companyMenu->url=='home')<img src="/assets/images/home.png">@elseif(in_array($companyMenu->url,['auth','info','content']))<img src="/assets/images/tool.png">@endif</span>
+                <span>@if($companyMenu->url=='home')<img src="/assets/images/home.png">@elseif(in_array($companyMenu->url,['auth','cominfo','content']))<img src="/assets/images/tool.png">@endif</span>
                 {{ $companyMenu->name }}
                 </div></a>
             @if($companyMenu->child)

@@ -5,8 +5,15 @@
     <table>
         <tr><td></td><td></td></tr>
         <tr>
-            <td class="left">某某公司管理中心</td>
-            <td class="right"><a href="">返回某某公司首页</a> &nbsp;&nbsp;登陆者：某某某某 &nbsp;&nbsp; 时间：2016/01/01</td>
+            <td class="left">
+                {{ Session::has('user.company') ? unserialize(Session::get('user.company'))['name'] : '未知公司' }}后台管理中心
+            </td>
+            <td class="right">
+                <a href="/company/home"
+                    title="返回到{{ Session::has('user.company') ? unserialize(Session::get('user.company'))['name'] : '未知公司' }}企业首页">返回公司首页</a>
+                &nbsp;&nbsp;登陆者：{{ Session::has('user.uid')?Session::get('user.username'):'未知' }} &nbsp;&nbsp;
+                时间：{{ Session::has('user.loginTime')?Session::get('user.loginTime'):'未知' }}
+            </td>
         </tr>
     </table>
 </div>

@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers\Company\Admin;
 
+use App\Models\Admin\MenusModel;
+
 class LayoutController extends BaseController
 {
     /**
@@ -9,14 +11,22 @@ class LayoutController extends BaseController
 
     public function __construct()
     {
-        $this->list['func']['name'] = '页面布局';
-        $this->list['func']['url'] = 'layout';
+        parent::__construct();
+        $this->lists['category']['name'] = '公司信息';
+        $this->lists['category']['url'] = 'cominfo';
+        $this->lists['func']['name'] = '页面布局';
+        $this->lists['func']['url'] = 'layout';
     }
 
     public function index()
     {
+        $curr['name'] = $this->lists['show']['name'];
+        $curr['url'] = $this->lists['show']['url'];
+        //功能页面设置
+//        $funcs = MenusModel::where()->get();
         $result = [
-            'lists'=> $this->list,
+            'lists'=> $this->lists,
+            'curr'=> $curr,
         ];
         return view('company.admin.layout.index', $result);
     }

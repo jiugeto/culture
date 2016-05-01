@@ -10,15 +10,15 @@ class BriefController extends BaseController
     public function __construct()
     {
         $this->list['func']['name'] = '花絮';
-        $this->list['func']['url'] = 'brief';
+        $this->list['func']['url'] = 'part';
     }
 
     public function index()
     {
         $result = [
             'topmenus'=> $this->topmenus,
-            'curr'=> 'brief',
+            'curr'=> 'part',
         ];
-        return view('company.brief.index', $result);
+        return view('company.part.index', $result);
     }
 }
