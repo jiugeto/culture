@@ -253,7 +253,7 @@ span.float_right a:hover { text-decoration:underline; }
 }
 .com_firm .com_firm_con {
     padding:0 80px;
-    height:820px;
+    height:420px;
     background:rgb(240,240,240);
 }
 .com_firm_con span { float:left; }
@@ -264,8 +264,10 @@ span.float_right a:hover { text-decoration:underline; }
 }
 .com_firm_con .onlyone p,.com_firm_con .onlyone div { margin:10px auto; }
 .com_firm_con .onlyone div.title {
-    margin:0 auto;
+    /*margin:0 auto;*/
     padding-top:20px;
+    width:100px;
+    text-align:center;
     font-size:20px;
     border:0;
 }

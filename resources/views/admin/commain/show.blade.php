@@ -43,22 +43,22 @@
                     <td class="am-hide-sm-only">logo / Logo：</td>
                     <td><img src="{{ $data->logo }}"></td>
                 </tr>
-                <tr>
-                    <td class="am-hide-sm-only">招聘的岗位 / Job：</td>
-                    <td>
-                        @if(isset($data->jobs) && $data->jobs)
-                            @foreach($data->jobs as $job) {{ $job }}<br> @endforeach
-                        @endif
-                    </td>
-                </tr>
-                <tr>
-                    <td class="am-hide-sm-only">招聘的岗位要求 / Job Require：</td>
-                    <td>
-                        @if(isset($data->jobRequires) && $data->jobRequires)
-                            @foreach($data->jobRequires as $jobRequire) {{ $jobRequire }}<br> @endforeach
-                        @endif
-                    </td>
-                </tr>
+                {{--<tr>--}}
+                    {{--<td class="am-hide-sm-only">招聘的岗位 / Job：</td>--}}
+                    {{--<td>--}}
+                        {{--@if(isset($data->jobs) && $data->jobs)--}}
+                            {{--@foreach($data->jobs as $job) {{ $job }}<br> @endforeach--}}
+                        {{--@endif--}}
+                    {{--</td>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                    {{--<td class="am-hide-sm-only">招聘的岗位要求 / Job Require：</td>--}}
+                    {{--<td>--}}
+                        {{--@if(isset($data->jobRequires) && $data->jobRequires)--}}
+                            {{--@foreach($data->jobRequires as $jobRequire) {{ $jobRequire }}<br> @endforeach--}}
+                        {{--@endif--}}
+                    {{--</td>--}}
+                {{--</tr>--}}
                 <tr>
                     <td class="am-hide-sm-only">排序 / Sort：</td>
                     <td>{{ $data->sort }}</td>

@@ -46,31 +46,31 @@
                         @endif
                         </div>
 
-                        <div class="am-form-group" id="job">
-                            <label>招聘岗位 / Job：(多组信息用|隔开)</label>
-                            <textarea placeholder="多组信息用|隔开" name="job" cols="50" rows="5">{{ $data->job }}</textarea>
-                        </div>
+                        {{--<div class="am-form-group" id="job">--}}
+                            {{--<label>招聘岗位 / Job：(多组信息用|隔开)</label>--}}
+                            {{--<textarea placeholder="多组信息用|隔开" name="job" cols="50" rows="5">{{ $data->job }}</textarea>--}}
+                        {{--</div>--}}
 
-                        <div class="am-form-group" id="num">
-                            <label>岗位人数 / Job Number：(多组信息用|隔开，必须与岗位一一对应)</label>
-                            <textarea placeholder="多组信息用|隔开" name="job_num" cols="50" rows="5">{{ $data->job_num }}</textarea>
-                        </div>
+                        {{--<div class="am-form-group" id="num">--}}
+                            {{--<label>岗位人数 / Job Number：(多组信息用|隔开，必须与岗位一一对应)</label>--}}
+                            {{--<textarea placeholder="多组信息用|隔开" name="job_num" cols="50" rows="5">{{ $data->job_num }}</textarea>--}}
+                        {{--</div>--}}
 
-                        <div class="am-form-group" id="require">
-                            <label>招聘岗位要求 / Job Require：(多组信息用|隔开，必须与岗位一一对应)</label>
-                            <textarea placeholder="多组信息用|隔开" name="job_require" cols="50" rows="5">{{ $data->job_require }}</textarea>
-                        </div>
-                        <script>
-                            $(document).ready(function(){
-                                var job = $("#job");
-                                var num = $("#num");
-                                var require = $("#require");
-                                job.change(function(){
-                                    if(job.val()){ num.show(); require.show(); }
-                                    else { num.hide(); require.hide(); }
-                                });
-                            });
-                        </script>
+                        {{--<div class="am-form-group" id="require">--}}
+                            {{--<label>招聘岗位要求 / Job Require：(多组信息用|隔开，必须与岗位一一对应)</label>--}}
+                            {{--<textarea placeholder="多组信息用|隔开" name="job_require" cols="50" rows="5">{{ $data->job_require }}</textarea>--}}
+                        {{--</div>--}}
+                        {{--<script>--}}
+                            {{--$(document).ready(function(){--}}
+                                {{--var job = $("#job");--}}
+                                {{--var num = $("#num");--}}
+                                {{--var require = $("#require");--}}
+                                {{--job.change(function(){--}}
+                                    {{--if(job.val()){ num.show(); require.show(); }--}}
+                                    {{--else { num.hide(); require.hide(); }--}}
+                                {{--});--}}
+                            {{--});--}}
+                        {{--</script>--}}
 
                         <div class="am-form-group">
                             <label>排序 / Sort：</label>

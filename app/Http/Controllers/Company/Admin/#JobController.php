@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Company\Admin;
 
-use App\Models\Company\ComJobModel;
+use App\Models\Company\ComMainModel;
 use Illuminate\Http\Request;
 
 class JobController extends BaseController
@@ -23,10 +23,10 @@ class JobController extends BaseController
 
     public function index()
     {
-        $curr['name'] = $this->lists['']['name'];
-        $curr['url'] = $this->lists['']['url'];
+        $curr['name'] = $this->lists['show']['name'];
+        $curr['url'] = $this->lists['show']['url'];
         $result = [
-            'datas'=> $this->query($del=0),
+            'data'=> $this->query(),
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -133,16 +133,13 @@ class JobController extends BaseController
 
 
 
-    public function query($del)
+    public function query()
     {
-//        $jobModels = ComJobModel::where('del',$del)
-//                    ->where('isshow',1)
-//                    ->orderBy('sort','desc')
-//                    ->orderBy('id','desc')
-//                    ->paginate($this->limit);
-        $jobModels = ComJobModel::where('cid',$this->cid)->get();
-        //假如记录不足，则补充
-        if (count($jobModels) && count($jobModels)<$th) {}
-        //假如没有记录，则添加
+        $this->cid = 0;     //假如默认值
+        $data = ComMainModel::where('cid',$this->cid)->first();
+        if ($data && $data->job) { $data->jobs = explode('|',$data->job); }
+        if ($data && $data->job_require) { $data->jobRequires = explode('|',$data->job_require); }
+        if ($data && $data->job_num) { $data->nums = explode('|',$data->job_num); }
+        return $data;
     }
 }

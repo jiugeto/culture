@@ -29,4 +29,9 @@ class ComFirmModel extends BaseModel
     {
         return $this->pic_id ? PicModel::find($this->pic_id) :'';
     }
+
+    public function smalls()
+    {
+        return $this->small ? explode('|',$this->small) : [];
+    }
 }
