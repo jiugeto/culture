@@ -552,7 +552,7 @@ CREATE TABLE `bs_com_jobs` (
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='企业招聘表';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='企业招聘表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -561,7 +561,7 @@ CREATE TABLE `bs_com_jobs` (
 
 LOCK TABLES `bs_com_jobs` WRITE;
 /*!40000 ALTER TABLE `bs_com_jobs` DISABLE KEYS */;
-INSERT INTO `bs_com_jobs` VALUES (1,0,'挂号费和法国','sdfghjjhertyuikkjmnb v fgtyyjuhngbvd','某某岗位',1,'某某岗位要求',10,10,0,0,1,0,0,'2016-04-27 00:00:00','2016-04-27 00:00:00'),(2,0,'挂号费和法国','sdfghjjhertyuikkjmnb v fgtyyjuhngbvd','工作22',2,'工作要求工作要求工作要求工作要求工作要求工作要求工作要求工作要求',10,10,0,0,1,0,0,'2016-05-02 02:05:41','2016-05-02 02:33:51');
+INSERT INTO `bs_com_jobs` VALUES (1,0,'挂号费和法国','sdfghjjhertyuikkjmnb v fgtyyjuhngbvd','某某岗位',1,'某某岗位要求',10,10,0,0,1,0,0,'2016-04-27 00:00:00','2016-04-27 00:00:00'),(2,0,'挂号费和法国','sdfghjjhertyuikkjmnb v fgtyyjuhngbvd','工作22',2,'工作要求工作要求工作要求工作要求工作要求工作要求工作要求工作要求',10,10,0,0,1,0,0,'2016-05-02 02:05:41','2016-05-02 02:33:51'),(3,1,'挂号费和法国','sdfghjjhertyuikkjmnb v fgtyyjuhngbvd','某某岗位',1,'某某岗位要求',10,10,0,0,1,0,0,'2016-05-02 17:20:32','0000-00-00 00:00:00'),(4,1,'挂号费和法国','sdfghjjhertyuikkjmnb v fgtyyjuhngbvd','工作22',2,'工作要求工作要求工作要求工作要求工作要求工作要求工作要求工作要求',10,10,0,0,1,0,0,'2016-05-02 17:20:32','0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `bs_com_jobs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1857,4 +1857,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-05-03  0:57:22
+-- Dump completed on 2016-05-03  2:01:24

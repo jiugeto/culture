@@ -49,7 +49,7 @@
 
                 <tr>
                     <td class="field_name"><label>排序：</label></td>
-                    <td class="right"><input type="text" class="field_value" pattern="^\d+$" required name="sort2"/></td>
+                    <td class="right"><input type="text" class="field_value" pattern="^\d+$" required name="sort2" value="10"/></td>
                 </tr>
                 {{--<tr><td></td></tr>--}}
 
@@ -57,7 +57,7 @@
                     <td class="field_name"><label>前台公司页面显示否：</label></td>
                     <td class="right">
                         <label><input type="radio" name="isshow2" value="0"> 不显示&nbsp;&nbsp;</label>
-                        <label><input type="radio" name="isshow2" value="1"> 显示&nbsp;&nbsp;</label>
+                        <label><input type="radio" name="isshow2" value="1" checked> 显示&nbsp;&nbsp;</label>
                     </td>
                 </tr>
                 {{--<tr><td></td></tr>--}}

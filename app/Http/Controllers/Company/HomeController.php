@@ -42,7 +42,8 @@ class HomeController extends BaseController
         $pptModels = ComPptModel::where('cid',$this->cid)->get();
         $pptModels0 = ComPptModel::where('cid',0)->get();
         //有则补充记录
-        if (count($pptModels) && count($pptModels)<$this->comPptNum) {
+//        if (count($pptModels) && count($pptModels)<$this->comPptNum) {
+        if (count($pptModels) && count($pptModels)<count($pptModels0)) {
             foreach ($pptModels0 as $key=>$pptModel) {
                 if ($pptModels0[$key]->cid!=$this->cid) {
                     $data = [
@@ -81,7 +82,8 @@ class HomeController extends BaseController
         $firmModels = ComFirmModel::where('cid',$this->cid)->get();
         $firmModels0 = ComFirmModel::where('cid',0)->get();
         //有则补充记录
-        if (count($firmModels) && count($firmModels)<$this->firmNum) {
+//        if (count($firmModels) && count($firmModels)<$this->firmNum) {
+        if (count($firmModels) && count($firmModels)<count($firmModels0)) {
             foreach ($firmModels0 as $key=>$firmModel) {
                 if ($firmModels0[$key]->cid!=$this->cid) {
                     $data = [
@@ -124,8 +126,9 @@ class HomeController extends BaseController
     {
         //假如没有。即可生成默认记录
         $newModels = ComInfoModel::where('cid',$this->cid)->whereIn('type',[4,5])->get();
+        $newModels0 = ComInfoModel::where('cid',0)->whereIn('type',[4,5])->get();
         if (!count($newModels)) {
-            foreach (ComInfoModel::where('cid',0)->whereIn('type',[4,5])->get() as $newModel) {
+            foreach ($newModels0 as $newModel) {
                 $data = [
                     'name'=> $newModel->name,
                     'cid'=> $this->cid,
