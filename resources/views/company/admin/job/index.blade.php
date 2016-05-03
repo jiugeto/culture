@@ -25,7 +25,7 @@
                 @foreach($datas as $data)
             <tr>
                 <td>{{ $data->id }}</td>
-                <td><a href="/company/admin/job/{{ $data['id'] }}" class="list_a">{{ $data->name ? $data->name : '企业默认信息' }}</a></td>
+                <td><a href="/company/admin/job/{{ $data['id'] }}" class="list_a">{{ $data->job ? $data->job : '企业默认信息' }}</a></td>
                 <td>{{ $data->sort2 }}</td>
                 <td>{{ $data->isshow2 ? '显示' : '不显示' }}</td>
                 <td>{{ $data->created_at }}</td>

@@ -70,6 +70,10 @@ Route::group(['prefix'=>'company','namespace'=>'Company'], function(){
         Route::post('part/{id}','PartController@update');
         Route::resource('part','PartController');
             //招聘路由
+        Route::get('job/trash','JobController@trash');
+        Route::get('job/{id}/destroy','JobController@destroy');
+        Route::get('job/{id}/restore','JobController@restore');
+        Route::get('job/{id}/forceDelete','JobController@forceDelete');
         Route::post('job/{id}','JobController@update');
         Route::resource('job','JobController');
             //图片管理路由

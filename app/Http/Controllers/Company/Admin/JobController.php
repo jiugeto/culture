@@ -33,6 +33,18 @@ class JobController extends BaseController
         return view('company.admin.job.index', $result);
     }
 
+    public function trash()
+    {
+        $curr['name'] = $this->lists['trash']['name'];
+        $curr['url'] = $this->lists['trash']['url'];
+        $result = [
+            'datas'=> $this->query($del=1),
+            'lists'=> $this->lists,
+            'curr'=> $curr,
+        ];
+        return view('company.admin.job.index', $result);
+    }
+
     public function create()
     {
         $curr['name'] = $this->lists['create']['name'];
@@ -73,6 +85,36 @@ class JobController extends BaseController
         ComJobModel::where('cid',$this->cid)
             ->update(['name'=>$request->name, 'intro'=>$request->intro]);
         return redirect('/company/admin/job');
+    }
+
+    public function show($id)
+    {
+        $curr['name'] = $this->lists['show']['name'];
+        $curr['url'] = $this->lists['show']['url'];
+        $result = [
+            'data'=> ComJobModel::find($id),
+            'lists'=> $this->lists,
+            'curr'=> $curr,
+        ];
+        return view('company.admin.job.show', $result);
+    }
+
+    public function destroy($id)
+    {
+        ComJobModel::where('id',$id)->update(['del'=> 1]);
+        return redirect('/company/admin/job');
+    }
+
+    public function restore($id)
+    {
+        ComJobModel::where('id',$id)->update(['del'=> 0]);
+        return redirect('/company/admin/job/trash');
+    }
+
+    public function forceDelete($id)
+    {
+        ComJobModel::where('id',$id)->delete();
+        return redirect('/company/admin/job/trash');
     }
 
 

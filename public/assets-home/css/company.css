@@ -304,9 +304,13 @@ span.float_right a:hover { text-decoration:underline; }
     border:1px solid lightgrey;
 }
 .com_recruit_con td {
-    padding:20px;
+    padding:5px 20px;
     text-align:center;
     font-size:18px;
 }
-.com_recruit_con td.left { width:30%; }
+.com_recruit_con td.left { width:150px; }
+.com_recruit_con td.second { width:50px; }
+/*.com_recruit_con td.third { width:200px; }*/
+.com_recruit_con td.four { width:100px; }
+.com_recruit_con td.four_text { font-size:14px;color:grey; }
 /*===== 招聘列表页面 =====*/

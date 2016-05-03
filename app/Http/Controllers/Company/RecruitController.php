@@ -1,7 +1,8 @@
 <?php
 namespace App\Http\Controllers\Company;
 
-use App\Models\Company\ComMainModel;
+use App\Models\Company\ComJobModel;
+use App\Models\CompanyModel;
 
 class RecruitController extends BaseController
 {
@@ -18,8 +19,10 @@ class RecruitController extends BaseController
 
     public function index()
     {
+        if ($this->cid) { $companyModel = CompanyModel::find($this->cid); }
         $result = [
-            'data'=> $this->query(),
+            'datas'=> $this->query(),
+            'company'=> isset($companyModel)?$companyModel:'',
             'topmenus'=> $this->topmenus,
             'curr'=> 'recruit',
         ];
@@ -28,10 +31,24 @@ class RecruitController extends BaseController
 
     public function query()
     {
-        $data = ComMainModel::where('cid',$this->cid)->get();
-        $data->jobs = $data->job?explode('|',$data->job):[];
-        $data->jobNums = $data->job_num?explode('|',$data->job_num):0;
-        $data->jobRequires = $data->job_require?explode('|',$data->job_require):[];
-        return $data;
+        $datas = ComJobModel::where('del',0)
+                    ->where('cid',$this->cid)
+                    ->where('isshow',1)
+                    ->where('isshow2',1)
+                    ->orderBy('istop','desc')
+                    ->orderBy('istop2','desc')
+                    ->orderBy('sort','desc')
+                    ->orderBy('sort2','desc')
+                    ->orderBy('id','desc')
+                    ->get();
+        if (!$datas) {
+            $datas = ComJobModel::where('cid',0)
+                ->where('isshow',1)
+                ->orderBy('istop','desc')
+                ->orderBy('sort','desc')
+                ->orderBy('id','desc')
+                ->get();
+        }
+        return $datas;
     }
 }
