@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Company\Admin;
 
-use App\Models\Company\ComMainModel;
+use App\Models\Company\ComJobModel;
 use Illuminate\Http\Request;
 
 class JobController extends BaseController
@@ -23,47 +23,44 @@ class JobController extends BaseController
 
     public function index()
     {
-        $curr['name'] = $this->lists['show']['name'];
-        $curr['url'] = $this->lists['show']['url'];
+        $curr['name'] = $this->lists['']['name'];
+        $curr['url'] = $this->lists['']['url'];
         $result = [
-            'data'=> $this->query(),
+            'datas'=> $this->query($del=0),
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
         return view('company.admin.job.index', $result);
     }
 
-    public function create($id)
+    public function trash()
+    {
+        $curr['name'] = $this->lists['trash']['name'];
+        $curr['url'] = $this->lists['trash']['url'];
+        $result = [
+            'datas'=> $this->query($del=1),
+            'lists'=> $this->lists,
+            'curr'=> $curr,
+        ];
+        return view('company.admin.job.index', $result);
+    }
+
+    public function create()
     {
         $curr['name'] = $this->lists['create']['name'];
         $curr['url'] = $this->lists['create']['url'];
         $result = [
             'lists'=> $this->lists,
             'curr'=> $curr,
-            'id'=> $id,
         ];
         return view('company.admin.job.create', $result);
     }
 
     public function store(Request $request)
     {
-        //取出值
-        $jobModel = ComMainModel::find($request->id);
-        $jobs = $jobModel->job?explode('|',$jobModel->job):[];
-        $jobNums = $jobModel->job_num?explode('|',$jobModel->job_num):[];
-        $jobRequires = $jobModel->job_require?explode('|',$jobModel->job_require):[];
-        //修改值
-        $index = $request->index;
-        $jobs[] = $request->job;
-        $jobNums[] = $request->num;
-        $jobRequires[] = $request->require;
-        //还原字符串，更新表
-        $data = [
-            'job'=> implode('|',$jobs),
-            'job_num'=> implode('|',$jobNums),
-            'job_require'=> implode('|',$jobRequires),
-        ];
-        ComMainModel::where('id',$request->id)->update($data);
+        $data = $this->getData($request);
+        $data['created_at'] = date('Y-m-d H:i:s', time());
+        ComJobModel::create($data);
         return redirect('/company/admin/job');
     }
 
@@ -71,75 +68,121 @@ class JobController extends BaseController
     {
         $curr['name'] = $this->lists['edit']['name'];
         $curr['url'] = $this->lists['edit']['url'];
-        $arr = explode('-',$id); $index = $arr[1];
-        $data = ComMainModel::find($arr[0]);
-        $jobs = explode('|',$data->job);
-        $jobNums = explode('|',$data->job_num);
-        $jobRequires = explode('|',$data->job_require);
-        $data->job = $jobs[$index];
-        $data->num = $jobNums[$index];
-        $data->require = $jobRequires[$index];
         $result = [
-            'data'=> $data,
+            'data'=> ComJobModel::find($id),
             'lists'=> $this->lists,
             'curr'=> $curr,
-            'index'=> $arr[1],
         ];
         return view('company.admin.job.edit', $result);
     }
 
     public function update(Request $request,$id)
     {
-        //取出值
-        $jobModel = ComMainModel::find($id);
-        $jobs = explode('|',$jobModel->job);
-        $jobNums = explode('|',$jobModel->job_num);
-        $jobRequires = explode('|',$jobModel->job_require);
-        //修改值
-        $index = $request->index;
-        $jobs[$index] = $request->job;
-        $jobNums[$index] = $request->num;
-        $jobRequires[$index] = $request->require;
-        //还原字符串，更新表
-        $data = [
-            'job'=> implode('|',$jobs),
-            'job_num'=> implode('|',$jobNums),
-            'job_require'=> implode('|',$jobRequires),
-        ];
-        ComMainModel::where('id',$id)->update($data);
+        $data = $this->getData($request);
+        $data['updated_at'] = date('Y-m-d H:i:s', time());
+        ComJobModel::where('id',$id)->update($data);
+        //同时修改相关其他记录
+        ComJobModel::where('cid',$this->cid)
+            ->update(['name'=>$request->name, 'intro'=>$request->intro]);
         return redirect('/company/admin/job');
     }
 
-    public function del($id)
+    public function show($id)
     {
-        $arr = explode('-',$id); $index = $arr[1];
-        $data = ComMainModel::find($arr[0]);
-        $jobs = explode('|',$data->job);
-        $jobNums = explode('|',$data->job_num);
-        $jobRequires = explode('|',$data->job_require);
-        unset($jobs[$index]); sort($jobs);
-        unset($jobNums[$index]); sort($jobNums);
-        unset($jobRequires[$index]); sort($jobRequires);
-        $data = [
-            'job'=> implode('|',$jobs),
-            'job_num'=> implode('|',$jobNums),
-            'job_require'=> implode('|',$jobRequires),
+        $curr['name'] = $this->lists['show']['name'];
+        $curr['url'] = $this->lists['show']['url'];
+        $result = [
+            'data'=> ComJobModel::find($id),
+            'lists'=> $this->lists,
+            'curr'=> $curr,
         ];
-        ComMainModel::where('id',$id)->update($data);
+        return view('company.admin.job.show', $result);
+    }
+
+    public function destroy($id)
+    {
+        ComJobModel::where('id',$id)->update(['del'=> 1]);
         return redirect('/company/admin/job');
+    }
+
+    public function restore($id)
+    {
+        ComJobModel::where('id',$id)->update(['del'=> 0]);
+        return redirect('/company/admin/job/trash');
+    }
+
+    public function forceDelete($id)
+    {
+        ComJobModel::where('id',$id)->delete();
+        return redirect('/company/admin/job/trash');
     }
 
 
 
 
 
-    public function query()
+    public function getData(Request $request)
     {
-        $this->cid = 0;     //假如默认值
-        $data = ComMainModel::where('cid',$this->cid)->first();
-        if ($data && $data->job) { $data->jobs = explode('|',$data->job); }
-        if ($data && $data->job_require) { $data->jobRequires = explode('|',$data->job_require); }
-        if ($data && $data->job_num) { $data->nums = explode('|',$data->job_num); }
+        $jobModel = ComJobModel::where('cid',$this->cid)->first();
+        $data = [
+            'name'=> $jobModel->name,
+            'intro'=> $jobModel->intro,
+            'cid'=> $this->cid,
+            'job'=> $request->job,
+            'num'=> $request->num,
+            'require'=> $request->require,
+            'istop2'=> $request->istop2,
+            'sort2'=> $request->sort2,
+            'isshow2'=> $request->isshow2,
+        ];
         return $data;
+    }
+
+    public function query($del)
+    {
+        //判断该公司的招聘有无记录
+        //假如没有。即可生成默认记录
+        $jobModels = ComJobModel::where('cid',$this->cid)->get();
+        $jobModels0 = ComJobModel::where('cid',0)->get();
+        //有则补充记录
+//        if (count($jobModels) && count($jobModels)<$this->comJobNum) {
+        if (count($jobModels) && count($jobModels)<count($jobModels0)) {
+            foreach ($jobModels0 as $key=>$jobModel) {
+                if ($jobModels0[$key]->cid!=$this->cid) {
+                    $data = [
+                        'name'=> $jobModel->name,
+                        'cid'=> $this->cid,
+                        'intro'=> $jobModel->intro,
+                        'job'=> $jobModel->job,
+                        'num'=> $jobModel->num,
+                        'require'=> $jobModel->require,
+                        'created_at'=> date('Y-m-d H:i:s', time()),
+                    ];
+                    ComJobModel::create($data);
+                }
+            }
+        }
+        //无则生成一组记录
+        if (!count($jobModels)) {
+            foreach (ComJobModel::where('cid',0)->get() as $jobModel) {
+                $data = [
+                    'name'=> $jobModel->name,
+                    'cid'=> $this->cid,
+                    'intro'=> $jobModel->intro,
+                    'job'=> $jobModel->job,
+                    'num'=> $jobModel->num,
+                    'require'=> $jobModel->require,
+                    'created_at'=> date('Y-m-d H:i:s', time()),
+                ];
+                ComJobModel::create($data);
+            }
+        }
+
+        return ComJobModel::where('del',$del)
+                    ->where('cid',$this->cid)
+                    ->where('isshow',1)
+                    ->orderBy('sort','desc')
+                    ->orderBy('id','desc')
+                    ->paginate($this->limit);
     }
 }

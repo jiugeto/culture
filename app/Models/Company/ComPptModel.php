@@ -6,7 +6,7 @@ use App\Models\BaseModel;
 
 class ComPptModel extends BaseModel
 {
-    protected $table = 'bs_com_ppts';
+    protected $table = 'com_ppts';
     protected $fillable = [
         'id','pic_id','cid','title','url','sort','sort2','isshow','isshow2','del','created_at','updated_at',
     ];

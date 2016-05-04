@@ -10,7 +10,7 @@ class ComJobModel extends BaseModel
      * 公司后台控制中心：企业招聘表 model
      */
 
-    protected $table = 'bs_com_jobs';
+    protected $table = 'com_jobs';
     protected $fillable = [
         'id','name','cid','intro','job','num','require','sort','sort2','istop','istop2','isshow','isshow2','del','created_at','updated_at',
     ];

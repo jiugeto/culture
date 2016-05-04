@@ -47,6 +47,9 @@ class BaseController extends Controller
             'name'=> '回收站',
             'url'=> 'trash',
         ],
+        'notrash'=> [
+            'action','menus','admin','role','link','commain','cominfo','comfirm','commodule','comfunc'
+        ],
     ];
 
     public function __construct()

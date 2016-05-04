@@ -9,7 +9,7 @@ class ComMainModel extends BaseModel
      * 企业主表 model
      */
 
-    protected $table = 'bs_com_main';
+    protected $table = 'com_main';
     protected $fillable = [
         'id','uid','cid','name','title','keyword','description','logo','job','job_num','job_require','sort','istop','isshow','isshow2','created_at','updated_at',
     ];

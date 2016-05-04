@@ -55,6 +55,9 @@ Route::group(['prefix'=>'company','namespace'=>'Company'], function(){
             //服务路由
         Route::post('firm/{id}','FirmController@update');
         Route::resource('firm','FirmController');
+            //团队路由
+        Route::post('team/{id}','TeamController@update');
+        Route::resource('team','TeamController');
             //产品路由
         Route::get('product/trash','ProductController@trash');
         Route::get('product/{id}/destroy','ProductController@destroy');
