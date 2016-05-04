@@ -21,10 +21,10 @@
                         <div class="am-form-group">
                             <label>所属模块 / Module：</label>
                             <select name="module_id" required>
-                                <option value="0">选择模块</option>
                                 @if(count($modules))
                                     @foreach($modules as $module)
-                                    <option value="{{ $module->id }}">{{ $module->name }}</option>
+                                    <option value="{{ $module->id }}">
+                                        {{ $module->name }}</option>
                                     @endforeach
                                 @endif
                             </select>
@@ -32,10 +32,21 @@
 
                         <div class="am-form-group">
                             <label>类型 / Genre：</label>
-                            <select name="genre" required readonly>
+                            <select name="genre" required>
                                 @if(count($model['genres']))
                                     @foreach($model['genres'] as $kgenre=>$genre)
                                     <option value="{{ $kgenre }}">{{ $genre }}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label>类型 / Type：</label>
+                            <select name="type" required>
+                                @if(count($model['types']))
+                                    @foreach($model['types'] as $ktype=>$type)
+                                    <option value="{{ $ktype }}">{{ $type }}</option>
                                     @endforeach
                                 @endif
                             </select>

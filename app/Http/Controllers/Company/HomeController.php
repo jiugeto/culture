@@ -1,8 +1,7 @@
 <?php
 namespace App\Http\Controllers\Company;
 
-use App\Models\Company\ComFirmModel;
-use App\Models\Company\ComInfoModel;
+use App\Models\Company\ComFuncModel;
 use App\Models\Company\ComPptModel;
 use App\Models\ProductModel;
 
@@ -74,73 +73,44 @@ class HomeController extends BaseController
     }
 
     /**
-     * 企业服务
+     * 企业服务 module==2
      */
     public function getFirms()
     {
         //假如没有。即可生成默认记录
-        $firmModels = ComFirmModel::where('cid',$this->cid)->get();
-        $firmModels0 = ComFirmModel::where('cid',0)->get();
+        $firmModels = $this->getFuncs($cid=$this->cid,$module_id=2);
+        $firmModels0 = $this->getFuncs($cid=0,$module_id=2);
         //有则补充记录
-//        if (count($firmModels) && count($firmModels)<$this->firmNum) {
         if (count($firmModels) && count($firmModels)<count($firmModels0)) {
             foreach ($firmModels0 as $key=>$firmModel) {
                 if ($firmModels0[$key]->cid!=$this->cid) {
-                    $data = [
-                        'name'=> $firmModel->name,
-                        'cid'=> $this->cid,
-                        'intro'=> $firmModel->intro,
-                        'title'=> $firmModel->title,
-                        'pic_id'=> $firmModel->pic_id,
-                        'detail'=> $firmModel->detail,
-                        'small'=> $firmModel->small,
-                        'created_at'=> date('Y-m-d H:i:s', time()),
-                    ];
-                    ComFirmModel::create($data);
+                    ComFuncModel::create($this->getFuncData($module_id=2,$firmModel));
                 }
             }
         }
         //无则生成一组记录
         if (!count($firmModels)) {
-            foreach (ComFirmModel::where('cid',0)->get() as $firmModel) {
-                $data = [
-                    'name'=> $firmModel->name,
-                    'cid'=> $this->cid,
-                    'intro'=> $firmModel->intro,
-                    'title'=> $firmModel->title,
-                    'pic_id'=> $firmModel->pic_id,
-                    'detail'=> $firmModel->detail,
-                    'small'=> $firmModel->small,
-                    'created_at'=> date('Y-m-d H:i:s', time()),
-                ];
-                ComFirmModel::create($data);
+            foreach ($this->getFuncs($cid=0,$module_id=2) as $firmModel) {
+                ComFuncModel::create($this->getFuncData($module_id=2,$firmModel));
             }
         }
-        return ComFirmModel::where('cid',$this->cid)->get();
+        return $this->getFuncs($cid=$this->cid,$module_id=2);
     }
 
     /**
-     * 企业新闻咨询 type 4,5
+     * 企业新闻资讯 module==6
      */
     public function getNews()
     {
         //假如没有。即可生成默认记录
-        $newModels = ComInfoModel::where('cid',$this->cid)->whereIn('type',[4,5])->get();
-        $newModels0 = ComInfoModel::where('cid',0)->whereIn('type',[4,5])->get();
+        $newModels = $this->getFuncs($cid=$this->cid,$module_id=6);
+        $newModels0 = $this->getFuncs($cid=0,$module_id=6);
         if (!count($newModels)) {
             foreach ($newModels0 as $newModel) {
-                $data = [
-                    'name'=> $newModel->name,
-                    'cid'=> $this->cid,
-                    'type'=> $newModel->type,
-                    'intro'=> $newModel->intro,
-                    'pic'=> $newModel->pic,
-                    'created_at'=> date('Y-m-d H:i:s', time()),
-                ];
-                ComInfoModel::create($data);
+                ComFuncModel::create($this->getFuncData($module_id=6,$newModel));
             }
         }
-        return count($newModels)?$newModels:ComFirmModel::where('cid',$this->cid)->whereIn('type',[4,5])->get();
+        return $this->getFuncs($cid=$this->cid,$module_id=6);
     }
 
     /**
@@ -158,4 +128,32 @@ class HomeController extends BaseController
      * 企业合作伙伴
      */
     public function getParterners(){}
+
+    /**
+     * 企业功能查询 未分页
+     */
+    public function getFuncs($cid,$module)
+    {
+        return ComFuncModel::where('cid',$cid)->where('module_id',$module)->get();
+    }
+
+    /**
+     * 收集功能数据
+     */
+    public function getFuncData($module_id,$model)
+    {
+        return array(
+            'name'=> $model->name,
+            'cid'=> $this->cid,
+            'module_id'=> $module_id,
+            'type'=> $model->type,
+            'genre'=> $model->genre,
+            'pic_id'=> $model->pic_id,
+            'intro'=> $model->intro,
+            'small'=> $model->small,
+            'sort'=> $model->sort,
+            'isshow'=> $model->isshow,
+            'created_at'=> date('Y-m-d H:i:s', time()),
+        );
+    }
 }

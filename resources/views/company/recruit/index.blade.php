@@ -12,8 +12,8 @@
             {{--</table>--}}
             {{--<p>请发简历至某某邮箱！</p>--}}
         {{--</div>--}}
-        <div class="title"><div>{{ count($datas) ? $datas[0]->name : '无' }}</div></div>
-        <p>{{ count($datas) ? $datas[0]->intro : '没有简介' }}</p>
+        <div class="title"><div>{{ $job?$job->name:'无' }}</div></div>
+        <p>{!! $job?$job->intro:'无' !!}</p>
         <div class="com_recruit_con">
             <table cellspacing="0">
                 {{--<tr><td class="left">职位</td><td>要求</td></tr>--}}
@@ -29,12 +29,13 @@
                 @if(count($datas))
                     @foreach($datas as $data)
                     <tr>
-                        <td>{{ $data->job }}</td>
-                        <td>{{ $data->num }}</td>
-                        <td><div class="admin_show_con">{{ $data->intro }}</div></td>
+                        <td>{{ $data->name }}</td>
+                        <td>{{ $data->small }}</td>
+                        <td><div class="admin_show_con">{!! $data->intro !!}</div></td>
                         <td class="four_text">{{ $data->updated_at=='0000-00-00 00:00:00' ? $data->created_at : $data->updated_at }}</td>
                     </tr>
                     @endforeach
+                @else @include('member.common.norecord')
                 @endif
             </table>
             <p>

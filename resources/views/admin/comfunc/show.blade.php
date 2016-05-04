@@ -28,6 +28,10 @@
                     <td>{{ $data->company() }}</td>
                 </tr>
                 <tr>
+                    <td class="am-hide-sm-only">功能类型 / Type：</td>
+                    <td>{{ $data->type() }}</td>
+                </tr>
+                <tr>
                     <td class="am-hide-sm-only">类型 / Genre：</td>
                     <td>{{ $data->genre() }}</td>
                 </tr>

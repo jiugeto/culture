@@ -7,7 +7,7 @@
 //    return 'member';
 //});
 
-Route::group(['prefix'=>'company','namespace'=>'Company'], function(){
+Route::group(['prefix'=>'company','middleware' =>'MemberAuth','namespace'=>'Company'], function(){
     //企业页面展示
         //首页路由
     Route::get('/','HomeController@index');

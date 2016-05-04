@@ -26,7 +26,7 @@
             <span class="service">
                 <div class="serve">
                     <p class="title">{{ $firm->name }}</p>
-                    <p>{{ $firm->detail }}</p>
+                    <p>{{ strip_tags($firm->intro) }}</p>
                 </div>
             </span>
             @endforeach
@@ -43,7 +43,7 @@
             <div class="com_news_text">
                 <p class="title">公司新闻</p>
                 @foreach($news as $new)
-                    @if($new->type==4)
+                    @if($new->type==7)
                     <p>{{ $new->name }}
                         <span style="float:right;">{{ $new->created_at }}</span>
                     </p>
@@ -53,7 +53,7 @@
             <div class="trade_news">
                 <p class="title">行业资讯</p>
                 @foreach($news as $new)
-                    @if($new->type==5)
+                    @if($new->type==8)
                     <p>{{ $new->name }}
                         <span style="float:right;">{{ $new->created_at }}</span>
                     </p>

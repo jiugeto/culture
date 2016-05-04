@@ -3,9 +3,9 @@
     <div class="com_firm">
         {{--<div class="title"><div>公司的服务</div></div>--}}
         {{--<p>服务的简单介绍...</p>--}}
-        <div class="title"><div>{{ $datas[0]->name }}</div></div>
-        <p>{!! $datas[0]->intro !!}</p>
-        <div class="com_firm_con" style="height:@if(count($datas)){{'0'}}@elseif(ceil(count($datas)/3)){{ceil(count($datas)/3)*400+20}}@endif px">
+        <div class="title"><div>{{ $firm?$firm->name:'无' }}</div></div>
+        <p>{!! $firm?$firm->intro:'无' !!}</p>
+        <div class="com_firm_con" style="height:@if(!count($datas)){{'0'}}@elseif(ceil(count($datas)/3)){{ceil(count($datas)/3)*400+20}}@endif px">
             <div style="height:20px;"></div>
             {{--<span>--}}
                 {{--<div class="onlyone">--}}
@@ -20,11 +20,13 @@
             @foreach($datas as $data)
             <span>
                 <div class="onlyone">
-                    <div class="title">{{ $data->title }}</div>
-                    <div><img src="/uploads/images/2016/online1.png"></div>
-                    <p>{{ $data->detail }}</p>
-                    @if($data->smalls())
-                        @foreach($data->smalls() as $small)<p>{{ $small }}</p>@endforeach
+                    <div class="title">{{ $data->name }}</div>
+                    @if($data->pic_id)
+                    <div><img src="{{ $data->pic()->url }}"></div>
+                    @endif
+                    <p>{{ strip_tags($data->intro) }}</p>
+                    @if($data->small())
+                        @foreach($data->small() as $small)<p>{{ $small }}</p>@endforeach
                     @endif
                 </div>
             </span>

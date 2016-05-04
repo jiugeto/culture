@@ -1,7 +1,8 @@
 <?php
 namespace App\Http\Controllers\Company;
 
-use App\Models\Company\ComJobModel;
+use App\Models\Company\ComModuleModel;
+use App\Models\Company\ComFuncModel;
 use App\Models\CompanyModel;
 
 class RecruitController extends BaseController
@@ -21,6 +22,7 @@ class RecruitController extends BaseController
     {
         if ($this->cid) { $companyModel = CompanyModel::find($this->cid); }
         $result = [
+            'job'=> $this->getModule(),
             'datas'=> $this->query(),
             'company'=> isset($companyModel)?$companyModel:'',
             'topmenus'=> $this->topmenus,
@@ -31,24 +33,25 @@ class RecruitController extends BaseController
 
     public function query()
     {
-        $datas = ComJobModel::where('del',0)
-                    ->where('cid',$this->cid)
+        $datas = ComFuncModel::where('cid',$this->cid)
+                    ->where('module_id',4)
                     ->where('isshow',1)
-                    ->where('isshow2',1)
-                    ->orderBy('istop','desc')
-                    ->orderBy('istop2','desc')
                     ->orderBy('sort','desc')
-                    ->orderBy('sort2','desc')
                     ->orderBy('id','desc')
                     ->get();
-        if (!$datas) {
-            $datas = ComJobModel::where('cid',0)
-                ->where('isshow',1)
-                ->orderBy('istop','desc')
-                ->orderBy('sort','desc')
-                ->orderBy('id','desc')
-                ->get();
-        }
+//        if (!$datas) {
+//            $datas = ComFuncModel::where('cid',0)
+//                ->where('isshow',1)
+//                ->orderBy('sort','desc')
+//                ->orderBy('id','desc')
+//                ->get();
+//        }
         return $datas;
+    }
+
+    public function getModule()
+    {
+        if (count($this->query())) { $job = $this->query()[0]; }
+        return isset($job) ? ComModuleModel::find($job->module_id) : '';
     }
 }

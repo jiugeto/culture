@@ -114,28 +114,6 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
         //企业功能路由
     Route::post('comfunc/{id}','ComFuncController@update');
     Route::resource('comfunc','ComFuncController');
-//        //企业信息管理路由
-//    Route::post('cominfo/{id}','ComInfoController@update');
-//    Route::resource('cominfo','ComInfoController');
-//        //企业服务项目路由
-//    Route::post('comfirm/{id}','ComFirmController@update');
-//    Route::get('comfirm/{id}/forceDelete','ComFirmController@forceDelete');
-//    Route::resource('comfirm','ComFirmController');
-//        //企业宣传路由
-//    Route::get('comppt/trash','ComPptController@trash');
-//    Route::get('comppt/{id}/destroy','OpinionsController@destroy');
-//    Route::get('comppt/{id}/restore','OpinionsController@restore');
-//    Route::get('comppt/{id}/forceDelete','OpinionsController@forceDelete');
-//    Route::post('comppt/{id}','ComPptController@update');
-//    Route::resource('comppt','ComPptController');
-//        //企业招聘路由
-//    Route::get('comjob/{id}/destroy','ComJobController@destroy');
-//    Route::get('comjob/{id}/restore','ComJobController@restore');
-//    Route::get('comjob/{id}/forceDelete','ComJobController@forceDelete');
-//    Route::post('comjob/{id}','ComJobController@update');
-//    Route::resource('comjob','ComJobController');
-//        //企业团队路由
-//    Route::resource('comteam','ComTeamController');
     //广告路由
         //广告管理
     Route::resource('ad','AdController');

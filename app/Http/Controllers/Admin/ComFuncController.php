@@ -117,6 +117,7 @@ class ComFuncController extends BaseController
         if ($request->small && mb_substr($request->small,-1,1,'utf-8')!='|') { $request->small = $request->small.'|'; }
         $data = [
             'name'=> $request->name,
+            'type'=> $request->type,
             'genre'=> $request->genre,
             'module_id'=> $request->module_id,
             'pic_id'=> $request->pic_id?$request->pic_id:0,
@@ -133,6 +134,6 @@ class ComFuncController extends BaseController
      */
     public function query()
     {
-        return ComFuncModel::paginate($this->limit);
+        return ComFuncModel::orderBy('id','desc')->paginate($this->limit);
     }
 }

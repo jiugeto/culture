@@ -1,7 +1,8 @@
 <?php
 namespace App\Http\Controllers\Company;
 
-use App\Models\Company\ComFirmModel;
+use App\Models\Company\ComFuncModel;
+use App\Models\Company\ComModuleModel;
 
 class FirmController extends BaseController
 {
@@ -19,6 +20,7 @@ class FirmController extends BaseController
     public function index()
     {
         $result = [
+            'firm'=> $this->getModule(),
             'datas'=> $this->query(),
             'topmenus'=> $this->topmenus,
             'curr'=> 'firm',
@@ -28,11 +30,17 @@ class FirmController extends BaseController
 
     public function query()
     {
-        return ComFirmModel::where('cid',$this->cid)
+        return ComFuncModel::where('cid',$this->cid)
+                        ->where('module_id',2)
                         ->where('isshow',1)
-                        ->where('isshow2',1)
                         ->orderBy('sort','desc')
-                        ->orderBy('sort2','desc')
+                        ->orderBy('id','desc')
                         ->get();
+    }
+
+    public function getModule()
+    {
+        if (count($this->query())) { $firm = $this->query()[0]; }
+        return isset($firm) ? ComModuleModel::find($firm->module_id) : '';
     }
 }

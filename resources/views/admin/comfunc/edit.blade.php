@@ -21,7 +21,7 @@
 
                         <div class="am-form-group">
                             <label>所属模块 / Module：</label>
-                            <select name="module_id" required disabled>
+                            <select name="module_id" required>
                                 <option value="0" {{ $data->module_id==0 ? 'selected' : '' }}>选择模块</option>
                                 @if(count($modules))
                                     @foreach($modules as $module)
@@ -29,19 +29,30 @@
                                     @endforeach
                                 @endif
                             </select>
-                            <input type="hidden" name="module_id" value="{{ $data->module_id }}">
+                            {{--<input type="hidden" name="module_id" value="{{ $data->module_id }}">--}}
+                        </div>
+
+                        <div class="am-form-group">
+                            <label>类型 / Type：</label>
+                            <select name="type" required>
+                                @if(count($model['types']))
+                                    @foreach($model['types'] as $ktype=>$type)
+                                        <option value="{{ $ktype }}" {{ $data->type==$ktype ? 'selected' : '' }}>{{ $type }}</option>
+                                    @endforeach
+                                @endif
+                            </select>
                         </div>
 
                         <div class="am-form-group">
                             <label>类型 / Genre：</label>
-                            <select name="genre" required disabled>
+                            <select name="genre" required>
                                 @if(count($model['genres']))
                                     @foreach($model['genres'] as $kgenre=>$genre)
                                     <option value="{{ $kgenre }}" {{ $data->genre==$kgenre ? 'selected' : '' }}>{{ $genre }}</option>
                                     @endforeach
                                 @endif
                             </select>
-                            <input type="hidden" name="module_id" value="{{ $data->genre }}">
+                            {{--<input type="hidden" name="module_id" value="{{ $data->genre }}">--}}
                         </div>
 
                         <div class="am-form-group">

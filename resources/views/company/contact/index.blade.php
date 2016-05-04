@@ -7,12 +7,21 @@
     <script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
 
     <div style="height:20px;"></div>
+    <a href="http://www.gzhatu.com/dingwei.html" class="com_a_show">经纬度定位查询工具(多试些数字，更精确定位)</a>
+    <div style="height:10px;"></div>
     <!--百度地图容器-->
     <div style="width:1000px;height:550px;border:#ccc solid 1px;" id="dituContent"></div>
     <p>
-        地址：雅安国际公寓 &nbsp;&nbsp;&nbsp;&nbsp;
-        电话：0000-00000000 &nbsp;&nbsp;&nbsp;&nbsp;
-        邮箱：xxxx@xx.xxx
+        {{--地址：雅安国际公寓 &nbsp;&nbsp;&nbsp;&nbsp;--}}
+        {{--电话：0000-00000000 &nbsp;&nbsp;&nbsp;&nbsp;--}}
+        {{--邮箱：xxxx@xx.xxx--}}
+        地址：{{ $company->address }} &nbsp;&nbsp;&nbsp;&nbsp;
+        电话：{{ $company->areacode.'-'.$company->tel }} &nbsp;&nbsp;&nbsp;&nbsp;
+        邮箱：{{ $company->email }}
+        <input type="hidden" name="companyname" value="{{ $company->name }}">
+        <input type="hidden" name="intro" value="{{ strip_tags($data->intro) }}">
+        <input type="hidden" name="axis_x" value="{{ $data->axis_x }}">
+        <input type="hidden" name="axis_y" value="{{ $data->axis_y }}">
     </p>
 
     <script type="text/javascript">
@@ -26,7 +35,8 @@
         //创建地图函数：
         function createMap(){
             var map = new BMap.Map("dituContent");//在百度地图容器中创建一个地图
-            var point = new BMap.Point(116.438005,39.93459);//定义一个中心点坐标
+//            var point = new BMap.Point(116.438005,39.93459);//定义一个中心点坐标
+            var point = new BMap.Point($("input[name='axis_x']").val(),$("input[name='axis_y']").val());//定义一个中心点坐标
             map.centerAndZoom(point,14);//设定地图的中心点和坐标并将地图显示在地图容器中
             window.map = map;//将map变量存储在全局
         }
@@ -50,7 +60,8 @@
             map.addControl(ctrl_sca);
         }
         //标注点数组
-        var markerArr = [{title:"雅安国际公寓",content:"南楼403",point:"116.440179|39.921214",isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}}
+//        var markerArr = [{title:"雅安国际公寓",content:"南楼403",point:"116.440179|39.921214",isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}}
+        var markerArr = [{title:$("input[name='companyname']").val(),content:$("input[name='intro']").val(),point:$("input[name='axis_x']").val()+"|"+$("input[name='axis_y']").val(),isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}}
         ];
         //创建marker
         function addMarker(){
