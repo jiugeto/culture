@@ -41,23 +41,26 @@ Route::group(['prefix'=>'company','namespace'=>'Company'], function(){
         Route::resource('single','SingleController');
         //公司内容设置路由
         Route::resource('content','ContentController');
-            //公司简介路由
-        Route::post('intro/{id}','IntroController@update');
-        Route::resource('intro','IntroController');
-            //新闻路由
-        Route::get('{type}/info','InfoController@index');
-        Route::get('info/create/{type}','InfoController@create');
-        Route::post('info/{id}','InfoController@update');
-        Route::resource('info','InfoController');
-            //联系路由
-        Route::post('contact/{id}','ContactController@update');
-        Route::resource('contact','ContactController');
-            //服务路由
-        Route::post('firm/{id}','FirmController@update');
-        Route::resource('firm','FirmController');
-            //团队路由
-        Route::post('team/{id}','TeamController@update');
-        Route::resource('team','TeamController');
+            //关于公司路由
+        Route::post('about/{id}','AboutController@update');
+        Route::resource('about','AboutController');
+//            //公司简介路由
+//        Route::post('intro/{id}','IntroController@update');
+//        Route::resource('intro','IntroController');
+//            //新闻路由
+//        Route::get('{type}/info','InfoController@index');
+//        Route::get('info/create/{type}','InfoController@create');
+//        Route::post('info/{id}','InfoController@update');
+//        Route::resource('info','InfoController');
+//            //联系路由
+//        Route::post('contact/{id}','ContactController@update');
+//        Route::resource('contact','ContactController');
+//            //服务路由
+//        Route::post('firm/{id}','FirmController@update');
+//        Route::resource('firm','FirmController');
+//            //团队路由
+//        Route::post('team/{id}','TeamController@update');
+//        Route::resource('team','TeamController');
             //产品路由
         Route::get('product/trash','ProductController@trash');
         Route::get('product/{id}/destroy','ProductController@destroy');
@@ -72,13 +75,13 @@ Route::group(['prefix'=>'company','namespace'=>'Company'], function(){
         Route::get('part/{id}/forceDelete','PartController@forceDelete');
         Route::post('part/{id}','PartController@update');
         Route::resource('part','PartController');
-            //招聘路由
-        Route::get('job/trash','JobController@trash');
-        Route::get('job/{id}/destroy','JobController@destroy');
-        Route::get('job/{id}/restore','JobController@restore');
-        Route::get('job/{id}/forceDelete','JobController@forceDelete');
-        Route::post('job/{id}','JobController@update');
-        Route::resource('job','JobController');
+//            //招聘路由
+//        Route::get('job/trash','JobController@trash');
+//        Route::get('job/{id}/destroy','JobController@destroy');
+//        Route::get('job/{id}/restore','JobController@restore');
+//        Route::get('job/{id}/forceDelete','JobController@forceDelete');
+//        Route::post('job/{id}','JobController@update');
+//        Route::resource('job','JobController');
             //图片管理路由
         Route::get('pic/trash','PicController@trash');
         Route::get('pic/{id}/destroy','PicController@destroy');

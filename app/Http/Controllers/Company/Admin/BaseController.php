@@ -2,8 +2,10 @@
 namespace App\Http\Controllers\Company\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Company\ComMainModel;
 use App\Models\CompanyModel;
+use App\Models\Company\ComMainModel;
+use App\Models\Company\ComModuleModel;
+use App\Models\Company\ComFuncModel;
 
 class BaseController extends Controller
 {

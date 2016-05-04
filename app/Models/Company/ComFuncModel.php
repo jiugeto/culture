@@ -33,16 +33,16 @@ class ComFuncModel extends BaseModel
 
     public function isshow()
     {
-        return $this->isshow ? $this->isshows[$this->isshow] : '';
+        return $this->isshow ? $this->isshows[$this->isshow] : '无';
     }
 
     public function pic()
     {
-        return $this->pic_id ? PicModel::find($this->pic_id) :'';
+        return $this->pic_id ? PicModel::find($this->pic_id) :'无';
     }
 
     public function module()
     {
-        return $this->module_id ? ComModuleModel::find($this->module_id)->name : '';
+        return $this->module_id ? ComModuleModel::find($this->module_id)->name : '无';
     }
 }
