@@ -16,7 +16,7 @@ class BaseController extends Controller
         'firm'=> '服务项目',
         'part'=> '花絮',
         'product'=> '产品',
-        'intro'=> '公司介绍',
+        'about'=> '关于公司',
         'home'=> '首页',
     ];
 

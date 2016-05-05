@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Company;
 
-class BriefController extends BaseController
+class PartController extends BaseController
 {
     /**
      * 企业后台花絮

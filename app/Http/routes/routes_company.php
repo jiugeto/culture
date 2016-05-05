@@ -12,6 +12,8 @@ Route::group(['prefix'=>'company','middleware' =>'MemberAuth','namespace'=>'Comp
         //首页路由
     Route::get('/','HomeController@index');
     Route::get('home','HomeController@index');
+        //关于公司路由
+    Route::resource('about','AboutController');
         //产品路由
     Route::resource('product','ProductController');
         //花絮路由

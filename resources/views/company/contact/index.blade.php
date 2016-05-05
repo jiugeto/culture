@@ -7,7 +7,8 @@
     <script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
 
     <div style="height:20px;"></div>
-    <a href="http://www.gzhatu.com/dingwei.html" class="com_a_show">经纬度定位查询工具(多试些数字，更精确定位)</a>
+    <a href="http://www.gzhatu.com/dingwei.html" class="com_a_show">经纬度定位查询工具(多试些数字，更精确定位)</a>&nbsp;&nbsp;
+    <a href="http://api.map.baidu.com/lbsapi/getpoint/index.html" class="com_a_show">此为获取坐标定位的API</a>
     <div style="height:10px;"></div>
     <!--百度地图容器-->
     <div style="width:1000px;height:550px;border:#ccc solid 1px;" id="dituContent"></div>
