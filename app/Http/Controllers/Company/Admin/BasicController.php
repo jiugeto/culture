@@ -9,14 +9,19 @@ class BasicController extends BaseController
 
     public function __construct()
     {
-        $this->list['func']['name'] = '基本设置';
-        $this->list['func']['url'] = 'basic';
+        parent::__construct();
+        $this->lists['func']['name'] = '基本设置';
+        $this->lists['func']['url'] = 'basic';
     }
 
     public function index()
     {
+        $curr['name'] = $this->lists['']['name'];
+        $curr['url'] = $this->lists['']['url'];
         $result = [
-            'lists'=> $this->list,
+//            'datas'=> $this->query($this->module),
+            'lists'=> $this->lists,
+            'curr'=> $curr,
         ];
         return view('company.admin.basic.index', $result);
     }

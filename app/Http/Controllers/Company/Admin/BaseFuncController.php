@@ -12,6 +12,7 @@ class BaseFuncController extends BaseController
      */
 
     protected $pics;
+    protected $genre = 1;       //1代表默认模块
 
     public function __construct()
     {
@@ -62,6 +63,7 @@ class BaseFuncController extends BaseController
         }
         return ComFuncModel::where('cid',$this->cid)
                         ->where('module_id',$module)
+                        ->where('genre',$this->genre)
                         ->orderBy('sort','desc')
                         ->orderBy('id','desc')
                         ->paginate($this->limit);
@@ -72,7 +74,10 @@ class BaseFuncController extends BaseController
      */
     public function getFuncs($cid,$module)
     {
-        return ComFuncModel::where('cid',$cid)->where('module_id',$module)->get();
+        return ComFuncModel::where('cid',$cid)
+                        ->where('module_id',$module)
+//                        ->where('genre',$this->genre)
+                        ->get();
     }
 
     /**

@@ -40,8 +40,11 @@ Route::group(['prefix'=>'company','middleware' =>'MemberAuth','namespace'=>'Comp
         Route::resource('layout','LayoutController');
             //基本设置路由
         Route::resource('basic','BasicController');
-            //添加单页路由
+            //其他页面（单页）路由
         Route::resource('single','SingleController');
+            //其他模块路由
+        Route::post('singlemodule/{id}','SingleModuleController@update');
+        Route::resource('singlemodule','SingleModuleController');
         //公司内容设置路由
         Route::resource('content','ContentController');
             //关于公司路由

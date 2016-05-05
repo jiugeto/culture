@@ -29,4 +29,9 @@ class ComModuleModel extends BaseModel
     {
         return $this->genre ? $this->genres[$this->genre] : '无';
     }
+
+    public function isshow()
+    {
+        return $this->isshow ? $this->isshows[$this->isshow] : '无';
+    }
 }

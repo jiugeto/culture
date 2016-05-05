@@ -64,4 +64,10 @@ class ComFuncModel extends BaseModel
     {
         return $this->small ? explode('|',$this->small) : '';
     }
+
+    public function singelModules($cid=null)
+    {
+        if (!$cid) { $cid = 0; }
+        return \App\Models\Company\ComModuleModel::where('genre',2)->where('cid',$cid)->get();
+    }
 }
