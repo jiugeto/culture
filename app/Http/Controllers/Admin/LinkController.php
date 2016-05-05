@@ -136,6 +136,7 @@ class LinkController extends BaseController
 //        }
         $data = [
             'name'=> $data['name'],
+            'cid'=> 0,      //0代表本网站
             'title'=> $data['title'],
             'type_id'=> $data['type_id'],
 //            'pic'=> $data['url_ori'],

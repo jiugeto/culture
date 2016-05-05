@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Company;
 
 use App\Http\Controllers\Controller;
+use App\Models\LinkModel;
 
 class BaseController extends Controller
 {
@@ -10,14 +11,14 @@ class BaseController extends Controller
      */
 
     protected $topmenus = [
-        'contact'=> '联系方式',
-        'recruit'=> '招聘',
-        'team'=> '团队',
-        'firm'=> '服务项目',
-        'part'=> '花絮',
-        'product'=> '产品',
-        'about'=> '关于公司',
-        'home'=> '首页',
+//        'contact'=> '联系方式',
+//        'recruit'=> '招聘',
+//        'team'=> '团队',
+//        'firm'=> '服务项目',
+//        'part'=> '花絮',
+//        'product'=> '产品',
+//        'about'=> '关于公司',
+//        'home'=> '首页',
     ];
 
     public function __construct()
@@ -27,5 +28,11 @@ class BaseController extends Controller
         if (!\Session::has('user.cid')) { return redirect('/member/setting/auth'); }
         $this->cid = \Session::get('user.cid');
         $this->company = unserialize(\Session::get('user.company'));
+
+        //企业页面header菜单 type_id==2
+        $this->topmenus = LinkModel::where('cid',$this->cid)
+                                ->where('type_id', 2)
+                                ->orderBy('sort','desc')
+                                ->get();
     }
 }

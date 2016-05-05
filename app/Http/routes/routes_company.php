@@ -35,12 +35,13 @@ Route::group(['prefix'=>'company','middleware' =>'MemberAuth','namespace'=>'Comp
         //权限路由
         Route::resource('auth','AuthController');
         //公司信息路由
-        Route::resource('cominfo','ComInfoController');
+        Route::resource('info','InfoController');
             //布局路由
         Route::resource('layout','LayoutController');
             //基本设置路由
         Route::resource('basic','BasicController');
             //其他页面（单页）路由
+        Route::post('single/{id}','SingleController@update');
         Route::resource('single','SingleController');
             //其他模块路由
         Route::post('singlemodule/{id}','SingleModuleController@update');
@@ -100,5 +101,8 @@ Route::group(['prefix'=>'company','middleware' =>'MemberAuth','namespace'=>'Comp
         Route::get('ppt/{id}/forceDelete','PptController@forceDelete');
         Route::post('ppt/{id}','PptController@update');
         Route::resource('ppt','PptController');
+            //链接管理
+        Route::post('lateink/{id}','LinkController@upd');
+        Route::resource('link','LinkController');
     });
 });

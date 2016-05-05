@@ -2,8 +2,8 @@
 namespace App\Http\Controllers\Company\Admin;
 
 use App\Models\Company\ComMainModel;
-use App\Models\Company\ComInfoModel;
-use App\Models\Company\ComFirmModel;
+use App\Models\Company\ComModuleModel;
+use App\Models\Company\ComFuncModel;
 
 class ContentController extends BaseController
 {
@@ -34,8 +34,8 @@ class ContentController extends BaseController
     {
         $this->cid = 0;     //假如默认值
         $mian = ComMainModel::where('cid',$this->cid)->first();
-        $infos = ComInfoModel::where('cid',$this->cid)->paginate($this->limit);
-        $firm = ComFirmModel::where('cid',$this->cid)->first();
+        $infos = ComModuleModel::where('cid',$this->cid)->paginate($this->limit);
+        $firm = ComFuncModel::where('cid',$this->cid)->first();
         if ($mian) { $mainCount = 1; }else{ $mainCount = 0; }
         if ($firm) { $firmCount = 1; }else{ $firmCount = 0; }
         $datas = new \stdClass();
@@ -54,10 +54,4 @@ class ContentController extends BaseController
         if ($firm) { $datas->items[] = $firm['attributes']; }
         return $datas;
     }
-
-//    public function queryMain()
-//    {
-//        $this->cid = 0;     //假如默认值
-//        return ComMainModel::where('cid',$this->cid)->get();
-//    }
 }

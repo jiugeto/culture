@@ -8,7 +8,7 @@
                 <td>排序</td>
                 <td>在前台公司页面显示否</td>
                 <td>创建时间</td>
-                <td>操作</td>
+                {{--<td>操作</td>--}}
             </tr>
             <tr><td colspan="10"></td></tr>
             @if($datas->items)
@@ -17,10 +17,10 @@
                 <td>{{ $data['id'] }}</td>
                 <td>{{ $data['name'] ? $data['name'] : '企业默认信息' }}</td>
                 <td>{{ $data['sort'] }}</td>
-                <td>{{ $data['isshow2'] ? '显示' : '不显示' }}</td>
+                <td>{{ $data['isshow'] ? '显示' : '不显示' }}</td>
                 <td>{{ $data['created_at'] }}</td>
                 <td>
-                    <a href="/company/admin/content/{{ $data['id'] }}" class="list_btn">查看</a>
+                    {{--<a href="/company/admin/content/{{ $data['id'] }}" class="list_btn">查看</a>--}}
                     {{--<a href="/company/admin/content/{{ $data['id'] }}/edit" class="list_btn">编辑</a>--}}
                 </td>
             </tr>
