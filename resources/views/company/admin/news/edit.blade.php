@@ -3,48 +3,45 @@
     @include('company.admin.common.crumb')
 
     <div class="com_admin_list">
-        <form data-am-validator method="POST" action="/company/admin/job/{{ $data->id }}" enctype="multipart/form-data">
+        <form data-am-validator method="POST" action="/company/admin/news/{{ $data->id }}" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" name="_method" value="POST">
-            <input type="hidden" name="type" value="5">{{--招聘type==5--}}
-            <input type="hidden" name="genre" value="1">{{--招聘genre==1--}}
+            <input type="hidden" name="genre" value="1">{{--新闻资讯genre==1--}}
             <table class="table_create">
                 <tr>
-                    <td class="field_name"><label>页面名称：</label></td>
+                    <td class="field_name"><label>名称：</label></td>
                     <td class="right"><input type="text" class="field_value" placeholder="至少2位" minlength="2" name="name" value="{{ $data->name }}"/></td>
                 </tr>
                 {{--<tr><td></td></tr>--}}
 
-                {{--<tr>--}}
-                    {{--<td class="field_name"><label>页面类型：</label></td>--}}
-                    {{--<td class="right">--}}
-                        {{--<select name="type" required>--}}
-                        {{--@if(count($model['types']))--}}
-                            {{--@foreach($model['types'] as $ktype=>$type)--}}
-                            {{--<option value="{{ $ktype }}" {{ $data->type==$ktype ? 'selected' : '' }}>{{ $type }}</option>--}}
-                            {{--@endforeach--}}
-                        {{--@endif--}}
-                        {{--</select>--}}
-                    {{--</td>--}}
-                {{--</tr>--}}
-                {{--<tr><td></td></tr>--}}
-
-                {{--<tr>--}}
-                    {{--<td class="field_name"><label>类型：</label></td>--}}
-                    {{--<td class="right">--}}
-                        {{--<select name="genre" required>--}}
-                        {{--@if(count($model['genres']))--}}
-                            {{--@foreach($model['genres'] as $kgenre=>$genre)--}}
-                            {{--<option value="{{ $kgenre }}" {{ $data->genre==$kgenre ? 'selected' : '' }}>{{ $genre }}</option>--}}
-                            {{--@endforeach--}}
-                        {{--@endif--}}
-                        {{--</select>--}}
-                    {{--</td>--}}
-                {{--</tr>--}}
+                <tr>
+                    <td class="field_name"><label>类型：</label></td>
+                    <td class="right">
+                        <select name="type" required>
+                            <option value="7" {{ $data->type==7 ? 'selected' : ''}}>新闻</option>
+                            <option value="8" {{ $data->type==8 ? 'selected' : ''}}>资讯</option>
+                        </select>
+                    </td>
+                </tr>
                 {{--<tr><td></td></tr>--}}
 
                 <tr>
-                    <td class="field_name"><label>内容：</label></td>
+                    <td class="field_name"><label>图片：</label></td>
+                    <td class="right">
+                        <select name="pic_id" required>
+                        @if(count($pics))
+                            @foreach($pics as $pic)
+                                <option value="{{ $pic->id }}" {{ $data->pic_id==$pic->id ? 'selected' : ''}}>{{ $pic->name }}</option>
+                            @endforeach
+                        @endif
+                        </select>
+                        <span class="right">&nbsp;&nbsp;<a href="/company/admin/pic" class="pic_list_a">图片列表</a></span>
+                    </td>
+                </tr>
+                {{--<tr><td></td></tr>--}}
+
+                <tr>
+                    <td class="field_name"><label>介绍：</label></td>
                     {{--<td class="right"><textarea name="require" cols="40" rows="5"></textarea></td>--}}
                     <td class="right" style="position:relative;z-index:0;">
                         @include('UEditor::head')
@@ -75,8 +72,8 @@
                 <tr>
                     <td class="field_name"><label>前台公司页面显示否：</label></td>
                     <td class="right">
-                        <label><input type="radio" name="isshow" value="0" {{ $data->isshow==0 ? 'checked' : '' }}> 不显示&nbsp;&nbsp;</label>
-                        <label><input type="radio" name="isshow" value="1" {{ $data->isshow==1 ? 'checked'  : ''}}> 显示&nbsp;&nbsp;</label>
+                        <label><input type="radio" name="isshow" value="0" {{ $data->isshow==0 ? 'checked' : ''}}> 不显示&nbsp;&nbsp;</label>
+                        <label><input type="radio" name="isshow" value="1" {{ $data->isshow==1 ? 'checked' : ''}}> 显示&nbsp;&nbsp;</label>
                     </td>
                 </tr>
                 {{--<tr><td></td></tr>--}}

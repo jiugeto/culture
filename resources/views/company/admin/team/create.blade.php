@@ -3,13 +3,13 @@
     @include('company.admin.common.crumb')
 
     <div class="com_admin_list">
-        <form data-am-validator method="POST" action="/company/admin/firms" enctype="multipart/form-data">
+        <form data-am-validator method="POST" action="/company/admin/team" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <input type="hidden" name="type" value="3">{{--服务type==3--}}
-            <input type="hidden" name="genre" value="1">{{--服务genre==1--}}
+            <input type="hidden" name="type" value="4">{{--团队type==4--}}
+            <input type="hidden" name="genre" value="1">{{--团队genre==1--}}
             <table class="table_create">
                 <tr>
-                    <td class="field_name"><label>服务名称：</label></td>
+                    <td class="field_name"><label>员工名称：</label></td>
                     <td class="right"><input type="text" class="field_value" placeholder="至少2位" minlength="2" name="name"/></td>
                 </tr>
                 {{--<tr><td></td></tr>--}}
@@ -29,36 +29,8 @@
                 </tr>
                 {{--<tr><td></td></tr>--}}
 
-                {{--<tr>--}}
-                    {{--<td class="field_name"><label>页面类型：</label></td>--}}
-                    {{--<td class="right">--}}
-                        {{--<select name="type" required>--}}
-                        {{--@if(count($model['types']))--}}
-                            {{--@foreach($model['types'] as $ktype=>$type)--}}
-                                {{--<option value="{{ $ktype }}">{{ $type }}</option>--}}
-                            {{--@endforeach--}}
-                        {{--@endif--}}
-                        {{--</select>--}}
-                    {{--</td>--}}
-                {{--</tr>--}}
-                {{--<tr><td></td></tr>--}}
-
-                {{--<tr>--}}
-                    {{--<td class="field_name"><label>类型：</label></td>--}}
-                    {{--<td class="right">--}}
-                        {{--<select name="genre" required>--}}
-                        {{--@if(count($model['genres']))--}}
-                            {{--@foreach($model['genres'] as $kgenre=>$genre)--}}
-                                {{--<option value="{{ $kgenre }}">{{ $genre }}</option>--}}
-                            {{--@endforeach--}}
-                        {{--@endif--}}
-                        {{--</select>--}}
-                    {{--</td>--}}
-                {{--</tr>--}}
-                {{--<tr><td></td></tr>--}}
-
                 <tr>
-                    <td class="field_name"><label>内容：</label></td>
+                    <td class="field_name"><label>介绍：</label></td>
                     {{--<td class="right"><textarea name="require" cols="40" rows="5"></textarea></td>--}}
                     <td class="right" style="position:relative;z-index:0;">
                         @include('UEditor::head')
@@ -81,12 +53,6 @@
                 <tr>
                     <td class="field_name"><label>排序：</label></td>
                     <td class="right"><input type="text" class="field_value" pattern="^\d+$" name="sort" value="10"/></td>
-                </tr>
-                {{--<tr><td></td></tr>--}}
-
-                <tr>
-                    <td class="field_name"><label>小字：</label></td>
-                    <td class="right"><input type="text" class="field_value" placeholder="至少2个字符，多组用|隔开" minlength="2" required name="small"/></td>
                 </tr>
                 {{--<tr><td></td></tr>--}}
 

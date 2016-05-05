@@ -4,11 +4,11 @@
 
     <div class="com_admin_list">
         <div class="search_type" style="height:20px;border:0;">
-            <span class="create_right"><a href="/company/admin/firms/create" class="list_btn">添加服务</a></span>
+            <span class="create_right"><a href="/company/admin/team/create" class="list_btn">添加员工</a></span>
         </div>
         <table cellspacing="0">
             <tr>
-                <td>服务名称</td>
+                <td>员工名称</td>
                 <td>排序</td>
                 <td>在公司页面显示否</td>
                 <td>创建时间</td>
@@ -23,8 +23,8 @@
                 <td>{{ $data->isshow() }}</td>
                 <td>{{ $data->created_at }}</td>
                 <td>
-                    <a href="/company/admin/firms/{{ $data->id }}" class="list_btn">查看</a>
-                    <a href="/company/admin/firms/{{ $data->id }}/edit" class="list_btn">编辑</a>
+                    <a href="/company/admin/team/{{ $data->id }}" class="list_btn">查看</a>
+                    <a href="/company/admin/team/{{ $data->id }}/edit" class="list_btn">编辑</a>
                 </td>
             </tr>
                 @endforeach

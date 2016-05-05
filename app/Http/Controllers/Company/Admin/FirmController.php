@@ -4,19 +4,19 @@ namespace App\Http\Controllers\Company\Admin;
 use App\Models\Company\ComFuncModel;
 use Illuminate\Http\Request;
 
-class AboutController extends BaseFuncController
+class FirmController extends BaseFuncController
 {
     /**
-     *  关于公司
+     *  公司服务
      */
 
-    protected $module = 1;        //1代表公司介绍
+    protected $module = 2;        //1代表公司服务
 
     public function __construct()
     {
         parent::__construct();
-        $this->lists['func']['name'] = '关于公司';
-        $this->lists['func']['url'] = 'about';
+        $this->lists['func']['name'] = '服务编辑';
+        $this->lists['func']['url'] = 'firms';
     }
 
     public function index()
@@ -24,11 +24,11 @@ class AboutController extends BaseFuncController
         $curr['name'] = $this->lists['']['name'];
         $curr['url'] = $this->lists['']['url'];
         $result = [
-            'datas'=> $this->query($this->module),
-            'lists'=> $this->lists,
-            'curr'=> $curr,
+            'datas' => $this->query($this->module),
+            'lists' => $this->lists,
+            'curr' => $curr,
         ];
-        return view('company.admin.about.index', $result);
+        return view('company.admin.firm.index', $result);
     }
 
     public function create()
@@ -36,27 +36,23 @@ class AboutController extends BaseFuncController
         $curr['name'] = $this->lists['create']['name'];
         $curr['url'] = $this->lists['create']['url'];
         $result = [
-            'model'=> $this->model,
+            'pics'=> $this->pics,
+//            'model'=> $this->model,
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
-        return view('company.admin.about.create', $result);
+        return view('company.admin.firm.create', $result);
     }
 
     public function store(Request $request)
     {
-        //排除简介的唯一性
-        if (in_array($request->type,[1,2])) {
-            $aboutModel = ComFuncModel::where('cid',$this->cid)
-                ->where('module_id',$this->module)
-                ->where('type',$request->type)
-                ->first();
-            if ($aboutModel) { echo "<script>alert('已有公司简介或公司历程！');history.go(-1);</script>";exit; }
-        }
         $data = $this->getData($request,$this->module);
+        if ($request->small) {
+            $data['small'] = mb_substr($request->small,-1,1,'utf-8')=='|'?$request->small:$request->small.'|';
+        }
         $data['created_at'] = date('Y-m-d H:i:s', time());
         ComFuncModel::create($data);
-        return redirect('/company/admin/about');
+        return redirect('/company/admin/firms');
     }
 
     public function edit($id)
@@ -65,19 +61,23 @@ class AboutController extends BaseFuncController
         $curr['url'] = $this->lists['edit']['url'];
         $result = [
             'data'=> ComFuncModel::find($id),
-            'model'=> $this->model,
+            'pics'=> $this->pics,
+//            'model'=> $this->model,
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
-        return view('company.admin.about.edit', $result);
+        return view('company.admin.firm.edit', $result);
     }
 
     public function update(Request $request,$id)
     {
         $data = $this->getData($request,$this->module);
+        if ($request->small) {
+            $data['small'] = mb_substr($request->small,-1,1,'utf-8')=='|'?$request->small:$request->small.'|';
+        }
         $data['updated_at'] = date('Y-m-d H:i:s', time());
         ComFuncModel::where('id',$id)->update($data);
-        return redirect('/company/admin/about');
+        return redirect('/company/admin/firms');
     }
 
     public function show($id)
@@ -86,10 +86,11 @@ class AboutController extends BaseFuncController
         $curr['url'] = $this->lists['show']['url'];
         $result = [
             'data'=> ComFuncModel::find($id),
-            'model'=> $this->model,
+            'pics'=> $this->pics,
+//            'model'=> $this->model,
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
-        return view('company.admin.about.show', $result);
+        return view('company.admin.firm.show', $result);
     }
 }

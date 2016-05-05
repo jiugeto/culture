@@ -4,19 +4,19 @@ namespace App\Http\Controllers\Company\Admin;
 use App\Models\Company\ComFuncModel;
 use Illuminate\Http\Request;
 
-class AboutController extends BaseFuncController
+class JobController extends BaseFuncController
 {
     /**
-     *  关于公司
+     *  公司招聘
      */
 
-    protected $module = 1;        //1代表公司介绍
+    protected $module = 4;        //1代表公司招聘
 
     public function __construct()
     {
         parent::__construct();
-        $this->lists['func']['name'] = '关于公司';
-        $this->lists['func']['url'] = 'about';
+        $this->lists['func']['name'] = '招聘编辑';
+        $this->lists['func']['url'] = 'job';
     }
 
     public function index()
@@ -28,7 +28,7 @@ class AboutController extends BaseFuncController
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
-        return view('company.admin.about.index', $result);
+        return view('company.admin.job.index', $result);
     }
 
     public function create()
@@ -40,23 +40,15 @@ class AboutController extends BaseFuncController
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
-        return view('company.admin.about.create', $result);
+        return view('company.admin.job.create', $result);
     }
 
     public function store(Request $request)
     {
-        //排除简介的唯一性
-        if (in_array($request->type,[1,2])) {
-            $aboutModel = ComFuncModel::where('cid',$this->cid)
-                ->where('module_id',$this->module)
-                ->where('type',$request->type)
-                ->first();
-            if ($aboutModel) { echo "<script>alert('已有公司简介或公司历程！');history.go(-1);</script>";exit; }
-        }
         $data = $this->getData($request,$this->module);
         $data['created_at'] = date('Y-m-d H:i:s', time());
         ComFuncModel::create($data);
-        return redirect('/company/admin/about');
+        return redirect('/company/admin/job');
     }
 
     public function edit($id)
@@ -69,7 +61,7 @@ class AboutController extends BaseFuncController
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
-        return view('company.admin.about.edit', $result);
+        return view('company.admin.job.edit', $result);
     }
 
     public function update(Request $request,$id)
@@ -77,7 +69,7 @@ class AboutController extends BaseFuncController
         $data = $this->getData($request,$this->module);
         $data['updated_at'] = date('Y-m-d H:i:s', time());
         ComFuncModel::where('id',$id)->update($data);
-        return redirect('/company/admin/about');
+        return redirect('/company/admin/job');
     }
 
     public function show($id)
@@ -90,6 +82,6 @@ class AboutController extends BaseFuncController
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
-        return view('company.admin.about.show', $result);
+        return view('company.admin.job.show', $result);
     }
 }

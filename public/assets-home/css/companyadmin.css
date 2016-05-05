@@ -233,6 +233,10 @@ select { margin:5px auto;font-size:20px;font-family:'微软雅黑'; }
     background:red;
     cursor:pointer;
 }
+.pic_list_a {
+    color:rgb(14,144,210);
+    text-decoration:none;
+}
 /*=== 企业后台图片找图按钮 ===*/
 
 

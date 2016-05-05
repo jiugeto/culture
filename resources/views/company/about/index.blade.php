@@ -12,7 +12,11 @@
             @if(count($abouts))
                 @foreach($abouts as $about)
                 {{--<a href=""><div> ▶ 简介</div></a>--}}
-                <a href="{{ $about->small?$about->small:'' }}"><div> ▶ {{ $about->name }}</div></a>
+                    @if($about->type==1)
+                <a href="/company/about"><div> ▶ {{ $about->name }}</div></a>
+                    @else
+                <a href="/company/{{$about->type}}/about"><div> ▶ {{ $about->name }}</div></a>
+                    @endif
                 @endforeach
             @endif
             </div>

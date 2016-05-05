@@ -13,6 +13,7 @@ Route::group(['prefix'=>'company','middleware' =>'MemberAuth','namespace'=>'Comp
     Route::get('/','HomeController@index');
     Route::get('home','HomeController@index');
         //关于公司路由
+    Route::get('{type}/about','AboutController@index');
     Route::resource('about','AboutController');
         //产品路由
     Route::resource('product','ProductController');
@@ -44,25 +45,8 @@ Route::group(['prefix'=>'company','middleware' =>'MemberAuth','namespace'=>'Comp
         //公司内容设置路由
         Route::resource('content','ContentController');
             //关于公司路由
-        Route::post('about/{id}','AboutController@update');
-        Route::resource('about','AboutController');
-//            //公司简介路由
-//        Route::post('intro/{id}','IntroController@update');
-//        Route::resource('intro','IntroController');
-//            //新闻路由
-//        Route::get('{type}/info','InfoController@index');
-//        Route::get('info/create/{type}','InfoController@create');
-//        Route::post('info/{id}','InfoController@update');
-//        Route::resource('info','InfoController');
-//            //联系路由
-//        Route::post('contact/{id}','ContactController@update');
-//        Route::resource('contact','ContactController');
-//            //服务路由
-//        Route::post('firm/{id}','FirmController@update');
-//        Route::resource('firm','FirmController');
-//            //团队路由
-//        Route::post('team/{id}','TeamController@update');
-//        Route::resource('team','TeamController');
+        Route::post('abouts/{id}','AboutController@update');
+        Route::resource('abouts','AboutController');
             //产品路由
         Route::get('product/trash','ProductController@trash');
         Route::get('product/{id}/destroy','ProductController@destroy');
@@ -70,6 +54,21 @@ Route::group(['prefix'=>'company','middleware' =>'MemberAuth','namespace'=>'Comp
         Route::get('product/{id}/forceDelete','ProductController@forceDelete');
         Route::post('product/{id}','ProductController@update');
         Route::resource('product','ProductController');
+            //团队路由
+        Route::post('team/{id}','TeamController@update');
+        Route::resource('team','TeamController');
+            //招聘路由
+        Route::post('job/{id}','JobController@update');
+        Route::resource('job','JobController');
+            //联系路由
+        Route::post('contact/{id}','ContactController@update');
+        Route::resource('contact','ContactController');
+            //服务路由
+        Route::post('firms/{id}','FirmController@update');
+        Route::resource('firms','FirmController');
+            //新闻资讯路由
+        Route::post('news/{id}','NewsController@update');
+        Route::resource('news','NewsController');
             //花絮路由
         Route::get('part/trash','PartController@trash');
         Route::get('part/{id}/destroy','PartController@destroy');
@@ -77,13 +76,6 @@ Route::group(['prefix'=>'company','middleware' =>'MemberAuth','namespace'=>'Comp
         Route::get('part/{id}/forceDelete','PartController@forceDelete');
         Route::post('part/{id}','PartController@update');
         Route::resource('part','PartController');
-//            //招聘路由
-//        Route::get('job/trash','JobController@trash');
-//        Route::get('job/{id}/destroy','JobController@destroy');
-//        Route::get('job/{id}/restore','JobController@restore');
-//        Route::get('job/{id}/forceDelete','JobController@forceDelete');
-//        Route::post('job/{id}','JobController@update');
-//        Route::resource('job','JobController');
             //图片管理路由
         Route::get('pic/trash','PicController@trash');
         Route::get('pic/{id}/destroy','PicController@destroy');
