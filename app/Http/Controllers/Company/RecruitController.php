@@ -25,6 +25,7 @@ class RecruitController extends BaseController
             'job'=> $this->getModule(),
             'datas'=> $this->query(),
             'company'=> isset($companyModel)?$companyModel:'',
+            'comMain'=> $this->getComMain(),
             'topmenus'=> $this->topmenus,
             'curr'=> 'recruit',
         ];

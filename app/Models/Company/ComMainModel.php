@@ -16,6 +16,6 @@ class ComMainModel extends BaseModel
 
     public function company()
     {
-        return \App\Models\CompanyModel::find($this->cid);
+        return $this->cid ? \App\Models\CompanyModel::find($this->cid) : '';
     }
 }

@@ -25,6 +25,7 @@ class AboutController extends BaseController
             'abouts'=> $this->getAbouts(),
             'company'=> CompanyModel::find($this->cid),
             'data'=> $this->query($type),
+            'comMain'=> $this->getComMain(),
             'topmenus'=> $this->topmenus,
             'curr'=> 'about',
         ];

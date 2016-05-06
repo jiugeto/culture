@@ -22,6 +22,7 @@ class ContactController extends BaseController
         $result = [
             'company'=> CompanyModel::find($this->cid),
             'data'=> $this->query(),
+            'comMain'=> $this->getComMain(),
             'topmenus'=> $this->topmenus,
             'curr'=> 'contact',
         ];

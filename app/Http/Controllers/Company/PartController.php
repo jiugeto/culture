@@ -17,6 +17,7 @@ class PartController extends BaseController
     public function index()
     {
         $result = [
+            'comMain'=> $this->getComMain(),
             'topmenus'=> $this->topmenus,
             'curr'=> 'part',
         ];

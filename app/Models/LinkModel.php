@@ -83,4 +83,17 @@ class LinkModel extends BaseModel
     {
         return $this->cid ? CompanyModel::find($this->id) : '本网站';
     }
+
+//    /**
+//     * 企业页面header菜单 type_id==2
+//     */
+//    public function comHeaders()
+//    {
+//        return LinkModel::where('cid',$this->cid)
+//                ->where('type_id', 2)
+//                ->where('isshow', 1)
+//                ->orderBy('sort','desc')
+//                ->orderBy('id','desc')
+//                ->get();
+//    }
 }

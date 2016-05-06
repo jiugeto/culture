@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Company;
 
 use App\Models\Company\ComFuncModel;
+use App\Models\Company\ComMainModel;
 use App\Models\Company\ComPptModel;
 use App\Models\ProductModel;
 
@@ -21,6 +22,7 @@ class HomeController extends BaseController
     public function index()
     {
         $result = [
+            'comMain'=> $this->getComMain(),
             'ppts'=> $this->getPpts(),
             'firms'=> $this->getFirms(),
             'news'=> $this->getNews(),

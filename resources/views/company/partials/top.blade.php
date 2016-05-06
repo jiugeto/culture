@@ -4,9 +4,15 @@
 <div class="com_top">
     <div class="com_center">
         <div class="com_logo">
-            <a href="##">
-                <img src="/assets/images/del_red.png" title="logo名称或公司名称" class="com_logo_size">
-            </a>
+            {{--<a href="##"><div class="img"></div></a>--}}
+                <a href="/company/home">
+                    <div class="img">
+                        @if($comMain)
+                            <img src="{{ $comMain->logo }}" title="{{ $comMain->company()?$comMain->company()->name:'某某公司' }}-{{ $comMain->title }}" class="com_logo_size">
+                        @else <img src="/assets/images/del_red.png" title="logo名称或公司名称" class="com_logo_size">
+                        @endif
+                    </div>
+                </a>
         </div>
         <ul>
             <a href="/company/admin"><li>后台</li></a>

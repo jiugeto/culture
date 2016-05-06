@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Company;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company\ComMainModel;
 use App\Models\LinkModel;
 
 class BaseController extends Controller
@@ -36,5 +37,33 @@ class BaseController extends Controller
                                 ->orderBy('sort','desc')
                                 ->orderBy('id','desc')
                                 ->get();
+//        $this->topmenus['company'] = $this->getComMain();
+    }
+
+    /**
+     * 公司基本信息
+     */
+    public function getComMain()
+    {
+        $mainModel = ComMainModel::where('cid',$this->cid)->first();
+        $mainModel0 = ComMainModel::where('cid',0)->first();
+        if (!$mainModel) {
+            $companyModel = \App\Models\CompanyModel::find($this->cid);
+            $main = [
+                'uid'=> $this->userid,
+                'cid'=> $this->cid,
+                'name'=> $companyModel->name,
+                'title'=> $mainModel0->title,
+                'keyword'=> $mainModel0->keyword,
+                'description'=> $mainModel0->description,
+                'logo'=> $mainModel0->logo,
+                'sort'=> $mainModel0->sort,
+                'istop'=> $mainModel0->istop,
+                'isshow'=> $mainModel0->isshow,
+                'created_at'=> date('Y-m-d H:i:s', time()),
+            ];
+            ComMainModel::create($main);
+        }
+        return ComMainModel::where('cid',$this->cid)->first();
     }
 }

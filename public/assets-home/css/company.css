@@ -9,6 +9,12 @@
     border-bottom:2px solid rgb(200,200,200);
 }
 .com_logo { float:left; }
+.com_logo div.img {
+    margin:0 auto;
+    width:100px;
+    height:65px;
+    overflow:hidden;
+}
 .com_logo_size { height:30px; }
 .com_logo img { padding:15px 0; }
 .com_center { margin:0 auto;width:1000px; }

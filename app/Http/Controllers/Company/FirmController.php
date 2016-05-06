@@ -22,6 +22,7 @@ class FirmController extends BaseController
         $result = [
             'firm'=> $this->getModule(),
             'datas'=> $this->query(),
+            'comMain'=> $this->getComMain(),
             'topmenus'=> $this->topmenus,
             'curr'=> 'firm',
         ];
