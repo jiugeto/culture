@@ -15,8 +15,8 @@
     height:65px;
     overflow:hidden;
 }
-.com_logo_size { height:30px; }
-.com_logo img { padding:15px 0; }
+.com_logo_size { height:50px; }
+.com_logo img { padding:7px 5px; }
 .com_center { margin:0 auto;width:1000px; }
 .com_center a { color:white;font-size:20px; }
 .com_center li {
