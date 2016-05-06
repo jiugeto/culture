@@ -10,13 +10,12 @@ class FirmController extends BaseFuncController
      *  公司服务
      */
 
-    protected $module = 2;        //1代表公司服务
-
     public function __construct()
     {
         parent::__construct();
         $this->lists['func']['name'] = '服务编辑';
         $this->lists['func']['url'] = 'firms';
+        $this->module = $this->getModuleId($genre=2);
     }
 
     public function index()

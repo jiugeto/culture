@@ -19,7 +19,7 @@
             </tr>
             <tr>
                 <td class="field_name">网站描述：</td>
-                <td><div class="admin_show_con">{{ $data->description }}</div></td>
+                <td><div class="admin_show_con" style="height:100px;">{{ $data->description }}</div></td>
             </tr>
 
             <tr><td class="center" colspan="3" style="border:0;cursor:pointer;">

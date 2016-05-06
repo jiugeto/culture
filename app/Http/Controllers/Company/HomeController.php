@@ -75,44 +75,46 @@ class HomeController extends BaseController
     }
 
     /**
-     * 企业服务 module==2
+     * 企业服务 genre==2
      */
     public function getFirms()
     {
         //假如没有。即可生成默认记录
-        $firmModels = $this->getFuncs($cid=$this->cid,$module_id=2);
-        $firmModels0 = $this->getFuncs($cid=0,$module_id=2);
+        $module = $this->getModuleId($genre=2);
+        $firmModels = $this->getFuncs($cid=$this->cid,$module);
+        $firmModels0 = $this->getFuncs($cid=0,$module);
         //有则补充记录
         if (count($firmModels) && count($firmModels)<count($firmModels0)) {
             foreach ($firmModels0 as $key=>$firmModel) {
                 if ($firmModels0[$key]->cid!=$this->cid) {
-                    ComFuncModel::create($this->getFuncData($module_id=2,$firmModel));
+                    ComFuncModel::create($this->getFuncData($module,$firmModel));
                 }
             }
         }
         //无则生成一组记录
         if (!count($firmModels)) {
-            foreach ($this->getFuncs($cid=0,$module_id=2) as $firmModel) {
-                ComFuncModel::create($this->getFuncData($module_id=2,$firmModel));
+            foreach ($this->getFuncs($cid=0,$module) as $firmModel) {
+                ComFuncModel::create($this->getFuncData($module,$firmModel));
             }
         }
-        return $this->getFuncs($cid=$this->cid,$module_id=2);
+        return $this->getFuncs($cid=$this->cid,$module);
     }
 
     /**
-     * 企业新闻资讯 module==6
+     * 企业新闻资讯 genre==6
      */
     public function getNews()
     {
         //假如没有。即可生成默认记录
-        $newModels = $this->getFuncs($cid=$this->cid,$module_id=6);
-        $newModels0 = $this->getFuncs($cid=0,$module_id=6);
+        $module = $this->getModuleId($genre=6);
+        $newModels = $this->getFuncs($cid=$this->cid,$module);
+        $newModels0 = $this->getFuncs($cid=0,$module);
         if (!count($newModels)) {
             foreach ($newModels0 as $newModel) {
-                ComFuncModel::create($this->getFuncData($module_id=6,$newModel));
+                ComFuncModel::create($this->getFuncData($module,$newModel));
             }
         }
-        return $this->getFuncs($cid=$this->cid,$module_id=6);
+        return $this->getFuncs($cid=$this->cid,$module);
     }
 
     /**

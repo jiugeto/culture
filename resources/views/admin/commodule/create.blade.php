@@ -19,6 +19,17 @@
                         </div>
 
                         <div class="am-form-group">
+                            <label>类型 / genre：</label>
+                            <select name="genre" required>
+                                @if(count($model['genres']))
+                                    @foreach($model['genres'] as $kgenre=>$genre)
+                                        <option value="{{ $kgenre }}">{{ $genre }}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                        </div>
+
+                        <div class="am-form-group">
                             <label>内容 / intro：</label>
                             @include('UEditor::head')
                             <script id="container" name="intro" type="text/plain"></script>

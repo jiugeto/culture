@@ -10,13 +10,12 @@ class TeamController extends BaseFuncController
      *  公司团队
      */
 
-    protected $module = 3;        //1代表公司团队
-
     public function __construct()
     {
         parent::__construct();
         $this->lists['func']['name'] = '团队编辑';
         $this->lists['func']['url'] = 'team';
+        $this->module = $this->getModuleId(3);
     }
 
     public function index()

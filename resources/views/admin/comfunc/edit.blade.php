@@ -15,7 +15,7 @@
                     <input type="hidden" name="_method" value="POST">
                     <fieldset>
                         <div class="am-form-group">
-                            <label>模块名称 / Name：</label>
+                            <label>功能名称 / Name：</label>
                             <input type="text" placeholder="至少2个字符" minlength="2" required name="name" value="{{ $data->name }}"/>
                         </div>
 

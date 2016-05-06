@@ -12,11 +12,15 @@ class AboutController extends BaseController
 
     //type：1公司简介，2公司历程，...
 
+    protected $moduleid;
+    protected $genre = 1;       //此处1代表关于公司
+
     public function __construct()
     {
         parent::__construct();
         $this->list['func']['name'] = '关于公司';
         $this->list['func']['url'] = 'about';
+        $this->moduleid = $this->getModuleId($this->genre);
     }
 
     public function index($type=1)
@@ -34,9 +38,9 @@ class AboutController extends BaseController
 
     public function query($type)
     {
-        $data = ComFuncModel::where('cid',$this->cid)->where('module_id',1)->where('type',$type)->first();
+        $data = ComFuncModel::where('cid',$this->cid)->where('module_id',$this->moduleid)->where('type',$type)->first();
         if (!$data) {
-            $data = ComFuncModel::where('cid',0)->where('module_id',1)->where('type',$type)->first();
+            $data = ComFuncModel::where('cid',0)->where('module_id',$this->moduleid)->where('type',$type)->first();
             $about = [
                 'name'=> $data->name,
                 'cid'=> $this->cid,
@@ -49,11 +53,11 @@ class AboutController extends BaseController
             ];
             ComFuncModel::create($about);
         }
-        return ComFuncModel::where('cid',$this->cid)->where('module_id',1)->where('type',$type)->first();
+        return ComFuncModel::where('cid',$this->cid)->where('module_id',$this->moduleid)->where('type',$type)->first();
     }
 
     public function getAbouts()
     {
-        return ComFuncModel::where('cid',$this->cid)->where('module_id',1)->get();
+        return ComFuncModel::where('cid',$this->cid)->where('module_id',$this->moduleid)->get();
     }
 }

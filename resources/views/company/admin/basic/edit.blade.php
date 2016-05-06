@@ -22,7 +22,7 @@
                         <div id="preview" style="margin: 5px; width: 160px; height: 120px; border:1px dotted #5bc0de ; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);"></div>
                     @endif
                         <script src="/assets/js/local_pre.js"></script>
-                        <br><small class="am-form-help">注意：图片尺寸不宜过大，150*50范围内。</small>
+                        <br><small class="am-form-help">注意：图片尺寸不宜过大，建议150*50范围内。</small>
                     </td>
                 </tr>
                 {{--<tr><td></td></tr>--}}

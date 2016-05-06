@@ -3,8 +3,8 @@
     @include('company.admin.common.crumb')
 
     <div class="com_admin_list">
-        <h3 class="center pos">{{ $lists['func']['name'] }}详情页</h3>
-        <table class="table_create" cellspacing="0" cellpadding="0">
+        <h3 class="center pos">{{ $lists['func']['name'] }}{{--详情页--}}</h3>
+        <table class="table_create" cellspacing="0" cellpadding="0" id="t1">
             <tr>
                 <td class="field_name" style="text-align:center;" colspan="2">
                     <b>功能页面设置</b>
@@ -13,7 +13,19 @@
             </tr>
             <tr>
                 <td class="field_name">显示控制：</td>
-                <td></td>
+                <td>
+                    <table class="radio">
+                        @if(count($modules))
+                            @foreach($modules as $module)
+                        <tr>
+                            <td class="first"><b>{{ $module->name }}</b></td>
+                            <td><label><input type="radio" class="radio_pos" name="isshow{{$module->id}}" value="0" {{ $module->isshow==0 ? 'checked' : '' }}> 不显示&nbsp;&nbsp;</label></td>
+                            <td><label><input type="radio" class="radio_pos" name="isshow{{$module->id}}" value="1" {{ $module->isshow==1 ? 'checked' : '' }}> 显示&nbsp;&nbsp;</label><br></td>
+                        </tr>
+                            @endforeach
+                        @endif
+                    </table>
+                </td>
             </tr>
             <tr>
                 <td class="field_name">顺序控制：</td>
@@ -21,7 +33,7 @@
             </tr>
         </table>
 
-        <table class="table_create" cellspacing="0" cellpadding="0">
+        <table class="table_create" cellspacing="0" cellpadding="0" id="t2" style="display:none;">
             <tr>
                 <td class="field_name" style="text-align:center;" colspan="2">
                     <b>首页设置</b>

@@ -10,13 +10,12 @@ class NewsController extends BaseFuncController
      * 公司新闻资讯
      */
 
-    protected $module = 6;        //1代表公司新闻资讯
-
     public function __construct()
     {
         parent::__construct();
         $this->lists['func']['name'] = '新闻资讯';
         $this->lists['func']['url'] = 'news';
+        $this->module = $this->getModuleId($genre=6);
     }
 
     public function index()

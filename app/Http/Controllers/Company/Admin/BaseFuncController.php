@@ -13,6 +13,7 @@ class BaseFuncController extends BaseController
 
     protected $pics;
     protected $genre = 1;       //1代表默认模块
+    protected $module;
 
     public function __construct()
     {
@@ -31,7 +32,7 @@ class BaseFuncController extends BaseController
             'name'=> $request->name,
             'cid'=> $this->cid,
             'module_id'=> $module,
-            'genre'=> isset($request->genre)?$request->genre:1,     //1代表默认模块，2担保新加单页
+            'genre'=> $request->genre,
             'type'=> $request->type,
             'intro'=> $request->intro,
             'sort'=> $request->sort,

@@ -59,4 +59,14 @@ class BaseController extends Controller
 //            return redirect('/member/setting/'.$this->userid.'/auth');
         }
     }
+
+    /**
+     * 获取所属模块id
+     */
+    public function getModuleId($genre)
+    {
+        $moduleModel = ComModuleModel::where('cid',$this->cid)->where('genre',$genre)->first();
+        if (!$moduleModel) { $moduleModel = ComModuleModel::where('cid',0)->where('genre',$genre)->first(); }
+        return $moduleModel->id;
+    }
 }

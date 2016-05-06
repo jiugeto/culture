@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Company\Admin;
 
-use App\Models\Admin\MenusModel;
+use App\Models\Company\ComModuleModel;
 
 class LayoutController extends BaseController
 {
@@ -22,12 +22,16 @@ class LayoutController extends BaseController
     {
         $curr['name'] = $this->lists['show']['name'];
         $curr['url'] = $this->lists['show']['url'];
-        //功能页面设置
-//        $funcs = MenusModel::where()->get();
         $result = [
+            'modules'=> $this->query(),
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
         return view('company.admin.layout.index', $result);
+    }
+
+    public function query()
+    {
+        return ComModuleModel::where('cid',$this->cid)->orderBy('sort','desc')->orderBy('id','desc')->get();
     }
 }

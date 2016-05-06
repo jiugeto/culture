@@ -11,7 +11,7 @@ class SingleModuleController extends BaseController
      * 企业后台 其他页面（单页）
      */
 
-    protected $genre = 2;       //2代表新加的单页
+    protected $genre = 7;       //7代表新加的单页
 
     public function __construct()
     {

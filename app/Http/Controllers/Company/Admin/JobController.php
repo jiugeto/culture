@@ -10,13 +10,12 @@ class JobController extends BaseFuncController
      *  公司招聘
      */
 
-    protected $module = 4;        //1代表公司招聘
-
     public function __construct()
     {
         parent::__construct();
         $this->lists['func']['name'] = '招聘编辑';
         $this->lists['func']['url'] = 'job';
+        $this->module = $this->getModuleId($genre=4);
     }
 
     public function index()

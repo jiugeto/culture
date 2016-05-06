@@ -35,13 +35,10 @@ class ComModuleController extends BaseController
 
     public function create()
     {
-        //有同名模块则不允许添加
-//        if (count(ComModuleModel::all())>$this->firmNum-1) {
-//            echo "<script>alert('已满".$this->firmNum."条记录！');history.go(-1);</script>";exit;
-//        }
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
+            'model'=>$this->model,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -62,6 +59,7 @@ class ComModuleController extends BaseController
         $curr['url'] = $this->crumb['edit']['url'];
         $result = [
             'data'=> ComModuleModel::find($id),
+            'model'=>$this->model,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -82,6 +80,7 @@ class ComModuleController extends BaseController
         $curr['url'] = $this->crumb['show']['url'];
         $result = [
             'data'=> ComModuleModel::find($id),
+            'model'=>$this->model,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -105,7 +104,7 @@ class ComModuleController extends BaseController
         if (!$request->intro) { echo "<script>alert('内容必填！');history.go(-1);</script>";exit; }
         $data = [
             'name'=> $request->name,
-            'genre'=> 1,        //1代表默认模块
+            'genre'=> $request->genre,
             'intro'=> $request->intro,
             'sort'=> $request->sort,
             'isshow'=> $request->isshow,

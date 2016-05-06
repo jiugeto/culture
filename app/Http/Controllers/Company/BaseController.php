@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Company;
 
 use App\Http\Controllers\Controller;
 use App\Models\Company\ComMainModel;
+use App\Models\Company\ComModuleModel;
 use App\Models\LinkModel;
 
 class BaseController extends Controller
@@ -31,6 +32,8 @@ class BaseController extends Controller
         $this->company = unserialize(\Session::get('user.company'));
 
         //企业页面header菜单 type_id==2
+//        dd($this->getComModules());
+        $this->getComModules();
         $this->topmenus = LinkModel::where('cid',$this->cid)
                                 ->where('type_id', 2)
                                 ->where('isshow', 1)
@@ -65,5 +68,58 @@ class BaseController extends Controller
             ComMainModel::create($main);
         }
         return ComMainModel::where('cid',$this->cid)->first();
+    }
+
+    /**
+     * 企业页面模块获取更新
+     */
+    public function getComModules()
+    {
+        //假如没有。即可生成默认记录
+        $moduleModels = ComModuleModel::where('cid',$this->cid)->get();
+        $moduleModels0 = ComModuleModel::where('cid',0)->get();
+        //有则补充记录
+        if (count($moduleModels) && count($moduleModels)<count($moduleModels0)) {
+            foreach ($moduleModels0 as $key=>$moduleModel) {
+                if ($moduleModels0[$key]->cid!=$this->cid) {
+                    $module = [
+                        'cid'=> $this->cid,
+                        'name'=> $moduleModel->name,
+                        'genre'=> $moduleModel->genre,
+                        'intro'=> $moduleModel->intro,
+                        'sort'=> $moduleModel->sort,
+                        'isshow'=> $moduleModel->isshow,
+                        'created_at'=> date('Y-m-d H:i:s', time()),
+                    ];
+                    ComModuleModel::create($module);
+                }
+            }
+        }
+        //无则生成一组记录
+        if (!count($moduleModels)) {
+            foreach (ComModuleModel::where('cid',0)->get() as $moduleModel) {
+                $module = [
+                    'cid'=> $this->cid,
+                    'name'=> $moduleModel->name,
+                    'genre'=> $moduleModel->genre,
+                    'intro'=> $moduleModel->intro,
+                    'sort'=> $moduleModel->sort,
+                    'isshow'=> $moduleModel->isshow,
+                    'created_at'=> date('Y-m-d H:i:s', time()),
+                ];
+                ComModuleModel::create($module);
+            }
+        }
+        return ComModuleModel::where('cid',$this->cid)->get();
+    }
+
+    /**
+     * 获取所属模块id
+     */
+    public function getModuleId($genre)
+    {
+        $moduleModel = ComModuleModel::where('cid',$this->cid)->where('genre',$genre)->first();
+        if (!$moduleModel) { $moduleModel = ComModuleModel::where('cid',0)->where('genre',$genre)->first(); }
+        return $moduleModel->id;
     }
 }

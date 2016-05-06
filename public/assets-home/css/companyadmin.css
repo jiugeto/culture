@@ -204,6 +204,7 @@ input.field_value {
     width:290px;
 }
 select { margin:5px auto;font-size:20px;font-family:'微软雅黑'; }
+.radio_pos { position:relative;top:10px; }
 .com_admin_list .table_create {
     margin:10px auto;
     padding:10px 50px;
@@ -246,4 +247,11 @@ select { margin:5px auto;font-size:20px;font-family:'微软雅黑'; }
     border:1px solid lightgrey;
     overflow:auto;
 }
+table.radio {
+    width:400px;
+    border:1px dashed lightgrey;
+    border-radius:5px;
+}
+table.radio td { text-align:left; }
+table.radio td.first { border-right:1px solid rgb(240,240,240); }
 /*=== 企业后台详情页面的内容 ===*/

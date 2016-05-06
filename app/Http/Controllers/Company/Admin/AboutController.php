@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Company\Admin;
 
 use App\Models\Company\ComFuncModel;
+use App\Models\Company\ComModuleModel;
 use Illuminate\Http\Request;
 
 class AboutController extends BaseFuncController
@@ -10,13 +11,12 @@ class AboutController extends BaseFuncController
      *  关于公司
      */
 
-    protected $module = 1;        //1代表公司介绍
-
     public function __construct()
     {
         parent::__construct();
         $this->lists['func']['name'] = '关于公司';
         $this->lists['func']['url'] = 'about';
+        $this->module = $this->getModuleId($genre=1);
     }
 
     public function index()
