@@ -32,7 +32,9 @@ class BaseController extends Controller
         //企业页面header菜单 type_id==2
         $this->topmenus = LinkModel::where('cid',$this->cid)
                                 ->where('type_id', 2)
+                                ->where('isshow', 1)
                                 ->orderBy('sort','desc')
+                                ->orderBy('id','desc')
                                 ->get();
     }
 }

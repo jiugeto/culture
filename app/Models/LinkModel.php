@@ -14,7 +14,7 @@ class LinkModel extends BaseModel
         1=>'header头链接','navigate菜单导航栏链接','footer脚部链接',
     ];
     protected $isshows = [
-       '不删除','删除',
+       '不显示','显示',
     ];
 
 //    /**
@@ -41,6 +41,10 @@ class LinkModel extends BaseModel
     {
         return $this->hasOne('App\Models\PicModel', 'id', 'pic_id');
     }
+//    public function pic()
+//    {
+//        return $this->pic_id ? PicModel::find($this->pic_id) : '';
+//    }
 
     /**
      * 顶部链接：type_id==1

@@ -44,11 +44,49 @@ class LinkController extends BaseController
         return view('company.admin.link.create', $result);
     }
 
-    public function store(Request $request){}
+    public function store(Request $request)
+    {
+        $data = $this->getData($request);
+        $data['created_at'] = date('Y-m-d H:i:s', time());
+        LinkModel::create($data);
+        return redirect('/company/admin/link');
+    }
 
-    public function edit($id){}
+    public function edit($id)
+    {
+        $curr['name'] = $this->lists['edit']['name'];
+        $curr['url'] = $this->lists['edit']['url'];
+        $result = [
+            'data'=> LinkModel::find($id),
+            'pics'=> PicModel::where('uid',$this->userid)->get(),
+            'types'=> $this->model['types'],
+            'lists'=> $this->lists,
+            'curr'=> $curr,
+        ];
+        return view('company.admin.link.edit', $result);
+    }
 
-    public function update(Request $request,$id){}
+    public function update(Request $request,$id)
+    {
+        $data = $this->getData($request);
+        $data['updated_at'] = date('Y-m-d H:i:s', time());
+        LinkModel::where('id',$id)->update($data);
+        return redirect('/company/admin/link');
+    }
+
+    public function show($id)
+    {
+        $curr['name'] = $this->lists['show']['name'];
+        $curr['url'] = $this->lists['show']['url'];
+        $result = [
+            'data'=> LinkModel::find($id),
+            'pics'=> PicModel::where('uid',$this->userid)->get(),
+            'types'=> $this->model['types'],
+            'lists'=> $this->lists,
+            'curr'=> $curr,
+        ];
+        return view('company.admin.link.show', $result);
+    }
 
 
 
@@ -57,12 +95,13 @@ class LinkController extends BaseController
     {
         $data = [
             'name'=> $request->name,
+            'cid'=> $this->cid,
             'type_id'=> $request->type_id,
             'pic_id'=> $request->pic_id,
             'intro'=> isset($request->intro) ? $request->intro : '',
-            'sort'=> $request->sort,
             'link'=> $request->link,
             'display_way'=> $request->display_way,
+            'sort'=> $request->sort,
             'isshow'=> $request->isshow,
         ];
         return $data;

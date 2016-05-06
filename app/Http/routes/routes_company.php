@@ -102,7 +102,7 @@ Route::group(['prefix'=>'company','middleware' =>'MemberAuth','namespace'=>'Comp
         Route::post('ppt/{id}','PptController@update');
         Route::resource('ppt','PptController');
             //链接管理
-        Route::post('lateink/{id}','LinkController@upd');
+        Route::post('link/{id}','LinkController@update');
         Route::resource('link','LinkController');
     });
 });

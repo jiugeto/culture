@@ -9,6 +9,7 @@ class ProductController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
         $this->list['func']['name'] = '产品';
         $this->list['func']['url'] = 'product';
     }

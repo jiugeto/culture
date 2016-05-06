@@ -17,8 +17,15 @@
             {{--<a href="##"><li>花絮</li></a>--}}
             {{--<a href="##"><li>作品</li></a>--}}
             {{--<a href="##"><li class="curr">首页</li></a>--}}
-            @foreach($topmenus as $kmenu=>$topmenu)
-                <a href="/company/{{ $kmenu }}"><li class="{{$curr==$kmenu?'curr':''}}">{{ $topmenu }}</li></a>
+            {{--@foreach($topmenus as $kmenu=>$topmenu)--}}
+                {{--<a href="/company/{{ $kmenu }}"><li class="{{$curr==$kmenu?'curr':''}}">{{ $topmenu }}</li></a>--}}
+            {{--@endforeach--}}
+            @foreach($topmenus as $topmenu)
+                @if(count($topmenu)<8)
+                <a href="/company/{{ $topmenu->link }}">
+                    <li class="{{$curr==$topmenu->link?'curr':''}}">{{ $topmenu->name }}</li>
+                </a>
+                @endif
             @endforeach
         </ul>
     </div>

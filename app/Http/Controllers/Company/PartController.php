@@ -9,6 +9,7 @@ class PartController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
         $this->list['func']['name'] = '花絮';
         $this->list['func']['url'] = 'part';
     }
