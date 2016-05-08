@@ -1074,16 +1074,33 @@ DROP TABLE IF EXISTS `bs_products_attr`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `bs_products_attr` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '样式属性名称：1=>margin，padding，width，height，border，border-radius，color，background，position',
-  `type` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '属性类型标识type：1(margin,padding)，2(width,height,border-radius)，3(color,background)，4(border)，5(position)，',
-  `val` varchar(255) NOT NULL COMMENT '样式属性值',
-  `layerid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '动画层id',
-  `intro` varchar(1000) NOT NULL COMMENT '属性简介',
+  `name` varchar(10) NOT NULL DEFAULT '0' COMMENT '样式名称',
+  `productid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '产品表id，关联bs_products',
+  `margin` varchar(10) NOT NULL COMMENT '外边距：行row，列col，用|隔开',
+  `padding` varchar(10) NOT NULL COMMENT '内边距：行row，列col，用|隔开',
+  `width` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '宽度，单位px',
+  `height` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '高度，单位px',
+  `border` varchar(20) NOT NULL COMMENT '边框：top，bottom，left，right，值，类型，颜色，值的组合，用|隔开',
+  `color` varchar(10) NOT NULL COMMENT '颜色',
+  `font_size` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '字号，单位px',
+  `word_spacing` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '字间距，单位px',
+  `line_height` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '行高，单位px',
+  `text_transform` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '字型变换：none，capitalize首字大写，uppercase英文大写，lowercase英文写',
+  `text_align` tinyint(3) unsigned NOT NULL COMMENT '水平对齐方式：center，left，right，justify',
+  `background` varchar(20) NOT NULL COMMENT '背景颜色',
+  `position` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '定位：static，fixed，relative，absolute',
+  `left` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '左边距离，单位px',
+  `top` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '顶部距离，单位px',
+  `overflow` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '显示方式：scroll(始终显示滚动条)，visible(不显示滚动条,但超出部分可见)，auto(内容超出时显示滚动条)，hidden(超出时隐藏内容)',
+  `opacity` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '透明度：区间值，0透明-1不透明，浮点值或%',
+  `intro` varchar(255) NOT NULL COMMENT '属性简介',
+  `pid` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '父级属性id，0代表顶级',
+  `islayer` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '有无动画：0无动画，1有动画',
   `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站功能：0不删除，1删除',
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL DEFAULT '0000-00-00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='在线创作属性表：在线写的属性';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='在线创作div类样式属性表：在线写的属性';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1105,9 +1122,12 @@ DROP TABLE IF EXISTS `bs_products_layer`;
 CREATE TABLE `bs_products_layer` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL COMMENT '动画层名称',
-  `productid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '产品表id',
+  `productid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '产品表id，关联bs_products',
+  `attrid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '属性id，关联bs_products_attr',
+  `field` varchar(255) NOT NULL COMMENT '初始字段名称和值，序列化存储',
+  `per` varchar(255) NOT NULL COMMENT '动画的百分比，用|隔开',
+  `value` varchar(255) NOT NULL COMMENT '动画字段，序列化存储，键值对(属性-数值)',
   `intro` varchar(1000) NOT NULL COMMENT '属性简介',
-  `pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '父层级id，0代表顶级',
   `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站功能：0不删除，1删除',
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL DEFAULT '0000-00-00',
@@ -1815,4 +1835,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-05-08 16:48:10
+-- Dump completed on 2016-05-09  0:06:54

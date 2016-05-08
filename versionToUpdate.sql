@@ -19,7 +19,41 @@
 
 -- 2016/05/04
 -- 公司数据表改造：转为模块表com_modules、功能表com_funcs
-
 -- 基本设置：企业logo、...
 
+-- 2016/05/08
 -- 在线产品数据表改造：2表变3表
+-- 在线产品数据表再改造：
+-- 属性表：标签样式的属性
+    margin:行-左右row 列-上下col
+    padding:行-左右row 列-上下col
+    width
+    height
+    color
+--     font-family字体
+    font-size
+--     font-style:italic normal oblique
+--     font-variant字体
+--     font-weight:bold bolder lighter
+--     letter-spacing字间距
+    word-spacing字间距
+    line-height
+--     vertical-align:sub下标字 super上标字
+--     text-decoration:line-through overline underline none
+    text-transform:capitalize首字大写 uppercase英文大写 lowercase英文写 none
+    text-align:center left right justify
+--     text-decorator:none underline overline line-through blink
+--     text-indent
+    background-color
+--     background-image:如url(image/bg.gif)
+--     background-attachment:scroll fixed
+--     background-repeat:repeat no-repeat repeat-x repeat-y
+--     background-position:如90% 90% 图片与x,y轴位置
+    border:top bottom left right 值 类型 颜色
+    position:static fixed relative absolute top left right bottom
+    overflow:scroll(始终显示滚动条) visible(不显示滚动条,但超出部分可见) auto(内容超出时显示滚动条) hidden(超出时隐藏内容)
+--     z-index(position必需要指定为absolute才行)
+--     cursor:设置DIV上光标的样式
+--     clip(position指定为absolute):设置剪辑矩形 rect(top right bottom left)设置上下左右的距离
+    opacity:filter:alpha(opacity=value) eg:filter:alpha(opacity=50);opacity:0.5;
+-- 动画表：需要做动画的属性
