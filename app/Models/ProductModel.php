@@ -8,43 +8,9 @@ class ProductModel extends BaseModel
 {
     protected $table = 'bs_products';
     protected $fillable = [
-        'id','name','genre','gif','intro','uid','uname','isauth','sort','isshow','del','created_at','updated_at',
+        'id','name','genre','gif','intro','uid','uname','width','height','isauth','sort','isshow','del','created_at','updated_at',
     ];
     protected $isauths = [
         '未审核','未通过审核','通过审核',
     ];
-
-    /**
-     * 由css_id得到一条css记录
-     */
-    public function getOneCss($css_id)
-    {
-        return ProductAttrModel::where('id', $css_id)->first();
-    }
-
-    /**
-     * 由js_id得到一条js记录
-     */
-    public function getOneJs($js_id)
-    {
-        return ProductAttrModel::where('id', $js_id)->first();
-    }
-
-    /**
-     * css样式列表
-     */
-    public function cssList()
-    {
-        //假如1代表css
-        return ProductAttrModel::where('type_id', 1)->get();
-    }
-
-    /**
-     * js文件列表
-     */
-    public function jsList()
-    {
-        //假如2代表js
-        return ProductAttrModel::where('type_id', 2)->get();
-    }
 }

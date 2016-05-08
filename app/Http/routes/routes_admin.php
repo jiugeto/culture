@@ -60,6 +60,8 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::resource('goods','GoodsController');
     //内部产品管理
     Route::resource('product','ProductController');
+        //内部产品动画层级路由
+    Route::resource('productlayer','ProductLayerController');
         //内部产品属性路由
     Route::resource('productattr','ProductAttrController');
         //产品类型路由

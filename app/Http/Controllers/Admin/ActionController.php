@@ -123,6 +123,7 @@ class ActionController extends BaseController
             'action'=> $data['action'],
             'style_class'=> $data['style_class'],
             'pid'=> $data['pid'],
+            'isshow'=> $data['isshow'],
         ];
         return $data;
     }

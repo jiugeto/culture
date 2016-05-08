@@ -2,21 +2,21 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Models\ProductAttrModel;
+use App\Models\ProductLayerModel;
 
-class ProductAttrController extends BaseController
+class ProductLayerController extends BaseController
 {
     /**
-     * 系统后台内部产品属性管理
+     * 系统后台 内部产品动画层级管理
      */
 
     public function __construct()
     {
         parent::__construct();
-        $this->model = new ProductAttrModel();
-        $this->crumb['']['name'] = '动画属性列表';
-        $this->crumb['category']['name'] = '动画属性';
-        $this->crumb['category']['url'] = 'productattr';
+        $this->model = new ProductLayerModel();
+        $this->crumb['']['name'] = '产品动画列表';
+        $this->crumb['category']['name'] = '产品动画';
+        $this->crumb['category']['url'] = 'productlayer';
     }
 
     public function index()
@@ -25,11 +25,11 @@ class ProductAttrController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $result = [
             'datas'=> $this->query(),
-            'prefix_url'=> '/admin/productattr',
+            'prefix_url'=> '/admin/productlayer',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
-        return view('admin.productAttr.index', $result);
+        return view('admin.productLayer.index', $result);
     }
 
     public function create()
@@ -41,7 +41,7 @@ class ProductAttrController extends BaseController
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
-       return view('admin.productAttr.create', $result);
+       return view('admin.productLayer.create', $result);
     }
 
     public function store(){}
@@ -79,6 +79,6 @@ class ProductAttrController extends BaseController
      */
     public function query()
     {
-        return ProductAttrModel::paginate($this->limit);
+        return ProductLayerModel::paginate($this->limit);
     }
 }

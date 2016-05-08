@@ -51,6 +51,12 @@
                             <textarea name="intro" cols="50" rows="5"></textarea>
                         </div>
 
+                        <div class="am-form-group">
+                            <label>是否显示 / Is Show：</label>
+                            <label><input type="radio" name="isshow" value="0"> 不显示&nbsp;&nbsp;</label>
+                            <label><input type="radio" name="isshow" value="1" checked> 显示&nbsp;&nbsp;</label>
+                        </div>
+
                         <button type="submit" class="am-btn am-btn-primary">保存添加</button>
                     </fieldset>
                 </form>
