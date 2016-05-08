@@ -63,3 +63,25 @@
 .img .title {
     text-align:center;
 }
+
+
+/*========== 动画控制 ==========*/
+.switch {
+    margin:0 auto;
+    margin-top:-50px;
+    width:980px;
+}
+.onlinebtn {
+    padding:2px 20px;
+    border:1px solid orangered;
+    border-radius:3px;
+    color:white;
+    font-family:'微软雅黑';
+    font-size:20px;
+    background:orangered;
+    cursor:pointer;
+}
+a:hover .onlinebtn {
+    border:1px solid darkred;
+    background:darkred;
+}
