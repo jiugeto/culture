@@ -1,8 +1,8 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use App\Models\ProductModel;
+use Illuminate\Http\Request;
 
 class ProductController extends BaseController
 {
@@ -24,10 +24,21 @@ class ProductController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'cssList'=> $this->model->cssList(),
-            'jsList'=> $this->model->jsList(),
-            'datas'=> $this->query(0),
+            'datas'=> $this->query($del=0),
             'prefix_url'=> '/admin/product',
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.product.index', $result);
+    }
+
+    public function trash()
+    {
+        $curr['name'] = $this->crumb['trash']['name'];
+        $curr['url'] = $this->crumb['trash']['url'];
+        $result = [
+            'datas'=> $this->query($del=1),
+            'prefix_url'=> '/admin/product/trash',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -39,8 +50,6 @@ class ProductController extends BaseController
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
-            'cssList'=> $this->model->cssList(),
-            'jsList'=> $this->model->jsList(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -57,13 +66,10 @@ class ProductController extends BaseController
 
     public function edit($id)
     {
-        $data = ProductModel::find($id);
-        $data->css = $this->model->getOneCss($data->css_id);
-        $data->js = $this->model->getOneJs($data->js_id);
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
         $result = [
-            'data'=> $data,
+            'data'=> ProductModel::find($id),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -80,28 +86,32 @@ class ProductController extends BaseController
 
     public function show($id)
     {
-        $data = ProductModel::find($id);
-        $data->css = $this->model->getOneCss($data->css_id);
-        $data->js = $this->model->getOneJs($data->js_id);
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
         $result = [
-            'data'=> $data,
+            'data'=> ProductModel::find($id),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
         return view('admin.product.show', $result);
     }
 
-    public function trash()
+    public function destroy($id)
     {
-        $curr['name'] = $this->crumb['trash']['name'];
-        $curr['url'] = $this->crumb['trash']['url'];
-        $result = [
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
-        ];
-        return view('admin.product.trash', $result);
+        ProductModel::where('id',$id)->update(['del'=> 1]);
+        return redirect('/admin/product');
+    }
+
+    public function restore($id)
+    {
+        ProductModel::where('id',$id)->update(['del'=> 0]);
+        return redirect('/admin/product/trash');
+    }
+
+    public function forceDelete($id)
+    {
+        ProductModel::where('id',$id)->delete();
+        return redirect('/admin/product/trash');
     }
 
 
@@ -119,13 +129,14 @@ class ProductController extends BaseController
      */
     public function getData(Request $request)
     {
-        $data = $request->all();
         $product = [
-            'name'=> $data['name'],
-            'uid'=> $data['uid'],
-            'uname'=> $data['uname'],
-            'css_id'=> $data['css_id'],
-            'js_id'=> $data['js_id'],
+            'name'=> $request->name,
+            'intro'=> $request->intro,
+            'width'=> $request->width,
+            'height'=> $request->height,
+            'istop'=> $request->istop,
+            'sort'=> $request->sort,
+            'isshow'=> $request->isshow,
         ];
         return $product;
     }
@@ -135,9 +146,8 @@ class ProductController extends BaseController
      */
     public function query($del=0)
     {
-        $products = ProductModel::where('del',$del)
+        return ProductModel::where('del',$del)
             ->orderBy('id','desc')
             ->paginate($this->limit);
-        return $products;
     }
 }

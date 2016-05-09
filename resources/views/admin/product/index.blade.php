@@ -17,8 +17,10 @@
                         <th class="table-id">ID</th>
                         <th class="table-title">产品名称</th>
                         <th class="table-type">用户名称</th>
-                        <th class="table-type">样式名称</th>
-                        <th class="table-author am-hide-sm-only">动画名称</th>
+                        <th class="table-type">是否置顶</th>
+                        <th class="table-type">排序</th>
+                        <th class="table-type">前台是否显示</th>
+                        <th class="table-type">是否审核</th>
                         <th class="table-date am-hide-sm-only">添加时间</th>
                         <th class="table-set">操作</th>
                     </tr>
@@ -31,16 +33,10 @@
                         <td class="am-hide-sm-only">{{ $data->id }}</td>
                         <td class="am-hide-sm-only"><a href="/admin/product/{{$data->id}}">{{ $data->name }}</a></td>
                         <td class="am-hide-sm-only">{{ $data->uname }}</td>
-                        <td class="am-hide-sm-only">
-                            @foreach($cssList as $css)
-                                @if($css->id==$data->type) {{ $css->name }} @endif
-                            @endforeach
-                        </td>
-                        <td class="am-hide-sm-only">
-                            @foreach($jsList as $js)
-                                @if($js->id==$data->type) {{ $js->name }} @endif
-                            @endforeach
-                        </td>
+                        <td class="am-hide-sm-only">{{ $data->istop() }}</td>
+                        <td class="am-hide-sm-only">{{ $data->sort }}</td>
+                        <td class="am-hide-sm-only">{{ $data->isshow() }}</td>
+                        <td class="am-hide-sm-only">{{ $data->isauth() }}</td>
                         <td class="am-hide-sm-only">{{ $data->created_at }}</td>
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">

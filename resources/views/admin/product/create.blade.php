@@ -25,30 +25,30 @@
                         </div>
 
                         <div class="am-form-group">
-                            <label>用户名称 / User Name：</label>
-                            <input type="text" placeholder="只是2个字符" minlength="2" required name="uname">
+                            <label>视频宽度 / Width：(单位px)</label>
+                            <input type="text" placeholder="" pattern="^\d{3,4}$" required name="width">
                         </div>
 
                         <div class="am-form-group">
-                            <label>css样式 / Css：
-                                <a href="">[+添加样式]</a></label>
-                            <select name="css_id">
-                                <option value="">-选择-</option>
-                                @foreach($cssList as $css)
-                                    <option value="{{ $css->id }}">{{ $css->name }}</option>
-                                @endforeach
-                            </select>
+                            <label>视频高度 / Height：(单位px)</label>
+                            <input type="text" placeholder="" pattern="^\d{3,4}$" required name="height">
                         </div>
 
                         <div class="am-form-group">
-                            <label>js动画 / JS：
-                                <a href="">[+添加动画]</a></label>
-                            <select name="js_id">
-                                <option value="">-选择-</option>
-                                @foreach($jsList as $js)
-                                    <option value="{{ $js->id }}">{{ $js->name }}</option>
-                                @endforeach
-                            </select>
+                            <label>是否置顶 / Is Top：</label>
+                            <label><input type="radio" name="istop" value="0" checked> 不置顶&nbsp;&nbsp;</label>
+                            <label><input type="radio" name="istop" value="1"> 置顶&nbsp;&nbsp;</label>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label>排序 / sort：</label>
+                            <input type="text" placeholder="" pattern="^\d+$" required name="sort" value="10">
+                        </div>
+
+                        <div class="am-form-group">
+                            <label>前台是否显示 / Is Show：</label>
+                            <label><input type="radio" name="isshow" value="0"> 不显示&nbsp;&nbsp;</label>
+                            <label><input type="radio" name="isshow" value="1" checked> 显示&nbsp;&nbsp;</label>
                         </div>
 
                         <button type="submit" class="am-btn am-btn-primary">保存添加</button>

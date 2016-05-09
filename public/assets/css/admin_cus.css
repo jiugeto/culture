@@ -73,3 +73,18 @@ a:hover.increase,a:hover.reduce { background:white; }
     overflow:auto;
 }
 /*=== 系统后台详情页面的内容 ===*/
+
+
+/*=== 系统后台添加修改页面 ===*/
+.admin_border {
+    padding:5px;
+    border:1px dashed lightgrey;
+}
+.admin_yulan {
+    margin-left:5px;
+    width:100px;
+    height:25px;
+    background:black;
+    float:right;
+}
+/*=== 系统后台添加修改页面 ===*/

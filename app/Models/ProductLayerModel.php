@@ -5,7 +5,29 @@ class ProductLayerModel extends BaseModel
 {
     protected $table = 'bs_products_layer';
     protected $fillable = [
-        'id','name','attrid','productid','field','per','value','intro','del','created_at','updated_at',
+        'id','name','productid','attrid','animation_name','duration','function','delay','count','direction','state','mode','field','per','value','intro','del','created_at','updated_at',
+    ];
+    //速度曲线
+    protected $functions = [
+        1=>'linear','ease','ease-in','ease-out','ease-in-out','cubic-bezier',
+    ];
+    protected $functionNames = [
+        1=>'匀速','默认，先慢再快后慢','低速开始','低速结束','低速开始和结束','贝塞尔函数自定义',
+    ];
+    //播放方向
+    protected $directions = [
+        1=>'normal','alternate',
+    ];
+    //播放状态
+    protected $states = [
+        'paused','running',
+    ];
+    //播放模式
+    protected $modes = [
+        1=>'forwards','backwards','both','none',
+    ];
+    protected $modeNames = [
+        1=>'保持最后画面','保持最开始画面','所有','复原',
     ];
 
     public function productAll()
@@ -25,5 +47,15 @@ class ProductLayerModel extends BaseModel
             if ($productModel) { $pname = $productModel->name; }
         }
         return isset($pname) ? $pname : '未知';
+    }
+
+    public function attrAll()
+    {
+        return ProductAttrModel::all();
+    }
+
+    public function attrs($uid)
+    {
+        return ProductAttrModel::where('uid',$uid)->get();
     }
 }

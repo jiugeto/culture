@@ -60,7 +60,7 @@ class LoginController extends BaseController
         Session::put('admin.username',$username);
         Session::put('admin.password',$password);
         Session::put('admin.serial',$serial);
-        Session::put('admin.limit',$adminModel->limit);
+//        Session::put('admin.limit',$adminModel->limit);
         Session::put('admin.created_at',$adminModel->created_at);
         Session::put('admin.loginTime',$loginTime);
 
@@ -85,7 +85,7 @@ class LoginController extends BaseController
         Session::forget('admin.username');
         Session::forget('admin.password');
         Session::forget('admin.serial');
-        Session::forget('admin.limit');
+//        Session::forget('admin.limit');
         Session::forget('admin.created_at');
         Session::forget('admin.loginTime');
         return Redirect('/admin/login');

@@ -30,7 +30,7 @@ class BaseController extends Controller
 
     public function __construct()
     {
-        if (\Session::has('user.limit')) {
+        if (\Session::has('user.username')) {
             $this->limit = UserModel::where('username',\Session::get('user.username'))->first()->limit;
         }
         $this->userid = \Session::has('user.uid') ? \Session::get('user.uid') : redirect('/login');
