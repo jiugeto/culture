@@ -18,9 +18,15 @@ class ProductLayerModel extends BaseModel
     protected $directions = [
         1=>'normal','alternate',
     ];
+    protected $directionNames = [
+        1=>'正常','轮流反向',
+    ];
     //播放状态
     protected $states = [
         'paused','running',
+    ];
+    protected $stateNames = [
+        '暂停','播放',
     ];
     //播放模式
     protected $modes = [
@@ -57,5 +63,45 @@ class ProductLayerModel extends BaseModel
     public function attrs($uid)
     {
         return ProductAttrModel::where('uid',$uid)->get();
+    }
+
+    public function func()
+    {
+        return $this->function ? $this->functions[$this->function] : '';
+    }
+
+    public function functionName()
+    {
+        return $this->function ? $this->functionNames[$this->function] : '';
+    }
+
+    public function direction()
+    {
+        return $this->direction ? $this->directions[$this->direction] : '';
+    }
+
+    public function directionName()
+    {
+        return $this->direction ? $this->directionNames[$this->direction] : '';
+    }
+
+    public function state()
+    {
+        return $this->state ? $this->states[$this->state] : '';
+    }
+
+    public function stateName()
+    {
+        return $this->state ? $this->stateNames[$this->state] : '';
+    }
+
+    public function mode()
+    {
+        return $this->mode ? $this->modes[$this->mode] : '';
+    }
+
+    public function modeName()
+    {
+        return $this->mode ? $this->modeNames[$this->mode] : '';
     }
 }

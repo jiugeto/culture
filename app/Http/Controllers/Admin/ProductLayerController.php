@@ -24,7 +24,7 @@ class ProductLayerController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'datas'=> $this->query(),
+            'datas'=> $this->query($del=0),
             'prefix_url'=> '/admin/productlayer',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -48,7 +48,6 @@ class ProductLayerController extends BaseController
     {
         $data = $this->getData($request);
         $data['created_at'] = date('Y-m-d H:i:s', time());
-        dd($data);
         ProductLayerModel::create($data);
         return redirect('/admin/productlayer');
     }
@@ -58,7 +57,7 @@ class ProductLayerController extends BaseController
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
         $result = [
-            'data'=> $th->,
+            'data'=> $this->getOne($id),
             'model'=> $this->model,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -86,14 +85,22 @@ class ProductLayerController extends BaseController
      */
     public function getData(Request $request)
     {
-        $data = $request->all();
         //动画属性值处理
-        for ($i=1;$i<$this->proAttrNum+1;++$i) {
-            $keyName = 'key'.$i;
+        $data = $request->all();
+        $val = '';
+        for ($i=1;$i<count(explode('|',$request->per))+1;++$i) {
             $valName = 'val'.$i;
-            if ($data[$valName]) { $val[$keyName] = $data[$valName]; }
+            if ($data[$valName]=='') { echo "<script>alert('动画属性值不能空！');history.go(-1);</script>";exit; }
+            if (substr($data[$valName],-1,1)!='|') { $data[$valName] = $data[$valName].'|'; }
+            if (substr($request->field,-1,1)!='|') { $request->field = $request->field.'|'; }
+            $count = count(explode('|',$request->field));
+            if (count(explode('|',$data[$valName])) != $count) {
+                echo "<script>alert('每个动画关键帧的值数量与字段数量必须一致！');history.go(-1);</script>";exit;
+            }
+            $val .= $data[$valName];
         }
-        $productAttr = [
+        $val = substr($val,-1,1)!='|'?$val.'|':$val;
+        $data = [
             'name'=> $request->name,
             'productid'=> $request->productid,
             'attrid'=> $request->attrid,
@@ -106,22 +113,33 @@ class ProductLayerController extends BaseController
             'state'=> $request->state,
             'mode'=> $request->mode,
             'field'=> $request->field,
-            'value'=> isset($val) ? serialize($val) : '',
+            'value'=> isset($val) ? $val : '',
             'intro'=> $request->intro,
         ];
-        return $productAttr;
+        return $data;
     }
 
     /**
      * 查询方法
      */
-    public function query()
+    public function query($del)
     {
-        return ProductLayerModel::paginate($this->limit);
+        return ProductLayerModel::where('del',$del)
+                    ->orderBy('id','desc')
+                    ->paginate($this->limit);
     }
 
     /**
      * 查询一条数据
      */
-    public function getOne($id){}
+    public function getOne($id)
+    {
+        $data = ProductLayerModel::find($id);
+        $data->fields = $data->field?explode('|',$data->field):[];
+        $data->per_index = isset($data->pers)?count($data->pers):0;
+        $data->pers = $data->per?explode('|',$data->per):[];
+//        $data->vals = $data->value?unserialize($data->value):[];
+        $data->vals = $data->value?explode('|',$data->value):[];
+        return $data;
+    }
 }

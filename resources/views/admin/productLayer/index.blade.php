@@ -17,7 +17,6 @@
                         <th class="table-id">ID</th>
                         <th class="table-title">动画名称</th>
                         <th class="table-type">产品名称</th>
-                        <th class="table-type">上级动画</th>
                         <th class="table-date am-hide-sm-only">添加时间</th>
                         <th class="table-set">操作</th>
                     </tr>
@@ -30,7 +29,6 @@
                         <td class="am-hide-sm-only">{{ $data->id }}</td>
                         <td class="am-hide-sm-only"><a href="/admin/productlayer/{{$data->id}}">{{ $data->name }}</a></td>
                         <td class="am-hide-sm-only">{{ $data->product() }}</td>
-                        <td class="am-hide-sm-only">{{ $data->parent() }}</td>
                         <td class="am-hide-sm-only">{{ $data->created_at }}</td>
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">
