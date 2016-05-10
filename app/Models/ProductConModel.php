@@ -1,28 +1,56 @@
 <?php
 namespace App\Models;
 
-class ProductAttrModel extends BaseModel
+class ProductConModel extends BaseModel
 {
-    protected $table = 'bs_products_attr';
-    protected $fillable = [
-        'id','name','style_name','productid','uid','margin','padding','width','height','border','color','font_size','word_spacing','line_height','text_transform','text_align','background','position','left','top','overflow','img','text','opacity','intro','islayer','del','created_at','updated_at',
-    ];
-    //img图片：pic_id，pic_margin1，pic_margin2，pic_padding1，pic_padding2，pic_border1，pic_border2，pic_border,3，pic_border,4，pic_width，pic_height，
-    //text文字：text_con，text_margin1，text_margin2，text_padding1，text_padding2，text_border1，text_border2，text_border3，text_border4，text_font_size，text_color，
+    /**
+     * 产品动画的图片文字管理
+     */
 
-    //边框类型
+    protected $table = 'bs_products_con';
+    protected $fillable = [
+        'id','name','attrid','genre','pic_id','productid','margin','padding','width','height','border','background','position','left','top','overflow','opacity','text_attr',
+//        'color','font_size','word_spacing','line_height','text_transform','text_align',
+        'intro','del','created_at','updated_at',
+    ];
+    protected $genres = [1=>'图片','文字'];
+
+    public function genre()
+    {
+        return $this->genre ? $this->genres[$this->genre] : '';
+    }
+
+    public function attrAll()
+    {
+        return ProductAttrModel::all();
+    }
+
+    public function attrs($uid)
+    {
+        return ProductAttrModel::where('ud',$uid)->get();
+    }
+
+    public function attr()
+    {
+        return $this->attrid ? ProductAttrModel::find($this->attrid)->name : '';
+    }
+
+    //边框位置
     protected $borderDirections = [
         '','top','right','bottom','left','all',
     ];
     protected $borderDirectionNames = [
         '无','顶部','右边','底部','左边','四面',
     ];
+
+    //边框类型
     protected $borderTypes = [
         'none','dotted','dashed','solid','double','groove','ridge','inset','outset',
     ];
     protected $borderTypeNames = [
         '无边框','点线','虚线','实线边框','双线边框','3D凹槽','3D凸槽','3D凹边','3D凸边',
     ];
+
     //字的变换
     protected $textTransformTypes = [
         'none','capitalize','uppercase','lowercase','inherit',
@@ -30,6 +58,7 @@ class ProductAttrModel extends BaseModel
     protected $textTransformTypeNames = [
         '无','单词开头字母大写','字母大写','字母小写','继承上级',
     ];
+
     //字的水平对齐
     protected $textAlignTypes = [
         'none','capitalize','uppercase','lowercase','inherit',
@@ -37,6 +66,7 @@ class ProductAttrModel extends BaseModel
     protected $textAlignTypeNames = [
         '无','单词开头字母大写','字母大写','字母小写','继承上级',
     ];
+
     //定位方式
     protected $positionTypes = [
         'static','absolute','fixed','relative','inherit',
@@ -44,6 +74,7 @@ class ProductAttrModel extends BaseModel
     protected $positionTypeNames = [
         '无','绝对定位(相对于第一个父级)','绝对定位(相对于浏览器)','相对定位','继承上级',
     ];
+
     //裁剪方式
     protected $overflowTypes = [
         'visible','hidden','scroll','auto','inherit',
@@ -56,32 +87,29 @@ class ProductAttrModel extends BaseModel
     {
         return ProductModel::all();
     }
+
     public function product()
     {
         $productModel = ProductModel::find($this->productid);
         if ($productModel) { $pname = $this->productid ? $productModel->name : ''; }
         return isset($pname) ? $pname : '';
     }
-//    public function parents()
-//    {
-//        return ProductAttrModel::where('pid',0)->get();
-//    }
-//    public function parent()
-//    {
-//        return $this->pid ? ProductAttrModel::find($this->pid)->name : '已是顶级属性';
-//    }
+
     public function borderDirection($border1)
     {
         return $border1?$this->borderDirection[$border1]:'';
     }
+
     public function borderType($border3)
     {
         return $border3?$this->borderTypes[$border3]:'';
     }
+
     public function borderTypeName($border3)
     {
         return $border3?$this->borderTypeNames[$border3]:'';
     }
+
     public function border()
     {
         $borders = $this->border?explode('-',$this->border):[];
@@ -93,18 +121,22 @@ class ProductAttrModel extends BaseModel
         }
         return isset($border) ? implode(',',$border) : '未定义';
     }
+
     public function textTransform()
     {
         return $this->text_transform ? $this->textTransformTypes[$this->text_transform] : '未定义';
     }
+
     public function textAlign()
     {
         return $this->text_align ? $this->text_aligns[$this->text_align] : '未定义';
     }
+
     public function position()
     {
         return $this->position ? $this->positions[$this->position] : '未定义';
     }
+
     public function overflow()
     {
         return $this->overflow ? $this->overflows[$this->overflow] : '未定义';
@@ -115,10 +147,12 @@ class ProductAttrModel extends BaseModel
     {
         return PicModel::all();
     }
+
     public function pics($uid)
     {
         return PicModel::where('uid',$uid)->get();
     }
+
     public function pic($pic_id)
     {
         return $pic_id ? PicModel::find($pic_id)->url : '';
