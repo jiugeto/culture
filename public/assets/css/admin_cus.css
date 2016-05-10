@@ -80,11 +80,18 @@ a:hover.increase,a:hover.reduce { background:white; }
     padding:5px;
     border:1px dashed lightgrey;
 }
-.admin_yulan {
+.admin_yulan,.admin_yulan2,.admin_yulan3,.admin_yulan4,.admin_yulan5,.admin_yulan6 {
     margin-left:5px;
     width:100px;
     height:25px;
     background:black;
     float:right;
 }
+.switch_pic {
+    width:100%;
+    background:rgb(240,240,240);
+    text-align:center;
+    cursor:pointer;
+}
+.switch_pic a { padding:5px 250px; }
 /*=== 系统后台添加修改页面 ===*/

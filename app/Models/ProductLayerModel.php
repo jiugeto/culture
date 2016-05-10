@@ -65,6 +65,15 @@ class ProductLayerModel extends BaseModel
         return ProductAttrModel::where('uid',$uid)->get();
     }
 
+    public function attrname()
+    {
+        if ($this->attrid) {
+            $attrModel = ProductAttrModel::find($this->attrid);
+            if ($attrModel) { $attrname = $attrModel->name; }
+        }
+        return isset($attrname) ? $attrname : '未知';
+    }
+
     public function func()
     {
         return $this->function ? $this->functions[$this->function] : '';
@@ -87,12 +96,12 @@ class ProductLayerModel extends BaseModel
 
     public function state()
     {
-        return $this->state ? $this->states[$this->state] : '';
+        return array_key_exists($this->state,$this->states) ? $this->states[$this->state] : '';
     }
 
     public function stateName()
     {
-        return $this->state ? $this->stateNames[$this->state] : '';
+        return array_key_exists($this->state,$this->stateNames) ? $this->stateNames[$this->state] : '';
     }
 
     public function mode()

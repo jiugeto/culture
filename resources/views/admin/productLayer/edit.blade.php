@@ -16,7 +16,7 @@
                     <input type="hidden" name="_method" value="POST">
                     <fieldset>
                         <div class="am-form-group">
-                            <label>动画名称 / Name：</label>
+                            <label>名称 / Name：</label>
                             <input type="text" placeholder="至少2个字符" minlength="2" required name="name" value="{{ $data->name }}"/>
                         </div>
 
@@ -97,22 +97,26 @@
 
                         <div class="am-form-group">
                             <label>字段名称 / Field：</label>
-                            <input type="text" placeholder="至少2个字符" pattern="^[a-zA-Z0-9-_]+$" required name="field" value="{{ $data->field }}"/>
+                            <input type="text" placeholder="至少2个字符" pattern="^[a-zA-Z0-9-_|]+$" required name="field" value="{{ $data->field }}"/>
                         </div>
 
                         <div class="am-form-group">
                             <label>动画百分比 / Per：(单位%，多组用|隔开)</label>
-                            <input type="text" placeholder="数字百分比，多组用|隔开" required name="per" value="{{ $data->per }}"/>
+                            <input type="text" placeholder="数字百分比，多组用|隔开" pattern="^[0-9|]+$" required name="per" value="{{ $data->per }}"/>
                         </div>
 
                         <div class="am-form-group">
-                            <label>动画值 / Value：(用-隔开)</label>
-                            <br>动画关键帧1：
-                            @if($data->per)
-                                @foreach($data)
-                            <input type="hidden" name="per_index" value="{{ $data->per_index+1 }}">
-                            <input type="text" placeholder="多个属性值用|隔开" minlength="2" required name="val1"/>
+                            <label>动画值 / Value：(用|隔开)</label>
+                            @if($data->vals)
+                                <br><input type="hidden" name="per_index" value="{{ $data->per_index+1 }}">
+                                @foreach($data->vals as $kval=>$val)
+                                动画关键帧{{ $kval+1 }}：
+                                <input type="text" placeholder="多个属性值用|隔开" pattern="^[a-zA-Z0-9-_|]+$" required name="val{{ $kval+1 }}" value="{{ $val }}"/>
                                 @endforeach
+                            @else
+                                <br>动画关键帧1：
+                                <input type="hidden" name="per_index" value="2">
+                                <input type="text" placeholder="多个属性值用|隔开" pattern="^[a-zA-Z0-9-_|]+$" required name="val1"/>
                             @endif
                             <span id="val"></span>
                         </div>
@@ -135,7 +139,7 @@
                             <textarea name="intro" cols="50" rows="5">{{ $data->intro }}</textarea>
                         </div>
 
-                        <button type="submit" class="am-btn am-btn-primary">保存添加</button>
+                        <button type="submit" class="am-btn am-btn-primary">保存修改</button>
                     </fieldset>
                 </form>
             </div>

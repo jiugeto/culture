@@ -2,47 +2,38 @@
 @section('content')
     {{--内页的样式方便调节动画--}}
     <style>
-        .attr_attr1 div.dh { margin:0 auto; padding-top:10px; width:960px; height:540px; overflow:hidden; }
-        .attr_attr1 img { height:540px; }
+        .img1 div.dh { margin:0 auto; padding-top:10px; width:960px; height:540px; overflow:hidden; }
+        .img1 img { height:540px;/*border:2px solid white;*/ }
         /*================================*/
-        .attr_attr2 { margin:0 auto; width:960px; height:540px; position:relative; top:-540px; }
-        .attr_attr2 div.pos { padding-left:5px; width:230px; height:520px; float:left; overflow:hidden; }
-        .attr_attr2 div.dh { width:230px; height:520px; overflow:hidden; }
-        .attr_attr2 img { height:520px; }
+        .img2 { margin:0 auto; width:960px; height:540px; position:relative; top:-540px; }
+        .img2 div.pos { padding-left:5px; width:230px; height:520px; float:left; overflow:hidden; }
+        .img2 div.pos div.dh { width:230px; height:520px; overflow:hidden; }
+        .img2 div.pos img { height:520px; }
         /*================================*/
-        .attr_attr3 { margin:0 auto; width:960px; height:540px; position:relative; top:-1080px; }
-        .attr_attr3 div.pos { padding-left:5px; width:470px; height:520px; float:left; overflow:hidden; }
-        .attr_attr3 div.dh { width:470px; height:520px; overflow:hidden; }
-        .attr_attr3 img { height:520px; }
+        .img3 { margin:0 auto; width:960px; height:540px; position:relative; top:-1080px; }
+        .img3 div.pos { padding-left:5px; width:470px; height:520px; float:left; overflow:hidden; }
+        .img3 div.pos div.dh { width:470px; height:520px; overflow:hidden; }
+        .img3 div.pos img { height:520px; }
         /*================================*/
-        .attr_attr4 { margin:0 auto; width:960px; height:540px; position:relative; top:-2720px; }
-        .attr_attr4 div.pos { padding:5px; width:950px; height:530px; }
-        .attr_attr4 div.dh { width:950px; height:530px; overflow:hidden; }
-        .attr_attr4 img { height:540px; }
+        .img4 { margin:0 auto; width:960px; height:540px; position:relative; top:-2720px; }
+        .img4 div.pos { padding:5px; width:950px; height:530px; }
+        .img4 div.pos div.dh { width:950px; height:530px; overflow:hidden; }
+        .img4 div.pos img { height:540px; }
         /*================================*/
-        .attr_attr5 { margin:0 auto; width:1920px; height:540px; position:relative; top:-3260px; }
-        .attr_attr5 div.pos { width:1920px; height:540px; }
-        .attr_attr5 div.dh { width:960px; height:540px; float:left; overflow:hidden; }
-        .attr_attr5 img { height:540px; }
+        .img5 { margin:0 auto; width:1920px; height:540px; position:relative; top:-3260px; }
+        .img5 div.pos { width:1920px; height:540px; }
+        .img5 div.pos div.dh { width:960px; height:540px; float:left; overflow:hidden; }
+        .img5 div.pos img { height:540px; }
         /*================================*/
-        .attr_attr6 { width:960px; height:540px; position:relative; top:-3260px; }
-        .attr_attr6 div.dh { margin-top:240px; text-align:center; }
-        /*=================时间线===============*/
+        .end { width:960px; height:540px; position:relative; top:-3260px; }
+        .end div.dh { margin-top:240px; text-align:center; }
+        /*================================*/
         .timeline { margin-bottom:5px; width:980px; height:5px; overflow:hidden; }
         .timeline div.dh { width:980px; height:2px; background:red; }
 
-        {{--@if(count($attrs))--}}
-            {{--@foreach($attrs as $attr)--}}
-                {{--{{'.'.$attr->style_name.' { margin:'.$attr->margin1.' '.$attr->margin2.'; width:'.' }'}}--}}
-                {{--{{'.'.$attr->style_name}}--}}
-                {{--{{'.'.$attr->style_name}}--}}
-                {{--{{'.'.$attr->style_name}}--}}
-            {{--@endforeach--}}
-        {{--@endif--}}
-
         {{--动画样式--}}
         /*动画的代码开始：定义动画时间*/
-        .attr_attr1 div.dh {
+        .img1 div.dh {
             position:relative; top:540px;
             opacity:1;
             animation-name:animate1;
@@ -53,7 +44,7 @@
             /*animation-iteration-count:infinite;*/
             animation-fill-mode:forwards;
         }
-        .attr_attr2 .pos div.dh {
+        .img2 .pos div.dh {
             position:relative; left:500px; opacity:0;
             animation-name:animate2;
             animation-play-state:paused;
@@ -62,7 +53,7 @@
             animation-delay:1s;
             animation-fill-mode:forwards;
         }
-        .attr_attr3 .pos div.dh {
+        .img3 .pos div.dh {
             position:relative; left:250px; opacity:0;
             animation-name:animate3;
             animation-play-state:paused;
@@ -71,7 +62,7 @@
             animation-delay:3s;
             animation-fill-mode:forwards;
         }
-        .attr_attr4 .pos div.dh {
+        .img4 .pos div.dh {
             position:relative; top:0px;
             animation-name:animate4;
             animation-play-state:paused;
@@ -80,7 +71,7 @@
             animation-delay:5.5s;
             animation-fill-mode:forwards;
         }
-        .attr_attr5 .pos div.dh {
+        .img5 .pos div.dh {
             position:relative; top:0px;
             animation-name:animate5;
             animation-play-state:paused;
@@ -89,7 +80,7 @@
             animation-delay:10s;
             animation-fill-mode:forwards;
         }
-        .attr_attr6 div.dh {
+        .end div.dh {
             font-size:12px; opacity:0;
             animation-name:end;
             animation-play-state:paused;
@@ -167,12 +158,10 @@
     {{--  在线创建窗口 --}}
     <div class="online_win">
         <div class="animate" style="background:white;">
-            <div class="attr_attr1">
-                <div class="pos">
-                    <div class="dh"><img src="/uploads/images/2016/ppt.png"></div>
-                </div>
+            <div class="img1">
+                <div class="dh"><img src="/uploads/images/2016/ppt.png"></div>
             </div>
-            <div class="attr_attr2">
+            <div class="img2">
                 <div class="pos" style="padding-left:10px;">
                     <div class="dh"><img src="/uploads/images/2016/online1.png"></div>
                 </div>
@@ -186,7 +175,7 @@
                     <div class="dh"><img src="/uploads/images/2016/online1.png"></div>
                 </div>
             </div>
-            <div class="attr_attr3">
+            <div class="img3">
                 <div class="pos">
                     <div class="dh"><img src="/uploads/images/2016/online1.png"></div>
                 </div>
@@ -194,23 +183,23 @@
                     <div class="dh"><img src="/uploads/images/2016/online1.png"></div>
                 </div>
             </div>
-            <div class="attr_attr4">
+            <div class="img4">
                 <div class="pos">
                     <div class="dh"><img src="/uploads/images/2016/ppt.png"></div>
                 </div>
             </div>
-            <div class="attr_attr4">
+            <div class="img4">
                 <div class="pos">
                     <div class="dh"><img src="/uploads/images/2016/ppt.png"></div>
                 </div>
             </div>
-            <div class="attr_attr5">
+            <div class="img5">
                 <div class="pos">
                     <div class="dh"><img src="/uploads/images/2016/ppt.png"></div>
                     <div class="dh"><img src="/uploads/images/2016/ppt.png"></div>
                 </div>
             </div>
-            <div class="attr_attr6">
+            <div class="end">
                 <div class="dh">END</div>
             </div>
         </div>

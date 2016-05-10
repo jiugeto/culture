@@ -15,8 +15,10 @@
                     <tr>
                         <th class="table-check"><input type="checkbox"/></th>
                         <th class="table-id">ID</th>
+                        <th class="table-title">名称</th>
                         <th class="table-title">动画名称</th>
                         <th class="table-type">产品名称</th>
+                        <th class="table-type">属性名称</th>
                         <th class="table-date am-hide-sm-only">添加时间</th>
                         <th class="table-set">操作</th>
                     </tr>
@@ -28,6 +30,8 @@
                         <td class="am-hide-sm-only"><input type="checkbox" /></td>
                         <td class="am-hide-sm-only">{{ $data->id }}</td>
                         <td class="am-hide-sm-only"><a href="/admin/productlayer/{{$data->id}}">{{ $data->name }}</a></td>
+                        <td class="am-hide-sm-only">{{ $data->animation_name }}</td>
+                        <td class="am-hide-sm-only">{{ $data->attrname() }}</td>
                         <td class="am-hide-sm-only">{{ $data->product() }}</td>
                         <td class="am-hide-sm-only">{{ $data->created_at }}</td>
                         <td class="am-hide-sm-only">

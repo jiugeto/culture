@@ -15,7 +15,7 @@
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <fieldset>
                         <div class="am-form-group">
-                            <label>动画名称 / Name：</label>
+                            <label>名称 / Name：</label>
                             <input type="text" placeholder="至少2个字符" minlength="2" required name="name"/>
                         </div>
 
@@ -105,7 +105,7 @@
                         </div>
 
                         <div class="am-form-group">
-                            <label>动画值 / Value：(用-隔开)</label>
+                            <label>动画值 / Value：(用|隔开)</label>
                             {{--<a style="cursor:pointer;" id="add">增加</a>--}}
                             <input type="hidden" name="per_index" value="2">
                             <br>动画关键帧1：

@@ -57,3 +57,8 @@
 --     clip(position指定为absolute):设置剪辑矩形 rect(top right bottom left)设置上下左右的距离
     opacity:filter:alpha(opacity=value) eg:filter:alpha(opacity=50);opacity:0.5;
 -- 动画表：需要做动画的属性
+
+-- 2016/05/10
+-- 产品属性表，加入字段：
+--    img序列化存储：url,margin,padding,border,width,height,
+--    text序列化存储：con,margin,padding,border,font_size,color,

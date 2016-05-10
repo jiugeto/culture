@@ -14,8 +14,8 @@ class ProductLayerController extends BaseController
     {
         parent::__construct();
         $this->model = new ProductLayerModel();
-        $this->crumb['']['name'] = '产品动画列表';
-        $this->crumb['category']['name'] = '产品动画';
+        $this->crumb['']['name'] = '属性动画列表';
+        $this->crumb['category']['name'] = '属性动画';
         $this->crumb['category']['url'] = 'productlayer';
     }
 
@@ -46,6 +46,9 @@ class ProductLayerController extends BaseController
 
     public function store(Request $request)
     {
+        //动画名称判断
+        $layerModel = ProductLayerModel::where('animation_name',$request->animation_name)->first();
+        if ($layerModel) { echo "<script>alert('已有同名动画，请更改动画名称！');history.go(-1);</script>";exit; }
         $data = $this->getData($request);
         $data['created_at'] = date('Y-m-d H:i:s', time());
         ProductLayerModel::create($data);
@@ -67,7 +70,23 @@ class ProductLayerController extends BaseController
 
     public function update(Request $request,$id)
     {
+        $data = $this->getData($request);
+        $data['updated_at'] = date('Y-m-d H:i:s', time());
+        ProductLayerModel::where('id',$id)->update($data);
         return redirect('/admin/productlayer');
+    }
+
+    public function show($id)
+    {
+        $curr['name'] = $this->crumb['show']['name'];
+        $curr['url'] = $this->crumb['show']['url'];
+        $result = [
+            'data'=> $this->getOne($id),
+            'model'=> $this->model,
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.productLayer.show', $result);
     }
 
 
@@ -86,20 +105,24 @@ class ProductLayerController extends BaseController
     public function getData(Request $request)
     {
         //动画属性值处理
+        if (substr($request->field,-1,1)!='|') { $request->field = $request->field.'|'; }
+        if (substr($request->per,-1,1)!='|') { $request->per = $request->per.'|'; }
         $data = $request->all();
         $val = '';
-        for ($i=1;$i<count(explode('|',$request->per))+1;++$i) {
+        for ($i=1;$i<count(explode('|',$request->per));++$i) {
             $valName = 'val'.$i;
             if ($data[$valName]=='') { echo "<script>alert('动画属性值不能空！');history.go(-1);</script>";exit; }
+            //拼凑字符串
             if (substr($data[$valName],-1,1)!='|') { $data[$valName] = $data[$valName].'|'; }
-            if (substr($request->field,-1,1)!='|') { $request->field = $request->field.'|'; }
-            $count = count(explode('|',$request->field));
-            if (count(explode('|',$data[$valName])) != $count) {
-                echo "<script>alert('每个动画关键帧的值数量与字段数量必须一致！');history.go(-1);</script>";exit;
-            }
+            $data[$valName] = $data[$valName].',';
             $val .= $data[$valName];
         }
-        $val = substr($val,-1,1)!='|'?$val.'|':$val;
+        //值判断
+        $count = count(explode('|',$request->per));
+//        dd($data,$val,$count,count(explode(',',$val)));
+        if (count(explode(',',$val)) != $count) {
+                echo "<script>alert('每个动画关键帧的值数量与字段数量必须一致！');history.go(-1);</script>";exit;
+        }
         $data = [
             'name'=> $request->name,
             'productid'=> $request->productid,
@@ -113,6 +136,7 @@ class ProductLayerController extends BaseController
             'state'=> $request->state,
             'mode'=> $request->mode,
             'field'=> $request->field,
+            'per'=> $request->per,
             'value'=> isset($val) ? $val : '',
             'intro'=> $request->intro,
         ];
@@ -138,8 +162,8 @@ class ProductLayerController extends BaseController
         $data->fields = $data->field?explode('|',$data->field):[];
         $data->per_index = isset($data->pers)?count($data->pers):0;
         $data->pers = $data->per?explode('|',$data->per):[];
-//        $data->vals = $data->value?unserialize($data->value):[];
-        $data->vals = $data->value?explode('|',$data->value):[];
+        $vals_per = $data->value?explode(',',$data->value):[];
+        $data->vals = $vals_per?array_filter($vals_per):[];
         return $data;
     }
 }

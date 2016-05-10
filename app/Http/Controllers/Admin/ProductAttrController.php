@@ -16,8 +16,8 @@ class ProductAttrController extends BaseController
     {
         parent::__construct();
         $this->model = new ProductAttrModel();
-        $this->crumb['']['name'] = '动画属性列表';
-        $this->crumb['category']['name'] = '动画属性';
+        $this->crumb['']['name'] = '产品属性列表';
+        $this->crumb['category']['name'] = '产品属性';
         $this->crumb['category']['url'] = 'productattr';
     }
 
@@ -73,8 +73,9 @@ class ProductAttrController extends BaseController
     {
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
+        $data = ProductAttrModel::find($id);
         $result = [
-            'data'=> $this->getOne($id),
+            'data'=> $this->getOne($data),
             'model'=> $this->model,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -90,12 +91,67 @@ class ProductAttrController extends BaseController
         return redirect('/admin/productattr');
     }
 
+    /**
+     * 图片编辑
+     */
+    public function editPic($id)
+    {
+        $curr['name'] = $this->crumb['edit']['name'];
+        $curr['url'] = $this->crumb['edit']['url'];
+        $data = ProductAttrModel::find($id);
+        $result = [
+            'data'=> $this->getOnePic($data),
+            'model'=> $this->model,
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.productAttr.editPic', $result);
+    }
+
+    /**
+     * 图片更新
+     */
+    public function updatePic(Request $request,$id)
+    {
+        ProductAttrModel::where('id',$id)->update(['img'=> serialize($this->getPic($request))]);
+        return redirect('/admin/productattr');
+    }
+
+    /**
+     * 文字编辑
+     */
+    public function editText($id)
+    {
+        $curr['name'] = $this->crumb['edit']['name'];
+        $curr['url'] = $this->crumb['edit']['url'];
+        $data = ProductAttrModel::find($id);
+        $result = [
+            'data'=> $this->getOneText($data),
+            'model'=> $this->model,
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.productAttr.editText', $result);
+    }
+
+    /**
+     * 文字更新
+     */
+    public function updateText(Request $request,$id)
+    {
+        ProductAttrModel::where('id',$id)->update(['text'=> serialize($this->getText($request))]);
+        return redirect('/admin/productattr');
+    }
+
     public function show($id)
     {
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
+        $data = ProductAttrModel::find($id);
         $result = [
-            'data'=> $this->getOne($id),
+            'data'=> $this->getOne($data),
+            'picInfo'=> $data->img ? unserialize($data->img) : $this->getOnePic($data),
+            'textInfo'=> $data->text ? unserialize($data->text) : $this->getOneText($data),
             'model'=> $this->model,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -136,7 +192,7 @@ class ProductAttrController extends BaseController
      */
     public function getData(Request $request)
     {
-        $request->name = $this->prefix_attr.$request->name;     //加个前缀好区分
+        $request->style_name = $this->prefix_attr.$request->style_name;     //加个前缀好区分
         //外边距
         if (!$request->margin1) { $request->margin1 = 'auto'; }
         if (!$request->margin2) { $request->margin2 = 'auto'; }
@@ -154,6 +210,9 @@ class ProductAttrController extends BaseController
         }
         //字的颜色
         if (!$request->color) { $request->color = ''; }
+        //图片处理
+//        if () {}
+        //文字处理
         $productAttr = [
             'name'=> $request->name,
             'style_name'=> $request->style_name,
@@ -181,6 +240,47 @@ class ProductAttrController extends BaseController
     }
 
     /**
+     * 图片数据
+     */
+    public function getPic(Request $request)
+    {
+        return array(
+            'pic_id'        => $request->pic_id,
+            'pic_margin1'   => $request->pic_margin1,
+            'pic_margin2'   => $request->pic_margin2,
+            'pic_padding1'  => $request->pic_padding1,
+            'pic_padding2'  => $request->pic_padding2,
+            'pic_border1'   => $request->pic_border1,
+            'pic_border2'   => $request->pic_border2,
+            'pic_border3'   => $request->pic_border3,
+            'pic_border4'   => $request->pic_border4,
+            'pic_width'     => $request->pic_width,
+            'pic_height'    => $request->pic_height,
+            'updated_at'    => date('Y-m-d H:i:s', time()),
+        );
+    }
+    /**
+     * 文字数据
+     */
+    public function getText(Request $request)
+    {
+        return array(
+            'text_con'       => $request->text_con,
+            'text_margin1'   => $request->text_margin1,
+            'text_margin2'   => $request->text_margin2,
+            'text_padding1'  => $request->text_padding1,
+            'text_padding2'  => $request->text_padding2,
+            'text_border1'   => $request->text_border1,
+            'text_border2'   => $request->text_border2,
+            'text_border3'   => $request->text_border3,
+            'text_border4'   => $request->text_border4,
+            'text_font_size' => $request->text_font_size,
+            'text_color'     => $request->text_color,
+            'updated_at'     => date('Y-m-d H:i:s', time()),
+        );
+    }
+
+    /**
      * 查询方法
      */
     public function query($del)
@@ -193,9 +293,9 @@ class ProductAttrController extends BaseController
     /**
      * 查询一条数据
      */
-    public function getOne($id)
+    public function getOne($data)
     {
-        $data = ProductAttrModel::find($id);
+        $data->style_name = substr($data->style_name,5,strlen($data->style_name)-1);
         if ($data->margin) {
             $margins = explode('-',$data->margin);
             $data->margin1 = $margins[0]=='auto'?'':$margins[0];
@@ -225,5 +325,53 @@ class ProductAttrController extends BaseController
             $data->border4 = '';
         }
         return $data;
+    }
+
+    /**
+     * 初始化图片信息
+     */
+    public function getOnePic($data)
+    {
+        $picArr = $data->img?unserialize($data->img):[];
+        if (!$picArr) {
+            $picArr['pic_id'] = 0;
+            $picArr['pic_margin1'] = 0;
+            $picArr['pic_margin2'] = 0;
+            $picArr['pic_padding1'] = 0;
+            $picArr['pic_padding2'] = 0;
+            $picArr['pic_border1'] = 0;
+            $picArr['pic_border2'] = 0;
+            $picArr['pic_border3'] = '';
+            $picArr['pic_border4'] = '';
+            $picArr['pic_width'] = 0;
+            $picArr['pic_height'] = 0;
+            $picArr['updated_at'] = '0000-00-00 00:00:00';
+        }
+        $picArr['id'] = $data->id;
+        return $picArr;
+    }
+
+    /**
+     * 初始化文字信息
+     */
+    public function getOneText($data)
+    {
+        $textArr = $data->text?unserialize($data->text):[];
+        if (!$textArr) {
+            $textArr['text_con'] = '';
+            $textArr['text_margin1'] = 0;
+            $textArr['text_margin2'] = 0;
+            $textArr['text_padding1'] = 0;
+            $textArr['text_padding2'] = 0;
+            $textArr['text_border1'] = 0;
+            $textArr['text_border2'] = 0;
+            $textArr['text_border3'] = '';
+            $textArr['text_border4'] = '';
+            $textArr['text_font_size'] = 0;
+            $textArr['text_color'] = '';
+            $picArr['updated_at'] = '0000-00-00 00:00:00';
+        }
+        $textArr['id'] = $data->id;
+        return $textArr;
     }
 }

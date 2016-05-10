@@ -40,7 +40,7 @@
                             <div class="admin_border">
                                 <input type="text" placeholder="上下间距，不填空着代表自动" pattern="\d+" name="margin1" value="0"/>
                                 <div style="height:5px;">{{--间距--}}</div>
-                                <input type="text" placeholder="左右间距，不填空着代表自动" pattern="\d+" name="margin1" value="0"/>
+                                <input type="text" placeholder="左右间距，不填空着代表自动" pattern="\d+" name="margin2" value="0"/>
                             </div>
                         </div>
 
@@ -49,7 +49,7 @@
                             <div class="admin_border">
                                 <input type="text" placeholder="上下间距，不填空着代表自动" pattern="\d+" name="padding1" value="0"/>
                                 <div style="height:5px;">{{--间距--}}</div>
-                                <input type="text" placeholder="左右间距，不填空着代表自动" pattern="\d+" name="padding1" value="0"/>
+                                <input type="text" placeholder="左右间距，不填空着代表自动" pattern="\d+" name="padding2" value="0"/>
                             </div>
                         </div>
 
@@ -98,9 +98,17 @@
 
                         <div class="am-form-group">
                             <label>文字颜色 / Color：(点击下面更改颜色)</label>
-                            <span style="float:right;">当前颜色预览<div class="admin_yulan"></div></span>
+                            <span style="float:right;">当前颜色预览<div class="admin_yulan2"></div></span>
                             <input type="color" title="点击更改颜色" name="color">
                         </div>
+                        <script>
+                            $(document).ready(function(){
+                                var color = $("input[name='color']");
+                                color.change(function(){
+                                    $(".admin_yulan2").css('background',this.value);
+                                });
+                            });
+                        </script>
 
                         <div class="am-form-group">
                             <label>文字尺寸 / Font Size：(单位px)</label>
@@ -137,14 +145,14 @@
 
                         <div class="am-form-group">
                             <label>背景颜色 / Color：(点击下面更改颜色)</label>
-                            <span style="float:right;">当前颜色预览<div class="admin_yulan2"></div></span>
+                            <span style="float:right;">当前颜色预览<div class="admin_yulan3"></div></span>
                             <input type="color" title="点击更改颜色" name="background">
                         </div>
                         <script>
                             $(document).ready(function(){
                                 var bgcolor = $("input[name='background']");
                                 bgcolor.change(function(){
-                                    $(".admin_yulan2").css('background',this.value);
+                                    $(".admin_yulan3").css('background',this.value);
                                 });
                             });
                         </script>
@@ -159,9 +167,9 @@
                                 </select>
                                 <span id="locate" style="display:none;">
                                     左边距离：(定位px)
-                                    <input type="text" placeholder="单位px" pattern="\d+" name="left"/>
+                                    <input type="text" placeholder="单位px" pattern="\d+" name="left" value="0"/>
                                     顶部距离：(定位px)
-                                    <input type="text" placeholder="单位px" pattern="\d+" name="top"/>
+                                    <input type="text" placeholder="单位px" pattern="\d+" name="top" value="0"/>
                                 </span>
                             </div>
                         </div>

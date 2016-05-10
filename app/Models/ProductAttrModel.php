@@ -5,8 +5,11 @@ class ProductAttrModel extends BaseModel
 {
     protected $table = 'bs_products_attr';
     protected $fillable = [
-        'id','name','style_name','productid','uid','margin','padding','width','height','border','color','font_size','word_spacing','line_height','text_transform','text_align','background','position','left','top','overflow','opacity','intro','islayer','del','created_at','updated_at',
+        'id','name','style_name','productid','uid','margin','padding','width','height','border','color','font_size','word_spacing','line_height','text_transform','text_align','background','position','left','top','overflow','img','text','opacity','intro','islayer','del','created_at','updated_at',
     ];
+    //img图片：pic_id，pic_margin1，pic_margin2，pic_padding1，pic_padding2，pic_border1，pic_border2，pic_border,3，pic_border,4，pic_width，pic_height，
+    //text文字：text_con，text_margin1，text_margin2，text_padding1，text_padding2，text_border1，text_border2，text_border3，text_border4，text_font_size，text_color，
+
     //边框类型
     protected $borderDirections = [
         '','top','right','bottom','left','all',
@@ -75,6 +78,10 @@ class ProductAttrModel extends BaseModel
     {
         return $border3?$this->borderTypes[$border3]:'';
     }
+    public function borderTypeName($border3)
+    {
+        return $border3?$this->borderTypeNames[$border3]:'';
+    }
     public function border()
     {
         $borders = $this->border?explode('-',$this->border):[];
@@ -101,5 +108,19 @@ class ProductAttrModel extends BaseModel
     public function overflow()
     {
         return $this->overflow ? $this->overflows[$this->overflow] : '未定义';
+    }
+
+    //图片
+    public function picAll()
+    {
+        return PicModel::all();
+    }
+    public function pics($uid)
+    {
+        return PicModel::where('uid',$uid)->get();
+    }
+    public function pic($pic_id)
+    {
+        return $pic_id ? PicModel::find($pic_id)->url : '';
     }
 }

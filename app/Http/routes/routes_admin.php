@@ -63,13 +63,18 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::post('product/{id}','ProductController@update');
     Route::resource('product','ProductController');
         //内部产品动画层级路由
+    Route::post('productlayer/{id}','ProductLayerController@update');
     Route::resource('productlayer','ProductLayerController');
         //内部产品属性路由
-    Route::post('productattr/{id}','ProductAttrController@update');
     Route::get('productattr/{id}/destroy','ProductAttrController@destroy');
     Route::get('productattr/{id}/restore','ProductAttrController@restore');
     Route::get('productattr/{id}/forceDelete','ProductAttrController@forceDelete');
     Route::get('productattr/trash','ProductAttrController@trash');
+    Route::get('productattr/pic/{id}','ProductAttrController@editPic');
+    Route::post('productattr/pic/{id}','ProductAttrController@updatePic');
+    Route::get('productattr/text/{id}','ProductAttrController@editText');
+    Route::post('productattr/text/{id}','ProductAttrController@updateText');
+    Route::post('productattr/{id}','ProductAttrController@update');
     Route::resource('productattr','ProductAttrController');
         //产品类型路由
     Route::resource('category','CategoryController');
