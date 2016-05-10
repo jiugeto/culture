@@ -1120,6 +1120,43 @@ INSERT INTO `bs_products_attr` VALUES (1,'测试属性1','attr_attr1',1,0,'auto-
 UNLOCK TABLES;
 
 --
+-- Table structure for table `bs_products_con`
+--
+
+DROP TABLE IF EXISTS `bs_products_con`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bs_products_con` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `genre` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '发布者身份：1图片，2文字',
+  `name` varchar(255) NOT NULL COMMENT '文字内容',
+  `pic_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '图片，关联图片表bs_pics',
+  `margin` varchar(30) NOT NULL COMMENT '外边距，上下左右，用|隔开',
+  `padding` varchar(30) NOT NULL COMMENT '内边距，上下左右，用|隔开',
+  `border` varchar(50) NOT NULL COMMENT '边框：',
+  `width` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '动画宽比率，单位px',
+  `height` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '动画高比率，单位px',
+  `intro` varchar(255) NOT NULL COMMENT '简介',
+  `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序字段，值越大越靠前，默认10',
+  `isshow` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '前台列表是否显示：0不显示，1显示',
+  `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站功能：0不放入回收站，1放入回收站',
+  `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
+  `updated_at` date NOT NULL DEFAULT '0000-00-00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='在线创作的图片文字表 bs_products_con';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bs_products_con`
+--
+
+LOCK TABLES `bs_products_con` WRITE;
+/*!40000 ALTER TABLE `bs_products_con` DISABLE KEYS */;
+INSERT INTO `bs_products_con` VALUES (1,1,'',0,'','','',960,540,'',10,1,0,'2016-05-09','0000-00-00');
+/*!40000 ALTER TABLE `bs_products_con` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `bs_products_layer`
 --
 
@@ -1851,4 +1888,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-05-10 18:14:28
+-- Dump completed on 2016-05-10 18:26:48
