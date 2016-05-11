@@ -33,10 +33,58 @@
                     <td>{{ $data->name }}</td>
                 </tr>
                 {{--@endif--}}
-
-                {{--文字属性开关--}}
                 <tr>
-                    <td class="am-hide-sm-only switch_pic" colspan="2">文字属性：<a id="open">展 开</a><a id="close" style="display:none;">关 闭</a></td>
+                    <td class="am-hide-sm-only">产品名称 / Product：</td>
+                    <td>{{ $data->product() }}</td>
+                </tr>
+                <tr>
+                    <td class="am-hide-sm-only">属性名称 / Attribute：</td>
+                    <td>{{ $data->attr() }}</td>
+                </tr>
+                <tr>
+                    <td class="am-hide-sm-only">外边距 / Margin：(单位px)</td>
+                    <td>{{ $data->margin ? $data->margin1.'-'.$data->margin1 : '无' }}</td>
+                </tr>
+                <tr>
+                    <td class="am-hide-sm-only">内边距 / Padding：(单位px)</td>
+                    <td>{{ $data->padding ? $data->padding1.'-'.$data->padding1 : '无' }}</td>
+                </tr>
+                <tr>
+                    <td class="am-hide-sm-only">边框 / Border：</td>
+                    <td>{{ $data->border ? $data->borderDirectionName($data->border1).'-'.$data->borde2.'px'.'-'.$data->borderTypeName($data->border3).'-'.$data->border4 : '无' }}</td>
+                </tr>
+                <tr>
+                    <td class="am-hide-sm-only">背景 / Background：</td>
+                    <td><div class="admin_yulan2" style="float:left;{{ $data->background ? 'background:'.$data->background : '' }}"></div></td>
+                </tr>
+                <tr>
+                    <td class="am-hide-sm-only">定位方式 / Position：</td>
+                    <td>{{ $data->left ? $data->left : '' }}</td>
+                </tr>
+                <tr>
+                    <td class="am-hide-sm-only">左边距离 / Left：(单位px)</td>
+                    <td>{{ $data->position() }}</td>
+                </tr>
+                <tr>
+                    <td class="am-hide-sm-only">顶部距离 / Top：(单位px)</td>
+                    <td>{{ $data->top ? $data->top : '' }}</td>
+                </tr>
+                <tr>
+                    <td class="am-hide-sm-only">溢出方式 / Overflow：</td>
+                    <td>{{ $data->overflow() }}</td>
+                </tr>
+                <tr>
+                    <td class="am-hide-sm-only">透明度 / Opacity：</td>
+                    <td>{{ $data->opacity }}</td>
+                </tr>
+
+                {{--文字属性--}}
+                <style>
+                    .text td { border:1px dashed grey; }
+                    td a { cursor:pointer; }
+                </style>
+                <tr>
+                    <td class="am-hide-sm-only switch_pic" colspan="2"><label>文字属性：<a id="open">展 开</a><a id="close" style="display:none;">关 闭</a></label></td>
                 </tr>
                 <tr class="text" style="display:none;">
                     <td class="am-hide-sm-only">文字颜色 / Color：</td>
@@ -54,10 +102,11 @@
                     <td class="am-hide-sm-only">行高 / Line Height：(单位px)</td>
                     <td>{{ $data->text['line_height']?$data->text['line_height']:0 }}</td>
                 </tr>
-                <td class="text" style="display:none;">
+                <tr class="text" style="display:none;">
                     <td class="am-hide-sm-only">水平对齐 / Text Align：</td>
                     <td>{{ $data->textAlign($data->text['text_align']) }}</td>
                 </tr>
+
                 <tr>
                     <td class="am-hide-sm-only">介绍 / Introduce：</td>
                     <td>{{ $data->intro ? $data->intro : '无' }}</td>
@@ -79,7 +128,7 @@
         $(document).ready(function(){
             var open = $("#open");
             var close = $("#close");
-            var text = $("#text");
+            var text = $(".text");
             open.click(function(){ open.hide(); close.show(); text.show(); });
             close.click(function(){ close.hide(); open.show(); text.hide(); });
         });

@@ -28,8 +28,16 @@ abstract class Controller extends BaseController
 //    protected $proAttrNum = 30;        //可以做动画的属性数量限制
 
     protected $lists = [      //数据列表
-        ''=> '所有列表',
-        'trash'=> '回收站',
+//        ''=> '所有列表',
+//        'trash'=> '回收站',
+        ''=> [
+            'url'=> '',
+            'name'=> '所有列表',
+        ],
+        'trash'=> [
+            'url'=> 'trash',
+            'name'=> '回收站',
+        ],
         'create'=> [
             'url'=> 'create',
             'name'=> '创建作品',

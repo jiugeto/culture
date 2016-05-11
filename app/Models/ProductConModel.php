@@ -100,6 +100,11 @@ class ProductConModel extends BaseModel
         return $border1?$this->borderDirection[$border1]:'';
     }
 
+    public function borderDirectionName($border1)
+    {
+        return $border1?$this->borderDirectionNames[$border1]:'';
+    }
+
     public function borderType($border3)
     {
         return $border3?$this->borderTypes[$border3]:'';
@@ -134,12 +139,12 @@ class ProductConModel extends BaseModel
 
     public function position()
     {
-        return $this->position ? $this->positions[$this->position] : '未定义';
+        return array_key_exists($this->position,$this->positionTypeNames) ? $this->positionTypeNames[$this->position] : '未定义';
     }
 
     public function overflow()
     {
-        return $this->overflow ? $this->overflows[$this->overflow] : '未定义';
+        return array_key_exists($this->overflow,$this->overflowTypeNames) ? $this->overflowTypeNames[$this->overflow] : '未定义';
     }
 
     //图片
