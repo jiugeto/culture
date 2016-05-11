@@ -15,7 +15,7 @@
                     <tr>
                         <th class="table-check"><input type="checkbox"/></th>
                         <th class="table-id">ID</th>
-                        <th class="table-title">内容名称</th>
+                        <th class="table-title">图片/文字名称</th>
                         <th class="table-type">类型</th>
                         <th class="table-type">产品名称</th>
                         <th class="table-date am-hide-sm-only">添加时间</th>
@@ -28,7 +28,9 @@
                     <tr>
                         <td class="am-hide-sm-only"><input type="checkbox" /></td>
                         <td class="am-hide-sm-only">{{ $data->id }}</td>
-                        <td class="am-hide-sm-only"><a href="/admin/productcon/{{$data->id}}">{{ $data->name }}</a></td>
+                        <td class="am-hide-sm-only"><a href="/admin/productcon/{{$data->id}}">
+                                {{ $data->pic_id?$data->pic()->name:$data->name }}
+                            </a></td>
                         <td class="am-hide-sm-only">{{ $data->genre() }}</td>
                         <td class="am-hide-sm-only">{{ $data->product() }}</td>
                         <td class="am-hide-sm-only">{{ $data->created_at }}</td>

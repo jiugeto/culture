@@ -9,7 +9,7 @@ class ProductConModel extends BaseModel
 
     protected $table = 'bs_products_con';
     protected $fillable = [
-        'id','name','attrid','genre','pic_id','productid','margin','padding','width','height','border','background','position','left','top','overflow','opacity','text_attr',
+        'id','name','productid','attrid','genre','pic_id','margin','padding','width','height','border','background','position','left','top','overflow','opacity','text_attr',
 //        'color','font_size','word_spacing','line_height','text_transform','text_align',
         'intro','del','created_at','updated_at',
     ];
@@ -127,9 +127,9 @@ class ProductConModel extends BaseModel
         return $this->text_transform ? $this->textTransformTypes[$this->text_transform] : '未定义';
     }
 
-    public function textAlign()
+    public function textAlign($textAlign)
     {
-        return $this->text_align ? $this->text_aligns[$this->text_align] : '未定义';
+        return array_key_exists($textAlign,$this->textAlignTypeNames) ? $this->textAlignTypeNames[$textAlign] : '未定义';
     }
 
     public function position()
@@ -153,8 +153,8 @@ class ProductConModel extends BaseModel
         return PicModel::where('uid',$uid)->get();
     }
 
-    public function pic($pic_id)
+    public function pic()
     {
-        return $pic_id ? PicModel::find($pic_id)->url : '';
+        return $this->pic_id ? PicModel::find($this->pic_id) : '';
     }
 }

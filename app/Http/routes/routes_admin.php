@@ -78,6 +78,7 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::resource('productattr','ProductAttrController');
         //产品动画的图片文字路由
     Route::get('productcon/trash','ProductConController@trash');
+    Route::post('productcon/{id}','ProductConController@update');
     Route::resource('productcon','ProductConController');
         //产品类型路由
     Route::resource('category','CategoryController');

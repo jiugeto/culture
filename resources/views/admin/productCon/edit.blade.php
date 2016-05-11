@@ -11,15 +11,16 @@
         <div class="am-g">
             @include('admin.common.info')
             <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
-                <form class="am-form" data-am-validator method="POST" action="/admin/productcon/" enctype="multipart/form-data">
+                <form class="am-form" data-am-validator method="POST" action="/admin/productcon/{{ $data->id }}" enctype="multipart/form-data">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="_method" value="POST">
                     <fieldset>
                         <div class="am-form-group">
                             <label>类型 / Genre：</label>
                             <select name="genre" required>
                                 @if($model['genres'])
                                     @foreach($model['genres'] as $kgenre=>$genre)
-                                        <option value="{{ $kgenre }}">{{ $genre }}</option>
+                                        <option value="{{ $kgenre }}" {{ $data->genre==$kgenre ? 'selected' : '' }}>{{ $genre }}</option>
                                     @endforeach
                                 @endif
                             </select>
@@ -31,7 +32,7 @@
                                 <option value="">选择图片</option>
                                 @if($model->picAll())
                                     @foreach($model->picAll() as $pic)
-                                        <option value="{{ $pic->id }}">{{ $pic->name }}</option>
+                                        <option value="{{ $pic->id }}" {{ $data->pic_id==$pic->id ? 'selected' : '' }}>{{ $pic->name }}</option>
                                     @endforeach
                                 @endif
                             </select>
@@ -39,10 +40,10 @@
 
                         <div class="am-form-group" id="name" style="display:none;">
                             <label>文字内容 / Content：</label>
-                            <input type="text" placeholder="至少2个字符" minlength="2" name="name"/>
+                            <input type="text" placeholder="至少2个字符" minlength="2" name="name" value="{{ $data->name }}"/>
                         </div>
 
-                        <div class="am-form-group" id="text" style="display:none;">
+                        <div class="am-form-group" id="text" style="display:{{$data->pic_id?'none':'block'}};">
                             <label>文字属性 / Text：</label>
                             <div class="admin_border" id="text_attr" style="display:none;">
                                 文字颜色：(点击下面更改颜色)
