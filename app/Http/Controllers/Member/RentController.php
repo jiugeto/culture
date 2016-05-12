@@ -22,34 +22,37 @@ class RentController extends BaseController
 
     public function index($genre=0)
     {
+        $curr['name'] = $this->lists['']['name'];
+        $curr['url'] = $this->lists['']['url'];
         $result = [
             'datas'=> $this->query($del=0,$genre),
             'genre'=> $genre,
             'lists'=> $this->lists,
-            'curr_list'=> '',
-            'menus'=> $this->menus,
+            'curr'=> $curr,
         ];
         return view('member.rent.index', $result);
     }
 
     public function trash($genre=0)
     {
+        $curr['name'] = $this->lists['trash']['name'];
+        $curr['url'] = $this->lists['trash']['url'];
         $result = [
             'datas'=> $this->query($del=1,$genre),
             'genre'=> $genre,
             'lists'=> $this->lists,
-            'curr_list'=> 'trash',
-            'menus'=> $this->menus,
+            'curr'=> $curr,
         ];
         return view('member.rent.index', $result);
     }
 
     public function create()
     {
+        $curr['name'] = $this->lists['create']['name'];
+        $curr['url'] = $this->lists['create']['url'];
         $result = [
             'lists'=> $this->lists,
-            'curr_list'=> 'create',
-            'menus'=> $this->menus,
+            'curr'=> $curr,
         ];
         return view('member.rent.create', $result);
     }
@@ -64,12 +67,12 @@ class RentController extends BaseController
 
     public function edit($id)
     {
-        $data = RentModel::find($id);
+        $curr['name'] = $this->lists['edit']['name'];
+        $curr['url'] = $this->lists['edit']['url'];
         $result = [
-            'data'=> $data,
+            'data'=> RentModel::find($id),
             'lists'=> $this->lists,
-            'curr_list'=> 'create',
-            'menus'=> $this->menus,
+            'curr'=> $curr,
         ];
         return view('member.rent.edit', $result);
     }
@@ -84,12 +87,12 @@ class RentController extends BaseController
 
     public function show($id)
     {
-        $data = RentModel::find($id);
+        $curr['name'] = $this->lists['show']['name'];
+        $curr['url'] = $this->lists['show']['url'];
         $result = [
-            'data'=> $data,
+            'data'=> RentModel::find($id),
             'lists'=> $this->lists,
-            'curr_list'=> 'show',
-            'menus'=> $this->menus,
+            'curr'=> $curr,
         ];
         return view('member.rent.show', $result);
     }

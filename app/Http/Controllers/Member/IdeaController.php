@@ -21,35 +21,38 @@ class IdeaController extends BaseController
 
     public function index($cate_id=0)
     {
+        $curr['name'] = $this->lists['']['name'];
+        $curr['url'] = $this->lists['']['url'];
         $result = [
             'datas'=> $this->query($del=0,$cate_id),
             'prefix_url'=> '/member/idea',
             'lists'=> $this->lists,
-//            'menus'=> $this->menus,
-            'curr_list'=> '',
+            'curr'=> $curr,
         ];
         return view('member.idea.index', $result);
     }
 
     public function trash($cate_id=0)
     {
+        $curr['name'] = $this->lists['trash']['name'];
+        $curr['url'] = $this->lists['trash']['url'];
         $result = [
             'datas'=> $this->query($del=1,$cate_id),
             'prefix_url'=> '/member/idea/trash',
             'lists'=> $this->lists,
-//            'menus'=> $this->menus,
-            'curr_list'=> 'trash',
+            'curr'=> $curr,
         ];
         return view('member.idea.index', $result);
     }
 
     public function create()
     {
+        $curr['name'] = $this->lists['create']['name'];
+        $curr['url'] = $this->lists['create']['url'];
         $result = [
             'categorys'=> $this->model->categorys(),
             'lists'=> $this->lists,
-            'curr_list'=> 'create',
-//            'menus'=> $this->menus,
+            'curr'=> $curr,
         ];
         return view('member.idea.create', $result);
     }
@@ -64,12 +67,13 @@ class IdeaController extends BaseController
 
     public function edit($id)
     {
+        $curr['name'] = $this->lists['edit']['name'];
+        $curr['url'] = $this->lists['edit']['url'];
         $result = [
             'data'=> IdeasModel::find($id),
             'categorys'=> $this->model->categorys(),
             'lists'=> $this->lists,
-            'curr_list'=> 'edit',
-//            'menus'=> $this->menus,
+            'curr'=> $curr,
         ];
         return view('member.idea.edit', $result);
     }
@@ -84,11 +88,12 @@ class IdeaController extends BaseController
 
     public function show($id)
     {
+        $curr['name'] = $this->lists['show']['name'];
+        $curr['url'] = $this->lists['show']['url'];
         $result = [
             'data'=> IdeasModel::find($id),
             'lists'=> $this->lists,
-            'curr_list'=> 'show',
-//            'menus'=> $this->menus,
+            'curr'=> $curr,
         ];
         return view('member.idea.show', $result);
     }

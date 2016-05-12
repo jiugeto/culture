@@ -6,7 +6,7 @@
         {{--@if(!in_array($klist,['func','create','edit','show']))--}}
         @if(in_array($klist,['','trash']))
             <a href="/member/{{$lists['func']['url']}}/{{$klist}}"
-               style="color:{{$klist==$curr_list['url']?'red':'black'}};">
+               style="color:{{$klist==$curr['url']?'red':'black'}};">
                 <li>{{$lists[$klist]['name']}}</li>
             </a>
             <li>|</li>

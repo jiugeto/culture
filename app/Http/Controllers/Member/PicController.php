@@ -21,32 +21,37 @@ class PicController extends BaseController
 
     public function index()
     {
+        $curr['name'] = $this->lists['']['name'];
+        $curr['url'] = $this->lists['']['url'];
         $result = [
             'datas'=> $this->query($del=0),
             'prefix_url'=> '/member/pic',
             'lists'=> $this->lists,
-            'curr_list'=> '',
+            'curr'=> $curr,
         ];
         return view('member.pic.index', $result);
     }
 
     public function trash()
     {
+        $curr['name'] = $this->lists['trash']['name'];
+        $curr['url'] = $this->lists['trash']['url'];
         $result = [
             'datas'=> $this->query($del=1),
             'prefix_url'=> '/member/pic/trash',
             'lists'=> $this->lists,
-            'curr_list'=> 'trash',
+            'curr'=> $curr,
         ];
         return view('member.pic.index', $result);
     }
 
     public function create()
     {
+        $curr['name'] = $this->lists['create']['name'];
+        $curr['url'] = $this->lists['create']['url'];
         $result = [
-//            'categorys'=> $this->model->categorys(),
             'lists'=> $this->lists,
-            'curr_list'=> 'create',
+            'curr'=> $curr,
         ];
         return view('member.pic.create', $result);
     }
@@ -61,10 +66,12 @@ class PicController extends BaseController
 
     public function edit($id)
     {
+        $curr['name'] = $this->lists['edit']['name'];
+        $curr['url'] = $this->lists['edit']['url'];
         $result = [
             'data'=> PicModel::find($id),
             'lists'=> $this->lists,
-            'curr_list'=> 'edit',
+            'curr'=> $curr,
         ];
         return view('member.pic.edit', $result);
     }
@@ -79,10 +86,12 @@ class PicController extends BaseController
 
     public function show($id)
     {
+        $curr['name'] = $this->lists['show']['name'];
+        $curr['url'] = $this->lists['show']['url'];
         $result = [
             'data'=> PicModel::find($id),
             'lists'=> $this->lists,
-            'curr_list'=> 'show',
+            'curr'=> $curr,
         ];
         return view('member.pic.show', $result);
     }

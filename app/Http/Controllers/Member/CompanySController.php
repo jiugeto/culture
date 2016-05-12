@@ -28,38 +28,40 @@ class CompanySController extends BaseGoodsController
 
     public function index($cate_id=0)
     {
+        $curr['name'] = $this->lists['']['name'];
+        $curr['url'] = $this->lists['']['url'];
         $result = [
             'datas'=> $this->query($del=0,$this->type,$cate_id),
             'cateModels'=> $this->cateModels,
             'prefix_url'=> '/member/companyS',
             'lists'=> $this->lists,
-            'curr_list'=> '',
-//            'menus'=> $this->menus,
+            'curr'=> $curr,
         ];
-//        dd($this->query($del=0,$this->type,$cate_id),$this->model->cates());
         return view('member.companySD.index', $result);
     }
 
     public function trash($cate_id=0)
     {
+        $curr['name'] = $this->lists['trash']['name'];
+        $curr['url'] = $this->lists['trash']['url'];
         $result = [
             'datas'=> $this->query($del=1,$this->type,$cate_id),
             'cateModels'=> $this->cateModels,
             'prefix_url'=> '/member/companyS/trash',
             'lists'=> $this->lists,
-            'curr_list'=> 'trash',
-//            'menus'=> $this->menus,
+            'curr'=> $curr,
         ];
         return view('member.companySD.index', $result);
     }
 
     public function create()
     {
+        $curr['name'] = $this->lists['create']['name'];
+        $curr['url'] = $this->lists['create']['url'];
         $result = [
             'categorys'=> $this->model->categorys(),
             'lists'=> $this->lists,
-            'curr_list'=> 'create',
-//            'menus'=> $this->menus,
+            'curr'=> $curr,
         ];
         return view('member.companySD.create', $result);
     }
@@ -74,12 +76,13 @@ class CompanySController extends BaseGoodsController
 
     public function edit($id)
     {
+        $curr['name'] = $this->lists['edit']['name'];
+        $curr['url'] = $this->lists['edit']['url'];
         $result = [
             'data'=> GoodsModel::find($id),
             'categorys'=> $this->model->categorys(),
             'lists'=> $this->lists,
-            'curr_list'=> 'edit',
-//            'menus'=> $this->menus,
+            'curr'=> $curr,
         ];
         return view('member.companySD.edit', $result);
     }
@@ -94,14 +97,15 @@ class CompanySController extends BaseGoodsController
 
     public function show($id)
     {
+        $curr['name'] = $this->lists['show']['name'];
+        $curr['url'] = $this->lists['show']['url'];
         $data = GoodsModel::find($id);
         $data->catename = CategoryModel::find($data->cate_id)->name;
         $result = [
             'data'=> $data,
             'types'=> $this->model['types'],
             'lists'=> $this->lists,
-            'curr_list'=> 'show',
-//            'menus'=> $this->menus,
+            'curr'=> $curr,
         ];
         return view('member.companySD.show', $result);
     }

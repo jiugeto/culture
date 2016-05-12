@@ -24,12 +24,12 @@
                 <td>{{ $data->uname }}</td>
                 <td>{{ $data->created_at }}</td>
                 <td>
-                    @if($curr_list=='')
+                    @if($curr['url']=='')
                         <a href="/member/{{$lists['func']['url']}}/{{ $data->id }}/pre" class="list_btn">预览</a>
                         <a href="/member/{{$lists['func']['url']}}/{{ $data->id }}" class="list_btn">查看</a>
                         <a href="/member/{{$lists['func']['url']}}/{{ $data->id }}/edit" class="list_btn">编辑</a>
                         <a href="/member/{{$lists['func']['url']}}/{{ $data->id }}/destroy" class="list_btn">删除</a>
-                    @elseif($curr_list=='trash')
+                    @elseif($curr['url']=='trash')
                         <a href="/member/{{$lists['func']['url']}}/{{ $data->id }}/restore" class="list_btn">还原</a>
                         <a href="/member/{{$lists['func']['url']}}/{{ $data->id }}/forceDelete" class="list_btn">销毁记录</a>
                     @endif

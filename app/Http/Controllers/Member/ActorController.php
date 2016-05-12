@@ -22,21 +22,25 @@ class ActorController extends BaseController
 
     public function index()
     {
+        $curr['name'] = $this->lists['']['name'];
+        $curr['url'] = $this->lists['']['url'];
         $result = [
             'datas'=> $this->query(),
             'prefix_url'=> '/admin/actor',
             'lists'=> $this->lists,
-            'curr_list'=> '',
+            'curr'=> $curr,
         ];
         return view('member.actor.index', $result);
     }
 
     public function create()
     {
+        $curr['name'] = $this->lists['create']['name'];
+        $curr['url'] = $this->lists['create']['url'];
         $result = [
             'educations'=> $this->model['educations'],
             'lists'=> $this->lists,
-            'curr_list'=> 'create',
+            'curr'=> $curr,
         ];
         return view('member.actor.create', $result);
     }
@@ -51,11 +55,13 @@ class ActorController extends BaseController
 
     public function edit($id)
     {
+        $curr['name'] = $this->lists['edit']['name'];
+        $curr['url'] = $this->lists['edit']['url'];
         $result = [
             'data'=> ActorModel::find($id),
             'educations'=> $this->model['educations'],
             'lists'=> $this->lists,
-            'curr_list'=> 'edit',
+            'curr'=> $curr,
         ];
         return view('member.actor.edit', $result);
     }
@@ -70,11 +76,13 @@ class ActorController extends BaseController
 
     public function show($id)
     {
+        $curr['name'] = $this->lists['show']['name'];
+        $curr['url'] = $this->lists['show']['url'];
         $result = [
             'data'=> ActorModel::find($id),
             'educations'=> $this->model['educations'],
             'lists'=> $this->lists,
-            'curr_list'=> 'show',
+            'curr'=> $curr,
         ];
         return view('member.actor.show', $result);
     }

@@ -21,36 +21,39 @@ class EntertainController extends BaseController
 
     public function index($genre=0)
     {
+        $curr['name'] = $this->lists['']['name'];
+        $curr['url'] = $this->lists['']['url'];
         $result = [
             'datas'=> $this->query($del=0,$genre),
             'prefix_url'=> '/admin/entertain',
             'lists'=> $this->lists,
-            'curr_list'=> '',
+            'curr'=> $curr,
             'genre'=> $genre,
-            'menus'=> $this->menus,
         ];
         return view('member.entertain.index', $result);
     }
 
     public function trash($genre=0)
     {
+        $curr['name'] = $this->lists['trash']['name'];
+        $curr['url'] = $this->lists['trash']['url'];
         $result = [
             'datas'=> $this->query($del=1,$genre),
             'prefix_url'=> '/admin/entertain',
             'lists'=> $this->lists,
-            'curr_list'=> 'trash',
+            'curr'=> $curr,
             'genre'=> $genre,
-            'menus'=> $this->menus,
         ];
         return view('member.entertain.index', $result);
     }
 
     public function create()
     {
+        $curr['name'] = $this->lists['create']['name'];
+        $curr['url'] = $this->lists['create']['url'];
         $result = [
             'lists'=> $this->lists,
-            'curr_list'=> 'create',
-            'menus'=> $this->menus,
+            'curr'=> $curr,
         ];
         return view('member.entertain.create', $result);
     }
@@ -65,11 +68,12 @@ class EntertainController extends BaseController
 
     public function edit($id)
     {
+        $curr['name'] = $this->lists['edit']['name'];
+        $curr['url'] = $this->lists['edit']['url'];
         $result = [
             'data'=> EntertainModel::find($id),
             'lists'=> $this->lists,
-            'curr_list'=> 'edit',
-            'menus'=> $this->menus,
+            'curr'=> $curr,
         ];
         return view('member.entertain.edit', $result);
     }
@@ -84,11 +88,12 @@ class EntertainController extends BaseController
 
     public function show($id)
     {
+        $curr['name'] = $this->lists['show']['name'];
+        $curr['url'] = $this->lists['show']['url'];
         $result = [
             'data'=> EntertainModel::find($id),
             'lists'=> $this->lists,
-            'curr_list'=> 'show',
-            'menus'=> $this->menus,
+            'curr'=> $curr,
         ];
         return view('member.entertain.show', $result);
     }

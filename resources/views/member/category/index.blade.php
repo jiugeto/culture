@@ -26,11 +26,11 @@
                 <td>{{ $data->pid }}</td>
                 <td>{{ $data->created_at }}</td>
                 <td>
-                    @if($curr_list=='')
+                    @if($curr['url']=='')
                         <a href="/member/category/{{ $data->id }}" class="list_btn">查看</a>
                         <a href="/member/category/{{ $data->id }}/edit" class="list_btn">编辑</a>
                         <a href="/member/category/{{ $data->id }}/destroy" class="list_btn">删除</a>
-                    @elseif($curr_list=='trash')
+                    @else
                         <a href="/member/category/{{ $data->id }}/restore" class="list_btn">还原</a>
                         <a href="/member/category/{{ $data->id }}/forceDelete" class="list_btn">销毁记录</a>
                     @endif

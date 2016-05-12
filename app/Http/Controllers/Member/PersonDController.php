@@ -26,34 +26,40 @@ class PersonDController extends BaseGoodsController
 
     public function index($cate_id=0)
     {
+        $curr['name'] = $this->lists['']['name'];
+        $curr['url'] = $this->lists['']['url'];
         $result = [
             'datas'=> $this->query($del=0,$this->type,$cate_id),
             'prefix_url'=> '/member/personD',
             'lists'=> $this->lists,
-            'curr_list'=> '',
+            'curr'=> $curr,
         ];
         return view('member.personSD.index', $result);
     }
 
     public function trash($cate_id=0)
     {
+        $curr['name'] = $this->lists['trash']['name'];
+        $curr['url'] = $this->lists['trash']['url'];
         $result = [
             'datas'=> $this->query($del=1,$this->type,$cate_id),
             'prefix_url'=> '/member/personD/trash',
             'lists'=> $this->lists,
-            'curr_list'=> 'trash',
+            'curr'=> $curr,
         ];
         return view('member.personSD.index', $result);
     }
 
     public function create()
     {
+        $curr['name'] = $this->lists['create']['name'];
+        $curr['url'] = $this->lists['create']['url'];
         $result = [
             'categorys'=> $this->model->categorys(),
             'pics'=> count($this->model->pics()) ? $this->model->pics() : [],
             'videos'=> count($this->model->videos()) ? $this->model->videos() : [],
             'lists'=> $this->lists,
-            'curr_list'=> 'create',
+            'curr'=> 'curr',
         ];
         return view('member.personSD.create', $result);
     }
@@ -68,13 +74,15 @@ class PersonDController extends BaseGoodsController
 
     public function edit($id)
     {
+        $curr['name'] = $this->lists['edit']['name'];
+        $curr['url'] = $this->lists['edit']['url'];
         $result = [
             'data'=> GoodsModel::find($id),
             'pics'=> count($this->model->pics()) ? $this->model->pics() : [],
             'videos'=> count($this->model->videos()) ? $this->model->videos() : [],
             'categorys'=> CategoryModel::all(),
             'lists'=> $this->lists,
-            'curr_list'=> 'edit',
+            'curr'=> $curr,
         ];
         return view('member.personSD.edit', $result);
     }
@@ -89,12 +97,14 @@ class PersonDController extends BaseGoodsController
 
     public function show($id)
     {
+        $curr['name'] = $this->lists['show']['name'];
+        $curr['url'] = $this->lists['show']['url'];
         $result = [
             'data'=> GoodsModel::find($id),
             'pics'=> count($this->model->pics()) ? $this->model->pics() : [],
             'videos'=> count($this->model->videos()) ? $this->model->videos() : [],
             'lists'=> $this->lists,
-            'curr_list'=> 'show',
+            'curr'=> $curr,
         ];
         return view('member.personD.show', $result);
     }
