@@ -99,6 +99,8 @@ class ProductController extends BaseController
         return view('member.product.show', $result);
     }
 
+    public function attrs($id){}
+
 
 
 

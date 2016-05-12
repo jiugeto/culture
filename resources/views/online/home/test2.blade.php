@@ -3,7 +3,7 @@
     {{--内页的样式方便调节动画--}}
     <style>
         .img1 div.dh { margin:0 auto; padding-top:10px; width:960px; height:540px; overflow:hidden; }
-        .img1 img { height:540px;/*border:2px solid white;*/ }
+        .img1 img { height:540px; }
         /*================================*/
         .img2 { margin:0 auto; width:960px; height:540px; position:relative; top:-540px; }
         .img2 div.pos { padding-left:5px; width:230px; height:520px; float:left; overflow:hidden; }

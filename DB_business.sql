@@ -1055,7 +1055,7 @@ CREATE TABLE `bs_products` (
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL DEFAULT '0000-00-00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='在线视频表：在线写的模板';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='在线视频表：在线写的模板';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1064,7 +1064,7 @@ CREATE TABLE `bs_products` (
 
 LOCK TABLES `bs_products` WRITE;
 /*!40000 ALTER TABLE `bs_products` DISABLE KEYS */;
-INSERT INTO `bs_products` VALUES (1,'产品1',1,0,'',0,'',960,540,0,0,0,10,1,0,'2016-05-09','0000-00-00');
+INSERT INTO `bs_products` VALUES (1,'产品1',1,0,'',0,'',960,540,0,0,0,10,1,0,'2016-05-09','0000-00-00'),(2,'产品333',2,0,'而沟通与法规和若干个',1,'jiuge',960,540,0,0,0,10,1,0,'2016-05-12','0000-00-00');
 /*!40000 ALTER TABLE `bs_products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1087,21 +1087,21 @@ CREATE TABLE `bs_products_attr` (
   `height` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '高度，单位px',
   `border` varchar(20) NOT NULL COMMENT '边框：top，bottom，left，right，值，类型，颜色，值的组合，用|隔开',
   `color` varchar(10) NOT NULL COMMENT '颜色',
-  `font_size` tinyint(3) unsigned NOT NULL DEFAULT '16' COMMENT '字号，单位px',
-  `word_spacing` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '字间距，单位px',
-  `line_height` tinyint(3) unsigned NOT NULL DEFAULT '25' COMMENT '行高，单位px',
+  `font_size` varchar(3) NOT NULL DEFAULT '0' COMMENT '字号，单位px',
+  `word_spacing` varchar(3) NOT NULL DEFAULT '0' COMMENT '字间距，单位px',
+  `line_height` varchar(3) NOT NULL DEFAULT '0' COMMENT '行高，单位px',
   `text_transform` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '字型变换：none，capitalize首字大写，uppercase英文大写，lowercase英文写',
   `text_align` tinyint(3) unsigned NOT NULL COMMENT '水平对齐方式：无，center，left，right，inherit',
   `background` varchar(20) NOT NULL COMMENT '背景颜色',
   `position` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '定位：static，fixed，relative，absolute',
-  `left` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '左边距离，单位px',
-  `top` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '顶部距离，单位px',
+  `left` int(10) NOT NULL DEFAULT '0' COMMENT '左边距离，单位px',
+  `top` int(10) NOT NULL DEFAULT '0' COMMENT '顶部距离，单位px',
   `overflow` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '显示方式：visible(不显示滚动条,但超出部分可见)，hidden(超出时隐藏内容)，scroll(始终显示滚动条)，auto(内容超出时显示滚动条)，inherit(继承父级)',
-  `opacity` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '透明度，区间值，0透明-1不透明，单位%',
-  `img` varchar(500) NOT NULL COMMENT '图片，序列化存储：pic_id，pic_margin1，pic_margin2，pic_padding1，pic_padding2，pic_border1，pic_border2，pic_border,3，pic_border,4，pic_width，pic_height，',
-  `text` varchar(500) NOT NULL COMMENT '文字，序列化存储：text_con，text_margin1，text_margin2，text_padding1，text_padding2，text_border1，text_border2，text_border3，text_border4，text_font_size，text_color，',
+  `opacity` varchar(3) NOT NULL DEFAULT '0' COMMENT '透明度，区间值，0透明-1不透明，单位%',
   `intro` varchar(255) NOT NULL COMMENT '属性简介',
-  `islayer` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '有无动画：0无动画，1有动画',
+  `img` varchar(255) NOT NULL COMMENT '图片样式，序列化存储：pic_id，pic_margin1，pic_margin2，pic_padding1，pic_padding2，pic_border1，pic_border2，pic_border,3，pic_border,4，pic_width，pic_height，',
+  `text` varchar(255) NOT NULL COMMENT '文字样式，序列化存储：text_con，text_margin1，text_margin2，text_padding1，text_padding2，text_border1，text_border2，text_border3，text_border4，text_font_size，text_color，',
+  `pid` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '父id，0顶级',
   `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站功能：0不删除，1删除',
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL DEFAULT '0000-00-00',
@@ -1115,7 +1115,7 @@ CREATE TABLE `bs_products_attr` (
 
 LOCK TABLES `bs_products_attr` WRITE;
 /*!40000 ALTER TABLE `bs_products_attr` DISABLE KEYS */;
-INSERT INTO `bs_products_attr` VALUES (1,'测试属性1','attr_attr1',1,0,'auto-auto','auto-auto',0,0,'','#000000',0,0,0,0,0,'#000000',0,0,0,0,0,'','',' ',0,0,'2016-05-09','2016-05-09'),(2,'测试属性2','attr_arrr2',1,0,'auto-auto','auto-auto',0,0,'','#000000',0,0,0,0,0,'#000000',0,0,0,0,0,'a:12:{s:6:\"pic_id\";s:1:\"1\";s:11:\"pic_margin1\";s:0:\"\";s:11:\"pic_margin2\";s:0:\"\";s:12:\"pic_padding1\";s:0:\"\";s:12:\"pic_padding2\";s:0:\"\";s:11:\"pic_border1\";s:1:\"0\";s:11:\"pic_border2\";s:0:\"\";s:11:\"pic_border3\";s:1:\"0\";s:11:\"pic_border4\";s:7:\"#000000\";s:9:\"pic_width\";s:0:\"\";s:10:\"pic_height\";s:0:\"\";s:10:\"updated_at\";s:19:\"2016-05-10 07:44:32\";}','a:12:{s:8:\"text_con\";s:11:\"tgrhtrhgdgf\";s:12:\"text_margin1\";s:1:\"0\";s:12:\"text_margin2\";s:1:\"0\";s:13:\"text_padding1\";s:1:\"0\";s:13:\"text_padding2\";s:1:\"0\";s:12:\"text_border1\";s:1:\"0\";s:12:\"text_border2\";s:1:\"0\";s:12:\"text_border3\";s:1:\"0\";s:12:\"text_border4\";s:7:\"#000000\";s:14:\"text_font_size\";s:1:\"0\";s:10:\"text_color\";s:7:\"#000000\";s:10:\"updated_at\";s:19:\"2016-05-10 07:50:18\";}','',0,0,'2016-05-10','0000-00-00'),(3,'测试属性3','attr_attr3',1,0,'auto-auto','auto-auto',0,0,'','#000000',0,0,0,0,0,'#000000',0,0,0,0,0,'','','',0,0,'2016-05-10','0000-00-00'),(4,'测试属性4','attr_attr4',1,0,'auto-auto','auto-auto',0,0,'','#000000',0,0,0,0,0,'#000000',0,0,0,0,0,'','','',0,0,'2016-05-10','0000-00-00'),(5,'测试属性5','attr_attr5',1,0,'auto-auto','auto-auto',0,0,'','#000000',0,0,0,0,0,'#000000',0,0,0,0,0,'','','',0,0,'2016-05-10','0000-00-00'),(6,'测试属性6','attr_attr6',1,0,'auto-auto','auto-auto',0,0,'','#000000',0,0,0,0,0,'#000000',0,0,0,0,0,'','','',0,0,'2016-05-10','0000-00-00'),(7,'测试属性7','attr_attr7',1,0,'auto-auto','auto-auto',0,0,'','#000000',0,0,0,0,0,'#000000',0,0,0,0,0,'','','',0,0,'2016-05-10','0000-00-00');
+INSERT INTO `bs_products_attr` VALUES (1,'测试属性1','attr_img1',1,0,'0-auto','10-0',960,540,'5-1-1-red','#000000','16','16','16',1,1,'',1,0,0,0,'',' ','','',0,0,'2016-05-09','2016-05-09'),(2,'测试属性2','attr_img2',1,0,'0-auto','',960,540,'','','','','',0,0,'',3,0,-540,0,'','','','',0,0,'2016-05-10','0000-00-00'),(3,'测试属性3','attr_attr3',1,0,'auto-auto','auto-auto',0,0,'','#000000','0','0','0',0,0,'#000000',0,0,0,0,'','','','',2,0,'2016-05-10','0000-00-00'),(4,'测试属性4','attr_attr4',1,0,'auto-auto','auto-auto',0,0,'','#000000','0','0','0',0,0,'#000000',0,0,0,0,'','','','',0,0,'2016-05-10','0000-00-00'),(5,'测试属性5','attr_attr5',1,0,'auto-auto','auto-auto',0,0,'','#000000','0','0','0',0,0,'#000000',0,0,0,0,'','','','',0,0,'2016-05-10','0000-00-00'),(6,'测试属性6','attr_attr6',1,0,'auto-auto','auto-auto',0,0,'','#000000','0','0','0',0,0,'#000000',0,0,0,0,'','','','',0,0,'2016-05-10','0000-00-00'),(7,'测试属性7','attr_attr7',1,0,'auto-auto','auto-auto',0,0,'','#000000','0','0','0',0,0,'#000000',0,0,0,0,'','','','',0,0,'2016-05-10','0000-00-00');
 /*!40000 ALTER TABLE `bs_products_attr` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1187,7 +1187,7 @@ CREATE TABLE `bs_products_layer` (
   `mode` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '播放模式：forwards保持最后画面，backwards保持最开始画面，both所有，none复原',
   `field` varchar(255) NOT NULL COMMENT '初始字段名称和值，序列化存储',
   `per` varchar(255) NOT NULL COMMENT '动画的百分比，用|隔开',
-  `value` varchar(255) NOT NULL COMMENT '动画值，多个用|隔开',
+  `value` varchar(255) NOT NULL COMMENT '动画值，多个用|隔开：字段(百分比|百分比),字段...',
   `intro` varchar(255) NOT NULL COMMENT '属性简介',
   `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站功能：0不删除，1删除',
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
@@ -1202,7 +1202,7 @@ CREATE TABLE `bs_products_layer` (
 
 LOCK TABLES `bs_products_layer` WRITE;
 /*!40000 ALTER TABLE `bs_products_layer` DISABLE KEYS */;
-INSERT INTO `bs_products_layer` VALUES (1,'动画',1,1,'my',5,1,0,1,1,0,1,'top|left|','0|100','0|100|,10|20|,','',0,'2016-05-09','0000-00-00'),(2,'动画2',1,1,'my2',5,1,0,1,1,0,1,'top|left|','0|100','1|0|,0|10|,','',0,'2016-05-10','2016-05-10'),(3,'动画3',1,1,'my3',5,1,0,1,1,0,1,'top|','0|100|','0|,100|,','',0,'2016-05-10','0000-00-00'),(4,'动画4',1,1,'my4',5,1,0,1,1,0,1,'top|','0|100|','0|,100|,','',0,'2016-05-10','0000-00-00'),(5,'动画5',1,1,'my5',5,1,0,1,1,0,1,'top|','0|100|','0|,100|,','',0,'2016-05-10','0000-00-00'),(6,'动画6',1,1,'my6',5,1,0,1,1,0,1,'top|','0|100|','0|,100|,','',0,'2016-05-10','0000-00-00'),(7,'动画7',1,1,'my7',5,1,0,1,1,0,1,'top|','0|100|','0|,100|,','',0,'2016-05-10','0000-00-00');
+INSERT INTO `bs_products_layer` VALUES (1,'动画',1,1,'my',5,1,0,1,1,0,1,'top|left|','0|100|','0|100|,10|20|,','',0,'2016-05-09','0000-00-00'),(2,'动画2',1,1,'my2',5,1,0,1,1,0,1,'top|left|','0|100|','1|0|,0|10|,','',0,'2016-05-10','2016-05-10'),(3,'动画3',1,1,'my3',5,1,0,1,1,0,1,'top|','0|100|','0|100|,','',0,'2016-05-10','0000-00-00'),(4,'动画4',1,1,'my4',5,1,0,1,1,0,1,'top|','0|100|','0|100|,','',0,'2016-05-10','0000-00-00'),(5,'动画5',1,1,'my5',5,1,0,1,1,0,1,'top|','0|100|','0|100|,','',0,'2016-05-10','0000-00-00'),(6,'动画6',1,1,'my6',5,1,0,1,1,0,1,'top|','0|100|','0|100|,','',0,'2016-05-10','0000-00-00'),(7,'动画7',1,1,'my7',5,1,0,1,1,0,1,'top|','0|100|','0|100|,','',0,'2016-05-10','0000-00-00');
 /*!40000 ALTER TABLE `bs_products_layer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1897,4 +1897,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-05-11 22:21:57
+-- Dump completed on 2016-05-12 18:59:15

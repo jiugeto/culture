@@ -111,91 +111,91 @@
                     <td>{{ $data->updated_at!='0000-00-00' ? $data->updated_at : '未修改' }}</td>
                 </tr>
                 </tbody>
-            </table>
+            {{--</table>--}}
 
-            <label>图片属性</label>
-            <table class="am-table am-table-striped am-table-hover table-main">
-                <tbody id="tbody-alert">
-                @if($picInfo['pic_id'])
-                <tr>
-                    <td class="am-hide-sm-only">图片预览：</td>
-                    <td><img src="{{ $data->pic($picInfo['pic_id']) }}"></td>
-                </tr>
-                <tr>
-                    <td class="am-hide-sm-only">外边距：(单位px)</td>
-                    <td>{{ $picInfo['pic_margin1'] }} - {{ $picInfo['pic_margin2'] }}</td>
-                </tr>
-                <tr>
-                    <td class="am-hide-sm-only">内边距：(单位px)</td>
-                    <td>{{ $picInfo['pic_padding1'] }} - {{ $picInfo['pic_padding2'] }}</td>
-                </tr>
-                <tr>
-                    <td class="am-hide-sm-only">边框：</td>
-                    <td>
-                        {{ $data->borderDirection($picInfo['pic_border1']) }} -
-                        {{ $picInfo['pic_border2'] }} -
-                        {{ $data->borderTypeName($picInfo['pic_border3']) }} -
-                        <span style="float:right;">颜色预览：<div class="admin_yulan" style="background:{{ $picInfo['pic_border4'] }};"></div></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="am-hide-sm-only">宽度：(单位px)</td>
-                    <td>{{ $picInfo['pic_width'] }}</td>
-                </tr>
-                <tr>
-                    <td class="am-hide-sm-only">高度：(单位px)</td>
-                    <td>{{ $picInfo['pic_height'] }}</td>
-                </tr>
-                <tr>
-                    <td class="am-hide-sm-only">更新时间：</td>
-                    <td>{{ $picInfo['updated_at'] }}</td>
-                </tr>
-                @else @include('admin.common.norecord')
-                @endif
-                </tbody>
-            </table>
+            {{--<label>图片属性</label>--}}
+            {{--<table class="am-table am-table-striped am-table-hover table-main">--}}
+                {{--<tbody id="tbody-alert">--}}
+                {{--@if($picInfo['pic_id'])--}}
+                {{--<tr>--}}
+                    {{--<td class="am-hide-sm-only">图片预览：</td>--}}
+                    {{--<td><img src="{{ $data->pic($picInfo['pic_id']) }}"></td>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                    {{--<td class="am-hide-sm-only">外边距：(单位px)</td>--}}
+                    {{--<td>{{ $picInfo['pic_margin1'] }} - {{ $picInfo['pic_margin2'] }}</td>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                    {{--<td class="am-hide-sm-only">内边距：(单位px)</td>--}}
+                    {{--<td>{{ $picInfo['pic_padding1'] }} - {{ $picInfo['pic_padding2'] }}</td>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                    {{--<td class="am-hide-sm-only">边框：</td>--}}
+                    {{--<td>--}}
+                        {{--{{ $data->borderDirection($picInfo['pic_border1']) }} ---}}
+                        {{--{{ $picInfo['pic_border2'] }} ---}}
+                        {{--{{ $data->borderTypeName($picInfo['pic_border3']) }} ---}}
+                        {{--<span style="float:right;">颜色预览：<div class="admin_yulan" style="background:{{ $picInfo['pic_border4'] }};"></div></span>--}}
+                    {{--</td>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                    {{--<td class="am-hide-sm-only">宽度：(单位px)</td>--}}
+                    {{--<td>{{ $picInfo['pic_width'] }}</td>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                    {{--<td class="am-hide-sm-only">高度：(单位px)</td>--}}
+                    {{--<td>{{ $picInfo['pic_height'] }}</td>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                    {{--<td class="am-hide-sm-only">更新时间：</td>--}}
+                    {{--<td>{{ $picInfo['updated_at'] }}</td>--}}
+                {{--</tr>--}}
+                {{--@else @include('admin.common.norecord')--}}
+                {{--@endif--}}
+                {{--</tbody>--}}
+            {{--</table>--}}
 
-            <label>文字属性</label>
-            <table class="am-table am-table-striped am-table-hover table-main">
-                <tbody id="tbody-alert">
-                @if($textInfo['text_con'])
-                <tr>
-                    <td class="am-hide-sm-only">文字内容：</td>
-                    <td>{{ $textInfo['text_con'] }}</td>
-                </tr>
-                <tr>
-                    <td class="am-hide-sm-only">外边距：(单位px)</td>
-                    <td>{{ $textInfo['text_margin1'] }} - {{ $textInfo['text_margin2'] }}</td>
-                </tr>
-                <tr>
-                    <td class="am-hide-sm-only">内边距：(单位px)</td>
-                    <td>{{ $textInfo['text_padding1'] }} - {{ $textInfo['text_padding2'] }}</td>
-                </tr>
-                <tr>
-                    <td class="am-hide-sm-only">边框：</td>
-                    <td>
-                        {{ $data->borderDirection($textInfo['text_border1']) }} -
-                        {{ $textInfo['text_border2'] }} -
-                        {{ $data->borderTypeName($textInfo['text_border3']) }} -
-                        <span style="float:right;">颜色预览：<div class="admin_yulan" style="background:{{ $textInfo['text_border4'] }};"></div></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="am-hide-sm-only">宽度：(单位px)</td>
-                    <td>{{ $textInfo['text_font_size'] }}</td>
-                </tr>
-                <tr>
-                    <td class="am-hide-sm-only">高度：(单位px)</td>
-                    <td>{{ $textInfo['text_color'] }}</td>
-                </tr>
-                <tr>
-                    <td class="am-hide-sm-only">更新时间：</td>
-                    <td>{{ $textInfo['updated_at'] }}</td>
-                </tr>
-                @else @include('admin.common.norecord')
-                @endif
-                </tbody>
-            </table>
+            {{--<label>文字属性</label>--}}
+            {{--<table class="am-table am-table-striped am-table-hover table-main">--}}
+                {{--<tbody id="tbody-alert">--}}
+                {{--@if($textInfo['text_con'])--}}
+                {{--<tr>--}}
+                    {{--<td class="am-hide-sm-only">文字内容：</td>--}}
+                    {{--<td>{{ $textInfo['text_con'] }}</td>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                    {{--<td class="am-hide-sm-only">外边距：(单位px)</td>--}}
+                    {{--<td>{{ $textInfo['text_margin1'] }} - {{ $textInfo['text_margin2'] }}</td>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                    {{--<td class="am-hide-sm-only">内边距：(单位px)</td>--}}
+                    {{--<td>{{ $textInfo['text_padding1'] }} - {{ $textInfo['text_padding2'] }}</td>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                    {{--<td class="am-hide-sm-only">边框：</td>--}}
+                    {{--<td>--}}
+                        {{--{{ $data->borderDirection($textInfo['text_border1']) }} ---}}
+                        {{--{{ $textInfo['text_border2'] }} ---}}
+                        {{--{{ $data->borderTypeName($textInfo['text_border3']) }} ---}}
+                        {{--<span style="float:right;">颜色预览：<div class="admin_yulan" style="background:{{ $textInfo['text_border4'] }};"></div></span>--}}
+                    {{--</td>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                    {{--<td class="am-hide-sm-only">宽度：(单位px)</td>--}}
+                    {{--<td>{{ $textInfo['text_font_size'] }}</td>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                    {{--<td class="am-hide-sm-only">高度：(单位px)</td>--}}
+                    {{--<td>{{ $textInfo['text_color'] }}</td>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                    {{--<td class="am-hide-sm-only">更新时间：</td>--}}
+                    {{--<td>{{ $textInfo['updated_at'] }}</td>--}}
+                {{--</tr>--}}
+                {{--@else @include('admin.common.norecord')--}}
+                {{--@endif--}}
+                {{--</tbody>--}}
+            {{--</table>--}}
         </div>
     </div>
 @stop

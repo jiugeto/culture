@@ -1,9 +1,6 @@
 <?php
 namespace App\Models;
 
-//use Illuminate\Database\Eloquent\Model;
-//use App\Models\ProductAttrModel;
-
 class ProductModel extends BaseModel
 {
     protected $table = 'bs_products';
@@ -38,5 +35,20 @@ class ProductModel extends BaseModel
     public function isshow()
     {
         return $this->isshow ? $this->isshows[$this->isshow] : '';
+    }
+
+    public function attrs()
+    {
+        return ProductAttrModel::where('productid',$this->id)->get();
+    }
+
+    public function layers()
+    {
+        return ProductLayerModel::where('productid',$this->id)->get();
+    }
+
+    public function cons()
+    {
+        return ProductConModel::where('productid',$this->id)->get();
     }
 }

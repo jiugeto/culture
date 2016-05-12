@@ -210,9 +210,6 @@ class ProductAttrController extends BaseController
         }
         //字的颜色
         if (!$request->color) { $request->color = ''; }
-        //图片处理
-//        if () {}
-        //文字处理
         $productAttr = [
             'name'=> $request->name,
             'style_name'=> $request->style_name,
@@ -237,47 +234,6 @@ class ProductAttrController extends BaseController
             'intro'=> $request->intro,
         ];
         return $productAttr;
-    }
-
-    /**
-     * 图片数据
-     */
-    public function getPic(Request $request)
-    {
-        return array(
-            'pic_id'        => $request->pic_id,
-            'pic_margin1'   => $request->pic_margin1,
-            'pic_margin2'   => $request->pic_margin2,
-            'pic_padding1'  => $request->pic_padding1,
-            'pic_padding2'  => $request->pic_padding2,
-            'pic_border1'   => $request->pic_border1,
-            'pic_border2'   => $request->pic_border2,
-            'pic_border3'   => $request->pic_border3,
-            'pic_border4'   => $request->pic_border4,
-            'pic_width'     => $request->pic_width,
-            'pic_height'    => $request->pic_height,
-            'updated_at'    => date('Y-m-d H:i:s', time()),
-        );
-    }
-    /**
-     * 文字数据
-     */
-    public function getText(Request $request)
-    {
-        return array(
-            'text_con'       => $request->text_con,
-            'text_margin1'   => $request->text_margin1,
-            'text_margin2'   => $request->text_margin2,
-            'text_padding1'  => $request->text_padding1,
-            'text_padding2'  => $request->text_padding2,
-            'text_border1'   => $request->text_border1,
-            'text_border2'   => $request->text_border2,
-            'text_border3'   => $request->text_border3,
-            'text_border4'   => $request->text_border4,
-            'text_font_size' => $request->text_font_size,
-            'text_color'     => $request->text_color,
-            'updated_at'     => date('Y-m-d H:i:s', time()),
-        );
     }
 
     /**

@@ -113,4 +113,31 @@ class ProductLayerModel extends BaseModel
     {
         return $this->mode ? $this->modeNames[$this->mode] : '';
     }
+
+    public function fields()
+    {
+        $fields = $this->field ? explode('|',$this->field) : [];
+        unset($fields[count($fields)-1]);
+        return $fields;
+    }
+
+    public function pers()
+    {
+        $pers = $this->per ? explode('|',$this->per) : [];
+        unset($pers[count($pers)-1]);
+        return $pers;
+    }
+
+    public function values()
+    {
+        $values = $this->value ? explode(',',$this->value) : [];
+        if ($values) {
+            foreach ($values as $k=>$value) {
+                $value = $value ? explode('|',$value) : [];
+                unset($value[count($value)-1]);
+                if ($value) { $vals[$k] = $value; }
+            }
+        }
+        return isset($vals) ? $vals : [];
+    }
 }
