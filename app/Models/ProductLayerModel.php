@@ -69,24 +69,24 @@ class ProductLayerModel extends BaseModel
     {
         if ($this->attrid) {
             $attrModel = ProductAttrModel::find($this->attrid);
-            if ($attrModel) { $attrname = $attrModel->name; }
+            if ($attrModel) { $attrname = $attrModel->style_name; }
         }
         return isset($attrname) ? $attrname : '未知';
     }
 
     public function func()
     {
-        return $this->function ? $this->functions[$this->function] : '';
+        return array_key_exists($this->function,$this->functions) ? $this->functions[$this->function] : '';
     }
 
     public function functionName()
     {
-        return $this->function ? $this->functionNames[$this->function] : '';
+        return array_key_exists($this->function,$this->functionNames) ? $this->functionNames[$this->function] : '';
     }
 
     public function direction()
     {
-        return $this->direction ? $this->directions[$this->direction] : '';
+        return array_key_exists($this->direction,$this->directions) ? $this->directions[$this->direction] : '';
     }
 
     public function directionName()

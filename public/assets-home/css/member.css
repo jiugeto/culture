@@ -1,6 +1,8 @@
 /*============= 会员后台 member.css ===============*/
 
 
+body { font-family:'微软雅黑'; }
+
 .mem_con {
     margin:0 auto;
     width:1000px;

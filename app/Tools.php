@@ -66,6 +66,18 @@ class Tools
         return $list;
     }
 
+    public static function childList2($obj,$pid = 0){
+        $list = array();
+        foreach ($obj as $v){
+            if ($v->pid == $pid) {
+                //找到子节点,继续找该子节点的后代节点
+                $v->child = Tools::childList2($obj,$v->id);
+                $list[] = $v;
+            }
+        }
+        return $list;
+    }
+
     /**
      * 对象转为数组
      * @param array $arrs

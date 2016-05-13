@@ -7,5 +7,6 @@
 Route::group(['prefix'=>'online','namespace'=>'Online'],function(){
     //主窗口
     Route::get('/','HomeController@index');
+    Route::get('restart','HomeController@index');
     Route::get('home','HomeController@index');
 });

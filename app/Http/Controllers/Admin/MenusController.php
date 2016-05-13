@@ -86,6 +86,7 @@ class MenusController extends BaseController
     {
         $data = $this->getData($request);
         $data['updated_at'] = date('Y-m-d H:m:s', time());
+        dd($data);
         MenusModel::where('id',$id)->update($data);
         return redirect('/admin/menus');
     }

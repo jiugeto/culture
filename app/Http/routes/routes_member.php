@@ -33,8 +33,8 @@ Route::group(['prefix'=>'regist'], function(){
 /**
  * 这里是会员路由
  */
-Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Member'], function(){
-//Route::group(['prefix'=>'member','namespace'=>'Member'], function(){
+//Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Member'], function(){
+Route::group(['prefix'=>'member','namespace'=>'Member'], function(){
     //账户首页
     Route::get('/','HomeController@index');
     Route::get('/home','HomeController@index');
@@ -50,15 +50,15 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
 //    Route::resource('setting','SettingController');
     //个人设计师、制作企业、经纪公司、租赁公司认证
     //在线视频制作
-    Route::get('product/{id}/attrs','ProductController@attrs');
-    Route::get('product/{id}/cons','ProductController@cons');
-    Route::get('product/{id}/layers','ProductController@layers');
     Route::get('product/trash','ProductController@trash');
     Route::get('product/{id}/destroy','ProductController@destroy');
     Route::get('product/{id}/restore','ProductController@restore');
     Route::get('product/{id}/forceDelete','ProductController@forceDelete');
     Route::post('product/{id}','ProductController@update');
     Route::resource('product','ProductController');
+        //动画属性
+    Route::get('productattr/trash','ProductAttrController@trash');
+    Route::resource('productattr','ProductAttrController');
     //个人供求
         //个人需求
     Route::post('personD/{id}','PersonDController@update');

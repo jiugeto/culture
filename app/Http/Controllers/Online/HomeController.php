@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Online;
 
 use App\Models\ProductAttrModel;
+use App\Models\ProductConModel;
 use App\Models\ProductLayerModel;
 use App\Models\ProductModel;
 
@@ -13,13 +14,20 @@ class HomeController extends BaseController
 
     public function index($productid=1)
     {
+        $urls = explode('/',$_SERVER['REQUEST_URI']);
+        $restart = $urls[count($urls)-1]=='restart'?1:0;
+//        dd($urls);
         $result = [
             'data'=> $this->product($productid),
-            'attrs'=> $this->attrs($productid),
+            'attrs'=> \App\Tools::childList2($this->attrs($productid)),
             'layers'=> $this->layers($productid),
+            'pics'=> $this->pics($productid),
+            'texts'=> $this->texts($productid),
+            'restart'=> $restart,
         ];
-//        dd($this->layers($productid)[2]->values());
-        return view('online.home.test2', $result);
+//        dd(\App\Tools::childList2($this->attrs($productid)));
+        return view('online.home.index', $result);
+//        return view('online.home.test2', $result);
     }
 
     public function product($id)
@@ -59,5 +67,15 @@ class HomeController extends BaseController
     public function layers($productid)
     {
         return ProductLayerModel::where('productid',$productid)->get();
+    }
+
+    public function pics($productid)
+    {
+        return ProductConModel::where('productid',$productid)->where('genre',1)->get();
+    }
+
+    public function texts($productid)
+    {
+        return ProductConModel::where('productid',$productid)->where('genre',2)->get();
     }
 }

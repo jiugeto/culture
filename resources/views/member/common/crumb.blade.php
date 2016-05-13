@@ -16,4 +16,5 @@
     @if(in_array($curr,['create','edit','show','pre'])) {{ ' / '.$lists[$curr]['name'] }} @endif
     @if($curr['url']=='') {{ ' / '.$lists['']['name'] }} @endif
     @if($curr['url']=='trash') {{ ' / '.$lists['trash']['name'] }} @endif
+    {{--<button class="companybtn" style="padding:0 10px;" onclick="history.go(-1)">返 &nbsp;回</button>--}}
 </div>

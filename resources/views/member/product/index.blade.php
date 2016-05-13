@@ -28,13 +28,13 @@
                 <td>{{ $data->id }}</td>
                 <td>{{ $data->name }}</td>
                 <td>{{ count($data->attrs()) ? count($data->attrs()) : 0 }}
-                    <a href="/member/attrs" class="star look" title="点击查看该产品属性列表">细看</a>
+                    {{--<a href="/member/productattr/{{ $data->id }}" class="star look" title="点击查看该产品属性列表">细看</a>--}}
                 </td>
                 <td>{{ count($data->cons()) ? count($data->cons()) : 0 }}
-                    <a href="/member/cons" class="star look" title="点击查看该产品内容列表">细看</a>
+                    {{--<a href="/member/productcon/{{ $data->id }}" class="star look" title="点击查看该产品内容列表">细看</a>--}}
                 </td>
                 <td>{{ count($data->layers()) ? count($data->layers()) : 0 }}
-                    <a href="/member/layers" class="star look" title="点击查看该产品动画列表">细看</a>
+                    {{--<a href="/member/productlayer/{{ $data->id }}" class="star look" title="点击查看该产品动画列表">细看</a>--}}
                 </td>
                 <td>{{ $data->uname }}</td>
                 <td>{{ $data->created_at }}</td>
