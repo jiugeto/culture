@@ -86,7 +86,6 @@ class MenusController extends BaseController
     {
         $data = $this->getData($request);
         $data['updated_at'] = date('Y-m-d H:m:s', time());
-        dd($data);
         MenusModel::where('id',$id)->update($data);
         return redirect('/admin/menus');
     }
@@ -112,6 +111,13 @@ class MenusController extends BaseController
     public function getData(Request $request)
     {
         $data = $request->all();
+        //pid判断
+        if (!$data['pid1'] &&!$data['pid2'] &&!$data['pid3']) {
+            echo "<script>alert('父id必选！');history.go(-1);</script>";exit;
+        }
+        if ($data['pid1']) { $data['pid'] = $data['pid1']; }
+        if ($data['pid2']) { $data['pid'] = $data['pid2']; }
+        if ($data['pid3']) { $data['pid'] = $data['pid3']; }
         if (!$data['style_class']) { $data['style_class'] = ''; }
         if (!$data['intro']) { $data['intro'] = ''; }
         $data = [

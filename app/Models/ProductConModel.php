@@ -160,6 +160,22 @@ class ProductConModel extends BaseModel
 
     public function pic()
     {
-        return $this->pic_id ? PicModel::find($this->pic_id) : '';
+        $picModel = PicModel::find($this->pic_id);
+//        return $this->pic_id ? PicModel::find($this->pic_id) : '';
+        return isset($picModel) ? $picModel : '';
+    }
+
+    public function picurl()
+    {
+        $picModel = PicModel::find($this->pic_id);
+//        return $this->pic_id ? PicModel::find($this->pic_id) : '';
+        return isset($picModel) ? $picModel->url : '';
+    }
+
+    public function picname()
+    {
+        $picModel = PicModel::find($this->pic_id);
+//        return $this->pic_id ? PicModel::find($this->pic_id) : '';
+        return isset($picModel) ? $picModel->name : '';
     }
 }

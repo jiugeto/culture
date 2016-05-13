@@ -29,7 +29,7 @@
 
                         <div class="am-form-group">
                             <label>父级菜单 / Pid：</label>
-                            <select name="pid" id="pid1">
+                            <select name="pid1" id="pid1">
                                 <option value="0">-0级菜单-</option>
                                 @foreach($pids as $pid)
                                     @if($pid->type==1)
@@ -37,7 +37,7 @@
                                     @endif
                                 @endforeach
                             </select>
-                            <select name="pid" id="pid2" style="display:none;">
+                            <select name="pid2" id="pid2" style="display:none;">
                                 <option value="0">-0级菜单-</option>
                                 @foreach($pids as $pid)
                                     @if($pid->type==2)
@@ -45,7 +45,7 @@
                                     @endif
                                 @endforeach
                             </select>
-                            <select name="pid" id="pid3" style="display:none;">
+                            <select name="pid3" id="pid3" style="display:none;">
                                 <option value="0">-0级菜单-</option>
                                 @foreach($pids as $pid)
                                     @if($pid->type==3)

@@ -44,7 +44,7 @@
 
                         <div class="am-form-group">
                             <label>父级菜单 / Pid：</label>
-                            <select name="pid" id="pid1"style="display:{{$data->type==1?'block':'none'}};">
+                            <select name="pid1" id="pid1"style="display:{{$data->type==1?'block':'none'}};">
                                 <option value="0" {{ $data->pid==0 ? 'selected' : '' }}>-0级菜单-</option>
                                 @foreach($pids as $pid)
                                     @if($pid->type==1)
@@ -53,7 +53,7 @@
                                     @endif
                                 @endforeach
                             </select>
-                            <select name="pid" id="pid2" style="display:{{$data->type==2?'block':'none'}};">
+                            <select name="pid2" id="pid2" style="display:{{$data->type==2?'block':'none'}};">
                                 <option value="0">-0级菜单-</option>
                                 @foreach($pids as $pid)
                                     @if($pid->type==2)
@@ -62,7 +62,7 @@
                                     @endif
                                 @endforeach
                             </select>
-                            <select name="pid" id="pid3" style="display:{{$data->type==3?'block':'none'}};">
+                            <select name="pid3" id="pid3" style="display:{{$data->type==3?'block':'none'}};">
                                 <option value="0">-0级菜单-</option>
                                 @foreach($pids as $pid)
                                     @if($pid->type==3)

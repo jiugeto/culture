@@ -217,6 +217,8 @@ input,textarea,select {
 input,select { height:30px; }
 input.field_value { width:300px; }
 select { font-size:20px;font-family:'微软雅黑'; }
+input.radio { position:relative;top:10px; }
+.td_border { border:1px dashed lightgrey; }
 /*=========右侧创建窗口==========*/
 
 /*=========右侧查看窗口==========*/

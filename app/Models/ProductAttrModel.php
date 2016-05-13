@@ -57,6 +57,13 @@ class ProductAttrModel extends BaseModel
         return ProductModel::all();
     }
 
+    public function products()
+    {
+        $userid = isset($this->userid) ? $this->userid : 0;
+        $productModels = ProductModel::where('uid',$userid)->get();
+        return $productModels ? $productModels : [];
+    }
+
     public function product()
     {
         $productModel = ProductModel::find($this->productid);

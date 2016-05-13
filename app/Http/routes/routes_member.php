@@ -56,9 +56,15 @@ Route::group(['prefix'=>'member','namespace'=>'Member'], function(){
     Route::get('product/{id}/forceDelete','ProductController@forceDelete');
     Route::post('product/{id}','ProductController@update');
     Route::resource('product','ProductController');
-        //动画属性
+        //产品属性
     Route::get('productattr/trash','ProductAttrController@trash');
     Route::resource('productattr','ProductAttrController');
+        //产品动画
+    Route::get('productlayer/trash','ProductLayerController@trash');
+    Route::resource('productlayer','ProductLayerController');
+        //产品内容
+    Route::get('productcon/trash','ProductConController@trash');
+    Route::resource('productcon','ProductConController');
     //个人供求
         //个人需求
     Route::post('personD/{id}','PersonDController@update');
