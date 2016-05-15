@@ -1082,7 +1082,10 @@ CREATE TABLE `bs_products_attr` (
   `productid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '产品表id，关联bs_products',
   `pid` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '父id，0顶级',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户id',
+  `attrs` varchar(1000) NOT NULL COMMENT '属性集合，序列化存储：ismargin，margin1，margin2，margin3，margin4，margin5，margin6，ispadding，ispadding1，ispadding2，ispadding3，ispadding4，ispadding5，ispadding6，width，height，border1，border2，border3，border4，color，font_size，word_spacing，line_height，text_transform，text_align，background，left，top，overflow，opacity，',
+  `ismargin` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '外边距类型：1无，2上下左右居中，3上下居中左右自定义，4左右居中上下自定义，5完全自定义',
   `margin` varchar(10) NOT NULL COMMENT '外边距：行row，列col，用|隔开',
+  `ispadding` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '内边距类型：1无，2上下左右居中，3上下居中左右自定义，4左右居中上下自定义，5完全自定义',
   `padding` varchar(10) NOT NULL COMMENT '内边距：行row，列col，用|隔开',
   `width` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '宽度，单位px',
   `height` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '高度，单位px',
@@ -1115,7 +1118,7 @@ CREATE TABLE `bs_products_attr` (
 
 LOCK TABLES `bs_products_attr` WRITE;
 /*!40000 ALTER TABLE `bs_products_attr` DISABLE KEYS */;
-INSERT INTO `bs_products_attr` VALUES (1,'测试属性1','attr_img1',1,0,0,'','',0,0,'','','0','0','0',0,0,'',0,0,0,2,'',' ','','',0,'2016-05-09','2016-05-09'),(2,'测试属性2','attr_img1',1,1,0,'','',0,0,'','','','','',0,0,'',0,0,0,0,'','','','',0,'2016-05-10','0000-00-00'),(3,'测试属性3','attr_img1',1,2,0,'0-auto','10-0',960,540,'','','0','0','0',0,0,'',4,0,540,0,'1','','','',0,'2016-05-10','0000-00-00'),(4,'测试属性4','attr_img1',1,3,0,'','',0,540,'','','0','0','0',0,0,'',0,0,0,0,'','','','',0,'2016-05-10','0000-00-00'),(5,'测试属性5','attr_attr5',2,0,0,'0-auto','auto-auto',0,0,'','#000000','0','0','0',0,0,'#000000',0,0,0,0,'','','','',0,'2016-05-10','0000-00-00'),(6,'测试属性6','attr_attr6',2,0,0,'auto-auto','auto-auto',0,0,'','#000000','0','0','0',0,0,'#000000',0,0,0,0,'','','','',0,'2016-05-10','0000-00-00'),(7,'测试属性7','attr_attr7',2,0,0,'auto-auto','auto-auto',0,0,'','#000000','0','0','0',0,0,'#000000',0,0,0,0,'','','','',0,'2016-05-10','0000-00-00');
+INSERT INTO `bs_products_attr` VALUES (1,'测试属性1','attr_img1',1,0,0,'',0,'',1,'',0,0,'','','0','0','0',0,0,'',0,0,0,2,'',' ','','',0,'2016-05-09','2016-05-09'),(2,'测试属性2','attr_img1',1,1,0,'',0,'',1,'',0,0,'','','','','',0,0,'',0,0,0,0,'','','','',0,'2016-05-10','0000-00-00'),(3,'测试属性3','attr_img1',1,2,0,'',0,'0-auto',1,'10-0',960,540,'','','0','0','0',0,0,'',4,0,540,0,'1','','','',0,'2016-05-10','0000-00-00'),(4,'测试属性4','attr_img1',1,3,0,'',0,'',1,'',0,540,'','','0','0','0',0,0,'',0,0,0,0,'','','','',0,'2016-05-10','0000-00-00'),(5,'测试属性5','attr_attr5',2,0,0,'',0,'0-auto',1,'auto-auto',0,0,'','#000000','0','0','0',0,0,'#000000',0,0,0,0,'','','','',0,'2016-05-10','0000-00-00'),(6,'测试属性6','attr_attr6',2,0,0,'',0,'auto-auto',1,'auto-auto',0,0,'','#000000','0','0','0',0,0,'#000000',0,0,0,0,'','','','',0,'2016-05-10','0000-00-00'),(7,'测试属性7','attr_attr7',2,0,0,'',0,'auto-auto',1,'auto-auto',0,0,'','#000000','0','0','0',0,0,'#000000',0,0,0,0,'','','','',0,'2016-05-10','0000-00-00');
 /*!40000 ALTER TABLE `bs_products_attr` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1897,4 +1900,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-05-14  1:52:55
+-- Dump completed on 2016-05-15 18:07:27

@@ -63,3 +63,6 @@
 --    img序列化存储：url,margin,padding,border,width,height,
 --    text序列化存储：con,margin,padding,border,font_size,color,
 -- 增加动画内容表 bs_products_con，存放动画中的图片、文字信息
+
+-- 2016/05/15
+-- 产品属性表结构改造开始

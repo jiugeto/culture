@@ -5,8 +5,11 @@ class ProductAttrModel extends BaseModel
 {
     protected $table = 'bs_products_attr';
     protected $fillable = [
-        'id','name','style_name','productid','uid','margin','padding','width','height','border','color','font_size','word_spacing','line_height','text_transform','text_align','background','position','left','top','overflow','img','text','opacity','intro','pid','del','created_at','updated_at',
+        'id','name','style_name','productid','uid','attrs',
+//        'ismargin','margin','ispadding','padding','width','height','border','color','font_size','word_spacing','line_height','text_transform','text_align','background','position','left','top','overflow','opacity',
+        'img','text','intro','pid','del','created_at','updated_at',
     ];
+    //attrs：ismargin，margin1，margin2，margin3，margin4，margin5，margin6，ispadding，ispadding1，ispadding2，ispadding3，ispadding4，ispadding5，ispadding6，width，height，border1，border2，border3，border4，color，font_size，word_spacing，line_height，text_transform，text_align，background，left，top，overflow，opacity，
     //img图片：pic_id，pic_margin1，pic_margin2，pic_padding1，pic_padding2，pic_border1，pic_border2，pic_border,3，pic_border,4，pic_width，pic_height，
     //text文字：text_con，text_margin1，text_margin2，text_padding1，text_padding2，text_border1，text_border2，text_border3，text_border4，text_font_size，text_color，
 
@@ -50,6 +53,10 @@ class ProductAttrModel extends BaseModel
     ];
     protected $overflowTypeNames = [
         1=>'无','内容修剪','内容修剪，但可滚动查看','如果内容修剪，可滚动查看','继承上级',
+    ];
+    //外类型边框
+    protected $marginTypes = [
+        1=>'无','上下左右居中','上下居中，左右自定义','左右居中，上下自定义','完全自定义',
     ];
 
     public function productAll()
