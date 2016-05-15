@@ -85,7 +85,22 @@ class ProductAttrController extends BaseController
         $data = $this->getData($request);
         $data['updated_at'] = date('Y-m-d H:i:s', time());
         ProductAttrModel::where('id',$id)->update($data);
-        return redirect('/member/prioductattr');
+        return redirect('/member/productattr');
+    }
+
+    public function show($id)
+    {
+        $curr['name'] = $this->lists['create']['name'];
+        $curr['url'] = $this->lists['create']['url'];
+        $data = ProductAttrModel::find($id);
+        $result = [
+            'data'=> $data,
+            'attrs'=> $this->getAttrs($data),
+            'model'=> $this->model,
+            'lists'=> $this->lists,
+            'curr'=> $curr,
+        ];
+        return view('member.productattr.show', $result);
     }
 
 
