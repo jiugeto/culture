@@ -41,7 +41,7 @@ class ProductLayerModel extends BaseModel
         return ProductModel::all();
     }
 
-    public function products($uid)
+    public function products($uid=0)
     {
         return ProductModel::where('uid',$uid)->get();
     }
@@ -60,7 +60,7 @@ class ProductLayerModel extends BaseModel
         return ProductAttrModel::all();
     }
 
-    public function attrs($uid)
+    public function attrs($uid=0)
     {
         return ProductAttrModel::where('uid',$uid)->get();
     }

@@ -120,14 +120,29 @@ class ProductAttrModel extends BaseModel
         return array_key_exists($this->text_transform,$this->textTransformTypes) ? $this->textTransformTypes[$this->text_transform] : '';
     }
 
+    public function textTransformName($text_transform)
+    {
+        return array_key_exists($text_transform,$this->textTransformTypeNames) ? $this->textTransformTypeNames[$text_transform] : '';
+    }
+
     public function textAlign()
     {
         return array_key_exists($this->text_align,$this->textAlignTypes) ? $this->textAlignTypes[$this->text_align] : '未定义';
     }
 
+    public function textAlignName($text_align)
+    {
+        return array_key_exists($text_align,$this->textAlignTypeNames) ? $this->textAlignTypeNames[$text_align] : '未定义';
+    }
+
     public function positionType()
     {
         return array_key_exists($this->position,$this->positionTypes) ? $this->positionTypes[$this->position] : '';
+    }
+
+    public function positionTypeName($position)
+    {
+        return array_key_exists($position,$this->positionTypeNames) ? $this->positionTypeNames[$position] : '';
     }
 
     public function positionName()
@@ -137,7 +152,12 @@ class ProductAttrModel extends BaseModel
 
     public function overflow()
     {
-        return $this->overflow ? $this->overflows[$this->overflow] : '未定义';
+        return $this->overflow ? $this->overflowTypes[$this->overflow] : '未定义';
+    }
+
+    public function overflowName($overflow)
+    {
+        return $overflow ? $this->overflowTypeNames[$overflow] : '未定义';
     }
 
     //图片

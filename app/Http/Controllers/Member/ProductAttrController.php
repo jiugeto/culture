@@ -103,6 +103,24 @@ class ProductAttrController extends BaseController
         return view('member.productattr.show', $result);
     }
 
+    public function destroy($id)
+    {
+        ProductAttrModel::where('id',$id)->update(['del'=> 1]);
+        return redirect('/member/productattr');
+    }
+
+    public function restore($id)
+    {
+        ProductAttrModel::where('id',$id)->update(['del'=> 0]);
+        return redirect('/member/productattr/trash');
+    }
+
+    public function forceDelete($id)
+    {
+        ProductAttrModel::where('id',$id)->dalete();
+        return redirect('/member/productattr/trash');
+    }
+
 
 
 

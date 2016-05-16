@@ -30,7 +30,7 @@
             </td>
         </tr>
         <tr>
-            <td class="field_name">边距：</td>
+            <td class="field_name">内边距：</td>
             <td>
                 @if($attrs['ispadding']==1) 无
                 @elseif($attrs['ispadding']==2) 上下左右居中
@@ -43,12 +43,69 @@
             </td>
         </tr>
         <tr>
+            <td class="field_name">边框：</td>
+            <td>
+                @if($attrs['border1']==0) 无
+                @elseif($attrs['border1']>0)
+                    {{ $data->borderDirection($attrs['border1']).'，'.$attrs['border2'].'px，'.$data->borderTypeName($attrs['border3']).'，'.$attrs['border4'] }}
+                @endif
+            </td>
+        </tr>
+        <tr>
+            <td class="field_name">颜色：</td>
+            <td>{{ $attrs['color'] }}</td>
+        </tr>
+        <tr>
+            <td class="field_name">文字大小：</td>
+            <td>{{ $attrs['font_size'] }}</td>
+        </tr>
+        <tr>
+            <td class="field_name">字间距：</td>
+            <td>{{ $attrs['word_spacing'] }}</td>
+        </tr>
+        <tr>
+            <td class="field_name">行高：</td>
+            <td>{{ $attrs['line_height'] }}</td>
+        </tr>
+        <tr>
+            <td class="field_name">字体变换：</td>
+            <td>{{ $data->textTransformName($attrs['text_transform']) }}</td>
+        </tr>
+        <tr>
+            <td class="field_name">水平对齐方式：</td>
+            <td>{{ $data->textAlignName($attrs['text_align']) }}</td>
+        </tr>
+        <tr>
             <td class="field_name">宽度：</td>
             <td>{{ $attrs['width'] }}</td>
         </tr>
         <tr>
             <td class="field_name">高度：</td>
             <td>{{ $attrs['height'] }}</td>
+        </tr>
+        <tr>
+            <td class="field_name">背景色：</td>
+            <td>{{ $attrs['background'] }}</td>
+        </tr>
+        <tr>
+            <td class="field_name">定位方式：</td>
+            <td>{{ $data->positionTypeName($attrs['position']) }}</td>
+        </tr>
+        <tr>
+            <td class="field_name">左边距离：</td>
+            <td>{{ $attrs['left'] }}</td>
+        </tr>
+        <tr>
+            <td class="field_name">顶部距离：</td>
+            <td>{{ $attrs['top'] }}</td>
+        </tr>
+        <tr>
+            <td class="field_name">裁剪方式：</td>
+            <td>{{ $data->overflowName($attrs['overflow']) }}</td>
+        </tr>
+        <tr>
+            <td class="field_name">透明度：</td>
+            <td>{{ $attrs['opacity'] }}</td>
         </tr>
         <tr>
             <td class="field_name">简介：</td>

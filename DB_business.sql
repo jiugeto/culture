@@ -1030,6 +1030,37 @@ INSERT INTO `bs_pics` VALUES (1,1,'图片111','/uploads/images/2016/ppt.png','er
 UNLOCK TABLES;
 
 --
+-- Table structure for table `bs_pro_layer_attr`
+--
+
+DROP TABLE IF EXISTS `bs_pro_layer_attr`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bs_pro_layer_attr` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `productid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '产品表id，关联bs_products',
+  `attrid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '属性id，关联bs_products_attr',
+  `layerid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '动画id，关联动画表bs_products_layer',
+  `attrSel` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '属性选择',
+  `per` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '动画点，单位%',
+  `val` varchar(255) NOT NULL COMMENT '属性值',
+  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='在线创作动画层表：在线写的动画';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bs_pro_layer_attr`
+--
+
+LOCK TABLES `bs_pro_layer_attr` WRITE;
+/*!40000 ALTER TABLE `bs_pro_layer_attr` DISABLE KEYS */;
+INSERT INTO `bs_pro_layer_attr` VALUES (1,1,3,0,0,0,'','2016-05-09 00:00:00','0000-00-00 00:00:00'),(2,1,5,0,0,0,'','2016-05-10 00:00:00','2016-05-10 00:00:00'),(3,1,5,0,0,0,'','2016-05-10 00:00:00','0000-00-00 00:00:00'),(4,1,5,0,0,0,'','2016-05-10 00:00:00','0000-00-00 00:00:00'),(5,1,5,0,0,0,'','2016-05-10 00:00:00','0000-00-00 00:00:00'),(6,1,5,0,0,0,'','2016-05-10 00:00:00','0000-00-00 00:00:00'),(7,1,5,0,0,0,'','2016-05-10 00:00:00','0000-00-00 00:00:00');
+/*!40000 ALTER TABLE `bs_pro_layer_attr` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `bs_products`
 --
 
@@ -1900,4 +1931,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-05-15 18:07:27
+-- Dump completed on 2016-05-16 18:46:06
