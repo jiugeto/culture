@@ -1044,6 +1044,7 @@ CREATE TABLE `bs_pro_layer_attr` (
   `attrSel` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '属性选择',
   `per` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '动画点，单位%',
   `val` varchar(255) NOT NULL COMMENT '属性值',
+  `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站：0不删除，1删除',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
@@ -1056,7 +1057,7 @@ CREATE TABLE `bs_pro_layer_attr` (
 
 LOCK TABLES `bs_pro_layer_attr` WRITE;
 /*!40000 ALTER TABLE `bs_pro_layer_attr` DISABLE KEYS */;
-INSERT INTO `bs_pro_layer_attr` VALUES (1,1,3,0,0,0,'','2016-05-09 00:00:00','0000-00-00 00:00:00'),(2,1,5,0,0,0,'','2016-05-10 00:00:00','2016-05-10 00:00:00'),(3,1,5,0,0,0,'','2016-05-10 00:00:00','0000-00-00 00:00:00'),(4,1,5,0,0,0,'','2016-05-10 00:00:00','0000-00-00 00:00:00'),(5,1,5,0,0,0,'','2016-05-10 00:00:00','0000-00-00 00:00:00'),(6,1,5,0,0,0,'','2016-05-10 00:00:00','0000-00-00 00:00:00'),(7,1,5,0,0,0,'','2016-05-10 00:00:00','0000-00-00 00:00:00');
+INSERT INTO `bs_pro_layer_attr` VALUES (1,1,3,7,0,0,'',0,'2016-05-09 00:00:00','0000-00-00 00:00:00'),(2,1,5,7,0,0,'',0,'2016-05-10 00:00:00','2016-05-10 00:00:00'),(3,1,5,7,0,0,'',0,'2016-05-10 00:00:00','0000-00-00 00:00:00'),(4,1,5,0,0,0,'',0,'2016-05-10 00:00:00','0000-00-00 00:00:00'),(5,1,5,0,0,0,'',0,'2016-05-10 00:00:00','0000-00-00 00:00:00'),(6,1,5,0,0,0,'',0,'2016-05-10 00:00:00','0000-00-00 00:00:00'),(7,1,5,0,0,0,'',0,'2016-05-10 00:00:00','0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `bs_pro_layer_attr` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1167,6 +1168,8 @@ CREATE TABLE `bs_products_con` (
   `name` varchar(255) NOT NULL COMMENT '文字内容',
   `productid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '在线产品id，关联bs_products',
   `attrid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '产品属性id，关联bs_products_attr',
+  `pic_attr` varchar(1000) NOT NULL COMMENT '图片属性，序列化存储：ismargin，margin1，margin2，margin3，margin4，ispadding，padding1，padding2，padding3，padding4，width，height，border1，border2，border3，border4，background，position，left，top，overflow，opacity',
+  `text_attr` varchar(255) NOT NULL COMMENT '文字属性，序列化存储：color颜色，font_size大小，word_spacing字间距，line_height行高，text_transform变换(capitalize单词开头字母大写，uppercase字母大写，lowercase字母小写，inherit继承上级)，text_align水平对齐(static无，absolute相对于第一个父级绝对定位，fixed相对于浏览器绝对定位，relative相对定位，inherit继承上级)',
   `margin` varchar(30) NOT NULL COMMENT '外边距，上下左右，用|隔开',
   `padding` varchar(30) NOT NULL COMMENT '内边距，上下左右，用|隔开',
   `border` varchar(50) NOT NULL COMMENT '边框：方向(上下左右)，尺寸(px)，类型(无边框，点线，虚线，实线边框，双线边框，3D凹槽，3D凸槽，3D凹边，3D凸边)，颜色',
@@ -1178,7 +1181,6 @@ CREATE TABLE `bs_products_con` (
   `top` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '顶部距离，单位px',
   `overflow` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '裁剪方式：visible无，hidden内容修剪，scroll内容修剪但可滚动查看，auto如果内容修剪可滚动查看，inherit继承上级',
   `opacity` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '透明度，单位%',
-  `text_attr` varchar(255) NOT NULL COMMENT '文字属性，序列化存储：color颜色，font_size大小，word_spacing字间距，line_height行高，text_transform变换(capitalize单词开头字母大写，uppercase字母大写，lowercase字母小写，inherit继承上级)，text_align水平对齐(static无，absolute相对于第一个父级绝对定位，fixed相对于浏览器绝对定位，relative相对定位，inherit继承上级)',
   `intro` varchar(255) NOT NULL COMMENT '简介',
   `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序字段，值越大越靠前，默认10',
   `isshow` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '前台列表是否显示：0不显示，1显示',
@@ -1195,7 +1197,7 @@ CREATE TABLE `bs_products_con` (
 
 LOCK TABLES `bs_products_con` WRITE;
 /*!40000 ALTER TABLE `bs_products_con` DISABLE KEYS */;
-INSERT INTO `bs_products_con` VALUES (1,1,0,'',1,0,'','','',960,540,'',0,0,0,0,0,'','',10,1,0,'2016-05-09','0000-00-00'),(2,1,1,'',1,1,'','','',0,0,'#000000',0,0,0,0,0,'a:6:{s:5:\"color\";s:7:\"#000000\";s:9:\"font_size\";s:2:\"16\";s:12:\"word_spacing\";s:0:\"\";s:11:\"line_height\";s:0:\"\";s:14:\"text_transform\";s:1:\"0\";s:10:\"text_align\";s:1:\"0\";}','',10,1,0,'2016-05-11','0000-00-00');
+INSERT INTO `bs_products_con` VALUES (1,1,0,'',1,0,'','','','','',960,540,'',0,0,0,0,0,'',10,1,0,'2016-05-09','0000-00-00'),(2,1,1,'',1,1,'','a:6:{s:5:\"color\";s:7:\"#000000\";s:9:\"font_size\";s:2:\"16\";s:12:\"word_spacing\";s:0:\"\";s:11:\"line_height\";s:0:\"\";s:14:\"text_transform\";s:1:\"0\";s:10:\"text_align\";s:1:\"0\";}','','','',0,0,'#000000',0,0,0,0,0,'',10,1,0,'2016-05-11','0000-00-00');
 /*!40000 ALTER TABLE `bs_products_con` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1931,4 +1933,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-05-16 18:46:06
+-- Dump completed on 2016-05-17 17:31:48

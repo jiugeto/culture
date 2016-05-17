@@ -9,31 +9,14 @@ class ProductConModel extends BaseModel
 
     protected $table = 'bs_products_con';
     protected $fillable = [
-        'id','name','productid','attrid','genre','pic_id','margin','padding','width','height','border','background','position','left','top','overflow','opacity','text_attr',
+        'id','name','productid','attrid','genre','pic_id','attrs',
+//        'margin','padding','width','height','border','background','position','left','top','overflow','opacity',
+        'text_attr',
 //        'color','font_size','word_spacing','line_height','text_transform','text_align',
         'intro','del','created_at','updated_at',
     ];
     protected $genres = [1=>'图片','文字'];
-
-    public function genre()
-    {
-        return $this->genre ? $this->genres[$this->genre] : '';
-    }
-
-    public function attrAll()
-    {
-        return ProductAttrModel::all();
-    }
-
-    public function attrs($uid)
-    {
-        return ProductAttrModel::where('ud',$uid)->get();
-    }
-
-    public function attr()
-    {
-        return $this->attrid ? ProductAttrModel::find($this->attrid)->name : '';
-    }
+    //attrs：ismargin，margin1，margin2，margin3，margin4，ispadding，padding1，padding2，padding3，padding4，width，height，border1，border2，border3，border4，background，position，left，top，overflow，opacity
 
     //边框位置
     protected $borderDirections = [
@@ -42,7 +25,6 @@ class ProductConModel extends BaseModel
     protected $borderDirectionNames = [
         '无','顶部','右边','底部','左边','四面',
     ];
-
     //边框类型
     protected $borderTypes = [
         'none','dotted','dashed','solid','double','groove','ridge','inset','outset',
@@ -50,7 +32,6 @@ class ProductConModel extends BaseModel
     protected $borderTypeNames = [
         '无边框','点线','虚线','实线边框','双线边框','3D凹槽','3D凸槽','3D凹边','3D凸边',
     ];
-
     //字的变换
     protected $textTransformTypes = [
         'none','capitalize','uppercase','lowercase','inherit',
@@ -58,7 +39,6 @@ class ProductConModel extends BaseModel
     protected $textTransformTypeNames = [
         '无','单词开头字母大写','字母大写','字母小写','继承上级',
     ];
-
     //字的水平对齐
     protected $textAlignTypes = [
         'none','capitalize','uppercase','lowercase','inherit',
@@ -66,7 +46,6 @@ class ProductConModel extends BaseModel
     protected $textAlignTypeNames = [
         '无','单词开头字母大写','字母大写','字母小写','继承上级',
     ];
-
     //定位方式
     protected $positionTypes = [
         'static','absolute','fixed','relative','inherit',
@@ -74,7 +53,6 @@ class ProductConModel extends BaseModel
     protected $positionTypeNames = [
         '无','绝对定位(相对于第一个父级)','绝对定位(相对于浏览器)','相对定位','继承上级',
     ];
-
     //裁剪方式
     protected $overflowTypes = [
         'visible','hidden','scroll','auto','inherit',
@@ -82,10 +60,32 @@ class ProductConModel extends BaseModel
     protected $overflowTypeNames = [
         '无','内容修剪','内容修剪，但可滚动查看','如果内容修剪，可滚动查看','继承上级',
     ];
-
+    public function genre()
+    {
+        return $this->genre ? $this->genres[$this->genre] : '';
+    }
+    public function attrAll()
+    {
+        return ProductAttrModel::all();
+    }
+    public function attrs()
+    {
+        $uid = \Session::has('user.uid')?\Session::get('user.uid'):0;
+        return ProductAttrModel::where('uid',$uid)->get();
+    }
+    public function attr()
+    {
+        return $this->attrid ? ProductAttrModel::find($this->attrid)->name : '';
+    }
     public function productAll()
     {
         return ProductModel::all();
+    }
+
+    public function products()
+    {
+        $uid = \Session::has('user.uid')?\Session::get('user.uid'):0;
+        return ProductModel::where('uid',$uid)->get();
     }
 
     public function product()
@@ -153,8 +153,9 @@ class ProductConModel extends BaseModel
         return PicModel::all();
     }
 
-    public function pics($uid)
+    public function pics()
     {
+        $uid = \Session::has('user.uid')?\Session::get('user.uid'):0;
         return PicModel::where('uid',$uid)->get();
     }
 
@@ -177,5 +178,17 @@ class ProductConModel extends BaseModel
         $picModel = PicModel::find($this->pic_id);
 //        return $this->pic_id ? PicModel::find($this->pic_id) : '';
         return isset($picModel) ? $picModel->name : '';
+    }
+
+    //图片样式
+    public function picAttrs()
+    {
+        return $this->pic_attr ? unserialize($this->pic_attr) : [];
+    }
+
+    //图片样式
+    public function textAttrs()
+    {
+        return $this->text_attr ? unserialize($this->text_attr) : [];
     }
 }

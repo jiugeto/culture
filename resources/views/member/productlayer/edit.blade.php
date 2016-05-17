@@ -113,33 +113,33 @@
             </tr>
             {{--<tr><td></td></tr>--}}
 
-            <tr>
-                <td class="field_name"><label>动画值处理：</label><br>(横向是属性名，<br>纵向是动画点和属性值)</td>
-                <td>
-                    <div class="td_border" style="height:200px;overflow:auto;">
-                        属性名称：<input type="text" class="field_value" style="width:200px;" placeholder="属性名称" pattern="^[a-zA-Z0-9-_]+$" required name="field"/>
-                        <input type="hidden" name="dh" value="1">
-                        <a class="companybtn addDH">增加值</a>
-                        <div class="dh">
-                            属性值1：<input type="text" class="field_value" style="width:110px;" placeholder="动画点，0%~100%" pattern="^\d+$" required name="per1"/>&nbsp;&nbsp;
-                            动画点1：<input type="text" class="field_value" style="width:110px;" placeholder="动画值" pattern="^[a-zA-Z0-9-_]++$" required name="val1"/>
-                        </div>
+            {{--<tr>--}}
+                {{--<td class="field_name"><label>动画值处理：</label><br>(横向是属性名，<br>纵向是动画点和属性值)</td>--}}
+                {{--<td>--}}
+                    {{--<div class="td_border" style="height:200px;overflow:auto;">--}}
+                        {{--属性名称：<input type="text" class="field_value" style="width:200px;" placeholder="属性名称" pattern="^[a-zA-Z0-9-_]+$" required name="field"/>--}}
+                        {{--<input type="hidden" name="dh" value="1">--}}
+                        {{--<a class="companybtn addDH">增加值</a>--}}
+                        {{--<div class="dh">--}}
+                            {{--属性值1：<input type="text" class="field_value" style="width:110px;" placeholder="动画点，0%~100%" pattern="^\d+$" required name="per1"/>&nbsp;&nbsp;--}}
+                            {{--动画点1：<input type="text" class="field_value" style="width:110px;" placeholder="动画值" pattern="^[a-zA-Z0-9-_]++$" required name="val1"/>--}}
+                        {{--</div>--}}
                         {{--<input type="hidden" name="attr_val" value="1">--}}
                         {{--<a class="companybtn addAttr">增加属性</a>--}}
                         {{--<div style="height:2px;border-bottom:1px dashed gainsboro;"></div>--}}
-                    </div>
-                </td>
-            </tr>
+                    {{--</div>--}}
+                {{--</td>--}}
+            {{--</tr>--}}
             {{--<tr><td></td></tr>--}}
-            <script>
-                $(document).ready(function(){
-                    var dh = $("input[name='dh']");
-                    $(".addDH").click(function(){
-                        dh[0].value = dh.val() * 1 + 1;
-                        $(".dh").append('<br>属性值'+dh.val()+'：<input type="text" class="field_value" style="width:110px;" placeholder="动画点，0%~100%" pattern="^\\d+$" required name="per'+dh.val()+'"/>&nbsp;&nbsp;&nbsp;动画点'+dh.val()+'：<input type="text" class="field_value" style="width:110px;" placeholder="动画值" pattern="^[a-zA-Z0-9-_]++$" required name="val'+dh.val()+'"/>');
-                    });
-                });
-            </script>
+            {{--<script>--}}
+                {{--$(document).ready(function(){--}}
+                    {{--var dh = $("input[name='dh']");--}}
+                    {{--$(".addDH").click(function(){--}}
+                        {{--dh[0].value = dh.val() * 1 + 1;--}}
+                        {{--$(".dh").append('<br>属性值'+dh.val()+'：<input type="text" class="field_value" style="width:110px;" placeholder="动画点，0%~100%" pattern="^\\d+$" required name="per'+dh.val()+'"/>&nbsp;&nbsp;&nbsp;动画点'+dh.val()+'：<input type="text" class="field_value" style="width:110px;" placeholder="动画值" pattern="^[a-zA-Z0-9-_]++$" required name="val'+dh.val()+'"/>');--}}
+                    {{--});--}}
+                {{--});--}}
+            {{--</script>--}}
 
             <tr>
                 <td class="field_name"><label>简介：</label></td>

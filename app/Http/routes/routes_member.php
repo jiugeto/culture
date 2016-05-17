@@ -65,14 +65,24 @@ Route::group(['prefix'=>'member','namespace'=>'Member'], function(){
     Route::resource('productattr','ProductAttrController');
         //产品动画
     Route::get('productlayer/trash','ProductLayerController@trash');
+    Route::get('productlayer/{id}/destroy','ProductLayerController@destroy');
+    Route::get('productlayer/{id}/restore','ProductLayerController@restore');
+    Route::get('productlayer/{id}/forceDelete','ProductLayerController@forceDelete');
     Route::post('productlayer/{id}','ProductLayerController@update');
     Route::resource('productlayer','ProductLayerController');
         //产品内容
     Route::get('productcon/trash','ProductConController@trash');
+    Route::get('productcon/{id}/destroy','ProductConController@destroy');
+    Route::get('productcon/{id}/restore','ProductConController@restore');
+    Route::get('productcon/{id}/forceDelete','ProductConController@forceDelete');
+    Route::post('productcon/{id}','ProductConController@update');
     Route::resource('productcon','ProductConController');
         //动画属性
-//    Route::get('prolayerattr/trash','ProLayerAttrController@trash');
-//    Route::resource('prolayerattr','ProLayerAttrController');
+    Route::get('{layerid}/prolayerattr/{id}/destroy','ProductLayerAttrController@destroy');
+    Route::get('{layerid}/prolayerattr/{id}/restore','ProductLayerAttrController@restore');
+    Route::get('{layerid}/prolayerattr/{id}/forceDelete','ProductLayerAttrController@forceDelete');
+    Route::post('{layerid}/prolayerattr/{id}','ProductLayerAttrController@update');
+    Route::resource('{layerid}/prolayerattr','ProductLayerAttrController');
     //个人供求
         //个人需求
     Route::post('personD/{id}','PersonDController@update');

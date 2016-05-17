@@ -24,6 +24,7 @@
                 <td>{{ $data->created_at }}</td>
                 <td>
                     @if($curr['url']=='')
+                        <a href="/member/{{$data->id}}/prolayerattr" class="list_btn">动画属性</a>
                         <a href="/member/productlayer/{{ $data->id }}" class="list_btn">查看</a>
                         <a href="/member/productlayer/{{ $data->id }}/edit" class="list_btn">编辑</a>
                         <a href="/member/productlayer/{{ $data->id }}/destroy" class="list_btn">删除</a>
