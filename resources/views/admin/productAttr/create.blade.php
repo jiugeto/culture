@@ -53,12 +53,13 @@
 
                         <div class="am-form-group attrs" style="display:none;">
                             <label>外边距 / Margin：(单位px)</label>
-                            <select name="ismargin">
-                                @foreach($model['marginTypes'] as $kmarginType=>$marginType)
-                                    <option value="{{ $kmarginType }}">{{ $marginType }}</option>
-                                @endforeach
-                            </select>
                             <div class="admin_border">
+                                外边距类型：
+                                <select name="ismargin">
+                                    @foreach($model['marginTypes'] as $kmarginType=>$marginType)
+                                        <option value="{{ $kmarginType }}">{{ $marginType }}</option>
+                                    @endforeach
+                                </select>
                                 <div id="margin1" style="display:none;">
                                     左右：<input type="text" style="width:100px;" name="margin2"> px
                                 </div>
@@ -91,9 +92,27 @@
                         <div class="am-form-group attrs" style="display:none;">
                             <label>内边距 / Padding：(单位px)</label>
                             <div class="admin_border">
-                                <input type="text" placeholder="上下间距，不填空着代表自动" pattern="\d+" name="padding1" value="0"/>
-                                <div style="height:5px;">{{--间距--}}</div>
-                                <input type="text" placeholder="左右间距，不填空着代表自动" pattern="\d+" name="padding2" value="0"/>
+                                内边距类型：
+                                <select name="ismargin" required>
+                                    @if(count($model['marginTypes']))
+                                        @foreach($model['marginTypes'] as $kmarginType=>$marginType)
+                                            <option value="{{ $kmarginType }}">{{ $marginType }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                                <div id="margin1" style="display:none;">
+                                    左右：<input type="text" style="width:100px;" name="margin2"> px
+                                </div>
+                                <div id="margin2" style="display:none;">
+                                    上下：<input type="text" style="width:100px;" name="margin1"> px
+                                </div>
+                                <div id="margin3" style="display:none;">
+                                    上：<input type="text" style="width:100px;" name="margin3"> px
+                                    下：<input type="text" style="width:100px;" name="margin4"> px
+                                    <br>
+                                    上：<input type="text" style="width:100px;" name="margin5"> px
+                                    下：<input type="text" style="width:100px;" name="margin6"> px
+                                </div>
                             </div>
                         </div>
                         <div class="am-form-group attrs" style="display:none;">

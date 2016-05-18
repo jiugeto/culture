@@ -226,14 +226,14 @@ class ProductAttrController extends BaseController
      */
     public function toAttrs($request)
     {
-        //外边距
-        if (!$request->margin1) { $request->margin1 = 'auto'; }
-        if (!$request->margin2) { $request->margin2 = 'auto'; }
-        $margin = $request->margin1.'-'.$request->margin2;
-        //内边距
-        if (!$request->padding1) { $request->padding1 = 'auto'; }
-        if (!$request->padding2) { $request->padding2 = 'auto'; }
-        $padding = $request->padding1.'-'.$request->padding2;
+//        //外边距
+//        if (!$request->margin1) { $request->margin1 = 'auto'; }
+//        if (!$request->margin2) { $request->margin2 = 'auto'; }
+//        $margin = $request->margin1.'-'.$request->margin2;
+//        //内边距
+//        if (!$request->padding1) { $request->padding1 = 'auto'; }
+//        if (!$request->padding2) { $request->padding2 = 'auto'; }
+//        $padding = $request->padding1.'-'.$request->padding2;
         //边框
         if ($request->border1) {
             if (!$request->border2 || !$request->border3 || !$request->border4) {
@@ -245,38 +245,39 @@ class ProductAttrController extends BaseController
         if (!$request->color) { $request->color = ''; }
         //组合样式
         $attrs = [
-            'ismargin'=> '',
-            'margin1'=> '',
-            'margin2'=> '',
-            'margin3'=> '',
-            'margin4'=> '',
-            'margin5'=> '',
-            'margin6'=> '',
-            'ispadding'=> '',
-            'ispadding2'=> '',
-            'ispadding1'=> '',
-            'ispadding3'=> '',
-            'ispadding4'=> '',
-            'ispadding5'=> '',
-            'ispadding6'=> '',
-            'width'=> '',
-            'height'=> '',
-            'border1'=> '',
-            'border2'=> '',
-            'border3'=> '',
-            'border4'=> '',
-            'color'=> '',
-            'font_size'=> '',
-            'word_spacing'=> '',
-            'line_height'=> '',
-            'text_transform'=> '',
-            'text_align'=> '',
+            'ismargin'=> $request->ismargin,
+            'margin1'=> $request->margin1,
+            'margin2'=> $request->margin2,
+            'margin3'=> $request->margin3,
+            'margin4'=> $request->margin4,
+            'margin5'=> $request->margin5,
+            'margin6'=> $request->margin6,
+            'ispadding'=> $request->ispadding,
+            'ispadding2'=> $request->padding1,
+            'ispadding1'=> $request->padding2,
+            'ispadding3'=> $request->padding3,
+            'ispadding4'=> $request->padding4,
+            'ispadding5'=> $request->padding5,
+            'ispadding6'=> $request->padding6,
+            'width'=> $request->width,
+            'height'=> $request->height,
+            'border1'=> $request->border1,
+            'border2'=> $request->border2,
+            'border3'=> $request->border3,
+            'border4'=> $request->border4,
+            'color'=> $request->color,
+            'font_size'=> $request->font_size,
+            'word_spacing'=> $request->word_spacing,
+            'line_height'=> $request->line_height,
+            'text_transform'=> $request->text_transform,
+            'text_align'=> $request->text_align,
             'background'=> '',
             'left'=> '',
             'top'=> '',
             'overflow'=> '',
             'opacity'=> '',
         ];
+        return $attrs;
     }
 
     /**
