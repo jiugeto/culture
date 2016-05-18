@@ -18,17 +18,17 @@
                             <input type="text" placeholder="至少2个字符" minlength="2" required name="name"/>
                         </div>
 
-                        <div class="am-form-group">
-                            <label>类型划分依据 / Type：
-                                <a href="/admin/type/create/{{'视频类别-type_id'}}">[+添加依据]</a>
-                            </label>
-                            <select name="type_id" required>
-                                <option value="">-选择-</option>
-                                @foreach($types as $type)
-                                    <option value="{{ $type->id }}">{{ $type->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                        {{--<div class="am-form-group">--}}
+                            {{--<label>类型划分依据 / Type：--}}
+                                {{--<a href="/admin/type/create/{{'视频类别-type_id'}}">[+添加依据]</a>--}}
+                            {{--</label>--}}
+                            {{--<select name="type_id" required>--}}
+                                {{--<option value="">-选择-</option>--}}
+                                {{--@foreach($types as $type)--}}
+                                    {{--<option value="{{ $type->id }}">{{ $type->name }}</option>--}}
+                                {{--@endforeach--}}
+                            {{--</select>--}}
+                        {{--</div>--}}
 
                         <div class="am-form-group">
                             <label>父id / Category：</label>

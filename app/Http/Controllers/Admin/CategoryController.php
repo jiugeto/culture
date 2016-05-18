@@ -24,9 +24,21 @@ class CategoryController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-//            'actions'=> $this->actions(),
             'datas'=> $this->query(),
             'prefix_url'=> '/admin/category',
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.category.index', $result);
+    }
+
+    public function trash()
+    {
+        $curr['name'] = $this->crumb['trash']['name'];
+        $curr['url'] = $this->crumb['trash']['url'];
+        $result = [
+            'datas'=> $this->query(),
+            'prefix_url'=> '/admin/category/trash',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -38,9 +50,7 @@ class CategoryController extends BaseController
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
-//            'actions'=> $this->actions(),
             'pcates'=> CategoryModel::where('pid', 0)->get(),      //暂时父级pid==0
-            'types'=> $this->model->getTypes(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -50,7 +60,7 @@ class CategoryController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
-        $data['created_at'] = date('Y-m-d', time());
+        $data['created_at'] = date('Y-m-d H:i:s', time());
         return redirect('/admin/category');
     }
 
@@ -59,8 +69,8 @@ class CategoryController extends BaseController
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
         $result = [
-//            'actions'=> $this->actions(),
             'data'=> CategoryModel::find($id),
+            'pcates'=> CategoryModel::where('pid', 0)->get(),      //暂时父级pid==0
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -70,7 +80,7 @@ class CategoryController extends BaseController
     public function update(Request $request, $id)
     {
         $data = $this->getData($request);
-        $data['updated_at'] = date('Y-m-d', time());
+        $data['updated_at'] = date('Y-m-d H:i:s', time());
         CategoryModel::where('id',$id)->update($data);
         return redirect('/admin/category');
     }
@@ -86,6 +96,24 @@ class CategoryController extends BaseController
             'curr'=> $curr,
         ];
         return view('admin.category.show', $result);
+    }
+
+    public function destroy($id)
+    {
+        CategoryModel::where('id',$id)->update(['del'=> 1]);
+        return redirect('/admin/category');
+    }
+
+    public function restore($id)
+    {
+        CategoryModel::where('id',$id)->update(['del'=> 0]);
+        return redirect('/admin/category/trash');
+    }
+
+    public function forceDelete($id)
+    {
+        CategoryModel::where('id',$id)->delete();
+        return redirect('/admin/category/trash');
     }
 
 
@@ -117,6 +145,6 @@ class CategoryController extends BaseController
      */
     public function query()
     {
-        return CategoryModel::paginate($this->limit);
+        return CategoryModel::orderBy('id','desc')->paginate($this->limit);
     }
 }

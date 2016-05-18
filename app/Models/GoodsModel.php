@@ -16,16 +16,20 @@ class GoodsModel extends BaseModel
         'id','name','genre','type','cate_id','intro','title','pic_id','video_id','uid','uname','recommend','sort','isshow','isshow2','del','created_at','updated_at',
     ];
 
+    //片源类型：1产品，2花絮
+    protected $genres = [
+        1=>'产品','花絮',
+    ];
+    //产品主体：1个人需求，2设计师供应，3企业需求，4企业供应
     protected $types = [
-        //产品主体：1个人需求，2设计师供应，3企业需求，4企业供应
         1=>'个人需求','设计师供应','企业需求','企业供应',
     ];
-
-    public function cate()
-    {
-//        return $this->hasOne('\App\Models\CategoryModel','id','cate_id');
-        return $this->cate_id?CategoryModel::find($this->cate_id):'';
-    }
+    protected $recommends = [
+        '不推荐','推荐',
+    ];
+    protected $isshows = [
+        '不显示','显示',
+    ];
 
     /**
      * 得到所有分类
@@ -36,6 +40,19 @@ class GoodsModel extends BaseModel
 //        $categorys = Tools::category($categorys);
         $categorys = Tools::getChild($categorys);
         return $categorys;
+    }
+
+    public function cate()
+    {
+//        return $this->hasOne('\App\Models\CategoryModel','id','cate_id');
+//        return $this->cate_id?CategoryModel::find($this->cate_id):'';
+        $cateModel = $this->cate_id?CategoryModel::find($this->cate_id):'';
+        return $cateModel ? $cateModel->name : '';
+    }
+
+    public function genre()
+    {
+        return $this->genre ? $this->genres[$this->genre] : '';
     }
 
     /**
@@ -78,5 +95,15 @@ class GoodsModel extends BaseModel
     {
         return $this->video_id ? VideoModel::find($this->video_id) : '';
 //        return $this->hasOne('\App\Models\VideoModel','id','video_id');
+    }
+
+    public function recommend()
+    {
+        return array_key_exists($this->recommend,$this->recommends) ? $this->recommends[$this->recommend] : '';
+    }
+
+    public function isshow()
+    {
+        return array_key_exists($this->isshow,$this->isshows) ? $this->isshows[$this->isshow] : '';
     }
 }

@@ -193,6 +193,39 @@ class ProductAttrController extends BaseController
     public function getData(Request $request)
     {
         $request->style_name = $this->prefix_attr.$request->style_name;     //加个前缀好区分
+        $attrs = $this->toAttrs($request);
+        $productAttr = [
+            'name'=> $request->name,
+            'style_name'=> $request->style_name,
+            'productid'=> $request->productid,
+            'attrs'=> serialize($attrs),
+//            'margin'=> isset($margin) ? $margin : '',
+//            'padding'=> isset($padding) ? $padding : '',
+//            'width'=> $request->width,
+//            'height'=> $request->height,
+//            'border'=> isset($border) ? $border : '',
+//            'color'=> $request->color,
+//            'font_size'=> $request->font_size,
+//            'word_spacing'=> $request->word_spacing,
+//            'line_height'=> $request->line_height,
+//            'text_transform'=> $request->text_transform,
+//            'text_align'=> $request->text_align,
+//            'background'=> $request->background,
+//            'position'=> $request->position,
+//            'left'=> $request->left,
+//            'top'=> $request->top,
+//            'overflow'=> $request->overflow,
+//            'opacity'=> $request->opacity,
+            'intro'=> $request->intro,
+        ];
+        return $productAttr;
+    }
+
+    /**
+     * 总的样式属性处理
+     */
+    public function toAttrs($request)
+    {
         //外边距
         if (!$request->margin1) { $request->margin1 = 'auto'; }
         if (!$request->margin2) { $request->margin2 = 'auto'; }
@@ -210,30 +243,40 @@ class ProductAttrController extends BaseController
         }
         //字的颜色
         if (!$request->color) { $request->color = ''; }
-        $productAttr = [
-            'name'=> $request->name,
-            'style_name'=> $request->style_name,
-            'productid'=> $request->productid,
-            'margin'=> isset($margin) ? $margin : '',
-            'padding'=> isset($padding) ? $padding : '',
-            'width'=> $request->width,
-            'height'=> $request->height,
-            'border'=> isset($border) ? $border : '',
-            'color'=> $request->color,
-            'font_size'=> $request->font_size,
-            'word_spacing'=> $request->word_spacing,
-            'line_height'=> $request->line_height,
-            'text_transform'=> $request->text_transform,
-            'text_align'=> $request->text_align,
-            'background'=> $request->background,
-            'position'=> $request->position,
-            'left'=> $request->left,
-            'top'=> $request->top,
-            'overflow'=> $request->overflow,
-            'opacity'=> $request->opacity,
-            'intro'=> $request->intro,
+        //组合样式
+        $attrs = [
+            'ismargin'=> '',
+            'margin1'=> '',
+            'margin2'=> '',
+            'margin3'=> '',
+            'margin4'=> '',
+            'margin5'=> '',
+            'margin6'=> '',
+            'ispadding'=> '',
+            'ispadding2'=> '',
+            'ispadding1'=> '',
+            'ispadding3'=> '',
+            'ispadding4'=> '',
+            'ispadding5'=> '',
+            'ispadding6'=> '',
+            'width'=> '',
+            'height'=> '',
+            'border1'=> '',
+            'border2'=> '',
+            'border3'=> '',
+            'border4'=> '',
+            'color'=> '',
+            'font_size'=> '',
+            'word_spacing'=> '',
+            'line_height'=> '',
+            'text_transform'=> '',
+            'text_align'=> '',
+            'background'=> '',
+            'left'=> '',
+            'top'=> '',
+            'overflow'=> '',
+            'opacity'=> '',
         ];
-        return $productAttr;
     }
 
     /**
@@ -249,39 +292,39 @@ class ProductAttrController extends BaseController
     /**
      * 查询一条数据
      */
-    public function getOne($data)
-    {
-        $data->style_name = substr($data->style_name,5,strlen($data->style_name)-1);
-        if ($data->margin) {
-            $margins = explode('-',$data->margin);
-            $data->margin1 = $margins[0]=='auto'?'':$margins[0];
-            $data->margin2 = $margins[1]=='auto'?'':$margins[1];
-        } else {
-            $data->margin1 = 0;
-            $data->margin2 = 0;
-        }
-        if ($data->padding) {
-            $paddings = explode('-',$data->padding);
-            $data->padding1 = $paddings[0]=='auto'?'':$paddings[0];
-            $data->padding2 = $paddings[1]=='auto'?'':$paddings[1];
-        } else {
-            $data->padding1 = 0;
-            $data->padding2 = 0;
-        }
-        if ($data->border) {
-            $borders = explode('-',$data->border);
-            $data->border1 = $borders[0];
-            $data->border2 = $borders[1];
-            $data->border3 = $borders[2];
-            $data->border4 = $borders[3];
-        } else {
-            $data->border1 = '';
-            $data->border2 = 0;
-            $data->border3 = 0;
-            $data->border4 = '';
-        }
-        return $data;
-    }
+//    public function getOne($data)
+//    {
+//        $data->style_name = substr($data->style_name,5,strlen($data->style_name)-1);
+//        if ($data->margin) {
+//            $margins = explode('-',$data->margin);
+//            $data->margin1 = $margins[0]=='auto'?'':$margins[0];
+//            $data->margin2 = $margins[1]=='auto'?'':$margins[1];
+//        } else {
+//            $data->margin1 = 0;
+//            $data->margin2 = 0;
+//        }
+//        if ($data->padding) {
+//            $paddings = explode('-',$data->padding);
+//            $data->padding1 = $paddings[0]=='auto'?'':$paddings[0];
+//            $data->padding2 = $paddings[1]=='auto'?'':$paddings[1];
+//        } else {
+//            $data->padding1 = 0;
+//            $data->padding2 = 0;
+//        }
+//        if ($data->border) {
+//            $borders = explode('-',$data->border);
+//            $data->border1 = $borders[0];
+//            $data->border2 = $borders[1];
+//            $data->border3 = $borders[2];
+//            $data->border4 = $borders[3];
+//        } else {
+//            $data->border1 = '';
+//            $data->border2 = 0;
+//            $data->border3 = 0;
+//            $data->border4 = '';
+//        }
+//        return $data;
+//    }
 
     /**
      * 初始化图片信息
@@ -329,5 +372,46 @@ class ProductAttrController extends BaseController
         }
         $textArr['id'] = $data->id;
         return $textArr;
+    }
+
+    public function getAttrs($data)
+    {
+        $attrs = $data->attrs?unserialize($data->attrs):[];
+        if (!$attrs) {
+            $attrs = [
+                'ismargin'=> '',
+                'margin1'=> '',
+                'margin2'=> '',
+                'margin3'=> '',
+                'margin4'=> '',
+                'margin5'=> '',
+                'margin6'=> '',
+                'ispadding'=> '',
+                'ispadding2'=> '',
+                'ispadding1'=> '',
+                'ispadding3'=> '',
+                'ispadding4'=> '',
+                'ispadding5'=> '',
+                'ispadding6'=> '',
+                'width'=> '',
+                'height'=> '',
+                'border1'=> '',
+                'border2'=> '',
+                'border3'=> '',
+                'border4'=> '',
+                'color'=> '',
+                'font_size'=> '',
+                'word_spacing'=> '',
+                'line_height'=> '',
+                'text_transform'=> '',
+                'text_align'=> '',
+                'background'=> '',
+                'left'=> '',
+                'top'=> '',
+                'overflow'=> '',
+                'opacity'=> '',
+            ];
+        }
+        return $attrs;
     }
 }

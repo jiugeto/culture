@@ -20,19 +20,19 @@
                             <input type="text" placeholder="至少2个字符" minlength="2" required name="name" value="{{ $data->name }}"/>
                         </div>
 
-                        <div class="am-form-group">
-                            <label>类型划分依据 / Type：
-                                <a href="/admin/type/create/{{'产品类别-type_id'}}">[+添加依据]</a>
-                            </label>
-                            <select name="type_id" required>
-                                <option value="">-选择-</option>
-                                @foreach($types as $type)
-                                    <option value="{{ $type->id }}"
-                                            {{ $data->type_id==$type->id ? 'selected' : '' }}>
-                                        {{ $type->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                        {{--<div class="am-form-group">--}}
+                            {{--<label>类型划分依据 / Type：--}}
+                                {{--<a href="/admin/type/create/{{'产品类别-type_id'}}">[+添加依据]</a>--}}
+                            {{--</label>--}}
+                            {{--<select name="type_id" required>--}}
+                                {{--<option value="">-选择-</option>--}}
+                                {{--@foreach($types as $type)--}}
+                                    {{--<option value="{{ $type->id }}"--}}
+                                            {{--{{ $data->type_id==$type->id ? 'selected' : '' }}>--}}
+                                        {{--{{ $type->name }}</option>--}}
+                                {{--@endforeach--}}
+                            {{--</select>--}}
+                        {{--</div>--}}
 
                         <div class="am-form-group">
                             <label>父id / Category：</label>

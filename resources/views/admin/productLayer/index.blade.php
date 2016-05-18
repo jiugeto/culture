@@ -37,6 +37,7 @@
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
+                                    <a href="/admin/{{$data->id}}/prolayerattr"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="/assets/images/show.png" class="icon"> 动画属性</button></a>
                                     <a href="/admin/productlayer/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="/assets/images/show.png" class="icon"> 查看</button></a>
                                     <a href="/admin/productlayer/{{$data->id}}/edit"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="/assets/images/edit.png" class="icon"> 编辑</button></a>
                                     <a href="/admin/productlayer/{{$data->id}}/forceDelete"><button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><img src="/assets/images/forceDelete_red.png" class="icon"> 销毁记录</button></a>

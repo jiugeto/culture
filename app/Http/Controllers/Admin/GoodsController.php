@@ -33,6 +33,31 @@ class GoodsController extends BaseController
         return view('admin.goods.index', $result);
     }
 
+    public function create()
+    {
+        $curr['name'] = $this->crumb['create']['name'];
+        $curr['url'] = $this->crumb['create']['url'];
+        $result = [
+            'model'=> $this->model,
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.goods.create', $result);
+    }
+
+    public function show($id)
+    {
+        $curr['name'] = $this->crumb['trash']['name'];
+        $curr['url'] = $this->crumb['trash']['url'];
+        $result = [
+            'data'=> GoodsModel::find($id),
+            'model'=> $this->model,
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.goods.show', $result);
+    }
+
 
 
 

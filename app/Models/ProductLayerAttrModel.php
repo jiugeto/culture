@@ -5,7 +5,7 @@ class ProductLayerAttrModel extends BaseModel
 {
     protected $table = 'bs_pro_layer_attr';
     protected $fillable = [
-        'id','productid','attrid','layerid','attrSel','per','val','created_at','del','updated_at',
+        'id','productid','attrid','layerid','attrSel','per','val','del','created_at','updated_at',
     ];
 
     //width,height,,color,font_size,word_spacing,line_height,background,left,top,overflow,opacity
@@ -54,26 +54,29 @@ class ProductLayerAttrModel extends BaseModel
         return isset($attrname) ? $attrname : '无';
     }
 
-//    public function layerAll()
-//    {
-//        return ProductLayerModel::all();
-//    }
-//
-//    public function layers()
-//    {
-//        return ProductLayerModel::find($this->layerid);
-//    }
+    public function layerAll()
+    {
+        return ProductLayerModel::all();
+    }
 
+    public function layers()
+    {
+        return ProductLayerModel::find($this->layerid);
+    }
+
+    //动画名称 ProductLayerModel
     public function layer()
     {
         $layerid = $this->layerid ? $this->layerid : 0;
         $layerModel = ProductLayerModel::find($layerid);
         if ($layerModel) {
-            $layername = array_key_exists($layerModel->attrSel,$this->attrSelNames)?$this->attrSelNames[$layerModel->attrSel]:'无';
+//            $layername = array_key_exists($layerModel->attrSel,$this->attrSelNames)?$this->attrSelNames[$layerModel->attrSel]:'无';
+            $layername = $layerModel->name;
         }
         return isset($layername) ? $layername : '未知';
     }
 
+    //动画属性 ProductLayerAttrModel
     public function layerAttr()
     {
         return array_key_exists($this->attrSel,$this->attrSelNames)?$this->attrSelNames[$this->attrSel]:'无';

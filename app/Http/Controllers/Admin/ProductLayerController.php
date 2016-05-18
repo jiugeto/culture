@@ -14,8 +14,8 @@ class ProductLayerController extends BaseController
     {
         parent::__construct();
         $this->model = new ProductLayerModel();
-        $this->crumb['']['name'] = '属性动画列表';
-        $this->crumb['category']['name'] = '属性动画';
+        $this->crumb['']['name'] = '产品动画列表';
+        $this->crumb['category']['name'] = '产品动画';
         $this->crumb['category']['url'] = 'productlayer';
     }
 

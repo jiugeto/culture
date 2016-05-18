@@ -70,17 +70,25 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::get('productattr/{id}/restore','ProductAttrController@restore');
     Route::get('productattr/{id}/forceDelete','ProductAttrController@forceDelete');
     Route::get('productattr/trash','ProductAttrController@trash');
-    Route::get('productattr/pic/{id}','ProductAttrController@editPic');
-    Route::post('productattr/pic/{id}','ProductAttrController@updatePic');
-    Route::get('productattr/text/{id}','ProductAttrController@editText');
-    Route::post('productattr/text/{id}','ProductAttrController@updateText');
+//    Route::get('productattr/pic/{id}','ProductAttrController@editPic');
+//    Route::post('productattr/pic/{id}','ProductAttrController@updatePic');
+//    Route::get('productattr/text/{id}','ProductAttrController@editText');
+//    Route::post('productattr/text/{id}','ProductAttrController@updateText');
     Route::post('productattr/{id}','ProductAttrController@update');
     Route::resource('productattr','ProductAttrController');
         //产品动画的图片文字路由
     Route::get('productcon/trash','ProductConController@trash');
     Route::post('productcon/{id}','ProductConController@update');
     Route::resource('productcon','ProductConController');
+        //动画属性路由
+    Route::get('{layerid}/prolayerattr/{id}/forceDelete','ProductLayerAttrController@forceDelete');
+    Route::post('{layerid}/prolayerattr/{id}','ProductLayerAttrController@update');
+    Route::resource('{layerid}/prolayerattr','ProductLayerAttrController');
         //产品类型路由
+    Route::get('category/{id}/destroy','CategoryController@destroy');
+    Route::get('category/{id}/restore','CategoryController@restore');
+    Route::get('category/{id}/forceDelete','CategoryController@forceDelete');
+    Route::post('category/{id}','CategoryController@update');
     Route::resource('category','CategoryController');
     //租赁路由
     Route::resource('rent','RentController');

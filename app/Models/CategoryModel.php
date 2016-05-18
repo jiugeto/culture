@@ -24,7 +24,9 @@ class CategoryModel extends BaseModel
      */
    public function parent()
    {
-       return CategoryModel::find($this->pid);
+       $pid = $this->pid ? $this->pid : 0;
+       $category = CategoryModel::find($pid);
+       return isset($category) ? $category->name : '';
    }
 
     /**
