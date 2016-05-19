@@ -130,55 +130,56 @@ class ProductAttrController extends BaseController
     public function getData(Request $request)
     {
         //外边距：margin1上下，margin2左右，
-        if (in_array($request->ismargin,[1,2])) {
-            $margin1 = ''; $margin2 = ''; $margin3 = '';
-            $margin4 = ''; $margin5 = ''; $margin6 = '';
-        }
+        if ($request->ismargin==2) { $request->margin1 = 'auto'; $request->margin2 = 'auto'; }
         if ($request->ismargin==3) {
-            $margin1 = 'auto'; $margin2 = $request->margin2; $margin3 = '';
-            $margin4 = ''; $margin5 = ''; $margin6 = '';
+            $request->margin1 = 'auto';
+            if ($request->margin2=='') { echo "<script>alert('左右外边距必填！');history.go(-1);</script>";exit; }
         }
         if ($request->ismargin==4) {
-            $margin1 = $request->margin1; $margin2 = 'auto'; $margin3 = '';
-            $margin4 = ''; $margin5 = ''; $margin6 = '';
+            $request->margin2 = 'auto';
+            if ($request->margin1=='') { echo "<script>alert('上下外边距必填！');history.go(-1);</script>";exit; }
         }
-        if ($request->ismargin==4) {
-            $margin1 = ''; $margin2 = ''; $margin3 = $request->margin3;
-            $margin4 = $request->margin4; $margin5 = $request->margin5; $margin6 = $request->margin6;
+        if ($request->ismargin==5) {
+            if ($request->margin3=='' || $request->margin4=='' || $request->margin5=='' || $request->margin6=='') {
+                echo "<script>alert('上下左右外边距必填！');history.go(-1);</script>";exit;
+            }
         }
         //内边距margin1上下，margin2左右，
-        if (in_array($request->ispadding,[1,2])) {
-            $padding1 = ''; $padding2 = ''; $padding3 = '';
-            $padding4 = ''; $padding5 = ''; $padding6 = '';
-        }
         if ($request->ispadding==3) {
-            $padding1 = 'auto'; $padding2 = $request->padding2; $padding3 = '';
-            $padding4 = ''; $padding5 = ''; $padding6 = '';
+            $request->padding1 = 'auto';
+            if ($request->padding2=='') { echo "<script>alert('左右内边距必填！');history.go(-1);</script>";exit; }
         }
+        if ($request->ispadding==3) { $request->padding1 = 'auto'; $request->padding2 = 'auto'; }
         if ($request->ispadding==4) {
-            $padding1 = $request->padding1; $padding2 = 'auto'; $padding3 = '';
-            $padding4 = ''; $padding5 = ''; $padding6 = '';
+            $request->padding2 = 'auto';
+            if ($request->padding1=='') { echo "<script>alert('上下内边距必填！');history.go(-1);</script>";exit; }
         }
-        if ($request->ispadding==4) {
-            $padding1 = ''; $padding2 = ''; $padding3 = $request->padding3;
-            $padding4 = $request->padding4; $padding5 = $request->padding5; $padding6 = $request->padding6;
+        if ($request->ispadding==5) {
+            if ($request->ispadding3=='' || $request->ispadding4=='' || $request->ispadding5=='' || $request->ispadding6=='') {
+                echo "<script>alert('上下左右内边距必填！');history.go(-1);</script>";exit;
+            }
         }
         //边框
+        if ($request->border1) {
+            if (!$request->border2 || !$request->border3 || !$request->border4) {
+                echo "<script>alert('边框宽度、类型、颜色必填！');history.go(-1);</script>";exit;
+            }
+        }
         $attrs = [
             'ismargin'=> $request->iamargin,
-            'margin1'=> isset($margin1)?$margin1:'',
-            'margin2'=> isset($margin2)?$margin2:'',
-            'margin3'=> isset($margin3)?$margin3:'',
-            'margin4'=> isset($margin4)?$margin4:'',
-            'margin5'=> isset($margin5)?$margin5:'',
-            'margin6'=> isset($margin6)?$margin6:'',
+            'margin1'=> $request->margin1,
+            'margin2'=> $request->margin2,
+            'margin3'=> $request->margin3,
+            'margin4'=> $request->margin4,
+            'margin5'=> $request->margin5,
+            'margin6'=> $request->margin6,
             'ispadding'=> $request->ispadding,
-            'padding1'=> isset($padding1)?$padding1:'',
-            'padding2'=> isset($padding2)?$padding2:'',
-            'padding3'=> isset($padding3)?$padding3:'',
-            'padding4'=> isset($padding4)?$padding4:'',
-            'padding5'=> isset($padding5)?$padding5:'',
-            'padding6'=> isset($padding6)?$padding6:'',
+            'padding1'=> $request->ispadding1,
+            'padding2'=> $request->ispadding2,
+            'padding3'=> $request->ispadding3,
+            'padding4'=> $request->ispadding4,
+            'padding5'=> $request->ispadding5,
+            'padding6'=> $request->ispadding6,
             'width'=> $request->width,
             'height'=> $request->height,
             'border1'=> $request->border1,

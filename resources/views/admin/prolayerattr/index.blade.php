@@ -12,6 +12,16 @@
                                 <img src="/assets/images/add.png" class="icon"> 添加
                             </button>
                         </a>
+                        <a href="/admin/productlayer">
+                            <button type="button" class="am-btn am-btn-default">
+                                <img src="/assets/images/redo.png" class="icon"> 返回产品动画
+                            </button>
+                        </a>
+                        {{--<a onclick="history.go(-1);">--}}
+                            {{--<button type="button" class="am-btn am-btn-default">--}}
+                                {{--<img src="/assets/images/redo.png" class="icon"> 返回--}}
+                            {{--</button>--}}
+                        {{--</a>--}}
                     </div>
                 </div>
             </div>

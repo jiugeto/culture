@@ -37,55 +37,125 @@
                         </div>
 
                         <div class="am-form-group">
+                            <label>简介 / Introduce：</label>
+                            <textarea name="intro" cols="50" rows="5"> {{ $data->intro }}</textarea>
+                        </div>
+
+                        {{--总的样式属性--}}
+                        <div class="am-form-group">
+                            <label>总的样式属性
+                                {{--<a id="open">展开</a><a id="close" style="display:none;">关闭</a>--}}
+                            </label>
+                            <label><input type="radio" name="switch0" id="close" value="1" {{ $attrs['switch0']==0 ? 'checked' : '' }}> 关闭&nbsp;&nbsp;</label>
+                            <label><input type="radio" name="switch0" id="open" value="0" {{ $attrs['switch0']==1 ? 'checked' : '' }}> 展开&nbsp;&nbsp;</label>
+                        </div>
+                        <script>
+                            $(document).ready(function(){
+                                var open = $("#open");
+                                var close = $("#close");
+                                var attrs = $(".attrs");
+                                open.click(function(){ /*open.hide(); close.show();*/ attrs.show(); });
+                                close.click(function(){ /*close.hide(); open.show();*/ attrs.hide(); });
+                            });
+                        </script>
+
+                        <div class="am-form-group attrs" style="display:{{$attrs['switch0']==0?'none':'block'}};">
                             <label>外边距 / Margin：(单位px)</label>
                             <div class="admin_border">
-                                <input type="text" placeholder="上下间距，不填空着代表自动" pattern="\d+" name="margin1" value="{{ $data->margin1 }}"/>
-                                <div style="height:5px;">{{--间距--}}</div>
-                                <input type="text" placeholder="左右间距，不填空着代表自动" pattern="\d+" name="margin1" value="{{ $data->margin2 }}"/>
+                                外边距类型：
+                                <select name="ismargin">
+                                    @foreach($model['marginTypes'] as $kmarginType=>$marginType)
+                                        {{--<option value="{{ $kmarginType }}" {{ $attrs['ismargin']==$kmarginType ? 'selected' : '' }}>{{ $marginType }}</option>--}}
+                                    @endforeach
+                                </select>
+                                {{--<div id="margin1" style="display:{{$attrs['ismargin']==3?'block':'none'}};">--}}
+                                    {{--左右：(单位px)<input type="text" name="margin2" value="{{ $attrs['margin2'] }}">--}}
+                                {{--</div>--}}
+                                {{--<div id="margin2" style="display:{{$attrs['ismargin']==4?'block':'none'}};">--}}
+                                    {{--上下：(单位px)<input type="text" name="margin1" value="{{ $attrs['margin1'] }}">--}}
+                                {{--</div>--}}
+                                {{--<div id="margin3" style="display:{{$attrs['ismargin']==5?'block':'none'}};">--}}
+                                    {{--上：(单位px)<input type="text" name="margin3" value="{{ $attrs['margin3'] }}">--}}
+                                    {{--下：(单位px)<input type="text" name="margin4" value="{{ $attrs['margin4'] }}">--}}
+                                    {{--<br>--}}
+                                    {{--上：(单位px)<input type="text" name="margin5" value="{{ $attrs['margin5'] }}">--}}
+                                    {{--下：(单位px)<input type="text" name="margin6" value="{{ $attrs['margin6'] }}">--}}
+                                {{--</div>--}}
                             </div>
                         </div>
+                        <script>
+                            $(document).ready(function(){
+                                var margin1 = $("#margin1");
+                                var margin2 = $("#margin2");
+                                var margin3 = $("#margin3");
+                                $("select[name='ismargin']").change(function(){
+                                    if(this.value<=2){ margin1.hide(); margin2.hide(); margin3.hide(); }
+                                    if(this.value==3){ margin1.show(); margin2.hide(); margin3.hide(); }
+                                    if(this.value==4){ margin1.hide(); margin2.show(); margin3.hide(); }
+                                    if(this.value==5){ margin1.hide(); margin2.hide(); margin3.show(); }
+                                });
+                            });
+                        </script>
 
-                        <div class="am-form-group">
+                        <div class="am-form-group attrs" style="display:{{$attrs['switch0']==0?'none':'block'}};">
                             <label>内边距 / Padding：(单位px)</label>
                             <div class="admin_border">
-                                <input type="text" placeholder="上下间距，不填空着代表自动" pattern="\d+" name="padding1" value="{{ $data->padding1 }}"/>
-                                <div style="height:5px;">{{--间距--}}</div>
-                                <input type="text" placeholder="左右间距，不填空着代表自动" pattern="\d+" name="padding1" value="{{ $data->padding2 }}"/>
+                                内边距类型：
+                                <select name="ispadding" required>
+                                    @if(count($model['marginTypes']))
+                                        @foreach($model['marginTypes'] as $kmarginType=>$marginType)
+                                            {{--<option value="{{ $kmarginType }}" {{ $attrs['ispadding']==$kmarginType ? 'selected' : ' }}>{{ $marginType }}</option>--}}
+                                        @endforeach
+                                    @endif
+                                </select>
+                                {{--<div id="padding1" style="display:{{$attrs['ispadding']==3?'block':'none'}};">--}}
+                                    {{--左右：(单位px)<input type="text" name="padding2" value="{{ $attrs['padding2'] }}">--}}
+                                {{--</div>--}}
+                                {{--<div id="padding2" style="display:{{$attrs['ispadding']==4?'block':'none'}};">--}}
+                                    {{--上下：(单位px)<input type="text" name="padding1" value="{{ $attrs['padding1'] }}">--}}
+                                {{--</div>--}}
+                                {{--<div id="padding3" style="display:{{$attrs['ispadding']==5?'block':'none'}};">--}}
+                                    {{--上：(单位px)<input type="text" name="padding3" value="{{ $attrs['padding3'] }}">--}}
+                                    {{--下：(单位px)<input type="text" name="padding4" value="{{ $attrs['padding4'] }}">--}}
+                                    {{--<br>--}}
+                                    {{--上：(单位px)<input type="text" name="padding5" value="{{ $attrs['padding5'] }}">--}}
+                                    {{--下：(单位px)<input type="text" name="padding6" value="{{ $attrs['padding6'] }}">--}}
+                                {{--</div>--}}
                             </div>
                         </div>
 
-                        <div class="am-form-group">
+                        <div class="am-form-group attrs" style="display:{{$attrs['switch0']==0?'none':'block'}};">
                             <label>宽度 / Width：(单位px)</label>
-                            <input type="text" placeholder="" pattern="\d+" name="width" value="{{ $data->width }}"/>
+                            <input type="text" placeholder="" pattern="\d+" name="width" value="{{ $attrs['width'] }}"/>
                         </div>
 
-                        <div class="am-form-group">
+                        <div class="am-form-group attrs" style="display:{{$attrs['switch0']==0?'none':'block'}};">
                             <label>高度 / Height：(单位px)</label>
-                            <input type="text" placeholder="" pattern="\d+" name="height" value="{{ $data->height }}"/>
+                            <input type="text" placeholder="" pattern="\d+" name="height" value="{{ $attrs['height'] }}"/>
                         </div>
 
-                        <div class="am-form-group">
+                        <div class="am-form-group attrs" style="display:{{$attrs['switch0']==0?'none':'block'}};">
                             <label>边框 / Border：</label>
                             <div class="admin_border">
                                 边框方向：
                                 <select name="border1">
                                     @foreach($model['borderDirectionNames'] as $kborderDirection=>$borderDirectionName)
-                                    <option value="{{ $kborderDirection }}" {{ $data->border1==$kborderDirection ? 'selected' : '' }}>{{ $borderDirectionName }}</option>
+                                    <option value="{{ $kborderDirection }}" {{ $attrs['border1']==$kborderDirection ? 'selected' : '' }}>{{ $borderDirectionName }}</option>
                                     @endforeach
                                 </select>
                                 <div style="height:5px;">{{--间距--}}</div>
-                                边框宽度：<input type="text" placeholder="边框宽度，单位px" pattern="\d+" name="border2" value="{{ $data->border2 }}"/>
+                                边框宽度：<input type="text" placeholder="边框宽度，单位px" pattern="\d+" name="border2" value="{{ $attrs['border2'] }}"/>
                                 <div style="height:5px;">{{--间距--}}</div>
                                 边框类型：
                                 <select name="border3">
                                     @foreach($model['borderTypeNames'] as $kborder=>$borderTypeName)
-                                        <option value="{{ $kborder }}" {{ $data->border3==$kborder ? 'selected' : '' }}>{{ $borderTypeName }}</option>
+                                        <option value="{{ $kborder }}" {{ $attrs['border3']==$kborder ? 'selected' : '' }}>{{ $borderTypeName }}</option>
                                     @endforeach
                                 </select>
                                 <div style="height:5px;">{{--间距--}}</div>
                                 边框颜色：(点击下面更改颜色)
-                                <span style="float:right;">当前颜色预览<div class="admin_yulan" style="{{ $data->border4?'background:'.$data->border4:'' }}"></div></span>
-                                <input type="color" title="点击更改颜色" name="border4" value="{{ $data->border4 }}">
+                                <span style="float:right;">当前颜色预览<div class="admin_yulan" style="{{ $attrs['border4']?'background:'.$attrs['border4']:'' }}"></div></span>
+                                <input type="color" title="点击更改颜色" name="border4" value="{{ $attrs['border4'] }}">
                             </div>
                         </div>
                         <script>
@@ -199,11 +269,6 @@
                         <div class="am-form-group">
                             <label>透明度 / Opacity：</label>
                             <input type="text" placeholder="单位%" pattern="\d+" name="opacity" value="{{ $data->opacity }}"/>
-                        </div>
-
-                        <div class="am-form-group">
-                            <label>简介 / Introduce：</label>
-                            <textarea name="intro" cols="50" rows="5"> {{ $data->intro }}</textarea>
                         </div>
 
                         <button type="submit" class="am-btn am-btn-primary">保存修改</button>
