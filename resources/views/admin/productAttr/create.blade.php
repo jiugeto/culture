@@ -438,6 +438,19 @@
                                 </div>
                             </div>
                         </div>
+                        <script>
+                            $(document).ready(function(){
+                                var picpadding1 = $("#picpadding1");
+                                var picpadding2 = $("#picpadding2");
+                                var picpadding3 = $("#picpadding3");
+                                $("select[name='ispicpadding']").change(function(){
+                                    if(this.value<=2){ picpadding1.hide(); picpadding2.hide(); picpadding3.hide(); }
+                                    if(this.value==3){ picpadding1.show(); picpadding2.hide(); picpadding3.hide(); }
+                                    if(this.value==4){ picpadding1.hide(); picpadding2.show(); picpadding3.hide(); }
+                                    if(this.value==5){ picpadding1.hide(); picpadding2.hide(); picpadding3.show(); }
+                                });
+                            });
+                        </script>
 
                         <div class="am-form-group attrs_pic" style="display:none;">
                             <label>边框 / Border：</label>

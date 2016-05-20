@@ -10,8 +10,8 @@ class ProductAttrModel extends BaseModel
         'img','text','intro','pid','del','created_at','updated_at',
     ];
     //attrs：switch0，ismargin，margin1，margin2，margin3，margin4，margin5，margin6，ispadding，ispadding1，ispadding2，ispadding3，ispadding4，ispadding5，ispadding6，width，height，border1，border2，border3，border4，color，font_size，word_spacing，line_height，text_transform，text_align，background，position,left，top，overflow，opacity，
-    //text文字：switch1，istextmargin，textmargin1，textmargin2，textmargin3，textmargin4，textmargin5，textmargin6，istextpadding，textpadding1，textpadding2，textborder3，textborder4，textborder5，textborder6，text_font_size，textcolor，
-    //img图片：switch2，pic_id，ispicmargin，picmargin1，picmargin2，picmargin3，picmargin4，picpadding，picpadding1，picpadding2，picpadding3，picpadding4，picborder1，picborder2，picborder3，picborder4，picwidth，picheight，
+    //text文字：switch1，istextmargin，textmargin1，textmargin2，textmargin3，textmargin4，textmargin5，textmargin6，istextpadding，textpadding1，textpadding2，textborder1，textborder2，textborder3，textborder4，text_font_size，text_word_spacing，text_line_height，textcolor，
+    //img图片：switch2，ispicmargin，picmargin1，picmargin2，picmargin3，picmargin4，ispicpadding，picpadding1，picpadding2，picpadding3，picpadding4，picborder1，picborder2，picborder3，picborder4，picwidth，picheight，
 
     //边框类型
     protected $borderDirections = [
@@ -90,7 +90,7 @@ class ProductAttrModel extends BaseModel
 
     public function borderDirection($border1)
     {
-        return $border1?$this->borderDirection[$border1]:'';
+        return array_key_exists($border1,$this->borderDirections)?$this->borderDirections[$border1]:'';
     }
 
     public function borderType($border3)
@@ -145,9 +145,10 @@ class ProductAttrModel extends BaseModel
         return array_key_exists($position,$this->positionTypeNames) ? $this->positionTypeNames[$position] : '';
     }
 
-    public function positionName()
+    public function positionName($position)
     {
-        return array_key_exists($this->position,$this->positionTypeNames) ? $this->positionTypeNames[$this->position] : '未定义';
+        $position = $position?$position:0;
+        return array_key_exists($position,$this->positionTypeNames) ? $this->positionTypeNames[$position] : '未定义';
     }
 
     public function overflow()
@@ -157,7 +158,8 @@ class ProductAttrModel extends BaseModel
 
     public function overflowName($overflow)
     {
-        return $overflow ? $this->overflowTypeNames[$overflow] : '未定义';
+        $overflow = $overflow?$overflow:0;
+        return array_key_exists($overflow,$this->overflowTypeNames) ? $this->overflowTypeNames[$overflow] : '未定义';
     }
 
     //图片
@@ -171,8 +173,15 @@ class ProductAttrModel extends BaseModel
         return PicModel::where('uid',$uid)->get();
     }
 
-    public function pic($pic_id)
+    public function picName($pic_id)
     {
-        return $pic_id ? PicModel::find($pic_id)->url : '';
+        $picModel = PicModel::find($pic_id);
+        return $picModel ? $picModel->name : '';
+    }
+
+    public function picUrl($pic_id)
+    {
+        $picModel = PicModel::find($pic_id);
+        return $picModel ? $picModel->url : '';
     }
 }

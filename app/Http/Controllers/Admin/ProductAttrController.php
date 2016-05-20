@@ -77,8 +77,8 @@ class ProductAttrController extends BaseController
         $result = [
             'data'=> $data,
             'attrs'=> $this->getAttrs($data),
-            'textAttr'=> $data->text ? unserialize($data->text) : [],
-            'picAttr'=> $data->img ? unserialize($data->img) : [],
+            'textAttr'=> $this->getTextAttr($data),
+            'picAttr'=> $this->getPicAttr($data),
             'model'=> $this->model,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -102,9 +102,9 @@ class ProductAttrController extends BaseController
         $data = ProductAttrModel::find($id);
         $result = [
             'data'=> $data,
-            'attrs'=> $data->attrs ? unserialize($data->attrs) : [],
-            'textAttr'=> $data->text ? unserialize($data->text) : [],
-            'picAttr'=> $data->img ? unserialize($data->img) : [],
+            'attrs'=> $this->getAttrs($data),
+            'textAttr'=> $this->getTextAttr($data),
+            'picAttr'=> $this->getPicAttr($data),
             'model'=> $this->model,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -382,7 +382,9 @@ class ProductAttrController extends BaseController
         return $picAttr;
     }
 
-    //初始化总的属性
+    /**
+     * 初始化总的属性
+     */
     public function getAttrs($data)
     {
         $attrs = $data->attrs ? unserialize($data->attrs) : [];
@@ -424,5 +426,75 @@ class ProductAttrController extends BaseController
             ];
         }
         return $attrs;
+    }
+
+    /**
+     * 初始化文字属性
+     */
+    public function getTextAttr($data)
+    {
+        $textAttr = $data->text ? unserialize($data->text) : [];
+        if (!isset($textAttr['switch1']) || !(isset($textAttr['switch1']) && $textAttr['switch1'])) {
+            $textAttr = [
+                'switch1'=> 0,
+                'istextmargin'=> 1,
+                'textmargin1'=> '',
+                'textmargin2'=> '',
+                'textmargin3'=> '',
+                'textmargin4'=> '',
+                'textmargin5'=> '',
+                'textmargin6'=> '',
+                'istextpadding'=> 1,
+                'textpadding1'=> '',
+                'textpadding2'=> '',
+                'textpadding3'=> '',
+                'textpadding4'=> '',
+                'textpadding5'=> '',
+                'textpadding6'=> '',
+                'textborder1'=> '',
+                'textborder2'=> '',
+                'textborder3'=> '',
+                'textborder4'=> '',
+                'text_font_size'=> '',
+                'text_word_spacing'=> '',
+                'text_line_height'=> '',
+                'textcolor'=> '',
+            ];
+        }
+        return $textAttr;
+    }
+
+    /**
+     * 初始化文字属性
+     */
+    public function getPicAttr($data)
+    {
+        $picAttr = $data->img ? unserialize($data->img) : [];
+        if (!isset($picAttr['switch2']) || !(isset($picAttr['switch2']) && $picAttr['switch2'])) {
+            $picAttr = [
+                'switch2'=> 0,
+                'ispicmargin'=> 1,
+                'picmargin1'=> '',
+                'picmargin2'=> '',
+                'picmargin3'=> '',
+                'picmargin4'=> '',
+                'picmargin5'=> '',
+                'picmargin6'=> '',
+                'ispicpadding'=> 1,
+                'picpadding1'=> '',
+                'picpadding2'=> '',
+                'picpadding3'=> '',
+                'picpadding4'=> '',
+                'picpadding5'=> '',
+                'picpadding6'=> '',
+                'picborder1'=> '',
+                'picborder2'=> '',
+                'picborder3'=> '',
+                'picborder4'=> '',
+                'picwidth'=> '',
+                'picheight'=> '',
+            ];
+        }
+        return $picAttr;
     }
 }

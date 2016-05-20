@@ -91,6 +91,7 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::post('category/{id}','CategoryController@update');
     Route::resource('category','CategoryController');
     //租赁路由
+    Route::post('rent/{id}','RentController@update');
     Route::resource('rent','RentController');
     //娱乐路由
     Route::post('entertain/{id}','EntertainController@update');

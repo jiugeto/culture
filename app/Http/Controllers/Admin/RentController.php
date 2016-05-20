@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 //use Illuminate\Http\Request;
+use App\Http\Requests\Request;
 use App\Models\RentModel;
 
 class RentController extends BaseController
@@ -24,7 +25,6 @@ class RentController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-//            'actions'=> $this->actions(),
             'datas'=> $this->query($del=0),
             'prefix_url'=> '/admin/rent',
             'crumb'=> $this->crumb,
@@ -33,12 +33,44 @@ class RentController extends BaseController
         return view('admin.rent.index', $result);
     }
 
+    public function create()
+    {
+        $curr['name'] = $this->crumb['']['name'];
+        $curr['url'] = $this->crumb['']['url'];
+        $result = [
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.rent.create', $result);
+    }
+
+    public function store(Request $request)
+    {
+        $data = $this->getData($request);
+        $data['created_at'] = date('Y-m-d H:i:s', time());
+        RentModel::create($data);
+        return redirect('/admin/rent');
+    }
+
+    public function edit($id)
+    {
+        $curr['name'] = $this->crumb['edit']['name'];
+        $curr['url'] = $this->crumb['edit']['url'];
+        $result = [
+            'data'=> RentModel::find($id),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.rent.edit', $result);
+    }
+
+    public function update(){}
+
     public function show($id)
     {
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
         $result = [
-//            'actions'=> $this->actions(),
             'data'=> RentModel::find($id),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -55,6 +87,22 @@ class RentController extends BaseController
      * 以下是公用方法
      * ===================
      */
+
+    /**
+     * 收集数据
+     */
+    public function getData($request)
+    {
+        $data = [
+            'name'=> $request->name,
+            'genre'=> $request->genre,
+            'type_id'=> $request->type_id,
+            'intro'=> $request->intro,
+            'price'=> $request->price,
+            'sort'=> $request->sort,
+        ];
+        return $data;
+    }
 
     /**
      * 查询方法

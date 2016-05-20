@@ -25,4 +25,11 @@ class RentModel extends BaseModel
         }
         return $pics;
     }
+
+    public function user()
+    {
+        $uid = $this->uid?$this->uid:0;
+        $userModel = UserModel::find($uid);
+        return $userModel ? $userModel->username : '无';
+    }
 }
