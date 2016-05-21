@@ -108,6 +108,7 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::post('link/{id}','LinkController@update');
     Route::resource('link','LinkController');
         //心声管理
+    Route::post('uservoice/{id}','UserVoiceController@update');
     Route::resource('uservoice','UserVoiceController');
         //用户意见管理
     Route::post('opinions/{id}','OpinionsController@update');
@@ -130,6 +131,7 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
         //用户日志管理
     Route::resource('userlog','UserlogController');
         //地区管理
+    Route::post('area/{id}','AreaController@update');
     Route::resource('area','AreaController');
     //企业页面功能管理
         //企业主页路由

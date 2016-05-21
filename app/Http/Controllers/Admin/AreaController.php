@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\AreaModel;
-//use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 
 class AreaController extends BaseController
 {
@@ -31,9 +31,33 @@ class AreaController extends BaseController
         return view('admin.area.index', $result);
     }
 
+    public function edit($id)
+    {
+        $curr['name'] = $this->crumb['edit']['name'];
+        $curr['url'] = $this->crumb['edit']['url'];
+        $result = [
+            'data'=> AreaModel::find($id),
+            'parents'=> AreaModel::all(),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.area.edit', $result);
+    }
+
+    public function update(Request $request,$id){}
 
 
 
+
+    /**
+     * 收集数据
+     */
+    public function getData(Request $request)
+    {
+        $data = [
+        ];
+        return $data;
+    }
 
     /**
      * 查询方法

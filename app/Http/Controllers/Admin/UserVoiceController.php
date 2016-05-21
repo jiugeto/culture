@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\UserVoiceModel;
+use Illuminate\Http\Request;
 
 class UserVoiceController extends BaseController
 {
@@ -30,9 +31,52 @@ class UserVoiceController extends BaseController
         return view('admin.uservoice.index', $result);
     }
 
+    public function edit($id)
+    {
+        $curr['name'] = $this->crumb['edit']['name'];
+        $curr['url'] = $this->crumb['edit']['url'];
+        $result = [
+            'data'=> UserVoiceModel::find($id),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.uservoice.edit', $result);
+    }
+
+    public function update(Request $request,$id)
+    {
+        $data = $this->getData($request);
+        $data['updated_at'] = date('Y-m-d H:i:s', time());
+        UserVoiceModel::where('id',$id)->update($data);
+        return redirect('/admin/uservoice');
+    }
+
+    public function show($id)
+    {
+        $curr['name'] = $this->crumb['show']['name'];
+        $curr['url'] = $this->crumb['show']['url'];
+        $result = [
+            'data'=> UserVoiceModel::find($id),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.uservoice.show', $result);
+    }
 
 
 
+
+    /**
+     * 收集数据
+     */
+    public function getData(Request $request)
+    {
+        $data = [
+            'title'=> $request->name,
+            'content'=> $request->intro,
+        ];
+        return $data;
+    }
 
     /**
      * 查询方法

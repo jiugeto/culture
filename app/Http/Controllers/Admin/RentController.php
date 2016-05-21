@@ -64,7 +64,13 @@ class RentController extends BaseController
         return view('admin.rent.edit', $result);
     }
 
-    public function update(){}
+    public function update(Request $request,$id)
+    {
+        $data = $this->getData($request);
+        $data['updated_at'] = date('Y-m-d H:i:s', time());
+        RentModel::where('id',$id)->update($data);
+        return redirect('/admin/rent');
+    }
 
     public function show($id)
     {

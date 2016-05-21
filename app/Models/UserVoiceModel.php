@@ -9,4 +9,11 @@ class UserVoiceModel extends BaseModel
     protected $fillable = [
         'id','title','uid','content','isshow','created_at',
     ];
+
+    public function user()
+    {
+        $uid = $this->uid ? $this->uid : 0;
+        $userModel = UserModel::find($uid);
+        return $userModel ? $userModel->username : '无';
+    }
 }

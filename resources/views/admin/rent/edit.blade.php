@@ -25,16 +25,16 @@
                             <input type="radio" name="genre" value="2" {{ $data->genre==2 ? 'checked' : '' }}/> 需求方&nbsp;&nbsp;
                         </div>
 
-                        <div class="am-form-group">
-                            <label>设计类型 / Type：</label>
-                            <select name="type_id">
-                            @if($types)
-                                @foreach($types as $type)
-                                <option value="{{ $type->id }}"  {{ $data->type_id==$type->id ? 'selected' : '' }}>{{ $type->name }}</option>
-                                @endforeach
-                            @endif
-                            </select>
-                        </div>
+                        {{--<div class="am-form-group">--}}
+                            {{--<label>设计类型 / Type：</label>--}}
+                            {{--<select name="type_id">--}}
+                            {{--@if($types)--}}
+                                {{--@foreach($types as $type)--}}
+                                {{--<option value="{{ $type->id }}"  {{ $data->type_id==$type->id ? 'selected' : '' }}>{{ $type->name }}</option>--}}
+                                {{--@endforeach--}}
+                            {{--@endif--}}
+                            {{--</select>--}}
+                        {{--</div>--}}
 
                         <div class="am-form-group">
                             <label>用户名称 / User Name：</label>

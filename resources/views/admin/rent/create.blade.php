@@ -24,17 +24,17 @@
                             <input type="radio" name="genre" value="2"/> 需求方&nbsp;&nbsp;
                         </div>
 
-                        <div class="am-form-group">
-                            <label>设计类型 / Type：</label>
-                            <select name="type_id">
-                                <option value="">-请选择-</option>
-                            @if($types)
-                                @foreach($types as $type)
-                                    <option value="{{ $type->id }}">{{ $type->name }}</option>
-                                @endforeach
-                            @endif
-                            </select>
-                        </div>
+                        {{--<div class="am-form-group">--}}
+                            {{--<label>设计类型 / Type：</label>--}}
+                            {{--<select name="type_id">--}}
+                                {{--<option value="">-请选择-</option>--}}
+                            {{--@if($types)--}}
+                                {{--@foreach($types as $type)--}}
+                                    {{--<option value="{{ $type->id }}">{{ $type->name }}</option>--}}
+                                {{--@endforeach--}}
+                            {{--@endif--}}
+                            {{--</select>--}}
+                        {{--</div>--}}
 
                         <div class="am-form-group">
                             <label>用户名称 / User Name：</label>
@@ -51,9 +51,9 @@
                             <input type="text" placeholder="数字" pattern="^\d+\(\d+\.\d{1,2})$" required name="price"/>
                         </div>
 
-                        <div class="am-form-group">
+                        <div class="am-form-group am-datepicker-date">
                             <label>租赁起始时间 / Start Time：</label>
-                            <input type="text" placeholder="如：2016-01-01 01:01" pattern="^\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}$" required name="fromtime"/>
+                            <input type="text" placeholder="如：2016-01-01 01:01" pattern="^\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}$" data-am-datepicker="{theme: 'success'}" required name="fromtime"/>
                             <label>租赁结束时间 / End Time：</label>
                             <input type="text" placeholder="如：2016-02-02 02:02" pattern="^\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}$" required name="totime"/>
                         </div>
