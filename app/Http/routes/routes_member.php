@@ -159,4 +159,13 @@ Route::group(['prefix'=>'member','namespace'=>'Member'], function(){
     Route::get('video/{id}/forceDelete','VideoController@forceDelete');
     Route::get('video/trash','VideoController@trash');
     Route::resource('video','VideoController');
+        //分镜路由
+    Route::get('storyboard/trash','StoryBoardController@trash');
+    Route::get('storyboard/{id}/destroy','StoryBoardController@destroy');
+    Route::get('storyboard/{id}/restore','StoryBoardController@restore');
+    Route::get('storyboard/{id}/forceDelete','StoryBoardController@forceDelete');
+    Route::post('storyboard/{id}','StoryBoardController@update');
+    Route::resource('storyboard','StoryBoardController');
+        //订单流程
+    Route::resource('order','OrderControler');
 });

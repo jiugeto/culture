@@ -677,6 +677,7 @@ CREATE TABLE `bs_ideas` (
   `cate_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分类，关联分类表category',
   `content` text NOT NULL COMMENT '创意内容',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布的用户id',
+  `money` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '价格，单位元',
   `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序，值越大越靠前，默认10',
   `isshow` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '前台列表是否显示：0前台列表不显示，1前台列表显示',
   `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站功能：0不放入回收站，1放入回收站',
@@ -692,7 +693,7 @@ CREATE TABLE `bs_ideas` (
 
 LOCK TABLES `bs_ideas` WRITE;
 /*!40000 ALTER TABLE `bs_ideas` DISABLE KEYS */;
-INSERT INTO `bs_ideas` VALUES (1,'创意1',4,'<p>而非v代表</p>',1,10,1,0,'2016-04-17 01:46:45','2016-04-17 02:24:47'),(2,'创意部分的白癜风',4,'<p>不辜负你发个你突然发红包让头发的非v别的人副本二本的日本</p>',1,10,1,0,'2016-04-21 14:42:17','0000-00-00 00:00:00'),(3,'创意123456',4,'<p>不同功能同一个男人太烦恼吧 不同人反复给你发给你发的吧v辅导班该方法v表单v废话么放入后天就能GV干嘛换个号部分或讲不出的生物科技获得鼠标不同人还能听任何人挺好投入和</p>',1,10,1,0,'2016-04-21 15:10:03','0000-00-00 00:00:00');
+INSERT INTO `bs_ideas` VALUES (1,'创意1',4,'<p>而非v代表</p>',1,0,10,1,0,'2016-04-17 01:46:45','2016-04-17 02:24:47'),(2,'创意部分的白癜风',4,'<p>不辜负你发个你突然发红包让头发的非v别的人副本二本的日本</p>',1,0,10,1,0,'2016-04-21 14:42:17','0000-00-00 00:00:00'),(3,'创意123456',4,'<p>不同功能同一个男人太烦恼吧 不同人反复给你发给你发的吧v辅导班该方法v表单v废话么放入后天就能GV干嘛换个号部分或讲不出的生物科技获得鼠标不同人还能听任何人挺好投入和</p>',1,0,10,1,0,'2016-04-21 15:10:03','0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `bs_ideas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -977,13 +978,23 @@ CREATE TABLE `bs_orders` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL COMMENT '订单名称',
   `serial` int(20) unsigned NOT NULL DEFAULT '0' COMMENT '订单编号',
+  `genre` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '订单来源：1创意，2分镜，3商品，4娱乐，5演员，6租赁',
+  `fromid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '订单来源表中的id',
   `seller` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '卖家id ',
   `sellerName` varchar(255) NOT NULL COMMENT '卖家名称',
   `buyer` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '买家id',
   `buyerName` varchar(255) NOT NULL COMMENT '买家名称',
   `number` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '数量',
+  `ideaMoney` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '创意实际价格，单位元',
+  `storyMoney` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '分镜实际价格，单位元',
+  `realMoney1` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '分期付款开始，单位元',
+  `realMoney2` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '分期付款2，单位元',
+  `realMoney3` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '分期付款3，单位元',
+  `realMoney4` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '分期付款尾款，单位元',
+  `isnew` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '是否新订单：0不是是新的，1是新订单',
   `status` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '订单状态：申请，协商，确定，交易，结果',
   `isshow` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '前台列表是否显示：0不显示，1显示，默认1',
+  `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站：0不删除，1删除',
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL DEFAULT '0000-00-00',
   PRIMARY KEY (`id`)
@@ -997,6 +1008,36 @@ CREATE TABLE `bs_orders` (
 LOCK TABLES `bs_orders` WRITE;
 /*!40000 ALTER TABLE `bs_orders` DISABLE KEYS */;
 /*!40000 ALTER TABLE `bs_orders` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bs_orders_firm`
+--
+
+DROP TABLE IF EXISTS `bs_orders_firm`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bs_orders_firm` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `orderid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '订单id',
+  `genre` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '订单类型：1(创意，分镜，商品)，2(娱乐，演员，租赁)',
+  `money` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '价格，单位元',
+  `status` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '服务状态：1申请，2拒绝，3同意，4交易，5成功，6完成',
+  `isshow` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '前台是否显示：0不显示，1显示',
+  `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站：0不删除，1删除',
+  `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
+  `updated_at` date NOT NULL DEFAULT '0000-00-00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='售后服务表 bs_orders_firm';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bs_orders_firm`
+--
+
+LOCK TABLES `bs_orders_firm` WRITE;
+/*!40000 ALTER TABLE `bs_orders_firm` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bs_orders_firm` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1299,6 +1340,41 @@ LOCK TABLES `bs_rents` WRITE;
 /*!40000 ALTER TABLE `bs_rents` DISABLE KEYS */;
 INSERT INTO `bs_rents` VALUES (1,'租赁供应0323',1,'yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy',0,0.00,0,0,10,0,'2016-03-23','2016-03-23');
 /*!40000 ALTER TABLE `bs_rents` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bs_storyboards`
+--
+
+DROP TABLE IF EXISTS `bs_storyboards`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bs_storyboards` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL COMMENT '名称',
+  `cate_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分类，关联分类表category',
+  `intro` varchar(2000) NOT NULL COMMENT '内容',
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布的用户id',
+  `money` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '价格，单位元',
+  `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序，值越大越靠前，默认10',
+  `sort2` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '用户控制排序，值越大越靠前，默认10',
+  `isshow` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '前台列表是否显示：0前台列表不显示，1前台列表显示',
+  `isshow2` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '用户控制前台列表是否显示：0前台列表不显示，1前台列表显示',
+  `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站功能：0不放入回收站，1放入回收站',
+  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='分镜表 bs_storyboards';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bs_storyboards`
+--
+
+LOCK TABLES `bs_storyboards` WRITE;
+/*!40000 ALTER TABLE `bs_storyboards` DISABLE KEYS */;
+INSERT INTO `bs_storyboards` VALUES (1,'ergth',4,'<p><img src=\"/uploads/ueditor/php/upload/image/20160523/1463995780428079.png\" title=\"1463995780428079.png\" alt=\"QQ截图20150906082002.png\"/>ergtghefrgtfgefrdfgh</p>',0,3456,10,10,1,1,0,'2016-05-23 09:32:55','2016-05-23 09:45:53');
+/*!40000 ALTER TABLE `bs_storyboards` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1934,4 +2010,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-05-21 17:46:52
+-- Dump completed on 2016-05-23 18:55:34
