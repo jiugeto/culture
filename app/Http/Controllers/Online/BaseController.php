@@ -8,4 +8,9 @@ class BaseController extends Controller
     /**
      * 在线创作窗口基础控制器
      */
+
+    public function __construct()
+    {
+        $this->userid = \Session::has('user.uid') ? \Session::get('user.uid') : redirect('/login');
+    }
 }

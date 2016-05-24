@@ -85,3 +85,40 @@ a:hover .onlinebtn {
     border:1px solid darkred;
     background:darkred;
 }
+
+
+/*========== 动画与属性编辑 ==========*/
+.frame {
+    margin:0 auto;
+    width:980px;
+}
+.frame .menus {
+    padding:10px 0;
+    width:950px;
+    color:white;
+    border:5px solid rgb(30,30,30);
+    background:rgb(60,60,60);
+}
+.frame .menus .grey { padding:0 10px;color:darkgrey; }
+.frame .oneframe {
+    margin:2px 0;
+    padding:5px 10px;
+    background:rgb(80,80,80);
+}
+.oneframe a { cursor:pointer; }
+.oneframe a:hover { color:red;text-decoration:underline; }
+.oneframe table {
+    margin:5px 0;
+    width:100%;
+    border:1px dashed darkgrey;
+}
+.oneframe table td.left { padding:5px 20px;width:50px; }
+.oneframe table input {
+    padding:0 5px;
+    width:100px;
+    font-size:20px;
+    font-family:'微软雅黑';
+    border:1px solid darkgrey;
+    border-radius:3px;
+    background:rgb(150,150,150);
+}

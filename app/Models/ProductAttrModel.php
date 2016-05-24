@@ -184,4 +184,31 @@ class ProductAttrModel extends BaseModel
         $picModel = PicModel::find($pic_id);
         return $picModel ? $picModel->url : '';
     }
+
+
+
+
+    /**
+     *=====
+     *改造后
+     *=====
+     */
+
+    //总的属性
+    public function attrs()
+    {
+        return $this->attrs ? unserialize($this->attrs) : [];
+    }
+
+    //文字属性
+    public function textAttr()
+    {
+        return $this->text ? unserialize($this->text) : [];
+    }
+
+    //图片属性
+    public function picAttr()
+    {
+        return $this->img ? unserialize($this->img) : [];
+    }
 }

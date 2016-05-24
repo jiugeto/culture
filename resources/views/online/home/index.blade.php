@@ -108,6 +108,7 @@
         <a href="/online" title="退回到原始状态"><button class="onlinebtn">重置</button></a>
         <a href="/online/restart" title="直接播放"><button class="onlinebtn">重播</button></a>
         <a id="menu"><button class="onlinebtn">菜单</button></a>
+        <a href="/online/{{$data->id}}/frame" title="编辑属性和内容"><button class="onlinebtn">编辑</button></a>
     </div>
     <div class="menus"></div>
 
