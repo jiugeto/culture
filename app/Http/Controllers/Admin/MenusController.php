@@ -112,12 +112,13 @@ class MenusController extends BaseController
     {
         $data = $request->all();
         //pid判断
-        if (!$data['pid1'] &&!$data['pid2'] &&!$data['pid3']) {
-            echo "<script>alert('父id必选！');history.go(-1);</script>";exit;
-        }
+//        if (!$data['pid1'] &&!$data['pid2'] &&!$data['pid3']) {
+//            echo "<script>alert('父id必选！');history.go(-1);</script>";exit;
+//        }
         if ($data['pid1']) { $data['pid'] = $data['pid1']; }
         if ($data['pid2']) { $data['pid'] = $data['pid2']; }
         if ($data['pid3']) { $data['pid'] = $data['pid3']; }
+        if (!$data['pid1'] &&!$data['pid2'] &&!$data['pid3']) { $data['pid'] = 0; }
         if (!$data['style_class']) { $data['style_class'] = ''; }
         if (!$data['intro']) { $data['intro'] = ''; }
         $data = [

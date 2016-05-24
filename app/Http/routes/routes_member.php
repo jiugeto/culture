@@ -166,6 +166,7 @@ Route::group(['prefix'=>'member','namespace'=>'Member'], function(){
     Route::get('storyboard/{id}/forceDelete','StoryBoardController@forceDelete');
     Route::post('storyboard/{id}','StoryBoardController@update');
     Route::resource('storyboard','StoryBoardController');
+    //订单流程
         //订单流程
-    Route::resource('order','OrderControler');
+    Route::resource('order','OrderController');
 });

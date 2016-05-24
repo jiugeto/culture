@@ -161,4 +161,13 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::resource('talk','TalkController');
         //演员管理
     Route::resource('actor','ActorController');
+    //订单管理
+        //订单路由
+    Route::get('order/{del}/{isshow}','OrderController@index');
+    Route::post('order/{id}','OrderController@update');
+    Route::resource('order','OrderController');
+        //售后路由
+    Route::get('orderfirm/{del}/{isshow}','OrderFirmController@index');
+    Route::post('orderfirm/{id}','OrderFirmController@update');
+    Route::resource('orderfirm','OrderFirmController');
 });

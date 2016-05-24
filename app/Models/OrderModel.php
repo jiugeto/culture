@@ -20,15 +20,27 @@ class OrderModel extends BaseModel
         1=>'创意','分镜','商品','娱乐','演员','租赁',
     ];
 
-    //视频流程
-    //订单状态：1提交创意，确定创意，创意免费，创意收费，创意完成，提交分镜，确定分镜，分镜免费，分镜收费，协商洽谈，开始分期收费，效果协商，二期收费，确定成片，三期收费，出片交付保证播放，尾款结清，交易成功，交易失败，（修改另外收费）
+    //视频订单状态：1提交创意，确定创意，创意免费，创意收费，创意完成，提交分镜，确定分镜，分镜免费，分镜收费，协商洽谈，开始分期收费，效果协商，二期收费，确定成片，三期收费，出片交付保证播放，尾款结清，交易成功，交易失败，（修改另外收费）
     protected $statuss = [
-        1=>'提交创意','确定创意','创意免费','创意收费','创意完成','提交分镜','确定分镜','分镜免费','分镜收费','协商洽谈','开始分期收费','效果协商','二期收费','确定成片','三期收费','出片交付保证播放','尾款结清','交易成功','交易失败','',
+        1=>'提交创意','确定创意','创意免费','创意收费','创意完成','提交分镜','确定分镜','分镜免费','分镜收费',10=>'确定项目',12=>'开始制作','分期收费','效果协商','二期收费','确定成片','三期收费','出片交付保证播放','尾款结清','交易成功','交易失败',
     ];
-    //娱乐流程
-    protected $statuss_e = [];
-    //演员流程
-    protected $statuss_actor = [];
-    //租赁流程
-    protected $statuss_rent = [];
+    //前台订单流程流程
+    protected $statuss_other = [
+        1=>'下订单',10=>'确定订单',11=>'进行协商',12=>'开始办理',20=>'办理成功',21=>'办理失败',
+    ];
+
+    public function genreName()
+    {
+        return array_key_exists($this->genre,$this->genreNames) ? $this->genreNames[$this->genre] : '无';
+    }
+
+    public function status()
+    {
+        if (in_array($this->genre,[1,2,3])) {
+            $status = array_key_exists($this->status,$this->statuss)?$this->statuss[$this->status]:'无';
+        } elseif (in_array($this->status,[4,5,6])) {
+            $status = array_key_exists($this->status,$this->statuss_other)?$this->statuss_other[$this->status]:'无';
+        }
+        return isset($status) ? $status : '无';
+    }
 }

@@ -23,20 +23,35 @@ class OrderController extends BaseController
 
     public function index()
     {
-        $curr['name'] = $this->lists['']['name'];
+        $curr['name'] = $this->lists['']['name'] = '订单列表';
         $curr['url'] = $this->lists['']['url'];
         $result = [
             'datas'=> $this->query(),
-            'prefix_url'=> '/member/category',
+            'prefix_url'=> '/member/order',
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
         return view('member.order.index', $result);
     }
 
+    public function show($id)
+    {
+        $curr['name'] = $this->lists['show']['name'];
+        $curr['url'] = $this->lists['show']['url'];
+        $result = [
+            'data'=> OrderModel::find($id),
+            'lists'=> $this->lists,
+            'curr'=> $curr,
+        ];
+        return view('member.order.show', $result);
+    }
+
     public function query()
     {
-        $datas = OrderModel::paginate($this->limit);
+        $datas = OrderModel::where('del',0)
+            ->where('isshow',1)
+            ->orderBy('id','desc')
+            ->paginate($this->limit);
         return $datas;
     }
 }
