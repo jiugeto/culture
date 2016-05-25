@@ -5,7 +5,7 @@ class ProductLayerModel extends BaseModel
 {
     protected $table = 'bs_products_layer';
     protected $fillable = [
-        'id','name','productid','attrid','animation_name','duration','function','delay','count','direction','state','mode','field','per','value','intro','del','created_at','updated_at',
+        'id','name','productid','attrid','conStr','layerAttr','animation_name','duration','function','delay','count','direction','state','mode','field','per','value','intro','del','created_at','updated_at',
     ];
     //速度曲线
     protected $functions = [
@@ -139,5 +139,31 @@ class ProductLayerModel extends BaseModel
             }
         }
         return isset($vals) ? $vals : [];
+    }
+
+    /**
+     * 动画内容，图片文字
+     */
+    public function cons()
+    {
+        $array = $this->conStr ? explode(',',$this->conStr) : [];
+        if ($array) {
+            array_filter($array); sort($array);
+            $conModels = ProductConModel::whereIn('conStr',$array)->get();;
+        }
+        return isset($conModels) ? $conModels : [];
+    }
+
+    /**
+     * 动画点的属性
+     */
+    public function layerAttrs()
+    {
+        $layerAttrs = $this->layerAttr ? explode(',',$this->layerAttr) : [];
+        if ($layerAttrs) {
+            array_filter($layerAttrs); sort($layerAttrs);
+            $layerAttrModels = ProductLayerAttrModel::whereIn('id',$layerAttrs)->get();
+        }
+        return isset($layerAttrModels) ? $layerAttrModels : [];
     }
 }

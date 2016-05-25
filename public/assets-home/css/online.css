@@ -88,16 +88,20 @@ a:hover .onlinebtn {
 
 
 /*========== 动画与属性编辑 ==========*/
+.frame_edit { margin-top:-20px;background:rgb(40,40,40); }
 .frame {
     margin:0 auto;
     width:980px;
 }
 .frame .menus {
     padding:10px 0;
-    width:950px;
+    width:970px;
     color:white;
     border:5px solid rgb(30,30,30);
     background:rgb(60,60,60);
+    /*height:200px;*/
+    /*overflow-x:hidden;*/
+    /*overflow-y:auto;*/
 }
 .frame .menus .grey { padding:0 10px;color:darkgrey; }
 .frame .oneframe {
@@ -112,7 +116,8 @@ a:hover .onlinebtn {
     width:100%;
     border:1px dashed darkgrey;
 }
-.oneframe table td.left { padding:5px 20px;width:50px; }
+.oneframe table td { width:200px; }
+.oneframe table td.left { padding:5px 10px;width:100px; }
 .oneframe table input {
     padding:0 5px;
     width:100px;
