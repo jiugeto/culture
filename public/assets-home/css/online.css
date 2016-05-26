@@ -23,7 +23,8 @@
 .online_win .animate {
     width:960px;
     height:540px;
-    background:lightgrey;
+    /*background:lightgrey;*/
+    background:white;
     overflow:hidden;
 }
 .timeline div { float:left; }

@@ -5,8 +5,17 @@
 
     {{--  在线创建窗口 --}}
     <div class="online_win">
-        <div class="animate" style="background:white;">
+        <div class="animate">
             {{--动画开始--}}
+            @if(count($attrs))
+                @foreach($attrs as $attr)
+                <div class="{{ $attr->style_name }}">
+                    <div class="pos">
+                        <div class="dh"><img src="/uploads/images/2016/ppt.png"></div>
+                    </div>
+                </div>
+                @endforeach
+            @endif
             {{--动画结束--}}
         </div>
     </div>

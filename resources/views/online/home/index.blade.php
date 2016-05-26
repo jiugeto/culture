@@ -86,7 +86,7 @@
 
     {{--  在线创建窗口 --}}
     <div class="online_win">
-        <div class="animate" style="background:white;">
+        <div class="animate">
             {{--动画开始--}}
             @if(count($attrs))
                 @foreach($attrs as $attr)

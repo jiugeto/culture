@@ -56,4 +56,6 @@ Route::group(['prefix'=>'','namespace'=>'Home'],function(){
     Route::get('talk/{id}/restore','TalkController@restore');
     Route::get('talk/{id}/forceDelete','TalkController@forceDelete');
     Route::resource('talk','TalkController');
+    //新手帮助路由
+    Route::resource('newuser','NewUserController');
 });
