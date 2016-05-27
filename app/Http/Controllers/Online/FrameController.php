@@ -26,6 +26,7 @@ class FrameController extends BaseController
             'attrs'=> \App\Tools::childList2($this->attrs($productid)),
             'layers'=> $this->layers($productid),
             'pics'=> PicModel::where('uid',$this->userid)->where('del',0)->get(),
+            'attrModel'=> new ProductAttrModel(),
         ];
 //        dd($this->layers($productid));
         return view('online.frame.index', $result);

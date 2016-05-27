@@ -82,6 +82,7 @@ class ProductAttrController extends BaseController
 
     public function update(Request $request,$id)
     {
+        dd($request->all());
         $data = $this->getData($request);
         $data['updated_at'] = date('Y-m-d H:i:s', time());
         ProductAttrModel::where('id',$id)->update($data);
@@ -166,6 +167,7 @@ class ProductAttrController extends BaseController
             }
         }
         $attrs = [
+            'style_name'=> $request->style_name,
             'ismargin'=> $request->iamargin,
             'margin1'=> $request->margin1,
             'margin2'=> $request->margin2,
@@ -227,6 +229,7 @@ class ProductAttrController extends BaseController
         $data->attrs = $data->attrs?unserialize($data->attrs):[];
         if (!$data->attrs) {
             $attrs = [
+                'style_name'=> '',
                 'ismargin'=> '',
                 'margin1'=> '',
                 'margin2'=> '',

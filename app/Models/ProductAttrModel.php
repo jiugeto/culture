@@ -5,13 +5,13 @@ class ProductAttrModel extends BaseModel
 {
     protected $table = 'bs_products_attr';
     protected $fillable = [
-        'id','name','style_name','productid','uid','attrs',
-//        'ismargin','margin','ispadding','padding','width','height','border','color','font_size','word_spacing','line_height','text_transform','text_align','background','position','left','top','overflow','opacity',
-        'img','text','intro','pid','del','created_at','updated_at',
+        'id','name','productid','uid','attrs','attrs2','attrs3','img','text','intro','pid','del','created_at','updated_at',
     ];
-    //attrs：switch0，ismargin，margin1，margin2，margin3，margin4，margin5，margin6，ispadding，ispadding1，ispadding2，ispadding3，ispadding4，ispadding5，ispadding6，width，height，border1，border2，border3，border4，color，font_size，word_spacing，line_height，text_transform，text_align，background，position,left，top，overflow，opacity，
-    //text文字：switch1，istextmargin，textmargin1，textmargin2，textmargin3，textmargin4，textmargin5，textmargin6，istextpadding，textpadding1，textpadding2，textborder1，textborder2，textborder3，textborder4，text_font_size，text_word_spacing，text_line_height，textcolor，
-    //img图片：switch2，ispicmargin，picmargin1，picmargin2，picmargin3，picmargin4，ispicpadding，picpadding1，picpadding2，picpadding3，picpadding4，picborder1，picborder2，picborder3，picborder4，picwidth，picheight，
+    //attrs：style_name，switch，ismargin，margin1，margin2，margin3，margin4，margin5，margin6，ispadding，ispadding1，ispadding2，ispadding3，ispadding4，ispadding5，ispadding6，width，height，border1，border2，border3，border4，color，font_size，word_spacing，line_height，text_transform，text_align，background，position,left，top，overflow，opacity，
+    //attrs2：style_name2，switch2，ismargin，margin1，margin2，margin3，margin4，margin5，margin6，ispadding，ispadding1，ispadding2，ispadding3，ispadding4，ispadding5，ispadding6，width，height，border1，border2，border3，border4，color，font_size，word_spacing，line_height，text_transform，text_align，background，position,left，top，overflow，opacity，
+    //attrs3：style_name3，switch3，ismargin，margin1，margin2，margin3，margin4，margin5，margin6，ispadding，ispadding1，ispadding2，ispadding3，ispadding4，ispadding5，ispadding6，width，height，border1，border2，border3，border4，color，font_size，word_spacing，line_height，text_transform，text_align，background，position,left，top，overflow，opacity，
+    //text文字：style_name4，switch4，istextmargin，textmargin1，textmargin2，textmargin3，textmargin4，textmargin5，textmargin6，istextpadding，textpadding1，textpadding2，textborder1，textborder2，textborder3，textborder4，text_font_size，text_word_spacing，text_line_height，textcolor，
+    //img图片：style_name5，switch5，ispicmargin，picmargin1，picmargin2，picmargin3，picmargin4，ispicpadding，picpadding1，picpadding2，picpadding3，picpadding4，picborder1，picborder2，picborder3，picborder4，picwidth，picheight，
 
     //边框类型
     protected $borderDirections = [
@@ -103,31 +103,33 @@ class ProductAttrModel extends BaseModel
         return $border3?$this->borderTypeNames[$border3]:'';
     }
 
-    public function border()
-    {
-        $borders = $this->border?explode('-',$this->border):[];
-        if ($borders) {
-            $border[] = $this->borderDirection($borders[0]);
-            $border[] = $borders[1].'px';
-            $border[] = $this->borderType($borders[3]);
-            $border[] = $borders[3];
-        }
-        return isset($border) ? implode(',',$border) : '未定义';
-    }
+//    public function border()
+//    {
+//        $borders = $this->border?explode('-',$this->border):[];
+//        if ($borders) {
+//            $border[] = $this->borderDirection($borders[0]);
+//            $border[] = $borders[1].'px';
+//            $border[] = $this->borderType($borders[3]);
+//            $border[] = $borders[3];
+//        }
+//        return isset($border) ? implode(',',$border) : '未定义';
+//    }
 
-    public function textTransform()
+    public function textTransform($text_transform)
     {
-        return array_key_exists($this->text_transform,$this->textTransformTypes) ? $this->textTransformTypes[$this->text_transform] : '';
+        $text_transform = $text_transform ? $text_transform : 1;
+        return array_key_exists($text_transform,$this->textTransformTypes) ? $this->textTransformTypes[$text_transform] : '未定义';
     }
 
     public function textTransformName($text_transform)
     {
-        return array_key_exists($text_transform,$this->textTransformTypeNames) ? $this->textTransformTypeNames[$text_transform] : '';
+        return array_key_exists($text_transform,$this->textTransformTypeNames) ? $this->textTransformTypeNames[$text_transform] : '未定义';
     }
 
-    public function textAlign()
+    public function textAlign($text_align)
     {
-        return array_key_exists($this->text_align,$this->textAlignTypes) ? $this->textAlignTypes[$this->text_align] : '未定义';
+        $text_align = $text_align ? $text_align : 0;
+        return array_key_exists($text_align,$this->textAlignTypes) ? $this->textAlignTypes[$text_align] : '未定义';
     }
 
     public function textAlignName($text_align)
@@ -135,30 +137,33 @@ class ProductAttrModel extends BaseModel
         return array_key_exists($text_align,$this->textAlignTypeNames) ? $this->textAlignTypeNames[$text_align] : '未定义';
     }
 
-    public function positionType()
+    public function positionType($position)
     {
-        return array_key_exists($this->position,$this->positionTypes) ? $this->positionTypes[$this->position] : '';
+        $position = $position ? $position : 1;
+        return array_key_exists($position,$this->positionTypes) ? $this->positionTypes[$position] : '未定义';
     }
 
     public function positionTypeName($position)
     {
-        return array_key_exists($position,$this->positionTypeNames) ? $this->positionTypeNames[$position] : '';
+        $position = $position ? $position : 1;
+        return array_key_exists($position,$this->positionTypeNames) ? $this->positionTypeNames[$position] : '未定义';
     }
 
     public function positionName($position)
     {
-        $position = $position?$position:0;
+        $position = $position ? $position : 0;
         return array_key_exists($position,$this->positionTypeNames) ? $this->positionTypeNames[$position] : '未定义';
     }
 
-    public function overflow()
+    public function overflow($overflow)
     {
-        return $this->overflow ? $this->overflowTypes[$this->overflow] : '未定义';
+        $overflow = $overflow ? $overflow : 1;
+        return $overflow ? $this->overflowTypes[$overflow] : '未定义';
     }
 
     public function overflowName($overflow)
     {
-        $overflow = $overflow?$overflow:0;
+        $overflow = $overflow ? $overflow : 1;
         return array_key_exists($overflow,$this->overflowTypeNames) ? $this->overflowTypeNames[$overflow] : '未定义';
     }
 
@@ -198,6 +203,18 @@ class ProductAttrModel extends BaseModel
     public function attrs()
     {
         return $this->attrs ? unserialize($this->attrs) : [];
+    }
+
+    //总的属性2
+    public function attrs2()
+    {
+        return $this->attrs2 ? unserialize($this->attrs2) : [];
+    }
+
+    //总的属性2
+    public function attrs3()
+    {
+        return $this->attrs3 ? unserialize($this->attrs3) : [];
     }
 
     //文字属性
