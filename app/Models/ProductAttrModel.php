@@ -5,13 +5,13 @@ class ProductAttrModel extends BaseModel
 {
     protected $table = 'bs_products_attr';
     protected $fillable = [
-        'id','name','productid','uid','attrs','attrs2','attrs3','img','text','intro','pid','del','created_at','updated_at',
+        'id','name','style_name','productid','uid','attrs','attrs2','attrs3','img','text','intro','del','created_at','updated_at',
     ];
-    //attrs：style_name，switch，ismargin，margin1，margin2，margin3，margin4，margin5，margin6，ispadding，ispadding1，ispadding2，ispadding3，ispadding4，ispadding5，ispadding6，width，height，border1，border2，border3，border4，color，font_size，word_spacing，line_height，text_transform，text_align，background，position,left，top，overflow，opacity，
-    //attrs2：style_name2，switch2，ismargin，margin1，margin2，margin3，margin4，margin5，margin6，ispadding，ispadding1，ispadding2，ispadding3，ispadding4，ispadding5，ispadding6，width，height，border1，border2，border3，border4，color，font_size，word_spacing，line_height，text_transform，text_align，background，position,left，top，overflow，opacity，
-    //attrs3：style_name3，switch3，ismargin，margin1，margin2，margin3，margin4，margin5，margin6，ispadding，ispadding1，ispadding2，ispadding3，ispadding4，ispadding5，ispadding6，width，height，border1，border2，border3，border4，color，font_size，word_spacing，line_height，text_transform，text_align，background，position,left，top，overflow，opacity，
-    //text文字：style_name4，switch4，istextmargin，textmargin1，textmargin2，textmargin3，textmargin4，textmargin5，textmargin6，istextpadding，textpadding1，textpadding2，textborder1，textborder2，textborder3，textborder4，text_font_size，text_word_spacing，text_line_height，textcolor，
-    //img图片：style_name5，switch5，ispicmargin，picmargin1，picmargin2，picmargin3，picmargin4，ispicpadding，picpadding1，picpadding2，picpadding3，picpadding4，picborder1，picborder2，picborder3，picborder4，picwidth，picheight，
+    //attrs：switch，ismargin，margin1，margin2，margin3，margin4，margin5，margin6，ispadding，ispadding1，ispadding2，ispadding3，ispadding4，ispadding5，ispadding6，width，height，border1，border2，border3，border4，color，font_size，word_spacing，line_height，text_transform，text_align，background，position,left，top，overflow，opacity，
+    //attrs2：switch2，ismargin，margin1，margin2，margin3，margin4，margin5，margin6，ispadding，ispadding1，ispadding2，ispadding3，ispadding4，ispadding5，ispadding6，width，height，border1，border2，border3，border4，color，font_size，word_spacing，line_height，text_transform，text_align，background，position,left，top，overflow，opacity，updated_at，
+    //attrs3：switch3，ismargin，margin1，margin2，margin3，margin4，margin5，margin6，ispadding，ispadding1，ispadding2，ispadding3，ispadding4，ispadding5，ispadding6，width，height，border1，border2，border3，border4，color，font_size，word_spacing，line_height，text_transform，text_align，background，position,left，top，overflow，opacity，updated_at，
+    //text文字：switch4，istextmargin，textmargin1，textmargin2，textmargin3，textmargin4，textmargin5，textmargin6，istextpadding，textpadding1，textpadding2，textborder1，textborder2，textborder3，textborder4，text_font_size，text_word_spacing，text_line_height，textcolor，updated_at，
+    //img图片：switch5，ispicmargin，picmargin1，picmargin2，picmargin3，picmargin4，ispicpadding，picpadding1，picpadding2，picpadding3，picpadding4，picborder1，picborder2，picborder3，picborder4，picwidth，picheight，updated_at，
 
     //边框类型
     protected $borderDirections = [

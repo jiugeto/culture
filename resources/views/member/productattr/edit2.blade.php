@@ -2,47 +2,14 @@
 @section('content')
     @include('member.common.crumb')
 
-    <form data-am-validator method="POST" action="/member/productattr/{{ $data->id }}" enctype="multipart/form-data">
+    <form data-am-validator method="POST" action="/member/productattr/{{ $data->id }}/update{{ $index }}" enctype="multipart/form-data">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="_method" value="POST">
         <input type="hidden" name="index" value="{{ $index }}">
         <table class="table_create">
             <tr>
-                <td class="field_name"><label>名称：</label></td>
-                <td><input type="text" class="field_value" placeholder="至少2个字符" minlength="2" required name="name" value="{{ $data->name }}"/></td>
-            </tr>
-            {{--<tr><td></td></tr>--}}
-
-            {{--<tr>--}}
-                {{--<td class="field_name"><label>类样式名称：</label></td>--}}
-                {{--<td><input type="text" placeholder="至少2个字符，英文、拼音、字母或数字组合" pattern="^[a-zA-Z0-9_-]+$" required name="style_name" value="{{ $data->style_name }}"/></td>--}}
-            {{--</tr>--}}
-            {{--<tr><td></td></tr>--}}
-
-            <tr>
-                <td class="field_name"><label>产品名称：</label></td>
-                <td>
-                    <select name="productid" required>
-                    @if(count($model->products()))
-                        @foreach($model->products() as $product)
-                            <option value="{{ $product->id }}" {{ $data->productid==$product->id ? 'selected' : '' }}>{{ $product->name }}</option>
-                        @endforeach
-                    @endif
-                    </select>
-                    &nbsp;<a href="/member/product" class="star">产品列表</a>
-                </td>
-            </tr>
-            {{--<tr><td></td></tr>--}}
-
-            <tr>
-                <td class="field_name"><label>简介：</label></td>
-                <td><textarea name="intro" cols="40" rows="5">{{ $data->intro }}</textarea></td>
-            </tr>
-            {{--<tr><td></td></tr>--}}
-
-            <tr>
                 <td class="field_name"><label></label></td>
-                <td><b>以下是一级样式</b></td>
+                <td><b>@if($index==2){{"二级"}}@elseif($index==3){{"三级"}}@elseif($index==4){{"图片"}}@elseif($index==5){{"文字"}}@endif样式修改</b></td>
             </tr>
             {{--<tr><td></td></tr>--}}
 
@@ -64,7 +31,7 @@
             </script>
         </table>
 
-        <table class="table_create attrs" style="width:680px;display:{{$attrs['switch']?'block':'none'}};">
+        <table class="table_create attrs" style="display:{{$attrs['switch']?'block':'none'}};">
             <tr>
                 <td class="field_name"><label>外边距：</label></td>
                 <td class="td_border">
@@ -202,6 +169,7 @@
                 });
             </script>
 
+            @if(in_array($index,[2,3,5]))
             <tr>
                 <td class="field_name"><label>颜色：</label></td>
                 <td><input type="color" title="点击更改颜色" name="color" value="{{ $attrs['color'] }}"></td>
@@ -255,6 +223,7 @@
                 <td><input type="color" title="点击更改颜色" name="background" value="{{ $attrs['background'] }}"></td>
             </tr>
             {{--<tr><td></td></tr>--}}
+            @endif
 
             <tr>
                 <td class="field_name"><label>定位：</label></td>
@@ -295,12 +264,6 @@
             <tr>
                 <td class="field_name"><label>透明度：</label></td>
                 <td><input type="text" placeholder="0透明，100不透明" pattern="\d+" name="opacity" value="{{ $attrs['opacity'] }}"/></td>
-            </tr>
-            {{--<tr><td></td></tr>--}}
-
-            <tr>
-                <td class="field_name"><label>二级样式/三级样式/<br>图片样式/文字样式 *：</label></td>
-                <td>添加后，在列表样式2/样式3/图片样式/文字样式中编辑</td>
             </tr>
             {{--<tr><td></td></tr>--}}
         </table>

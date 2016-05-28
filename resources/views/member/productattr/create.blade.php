@@ -4,6 +4,7 @@
 
     <form data-am-validator method="POST" action="/member/productattr" enctype="multipart/form-data">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="index" value="{{ $index }}">
         <table class="table_create">
             <tr>
                 <td class="field_name"><label>名称：</label></td>
@@ -11,10 +12,10 @@
             </tr>
             {{--<tr><td></td></tr>--}}
 
-            <tr>
-                <td class="field_name"><label>类样式名称：</label></td>
-                <td><input type="text" placeholder="至少2个字符，英文、拼音、字母或数字组合" pattern="^[a-zA-Z0-9_-]+$" required name="style_name"/></td>
-            </tr>
+            {{--<tr>--}}
+                {{--<td class="field_name"><label>类样式名称：</label></td>--}}
+                {{--<td><input type="text" placeholder="至少2个字符，英文、拼音、字母或数字组合" pattern="^[a-zA-Z0-9_-]+$" required name="style_name"/></td>--}}
+            {{--</tr>--}}
             {{--<tr><td></td></tr>--}}
 
             <tr>
@@ -23,7 +24,7 @@
                     <select name="productid" required>
                     @if(count($model->products()))
                         @foreach($model->products() as $product)
-                            <option value="{{ $product->name }}">{{ $product->name }}</option>
+                            <option value="{{ $product->id }}">{{ $product->name }}</option>
                         @endforeach
                     @endif
                     </select>
@@ -32,6 +33,37 @@
             </tr>
             {{--<tr><td></td></tr>--}}
 
+            <tr>
+                <td class="field_name"><label>简介：</label></td>
+                <td><textarea name="intro" cols="40" rows="5"></textarea></td>
+            </tr>
+            {{--<tr><td></td></tr>--}}
+
+            <tr>
+                <td class="field_name"><label></label></td>
+                <td><b>以下是一级样式</b></td>
+            </tr>
+            {{--<tr><td></td></tr>--}}
+
+            <tr>
+                <td class="field_name"><label>样式开关：</label></td>
+                <td>
+                    <label><input type="radio" class="radio" name="switch" value="0"> 不启用&nbsp;&nbsp;&nbsp;</label>
+                    <label><input type="radio" class="radio" name="switch" value="1" checked> 启用&nbsp;&nbsp;&nbsp;</label>
+                </td>
+            </tr>
+            {{--<tr><td></td></tr>--}}
+            <script>
+                $(document).ready(function(){
+                    $("input[name='switch']").click(function(){
+                        if(this.value==0){ $(".attrs").hide(); }
+                        else { $(".attrs").show(); }
+                    });
+                });
+            </script>
+        </table>
+
+        <table class="table_create attrs">
             <tr>
                 <td class="field_name"><label>外边距：</label></td>
                 <td class="td_border">
@@ -224,7 +256,7 @@
             {{--<tr><td></td></tr>--}}
 
             <tr>
-                <td class="field_name"><label>水平对齐方式：</label></td>
+                <td class="field_name"><label>定位：</label></td>
                 <td>
                     <select name="position">
                         @foreach($model['positionTypeNames'] as $kpositionAlignType=>$positionAlignTypeName)
@@ -266,11 +298,13 @@
             {{--<tr><td></td></tr>--}}
 
             <tr>
-                <td class="field_name"><label>简介：</label></td>
-                <td><textarea name="intro" cols="40" rows="5"></textarea></td>
+                <td class="field_name"><label>二级样式/三级样式/<br>图片样式/文字样式 *：</label></td>
+                <td>添加后，在列表样式2/样式3/图片样式/文字样式中编辑</td>
             </tr>
             {{--<tr><td></td></tr>--}}
+        </table>
 
+        <table class="table_create">
             <tr><td colspan="2" style="text-align:center;">
                     <button class="companybtn" onclick="history.go(-1)">返 &nbsp;&nbsp;&nbsp;回</button>
                     <button type="submit" class="companybtn">保存添加</button>

@@ -23,7 +23,7 @@ body { font-family:'微软雅黑'; }
 .mem_leftmenus {
     margin:0;
     padding:0;
-    width:150px;height:1400px;
+    width:150px;height:1500px;
     border-radius:3px;
     border:1px solid lightgrey;
     background:white;
@@ -62,11 +62,11 @@ a:hover li.a_li,a li.a_li_curr {
 
 /*=========右侧账户首页窗口==========*/
 .mem_right {
-    width:830px;height:1402px;
+    width:830px;height:1502px;
 }
 .mem_win {
     padding:10px;
-    width:800px;height:1380px;
+    width:800px;height:1480px;
     background:white;
     border-radius:3px;
     border:1px solid lightgrey;

@@ -33,8 +33,8 @@ Route::group(['prefix'=>'regist'], function(){
 /**
  * 这里是会员路由
  */
-//Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Member'], function(){
-Route::group(['prefix'=>'member','namespace'=>'Member'], function(){
+Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Member'], function(){
+//Route::group(['prefix'=>'member','namespace'=>'Member'], function(){
     //账户首页
     Route::get('/','HomeController@index');
     Route::get('/home','HomeController@index');
@@ -57,6 +57,14 @@ Route::group(['prefix'=>'member','namespace'=>'Member'], function(){
     Route::post('product/{id}','ProductController@update');
     Route::resource('product','ProductController');
         //产品属性
+    Route::get('productattr/{id}/edit2','ProductAttrController@edit2');
+    Route::post('productattr/{id}/update2','ProductAttrController@update2');
+    Route::get('productattr/{id}/edit3','ProductAttrController@edit3');
+    Route::post('productattr/{id}/update3','ProductAttrController@update3');
+    Route::get('productattr/{id}/edit4','ProductAttrController@edit4');
+    Route::post('productattr/{id}/update4','ProductAttrController@update4');
+    Route::get('productattr/{id}/edit5','ProductAttrController@edit5');
+    Route::post('productattr/{id}/update5','ProductAttrController@update5');
     Route::get('productattr/trash','ProductAttrController@trash');
     Route::get('productattr/{id}/destroy','ProductAttrController@destroy');
     Route::get('productattr/{id}/restore','ProductAttrController@restore');

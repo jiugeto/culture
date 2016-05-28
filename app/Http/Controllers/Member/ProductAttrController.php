@@ -10,6 +10,8 @@ class ProductAttrController extends BaseController
      * 会员后台 在线动画 属性管理
      */
 
+    protected $prefix_attr = 'attr_';       //样式属性前缀
+
     public function __construct()
     {
         parent::__construct();
@@ -53,6 +55,7 @@ class ProductAttrController extends BaseController
             'model'=> $this->model,
             'lists'=> $this->lists,
             'curr'=> $curr,
+            'index'=> 1,    //属性级别索引
         ];
         return view('member.productattr.create', $result);
     }
@@ -60,6 +63,9 @@ class ProductAttrController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
+        //属性名：属性前缀+用户ID+产品id+随机值
+        $uid = $this->userid ? $this->userid : 0;
+        $attrs['style_name'] = $this->prefix_attr.$uid.'_'.$request->productid.rand(0,100);
         $data['created_at'] = date('Y-m-d H:i:s', time());
         ProductAttrModel::create($data);
         return redirect('/member/productattr');
@@ -76,16 +82,152 @@ class ProductAttrController extends BaseController
             'model'=> $this->model,
             'lists'=> $this->lists,
             'curr'=> $curr,
+            'index'=> 1,    //属性级别索引
         ];
         return view('member.productattr.edit', $result);
     }
 
     public function update(Request $request,$id)
     {
-        dd($request->all());
         $data = $this->getData($request);
         $data['updated_at'] = date('Y-m-d H:i:s', time());
         ProductAttrModel::where('id',$id)->update($data);
+        return redirect('/member/productattr');
+    }
+
+    /**
+     * 二级样式编辑
+     */
+    public function edit2($id)
+    {
+        $curr['name'] = $this->lists['edit']['name'];
+        $curr['url'] = $this->lists['edit']['url'];
+        $data = ProductAttrModel::find($id);
+        $attrs = $data->attrs2 ? unserialize($data->attrs2) : $this->attrs();
+        $attrs['switch'] = 0;
+        $result = [
+            'data'=> $data,
+            'attrs'=> $attrs,
+            'model'=> $this->model,
+            'lists'=> $this->lists,
+            'curr'=> $curr,
+            'index'=> 2,    //属性级别索引
+        ];
+        return view('member.productattr.edit2', $result);
+    }
+
+    /**
+     * 二级样式更新
+     */
+    public function update2(Request $request, $id)
+    {
+//        dd(2,$request->all());
+        $data = $this->toAttrs($request);
+        $data['updated_at'] = date('Y-m-d H:i:s', time());
+        $data['switch'.$request->index] = $request->switch;
+        ProductAttrModel::where('id',$id)->update(['attrs2'=> serialize($data)]);
+        return redirect('/member/productattr');
+    }
+
+    /**
+     * 三级样式编辑
+     */
+    public function edit3($id)
+    {
+        $curr['name'] = $this->lists['edit']['name'];
+        $curr['url'] = $this->lists['edit']['url'];
+        $data = ProductAttrModel::find($id);
+        $attrs = $data->attrs3 ? unserialize($data->attrs3) : $this->attrs();
+        $attrs['switch'] = 0;
+        $result = [
+            'data'=> $data,
+            'attrs'=> $attrs,
+            'model'=> $this->model,
+            'lists'=> $this->lists,
+            'curr'=> $curr,
+            'index'=> 3,    //属性级别索引
+        ];
+        return view('member.productattr.edit2', $result);
+    }
+
+    /**
+     * 三级样式更新
+     */
+    public function update3(Request $request, $id)
+    {
+//        dd(3,$request->all());
+        $data = $this->toAttrs($request);
+        $data['updated_at'] = date('Y-m-d H:i:s', time());
+        $data['switch'.$request->index] = $request->switch;
+        ProductAttrModel::where('id',$id)->update(['attrs3'=> serialize($data)]);
+        return redirect('/member/productattr');
+    }
+
+    /**
+     * 图片样式编辑
+     */
+    public function edit4($id)
+    {
+        $curr['name'] = $this->lists['edit']['name'];
+        $curr['url'] = $this->lists['edit']['url'];
+        $data = ProductAttrModel::find($id);
+        $attrs = $data->img ? unserialize($data->img) : $this->imgs();
+        $attrs['switch'] = 0;
+        $result = [
+            'data'=> $data,
+            'attrs'=> $attrs,
+            'model'=> $this->model,
+            'lists'=> $this->lists,
+            'curr'=> $curr,
+            'index'=> 4,    //属性级别索引
+        ];
+        return view('member.productattr.edit2', $result);
+    }
+
+    /**
+     * 图片样式更新
+     */
+    public function update4(Request $request, $id)
+    {
+//        dd(4,$request->all());
+        $data = $this->toAttrs($request);
+        $data['updated_at'] = date('Y-m-d H:i:s', time());
+        $data['switch'.$request->index] = $request->switch;
+        ProductAttrModel::where('id',$id)->update(['img'=> serialize($data)]);
+        return redirect('/member/productattr');
+    }
+
+    /**
+     * 文字样式编辑
+     */
+    public function edit5($id)
+    {
+        $curr['name'] = $this->lists['edit']['name'];
+        $curr['url'] = $this->lists['edit']['url'];
+        $data = ProductAttrModel::find($id);
+        $attrs = $data->text ? unserialize($data->text) : $this->attrs();
+        $attrs['switch'] = 0;
+        $result = [
+            'data'=> $data,
+            'attrs'=> $attrs,
+            'model'=> $this->model,
+            'lists'=> $this->lists,
+            'curr'=> $curr,
+            'index'=> 5,    //属性级别索引
+        ];
+        return view('member.productattr.edit2', $result);
+    }
+
+    /**
+     * 文字样式更新
+     */
+    public function update5(Request $request, $id)
+    {
+//        dd(5,$request->all());
+        $data = $this->toAttrs($request);
+        $data['updated_at'] = date('Y-m-d H:i:s', time());
+        $data['switch'.$request->index] = $request->switch;
+        ProductAttrModel::where('id',$id)->update(['text'=> serialize($data)]);
         return redirect('/member/productattr');
     }
 
@@ -97,6 +239,10 @@ class ProductAttrController extends BaseController
         $result = [
             'data'=> $data,
             'attrs'=> $this->getAttrs($data),
+            'attrs2'=> $this->getAttrs2($data),
+            'attrs3'=> $this->getAttrs3($data),
+            'pics'=> $this->getImg($data),
+            'texts'=> $this->getText($data),
             'model'=> $this->model,
             'lists'=> $this->lists,
             'curr'=> $curr,
@@ -129,6 +275,23 @@ class ProductAttrController extends BaseController
      * 数据收集
      */
     public function getData(Request $request)
+    {
+        $attrs = $this->toAttrs($request);
+        if ($request->index==1) { $switch = 'switch'; }else{ $switch = 'switch'.$request->index; }
+        $attrs[$switch] = $request->switch;
+        $data = [
+            'name'=> $request->name,
+            'productid'=> $request->productid,
+            'attrs'=> serialize($attrs),
+            'intro'=> $request->intro,
+        ];
+        return $data;
+    }
+
+    /**
+     * 属性收集
+     */
+    public function toAttrs(Request $request)
     {
         //外边距：margin1上下，margin2左右，
         if ($request->ismargin==2) { $request->margin1 = 'auto'; $request->margin2 = 'auto'; }
@@ -166,9 +329,8 @@ class ProductAttrController extends BaseController
                 echo "<script>alert('边框宽度、类型、颜色必填！');history.go(-1);</script>";exit;
             }
         }
-        $attrs = [
-            'style_name'=> $request->style_name,
-            'ismargin'=> $request->iamargin,
+        $attrs =  array(
+            'ismargin'=> $request->ismargin,
             'margin1'=> $request->margin1,
             'margin2'=> $request->margin2,
             'margin3'=> $request->margin3,
@@ -176,39 +338,34 @@ class ProductAttrController extends BaseController
             'margin5'=> $request->margin5,
             'margin6'=> $request->margin6,
             'ispadding'=> $request->ispadding,
-            'padding1'=> $request->ispadding1,
-            'padding2'=> $request->ispadding2,
-            'padding3'=> $request->ispadding3,
-            'padding4'=> $request->ispadding4,
-            'padding5'=> $request->ispadding5,
-            'padding6'=> $request->ispadding6,
+            'padding1'=> $request->padding1,
+            'padding2'=> $request->padding2,
+            'padding3'=> $request->padding3,
+            'padding4'=> $request->padding4,
+            'padding5'=> $request->padding5,
+            'padding6'=> $request->padding6,
             'width'=> $request->width,
             'height'=> $request->height,
             'border1'=> $request->border1,
             'border2'=> $request->border2,
             'border3'=> $request->border3,
             'border4'=> $request->border4,
-            'color'=> $request->color,
-            'font_size'=> $request->font_size,
-            'word_spacing'=> $request->word_spacing,
-            'line_height'=> $request->line_height,
-            'text_transform'=> $request->text_transform,
-            'text_align'=> $request->text_align,
-            'background'=> $request->background,
             'position'=> $request->position,
             'left'=> $request->left,
             'top'=> $request->top,
             'overflow'=> $request->overflow,
             'opacity'=> $request->opacity,
-        ];
-        $data = [
-            'name'=> $request->name,
-            'style_name'=> $request->style_name,
-            'productid'=> $request->productid,
-            'attrs'=> serialize($attrs),
-            'intro'=> $request->intro,
-        ];
-        return $data;
+        );
+        if (in_array($request->index,[1,2,3,5])) {
+            $attrs['color'] = $request->color;
+            $attrs['font_size'] = $request->font_size;
+            $attrs['word_spacing'] = $request->word_spacing;
+            $attrs['line_height'] = $request->line_height;
+            $attrs['text_transform'] = $request->text_transform;
+            $attrs['text_align'] = $request->text_align;
+            $attrs['background'] = $request->background;
+        }
+        return $attrs;
     }
 
     /**
@@ -222,48 +379,134 @@ class ProductAttrController extends BaseController
     }
 
     /**
-     * 转换数据
+     * 转换数据 attrs
      */
     public function getAttrs($data)
     {
-        $data->attrs = $data->attrs?unserialize($data->attrs):[];
-        if (!$data->attrs) {
-            $attrs = [
-                'style_name'=> '',
-                'ismargin'=> '',
-                'margin1'=> '',
-                'margin2'=> '',
-                'margin3'=> '',
-                'margin4'=> '',
-                'margin5'=> '',
-                'margin6'=> '',
-                'ispadding'=> '',
-                'padding1'=> '',
-                'padding2'=> '',
-                'padding3'=> '',
-                'padding4'=> '',
-                'padding5'=> '',
-                'padding6'=> '',
-                'width'=> '',
-                'height'=> '',
-                'border1'=> '',
-                'border2'=> '',
-                'border3'=> '',
-                'border4'=> '',
-                'color'=> '',
-                'font_size'=> '',
-                'word_spacing'=> '',
-                'line_height'=> '',
-                'text_transform'=> '',
-                'text_align'=> '',
-                'background'=> '',
-                'position'=> '',
-                'left'=> '',
-                'top'=> '',
-                'overflow'=> '',
-                'opacity'=> '',
-            ];
-        }
+        $attrs = $data->attrs?unserialize($data->attrs):[];
+        if (!$attrs) { $attrs = $this->attrs(); $attrs['switch'] = 0; }
         return $attrs;
+    }
+
+    /**
+     * 转换数据 attrs2
+     */
+    public function getAttrs2($data)
+    {
+        $attrs = $data->attrs2?unserialize($data->attrs2):[];
+        if (!$attrs) { $attrs = $this->attrs(); $attrs['switch'] = 0; }
+        return $attrs;
+    }
+
+    /**
+     * 转换数据 attrs3
+     */
+    public function getAttrs3($data)
+    {
+        $attrs = $data->attrs3?unserialize($data->attrs3):[];
+        if (!$attrs) { $attrs = $this->attrs(); $attrs['switch'] = 0; }
+        return $attrs;
+    }
+
+    /**
+     * 转换数据 img
+     */
+    public function getImg($data)
+    {
+        $attrs = $data->img?unserialize($data->img):[];
+        if (!$attrs) { $attrs = $this->attrs(); $attrs['switch'] = 0; }
+        return $attrs;
+    }
+
+    /**
+     * 转换数据 text
+     */
+    public function getText($data)
+    {
+        $attrs = $data->text?unserialize($data->text):[];
+        if (!$attrs) { $attrs = $this->attrs(); $attrs['switch'] = 0; }
+        return $attrs;
+    }
+
+    /**
+     * 初始化 attrs
+     */
+    public function attrs()
+    {
+        return array(
+            'ismargin'=> '',
+            'margin1'=> '',
+            'margin2'=> '',
+            'margin3'=> '',
+            'margin4'=> '',
+            'margin5'=> '',
+            'margin6'=> '',
+            'ispadding'=> '',
+            'padding1'=> '',
+            'padding2'=> '',
+            'padding3'=> '',
+            'padding4'=> '',
+            'padding5'=> '',
+            'padding6'=> '',
+            'width'=> '',
+            'height'=> '',
+            'border1'=> '',
+            'border2'=> '',
+            'border3'=> '',
+            'border4'=> '',
+            'color'=> '',
+            'font_size'=> '',
+            'word_spacing'=> '',
+            'line_height'=> '',
+            'text_transform'=> '',
+            'text_align'=> '',
+            'background'=> '',
+            'position'=> '',
+            'left'=> '',
+            'top'=> '',
+            'overflow'=> '',
+            'opacity'=> '',
+        );
+    }
+
+    /**
+     * 初始化 imgs
+     */
+    public function imgs()
+    {
+        return array(
+            'ismargin'=> '',
+            'margin1'=> '',
+            'margin2'=> '',
+            'margin3'=> '',
+            'margin4'=> '',
+            'margin5'=> '',
+            'margin6'=> '',
+            'ispadding'=> '',
+            'padding1'=> '',
+            'padding2'=> '',
+            'padding3'=> '',
+            'padding4'=> '',
+            'padding5'=> '',
+            'padding6'=> '',
+            'width'=> '',
+            'height'=> '',
+            'border1'=> '',
+            'border2'=> '',
+            'border3'=> '',
+            'border4'=> '',
+//            'color'=> '',
+//            'font_size'=> '',
+//            'word_spacing'=> '',
+//            'line_height'=> '',
+//            'text_transform'=> '',
+//            'text_align'=> '',
+//            'background'=> '',
+            'position'=> '',
+            'left'=> '',
+            'top'=> '',
+            'overflow'=> '',
+            'opacity'=> '',
+        );
     }
 }

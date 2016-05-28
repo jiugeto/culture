@@ -17,6 +17,20 @@
             <td>{{ $data->product() }}</td>
         </tr>
         <tr>
+            <td class="field_name">简介：</td>
+            <td>{{ $data->intro ? $data->intro : '无' }}</td>
+        </tr>
+        <tr>
+            <td class="field_name">创建时间：</td>
+            <td>{{ $data->created_at }}</td>
+        </tr>
+        <tr>
+            <td class="field_name">更新时间：</td>
+            <td>{{ $data->updated_at!='0000-00-00 00:00:00' ? $data->updated_at : '未更新' }}</td>
+        </tr>
+    </table>
+    <table class="table_create table_show" cellspacing="0" cellpadding="0">
+        <tr>
             <td class="field_name">外边距：</td>
             <td>
                 @if($attrs['ismargin']==1) 无
@@ -107,18 +121,8 @@
             <td class="field_name">透明度：</td>
             <td>{{ $attrs['opacity'] }}</td>
         </tr>
-        <tr>
-            <td class="field_name">简介：</td>
-            <td>{{ $data->intro ? $data->intro : '无' }}</td>
-        </tr>
-        <tr>
-            <td class="field_name">创建时间：</td>
-            <td>{{ $data->created_at }}</td>
-        </tr>
-        <tr>
-            <td class="field_name">更新时间：</td>
-            <td>{{ $data->updated_at!='0000-00-00 00:00:00' ? $data->updated_at : '未更新' }}</td>
-        </tr>
+    </table>
+    <table class="table_create table_show" cellspacing="0" cellpadding="0">
         <tr><td class="center" colspan="2" style="border:0;cursor:pointer;">
                 {{--<a class="list_btn" onclick="history.go(-1)">返回</a>--}}
                 <button class="companybtn" onclick="history.go(-1)">返 &nbsp;回</button>
