@@ -7,22 +7,22 @@
         /*================================*/
         .img2 { margin:0 auto; width:960px; height:540px; position:relative; top:-540px; }
         .img2 div.pos { padding-left:5px; width:230px; height:520px; float:left; overflow:hidden; }
-        .img2 div.pos div.dh { width:230px; height:520px; overflow:hidden; position:relative; left:500px; opacity:0; }
+        .img2 div.dh { width:230px; height:520px; overflow:hidden; position:relative; left:500px; opacity:0; }
         .img2 div.pos img { height:520px; }
         /*================================*/
         .img3 { margin:0 auto; width:960px; height:540px; position:relative; top:-1080px; }
         .img3 div.pos { padding-left:5px; width:470px; height:520px; float:left; overflow:hidden; }
-        .img3 div.pos div.dh { width:470px; height:520px; overflow:hidden; position:relative; left:250px; opacity:0; }
+        .img3 div.dh { width:470px; height:520px; overflow:hidden; position:relative; left:250px; opacity:0; }
         .img3 div.pos img { height:520px; }
         /*================================*/
         .img4 { margin:0 auto; width:960px; height:540px; position:relative; top:-2720px; }
         .img4 div.pos { padding:5px; width:950px; height:530px; }
-        .img4 div.pos div.dh { width:950px; height:530px; overflow:hidden; position:relative; top:0px; }
+        .img4 div.dh { width:950px; height:530px; overflow:hidden; position:relative; top:0px; }
         .img4 div.pos img { height:540px; }
         /*================================*/
         .img5 { margin:0 auto; width:1920px; height:540px; position:relative; top:-3260px; }
         .img5 div.pos { width:1920px; height:540px; }
-        .img5 div.pos div.dh { width:960px; height:540px; float:left; overflow:hidden; position:relative; top:0px; }
+        .img5 div.dh { width:960px; height:540px; float:left; overflow:hidden; position:relative; top:0px; }
         .img5 div.pos img { height:540px; }
         /*================================*/
         .end { width:960px; height:540px; position:relative; top:-3260px; }
@@ -42,7 +42,7 @@
             /*animation-iteration-count:infinite;*/
             animation-fill-mode:forwards;
         }
-        .img2 .pos div.dh {
+        .img2 div.dh {
             animation-name:animate2;
             animation-play-state:paused;
             animation-duration:3s;
@@ -50,7 +50,7 @@
             animation-delay:1s;
             animation-fill-mode:forwards;
         }
-        .img3 .pos div.dh {
+        .img3 div.dh {
             animation-name:animate3;
             animation-play-state:paused;
             animation-duration:3s;
@@ -58,7 +58,7 @@
             animation-delay:3s;
             animation-fill-mode:forwards;
         }
-        .img4 .pos div.dh {
+        .img4 div.dh {
             animation-name:animate4;
             animation-play-state:paused;
             animation-duration:6.5s;
@@ -66,7 +66,7 @@
             animation-delay:5.5s;
             animation-fill-mode:forwards;
         }
-        .img5 .pos div.dh {
+        .img5 div.dh {
             animation-name:animate5;
             animation-play-state:paused;
             animation-duration:6s;

@@ -75,7 +75,7 @@ class ProductConController extends BaseController
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
-        return view('member.productcon.create', $result);
+        return view('member.productcon.edit', $result);
     }
 
     public function update(Request $request,$id)
@@ -84,6 +84,19 @@ class ProductConController extends BaseController
         $data['updated_at'] = date('Y-m-d H:i:s', time());
         ProductConModel::where('id',$id)->update($data);
         return redirect('/member/productcon');
+    }
+
+    public function show($id)
+    {
+        $curr['name'] = $this->lists['show']['name'];
+        $curr['url'] = $this->lists['show']['url'];
+        $result = [
+            'data'=> ProductConModel::find($id),
+            'model'=> $this->model,
+            'lists'=> $this->lists,
+            'curr'=> $curr,
+        ];
+        return view('member.productcon.show', $result);
     }
 
     public function destroy($id)
@@ -112,24 +125,15 @@ class ProductConController extends BaseController
      */
     public function getData(Request $request)
     {
-        if (!$request->pic_id || !$request->name) {
+        if (!$request->pic_id && !$request->name) {
             echo "<script>alert('图片、文字必须填选一个！');history.go(-1);</script>";exit;
         }
-        //图片样式
-        if ($request->isPicAttr) {
-            $pic_attr = [];
-        }
-        //文字样式
-        if ($request->isTextAttr) {
-            $pic_attr = [];
-        }
         $data = [
+            'genre'=> $request->genre,
+            'pic_id'=> $request->pic_id,
             'name'=> $request->name,
             'productid'=> $request->productid,
             'attrid'=> $request->attrid,
-            'genre'=> $request->genre,
-            'pic_attr'=> isset($pic_attr)?serialize($pic_attr):'',
-            'text_attr'=> isset($text_attr)?serialize($text_attr):'',
             'intro'=> $request->intro,
         ];
         return $data;
@@ -144,4 +148,14 @@ class ProductConController extends BaseController
             ->orderBy('id','desc')
             ->paginate($this->limit);
     }
+
+    /**
+     * 图片样式
+     */
+    public function picAttrs(){}
+
+    /**
+     * 文字样式
+     */
+    public function textAttrs(){}
 }

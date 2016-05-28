@@ -65,7 +65,7 @@ class ProductAttrController extends BaseController
         $data = $this->getData($request);
         //属性名：属性前缀+用户ID+产品id+随机值
         $uid = $this->userid ? $this->userid : 0;
-        $attrs['style_name'] = $this->prefix_attr.$uid.'_'.$request->productid.rand(0,100);
+        $attrs['style_name'] = $this->prefix_attr.$uid.'_'.$request->productid.rand(0,1000);
         $data['created_at'] = date('Y-m-d H:i:s', time());
         ProductAttrModel::create($data);
         return redirect('/member/productattr');
@@ -519,13 +519,6 @@ class ProductAttrController extends BaseController
             'border2'=> '',
             'border3'=> '',
             'border4'=> '',
-//            'color'=> '',
-//            'font_size'=> '',
-//            'word_spacing'=> '',
-//            'line_height'=> '',
-//            'text_transform'=> '',
-//            'text_align'=> '',
-//            'background'=> '',
             'position'=> '',
             'left'=> '',
             'top'=> '',

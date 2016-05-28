@@ -57,6 +57,7 @@ class ProductAttrController extends BaseController
             'model'=> $this->model,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
+            'index'=> 1,        //一级样式
         ];
        return view('admin.productAttr.create', $result);
     }
@@ -64,6 +65,9 @@ class ProductAttrController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
+        //类样式名称相同自动添加：属性前缀+用户id_+产品id_+随机值
+        $uid = 0;
+        $data['style_name'] = $this->prefix_attr.$uid.'_'.$request->productid.'_'.rand(0,1000);
         $data['created_at'] = date('Y-m-d H:i:s', time());
         ProductAttrModel::create($data);
         return redirect('/admin/productattr');
@@ -74,16 +78,16 @@ class ProductAttrController extends BaseController
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
         $data = ProductAttrModel::find($id);
+        $attrs = $data->attrs ? unserialize($data->attrs) : $this->attrs();
+        $attrs['switch'] = isset($attrs['switch']) ? $attrs['switch'] : 0;
         $result = [
             'data'=> $data,
-            'attrs'=> $this->getAttrs($data),
-            'textAttr'=> $this->getTextAttr($data),
-            'picAttr'=> $this->getPicAttr($data),
+            'attrs'=> $attrs,
             'model'=> $this->model,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
+            'index'=> 1,        //一级样式
         ];
-//        dd($this->getAttrs($data),$this->model['marginTypes']);
         return view('admin.productAttr.edit', $result);
     }
 
@@ -95,21 +99,176 @@ class ProductAttrController extends BaseController
         return redirect('/admin/productattr');
     }
 
-    public function show($id)
+    public function edit2($id)
     {
-        $curr['name'] = $this->crumb['show']['name'];
-        $curr['url'] = $this->crumb['show']['url'];
+        $curr['name'] = $this->crumb['edit']['name'];
+        $curr['url'] = $this->crumb['edit']['url'];
         $data = ProductAttrModel::find($id);
+        $attrs = $data->attrs2 ? unserialize($data->attrs2) : $this->attrs();
+        $attrs['switch'] = isset($attrs['switch2']) ? $attrs['switch2'] : 0;
         $result = [
             'data'=> $data,
-            'attrs'=> $this->getAttrs($data),
-            'textAttr'=> $this->getTextAttr($data),
-            'picAttr'=> $this->getPicAttr($data),
+            'attrs'=> $attrs,
             'model'=> $this->model,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
+            'index'=> 2,        //一级样式
         ];
-        return view('admin.productAttr.show', $result);
+        return view('admin.productAttr.edit2', $result);
+    }
+
+    /**
+     * 二级样式更新
+     */
+    public function update2(Request $request, $id)
+    {
+//        dd(2,$request->all());
+        $data = $this->toAttrs($request);
+        $data['updated_at'] = date('Y-m-d H:i:s', time());
+        $data['switch'.$request->index] = $request->switch;
+        ProductAttrModel::where('id',$id)->update(['attrs2'=> serialize($data)]);
+        return redirect('/admin/productattr');
+    }
+
+    /**
+     * 三级样式编辑
+     */
+    public function edit3($id)
+    {
+        $curr['name'] = $this->lists['edit']['name'];
+        $curr['url'] = $this->lists['edit']['url'];
+        $data = ProductAttrModel::find($id);
+        $attrs = $data->attrs3 ? unserialize($data->attrs3) : $this->attrs();
+        $attrs['switch'] = isset($attrs['switch3']) ? $attrs['switch3'] : 0;
+        $result = [
+            'data'=> $data,
+            'attrs'=> $attrs,
+            'model'=> $this->model,
+            'lists'=> $this->lists,
+            'curr'=> $curr,
+            'index'=> 3,    //属性级别索引
+        ];
+        return view('admin.productattr.edit2', $result);
+    }
+
+    /**
+     * 三级样式更新
+     */
+    public function update3(Request $request, $id)
+    {
+//        dd(3,$request->all());
+        $data = $this->toAttrs($request);
+        $data['updated_at'] = date('Y-m-d H:i:s', time());
+        $data['switch'.$request->index] = $request->switch;
+        ProductAttrModel::where('id',$id)->update(['attrs3'=> serialize($data)]);
+        return redirect('/admin/productattr');
+    }
+
+    /**
+     * 图片样式编辑
+     */
+    public function edit4($id)
+    {
+        $curr['name'] = $this->lists['edit']['name'];
+        $curr['url'] = $this->lists['edit']['url'];
+        $data = ProductAttrModel::find($id);
+        $attrs = $data->img ? unserialize($data->img) : $this->imgs();
+        $attrs['switch'] = isset($attrs['switch4']) ? $attrs['switch4'] : 0;
+        $result = [
+            'data'=> $data,
+            'attrs'=> $attrs,
+            'model'=> $this->model,
+            'lists'=> $this->lists,
+            'curr'=> $curr,
+            'index'=> 4,    //属性级别索引
+        ];
+        return view('admin.productattr.edit2', $result);
+    }
+
+    /**
+     * 图片样式更新
+     */
+    public function update4(Request $request, $id)
+    {
+//        dd(4,$request->all());
+        $data = $this->toAttrs($request);
+        $data['updated_at'] = date('Y-m-d H:i:s', time());
+        $data['switch'.$request->index] = $request->switch;
+        ProductAttrModel::where('id',$id)->update(['img'=> serialize($data)]);
+        return redirect('/admin/productattr');
+    }
+
+    /**
+     * 文字样式编辑
+     */
+    public function edit5($id)
+    {
+        $curr['name'] = $this->lists['edit']['name'];
+        $curr['url'] = $this->lists['edit']['url'];
+        $data = ProductAttrModel::find($id);
+        $attrs = $data->text ? unserialize($data->text) : $this->attrs();
+        $attrs['switch'] = isset($attrs['switch5']) ? $attrs['switch5'] : 0;
+        $result = [
+            'data'=> $data,
+            'attrs'=> $attrs,
+            'model'=> $this->model,
+            'lists'=> $this->lists,
+            'curr'=> $curr,
+            'index'=> 5,    //属性级别索引
+        ];
+        return view('admin.productattr.edit2', $result);
+    }
+
+    /**
+     * 文字样式更新
+     */
+    public function update5(Request $request, $id)
+    {
+//        dd(5,$request->all());
+        $data = $this->toAttrs($request);
+        $data['updated_at'] = date('Y-m-d H:i:s', time());
+        $data['switch'.$request->index] = $request->switch;
+        ProductAttrModel::where('id',$id)->update(['text'=> serialize($data)]);
+        return redirect('/admin/productattr');
+    }
+
+    public function show($id)
+    {
+        $curr['name'] = $this->lists['show']['name'];
+        $curr['url'] = $this->lists['show']['url'];
+        $data = ProductAttrModel::find($id);
+        $result = [
+            'data'=> $data,
+            'attrs'=> $data->attrs ? unserialize($data->attrs) : [],
+            'attrs2'=> $data->attrs2 ? unserialize($data->attrs2) : [],
+            'attrs3'=> $data->attrs3 ? unserialize($data->attrs3) : [],
+            'pics'=> $data->img ? unserialize($data->img) : [],
+            'texts'=> $data->text ? unserialize($data->text) : [],
+            'lists'=> $this->lists,
+            'curr'=> $curr,
+        ];
+        return view('admin.productattr.show', $result);
+    }
+
+    public function show2($id,$index)
+    {
+        $curr['name'] = $this->lists['show']['name'];
+        $curr['url'] = $this->lists['show']['url'];
+        $data = ProductAttrModel::find($id);
+        if ($index==1) { $attrs = $this->getAttrs($data); }
+        elseif ($index==2) { $attrs = $this->getAttrs2($data); }
+        elseif ($index==3) { $attrs = $this->getAttrs3($data); }
+        elseif ($index==4) { $attrs = $this->getImg($data); }
+        elseif ($index==5) { $attrs = $this->getText($data); }
+        $result = [
+            'data'=> $data,
+            'attrs'=> isset($attrs) ? $attrs : [],
+            'model'=> $this->model,
+            'lists'=> $this->lists,
+            'curr'=> $curr,
+            'index'=> $index,
+        ];
+        return view('admin.productattr.show2', $result);
     }
 
     public function destroy($id)
@@ -141,36 +300,26 @@ class ProductAttrController extends BaseController
      */
 
     /**
-     * 收集数据
+     * 数据收集
      */
     public function getData(Request $request)
     {
-        $productAttr = [
+        $attrs = $this->toAttrs($request);
+        if ($request->index==1) { $switch = 'switch'; }else{ $switch = 'switch'.$request->index; }
+        $attrs[$switch] = $request->switch;
+        $data = [
             'name'=> $request->name,
-            'style_name'=> $this->prefix_attr.$request->style_name,     //加个前缀好区分
             'productid'=> $request->productid,
-            'attrs'=> serialize($this->toAttrs($request)),
-            'text'=> serialize($this->toTextAttr($request)),
-            'img'=> serialize($this->toPicAttr($request)),
+            'attrs'=> serialize($attrs),
             'intro'=> $request->intro,
         ];
-        return $productAttr;
+        return $data;
     }
 
     /**
-     * 查询方法
+     * 属性收集
      */
-    public function query($del)
-    {
-        return ProductAttrModel::where('del',$del)
-            ->orderBy('id','desc')
-            ->paginate($this->limit);
-    }
-
-    /**
-     * 总的样式属性处理
-     */
-    public function toAttrs($request)
+    public function toAttrs(Request $request)
     {
         //外边距：margin1上下，margin2左右，
         if ($request->ismargin==2) { $request->margin1 = 'auto'; $request->margin2 = 'auto'; }
@@ -188,11 +337,11 @@ class ProductAttrController extends BaseController
             }
         }
         //内边距margin1上下，margin2左右，
-        if ($request->ispadding==2) { $request->padding1 = 'auto'; $request->padding2 = 'auto'; }
         if ($request->ispadding==3) {
             $request->padding1 = 'auto';
             if ($request->padding2=='') { echo "<script>alert('左右内边距必填！');history.go(-1);</script>";exit; }
         }
+        if ($request->ispadding==3) { $request->padding1 = 'auto'; $request->padding2 = 'auto'; }
         if ($request->ispadding==4) {
             $request->padding2 = 'auto';
             if ($request->padding1=='') { echo "<script>alert('上下内边距必填！');history.go(-1);</script>";exit; }
@@ -208,9 +357,7 @@ class ProductAttrController extends BaseController
                 echo "<script>alert('边框宽度、类型、颜色必填！');history.go(-1);</script>";exit;
             }
         }
-        //组合样式
-        $attrs = [
-            'switch0'=> $request->switch0,
+        $attrs =  array(
             'ismargin'=> $request->ismargin,
             'margin1'=> $request->margin1,
             'margin2'=> $request->margin2,
@@ -231,270 +378,160 @@ class ProductAttrController extends BaseController
             'border2'=> $request->border2,
             'border3'=> $request->border3,
             'border4'=> $request->border4,
-            'color'=> $request->color,
-            'font_size'=> $request->font_size,
-            'word_spacing'=> $request->word_spacing,
-            'line_height'=> $request->line_height,
-            'text_transform'=> $request->text_transform,
-            'text_align'=> $request->text_align,
-            'background'=> $request->background,
-            'position'=> $request->postion,
+            'position'=> $request->position,
             'left'=> $request->left,
             'top'=> $request->top,
             'overflow'=> $request->overflow,
             'opacity'=> $request->opacity,
-        ];
+        );
+        if (in_array($request->index,[1,2,3,5])) {
+            $attrs['iscolor'] = $request->iscolor;
+            $attrs['color'] = $request->color;
+            $attrs['font_size'] = $request->font_size;
+            $attrs['word_spacing'] = $request->word_spacing;
+            $attrs['line_height'] = $request->line_height;
+            $attrs['text_transform'] = $request->text_transform;
+            $attrs['text_align'] = $request->text_align;
+            $attrs['isbackground'] = $request->isbackground;
+            $attrs['background'] = $request->background;
+        }
         return $attrs;
     }
 
     /**
-     * 文字样式属性处理
+     * 查询方法
      */
-    public function toTextAttr($request)
+    public function query($del)
     {
-        //外边距：textmargin1上下，textmargin2左右，
-        if ($request->istextmargin==2) { $request->textmargin1 = 'auto'; $request->textmargin2 = 'auto'; }
-        if ($request->istextmargin==3) {
-            $request->textmargin1 = 'auto';
-            if ($request->textmargin2=='') { echo "<script>alert('左右外边距必填！');history.go(-1);</script>";exit; }
-        }
-        if ($request->istextmargin==4) {
-            $request->textmargin2 = 'auto';
-            if ($request->textmargin1=='') { echo "<script>alert('上下外边距必填！');history.go(-1);</script>";exit; }
-        }
-        if ($request->istextmargin==5) {
-            if ($request->textmargin3=='' || $request->textmargin4=='' || $request->textmargin5=='' || $request->textmargin6=='') {
-                echo "<script>alert('上下左右外边距必填！');history.go(-1);</script>";exit;
-            }
-        }
-        //内边距textpadding1上下，textpadding2左右，
-        if ($request->istextpadding==2) { $request->textpadding1 = 'auto'; $request->textpadding2 = 'auto'; }
-        if ($request->istextpadding==3) {
-            $request->textpadding1 = 'auto';
-            if ($request->textpadding2=='') { echo "<script>alert('左右内边距必填！');history.go(-1);</script>";exit; }
-        }
-        if ($request->istextpadding==4) {
-            $request->textpadding2 = 'auto';
-            if ($request->textpadding1=='') { echo "<script>alert('上下内边距必填！');history.go(-1);</script>";exit; }
-        }
-        if ($request->istextpadding==5) {
-            if ($request->textpadding3=='' || $request->textpadding4=='' || $request->textpadding5=='' || $request->textpadding6=='') {
-                echo "<script>alert('上下左右内边距必填！');history.go(-1);</script>";exit;
-            }
-        }
-        //边框
-        if ($request->textborder1) {
-            if (!$request->textborder2 || !$request->textborder3 || !$request->textborder4) {
-                echo "<script>alert('边框宽度、类型、颜色必填！');history.go(-1);</script>";exit;
-            }
-        }
-        $textAttr = [
-            'switch1'=> $request->switch1,
-            'istextmargin'=> $request->istextmargin,
-            'textmargin1'=> $request->textmargin1,
-            'textmargin2'=> $request->textmargin2,
-            'textmargin3'=> $request->textmargin3,
-            'textmargin4'=> $request->textmargin4,
-            'textmargin5'=> $request->textmargin5,
-            'textmargin6'=> $request->textmargin6,
-            'istextpadding'=> $request->istextpadding,
-            'textpadding1'=> $request->textpadding1,
-            'textpadding2'=> $request->textpadding2,
-            'textpadding3'=> $request->textpadding3,
-            'textpadding4'=> $request->textpadding4,
-            'textpadding5'=> $request->textpadding5,
-            'textpadding6'=> $request->textpadding6,
-            'textcolor'=> $request->textcolor,
-            'font_size'=> $request->font_size,
-            'word_spacing'=> $request->word_spacing,
-            'line_height'=> $request->line_height,
-            'text_transform'=> $request->text_transform,
-            'text_align'=> $request->text_align,
-            'background'=> $request->background,
-        ];
-        return $textAttr;
+        return ProductAttrModel::where('del',$del)
+            ->orderBy('id','desc')
+            ->paginate($this->limit);
     }
 
     /**
-     * 图片样式属性处理
-     */
-    public function toPicAttr($request)
-    {
-        //外边距：picmargin1上下，picmargin2左右，
-        if ($request->ispicmargin==2) { $request->picmargin1 = 'auto'; $request->picmargin2 = 'auto'; }
-        if ($request->ispicmargin==3) {
-            $request->picmargin1 = 'auto';
-            if ($request->picmargin2=='') { echo "<script>alert('左右外边距必填！');history.go(-1);</script>";exit; }
-        }
-        if ($request->ispicmargin==4) {
-            $request->picmargin2 = 'auto';
-            if ($request->picmargin1=='') { echo "<script>alert('上下外边距必填！');history.go(-1);</script>";exit; }
-        }
-        if ($request->ispicmargin==5) {
-            if ($request->picmargin3=='' || $request->picmargin4=='' || $request->picmargin5=='' || $request->picmargin6=='') {
-                echo "<script>alert('上下左右外边距必填！');history.go(-1);</script>";exit;
-            }
-        }
-        //内边距picpadding1上下，picpadding2左右，
-        if ($request->ispicpadding==2) { $request->picpadding1 = 'auto'; $request->picpadding2 = 'auto'; }
-        if ($request->ispicpadding==3) {
-            $request->picpadding1 = 'auto';
-            if ($request->picpadding2=='') { echo "<script>alert('左右内边距必填！');history.go(-1);</script>";exit; }
-        }
-        if ($request->ispicpadding==4) {
-            $request->picpadding2 = 'auto';
-            if ($request->picpadding1=='') { echo "<script>alert('上下内边距必填！');history.go(-1);</script>";exit; }
-        }
-        if ($request->ispicpadding==5) {
-            if ($request->picpadding3=='' || $request->picpadding4=='' || $request->picpadding5=='' || $request->picpadding6=='') {
-                echo "<script>alert('上下左右内边距必填！');history.go(-1);</script>";exit;
-            }
-        }
-        //边框
-        if ($request->picborder1) {
-            if (!$request->picborder2 || !$request->picborder3 || !$request->picborder4) {
-                echo "<script>alert('边框宽度、类型、颜色必填！');history.go(-1);</script>";exit;
-            }
-        }
-        $picAttr = [
-            'switch2'=> $request->switch2,
-            'ispicmargin'=> $request->ispicmargin,
-            'picmargin1'=> $request->picmargin1,
-            'picmargin2'=> $request->picmargin2,
-            'picmargin3'=> $request->picmargin3,
-            'picmargin4'=> $request->picmargin4,
-            'picmargin5'=> $request->picmargin5,
-            'picmargin6'=> $request->picmargin6,
-            'ispicpadding'=> $request->ispicpadding,
-            'picpadding1'=> $request->picpadding1,
-            'picpadding2'=> $request->picpadding2,
-            'picpadding3'=> $request->picpadding3,
-            'picpadding4'=> $request->picpadding4,
-            'picpadding5'=> $request->picpadding5,
-            'picpadding6'=> $request->picpadding6,
-            'picborder1'=> $request->picborder1,
-            'picborder2'=> $request->picborder2,
-            'picborder3'=> $request->picborder3,
-            'picborder4'=> $request->picborder4,
-            'picwidth'=> $request->picwidth,
-            'picheight'=> $request->picheight,
-        ];
-        return $picAttr;
-    }
-
-    /**
-     * 初始化总的属性
+     * 转换数据 attrs
      */
     public function getAttrs($data)
     {
-        $attrs = $data->attrs ? unserialize($data->attrs) : [];
-        if (!isset($attrs['switch0']) || !(isset($attrs['switch0']) && $attrs['switch0'])) {
-            $attrs = [
-                'switch0'=> 0,
-                'ismargin'=> 1,
-                'margin1'=> '',
-                'margin2'=> '',
-                'margin3'=> '',
-                'margin4'=> '',
-                'margin5'=> '',
-                'margin6'=> '',
-                'ispadding'=> 1,
-                'padding1'=> '',
-                'padding2'=> '',
-                'padding3'=> '',
-                'padding4'=> '',
-                'padding5'=> '',
-                'padding6'=> '',
-                'width'=> '',
-                'height'=> '',
-                'border1'=> 0,
-                'border2'=> '',
-                'border3'=> '',
-                'border4'=> '',
-                'color'=> '',
-                'font_size'=> '',
-                'word_spacing'=> '',
-                'line_height'=> '',
-                'text_transform'=> '',
-                'text_align'=> '',
-                'background'=> '',
-                'position'=> 0,
-                'left'=> '',
-                'top'=> '',
-                'overflow'=> '',
-                'opacity'=> '',
-            ];
-        }
+        $attrs = $data->attrs?unserialize($data->attrs):[];
+        if (!$attrs) { $attrs = $this->attrs(); $attrs['switch'] = 0; }
         return $attrs;
     }
 
     /**
-     * 初始化文字属性
+     * 转换数据 attrs2
      */
-    public function getTextAttr($data)
+    public function getAttrs2($data)
     {
-        $textAttr = $data->text ? unserialize($data->text) : [];
-        if (!isset($textAttr['switch1']) || !(isset($textAttr['switch1']) && $textAttr['switch1'])) {
-            $textAttr = [
-                'switch1'=> 0,
-                'istextmargin'=> 1,
-                'textmargin1'=> '',
-                'textmargin2'=> '',
-                'textmargin3'=> '',
-                'textmargin4'=> '',
-                'textmargin5'=> '',
-                'textmargin6'=> '',
-                'istextpadding'=> 1,
-                'textpadding1'=> '',
-                'textpadding2'=> '',
-                'textpadding3'=> '',
-                'textpadding4'=> '',
-                'textpadding5'=> '',
-                'textpadding6'=> '',
-                'textborder1'=> '',
-                'textborder2'=> '',
-                'textborder3'=> '',
-                'textborder4'=> '',
-                'text_font_size'=> '',
-                'text_word_spacing'=> '',
-                'text_line_height'=> '',
-                'textcolor'=> '',
-            ];
-        }
-        return $textAttr;
+        $attrs = $data->attrs2?unserialize($data->attrs2):[];
+        if (!$attrs) { $attrs = $this->attrs(); $attrs['switch2'] = 0; }
+        return $attrs;
     }
 
     /**
-     * 初始化文字属性
+     * 转换数据 attrs3
      */
-    public function getPicAttr($data)
+    public function getAttrs3($data)
     {
-        $picAttr = $data->img ? unserialize($data->img) : [];
-        if (!isset($picAttr['switch2']) || !(isset($picAttr['switch2']) && $picAttr['switch2'])) {
-            $picAttr = [
-                'switch2'=> 0,
-                'ispicmargin'=> 1,
-                'picmargin1'=> '',
-                'picmargin2'=> '',
-                'picmargin3'=> '',
-                'picmargin4'=> '',
-                'picmargin5'=> '',
-                'picmargin6'=> '',
-                'ispicpadding'=> 1,
-                'picpadding1'=> '',
-                'picpadding2'=> '',
-                'picpadding3'=> '',
-                'picpadding4'=> '',
-                'picpadding5'=> '',
-                'picpadding6'=> '',
-                'picborder1'=> '',
-                'picborder2'=> '',
-                'picborder3'=> '',
-                'picborder4'=> '',
-                'picwidth'=> '',
-                'picheight'=> '',
-            ];
-        }
-        return $picAttr;
+        $attrs = $data->attrs3?unserialize($data->attrs3):[];
+        if (!$attrs) { $attrs = $this->attrs(); $attrs['switch3'] = 0; }
+        return $attrs;
+    }
+
+    /**
+     * 转换数据 img
+     */
+    public function getImg($data)
+    {
+        $attrs = $data->img?unserialize($data->img):[];
+        if (!$attrs) { $attrs = $this->attrs(); $attrs['switch4'] = 0; }
+        return $attrs;
+    }
+
+    /**
+     * 转换数据 text
+     */
+    public function getText($data)
+    {
+        $attrs = $data->text?unserialize($data->text):[];
+        if (!$attrs) { $attrs = $this->attrs(); $attrs['switch5'] = 0; }
+        return $attrs;
+    }
+
+    /**
+     * 初始化 attrs
+     */
+    public function attrs()
+    {
+        return array(
+            'ismargin'=> 0,
+            'margin1'=> '',
+            'margin2'=> '',
+            'margin3'=> '',
+            'margin4'=> '',
+            'margin5'=> '',
+            'margin6'=> '',
+            'ispadding'=> 0,
+            'padding1'=> '',
+            'padding2'=> '',
+            'padding3'=> '',
+            'padding4'=> '',
+            'padding5'=> '',
+            'padding6'=> '',
+            'width'=> '',
+            'height'=> '',
+            'border1'=> '',
+            'border2'=> '',
+            'border3'=> '',
+            'border4'=> '',
+            'iscolor'=> 0,
+            'color'=> '',
+            'font_size'=> '',
+            'word_spacing'=> '',
+            'line_height'=> '',
+            'text_transform'=> '',
+            'text_align'=> '',
+            'isbackground'=> 0,
+            'background'=> '',
+            'position'=> '',
+            'left'=> '',
+            'top'=> '',
+            'overflow'=> '',
+            'opacity'=> '',
+        );
+    }
+
+    /**
+     * 初始化 imgs
+     */
+    public function imgs()
+    {
+        return array(
+            'ismargin'=> 0,
+            'margin1'=> '',
+            'margin2'=> '',
+            'margin3'=> '',
+            'margin4'=> '',
+            'margin5'=> '',
+            'margin6'=> '',
+            'ispadding'=> 0,
+            'padding1'=> '',
+            'padding2'=> '',
+            'padding3'=> '',
+            'padding4'=> '',
+            'padding5'=> '',
+            'padding6'=> '',
+            'width'=> '',
+            'height'=> '',
+            'border1'=> '',
+            'border2'=> '',
+            'border3'=> '',
+            'border4'=> '',
+            'position'=> '',
+            'left'=> '',
+            'top'=> '',
+            'overflow'=> '',
+            'opacity'=> '',
+        );
     }
 }

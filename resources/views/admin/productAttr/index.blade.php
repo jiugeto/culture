@@ -33,11 +33,16 @@
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
+                                    @if($curr['url']=='')
                                     <a href="/admin/productattr/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="/assets/images/show.png" class="icon"> 查看</button></a>
-                                    {{--<a href="/admin/productattr/pic/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="/assets/images/edit.png" class="icon"> 图片修改</button></a>--}}
-                                    {{--<a href="/admin/productattr/text/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="/assets/images/edit.png" class="icon"> 文字修改</button></a>--}}
                                     <a href="/admin/productattr/{{$data->id}}/edit"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="/assets/images/edit.png" class="icon"> 编辑</button></a>
+                                    <a href="/admin/productattr/{{$data->id}}/edit2"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="/assets/images/edit.png" class="icon"> 二级样式</button></a>
+                                    <a href="/admin/productattr/{{$data->id}}/edit3"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="/assets/images/edit.png" class="icon"> 三级样式</button></a>
+                                    <div style="height:5px;"></div>
+                                    <a href="/admin/productattr/{{$data->id}}/edit4"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="/assets/images/edit.png" class="icon"> 图片样式</button></a>
+                                    <a href="/admin/productattr/{{$data->id}}/edit5"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="/assets/images/edit.png" class="icon"> 文字样式</button></a>
                                     <a href="/admin/productattr/{{$data->id}}/destroy"><button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><img src="/assets/images/del_red.png" class="icon"> 删除</button></a>
+                                    @endif
                                 </div>
                             </div>
                         </td>

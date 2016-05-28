@@ -182,4 +182,19 @@ class ProductLayerModel extends BaseModel
         }
         return isset($layerAttrModels) ? $layerAttrModels : [];
     }
+
+    /**
+     * 动画点的属性
+     */
+    public function getLayerAttrs($productid,$attrid,$layerid)
+    {
+        $productid = $productid ? $productid : 0;
+        $attrid = $attrid ? $attrid : 0;
+        $layerid = $layerid ? $layerid : 0;
+        $layerAttrModels = ProductLayerAttrModel::where('productid',$productid)
+            ->where('attrid',$attrid)
+            ->where('layerid',$layerid)
+            ->get();
+        return isset($layerAttrModels) ? $layerAttrModels : [];
+    }
 }

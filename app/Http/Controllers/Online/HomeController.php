@@ -20,15 +20,14 @@ class HomeController extends BaseController
         $result = [
             'data'=> $this->product($productid),
             'attrs'=> $this->attrs($productid),
+            'attrModel'=> new ProductAttrModel(),
             'layerModel'=> new ProductLayerModel(),
             'layerAttrModel'=> new ProductLayerAttrModel(),
-//            'layers'=> $this->layers($productid),
-//            'pics'=> $this->pics($productid),
-//            'texts'=> $this->texts($productid),
+            'conModel'=> new ProductConModel(),
             'restart'=> $restart,
         ];
-//        dd(\App\Tools::childList2($this->attrs($productid)));
         return view('online.home.index', $result);
+//        return view('online.home.test2', $result);
     }
 
 
@@ -51,19 +50,4 @@ class HomeController extends BaseController
             ->where('uid',$uid)
             ->get();
     }
-
-//    public function layers($productid)
-//    {
-//        return ProductLayerModel::where('productid',$productid)->where('del',0)->get();
-//    }
-
-//    public function pics($productid)
-//    {
-//        return ProductConModel::where('productid',$productid)->where('genre',1)->where('del',0)->get();
-//    }
-//
-//    public function texts($productid)
-//    {
-//        return ProductConModel::where('productid',$productid)->where('genre',2)->where('del',0)->get();
-//    }
 }

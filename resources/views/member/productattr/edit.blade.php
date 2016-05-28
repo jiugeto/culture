@@ -77,10 +77,10 @@
                         @endif
                     </select>
                     <div id="margin1" style="display:{{$attrs['ismargin']==3?'block':'none'}};">
-                        左右：<input type="text" style="width:100px;" name="margin2" value="{{ $attrs['margin2'] }}"> px
+                        左右：<input type="text" style="width:100px;" name="margin2" value="{{ $attrs['margin2']=='auto'?'':$attrs['margin2'] }}"> px
                     </div>
                     <div id="margin2" style="display:{{$attrs['ismargin']==4?'block':'none'}};">
-                        上下：<input type="text" style="width:100px;" name="margin1" value="{{ $attrs['margin1'] }}"> px
+                        上下：<input type="text" style="width:100px;" name="margin1" value="{{ $attrs['margin1']=='auto'?'':$attrs['margin1'] }}"> px
                     </div>
                     <div id="margin3" style="display:{{$attrs['ismargin']==5?'block':'none'}};">
                         上：<input type="text" style="width:100px;" name="margin3" value="{{ $attrs['margin3'] }}"> px
@@ -213,7 +213,7 @@
             {{--<tr><td></td></tr>--}}
             <script>
                 $(document).ready(function(){
-                    var iscolor = $("input[name=iscolor]");
+                    var iscolor = $("input[name='iscolor']");
                     iscolor.click(function(){
                         if(this.value==0){ $("#color").hide(); }
                         else{ $("#color").show(); }

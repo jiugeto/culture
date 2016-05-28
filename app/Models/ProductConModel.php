@@ -9,11 +9,7 @@ class ProductConModel extends BaseModel
 
     protected $table = 'bs_products_con';
     protected $fillable = [
-        'id','name','productid','attrid','genre','pic_id','attrs',
-//        'margin','padding','width','height','border','background','position','left','top','overflow','opacity',
-        'text_attr',
-//        'color','font_size','word_spacing','line_height','text_transform','text_align',
-        'intro','del','created_at','updated_at',
+        'id','name','productid','attrid','genre','pic_id','attrs','text_attr','intro','del','created_at','updated_at',
     ];
     protected $genres = [1=>'图片','文字'];
     //attrs：ismargin，margin1，margin2，margin3，margin4，ispadding，padding1，padding2，padding3，padding4，width，height，border1，border2，border3，border4，background，position，left，top，overflow，opacity
@@ -178,6 +174,18 @@ class ProductConModel extends BaseModel
         $picModel = PicModel::find($this->pic_id);
 //        return $this->pic_id ? PicModel::find($this->pic_id) : '';
         return isset($picModel) ? $picModel->name : '';
+    }
+
+    public function getPicName($pic_id)
+    {
+        $picModel = PicModel::find($pic_id);
+        return isset($picModel) ? $picModel->name : '';
+    }
+
+    public function getPicUrl($pic_id)
+    {
+        $picModel = PicModel::find($pic_id);
+        return isset($picModel) ? $picModel->url : '';
     }
 
     //图片样式

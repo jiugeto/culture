@@ -70,11 +70,15 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::get('productattr/{id}/restore','ProductAttrController@restore');
     Route::get('productattr/{id}/forceDelete','ProductAttrController@forceDelete');
     Route::get('productattr/trash','ProductAttrController@trash');
-//    Route::get('productattr/pic/{id}','ProductAttrController@editPic');
-//    Route::post('productattr/pic/{id}','ProductAttrController@updatePic');
-//    Route::get('productattr/text/{id}','ProductAttrController@editText');
-//    Route::post('productattr/text/{id}','ProductAttrController@updateText');
     Route::post('productattr/{id}','ProductAttrController@update');
+    Route::get('productattr/{id}/edit2','ProductAttrController@edit2');
+    Route::post('productattr/{id}/update2','ProductAttrController@update2');
+    Route::get('productattr/{id}/edit3','ProductAttrController@edit3');
+    Route::post('productattr/{id}/update3','ProductAttrController@update3');
+    Route::get('productattr/{id}/edit4','ProductAttrController@edit4');
+    Route::post('productattr/{id}/update4','ProductAttrController@update4');
+    Route::get('productattr/{id}/edit5','ProductAttrController@edit5');
+    Route::post('productattr/{id}/update5','ProductAttrController@update5');
     Route::resource('productattr','ProductAttrController');
         //产品动画的图片文字路由
     Route::get('productcon/trash','ProductConController@trash');
