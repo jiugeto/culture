@@ -71,6 +71,7 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
     Route::get('productattr/{id}/forceDelete','ProductAttrController@forceDelete');
     Route::post('productattr/{id}','ProductAttrController@update');
     Route::resource('productattr','ProductAttrController');
+    Route::get('productattr/{id}/{index}','ProductAttrController@show2');
         //产品动画
     Route::get('productlayer/trash','ProductLayerController@trash');
     Route::get('productlayer/{id}/destroy','ProductLayerController@destroy');

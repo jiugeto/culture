@@ -204,9 +204,22 @@
 
             <tr>
                 <td class="field_name"><label>颜色：</label></td>
-                <td><input type="color" title="点击更改颜色" name="color" value="{{ $attrs['color'] }}"></td>
+                <td>
+                    <label><input type="radio" class="radio" name="iscolor" value="0" {{ !$attrs['iscolor'] ? 'checked' : '' }}> 无&nbsp;&nbsp;</label>
+                    <label><input type="radio" class="radio" name="iscolor" value="1" {{ $attrs['iscolor'] ? 'checked' : '' }}> 有&nbsp;&nbsp;</label>
+                    <input type="color" title="点击更改颜色" style="display:{{$attrs['iscolor']?'block':'none'}};" id="color" name="color" value="{{ $attrs['color'] }}">
+                </td>
             </tr>
             {{--<tr><td></td></tr>--}}
+            <script>
+                $(document).ready(function(){
+                    var iscolor = $("input[name=iscolor]");
+                    iscolor.click(function(){
+                        if(this.value==0){ $("#color").hide(); }
+                        else{ $("#color").show(); }
+                    });
+                });
+            </script>
 
             <tr>
                 <td class="field_name"><label>字体大小：(单位px)</label></td>
@@ -252,33 +265,22 @@
 
             <tr>
                 <td class="field_name"><label>背景：</label></td>
-                <td><input type="color" title="点击更改颜色" name="background" value="{{ $attrs['background'] }}"></td>
-            </tr>
-            {{--<tr><td></td></tr>--}}
-
-            <tr>
-                <td class="field_name"><label>定位：</label></td>
                 <td>
-                    <select name="position">
-                        @foreach($model['positionTypeNames'] as $kpositionAlignType=>$positionAlignTypeName)
-                            <option value="{{ $kpositionAlignType }}" {{ $attrs['position']==$kpositionAlignType ? 'selected' : '' }}>{{ $positionAlignTypeName }}</option>
-                        @endforeach
-                    </select>
+                    <label><input type="radio" class="radio" name="isbackground" value="0" {{ !$attrs['isbackground'] ? 'checked' : '' }}> 无&nbsp;&nbsp;</label>
+                    <label><input type="radio" class="radio" name="isbackground" value="1" {{ $attrs['isbackground'] ? 'checked' : '' }}> 有&nbsp;&nbsp;</label>
+                    <input type="color" title="点击更改颜色" style="display:{{$attrs['isbackground']?'block':'none'}};" id="background" name="background" value="{{ $attrs['background'] }}">
                 </td>
             </tr>
             {{--<tr><td></td></tr>--}}
-
-            <tr>
-                <td class="field_name"><label>左边距离：(单位px)</label></td>
-                <td><input type="text" placeholder="左边距离" pattern="\d+" name="left" value="{{ $attrs['left'] }}"/> px</td>
-            </tr>
-            {{--<tr><td></td></tr>--}}
-
-            <tr>
-                <td class="field_name"><label>顶部距离：(单位px)</label></td>
-                <td><input type="text" placeholder="顶部距离" pattern="\d+" name="top" value="{{ $attrs['top'] }}"/> px</td>
-            </tr>
-            {{--<tr><td></td></tr>--}}
+            <script>
+                $(document).ready(function(){
+                    var isbackground = $("input[name=isbackground]");
+                    isbackground.click(function(){
+                        if(this.value==0){ $("#background").hide(); }
+                        else{ $("#background").show(); }
+                    });
+                });
+            </script>
 
             <tr>
                 <td class="field_name"><label>裁剪方式：</label></td>
@@ -295,6 +297,30 @@
             <tr>
                 <td class="field_name"><label>透明度：</label></td>
                 <td><input type="text" placeholder="0透明，100不透明" pattern="\d+" name="opacity" value="{{ $attrs['opacity'] }}"/></td>
+            </tr>
+            {{--<tr><td></td></tr>--}}
+
+            <tr>
+                <td class="field_name"><label>定位方式：</label></td>
+                <td>
+                    <select name="position">
+                    @foreach($model['positionTypeNames'] as $kpositionAlignType=>$positionAlignTypeName)
+                        <option value="{{ $kpositionAlignType }}" {{ $attrs['position']==$kpositionAlignType ? 'selected' : '' }}>{{ $positionAlignTypeName }}</option>
+                    @endforeach
+                    </select>
+                </td>
+            </tr>
+            {{--<tr><td></td></tr>--}}
+
+            <tr>
+                <td class="field_name"><label>左边距离：(单位px)</label></td>
+                <td><input type="text" placeholder="左边距离" pattern="\d+" name="left" value="{{ $attrs['left'] }}"/> px</td>
+            </tr>
+            {{--<tr><td></td></tr>--}}
+
+            <tr>
+                <td class="field_name"><label>顶部距离：(单位px)</label></td>
+                <td><input type="text" placeholder="顶部距离" pattern="\d+" name="top" value="{{ $attrs['top'] }}"/> px</td>
             </tr>
             {{--<tr><td></td></tr>--}}
 

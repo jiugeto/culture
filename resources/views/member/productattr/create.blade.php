@@ -203,9 +203,22 @@
 
             <tr>
                 <td class="field_name"><label>颜色：</label></td>
-                <td><input type="color" title="点击更改颜色" name="color"></td>
+                <td>
+                    <label><input type="radio" class="radio" name="iscolor" value="0" checked> 无&nbsp;&nbsp;</label>
+                    <label><input type="radio" class="radio" name="iscolor" value="1"> 有&nbsp;&nbsp;</label>
+                    <input type="color" title="点击更改颜色" style="display:none;" id="color" name="color">
+                </td>
             </tr>
             {{--<tr><td></td></tr>--}}
+            <script>
+                $(document).ready(function(){
+                    var iscolor = $("input[name=iscolor]");
+                    iscolor.click(function(){
+                        if(this.value==0){ $("#color").hide(); }
+                        else{ $("#color").show(); }
+                    });
+                });
+            </script>
 
             <tr>
                 <td class="field_name"><label>字体大小：(单位px)</label></td>
@@ -251,12 +264,43 @@
 
             <tr>
                 <td class="field_name"><label>背景：</label></td>
-                <td><input type="color" title="点击更改颜色" name="background"></td>
+                <td>
+                    <label><input type="radio" class="radio" name="isbackground" value="0" checked> 无&nbsp;&nbsp;</label>
+                    <label><input type="radio" class="radio" name="isbackground" value="1"> 有&nbsp;&nbsp;</label>
+                    <input type="color" title="点击更改颜色" style="display:none;" id="background" name="background">
+                </td>
+            </tr>
+            {{--<tr><td></td></tr>--}}
+            <script>
+                $(document).ready(function(){
+                    var isbackground = $("input[name=isbackground]");
+                    isbackground.click(function(){
+                        if(this.value==0){ $("#background").hide(); }
+                        else{ $("#background").show(); }
+                    });
+                });
+            </script>
+
+            <tr>
+                <td class="field_name"><label>裁剪方式：</label></td>
+                <td>
+                    <select name="overflow">
+                        @foreach($model['overflowTypeNames'] as $koverflowAlignType=>$overflowAlignTypeName)
+                            <option value="{{ $koverflowAlignType }}">{{ $overflowAlignTypeName }}</option>
+                        @endforeach
+                    </select>
+                </td>
             </tr>
             {{--<tr><td></td></tr>--}}
 
             <tr>
-                <td class="field_name"><label>定位：</label></td>
+                <td class="field_name"><label>透明度：</label></td>
+                <td><input type="text" placeholder="0透明，100不透明" pattern="\d+" name="opacity"/></td>
+            </tr>
+            {{--<tr><td></td></tr>--}}
+
+            <tr>
+                <td class="field_name"><label>定位方式：</label></td>
                 <td>
                     <select name="position">
                         @foreach($model['positionTypeNames'] as $kpositionAlignType=>$positionAlignTypeName)
@@ -276,24 +320,6 @@
             <tr>
                 <td class="field_name"><label>顶部距离：(单位px)</label></td>
                 <td><input type="text" placeholder="顶部距离" pattern="\d+" name="top"/> px</td>
-            </tr>
-            {{--<tr><td></td></tr>--}}
-
-            <tr>
-                <td class="field_name"><label>裁剪方式：</label></td>
-                <td>
-                    <select name="overflow">
-                        @foreach($model['overflowTypeNames'] as $koverflowAlignType=>$overflowAlignTypeName)
-                            <option value="{{ $koverflowAlignType }}">{{ $overflowAlignTypeName }}</option>
-                        @endforeach
-                    </select>
-                </td>
-            </tr>
-            {{--<tr><td></td></tr>--}}
-
-            <tr>
-                <td class="field_name"><label>透明度：</label></td>
-                <td><input type="text" placeholder="0透明，100不透明" pattern="\d+" name="opacity"/></td>
             </tr>
             {{--<tr><td></td></tr>--}}
 

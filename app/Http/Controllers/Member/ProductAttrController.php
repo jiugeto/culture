@@ -104,7 +104,7 @@ class ProductAttrController extends BaseController
         $curr['url'] = $this->lists['edit']['url'];
         $data = ProductAttrModel::find($id);
         $attrs = $data->attrs2 ? unserialize($data->attrs2) : $this->attrs();
-        $attrs['switch'] = 0;
+        $attrs['switch'] = isset($attrs['switch2']) ? $attrs['switch2'] : 0;
         $result = [
             'data'=> $data,
             'attrs'=> $attrs,
@@ -138,7 +138,7 @@ class ProductAttrController extends BaseController
         $curr['url'] = $this->lists['edit']['url'];
         $data = ProductAttrModel::find($id);
         $attrs = $data->attrs3 ? unserialize($data->attrs3) : $this->attrs();
-        $attrs['switch'] = 0;
+        $attrs['switch'] = isset($attrs['switch3']) ? $attrs['switch3'] : 0;
         $result = [
             'data'=> $data,
             'attrs'=> $attrs,
@@ -172,7 +172,7 @@ class ProductAttrController extends BaseController
         $curr['url'] = $this->lists['edit']['url'];
         $data = ProductAttrModel::find($id);
         $attrs = $data->img ? unserialize($data->img) : $this->imgs();
-        $attrs['switch'] = 0;
+        $attrs['switch'] = isset($attrs['switch4']) ? $attrs['switch4'] : 0;
         $result = [
             'data'=> $data,
             'attrs'=> $attrs,
@@ -206,7 +206,7 @@ class ProductAttrController extends BaseController
         $curr['url'] = $this->lists['edit']['url'];
         $data = ProductAttrModel::find($id);
         $attrs = $data->text ? unserialize($data->text) : $this->attrs();
-        $attrs['switch'] = 0;
+        $attrs['switch'] = isset($attrs['switch5']) ? $attrs['switch5'] : 0;
         $result = [
             'data'=> $data,
             'attrs'=> $attrs,
@@ -233,21 +233,41 @@ class ProductAttrController extends BaseController
 
     public function show($id)
     {
-        $curr['name'] = $this->lists['create']['name'];
-        $curr['url'] = $this->lists['create']['url'];
+        $curr['name'] = $this->lists['show']['name'];
+        $curr['url'] = $this->lists['show']['url'];
         $data = ProductAttrModel::find($id);
         $result = [
             'data'=> $data,
-            'attrs'=> $this->getAttrs($data),
-            'attrs2'=> $this->getAttrs2($data),
-            'attrs3'=> $this->getAttrs3($data),
-            'pics'=> $this->getImg($data),
-            'texts'=> $this->getText($data),
-            'model'=> $this->model,
+            'attrs'=> $data->attrs ? unserialize($data->attrs) : [],
+            'attrs2'=> $data->attrs2 ? unserialize($data->attrs2) : [],
+            'attrs3'=> $data->attrs3 ? unserialize($data->attrs3) : [],
+            'pics'=> $data->img ? unserialize($data->img) : [],
+            'texts'=> $data->text ? unserialize($data->text) : [],
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
         return view('member.productattr.show', $result);
+    }
+
+    public function show2($id,$index)
+    {
+        $curr['name'] = $this->lists['show']['name'];
+        $curr['url'] = $this->lists['show']['url'];
+        $data = ProductAttrModel::find($id);
+        if ($index==1) { $attrs = $this->getAttrs($data); }
+        elseif ($index==2) { $attrs = $this->getAttrs2($data); }
+        elseif ($index==3) { $attrs = $this->getAttrs3($data); }
+        elseif ($index==4) { $attrs = $this->getImg($data); }
+        elseif ($index==5) { $attrs = $this->getText($data); }
+        $result = [
+            'data'=> $data,
+            'attrs'=> isset($attrs) ? $attrs : [],
+            'model'=> $this->model,
+            'lists'=> $this->lists,
+            'curr'=> $curr,
+            'index'=> $index,
+        ];
+        return view('member.productattr.show2', $result);
     }
 
     public function destroy($id)
@@ -319,7 +339,7 @@ class ProductAttrController extends BaseController
             if ($request->padding1=='') { echo "<script>alert('上下内边距必填！');history.go(-1);</script>";exit; }
         }
         if ($request->ispadding==5) {
-            if ($request->ispadding3=='' || $request->ispadding4=='' || $request->ispadding5=='' || $request->ispadding6=='') {
+            if ($request->padding3=='' || $request->padding4=='' || $request->padding5=='' || $request->padding6=='') {
                 echo "<script>alert('上下左右内边距必填！');history.go(-1);</script>";exit;
             }
         }
@@ -357,12 +377,14 @@ class ProductAttrController extends BaseController
             'opacity'=> $request->opacity,
         );
         if (in_array($request->index,[1,2,3,5])) {
+            $attrs['iscolor'] = $request->iscolor;
             $attrs['color'] = $request->color;
             $attrs['font_size'] = $request->font_size;
             $attrs['word_spacing'] = $request->word_spacing;
             $attrs['line_height'] = $request->line_height;
             $attrs['text_transform'] = $request->text_transform;
             $attrs['text_align'] = $request->text_align;
+            $attrs['isbackground'] = $request->isbackground;
             $attrs['background'] = $request->background;
         }
         return $attrs;
@@ -394,7 +416,7 @@ class ProductAttrController extends BaseController
     public function getAttrs2($data)
     {
         $attrs = $data->attrs2?unserialize($data->attrs2):[];
-        if (!$attrs) { $attrs = $this->attrs(); $attrs['switch'] = 0; }
+        if (!$attrs) { $attrs = $this->attrs(); $attrs['switch2'] = 0; }
         return $attrs;
     }
 
@@ -404,7 +426,7 @@ class ProductAttrController extends BaseController
     public function getAttrs3($data)
     {
         $attrs = $data->attrs3?unserialize($data->attrs3):[];
-        if (!$attrs) { $attrs = $this->attrs(); $attrs['switch'] = 0; }
+        if (!$attrs) { $attrs = $this->attrs(); $attrs['switch3'] = 0; }
         return $attrs;
     }
 
@@ -414,7 +436,7 @@ class ProductAttrController extends BaseController
     public function getImg($data)
     {
         $attrs = $data->img?unserialize($data->img):[];
-        if (!$attrs) { $attrs = $this->attrs(); $attrs['switch'] = 0; }
+        if (!$attrs) { $attrs = $this->attrs(); $attrs['switch4'] = 0; }
         return $attrs;
     }
 
@@ -424,7 +446,7 @@ class ProductAttrController extends BaseController
     public function getText($data)
     {
         $attrs = $data->text?unserialize($data->text):[];
-        if (!$attrs) { $attrs = $this->attrs(); $attrs['switch'] = 0; }
+        if (!$attrs) { $attrs = $this->attrs(); $attrs['switch5'] = 0; }
         return $attrs;
     }
 
@@ -434,14 +456,14 @@ class ProductAttrController extends BaseController
     public function attrs()
     {
         return array(
-            'ismargin'=> '',
+            'ismargin'=> 0,
             'margin1'=> '',
             'margin2'=> '',
             'margin3'=> '',
             'margin4'=> '',
             'margin5'=> '',
             'margin6'=> '',
-            'ispadding'=> '',
+            'ispadding'=> 0,
             'padding1'=> '',
             'padding2'=> '',
             'padding3'=> '',
@@ -454,12 +476,14 @@ class ProductAttrController extends BaseController
             'border2'=> '',
             'border3'=> '',
             'border4'=> '',
+            'iscolor'=> 0,
             'color'=> '',
             'font_size'=> '',
             'word_spacing'=> '',
             'line_height'=> '',
             'text_transform'=> '',
             'text_align'=> '',
+            'isbackground'=> 0,
             'background'=> '',
             'position'=> '',
             'left'=> '',
@@ -475,14 +499,14 @@ class ProductAttrController extends BaseController
     public function imgs()
     {
         return array(
-            'ismargin'=> '',
+            'ismargin'=> 0,
             'margin1'=> '',
             'margin2'=> '',
             'margin3'=> '',
             'margin4'=> '',
             'margin5'=> '',
             'margin6'=> '',
-            'ispadding'=> '',
+            'ispadding'=> 0,
             'padding1'=> '',
             'padding2'=> '',
             'padding3'=> '',
