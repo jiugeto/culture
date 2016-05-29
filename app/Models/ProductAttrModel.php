@@ -228,4 +228,41 @@ class ProductAttrModel extends BaseModel
     {
         return $this->img ? unserialize($this->img) : [];
     }
+
+    //内容
+    public function cons()
+    {
+        $productid = $this->productid ? $this->productid : 0;
+        $attrid = $this->id ? $this->id : 0;
+        return ProductConModel::where('productid',$productid)
+            ->where('attrid',$attrid)
+            ->where('isshow',1)
+            ->where('del',0)
+            ->orderBy('sort','desc')
+            ->orderBy('id','asc')
+            ->get();
+    }
+
+    //动画调节
+    public function layers()
+    {
+        $productid = $this->productid ? $this->productid : 0;
+        $attrid = $this->id ? $this->id : 0;
+        return ProductLayerModel::where('productid',$productid)
+            ->where('attrid',$attrid)
+            ->where('del',0)
+            ->get();
+    }
+
+    //动画属性
+    public function layerAttrs()
+    {
+        $productid = $this->productid ? $this->productid : 0;
+        $attrid = $this->id ? $this->id : 0;
+        return ProductLayerAttrModel::where('productid',$productid)
+            ->where('attrid',$attrid)
+            ->where('del',0)
+            ->orderBy('per','asc')
+            ->get();
+    }
 }

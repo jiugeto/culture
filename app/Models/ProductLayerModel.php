@@ -5,7 +5,7 @@ class ProductLayerModel extends BaseModel
 {
     protected $table = 'bs_products_layer';
     protected $fillable = [
-        'id','name','productid','attrid','conStr','layerAttr','animation_name','duration','function','delay','count','direction','state','mode','field','per','value','intro','del','created_at','updated_at',
+        'id','name','layer_name','productid','attrid','conStr','layerAttr','animation_name','duration','function','delay','count','direction','state','mode','field','per','value','intro','del','created_at','updated_at',
     ];
     //速度曲线
     protected $functions = [
@@ -91,7 +91,7 @@ class ProductLayerModel extends BaseModel
 
     public function directionName()
     {
-        return $this->direction ? $this->directionNames[$this->direction] : '';
+        return array_key_exists($this->direction,$this->directionNames) ? $this->directionNames[$this->direction] : '';
     }
 
     public function state()
@@ -106,39 +106,55 @@ class ProductLayerModel extends BaseModel
 
     public function mode()
     {
-        return $this->mode ? $this->modes[$this->mode] : '';
+        return array_key_exists($this->mode,$this->modes) ? $this->modes[$this->mode] : '';
     }
 
     public function modeName()
     {
-        return $this->mode ? $this->modeNames[$this->mode] : '';
+        return array_key_exists($this->mode,$this->modeNames) ? $this->modeNames[$this->mode] : '';
     }
 
-    public function fields()
+    /**
+     * 以下是换种方式
+     */
+    public function getFunc($function)
     {
-        $fields = $this->field ? explode('|',$this->field) : [];
-        unset($fields[count($fields)-1]);
-        return $fields;
+        return array_key_exists($function,$this->functions) ? $this->functions[$function] : '';
     }
 
-    public function pers()
+    public function geFunctionName($function)
     {
-        $pers = $this->per ? explode('|',$this->per) : [];
-        unset($pers[count($pers)-1]);
-        return $pers;
+        return array_key_exists($function,$this->functionNames) ? $this->functionNames[$function] : '';
     }
 
-    public function values()
+    public function getDirection($direction)
     {
-        $values = $this->value ? explode(',',$this->value) : [];
-        if ($values) {
-            foreach ($values as $k=>$value) {
-                $value = $value ? explode('|',$value) : [];
-                unset($value[count($value)-1]);
-                if ($value) { $vals[$k] = $value; }
-            }
-        }
-        return isset($vals) ? $vals : [];
+        return array_key_exists($direction,$this->directions) ? $this->directions[$direction] : '';
+    }
+
+    public function getDirectionName($direction)
+    {
+        return array_key_exists($direction,$this->directionNames) ? $this->directionNames[$direction] : '';
+    }
+
+    public function getState($state)
+    {
+        return array_key_exists($state,$this->states) ? $this->states[$state] : '';
+    }
+
+    public function getStateName($state)
+    {
+        return array_key_exists($state,$this->stateNames) ? $this->stateNames[$state] : '';
+    }
+
+    public function getMode($mode)
+    {
+        return array_key_exists($mode,$this->modes) ? $this->modes[$mode] : '';
+    }
+
+    public function getModeName($mode)
+    {
+        return array_key_exists($mode,$this->modeNames) ? $this->modeNames[$mode] : '';
     }
 
     /**

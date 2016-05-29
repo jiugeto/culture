@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Online;
 
 use App\Models\ProductAttrModel;
 use App\Models\ProductConModel;
+use App\Models\ProductLayerAttrModel;
 use App\Models\ProductLayerModel;
 use App\Models\ProductModel;
 
@@ -19,9 +20,11 @@ class HomeController extends BaseController
         $result = [
             'data'=> $this->product($productid),
             'attrs'=> $this->attrs($productid),
-            'layers'=> $this->layers($productid),
-            'pics'=> $this->pics($productid),
-            'texts'=> $this->texts($productid),
+            'layerModel'=> new ProductLayerModel(),
+            'layerAttrModel'=> new ProductLayerAttrModel(),
+//            'layers'=> $this->layers($productid),
+//            'pics'=> $this->pics($productid),
+//            'texts'=> $this->texts($productid),
             'restart'=> $restart,
         ];
 //        dd(\App\Tools::childList2($this->attrs($productid)));
@@ -49,18 +52,18 @@ class HomeController extends BaseController
             ->get();
     }
 
-    public function layers($productid)
-    {
-        return ProductLayerModel::where('productid',$productid)->where('del',0)->get();
-    }
+//    public function layers($productid)
+//    {
+//        return ProductLayerModel::where('productid',$productid)->where('del',0)->get();
+//    }
 
-    public function pics($productid)
-    {
-        return ProductConModel::where('productid',$productid)->where('genre',1)->where('del',0)->get();
-    }
-
-    public function texts($productid)
-    {
-        return ProductConModel::where('productid',$productid)->where('genre',2)->where('del',0)->get();
-    }
+//    public function pics($productid)
+//    {
+//        return ProductConModel::where('productid',$productid)->where('genre',1)->where('del',0)->get();
+//    }
+//
+//    public function texts($productid)
+//    {
+//        return ProductConModel::where('productid',$productid)->where('genre',2)->where('del',0)->get();
+//    }
 }

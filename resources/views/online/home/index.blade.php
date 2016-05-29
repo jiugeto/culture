@@ -5,7 +5,7 @@
     <style>
         @if(count($attrs))
         @foreach($attrs as $attrs0)
-            /*一级属性样式：.attr*/
+        /*一级属性样式：.attr*/
             {{'.'.$attrs0->style_name.' {'}}
             @if($attr=$attrs0->attrs() && $attr['switch'])
                 @if($attr['ismargin']==1)@elseif($attr['ismargin']==2){{'margin:'.$attr['margin1'].' '.$attr['margin2'].';'}}@elseif($attr['ismargin']==3){{'margin:'.$attr['margin1'].' '.$attr['margin2'].'px;'}}@elseif($attr['ismargin']==4){{'margin:'.$attr['margin1'].'px '.$attr['margin2'].';'}}@elseif($attr['ismargin']==5){{'margin:'.$attr['margin3'].'px '.$attr['margin4'].'px '.$attr['margin5'].'px '.$attr['margin6'].'px;'}}@endif
@@ -15,26 +15,106 @@
                 @if($attr['position']==4){{$attr['left']?'left:'.$attr['left'].'px;':''}}{{$attr['top']?'top:'.$attr['top'].'px;':''}}@endif
             @endif
             {{'}'}}
-            /*二级属性样式：.attr div.pos*/
-            {{'.'.$attrs0->style_name.' {'}}
+        /*================================*/
+
+        /*二级属性样式：.attr div.pos*/
+            {{'.'.$attrs0->style_name.' div.pos {'}}
             @if($attr2=$attrs0->attrs2() && $attr2['switch2'])
+                @if($attr2['ismargin']==1)@elseif($attr2['ismargin']==2){{'margin:'.$attr2['margin1'].' '.$attr2['margin2'].';'}}@elseif($attr2['ismargin']==3){{'margin:'.$attr2['margin1'].' '.$attr2['margin2'].'px;'}}@elseif($attr2['ismargin']==4){{'margin:'.$attr2['margin1'].'px '.$attr2['margin2'].';'}}@elseif($attr2['ismargin']==5){{'margin:'.$attr2['margin3'].'px '.$attr2['margin4'].'px '.$attr2['margin5'].'px '.$attr2['margin6'].'px;'}}@endif
+                @if($attr2['ispadding']==1)@elseif($attr2['ispadding']==2){{'padding:'.$attr2['padding1'].' '.$attr2['padding2'].';'}}@elseif($attr2['ispaddingpadding']==3){{'padding:'.$attr2['padding1'].' '.$attr2['padding2'].'px;'}}@elseif($attr2['ispadding']==4){{'padding:'.$attr2['padding1'].'px '.$attr2['padding2'].';'}}@elseif($attr2['ispadding']==5){{'padding:'.$attr2['padding3'].'px '.$attr2['padding4'].'px '.$attr2['padding5'].'px '.$attr2['padding6'].'px;'}}@endif
+                @if($attr2['width']){{'width:'.$attr2['width'].'px;'}}@endif
+                @if($attr2['height']){{'height:'.$attr2['height'].'px;'}}@endif
+                @if($attr2['position']==4){{$attr2['left']?'left:'.$attr2['left'].'px;':''}}{{$attr2['top']?'top:'.$attr2['top'].'px;':''}}@endif
             @endif
             {{'{'}}
-            /*三级属性样式：.attr div.dh*/
-            /*图片属性样式：.attr img*/
-            /*文字属性样式：.attr text*/
+        /*================================*/
+
+        /*三级属性样式：.attr div.dh*/
+            {{'.'.$attrs0->style_name.' div.dh {'}}
+            @if($attr3=$attrs0->attrs2() && $attr3['switch3'])
+                @if($attr3['ismargin']==1)@elseif($attr3['ismargin']==2){{'margin:'.$attr3['margin1'].' '.$attr3['margin2'].';'}}@elseif($attr3['ismargin']==3){{'margin:'.$attr3['margin1'].' '.$attr3['margin2'].'px;'}}@elseif($attr3['ismargin']==4){{'margin:'.$attr3['margin1'].'px '.$attr3['margin2'].';'}}@elseif($attr3['ismargin']==5){{'margin:'.$attr3['margin3'].'px '.$attr3['margin4'].'px '.$attr3['margin5'].'px '.$attr3['margin6'].'px;'}}@endif
+                @if($attr3['ispadding']==1)@elseif($attr3['ispadding']==2){{'padding:'.$attr3['padding1'].' '.$attr3['padding2'].';'}}@elseif($attr3['ispaddingpadding']==3){{'padding:'.$attr3['padding1'].' '.$attr3['padding2'].'px;'}}@elseif($attr3['ispadding']==4){{'padding:'.$attr3['padding1'].'px '.$attr3['padding2'].';'}}@elseif($attr3['ispadding']==5){{'padding:'.$attr3['padding3'].'px '.$attr3['padding4'].'px '.$attr3['padding5'].'px '.$attr3['padding6'].'px;'}}@endif
+                @if($attr3['width']){{'width:'.$attr3['width'].'px;'}}@endif
+                @if($attr3['height']){{'height:'.$attr3['height'].'px;'}}@endif
+                @if($attr3['position']==4){{$attr3['left']?'left:'.$attr3['left'].'px;':''}}{{$attr3['top']?'top:'.$attr3['top'].'px;':''}}@endif
+            @endif
+            {{'{'}}
+        /*================================*/
+
+        /*图片属性样式：.attr img*/
+            {{'.'.$attrs0->style_name.' div.pos img {'}}
+            @if($pics=$attrs0->picAttr() && $pics['switch4'])
+                @if($pics['ismargin']==1)@elseif($pics['ismargin']==2){{'margin:'.$pics['margin1'].' '.$pics['margin2'].';'}}@elseif($pics['ismargin']==3){{'margin:'.$pics['margin1'].' '.$pics['margin2'].'px;'}}@elseif($pics['ismargin']==4){{'margin:'.$pics['margin1'].'px '.$pics['margin2'].';'}}@elseif($pics['ismargin']==5){{'margin:'.$pics['margin3'].'px '.$pics['margin4'].'px '.$pics['margin5'].'px '.$pics['margin6'].'px;'}}@endif
+                @if($pics['ispadding']==1)@elseif($pics['ispadding']==2){{'padding:'.$pics['padding1'].' '.$pics['padding2'].';'}}@elseif($pics['ispaddingpadding']==3){{'padding:'.$pics['padding1'].' '.$pics['padding2'].'px;'}}@elseif($pics['ispadding']==4){{'padding:'.$pics['padding1'].'px '.$pics['padding2'].';'}}@elseif($pics['ispadding']==5){{'padding:'.$pics['padding3'].'px '.$pics['padding4'].'px '.$pics['padding5'].'px '.$pics['padding6'].'px;'}}@endif
+                @if($pics['width']){{'width:'.$pics['width'].'px;'}}@endif
+                @if($pics['height']){{'height:'.$pics['height'].'px;'}}@endif
+                @if($pics['position']==4){{$pics['left']?'left:'.$pics['left'].'px;':''}}{{$pics['top']?'top:'.$pics['top'].'px;':''}}@endif
+            @endif
+            {{'{'}}
+        /*================================*/
+
+        /*文字属性样式：.attr text*/
+            {{'.'.$attrs0->style_name.' div.pos .text {'}}
+            @if($texts=$attrs0->textAttr() && $texts['switch5'])
+                @if($texts['ismargin']==1)@elseif($texts['ismargin']==2){{'margin:'.$texts['margin1'].' '.$texts['margin2'].';'}}@elseif($texts['ismargin']==3){{'margin:'.$texts['margin1'].' '.$texts['margin2'].'px;'}}@elseif($texts['ismargin']==4){{'margin:'.$texts['margin1'].'px '.$texts['margin2'].';'}}@elseif($texts['ismargin']==5){{'margin:'.$texts['margin3'].'px '.$texts['margin4'].'px '.$texts['margin5'].'px '.$texts['margin6'].'px;'}}@endif
+                @if($texts['ispadding']==1)@elseif($texts['ispadding']==2){{'padding:'.$texts['padding1'].' '.$texts['padding2'].';'}}@elseif($attr2['ispaddingpadding']==3){{'padding:'.$texts['padding1'].' '.$texts['padding2'].'px;'}}@elseif($texts['ispadding']==4){{'padding:'.$texts['padding1'].'px '.$texts['padding2'].';'}}@elseif($texts['ispadding']==5){{'padding:'.$texts['padding3'].'px '.$texts['padding4'].'px '.$texts['padding5'].'px '.$texts['padding6'].'px;'}}@endif
+                @if($texts['width']){{'width:'.$texts['width'].'px;'}}@endif
+                @if($texts['height']){{'height:'.$texts['height'].'px;'}}@endif
+                @if($texts['position']==4){{$texts['left']?'left:'.$texts['left'].'px;':''}}{{$texts['top']?'top:'.$texts['top'].'px;':''}}@endif
+            @endif
+            {{'{'}}
         @endforeach
-        @endif
+    @endif
         /*================================*/
         .timeline { margin-bottom:5px; width:980px; height:5px; overflow:hidden; }
         .timeline div.dh { width:980px; height:2px; background:red; }
 
         {{--动画样式--}}
         /*动画的代码开始：定义动画时间*/
+        @if(count($attrs))
+        @foreach($attrs as $attrs0)
+            @if($attrs0->layers())
+            @foreach($attrs0->layers() as $layer)
+        {{'.'.$attrs0->style_name}} div.dh {
+            animation-name:{{ $layer->animation_name }};
+            animation-play-state:{{ $layerModel->getState($layer->state) }};
+            animation-duration:{{ $layer->duration }}s;
+            animation-timing-function:{{ $layerModel->getFunc($layer->function) }};
+            animation-delay:{{ $layer->delay }}s;
+            animation-iteration-count:{{ $layer->count }};
+            animation-fill-mode:{{ $layerModel->getMode($layer->mode) }};
+        }
+            @endforeach
+            @endif
+        @endforeach
+        @endif
         /*时间线进度条*/
+        .timeline div.dh {
+            animation-name:timeline;
+            animation-play-state:paused;
+            animation-duration:{{ $attrs[count($attrs)-1]->delay+$attrs[count($attrs)-1]->duration }}s;
+            animation-timing-function:linear;
+            animation-delay:0s;
+            animation-fill-mode:forwards;
+        }
 
         /*动画的代码开始*/
-
+        @if(count($attrs))
+        @foreach($attrs as $attrs0)
+            @if($attrs0->layers())
+            @foreach($attrs0->layers() as $layer)
+            {{ '@keyframes '.$layer->animation_name }}
+            {{ '{' }}
+                @if($layer->layerAttrs())
+                @foreach($layerAttr->layerAttrs() as $layerAttr)
+                {{ $layerAttr->per.'% { '.$layerAttrModel->getLayerAttr($layerAttr->attrSel).':'.$layerAttr->val.'; }' }}
+                @endforeach
+                @endif
+            {{ '}' }}
+            @endforeach
+            @endif
+        @endforeach
+        @endif
         /*时间线进度条*/
         @keyframes timeline
         {
@@ -48,14 +128,23 @@
         <div class="animate">
             {{--动画开始--}}
             @if(count($attrs))
-                @foreach($attrs as $attr)
-                <div class="{{ $attr->style_name }}">
-                    {{--动画开始--}}
-                    <div class="pos">
-                        <div class="dh"><img src="/uploads/images/2016/ppt.png"></div>
+            @foreach($attrs as $attr)
+            <div class="{{ $attr->style_name }}">
+                @if($attr->cons())
+                @foreach($attr->cons() as $con)
+                <div class="pos">
+                    <div class="dh">
+                        @if($con->genre==1)
+                            <img src="{{ $con->url }}">
+                        @elseif($con->genre==2)
+                            <div class="text">{{ $con->name }}</div>
+                        @endif
                     </div>
                 </div>
                 @endforeach
+                @endif
+            </div>
+            @endforeach
             @endif
             {{--动画结束--}}
         </div>

@@ -81,4 +81,9 @@ class ProductLayerAttrModel extends BaseModel
     {
         return array_key_exists($this->attrSel,$this->attrSelNames)?$this->attrSelNames[$this->attrSel]:'无';
     }
+
+    public function getLayerAttr($attrSel)
+    {
+        return array_key_exists($attrSel,$this->attrSelNames)?$this->attrSelNames[$attrSel]:'无';
+    }
 }
