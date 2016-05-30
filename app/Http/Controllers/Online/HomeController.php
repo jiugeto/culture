@@ -27,7 +27,7 @@ class HomeController extends BaseController
             'restart'=> $restart,
         ];
         return view('online.home.index', $result);
-//        return view('online.home.test2', $result);
+//        return view('online.home.demo1', $result);
     }
 
 
