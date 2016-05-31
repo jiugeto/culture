@@ -8,6 +8,7 @@
             <td class="field_name"></td>
             <td><b>@if($index==1)一级@elseif($index==2)二级@elseif($index==3)三级@elseif($index==4)图片@elseif($index==5)文字@endif样式</b></td>
         </tr>
+        @if($attrs['switch'.$index==1?'':$index])
         <tr>
             <td class="field_name">外边距：</td>
             <td>
@@ -100,6 +101,8 @@
             <td class="field_name">背景色：</td>
             <td>{{ $attrs['isbackground'] ? $attrs['background'] : '无' }}</td>
         </tr>
+        @endif
+        @else @include('member.common.norecord')
         @endif
     </table>
     <table class="table_create table_show" cellspacing="0" cellpadding="0">

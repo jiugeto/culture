@@ -66,11 +66,6 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::post('productlayer/{id}','ProductLayerController@update');
     Route::resource('productlayer','ProductLayerController');
         //内部产品属性路由
-    Route::get('productattr/{id}/destroy','ProductAttrController@destroy');
-    Route::get('productattr/{id}/restore','ProductAttrController@restore');
-    Route::get('productattr/{id}/forceDelete','ProductAttrController@forceDelete');
-    Route::get('productattr/trash','ProductAttrController@trash');
-    Route::post('productattr/{id}','ProductAttrController@update');
     Route::get('productattr/{id}/edit2','ProductAttrController@edit2');
     Route::post('productattr/{id}/update2','ProductAttrController@update2');
     Route::get('productattr/{id}/edit3','ProductAttrController@edit3');
@@ -79,8 +74,14 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::post('productattr/{id}/update4','ProductAttrController@update4');
     Route::get('productattr/{id}/edit5','ProductAttrController@edit5');
     Route::post('productattr/{id}/update5','ProductAttrController@update5');
+    Route::get('productattr/{id}/destroy','ProductAttrController@destroy');
+    Route::get('productattr/{id}/restore','ProductAttrController@restore');
+    Route::get('productattr/{id}/forceDelete','ProductAttrController@forceDelete');
+    Route::get('productattr/trash','ProductAttrController@trash');
+    Route::post('productattr/{id}','ProductAttrController@update');
     Route::resource('productattr','ProductAttrController');
-        //产品动画的图片文字路由
+    Route::get('productattr/{id}/{index}','ProductAttrController@show2');
+    //产品动画的图片文字路由
     Route::get('productcon/trash','ProductConController@trash');
     Route::post('productcon/{id}','ProductConController@update');
     Route::resource('productcon','ProductConController');

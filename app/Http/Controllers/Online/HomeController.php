@@ -26,8 +26,8 @@ class HomeController extends BaseController
             'conModel'=> new ProductConModel(),
             'restart'=> $restart,
         ];
-        return view('online.home.index', $result);
-//        return view('online.home.demo1', $result);
+//        return view('online.home.index', $result);
+        return view('online.home.demo1', $result);
     }
 
 

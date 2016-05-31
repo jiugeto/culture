@@ -7,11 +7,19 @@ class ProductAttrModel extends BaseModel
     protected $fillable = [
         'id','name','style_name','productid','uid','attrs','attrs2','attrs3','img','text','intro','del','created_at','updated_at',
     ];
-    //attrs：switch，ismargin，margin1，margin2，margin3，margin4，margin5，margin6，ispadding，ispadding1，ispadding2，ispadding3，ispadding4，ispadding5，ispadding6，width，height，border1，border2，border3，border4，iscolor，color，font_size，word_spacing，line_height，text_transform，text_align，isbackground，background，position,left，top，overflow，opacity，
-    //attrs2：switch2，ismargin，margin1，margin2，margin3，margin4，margin5，margin6，ispadding，ispadding1，ispadding2，ispadding3，ispadding4，ispadding5，ispadding6，width，height，border1，border2，border3，border4，iscolor，color，font_size，word_spacing，line_height，text_transform，text_align，isbackground，background，position,left，top，overflow，opacity，updated_at，
-    //attrs3：switch3，ismargin，margin1，margin2，margin3，margin4，margin5，margin6，ispadding，ispadding1，ispadding2，ispadding3，ispadding4，ispadding5，ispadding6，width，height，border1，border2，border3，border4，iscolor，color，font_size，word_spacing，line_height，text_transform，text_align，isbackground，background，position,left，top，overflow，opacity，updated_at，
-    //text文字：switch4，ismargin，margin1，margin2，margin3，margin4，margin5，margin6，ispadding，padding1，padding2，border1，border2，border3，border4，iscolor，color，isbackground，background，font_size，word_spacing，line_height，updated_at，
-    //img图片：switch5，ismargin，margin1，margin2，margin3，margin4，ispadding，padding1，padding2，padding3，padding4，border1，border2，border3，border4，width，height，updated_at，
+    //attrs：switch，ismargin，margin1，margin2，margin3，margin4，margin5，margin6，ispadding，ispadding1，ispadding2，ispadding3，ispadding4，ispadding5，ispadding6，width，height，border1，border2，border3，border4，iscolor，color，font_size，word_spacing，line_height，text_transform，text_align，isbackground，background，position,left，top，overflow，opacity，float，
+    //attrs2：switch2，ismargin，margin1，margin2，margin3，margin4，margin5，margin6，ispadding，ispadding1，ispadding2，ispadding3，ispadding4，ispadding5，ispadding6，width，height，border1，border2，border3，border4，iscolor，color，font_size，word_spacing，line_height，text_transform，text_align，isbackground，background，position,left，top，overflow，opacity，updated_at，float，
+    //attrs3：switch3，ismargin，margin1，margin2，margin3，margin4，margin5，margin6，ispadding，ispadding1，ispadding2，ispadding3，ispadding4，ispadding5，ispadding6，width，height，border1，border2，border3，border4，iscolor，color，font_size，word_spacing，line_height，text_transform，text_align，isbackground，background，position,left，top，overflow，opacity，updated_at，float，
+    //text文字：switch4，ismargin，margin1，margin2，margin3，margin4，margin5，margin6，ispadding，padding1，padding2，border1，border2，border3，border4，iscolor，color，isbackground，background，font_size，word_spacing，line_height，updated_at，float，
+    //img图片：switch5，ismargin，margin1，margin2，margin3，margin4，ispadding，padding1，padding2，padding3，padding4，border1，border2，border3，border4，width，height，updated_at，float，
+
+    //备用样式：font-style，font-weight，font-variant，text-decoration，font-family，background-color，background-image，background-repeat，background-attachment，background-position，（简写background:#000 url(..) repeat fixed left top;），letter-spacing，text-indent，vertical-align，white-space，display
+    //以下是分类
+    //方块属性：width:; height:; float:; clear:both; margin:; padding:;
+    //边框属性：border：width style color; /*简写*/
+    //列表属性：类型list-style-type: disc;(圆点) circle;(圆圈) square;(方块) decimal;(数字) lower-roman;(小罗码数字) upper-roman; lower-alpha; upper-alpha;     位置list-style-position: outside;(外) inside;      图像list-style-image: url(..);
+    //定位属性：position，visibility，overflow，clip:rect(12px,auto,12px,auto) (裁切)
+    //光标样式：cursor：crosshair十字体，s-resize箭头朝下，move十字箭头，help加一问号，w-resize箭头朝左，n-resize箭头朝上，ne-resize箭头朝右上，nw-resize，箭头朝左上，text文字I型，se-resize箭头斜右下，sw-resize箭头斜左下，wait漏斗，cursor:url("光标文件名.cur"),text;
 
     //边框类型
     protected $borderDirections = [
@@ -26,7 +34,7 @@ class ProductAttrModel extends BaseModel
     protected $borderTypeNames = [
         '无边框','点线','虚线','实线边框','双线边框','3D凹槽','3D凸槽','3D凹边','3D凸边',
     ];
-    //字的变换
+    //字的大小写
     protected $textTransformTypes = [
         1=>'none','capitalize','uppercase','lowercase','inherit',
     ];
@@ -53,6 +61,13 @@ class ProductAttrModel extends BaseModel
     ];
     protected $overflowTypeNames = [
         1=>'无','内容修剪','内容修剪，但可滚动查看','如果内容修剪，可滚动查看','继承上级',
+    ];
+    //浮动方式
+    protected $floatTypes = [
+        1=>'none','left','right','inherit',
+    ];
+    protected $floatTypeNames = [
+        1=>'无','左浮动','右浮动','继承父级',
     ];
     //外类型边框
     protected $marginTypes = [
@@ -90,17 +105,17 @@ class ProductAttrModel extends BaseModel
 
     public function borderDirection($border1)
     {
-        return array_key_exists($border1,$this->borderDirections)?$this->borderDirections[$border1]:'';
+        return array_key_exists($border1,$this->borderDirections) ? $this->borderDirections[$border1] : '';
     }
 
     public function borderType($border3)
     {
-        return array_key_exists($border3,$this->borderTypes)?$this->borderTypes[$border3]:'';
+        return array_key_exists($border3,$this->borderTypes) ? $this->borderTypes[$border3] : '';
     }
 
     public function borderTypeName($border3)
     {
-        return $border3?$this->borderTypeNames[$border3]:'';
+        return array_key_exists($border3,$this->borderTypeNames) ? $this->borderTypeNames[$border3] : '';
     }
 
 //    public function border()
@@ -158,13 +173,25 @@ class ProductAttrModel extends BaseModel
     public function overflow($overflow)
     {
         $overflow = $overflow ? $overflow : 1;
-        return $overflow ? $this->overflowTypes[$overflow] : '未定义';
+        return array_key_exists($overflow,$this->overflowTypes) ? $this->overflowTypes[$overflow] : '未定义';
     }
 
     public function overflowName($overflow)
     {
         $overflow = $overflow ? $overflow : 1;
         return array_key_exists($overflow,$this->overflowTypeNames) ? $this->overflowTypeNames[$overflow] : '未定义';
+    }
+
+    public function floatType($float)
+    {
+        $float = $float ? $float : 1;
+        return array_key_exists($float,$this->floatTypes) ? $this->floatTypes[$float] : '未定义';
+    }
+
+    public function floatTypeName($float)
+    {
+        $float = $float ? $float : 1;
+        return array_key_exists($float,$this->floatTypeNames) ? $this->floatTypeNames[$float] : '未定义';
     }
 
     //图片

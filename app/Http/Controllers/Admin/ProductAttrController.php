@@ -144,11 +144,12 @@ class ProductAttrController extends BaseController
             'data'=> $data,
             'attrs'=> $attrs,
             'model'=> $this->model,
+            'crumb'=> $this->crumb,
             'lists'=> $this->lists,
             'curr'=> $curr,
             'index'=> 3,    //属性级别索引
         ];
-        return view('admin.productattr.edit2', $result);
+        return view('admin.productAttr.edit2', $result);
     }
 
     /**
@@ -178,11 +179,12 @@ class ProductAttrController extends BaseController
             'data'=> $data,
             'attrs'=> $attrs,
             'model'=> $this->model,
+            'crumb'=> $this->crumb,
             'lists'=> $this->lists,
             'curr'=> $curr,
             'index'=> 4,    //属性级别索引
         ];
-        return view('admin.productattr.edit2', $result);
+        return view('admin.productAttr.edit2', $result);
     }
 
     /**
@@ -212,11 +214,12 @@ class ProductAttrController extends BaseController
             'data'=> $data,
             'attrs'=> $attrs,
             'model'=> $this->model,
+            'crumb'=> $this->crumb,
             'lists'=> $this->lists,
             'curr'=> $curr,
             'index'=> 5,    //属性级别索引
         ];
-        return view('admin.productattr.edit2', $result);
+        return view('admin.productAttr.edit2', $result);
     }
 
     /**
@@ -244,10 +247,11 @@ class ProductAttrController extends BaseController
             'attrs3'=> $data->attrs3 ? unserialize($data->attrs3) : [],
             'pics'=> $data->img ? unserialize($data->img) : [],
             'texts'=> $data->text ? unserialize($data->text) : [],
+            'crumb'=> $this->crumb,
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
-        return view('admin.productattr.show', $result);
+        return view('admin.productAttr.show', $result);
     }
 
     public function show2($id,$index)
@@ -264,11 +268,12 @@ class ProductAttrController extends BaseController
             'data'=> $data,
             'attrs'=> isset($attrs) ? $attrs : [],
             'model'=> $this->model,
+            'crumb'=> $this->crumb,
             'lists'=> $this->lists,
             'curr'=> $curr,
             'index'=> $index,
         ];
-        return view('admin.productattr.show2', $result);
+        return view('admin.productAttr.show2', $result);
     }
 
     public function destroy($id)
@@ -383,6 +388,7 @@ class ProductAttrController extends BaseController
             'top'=> $request->top,
             'overflow'=> $request->overflow,
             'opacity'=> $request->opacity,
+            'float'=> $request->float,
         );
         if (in_array($request->index,[1,2,3,5])) {
             $attrs['iscolor'] = $request->iscolor;
@@ -498,6 +504,7 @@ class ProductAttrController extends BaseController
             'top'=> '',
             'overflow'=> '',
             'opacity'=> '',
+            'float'=> '',
         );
     }
 
@@ -532,6 +539,7 @@ class ProductAttrController extends BaseController
             'top'=> '',
             'overflow'=> '',
             'opacity'=> '',
+            'float'=> '',
         );
     }
 }

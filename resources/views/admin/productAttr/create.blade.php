@@ -16,6 +16,7 @@
             <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
                 <form class="am-form" data-am-validator method="POST" action="/admin/productattr" enctype="multipart/form-data">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="index" value="{{ $index }}">
                     <fieldset>
                         <div class="am-form-group">
                             <label>名称 / Name：</label>
@@ -48,8 +49,8 @@
                             <label>总的样式属性
                                 {{--<a id="open">展开</a><a id="close" style="display:none;">关闭</a>--}}
                             </label>
-                            <label><input type="radio" name="switch0" id="open" value="0"> 展开&nbsp;&nbsp;</label>
-                            <label><input type="radio" name="switch0" id="close" value="1" checked> 关闭&nbsp;&nbsp;</label>
+                            <label><input type="radio" name="switch" id="open" value="0"> 展开&nbsp;&nbsp;</label>
+                            <label><input type="radio" name="switch" id="close" value="1" checked> 关闭&nbsp;&nbsp;</label>
                         </div>
                         <script>
                             $(document).ready(function(){
@@ -120,8 +121,8 @@
                                     上：(单位px)<input type="text" name="padding3">
                                     下：(单位px)<input type="text" name="padding4">
                                     <br>
-                                    上：(单位px)<input type="text" name="padding5">
-                                    下：(单位px)<input type="text" name="padding6">
+                                    左：(单位px)<input type="text" name="padding5">
+                                    右：(单位px)<input type="text" name="padding6">
                                 </div>
                             </div>
                         </div>
@@ -145,24 +146,31 @@
                                     <option value="{{ $kborderDirection }}">{{ $borderDirectionName }}</option>
                                     @endforeach
                                 </select>
-                                <div style="height:5px;">{{--间距--}}</div>
-                                边框宽度：<input type="text" placeholder="边框宽度，单位px" pattern="\d+" name="border2"/>
-                                <div style="height:5px;">{{--间距--}}</div>
-                                边框类型：
-                                <select name="border3">
-                                    @foreach($model['borderTypeNames'] as $kborder=>$borderTypeName)
-                                        <option value="{{ $kborder }}">{{ $borderTypeName }}</option>
-                                    @endforeach
-                                </select>
-                                <div style="height:5px;">{{--间距--}}</div>
-                                边框颜色：(点击下面更改颜色)
-                                <span style="float:right;">当前颜色预览<div class="admin_yulan"></div></span>
-                                <input type="color" title="点击更改颜色" name="border4">
+                                <span id="border_con" style="display:none;">
+                                    <div style="height:5px;">{{--间距--}}</div>
+                                    边框宽度：<input type="text" placeholder="边框宽度，单位px" pattern="\d+" name="border2"/>
+                                    <div style="height:5px;">{{--间距--}}</div>
+                                    边框类型：
+                                    <select name="border3">
+                                        @foreach($model['borderTypeNames'] as $kborder=>$borderTypeName)
+                                            <option value="{{ $kborder }}">{{ $borderTypeName }}</option>
+                                        @endforeach
+                                    </select>
+                                    <div style="height:5px;">{{--间距--}}</div>
+                                    边框颜色：(点击下面更改颜色)
+                                    <span style="float:right;">当前颜色预览<div class="admin_yulan"></div></span>
+                                    <input type="color" title="点击更改颜色" name="border4">
+                                </span>
                             </div>
                         </div>
                         <script>
                             $(document).ready(function(){
+                                var border_con = $("#border_con");
                                 var color = $("input[name='border4']");
+                                $("select[name='border1']").change(function(){
+                                    if(this.value){ border_con.show(); }
+                                    else{ border_con.hide(); }
+                                });
                                 color.change(function(){
                                     $(".admin_yulan").css('background',this.value);
                                 });
@@ -288,6 +296,15 @@
                                 });
                             });
                         </script>
+
+                        <div class="am-form-group">
+                            <label>浮动方式 / Float：</label>
+                            <select name="float">
+                                @foreach($model['floatTypeNames'] as $kfloatType=>$floatTypeName)
+                                    <option value="{{ $kfloatType }}" {{ $attrs['float']==$kfloatType ? 'selected' : '' }}>{{ $floatTypeName }}</option>
+                                @endforeach
+                            </select>
+                        </div>
 
                         <div class="am-form-group">
                             <label>二级样式/三级样式/图片样式/文字样式 *：</label>
