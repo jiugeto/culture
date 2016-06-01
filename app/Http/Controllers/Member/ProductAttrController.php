@@ -375,6 +375,7 @@ class ProductAttrController extends BaseController
             'top'=> $request->top,
             'overflow'=> $request->overflow,
             'opacity'=> $request->opacity,
+            'float'=> $request->float,
         );
         if (in_array($request->index,[1,2,3,5])) {
             $attrs['iscolor'] = $request->iscolor;
@@ -490,6 +491,7 @@ class ProductAttrController extends BaseController
             'top'=> '',
             'overflow'=> '',
             'opacity'=> '',
+            'float'=> '',
         );
     }
 
@@ -524,6 +526,7 @@ class ProductAttrController extends BaseController
             'top'=> '',
             'overflow'=> '',
             'opacity'=> '',
+            'float'=> '',
         );
     }
 }

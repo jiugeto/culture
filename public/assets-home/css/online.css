@@ -89,42 +89,38 @@ a:hover .onlinebtn {
 
 
 /*========== 动画与属性编辑 ==========*/
-.frame_edit { margin-top:-20px;background:rgb(40,40,40); }
+.online_frame {
+    /*margin-top:-20px;*/
+    width:100%;
+    background:rgb(20,20,20);
+    border-top:5px solid lightgrey;
+    position:fixed;bottom:100px;
+    height:200px;
+    overflow:auto;
+}
 .frame {
     margin:0 auto;
     width:980px;
 }
 .frame .menus {
-    padding:10px 0;
-    width:970px;
-    color:white;
-    border:5px solid rgb(30,30,30);
+    height:100%;
+    border:2px solid black;
     background:rgb(60,60,60);
-    /*height:200px;*/
-    /*overflow-x:hidden;*/
-    /*overflow-y:auto;*/
+    float:left;
 }
-.frame .menus .grey { padding:0 10px;color:darkgrey; }
+.frame .title,.frame .oneframe {
+    padding:5px;
+    height:180px;
+    color:darkgrey;
+    float:left;
+}
+.frame .title { padding-left:10px;width:20px; }
+.frame .star { color:red; }
+.frame a:hover div { color:red;cursor:pointer; }
 .frame .oneframe {
-    margin:2px 0;
     padding:5px 10px;
-    background:rgb(80,80,80);
+    width:834px;
+    border:2px solid black;
+    overflow:auto;
 }
-.oneframe a { cursor:pointer; }
-.oneframe a:hover { color:red;text-decoration:underline; }
-.oneframe table {
-    margin:5px 0;
-    width:100%;
-    border:1px dashed darkgrey;
-}
-.oneframe table td { width:200px; }
-.oneframe table td.left { padding:5px 10px;width:100px; }
-.oneframe table input {
-    padding:0 5px;
-    width:100px;
-    font-size:20px;
-    font-family:'微软雅黑';
-    border:1px solid darkgrey;
-    border-radius:3px;
-    background:rgb(150,150,150);
-}
+.frame .oneframe a { color:darkgrey;text-decoration:none; }

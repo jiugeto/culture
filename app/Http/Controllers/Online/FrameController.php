@@ -19,18 +19,27 @@ class FrameController extends BaseController
         parent::__construct();
     }
 
-    public function index($productid)
+    public function index($productid,$conid=0)
     {
         $result = [
             'data'=> $this->product($productid),
-            'attrs'=> \App\Tools::childList2($this->attrs($productid)),
+//            'attrs'=> \App\Tools::childList2($this->attrs($productid)),
+            'attrs'=> $this->attrs($productid),
+            'cons'=> $this->attrs($productid),
             'layers'=> $this->layers($productid),
             'pics'=> PicModel::where('uid',$this->userid)->where('del',0)->get(),
             'attrModel'=> new ProductAttrModel(),
+            'footSwitch'=> \App\Models\UserParamsModel::where('uid',$this->userid)->first()->foot_switch,
         ];
-//        dd($this->layers($productid));
-        return view('online.frame.index', $result);
+//        dd($this->attrs($productid));
+        return view('online.frame.edit', $result);
     }
+
+    public function con(){}
+
+    public function style(){}
+
+    public function layer(){}
 
 
 
@@ -52,6 +61,13 @@ class FrameController extends BaseController
 
     public function layers($productid)
     {
-        return ProductLayerModel::where('productid',$productid)->where('del',0)->orderBy('delay','asc')->orderBy('id','asc')->get();
+        return ProductLayerModel::where('productid',$productid)->where('del',0)->get();
+    }
+    public function cons($productid)
+    {
+        return ProductConModel::where('productid',$productid)
+            ->where('del',0)->where('isshow',1)
+            ->orderBy('sort','desc')
+            ->get();
     }
 }

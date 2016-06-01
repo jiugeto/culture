@@ -7,9 +7,10 @@
 </style>
 <div class="footer">
     <div style="float:right;">
-        <a id="footer_close">隐藏</a> <a id="footer_open" style="display:none;">显示</a>
+        <a id="footer_close" style="display:@if(isset($footSwitch)&&$footSwitch){{'block'}}@else{{'none'}}@endif;" href="/footSwitch/set/0">隐藏</a>
+        <a id="footer_open" style="display:@if(isset($footSwitch)&&!$footSwitch){{'block'}}@else{{'none'}}@endif;" href="/footSwitch/set/1">显示</a>
     </div>
-    <div class="footer_center">
+    <div class="footer_center" style="display:@if(isset($footSwitch)&&$footSwitch){{'block'}}@else{{'none'}}@endif;">
         {{--<p class="footer_pic">--}}
             {{--<a href=""><img src=""></a>--}}
         {{--</p>--}}

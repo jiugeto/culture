@@ -71,7 +71,9 @@ class ProductConModel extends BaseModel
     }
     public function attr()
     {
-        return $this->attrid ? ProductAttrModel::find($this->attrid)->name : '';
+        $attrid = $this->attrid ? $this->attrid : 0;
+        $attrModel = ProductAttrModel::find($attrid);
+        return isset($attrModel) ? $attrModel->name : '';
     }
     public function productAll()
     {

@@ -12,6 +12,7 @@
         @include('admin.common.info')
         <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
             <label>总的样式属性</label>
+            <button type="button" class="am-btn am-btn-default" onclick="history.go(-1)">返回上一页</button>
             <table class="am-table am-table-striped am-table-hover table-main">
                 <tbody id="tbody-alert">
                 <tr>
@@ -130,6 +131,7 @@
                 </tr>
                 @else @include('admin.common.norecord')
                 @endif
+                <tr><td colspan="10"><button type="button" class="am-btn am-btn-default" onclick="history.go(-1)">返回上一页</button></td></tr>
                 </tbody>
             </table>
         </div>

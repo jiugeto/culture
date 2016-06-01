@@ -165,33 +165,6 @@
                         </script>
 
                         <div class="am-form-group">
-                            <label>定位方式 / Position：</label>
-                            <div class="admin_border">
-                                <select name="position">
-                                    @foreach($model['positionTypeNames'] as $kpositionType=>$positionTypeName)
-                                        <option value="{{ $kpositionType }}" {{ $attrs['position']==$kpositionType ? 'selected' : '' }}>{{ $positionTypeName }}</option>
-                                    @endforeach
-                                </select>
-                                <span id="locate" style="display:none;">
-                                    左边距离：(定位px)
-                                    <input type="text" placeholder="单位px" pattern="\d+" name="left" value="{{ $attrs['left'] }}"/>
-                                    顶部距离：(定位px)
-                                    <input type="text" placeholder="单位px" pattern="\d+" name="top" value="{{ $attrs['top'] }}"/>
-                                </span>
-                            </div>
-                        </div>
-                        <script>
-                            $(document).ready(function(){
-                                var position = $("select[name='position']");
-                                var locate = $("#locate");
-                                position.change(function(){
-                                    if(position.val()==0){ locate.hide(); }
-                                    if(position.val()>0){ locate.show(); }
-                                });
-                            });
-                        </script>
-
-                        <div class="am-form-group">
                             <label>溢出方式 / Overflow：</label>
                             <select name="overflow">
                                 @foreach($model['overflowTypeNames'] as $koverflowType=>$overflowTypeName)
@@ -280,6 +253,33 @@
                                 });
                                 bgcolor.change(function(){
                                     $(".admin_yulan3").css('background',this.value);
+                                });
+                            });
+                        </script>
+
+                        <div class="am-form-group">
+                            <label>定位方式 / Position：</label>
+                            <div class="admin_border">
+                                <select name="position">
+                                    @foreach($model['positionTypeNames'] as $kpositionType=>$positionTypeName)
+                                        <option value="{{ $kpositionType }}" {{ $attrs['position']==$kpositionType ? 'selected' : '' }}>{{ $positionTypeName }}</option>
+                                    @endforeach
+                                </select>
+                            <span id="locate" style="display:{{$attrs['position']?'block':'none'}};">
+                                左边距离：(定位px)
+                                <input type="text" placeholder="单位px" pattern="(\d+)|(-[0-9]+)" name="left" value="{{ $attrs['left'] }}"/>
+                                顶部距离：(定位px)
+                                <input type="text" placeholder="单位px" pattern="(\d+)|(-[0-9]+)" name="top" value="{{ $attrs['top'] }}"/>
+                            </span>
+                            </div>
+                        </div>
+                        <script>
+                            $(document).ready(function(){
+                                var position = $("select[name='position']");
+                                var locate = $("#locate");
+                                position.change(function(){
+                                    if(position.val()==0){ locate.hide(); }
+                                    if(position.val()>0){ locate.show(); }
                                 });
                             });
                         </script>
