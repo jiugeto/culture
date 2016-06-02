@@ -151,7 +151,7 @@ CREATE TABLE `ba_userlog` (
   `logoutTime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '退出时间',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -160,7 +160,7 @@ CREATE TABLE `ba_userlog` (
 
 LOCK TABLES `ba_userlog` WRITE;
 /*!40000 ALTER TABLE `ba_userlog` DISABLE KEYS */;
-INSERT INTO `ba_userlog` VALUES (1,1,1,'jiuge','201605310914261210','2016-05-31 09:14:26','0000-00-00 00:00:00','2016-04-05 00:00:00'),(2,1,1,'jiuge','201605311425323520','2016-05-31 14:25:32','0000-00-00 00:00:00','2016-04-05 00:00:00'),(3,2,1,'jiuge','20160531192210885','2016-05-31 19:22:10','0000-00-00 00:00:00','2016-04-06 00:00:00'),(4,2,1,'jiuge','201606010919246237','2016-06-01 09:19:24','0000-00-00 00:00:00','2016-04-06 00:00:00'),(5,2,1,'jiuge','201606011439518410','2016-06-01 14:39:51','0000-00-00 00:00:00','2016-04-06 00:00:00'),(6,1,1,'jiuge','201606011548031845','2016-06-01 15:48:03','0000-00-00 00:00:00','2016-04-05 00:00:00');
+INSERT INTO `ba_userlog` VALUES (1,1,1,'jiuge','201605310914261210','2016-05-31 09:14:26','0000-00-00 00:00:00','2016-04-05 00:00:00'),(2,1,1,'jiuge','201605311425323520','2016-05-31 14:25:32','0000-00-00 00:00:00','2016-04-05 00:00:00'),(3,2,1,'jiuge','20160531192210885','2016-05-31 19:22:10','0000-00-00 00:00:00','2016-04-06 00:00:00'),(4,2,1,'jiuge','201606010919246237','2016-06-01 09:19:24','0000-00-00 00:00:00','2016-04-06 00:00:00'),(5,2,1,'jiuge','201606011439518410','2016-06-01 14:39:51','0000-00-00 00:00:00','2016-04-06 00:00:00'),(6,1,1,'jiuge','201606011548031845','2016-06-01 15:48:03','0000-00-00 00:00:00','2016-04-05 00:00:00'),(7,2,1,'jiuge','201606020910435035','2016-06-02 09:10:43','0000-00-00 00:00:00','2016-04-06 00:00:00');
 /*!40000 ALTER TABLE `ba_userlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1231,6 +1231,7 @@ CREATE TABLE `bs_products_con` (
   `productid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '在线产品id，关联bs_products',
   `attrid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '产品属性id，关联bs_products_attr',
   `layerid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '动画id，关联 bs_products_layer',
+  `turn` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '同产品的内容先后顺序',
   `pic_attr` varchar(1000) NOT NULL COMMENT '图片属性，序列化存储：ismargin，margin1，margin2，margin3，margin4，ispadding，padding1，padding2，padding3，padding4，width，height，border1，border2，border3，border4，background，position，left，top，overflow，opacity',
   `text_attr` varchar(1000) NOT NULL COMMENT '文字属性，序列化存储：color颜色，font_size大小，word_spacing字间距，line_height行高，text_transform变换(capitalize单词开头字母大写，uppercase字母大写，lowercase字母小写，inherit继承上级)，text_align水平对齐(static无，absolute相对于第一个父级绝对定位，fixed相对于浏览器绝对定位，relative相对定位，inherit继承上级)',
   `intro` varchar(255) NOT NULL COMMENT '简介',
@@ -1250,7 +1251,7 @@ CREATE TABLE `bs_products_con` (
 
 LOCK TABLES `bs_products_con` WRITE;
 /*!40000 ALTER TABLE `bs_products_con` DISABLE KEYS */;
-INSERT INTO `bs_products_con` VALUES (1,1,1,'',1,1,3,'','','',0,10,1,0,'2016-05-09','0000-00-00'),(2,1,2,'',1,2,3,'','','',0,10,1,0,'2016-05-11','0000-00-00'),(3,1,1,'',1,1,0,'','','erthnewfrggrfg',0,10,1,0,'2016-05-29','2016-05-29'),(4,2,2,'文字123',1,1,0,'','','rthymrgthj',0,10,1,0,'2016-05-29','2016-05-29');
+INSERT INTO `bs_products_con` VALUES (1,1,1,'',1,1,3,0,'','','',0,10,1,0,'2016-05-09','0000-00-00'),(2,1,2,'',1,2,3,0,'','','',0,10,1,0,'2016-05-11','0000-00-00'),(3,1,1,'',1,1,0,0,'','','erthnewfrggrfg',0,10,1,0,'2016-05-29','2016-05-29'),(4,2,2,'文字123',1,1,0,0,'','','rthymrgthj',0,10,1,0,'2016-05-29','2016-05-29');
 /*!40000 ALTER TABLE `bs_products_con` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1268,6 +1269,7 @@ CREATE TABLE `bs_products_layer` (
   `attrid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '属性id，关联bs_products_attr',
   `conStr` varchar(255) NOT NULL COMMENT '图片文字内容id集合，关联  bs_products_con',
   `layerAttr` varchar(255) NOT NULL DEFAULT '0' COMMENT '动画属性id集合，关联  bs_pro_layer_attr',
+  `turn` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '同产品的动画顺序',
   `animation_name` varchar(255) NOT NULL COMMENT '动画名称，系统自动添加，act_+用户id_+产品id_+动画id',
   `duration` float(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '动画时长，单位秒(s)',
   `function` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '速度曲线：linear匀速，ease默认慢快慢，ease-in低速开始，ease-out低速结束，ease-in-out低速开始和结束，cubic-bezier(n,n,n,n)贝塞尔函数自定义',
@@ -1290,7 +1292,7 @@ CREATE TABLE `bs_products_layer` (
 
 LOCK TABLES `bs_products_layer` WRITE;
 /*!40000 ALTER TABLE `bs_products_layer` DISABLE KEYS */;
-INSERT INTO `bs_products_layer` VALUES (1,'动画',1,1,'','','act_1_1_1',1.50,1,0.00,1,1,0,1,'',0,'2016-05-09','0000-00-00'),(2,'动画2',1,5,'','','my2',5.00,1,0.00,1,1,0,1,'',0,'2016-05-10','2016-05-10'),(3,'动画3',1,5,'','','my3',5.00,1,0.00,1,1,0,1,'',0,'2016-05-10','0000-00-00'),(4,'动画4',1,5,'','','my4',5.00,1,0.00,1,1,0,1,'',0,'2016-05-10','0000-00-00'),(5,'动画5',1,5,'','','my5',5.00,1,0.00,1,1,0,1,'',0,'2016-05-10','0000-00-00'),(6,'动画6',1,5,'','','my6',5.00,1,0.00,1,1,0,1,'',0,'2016-05-10','0000-00-00'),(7,'动画7',1,5,'','','my7',5.00,1,0.00,1,1,0,1,'',0,'2016-05-10','0000-00-00');
+INSERT INTO `bs_products_layer` VALUES (1,'动画',1,1,'','',1,'act_1_1_1',1.50,1,0.00,1,1,0,1,'',0,'2016-05-09','0000-00-00'),(2,'动画2',1,5,'','',2,'my2',5.00,1,0.00,1,1,0,1,'',0,'2016-05-10','2016-05-10'),(3,'动画3',1,5,'','',3,'my3',5.00,1,0.00,1,1,0,1,'',0,'2016-05-10','0000-00-00'),(4,'动画4',1,5,'','',4,'my4',5.00,1,0.00,1,1,0,1,'',0,'2016-05-10','0000-00-00'),(5,'动画5',1,5,'','',5,'my5',5.00,1,0.00,1,1,0,1,'',0,'2016-05-10','0000-00-00'),(6,'动画6',1,5,'','',6,'my6',5.00,1,0.00,1,1,0,1,'',0,'2016-05-10','0000-00-00'),(7,'动画7',1,5,'','',7,'my7',5.00,1,0.00,1,1,0,1,'',0,'2016-05-10','0000-00-00');
 /*!40000 ALTER TABLE `bs_products_layer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2049,4 +2051,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-06-01 18:23:11
+-- Dump completed on 2016-06-02 18:55:11

@@ -20,6 +20,7 @@ class HomeController extends BaseController
         $result = [
             'data'=> $this->product($productid),
             'attrs'=> $this->attrs($productid),
+            'layers'=> $this->layers($productid),
             'attrModel'=> new ProductAttrModel(),
             'layerModel'=> new ProductLayerModel(),
             'layerAttrModel'=> new ProductLayerAttrModel(),
@@ -48,6 +49,15 @@ class HomeController extends BaseController
         return ProductAttrModel::where('productid',$productid)
             ->where('del',0)
             ->where('uid',$uid)
+            ->get();
+    }
+
+    public function layers($productid)
+    {
+        $uid = $this->userid ? $this->userid : 0;
+        return ProductLayerModel::where('productid',$productid)
+            ->where('del',0)
+            ->orderBy('turn','desc')
             ->get();
     }
 }

@@ -114,7 +114,7 @@
     @endif
         /*================================*/
         .timeline { margin-bottom:5px; width:980px; height:5px; overflow:hidden; }
-        .timeline div.dh { width:980px; height:2px; background:red; }
+        .timeline div.dh { width:980px; height:2px; background:red; position:relative; left:-980px; }
 
         {{--动画样式--}}
         /*动画的代码开始：定义动画时间*/
@@ -140,8 +140,8 @@
         .timeline div.dh {
             animation-name:timeline;
             animation-play-state:paused;
-            {{--animation-duration:{{ $attrs[count($attrs)-1]->delay+$attrs[count($attrs)-1]->duration }}s;--}}
-            animation-duration:2s;
+            animation-duration:{{ $layers[0]->delay+$layers[0]->duration }}s;
+            /*animation-duration:2s;*/
             animation-timing-function:linear;
             animation-delay:0s;
             animation-fill-mode:forwards;
