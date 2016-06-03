@@ -23,23 +23,21 @@ class FrameController extends BaseController
     {
         $result = [
             'data'=> $this->product($productid),
-//            'attrs'=> \App\Tools::childList2($this->attrs($productid)),
+            'cons'=> $this->cons($productid),
             'attrs'=> $this->attrs($productid),
-            'cons'=> $this->attrs($productid),
             'layers'=> $this->layers($productid),
             'pics'=> PicModel::where('uid',$this->userid)->where('del',0)->get(),
             'attrModel'=> new ProductAttrModel(),
             'footSwitch'=> \App\Models\UserParamsModel::where('uid',$this->userid)->first()->foot_switch,
         ];
-//        dd($this->attrs($productid));
         return view('online.frame.edit', $result);
     }
 
-    public function con(){}
+    public function setCon(){}
 
-    public function style(){}
+    public function setStyle(){}
 
-    public function layer(){}
+    public function setLayer(){}
 
 
 
@@ -53,6 +51,15 @@ class FrameController extends BaseController
         return ProductModel::find($productid);
     }
 
+    public function cons($productid)
+    {
+        return ProductConModel::where('productid',$productid)
+            ->where('del',0)
+            ->where('isshow',1)
+            ->orderBy('sort','desc')
+            ->get();
+    }
+
     public function attrs($productid)
     {
         $uid = $this->userid ? $this->userid : 0;
@@ -62,12 +69,5 @@ class FrameController extends BaseController
     public function layers($productid)
     {
         return ProductLayerModel::where('productid',$productid)->where('del',0)->get();
-    }
-    public function cons($productid)
-    {
-        return ProductConModel::where('productid',$productid)
-            ->where('del',0)->where('isshow',1)
-            ->orderBy('sort','desc')
-            ->get();
     }
 }

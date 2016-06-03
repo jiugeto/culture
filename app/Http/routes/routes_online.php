@@ -11,8 +11,9 @@ Route::group(['prefix'=>'online','middleware' =>'MemberAuth','namespace'=>'Onlin
     Route::get('home','HomeController@index');
     //单帧编辑路由
     Route::resource('{productid}/frame','FrameController');
-    Route::get('{productid}/frame/style/{attrid}','FrameController@style');
-    Route::get('{productid}/frame/layer/{layerid}','FrameController@layer');
+    Route::get('{productid}/frame/con/{attrid}','FrameController@setCon');
+    Route::get('{productid}/frame/style/{attrid}','FrameController@setStyle');
+    Route::get('{productid}/frame/layer/{layerid}','FrameController@setLayer');
 });
 
 //用户参数路由

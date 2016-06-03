@@ -119,7 +119,7 @@ a:hover .onlinebtn {
 .frame a:hover div { color:red;cursor:pointer; }
 .frame .oneframe {
     padding:5px 10px;
-    width:834px;
+    width:800px;
     border:2px solid black;
     overflow:auto;
 }
