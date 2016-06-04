@@ -1,6 +1,8 @@
 /*========== 这里是关于我们样式a(about) ==========*/
 
 
+body { font-family:'微软雅黑'; }
+
 /*========== 窗口定位 ==========*/
 .online_bg {
     padding:20px 0;
@@ -90,7 +92,6 @@ a:hover .onlinebtn {
 
 /*========== 动画与属性编辑 ==========*/
 .online_frame {
-    /*margin-top:-20px;*/
     width:100%;
     background:rgb(20,20,20);
     border-top:5px solid lightgrey;
@@ -98,6 +99,18 @@ a:hover .onlinebtn {
     height:200px;
     overflow:auto;
 }
+.online_frame .timeframe {
+    margin:0 auto;
+    padding:5px;
+    width:965px;
+    color:darkgrey;
+    border:2px solid black;
+    background:rgb(60,60,60);
+}
+.online_frame .timeframe #menu { padding:2px 10px;color:darkgrey;background:grey;float:right;position:relative;top:-3px; }
+.online_frame .timeframe a { color:darkgrey;text-decoration:none; }
+.online_frame .timeframe a { padding:0 5px; border:1px solid grey; cursor:pointer; }
+.online_frame .timeframe a:hover,.online_frame .timeframe a#timecurr { color:white;background:dimgrey; }
 .frame {
     margin:0 auto;
     width:980px;
@@ -123,4 +136,5 @@ a:hover .onlinebtn {
     border:2px solid black;
     overflow:auto;
 }
-.frame .oneframe a { color:darkgrey;text-decoration:none; }
+.frame .oneframe input,.frame .oneframe select { padding:5px;border:1px solid black;border-radius:3px; }
+.frame .oneframe select { width:180px; }

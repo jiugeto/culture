@@ -14,6 +14,8 @@ Route::group(['prefix'=>'online','middleware' =>'MemberAuth','namespace'=>'Onlin
     Route::get('{productid}/frame/con/{attrid}','FrameController@setCon');
     Route::get('{productid}/frame/style/{attrid}','FrameController@setStyle');
     Route::get('{productid}/frame/layer/{layerid}','FrameController@setLayer');
+    //当前动画设置的路由
+    Route::get('{productid}/frame/timecurr/{id}','FrameController@setTimeCurr');
 });
 
 //用户参数路由

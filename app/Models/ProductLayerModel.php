@@ -5,7 +5,7 @@ class ProductLayerModel extends BaseModel
 {
     protected $table = 'bs_products_layer';
     protected $fillable = [
-        'id','name','layer_name','productid','attrid','conStr','layerAttr','animation_name','duration','function','delay','count','direction','state','mode','field','per','value','intro','del','created_at','updated_at',
+        'id','name','layer_name','productid','attrid','conStr','layerAttr','turn','timeCurr','animation_name','duration','function','delay','count','direction','state','mode','field','per','value','intro','del','created_at','updated_at',
     ];
     //速度曲线
     protected $functions = [

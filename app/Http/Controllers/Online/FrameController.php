@@ -7,6 +7,7 @@ use App\Models\ProductModel;
 use App\Models\ProductAttrModel;
 use App\Models\ProductLayerModel;
 use App\Models\ProductConModel;
+use App\Models\ProductLayerAttrModel;
 
 class FrameController extends BaseController
 {
@@ -27,8 +28,11 @@ class FrameController extends BaseController
             'attrs'=> $this->attrs($productid),
             'layers'=> $this->layers($productid),
             'pics'=> PicModel::where('uid',$this->userid)->where('del',0)->get(),
-            'attrModel'=> new ProductAttrModel(),
             'footSwitch'=> \App\Models\UserParamsModel::where('uid',$this->userid)->first()->foot_switch,
+            'attrModel'=> new ProductAttrModel(),
+            'layerModel'=> new ProductLayerModel(),
+            'layerAttrModel'=> new ProductLayerAttrModel(),
+            'conModel'=> new ProductConModel(),
         ];
         return view('online.frame.edit', $result);
     }
@@ -38,6 +42,13 @@ class FrameController extends BaseController
     public function setStyle(){}
 
     public function setLayer(){}
+
+    public function setTimeCurr($productid,$layerid)
+    {
+        ProductLayerModel::where('productid',$productid)->update(['timeCurr'=> 0]);
+        ProductLayerModel::where('id',$layerid)->update(['timeCurr'=> 1]);
+        return redirect('/online/'.$productid.'/frame');
+    }
 
 
 

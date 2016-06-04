@@ -201,4 +201,12 @@ class ProductConModel extends BaseModel
     {
         return $this->text_attr ? unserialize($this->text_attr) : [];
     }
+
+    //获取layer
+    public function layer()
+    {
+        $layerid = $this->layerid ? $this->layerid : 0;
+        $layerModel = ProductLayerModel::find($layerid);
+        return isset($layerModel) ? $layerModel : '';
+    }
 }
