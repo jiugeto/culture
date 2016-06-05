@@ -3,7 +3,7 @@
     @include('online.common.style')
     @include('online.common.show')
 
-    <div class="online_frame" style="@if(isset($footSwitch)&&!$footSwitch)bottom:25px;@endif">
+    <div class="online_frame" style="@if(isset($footSwitch)&&!$footSwitch)bottom:30px;@endif">
         <div class="timeframe">
             <input type="hidden" name="productid" value="{{ $data->id }}">
             <div class="showtime">
@@ -13,13 +13,16 @@
                     <a id="{{$layer->timeCurr?'timecurr':''}}" onclick="timecurr({{$layer->id}})">{{ $layer->delay.'s~'.$layer->duration.'s' }}</a>
                 @endforeach
                 @endif
+                <a id="finish" onclick="finish()">完成</a>
                 <script>
                     var productid = $("input[name='productid']").val();
                     function timecurr(v){
                         window.location.href = "/online/"+productid+"/frame/timecurr/"+v;
                     }
+                    function finish(){
+                        window.location.href = "/online/"+productid;
+                    }
                 </script>
-                <a id="menu">完成</a>
             </div>
         </div>
         <div class="frame">
@@ -37,7 +40,7 @@
                 @if(count($cons))
                 @foreach($cons as $con)
                     @if($con->layer() && $con->layer()->timeCurr)
-                <table style="width:100%;border-bottom:1px dashed grey;">
+                <table>
                     <tr><td style="width:50%;">
                         <span id="pic_{{$con->id}}" style="display:{{$con->genre==1?'block':'none'}};">
                             图片选择：
@@ -52,7 +55,7 @@
                         </span>
                         <span id="text_{{$con->id}}" style="display:{{$con->genre==2?'block':'none'}};">
                             文字填写：
-                            <input type="text" placeholder="填写文字" minlength="2" required name="name_{{$con->id}}" value="{{ $con->name }}">
+                            <input type="text" placeholder="填写文字" minlength="2" required name="con_name_{{$con->id}}" value="{{ $con->name }}">
                         </span>
                         </td>
                         <td>内容类型：
@@ -74,13 +77,47 @@
             <div class="menus">
                 <a><div class="title" id="title3">动画单帧修改</div></a>
             </div>
-            <div class="menus oneframe" id="layerAttr" style="display:none;"></div>
+            <div class="menus oneframe" id="layerAttr" style="display:none;">
+                @if(count($layerAttrs))
+                @foreach($layerAttrs as $layerAttr)
+                    @if($layerAttr->getLayer() && $layerAttr->getLayer()->timeCurr)
+                <table class="layer">
+                    <tr><td style="width:20%;">
+                            属性名：{{ $layerAttr->layerAttrName() }}
+                        </td>
+                        <td style="width:30%;">
+                            百分比(%)/时长(s)：<input type="text" name="per_{{$layerAttr->id}}" value="{{ $layerAttr->per }}">/{{ $layerAttr->getLayer()->duration }}
+                        </td>
+                        <td>
+                            参数值：<input type="text" name="val_{{$layerAttr->id}}" value="{{ $layerAttr->val }}">
+                        </td>
+                    </tr>
+                </table>
+                    @endif
+                @endforeach
+                @endif
+            </div>
 
             {{--动画设置修改--}}
             <div class="menus">
                 <a><div class="title" id="title4">动画设置</div></a>
             </div>
-            <div class="menus oneframe" id="layer" style="display:none;"></div>
+            <div class="menus oneframe" id="layer" style="display:none;">
+                @if(count($layers))
+                @foreach($layers as $layer)
+                    <table class="layer">
+                        <tr><td style="width:30%;">
+                                动画名称：<input type="text" style="width:100px;" name="layer_name_{{ $layer->id }}" value="{{ $layer->name }}">
+                            </td>
+                            <td>
+                                开始时间(s)：<input type="text" name="layer_delay_{{ $layer->id }}" value="{{ $layer->delay }}"></td>
+                            <td>动画时长(s)：<input type="text" name="layer_duration_{{ $layer->id }}" value="{{ $layer->duration }}"></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                @endforeach
+                @endif
+            </div>
         </div>
         <div style="height:100px;">{{--空白--}}</div>
     </div>

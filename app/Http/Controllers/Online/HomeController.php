@@ -57,7 +57,6 @@ class HomeController extends BaseController
         $uid = $this->userid ? $this->userid : 0;
         return ProductLayerModel::where('productid',$productid)
             ->where('del',0)
-            ->orderBy('turn','desc')
             ->get();
     }
 }

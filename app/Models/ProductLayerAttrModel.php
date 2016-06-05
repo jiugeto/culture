@@ -76,6 +76,13 @@ class ProductLayerAttrModel extends BaseModel
         return isset($layername) ? $layername : '未知';
     }
 
+    public function getLayer()
+    {
+        $layerid = $this->layerid ? $this->layerid : 0;
+        $layerModel = ProductLayerModel::find($layerid);
+        return isset($layerModel) ? $layerModel : '未知';
+    }
+
     //动画属性 ProductLayerAttrModel
     public function layerAttr()
     {

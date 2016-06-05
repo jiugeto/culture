@@ -278,7 +278,6 @@ class ProductAttrModel extends BaseModel
         return ProductLayerModel::where('productid',$productid)
             ->where('attrid',$attrid)
             ->where('del',0)
-//            ->orderBy('turn','asc')
             ->get();
     }
 
