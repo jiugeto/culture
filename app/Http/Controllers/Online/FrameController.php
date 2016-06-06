@@ -53,6 +53,12 @@ class FrameController extends BaseController
         return redirect('/online/'.$productid.'/frame');
     }
 
+    public function setTimeCurr2($productid,$timecurr)
+    {
+        ProductModel::where('id',$productid)->update(['timeCurr'=> $timecurr]);
+        return redirect('/online/'.$productid.'/frame');
+    }
+
 
 
 
