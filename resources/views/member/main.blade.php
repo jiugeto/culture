@@ -22,7 +22,7 @@
                     @yield('content')
                 </div>
                 <!-- 空白 -->
-                <div class="content_kongbai">&nbsp;</div>
+                <div class="content_kongbai" style="height:150px;">&nbsp;</div>
             </div>
         </div>
         <!-- 中间内容 -->

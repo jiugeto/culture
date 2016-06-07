@@ -29,6 +29,7 @@ Route::group(['prefix'=>'','namespace'=>'Home'],function(){
     Route::any('design','DesignController@index');
     //关于我们
     Route::any('about','AboutController@index');
+    Route::get('about/join','AboutController@join');
     //用户对本站的意见栏
     Route::get('opinion/create/{reply}','OpinionController@create');
     Route::get('opinion/create','OpinionController@create');

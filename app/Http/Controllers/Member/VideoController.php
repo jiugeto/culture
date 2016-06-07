@@ -118,6 +118,8 @@ class VideoController extends BaseController
 
     public function getData(Request $request)
     {
+        dd($request->all());
+        //乐视视频上传接口：http://api.letvcloud.com/open.php/video.upload.init
         $data = [
             'uid'=> $this->userid,
             'name'=> $request->name,

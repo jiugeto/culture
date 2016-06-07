@@ -24,5 +24,7 @@
         <p>
             本站追求：急用户之所急，成用户之所想！
         </p>
+        @include('home.about.menu')
     </div>
+    <div style="height:300px;">{{--空白--}}</div>
 @stop
