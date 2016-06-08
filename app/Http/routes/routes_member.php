@@ -167,6 +167,7 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
     Route::get('video/{id}/restore','VideoController@restore');
     Route::get('video/{id}/forceDelete','VideoController@forceDelete');
     Route::get('video/trash','VideoController@trash');
+    Route::get('video/uploadWay','VideoController@uploadWay');
     Route::resource('video','VideoController');
         //分镜路由
     Route::get('storyboard/trash','StoryBoardController@trash');

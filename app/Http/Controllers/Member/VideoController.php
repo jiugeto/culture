@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Member;
 
 use Illuminate\Http\Request;
 use App\Models\VideoModel;
+use App\Models\UserParamsModel;
 
 class VideoController extends BaseController
 {
@@ -50,6 +51,7 @@ class VideoController extends BaseController
         $curr['name'] = $this->lists['create']['name'];
         $curr['url'] = $this->lists['create']['url'];
         $result = [
+            'user'=> UserParamsModel::where('uid',$this->userid)->first(),
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -114,8 +116,22 @@ class VideoController extends BaseController
         return redirect('/member/video/trash');
     }
 
+    public function uploadWay()
+    {
+        $curr['name'] = '视频上传的方法';
+        $curr['url'] = $this->lists['show']['url'];
+        $result = [
+            'lists'=> $this->lists,
+            'curr'=> $curr,
+        ];
+        return view('member.video.uploadWay', $result);
+    }
 
 
+
+    /**
+     * 以下是公用方法
+     */
     public function getData(Request $request)
     {
         dd($request->all());

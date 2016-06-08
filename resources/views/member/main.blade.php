@@ -3,6 +3,7 @@
 <head>
     <title>微文化</title>
     <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/png" href="/assets/images/icon.png">
     <link rel="stylesheet" type="text/css" href="/assets-home/css/home.css">
     <link rel="stylesheet" type="text/css" href="/assets-home/css/member.css">
