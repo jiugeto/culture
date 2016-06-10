@@ -25,7 +25,7 @@
         </div>
         <div class="keyword_pos">搜索关键词：</div>
             {{--{{explode('/',$_SERVER['REQUEST_URI'])[1]}}--}}
-        <div class="nav_right">
+        <span class="nav_right">
             <a href="/{{ Session::has('user.username') ? 'member' : 'login' }}">
                 <img src="/assets/images/key.png" class="imgMiniSize">
                 {{ Session::has('user.username') ? Session::get('user.username') : '登录/注册' }}</a>&nbsp;
@@ -39,7 +39,7 @@
             &nbsp;&nbsp;<a href="/idea" style="color:red;">创意</a>
             &nbsp;&nbsp;<a href="/talk" style="color:red;">话题</a>
             &nbsp;&nbsp;<a href="/opinion" class="opinion" style="color:white;">用户意见</a>
-        </div>
+        </span>
         <div class="navigate">
             <div class="navigate_a" style="display:{{explode('/',$_SERVER['REQUEST_URI'])[1]?'none':'block'}};">
                 @foreach($navigates as $navigate)

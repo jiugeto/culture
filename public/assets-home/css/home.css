@@ -58,7 +58,8 @@ body {
 }
 .nav_body div { float:left; }
 .nav_right {
-    position:absolute;top:50px;right:150px;
+    /*position:absolute;top:50px;right:200px;*/
+    float:right;
 }
 .nav_right a {
     color:black;
@@ -105,7 +106,7 @@ a.curr {
     border:1px solid lightgray;
     background:white;
     cursor:pointer;
-    position:fixed;z-index:120;top:27px;left:380px;
+    position:fixed;z-index:120;top:27px;left:300px;
 }
 .nav_qh {
     background:white;
