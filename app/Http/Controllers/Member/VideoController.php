@@ -72,6 +72,7 @@ class VideoController extends BaseController
         $curr['url'] = $this->lists['edit']['url'];
         $result = [
             'data'=> VideoModel::find($id),
+            'user'=> UserParamsModel::where('uid',$this->userid)->first(),
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -95,7 +96,7 @@ class VideoController extends BaseController
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
-        return view('member.bideo.show', $result);
+        return view('member.video.show', $result);
     }
 
     public function destroy($id)
@@ -134,13 +135,32 @@ class VideoController extends BaseController
      */
     public function getData(Request $request)
     {
-        dd($request->all());
+        //乐视账户判断
+        if (!$request->lecloud || !$request->lepwd) {
+            echo "<script>alert('乐视账户、密码必填！');history.go(-1);</script>";exit;
+        }
+        $le = array('lecloud'=>$request->lecloud,'lepwd'=>$request->lepwd);
+        UserParamsModel::where('uid',$this->userid)->update($le);
         //乐视视频上传接口：http://api.letvcloud.com/open.php/video.upload.init
+        if (!$request->url) {
+            echo "<script>alert('视频地址必填！');history.go(-1);</script>";exit;
+        }
+        //url处理
+        if (strstr($request->url,'?')) {
+            $urls = explode('?',$request->url);
+            $url = $urls[0];
+            $url_2 = explode('&',$urls[1]);
+            if (strstr($urls[1],'width') && strstr($urls[1],'height')) {
+                unset($url_2[count($url_2)-1]); unset($url_2[count($url_2)-1]);
+            }
+            $url2 = implode('&',$url_2);
+        }
         $data = [
             'uid'=> $this->userid,
             'name'=> $request->name,
             'intro'=> $request->intro,
-            'url'=> $request->url,
+            'url'=> isset($url) ? $url : '',
+            'url2'=> isset($url2) ? $url2 : '',
         ];
         return $data;
     }

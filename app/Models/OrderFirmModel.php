@@ -24,7 +24,7 @@ class OrderFirmModel extends BaseModel
     {
         $orderid = $this->orderid ? $this->orderid : 0;
         $orderModel = OrderModel::find($orderid);
-        return $orderModel;
+        return isset($orderModel) ? $orderModel : '';
     }
 
     public function genre()

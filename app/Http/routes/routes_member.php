@@ -176,7 +176,11 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
     Route::get('storyboard/{id}/forceDelete','StoryBoardController@forceDelete');
     Route::post('storyboard/{id}','StoryBoardController@update');
     Route::resource('storyboard','StoryBoardController');
-    //订单流程
+    //订单路由
         //订单流程
     Route::resource('order','OrderController');
+        //售后（样片修改）路由
+    Route::resource('orderfirm','OrderFirmController');
+        //在线创作路由
+    Route::resource('orderpro','OrderProductController');
 });
