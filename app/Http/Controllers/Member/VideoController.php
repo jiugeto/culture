@@ -11,6 +11,8 @@ class VideoController extends BaseController
      * 会员后台图片管理
      */
 
+    protected $userParam;
+
     public function __construct()
     {
         parent::__construct();
@@ -18,6 +20,7 @@ class VideoController extends BaseController
         $this->lists['func']['url'] = 'video';
         $this->lists['create']['name'] = '添加视频';
         $this->model = new VideoModel();
+        $this->userParam = UserParamsModel::where('uid',$this->userid)->first();
     }
 
     public function index()
@@ -26,6 +29,7 @@ class VideoController extends BaseController
         $curr['url'] = $this->lists['']['url'];
         $result = [
             'datas'=> $this->query($del=0),
+            'user'=> $this->userParam,
             'prefix_url'=> '/member/video',
             'lists'=> $this->lists,
             'curr'=> $curr,
@@ -39,6 +43,7 @@ class VideoController extends BaseController
         $curr['url'] = $this->lists['trash']['url'];
         $result = [
             'datas'=> $this->query($del=1),
+            'user'=> $this->userParam,
             'prefix_url'=> '/member/video/trash',
             'lists'=> $this->lists,
             'curr'=> $curr,
@@ -51,7 +56,7 @@ class VideoController extends BaseController
         $curr['name'] = $this->lists['create']['name'];
         $curr['url'] = $this->lists['create']['url'];
         $result = [
-            'user'=> UserParamsModel::where('uid',$this->userid)->first(),
+            'user'=> $this->userParam,
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -72,7 +77,7 @@ class VideoController extends BaseController
         $curr['url'] = $this->lists['edit']['url'];
         $result = [
             'data'=> VideoModel::find($id),
-            'user'=> UserParamsModel::where('uid',$this->userid)->first(),
+            'user'=> $this->userParam,
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -93,6 +98,7 @@ class VideoController extends BaseController
         $curr['url'] = $this->lists['show']['url'];
         $result = [
             'data'=> VideoModel::find($id),
+            'user'=> $this->userParam,
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -128,6 +134,15 @@ class VideoController extends BaseController
         return view('member.video.uploadWay', $result);
     }
 
+    /**
+     * 设置视频是否自动播放
+     */
+    public function setLeplay($play)
+    {
+        UserParamsModel::where('id',$this->userid)->update(['leplay'=> $play]);
+        return redirect('/member/video');
+    }
+
 
 
     /**
@@ -141,6 +156,7 @@ class VideoController extends BaseController
         }
         $le = array('lecloud'=>$request->lecloud,'lepwd'=>$request->lepwd);
         UserParamsModel::where('uid',$this->userid)->update($le);
+
         //乐视视频上传接口：http://api.letvcloud.com/open.php/video.upload.init
         if (!$request->url) {
             echo "<script>alert('视频地址必填！');history.go(-1);</script>";exit;
@@ -153,6 +169,7 @@ class VideoController extends BaseController
             if (strstr($urls[1],'width') && strstr($urls[1],'height')) {
                 unset($url_2[count($url_2)-1]); unset($url_2[count($url_2)-1]);
             }
+            if (strstr($urls[1],'auto_play')) { unset($url_2[count($url_2)-2]); }
             $url2 = implode('&',$url_2);
         }
         $data = [
@@ -161,6 +178,8 @@ class VideoController extends BaseController
             'intro'=> $request->intro,
             'url'=> isset($url) ? $url : '',
             'url2'=> isset($url2) ? $url2 : '',
+            'width'=> $request->width,
+            'height'=> $request->height,
         ];
         return $data;
     }

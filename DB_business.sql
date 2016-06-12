@@ -151,7 +151,7 @@ CREATE TABLE `ba_userlog` (
   `logoutTime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '退出时间',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -160,7 +160,7 @@ CREATE TABLE `ba_userlog` (
 
 LOCK TABLES `ba_userlog` WRITE;
 /*!40000 ALTER TABLE `ba_userlog` DISABLE KEYS */;
-INSERT INTO `ba_userlog` VALUES (1,2,1,'jiuge','201606100027416445','2016-06-10 00:27:41','0000-00-00 00:00:00','2016-04-06 00:00:00'),(2,2,1,'jiuge','201606102145482809','2016-06-10 21:45:48','0000-00-00 00:00:00','2016-04-06 00:00:00'),(3,2,1,'jiuge','201606110914365805','2016-06-11 09:14:36','0000-00-00 00:00:00','2016-04-06 00:00:00'),(4,2,1,'jiuge','201606111607431487','2016-06-11 16:07:43','0000-00-00 00:00:00','2016-04-06 00:00:00'),(5,2,1,'jiuge','201606111808179545','2016-06-11 18:08:17','0000-00-00 00:00:00','2016-04-06 00:00:00');
+INSERT INTO `ba_userlog` VALUES (1,2,1,'jiuge','201606100027416445','2016-06-10 00:27:41','0000-00-00 00:00:00','2016-04-06 00:00:00'),(2,2,1,'jiuge','201606102145482809','2016-06-10 21:45:48','0000-00-00 00:00:00','2016-04-06 00:00:00'),(3,2,1,'jiuge','201606110914365805','2016-06-11 09:14:36','0000-00-00 00:00:00','2016-04-06 00:00:00'),(4,2,1,'jiuge','201606111607431487','2016-06-11 16:07:43','0000-00-00 00:00:00','2016-04-06 00:00:00'),(5,2,1,'jiuge','201606111808179545','2016-06-11 18:08:17','0000-00-00 00:00:00','2016-04-06 00:00:00'),(6,2,1,'jiuge','201606121433482194','2016-06-12 14:33:48','0000-00-00 00:00:00','2016-04-06 00:00:00');
 /*!40000 ALTER TABLE `ba_userlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1728,6 +1728,8 @@ CREATE TABLE `bs_videos` (
   `name` varchar(255) NOT NULL COMMENT '视频名称',
   `url` varchar(255) NOT NULL COMMENT '视频链接',
   `url2` varchar(255) NOT NULL COMMENT '地址上的一些参数',
+  `width` smallint(4) unsigned NOT NULL DEFAULT '640' COMMENT '视频宽度，单位px，默认640',
+  `height` smallint(4) unsigned NOT NULL DEFAULT '480' COMMENT '视频高度，单位px，默认480',
   `intro` varchar(500) NOT NULL COMMENT '图片介绍',
   `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站功能：0未删除，1已删除',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
@@ -1742,7 +1744,7 @@ CREATE TABLE `bs_videos` (
 
 LOCK TABLES `bs_videos` WRITE;
 /*!40000 ALTER TABLE `bs_videos` DISABLE KEYS */;
-INSERT INTO `bs_videos` VALUES (1,1,'视频001','http://yuntv.letv.com/bcloud.html','uu=1ew2bpfrka&vu=9c87e2e08b&pu=5fc8cd11e6&auto_play=1&gpcflag=1','',0,'2016-06-11 00:00:00','2016-06-11 12:04:18');
+INSERT INTO `bs_videos` VALUES (1,1,'视频001','http://yuntv.letv.com/bcloud.swf','uu=1ew2bpfrka&vu=9c87e2e08b&pu=5fc8cd11e6&gpcflag=1',640,480,'',0,'2016-06-11 00:00:00','2016-06-12 15:53:18');
 /*!40000 ALTER TABLE `bs_videos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2032,6 +2034,7 @@ CREATE TABLE `users_params` (
   `foot_switch` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '在线创作的底部链接开关：0关闭，1开启',
   `lecloud` varchar(255) NOT NULL COMMENT '乐视云账户',
   `lepwd` varchar(255) NOT NULL COMMENT '乐视云密码',
+  `leplay` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '是否自动播放：0手动播放，1自动播放',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '更新时间',
   PRIMARY KEY (`id`)
@@ -2044,7 +2047,7 @@ CREATE TABLE `users_params` (
 
 LOCK TABLES `users_params` WRITE;
 /*!40000 ALTER TABLE `users_params` DISABLE KEYS */;
-INSERT INTO `users_params` VALUES (1,1,15,1,'946493655@qq.com','zwx4074553864','2016-04-06 00:00:00','0000-00-00 00:00:00');
+INSERT INTO `users_params` VALUES (1,1,15,1,'946493655@qq.com','zwx4074553864',0,'2016-04-06 00:00:00','0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `users_params` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -2057,4 +2060,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-06-11 22:26:14
+-- Dump completed on 2016-06-12 18:51:37

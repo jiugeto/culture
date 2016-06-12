@@ -33,6 +33,17 @@
             @endforeach
         @else @include('member.common.norecord')
         @endif
+            <tr><td colspan="10">视频自动播放设置：
+                    <label><input type="radio" class="radio" name="leplay" value="0" {{ $user->leplay==0 ? 'checked' : '' }}> 手动播放&nbsp;</label>
+                    <label><input type="radio" class="radio" name="leplay" value="1" {{ $user->leplay==1 ? 'checked' : '' }}> 自动播放&nbsp;</label>
+                </td></tr>
+            <script>
+                $(document).ready(function(){
+                    $("input[name='leplay']").change(function(){
+                        window.location.href = '/member/video/leplay/'+$(this).val();
+                    });
+                });
+            </script>
         </table>
         @include('member.common.page')
     </div>

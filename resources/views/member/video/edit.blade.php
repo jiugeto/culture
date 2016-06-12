@@ -28,6 +28,18 @@
             </tr>
             <tr><td colspan="2"><div style="border-bottom:1px dotted lightgrey;"></div></td></tr>
 
+            <tr>
+                <td class="field_name"><label>视频宽度：( 单位px)</label></td>
+                <td><input type="text" class="field_value" placeholder="必填，1到4个数字" pattern="^([1-9])|([1-9]\d{1,3})$" required name="width" value="{{ $data->width }}"/></td>
+            </tr>
+            <tr><td colspan="2"><div style="border-bottom:1px dotted lightgrey;"></div></td></tr>
+
+            <tr>
+                <td class="field_name"><label>视频高度：( 单位px)</label></td>
+                <td><input type="text" class="field_value" placeholder="必填，1到4个数字" pattern="^([1-9])|([1-9]\d{1,3})$" required name="height" value="{{ $data->height }}"/></td>
+            </tr>
+            <tr><td colspan="2"><div style="border-bottom:1px dotted lightgrey;"></div></td></tr>
+
             {{--@if($user->lecloud)--}}
             <tr>
                 <td class="field_name"><label>乐视视频云：</label></td>
