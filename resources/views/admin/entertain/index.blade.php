@@ -4,6 +4,23 @@
         @include('admin.common.crumb')
         <div class="am-g">
             @include('admin.common.menu')
+            {{--演员链接、作品链接--}}
+            <div class="am-u-sm-12 am-u-md-6">
+                <div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs" style="float:right;">
+                        <a href="/admin/actor">
+                            <button type="button" class="am-btn am-btn-default">
+                                <img src="/assets/images/files.png" class="icon"> 演员列表
+                            </button>
+                        </a>
+                        <a href="/admin/works">
+                            <button type="button" class="am-btn am-btn-default">
+                                <img src="/assets/images/files.png" class="icon"> 作品列表
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="am-g">

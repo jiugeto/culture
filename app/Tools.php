@@ -66,6 +66,7 @@ class Tools
         return $list;
     }
 
+    //父id：pid
     public static function childList2($obj,$pid = 0){
         $list = array();
         foreach ($obj as $v){

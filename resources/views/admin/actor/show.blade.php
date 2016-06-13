@@ -38,7 +38,7 @@
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">地区 / Area：</td>
-                    <td>{{ $data->area }}</td>
+                    <td>{{ $data->area ? $data->area() : '无' }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">毕业学校 / School：</td>
@@ -46,11 +46,11 @@
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">兴趣爱好 / Hobby：</td>
-                    <td>{{ $data->hobby }}</td>
+                    <td>{{ $data->getHobbyName() }}</td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">职务 / Job：</td>
-                    <td>{{ $data->job }}</td>
+                    <td class="am-hide-sm-only">前台显示否 / Is Show：</td>
+                    <td>{{ $data->isshow ? '显示' : '不显示' }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">创建时间 / Create Time：</td>
@@ -58,7 +58,7 @@
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">修改时间 / Update Time：</td>
-                    <td>{{ $data->updated_at ? $data->updated_at : '未修改' }}</td>
+                    <td>{{ $data->updated_at!='0000-00-00 00:00:00' ? $data->updated_at : '未修改' }}</td>
                 </tr>
                 </tbody>
             </table>

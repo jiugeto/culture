@@ -101,6 +101,14 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     //娱乐路由
     Route::post('entertain/{id}','EntertainController@update');
     Route::resource('entertain','EntertainController');
+        //演员管理
+    Route::get('actor/{id}/destroy','ActorController@destroy');
+    Route::get('actor/{id}/restore','ActorController@restore');
+    Route::get('actor/{id}/forceDelete','ActorController@forceDelete');
+    Route::post('actor/{id}','ActorController@update');
+    Route::resource('actor','ActorController');
+    //作品管理
+    Route::resource('works','WorksController');
     //设计路由
     Route::post('design/{id}','DesignController@update');
     Route::get('design/trash','DesignController@trash');
@@ -164,8 +172,6 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
         //话题管理
     Route::post('talk/{id}','TalkController@update');
     Route::resource('talk','TalkController');
-        //演员管理
-    Route::resource('actor','ActorController');
     //订单管理
         //订单路由
     Route::get('order/{del}/{isshow}','OrderController@index');
