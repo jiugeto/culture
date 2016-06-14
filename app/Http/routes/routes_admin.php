@@ -107,7 +107,7 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::get('actor/{id}/forceDelete','ActorController@forceDelete');
     Route::post('actor/{id}','ActorController@update');
     Route::resource('actor','ActorController');
-    //作品管理
+        //作品管理
     Route::resource('works','WorksController');
     //设计路由
     Route::post('design/{id}','DesignController@update');
