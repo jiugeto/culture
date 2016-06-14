@@ -151,7 +151,7 @@ CREATE TABLE `ba_userlog` (
   `logoutTime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '退出时间',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -160,7 +160,7 @@ CREATE TABLE `ba_userlog` (
 
 LOCK TABLES `ba_userlog` WRITE;
 /*!40000 ALTER TABLE `ba_userlog` DISABLE KEYS */;
-INSERT INTO `ba_userlog` VALUES (1,2,1,'jiuge','201606100027416445','2016-06-10 00:27:41','0000-00-00 00:00:00','2016-04-06 00:00:00'),(2,2,1,'jiuge','201606102145482809','2016-06-10 21:45:48','0000-00-00 00:00:00','2016-04-06 00:00:00'),(3,2,1,'jiuge','201606110914365805','2016-06-11 09:14:36','0000-00-00 00:00:00','2016-04-06 00:00:00'),(4,2,1,'jiuge','201606111607431487','2016-06-11 16:07:43','0000-00-00 00:00:00','2016-04-06 00:00:00'),(5,2,1,'jiuge','201606111808179545','2016-06-11 18:08:17','0000-00-00 00:00:00','2016-04-06 00:00:00'),(6,2,1,'jiuge','201606121433482194','2016-06-12 14:33:48','0000-00-00 00:00:00','2016-04-06 00:00:00'),(7,1,1,'jiuge','201606131213536839','2016-06-13 12:13:53','0000-00-00 00:00:00','2016-04-05 00:00:00'),(8,1,1,'jiuge','201606140940207027','2016-06-14 09:40:20','0000-00-00 00:00:00','2016-04-05 00:00:00'),(9,1,1,'jiuge','201606141204289127','2016-06-14 12:04:28','0000-00-00 00:00:00','2016-04-05 00:00:00'),(10,1,1,'jiuge','201606141800172950','2016-06-14 18:00:17','0000-00-00 00:00:00','2016-04-05 00:00:00');
+INSERT INTO `ba_userlog` VALUES (1,2,1,'jiuge','201606100027416445','2016-06-10 00:27:41','0000-00-00 00:00:00','2016-04-06 00:00:00'),(2,2,1,'jiuge','201606102145482809','2016-06-10 21:45:48','0000-00-00 00:00:00','2016-04-06 00:00:00'),(3,2,1,'jiuge','201606110914365805','2016-06-11 09:14:36','0000-00-00 00:00:00','2016-04-06 00:00:00'),(4,2,1,'jiuge','201606111607431487','2016-06-11 16:07:43','0000-00-00 00:00:00','2016-04-06 00:00:00'),(5,2,1,'jiuge','201606111808179545','2016-06-11 18:08:17','0000-00-00 00:00:00','2016-04-06 00:00:00'),(6,2,1,'jiuge','201606121433482194','2016-06-12 14:33:48','0000-00-00 00:00:00','2016-04-06 00:00:00'),(7,1,1,'jiuge','201606131213536839','2016-06-13 12:13:53','0000-00-00 00:00:00','2016-04-05 00:00:00'),(8,1,1,'jiuge','201606140940207027','2016-06-14 09:40:20','0000-00-00 00:00:00','2016-04-05 00:00:00'),(9,1,1,'jiuge','201606141204289127','2016-06-14 12:04:28','0000-00-00 00:00:00','2016-04-05 00:00:00'),(10,1,1,'jiuge','201606141800172950','2016-06-14 18:00:17','0000-00-00 00:00:00','2016-04-05 00:00:00'),(11,1,1,'jiuge','201606142018035688','2016-06-14 20:18:03','0000-00-00 00:00:00','2016-04-05 00:00:00'),(12,1,1,'jiuge','201606142311395677','2016-06-14 23:11:39','0000-00-00 00:00:00','2016-04-05 00:00:00'),(13,1,1,'jiuge','201606150152421309','2016-06-15 01:52:42','0000-00-00 00:00:00','2016-04-05 00:00:00'),(14,2,1,'jiuge','201606150454131733','2016-06-15 04:54:13','0000-00-00 00:00:00','2016-04-06 00:00:00');
 /*!40000 ALTER TABLE `ba_userlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -230,7 +230,7 @@ CREATE TABLE `bs_actor_works` (
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='演员和影视作品关联表 ba_actor_work';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='演员和影视作品关联表 ba_actor_work';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -239,6 +239,7 @@ CREATE TABLE `bs_actor_works` (
 
 LOCK TABLES `bs_actor_works` WRITE;
 /*!40000 ALTER TABLE `bs_actor_works` DISABLE KEYS */;
+INSERT INTO `bs_actor_works` VALUES (1,1,1,'2016-06-14 21:03:25','0000-00-00 00:00:00'),(2,2,1,'2016-06-14 21:03:25','0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `bs_actor_works` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -678,6 +679,8 @@ CREATE TABLE `bs_ideas` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL COMMENT '名称',
   `cate_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分类，关联分类表category',
+  `intro` varchar(255) NOT NULL COMMENT '简介',
+  `iscon` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '内容开关：0不显示，1显示',
   `content` text NOT NULL COMMENT '创意内容',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布的用户id',
   `money` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '价格，单位元',
@@ -696,7 +699,7 @@ CREATE TABLE `bs_ideas` (
 
 LOCK TABLES `bs_ideas` WRITE;
 /*!40000 ALTER TABLE `bs_ideas` DISABLE KEYS */;
-INSERT INTO `bs_ideas` VALUES (1,'创意1',4,'<p>而非v代表</p>',1,0,10,1,0,'2016-04-17 01:46:45','2016-04-17 02:24:47'),(2,'创意部分的白癜风',4,'<p>不辜负你发个你突然发红包让头发的非v别的人副本二本的日本</p>',1,0,10,1,0,'2016-04-21 14:42:17','0000-00-00 00:00:00'),(3,'创意123456',4,'<p>不同功能同一个男人太烦恼吧 不同人反复给你发给你发的吧v辅导班该方法v表单v废话么放入后天就能GV干嘛换个号部分或讲不出的生物科技获得鼠标不同人还能听任何人挺好投入和</p>',1,0,10,1,0,'2016-04-21 15:10:03','0000-00-00 00:00:00');
+INSERT INTO `bs_ideas` VALUES (1,'创意1',4,'',0,'<p>而非v代表</p>',1,0,10,1,0,'2016-04-17 01:46:45','2016-04-17 02:24:47'),(2,'创意部分的白癜风',4,'',0,'<p>不辜负你发个你突然发红包让头发的非v别的人副本二本的日本</p>',1,0,10,1,0,'2016-04-21 14:42:17','0000-00-00 00:00:00'),(3,'创意123456',4,'',0,'<p>不同功能同一个男人太烦恼吧 不同人反复给你发给你发的吧v辅导班该方法v表单v废话么放入后天就能GV干嘛换个号部分或讲不出的生物科技获得鼠标不同人还能听任何人挺好投入和</p>',1,0,10,1,0,'2016-04-21 15:10:03','0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `bs_ideas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1770,7 +1773,7 @@ CREATE TABLE `bs_works` (
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='影视作品表 works';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='影视作品表 works';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1779,6 +1782,7 @@ CREATE TABLE `bs_works` (
 
 LOCK TABLES `bs_works` WRITE;
 /*!40000 ALTER TABLE `bs_works` DISABLE KEYS */;
+INSERT INTO `bs_works` VALUES (1,'作品26256',1,'<p>efdbgesfsdf</p>',0,15,1,0,'2016-06-14 21:03:25','0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `bs_works` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2064,4 +2068,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-06-14 19:14:16
+-- Dump completed on 2016-06-15  5:34:17

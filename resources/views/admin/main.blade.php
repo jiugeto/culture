@@ -53,7 +53,7 @@
 @include('admin.partials.footer')
 
 <script src="/assets/js/jquery.js"></script>
-<script src="/assets/js/amazeui.js') }}"></script>
+<script src="/assets/js/amazeui.js"></script>
 <script src="/assets/js/app.js"></script>
 </body>
 </html>

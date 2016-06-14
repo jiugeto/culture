@@ -10,19 +10,20 @@
         <div class="am-g">
             @include('admin.common.info')
             <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
-                <form class="am-form" data-am-validator method="POST" action="/admin/works" enctype="multipart/form-data">
+                <form class="am-form" data-am-validator method="POST" action="/admin/works/{{ $data->id }}" enctype="multipart/form-data">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="_method" value="POST">
                     <fieldset>
                         <div class="am-form-group">
                             <label>作品名称 / Name：</label>
-                            <input type="text" placeholder="至少2个字符" minlength="2" required name="name"/>
+                            <input type="text" placeholder="至少2个字符" minlength="2" required name="name" value="{{ $data->name }}"/>
                         </div>
 
                         <div class="am-form-group">
                             <label>类型 / Category：</label>
                             <select name="cateid">
                                 @foreach($model['cates'] as $kcate=>$cate)
-                                    <option value="{{ $kcate }}">{{ $cate }}</option>
+                                    <option value="{{ $kcate }}" {{ $data->cateid==$kcate ? 'selected' : '' }}>{{ $cate }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -31,7 +32,7 @@
                             <label>视频 / Video：</label>
                             <select name="videoid" required>
                                 @foreach($model->videos() as $video)
-                                    <option value="{{ $video->id }}">{{ $video->name }}</option>
+                                    <option value="{{ $video->id }}" {{ $data->videoid==$video->id ? 'selected' : '' }}>{{ $video->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -40,8 +41,11 @@
                             <label>剧中演员 / Actor：</label>
                             @if(count($model->actors()))
                             @foreach($model->actors() as $actor)
-                                <label><input type="checkbox" name="actor[]" value="{{ $actor->id }}">
-                                    {{ $actor->name }}&nbsp;&nbsp;</label>
+                                <label><input type="checkbox" name="actor[]" value="{{ $actor->id }}"
+                                        @foreach($data->actor() as $actor2)
+                                            {{ $actor2->id==$actor->id ? 'checked' : '' }}
+                                        @endforeach
+                                    >{{ $actor->name }}&nbsp;&nbsp;</label>
                             @endforeach
                             @else 没有演员
                             @endif
@@ -51,7 +55,9 @@
                         <div class="am-form-group">
                             <label for="content">简介 / Introduce：</label>
                             @include('UEditor::head')
-                            <script id="container" name="intro" type="text/plain"></script>
+                            <script id="container" name="intro" type="text/plain">
+                                {!! $data->intro !!}
+                            </script>
                             <!-- 实例化编辑器 -->
                             <script type="text/javascript">
                                 var ue = UE.getEditor('container',{
@@ -66,7 +72,7 @@
                             </script>
                         </div>
 
-                        <button type="submit" class="am-btn am-btn-primary">保存添加</button>
+                        <button type="submit" class="am-btn am-btn-primary">保存修改</button>
                     </fieldset>
                 </form>
             </div>

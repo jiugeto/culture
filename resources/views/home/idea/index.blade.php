@@ -1,5 +1,6 @@
 @extends('home.main')
 @section('content')
+    @include('home.common.crumb')
     <div class="opinion_con">
         <div class="opinion_list">
             {{--<p class="cate">大分类：</p>--}}
@@ -35,7 +36,8 @@
                         <span class="right"><a href="/idea/{{$data->id}}">查看</a></span>
                     </td>
                 </tr>
-                <tr><td class="con">{!! $data->content !!}</td></tr>
+                {{--<tr><td class="con">{!! $data->content !!}</td></tr>--}}
+                <tr><td class="con">{{ $data->intro }}</td></tr>
                 <tr>
                     <td class="small">
                         <a href="/idea/click/{{$data->id}}">关注</a>：{{ count($data->click()) }}

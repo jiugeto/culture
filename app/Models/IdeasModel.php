@@ -9,7 +9,7 @@ class IdeasModel extends BaseModel
 
     protected $table = 'bs_ideas';
     protected $fillable = [
-        'id','name','cate_id','content','uid','sort','isshow','del','created_at','updated_at',
+        'id','name','cate_id','intro','iscon','content','uid','sort','isshow','del','created_at','updated_at',
     ];
 
 //    public function categorys()

@@ -7,10 +7,10 @@
         <input type="hidden" name="_method" value="POST">
         <table class="table_create">
             <tr>
-                <td><label>创意名称 / Name：</label></td>
+                <td class="field_name"><label>创意名称 / Name：</label></td>
                 <td><input type="text" placeholder="至少2个字符" minlength="2" required name="name" value="{{ $data->name }}"/></td>
             </tr>
-            <tr><td></td></tr>
+            {{--<tr><td></td></tr>--}}
 
             <tr>
                 <td><label>分类 / Category：</label></td>
@@ -35,11 +35,26 @@
                     {{--<a href="/member/category/create/{{'个人需求'}}">[+添加类型]</a>--}}
                 </td>
             </tr>
-            <tr><td></td></tr>
+            {{--<tr><td></td></tr>--}}
 
             <tr>
-                <td><label>内容 / Contont：</label></td>
+                <td class="field_name"><label>内容简介 / Introduce：</label></td>
+                <td><textarea name="intro2" cols="50" rows="5"></textarea></td>
+            </tr>
+            {{--<tr><td></td></tr>--}}
+
+            <tr>
+                <td class="field_name"><label>前台内容是否显示 / Is Content：</label></td>
                 <td>
+                    <label><input type="radio" class="radio" name="iscon" value="0" checked> 不显示&nbsp;&nbsp;</label>
+                    <label><input type="radio" class="radio" name="iscon" value="1"> 显示&nbsp;&nbsp;</label>
+                </td>
+            </tr>
+            {{--<tr><td></td></tr>--}}
+
+            <tr>
+                <td class="field_name"><label>内容 / Contont：</label></td>
+                <td style="position:relative;z-index:10;">
                     @include('UEditor::head')
                     <script id="container" name="intro" type="text/plain">
                         {!! $data->content !!}
@@ -47,7 +62,7 @@
                     <!-- 实例化编辑器 -->
                     <script type="text/javascript">
                         var ue = UE.getEditor('container',{
-                            initialFrameWidth:500,
+                            initialFrameWidth:400,
                             initialFrameHeight:200,
                             toolbars:[['redo','undo','bold','italic','underline','strikethrough','horizontal','forecolor','fontfamily','fontsize','priview','directionality','paragraph','insertimage','magefloat','searchreplace','pasteplain','help']]
                         });
@@ -58,9 +73,9 @@
                     </script>
                 </td>
             </tr>
-            <tr><td></td></tr>
+            {{--<tr><td></td></tr>--}}
 
-            <tr><td colspan="2" style="text-align:center;">
+            <tr><td colspan="10" style="text-align:center;">
                     <button class="companybtn" onclick="history.go(-1)">返 &nbsp;&nbsp;&nbsp;回</button>
                     <button type="submit" class="companybtn">保存修改</button>
                 </td></tr>

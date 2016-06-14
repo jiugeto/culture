@@ -33,6 +33,17 @@
                     <td>{{ $data->video() }}</td>
                 </tr>
                 <tr>
+                    <td class="am-hide-sm-only">片中演员 / Actors：</td>
+                    <td>
+                        @if(count($data->actor()))
+                        @foreach($data->actor() as $actor)
+                            {{ $actor->realname }} 饰演 {{ $actor->name }}
+                        @endforeach
+                        @else 无
+                        @endif
+                    </td>
+                </tr>
+                <tr>
                     <td class="am-hide-sm-only">排序 / Sort：</td>
                     <td>{{ $data->sort }}</td>
                 </tr>

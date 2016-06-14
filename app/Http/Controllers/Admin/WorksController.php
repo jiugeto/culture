@@ -49,9 +49,9 @@ class WorksController extends BaseController
     {
         $data = $this->getData($request);
         $data['created_at'] = date('Y-m-d H:i:s',time());
-        ActorWorksModel::create($data);
+        WorksModel::create($data);
         //更新作品演员关联表
-        $actorWorksModel = ActorWorksModel::where($data)->first();
+        $actorWorksModel = WorksModel::where($data)->first();
         $this->updateActorWorks($request,$actorWorksModel->id);
         return redirect('/admin/works');
     }
@@ -61,12 +61,49 @@ class WorksController extends BaseController
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
         $result = [
-            'data'=> ActorWorksModel::find($id),
+            'data'=> WorksModel::find($id),
             'model'=> $this->model,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
         return view('admin.works.edit', $result);
+    }
+
+    public function show($id)
+    {
+        $curr['name'] = $this->crumb['show']['name'];
+        $curr['url'] = $this->crumb['show']['url'];
+        $result = [
+            'data'=> WorksModel::find($id),
+            'model'=> $this->model,
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.works.show', $result);
+    }
+
+    public function sort($id,$sort)
+    {
+        WorksModel::where('id',$id)->update(['sort'=> $sort]);
+        return redirect('/admin/works');
+    }
+
+    public function destroy($id)
+    {
+        WorksModel::where('id',$id)->update(['del'=> 1]);
+        return redirect('/admin/works');
+    }
+
+    public function restore($id)
+    {
+        WorksModel::where('id',$id)->update(['del'=> 0]);
+        return redirect('/admin/works');
+    }
+
+    public function forceDelete($id)
+    {
+        WorksModel::where('id',$id)->delete();
+        return redirect('/admin/works');
     }
 
 

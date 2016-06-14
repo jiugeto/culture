@@ -122,12 +122,17 @@ class IdeaController extends BaseController
 
     public function getData(Request $request)
     {
+        if (!$request->intro2) {
+            echo "<script>alert('内容简介不能为空！');history.go(-1);</script>";exit;
+        }
         if (!$request->intro) {
             echo "<script>alert('内容不能为空！');history.go(-1);</script>";exit;
         }
         $data = [
             'name'=> $request->name,
             'cate_id'=> $request->cate_id,
+            'intro'=> $request->intro2,
+            'iscon'=> $request->iscon,
             'content'=> $request->intro,
             'uid'=> \Session::get('user.uid'),
         ];

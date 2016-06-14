@@ -12,6 +12,14 @@
             <td>{{ $data->cate_id }}</td>
         </tr>
         <tr>
+            <td>内容简介：</td>
+            <td>{!! $data->content !!}</td>
+        </tr>
+        <tr>
+            <td>前台是否显示内容：</td>
+            <td>{{ $data->iscon ? '显示' : '不显示' }}</td>
+        </tr>
+        <tr>
             <td>内容：</td>
             <td>{!! $data->content !!}</td>
         </tr>

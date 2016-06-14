@@ -16,6 +16,8 @@ class IdeaController extends BaseController
      * 前台创意管理
      */
 
+    protected $curr = 'idea';
+
     public function islogin()
     {
         if (!\Session::has('user.uid')) { echo "<script>alert('您还没有登录，请先登录！');window.location.href='/login';</script>";exit; }
@@ -26,6 +28,8 @@ class IdeaController extends BaseController
         $result = [
             'datas'=> $this->query(),
             'cates'=> Tools::getChild(CategoryModel::all()),
+            'lists'=> $this->list,
+            'curr_menu'=> $this->curr,
         ];
         return view('home.idea.index', $result);
     }
@@ -35,11 +39,6 @@ class IdeaController extends BaseController
         $this->read($id);
         return view('home.idea.show',array('data'=>IdeasModel::find($id)));
     }
-
-//    public function read($id)
-//    {
-//        IdeasModel::where('id',$id)->increment('read');
-//    }
 
     /**
      * 浏览控制

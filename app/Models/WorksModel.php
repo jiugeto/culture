@@ -33,11 +33,23 @@ class WorksModel extends BaseModel
     {
         $videoid = $this->videoid ? $this->videoid : 0;
         $videoModel = VideoModel::find($videoid);
-        return $videoModel ? $videoid : '';
+        return $videoModel ? $videoModel : '无';
     }
 
     public function actors()
     {
         return ActorModel::all();
+    }
+
+    public function actor()
+    {
+        $worksid = $this->id ? $this->id : 0;
+        $actorWorks = ActorWorksModel::where('worksid',$worksid)->get();
+        if (count($actorWorks)) {
+            foreach ($actorWorks as $actorWork) {
+                $actorids[] = $actorWork->actorid;
+            }
+        }
+        return isset($actorids) ? ActorModel::whereIn('id',$actorids)->get() : [];
     }
 }

@@ -24,6 +24,8 @@
                     {{ isset($isreply) ? ' / 意见'.$isreply.'的回复' : '' }}
                 @endif
             @endforeach
+
+            @if(isset($lists)&&array_key_exists($curr_menu,$lists)){{ $lists[$curr_menu] }}@endif
         </div>
     </div>
 </div>
