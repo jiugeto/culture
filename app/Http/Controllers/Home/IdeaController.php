@@ -30,6 +30,7 @@ class IdeaController extends BaseController
             'cates'=> Tools::getChild(CategoryModel::all()),
             'lists'=> $this->list,
             'curr_menu'=> $this->curr,
+            'userid'=> $this->userid,
         ];
         return view('home.idea.index', $result);
     }
@@ -37,59 +38,60 @@ class IdeaController extends BaseController
     public function show($id)
     {
         $this->read($id);
-        return view('home.idea.show',array('data'=>IdeasModel::find($id)));
+        $data = IdeasModel::find($id);
+        //内容查看权限开关
+        $data->iscon = 0;
+        if (IdeasShowModel::where(['ideaid'=>$id,'uid'=>$this->userid])->get()) {
+            $data->iscon = 1;
+        }
+        return view('home.idea.show',compact('data'));
     }
+
+    /**
+     * 
+     */
 
     /**
      * 浏览控制
      */
     public function read($id)
     {
+        $this->islogin();
         $ideaModel = IdeasModel::find($id);
-        //查看权限控制
-        if ($ideaModel->uid!=$this->userid && !IdeasShowModel::where(['ideaid'=>$ideaModel->id,''])) {}
-        //查看次数递增
         if ($ideaModel->uid!=$this->userid) {
-            $data = array(
-                'ideaid'=> $id,
-                'uid'=> $this->userid,
-            );
-            IdeasReadModel::create($data);
+            $create = ['ideaid'=>$id,'uid'=>$this->userid,'created_at'=>date('Y-m-d H:i:s',time())];
+            IdeasReadModel::create($create);
         }
     }
 
     /**
      * 点赞自增
      */
-    public function click($id)
+    public function click($id,$click)
     {
-        $msg = '不能点赞自己的话题';
-        IdeasClickModel::create($this->tolimit($id,$msg));
+        $this->islogin();
+        if (!$click) {        //增加
+            $create = ['ideaid'=> $id,'uid'=> $this->userid,'created_at'=>date('Y-m-d H:i:s',time())];
+            IdeasClickModel::create($create);
+        } else {        //减少
+            IdeasClickModel::where('ideaid',$id)->delete();
+        }
         return redirect('/idea');
     }
 
     /**
      * 收藏自增
      */
-    public function collect($id)
-    {
-        $msg = '不能收藏自己的话题';
-        IdeasCollectModel::create($this->tolimit($id,$msg));
-        return redirect('/talk');
-    }
-
-    /**
-     * 一些限制
-     */
-    public function tolimit($id,$msg)
+    public function collect($id,$collect)
     {
         $this->islogin();
-        $ideaModel = IdeasModel::find($id);
-        if ($this->userid==$ideaModel->uid) { echo "<script>alert('".$msg."！');history.go(-1);</script>";exit; }
-        return array(
-            'ideaid'=> $id,
-            'uid'=> $this->userid,
-        );
+        if (!$collect) {      //增加
+            $create = ['ideaid'=> $id,'uid'=> $this->userid,'created_at'=>date('Y-m-d H:i:s',time())];
+            IdeasCollectModel::create($create);
+        } else {        //减少
+            IdeasCollectModel::where('ideaid',$id)->delete();
+        }
+        return redirect('/idea');
     }
 
 

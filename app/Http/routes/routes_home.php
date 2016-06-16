@@ -37,8 +37,8 @@ Route::group(['prefix'=>'','namespace'=>'Home'],function(){
     Route::get('{status}/opinion','OpinionController@index');
     Route::resource('opinion','OpinionController');
     //创意路由
-    Route::get('idea/click/{id}','IdeaController@click');
-    Route::get('idea/collect/{id}','IdeaController@collect');
+    Route::get('idea/click/{id}/{click}','IdeaController@click');
+    Route::get('idea/collect/{id}/{collect}','IdeaController@collect');
     Route::resource('idea','IdeaController');
     //话题路由
     Route::post('talk/{id}','TalkController@update');

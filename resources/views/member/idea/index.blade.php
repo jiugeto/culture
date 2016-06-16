@@ -27,6 +27,7 @@
                     @if($curr['url']=='')
                         {{--<a href="/member/idea/{{ $data->id }}/pre" class="list_btn">预览</a>--}}
                         <a href="/member/idea/{{ $data->id }}" class="list_btn">查看</a>
+                        <a href="/member/idea/user/{{ $data->id }}" class="list_btn">用户</a>
                         <a href="/member/idea/{{ $data->id }}/edit" class="list_btn">编辑</a>
                         <a href="/member/idea/{{ $data->id }}/destroy" class="list_btn">删除</a>
                     @else

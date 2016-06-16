@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Member;
 
 //use Illuminate\Http\Request;
 use App\Models\OrderModel;
+use App\Models\UserModel;
 
 class OrderController extends BaseController
 {
@@ -32,6 +33,40 @@ class OrderController extends BaseController
             'curr'=> $curr,
         ];
         return view('member.order.index', $result);
+    }
+
+    /**
+     * 前台下的订单，这里统一处理
+     */
+    public function create($data)
+    {
+        if (\Illuminate\Support\Facades\Request::ajax()) {
+            $datas = \Illuminate\Support\Facades\Input::all();
+            dd($datas);
+            //1创意，2分镜，3商品，4娱乐，5演员，6租赁
+            if ($datas[0]=='idea') {
+                $ideaModel = \App\Models\IdeasModel::find($datas[1]);
+                $genre = 1; $productname = $ideaModel->name;
+                $sellerid = $ideaModel->uid;
+            }
+            //获取供应方信息
+            $userModel = UserModel::find($sellerid);
+            $create = [
+                'name'=> $productname,
+                'serial'=> date('YmdHis',time()).rand(0,10000),
+                'genre'=> $genre,
+                'fromid'=> $datas[1],
+                'seller'=> $sellerid,
+                'sellerName'=> $userModel->username,
+                'buyer'=> $this->userid,
+                'buyerName'=> \Session::get('user.username'),
+//            'number'=> 0,
+                'isnew'=> 1,        //1代表新订单
+                'status'=> 1,        //新创意订单
+            ];
+            OrderModel::create($create);
+        }
+        return redirect('/member/order');
     }
 
     public function show($id)

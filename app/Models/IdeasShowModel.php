@@ -9,6 +9,13 @@ class IdeasShowModel extends BaseModel
 
     protected $table = 'bs_ideas_show';
     protected $fillable = [
-        'id','ideadid','uid','created_at',
+        'id','ideaid','uid','created_at',
     ];
+
+    public function user()
+    {
+        $uid = $this->uid ? $this->uid : 0;
+        $userModel = UserModel::find($uid);
+        return $userModel ? $userModel->username : '无';
+    }
 }

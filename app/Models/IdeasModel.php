@@ -9,13 +9,8 @@ class IdeasModel extends BaseModel
 
     protected $table = 'bs_ideas';
     protected $fillable = [
-        'id','name','cate_id','intro','iscon','content','uid','sort','isshow','del','created_at','updated_at',
+        'id','name','cate_id','intro','content','uid','sort','isshow','del','created_at','updated_at',
     ];
-
-//    public function categorys()
-//    {
-//        return CategoryModel::all();
-//    }
 
     /**
      * 得到所有分类
@@ -33,21 +28,32 @@ class IdeasModel extends BaseModel
         return $this->hasOne('\App\Models\CategoryModel','id','cate_id');
     }
 
-    public function read()
+    public function read($uid)
     {
-        $datas = IdeasReadModel::where('ideaid',$this->id)->get();
+        $datas = IdeasReadModel::where(['ideaid'=>$this->id,'uid'=>$uid])->get();
         return count($datas) ? $datas : 0;
     }
 
-    public function click()
+    public function click($uid)
     {
-        $datas = IdeasClickModel::where('ideaid',$this->id)->get();
+        $datas = IdeasClickModel::where(['ideaid'=>$this->id,'uid'=>$uid])->get();
         return count($datas) ? $datas : 0;
     }
 
-    public function collect()
+    public function collect($uid)
     {
-        $datas = IdeasCollectModel::where('ideaid',$this->id)->get();
+        $datas = IdeasCollectModel::where(['ideaid'=>$this->id,'uid'=>$uid])->get();
         return count($datas) ? $datas : 0;
+    }
+
+    public function user()
+    {
+        $uid = $this->uid ? $this->uid : 0;
+        $userModel = UserModel::find($uid);
+        $userModel->company = '';
+        if ($companyModel = CompanyModel::where('uid',$uid)->first()) {
+            $userModel->company = $companyModel;
+        }
+        return $userModel ? $userModel : '';
     }
 }

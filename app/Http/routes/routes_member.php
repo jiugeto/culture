@@ -151,6 +151,8 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
     Route::get('idea/{id}/restore','IdeaController@restore');
     Route::get('idea/{id}/forceDelete','IdeaController@forceDelete');
     Route::get('idea/trash','IdeaController@trash');
+    Route::get('idea/user/{id}','IdeaController@ideaShow');
+    Route::get('idea/user/{id}/{uid}','IdeaController@setIdeaShow');
     Route::resource('idea','IdeaController');
         //演员管理
     Route::resource('actor','ActorController');
@@ -179,6 +181,7 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
     Route::resource('storyboard','StoryBoardController');
     //订单路由
         //订单流程
+    Route::get('order/create/{data}','OrderController@create');
     Route::resource('order','OrderController');
         //售后（样片修改）路由
     Route::resource('orderfirm','OrderFirmController');

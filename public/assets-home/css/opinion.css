@@ -135,8 +135,10 @@
     margin:0 10px;float:right;color:darkgrey;
 }
 .opinion_list table.idea a {
-    color:black;
+    margin-right:10px;
+    color:grey;
     text-decoration:none;
+    float:left;
 }
 .opinion_list table.idea a:hover {
     color:black;
@@ -150,7 +152,7 @@
     width:1000px;
 }
 .idea_show .idea_left { float:left; }
-.idea_show .idea_right { float:right; }
+.idea_show .idea_right { margin:10px;box-shadow:0 0 10px rgba(200,200,200,0.5);float:right; }
 .idea_show .idea_left .idea_con {
     width:700px;
 }
@@ -163,13 +165,21 @@
 }
 .idea_show .idea_right .userinfo {
     margin:20px 10px;
-    width:280px;
+    width:260px;
 }
 .idea_show .idea_right .userinfo p.title {
+    padding-bottom:10px;
     color:grey;
-    font-size:25px;
+    font-size:20px;
     border-bottom:1px solid lightgrey;
 }
 .idea_show .idea_right .userinfo p {
     margin:10px 0;
 }
+
+/*=== 查看限制 ===*/
+a#lookopen,a#lookclose { color:lightgrey;cursor:pointer; }
+a:hover#lookopen,a:hover#lookclose { color:red; }
+.laymsg { padding:10px;width:400px;height:200px;border:1px solid lightgrey;background:white;box-shadow:0 0 20px rgba(100,100,100,.5);text-align:center;position:absolute;left:30%;top:200px;display:none; }
+.laymsg a { position:relative;top:-100px;float:right;cursor:pointer; }
+.laymsg a:hover { color:red; }

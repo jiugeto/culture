@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Member;
 
+use App\Models\IdeasShowModel;
 use Illuminate\Http\Request;
 use App\Models\IdeasModel;
 
@@ -62,6 +63,9 @@ class IdeaController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = date('Y-m-d H:i:s', time());
         IdeasModel::create($data);
+        //将自己加入查看权限表
+        $ideaModel = IdeasModel::where($data)->first();
+        IdeasShowModel::create(['ideaid'=>$ideaModel->id,'uid'=>$this->userid,'created_at'=>date('Y-m-d H:i:s',time())]);
         return redirect('/member/idea');
     }
 
@@ -116,10 +120,35 @@ class IdeaController extends BaseController
         return redirect('/member/idea/trash');
     }
 
+    /**
+     * 权限列表
+     */
+    public function ideaShow($id)
+    {
+        $curr['name'] = '用户列表';
+        $curr['url'] = $this->lists['show']['url'];
+        $result = [
+            'users'=> IdeasShowModel::where('ideaid',$id)->get(),
+            'lists'=> $this->lists,
+            'curr'=> $curr,
+        ];
+        return view('member.idea.userList', $result);
+    }
+
+//    /**
+//     * 设置创意权限
+//     */
+//    public function setIdeaShow($id)
+//    {
+//    }
 
 
 
 
+
+    /**
+     * 收集数据
+     */
     public function getData(Request $request)
     {
         if (!$request->intro2) {
