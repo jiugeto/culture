@@ -25,10 +25,10 @@ class RegisterController extends Controller
         $userModel = UserModel::where('username',Input::get('username'))->first();
         //查看是否有此用户
         if ($userModel) { echo "<script>alert('此用户已经注册！');history.go(-1);</script>";exit; }
-        //验证密码正确否
-        if (!(Hash::check(Input::get('password'),$userModel->password))) {
-            echo "<script>alert('密码错误！');history.go(-1);</script>";exit;
-        }
+//        //验证密码正确否
+//        if (!(Hash::check(Input::get('password'),$userModel->password))) {
+//            echo "<script>alert('密码错误！');history.go(-1);</script>";exit;
+//        }
         //查看2次密码输入是否一致
         if (Input::get('password')!=Input::get('password2')) {
             echo "<script>alert('2次密码输入不一致！');history.go(-1);</script>";exit;

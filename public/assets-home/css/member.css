@@ -239,3 +239,51 @@ input.radio { position:relative;top:10px; }
 
 /*=== *号备注 ===*/
 .star { color:red; }
+
+
+/*=========右侧详情页面==========*/
+.table_create td.status_line { padding:0;border:0;font-family:'微软雅黑'; }
+.status_line .title {
+    margin-bottom:20px;
+    text-align:center;
+}
+.status_line .con {
+    margin:10px 0;
+    margin-top:30px;
+    margin-left:5px;
+    width:99%;height:2px;
+    background:rgba(240,240,240,1);
+}
+.status_line .pos { position:relative;top:-2px; }
+.status_line .pos div { width:7px;height:7px;background:rgba(220,220,220,1);position:relative;float:left; }
+.status_line a { width:50px;font-size:12px;cursor:pointer; }
+.status_line a:hover div { background:rgba(255,0,255,1); }
+.status_line a#status2 { position:absolute;left:35px; }
+.status_line a#status3 { position:absolute;left:70px; }
+.status_line a#status4 { position:absolute;left:105px; }
+.status_line a#status5 { position:absolute;left:140px; }
+.status_line a#status6 { position:absolute;left:175px; }
+.status_line a#status7 { position:absolute;left:210px; }
+.status_line a#status8 { position:absolute;left:245px; }
+.status_line a#status9 { position:absolute;left:280px; }
+.status_line a#status10 { position:absolute;left:315px; }
+.status_line a#status11 { position:absolute;left:350px; }
+.status_line a#status12 { position:absolute;left:385px; }
+.status_line a#status13 { position:absolute;left:420px; }
+.status_line a#status14 { position:absolute;left:455px; }
+.status_line a#status15 { position:absolute;left:490px; }
+.status_line a#status16 { position:absolute;left:525px; }
+.status_line a#status17 { position:absolute;left:560px; }
+.status_line a#status18 { position:absolute;left:595px; }
+.status_line a#status19 { position:absolute;left:630px; }
+.status_line a#status20 { position:absolute;left:665px; }
+.status_line a span {
+    margin:0 5px;
+    padding:0 5px;
+    width:50px;
+    border:1px solid rgba(230,230,230,1);
+    color:grey;
+    background:rgba(240,240,240,1);
+    position:absolute;top:-20px;left:-30px;
+    display:none;
+}

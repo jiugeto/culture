@@ -38,15 +38,15 @@ class OrderController extends BaseController
     /**
      * 前台下的订单，这里统一处理
      */
-    public function create($data)
+    public function create()
     {
         if (\Illuminate\Support\Facades\Request::ajax()) {
-            $datas = \Illuminate\Support\Facades\Input::all();
-            dd($datas);
+            $data = \Illuminate\Support\Facades\Input::all();
+            //加入已有类似订单
             //1创意，2分镜，3商品，4娱乐，5演员，6租赁
-            if ($datas[0]=='idea') {
-                $ideaModel = \App\Models\IdeasModel::find($datas[1]);
-                $genre = 1; $productname = $ideaModel->name;
+            if ($data['genre']==1) {
+                $ideaModel = \App\Models\IdeasModel::find($data['id']);
+                $productname = $ideaModel->name;
                 $sellerid = $ideaModel->uid;
             }
             //获取供应方信息
@@ -54,19 +54,22 @@ class OrderController extends BaseController
             $create = [
                 'name'=> $productname,
                 'serial'=> date('YmdHis',time()).rand(0,10000),
-                'genre'=> $genre,
-                'fromid'=> $datas[1],
+                'genre'=> $data['genre'],
+                'fromid'=> $data['id'],
                 'seller'=> $sellerid,
                 'sellerName'=> $userModel->username,
                 'buyer'=> $this->userid,
                 'buyerName'=> \Session::get('user.username'),
-//            'number'=> 0,
-                'isnew'=> 1,        //1代表新订单
+//                'number'=> 0,
                 'status'=> 1,        //新创意订单
+                'created_at'=> date('Y-m-d H:i:s',time()),
             ];
             OrderModel::create($create);
+
+            echo json_encode(array('code'=>'0', 'message' =>'操作成功！'));exit;
         }
-        return redirect('/member/order');
+//        return redirect('/member/order');
+        echo json_encode(array('code'=>'-1', 'message' =>'非法操作!'));exit;
     }
 
     public function show($id)
@@ -75,10 +78,31 @@ class OrderController extends BaseController
         $curr['url'] = $this->lists['show']['url'];
         $result = [
             'data'=> OrderModel::find($id),
+            'model'=> $this->model,
             'lists'=> $this->lists,
             'curr'=> $curr,
+            'userid'=> $this->userid,
         ];
         return view('member.order.show', $result);
+    }
+
+    /**
+     * 设置创意价格
+     */
+    public function setIdeaMoney($id,$money)
+    {
+        if (!$money) { $status = 3; }else{ $status = 4; }
+        OrderModel::where('id',$id)->update(['ideaMoney'=>$money,'status'=>$status]);
+        return redirect('/member/order/'.$id);
+    }
+
+    /**
+     * 设置状态
+     */
+    public function setStatus($id,$status)
+    {
+        OrderModel::where('id',$id)->update(['status'=> $status]);
+        return redirect('/member/order/'.$id);
     }
 
     public function query()

@@ -151,7 +151,7 @@ CREATE TABLE `ba_userlog` (
   `logoutTime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '退出时间',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -160,6 +160,7 @@ CREATE TABLE `ba_userlog` (
 
 LOCK TABLES `ba_userlog` WRITE;
 /*!40000 ALTER TABLE `ba_userlog` DISABLE KEYS */;
+INSERT INTO `ba_userlog` VALUES (1,2,1,'jiuge','201606171248144719','2016-06-17 12:48:14','0000-00-00 00:00:00','2016-04-06 00:00:00'),(2,2,2,'jiuge2','20160617152315376','2016-06-17 15:23:15','0000-00-00 00:00:00','2016-06-17 00:00:00'),(3,2,1,'jiuge','201606171800394478','2016-06-17 18:00:39','0000-00-00 00:00:00','2016-04-06 00:00:00');
 /*!40000 ALTER TABLE `ba_userlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -697,7 +698,7 @@ CREATE TABLE `bs_ideas` (
 
 LOCK TABLES `bs_ideas` WRITE;
 /*!40000 ALTER TABLE `bs_ideas` DISABLE KEYS */;
-INSERT INTO `bs_ideas` VALUES (1,'创意1',4,'efrbgrdfbg','<p>而非v代表</p>',1,0,10,1,0,'2016-04-17 01:46:45','2016-04-17 02:24:47'),(2,'创意部分的白癜风',4,'wefdgbefdv','<p>不辜负你发个你突然发红包让头发的非v别的人副本二本的日本</p>',1,0,10,1,0,'2016-04-21 14:42:17','0000-00-00 00:00:00'),(3,'创意123456',4,'fngbvrrthgfbrthf','<p>不同功能同一个男人太烦恼吧 不同人反复给你发给你发的吧v辅导班该方法v表单v废话么放入后天就能GV干嘛换个号部分或讲不出的生物科技获得鼠标不同人还能听任何人挺好投入和</p>',1,0,10,1,0,'2016-04-21 15:10:03','0000-00-00 00:00:00');
+INSERT INTO `bs_ideas` VALUES (1,'创意1',4,'efrbgrdfbg','<p>而非v代表</p>',1,0,10,1,0,'2016-04-17 01:46:45','2016-04-17 02:24:47'),(2,'创意部分的白癜风',4,'wefdgbefdv','<p>不辜负你发个你突然发红包让头发的非v别的人副本二本的日本</p>',1,0,10,1,0,'2016-04-21 14:42:17','0000-00-00 00:00:00'),(3,'创意123456',4,'fngbvrrthgfbrthf','<p>不同功能同一个男人太烦恼吧 不同人反复给你发给你发的吧v辅导班该方法v表单v废话么放入后天就能GV干嘛换个号部分或讲不出的生物科技获得鼠标不同人还能听任何人挺好投入和</p>',1,10,10,1,0,'2016-04-21 15:10:03','0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `bs_ideas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -764,7 +765,7 @@ CREATE TABLE `bs_ideas_read` (
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '登录用户id',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='创意阅读表';
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8 COMMENT='创意阅读表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -773,6 +774,7 @@ CREATE TABLE `bs_ideas_read` (
 
 LOCK TABLES `bs_ideas_read` WRITE;
 /*!40000 ALTER TABLE `bs_ideas_read` DISABLE KEYS */;
+INSERT INTO `bs_ideas_read` VALUES (1,0,2,'2016-06-17 09:02:31'),(2,0,2,'2016-06-17 09:02:39'),(3,0,2,'2016-06-17 09:09:34'),(4,0,2,'2016-06-17 09:10:23'),(5,0,2,'2016-06-17 09:11:01'),(6,0,2,'2016-06-17 09:11:42'),(7,0,2,'2016-06-17 09:12:02'),(8,0,2,'2016-06-17 09:12:25'),(9,0,2,'2016-06-17 09:12:41'),(10,0,2,'2016-06-17 09:13:36'),(11,0,2,'2016-06-17 09:14:54'),(12,0,2,'2016-06-17 09:15:41'),(13,0,2,'2016-06-17 09:16:47'),(14,0,2,'2016-06-17 09:50:11'),(15,0,2,'2016-06-17 09:51:03'),(16,0,2,'2016-06-17 09:51:16'),(17,0,2,'2016-06-17 09:51:23'),(18,0,2,'2016-06-17 09:51:39'),(19,0,2,'2016-06-17 09:51:55'),(20,0,2,'2016-06-17 09:52:04'),(21,0,2,'2016-06-17 09:52:56'),(22,0,2,'2016-06-17 10:04:12'),(23,0,2,'2016-06-17 10:06:52'),(24,0,2,'2016-06-17 10:18:11'),(25,0,2,'2016-06-17 10:30:45'),(26,0,2,'2016-06-17 10:31:53'),(27,0,2,'2016-06-17 10:32:58'),(28,0,2,'2016-06-17 10:33:05'),(29,0,2,'2016-06-17 10:33:19'),(30,0,2,'2016-06-17 10:34:21'),(31,0,2,'2016-06-17 10:34:29'),(32,0,2,'2016-06-17 10:35:14'),(33,0,2,'2016-06-17 10:36:27'),(34,0,2,'2016-06-17 10:37:10'),(35,0,2,'2016-06-17 10:38:21'),(36,0,2,'2016-06-17 10:38:42'),(37,0,2,'2016-06-17 11:43:04'),(38,0,2,'2016-06-17 11:43:06'),(39,0,2,'2016-06-17 11:43:08'),(40,0,2,'2016-06-17 11:43:20'),(41,0,2,'2016-06-17 11:45:33'),(42,0,2,'2016-06-17 11:45:59'),(43,0,2,'2016-06-17 12:56:36'),(44,0,2,'2016-06-17 12:56:55'),(45,0,2,'2016-06-17 12:57:11'),(46,0,2,'2016-06-17 13:01:46'),(47,0,2,'2016-06-17 13:02:32');
 /*!40000 ALTER TABLE `bs_ideas_read` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -986,27 +988,27 @@ CREATE TABLE `bs_orders` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL COMMENT '订单名称',
   `serial` int(20) unsigned NOT NULL DEFAULT '0' COMMENT '订单编号',
-  `genre` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '订单来源：1创意，2分镜，3商品，4娱乐，5演员，6租赁',
+  `genre` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '订单来源：1创意供应，2创意需求，3分镜供应，4分镜需求，5视频供应，6视频需求，7娱乐供应，8娱乐需求，9演员供应，10演员需求，1租赁供应，12租赁需求',
   `fromid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '订单来源表中的id',
   `seller` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '卖家id ',
   `sellerName` varchar(255) NOT NULL COMMENT '卖家名称',
   `buyer` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '买家id',
   `buyerName` varchar(255) NOT NULL COMMENT '买家名称',
   `number` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '数量',
-  `ideaMoney` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '创意实际价格，单位元',
-  `storyMoney` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '分镜实际价格，单位元',
-  `realMoney1` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '分期付款开始，单位元',
-  `realMoney2` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '分期付款2，单位元',
-  `realMoney3` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '分期付款3，单位元',
-  `realMoney4` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '分期付款尾款，单位元',
-  `isnew` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '是否新订单：0不是是新的，1是新订单',
-  `status` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '订单状态：(申请，协商，确定，交易，结果)       \r\n\r\n1=>''提交创意'',''确定创意'',''创意免费'',''创意收费'',''创意完成'',''提交分镜'',''确定分镜'',''分镜免费'',''分镜收费'',10=>''确定项目'',12=>''开始制作'',''分期收费'',''效果协商'',''二期收费'',''确定成片'',''三期收费'',''出片交付保证播放'',''尾款结清'',''交易成功'',''交易失败'',',
-  `isshow` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '前台列表是否显示：0不显示，1显示，默认1',
-  `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站：0不删除，1删除',
-  `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
-  `updated_at` date NOT NULL DEFAULT '0000-00-00',
+  `money` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '价格总额，单位元',
+  `ideaMoney` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创意实际价格，单位元',
+  `storyMoney` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分镜实际价格，单位元',
+  `realMoney1` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分期付款开始，单位元',
+  `realMoney2` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分期付款2，单位元',
+  `realMoney3` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分期付款3，单位元',
+  `realMoney4` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分期付款尾款，单位元',
+  `status` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '订单状态：\r\n\r\n1提交创意，2确定创意，3创意免费，4创意收费，5创意完成，6提交分镜，7确定分镜，8分镜免费，9分镜收费，10确定项目，11进行协商，12开始制作，13分期收费，14效果协商，15二期收费，16确定成片，17三期收费，18出片交付保证播放，19尾款结清，20交易成功，21交易失败，（修改另外收费）',
+  `isshow` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '前台列表是否显示：0不显示，1显示，默认1',
+  `del` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '回收站：0不删除，1删除',
+  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单表 bs_orders';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='订单表 bs_orders';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1015,6 +1017,7 @@ CREATE TABLE `bs_orders` (
 
 LOCK TABLES `bs_orders` WRITE;
 /*!40000 ALTER TABLE `bs_orders` DISABLE KEYS */;
+INSERT INTO `bs_orders` VALUES (4,'创意123456',4294967295,1,3,1,'jiuge',2,'jiuge2',0,0,0,0,0,0,0,0,5,1,0,'2016-06-17 13:02:35','0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `bs_orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2017,7 +2020,7 @@ CREATE TABLE `users` (
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户表 bs_users';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户表 bs_users';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2026,7 +2029,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'jiuge','$2y$10$Ys0R.RAweFTJYXNTAH.tL.84VE8ZswnjMzJtrMr5P89Wg.4H26He.','jiuge@qq.com','946493655',63929131,4294967295,0,'',0,1,1,4,0,15,'2016-04-06','0000-00-00');
+INSERT INTO `users` VALUES (1,'jiuge','$2y$10$Ys0R.RAweFTJYXNTAH.tL.84VE8ZswnjMzJtrMr5P89Wg.4H26He.','jiuge@qq.com','946493655',63929131,4294967295,0,'',0,1,1,4,0,15,'2016-04-06','0000-00-00'),(2,'jiuge2','$2y$10$X5BdoH0p0n.E3hxCVag/neinTfiHXbMrCHUEEqf8ZpUQGaeOxUUBe','946493655@qq.com','',0,0,0,'',0,0,0,0,0,10,'2016-06-17','0000-00-00');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2070,4 +2073,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-06-16 18:34:18
+-- Dump completed on 2016-06-17 19:20:24

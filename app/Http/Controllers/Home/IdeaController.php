@@ -41,9 +41,8 @@ class IdeaController extends BaseController
         $data = IdeasModel::find($id);
         //内容查看权限开关
         $data->iscon = 0;
-        if (IdeasShowModel::where(['ideaid'=>$id,'uid'=>$this->userid])->get()) {
-            $data->iscon = 1;
-        }
+        $ideaShowModels = IdeasShowModel::where(['ideaid'=>$id,'uid'=>$this->userid])->get();
+        if (count($ideaShowModels)) { $data->iscon = 1; }
         return view('home.idea.show',compact('data'));
     }
 

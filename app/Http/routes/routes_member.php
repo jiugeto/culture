@@ -181,7 +181,9 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
     Route::resource('storyboard','StoryBoardController');
     //订单路由
         //订单流程
-    Route::get('order/create/{data}','OrderController@create');
+    Route::get('order/{id}/idea/{money}','OrderController@setIdeaMoney');
+    Route::get('order/{id}/status/{status}','OrderController@setStatus');
+    Route::post('order/create','OrderController@create');
     Route::resource('order','OrderController');
         //售后（样片修改）路由
     Route::resource('orderfirm','OrderFirmController');
