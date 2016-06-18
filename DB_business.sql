@@ -151,7 +151,7 @@ CREATE TABLE `ba_userlog` (
   `logoutTime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '退出时间',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户日志表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -160,7 +160,6 @@ CREATE TABLE `ba_userlog` (
 
 LOCK TABLES `ba_userlog` WRITE;
 /*!40000 ALTER TABLE `ba_userlog` DISABLE KEYS */;
-INSERT INTO `ba_userlog` VALUES (1,2,1,'jiuge','201606171248144719','2016-06-17 12:48:14','0000-00-00 00:00:00','2016-04-06 00:00:00'),(2,2,2,'jiuge2','20160617152315376','2016-06-17 15:23:15','0000-00-00 00:00:00','2016-06-17 00:00:00'),(3,2,1,'jiuge','201606171800394478','2016-06-17 18:00:39','0000-00-00 00:00:00','2016-04-06 00:00:00');
 /*!40000 ALTER TABLE `ba_userlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -990,6 +989,8 @@ CREATE TABLE `bs_orders` (
   `serial` int(20) unsigned NOT NULL DEFAULT '0' COMMENT '订单编号',
   `genre` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '订单来源：1创意供应，2创意需求，3分镜供应，4分镜需求，5视频供应，6视频需求，7娱乐供应，8娱乐需求，9演员供应，10演员需求，1租赁供应，12租赁需求',
   `fromid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '订单来源表中的id',
+  `fromid2` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '备用id，主要是分镜',
+  `fromid3` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '备用id，主要是视频',
   `seller` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '卖家id ',
   `sellerName` varchar(255) NOT NULL COMMENT '卖家名称',
   `buyer` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '买家id',
@@ -1007,6 +1008,9 @@ CREATE TABLE `bs_orders` (
   `del` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '回收站：0不删除，1删除',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `ideaTime` datetime NOT NULL COMMENT '创意交易时间',
+  `storyTime` datetime NOT NULL COMMENT '分镜交易时间',
+  `realTime` datetime NOT NULL COMMENT '分期付款最后付款时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='订单表 bs_orders';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1017,7 +1021,7 @@ CREATE TABLE `bs_orders` (
 
 LOCK TABLES `bs_orders` WRITE;
 /*!40000 ALTER TABLE `bs_orders` DISABLE KEYS */;
-INSERT INTO `bs_orders` VALUES (4,'创意123456',4294967295,1,3,1,'jiuge',2,'jiuge2',0,0,0,0,0,0,0,0,5,1,0,'2016-06-17 13:02:35','0000-00-00 00:00:00');
+INSERT INTO `bs_orders` VALUES (4,'创意123456',4294967295,1,3,0,0,1,'jiuge',2,'jiuge2',0,0,45,20,0,0,0,0,12,1,0,'2016-06-17 13:02:35','0000-00-00 00:00:00','2016-06-18 12:43:16','2016-06-18 15:29:24','0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `bs_orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2073,4 +2077,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-06-17 19:20:24
+-- Dump completed on 2016-06-18 17:34:32

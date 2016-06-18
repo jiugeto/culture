@@ -92,7 +92,27 @@ class OrderController extends BaseController
     public function setIdeaMoney($id,$money)
     {
         if (!$money) { $status = 3; }else{ $status = 4; }
-        OrderModel::where('id',$id)->update(['ideaMoney'=>$money,'status'=>$status]);
+        $update = [
+            'ideaMoney'=> $money,
+            'status'=>$status,
+            'ideaTime'=>date('Y-m-d H:i:s',time())
+        ];
+        OrderModel::where('id',$id)->update($update);
+        return redirect('/member/order/'.$id);
+    }
+
+    /**
+     * 设置分镜价格
+     */
+    public function setStoryMoney($id,$money)
+    {
+        if (!$money) { $status = 8; }else{ $status = 9; }
+        $update = [
+            'storyMoney'=> $money,
+            'status'=>$status,
+            'storyTime'=>date('Y-m-d H:i:s',time())
+        ];
+        OrderModel::where('id',$id)->update($update);
         return redirect('/member/order/'.$id);
     }
 
@@ -102,6 +122,37 @@ class OrderController extends BaseController
     public function setStatus($id,$status)
     {
         OrderModel::where('id',$id)->update(['status'=> $status]);
+        return redirect('/member/order/'.$id);
+    }
+
+    /**
+     * 设置分期价格
+     */
+    public function setRealMoney($id,$real,$money)
+    {
+        if ($real==1) {     //一期，确认收款，协商效果
+            $update = [
+                'realMoney1'=> $money,
+                'status'=> 13,
+            ];
+        } elseif ($real==2) {       //二期，确认收款，协商效果
+            $update = [
+                'realMoney2'=> $money,
+                'status'=> 15,
+            ];
+        } elseif ($real==3) {       //三期，确认收款，协商效果
+            $update = [
+                'realMoney2'=> $money,
+                'status'=> 17,
+            ];
+        } elseif ($real==4) {       //四期，确认尾款
+            $update = [
+                'realMoney2'=> $money,
+                'status'=> 19,
+            ];
+        }
+        $update['realTime'] = date('Y-m-d H:i:s',time());
+        OrderModel::where('id',$id)->update($update);
         return redirect('/member/order/'.$id);
     }
 
