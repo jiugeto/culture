@@ -151,7 +151,7 @@ CREATE TABLE `ba_userlog` (
   `logoutTime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '退出时间',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -160,6 +160,7 @@ CREATE TABLE `ba_userlog` (
 
 LOCK TABLES `ba_userlog` WRITE;
 /*!40000 ALTER TABLE `ba_userlog` DISABLE KEYS */;
+INSERT INTO `ba_userlog` VALUES (1,2,1,'jiuge','201606191531364011','2016-06-19 15:31:36','0000-00-00 00:00:00','2016-04-06 00:00:00');
 /*!40000 ALTER TABLE `ba_userlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -213,6 +214,31 @@ CREATE TABLE `bs_actor_pic` (
 LOCK TABLES `bs_actor_pic` WRITE;
 /*!40000 ALTER TABLE `bs_actor_pic` DISABLE KEYS */;
 /*!40000 ALTER TABLE `bs_actor_pic` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bs_actor_work`
+--
+
+DROP TABLE IF EXISTS `bs_actor_work`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bs_actor_work` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `actorid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '演员id',
+  `workid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '影视作品id',
+  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='演员作品关联表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bs_actor_work`
+--
+
+LOCK TABLES `bs_actor_work` WRITE;
+/*!40000 ALTER TABLE `bs_actor_work` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bs_actor_work` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1021,7 +1047,7 @@ CREATE TABLE `bs_orders` (
 
 LOCK TABLES `bs_orders` WRITE;
 /*!40000 ALTER TABLE `bs_orders` DISABLE KEYS */;
-INSERT INTO `bs_orders` VALUES (4,'创意123456',4294967295,1,3,0,0,1,'jiuge',2,'jiuge2',0,0,45,20,0,0,0,0,12,1,0,'2016-06-17 13:02:35','0000-00-00 00:00:00','2016-06-18 12:43:16','2016-06-18 15:29:24','0000-00-00 00:00:00');
+INSERT INTO `bs_orders` VALUES (4,'创意123456',4294967295,1,3,0,0,1,'jiuge',2,'jiuge2',0,0,45,20,10000,0,0,0,13,1,0,'2016-06-17 13:02:35','0000-00-00 00:00:00','2016-06-18 12:43:16','2016-06-18 15:29:24','2016-06-19 16:33:30');
 /*!40000 ALTER TABLE `bs_orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2077,4 +2103,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-06-18 17:34:32
+-- Dump completed on 2016-06-19 19:04:22

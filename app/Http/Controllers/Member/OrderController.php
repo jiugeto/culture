@@ -76,8 +76,10 @@ class OrderController extends BaseController
     {
         $curr['name'] = $this->lists['show']['name'];
         $curr['url'] = $this->lists['show']['url'];
+        $data = OrderModel::find($id);
+        if ($data->genre<7) {}
         $result = [
-            'data'=> OrderModel::find($id),
+            'data'=> $data,
             'model'=> $this->model,
             'lists'=> $this->lists,
             'curr'=> $curr,

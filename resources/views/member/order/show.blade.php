@@ -160,12 +160,24 @@
                         @elseif(in_array($data->status,[8,9])) 分镜完成
                         @elseif($data->status==10) 确定制作
                         @elseif($data->status==12) 一期收费
-                        @elseif($data->status==13) 一期收费
+                        @elseif($data->status==13) 协商效果
+                        @elseif($data->status==14) 二期收费
+                        @elseif($data->status==15) 确定效果
+                        @elseif($data->status==16) 成片收费
+                        @elseif($data->status==17) 确定成片
+                        @elseif($data->status==18) 出片尾款
+                        {{--@elseif($data->status==19) 订单成功--}}
                         @endif
                     </button></a>
                 @if(in_array($data->status,[5,10]))
                 <a id="finish" title="{{ $data->statusbtn() }}">
                     <button class="companybtn">完成订单</button></a>
+                @endif
+                @if(in_array($data->status,[19]))
+                <a id="true" title="{{ $data->statusbtn() }}成功">
+                    <button class="companybtn">订单成功</button></a>
+                <a id="false" title="{{ $data->statusbtn() }}失败">
+                    <button class="companybtn">订单失败</button></a>
                 @endif
             </td></tr>
     </table>
@@ -207,11 +219,37 @@
                     var realMoney1 = $("input[name='realMoney1']").val();
                     if(realMoney1==''){ alert("一期价格必填！"); return; }
                     window.location.href = "/member/order/"+id+"/1/"+realMoney1;
+                } else if (status==13) {
+                    window.location.href = "/member/order/"+id+"/status/"+14;
+                } else if (status==14) {
+                    var realMoney2 = $("input[name='realMoney2']").val();
+                    if(realMoney2==''){ alert("二期价格必填！"); return; }
+                    window.location.href = "/member/order/"+id+"/2/"+realMoney2;
+                } else if (status==15) {
+                    window.location.href = "/member/order/"+id+"/status/"+16;
+                } else if (status==16) {
+                    var realMoney3 = $("input[name='realMoney3']").val();
+                    if(realMoney3==''){ alert("三期价格必填！"); return; }
+                    window.location.href = "/member/order/"+id+"/3/"+realMoney3;
+                } else if (status==17) {
+                    window.location.href = "/member/order/"+id+"/status/"+18;
+                } else if (status==18) {
+                    var realMoney4 = $("input[name='realMoney4']").val();
+                    if(realMoney4==''){ alert("尾款价格必填！"); return; }
+                    window.location.href = "/member/order/"+id+"/4/"+realMoney4;
                 }
             });
             //订单完成
             $("#finish").click(function(){
                 window.location.href = "/member/order/"+id+"/status/"+20;
+            });
+            //订单成功
+            $("#true").click(function(){
+                window.location.href = "/member/order/"+id+"/status/"+20;
+            });
+            //订单失败
+            $("#false").click(function(){
+                window.location.href = "/member/order/"+id+"/status/"+21;
             });
 
             $("#status1").mouseover(function(){ $("#statustext1").show(); }).mouseout(function(){ $("#statustext1").hide(); });
