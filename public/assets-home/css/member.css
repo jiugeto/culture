@@ -211,6 +211,8 @@ a.list_btn:hover { background:darkred; }
 .table_create .statusbtn a { padding:2px 10px;border-radius:3px;border:1px dashed lightgrey; }
 .table_create .statusbtn a:hover { color:red;border:1px solid red; }
 .table_create .statusbtn input { width:60px;padding:0 10px; }
+.table_create .orange { color:orangered; }
+.table_create .green { color:green; }
 .table_create td { padding:5px 10px; }
 .table_create td.field_name { width:200px;text-align:end; }
 input,textarea,select {

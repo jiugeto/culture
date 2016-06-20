@@ -151,7 +151,7 @@ CREATE TABLE `ba_userlog` (
   `logoutTime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '退出时间',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -160,7 +160,7 @@ CREATE TABLE `ba_userlog` (
 
 LOCK TABLES `ba_userlog` WRITE;
 /*!40000 ALTER TABLE `ba_userlog` DISABLE KEYS */;
-INSERT INTO `ba_userlog` VALUES (1,2,1,'jiuge','201606191531364011','2016-06-19 15:31:36','0000-00-00 00:00:00','2016-04-06 00:00:00');
+INSERT INTO `ba_userlog` VALUES (1,2,1,'jiuge','201606191531364011','2016-06-19 15:31:36','0000-00-00 00:00:00','2016-04-06 00:00:00'),(2,2,1,'jiuge','201606201607391788','2016-06-20 16:07:39','0000-00-00 00:00:00','2016-04-06 00:00:00');
 /*!40000 ALTER TABLE `ba_userlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1015,28 +1015,25 @@ CREATE TABLE `bs_orders` (
   `serial` int(20) unsigned NOT NULL DEFAULT '0' COMMENT '订单编号',
   `genre` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '订单来源：1创意供应，2创意需求，3分镜供应，4分镜需求，5视频供应，6视频需求，7娱乐供应，8娱乐需求，9演员供应，10演员需求，1租赁供应，12租赁需求',
   `fromid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '订单来源表中的id',
-  `fromid2` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '备用id，主要是分镜',
-  `fromid3` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '备用id，主要是视频',
   `seller` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '卖家id ',
   `sellerName` varchar(255) NOT NULL COMMENT '卖家名称',
   `buyer` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '买家id',
   `buyerName` varchar(255) NOT NULL COMMENT '买家名称',
   `number` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '数量',
-  `money` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '价格总额，单位元',
-  `ideaMoney` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创意实际价格，单位元',
-  `storyMoney` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分镜实际价格，单位元',
+  `money` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创意或分镜价格，单位元',
   `realMoney1` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分期付款开始，单位元',
   `realMoney2` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分期付款2，单位元',
   `realMoney3` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分期付款3，单位元',
   `realMoney4` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分期付款尾款，单位元',
-  `status` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '订单状态：\r\n\r\n1提交创意，2确定创意，3创意免费，4创意收费，5创意完成，6提交分镜，7确定分镜，8分镜免费，9分镜收费，10确定项目，11进行协商，12开始制作，13分期收费，14效果协商，15二期收费，16确定成片，17三期收费，18出片交付保证播放，19尾款结清，20交易成功，21交易失败，（修改另外收费）',
+  `status` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '订单状态：1提交创意，2确定创意，3创意免费，4创意收费，5创意完成，6提交分镜，7确定分镜，8分镜免费，9分镜收费，10确定项目，11进行协商，12开始制作，13分期收费，14效果协商，15二期收费，16确定成片，17三期收费，18出片交付保证播放，19尾款结清，20交易成功，21交易失败，（修改另外收费）     \r\n\r\n(========================)\r\n创意订单状态：1新的创意，2确定创意，3创意免费，4创意收费，5办理订单，6确认收到，11订单成功，12订单失败。\r\n分镜订单状态：1新的分镜，2确定分镜，3分镜免费，4分镜收费，5办理订单，6确认收到，11订单成功，12订单失败。\r\n视频制作订单状态：1新的样片，2确认制作，3分期收费，4效果协商，5二期收费，6确定成片，7三期收费，8出片交付，9尾款结清，10确认完成，11订单成功，12订单失败。',
   `isshow` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '前台列表是否显示：0不显示，1显示，默认1',
   `del` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '回收站：0不删除，1删除',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `ideaTime` datetime NOT NULL COMMENT '创意交易时间',
-  `storyTime` datetime NOT NULL COMMENT '分镜交易时间',
-  `realTime` datetime NOT NULL COMMENT '分期付款最后付款时间',
+  `realTime1` datetime NOT NULL COMMENT '分期付款时间1',
+  `realTime2` datetime NOT NULL COMMENT '分期付款时间2',
+  `realTime3` datetime NOT NULL COMMENT '分期付款时间3',
+  `realTime4` datetime NOT NULL COMMENT '分期付款时间4',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='订单表 bs_orders';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1047,7 +1044,7 @@ CREATE TABLE `bs_orders` (
 
 LOCK TABLES `bs_orders` WRITE;
 /*!40000 ALTER TABLE `bs_orders` DISABLE KEYS */;
-INSERT INTO `bs_orders` VALUES (4,'创意123456',4294967295,1,3,0,0,1,'jiuge',2,'jiuge2',0,0,45,20,10000,0,0,0,13,1,0,'2016-06-17 13:02:35','0000-00-00 00:00:00','2016-06-18 12:43:16','2016-06-18 15:29:24','2016-06-19 16:33:30');
+INSERT INTO `bs_orders` VALUES (4,'创意123456',4294967295,1,3,1,'jiuge',2,'jiuge2',0,0,1000,5000,10000,10000,19,1,0,'2016-06-17 13:02:35','0000-00-00 00:00:00','2016-06-20 12:19:22','0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `bs_orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2103,4 +2100,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-06-19 19:04:22
+-- Dump completed on 2016-06-20 18:18:46

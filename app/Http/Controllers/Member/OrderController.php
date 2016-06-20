@@ -42,15 +42,26 @@ class OrderController extends BaseController
     {
         if (\Illuminate\Support\Facades\Request::ajax()) {
             $data = \Illuminate\Support\Facades\Input::all();
-            //加入已有类似订单
-            //1创意，2分镜，3商品，4娱乐，5演员，6租赁
-            if ($data['genre']==1) {
+
+            //假如已有类似订单
+            //1创意供应，2创意需求，3分镜供应，4分镜需求，5视频供应，6视频需求，7娱乐供应，8娱乐需求，9演员供应，10演员需求，1租赁供应，12租赁需求
+            if (in_array($data['genre'],[1,2])) {
                 $ideaModel = \App\Models\IdeasModel::find($data['id']);
                 $productname = $ideaModel->name;
                 $sellerid = $ideaModel->uid;
+            } elseif (in_array($data['genre'],[3,4])) {
+                $storyBoardModel = \App\Models\StoryBoardModel::find($data['id']);
+                $productname = $storyBoardModel->name;
+                $sellerid = $storyBoardModel->uid;
+            } elseif (in_array($data['genre'],[5,6])) {
+                $videoModel = \App\Models\VideoModel::find($data['id']);
+                $productname = $videoModel->name;
+                $sellerid = $videoModel->uid;
             }
+
             //获取供应方信息
             $userModel = UserModel::find($sellerid);
+
             $create = [
                 'name'=> $productname,
                 'serial'=> date('YmdHis',time()).rand(0,10000),
@@ -60,8 +71,7 @@ class OrderController extends BaseController
                 'sellerName'=> $userModel->username,
                 'buyer'=> $this->userid,
                 'buyerName'=> \Session::get('user.username'),
-//                'number'=> 0,
-                'status'=> 1,        //新创意订单
+                'status'=> 1,
                 'created_at'=> date('Y-m-d H:i:s',time()),
             ];
             OrderModel::create($create);
@@ -77,7 +87,6 @@ class OrderController extends BaseController
         $curr['name'] = $this->lists['show']['name'];
         $curr['url'] = $this->lists['show']['url'];
         $data = OrderModel::find($id);
-        if ($data->genre<7) {}
         $result = [
             'data'=> $data,
             'model'=> $this->model,
@@ -144,12 +153,12 @@ class OrderController extends BaseController
             ];
         } elseif ($real==3) {       //三期，确认收款，协商效果
             $update = [
-                'realMoney2'=> $money,
+                'realMoney3'=> $money,
                 'status'=> 17,
             ];
         } elseif ($real==4) {       //四期，确认尾款
             $update = [
-                'realMoney2'=> $money,
+                'realMoney4'=> $money,
                 'status'=> 19,
             ];
         }

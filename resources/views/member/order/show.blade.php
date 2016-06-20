@@ -24,89 +24,99 @@
             <td class="field_name">状态：</td>
             <td>{{ $data->status() }}</td>
         </tr>
-        @if($data->genre<7 && $data->status>1)
+
+    @if($data->status>1)
+        @if(in_array($data->genre,[1,2]))
         <tr>
             <td class="field_name">创意交易价格：</td>
             <td class="statusbtn">
                 @if($data->status==2 && $data->seller==$userid)
-                    <input type="text" placeholder="0代表免费" pattern="^\d+$" name="ideaMoney"> 元
-                @elseif($data->status>2 && $data->ideaMoney)
-                    {{ $data->ideaMoney ? $data->ideaMoney.'元' : '免费' }}
+                    <input type="text" placeholder="0代表免费" pattern="^\d+$" name="money"> 元
+                @elseif($data->status>2 && $data->money)
+                    {{ $data->money ? $data->money.'元' : '免费' }}
                 @endif
-                &nbsp;&nbsp;<a href="" target="_blank">查看创意</a>
+                &nbsp;&nbsp;<a href="/member/idea/{{ $data->fromid }}" target="_blank">查看创意</a>
             </td>
         </tr>
-        @endif
-        @if($data->genre<7 && $data->status>5)
+        @elseif(in_array($data->genre,[3,4]))
         <tr>
             <td class="field_name">分镜交易价格：</td>
             <td class="statusbtn">
-                @if($data->status==6) <a href="/member/storyboard" target="_blank">提交分镜</a>
-                @elseif($data->status==7)
-                    @if($data->seller==$userid)
-                        <input type="text" placeholder="0代表免费" pattern="^\d+$" name="storyMoney"> 元 &nbsp;
-                    @endif
-                    <a href="" target="_blank">查看分镜</a>
-                @elseif($data->status>7 && $data->storyMoney)
-                    {{ $data->storyMoney ? $data->storyMoney.'元' : '免费' }}
-                    &nbsp;&nbsp;<a href="" target="_blank">查看分镜</a>
+                @if($data->status==2 || $data->seller==$userid)
+                    <input type="text" placeholder="0代表免费" pattern="^\d+$" name="storyMoney"> 元
+                @elseif($data->status>2 && $data->money)
+                    {{ $data->money ? $data->money.'元' : '免费' }}
                 @endif
+                &nbsp;&nbsp;<a href="/member/storyboard/{{ $data->fromid }}" target="_blank">查看分镜</a>
             </td>
         </tr>
-        @endif
-        @if($data->genre<7 && $data->status>11)
+        @elseif(in_array($data->genre,[5,6]))
         <tr>
             <td class="field_name">分期首款：</td>
             <td class="statusbtn">
-                @if($data->status==12)
-                    @if($data->seller==$userid)
-                        <input type="text" placeholder="一期收费" pattern="^([1-9])|([1-9]\d+)$" required name="realMoney1"> 元 &nbsp;
-                    @endif
-                @elseif($data->status>12)
+                @if($data->status==2 || $data->seller==$userid)
+                    <input type="text" placeholder="一期收费" pattern="^([1-9])|([1-9]\d+)$" required name="realMoney1"> 元 &nbsp;
+                @elseif($data->status>2)
                     {{ $data->realMoney1 }}元
+                @endif
+                @if($data->status==3)
+                    <span class="orange">效果协商中</span>
+                @elseif($data->status>3)
+                    <span class="green">效果已协商</span>
                 @endif
             </td>
         </tr>
         <tr>
             <td class="field_name">二期付款：</td>
             <td class="statusbtn">
-                @if($data->status==15)
-                    @if($data->seller==$userid)
-                        <input type="text" placeholder="二期收费" pattern="^([1-9])|([1-9]\d+)$" required name="realMoney2"> 元 &nbsp;
-                    @endif
-                @elseif($data->status>15)
+                @if($data->status==4 || $data->seller==$userid)
+                    <input type="text" placeholder="二期收费" pattern="^([1-9])|([1-9]\d+)$" required name="realMoney2"> 元
+                @elseif($data->status>4)
                     {{ $data->realMoney2 }}元
                 @else 无
+                @endif
+                @if($data->status==5)
+                    <span class="orange">效果待确定</span>
+                @elseif($data->status>5)
+                    <span class="green">效果已确定</span>
                 @endif
             </td>
         </tr>
         <tr>
             <td class="field_name">三期付款：</td>
             <td class="statusbtn">
-                @if($data->status==17)
-                    @if($data->seller==$userid)
-                        <input type="text" placeholder="三期收费" pattern="^([1-9])|([1-9]\d+)$" required name="realMoney3"> 元 &nbsp;
-                    @endif
-                @elseif($data->status>17)
+                @if($data->status==6 || $data->seller==$userid)
+                    <input type="text" placeholder="三期收费" pattern="^([1-9])|([1-9]\d+)$" required name="realMoney3"> 元
+                @elseif($data->status>6)
                     {{ $data->realMoney3 }}元
                 @else 无
+                @endif
+                @if($data->status==7)
+                    <span class="orange">成片待确定</span>
+                @elseif($data->status>7)
+                    <span class="green">成片已确定</span>
                 @endif
             </td>
         </tr>
         <tr>
             <td class="field_name">分期尾款：</td>
             <td class="statusbtn">
-                @if($data->status==19)
-                    @if($data->seller==$userid)
-                        <input type="text" placeholder="四期收费" pattern="^([1-9])|([1-9]\d+)$" required name="realMoney4"> 元 &nbsp;
-                    @endif
-                @elseif($data->status>19)
-                    {{ $data->realMoney19 }}元
+                @if($data->status==8 || $data->seller==$userid)
+                    <input type="text" placeholder="四期收费" pattern="^([1-9])|([1-9]\d+)$" required name="realMoney4"> 元
+                @elseif($data->status>8)
+                    {{ $data->realMoney4 }}元
                 @else 无
+                @endif
+                @if($data->status==9)
+                    <span class="orange">待出片</span>
+                @elseif($data->status>9)
+                    <span class="green">已出片</span>
                 @endif
             </td>
         </tr>
         @endif
+    @endif
+
         <tr>
             <td class="field_name">创建时间：</td>
             <td>{{ $data->created_at }}</td>
@@ -121,12 +131,20 @@
         <tr>
             <td class="status_line">
                 <div class="title">订单状态线：
-                    <span id="statustext0">{{ $model['statuss'][$data->status] }}</span>
+                    <span id="statustext0">
+                        @if(in_array($data->genre,[1,2,3,4]))
+                            {{ $model['status1s'][$data->status] }}
+                        @elseif(in_array($data->genre,[5,6]))
+                            {{ $model['status2s'][$data->status] }}
+                        @elseif(in_array($data->genre,[7,8,9,10,11,12]))
+                            {{ $model['status3s'][$data->status] }}
+                        @endif
+                    </span>
                 </div>
                 <div class="con">
                     <div class="pos">
-                        @if($data->genre<7)
-                        @foreach($model['statuss'] as $kstatus=>$status)
+                    @if(in_array($data->genre,[1,2,3,4]))
+                        @foreach($model['status1s'] as $kstatus=>$status)
                             @if($kstatus>11)
                             <a id="status{{ $kstatus-1 }}">
                                 <div style="background:{{$data->status==$kstatus?'rgba(255,0,255,1)':'rgba(220,220,220,1)'}};"></div>
@@ -139,7 +157,7 @@
                             </a>
                             @endif
                         @endforeach
-                        @endif
+                    @endif
                     </div>
                 </div>
             </td>
@@ -149,6 +167,7 @@
     <table class="table_create table_show" cellspacing="0" cellpadding="0">
         <tr><td class="center" colspan="2" style="border:0;cursor:pointer;">
                 <button class="companybtn" onclick="history.go(-1)">返 &nbsp;回</button>
+                @if($data->status<20)
                 <a id="tostatus" title="{{ $data->statusbtn() }}">
                     <button class="companybtn">
                         @if($data->status==1) 确定创意
@@ -166,19 +185,20 @@
                         @elseif($data->status==16) 成片收费
                         @elseif($data->status==17) 确定成片
                         @elseif($data->status==18) 出片尾款
-                        {{--@elseif($data->status==19) 订单成功--}}
+                        @elseif($data->status==19) 出片成功
                         @endif
                     </button></a>
+                @endif
                 @if(in_array($data->status,[5,10]))
                 <a id="finish" title="{{ $data->statusbtn() }}">
                     <button class="companybtn">完成订单</button></a>
                 @endif
-                @if(in_array($data->status,[19]))
-                <a id="true" title="{{ $data->statusbtn() }}成功">
-                    <button class="companybtn">订单成功</button></a>
+                {{--@if(in_array($data->status,[19]))--}}
+                {{--<a id="true" title="{{ $data->statusbtn() }}成功">--}}
+                    {{--<button class="companybtn">订单成功</button></a>--}}
+                {{--@endif--}}
                 <a id="false" title="{{ $data->statusbtn() }}失败">
                     <button class="companybtn">订单失败</button></a>
-                @endif
             </td></tr>
     </table>
     <input type="hidden" name="id" value="{{ $data->id }}">
@@ -187,11 +207,6 @@
     <script>
         $(document).ready(function(){
             var id = $("input[name='id']").val();
-//            $("input[name='ideaMoney']").change(function(){
-//                if($(this).val()==''){ alert("创意价格不能必填！"); return; }
-//                window.location.href = "/member/order/"+id+"/idea/"+$(this).val();
-//            });
-
             //订单流程：创意、分镜、视频
             var status = $("input[name='status']").val();
             $("#tostatus").click(function(){
@@ -249,6 +264,15 @@
             });
             //订单失败
             $("#false").click(function(){
+                var ideaMoney = $("input[name='ideaMoney']").val();
+                var storyMoney = $("input[name='storyMoney']").val();
+                var realMoney1 = $("input[name='realMoney1']").val();
+                var realMoney2 = $("input[name='realMoney2']").val();
+                var realMoney3 = $("input[name='realMoney3']").val();
+                var realMoney4 = $("input[name='realMoney4']").val();
+                if (ideaMoney || storyMoney || realMoney1 || realMoney2 || realMoney3 || realMoney4) {
+                    alert("对不起，已产生交易价格，不能取消订单！"); return;
+                }
                 window.location.href = "/member/order/"+id+"/status/"+21;
             });
 
