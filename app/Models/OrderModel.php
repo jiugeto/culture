@@ -34,7 +34,7 @@ class OrderModel extends BaseModel
         1=>'新的片源','确认制作','分期收费','效果协商','二期收费','确定成片','三期收费','出片交付','尾款结清','确认完成','订单成功','订单失败'
     ];
     //前台订单流程流程
-    protected $status3s = [1=>'下订单',10=>'确定订单',11=>'进行协商',12=>'开始办理',20=>'办理成功',21=>'办理失败'];
+    protected $status3s = [1=>'下订单',2=>'确定订单',3=>'进行协商',5=>'办理订单',6=>'确认收到',11=>'办理成功',12=>'办理失败'];
 
     public function genreName()
     {
@@ -55,10 +55,12 @@ class OrderModel extends BaseModel
 
     public function statusbtn()
     {
-        if (in_array($this->genre,[1,2,3,4,5,6])) {
-            $status = array_key_exists($this->status+1,$this->statuss)?$this->statuss[$this->status+1]:'';
+        if (in_array($this->genre,[1,2,3,4])) {
+            $status = array_key_exists($this->status+1,$this->status1s)?$this->status1s[$this->status+1]:'';
+        } elseif (in_array($this->genre,[5,6])) {
+            $status = array_key_exists($this->status+1,$this->status2s)?$this->status2s[$this->status+1]:'';
         } elseif (in_array($this->genre,[7,8,9,10,11,12])) {
-            $status = array_key_exists($this->status+1,$this->statuss_other)?$this->statuss_other[$this->status+1]:'';
+            $status = array_key_exists($this->status+1,$this->status3s)?$this->status3s[$this->status+1]:'';
         }
         return isset($status) ? $status : '';
     }
