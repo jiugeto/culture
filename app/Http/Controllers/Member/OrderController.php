@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Member;
 
 //use Illuminate\Http\Request;
+use App\Models\CompanyModel;
 use App\Models\OrderModel;
 use App\Models\UserModel;
 
@@ -87,52 +88,58 @@ class OrderController extends BaseController
         $curr['name'] = $this->lists['show']['name'];
         $curr['url'] = $this->lists['show']['url'];
         $data = OrderModel::find($id);
+        //联系方式
+        if (in_array($data->genre,[1,3,5,7,9,11])) {
+            $userInfo = UserModel::find($data->buyer);
+        } elseif (in_array($data->genre,[2,4,6,8,10,12])) {
+            $userInfo = UserModel::find($data->seller);
+        }
         $result = [
             'data'=> $data,
             'model'=> $this->model,
             'lists'=> $this->lists,
             'curr'=> $curr,
             'userid'=> $this->userid,
+            'userInfo'=> $userInfo,
         ];
         return view('member.order.show', $result);
     }
 
-    /**
-     * 设置创意价格
-     */
-    public function setIdeaMoney($id,$money)
+    public function getUser($uid)
     {
-        if (!$money) { $status = 3; }else{ $status = 4; }
-        $update = [
-            'ideaMoney'=> $money,
-            'status'=>$status,
-            'ideaTime'=>date('Y-m-d H:i:s',time())
-        ];
-        OrderModel::where('id',$id)->update($update);
-        return redirect('/member/order/'.$id);
+        $userModel = UserModel::find($uid);
+        if (in_array($userModel->isuser,[2,4,5,6])) {
+            $userModel->company = CompanyModel::where('uid',$uid)->get();
+        } else {
+            $userModel->company = '';
+        }
+        return $userModel ? $userModel : '';
     }
 
     /**
-     * 设置分镜价格
-     */
-    public function setStoryMoney($id,$money)
-    {
-        if (!$money) { $status = 8; }else{ $status = 9; }
-        $update = [
-            'storyMoney'=> $money,
-            'status'=>$status,
-            'storyTime'=>date('Y-m-d H:i:s',time())
-        ];
-        OrderModel::where('id',$id)->update($update);
-        return redirect('/member/order/'.$id);
-    }
-
-    /**
-     * 设置状态
+     * 设置状态 1,3,4
      */
     public function setStatus($id,$status)
     {
-        OrderModel::where('id',$id)->update(['status'=> $status]);
+        if (in_array($status,[1,5])) { $s = $status+1; }
+        elseif (in_array($status,[3,4])) { $s = 5; }
+        OrderModel::where('id',$id)->update(['status'=> $s]);
+        return redirect('/member/order/'.$id);
+    }
+
+    /**
+     * 设置创意、分镜价格 2
+     */
+    public function setMoney($id,$genre,$money)
+    {
+        if (!in_array($genre,['idea','story'])) { echo "<script>alert('参数有误！');history.go(-1);</script>";exit; }
+        if (!$money) { $status = 3; }else{ $status = 4; }
+        $update = [
+            'money'=> $money,
+            'status'=>$status,
+            'updated_at'=>date('Y-m-d H:i:s',time())
+        ];
+        OrderModel::where('id',$id)->update($update);
         return redirect('/member/order/'.$id);
     }
 

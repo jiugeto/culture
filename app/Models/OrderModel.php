@@ -64,4 +64,15 @@ class OrderModel extends BaseModel
         }
         return isset($status) ? $status : '';
     }
+
+    /**
+     * 订单来源的数据
+     */
+    public function getModel()
+    {
+        if (in_array($this->genre,[1,2])) { $model = IdeasModel::find($this->fromid); }
+        elseif (in_array($this->genre,[3,4])) { $model = StoryBoardModel::find($this->fromid); }
+        elseif (in_array($this->genre,[5,6])) { $model = GoodsModel::find($this->fromid); }
+        return isset($model) ? $model : '';
+    }
 }

@@ -35,7 +35,7 @@
                 @elseif($data->status>2 && $data->money)
                     {{ $data->money ? $data->money.'元' : '免费' }}
                 @endif
-                &nbsp;&nbsp;<a href="/member/idea/{{ $data->fromid }}" target="_blank">查看创意</a>
+                {{--&nbsp;&nbsp;<a href="/member/idea/{{ $data->fromid }}" target="_blank">查看创意</a>--}}
             </td>
         </tr>
         @elseif(in_array($data->genre,[3,4]))
@@ -47,7 +47,7 @@
                 @elseif($data->status>2 && $data->money)
                     {{ $data->money ? $data->money.'元' : '免费' }}
                 @endif
-                &nbsp;&nbsp;<a href="/member/storyboard/{{ $data->fromid }}" target="_blank">查看分镜</a>
+                {{--&nbsp;&nbsp;<a href="/member/storyboard/{{ $data->fromid }}" target="_blank">查看分镜</a>--}}
             </td>
         </tr>
         @elseif(in_array($data->genre,[5,6]))
@@ -121,10 +121,60 @@
             <td class="field_name">创建时间：</td>
             <td>{{ $data->created_at }}</td>
         </tr>
+    @if(in_array($data->genre,[1,2,3,4]))
         <tr>
             <td class="field_name">更新时间：</td>
-            <td>{{ $data->updated_at ? '未更新' : $data->updated_at }}</td>
+            <td>{{ $data->updated_at=='0000-00-00 00:00:00' ? '未更新' : $data->updated_at }}</td>
         </tr>
+    @elseif(in_array($data->genre,[5,6]))
+        @if($data->status==2)
+        <tr>
+            <td class="field_name">首款时间：</td>
+            <td>{{ $data->realMoney1=='0000-00-00 00:00:00' ? '未更新' : $data->realMoney1 }}</td>
+        </tr>
+        @elseif($data->status==4)
+        <tr>
+            <td class="field_name">二期付款时间：</td>
+            <td>{{ $data->realMoney2=='0000-00-00 00:00:00' ? '未更新' : $data->realMoney2 }}</td>
+        </tr>
+        @elseif($data->status==6)
+        <tr>
+            <td class="field_name">三期付款时间：</td>
+            <td>{{ $data->realMoney3=='0000-00-00 00:00:00' ? '未更新' : $data->realMoney3 }}</td>
+        </tr>
+        @elseif($data->status==7)
+        <tr>
+            <td class="field_name">尾款时间：</td>
+            <td>{{ $data->realMoney4=='0000-00-00 00:00:00' ? '未更新' : $data->realMoney4 }}</td>
+        </tr>
+        @endif
+    @endif
+    </table>
+
+    <table class="table_create table_show" cellspacing="0" cellpadding="0">
+        <tr><td colspan="2"><b>{{ $data->buyer==$userid ? '供应方' : '需求方' }}联系方式</b>：</td></tr>
+        <tr>
+            <td class="field_name">供应方名称：</td>
+            <td>{{ $userInfo->username }}</td>
+        </tr>
+        <tr>
+            <td class="field_name">联系方式：</td>
+            <td>{{ $userInfo->mobile }}</td>
+        </tr>
+        <tr>
+            <td class="field_name">QQ：</td>
+            <td>{{ $userInfo->qq }}</td>
+        </tr>
+        <tr>
+            <td class="field_name">地址：</td>
+            <td>{{ $userInfo->address }}</td>
+        </tr>
+        @if($userInfo->company)
+        <tr>
+            <td class="field_name">需求方公司：</td>
+            <td>{{ $userInfo->company->name }}</td>
+        </tr>
+        @endif
     </table>
 
     <table class="table_create table_show" cellspacing="0" cellpadding="0">
@@ -145,23 +195,23 @@
                     <div class="pos">
                     @if(in_array($data->genre,[1,2,3,4]))
                         @foreach($model['status1s'] as $kstatus=>$status)
-                        <a id="status{{ $kstatus-1 }}">
+                        <a id="status{{ $kstatus }}">
                             <div style="background:{{$data->status==$kstatus?'rgba(255,0,255,1)':'rgba(220,220,220,1)'}};"></div>
-                            <span id="statustext{{ $kstatus-1 }}" style="display:{{$data->status==$kstatus?'block':'none'}};">{{ $status }}</span>
+                            <span id="statustext{{ $kstatus }}" style="display:{{$data->status==$kstatus?'block':'none'}};">{{ $status }}</span>
                         </a>
                         @endforeach
                     @elseif(in_array($data->genre,[5,6]))
                         @foreach($model['status2s'] as $kstatus=>$status)
-                        <a id="status2_{{ $kstatus-1 }}">
+                        <a id="status2_{{ $kstatus }}">
                             <div style="background:{{$data->status==$kstatus?'rgba(255,0,255,1)':'rgba(220,220,220,1)'}};"></div>
-                            <span id="statustext2_{{ $kstatus-1 }}" style="display:{{$data->status==$kstatus?'block':'none'}};">{{ $status }}</span>
+                            <span id="statustext2_{{ $kstatus }}" style="display:{{$data->status==$kstatus?'block':'none'}};">{{ $status }}</span>
                         </a>
                         @endforeach
                     @elseif(in_array($data->genre,[6,7,8,9,10,11,12]))
                         @foreach($model['status3s'] as $kstatus=>$status)
-                        <a id="status2_{{ $kstatus-1 }}">
+                        <a id="status2_{{ $kstatus }}">
                             <div style="background:{{$data->status==$kstatus?'rgba(255,0,255,1)':'rgba(220,220,220,1)'}};"></div>
-                            <span id="statustext2_{{ $kstatus-1 }}" style="display:{{$data->status==$kstatus?'block':'none'}};">{{ $status }}</span>
+                            <span id="statustext3_{{ $kstatus }}" style="display:{{$data->status==$kstatus?'block':'none'}};">{{ $status }}</span>
                         </a>
                         @endforeach
                     @endif
@@ -176,31 +226,46 @@
                 <button class="companybtn" onclick="history.go(-1)">返 &nbsp;回</button>
                 @if(in_array($data->genre,[1,2,3,4]))
                 <a id="tostatus" title="{{ $data->statusbtn() }}">
-                    <button class="companybtn">{{ $data->statusbtn() }}</button></a>
+                    <button class="companybtn">
+                        @if($data->status==2)提交价格
+                        @elseif(in_array($data->status,[2,3]))办理订单
+                        @else{{ $data->statusbtn() }}
+                        @endif
+                    </button></a>
                 @endif
-                @if(in_array($data->status,[5,10]))
+                @if($data->status==6)
                 <a id="finish" title="{{ $data->statusbtn() }}">
                     <button class="companybtn">完成订单</button></a>
                 @endif
-                <a id="false" title="{{ $data->statusbtn() }}失败">
-                    <button class="companybtn">订单失败</button></a>
+                {{--<a id="false" title="{{ $data->statusbtn() }}失败">--}}
+                    {{--<button class="companybtn">订单失败</button></a>--}}
             </td></tr>
     </table>
     <input type="hidden" name="id" value="{{ $data->id }}">
+    <input type="hidden" name="genre" value="{{ $data->genre }}">
     <input type="hidden" name="status" value="{{ $data->status }}">
 
     <script>
         $(document).ready(function(){
             var id = $("input[name='id']").val();
-            //订单流程：创意、分镜、视频
+            var genre = $("input[name='genre']").val();
             var status = $("input[name='status']").val();
+            //订单流程：创意、分镜、视频
             $("#tostatus").click(function(){
-                if (status==1) {
-                    window.location.href = "/member/order/"+id+"/status/"+2;
+                if (status==1 || status==3 || status==4 || status==5) {
+                    window.location.href = "/member/order/"+id+"/"+status;
                 } else if (status==2) {
-                    var ideaMoney = $("input[name='ideaMoney']").val();
-                    if(ideaMoney==''){ alert("创意价格必填！"); return; }
-                    window.location.href = "/member/order/"+id+"/idea/"+ideaMoney;
+                    var money = $("input[name='money']").val();
+                    if(genre==1 || genre==2){
+                        genreName = '创意'; genreUrl = 'idea';
+                    } else if(genre==3 || genre==4){
+                        genreName = '分镜'; genreUrl = 'story';
+                    }
+                    if(money==''){
+                        var genreName =''; var genreUrl = '';
+                        alert(genreName+"价格必填！"); return;
+                    }
+                    window.location.href = "/member/order/"+id+"/"+genreUrl+"/"+money;
                 }
             });
             //订单完成
@@ -213,13 +278,12 @@
             });
             //订单失败
             $("#false").click(function(){
-                var ideaMoney = $("input[name='ideaMoney']").val();
-                var storyMoney = $("input[name='storyMoney']").val();
+                var money = $("input[name='money']").val();
                 var realMoney1 = $("input[name='realMoney1']").val();
                 var realMoney2 = $("input[name='realMoney2']").val();
                 var realMoney3 = $("input[name='realMoney3']").val();
                 var realMoney4 = $("input[name='realMoney4']").val();
-                if (ideaMoney || storyMoney || realMoney1 || realMoney2 || realMoney3 || realMoney4) {
+                if (money || realMoney1 || realMoney2 || realMoney3 || realMoney4) {
                     alert("对不起，已产生交易价格，不能取消订单！"); return;
                 }
                 window.location.href = "/member/order/"+id+"/status/"+21;

@@ -282,7 +282,7 @@ input.radio { position:relative;top:10px; }
 }
 .status_line a span {
     padding:0 5px;
-    position:absolute;top:-20px;left:-30px;
+    position:absolute;top:-25px;left:-30px;
     display:none;
 }
 .status_line #statustext0 {
