@@ -123,6 +123,8 @@ class OrderController extends BaseController
     {
         if (in_array($status,[1,5])) { $s = $status+1; }
         elseif (in_array($status,[3,4])) { $s = 5; }
+        elseif ($status==6) { $s = 11; }
+        elseif ($status==12) { $s = 12; }
         OrderModel::where('id',$id)->update(['status'=> $s]);
         return redirect('/member/order/'.$id);
     }

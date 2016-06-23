@@ -151,7 +151,7 @@ CREATE TABLE `ba_userlog` (
   `logoutTime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '退出时间',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -160,7 +160,7 @@ CREATE TABLE `ba_userlog` (
 
 LOCK TABLES `ba_userlog` WRITE;
 /*!40000 ALTER TABLE `ba_userlog` DISABLE KEYS */;
-INSERT INTO `ba_userlog` VALUES (1,2,1,'jiuge','201606191531364011','2016-06-19 15:31:36','0000-00-00 00:00:00','2016-04-06 00:00:00'),(2,2,1,'jiuge','201606201607391788','2016-06-20 16:07:39','0000-00-00 00:00:00','2016-04-06 00:00:00'),(3,2,1,'jiuge','201606210911378157','2016-06-21 09:11:37','0000-00-00 00:00:00','2016-04-06 00:00:00'),(4,2,1,'jiuge','201606221430498649','2016-06-22 14:30:49','0000-00-00 00:00:00','2016-04-06 00:00:00');
+INSERT INTO `ba_userlog` VALUES (1,2,1,'jiuge','201606191531364011','2016-06-19 15:31:36','0000-00-00 00:00:00','2016-04-06 00:00:00'),(2,2,1,'jiuge','201606201607391788','2016-06-20 16:07:39','0000-00-00 00:00:00','2016-04-06 00:00:00'),(3,2,1,'jiuge','201606210911378157','2016-06-21 09:11:37','0000-00-00 00:00:00','2016-04-06 00:00:00'),(4,2,1,'jiuge','201606221430498649','2016-06-22 14:30:49','0000-00-00 00:00:00','2016-04-06 00:00:00'),(5,2,1,'jiuge','201606231228274592','2016-06-23 12:28:27','0000-00-00 00:00:00','2016-04-06 00:00:00'),(6,2,1,'jiuge','201606231501257212','2016-06-23 15:01:25','0000-00-00 00:00:00','2016-04-06 00:00:00');
 /*!40000 ALTER TABLE `ba_userlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -663,7 +663,7 @@ DROP TABLE IF EXISTS `bs_goods`;
 CREATE TABLE `bs_goods` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL COMMENT '视频名称',
-  `genre` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '片源类型：1产品，2花絮',
+  `genre` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '片源类型：1产品，2花絮',
   `type` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '产品主体：1个人需求，2设计师供应，3企业需求，4企业供应',
   `cate_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '视频分类：关联bs_videos_category',
   `intro` varchar(1000) NOT NULL COMMENT '视频简介',
@@ -703,6 +703,7 @@ DROP TABLE IF EXISTS `bs_ideas`;
 CREATE TABLE `bs_ideas` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL COMMENT '名称',
+  `genre` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '供求类型：1供应，2需求',
   `cate_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分类，关联分类表category',
   `intro` varchar(255) NOT NULL COMMENT '简介',
   `content` text NOT NULL COMMENT '创意内容',
@@ -723,7 +724,7 @@ CREATE TABLE `bs_ideas` (
 
 LOCK TABLES `bs_ideas` WRITE;
 /*!40000 ALTER TABLE `bs_ideas` DISABLE KEYS */;
-INSERT INTO `bs_ideas` VALUES (1,'创意1',4,'efrbgrdfbg','<p>而非v代表</p>',1,0,10,1,0,'2016-04-17 01:46:45','2016-04-17 02:24:47'),(2,'创意部分的白癜风',4,'wefdgbefdv','<p>不辜负你发个你突然发红包让头发的非v别的人副本二本的日本</p>',1,0,10,1,0,'2016-04-21 14:42:17','0000-00-00 00:00:00'),(3,'创意123456',4,'fngbvrrthgfbrthf','<p>不同功能同一个男人太烦恼吧 不同人反复给你发给你发的吧v辅导班该方法v表单v废话么放入后天就能GV干嘛换个号部分或讲不出的生物科技获得鼠标不同人还能听任何人挺好投入和</p>',1,10,10,1,0,'2016-04-21 15:10:03','0000-00-00 00:00:00');
+INSERT INTO `bs_ideas` VALUES (1,'创意1',1,4,'efrbgrdfbg','<p>而非v代表</p>',1,0,10,1,0,'2016-04-17 01:46:45','2016-04-17 02:24:47'),(2,'创意部分的白癜风',1,4,'wefdgbefdv','<p>不辜负你发个你突然发红包让头发的非v别的人副本二本的日本</p>',1,0,10,1,0,'2016-04-21 14:42:17','0000-00-00 00:00:00'),(3,'创意123456',1,4,'fngbvrrthgfbrthf','<p>不同功能同一个男人太烦恼吧 不同人反复给你发给你发的吧v辅导班该方法v表单v废话么放入后天就能GV干嘛换个号部分或讲不出的生物科技获得鼠标不同人还能听任何人挺好投入和</p>',1,10,10,1,0,'2016-04-21 15:10:03','0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `bs_ideas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1044,7 +1045,7 @@ CREATE TABLE `bs_orders` (
 
 LOCK TABLES `bs_orders` WRITE;
 /*!40000 ALTER TABLE `bs_orders` DISABLE KEYS */;
-INSERT INTO `bs_orders` VALUES (4,'创意123456',4294967295,1,3,1,'jiuge',2,'jiuge2',0,100,1000,5000,10000,10000,6,1,0,'2016-06-17 13:02:35','2016-06-22 16:20:29','2016-06-20 12:19:22','0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00');
+INSERT INTO `bs_orders` VALUES (4,'创意123456',4294967295,1,3,1,'jiuge',2,'jiuge2',0,100,1000,5000,10000,10000,11,1,0,'2016-06-17 13:02:35','2016-06-22 16:20:29','2016-06-20 12:19:22','0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `bs_orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1405,6 +1406,7 @@ DROP TABLE IF EXISTS `bs_storyboards`;
 CREATE TABLE `bs_storyboards` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL COMMENT '名称',
+  `genre` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '供求类型：1供应，2需求',
   `cate_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分类，关联分类表category',
   `intro` varchar(2000) NOT NULL COMMENT '内容',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布的用户id',
@@ -1426,7 +1428,7 @@ CREATE TABLE `bs_storyboards` (
 
 LOCK TABLES `bs_storyboards` WRITE;
 /*!40000 ALTER TABLE `bs_storyboards` DISABLE KEYS */;
-INSERT INTO `bs_storyboards` VALUES (1,'ergth',4,'<p><img src=\"/uploads/ueditor/php/upload/image/20160523/1463995780428079.png\" title=\"1463995780428079.png\" alt=\"QQ截图20150906082002.png\"/>ergtghefrgtfgefrdfgh</p>',0,3456,10,10,1,1,0,'2016-05-23 09:32:55','2016-05-23 09:45:53');
+INSERT INTO `bs_storyboards` VALUES (1,'ergth',1,4,'<p><img src=\"/uploads/ueditor/php/upload/image/20160523/1463995780428079.png\" title=\"1463995780428079.png\" alt=\"QQ截图20150906082002.png\"/>ergtghefrgtfgefrdfgh</p>',0,3456,10,10,1,1,0,'2016-05-23 09:32:55','2016-05-23 09:45:53');
 /*!40000 ALTER TABLE `bs_storyboards` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2100,4 +2102,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-06-22 18:15:36
+-- Dump completed on 2016-06-23 16:35:07

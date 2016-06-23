@@ -10,7 +10,7 @@ class StoryBoardModel extends BaseModel
      */
     protected $table = 'bs_storyboards';
     protected $fillable = [
-        'id','name','cate_id','intro','uid','money','sort','isshow','sort2','isshow2','del','created_at','updated_at',
+        'id','name','genre','cate_id','intro','uid','money','sort','isshow','sort2','isshow2','del','created_at','updated_at',
     ];
 
     public function cates()

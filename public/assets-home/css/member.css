@@ -267,8 +267,8 @@ input.radio { position:relative;top:10px; }
 .status_line a#status4 { position:absolute;left:285px; }
 .status_line a#status5 { position:absolute;left:380px; }
 .status_line a#status6 { position:absolute;left:475px; }
-.status_line a#status7 { position:absolute;left:580px; }
-.status_line a#status8 { position:absolute;left:670px; }
+.status_line a#status11 { position:absolute;left:580px; }
+.status_line a#status12 { position:absolute;left:670px; }
 .status_line a#status2_2 { position:absolute;left:720px; }
 .status_line a#status2_3 { position:absolute;left:315px; }
 .status_line a#status2_4 { position:absolute;left:350px; }
@@ -288,4 +288,26 @@ input.radio { position:relative;top:10px; }
 .status_line #statustext0 {
     padding:2px 5px;
     font-size:12px;
+}
+
+/*弹出面板*/
+.popup {
+    padding:10px 20px;
+    width:300px;height:50px;
+    border:1px solid lightgrey;
+    box-shadow:0 0 50px rgba(200,200,200,1);
+    background:white;
+    text-align:center;
+    line-height:50px;
+    position:absolute;
+    left:40%;
+    top:750px;
+    display:none;
+}
+.popup a#story,.popup a#video { display:none; }
+.popup a { margin:0 10px;padding:5px;font-size:18px; }
+.popup a:hover { color:red; }
+.popup a.close {
+    color:red;cursor:pointer;
+    position:absolute;top:-10px;left:90%;
 }

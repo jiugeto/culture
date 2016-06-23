@@ -225,25 +225,39 @@
         <tr><td class="center" colspan="2" style="border:0;cursor:pointer;">
                 <button class="companybtn" onclick="history.go(-1)">返 &nbsp;回</button>
                 @if(in_array($data->genre,[1,2,3,4]))
+                    @if($data->status<=6)
                 <a id="tostatus" title="{{ $data->statusbtn() }}">
                     <button class="companybtn">
                         @if($data->status==2)提交价格
-                        @elseif(in_array($data->status,[2,3]))办理订单
-                        @else{{ $data->statusbtn() }}
+                        @elseif(in_array($data->status,[3,4]))办理订单
+                        @elseif($data->status==5)确认收到
+                        @elseif($data->status==6)订单成功
                         @endif
                     </button></a>
+                    @endif
                 @endif
-                @if($data->status==6)
-                <a id="finish" title="{{ $data->statusbtn() }}">
-                    <button class="companybtn">完成订单</button></a>
+                @if($data->status<=6)
+                <a id="false" title="{{ $data->statusbtn() }}失败">
+                    <button class="companybtn">订单失败</button></a>
+                @elseif($data->status==11)
+                <a id="next"><button class="companybtn">继续流程</button></a>
                 @endif
-                {{--<a id="false" title="{{ $data->statusbtn() }}失败">--}}
-                    {{--<button class="companybtn">订单失败</button></a>--}}
             </td></tr>
     </table>
     <input type="hidden" name="id" value="{{ $data->id }}">
     <input type="hidden" name="genre" value="{{ $data->genre }}">
     <input type="hidden" name="status" value="{{ $data->status }}">
+    <input type="hidden" name="money" value="{{ $data->money }}">
+    <input type="hidden" name="realMoney1" value="{{ $data->realMoney1 }}">
+    <input type="hidden" name="realMoney2" value="{{ $data->realMoney2 }}">
+    <input type="hidden" name="realMoney3" value="{{ $data->realMoney3 }}">
+    <input type="hidden" name="realMoney4" value="{{ $data->realMoney4 }}">
+    {{--弹出窗口--}}
+    <div class="popup">
+        <a href="" id="story">分镜流程</a>
+        <a href="" id="video">视频流程</a>
+        <a class="close" onclick="$('.popup').hide();">X</a>
+    </div>
 
     <script>
         $(document).ready(function(){
@@ -252,7 +266,7 @@
             var status = $("input[name='status']").val();
             //订单流程：创意、分镜、视频
             $("#tostatus").click(function(){
-                if (status==1 || status==3 || status==4 || status==5) {
+                if (status==1 || status==3 || status==4 || status==5 || status==6) {
                     window.location.href = "/member/order/"+id+"/"+status;
                 } else if (status==2) {
                     var money = $("input[name='money']").val();
@@ -268,13 +282,9 @@
                     window.location.href = "/member/order/"+id+"/"+genreUrl+"/"+money;
                 }
             });
-            //订单完成
-            $("#finish").click(function(){
-                window.location.href = "/member/order/"+id+"/status/"+20;
-            });
             //订单成功
             $("#true").click(function(){
-                window.location.href = "/member/order/"+id+"/status/"+20;
+                window.location.href = "/member/order/"+id+"/"+11;
             });
             //订单失败
             $("#false").click(function(){
@@ -286,17 +296,24 @@
                 if (money || realMoney1 || realMoney2 || realMoney3 || realMoney4) {
                     alert("对不起，已产生交易价格，不能取消订单！"); return;
                 }
-                window.location.href = "/member/order/"+id+"/status/"+21;
+                window.location.href = "/member/order/"+id+"/"+12;
             });
+            //订单下一步：弹窗
+            $("#next").click(function(){
+                $(".popup").show(); $("#story").show(); $("#video").show();
+//                window.location.href = "/member/order/"+id+"/next/"+1;
+            });
+            $(".close").click(function(){ $("popup").hide(); });
 
+            //订单流程线
             $("#status1").mouseover(function(){ $("#statustext1").show(); }).mouseout(function(){ $("#statustext1").hide(); });
             $("#status2").mouseover(function(){ $("#statustext2").show(); }).mouseout(function(){ $("#statustext2").hide(); });
             $("#status3").mouseover(function(){ $("#statustext3").show(); }).mouseout(function(){ $("#statustext3").hide(); });
             $("#status4").mouseover(function(){ $("#statustext4").show(); }).mouseout(function(){ $("#statustext4").hide(); });
             $("#status5").mouseover(function(){ $("#statustext5").show(); }).mouseout(function(){ $("#statustext5").hide(); });
             $("#status6").mouseover(function(){ $("#statustext6").show(); }).mouseout(function(){ $("#statustext6").hide(); });
-            $("#status7").mouseover(function(){ $("#statustext7").show(); }).mouseout(function(){ $("#statustext7").hide(); });
-            $("#status8").mouseover(function(){ $("#statustext8").show(); }).mouseout(function(){ $("#statustext8").hide(); });
+            $("#status11").mouseover(function(){ $("#statustext11").show(); }).mouseout(function(){ $("#statustext11").hide(); });
+            $("#status12").mouseover(function(){ $("#statustext12").show(); }).mouseout(function(){ $("#statustext12").hide(); });
         });
     </script>
 @stop
