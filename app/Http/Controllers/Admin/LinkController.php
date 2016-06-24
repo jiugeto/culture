@@ -118,6 +118,7 @@ class LinkController extends BaseController
         $data = $request->all();
         if (!$data['title']) { $data['title'] = ''; }
         if (!$data['intro']) { $data['intro'] = ''; }
+        if ($data['cid']==0 && $data['type_id']==2 && mb_substr($data['link'],0,1,'utf-8')!='/') { $data['link'] = '/'.$data['link']; }
 //        //获取图片文件名
 //        $data['url_ori'] = '';
 //        if($request->hasFile('url_ori')){  //判断文件存在

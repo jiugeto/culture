@@ -18,6 +18,7 @@ Route::group(['prefix'=>'','namespace'=>'Home'],function(){
     Route::any('creation','CreationController@index');
     //创意脚本
     //分镜画面
+    Route::get('storyboard/like/{id}','StoryBoardController@like');
     Route::any('storyboard','StoryBoardController@index');
     //供应单位
     Route::any('supply','SupplyController@index');

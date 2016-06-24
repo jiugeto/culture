@@ -151,7 +151,7 @@ CREATE TABLE `ba_userlog` (
   `logoutTime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '退出时间',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -160,7 +160,7 @@ CREATE TABLE `ba_userlog` (
 
 LOCK TABLES `ba_userlog` WRITE;
 /*!40000 ALTER TABLE `ba_userlog` DISABLE KEYS */;
-INSERT INTO `ba_userlog` VALUES (1,2,1,'jiuge','201606191531364011','2016-06-19 15:31:36','0000-00-00 00:00:00','2016-04-06 00:00:00'),(2,2,1,'jiuge','201606201607391788','2016-06-20 16:07:39','0000-00-00 00:00:00','2016-04-06 00:00:00'),(3,2,1,'jiuge','201606210911378157','2016-06-21 09:11:37','0000-00-00 00:00:00','2016-04-06 00:00:00'),(4,2,1,'jiuge','201606221430498649','2016-06-22 14:30:49','0000-00-00 00:00:00','2016-04-06 00:00:00'),(5,2,1,'jiuge','201606231228274592','2016-06-23 12:28:27','0000-00-00 00:00:00','2016-04-06 00:00:00'),(6,2,1,'jiuge','201606231501257212','2016-06-23 15:01:25','0000-00-00 00:00:00','2016-04-06 00:00:00');
+INSERT INTO `ba_userlog` VALUES (1,2,1,'jiuge','201606191531364011','2016-06-19 15:31:36','0000-00-00 00:00:00','2016-04-06 00:00:00'),(2,2,1,'jiuge','201606201607391788','2016-06-20 16:07:39','0000-00-00 00:00:00','2016-04-06 00:00:00'),(3,2,1,'jiuge','201606210911378157','2016-06-21 09:11:37','0000-00-00 00:00:00','2016-04-06 00:00:00'),(4,2,1,'jiuge','201606221430498649','2016-06-22 14:30:49','0000-00-00 00:00:00','2016-04-06 00:00:00'),(5,2,1,'jiuge','201606231228274592','2016-06-23 12:28:27','0000-00-00 00:00:00','2016-04-06 00:00:00'),(6,2,1,'jiuge','201606231501257212','2016-06-23 15:01:25','0000-00-00 00:00:00','2016-04-06 00:00:00'),(7,1,1,'jiuge','201606240913314181','2016-06-24 09:13:31','0000-00-00 00:00:00','2016-04-05 00:00:00');
 /*!40000 ALTER TABLE `ba_userlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -856,7 +856,7 @@ CREATE TABLE `bs_links` (
   `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
   `updated_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COMMENT='网站链接表：包含header头部链接、navigate菜单导航栏链接、footer脚部链接等';
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COMMENT='网站链接表：包含header头部链接、navigate菜单导航栏链接、footer脚部链接等';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -865,7 +865,7 @@ CREATE TABLE `bs_links` (
 
 LOCK TABLES `bs_links` WRITE;
 /*!40000 ALTER TABLE `bs_links` DISABLE KEYS */;
-INSERT INTO `bs_links` VALUES (1,'首页',0,'',2,0,'','/',1,10,1,0,'2016-01-13','0000-00-00'),(2,'产品样片',0,'',2,0,'','/product',1,10,1,0,'2016-04-17','0000-00-00'),(3,'在线作品',0,'',2,0,'','/creation',1,10,1,0,'2016-04-17','0000-00-00'),(4,'供应企业',0,'',2,0,'','/supply',1,10,1,0,'2016-04-17','0000-00-00'),(5,'需求信息',0,'',2,0,'','/demand',1,10,1,0,'2016-04-17','0000-00-00'),(6,'娱乐频道',0,'',2,0,'','/entertain',1,10,1,0,'2016-04-17','0000-00-00'),(7,'租赁频道',0,'',2,0,'','/rent',1,10,1,0,'2016-04-17','0000-00-00'),(8,'设计频道',0,'',2,0,'','/design',1,10,1,0,'2016-04-17','0000-00-00'),(9,'关于我们',0,'',2,0,'','/about',1,10,1,0,'2016-04-17','0000-00-00'),(10,'创意点子',0,'',2,0,'','/idea',1,10,1,0,'2016-04-17','0000-00-00'),(11,'用户意见',0,'请留下您的宝贵意见哦',2,0,'','/opinion',1,10,1,0,'2016-04-17','0000-00-00'),(12,'首页',0,'底部链接，此链接带修改',3,0,'','home',1,10,1,0,'2016-04-17','2016-04-17'),(13,'友情链接',0,'此链接带修改',3,0,'','home',1,10,1,0,'2016-04-17','2016-04-17'),(14,'安全网盾',0,'此链接带修改',3,0,'','home',1,10,1,0,'2016-04-17','0000-00-00'),(15,'链接1',0,'此链接带修改',3,0,'','home',1,10,1,0,'2016-04-17','0000-00-00'),(16,'链接2',0,'此链接带修改',3,0,'','home',1,10,1,0,'2016-04-17','0000-00-00'),(17,'链接3',0,'此链接带修改',3,0,'','home',1,10,1,0,'2016-04-17','0000-00-00'),(18,'首页',1,'',2,0,'','home',1,10,1,0,'2016-05-06','2016-05-06'),(19,'关于公司',1,'',2,0,'','about',1,10,1,0,'2016-05-06','0000-00-00'),(20,'产品',1,'',2,0,'','product',1,10,1,0,'2016-05-06','0000-00-00'),(21,'花絮',1,'',2,0,'','part',1,10,1,0,'2016-05-06','0000-00-00'),(22,'服务项目',1,'',2,0,'','firm',1,10,1,0,'2016-05-06','0000-00-00'),(23,'团队',1,'',2,0,'','team',1,10,1,0,'2016-05-06','0000-00-00'),(24,'招聘',1,'',2,0,'','recruit',1,10,1,0,'2016-05-06','0000-00-00'),(25,'联系方式',1,'',2,0,'','contact',1,10,1,0,'2016-05-06','0000-00-00');
+INSERT INTO `bs_links` VALUES (1,'首页',0,'',2,0,'','/',1,20,1,0,'2016-01-13','0000-00-00'),(2,'产品样片',0,'',2,0,'','/product',1,20,1,0,'2016-04-17','0000-00-00'),(3,'在线作品',0,'',2,0,'','/creation',1,20,1,0,'2016-04-17','0000-00-00'),(4,'供应企业',0,'',2,0,'','/supply',1,10,1,0,'2016-04-17','0000-00-00'),(5,'需求信息',0,'',2,0,'','/demand',1,10,1,0,'2016-04-17','0000-00-00'),(6,'娱乐频道',0,'',2,0,'','/entertain',1,10,1,0,'2016-04-17','0000-00-00'),(7,'租赁频道',0,'',2,0,'','/rent',1,10,1,0,'2016-04-17','0000-00-00'),(8,'设计频道',0,'',2,0,'','/design',1,10,1,0,'2016-04-17','0000-00-00'),(9,'关于我们',0,'',2,0,'','/about',1,10,1,0,'2016-04-17','0000-00-00'),(10,'创意点子',0,'',2,0,'','/idea',1,10,1,0,'2016-04-17','0000-00-00'),(11,'用户意见',0,'请留下您的宝贵意见哦',2,0,'','/opinion',1,10,1,0,'2016-04-17','0000-00-00'),(12,'首页',0,'底部链接，此链接带修改',3,0,'','home',1,10,1,0,'2016-04-17','2016-04-17'),(13,'友情链接',0,'此链接带修改',3,0,'','home',1,10,1,0,'2016-04-17','2016-04-17'),(14,'安全网盾',0,'此链接带修改',3,0,'','home',1,10,1,0,'2016-04-17','0000-00-00'),(15,'链接1',0,'此链接带修改',3,0,'','home',1,10,1,0,'2016-04-17','0000-00-00'),(16,'链接2',0,'此链接带修改',3,0,'','home',1,10,1,0,'2016-04-17','0000-00-00'),(17,'链接3',0,'此链接带修改',3,0,'','home',1,10,1,0,'2016-04-17','0000-00-00'),(18,'首页',1,'',2,0,'','home',1,10,1,0,'2016-05-06','2016-05-06'),(19,'关于公司',1,'',2,0,'','about',1,10,1,0,'2016-05-06','0000-00-00'),(20,'产品',1,'',2,0,'','product',1,10,1,0,'2016-05-06','0000-00-00'),(21,'花絮',1,'',2,0,'','part',1,10,1,0,'2016-05-06','0000-00-00'),(22,'服务项目',1,'',2,0,'','firm',1,10,1,0,'2016-05-06','0000-00-00'),(23,'团队',1,'',2,0,'','team',1,10,1,0,'2016-05-06','0000-00-00'),(24,'招聘',1,'',2,0,'','recruit',1,10,1,0,'2016-05-06','0000-00-00'),(25,'联系方式',1,'',2,0,'','contact',1,10,1,0,'2016-05-06','0000-00-00'),(26,'故事分镜',0,'分镜画面列表',2,0,'','/storyboard',1,20,1,0,'2016-06-24','0000-00-00');
 /*!40000 ALTER TABLE `bs_links` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1408,9 +1408,12 @@ CREATE TABLE `bs_storyboards` (
   `name` varchar(255) NOT NULL COMMENT '名称',
   `genre` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '供求类型：1供应，2需求',
   `cate_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分类，关联分类表category',
+  `img` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分镜示意图，关联bs_pics',
   `intro` varchar(2000) NOT NULL COMMENT '内容',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布的用户id',
   `money` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '价格，单位元',
+  `isnew` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '是否是最新的：0不是最新，1最新',
+  `ishot` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否最热的：0不是最热，1最热',
   `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序，值越大越靠前，默认10',
   `sort2` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '用户控制排序，值越大越靠前，默认10',
   `isshow` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '前台列表是否显示：0前台列表不显示，1前台列表显示',
@@ -1428,8 +1431,34 @@ CREATE TABLE `bs_storyboards` (
 
 LOCK TABLES `bs_storyboards` WRITE;
 /*!40000 ALTER TABLE `bs_storyboards` DISABLE KEYS */;
-INSERT INTO `bs_storyboards` VALUES (1,'ergth',1,4,'<p><img src=\"/uploads/ueditor/php/upload/image/20160523/1463995780428079.png\" title=\"1463995780428079.png\" alt=\"QQ截图20150906082002.png\"/>ergtghefrgtfgefrdfgh</p>',0,3456,10,10,1,1,0,'2016-05-23 09:32:55','2016-05-23 09:45:53');
+INSERT INTO `bs_storyboards` VALUES (1,'ergth',1,4,1,'<p><img src=\"/uploads/ueditor/php/upload/image/20160523/1463995780428079.png\" title=\"1463995780428079.png\" alt=\"QQ截图20150906082002.png\"/>ergtghefrgtfgefrdfgh</p>',1,3456,0,0,10,10,1,1,0,'2016-05-23 09:32:55','2016-05-23 09:45:53');
 /*!40000 ALTER TABLE `bs_storyboards` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bs_storyboards_like`
+--
+
+DROP TABLE IF EXISTS `bs_storyboards_like`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bs_storyboards_like` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户id',
+  `sbid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分镜storyboard的id',
+  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='分镜喜欢表 bs_storyboards_like';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bs_storyboards_like`
+--
+
+LOCK TABLES `bs_storyboards_like` WRITE;
+/*!40000 ALTER TABLE `bs_storyboards_like` DISABLE KEYS */;
+INSERT INTO `bs_storyboards_like` VALUES (1,0,0,'2016-05-23 09:32:55');
+/*!40000 ALTER TABLE `bs_storyboards_like` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -2102,4 +2131,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-06-23 16:35:07
+-- Dump completed on 2016-06-24 18:48:30

@@ -14,6 +14,7 @@ class BaseController extends Controller
         'home'=> '首 页',
         'product'=> '产品样片',
         'creation'=> '在线作品',
+        'storyboard'=> '故事分镜',
         'supply'=> '供应企业',
         'demand'=> '需求信息',
         'entertain'=> '娱乐频道',
@@ -33,6 +34,7 @@ class BaseController extends Controller
 
     public function __construct()
     {
-        $this->userid = \Session::has('user.uid') ? \Session::get('user.uid') : redirect('/login');
+        if (!\Session::has('user.uid')) { return redirect('/login'); }
+        $this->userid = \Session::get('user.uid');
     }
 }

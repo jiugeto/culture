@@ -14,9 +14,6 @@
                 @foreach($navigates as $navigate)
                     <a href="{{ $navigate->link }}" class="@if(isset($curr_menu) && $curr_menu==$navigate->link) curr @else nav_a @endif" title="{{ $navigate->title }}">{{ $navigate->name }}</a>
                 @endforeach
-                {{--@foreach($menus as $kmenu=>$menu)--}}
-                {{--<a href="/{{$kmenu}}" class="@if(isset($curr_menu) && $curr_menu==$kmenu) curr @else nav_a @endif">{{ $menu }}</a>--}}
-                {{--@endforeach--}}
             </div>
         </div>
         <div class="search">
@@ -24,7 +21,6 @@
             <input type="submit" class="search_text" value="搜 索">
         </div>
         <div class="keyword_pos">搜索关键词：</div>
-            {{--{{explode('/',$_SERVER['REQUEST_URI'])[1]}}--}}
         <span class="nav_right">
             <a href="/{{ Session::has('user.username') ? 'member' : 'login' }}">
                 <img src="/assets/images/key.png" class="imgMiniSize">
@@ -33,25 +29,17 @@
                 {{--<a href="">资料</a><br>--}}
                 {{--<a href="">退出</a>--}}
             {{--</div>--}}
-            {{--<a href="/login"><img src="/assets/images/key.png" class="imgMiniSize">登陆/注册</a>&nbsp;--}}
-            {{--<a href="/"><img src="/assets/images/msg.png" class="imgMiniSize">消息</a>&nbsp;--}}
-            {{--<img src="/assets/images/record.png" class="imgMiniSize"><a href="/">记录</a>--}}
             &nbsp;&nbsp;<a href="/idea" style="color:red;">创意</a>
             &nbsp;&nbsp;<a href="/talk" style="color:red;">话题</a>
             &nbsp;&nbsp;<a href="/opinion" class="opinion" style="color:white;">用户意见</a>
         </span>
         <div class="navigate">
             <div class="navigate_a" style="display:{{explode('/',$_SERVER['REQUEST_URI'])[1]?'none':'block'}};">
-                @foreach($navigates as $navigate)
-                    @if($navigate->id<10)
+                @foreach($navigates as $kn=>$navigate)
+                    @if($kn<10)
                     <a href="{{ $navigate->link }}" class="@if(isset($curr_menu) && $curr_menu==$navigate->link) curr @else nav_a @endif" title="{{ $navigate->title }}">{{ $navigate->name }}</a>
                     @endif
                 @endforeach
-            {{--@foreach($menus as $kmenu=>$menu)--}}
-                {{--@if(in_array($kmenu,['home','product','creation','supply','demand','entertain','rent','design','about']))--}}
-                {{--<a href="/{{$kmenu}}" class="@if(isset($curr_menu) && $curr_menu==$kmenu) curr @else nav_a @endif">{{ $menu }}</a>--}}
-                {{--@endif--}}
-            {{--@endforeach--}}
             </div>
         </div>
     </div>

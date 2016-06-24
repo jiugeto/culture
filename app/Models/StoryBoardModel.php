@@ -10,7 +10,7 @@ class StoryBoardModel extends BaseModel
      */
     protected $table = 'bs_storyboards';
     protected $fillable = [
-        'id','name','genre','cate_id','intro','uid','money','sort','isshow','sort2','isshow2','del','created_at','updated_at',
+        'id','name','genre','cate_id','intro','uid','money','isnew','ishot','sort','isshow','sort2','isshow2','del','created_at','updated_at',
     ];
 
     public function cates()
@@ -30,5 +30,28 @@ class StoryBoardModel extends BaseModel
         $uid = $this->uid ? $this->uid : '0';
         $userModel = UserModel::find($uid);
         return $userModel ? $userModel->username : '无';
+    }
+
+    public function company()
+    {
+        $uid = $this->uid ? $this->uid : '0';
+        $companyModel = CompanyModel::where('uid',$uid)->first();
+        return $companyModel ? $companyModel : '';
+    }
+
+    public function getComName()
+    {
+        return $this->company() ? $this->limits($this->company()->name,5) : '';
+    }
+
+    public function limits($name,$length)
+    {
+        return mb_strlen($name)>$length ? mb_substr($name,0,$length,'utf-8') : $name;
+    }
+
+    public function img()
+    {
+        $picModel = PicModel::find($this->img);
+        return $picModel ? $picModel->url : '';
     }
 }
