@@ -7,7 +7,7 @@
 //    return 'home';
 //});
 
-Route::group(['prefix'=>'','namespace'=>'Home'],function(){
+Route::group(['prefix'=>'/','namespace'=>'Home'],function(){
     //前台首页路由
     Route::any('/','HomeController@index');
     Route::any('home','HomeController@index');
@@ -18,7 +18,9 @@ Route::group(['prefix'=>'','namespace'=>'Home'],function(){
     Route::any('creation','CreationController@index');
     //创意脚本
     //分镜画面
-    Route::get('storyboard/like/{id}','StoryBoardController@like');
+    Route::get('storyboard/like/{way}/{id}','StoryBoardController@like');
+    Route::get('{way}/storyboard','StoryBoardController@index');
+    Route::get('storyboard/{id}','StoryBoardController@show');
     Route::any('storyboard','StoryBoardController@index');
     //供应单位
     Route::any('supply','SupplyController@index');

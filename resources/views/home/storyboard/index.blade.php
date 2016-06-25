@@ -4,9 +4,10 @@
 
     {{--分镜来一个瀑布流--}}
     <link rel="stylesheet" type="text/css" href="/assets-home/css/waterfall.css">
-    <div class="pbl_title">全部分镜：
-        <a href="">最新</a>
-        <a href="">热门</a>
+    <div class="pbl_title">
+        <a href="/storyboard" class="{{ $way=='' ? 'star' : '' }}">全部分镜</a>：
+        <a href="/1/storyboard" class="{{ $way=='isnew' ? 'star' : '' }}">最新</a>
+        <a href="/2/storyboard" class="{{ $way=='ishot' ? 'star' : '' }}">热门</a>
         <span class="right">分镜：{{ count($datas) }}</span>
     </div>
     <div class="pbl_out">
@@ -34,8 +35,8 @@
                 </div>
                 @if($data->company())<a href="">{{ $data->getComName() }}</a>@endif
                 <span class="right">
-                    <a class="click" onclick="like({{$data->id}})">喜欢：0</a>&nbsp;&nbsp;
-                    {{--<a class="click" onclick="reply({{$data->id}})">回复：0</a>--}}
+                    <a class="click" onclick="like({{$data->id}})" title="点击喜欢或者不喜欢">喜欢：{{ $data->getLike() }}</a>&nbsp;&nbsp;
+                    <a class="click" id="apply">申请分镜</a>
                 </span>
             @endforeach
             @else
@@ -63,10 +64,7 @@
         });
 
         function like(id){
-            window.location.href = "/storyboard/like/"+id;
-        }
-        function reply(id){
-            window.location.href = "/storyboard/reply/"+id;
+            window.location.href = "/storyboard/like/1/"+id;
         }
     </script>
 @stop

@@ -3,7 +3,7 @@
 
 /*===== 供应单位面包屑 =====*/
 .s_crumb {
-    padding:5px;
+    padding:5px 0;
     width:100%;
     background:rgb(250,250,250);
     border-bottom:1px solid lightgrey;

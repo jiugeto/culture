@@ -10,7 +10,7 @@ class StoryBoardModel extends BaseModel
      */
     protected $table = 'bs_storyboards';
     protected $fillable = [
-        'id','name','genre','cate_id','intro','uid','money','isnew','ishot','sort','isshow','sort2','isshow2','del','created_at','updated_at',
+        'id','name','genre','cate_id','img','intro','uid','money','isnew','ishot','sort','isshow','sort2','isshow2','del','created_at','updated_at',
     ];
 
     public function cates()
@@ -53,5 +53,11 @@ class StoryBoardModel extends BaseModel
     {
         $picModel = PicModel::find($this->img);
         return $picModel ? $picModel->url : '';
+    }
+
+    public function getLike()
+    {
+        $likeModels = StoryBoardLikeModel::where('sbid',$this->id)->get();
+        return $likeModels ? count($likeModels) : 0;
     }
 }

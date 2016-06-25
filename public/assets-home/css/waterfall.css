@@ -44,3 +44,14 @@ span.right { color:grey;font-size:13px;float:right; }
 .pbl_in a:hover { text-decoration:underline; }
 .pbl_in a.click { color:grey;text-decoration:none; }
 .pbl_in a.click:hover { color:red;text-decoration:none; }
+
+/*=== 红色 ===*/
+a.star { color:red; }
+
+/*=== 详情页面 ===*/
+.pbl_show_title { color:black;background:white; }
+.pbl_show_user { margin:0 10px;padding:5px 10px;font-size:14px;border-bottom:1px dashed lightgrey; }
+.pbl_show_con { margin:10px;width:990px;overflow:hidden; }
+.pbl_intro { margin:10px;padding:10px;width:970px;height:200px;border:1px solid lightgrey;overflow:auto; }
+.pbl_show_btn,.pbl_show_btn a { padding:10px;text-align:center; }
+.pbl_show_btn a { padding:5px 20px;border-radius:3px;background:rgba(240,240,240,1);cursor:pointer; }
