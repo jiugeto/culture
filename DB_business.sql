@@ -1408,7 +1408,8 @@ CREATE TABLE `bs_storyboards` (
   `name` varchar(255) NOT NULL COMMENT '名称',
   `genre` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '供求类型：1供应，2需求',
   `cate_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分类，关联分类表category',
-  `img` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分镜示意图，关联bs_pics',
+  `thumb` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分镜缩略图，关联 bs_pics',
+  `imgs` varchar(255) NOT NULL COMMENT '分镜单图id集合，关联bs_pics',
   `intro` varchar(2000) NOT NULL COMMENT '内容',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布的用户id',
   `money` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '价格，单位元',
@@ -1431,7 +1432,7 @@ CREATE TABLE `bs_storyboards` (
 
 LOCK TABLES `bs_storyboards` WRITE;
 /*!40000 ALTER TABLE `bs_storyboards` DISABLE KEYS */;
-INSERT INTO `bs_storyboards` VALUES (1,'ergth',1,4,1,'<p><img src=\"/uploads/ueditor/php/upload/image/20160523/1463995780428079.png\" title=\"1463995780428079.png\" alt=\"QQ截图20150906082002.png\"/>ergtghefrgtfgefrdfgh</p>',1,3456,0,0,10,10,1,1,0,'2016-05-23 09:32:55','2016-05-23 09:45:53');
+INSERT INTO `bs_storyboards` VALUES (1,'ergth',1,4,1,'','<p><img src=\"/uploads/ueditor/php/upload/image/20160523/1463995780428079.png\" title=\"1463995780428079.png\" alt=\"QQ截图20150906082002.png\"/>ergtghefrgtfgefrdfgh</p>',1,3456,0,0,10,10,1,1,0,'2016-05-23 09:32:55','2016-05-23 09:45:53');
 /*!40000 ALTER TABLE `bs_storyboards` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1459,6 +1460,35 @@ LOCK TABLES `bs_storyboards_like` WRITE;
 /*!40000 ALTER TABLE `bs_storyboards_like` DISABLE KEYS */;
 INSERT INTO `bs_storyboards_like` VALUES (1,0,1,'2016-05-23 09:32:55');
 /*!40000 ALTER TABLE `bs_storyboards_like` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bs_storyboards_show`
+--
+
+DROP TABLE IF EXISTS `bs_storyboards_show`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bs_storyboards_show` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `sbid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分镜id',
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '允许查看的用户id',
+  `isauth` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否同意查看：0申请查看，1同意查看，2拒绝查看',
+  `remark` varchar(255) NOT NULL COMMENT '拒绝理由',
+  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='分镜查看权限表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bs_storyboards_show`
+--
+
+LOCK TABLES `bs_storyboards_show` WRITE;
+/*!40000 ALTER TABLE `bs_storyboards_show` DISABLE KEYS */;
+INSERT INTO `bs_storyboards_show` VALUES (1,3,1,0,'','2016-06-16 12:22:40','0000-00-00 00:00:00');
+/*!40000 ALTER TABLE `bs_storyboards_show` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -2131,4 +2161,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-06-25 15:17:27
+-- Dump completed on 2016-06-25 17:56:34

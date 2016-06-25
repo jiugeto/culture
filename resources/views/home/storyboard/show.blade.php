@@ -8,26 +8,35 @@
     <div class="pbl_out">
         <div class="pbl_show_user">{{ $data->user() }} 发布于 {{ $data->created_at }}</div>
         <div class="pbl_show_con">
-            <img src="{{ $data->img() }}">
+            <img src="{{ $data->thumb() }}">
         </div>
         <div style="height:20px;border-bottom:5px solid rgba(240,240,240,1);">{{--空白--}}</div>
         <div class="pbl_show_user">分镜简介</div>
         <div class="pbl_intro">{!! $data->intro !!}</div>
-        <div class="pbl_show_btn">
-            <a onclick="like({{$data->id}})" title="点击喜欢或者不喜欢">
-                喜欢 <span class="star">{{ $data->getLike() }}</span>
-            </a>
-        </div>
     </div>
-    <div style="height:200px;">{{--空白--}}</div>
-    <input type="hidden" name="img" value="{{ $data->img() }}">
+    <div class="pbl_out2">
+        <div class="pbl_show_user">分镜详图</div>
+        @if(count($data->imgs()))
+            <div style="height:20px;border-bottom:5px solid rgba(240,240,240,1);">{{--空白--}}</div>
+            <div class="pbl_show_con">
+                @foreach($data->imgs() as $img)<img src="{{ $img->url }}">@endforeach
+            </div>
+        @else <p style="text-align:center;">没有详图</p>
+        @endif
+    </div>
+    <div class="pbl_show_btn">
+        <a onclick="like({{$data->id}})" title="点击喜欢或者不喜欢">
+            喜欢 <span class="star">{{ $data->getLike() }}</span>
+        </a>
+        <a onclick="like({{$data->id}})" title="点击申请">申请分镜</a>
+    </div>
+    <div style="height:50px;">{{--空白--}}</div>
+    <input type="hidden" name="thumb" value="{{ $data->thumb() }}">
 
     <script>
         $(document).ready(function(){
-            var filePath = $("input[name='img']");
-            var image = new Image();
-            image.src = filePath.val();
-//            alert(image.height);
+            var filePath = $("input[name='thumb']").val();
+            var image = new Image(); image.src = filePath;
             $(".pbl_out").css('height',image.height+400+'px');
         });
 

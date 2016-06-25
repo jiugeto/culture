@@ -27,7 +27,7 @@
             @foreach($datas as $data)
                 <div class="img">
                     <a href="/storyboard/{{ $data->id }}" title="点击进入查看{{ $data->name }}">
-                        <img src="{{ $data->img() }}">
+                        <img src="{{ $data->thumb() }}">
                     </a></div>
                 <div class="title">
                     <a href="/storyboard/{{ $data->id }}" title="点击进入查看{{ $data->name }}">
@@ -36,7 +36,7 @@
                 @if($data->company())<a href="">{{ $data->getComName() }}</a>@endif
                 <span class="right">
                     <a class="click" onclick="like({{$data->id}})" title="点击喜欢或者不喜欢">喜欢：{{ $data->getLike() }}</a>&nbsp;&nbsp;
-                    <a class="click" id="apply">申请分镜</a>
+                    {{--<a class="click" id="apply">申请分镜</a>--}}
                 </span>
             @endforeach
             @else

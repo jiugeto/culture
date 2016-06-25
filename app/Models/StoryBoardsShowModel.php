@@ -1,15 +1,15 @@
 <?php
 namespace App\Models;
 
-class IdeasShowModel extends BaseModel
+class StoryBoardsShowModel extends BaseModel
 {
     /**
      * 这是创意查看权限表 model
      */
 
-    protected $table = 'bs_ideas_show';
+    protected $table = 'bs_storyboards_show';
     protected $fillable = [
-        'id','ideaid','uid','isauth','remark','created_at','updated_at',
+        'id','sbid','uid','isauth','remark','created_at','updated_at',
     ];
 
     public function user()
