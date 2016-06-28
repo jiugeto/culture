@@ -12,16 +12,15 @@
         </div>
         <div style="height:20px;border-bottom:5px solid rgba(240,240,240,1);">{{--空白--}}</div>
         <div class="pbl_show_user">分镜简介</div>
-        <div class="pbl_intro">{!! $data->intro !!}</div>
+        @if($data->intro)
+        <div class="pbl_intro">{{ $data->intro }}</div>
+        @else <p style="text-align:center;">无</p> @endif
     </div>
     <div class="pbl_out2">
-        <div class="pbl_show_user">分镜详图</div>
-        @if(count($data->imgs()))
-            <div style="height:20px;border-bottom:5px solid rgba(240,240,240,1);">{{--空白--}}</div>
-            <div class="pbl_show_con">
-                @foreach($data->imgs() as $img)<img src="{{ $img->url }}">@endforeach
-            </div>
-        @else <p style="text-align:center;">没有详图</p>
+        <div class="pbl_show_user">分镜细节</div>
+        @if($data->detail && $data->getShow())
+            <div class="pbl_show_con">{!! $data->detail !!}</div>
+        @else <p style="text-align:center;">没有细节</p>
         @endif
     </div>
     <div class="pbl_show_btn">

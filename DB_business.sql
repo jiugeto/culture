@@ -151,7 +151,7 @@ CREATE TABLE `ba_userlog` (
   `logoutTime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '退出时间',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -160,7 +160,7 @@ CREATE TABLE `ba_userlog` (
 
 LOCK TABLES `ba_userlog` WRITE;
 /*!40000 ALTER TABLE `ba_userlog` DISABLE KEYS */;
-INSERT INTO `ba_userlog` VALUES (1,2,1,'jiuge','201606191531364011','2016-06-19 15:31:36','0000-00-00 00:00:00','2016-04-06 00:00:00'),(2,2,1,'jiuge','201606201607391788','2016-06-20 16:07:39','0000-00-00 00:00:00','2016-04-06 00:00:00'),(3,2,1,'jiuge','201606210911378157','2016-06-21 09:11:37','0000-00-00 00:00:00','2016-04-06 00:00:00'),(4,2,1,'jiuge','201606221430498649','2016-06-22 14:30:49','0000-00-00 00:00:00','2016-04-06 00:00:00'),(5,2,1,'jiuge','201606231228274592','2016-06-23 12:28:27','0000-00-00 00:00:00','2016-04-06 00:00:00'),(6,2,1,'jiuge','201606231501257212','2016-06-23 15:01:25','0000-00-00 00:00:00','2016-04-06 00:00:00'),(7,1,1,'jiuge','201606240913314181','2016-06-24 09:13:31','0000-00-00 00:00:00','2016-04-05 00:00:00'),(8,2,1,'jiuge','201606251154221419','2016-06-25 11:54:22','0000-00-00 00:00:00','2016-04-06 00:00:00');
+INSERT INTO `ba_userlog` VALUES (1,2,1,'jiuge','201606191531364011','2016-06-19 15:31:36','0000-00-00 00:00:00','2016-04-06 00:00:00'),(2,2,1,'jiuge','201606201607391788','2016-06-20 16:07:39','0000-00-00 00:00:00','2016-04-06 00:00:00'),(3,2,1,'jiuge','201606210911378157','2016-06-21 09:11:37','0000-00-00 00:00:00','2016-04-06 00:00:00'),(4,2,1,'jiuge','201606221430498649','2016-06-22 14:30:49','0000-00-00 00:00:00','2016-04-06 00:00:00'),(5,2,1,'jiuge','201606231228274592','2016-06-23 12:28:27','0000-00-00 00:00:00','2016-04-06 00:00:00'),(6,2,1,'jiuge','201606231501257212','2016-06-23 15:01:25','0000-00-00 00:00:00','2016-04-06 00:00:00'),(7,1,1,'jiuge','201606240913314181','2016-06-24 09:13:31','0000-00-00 00:00:00','2016-04-05 00:00:00'),(8,2,1,'jiuge','201606251154221419','2016-06-25 11:54:22','0000-00-00 00:00:00','2016-04-06 00:00:00'),(9,2,1,'jiuge','201606271125287366','2016-06-27 11:25:28','0000-00-00 00:00:00','2016-04-06 00:00:00'),(10,1,1,'jiuge','201606271125571958','2016-06-27 11:25:57','0000-00-00 00:00:00','2016-04-05 00:00:00');
 /*!40000 ALTER TABLE `ba_userlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1408,9 +1408,9 @@ CREATE TABLE `bs_storyboards` (
   `name` varchar(255) NOT NULL COMMENT '名称',
   `genre` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '供求类型：1供应，2需求',
   `cate_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分类，关联分类表category',
-  `thumb` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分镜缩略图，关联 bs_pics',
-  `imgs` varchar(255) NOT NULL COMMENT '分镜单图id集合，关联bs_pics',
-  `intro` varchar(2000) NOT NULL COMMENT '内容',
+  `thumb` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分镜缩略图，关联 bs_storyboards_pic',
+  `intro` varchar(255) NOT NULL COMMENT '简单介绍',
+  `detail` varchar(2000) NOT NULL COMMENT '分镜细节',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布的用户id',
   `money` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '价格，单位元',
   `isnew` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '是否是最新的：0不是最新，1最新',
@@ -1473,7 +1473,7 @@ CREATE TABLE `bs_storyboards_show` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `sbid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分镜id',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '允许查看的用户id',
-  `isauth` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否同意查看：0申请查看，1同意查看，2拒绝查看',
+  `isauth` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否同意查看：0申请查看，1拒绝查看，2同意查看',
   `remark` varchar(255) NOT NULL COMMENT '拒绝理由',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   `updated_at` datetime NOT NULL,
@@ -2161,4 +2161,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-06-25 17:56:34
+-- Dump completed on 2016-06-28 12:04:12
