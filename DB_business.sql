@@ -151,7 +151,7 @@ CREATE TABLE `ba_userlog` (
   `logoutTime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '退出时间',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -160,7 +160,7 @@ CREATE TABLE `ba_userlog` (
 
 LOCK TABLES `ba_userlog` WRITE;
 /*!40000 ALTER TABLE `ba_userlog` DISABLE KEYS */;
-INSERT INTO `ba_userlog` VALUES (1,2,1,'jiuge','201606191531364011','2016-06-19 15:31:36','0000-00-00 00:00:00','2016-04-06 00:00:00'),(2,2,1,'jiuge','201606201607391788','2016-06-20 16:07:39','0000-00-00 00:00:00','2016-04-06 00:00:00'),(3,2,1,'jiuge','201606210911378157','2016-06-21 09:11:37','0000-00-00 00:00:00','2016-04-06 00:00:00'),(4,2,1,'jiuge','201606221430498649','2016-06-22 14:30:49','0000-00-00 00:00:00','2016-04-06 00:00:00'),(5,2,1,'jiuge','201606231228274592','2016-06-23 12:28:27','0000-00-00 00:00:00','2016-04-06 00:00:00'),(6,2,1,'jiuge','201606231501257212','2016-06-23 15:01:25','0000-00-00 00:00:00','2016-04-06 00:00:00'),(7,1,1,'jiuge','201606240913314181','2016-06-24 09:13:31','0000-00-00 00:00:00','2016-04-05 00:00:00'),(8,2,1,'jiuge','201606251154221419','2016-06-25 11:54:22','0000-00-00 00:00:00','2016-04-06 00:00:00'),(9,2,1,'jiuge','201606271125287366','2016-06-27 11:25:28','0000-00-00 00:00:00','2016-04-06 00:00:00'),(10,1,1,'jiuge','201606271125571958','2016-06-27 11:25:57','0000-00-00 00:00:00','2016-04-05 00:00:00');
+INSERT INTO `ba_userlog` VALUES (1,2,1,'jiuge','201606191531364011','2016-06-19 15:31:36','0000-00-00 00:00:00','2016-04-06 00:00:00'),(2,2,1,'jiuge','201606201607391788','2016-06-20 16:07:39','0000-00-00 00:00:00','2016-04-06 00:00:00'),(3,2,1,'jiuge','201606210911378157','2016-06-21 09:11:37','0000-00-00 00:00:00','2016-04-06 00:00:00'),(4,2,1,'jiuge','201606221430498649','2016-06-22 14:30:49','0000-00-00 00:00:00','2016-04-06 00:00:00'),(5,2,1,'jiuge','201606231228274592','2016-06-23 12:28:27','0000-00-00 00:00:00','2016-04-06 00:00:00'),(6,2,1,'jiuge','201606231501257212','2016-06-23 15:01:25','0000-00-00 00:00:00','2016-04-06 00:00:00'),(7,1,1,'jiuge','201606240913314181','2016-06-24 09:13:31','0000-00-00 00:00:00','2016-04-05 00:00:00'),(8,2,1,'jiuge','201606251154221419','2016-06-25 11:54:22','0000-00-00 00:00:00','2016-04-06 00:00:00'),(9,2,1,'jiuge','201606271125287366','2016-06-27 11:25:28','0000-00-00 00:00:00','2016-04-06 00:00:00'),(10,1,1,'jiuge','201606271125571958','2016-06-27 11:25:57','0000-00-00 00:00:00','2016-04-05 00:00:00'),(11,2,2,'jiuge2','20160703124328530','2016-07-03 12:43:28','0000-00-00 00:00:00','2016-06-17 00:00:00');
 /*!40000 ALTER TABLE `ba_userlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -791,7 +791,7 @@ CREATE TABLE `bs_ideas_read` (
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '登录用户id',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8 COMMENT='创意阅读表';
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='创意阅读表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -800,37 +800,8 @@ CREATE TABLE `bs_ideas_read` (
 
 LOCK TABLES `bs_ideas_read` WRITE;
 /*!40000 ALTER TABLE `bs_ideas_read` DISABLE KEYS */;
-INSERT INTO `bs_ideas_read` VALUES (1,0,2,'2016-06-17 09:02:31'),(2,0,2,'2016-06-17 09:02:39'),(3,0,2,'2016-06-17 09:09:34'),(4,0,2,'2016-06-17 09:10:23'),(5,0,2,'2016-06-17 09:11:01'),(6,0,2,'2016-06-17 09:11:42'),(7,0,2,'2016-06-17 09:12:02'),(8,0,2,'2016-06-17 09:12:25'),(9,0,2,'2016-06-17 09:12:41'),(10,0,2,'2016-06-17 09:13:36'),(11,0,2,'2016-06-17 09:14:54'),(12,0,2,'2016-06-17 09:15:41'),(13,0,2,'2016-06-17 09:16:47'),(14,0,2,'2016-06-17 09:50:11'),(15,0,2,'2016-06-17 09:51:03'),(16,0,2,'2016-06-17 09:51:16'),(17,0,2,'2016-06-17 09:51:23'),(18,0,2,'2016-06-17 09:51:39'),(19,0,2,'2016-06-17 09:51:55'),(20,0,2,'2016-06-17 09:52:04'),(21,0,2,'2016-06-17 09:52:56'),(22,0,2,'2016-06-17 10:04:12'),(23,0,2,'2016-06-17 10:06:52'),(24,0,2,'2016-06-17 10:18:11'),(25,0,2,'2016-06-17 10:30:45'),(26,0,2,'2016-06-17 10:31:53'),(27,0,2,'2016-06-17 10:32:58'),(28,0,2,'2016-06-17 10:33:05'),(29,0,2,'2016-06-17 10:33:19'),(30,0,2,'2016-06-17 10:34:21'),(31,0,2,'2016-06-17 10:34:29'),(32,0,2,'2016-06-17 10:35:14'),(33,0,2,'2016-06-17 10:36:27'),(34,0,2,'2016-06-17 10:37:10'),(35,0,2,'2016-06-17 10:38:21'),(36,0,2,'2016-06-17 10:38:42'),(37,0,2,'2016-06-17 11:43:04'),(38,0,2,'2016-06-17 11:43:06'),(39,0,2,'2016-06-17 11:43:08'),(40,0,2,'2016-06-17 11:43:20'),(41,0,2,'2016-06-17 11:45:33'),(42,0,2,'2016-06-17 11:45:59'),(43,0,2,'2016-06-17 12:56:36'),(44,0,2,'2016-06-17 12:56:55'),(45,0,2,'2016-06-17 12:57:11'),(46,0,2,'2016-06-17 13:01:46'),(47,0,2,'2016-06-17 13:02:32');
+INSERT INTO `bs_ideas_read` VALUES (1,0,2,'2016-07-03 12:52:10'),(2,0,2,'2016-07-03 13:09:40'),(3,0,2,'2016-07-03 13:09:44'),(4,0,2,'2016-07-03 13:17:43'),(5,0,2,'2016-07-03 13:19:33'),(6,0,2,'2016-07-03 13:19:34'),(7,0,2,'2016-07-03 13:20:08'),(8,0,2,'2016-07-03 13:20:55'),(9,0,2,'2016-07-03 13:26:45'),(10,0,2,'2016-07-03 13:27:09'),(11,0,2,'2016-07-03 13:27:26'),(12,0,2,'2016-07-03 13:27:58'),(13,0,2,'2016-07-03 13:28:48');
 /*!40000 ALTER TABLE `bs_ideas_read` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `bs_ideas_show`
---
-
-DROP TABLE IF EXISTS `bs_ideas_show`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `bs_ideas_show` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `ideaid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创意id',
-  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '允许查看的用户id',
-  `isauth` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否同意查看：0申请查看，1同意查看，2拒绝查看',
-  `remark` varchar(255) NOT NULL COMMENT '拒绝理由',
-  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
-  `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='创意查看权限表';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `bs_ideas_show`
---
-
-LOCK TABLES `bs_ideas_show` WRITE;
-/*!40000 ALTER TABLE `bs_ideas_show` DISABLE KEYS */;
-INSERT INTO `bs_ideas_show` VALUES (1,3,1,0,'','2016-06-16 12:22:40','0000-00-00 00:00:00');
-/*!40000 ALTER TABLE `bs_ideas_show` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1013,7 +984,7 @@ DROP TABLE IF EXISTS `bs_orders`;
 CREATE TABLE `bs_orders` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL COMMENT '订单名称',
-  `serial` int(20) unsigned NOT NULL DEFAULT '0' COMMENT '订单编号',
+  `serial` varchar(50) NOT NULL DEFAULT '0' COMMENT '订单编号',
   `genre` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '订单来源：1创意供应，2创意需求，3分镜供应，4分镜需求，5视频供应，6视频需求，7娱乐供应，8娱乐需求，9演员供应，10演员需求，1租赁供应，12租赁需求',
   `fromid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '订单来源表中的id',
   `seller` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '卖家id ',
@@ -1027,16 +998,18 @@ CREATE TABLE `bs_orders` (
   `realMoney3` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分期付款3，单位元',
   `realMoney4` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分期付款尾款，单位元',
   `status` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '订单状态：1提交创意，2确定创意，3创意免费，4创意收费，5创意完成，6提交分镜，7确定分镜，8分镜免费，9分镜收费，10确定项目，11进行协商，12开始制作，13分期收费，14效果协商，15二期收费，16确定成片，17三期收费，18出片交付保证播放，19尾款结清，20交易成功，21交易失败，（修改另外收费）     \r\n\r\n(========================)\r\n创意订单状态：1新的创意，2确定创意，3创意免费，4创意收费，5办理订单，6确认收到，11订单成功，12订单失败。\r\n分镜订单状态：1新的分镜，2确定分镜，3分镜免费，4分镜收费，5办理订单，6确认收到，11订单成功，12订单失败。\r\n视频制作订单状态：1新的样片，2确认制作，3分期收费，4效果协商，5二期收费，6确定成片，7三期收费，8出片交付，9尾款结清，10确认完成，11订单成功，12订单失败。',
+  `remarks` varchar(255) NOT NULL COMMENT '拒绝理由',
   `isshow` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '前台列表是否显示：0不显示，1显示，默认1',
   `del` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '回收站：0不删除，1删除',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
-  `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '确定时间',
+  `moneyTime` datetime NOT NULL COMMENT '创意、分镜等付款时间',
   `realTime1` datetime NOT NULL COMMENT '分期付款时间1',
   `realTime2` datetime NOT NULL COMMENT '分期付款时间2',
   `realTime3` datetime NOT NULL COMMENT '分期付款时间3',
   `realTime4` datetime NOT NULL COMMENT '分期付款时间4',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='订单表 bs_orders';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='订单表 bs_orders';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1045,7 +1018,7 @@ CREATE TABLE `bs_orders` (
 
 LOCK TABLES `bs_orders` WRITE;
 /*!40000 ALTER TABLE `bs_orders` DISABLE KEYS */;
-INSERT INTO `bs_orders` VALUES (4,'创意123456',4294967295,1,3,1,'jiuge',2,'jiuge2',0,100,1000,5000,10000,10000,11,1,0,'2016-06-17 13:02:35','2016-06-22 16:20:29','2016-06-20 12:19:22','0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00');
+INSERT INTO `bs_orders` VALUES (2,'创意123456','201607031309426817',1,3,1,'jiuge',2,'jiuge2',0,0,0,0,0,0,2,'',1,0,'2016-07-03 13:09:42','2016-07-03 16:49:32','0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `bs_orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1460,35 +1433,6 @@ LOCK TABLES `bs_storyboards_like` WRITE;
 /*!40000 ALTER TABLE `bs_storyboards_like` DISABLE KEYS */;
 INSERT INTO `bs_storyboards_like` VALUES (1,0,1,'2016-05-23 09:32:55');
 /*!40000 ALTER TABLE `bs_storyboards_like` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `bs_storyboards_show`
---
-
-DROP TABLE IF EXISTS `bs_storyboards_show`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `bs_storyboards_show` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `sbid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分镜id',
-  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '允许查看的用户id',
-  `isauth` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否同意查看：0申请查看，1拒绝查看，2同意查看',
-  `remark` varchar(255) NOT NULL COMMENT '拒绝理由',
-  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
-  `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='分镜查看权限表';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `bs_storyboards_show`
---
-
-LOCK TABLES `bs_storyboards_show` WRITE;
-/*!40000 ALTER TABLE `bs_storyboards_show` DISABLE KEYS */;
-INSERT INTO `bs_storyboards_show` VALUES (1,3,1,0,'','2016-06-16 12:22:40','0000-00-00 00:00:00');
-/*!40000 ALTER TABLE `bs_storyboards_show` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -2161,4 +2105,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-06-28 12:04:12
+-- Dump completed on 2016-07-03 17:01:18

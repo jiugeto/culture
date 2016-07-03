@@ -6,7 +6,7 @@ use App\Models\IdeasClickModel;
 use App\Models\IdeasCollectModel;
 use App\Models\IdeasModel;
 use App\Models\IdeasReadModel;
-use App\Models\IdeasShowModel;
+use App\Models\OrderModel;
 use App\Tools;
 use Illuminate\Http\Request;
 
@@ -35,32 +35,26 @@ class IdeaController extends BaseController
         return view('home.idea.index', $result);
     }
 
+    /**
+     * 浏览权限控制
+     */
     public function show($id)
     {
-        $this->read($id);
-        $data = IdeasModel::find($id);
-        //内容查看权限开关
-        $data->iscon = 0;
-        $ideaShowModels = IdeasShowModel::where(['ideaid'=>$id,'uid'=>$this->userid])->get();
-        if (count($ideaShowModels)) { $data->iscon = 1; }
-        return view('home.idea.show',compact('data'));
-    }
-
-    /**
-     * 
-     */
-
-    /**
-     * 浏览控制
-     */
-    public function read($id)
-    {
         $this->islogin();
-        $ideaModel = IdeasModel::find($id);
-        if ($ideaModel->uid!=$this->userid) {
+        $data = IdeasModel::find($id);
+        if ($data->uid!=$this->userid) {
             $create = ['ideaid'=>$id,'uid'=>$this->userid,'created_at'=>date('Y-m-d H:i:s',time())];
             IdeasReadModel::create($create);
         }
+        //内容查看权限开关
+        $data->iscon = 0;
+        $orderModels = OrderModel::whereIn('genre',[1,2])
+            ->where('fromid',$id)
+            ->where('seller',$data->uid)
+            ->where('buyer',\Session::get('user.uid'))
+            ->get();
+        if (count($orderModels)) { $data->iscon = 1; }
+        return view('home.idea.show',compact('data'));
     }
 
     /**

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Member;
 use App\Models\CompanyModel;
 use App\Models\OrderModel;
 use App\Models\UserModel;
+use Illuminate\Support\Facades\Request as AjaxRequest;
+use Illuminate\Support\Facades\Input;
 
 class OrderController extends BaseController
 {
@@ -41,10 +43,15 @@ class OrderController extends BaseController
      */
     public function create()
     {
-        if (\Illuminate\Support\Facades\Request::ajax()) {
-            $data = \Illuminate\Support\Facades\Input::all();
+        if (AjaxRequest::ajax()) {
+            $data = Input::all();
 
             //假如已有类似订单
+            $order = OrderModel::where(['genre'=>$data['genre'], 'fromid'=>$data['id']])->first();
+            if (count($order)) {
+                echo json_encode(array('code'=>'-2', 'message' =>'你已经申请此订单，不能重复申请！'));exit;
+            }
+
             //1创意供应，2创意需求，3分镜供应，4分镜需求，5视频供应，6视频需求，7娱乐供应，8娱乐需求，9演员供应，10演员需求，1租赁供应，12租赁需求
             if (in_array($data['genre'],[1,2])) {
                 $ideaModel = \App\Models\IdeasModel::find($data['id']);
@@ -114,6 +121,29 @@ class OrderController extends BaseController
             $userModel->company = '';
         }
         return $userModel ? $userModel : '';
+    }
+
+    /**
+     * 确认订单
+     */
+    public function tosure()
+    {
+        if (AjaxRequest::ajax()) {
+            $data = Input::all();
+            $updated_at = date('Y-m-d H:i:s',time());
+            if ($data['tosure']) {
+                OrderModel::where(['id'=>$data['id'],'status'=>1])->update(['status'=>2,'updated_at'=>$updated_at]);
+            } else {
+                if (!$data['remarks']) {
+                    echo json_encode(array('code'=>-2,'message'=>'拒绝理由必填！'));exit;
+                }
+                $update = array('status'=>3,'remarks'=>$data['remarks'],'updated_at'=>$updated_at);
+                OrderModel::where(['id'=>$data['id'],'status'=>1])->update($update);
+            }
+//            return redirect('/member/order/'.$data['id']);
+            echo json_encode(array('code'=>0,'message'=>'操作成功！'));exit;
+        }
+        echo json_encode(array('code'=>-1,'message'=>'参数有误！'));exit;
     }
 
     /**

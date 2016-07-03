@@ -224,23 +224,29 @@
     <table class="table_create table_show" cellspacing="0" cellpadding="0">
         <tr><td class="center" colspan="2" style="border:0;cursor:pointer;">
                 <button class="companybtn" onclick="history.go(-1)">返 &nbsp;回</button>
+                @if($data->status==1)
+                    <a id="sure" title="{{ $data->statusbtn() }}"><button class="companybtn">确认订单</button></a>
+                    <a id="refuse" title="{{ $data->statusbtn() }}"><button class="companybtn">拒绝订单</button></a>
+                @endif
                 @if(in_array($data->genre,[1,2,3,4]))
-                    @if($data->status<=6)
-                <a id="tostatus" title="{{ $data->statusbtn() }}">
-                    <button class="companybtn">
-                        @if($data->status==2)提交价格
-                        @elseif(in_array($data->status,[3,4]))办理订单
-                        @elseif($data->status==5)确认收到
-                        @elseif($data->status==6)订单成功
-                        @endif
-                    </button></a>
+                    @if(in_array($data->status,[2,4,5,6,7]))
+                    <a id="tostatus" title="{{ $data->statusbtn() }}">
+                        <button class="companybtn">
+                            @if($data->status==2)提交价格
+                            @elseif(in_array($data->status,[4,5]))办理订单
+                            @elseif($data->status==6)确认收到
+                            @elseif($data->status==7)订单成功
+                            @endif
+                        </button></a>
                     @endif
                 @endif
-                @if($data->status<=6)
-                <a id="false" title="{{ $data->statusbtn() }}失败">
-                    <button class="companybtn">订单失败</button></a>
-                @elseif($data->status==11)
-                <a id="next"><button class="companybtn">继续流程</button></a>
+                @if(in_array($data->status,[3,12,13]))
+                    <a id="false" title="{{ $data->statusbtn() }}失败">
+                        <button class="companybtn">订单失败</button></a>
+                @elseif($data->status==12)
+                    <a id="success" title="{{ $data->statusbtn() }}失败">
+                        <button class="companybtn">订单成功</button></a>
+                    <a id="next"><button class="companybtn">继续流程</button></a>
                 @endif
             </td></tr>
     </table>
@@ -252,10 +258,16 @@
     <input type="hidden" name="realMoney2" value="{{ $data->realMoney2 }}">
     <input type="hidden" name="realMoney3" value="{{ $data->realMoney3 }}">
     <input type="hidden" name="realMoney4" value="{{ $data->realMoney4 }}">
+    <input type="hidden" name="_token" value="{{csrf_token()}}">
     {{--弹出窗口--}}
     <div class="popup">
         <a href="" id="story">分镜流程</a>
         <a href="" id="video">视频流程</a>
+        <a class="close" onclick="$('.popup').hide();">X</a>
+    </div>
+    <div class="popup2">
+        <textarea name="remarks" cols="35" rows="5"></textarea>
+        <div id="torefuse">确定拒绝</div>
         <a class="close" onclick="$('.popup').hide();">X</a>
     </div>
 
@@ -264,7 +276,26 @@
             var id = $("input[name='id']").val();
             var genre = $("input[name='genre']").val();
             var status = $("input[name='status']").val();
+            var remarks = $("textarea[name='remarks']");
             //订单流程：创意、分镜、视频
+            $.ajaxSetup({headers : {'X-CSRF-TOKEN':$('input[name="_token"]').val()}});
+                //确认、拒绝订单
+            $("#sure").click(function(){ checkAjax(1); });
+            $("#refuse").click(function(){ $(".popup2").show(); });
+            $("#torefuse").click(function(){ checkAjax(0); });
+            function checkAjax(tosure){
+                $.ajax({
+                    type: 'POST',
+                    url: '/member/order/tosure',
+                    data: {'id':id,'tosure':tosure,'remarks':remarks.val()},
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.message<0) { alert(data.message); }
+                        else { window.location.href = "/member/order/"+id; }
+                    }
+                });
+            }
+                //走流程
             $("#tostatus").click(function(){
                 if (status==1 || status==3 || status==4 || status==5 || status==6) {
                     window.location.href = "/member/order/"+id+"/"+status;
@@ -282,11 +313,11 @@
                     window.location.href = "/member/order/"+id+"/"+genreUrl+"/"+money;
                 }
             });
-            //订单成功
+                //订单成功
             $("#true").click(function(){
-                window.location.href = "/member/order/"+id+"/"+11;
+                window.location.href = "/member/order/"+id+"/"+12;
             });
-            //订单失败
+                //订单失败
             $("#false").click(function(){
                 var money = $("input[name='money']").val();
                 var realMoney1 = $("input[name='realMoney1']").val();
@@ -296,14 +327,14 @@
                 if (money || realMoney1 || realMoney2 || realMoney3 || realMoney4) {
                     alert("对不起，已产生交易价格，不能取消订单！"); return;
                 }
-                window.location.href = "/member/order/"+id+"/"+12;
+                window.location.href = "/member/order/"+id+"/"+13;
             });
-            //订单下一步：弹窗
+                //订单下一步：弹窗
             $("#next").click(function(){
                 $(".popup").show(); $("#story").show(); $("#video").show();
 //                window.location.href = "/member/order/"+id+"/next/"+1;
             });
-            $(".close").click(function(){ $("popup").hide(); });
+            $(".close").click(function(){ $(".popup").hide(); $(".popup2").hide(); });
 
             //订单流程线
             $("#status1").mouseover(function(){ $("#statustext1").show(); }).mouseout(function(){ $("#statustext1").hide(); });
@@ -312,8 +343,9 @@
             $("#status4").mouseover(function(){ $("#statustext4").show(); }).mouseout(function(){ $("#statustext4").hide(); });
             $("#status5").mouseover(function(){ $("#statustext5").show(); }).mouseout(function(){ $("#statustext5").hide(); });
             $("#status6").mouseover(function(){ $("#statustext6").show(); }).mouseout(function(){ $("#statustext6").hide(); });
-            $("#status11").mouseover(function(){ $("#statustext11").show(); }).mouseout(function(){ $("#statustext11").hide(); });
+            $("#status7").mouseover(function(){ $("#statustext7").show(); }).mouseout(function(){ $("#statustext7").hide(); });
             $("#status12").mouseover(function(){ $("#statustext12").show(); }).mouseout(function(){ $("#statustext12").hide(); });
+            $("#status13").mouseover(function(){ $("#statustext13").show(); }).mouseout(function(){ $("#statustext13").hide(); });
         });
     </script>
 @stop

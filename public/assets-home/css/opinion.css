@@ -158,7 +158,7 @@
 }
 .idea_show .idea_left .idea_con p.title {
     padding-bottom:20px;
-    color:grey;
+    color:black;
     font-size:30px;
     font-weight:bold;
     border-bottom:1px solid lightgrey;
@@ -175,6 +175,12 @@
 }
 .idea_show .idea_right .userinfo p {
     margin:10px 0;
+}
+.idea_con #con {
+    padding:0 10px;
+    border:1px solid rgba(240,240,240,1);
+    border-radius:5px;
+    display:none;
 }
 
 /*=== 查看限制 ===*/

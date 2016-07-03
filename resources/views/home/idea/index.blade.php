@@ -49,7 +49,7 @@
                         <a id="noclick" style="display:{{ $data->click($userid) ? 'block' : 'none' }};">取消关注：{{ $data->click($userid) }}</a>
                         <a id="collect" style="display:{{ !$data->collect($userid) ? 'block' : 'none' }};">收藏：{{ $data->collect($userid) }}</a>
                         <a id="nocollect" style="display:{{ $data->collect($userid) ? 'block' : 'none' }};">取消收藏：{{ $data->collect($userid) }}</a>
-                        <span class="right">时间：{{ $data->created_at }}&nbsp;&nbsp;发布人：{{ $data->uid }}</span>
+                        <span class="right">时间：{{ $data->created_at }}&nbsp;&nbsp;发布人：{{ $data->getUserName() }}</span>
                     </td>
                 </tr>
             </table>

@@ -56,4 +56,10 @@ class IdeasModel extends BaseModel
         }
         return $userModel ? $userModel : '';
     }
+
+    public function getUserName()
+    {
+        $userModel = $this->user();
+        return $userModel ? $userModel->username : '';
+    }
 }

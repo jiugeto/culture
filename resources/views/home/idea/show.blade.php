@@ -10,7 +10,7 @@
                     <a id="lookclose" style="display:none;">收起</a>
                     <input type="hidden" name="iscon" value="{{ $data->iscon }}">
                     <input type="hidden" name="id" value="{{ $data->id }}">
-                    <div id="con" style="display:none;">@if($data->iscon){!! $data->content !!}@endif</div>
+                    <div id="con">@if($data->iscon){!! $data->content !!}@endif</div>
                 </p>
             </div>
         </span>
@@ -43,8 +43,11 @@
         $(document).ready(function(){
             var iscon = $("input[name='iscon']");
             $("#lookopen").click(function(){
-                if(iscon.val()==0){ $(".laymsg").show(); return; }
-                if(iscon.val()){ $(this).hide(); $("#lookclose").show(); $("#con").show(); }
+                if (iscon.val()==0) {
+                    $(".laymsg").show();return;
+                } else if (iscon.val()==1) {
+                    $(this).hide(); $("#lookclose").show(); $("#con").show();
+                }
             });
             $("#lookclose").click(function(){
                 if(iscon.val()){

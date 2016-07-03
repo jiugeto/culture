@@ -184,6 +184,7 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
     Route::get('order/{id}/{genre}/{money}','OrderController@setMoney');
     Route::get('order/{id}/{status}','OrderController@setStatus');
     Route::get('order/{id}/{real}/{money}','OrderController@setRealMoney');
+    Route::post('order/tosure','OrderController@tosure');
     Route::post('order/create','OrderController@create');
     Route::resource('order','OrderController');
         //售后（样片修改）路由
