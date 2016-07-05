@@ -124,7 +124,7 @@ class OrderController extends BaseController
     }
 
     /**
-     * 确认订单
+     * 确认、拒绝订单
      */
     public function tosure()
     {
@@ -147,15 +147,11 @@ class OrderController extends BaseController
     }
 
     /**
-     * 设置状态 1,3,4
+     * 设置创意、分镜状态：6办理,、7收到、12成功、13失败
      */
     public function setStatus($id,$status)
     {
-        if (in_array($status,[1,5])) { $s = $status+1; }
-        elseif (in_array($status,[3,4])) { $s = 5; }
-        elseif ($status==6) { $s = 11; }
-        elseif ($status==12) { $s = 12; }
-        OrderModel::where('id',$id)->update(['status'=> $s]);
+        OrderModel::where('id',$id)->update(['status'=> $status+1]);
         return redirect('/member/order/'.$id);
     }
 

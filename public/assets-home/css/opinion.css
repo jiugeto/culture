@@ -193,4 +193,4 @@ a:hover#lookopen,a:hover#lookclose { color:red; }
 .laymsg a.close:hover,.layback a.close:hover { color:red; }
 .laymsg p a,.layback p a { padding:5px 10px;color:white;text-decoration:none;background:red;cursor:pointer; }
 .laymsg p a:hover,.layback p a:hover { background:darkred; }
-.layback p#backcon { color:red; }
+.layback p#backcon,.laymsg p#msgcon { color:red; }

@@ -48,12 +48,18 @@ class IdeaController extends BaseController
         }
         //内容查看权限开关
         $data->iscon = 0;
-        $orderModels = OrderModel::whereIn('genre',[1,2])
+        $orderModel = OrderModel::whereIn('genre',[1,2])
             ->where('fromid',$id)
             ->where('seller',$data->uid)
             ->where('buyer',\Session::get('user.uid'))
-            ->get();
-        if (count($orderModels)) { $data->iscon = 1; }
+//            ->where('status',12)
+            ->first();
+        if ($orderModel) {
+            if ($orderModel->status < 12) { $data->iscon = 1; }
+            elseif ($orderModel->status == 13) { $data->iscon = 2; }
+            elseif ($orderModel->status == 12) { $data->iscon = 3; }
+            $data->remarks = $orderModel->remarks;;
+        }
         return view('home.idea.show',compact('data'));
     }
 

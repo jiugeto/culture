@@ -30,8 +30,11 @@
         <tr>
             <td class="field_name">创意交易价格：</td>
             <td class="statusbtn">
-                @if($data->status==2 && $data->seller==$userid)
+                @if($data->status==2)
+                    @if($data->seller==$userid)
                     <input type="text" placeholder="0代表免费" pattern="^\d+$" name="money"> 元
+                    @else <span class="star">双方实际定价中</span>
+                    @endif
                 @elseif($data->status>2 && $data->money)
                     {{ $data->money ? $data->money.'元' : '免费' }}
                 @endif
@@ -297,7 +300,8 @@
             }
                 //走流程
             $("#tostatus").click(function(){
-                if (status==1 || status==3 || status==4 || status==5 || status==6) {
+                if (genre==1 || genre==2) {}
+                if (status==6 || status==7) {
                     window.location.href = "/member/order/"+id+"/"+status;
                 } else if (status==2) {
                     var money = $("input[name='money']").val();
