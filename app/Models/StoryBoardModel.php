@@ -61,14 +61,26 @@ class StoryBoardModel extends BaseModel
         return $likeModels ? count($likeModels) : 0;
     }
 
-    public function getShow()
-    {
-        $shows = StoryBoardsShowModel::where('sbid',$this->id)->where('isauth',2)->get();
-        if (count($shows)) {
-            foreach ($shows as $show) {
-                $showIds[] = $show->uid;
-            }
-        }
-        return isset($showIds) ? $showIds : [];
-    }
+//    /**
+//     * 细节查看权限
+//     */
+//    public function getShow()
+//    {
+//        if ($this->genre==1) {
+//            //供应分镜
+//            $orderModel = OrderModel::where('buyer',$this->uid)
+//                ->where('status','>',11)
+//                ->where('isshow',1)
+//                ->where('del',0)
+//                ->first();
+//        } elseif ($this->genre==2) {
+//            //需求分镜
+//            $orderModel = OrderModel::where('seller',$this->uid)
+//                ->where('status','>',11)
+//                ->where('isshow',1)
+//                ->where('del',0)
+//                ->first();
+//        }
+//        return (isset($orderModel)&&$orderModel) ? 1 : 0;
+//    }
 }

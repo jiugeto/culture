@@ -154,8 +154,22 @@
     @endif
     </table>
 
-    <table class="table_create table_show" cellspacing="0" cellpadding="0">
-        <tr><td colspan="2"><b>{{ $data->buyer==$userid ? '供应方' : '需求方' }}联系方式</b>：</td></tr>
+    <style>
+        a#open,a#close { color:rgba(14,144,210,1);cursor:pointer; }
+        a:hover#open,a:hover#close { color:red; }
+    </style>
+    <p style="padding:0 20px;">
+        <b>{{ $data->buyer==$userid ? '供应方' : '需求方' }}联系方式</b>：
+        <a id="open" title="展开用户信息">[+]</a>
+        <a id="close" style="display:none;" title="收起用户信息">[-]</a>
+        <script>
+            $(document).ready(function(){
+                $("#open").click(function(){ $(this).toggle(); $("#close").toggle(); $("#userinfo").toggle(); });
+                $("#close").click(function(){ $(this).toggle(); $("#open").toggle(); $("#userinfo").toggle(); });
+            });
+        </script>
+    </p>
+    <table class="table_create table_show" cellspacing="0" cellpadding="0" id="userinfo" style="display:none;">
         <tr>
             <td class="field_name">供应方名称：</td>
             <td>{{ $userInfo->username }}</td>
@@ -243,12 +257,14 @@
                         </button></a>
                     @endif
                 @endif
-                @if(in_array($data->status,[3,12,13]))
+                @if(in_array($data->status,[3,11]))
                     <a id="false" title="{{ $data->statusbtn() }}失败">
                         <button class="companybtn">订单失败</button></a>
-                @elseif($data->status==12)
+                @elseif(in_array($data->status,[11]))
                     <a id="success" title="{{ $data->statusbtn() }}失败">
                         <button class="companybtn">订单成功</button></a>
+                @elseif(in_array($data->status,[12,13]))
+                    <a onclick=""><button class="companybtn">完成</button></a>
                     <a id="next"><button class="companybtn">继续流程</button></a>
                 @endif
             </td></tr>
@@ -264,8 +280,8 @@
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     {{--弹出窗口--}}
     <div class="popup">
-        <a href="" id="story">分镜流程</a>
-        <a href="" id="video">视频流程</a>
+        <a href="/storyboard" id="story">分镜流程</a>
+        <a href="/product" id="video">视频流程</a>
         <a class="close" onclick="$('.popup').hide();">X</a>
     </div>
     <div class="popup2">

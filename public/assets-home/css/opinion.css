@@ -186,7 +186,17 @@
 /*=== 查看限制 ===*/
 a#lookopen,a#lookclose { color:lightgrey;cursor:pointer; }
 a:hover#lookopen,a:hover#lookclose { color:red; }
-.laymsg,.layback { padding:10px;width:400px;height:150px;border:1px solid lightgrey;background:white;box-shadow:0 0 20px rgba(100,100,100,.5);text-align:center;position:absolute;left:30%;top:200px;display:none; }
+.laymsg,.layback {
+    padding:10px;
+    width:400px;height:150px;
+    border:1px solid lightgrey;
+    background:white;
+    box-shadow:0 0 20px rgba(100,100,100,.5);
+    text-align:center;
+    /*position:absolute;left:30%;top:200px;*/
+    position:fixed;left:30%;top:20%;
+    display:none;
+}
 /*.layback { height:100px; }*/
 .laymsg a.close,.layback a.close { position:relative;top:-140px;float:right;cursor:pointer; }
 /*.layback a.close { top:-100px; }*/

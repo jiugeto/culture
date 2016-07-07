@@ -62,4 +62,34 @@ class IdeasModel extends BaseModel
         $userModel = $this->user();
         return $userModel ? $userModel->username : '';
     }
+
+//    /**
+//     * 细节查看权限
+//     */
+//    public function iscon()
+//    {
+//        if ($this->genre==1) {
+//            //供应分镜
+//            $orderModel = OrderModel::where('buyer',$uid)
+//                ->where('status','>',11)
+//                ->where('isshow',1)
+//                ->where('del',0)
+//                ->first();
+//        } elseif ($this->genre==2) {
+//            //需求分镜
+//            $orderModel = OrderModel::where('seller',$this->userid)
+//                ->where('status','>',11)
+//                ->where('isshow',1)
+//                ->where('del',0)
+//                ->first();
+//        }
+//        $iscon = 0;
+//        if (isset($orderModel)&&$orderModel) {
+//            if ($orderModel->status<12) { $iscon = 1; }
+//            elseif ($orderModel->status==13) { $iscon = 2; }
+//            elseif ($orderModel->status==12) { $iscon = 3; }
+//            $remarks = $orderModel->remarks;
+//        }
+//        return array('iscon'=> $iscon, 'remarks'=> isset($remarks)?$remarks:'');
+//    }
 }

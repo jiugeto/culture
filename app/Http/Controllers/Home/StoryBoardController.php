@@ -4,12 +4,15 @@ namespace App\Http\Controllers\Home;
 //use Illuminate\Http\Request;
 use App\Models\StoryBoardModel;
 use App\Models\StoryBoardLikeModel;
+use App\Models\OrderModel;
 
 class StoryBoardController extends BaseController
 {
     /**
      *  会员后台 订单流程管理
      */
+
+    protected $curr = 'storyboard';
 
     public function index($way='',$genre=0)
     {
@@ -19,7 +22,7 @@ class StoryBoardController extends BaseController
         $result = [
             'lists'=> $this->list,
             'datas'=> $this->query($way,$genre),
-            'curr_menu'=> 'storyboard',
+            'curr_menu'=> $this->curr,
             'genre'=> $genre,
             'way'=> $way,
         ];
@@ -29,11 +32,37 @@ class StoryBoardController extends BaseController
     public function show($id)
     {
         if (!\Session::has('user.uid')) { return redirect('/login'); }
-//        $this->userid = \Session::get('user.uid');
+        $data = StoryBoardModel::find($id);
+        //内容查看权限开关
+        if ($data->genre==1) {
+            //供应分镜
+            $orderModel = OrderModel::where('genre',3)
+                ->where('buyer',$this->userid)
+                ->where('status','>',11)
+                ->where('isshow',1)
+                ->where('del',0)
+                ->first();
+        } elseif ($data->genre==2) {
+            //需求分镜
+            $orderModel = OrderModel::where('genre',4)
+                ->where('seller',$this->userid)
+                ->where('status','>',11)
+                ->where('isshow',1)
+                ->where('del',0)
+                ->first();
+        }
+        $data->iscon = 0;
+        if (isset($orderModel) && $orderModel) {
+            if ($orderModel->status < 12) { $data->iscon = 1; }
+            elseif ($orderModel->status == 13) { $data->iscon = 2; }
+            elseif ($orderModel->status == 12) { $data->iscon = 3; }
+            $data->remarks = $orderModel->remarks;
+        }
         $result = [
+            'data'=> $data,
             'lists'=> $this->list,
-            'data'=> StoryBoardModel::find($id),
-            'curr_menu'=> 'storyboard/show',
+            'curr_menu'=> $this->curr,
+            'uid'=> $this->userid,
         ];
         return view('home.storyboard.show', $result);
     }

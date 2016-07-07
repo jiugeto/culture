@@ -151,7 +151,13 @@ class OrderController extends BaseController
      */
     public function setStatus($id,$status)
     {
-        OrderModel::where('id',$id)->update(['status'=> $status+1]);
+        $orderModel = OrderModel::find($id);
+        if ($orderModel->genre <=4) {
+            if ($status==6) { $s = 7; }
+            elseif ($status==7) { $s = 12; }
+            elseif ($status==13) { $s = 13; }
+        }
+        OrderModel::where('id',$id)->update(['status'=> $s]);
         return redirect('/member/order/'.$id);
     }
 

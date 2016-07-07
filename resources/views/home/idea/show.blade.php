@@ -11,7 +11,7 @@
                     <input type="hidden" name="iscon" value="{{ $data->iscon }}">
                     <input type="hidden" name="remarks" value="{{ $data->remarks }}">
                     <input type="hidden" name="id" value="{{ $data->id }}">
-                    <div id="con">@if($data->iscon){!! $data->content !!}@endif</div>
+                    <div id="con">@if($data->iscon==3){!! $data->content !!}@endif</div>
                 </p>
             </div>
         </span>
@@ -25,8 +25,9 @@
             @endif
         </span>
     </div>
-
     <input type="hidden" name="_token" value="{{csrf_token()}}">
+    <input type="hidden" name=genre"" value="{{ $data->genre }}">
+
     <div class="laymsg">
         <h4 style="text-align:center;">查看限制</h4>
         <p id="msgcon"></p>
@@ -69,14 +70,17 @@
             });
             //订单申请
             $.ajaxSetup({headers : {'X-CSRF-TOKEN':$('input[name="_token"]').val()}});
-            var id = $("input[name='id']").val();
             $(".toOrder").click(function(){
 //                window.location.href = '/member/order/create/idea-'+$("input[name='id']").val();
                 //1创意供应，2创意需求，3分镜供应，4分镜需求，5商品供应，6商品需求，7娱乐供应，8娱乐需求，9演员供应，10演员需求，1租赁供应，12租赁需求
+                var id = $("input[name='id']").val();
+                var genre0 = $("input[name='genre']").val();
+                var genre;
+                if (genre0===1) { genre = 1; } else if (genre0==2) { genre = 1; }
                 $.ajax({
                     type: 'POST',
                     url: '/member/order/create',
-                    data: {'genre':1,'id':id},
+                    data: {'genre':genre,'id':id},
                     dataType: 'json',
                     success: function(data) {
                         $(".laymsg").hide(); $(".layback").show(); $("#backcon").html(data.message);
