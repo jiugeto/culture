@@ -152,8 +152,9 @@ class OrderController extends BaseController
     public function setStatus($id,$status)
     {
         $orderModel = OrderModel::find($id);
-        if ($orderModel->genre <=4) {
-            if ($status==6) { $s = 7; }
+        if ($orderModel->genre <= 4) {
+            if (in_array($status,[4,5])) { $s = 6; }
+            elseif ($status==6) { $s = 7; }
             elseif ($status==7) { $s = 12; }
             elseif ($status==13) { $s = 13; }
         }
@@ -167,7 +168,7 @@ class OrderController extends BaseController
     public function setMoney($id,$genre,$money)
     {
         if (!in_array($genre,['idea','story'])) { echo "<script>alert('参数有误！');history.go(-1);</script>";exit; }
-        if (!$money) { $status = 3; }else{ $status = 4; }
+        if (!$money) { $status = 4; }else{ $status = 5; }
         $update = [
             'money'=> $money,
             'status'=>$status,

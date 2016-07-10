@@ -46,7 +46,7 @@
             <td class="field_name">分镜交易价格：</td>
             <td class="statusbtn">
                 @if($data->status==2 || $data->seller==$userid)
-                    <input type="text" placeholder="0代表免费" pattern="^\d+$" name="storyMoney"> 元
+                    <input type="text" placeholder="0代表免费" pattern="^\d+$" name="money"> 元
                 @elseif($data->status>2 && $data->money)
                     {{ $data->money ? $data->money.'元' : '免费' }}
                 @endif
@@ -264,7 +264,7 @@
                     <a id="success" title="{{ $data->statusbtn() }}失败">
                         <button class="companybtn">订单成功</button></a>
                 @elseif(in_array($data->status,[12,13]))
-                    <a onclick=""><button class="companybtn">完成</button></a>
+                    {{--<a onclick=""><button class="companybtn">完成</button></a>--}}
                     <a id="next"><button class="companybtn">继续流程</button></a>
                 @endif
             </td></tr>
@@ -280,8 +280,11 @@
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     {{--弹出窗口--}}
     <div class="popup">
+        @if(in_array($data->genre,[1,2]))
         <a href="/storyboard" id="story">分镜流程</a>
+        @elseif(in_array($data->genre,[1,2,3,4]))
         <a href="/product" id="video">视频流程</a>
+        @endif
         <a class="close" onclick="$('.popup').hide();">X</a>
     </div>
     <div class="popup2">
@@ -316,21 +319,19 @@
             }
                 //走流程
             $("#tostatus").click(function(){
-                if (genre==1 || genre==2) {}
-                if (status==6 || status==7) {
-                    window.location.href = "/member/order/"+id+"/"+status;
-                } else if (status==2) {
+                if (status==2 && genre <= 4) {
                     var money = $("input[name='money']").val();
+                    var genreName =''; var genreUrl = '';
                     if(genre==1 || genre==2){
                         genreName = '创意'; genreUrl = 'idea';
                     } else if(genre==3 || genre==4){
                         genreName = '分镜'; genreUrl = 'story';
                     }
-                    if(money==''){
-                        var genreName =''; var genreUrl = '';
-                        alert(genreName+"价格必填！"); return;
-                    }
+//                    alert(money);return;
+                    if(money==''){ alert(genreName+"价格必填！"); return; }
                     window.location.href = "/member/order/"+id+"/"+genreUrl+"/"+money;
+                } else if (status==4 || status==5 || status==6 || status==7 || status==12) {
+                    window.location.href = "/member/order/"+id+"/"+status;
                 }
             });
                 //订单成功
