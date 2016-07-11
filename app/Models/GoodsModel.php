@@ -13,7 +13,7 @@ class GoodsModel extends BaseModel
 
     protected $table = 'bs_goods';
     protected $fillable = [
-        'id','name','genre','type','cate_id','intro','title','pic_id','video_id','video_id2','uid','uname','recommend','sort','isshow','isshow2','del','created_at','updated_at',
+        'id','name','genre','type','cate_id','intro','title','pic_id','video_id','video_id2','uid','uname','click','recommend','sort','isshow','isshow2','del','created_at','updated_at',
     ];
 
     //片源类型：1产品，2花絮
@@ -97,20 +97,18 @@ class GoodsModel extends BaseModel
     }
 
     /**
-     * 获取图片尺寸
+     * 获取图片尺寸：高度100，确定宽度
      */
-    public function getPicSize()
+    public function getPicSize($w,$h)
     {
         $pic = $this->pic();
         if ($pic && $pic->width && $pic->height) {
-            $ratio = $pic->width / $pic->height;
-            if ($ratio>1) {
-                $size['key'] = 'h'; $size['val'] = $pic->height;
-            } else {
-                $size['key'] = 'w'; $size['val'] = $pic->width;
-            }
+            $ratio_h = $h / $pic->height;
+            //确定高度 $h，计算$w
+            $width=$ratio_h*$pic->width;
+            if ($width>$w) { $size = $width; } else  { $size = $w; }
         }
-        return (isset($size)&&$size['val']) ? $size :[];
+        return (isset($size)&&$size) ? $size : 0;
     }
 
     /**
@@ -130,6 +128,11 @@ class GoodsModel extends BaseModel
         return $this->video() ? $this->video()->url : '';
     }
 
+    public function title()
+    {
+        return $this->title ? $this->title : $this->name;
+    }
+
     public function recommend()
     {
         return array_key_exists($this->recommend,$this->recommends) ? $this->recommends[$this->recommend] : '';
@@ -139,4 +142,21 @@ class GoodsModel extends BaseModel
     {
         return array_key_exists($this->isshow,$this->isshows) ? $this->isshows[$this->isshow] : '';
     }
+
+    /**
+     * 点击量，象征性自增
+     */
+    public function click($id)
+    {
+    }
+
+    /**
+     * 点击量，每个会员一次
+     */
+    public function userClick($id){}
+
+    /**
+     * 喜欢量，每个会员一次
+     */
+    public function userLike($id){}
 }

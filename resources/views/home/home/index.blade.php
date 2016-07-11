@@ -166,33 +166,39 @@
                 <span class="more" onclick="window.location.href='/product';">>更多</span>
             </p>
             <div class="trait_con">
-                {{--<div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>--}}
-                {{--<div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>--}}
-                {{--<div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>--}}
-                {{--<div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>--}}
-                {{--<div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>--}}
-                {{--<div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>--}}
                 @if(count($goods))
                 @foreach($goods as $good)
-                    <div class="img">
-                        <a href="{{ $good->getVideoUrl() }}">
-                            <img src="{{ $good->getPicUrl() }}" style="
-                            @if($size=$good->getPicSize())
-                                @if($size['key']=='w')width:{{$size['val']}}px;
-                                @elseif($size['key']=='h')height:{{$size['val']}}px;
-                                @endif
-                            @endif
-                                    ">
-                        </a></div>
-                    @if(count($goods)<6)
-                    @endif
+                    <div class="img" onmouseover="over({{ $good->id }})" onmouseout="out({{ $good->id }})">
+                        <a href="/product/video/{{ $good->video_id }}" title="查看详情：{{ $good->title() }}">
+                            <img src="{{ $good->getPicUrl() }}" style="@if($size=$good->getPicSize($w=148,$h=100)) width:{{$size}}px; @endif height:100px;">
+                        </a>
+                        <div class="text" style="top:0;pointer-events:none;" id="goodText_{{ $good->id }}">
+                            <div>{{ $good->name }}</div>
+                            <div>
+                                <span style="float:left;">点击 0</span>
+                                <span style="float:right;">喜欢 0</span>
+                            </div>
+                        </div>
+                    </div>
                 @endforeach
                 @endif
-                {{--箭头--}}
-                <div class="arrow">
-                    <div class="con_left"> ◀ </div>
-                    <div class="con_right"> ▶ </div>
-                </div>
+                <script>
+                    function over(id){ $("#goodText_"+id).animate({top:'-40px'},100); }
+                    function out(id){ $("#goodText_"+id).animate({top:'0px'},100); }
+                </script>
+                @if(count($goods)<6)
+                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
+                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
+                @endif
+            </div>
+            {{--箭头--}}
+            <div class="arrow">
+                <div class="con_left"> ◀ </div>
+                <div class="con_right"> ▶ </div>
             </div>
         </div>
         <br style="clear:both;">
@@ -212,11 +218,11 @@
                 <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
                 <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
                 <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
-                {{--箭头--}}
-                <div class="arrow">
-                    <div class="con_left"> ◀ </div>
-                    <div class="con_right"> ▶ </div>
-                </div>
+            </div>
+            {{--箭头--}}
+            <div class="arrow">
+                <div class="con_left"> ◀ </div>
+                <div class="con_right"> ▶ </div>
             </div>
         </div>
         <br style="clear:both;">
@@ -236,11 +242,11 @@
                 <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
                 <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
                 <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
-                {{--箭头--}}
-                <div class="arrow">
-                    <div class="con_left"> ◀ </div>
-                    <div class="con_right"> ▶ </div>
-                </div>
+            </div>
+            {{--箭头--}}
+            <div class="arrow">
+                <div class="con_left"> ◀ </div>
+                <div class="con_right"> ▶ </div>
             </div>
         </div>
         <br style="clear:both;">
@@ -267,37 +273,37 @@
             <div class="list_div">
                 <div class="img_text">
                     <div class="img_num"> 1 </div>
-                    <div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>
+                    <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
                     <a href="">需求需求</a><br>
                     <a href="" class="click">点击量 <span>10</span></a>
                 </div>
                 <div class="img_text">
                     <div class="img_num"> 2 </div>
-                    {{--<div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>--}}
+                    {{--<div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>--}}
                     <a href="">需求需求</a><br>
                     {{--<a href="" class="click">点击量 <span>10</span></a>--}}
                 </div>
                 <div class="img_text">
                     <div class="img_num"> 3 </div>
-                    {{--<div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>--}}
+                    {{--<div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>--}}
                     <a href="">需求需求</a><br>
                     {{--<a href="" class="click">点击量 <span>10</span></a>--}}
                 </div>
                 <div class="img_text">
                     <div class="img_num"> 4 </div>
-                    {{--<div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>--}}
+                    {{--<div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>--}}
                     <a href="">需求需求</a><br>
                     {{--<a href="" class="click">点击量 <span>10</span></a>--}}
                 </div>
                 <div class="img_text">
                     <div class="img_num"> 5 </div>
-                    {{--<div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>--}}
+                    {{--<div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>--}}
                     <a href="">需求需求</a><br>
                     {{--<a href="" class="click">点击量 <span>10</span></a>--}}
                 </div>
                 <div class="img_text">
                     <div class="img_num"> 6 </div>
-                    {{--<div class="img"><a href=""><img src="/upload/images/online1.png"></a></div>--}}
+                    {{--<div class="img"><a href=""><img src="/upload/images/2016/online1.png"></a></div>--}}
                     <a href="">需求需求</a><br>
                     {{--<a href="" class="click">点击量 <span>10</span></a>--}}
                 </div>

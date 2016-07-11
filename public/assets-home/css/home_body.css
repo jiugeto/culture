@@ -138,15 +138,35 @@
 /*===== 特色产品 =====*/
 .trait {}
 .trait_con {
-    width:100%;
+    width:915px;
     height:100px;
     /*border:1px solid red;*/
+    overflow:hidden;
+    float:left;
 }
 .trait_con .img {
     margin-right:4px;
     width:148px;height:100px;
     overflow:hidden;
     float:left;
+}
+.trait_con .img .text {
+    height:40px;
+    background:rgba(0,0,0,0.5);
+    position:relative;top:-40px;
+}
+.trait_con .img .text div {
+    margin:0;
+    height:18px;
+    line-height:18px;
+    text-align:center;
+    font-size:14px;
+    color:rgba(220,220,220,1);
+}
+.trait_con .img .text span {
+    padding:0 5px;padding-bottom:5px;
+    font-size:12px;
+    color:rgba(180,180,180,1);
 }
 .trait_con img { width:160px; }
 .trait_con .con_text {

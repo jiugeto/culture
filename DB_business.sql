@@ -673,6 +673,7 @@ CREATE TABLE `bs_goods` (
   `video_id2` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '花絮，视频链接',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布人：需求用户，设计师，公司',
   `uname` varchar(255) NOT NULL COMMENT '发布人名称',
+  `click` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '点击自增，与会员无关，象征性的',
   `recommend` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '是否推荐：0不推荐，1推荐，默认0',
   `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序字段，值越大越靠前，默认10',
   `isshow` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '前台列表是否显示：0不显示，1显示，默认1',
@@ -690,7 +691,7 @@ CREATE TABLE `bs_goods` (
 
 LOCK TABLES `bs_goods` WRITE;
 /*!40000 ALTER TABLE `bs_goods` DISABLE KEYS */;
-INSERT INTO `bs_goods` VALUES (1,'作品1',1,0,4,'v部分的白癜风b','',1,0,0,0,'',0,10,1,1,0,'2016-03-12','0000-00-00'),(2,'企业需求001',1,3,4,'','',1,0,0,0,'',0,10,1,1,0,'2016-03-13','0000-00-00'),(3,'企业作品001',1,4,4,'','',1,0,0,0,'',0,10,1,1,0,'2016-03-13','0000-00-00'),(4,'视频产品0003',1,4,4,'rgfgewfrgtnh','wferbgrwefrgtfh',1,0,0,0,'',0,10,1,1,0,'2016-04-28','0000-00-00');
+INSERT INTO `bs_goods` VALUES (1,'作品1',1,0,4,'v部分的白癜风b','',1,1,0,0,'',0,0,10,1,1,0,'2016-03-12','0000-00-00'),(2,'企业需求001',1,3,4,'','',1,1,0,0,'',0,0,10,1,1,0,'2016-03-13','0000-00-00'),(3,'企业作品001',1,4,4,'','',1,1,0,0,'',0,0,10,1,1,0,'2016-03-13','0000-00-00'),(4,'视频产品0003',1,4,4,'rgfgewfrgtnh','wferbgrwefrgtfh',1,1,0,0,'',0,0,10,1,1,0,'2016-04-28','0000-00-00');
 /*!40000 ALTER TABLE `bs_goods` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2158,4 +2159,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-07-11 18:55:31
+-- Dump completed on 2016-07-12  5:29:43

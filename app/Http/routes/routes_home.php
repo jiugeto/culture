@@ -14,6 +14,8 @@ Route::group(['prefix'=>'/','namespace'=>'Home'],function(){
     Route::any('creation','CreationController@index');
     //产品样片
     Route::any('product','ProductController@index');
+    Route::get('product/video/{videoid}','ProductController@video');
+    Route::get('product/{id}','ProductController@show');
     //在线作品
     Route::any('creation','CreationController@index');
     //创意脚本
