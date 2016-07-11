@@ -166,12 +166,28 @@
                 <span class="more" onclick="window.location.href='/product';">>更多</span>
             </p>
             <div class="trait_con">
-                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
-                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
-                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
-                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
-                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
-                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
+                {{--<div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>--}}
+                {{--<div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>--}}
+                {{--<div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>--}}
+                {{--<div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>--}}
+                {{--<div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>--}}
+                {{--<div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>--}}
+                @if(count($goods))
+                @foreach($goods as $good)
+                    <div class="img">
+                        <a href="{{ $good->getVideoUrl() }}">
+                            <img src="{{ $good->getPicUrl() }}" style="
+                            @if($size=$good->getPicSize())
+                                @if($size['key']=='w')width:{{$size['val']}}px;
+                                @elseif($size['key']=='h')height:{{$size['val']}}px;
+                                @endif
+                            @endif
+                                    ">
+                        </a></div>
+                    @if(count($goods)<6)
+                    @endif
+                @endforeach
+                @endif
                 {{--箭头--}}
                 <div class="arrow">
                     <div class="con_left"> ◀ </div>

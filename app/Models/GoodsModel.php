@@ -13,7 +13,7 @@ class GoodsModel extends BaseModel
 
     protected $table = 'bs_goods';
     protected $fillable = [
-        'id','name','genre','type','cate_id','intro','title','pic_id','video_id','uid','uname','recommend','sort','isshow','isshow2','del','created_at','updated_at',
+        'id','name','genre','type','cate_id','intro','title','pic_id','video_id','video_id2','uid','uname','recommend','sort','isshow','isshow2','del','created_at','updated_at',
     ];
 
     //片源类型：1产品，2花絮
@@ -89,12 +89,45 @@ class GoodsModel extends BaseModel
     }
 
     /**
+     * 获取图片链接
+     */
+    public function getPicUrl()
+    {
+        return $this->pic() ? $this->pic()->url : '';
+    }
+
+    /**
+     * 获取图片尺寸
+     */
+    public function getPicSize()
+    {
+        $pic = $this->pic();
+        if ($pic && $pic->width && $pic->height) {
+            $ratio = $pic->width / $pic->height;
+            if ($ratio>1) {
+                $size['key'] = 'h'; $size['val'] = $pic->height;
+            } else {
+                $size['key'] = 'w'; $size['val'] = $pic->width;
+            }
+        }
+        return (isset($size)&&$size['val']) ? $size :[];
+    }
+
+    /**
      * 视频
      */
     public function video()
     {
         return $this->video_id ? VideoModel::find($this->video_id) : '';
 //        return $this->hasOne('\App\Models\VideoModel','id','video_id');
+    }
+
+    /**
+     * 获取视频链接
+     */
+    public function getVideoUrl()
+    {
+        return $this->video() ? $this->video()->url : '';
     }
 
     public function recommend()

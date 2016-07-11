@@ -29,6 +29,7 @@ class PicController extends BaseController
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
+        PicModel::saveSize();      //确定图片存储
         return view('member.pic.index', $result);
     }
 

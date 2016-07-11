@@ -51,8 +51,8 @@ body { font-family:'微软雅黑'; }
 
 /*========== 动画内容 ==========*/
 .img {
-    width:218px;
-    height:198px;
+    /*width:218px;*/
+    /*height:198px;*/
     background:gainsboro;
     border:1px solid darkgrey;
 }

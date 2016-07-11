@@ -151,7 +151,7 @@ CREATE TABLE `ba_userlog` (
   `logoutTime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '退出时间',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -160,7 +160,7 @@ CREATE TABLE `ba_userlog` (
 
 LOCK TABLES `ba_userlog` WRITE;
 /*!40000 ALTER TABLE `ba_userlog` DISABLE KEYS */;
-INSERT INTO `ba_userlog` VALUES (1,2,1,'jiuge','201606191531364011','2016-06-19 15:31:36','0000-00-00 00:00:00','2016-04-06 00:00:00'),(2,2,1,'jiuge','201606201607391788','2016-06-20 16:07:39','0000-00-00 00:00:00','2016-04-06 00:00:00'),(3,2,1,'jiuge','201606210911378157','2016-06-21 09:11:37','0000-00-00 00:00:00','2016-04-06 00:00:00'),(4,2,1,'jiuge','201606221430498649','2016-06-22 14:30:49','0000-00-00 00:00:00','2016-04-06 00:00:00'),(5,2,1,'jiuge','201606231228274592','2016-06-23 12:28:27','0000-00-00 00:00:00','2016-04-06 00:00:00'),(6,2,1,'jiuge','201606231501257212','2016-06-23 15:01:25','0000-00-00 00:00:00','2016-04-06 00:00:00'),(7,1,1,'jiuge','201606240913314181','2016-06-24 09:13:31','0000-00-00 00:00:00','2016-04-05 00:00:00'),(8,2,1,'jiuge','201606251154221419','2016-06-25 11:54:22','0000-00-00 00:00:00','2016-04-06 00:00:00'),(9,2,1,'jiuge','201606271125287366','2016-06-27 11:25:28','0000-00-00 00:00:00','2016-04-06 00:00:00'),(10,1,1,'jiuge','201606271125571958','2016-06-27 11:25:57','0000-00-00 00:00:00','2016-04-05 00:00:00'),(11,2,2,'jiuge2','20160703124328530','2016-07-03 12:43:28','0000-00-00 00:00:00','2016-06-17 00:00:00'),(12,2,2,'jiuge2','201607050815402271','2016-07-05 08:15:40','0000-00-00 00:00:00','2016-06-17 00:00:00'),(13,2,2,'jiuge2','201607070808351353','2016-07-07 08:08:35','0000-00-00 00:00:00','2016-06-17 00:00:00'),(14,2,2,'jiuge2','201607071533028021','2016-07-07 15:33:02','0000-00-00 00:00:00','2016-06-17 00:00:00'),(15,2,2,'jiuge2','201607101617243818','2016-07-10 16:17:24','0000-00-00 00:00:00','2016-06-17 00:00:00');
+INSERT INTO `ba_userlog` VALUES (1,2,1,'jiuge','201606191531364011','2016-06-19 15:31:36','0000-00-00 00:00:00','2016-04-06 00:00:00'),(2,2,1,'jiuge','201606201607391788','2016-06-20 16:07:39','0000-00-00 00:00:00','2016-04-06 00:00:00'),(3,2,1,'jiuge','201606210911378157','2016-06-21 09:11:37','0000-00-00 00:00:00','2016-04-06 00:00:00'),(4,2,1,'jiuge','201606221430498649','2016-06-22 14:30:49','0000-00-00 00:00:00','2016-04-06 00:00:00'),(5,2,1,'jiuge','201606231228274592','2016-06-23 12:28:27','0000-00-00 00:00:00','2016-04-06 00:00:00'),(6,2,1,'jiuge','201606231501257212','2016-06-23 15:01:25','0000-00-00 00:00:00','2016-04-06 00:00:00'),(7,1,1,'jiuge','201606240913314181','2016-06-24 09:13:31','0000-00-00 00:00:00','2016-04-05 00:00:00'),(8,2,1,'jiuge','201606251154221419','2016-06-25 11:54:22','0000-00-00 00:00:00','2016-04-06 00:00:00'),(9,2,1,'jiuge','201606271125287366','2016-06-27 11:25:28','0000-00-00 00:00:00','2016-04-06 00:00:00'),(10,1,1,'jiuge','201606271125571958','2016-06-27 11:25:57','0000-00-00 00:00:00','2016-04-05 00:00:00'),(11,2,2,'jiuge2','20160703124328530','2016-07-03 12:43:28','0000-00-00 00:00:00','2016-06-17 00:00:00'),(12,2,2,'jiuge2','201607050815402271','2016-07-05 08:15:40','0000-00-00 00:00:00','2016-06-17 00:00:00'),(13,2,2,'jiuge2','201607070808351353','2016-07-07 08:08:35','0000-00-00 00:00:00','2016-06-17 00:00:00'),(14,2,2,'jiuge2','201607071533028021','2016-07-07 15:33:02','0000-00-00 00:00:00','2016-06-17 00:00:00'),(15,2,2,'jiuge2','201607101617243818','2016-07-10 16:17:24','0000-00-00 00:00:00','2016-06-17 00:00:00'),(16,2,1,'jiuge','201607111727218944','2016-07-11 17:27:21','0000-00-00 00:00:00','2016-04-06 00:00:00'),(17,1,1,'jiuge','201607111728226776','2016-07-11 17:28:22','0000-00-00 00:00:00','2016-04-05 00:00:00');
 /*!40000 ALTER TABLE `ba_userlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -670,6 +670,7 @@ CREATE TABLE `bs_goods` (
   `title` varchar(255) NOT NULL COMMENT '鼠标移动的文字',
   `pic_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '图片链接id，关联图片表bs_pics',
   `video_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '视频链接id，链接视频表bs_videos',
+  `video_id2` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '花絮，视频链接',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布人：需求用户，设计师，公司',
   `uname` varchar(255) NOT NULL COMMENT '发布人名称',
   `recommend` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '是否推荐：0不推荐，1推荐，默认0',
@@ -689,8 +690,58 @@ CREATE TABLE `bs_goods` (
 
 LOCK TABLES `bs_goods` WRITE;
 /*!40000 ALTER TABLE `bs_goods` DISABLE KEYS */;
-INSERT INTO `bs_goods` VALUES (1,'作品1',1,0,0,'v部分的白癜风b','',0,0,0,'',0,10,1,1,0,'2016-03-12','0000-00-00'),(2,'企业需求001',1,3,4,'','',1,0,0,'',0,10,1,1,0,'2016-03-13','0000-00-00'),(3,'企业作品001',1,4,4,'','',1,0,0,'',0,10,1,1,0,'2016-03-13','0000-00-00'),(4,'视频产品0003',1,4,4,'rgfgewfrgtnh','wferbgrwefrgtfh',0,0,0,'',0,10,1,1,0,'2016-04-28','0000-00-00');
+INSERT INTO `bs_goods` VALUES (1,'作品1',1,0,4,'v部分的白癜风b','',1,0,0,0,'',0,10,1,1,0,'2016-03-12','0000-00-00'),(2,'企业需求001',1,3,4,'','',1,0,0,0,'',0,10,1,1,0,'2016-03-13','0000-00-00'),(3,'企业作品001',1,4,4,'','',1,0,0,0,'',0,10,1,1,0,'2016-03-13','0000-00-00'),(4,'视频产品0003',1,4,4,'rgfgewfrgtnh','wferbgrwefrgtfh',1,0,0,0,'',0,10,1,1,0,'2016-04-28','0000-00-00');
 /*!40000 ALTER TABLE `bs_goods` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bs_goods_click`
+--
+
+DROP TABLE IF EXISTS `bs_goods_click`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bs_goods_click` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `gid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '商品id，视频为主',
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '登录用户id',
+  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='视频点击表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bs_goods_click`
+--
+
+LOCK TABLES `bs_goods_click` WRITE;
+/*!40000 ALTER TABLE `bs_goods_click` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bs_goods_click` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bs_goods_like`
+--
+
+DROP TABLE IF EXISTS `bs_goods_like`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bs_goods_like` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `gid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '商品id，视频为主',
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '登录用户id',
+  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='视频喜欢表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bs_goods_like`
+--
+
+LOCK TABLES `bs_goods_like` WRITE;
+/*!40000 ALTER TABLE `bs_goods_like` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bs_goods_like` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1103,6 +1154,8 @@ CREATE TABLE `bs_pics` (
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户id',
   `name` varchar(255) NOT NULL COMMENT '图片名称',
   `url` varchar(255) NOT NULL COMMENT '图片路径',
+  `width` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '图片宽度，单位px',
+  `height` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '图片高度，单位px',
   `intro` varchar(255) NOT NULL COMMENT '图片介绍',
   `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站：0不删除，1删除',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
@@ -1117,7 +1170,7 @@ CREATE TABLE `bs_pics` (
 
 LOCK TABLES `bs_pics` WRITE;
 /*!40000 ALTER TABLE `bs_pics` DISABLE KEYS */;
-INSERT INTO `bs_pics` VALUES (1,1,'图片111','/uploads/images/2016/ppt.png','ergdfbghrgtfh\r\n111111111111',0,'0000-00-00 00:00:00','2016-04-30 13:55:08'),(2,1,'图片2','/uploads/images/2016/ppt.png','',0,'2016-05-29 21:53:57','2016-05-29 21:53:57'),(3,1,'图片3','/uploads/images/2016/ppt.png','',0,'2016-05-29 21:54:05','2016-05-29 21:54:05'),(4,1,'图片4','/uploads/images/2016/ppt.png','',0,'2016-05-29 21:54:06','2016-05-29 21:54:06'),(5,1,'图片5','/uploads/images/2016/ppt.png','',0,'2016-05-29 21:54:07','2016-05-29 21:54:07');
+INSERT INTO `bs_pics` VALUES (1,1,'图片111','/uploads/images/2016/ppt.png',1920,400,'ergdfbghrgtfh\r\n111111111111',0,'0000-00-00 00:00:00','2016-04-30 13:55:08'),(2,1,'图片2','/uploads/images/2016/ppt.png',1920,400,'',0,'2016-05-29 21:53:57','2016-05-29 21:53:57'),(3,1,'图片3','/uploads/images/2016/ppt.png',1920,400,'',0,'2016-05-29 21:54:05','2016-05-29 21:54:05'),(4,1,'图片4','/uploads/images/2016/ppt.png',1920,400,'',0,'2016-05-29 21:54:06','2016-05-29 21:54:06'),(5,1,'图片5','/uploads/images/2016/ppt.png',1920,400,'',0,'2016-05-29 21:54:07','2016-05-29 21:54:07');
 /*!40000 ALTER TABLE `bs_pics` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2105,4 +2158,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-07-10 18:01:31
+-- Dump completed on 2016-07-11 18:55:31

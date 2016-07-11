@@ -29,6 +29,7 @@ class PicController extends BaseController
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
+        PicModel::saveSize();      //确定图片存储
         return view('admin.pic.index', $result);
     }
 

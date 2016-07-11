@@ -11,6 +11,7 @@ class HomeController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
     }
 
     public function index()
@@ -18,8 +19,8 @@ class HomeController extends BaseController
         $result = [
             'ideas'=> $this->getIdeas(3),
             'talks'=> $this->getTalks(3),
-            'products'=> $this->getProducts(10),
-            'goods'=> $this->getGoods(6),
+            'products'=> $this->getProducts(10),        //在线创作
+            'goods'=> $this->getGoods(6),               //视频
             'companys'=> $this->getCompanys(6),
             'recommends'=> $this->getRecommendProducts(6),
             'demands'=> $this->getDemands(6),
