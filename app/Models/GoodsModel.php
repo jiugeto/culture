@@ -3,6 +3,8 @@ namespace App\Models;
 
 //use Illuminate\Database\Eloquent\Model;
 
+use App\Http\Controllers\Admin\ComMainController;
+use App\Models\Company\ComMainModel;
 use App\Tools;
 
 class GoodsModel extends BaseModel
@@ -13,7 +15,7 @@ class GoodsModel extends BaseModel
 
     protected $table = 'bs_goods';
     protected $fillable = [
-        'id','name','genre','type','cate_id','intro','title','pic_id','video_id','video_id2','uid','uname','click','recommend','sort','isshow','isshow2','del','created_at','updated_at',
+        'id','name','genre','type','cate_id','intro','title','pic_id','video_id','video_id2','uid','uname','click','recommend','newest','sort','isshow','isshow2','del','created_at','updated_at',
     ];
 
     //片源类型：1产品，2花絮
@@ -144,19 +146,16 @@ class GoodsModel extends BaseModel
     }
 
     /**
-     * 点击量，象征性自增
+     * 视频发布方信息
      */
-    public function click($id)
+    public function getUserInfo()
     {
+        $companyMian = ComMainModel::where('uid',$this->uid)->first();
+        return $companyMian ? $companyMian : '';
     }
 
-    /**
-     * 点击量，每个会员一次
-     */
-    public function userClick($id){}
-
-    /**
-     * 喜欢量，每个会员一次
-     */
-    public function userLike($id){}
+    public function getComLogo()
+    {
+        return $this->getUserInfo() ? $this->getUserInfo()->logo : '';
+    }
 }

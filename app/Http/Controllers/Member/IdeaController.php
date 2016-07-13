@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers\Member;
 
-use App\Models\IdeasShowModel;
 use Illuminate\Http\Request;
 use App\Models\IdeasModel;
 
@@ -63,9 +62,9 @@ class IdeaController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = date('Y-m-d H:i:s', time());
         IdeasModel::create($data);
-        //将自己加入查看权限表
-        $ideaModel = IdeasModel::where($data)->first();
-        IdeasShowModel::create(['ideaid'=>$ideaModel->id,'uid'=>$this->userid,'created_at'=>date('Y-m-d H:i:s',time())]);
+//        //将自己加入查看权限表
+//        $ideaModel = IdeasModel::where($data)->first();
+//        IdeasShowModel::create(['ideaid'=>$ideaModel->id,'uid'=>$this->userid,'created_at'=>date('Y-m-d H:i:s',time())]);
         return redirect('/member/idea');
     }
 

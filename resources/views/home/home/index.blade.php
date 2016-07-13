@@ -169,7 +169,7 @@
                 @if(count($goods))
                 @foreach($goods as $good)
                     <div class="img" onmouseover="over({{ $good->id }})" onmouseout="out({{ $good->id }})">
-                        <a href="/product/video/{{ $good->video_id }}" title="查看详情：{{ $good->title() }}">
+                        <a href="/product/video/{{ $good->id }}/{{ $good->video_id }}" title="查看详情：{{ $good->title() }}">
                             <img src="{{ $good->getPicUrl() }}" style="@if($size=$good->getPicSize($w=148,$h=100)) width:{{$size}}px; @endif height:100px;">
                         </a>
                         <div class="text" style="top:0;pointer-events:none;" id="goodText_{{ $good->id }}">

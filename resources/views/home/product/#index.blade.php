@@ -20,7 +20,7 @@
         {{-- 一楼 --}}
         <div class="pro_floor">
             <div class="pro_big">
-                <p>推荐的样片</p>
+                <p>新闻新闻</p>
                 <ul>
                     <li><span>新闻新闻</span></li>
                     <li><span>新闻新闻</span></li>
@@ -62,7 +62,7 @@
 
         {{-- 二楼：原创产品集 --}}
         <div class="pro_floor">
-            <div class="title">最新的样片</div>
+            <div class="title">原创</div>
             {{-- 原创视频 --}}
             <div class="original">
                 <div class="img_text">

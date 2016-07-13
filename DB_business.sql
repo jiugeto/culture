@@ -674,7 +674,8 @@ CREATE TABLE `bs_goods` (
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布人：需求用户，设计师，公司',
   `uname` varchar(255) NOT NULL COMMENT '发布人名称',
   `click` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '点击自增，与会员无关，象征性的',
-  `recommend` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '是否推荐：0不推荐，1推荐，默认0',
+  `recommend` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否推荐：0不推荐，1推荐，默认0',
+  `newest` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '是否最新的：0不是，1是',
   `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序字段，值越大越靠前，默认10',
   `isshow` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '前台列表是否显示：0不显示，1显示，默认1',
   `isshow2` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '用户企业控制前台列表是否显示：0不显示，1显示，默认1',
@@ -691,7 +692,7 @@ CREATE TABLE `bs_goods` (
 
 LOCK TABLES `bs_goods` WRITE;
 /*!40000 ALTER TABLE `bs_goods` DISABLE KEYS */;
-INSERT INTO `bs_goods` VALUES (1,'作品1',1,0,4,'v部分的白癜风b','',1,1,0,0,'',0,0,10,1,1,0,'2016-03-12','0000-00-00'),(2,'企业需求001',1,3,4,'','',1,1,0,0,'',0,0,10,1,1,0,'2016-03-13','0000-00-00'),(3,'企业作品001',1,4,4,'','',1,1,0,0,'',0,0,10,1,1,0,'2016-03-13','0000-00-00'),(4,'视频产品0003',1,4,4,'rgfgewfrgtnh','wferbgrwefrgtfh',1,1,0,0,'',0,0,10,1,1,0,'2016-04-28','0000-00-00');
+INSERT INTO `bs_goods` VALUES (1,'作品1',1,0,4,'v部分的白癜风b','',1,1,0,0,'',0,0,1,10,1,1,0,'2016-03-12','0000-00-00'),(2,'企业需求001',1,3,4,'','',1,1,0,0,'',0,0,1,10,1,1,0,'2016-03-13','0000-00-00'),(3,'企业作品001',1,4,4,'','',1,1,0,0,'',0,0,1,10,1,1,0,'2016-03-13','0000-00-00'),(4,'视频产品0003',1,4,4,'rgfgewfrgtnh','wferbgrwefrgtfh',1,1,0,1,'',0,0,1,10,1,1,0,'2016-04-28','0000-00-00');
 /*!40000 ALTER TABLE `bs_goods` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -706,7 +707,7 @@ CREATE TABLE `bs_goods_click` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `gid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '商品id，视频为主',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '登录用户id',
-  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  `created_at` int(15) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='视频点击表';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -731,7 +732,7 @@ CREATE TABLE `bs_goods_like` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `gid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '商品id，视频为主',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '登录用户id',
-  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  `created_at` int(15) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='视频喜欢表';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1476,7 +1477,7 @@ CREATE TABLE `bs_storyboards_like` (
   `sbid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分镜storyboard的id',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='分镜喜欢表 bs_storyboards_like';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='分镜喜欢表 bs_storyboards_like';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2133,7 +2134,7 @@ CREATE TABLE `users_params` (
   `foot_switch` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '在线创作的底部链接开关：0关闭，1开启',
   `lecloud` varchar(255) NOT NULL COMMENT '乐视云账户',
   `lepwd` varchar(255) NOT NULL COMMENT '乐视云密码',
-  `leplay` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '是否自动播放：0手动播放，1自动播放',
+  `leplay` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否自动播放：0手动播放，1自动播放',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '更新时间',
   PRIMARY KEY (`id`)
@@ -2159,4 +2160,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-07-12  5:29:43
+-- Dump completed on 2016-07-13 16:56:15
