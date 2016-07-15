@@ -13,10 +13,12 @@ class ProductController extends BaseController
      * 网站首页产品样片
      */
 
-    public function index($r=0,$n=0)
+    public function index()
     {
         $result = [
-            'datas'=> $this->query($r,$n),
+            'recommends'=> $this->queryR(),
+            'newests'=> $this->queryN(),
+            'datas'=> $this->query(),
             'curr_menu'=> 'product',
         ];
         return view('home.product.index', $result);
@@ -85,25 +87,35 @@ class ProductController extends BaseController
 
 
 
-    public function query($r,$n)
+    public function query()
     {
-        if ($r && !$n) {
-            $datas = GoodsModel::where('recommend',1)
-                ->where('isshow',1)
-                ->where('isshow2',1)
-                ->where('del',0)
-                ->orderBy('sort','desc')
-                ->orderBy('id','desc')
-                ->paginate($this->limit);
-        } elseif (!$r && $n) {
-            $datas = GoodsModel::where('newest',1)
-                ->where('isshow',1)
-                ->where('isshow2',1)
-                ->where('del',0)
-                ->orderBy('sort','desc')
-                ->orderBy('id','desc')
-                ->paginate($this->limit);
-        }
-        return $datas;
+        return GoodsModel::where('isshow',1)
+            ->where('isshow2',1)
+            ->where('del',0)
+            ->orderBy('sort','desc')
+            ->orderBy('id','desc')
+            ->paginate($this->limit);
+    }
+
+    public function queryR()
+    {
+        return GoodsModel::where('recommend',1)
+            ->where('isshow',1)
+            ->where('isshow2',1)
+            ->where('del',0)
+            ->orderBy('sort','desc')
+            ->orderBy('id','desc')
+            ->paginate($this->limit);
+    }
+
+    public function queryN()
+    {
+        return GoodsModel::where('newest',1)
+            ->where('isshow',1)
+            ->where('isshow2',1)
+            ->where('del',0)
+            ->orderBy('sort','desc')
+            ->orderBy('id','desc')
+            ->paginate($this->limit);
     }
 }

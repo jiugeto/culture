@@ -22,9 +22,13 @@
             <div class="pro_big">
                 <p>推荐的样片</p>
                 <ul>
-                    <li><span>新闻新闻</span></li>
-                    <li><span>新闻新闻</span></li>
-                    <li><span>新闻新闻</span></li>
+                    @if(count($recommends))
+                        @foreach($recommends as $recommend)
+                    <li><a href="/product/{{ $recommend->id }}">{{ $recommend->name }}</a></li>
+                        @endforeach
+                    @else
+                    <li><span>没有推荐</span></li>
+                    @endif
                 </ul>
             </div>
             <div class="pro_big">
@@ -32,30 +36,16 @@
                 <a href="">巨大那部分的加班费</a>
             </div>
             <div class="pro_big2">
+                @if(count($recommends))
+                    @foreach($recommends as $recommend)
                 <div class="img_text">
                     <div class="img">
                         <a href=""><img src="/uploads/images/2016/online1.png"></a>
                     </div>
-                    <div class="text"><a href="">租赁租赁</a></div>
+                    <div class="text"><a href="">{{ $recommend->name }}</a></div>
                 </div>
-                <div class="img_text">
-                    <div class="img">
-                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
-                    </div>
-                    <div class="text"><a href="">租赁租赁</a></div>
-                </div>
-                <div class="img_text">
-                    <div class="img">
-                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
-                    </div>
-                    <div class="text"><a href="">租赁租赁</a></div>
-                </div>
-                <div class="img_text">
-                    <div class="img">
-                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
-                    </div>
-                    <div class="text"><a href="">租赁租赁</a></div>
-                </div>
+                    @endforeach
+                @endif
             </div>
         </div>
         <br style="clear:both;"><br>
@@ -214,84 +204,18 @@
         <br style="clear:both;"><br>
 
         {{-- 猜你喜欢 --}}
-        <div class="pro_floor">
-            <div class="title">猜你喜欢</div>
-            <div class="guess">
-                <div class="img_text">
-                    <div class="img">
-                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
-                    </div>
-                    <div class="text"><a href="">原创视频</a></div>
-                </div>
-                <div class="img_text">
-                    <div class="img">
-                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
-                    </div>
-                    <div class="text"><a href="">原创视频</a></div>
-                </div>
-                <div class="img_text">
-                    <div class="img">
-                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
-                    </div>
-                    <div class="text"><a href="">原创视频</a></div>
-                </div>
-                <div class="img_text">
-                    <div class="img">
-                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
-                    </div>
-                    <div class="text"><a href="">原创视频</a></div>
-                </div>
-                <div class="img_text">
-                    <div class="img">
-                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
-                    </div>
-                    <div class="text"><a href="">原创视频</a></div>
-                </div>
-                <div class="img_text">
-                    <div class="img">
-                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
-                    </div>
-                    <div class="text"><a href="">原创视频</a></div>
-                </div>
-                <div class="img_text">
-                    <div class="img">
-                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
-                    </div>
-                    <div class="text"><a href="">原创视频</a></div>
-                </div>
-                <div class="img_text">
-                    <div class="img">
-                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
-                    </div>
-                    <div class="text"><a href="">原创视频</a></div>
-                </div>
-                <div class="img_text">
-                    <div class="img">
-                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
-                    </div>
-                    <div class="text"><a href="">原创视频</a></div>
-                </div>
-                <div class="img_text">
-                    <div class="img">
-                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
-                    </div>
-                    <div class="text"><a href="">原创视频</a></div>
-                </div>
-                <div class="img_text">
-                    <div class="img">
-                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
-                    </div>
-                    <div class="text"><a href="">原创视频</a></div>
-                </div>
-                <div class="img_text">
-                    <div class="img">
-                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
-                    </div>
-                    <div class="text"><a href="">原创视频</a></div>
-                </div>
-            </div>
-        </div>
-        <br style="clear:both;"><br>
+        {{--<div class="pro_floor">--}}
+            {{--<div class="title">猜你喜欢</div>--}}
+            {{--<div class="guess">--}}
+                {{--<div class="img_text">--}}
+                    {{--<div class="img">--}}
+                        {{--<a href=""><img src="/uploads/images/2016/online1.png"></a>--}}
+                    {{--</div>--}}
+                    {{--<div class="text"><a href="">原创视频</a></div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+        {{--<br style="clear:both;"><br>--}}
 
         {{-- 宣传片 --}}
         <div class="pro_floor">

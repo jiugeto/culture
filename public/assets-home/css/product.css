@@ -38,7 +38,7 @@
 }
 .pro_big p { padding:0 20px; }
 .pro_big li { list-style:square;color:red; }
-.pro_big li span { color:black; }
+.pro_big li a { color:black; }
 .pro_big .img {
     width:100%;height:270px;
     overflow:hidden;
