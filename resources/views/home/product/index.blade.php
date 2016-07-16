@@ -19,6 +19,7 @@
 
         {{-- 一楼 --}}
         <div class="pro_floor">
+            {{--标题列表--}}
             <div class="pro_big">
                 <p>推荐的样片</p>
                 <ul>
@@ -27,24 +28,43 @@
                     <li><a href="/product/{{ $recommend->id }}">{{ $recommend->name }}</a></li>
                         @endforeach
                     @else
+                        @for($i=0;$i<4-count($recommends);++$i)
                     <li><span>没有推荐</span></li>
+                        @endfor
                     @endif
                 </ul>
             </div>
+            {{--大图--}}
             <div class="pro_big">
-                <div class="img"><img src="/uploads/images/2016/online1.png"></div>
-                <a href="">巨大那部分的加班费</a>
+                @if(count($recommends))
+                    <div class="img"><img src="{{ $recommends[0]->getPicUrl() }}"></div>
+                    <a href="/product/{{ $recommend->id }}">{{ $recommends[0]->name }}</a>
+                @else
+                    <div class="img"><div class="none">无</div></div>
+                    <a href="">没有推荐大图</a>
+                @endif
             </div>
+            {{--小图--}}
             <div class="pro_big2">
                 @if(count($recommends))
                     @foreach($recommends as $recommend)
                 <div class="img_text">
                     <div class="img">
-                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
+                        <a href="/product/{{ $recommend->id }}"><img src="{{ $recommend->getPicUrl() }}"></a>
                     </div>
-                    <div class="text"><a href="">{{ $recommend->name }}</a></div>
+                    <div class="text"><a href="/product/{{ $recommend->id }}">{{ $recommend->name }}</a></div>
                 </div>
                     @endforeach
+                @endif
+                @if(count($recommends)<4)
+                    @for($i=0;$i<4-count($recommends);++$i)
+                <div class="img_text">
+                    <div class="img">
+                        <a href=""><div class="none">无</div></a>
+                    </div>
+                    <div class="text"><a href="">没有推荐</a></div>
+                </div>
+                    @endfor
                 @endif
             </div>
         </div>
@@ -55,153 +75,89 @@
             <div class="title">最新的样片</div>
             {{-- 原创视频 --}}
             <div class="original">
+                @if(count($model->getNewests([])))
+                    @foreach($model->getNewests([]) as $newest)
                 <div class="img_text">
                     <div class="img">
-                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
+                        <a href="/product/{{ $newest->id }}"><img src="{{ $newest->getPicUrl() }}" style="@if($size=$newest->getPicSize($w=150,$h=125)) width:{{$size}}px; @endif height:125px;"></a>
                     </div>
-                    <div class="text"><a href="">原创视频</a></div>
+                    <div class="text"><a href="/product/{{ $newest->id }}">{{ $newest->name }}</a></div>
                 </div>
+                    @endforeach
+                @endif
+                @if(count($model->getNewests([]))<8)
+                    @for($i=0;$i<8-count($model->getNewests([]));++$i)
                 <div class="img_text">
                     <div class="img">
-                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
+                        <a href=""><div class="none">无</div></a>
                     </div>
-                    <div class="text"><a href="">原创视频</a></div>
+                    <div class="text"><a href="">没有原创</a></div>
                 </div>
-                <div class="img_text">
-                    <div class="img">
-                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
-                    </div>
-                    <div class="text"><a href="">原创视频</a></div>
-                </div>
-                <div class="img_text">
-                    <div class="img">
-                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
-                    </div>
-                    <div class="text"><a href="">原创视频</a></div>
-                </div>
-                <div class="img_text">
-                    <div class="img">
-                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
-                    </div>
-                    <div class="text"><a href="">原创视频</a></div>
-                </div>
-                <div class="img_text">
-                    <div class="img">
-                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
-                    </div>
-                    <div class="text"><a href="">原创视频</a></div>
-                </div>
-                <div class="img_text">
-                    <div class="img">
-                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
-                    </div>
-                    <div class="text"><a href="">原创视频</a></div>
-                </div>
-                <div class="img_text">
-                    <div class="img">
-                        <a href=""><img src="/uploads/images/2016/online1.png"></a>
-                    </div>
-                    <div class="text"><a href="">原创视频</a></div>
-                </div>
+                    @endfor
+                @endif
             </div>
             {{-- 公司信息 --}}
             <div class="pro_com">
                 <div class="privateInfo">
                     <div class="title">公司</div>
+                    @if(count($model->getNewests([2,4,5,6])))
+                        @foreach($model->getNewests([2,4,5,6]) as $newest)
                     <div class="img_text">
                         {{--<div class="img_num"> 1 </div>--}}
-                        <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
-                        <a href="">供应供应</a>
-                        <a href="" class="click">点击量<span>10</span></a>
+                        <div class="img"><a href="/product/{{ $newest->id }}">
+                                <img src="{{ $newest->getPicUrl() }}" style="@if($size=$newest->getPicSize($w=150,$h=125)) width:{{$size}}px; @endif height:125px;"></a>
+                        </div>
+                        <a href="/product/{{ $newest->id }}">{{ str_limit($newest->name,10) }}</a>
+                        <a href="" class="click">点击<span>{{ $newest->click }}</span></a>
                     </div>
+                        @endforeach
+                    @endif
+                    @if(count($model->getNewests([2,4,5,6]))<7)
+                        @for($i=0;$i<7-count($model->getNewests([2,4,5,6]));++$i)
                     <div class="img_text">
                         {{--<div class="img_num"> 1 </div>--}}
-                        <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
-                        <a href="">供应供应</a>
-                        <a href="" class="click">点击量<span>10</span></a>
+                        <div class="img">
+                            {{--<a href=""><div class="none">无</div></a>--}}
+                        </div>
+                        <a href="">无最新样片</a>
+                        <a href="" class="click">点击<span>0</span></a>
                     </div>
-                    <div class="img_text">
-                        {{--<div class="img_num"> 1 </div>--}}
-                        <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
-                        <a href="">供应供应</a>
-                        <a href="" class="click">点击量<span>10</span></a>
-                    </div>
-                    <div class="img_text">
-                        {{--<div class="img_num"> 1 </div>--}}
-                        <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
-                        <a href="">供应供应</a>
-                        <a href="" class="click">点击量<span>10</span></a>
-                    </div>
-                    <div class="img_text">
-                        {{--<div class="img_num"> 1 </div>--}}
-                        <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
-                        <a href="">供应供应</a>
-                        <a href="" class="click">点击量<span>10</span></a>
-                    </div>
-                    <div class="img_text">
-                        {{--<div class="img_num"> 1 </div>--}}
-                        <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
-                        <a href="">供应供应</a>
-                        <a href="" class="click">点击量<span>10</span></a>
-                    </div>
-                    <div class="img_text">
-                        {{--<div class="img_num"> 1 </div>--}}
-                        <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
-                        <a href="">供应供应</a>
-                        <a href="" class="click">点击量<span>10</span></a>
-                    </div>
+                        @endfor
+                    @endif
                 </div>
             </div>
             {{-- 设计师信息 --}}
             <div class="pro_per">
                 <div class="privateInfo">
                     <div class="title">个人</div>
+                    @if(count($model->getNewests([1,3])))
+                        @foreach($model->getNewests([1,3]) as $newest)
                     <div class="img_text">
                         {{--<div class="img_num"> 1 </div>--}}
-                        <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
-                        <a href="">需求需求</a>
-                        <a href="" class="click">点击量<span>10</span></a>
+                        <div class="img"><a href="/product/{{ $newest->id }}"><img src="{{ $newest->getPicUrl() }}" style="@if($size=$newest->getPicSize($w=150,$h=125)) width:{{$size}}px; @endif height:125px;"></a></div>
+                        <a href="/product/{{ $newest->id }}">{{ str_limit($newest->name,10) }}</a>
+                        <a href="" class="click">点击<span>{{ $newest->click }}</span></a>
                     </div>
+                        @endforeach
+                    @endif
+                    @if(count($model->getNewests([1,3]))<7)
+                        @for($i=0;$i<7-count($model->getNewests([1,3]));++$i)
                     <div class="img_text">
                         {{--<div class="img_num"> 1 </div>--}}
-                        <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
-                        <a href="">需求需求</a>
-                        <a href="" class="click">点击量<span>10</span></a>
+                        <div class="img">
+                            {{--<a href=""><div class="none">无</div></a>--}}
+                        </div>
+                        <a href="">无最新样片</a>
+                        <a href="" class="click">点击<span>0</span></a>
                     </div>
-                    <div class="img_text">
-                        {{--<div class="img_num"> 1 </div>--}}
-                        <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
-                        <a href="">需求需求</a>
-                        <a href="" class="click">点击量<span>10</span></a>
-                    </div>
-                    <div class="img_text">
-                        {{--<div class="img_num"> 1 </div>--}}
-                        <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
-                        <a href="">需求需求</a>
-                        <a href="" class="click">点击量<span>10</span></a>
-                    </div>
-                    <div class="img_text">
-                        {{--<div class="img_num"> 1 </div>--}}
-                        <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
-                        <a href="">需求需求</a>
-                        <a href="" class="click">点击量<span>10</span></a>
-                    </div>
-                    <div class="img_text">
-                        {{--<div class="img_num"> 1 </div>--}}
-                        <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
-                        <a href="">需求需求</a>
-                        <a href="" class="click">点击量<span>10</span></a>
-                    </div>
-                    <div class="img_text">
-                        {{--<div class="img_num"> 1 </div>--}}
-                        <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
-                        <a href="">需求需求</a>
-                        <a href="" class="click">点击量<span>10</span></a>
-                    </div>
+                        @endfor
+                    @endif
                 </div>
             </div>
         </div>
         <br style="clear:both;"><br>
+
+        <div style="border-bottom:1px solid rgba(240,240,240,1);"></div>
 
         {{-- 猜你喜欢 --}}
         {{--<div class="pro_floor">--}}

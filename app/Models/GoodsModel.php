@@ -158,4 +158,47 @@ class GoodsModel extends BaseModel
     {
         return $this->getUserInfo() ? $this->getUserInfo()->logo : '';
     }
+
+    /**
+     * 用户类型数组 arr
+     * 推荐和最新：recommend、newest
+     */
+    public function getNewests($arr)
+    {
+        if ($arr) {
+            $userModels = UserModel::whereIn('isuser',$arr)->get();
+            $userIds = array();
+            if ($userModels) {
+                foreach ($userModels as $userModel) {
+                    $userIds[] = $userModel->id;
+                }
+            }
+            return GoodsModel::whereIn('uid',$userIds)
+                ->where('newest',1)
+                ->where('isshow',1)
+                ->where('isshow2',1)
+                ->where('del',0)
+                ->orderBy('sort','desc')
+                ->orderBy('id','desc')
+                ->paginate($this->limit);
+//            ->get();
+        } else {
+            return GoodsModel::where('newest',1)
+                ->where('isshow',1)
+                ->where('isshow2',1)
+                ->where('del',0)
+                ->orderBy('sort','desc')
+                ->orderBy('id','desc')
+                ->paginate($this->limit);
+        }
+    }
+
+    /**
+     * 用户类型
+     */
+    public function userType()
+    {
+        $userModel = UserModel::find($this->uid);
+        return $userModel ? $userModel->isuser : '';
+    }
 }

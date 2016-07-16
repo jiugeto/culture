@@ -13,13 +13,20 @@ class ProductController extends BaseController
      * 网站首页产品样片
      */
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->model = new GoodsModel();
+    }
+
     public function index()
     {
         $result = [
             'recommends'=> $this->queryR(),
-            'newests'=> $this->queryN(),
+//            'newests'=> $this->queryN(),
             'datas'=> $this->query(),
             'curr_menu'=> 'product',
+            'model'=> $this->model,
         ];
         return view('home.product.index', $result);
     }
@@ -84,6 +91,15 @@ class ProductController extends BaseController
         return redirect('/product');
     }
 
+    /**
+     * 设定它一周以内的为最新的
+     */
+    public function setNew()
+    {
+        //一周以内为最新
+        //一周以外非最新
+    }
+
 
 
 
@@ -97,6 +113,9 @@ class ProductController extends BaseController
             ->paginate($this->limit);
     }
 
+    /**
+     * 推荐样片
+     */
     public function queryR()
     {
         return GoodsModel::where('recommend',1)
@@ -106,16 +125,21 @@ class ProductController extends BaseController
             ->orderBy('sort','desc')
             ->orderBy('id','desc')
             ->paginate($this->limit);
+//            ->get();
     }
 
-    public function queryN()
-    {
-        return GoodsModel::where('newest',1)
-            ->where('isshow',1)
-            ->where('isshow2',1)
-            ->where('del',0)
-            ->orderBy('sort','desc')
-            ->orderBy('id','desc')
-            ->paginate($this->limit);
-    }
+//    /**
+//     * 最新样片
+//     */
+//    public function queryN()
+//    {
+//        return GoodsModel::where('newest',1)
+//            ->where('isshow',1)
+//            ->where('isshow2',1)
+//            ->where('del',0)
+//            ->orderBy('sort','desc')
+//            ->orderBy('id','desc')
+////            ->paginate($this->limit);
+//            ->get();
+//    }
 }
