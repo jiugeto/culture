@@ -81,7 +81,10 @@
                     <div class="img">
                         <a href="/product/{{ $newest->id }}"><img src="{{ $newest->getPicUrl() }}" style="@if($size=$newest->getPicSize($w=150,$h=125)) width:{{$size}}px; @endif height:125px;"></a>
                     </div>
-                    <div class="text"><a href="/product/{{ $newest->id }}">{{ $newest->name }}</a></div>
+                    <div class="text">
+                        <a href="/product/{{ $newest->id }}">{{ $newest->name }}</a>
+                        <span style="color:red;float:right;">{{ $newest->click }}</span>
+                    </div>
                 </div>
                     @endforeach
                 @endif

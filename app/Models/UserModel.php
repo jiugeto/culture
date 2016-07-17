@@ -41,8 +41,10 @@ class UserModel extends BaseModel
         return $this->hasOne('\App\Models\PersonModel','id','uid');
     }
 
-    public function company()
+    public function company($uid)
     {
-        return $this->hasOne('\App\Models\CompanyModel','id','uid');
+//        return $this->hasOne('\App\Models\CompanyModel','id','uid');
+        $companyModel = CompanyModel::where('uid',$uid)->first();
+        return $companyModel ? $companyModel : '';
     }
 }

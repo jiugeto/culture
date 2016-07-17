@@ -663,7 +663,7 @@ DROP TABLE IF EXISTS `bs_goods`;
 CREATE TABLE `bs_goods` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL COMMENT '视频名称',
-  `genre` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '片源类型：1产品，2花絮',
+  `genre` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '片源类型：1产品系列，2花絮系列',
   `type` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '产品主体：1个人需求，2设计师供应，3企业需求，4企业供应',
   `cate_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '视频分类：关联bs_videos_category',
   `intro` varchar(1000) NOT NULL COMMENT '视频简介',
@@ -671,6 +671,7 @@ CREATE TABLE `bs_goods` (
   `pic_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '图片链接id，关联图片表bs_pics',
   `video_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '视频链接id，链接视频表bs_videos',
   `video_id2` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '花絮，视频链接',
+  `money` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '预报价，单位元',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布人：需求用户，设计师，公司',
   `uname` varchar(255) NOT NULL COMMENT '发布人名称',
   `click` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '点击自增，与会员无关，象征性的',
@@ -692,7 +693,7 @@ CREATE TABLE `bs_goods` (
 
 LOCK TABLES `bs_goods` WRITE;
 /*!40000 ALTER TABLE `bs_goods` DISABLE KEYS */;
-INSERT INTO `bs_goods` VALUES (1,'作品1',1,0,4,'v部分的白癜风b','',1,1,0,0,'',0,0,1,10,1,1,0,'2016-03-12','0000-00-00'),(2,'企业需求001',1,3,4,'','',1,1,0,0,'',0,0,1,10,1,1,0,'2016-03-13','0000-00-00'),(3,'企业作品001',1,4,4,'','',1,1,0,0,'',0,0,1,10,1,1,0,'2016-03-13','0000-00-00'),(4,'视频产品0003',1,4,4,'rgfgewfrgtnh','wferbgrwefrgtfh',1,1,0,1,'',0,0,1,10,1,1,0,'2016-04-28','0000-00-00');
+INSERT INTO `bs_goods` VALUES (1,'作品1',1,0,4,'v部分的白癜风b','',1,1,0,0,0,'',0,0,1,10,1,1,0,'2016-03-12','0000-00-00'),(2,'企业需求001',1,3,4,'','',1,1,0,0,0,'',0,0,1,10,1,1,0,'2016-03-13','0000-00-00'),(3,'企业作品001',1,4,4,'','',1,1,0,0,0,'',0,0,1,10,1,1,0,'2016-03-13','0000-00-00'),(4,'视频产品0003',1,4,4,'rgfgewfrgtnh','wferbgrwefrgtfh',1,1,0,0,1,'',0,0,1,10,1,1,0,'2016-04-28','0000-00-00');
 /*!40000 ALTER TABLE `bs_goods` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2160,4 +2161,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-07-16 17:08:35
+-- Dump completed on 2016-07-17 17:38:49

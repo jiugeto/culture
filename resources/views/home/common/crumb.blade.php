@@ -13,6 +13,8 @@
                 {{--@if($data->isreply==0)  / 修改意见 @else {{ isset($data->reply) ? ' / 意见'.$data->reply.'的回复' : '' }} @endif--}}
             {{--@endif--}}
             {{--{{ isset($menus['show']) ? ' / '.$menus['show'] : '' }}--}}
+
+            {{--意见、话题等导航--}}
             @foreach($navigates as $navigate)
                 @if($curr_menu==$navigate->link)<a href="/{{$curr_menu}}">{{ $navigate->name }}</a>@endif
                 @if($navigate->link=='opinion' && $curr_menu=='opinion')
@@ -25,7 +27,11 @@
                 @endif
             @endforeach
 
-            @if(isset($lists)&&array_key_exists($curr_menu,$lists)){{ $lists[$curr_menu] }}@endif
+            {{--模块名称--}}
+            @if(isset($lists)&&array_key_exists($curr_menu,$lists))<a href="/{{ $curr_menu }}">{{ $lists[$curr_menu] }}</a>@endif
+
+            {{--详情--}}
+            {{ isset($curr_submenu) ? '/ '.$curr_submenu['name'] : ''   }}
         </div>
     </div>
 </div>

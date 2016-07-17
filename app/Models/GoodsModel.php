@@ -15,7 +15,7 @@ class GoodsModel extends BaseModel
 
     protected $table = 'bs_goods';
     protected $fillable = [
-        'id','name','genre','type','cate_id','intro','title','pic_id','video_id','video_id2','uid','uname','click','recommend','newest','sort','isshow','isshow2','del','created_at','updated_at',
+        'id','name','genre','type','cate_id','intro','title','pic_id','video_id','video_id2','money','uid','uname','click','recommend','newest','sort','isshow','isshow2','del','created_at','updated_at',
     ];
 
     //片源类型：1产品，2花絮
@@ -82,6 +82,14 @@ class GoodsModel extends BaseModel
     }
 
     /**
+     * 花絮
+     */
+    public function video1s()
+    {
+        return VideoModel::where('uid',$this->uid)->get();
+    }
+
+    /**
      * 图片
      */
     public function pic()
@@ -123,11 +131,28 @@ class GoodsModel extends BaseModel
     }
 
     /**
+     * 花絮
+     */
+    public function video1()
+    {
+        return $this->video_id ? VideoModel::find($this->video_id1) : '';
+//        return $this->hasOne('\App\Models\VideoModel','id','video_id');
+    }
+
+    /**
      * 获取视频链接
      */
     public function getVideoUrl()
     {
         return $this->video() ? $this->video()->url : '';
+    }
+
+    /**
+     * 获取花絮链接
+     */
+    public function getVideo1Url()
+    {
+        return $this->video1() ? $this->video1()->url : '';
     }
 
     public function title()
@@ -143,6 +168,15 @@ class GoodsModel extends BaseModel
     public function isshow()
     {
         return array_key_exists($this->isshow,$this->isshows) ? $this->isshows[$this->isshow] : '';
+    }
+
+    /**
+     * 用户信息
+     */
+    public function user()
+    {
+        $userModel = UserModel::find($this->uid);
+        return $userModel ? $userModel : '';
     }
 
     /**
@@ -200,5 +234,25 @@ class GoodsModel extends BaseModel
     {
         $userModel = UserModel::find($this->uid);
         return $userModel ? $userModel->isuser : '';
+    }
+
+    /**
+     * 点击用户或关注用户
+     */
+    public function getClicks($uid)
+    {
+        $gid = $this->id ? $this->id : 0;
+        $clickModels = GoodsClickModel::where(array('gid'=>$gid, 'uid'=>$uid))->get();
+        return count($clickModels) ? count($clickModels) : 0;
+    }
+
+    /**
+     * 喜欢的用户
+     */
+    public function getLikes($uid)
+    {
+        $gid = $this->id ? $this->id : 0;
+        $likeModels = GoodsLikeModel::where(array('gid'=>$gid, 'uid'=>$uid))->get();
+        return count($likeModels) ? count($likeModels) : 0;
     }
 }

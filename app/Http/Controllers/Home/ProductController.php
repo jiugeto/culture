@@ -13,37 +13,69 @@ class ProductController extends BaseController
      * 网站首页产品样片
      */
 
+    protected $curr = 'product';
+    protected $uid;
+
     public function __construct()
     {
         parent::__construct();
         $this->model = new GoodsModel();
+        $this->uid = \Session::has('user.uid') ? \Session::get('user.uid') : 0;
     }
 
     public function index()
     {
         $result = [
+            'lists'=> $this->list,
             'recommends'=> $this->queryR(),
 //            'newests'=> $this->queryN(),
             'datas'=> $this->query(),
-            'curr_menu'=> 'product',
+            'curr_menu'=> $this->curr,
             'model'=> $this->model,
         ];
         return view('home.product.index', $result);
     }
 
-//    public function show($id)
-//    {
-//        return view('home.product.show');
-//    }
+    public function show($id)
+    {
+        $submenu['url'] = 'show';
+        $submenu['name'] = '详情';
+        $data = GoodsModel::find($id);
+        $result = [
+            'lists'=> $this->list,
+            'data'=> $data,
+            'curr_menu'=> $this->curr,
+            'curr_submenu'=> $submenu,
+            'uid'=> $data->uid,
+        ];
+        return view('home.product.show', $result);
+    }
 
     public function video($id,$videoid)
     {
         $result = [
             'data'=> GoodsModel::find($id),
             'video'=> VideoModel::find($videoid),
-            'uid'=> \Session::has('user.uid') ? \Session::get('user.uid') : 0,
+            'uid'=> $this->uid,
         ];
         return view('layout.videoPre', $result);
+    }
+
+    public function setClick($id,$num)
+    {
+        if ($num==1) {
+            //增加点击量
+            GoodsModel::where('id',$id)->increment('click',1);
+        } elseif (in_array($num,[2,3])) {
+            //用户点击
+            $arr = array('gid'=> $id, 'uid'=> $this->uid, 'created_at'=> time());
+            GoodsClickModel::create($arr);
+        } elseif ($num==3) {
+            //用户喜欢
+            $arr = array('gid'=> $id, 'uid'=> $this->uid, 'created_at'=> time());
+            GoodsClickModel::create($arr);
+        }
+        return redirect('/product/'.$id);
     }
 
     /**
@@ -51,7 +83,7 @@ class ProductController extends BaseController
      */
     public function click($id)
     {
-        GoodsModel::where('id',$id)->increment('votes', 1);
+        GoodsModel::where('id',$id)->increment('click', 1);
         return redirect('/product');
     }
 
