@@ -20,8 +20,8 @@ class StoryBoardController extends BaseController
         elseif ($way==2) { $way = 'ishot'; }
         $this->isnew();
         $result = [
-            'lists'=> $this->list,
             'datas'=> $this->query($way,$genre),
+            'lists'=> $this->list,
             'curr_menu'=> $this->curr,
             'genre'=> $genre,
             'way'=> $way,

@@ -2024,6 +2024,7 @@ DROP TABLE IF EXISTS `companys`;
 CREATE TABLE `companys` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL COMMENT '公司名称',
+  `genre` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '公司的类型，对应users表的isuser：2普通企业，4广告公司，5影视公司，6租赁公司',
   `area` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '所在地ID',
   `address` varchar(255) NOT NULL COMMENT '详细地址',
   `yyzzid` varchar(255) NOT NULL COMMENT '营业执照注册码',
@@ -2036,8 +2037,8 @@ CREATE TABLE `companys` (
   `zipcode` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '邮编',
   `email` varchar(255) NOT NULL COMMENT '企业邮箱',
   `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序字段，值越大越靠前，默认10',
-  `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
-  `updated_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '更新时间',
+  `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `updated_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='企业表 bs_companys';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -2048,7 +2049,7 @@ CREATE TABLE `companys` (
 
 LOCK TABLES `companys` WRITE;
 /*!40000 ALTER TABLE `companys` DISABLE KEYS */;
-INSERT INTO `companys` VALUES (1,'这是广告公司',10,'滨盛路1870','0123456789012345',1,'0571',88888888,100000,'www.jiuge.com',12345678,311301,'123@456.com',10,'2016-04-28','0000-00-00');
+INSERT INTO `companys` VALUES (1,'这是广告公司',1,10,'滨盛路1870','0123456789012345',1,'0571',88888888,100000,'www.jiuge.com',12345678,311301,'123@456.com',10,20160428,0);
 /*!40000 ALTER TABLE `companys` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2066,8 +2067,8 @@ CREATE TABLE `persons` (
   `idcard` char(18) NOT NULL COMMENT '身份证号码，18位',
   `idfront` varchar(255) NOT NULL COMMENT '身份证正面照',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '会员id',
-  `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
-  `updated_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '更新时间',
+  `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `updated_at` int(11) NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='个人表 bs_persons';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -2078,7 +2079,7 @@ CREATE TABLE `persons` (
 
 LOCK TABLES `persons` WRITE;
 /*!40000 ALTER TABLE `persons` DISABLE KEYS */;
-INSERT INTO `persons` VALUES (1,'jiuge',1,'123456789012345678','',1,'2016-04-10','0000-00-00'),(2,'jiuge',1,'123456789012345678','',1,'2016-04-10','0000-00-00'),(3,'九哥',1,'123456789012345678','',1,'2016-04-10','0000-00-00'),(4,'九哥',1,'123456789012345678','',1,'2016-04-10','0000-00-00');
+INSERT INTO `persons` VALUES (1,'jiuge',1,'123456789012345678','',1,20160410,0),(2,'jiuge',1,'123456789012345678','',1,20160410,0),(3,'九哥',1,'123456789012345678','',1,20160410,0),(4,'九哥',1,'123456789012345678','',1,20160410,0);
 /*!40000 ALTER TABLE `persons` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2105,8 +2106,8 @@ CREATE TABLE `users` (
   `isuser` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '会员身份：0非会员，1个人消费者，2普通企业，3设计师，4广告公司，5影视公司，6租赁公司',
   `isvip` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '是否vip：0非VIP，1是VIP',
   `limit` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '列表每页记录数，默认10条',
-  `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
-  `updated_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '更新时间',
+  `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `updated_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户表 bs_users';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -2117,7 +2118,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'jiuge','$2y$10$Ys0R.RAweFTJYXNTAH.tL.84VE8ZswnjMzJtrMr5P89Wg.4H26He.','jiuge@qq.com','946493655',63929131,4294967295,0,'',0,1,1,4,0,15,'2016-04-06','0000-00-00'),(2,'jiuge2','$2y$10$X5BdoH0p0n.E3hxCVag/neinTfiHXbMrCHUEEqf8ZpUQGaeOxUUBe','946493655@qq.com','',0,0,0,'',0,0,0,0,0,10,'2016-06-17','0000-00-00');
+INSERT INTO `users` VALUES (1,'jiuge','$2y$10$Ys0R.RAweFTJYXNTAH.tL.84VE8ZswnjMzJtrMr5P89Wg.4H26He.','jiuge@qq.com','946493655',63929131,4294967295,0,'',0,1,1,4,0,15,20160406,0),(2,'jiuge2','$2y$10$X5BdoH0p0n.E3hxCVag/neinTfiHXbMrCHUEEqf8ZpUQGaeOxUUBe','946493655@qq.com','',0,0,0,'',0,0,0,0,0,10,20160617,0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2136,8 +2137,8 @@ CREATE TABLE `users_params` (
   `lecloud` varchar(255) NOT NULL COMMENT '乐视云账户',
   `lepwd` varchar(255) NOT NULL COMMENT '乐视云密码',
   `leplay` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否自动播放：0手动播放，1自动播放',
-  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
-  `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '更新时间',
+  `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `updated_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户参数表 bs_users_params';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -2148,7 +2149,7 @@ CREATE TABLE `users_params` (
 
 LOCK TABLES `users_params` WRITE;
 /*!40000 ALTER TABLE `users_params` DISABLE KEYS */;
-INSERT INTO `users_params` VALUES (1,1,15,1,'946493655@qq.com','zwx4074553864',0,'2016-04-06 00:00:00','0000-00-00 00:00:00');
+INSERT INTO `users_params` VALUES (1,1,15,1,'946493655@qq.com','zwx4074553864',0,20160406,0);
 /*!40000 ALTER TABLE `users_params` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -2161,4 +2162,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-07-17 17:38:49
+-- Dump completed on 2016-08-02 21:09:16

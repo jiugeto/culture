@@ -26,6 +26,7 @@ Route::group(['prefix'=>'/','namespace'=>'Home'],function(){
     Route::get('storyboard/{id}','StoryBoardController@show');
     Route::any('storyboard','StoryBoardController@index');
     //供应单位
+    Route::get('{genre}/supply','SupplyController@index');
     Route::any('supply','SupplyController@index');
     //需求信息
     Route::any('demand','DemandController@index');

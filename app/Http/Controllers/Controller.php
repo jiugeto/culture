@@ -25,11 +25,7 @@ abstract class Controller extends BaseController
     protected $comPptNum = 3;     //企业宣传记录数
     protected $comJobNum = 5;     //企业工作记录数
     protected $sefLogo = '/assets/images/icon.png';        //本网站普通自己的logo地址
-//    protected $proAttrNum = 30;        //可以做动画的属性数量限制
-
-    protected $lists = [      //数据列表
-//        ''=> '所有列表',
-//        'trash'=> '回收站',
+    protected $lists = [
         ''=> [
             'url'=> '',
             'name'=> '所有列表',
@@ -60,16 +56,19 @@ abstract class Controller extends BaseController
         ],
     ];
 
-//    protected $menus = [    //菜单
-//        'home'=> '首 页',
-//        'product'=> '产品样片',
-//        'creation'=> '在线作品',
-//        'supply'=> '供应企业',
-//        'demand'=> '需求信息',
-//        'entertain'=> '娱乐频道',
-//        'rent'=> '租赁频道',
-//        'design'=> '设计频道',
-//        'about'=> '关于我们',
-//        'idea'=> '创意点子',
-//    ];
+    /**
+     * 创建时间转换
+     */
+    public function createTime()
+    {
+        return $this->created_at ? date("Y年m月d日 H:i", $this->created_at) : '';
+    }
+
+    /**
+     * 更新时间转换
+     */
+    public function updateTime()
+    {
+        return $this->updated_at ? date("Y年m月d日 H:i", $this->updated_at) : '';
+    }
 }

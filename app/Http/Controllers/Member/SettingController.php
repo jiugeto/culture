@@ -101,7 +101,7 @@ class SettingController extends BaseController
                 'address'=> $request->address,
                 'yyzzid'=> $request->yyzzid,
                 'uid'=> $id,
-                'created_at'=> date('Y-m-d', time()),
+                'created_at'=> time(),
             ];
             CompanyModel::create($company);
         }
