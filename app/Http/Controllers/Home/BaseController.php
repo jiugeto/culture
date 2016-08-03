@@ -34,6 +34,7 @@ class BaseController extends Controller
 
     public function __construct()
     {
+        parent::__construct();
         if (!\Session::has('user.uid')) { return redirect('/login'); }
         $this->userid = \Session::get('user.uid');
     }

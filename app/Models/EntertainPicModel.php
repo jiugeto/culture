@@ -1,8 +1,6 @@
 <?php
 namespace App\Models;
 
-//use Illuminate\Database\Eloquent\Model;
-
 class EntertainPicModel extends BaseModel
 {
     protected $table = 'bs_entertain_pic';

@@ -33,33 +33,23 @@
                 @if(count($datas))
                     @foreach($datas as $data)
                 <tr>
-                    <td>公司名称：{{ $data->name }}</td>
-                    <td>地址：{{ $data->address }}</td>
-                    <td>业务：</td>
+                    <td>公司名称：{{ str_limit($data->name,20) }}</td>
+                    <td>公司类型：{{ $data->genreName() }}</td>
+                    <td>地址：{{ str_limit($data->address,20) }}</td>
                 </tr>
                 <tr>
-                    <td>地区：{{ $data->areaName() }}</td>
+                    <td>地区：{{ $data->getAreaName($data->area) }}</td>
                     <td>时间：{{ $data->createTime() }}</td>
-                    <td></td>
+                    <td><a href="{{DOMAIN}}supply/{{ $data->id }}" class="toshow">详情</a></td>
                 </tr>
                     @endforeach
                 @endif
             </table>
-            <table class="record">
-                <tr>
-                    <td>公司名称：</td>
-                    <td>地址：</td>
-                    <td>职能：</td>
-                </tr>
-                <tr>
-                    <td>地区：</td>
-                    <td>时间：</td>
-                    <td></td>
-                </tr>
-            </table>
+            @include('home.common.page')
         </div>
         <div class="s_right">
-            <img src="/uploads/images/2016/ppt.png">
+            {{--<img src="/uploads/images/2016/ppt.png">--}}
+            <div style="width:280px;height:300px;background:rgb(250,250,250);"></div>
         </div>
     </div>
 

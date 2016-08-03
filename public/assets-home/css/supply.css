@@ -31,7 +31,7 @@
     background:rgb(250,250,250);
     border-radius:3px;
     border:1px solid rgb(240,240,240);
-    font-size:20px;
+    font-size:18px;
 }
 .s_select {
     width:120px;height:30px;
@@ -49,7 +49,16 @@
     width:708px;
     border:1px solid rgb(230,230,230);
     border-radius:3px;
+    font-size:14px;
 }
+.s_list .record td { width:30%; }
+.s_list .record a.toshow {
+    padding:3px 20px;
+    color:lightgrey;
+    text-decoration:none;
+    background:darkred;
+}
+.s_list .record a.toshow:hover { color:white;background:red; }
 /*娱乐列表entertain*/
 .e_list { width:860px; }
 .e_list .record td {

@@ -272,7 +272,8 @@ td.head { text-align:center; }
 /*=== 前台公用搜索样式 ===*/
 .home_search {
     padding:2px 10px;
-    font-size:16px;
+    font-size:18px;
     border:1px solid lightgrey;
     border-radius:5px;
+    font-family:"黑体";
 }

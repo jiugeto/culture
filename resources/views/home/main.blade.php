@@ -17,7 +17,7 @@
 </head>
 <body>
     @include('layout.header')
-    @include('layout.navigate')
+    {{--@include('layout.navigate')--}}
 
     <!-- 空白 -->
     <div class="content_kongbai">&nbsp;</div>

@@ -56,19 +56,9 @@ abstract class Controller extends BaseController
         ],
     ];
 
-    /**
-     * 创建时间转换
-     */
-    public function createTime()
+    public function __construct()
     {
-        return $this->created_at ? date("Y年m月d日 H:i", $this->created_at) : '';
-    }
-
-    /**
-     * 更新时间转换
-     */
-    public function updateTime()
-    {
-        return $this->updated_at ? date("Y年m月d日 H:i", $this->updated_at) : '';
+        define("DOMAIN",strtoupper(getenv('DOMAIN')));
+        define("PUB",strtoupper(getenv('PUB')));
     }
 }

@@ -180,6 +180,14 @@ class GoodsModel extends BaseModel
     }
 
     /**
+     * 得到用户名
+     */
+    public function userName()
+    {
+        return $this->user() ? $this->user()->username : '';
+    }
+
+    /**
      * 视频发布方信息
      */
     public function getUserInfo()
