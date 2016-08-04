@@ -32,7 +32,7 @@ Route::group(['prefix'=>'/','namespace'=>'Home'],function(){
     Route::get('demand/genre/{genre}','DemandController@index');
     Route::any('demand','DemandController@index');
     //娱乐频道
-    Route::get('{genre0}/entertain/{genre}','EntertainController@index');
+    Route::get('entertain/{genre0}/{genre}','EntertainController@index');
     Route::any('entertain','EntertainController@index');
     //租赁频道
     Route::any('rent/SD/{genre}','RentController@index');

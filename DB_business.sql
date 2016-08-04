@@ -414,7 +414,8 @@ CREATE TABLE `bs_entertain_pic` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `entertain_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '娱乐id',
   `pic_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '图片id',
-  `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
+  `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `updated_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='娱乐图片关联表 bs_entertain_pic';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -439,7 +440,8 @@ CREATE TABLE `bs_entertain_work` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `entertainid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '娱乐id',
   `workid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '影视作品id',
-  `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
+  `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `updated_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='娱乐公司与作品关联表 bs_entertain_work';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -469,8 +471,8 @@ CREATE TABLE `bs_entertains` (
   `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序字段，值越大越靠前，默认10',
   `isshow` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '控制是否显示：0不显示，1显示',
   `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站：0为不放入回收站，1为放入回收站',
-  `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
-  `updated_at` date NOT NULL,
+  `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `updated_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='娱乐表';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -481,7 +483,7 @@ CREATE TABLE `bs_entertains` (
 
 LOCK TABLES `bs_entertains` WRITE;
 /*!40000 ALTER TABLE `bs_entertains` DISABLE KEYS */;
-INSERT INTO `bs_entertains` VALUES (1,'娱乐001',2,'rthyngrthg',0,10,1,0,'2016-03-22','2016-03-22');
+INSERT INTO `bs_entertains` VALUES (1,'娱乐001',1,'rthyngrthgggggggggggggggggggggggggggggggggggggggggggggggggggggggg',1,10,1,0,20160322,20160322);
 /*!40000 ALTER TABLE `bs_entertains` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1300,6 +1302,7 @@ CREATE TABLE `bs_staff_pic` (
   `staff_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '演员id',
   `pic_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '图片id',
   `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `updated_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='员工图片关联表 bs_staff_pic';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1351,7 +1354,8 @@ CREATE TABLE `bs_staffs` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL COMMENT '演员名称',
   `entertain_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '娱乐id，关联娱乐表bs_entertains',
-  `genre` tinyint(3) unsigned NOT NULL COMMENT '职位类型：',
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布人',
+  `genre` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '职位类型：1=>演员，导演，摄影师，灯光师，化妆师，21=>剪辑师，特效师，合成师，配音，背景音',
   `sex` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '性别：1男，2女',
   `realname` varchar(255) NOT NULL COMMENT '真实名字',
   `origin` varchar(255) NOT NULL COMMENT '籍贯',
@@ -1366,7 +1370,7 @@ CREATE TABLE `bs_staffs` (
   `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updated_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='娱乐公司员工表 bs_staffs';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='娱乐公司员工表 bs_staffs ：主要是供应信息';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1375,7 +1379,7 @@ CREATE TABLE `bs_staffs` (
 
 LOCK TABLES `bs_staffs` WRITE;
 /*!40000 ALTER TABLE `bs_staffs` DISABLE KEYS */;
-INSERT INTO `bs_staffs` VALUES (1,'拿斧头男',0,0,1,'能否规范','个人方法',1,'他人观花','',0,172,10,1,0,20160423,0),(2,'如果它不符合',0,0,1,'乳房的不过','而发表格式的风格',1,'而对方不改变','1,2,3',0,150,10,1,0,20160613,20160613);
+INSERT INTO `bs_staffs` VALUES (1,'拿斧头男',1,1,0,1,'能否规范','个人方法',1,'他人观花','',0,172,10,1,0,20160423,0),(2,'如果它不符合',1,1,0,1,'乳房的不过','而发表格式的风格',1,'而对方不改变','1,2,3',0,150,10,1,0,20160613,20160613);
 /*!40000 ALTER TABLE `bs_staffs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2116,4 +2120,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-03 21:09:23
+-- Dump completed on 2016-08-04 20:23:25

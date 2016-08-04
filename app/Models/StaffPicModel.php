@@ -19,8 +19,19 @@ class StaffPicModel extends BaseModel
     /**
      * 关联图片
      */
+//    public function pic()
+//    {
+//        return $this->hasOne('App\Models\PicModel', 'id', 'pic_id');
+//    }
     public function pic()
     {
-        return $this->hasOne('App\Models\PicModel', 'id', 'pic_id');
+        $pic_id = $this->pic_id ? $this->pic_id : 0;
+        $picModel = PicModel::find($pic_id);
+        return $picModel ? $picModel : '';
+    }
+
+    public function getPicUrl()
+    {
+        return $this->pic() ? $this->pic()->url : '';
     }
 }

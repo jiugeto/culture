@@ -52,47 +52,40 @@
     font-size:14px;
 }
 .s_list .record td { width:30%; }
-.s_list .record a.toshow {
+/*.s_list .record*/ a.toshow {
     padding:3px 20px;
     color:lightgrey;
     text-decoration:none;
     background:darkred;
 }
-.s_list .record a.toshow:hover { color:white;background:red; }
+/*.s_list .record*/ a.toshow:hover { color:white;background:red; }
 /*娱乐列表entertain*/
 .e_list { width:860px; }
-.e_list .record td {
-    padding:5px;
-    width:226px;
-}
 .e_list .record {
     margin:20px 0;
-    padding:0 10px;
-    width:828px;
+    padding:0 5px;
+    width:728px;
+    /*height:80px;*/
     border:1px solid rgb(230,230,230);
     border-radius:3px;
 }
-.e_list .record td {
-    padding:5px;
-    /*818/4-10=194.5*/
-    width:194px;height:150px;
+.e_list td div.title {
+    font-size:16px;
 }
-.e_list td.title {
-    height:30px;
-    border-bottom:1px solid rgb(240,240,240);
+.e_list td div.con {
+    padding:5px 0;
+    width:310px; height:30px;
+    border:1px dashed rgb(250,250,250);
 }
 .e_list .img {
-    margin:0 auto;
-    width:190px;height:90px;
+    width:180px;height:60px;
     overflow:hidden;
 }
-.e_list p {
-    margin:0;
-    padding:0;
-    text-align:center;
-    font-size:14px;
+.e_list div {
+    font-size:16px;
 }
-.e_list p.title { font-size:18px; }
+.e_list div.title { font-size:16px; }
+.e_list div.comName { padding-top:5px;width:150px;font-size:12px; }
 /*租赁列表rent*/
 .s_list .td_r_img {
     width:60px;height:60px;
@@ -112,7 +105,7 @@
 }
 /*娱乐广告entertain*/
 .e_right {
-    width:160px;height:500px;
+    width:260px;height:500px;
     overflow:hidden;
     /*position:absolute;top:225px;right:0;*/
 }
