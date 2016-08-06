@@ -34,9 +34,12 @@ Route::group(['prefix'=>'/','namespace'=>'Home'],function(){
     //娱乐频道
     Route::get('entertain/{genre0}/{genre}','EntertainController@index');
     Route::any('entertain','EntertainController@index');
+    Route::get('entertain/{id}','EntertainController@show');
+    Route::get('entertain/staff/show/{id}','EntertainController@staffShow');
     //租赁频道
-    Route::any('rent/SD/{genre}','RentController@index');
-    Route::any('rent','RentController@index');
+    Route::get('rent/SD/{genre}','RentController@index');
+    Route::get('rent/m/{from}/{to}','RentController@index');
+    Route::resource('rent','RentController');
     //设计频道
     Route::any('design','DesignController@index');
     //关于我们

@@ -11,7 +11,7 @@ class WorksModel extends BaseModel
 
     protected $table = 'bs_works';
     protected $fillable = [
-        'id','name','cateid','intro','videoid','sort','isshow','del','created_at','updated_at',
+        'id','name','cateid','intro','detail','video_id','pic_id','sort','isshow','del','created_at','updated_at',
     ];
 
     protected $cates = [
@@ -36,20 +36,29 @@ class WorksModel extends BaseModel
         return $videoModel ? $videoModel : '无';
     }
 
-    public function actors()
+    public function staffs()
     {
-        return ActorModel::all();
+        return StaffModel::all();
     }
 
-    public function actor()
+    public function staff()
     {
         $worksid = $this->id ? $this->id : 0;
-        $actorWorks = ActorWorksModel::where('worksid',$worksid)->get();
-        if (count($actorWorks)) {
-            foreach ($actorWorks as $actorWork) {
-                $actorids[] = $actorWork->actorid;
+        $staffWorks = StaffWorksModel::where('worksid',$worksid)->get();
+        if (count($staffWorks)) {
+            foreach ($staffWorks as $staffWork) {
+                $staffids[] = $staffWork->staffid;
             }
         }
-        return isset($actorids) ? ActorModel::whereIn('id',$actorids)->get() : [];
+        return isset($staffids) ? StaffModel::whereIn('id',$staffids)->get() : [];
+    }
+
+    /**
+     * 人员公司的所有图片
+     */
+    public function getPics()
+    {
+        $staff_id = $this->id ? $this->id : 0;
+        return StaffPicModel::where('staff_id',$staff_id)->get();
     }
 }

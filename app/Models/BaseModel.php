@@ -26,9 +26,9 @@ class BaseModel extends Model
     /**
      * 拼接地区名称字符串
      */
-    public function getAreaName($area)
+    public function getAreaName()
     {
-        $areaid = $area ? $area : 0;
+        $areaid = $this->area ? $this->area : 0;
         $areaModel = AreaModel::find($areaid);
         $areaName = '';
         //本级

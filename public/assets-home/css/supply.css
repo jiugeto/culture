@@ -87,12 +87,13 @@
 .e_list div.title { font-size:16px; }
 .e_list div.comName { padding-top:5px;width:150px;font-size:12px; }
 /*租赁列表rent*/
-.s_list .td_r_img {
+.s_list td { padding:0 5px; }
+.s_list td.td_r_img {
     width:60px;height:60px;
 }
 .s_list .r_img {
     margin:0 auto;
-    width:50px;height:50px;
+    width:150px;height:50px;
     overflow:hidden;
 }
 

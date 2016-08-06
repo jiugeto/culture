@@ -1,52 +1,71 @@
 @extends('home.main')
 @section('content')
     @include('home.common.crumb')
+    <style>
+        .s_con { color:grey; }
+        input { padding:2px 5px;width:50px;border:1px solid lightgrey;border-radius:3px; }
+        a#search { padding:0 10px;color:grey;border:1px solid lightgrey;background:lightgrey;text-decoration:none;cursor:pointer; }
+        a:hover#search { color:red;border:1px solid red;background:white; }
+    </style>
     <div class="s_con">
         {{-- 搜索 --}}
         <div class="cre_kong">&nbsp;{{--10px高度留空--}}</div>
         <div class="s_search">
-            租赁供求：
-            <select name="genre">
-                <option value="0" {{ $genre==0 ? 'selected' : '' }}>-请选择-</option>
-                <option value="1" {{ $genre==1 ? 'selected' : '' }}>设备供应</option>
-                <option value="2" {{ $genre==2 ? 'selected' : '' }}>设备需求</option>
-            </select>
-            <script>
-                $(document).ready(function(){
-                    var genre = $("select[name='genre']");
-                    genre.change(function(){
-                        if(genre.val()==0){
-                            window.location.href = '/rent';
-                        } else {
-                            //SD就是SupplyDemand
-                            window.location.href = '/rent/SD/'+genre.val();
-                        }
-                    });
-                });
-            </script>
+            租金：
+            <input type="text" name="fromMoney"> -
+            <input type="text" name="toMoney"> 元
+            <a id="search">搜索</a>
         </div>
+        <script>
+            $("#search").click(function(){
+                var fromMoney = $("input[name='fromMoney']").val();
+                var toMoney = $("input[name='toMoney']").val();
+                //m代表money缩写，代表租金
+                if (!fromMoney && !toMoney) {
+                    window.location.href = '{{DOMAIN}}rent';
+                } else {
+                    window.location.href = '{{DOMAIN}}rent/m/'+fromMoney+'/'+toMoney;
+                }
+            });
+        </script>
 
         {{-- 列表 --}}
         <div class="cre_kong">&nbsp;{{--10px高度留空--}}</div>
         <div class="s_list">
             <table class="record">
+            @if(Count($datas))
+                @foreach($datas as $kdata=>$data)
                 <tr>
                     <td rowspan="2" class="td_r_img">
-                        <div class="r_img"><img src="/uploads/images/2016/online1.png"></div>
+                        <div class="r_img">
+                            {{--<img src="/uploads/images/2016/online1.png">--}}
+                            @if(count($data->getPics()))
+                                <img src="{{ $pic[0]->getPicUrl() }}">
+                            @else
+                                <div style="width:150px;height:50px;background:rgb(250,250,250);"></div>
+                            @endif
+                        </div>
                     </td>
-                    <td>设备名称：</td>
-                    <td>供求关系：</td>
+                    <td>设备：{{ str_limit($data->name,15) }}</td>
+                    <td>公司：{{ str_limit($data->getUserName(),15) }}</td>
+                    <td>地区：{{ $data->getAreaName() }}</td>
                 </tr>
                 <tr>
-                    <td>租赁公司：</td>
-                    <td>地区：</td>
-                    <td>公司地址：</td>
+                    <td>租金：{{ $data->money() }}</td>
+                    <td>有效期：{{ $data->period() }}</td>
+                    <td><a href="{{DOMAIN}}rent/{{ $data->id }}" class="toshow">详情</a></td>
                 </tr>
+                @if($kdata!=1 && $kdata!=count($datas)-1)
+                    <tr><td colspan="10"><div style="height:10px;border-top:1px dashed lightgrey;">&nbsp;</div></td></tr>
+                @endif
+                @endforeach
+            @endif
             </table>
         </div>
         <div class="s_right">
             <div class="cate"></div>
-            <img src="/uploads/images/2016/ppt.png">
+            {{--<img src="/uploads/images/2016/ppt.png">--}}
+            <div style="width:280px;height:400px;background:rgb(250,250,250);"></div>
         </div>
     </div>
 

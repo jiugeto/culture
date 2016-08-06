@@ -483,7 +483,7 @@ CREATE TABLE `bs_entertains` (
 
 LOCK TABLES `bs_entertains` WRITE;
 /*!40000 ALTER TABLE `bs_entertains` DISABLE KEYS */;
-INSERT INTO `bs_entertains` VALUES (1,'娱乐001',1,'rthyngrthgggggggggggggggggggggggggggggggggggggggggggggggggggggggg',1,10,1,0,20160322,20160322);
+INSERT INTO `bs_entertains` VALUES (1,'娱乐001',1,'rthyngrthgggggggggggggggggggggggggggggggggggggggggggggggggggggggghhhhhhhhhhhhhhh',1,10,1,0,20160322,20160322);
 /*!40000 ALTER TABLE `bs_entertains` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1269,6 +1269,7 @@ CREATE TABLE `bs_rents` (
   `genre` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '类型：1供应，2需求',
   `intro` varchar(500) NOT NULL COMMENT '设备介绍',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布者id',
+  `area` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '地区id',
   `price` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '价格，单位元',
   `fromtime` int(20) unsigned NOT NULL DEFAULT '0' COMMENT '租赁开始时间',
   `totime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '租赁结束时间',
@@ -1286,7 +1287,7 @@ CREATE TABLE `bs_rents` (
 
 LOCK TABLES `bs_rents` WRITE;
 /*!40000 ALTER TABLE `bs_rents` DISABLE KEYS */;
-INSERT INTO `bs_rents` VALUES (1,'租赁供应0323',1,'yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy',0,0.00,0,0,10,0,20160323,20160323);
+INSERT INTO `bs_rents` VALUES (1,'租赁供应0323',1,'yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy',1,0,0.00,0,0,10,0,20160323,20160323);
 /*!40000 ALTER TABLE `bs_rents` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1379,7 +1380,7 @@ CREATE TABLE `bs_staffs` (
 
 LOCK TABLES `bs_staffs` WRITE;
 /*!40000 ALTER TABLE `bs_staffs` DISABLE KEYS */;
-INSERT INTO `bs_staffs` VALUES (1,'拿斧头男',1,1,0,1,'能否规范','个人方法',1,'他人观花','',0,172,10,1,0,20160423,0),(2,'如果它不符合',1,1,0,1,'乳房的不过','而发表格式的风格',1,'而对方不改变','1,2,3',0,150,10,1,0,20160613,20160613);
+INSERT INTO `bs_staffs` VALUES (1,'拿斧头男',1,1,1,1,'能否规范','个人方法',1,'他人观花','',0,172,10,1,0,20160423,0),(2,'如果它不符合',1,1,1,1,'乳房的不过','而发表格式的风格',1,'而对方不改变','1,2,3',0,150,10,1,0,20160613,20160613);
 /*!40000 ALTER TABLE `bs_staffs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1816,13 +1817,15 @@ CREATE TABLE `bs_works` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL COMMENT '作品名称',
   `cateid` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '影片类型：1电视剧，2电影，3微电影，4广告，5宣传片，6汇报片，7纪录片，',
-  `intro` varchar(1000) NOT NULL COMMENT '简单介绍',
-  `videoid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '视频链接id，链接视频表bs_videos',
+  `intro` varchar(255) NOT NULL COMMENT '简介',
+  `detail` varchar(1000) NOT NULL COMMENT '详情',
+  `video_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '视频链接id，链接视频表bs_videos',
+  `pic_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '图片id，关联bs_pics',
   `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序，值越大越靠前，默认10',
-  `isshow` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '前台显示否：0不显示，1显示',
+  `isshow` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '前台显示否：0不显示，1显示',
   `del` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '回收站：0不删除，1删除',
-  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
-  `updated_at` datetime NOT NULL,
+  `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `updated_at` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='影视作品表 works';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1833,7 +1836,7 @@ CREATE TABLE `bs_works` (
 
 LOCK TABLES `bs_works` WRITE;
 /*!40000 ALTER TABLE `bs_works` DISABLE KEYS */;
-INSERT INTO `bs_works` VALUES (1,'作品26256',1,'<p>efdbgesfsdf</p>',0,15,1,0,'2016-06-14 21:03:25','0000-00-00 00:00:00');
+INSERT INTO `bs_works` VALUES (1,'作品26256',1,'','<p>efdbgesfsdf</p>',0,0,15,1,0,20160614,0);
 /*!40000 ALTER TABLE `bs_works` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2120,4 +2123,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-04 20:23:25
+-- Dump completed on 2016-08-06 21:00:34

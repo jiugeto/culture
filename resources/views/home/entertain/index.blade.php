@@ -8,6 +8,7 @@
             搜索方式：
             <label><input type="radio" name="genre0" value="1" {{ $genre0==1 ? 'checked' : '' }} onclick="window.location.href='{{DOMAIN}}entertain';">公司</label>
             <label><input type="radio" name="genre0" value="2" {{ $genre0==2 ? 'checked' : '' }} onclick="window.location.href='{{DOMAIN}}entertain/2/0';">人员</label>
+            {{--<label><input type="radio" name="genre0" value="3" {{ $genre0==3 ? 'checked' : '' }} onclick="window.location.href='{{DOMAIN}}entertain/3/0';">作品</label>--}}
             <input type="hidden" name="genre_0" value="{{ $genre0 }}">
             @if($genre0==2)
             &nbsp;&nbsp;&nbsp;&nbsp;
@@ -36,70 +37,54 @@
         {{-- 列表 --}}
         <div class="e_list">
             <table class="record">
-                @if(count($datas))
-                    @if($genre0==1)
-                    {{--公司列表--}}
-                    @foreach($datas as $data)
-                <tr>
-                    <td><div style="color:lightgrey;text-align:center;">{{ date('Y',$data->created_at) }}
-                            <div style="border-bottom:1px solid lightgrey;"></div>{{ date('m',$data->created_at) }}
-                            {{--<div style="border-bottom:1px solid lightgrey;"></div>{{ date('d',$data->created_at) }}--}}
-                        </div>
-                    </td>
-                    <td>
-                        <div class="img">
-                            {{--<img src="/uploads/images/2016/online1.png">--}}
-                            @if(count($data->getPics()))
-                                <img src="{{ $pic[0]->getPicUrl() }}">
-                            @else
-                                <div style="width:280px;height:500px;background:rgb(250,250,250);"></div>
-                            @endif
-                        </div>
-                    </td>
-                    <td>
-                        <div class="title"><b>标题：{{ $data->title }}</b></div>
-                        <div class="con"><textarea id="" cols="40" rows="2" readonly style="border:0;resize:none;overflow:hidden;">{{ str_limit($data->content,40) }}</textarea></div>
-                    </td>
-                    <td>
-                        <div class="comName">公司：{{ $data->getCompanyName() }}</div>
-                        <p><a href="" class="toshow">详情</a></p>
-                    </td>
-                </tr>
-                <tr><td colspan="10"><div style="height:10px;border-top:1px dashed lightgrey;">&nbsp;</div></td></tr>
-                    @endforeach
-                    @elseif($genre0==2)
-                    {{--人员--}}
-                    @foreach($datas as $data)
-                <tr>
-                    <td>
-                        <div style="color:lightgrey;text-align:center;">{{ date('Y',$data->created_at) }}
-                            <div style="border-bottom:1px solid lightgrey;"></div>{{ date('m',$data->created_at) }}
-                            {{--<div style="border-bottom:1px solid lightgrey;"></div>{{ date('d',$data->created_at) }}--}}
-                        </div>
-                    </td>
-                    <td>
-                        <div class="img">
-                            @if(count($data->getPics()))
-                                <img src="{{ $pic[0]->getPicUrl() }}">
-                            @else
-                                <div style="width:280px;height:500px;background:rgb(250,250,250);"></div>
-                            @endif
-                        </div>
-                    </td>
-                    <td>
-                        <div class="title"><b>艺名：{{ $data->name }}</b></div>
-                        <div class="con"><textarea id="" cols="40" rows="2" readonly style="border:0;resize:none;">{{ str_limit($data->content,40) }}</textarea></div>
-                    </td>
-                    <td>
-                        <div class="comName">公司：{{ $data->getCompanyName() }}</div>
-                        <p><a href="" class="toshow">详情</a></p>
-                    </td>
-                </tr>
-                    @endforeach
+            @if(count($datas))
+                @foreach($datas as $kdata=>$data)
+                    <tr>
+                        <td><div style="color:lightgrey;text-align:center;">{{ date('Y',$data->created_at) }}
+                                <div style="border-bottom:1px solid lightgrey;"></div>{{ date('m',$data->created_at) }}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="img">
+                                @if(count($data->getPics()))
+                                    <img src="{{ $pic[0]->getPicUrl() }}">
+                                @else
+                                    <div style="width:280px;height:500px;background:rgb(250,250,250);"></div>
+                                @endif
+                            </div>
+                        </td>
+                        @if($genre0==1)
+                            {{--公司列表--}}
+                            <td>
+                                <div class="title"><b>标题：{{ $data->title }}</b></div>
+                                <div class="con"><textarea cols="40" rows="2" readonly style="border:0;resize:none;overflow:hidden;">
+                                        {{ str_limit($data->content,40) }}</textarea></div>
+                            </td>
+                            <td>
+                                <div class="comName">公司：{{ $data->getCompanyName() }}</div>
+                                <p><a href="{{DOMAIN}}entertain/{{ $data->id }}" class="toshow">详情</a></p>
+                            </td>
+                        @elseif($genre0==2)
+                            {{--人员--}}
+                            <td>
+                                <div class="title"><b>艺名：{{ $data->name }}</b></div>
+                                <div class="con"><textarea cols="40" rows="2" readonly style="border:0;resize:none;">
+                                    {{ str_limit($data->content,40) }}</textarea></div>
+                            </td>
+                            <td>
+                                <div class="comName">公司：{{ $data->getCompanyName() }}</div>
+                                <p><a href="{{DOMAIN}}entertain/staff/show/{{ $data->id }}" class="toshow">详情</a></p>
+                            </td>
+                        @endif
+                    </tr>
+                    @if($kdata!=1 && $kdata!=count($datas)-1)
+                    <tr><td colspan="10"><div style="height:10px;border-top:1px dashed lightgrey;">&nbsp;</div></td></tr>
                     @endif
-                @else @include('home.common.norecord')
-                @endif
+                @endforeach
+            @else @include('home.common.norecord')
+            @endif
             </table>
+            @include('home.common.page')
         </div>
         <div class="e_right">
             {{--<img src="/uploads/images/2016/ppt.png">--}}
