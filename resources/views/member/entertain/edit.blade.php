@@ -10,7 +10,7 @@
                 <td><label>娱乐名称 / Name：</label></td>
                 <td><input type="text" placeholder="至少2个字符" minlength="2" required name="title" value="{{ $data->title }}"/></td>
             </tr>
-            <tr><td></td></tr>
+            {{--<tr><td></td></tr>--}}
 
             <tr>
                 <td><label>供求关系 / Genre：</label></td>
@@ -19,7 +19,7 @@
                     <label><input type="radio" name="genre" value="2" {{ $data->genre==2 ? 'checked' : '' }}/> 娱乐需求&nbsp;&nbsp;</label>
                 </td>
             </tr>
-            <tr><td></td></tr>
+            {{--<tr><td></td></tr>--}}
 
             <tr>
                 <td><label>简介 / Introduce：</label></td>
@@ -41,7 +41,7 @@
                     </script>--}}
                 </td>
             </tr>
-            <tr><td></td></tr>
+            {{--<tr><td></td></tr>--}}
 
             <tr><td colspan="2" style="text-align:center;">
                     <button class="companybtn" onclick="history.go(-1)">返 &nbsp;&nbsp;&nbsp;回</button>

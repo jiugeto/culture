@@ -337,3 +337,5 @@ input.radio { position:relative;top:10px; }
     background:darkred;
     cursor:pointer;
  }
+
+input { padding:0 5px; }

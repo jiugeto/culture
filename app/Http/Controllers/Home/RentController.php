@@ -11,12 +11,18 @@ class RentController extends BaseController
 
     protected $curr = 'rent';
 
-    public function index()
+    public function index($fromMoney=0,$toMoney=0)
     {
+        //判断起始租金、结束租金
+        if (!is_numeric($fromMoney) || !is_numeric($toMoney)) {
+            echo "<script>alert('租金格式错误！');history.go(-1);</script>";exit;
+        }
         $result = [
             'lists'=> $this->list,
-            'datas'=> $this->query(),
+            'datas'=> $this->query($fromMoney,$toMoney),
             'curr_menu'=> $this->curr,
+            'fromMoney'=> $fromMoney,
+            'toMoney'=> $toMoney,
         ];
         return view('home.rent.index', $result);
     }
@@ -39,10 +45,12 @@ class RentController extends BaseController
 
 
 
-    public function query()
+    public function query($fromMoney,$toMoney)
     {
         $datas = RentModel::where('genre',1)
             ->where('del',0)
+            ->where('price','>',$fromMoney)
+            ->where('price','<',$toMoney)
             ->orderBy('sort','desc')
             ->orderBy('id','desc')
             ->paginate($this->limit);

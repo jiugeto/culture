@@ -189,6 +189,11 @@
     overflow:hidden;
 }
 .img_size_img { width:200px; }
+textarea.index_intro {
+    border:0;
+    resize:none;
+    overflow:hidden;
+}
 textarea.show_intro {
     width:650px;height:200px;
     border:0;

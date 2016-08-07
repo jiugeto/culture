@@ -41,7 +41,8 @@ Route::group(['prefix'=>'/','namespace'=>'Home'],function(){
     Route::get('rent/m/{from}/{to}','RentController@index');
     Route::resource('rent','RentController');
     //设计频道
-    Route::any('design','DesignController@index');
+    Route::get('design/cate/{cate}','DesignController@index');
+    Route::resource('design','DesignController');
     //关于我们
     Route::any('about','AboutController@index');
     Route::get('about/join','AboutController@join');

@@ -313,13 +313,13 @@ LOCK TABLES `bs_authorizations` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `bs_category`
+-- Table structure for table `bs_category待处理`
 --
 
-DROP TABLE IF EXISTS `bs_category`;
+DROP TABLE IF EXISTS `bs_category待处理`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `bs_category` (
+CREATE TABLE `bs_category待处理` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL COMMENT '视频分类名称',
   `pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '父id',
@@ -332,13 +332,13 @@ CREATE TABLE `bs_category` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `bs_category`
+-- Dumping data for table `bs_category待处理`
 --
 
-LOCK TABLES `bs_category` WRITE;
-/*!40000 ALTER TABLE `bs_category` DISABLE KEYS */;
-INSERT INTO `bs_category` VALUES (1,'专业',0,'按专业分类',0,'2016-03-13 00:00:00','2016-03-13 00:00:00'),(2,'行业',0,'按行业分类',0,'2016-03-17 00:00:00','0000-00-00 00:00:00'),(3,'年龄',0,'按年龄分类',0,'2016-03-17 00:00:00','0000-00-00 00:00:00'),(4,'视频',1,'视频组',0,'2016-03-17 00:00:00','0000-00-00 00:00:00'),(5,'平面设计',1,'平面组',0,'2016-03-17 00:00:00','0000-00-00 00:00:00'),(6,'建筑设计',1,'建筑组',0,'2016-03-17 00:00:00','0000-00-00 00:00:00'),(7,'房产漫游',1,'房产组，包括效果图',0,'2016-03-17 00:00:00','0000-00-00 00:00:00'),(8,'游戏制作',1,'游戏组，包括Unity 3D',0,'2016-03-17 00:00:00','0000-00-00 00:00:00');
-/*!40000 ALTER TABLE `bs_category` ENABLE KEYS */;
+LOCK TABLES `bs_category待处理` WRITE;
+/*!40000 ALTER TABLE `bs_category待处理` DISABLE KEYS */;
+INSERT INTO `bs_category待处理` VALUES (1,'专业',0,'按专业分类',0,'2016-03-13 00:00:00','2016-03-13 00:00:00'),(2,'行业',0,'按行业分类',0,'2016-03-17 00:00:00','0000-00-00 00:00:00'),(3,'年龄',0,'按年龄分类',0,'2016-03-17 00:00:00','0000-00-00 00:00:00'),(4,'视频',1,'视频组',0,'2016-03-17 00:00:00','0000-00-00 00:00:00'),(5,'平面设计',1,'平面组',0,'2016-03-17 00:00:00','0000-00-00 00:00:00'),(6,'建筑设计',1,'建筑组',0,'2016-03-17 00:00:00','0000-00-00 00:00:00'),(7,'房产漫游',1,'房产组，包括效果图',0,'2016-03-17 00:00:00','0000-00-00 00:00:00'),(8,'游戏制作',1,'游戏组，包括Unity 3D',0,'2016-03-17 00:00:00','0000-00-00 00:00:00');
+/*!40000 ALTER TABLE `bs_category待处理` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -381,17 +381,18 @@ DROP TABLE IF EXISTS `bs_designs`;
 CREATE TABLE `bs_designs` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL COMMENT '设计名称',
-  `genre` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '供求类型：1供应，2需求',
-  `type_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '设计类型：房产，效果图，平面，漫游',
+  `genre` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '供求类型：1供应，2需求',
+  `cate` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '设计类型：房产，效果图，平面，漫游',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布者id',
-  `intro` varchar(1000) DEFAULT NULL COMMENT '设计简介',
+  `intro` varchar(255) NOT NULL COMMENT '简介',
+  `detail` varchar(1000) NOT NULL COMMENT '详情',
   `price` decimal(10,0) unsigned NOT NULL DEFAULT '0' COMMENT '价格，单位元',
   `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序字段，值越大越靠前，默认10',
   `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站功能：0不放入回收站，1放入回收站',
-  `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
-  `updated_at` date NOT NULL DEFAULT '0000-00-00',
+  `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `updated_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='设计表 bs_designs';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='设计表 bs_designs';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -400,7 +401,34 @@ CREATE TABLE `bs_designs` (
 
 LOCK TABLES `bs_designs` WRITE;
 /*!40000 ALTER TABLE `bs_designs` DISABLE KEYS */;
+INSERT INTO `bs_designs` VALUES (1,'嘎嘎嘎',1,1,0,'而过的风格吧','<p>而地方吧</p>',55,10,0,1470573399,1470574616);
 /*!40000 ALTER TABLE `bs_designs` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bs_designs_pic`
+--
+
+DROP TABLE IF EXISTS `bs_designs_pic`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bs_designs_pic` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `design_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '设计id',
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户id',
+  `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `updated_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='设计图片关联表 bs_designs_pic';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bs_designs_pic`
+--
+
+LOCK TABLES `bs_designs_pic` WRITE;
+/*!40000 ALTER TABLE `bs_designs_pic` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bs_designs_pic` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1265,8 +1293,8 @@ DROP TABLE IF EXISTS `bs_rents`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `bs_rents` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL COMMENT '设备名称',
-  `genre` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '类型：1供应，2需求',
+  `name` varchar(50) NOT NULL COMMENT '设备名称',
+  `genre` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '类型：1供应，2需求',
   `intro` varchar(500) NOT NULL COMMENT '设备介绍',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布者id',
   `area` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '地区id',
@@ -2123,4 +2151,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-06 21:00:34
+-- Dump completed on 2016-08-07 21:06:04

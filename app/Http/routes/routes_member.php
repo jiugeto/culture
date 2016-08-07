@@ -19,22 +19,11 @@ Route::group(['prefix'=>'regist'], function(){
 });
 
 
-///**
-// * 在线创作路由
-// */
-////Route::group(['prefix'=>'online','middleware' =>'MemberAuth','namespace'=>'Online'],function(){
-//Route::group(['prefix'=>'online','namespace'=>'Online'],function(){
-//    //主窗口
-//    Route::get('/','HomeController@index');
-//    Route::get('home','HomeController@index');
-//});
-
-
 /**
  * 这里是会员路由
  */
-Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Member'], function(){
-//Route::group(['prefix'=>'member','namespace'=>'Member'], function(){
+//Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Member'], function(){
+Route::group(['prefix'=>'member','namespace'=>'Member'], function(){
     //账户首页
     Route::get('/','HomeController@index');
     Route::get('/home','HomeController@index');
@@ -179,6 +168,11 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
     Route::get('storyboard/{id}/forceDelete','StoryBoardController@forceDelete');
     Route::post('storyboard/{id}','StoryBoardController@update');
     Route::resource('storyboard','StoryBoardController');
+        //设计管理
+    Route::post('design/{id}','DesignController@update');
+    Route::get('design/trash','DesignController@trash');
+    Route::get('design/{id}/destroy','DesignController@destroy');
+    Route::resource('design','DesignController');
     //订单路由
         //订单流程
     Route::get('order/{id}/{genre}/{money}','OrderController@setMoney');

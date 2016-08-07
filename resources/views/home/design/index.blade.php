@@ -5,50 +5,83 @@
         {{-- 搜索 --}}
         <div class="cre_kong">&nbsp;{{--10px高度留空--}}</div>
         <div class="s_search">
-            供求：
-            <select name="genre">
-                <option value="0" {{ $genre==0 ? 'selected' : '' }}>-请选择-</option>
-                <option value="1" {{ $genre==1 ? 'selected' : '' }}>设备供应</option>
-                <option value="2" {{ $genre==2 ? 'selected' : '' }}>设备需求</option>
-            </select>
-            &nbsp;&nbsp;&nbsp;&nbsp;
             分类：
-            <select name="type">
-                <option value="0">-请选择-</option>
+            <select name="cate" class="home_search">
+                <option value="0" {{ $cate==0 ? 'selected' : '' }}>所有</option>
+                @foreach($model['cates'] as $kcate=>$vcate)
+                    <option value="{{ $kcate }}" {{ $cate==$kcate ? 'selected' : '' }}>{{ $vcate }}</option>
+                @endforeach
             </select>
         </div>
+        <script>
+            $("select[name='cate']").change(function(){
+                var cate = $(this).val();
+                if (cate==0) {
+                    window.location.href = '{{DOMAIN}}design';
+                } else {
+                    window.location.href = '{{DOMAIN}}/design/cate/'+cate;
+                }
+            });
+        </script>
 
         {{-- 列表 --}}
         <div class="cre_kong">&nbsp;{{--10px高度留空--}}</div>
-        <div class="de_title">3D设计 > C4D</div>
+        {{--面包屑--}}
+        {{--<div class="de_title">3D设计 > C4D</div>--}}
+        {{--设计列表--}}
         <div class="de_list">
             <table class="record">
-                <tr>
-                    <td rowspan="3">
-                        <div class="img"><img src="/uploads/images/2016/online1.png"></div>
-                    </td>
-                    <td class="text1"><b>c4d作品</b></td>
-                </tr>
-                <tr>
-                    <td class="text2">发布者 浏览次数 回复 发布时间</td>
-                </tr>
-                <tr>
-                    <td class="text3">作品详情作品详情作品详情作品详情作品详情作品详情作品详情作品详情作品详情作品详情</td>
-                </tr>
+            @if(count($datas))
+                @foreach($datas as $kdata=>$data)
+                    <tr>
+                        <td rowspan="3">
+                            <div class="img">
+                                @if(count($data->getPics()))
+                                    <img src="{{ $pic[0]->getPicUrl() }}">
+                                @else
+                                    <div style="width:280px;height:500px;background:rgb(250,250,250);"></div>
+                                @endif
+                            </div>
+                        </td>
+                        <td class="text1"><b>{{ $data->name }}</b></td>
+                    </tr>
+                    <tr>
+                        <td class="text2">
+                            发布者：{{ $data->getUserName() }}
+                            &nbsp;&nbsp;
+                            浏览次数：
+                            回复：
+                            发布时间：
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text3">
+                            <textarea cols="40" rows="2" readonly class="index_intro">{{ str_limit($data->intro,40) }}</textarea>
+                        </td>
+                    </tr>
+                    @if($kdata!=1 && $kdata!=count($datas)-1)
+                        <tr><td colspan="10"><div style="height:10px;border-top:1px dashed lightgrey;">&nbsp;</div></td></tr>
+                    @endif
+                @endforeach
+            @else <tr><td colspan="2"><div style="width:700px;text-align:center;">没有记录</div></td></tr>
+            @endif
             </table>
         </div>
 
         <div class="de_right">
-            <div class="cate">
-                <div class="title">分类信息</div>
-                <div class="con">
-                    <div class="de_con"><div></div>视频</div>
-                    <div class="de_con"><div></div>平面</div>
-                </div>
+            {{--<div class="cate">--}}
+                {{--<div class="title">分类信息</div>--}}
+                {{--<div class="con">--}}
+                    {{--<div class="de_con"><div></div>视频</div>--}}
+                    {{--<div class="de_con"><div></div>平面</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+            <div class="img">
+                <div style="width:260px;height:500px;background:rgb(250,250,250);"></div>
             </div>
-            <div class="img"><img src="/uploads/images/2016/ppt.png"></div>
         </div>
     </div>
+    <div style="height:500px;">{{--空白--}}</div>
 
     <script>
         $(document).ready(function(){

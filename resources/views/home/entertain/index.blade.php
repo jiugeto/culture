@@ -57,7 +57,7 @@
                             {{--公司列表--}}
                             <td>
                                 <div class="title"><b>标题：{{ $data->title }}</b></div>
-                                <div class="con"><textarea cols="40" rows="2" readonly style="border:0;resize:none;overflow:hidden;">
+                                <div class="con"><textarea cols="40" rows="2" readonly class="index_intro">
                                         {{ str_limit($data->content,40) }}</textarea></div>
                             </td>
                             <td>

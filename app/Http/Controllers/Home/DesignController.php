@@ -1,19 +1,51 @@
 <?php
 namespace App\Http\Controllers\Home;
 
+use App\Models\DesignModel;
+
 class DesignController extends BaseController
 {
     /**
      * 网站前台租赁频道
      */
 
-    public function index($genre=0)
+    protected $curr = 'design';
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->model = new DesignModel();
+    }
+
+    public function index($cate=0)
     {
         $result = [
-//            'menus'=> $this->menus,
-            'curr_menu'=> 'design',
-            'genre'=> $genre,
+            'lists'=> $this->list,
+            'datas'=> $this->query($cate),
+            'model'=> $this->model,
+            'curr_menu'=> $this->curr,
+            'cate'=> $cate,
         ];
         return view('home.design.index', $result);
+    }
+
+
+
+
+
+    public function query($cate)
+    {
+        if ($cate) {
+            $datas = DesignModel::where('del',0)
+                ->where('genre',1)
+                ->where('cate',$cate)
+                ->paginate($this->limit);
+        } else {
+            $datas = DesignModel::where('del',0)
+                ->where('genre',1)
+                ->paginate($this->limit);
+        }
+        $datas->limit = $this->limit;
+        return $datas;
     }
 }

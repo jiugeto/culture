@@ -32,6 +32,7 @@
     border-radius:3px;
     border:1px solid rgb(240,240,240);
     font-size:18px;
+    color:grey;
 }
 .s_select {
     width:120px;height:30px;

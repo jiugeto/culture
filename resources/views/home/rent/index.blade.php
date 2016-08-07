@@ -4,24 +4,26 @@
     <style>
         .s_con { color:grey; }
         input { padding:2px 5px;width:50px;border:1px solid lightgrey;border-radius:3px; }
-        a#search { padding:0 10px;color:grey;border:1px solid lightgrey;background:lightgrey;text-decoration:none;cursor:pointer; }
-        a:hover#search { color:red;border:1px solid red;background:white; }
+        a.a_search { padding:0 10px;padding-bottom:3px;color:grey;border:1px solid lightgrey;background:rgb(245,245,245);text-decoration:none;font-size:16px;cursor:pointer; }
+        a:hover.a_search { color:red;border:1px solid red;background:white; }
     </style>
     <div class="s_con">
         {{-- 搜索 --}}
         <div class="cre_kong">&nbsp;{{--10px高度留空--}}</div>
         <div class="s_search">
             租金：
-            <input type="text" name="fromMoney"> -
-            <input type="text" name="toMoney"> 元
-            <a id="search">搜索</a>
+            <input type="text" name="fromMoney" value="{{ $fromMoney }}"> -
+            <input type="text" name="toMoney" value="{{ $toMoney }}"> 元
+            &nbsp;&nbsp;
+            <a id="search" class="a_search">搜索</a>
+            @if($fromMoney!=0||$toMoney!=0)<a href="{{DOMAIN}}rent" class="a_search">退出搜索</a>@endif
         </div>
         <script>
             $("#search").click(function(){
                 var fromMoney = $("input[name='fromMoney']").val();
                 var toMoney = $("input[name='toMoney']").val();
                 //m代表money缩写，代表租金
-                if (!fromMoney && !toMoney) {
+                if (fromMoney==0 && toMoney==0) {
                     window.location.href = '{{DOMAIN}}rent';
                 } else {
                     window.location.href = '{{DOMAIN}}rent/m/'+fromMoney+'/'+toMoney;
@@ -59,6 +61,7 @@
                     <tr><td colspan="10"><div style="height:10px;border-top:1px dashed lightgrey;">&nbsp;</div></td></tr>
                 @endif
                 @endforeach
+            @else @include('home.common.norecord')
             @endif
             </table>
         </div>

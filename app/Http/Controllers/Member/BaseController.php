@@ -30,6 +30,7 @@ class BaseController extends Controller
 
     public function __construct()
     {
+        parent::__construct();
         if (\Session::has('user.username')) {
             $this->limit = UserModel::where('username',\Session::get('user.username'))->first()->limit;
         }
