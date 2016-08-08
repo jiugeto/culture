@@ -25,7 +25,6 @@ class ActionController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-//            'actions'=> $this->actions(),
             'datas'=> ActionModel::paginate($this->limit),
             'prefix_url'=> '/admin/action',
             'crumb'=> $this->crumb,
@@ -39,7 +38,6 @@ class ActionController extends BaseController
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
-//            'actions'=> $this->actions(),
             'parent'=> $this->parent($pid),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -50,7 +48,7 @@ class ActionController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
-        $data['created_at'] = date('Y-m-d H:m:s', time());
+        $data['created_at'] = time();
         ActionModel::create($data);
         return redirect('/admin/action');
     }
@@ -60,7 +58,6 @@ class ActionController extends BaseController
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
         $result = [
-//            'actions'=> $this->actions(),
             'datas'=> ActionModel::find($id),
             'crumb'=> $this->crumb,
         ];
@@ -72,7 +69,6 @@ class ActionController extends BaseController
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
         $result = [
-//            'actions'=> $this->actions(),
             'pactions'=> ActionModel::where('pid',0)->get(),
             'parent'=> $this->parent($id),
             'data'=> ActionModel::find($id),
@@ -85,7 +81,7 @@ class ActionController extends BaseController
     public function update(Request $request, $id)
     {
         $data = $this->getData($request);
-        $data['updated_at'] = date('Y-m-d H:m:s', time());
+        $data['updated_at'] = time();
         ActionModel::where('id',$id)->update($data);
         return redirect('/admin/action');
     }

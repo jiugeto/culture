@@ -11,32 +11,32 @@
             <td style="width:40%;"><label>用户名：</label></td>
             <td>{{ $data->username }}</td>
         </tr>
-        <tr><td>&nbsp;</td></tr>
+        {{--<tr><td>&nbsp;</td></tr>--}}
         <tr>
             <td><label>邮箱：</label></td>
             <td>{{ $data->email }}</td>
         </tr>
-        <tr><td>&nbsp;</td></tr>
+        {{--<tr><td>&nbsp;</td></tr>--}}
         <tr>
             <td><label>qq：</label></td>
             <td>{{ $data->qq }}</td>
         </tr>
-        <tr><td>&nbsp;</td></tr>
+        {{--<tr><td>&nbsp;</td></tr>--}}
         <tr>
             <td><label>电话：</label></td>
             <td>{{ $data->tel }}</td>
         </tr>
-        <tr><td>&nbsp;</td></tr>
+        {{--<tr><td>&nbsp;</td></tr>--}}
         <tr>
             <td><label>手机：</label></td>
             <td>{{ $data->mobile }}</td>
         </tr>
-        <tr><td>&nbsp;</td></tr>
+        {{--<tr><td>&nbsp;</td></tr>--}}
         <tr>
             <td><label>用户类型：</label></td>
             <td>{{ $data->isuser() }}</td>
         </tr>
-        <tr><td>&nbsp;</td></tr>
+        {{--<tr><td>&nbsp;</td></tr>--}}
 
         {{--个人信息--}}
         @if(in_array($data->isuser,[1,3]))

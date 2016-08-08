@@ -59,14 +59,6 @@
         </span>
         <input type="hidden" name="id" value="{{ $data->id }}">
         {{--发布方信息--}}
-        <span class="idea_right">
-            @if($userInfo = $data->user())
-            <div class="userinfo">
-                <p class="title">{{ $userInfo->company($uid) ? $userInfo->company($uid)->name.'的' : '' }} {{ $userInfo->username }}</p>
-                @if($userInfo->address)<p>地址：{{ $userInfo->address }}</p>@endif
-                <p>发布时间：{{ $userInfo->createTime() }}</p>
-            </div>
-            @endif
-        </span>
+        @include('home.common.info')
     </div>
 @stop

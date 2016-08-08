@@ -29,6 +29,18 @@ class DesignController extends BaseController
         return view('home.design.index', $result);
     }
 
+    public function show($id)
+    {
+        $data = DesignModel::find($id);
+        $result = [
+            'lists'=> $this->list,
+            'data'=> $data,
+            'curr_menu'=> $this->curr,
+            'uid'=> $data->uid,
+        ];
+        return view('home.design.show', $result);
+    }
+
 
 
 

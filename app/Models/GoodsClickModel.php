@@ -9,6 +9,6 @@ class GoodsClickModel extends BaseModel
 
     protected $table = 'bs_goods_click';
     protected $fillable = [
-        'id','gid','uid','created_at',
+        'id','gid','uid','created_at','updated_at',
     ];
 }

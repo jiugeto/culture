@@ -25,7 +25,6 @@ class DesignController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-//            'actions'=> $this->actions(),
             'datas'=> $this->query($del=0),
             'prefix_url'=> '/admin/design',
             'crumb'=> $this->crumb,
@@ -39,7 +38,6 @@ class DesignController extends BaseController
         $curr['name'] = $this->crumb['trash']['name'];
         $curr['url'] = $this->crumb['trash']['url'];
         $result = [
-//            'actions'=> $this->actions(),
             'datas'=> $this->query($del=0),
             'prefix_url'=> '/admin/design/trash',
             'crumb'=> $this->crumb,
@@ -53,7 +51,6 @@ class DesignController extends BaseController
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
-//            'actions'=> $this->actions(),
             'types'=> $this->model->types(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -64,7 +61,7 @@ class DesignController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
-        $data['created_at'] = date('Y-m-d', time());
+        $data['created_at'] = time();
         DesignModel::create($data);
         return redirect('/admin/design');
     }
@@ -74,7 +71,6 @@ class DesignController extends BaseController
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
         $result = [
-//            'actions'=> $this->actions(),
             'types'=> $this->model->types(),
             'data'=> DesignModel::find($id),
             'crumb'=> $this->crumb,
@@ -86,7 +82,7 @@ class DesignController extends BaseController
     public function update(Request $request,$id)
     {
         $data = $this->getData($request);
-        $data['updated_at'] = date('Y-m-d', time());
+        $data['updated_at'] = time();
         DesignModel::where('id',$id)->update($data);
         return redirect('/admin/design');
     }

@@ -25,7 +25,6 @@ class RoleController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-//            'actions'=> $this->actions(),
             'datas'=> RoleModel::orderBy('id','desc')->paginate($this->limit),
             'prefix_url'=> '/admin/role',
             'crumb'=> $this->crumb,
@@ -39,8 +38,6 @@ class RoleController extends BaseController
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
-//            'actions'=> $this->actions(),
-//            'roles'=> RoleModel::paginate($this->limit),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -49,10 +46,8 @@ class RoleController extends BaseController
 
     public function store(Request $request)
     {
-//        $actions = $this->actions();
         $data = $this->getData($request);
-//        $data['created_at'] = date('Y-m-d H:m:s', time());
-        $data['created_at'] = date('Y-m-d', time());
+        $data['created_at'] = time();
         RoleModel::create($data);
         return redirect('/admin/role');
     }
@@ -84,8 +79,7 @@ class RoleController extends BaseController
     public function update(Request $request,$id)
     {
         $data = $this->getData($request);
-//        $data['updated_at'] = date('Y-m-d H:m:s', time());
-        $data['updated_at'] = date('Y-m-d', time());
+        $data['updated_at'] = time();
         RoleModel::where('id',$id)->update($data);
         return redirect('/admin/role');
     }

@@ -48,7 +48,7 @@ class PicController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
-        $data['created_at'] = date('Y-m-d H:i:s', time());
+        $data['created_at'] = time();
         PicModel::create($data);
         return redirect('/admin/pic');
     }
@@ -68,7 +68,7 @@ class PicController extends BaseController
     public function update(Request $request, $id)
     {
         $data = $this->getData($request);
-        $data['updated_at'] = date('Y-m-d H:i:s', time());
+        $data['updated_at'] = time();
         PicModel::where('id',$id)->update($data);
         return redirect('/admin/pic');
     }

@@ -50,7 +50,7 @@ class ProductLayerAttrController extends BaseController
     public function store(Request $request,$layerid)
     {
         $data = $this->getData($request,$layerid);
-        $data['created_at'] = date('Y-m-d H:i:s', time());
+        $data['created_at'] = time();
         ProductLayerAttrModel::create($data);
         return redirect('/admin/'.$layerid.'/prolayerattr');
     }
@@ -72,7 +72,7 @@ class ProductLayerAttrController extends BaseController
     public function update(Request $request,$layerid,$id)
     {
         $data = $this->getData($request,$layerid);
-        $data['updated_at'] = date('Y-m-d H:i:s', time());
+        $data['updated_at'] = time();
         ProductLayerAttrModel::where('id',$id)->update($data);
         return redirect('/admin/'.$layerid.'/prolayerattr');
     }

@@ -196,9 +196,9 @@ textarea.index_intro {
 }
 textarea.show_intro {
     width:650px;height:200px;
-    border:0;
+    border:1px dashed ghostwhite;
     resize:none;
-    overflow:hidden;
+    overflow:auto;
 }
 
 /*=== 查看限制 ===*/

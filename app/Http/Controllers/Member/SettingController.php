@@ -26,6 +26,8 @@ class SettingController extends BaseController
 
     public function show()
     {
+        $curr['name'] = $this->lists['']['name'];
+        $curr['url'] = $this->lists['']['url'];
         $data = UserModel::find($this->userid);
         if (in_array($data->isuser,[1,3])) {
             $personModel = PersonModel::where('uid',$this->userid)->first();
@@ -39,7 +41,7 @@ class SettingController extends BaseController
             'companyModel'=> isset($companyModel) ? $companyModel : '',
             'lists'=> $this->lists,
             'curr_list'=> '',
-//            'menus'=> $this->menus,
+            'curr'=> $curr,
         ];
         return view('member.setting.show', $result);
     }
@@ -51,7 +53,6 @@ class SettingController extends BaseController
             'data'=> UserModel::find($id),
             'lists'=> $this->lists,
             'curr_list'=> '',
-//            'menus'=> $this->menus,
             'isusers'=> $this->model['isusers'],
         ];
         return view('member.setting.auth', $result);
@@ -62,7 +63,6 @@ class SettingController extends BaseController
      */
     public function update(Request $request,$id)
     {
-//        dd($request->all());
         //基本信息
         if (!$request->isuser) {
             echo "<script>alert('用户类型必选！');history.go(-1);</script>";exit;
@@ -90,7 +90,7 @@ class SettingController extends BaseController
                 'sex'=> $request->sex,
                 'idcard'=> $request->idcard,
                 'uid'=> $id,
-                'created_at'=> date('Y-m-d', time()),
+                'created_at'=> time(),
             ];
             PersonModel::create($person);
         } else {
@@ -117,7 +117,6 @@ class SettingController extends BaseController
             'data'=> UserModel::find($id),
             'lists'=> $this->lists,
             'curr_list'=> '',
-//            'menus'=> $this->menus,
         ];
         return view('member.setting.pwd', $result);
     }
@@ -147,7 +146,6 @@ class SettingController extends BaseController
             'data'=> UserModel::find($id),
             'lists'=> $this->lists,
             'curr_list'=> '',
-//            'menus'=> $this->menus,
         ];
         return view('member.setting.info', $result);
     }

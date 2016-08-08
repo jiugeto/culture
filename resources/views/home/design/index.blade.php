@@ -1,6 +1,10 @@
 @extends('home.main')
 @section('content')
     @include('home.common.crumb')
+    <style>
+        .a_to_show { font-size:12px;color:grey;text-decoration:none;float:right; }
+    </style>
+
     <div class="s_con">
         {{-- 搜索 --}}
         <div class="cre_kong">&nbsp;{{--10px高度留空--}}</div>
@@ -19,7 +23,7 @@
                 if (cate==0) {
                     window.location.href = '{{DOMAIN}}design';
                 } else {
-                    window.location.href = '{{DOMAIN}}/design/cate/'+cate;
+                    window.location.href = '{{DOMAIN}}design/cate/'+cate;
                 }
             });
         </script>
@@ -43,20 +47,22 @@
                                 @endif
                             </div>
                         </td>
-                        <td class="text1"><b>{{ $data->name }}</b></td>
+                        <td class="text1"><b>{{ $data->name }}</b>
+                            <a href="{{DOMAIN}}design/{{ $data->id }}" class="a_to_show">详情</a>
+                        </td>
                     </tr>
                     <tr>
                         <td class="text2">
                             发布者：{{ $data->getUserName() }}
-                            &nbsp;&nbsp;
-                            浏览次数：
-                            回复：
-                            发布时间：
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            浏览次数：{{ $data->click }}
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            发布时间：{{ $data->createTime() }}
                         </td>
                     </tr>
                     <tr>
                         <td class="text3">
-                            <textarea cols="40" rows="2" readonly class="index_intro">{{ str_limit($data->intro,40) }}</textarea>
+                            <textarea cols="50" rows="2" readonly class="index_intro">{{ str_limit($data->intro,80) }}</textarea>
                         </td>
                     </tr>
                     @if($kdata!=1 && $kdata!=count($datas)-1)

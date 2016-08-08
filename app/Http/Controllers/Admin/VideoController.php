@@ -54,7 +54,6 @@ class VideoController extends BaseController
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
-//            'actions'=> $this->actions(),
             'cates'=> VideoCategoryModel::all(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -65,7 +64,7 @@ class VideoController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
-        $data['created_at'] = date('Y-m-d', time());
+        $data['created_at'] = time();
         return redirect('/admin/video');
     }
 
@@ -74,7 +73,6 @@ class VideoController extends BaseController
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
         $result = [
-//            'actions'=> $this->actions(),
             'cates'=> VideoCategoryModel::all(),
             'data'=> VideoModel::find($id),
             'crumb'=> $this->crumb,
@@ -86,7 +84,7 @@ class VideoController extends BaseController
     public function update(Request $request, $id)
     {
         $data = $this->getData($request);
-        $data['updated_at'] = date('Y-m-d', time());
+        $data['updated_at'] = time();
         VideoModel::where('id',$id)->update($data);
         return redirect('/admin/video');
     }
@@ -96,7 +94,6 @@ class VideoController extends BaseController
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
         $result = [
-//            'actions'=> $this->actions(),
             'data'=> VideoModel::find($id),
             'crumb'=> $this->crumb,
             'curr'=> $curr,

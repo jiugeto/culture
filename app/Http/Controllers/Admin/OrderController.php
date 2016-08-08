@@ -54,7 +54,7 @@ class OrderController extends BaseController
             'status'=> $request->status,
             'del'=> $request->del,
             'isshow'=> $request->isshow,
-            'updated_at'=> date('Y-m-d H:i:s', time()),
+            'updated_at'=> time(),
         ];
         OrderModel::where('id',$id)->update($data);
         return redirect('/admin/order');

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Models\Admin\AdminModel;
 use App\Models\Admin\RoleModel;
-//use Symfony\Component\HttpFoundation\Request;
 
 class AdminController extends BaseController
 {
@@ -27,7 +26,6 @@ class AdminController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-//            'actions'=> $this->actions(),
             'datas'=> AdminModel::orderBy('id','desc')->paginate($this->limit),
             'prefix_url'=> '/admin/admin',
             'crumb'=> $this->crumb,
@@ -51,7 +49,7 @@ class AdminController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
-        $data['created_at'] = date('Y-m-d', time());
+        $data['created_at'] = time();
         AdminModel::create($data);
         return redirect('/admin/admin');
     }
@@ -84,7 +82,7 @@ class AdminController extends BaseController
     public function update(Request $request,$id)
     {
         $data = $this->getData($request);
-        $data['updated_at'] = date('Y-m-d', time());
+        $data['updated_at'] = time();
         AdminModel::where('id',$id)->update($data);
         return redirect('/admin/admin');
     }

@@ -68,7 +68,7 @@ class ProductAttrController extends BaseController
         //类样式名称相同自动添加：属性前缀+用户id_+产品id_+随机值
         $uid = 0;
         $data['style_name'] = $this->prefix_attr.$uid.'_'.$request->productid.'_'.rand(0,1000);
-        $data['created_at'] = date('Y-m-d H:i:s', time());
+        $data['created_at'] = time();
         ProductAttrModel::create($data);
         return redirect('/admin/productattr');
     }
@@ -94,7 +94,7 @@ class ProductAttrController extends BaseController
     public function update(Request $request,$id)
     {
         $data = $this->getData($request);
-        $data['updated_at'] = date('Y-m-d H:i:s', time());
+        $data['updated_at'] = time();
         ProductAttrModel::where('id',$id)->update($data);
         return redirect('/admin/productattr');
     }
@@ -124,7 +124,7 @@ class ProductAttrController extends BaseController
     {
 //        dd(2,$request->all());
         $data = $this->toAttrs($request);
-        $data['updated_at'] = date('Y-m-d H:i:s', time());
+        $data['updated_at'] = time();
         $data['switch'.$request->index] = $request->switch;
         ProductAttrModel::where('id',$id)->update(['attrs2'=> serialize($data)]);
         return redirect('/admin/productattr');
@@ -159,7 +159,7 @@ class ProductAttrController extends BaseController
     {
 //        dd(3,$request->all());
         $data = $this->toAttrs($request);
-        $data['updated_at'] = date('Y-m-d H:i:s', time());
+        $data['updated_at'] = time();
         $data['switch'.$request->index] = $request->switch;
         ProductAttrModel::where('id',$id)->update(['attrs3'=> serialize($data)]);
         return redirect('/admin/productattr');
@@ -194,7 +194,7 @@ class ProductAttrController extends BaseController
     {
 //        dd(4,$request->all());
         $data = $this->toAttrs($request);
-        $data['updated_at'] = date('Y-m-d H:i:s', time());
+        $data['updated_at'] = time();
         $data['switch'.$request->index] = $request->switch;
         ProductAttrModel::where('id',$id)->update(['img'=> serialize($data)]);
         return redirect('/admin/productattr');
@@ -229,7 +229,7 @@ class ProductAttrController extends BaseController
     {
 //        dd(5,$request->all());
         $data = $this->toAttrs($request);
-        $data['updated_at'] = date('Y-m-d H:i:s', time());
+        $data['updated_at'] = time();
         $data['switch'.$request->index] = $request->switch;
         ProductAttrModel::where('id',$id)->update(['text'=> serialize($data)]);
         return redirect('/admin/productattr');

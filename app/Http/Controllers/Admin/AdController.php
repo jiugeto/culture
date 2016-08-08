@@ -1,10 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use App\Models\ActionModel;
 use App\Models\AdModel;
-use App\Models\AdPlaceModel;
 
 class AdController extends BaseController
 {
@@ -28,7 +25,6 @@ class AdController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-//            'actions'=> $this->actions(),
             'datas'=> $datas,
             'prefix_url'=> '/admin/ad',
             'crumb'=> $this->crumb,

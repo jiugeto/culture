@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Member;
 
 use Illuminate\Http\Request;
-use App\Models\ActorModel;
+use App\Models\StaffModel;
 
-class ActorController extends BaseController
+class StaffController extends BaseController
 {
     /**
      * 系统后台租赁管理
@@ -17,7 +17,7 @@ class ActorController extends BaseController
         $this->lists['func']['name'] = '演员管理';
         $this->lists['func']['url'] = 'entertain';
         $this->lists['create']['name'] = '添加演员';
-        $this->model = new ActorModel();
+        $this->model = new StaffModel();
     }
 
     public function index()
@@ -26,11 +26,11 @@ class ActorController extends BaseController
         $curr['url'] = $this->lists['']['url'];
         $result = [
             'datas'=> $this->query(),
-            'prefix_url'=> '/admin/actor',
+            'prefix_url'=> '/admin/staff',
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
-        return view('member.actor.index', $result);
+        return view('member.staff.index', $result);
     }
 
     public function create()
@@ -42,15 +42,15 @@ class ActorController extends BaseController
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
-        return view('member.actor.create', $result);
+        return view('member.staff.create', $result);
     }
 
     public function store(Request $request)
     {
         $data = $this->getData($request);
-        $data['created_at'] = date('Y-m-d H:i:s', time());
-        ActorModel::create($data);
-        return redirect('/member/actor');
+        $data['created_at'] = time();
+        StaffModel::create($data);
+        return redirect('/member/staff');
     }
 
     public function edit($id)
@@ -58,20 +58,20 @@ class ActorController extends BaseController
         $curr['name'] = $this->lists['edit']['name'];
         $curr['url'] = $this->lists['edit']['url'];
         $result = [
-            'data'=> ActorModel::find($id),
+            'data'=> StaffModel::find($id),
             'educations'=> $this->model['educations'],
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
-        return view('member.actor.edit', $result);
+        return view('member.staff.edit', $result);
     }
 
     public function update(Request $request,$id)
     {
         $data = $this->getData($request);
-        $data['updated_at'] = date('Y-m-d H:i:s', time());
-        ActorModel::where('id',$id)->update($data);
-        return redirect('/member/actor');
+        $data['updated_at'] = time();
+        StaffModel::where('id',$id)->update($data);
+        return redirect('/member/staff');
     }
 
     public function show($id)
@@ -79,30 +79,30 @@ class ActorController extends BaseController
         $curr['name'] = $this->lists['show']['name'];
         $curr['url'] = $this->lists['show']['url'];
         $result = [
-            'data'=> ActorModel::find($id),
+            'data'=> StaffModel::find($id),
             'educations'=> $this->model['educations'],
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
-        return view('member.actor.show', $result);
+        return view('member.staff.show', $result);
     }
 
     public function destroy($id)
     {
-        ActorModel::where('id',$id)->update(['del'=> 1]);
-        return redirect('/member/actor');
+        StaffModel::where('id',$id)->update(['del'=> 1]);
+        return redirect('/member/staff');
     }
 
     public function restore($id)
     {
-        ActorModel::where('id',$id)->update(['del'=> 0]);
-        return redirect('/member/actor/trash');
+        StaffModel::where('id',$id)->update(['del'=> 0]);
+        return redirect('/member/staff/trash');
     }
 
     public function forceDelete($id)
     {
-        ActorModel::where('id',$id)->delete();
-        return redirect('/member/actor/trash');
+        StaffModel::where('id',$id)->delete();
+        return redirect('/member/staff/trash');
     }
 
 
@@ -140,7 +140,7 @@ class ActorController extends BaseController
      */
     public function query()
     {
-        $datas =  ActorModel::orderBy('id','desc')->paginate($this->limit);
+        $datas =  StaffModel::orderBy('id','desc')->paginate($this->limit);
         return $datas;
     }
 }

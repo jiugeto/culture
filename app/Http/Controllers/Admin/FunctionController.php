@@ -24,7 +24,6 @@ class FunctionController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-//            'actions'=> $this->actions(),
             'datas'=> $this->query($del=0),
             'prefix_url'=> '/admin/function',
             'crumb'=> $this->crumb,
@@ -38,7 +37,6 @@ class FunctionController extends BaseController
         $curr['name'] = $this->crumb['trash']['name'];
         $curr['url'] = $this->crumb['trash']['url'];
         $result = [
-//            'actions'=> $this->actions(),
             'datas'=> $this->query($del=1),
             'prefix_url'=> '/admin/function/trash',
             'crumb'=> $this->crumb,
@@ -52,7 +50,6 @@ class FunctionController extends BaseController
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
-//            'actions'=> $this->actions(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -62,7 +59,7 @@ class FunctionController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
-        $data['created_at'] = date('Y-m-d', time());
+        $data['created_at'] = time();
         FunctionModel::create($data);
         return redirect('/admin/function');
     }
@@ -72,7 +69,6 @@ class FunctionController extends BaseController
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
         $result = [
-//            'actions'=> $this->actions(),
             'data'=> FunctionModel::find($id),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -83,14 +79,14 @@ class FunctionController extends BaseController
     public function update(Request $request, $id)
     {
         $data = $this->getData($request);
-        $data['updated_at'] = date('Y-m-d', time());
+        $data['updated_at'] = time();
         FunctionModel::where('id',$id)->update($data);
         return redirect('/admin/function');
     }
 
     public function destroy($id)
     {
-        FunctionModel::where()->update(['del'=>1]);
+        FunctionModel::where('id',$id)->update(['del'=>1]);
         return redirect('/admin/function');
     }
 

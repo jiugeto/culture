@@ -25,7 +25,6 @@ class LinkController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-//            'actions'=> $this->actions(),
             'types'=> $this->model->type(),
             'datas'=> LinkModel::paginate($this->limit),
             'prefix_url'=> '/admin/link',
@@ -40,9 +39,7 @@ class LinkController extends BaseController
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
-//            'actions'=> $this->actions(),
             'plinks'=> LinkModel::where('pid',0)->get(),      //得到父链接
-//            'types'=> $this->model->type(),
             'types'=> $this->model['types'],
             'pics'=> $this->model->pic(),
             'crumb'=> $this->crumb,
@@ -54,7 +51,7 @@ class LinkController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
-        $data['created_at'] = date('Y-m-d', time());
+        $data['created_at'] = time();
         LinkModel::create($data);
         return redirect('/admin/link');
     }
@@ -64,9 +61,7 @@ class LinkController extends BaseController
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
         $result =[
-//            'actions'=> $this->actions(),
             'plinks'=> LinkModel::where('pid',0)->get(),      //得到父链接
-//            'types'=> $this->model->type(),
             'pics'=> $this->model->pic(),
             'types'=> $this->model['types'],
             'data'=> LinkModel::find($id),
@@ -79,7 +74,7 @@ class LinkController extends BaseController
     public function update(Request $request, $id)
     {
         $data = $this->getData($request);
-        $data['updated_at'] = date('Y-m-d', time());
+        $data['updated_at'] = time();
         LinkModel::where('id',$id)->update($data);
         return redirect('/admin/link');
     }
@@ -87,11 +82,9 @@ class LinkController extends BaseController
     public function show($id)
     {
         $data = LinkModel::find($id);
-//        $data['type'] = $this->model->type();
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
         $result = [
-//            'actions'=> $this->actions(),
             'data'=> $data,
             'types'=> $this->model['types'],
             'crumb'=> $this->crumb,

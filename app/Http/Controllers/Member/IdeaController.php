@@ -60,7 +60,7 @@ class IdeaController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
-        $data['created_at'] = date('Y-m-d H:i:s', time());
+        $data['created_at'] = time();
         IdeasModel::create($data);
 //        //将自己加入查看权限表
 //        $ideaModel = IdeasModel::where($data)->first();
@@ -84,7 +84,7 @@ class IdeaController extends BaseController
     public function update(Request $request,$id)
     {
         $data = $this->getData($request);
-        $data['updated_at'] = date('Y-m-d H:i:s', time());
+        $data['updated_at'] = time();
         IdeasModel::where('id',$id)->update($data);
         return redirect('/member/idea');
     }

@@ -101,12 +101,12 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     //娱乐路由
     Route::post('entertain/{id}','EntertainController@update');
     Route::resource('entertain','EntertainController');
-        //演员管理
-    Route::get('actor/{id}/destroy','ActorController@destroy');
-    Route::get('actor/{id}/restore','ActorController@restore');
-    Route::get('actor/{id}/forceDelete','ActorController@forceDelete');
-    Route::post('actor/{id}','ActorController@update');
-    Route::resource('actor','ActorController');
+        //娱乐员工管理
+    Route::get('staff/{id}/destroy','StaffController@destroy');
+    Route::get('staff/{id}/restore','StaffController@restore');
+    Route::get('staff/{id}/forceDelete','StaffController@forceDelete');
+    Route::post('staff/{id}','StaffController@update');
+    Route::resource('staff','StaffController');
         //作品管理
     Route::get('works/{id}/destroy','WorksController@destroy');
     Route::get('works/{id}/restore','WorksController@restore');

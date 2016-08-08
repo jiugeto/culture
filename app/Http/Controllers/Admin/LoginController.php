@@ -44,7 +44,7 @@ class LoginController extends BaseController
         }
 
         $serial = date('YmdHis',time()).rand(0,10000);
-        $loginTime = date('Y-m-d H:i:s',time());
+        $loginTime = time();
         //登陆加入用户日志表
         $userlog = [
             'plat'=> 1,     //1管理员登录
@@ -77,7 +77,7 @@ class LoginController extends BaseController
     public function dologout()
     {
         //更新用户日志表
-        $logoutTime = date('Y-m-d',time());
+        $logoutTime = time();
         UserlogModel::where('serial',Session::get('admin.serial'))
             ->update(['logoutTime'=>$logoutTime]);
         //去除session

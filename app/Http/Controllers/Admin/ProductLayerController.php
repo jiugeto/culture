@@ -50,7 +50,7 @@ class ProductLayerController extends BaseController
         $layerModel = ProductLayerModel::where('animation_name',$request->animation_name)->first();
         if ($layerModel) { echo "<script>alert('已有同名动画，请更改动画名称！');history.go(-1);</script>";exit; }
         $data = $this->getData($request);
-        $data['created_at'] = date('Y-m-d H:i:s', time());
+        $data['created_at'] = time();
         ProductLayerModel::create($data);
         return redirect('/admin/productlayer');
     }
@@ -71,7 +71,7 @@ class ProductLayerController extends BaseController
     public function update(Request $request,$id)
     {
         $data = $this->getData($request);
-        $data['updated_at'] = date('Y-m-d H:i:s', time());
+        $data['updated_at'] = time();
         ProductLayerModel::where('id',$id)->update($data);
         return redirect('/admin/productlayer');
     }

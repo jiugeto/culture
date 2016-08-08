@@ -60,7 +60,7 @@ class ProductLayerController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
-        $data['created_at'] = date('Y-m-d H:i:s', time());
+        $data['created_at'] = time();
         ProductLayerModel::create($data);
         return redirect('/member/produvtlayer');
     }

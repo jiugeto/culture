@@ -16,6 +16,10 @@
     <script src="/assets/js/jquery-1.10.2.min.js"></script>
 </head>
 <body>
+{{--浏览器问题--}}
+@include('layout.browser')
+{{--浏览器问题--}}
+
     @include('layout.header')
     {{--@include('layout.navigate')--}}
 

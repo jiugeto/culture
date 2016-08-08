@@ -48,7 +48,7 @@ class WorksController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
-        $data['created_at'] = date('Y-m-d H:i:s',time());
+        $data['created_at'] = time();
         WorksModel::create($data);
         //更新作品演员关联表
         $actorWorksModel = WorksModel::where($data)->first();

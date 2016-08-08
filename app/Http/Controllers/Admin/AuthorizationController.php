@@ -25,7 +25,6 @@ class AuthorizationController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'actions'=> $this->actions(),
             'datas'=> $this->query($del=0),
             'prefix_url'=> '/admin/authorization',
             'crumb'=> $this->crumb,
@@ -39,7 +38,6 @@ class AuthorizationController extends BaseController
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
-            'actions'=> $this->actions(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];

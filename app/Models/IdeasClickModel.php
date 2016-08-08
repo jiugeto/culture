@@ -9,6 +9,6 @@ class IdeasClickModel extends BaseModel
 
     protected $table = 'bs_ideas_click';
     protected $fillable = [
-        'id','ideadid','uid','created_at',
+        'id','ideadid','uid','created_at','updated_at',
     ];
 }

@@ -48,27 +48,28 @@ class BaseController extends Controller
             'url'=> 'trash',
         ],
         'notrash'=> [
-            'action','menus','admin','role','link','commain','cominfo','comfirm','commodule','comfunc','actor','works',
+            'action','menus','admin','role','link','commain','cominfo','comfirm','commodule','comfunc','staff','works',
         ],
     ];
 
     public function __construct()
     {
+        parent::__construct();
         if (\Session::has('admin.username')) {
             $this->limit = AdminModel::where('username',\Session::get('admin.username'))->first()->limit;
         }
     }
 
-    /**
-     * 获取权限数据列表
-     */
-    public function actions()
-    {
-        if ($actions = ActionModel::all()) {
-            return Tools::getChild($actions,$pid=0);
-        }
-        return [];
-    }
+//    /**
+//     * 获取权限数据列表
+//     */
+//    public function actions()
+//    {
+//        if ($actions = ActionModel::all()) {
+//            return Tools::getChild($actions,$pid=0);
+//        }
+//        return [];
+//    }
 
     /**
      * 获取链接数据列表

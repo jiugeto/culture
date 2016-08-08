@@ -67,7 +67,7 @@ class PersonDController extends BaseGoodsController
     public function store(Request $request)
     {
         $data = $this->getData($request,$this->type);
-        $data['created_at'] = date('Y-m-d', time());
+        $data['created_at'] = time();
         GoodsModel::create($data);
         return redirect('/member/personD');
     }
@@ -90,7 +90,7 @@ class PersonDController extends BaseGoodsController
     public function update(Request $request,$id)
     {
         $data = $this->getData($request,$this->type,$id);
-        $data['updated_at'] = date('Y-m-d H:i:s', time());
+        $data['updated_at'] = time();
         GoodsModel::where('id',$id)->update($data);
         return redirect('/member/personD');
     }

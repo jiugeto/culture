@@ -5,7 +5,7 @@ class DesignModel extends BaseModel
 {
     protected $table = 'bs_designs';
     protected $fillable = [
-        'id','name','genre','cate','uid','intro','detail','price','sort','del','created_at','updated_at',
+        'id','name','genre','cate','uid','intro','detail','price','video_id','click','sort','del','created_at','updated_at',
     ];
     //类型：房产，效果图，平面，漫游
     protected $cates = [
@@ -65,5 +65,14 @@ class DesignModel extends BaseModel
     public function money()
     {
         return $this->price ? $this->price.'元' : '';
+    }
+
+    /**
+     * 设计的所有图片
+     */
+    public function getPics()
+    {
+        $design_id = $this->id ? $this->id : 0;
+        return DesignPicModel::where('design_id',$design_id)->get();
     }
 }

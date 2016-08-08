@@ -130,7 +130,7 @@ class OrderController extends BaseController
     {
         if (AjaxRequest::ajax()) {
             $data = Input::all();
-            $updated_at = date('Y-m-d H:i:s',time());
+            $updated_at = time();
             if ($data['tosure']) {
                 OrderModel::where(['id'=>$data['id'],'status'=>1])->update(['status'=>2,'updated_at'=>$updated_at]);
             } else {
@@ -172,7 +172,7 @@ class OrderController extends BaseController
         $update = [
             'money'=> $money,
             'status'=>$status,
-            'updated_at'=>date('Y-m-d H:i:s',time())
+            'updated_at'=> time(),
         ];
         OrderModel::where('id',$id)->update($update);
         return redirect('/member/order/'.$id);
@@ -204,7 +204,7 @@ class OrderController extends BaseController
                 'status'=> 19,
             ];
         }
-        $update['realTime'] = date('Y-m-d H:i:s',time());
+        $update['realTime'] = time();
         OrderModel::where('id',$id)->update($update);
         return redirect('/member/order/'.$id);
     }

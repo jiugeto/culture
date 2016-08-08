@@ -60,7 +60,7 @@ class CategoryController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
-        $data['created_at'] = date('Y-m-d H:i:s', time());
+        $data['created_at'] = time();
         return redirect('/admin/category');
     }
 
@@ -80,7 +80,7 @@ class CategoryController extends BaseController
     public function update(Request $request, $id)
     {
         $data = $this->getData($request);
-        $data['updated_at'] = date('Y-m-d H:i:s', time());
+        $data['updated_at'] = time();
         CategoryModel::where('id',$id)->update($data);
         return redirect('/admin/category');
     }
@@ -90,7 +90,6 @@ class CategoryController extends BaseController
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
         $result = [
-//            'actions'=> $this->actions(),
             'data'=> CategoryModel::find($id),
             'crumb'=> $this->crumb,
             'curr'=> $curr,

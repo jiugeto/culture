@@ -51,7 +51,7 @@ class MenusController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
-        $data['created_at'] = date('Y-m-d H:m:s', time());
+        $data['created_at'] = time();
         MenusModel::create($data);
         return redirect('/admin/menus');
     }
@@ -85,7 +85,7 @@ class MenusController extends BaseController
     public function update(Request $request, $id)
     {
         $data = $this->getData($request);
-        $data['updated_at'] = date('Y-m-d H:m:s', time());
+        $data['updated_at'] = time();
         MenusModel::where('id',$id)->update($data);
         return redirect('/admin/menus');
     }
@@ -167,9 +167,14 @@ class MenusController extends BaseController
     public function query($type=0)
     {
         if ($type) {
-            $datas =  MenusModel::where('type',$type)->paginate($this->limit);
+            $datas =  MenusModel::where('type',$type)
+                ->orderBy('id','desc')
+                ->orderBy('sort','desc')
+                ->paginate($this->limit);
         } else {
-            $datas =  MenusModel::paginate($this->limit);
+            $datas =  MenusModel::orderBy('id','desc')
+                ->orderBy('sort','desc')
+                ->paginate($this->limit);
         }
         return $datas;
     }

@@ -143,8 +143,8 @@ Route::group(['prefix'=>'member','namespace'=>'Member'], function(){
     Route::get('idea/user/{id}','IdeaController@ideaShow');
     Route::get('idea/user/{id}/{uid}','IdeaController@setIdeaShow');
     Route::resource('idea','IdeaController');
-        //演员管理
-    Route::resource('actor','ActorController');
+        //娱乐员工管理
+    Route::resource('staff','StaffController');
         //图片管理
     Route::post('pic/{id}','PicController@update');
     Route::get('pic/{id}/destroy','PicController@destroy');

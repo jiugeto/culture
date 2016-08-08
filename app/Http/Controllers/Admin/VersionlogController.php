@@ -50,7 +50,7 @@ class VersionlogController extends BaseController
         $versionlog = [
             'name'=> $request->name,
             'intro'=> $request->intro,
-            'created_at'=> date('Y-m-d H:i:s', time()),
+            'created_at'=> time(),
         ];
         VersionlogModel::create($versionlog);
         return redirect('/admin/versionlog');

@@ -9,6 +9,6 @@ class GoodsLikeModel extends BaseModel
 
     protected $table = 'bs_goods_like';
     protected $fillable = [
-        'id','gid','uid','created_at',
+        'id','gid','uid','created_at','updated_at',
     ];
 }

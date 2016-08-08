@@ -429,3 +429,12 @@
 }
 .talk_con .right { width:693px;height:98px;overflow:hidden; }
 .talk_con .right div { padding:10px;height:98px; }
+
+
+
+
+
+/*IE浏览器部分兼容代码*/
+.ppt img,.content img {     /*图片边框*/
+    border-style:none;
+}
