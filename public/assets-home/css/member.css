@@ -90,6 +90,7 @@ a:hover li.a_li,a li.a_li_curr {
     border-radius:3px;
 }
 .chart1 { float:left;margin-right:20px;height:50px; }
+.chart1 .chart_text span { font-size:12px;position:relative; }
 .mem_info { float:right;margin-right:20px;height:70px; }
 .mem_info .detail {
     padding:2px 60px;
@@ -97,7 +98,7 @@ a:hover li.a_li,a li.a_li_curr {
     border-bottom-left-radius:3px;
     border-bottom-right-radius:3px;
     cursor:pointer;
-    position:relative;bottom:30px;
+    position:relative;bottom:45px;
 }
 .userInfoDetail {
     margin:2px 0;
@@ -106,7 +107,10 @@ a:hover li.a_li,a li.a_li_curr {
     border:1px solid lightgrey;
     border-top:2px solid orangered;
     border-radius:5px;
-    position:relative;bottom:30px;
+    font-size:14px;
+    color:gray;
+    position:relative;bottom:45px;
+    z-index:5;
     display:none;
 }
 .circle {
@@ -118,11 +122,13 @@ a:hover li.a_li,a li.a_li_curr {
 .circle1 { background:rgb(220,110,30); }
 .circle2 { background:rgb(225,200,85); }
 .circle3 { background:rgb(45,195,230); }
+.circle .text { color:white;font-size:12px;position:relative;top:-32px;left:5px; }
 .chart_text,.mem_user {
     padding:5px 20px;
 }
 .chart_text {
     font-size:15px;
+    color:gray;
     position:relative;top:-40px;left:50px;
 }
 .mem_user {
@@ -136,6 +142,32 @@ a:hover li.a_li,a li.a_li_curr {
     border:1px solid rgb(240,240,240);
     background:rgb(245,245,245);
     clear:both;
+}
+.company_detail {
+    margin:10px;
+    padding:5px 20px;
+    width:740px;
+    border-radius:3px;
+    border:1px dashed rgb(245,245,245);
+    color:gray;
+    background:rgb(253,253,253);
+    clear:both;
+    display:none;
+}
+.userInfoDetail a.close,.company_detail a.close {
+    padding:0 5px;
+    color:grey;
+    border-radius:5px;
+    border:1px dashed lightgrey;
+    background:ghostwhite;
+    position:relative;bottom:190px;left:15px;
+    float:right;
+    cursor:pointer;
+}
+.userInfoDetail a:hover.close,.company_detail a:hover.close {
+    color:red;
+    border:1px solid red;
+    background:pink;
 }
 .companybtn {
     padding:5px 20px;

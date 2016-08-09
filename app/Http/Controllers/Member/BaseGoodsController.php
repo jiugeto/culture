@@ -17,26 +17,12 @@ class BaseGoodsController extends BaseController
     /**
      * 查询方法
      */
-    public function query($del=0,$type,$cate_id=0)
+    public function query($del=0,$type)
     {
-        if ($cate_id) {
-            $goods =  GoodsModel::where('del',$del)
-                ->where('type',$type)
-                ->where('cate_id',$cate_id)
-                ->orderBy('id','desc')
-                ->paginate($this->limit);
-        } else {
-            $goods =  GoodsModel::where('del',$del)
-                ->where('type',$type)
-                ->orderBy('id','desc')
-                ->paginate($this->limit);
-        }
-        foreach ($goods as $good) {
-            $good->catename = '';
-            if ($good->cate_id) {
-                $good->catename = CategoryModel::find($good->cate_id)->name;
-            }
-        }
+        $goods =  GoodsModel::where('del',$del)
+            ->where('type',$type)
+            ->orderBy('id','desc')
+            ->paginate($this->limit);
         return $goods;
     }
 
@@ -51,7 +37,6 @@ class BaseGoodsController extends BaseController
         $goods = [
             'name'=> $data['name'],
             'type'=> $type,
-            'cate_id'=> $data['cate_id'],
             'intro'=> $data['intro'],
             'title'=> $data['title'],
             'pic_id'=> $data['pic_id'],

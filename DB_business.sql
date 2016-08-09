@@ -83,6 +83,34 @@ INSERT INTO `ba_admin` VALUES (1,'jiuge','jiuge','','jiuge',1,'',10,20160405,0);
 UNLOCK TABLES;
 
 --
+-- Table structure for table `ba_adminlog`
+--
+
+DROP TABLE IF EXISTS `ba_adminlog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ba_adminlog` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '管理员id',
+  `uname` varchar(255) NOT NULL COMMENT '用户名称',
+  `serial` varchar(20) NOT NULL COMMENT '序号，唯一标识',
+  `loginTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '登陆时间',
+  `logoutTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '退出时间',
+  `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='管理员日志表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ba_adminlog`
+--
+
+LOCK TABLES `ba_adminlog` WRITE;
+/*!40000 ALTER TABLE `ba_adminlog` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ba_adminlog` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `ba_role`
 --
 
@@ -152,7 +180,7 @@ CREATE TABLE `ba_userlog` (
   `logoutTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '退出时间',
   `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -161,6 +189,7 @@ CREATE TABLE `ba_userlog` (
 
 LOCK TABLES `ba_userlog` WRITE;
 /*!40000 ALTER TABLE `ba_userlog` DISABLE KEYS */;
+INSERT INTO `ba_userlog` VALUES (1,2,1,'jiuge','201608090833518600',2016,0,20160406),(2,2,1,'jiuge','201608091433021426',2016,0,20160406);
 /*!40000 ALTER TABLE `ba_userlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -559,7 +588,6 @@ CREATE TABLE `bs_goods` (
   `name` varchar(255) NOT NULL COMMENT '视频名称',
   `genre` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '片源类型：1产品系列，2花絮系列',
   `type` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '产品主体：1个人需求，2设计师供应，3企业需求，4企业供应',
-  `cate_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '视频分类：关联bs_videos_category',
   `intro` varchar(1000) NOT NULL COMMENT '视频简介',
   `title` varchar(255) NOT NULL COMMENT '鼠标移动的文字',
   `pic_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '图片链接id，关联图片表bs_pics',
@@ -587,7 +615,7 @@ CREATE TABLE `bs_goods` (
 
 LOCK TABLES `bs_goods` WRITE;
 /*!40000 ALTER TABLE `bs_goods` DISABLE KEYS */;
-INSERT INTO `bs_goods` VALUES (1,'作品1',1,0,4,'v部分的白癜风b','',1,1,0,0,0,'',0,0,1,10,1,1,0,20160312,0),(2,'企业需求001',1,3,4,'','',1,1,0,0,0,'',0,0,1,10,1,1,0,20160313,0),(3,'企业作品001',1,4,4,'','',1,1,0,0,0,'',0,0,1,10,1,1,0,20160313,0),(4,'视频产品0003',1,4,4,'rgfgewfrgtnh','wferbgrwefrgtfh',1,1,0,0,1,'',0,0,1,10,1,1,0,20160428,0);
+INSERT INTO `bs_goods` VALUES (1,'作品1',1,0,'v部分的白癜风b','',1,1,0,0,0,'',0,0,1,10,1,1,0,20160312,0),(2,'企业需求001',1,3,'','',1,1,0,0,0,'',0,0,1,10,1,1,0,20160313,0),(3,'企业作品001',1,4,'','',1,1,0,0,0,'',0,0,1,10,1,1,0,20160313,0),(4,'视频产品0003',1,4,'rgfgewfrgtnh','wferbgrwefrgtfh',1,1,0,0,1,'',0,0,1,10,1,1,0,20160428,0);
 /*!40000 ALTER TABLE `bs_goods` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -950,7 +978,7 @@ CREATE TABLE `bs_orders` (
   `realMoney2` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分期付款2，单位元',
   `realMoney3` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分期付款3，单位元',
   `realMoney4` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分期付款尾款，单位元',
-  `status` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '订单状态：创意订单状态：1新的创意，2确定创意，3拒绝创意，4创意免费，5创意收费，6办理订单，7确认收到，12订单成功，13订单失败。\r\n分镜订单状态：1新的分镜，2确定分镜，3拒绝分镜，4分镜免费，5分镜收费，6办理订单，7确认收到，12订单成功，132订单失败。\r\n视频制作订单状态：1新的样片，2确认制作，3拒绝制作，4分期收费，5效果协商，6二期收费，7确定成片，8三期收费，9出片交付，10尾款结清，11确认完成，12订单成功，13订单失败。',
+  `status` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '订单状态：创意订单状态：1新的创意，2确定创意，3拒绝创意，4创意免费，5创意收费，6办理订单，7确认收到，12订单成功，13订单失败。\r\n分镜订单状态：1新的分镜，2确定分镜，3拒绝分镜，4分镜免费，5分镜收费，6办理订单，7确认收到，12订单成功，13订单失败。\r\n视频制作订单状态：1新的样片，2确认制作，3拒绝制作，4分期收费，5效果协商，6二期收费，7确定成片，8三期收费，9出片交付，10尾款结清，11确认完成，12订单成功，13订单失败。',
   `remarks` varchar(255) NOT NULL COMMENT '拒绝理由',
   `isshow` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '前台列表是否显示：0不显示，1显示，默认1',
   `del` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '回收站：0不删除，1删除',
@@ -2043,7 +2071,7 @@ CREATE TABLE `companys` (
   `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updated_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='企业表 bs_companys';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='企业表 bs_companys';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2052,7 +2080,7 @@ CREATE TABLE `companys` (
 
 LOCK TABLES `companys` WRITE;
 /*!40000 ALTER TABLE `companys` DISABLE KEYS */;
-INSERT INTO `companys` VALUES (1,'这是广告公司',1,10,'滨盛路1870','0123456789012345',1,'0571',88888888,100000,'www.jiuge.com',12345678,311301,'123@456.com',10,20160428,0);
+INSERT INTO `companys` VALUES (1,'这是广告公司',2,10,'滨盛路1870','0123456789012345',1,'0571',88888888,100000,'www.jiuge.com',12345678,311301,'123@456.com',10,20160428,0),(2,'',0,0,'','',1,'0',0,0,'',0,0,'',10,1470735629,0);
 /*!40000 ALTER TABLE `companys` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2111,6 +2139,7 @@ CREATE TABLE `users` (
   `limit` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '列表每页记录数，默认10条',
   `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updated_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+  `lastLogin` int(10) unsigned DEFAULT '0' COMMENT '上次登录时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户表 bs_users';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -2121,7 +2150,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'jiuge','$2y$10$Ys0R.RAweFTJYXNTAH.tL.84VE8ZswnjMzJtrMr5P89Wg.4H26He.','jiuge@qq.com','946493655',63929131,4294967295,0,'',0,1,1,4,0,15,20160406,0),(2,'jiuge2','$2y$10$X5BdoH0p0n.E3hxCVag/neinTfiHXbMrCHUEEqf8ZpUQGaeOxUUBe','946493655@qq.com','',0,0,0,'',0,0,0,0,0,10,20160617,0);
+INSERT INTO `users` VALUES (1,'jiuge','$2y$10$Ys0R.RAweFTJYXNTAH.tL.84VE8ZswnjMzJtrMr5P89Wg.4H26He.','jiuge@qq.com','946493655',63929131,4294967295,0,'',0,1,1,4,0,15,20160406,0,0),(2,'jiuge2','$2y$10$X5BdoH0p0n.E3hxCVag/neinTfiHXbMrCHUEEqf8ZpUQGaeOxUUBe','946493655@qq.com','',0,0,0,'',0,0,0,0,0,10,20160617,0,0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2165,4 +2194,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-08 20:56:12
+-- Dump completed on 2016-08-09 21:03:42

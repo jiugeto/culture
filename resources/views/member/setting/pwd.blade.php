@@ -1,6 +1,9 @@
 @extends('member.main')
 @section('content')
-    @include('member.common.crumb')
+    {{--@include('member.common.crumb')--}}
+    <div class="mem_crumb">
+        <a href="/member">会员后台</a> / 会员设置 / 更新密码
+    </div>
 
     <form data-am-validator method="POST" action="/member/setting/updatepwd/{{ $data->id }}" enctype="multipart/form-data">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -8,7 +11,7 @@
 
         <table class="table_create">
             {{--密码--}}
-            <tr><td colspan="2"><div class="div_hr"></div></td></tr>
+            {{--<tr><td colspan="2"><div class="div_hr"></div></td></tr>--}}
             <tr><td colspan="2"><p class="center"><b>密码修改</b></p></td></tr>
             <tr>
                 <td style="width:40%;"><label>用户名 / User Name：</label></td>

@@ -47,7 +47,7 @@ class LoginController extends Controller
         $validator = Validator::make(Input::all(), $rules, $messages);
         if ($validator->fails()) {
             echo "<script>alert('验证码错误！');history.go(-1);</script>";exit;
-            return redirect('/login');
+//            return redirect('/login');
         }
         //个人资料
         if (in_array($userModel->isuser,[1,3])) {
@@ -71,7 +71,6 @@ class LoginController extends Controller
         $usercompany = isset($companys) ? serialize($companys) : [];
 
         $serial = date('YmdHis',time()).rand(0,10000);
-        $loginTime = date('Y-m-d H:i:s',time());
         //加入session
         Session::put('user.uid',$userModel->id);
         Session::put('user.username',Input::get('username'));
@@ -82,7 +81,7 @@ class LoginController extends Controller
         Session::put('user.area',$userModel->area);
         Session::put('user.address',$userModel->address);
         Session::put('user.cid',isset($companyModel)?$companyModel->id:'');
-        Session::put('user.loginTime',date('Y/m/d H:i:s', time()));
+        Session::put('user.loginTime',time());
         Session::put('user.person',$userperson);
         Session::put('user.company',$usercompany);
 
@@ -91,7 +90,7 @@ class LoginController extends Controller
             'plat'=> 2,     //1用户登录
             'uid'=> $userModel->id,
             'uname'=> Input::get('username'),
-            'loginTime'=> date('Y-m-d H:i:s',time()),
+            'loginTime'=> time(),
             'serial'=> $serial,
             'created_at'=> $userModel->created_at,
         ];
@@ -103,7 +102,7 @@ class LoginController extends Controller
     public function dologout()
     {
         //更新用户日志表
-        $logoutTime = date('Y-m-d H:i:s',time());
+        $logoutTime = time();
         UserlogModel::where('serial',Session::get('user.serial'))
                     ->update(['logoutTime'=>$logoutTime]);
         //去除session

@@ -10,12 +10,12 @@ use App\Tools;
 class GoodsModel extends BaseModel
 {
     /**
-     * goods 商品、货物，代表文化类产品
+     * goods 商品、货物，代表视频类产品
      */
 
     protected $table = 'bs_goods';
     protected $fillable = [
-        'id','name','genre','type','cate_id','intro','title','pic_id','video_id','video_id2','money','uid','uname','click','recommend','newest','sort','isshow','isshow2','del','created_at','updated_at',
+        'id','name','genre','type','intro','title','pic_id','video_id','video_id2','money','uid','uname','click','recommend','newest','sort','isshow','isshow2','del','created_at','updated_at',
     ];
 
     //片源类型：1产品，2花絮
@@ -32,25 +32,6 @@ class GoodsModel extends BaseModel
     protected $isshows = [
         '不显示','显示',
     ];
-
-    /**
-     * 得到所有分类
-     */
-    public function categorys()
-    {
-        $categorys =  CategoryModel::where('del',0)->get();
-//        $categorys = Tools::category($categorys);
-        $categorys = Tools::getChild($categorys);
-        return $categorys;
-    }
-
-    public function cate()
-    {
-//        return $this->hasOne('\App\Models\CategoryModel','id','cate_id');
-//        return $this->cate_id?CategoryModel::find($this->cate_id):'';
-        $cateModel = $this->cate_id?CategoryModel::find($this->cate_id):'';
-        return $cateModel ? $cateModel->name : '';
-    }
 
     public function genre()
     {

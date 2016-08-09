@@ -2,7 +2,6 @@
 namespace App\Http\Controllers\Member;
 
 //use App\Http\Requests\Request;
-use App\Models\CategoryModel;
 use Illuminate\Http\Request;
 use App\Models\GoodsModel;
 
@@ -23,7 +22,6 @@ class CompanySController extends BaseGoodsController
         $this->lists['func']['url'] = 'companyS';
         $this->lists['create']['name'] = '发布作品';
         $this->model = new GoodsModel();
-        $this->cateModels = new CategoryModel();
     }
 
     public function index($cate_id=0)
@@ -31,8 +29,7 @@ class CompanySController extends BaseGoodsController
         $curr['name'] = $this->lists['']['name'];
         $curr['url'] = $this->lists['']['url'];
         $result = [
-            'datas'=> $this->query($del=0,$this->type,$cate_id),
-            'cateModels'=> $this->cateModels,
+            'datas'=> $this->query($del=0,$this->type),
             'prefix_url'=> '/member/companyS',
             'lists'=> $this->lists,
             'curr'=> $curr,
@@ -45,8 +42,7 @@ class CompanySController extends BaseGoodsController
         $curr['name'] = $this->lists['trash']['name'];
         $curr['url'] = $this->lists['trash']['url'];
         $result = [
-            'datas'=> $this->query($del=1,$this->type,$cate_id),
-            'cateModels'=> $this->cateModels,
+            'datas'=> $this->query($del=1,$this->type),
             'prefix_url'=> '/member/companyS/trash',
             'lists'=> $this->lists,
             'curr'=> $curr,
@@ -59,7 +55,6 @@ class CompanySController extends BaseGoodsController
         $curr['name'] = $this->lists['create']['name'];
         $curr['url'] = $this->lists['create']['url'];
         $result = [
-            'categorys'=> $this->model->categorys(),
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -80,7 +75,6 @@ class CompanySController extends BaseGoodsController
         $curr['url'] = $this->lists['edit']['url'];
         $result = [
             'data'=> GoodsModel::find($id),
-            'categorys'=> $this->model->categorys(),
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -100,7 +94,6 @@ class CompanySController extends BaseGoodsController
         $curr['name'] = $this->lists['show']['name'];
         $curr['url'] = $this->lists['show']['url'];
         $data = GoodsModel::find($id);
-        $data->catename = CategoryModel::find($data->cate_id)->name;
         $result = [
             'data'=> $data,
             'types'=> $this->model['types'],

@@ -20,14 +20,10 @@ class SettingController extends BaseController
         parent::__construct();
         if ($this->userid) { return redirect('/login'); }
         $this->model = new UserModel();
-        $this->lists['func']['name'] = '用户设置';
-        $this->lists['func']['url'] = 'setting';
     }
 
     public function show()
     {
-        $curr['name'] = $this->lists['']['name'];
-        $curr['url'] = $this->lists['']['url'];
         $data = UserModel::find($this->userid);
         if (in_array($data->isuser,[1,3])) {
             $personModel = PersonModel::where('uid',$this->userid)->first();
@@ -39,9 +35,6 @@ class SettingController extends BaseController
             'data'=> $data,
             'personModel'=> isset($personModel) ? $personModel : '',
             'companyModel'=> isset($companyModel) ? $companyModel : '',
-            'lists'=> $this->lists,
-            'curr_list'=> '',
-            'curr'=> $curr,
         ];
         return view('member.setting.show', $result);
     }
@@ -51,8 +44,6 @@ class SettingController extends BaseController
         $this->model = new UserModel();
         $result = [
             'data'=> UserModel::find($id),
-            'lists'=> $this->lists,
-            'curr_list'=> '',
             'isusers'=> $this->model['isusers'],
         ];
         return view('member.setting.auth', $result);
@@ -115,8 +106,6 @@ class SettingController extends BaseController
     {
         $result = [
             'data'=> UserModel::find($id),
-            'lists'=> $this->lists,
-            'curr_list'=> '',
         ];
         return view('member.setting.pwd', $result);
     }

@@ -97,12 +97,12 @@ Route::group(['prefix'=>'member','namespace'=>'Member'], function(){
     Route::get('personS/{id}/forceDelete','PersonSController@forceDelete');
     Route::resource('personS','PersonSController');
         //作品类型
-    Route::post('category/{id}','CategoryController@update');
-    Route::get('category/trash','CategoryController@trash');
-    Route::get('category/{id}/destroy','CategoryController@destroy');
-    Route::get('category/{id}/restore','CategoryController@restore');
-    Route::get('category/{id}/forceDelete','CategoryController@forceDelete');
-    Route::resource('category','CategoryController');
+//    Route::post('category/{id}','CategoryController@update');
+//    Route::get('category/trash','CategoryController@trash');
+//    Route::get('category/{id}/destroy','CategoryController@destroy');
+//    Route::get('category/{id}/restore','CategoryController@restore');
+//    Route::get('category/{id}/forceDelete','CategoryController@forceDelete');
+//    Route::resource('category','CategoryController');
     //企业供求
         //企业需求
     Route::post('companyD/{id}','CompanyDController@update');

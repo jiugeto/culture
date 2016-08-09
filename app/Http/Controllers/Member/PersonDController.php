@@ -24,12 +24,12 @@ class PersonDController extends BaseGoodsController
         $this->model = new GoodsModel();
     }
 
-    public function index($cate_id=0)
+    public function index()
     {
         $curr['name'] = $this->lists['']['name'];
         $curr['url'] = $this->lists['']['url'];
         $result = [
-            'datas'=> $this->query($del=0,$this->type,$cate_id),
+            'datas'=> $this->query($del=0,$this->type),
             'prefix_url'=> '/member/personD',
             'lists'=> $this->lists,
             'curr'=> $curr,
