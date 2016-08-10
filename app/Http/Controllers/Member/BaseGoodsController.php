@@ -29,7 +29,7 @@ class BaseGoodsController extends BaseController
     /**
      * 收集数据
      */
-    public function getData(Request $request,$type,$id=null)
+    public function getData(Request $request,$type)
     {
         $data = $request->all();
         //uid暂且为10,uname暂且为''

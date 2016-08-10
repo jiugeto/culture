@@ -2,8 +2,9 @@
 @section('content')
     @include('member.common.crumb')
 
-    <form data-am-validator method="POST" action="/member/design" enctype="multipart/form-data">
+    <form data-am-validator method="POST" action="/member/{{ $lists['func']['url'] }}" enctype="multipart/form-data">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <p style="text-align:center;"><b>{{ $lists['func']['name'] }}{{ in_array($lists['func']['url'],['designPerD','designComD']) ? '需求' : '供应' }}添加</b></p>
         <table class="table_create">
             <tr>
                 <td><label>设计名称{{-- / Name--}}：</label></td>
@@ -11,13 +12,13 @@
             </tr>
             {{--<tr><td></td></tr>--}}
 
-            <tr>
-                <td><label>供求关系{{-- / Genre--}}：</label></td>
-                <td>
-                    <label><input type="radio" name="genre" value="1" checked/> 设计供应&nbsp;&nbsp;</label>
-                    <label><input type="radio" name="genre" value="2"/> 设计需求&nbsp;&nbsp;</label>
-                </td>
-            </tr>
+            {{--<tr>--}}
+                {{--<td><label>供求关系--}}{{-- / Genre--}}{{--：</label></td>--}}
+                {{--<td>--}}
+                    {{--<label><input type="radio" name="genre" value="1" checked/> 设计供应&nbsp;&nbsp;</label>--}}
+                    {{--<label><input type="radio" name="genre" value="2"/> 设计需求&nbsp;&nbsp;</label>--}}
+                {{--</td>--}}
+            {{--</tr>--}}
             {{--<tr><td></td></tr>--}}
 
             <tr>
@@ -34,7 +35,7 @@
 
             <tr>
                 <td><label>价格{{-- / Price--}}：(单位元)</label></td>
-                <td><input type="text" placeholder="" pattern="^(\d+)|(\d.\d+)$" required name="money"/></td>
+                <td><input type="text" placeholder="" pattern="^\d+(.\d{1,2})?$" required name="money"/></td>
             </tr>
             {{--<tr><td></td></tr>--}}
 
@@ -69,7 +70,7 @@
                     <!-- 实例化编辑器 -->
                     <script type="text/javascript">
                         var ue = UE.getEditor('container',{
-                            initialFrameWidth:500,
+                            initialFrameWidth:400,
                             initialFrameHeight:100,
                                     toolbars:[['redo','undo','bold','italic','underline','strikethrough','horizontal','forecolor','fontfamily','fontsize','fullscreen','priview','directionality','paragraph','insertimage','searchreplace','pasteplain','help']]
                         });
@@ -82,14 +83,14 @@
             </tr>
             {{--<tr><td></td></tr>--}}
 
-            <tr>
-                <td><label>排序{{-- / Sort--}}：</label></td>
-                <td><input type="text" placeholder="值越大越靠前" pattern="^\d+$" required name="sort" value="20"/></td>
-            </tr>
+            {{--<tr>--}}
+                {{--<td><label>排序--}}{{-- / Sort--}}{{--：</label></td>--}}
+                {{--<td><input type="text" placeholder="值越大越靠前" pattern="^\d+$" required name="sort" value="20"/></td>--}}
+            {{--</tr>--}}
             {{--<tr><td></td></tr>--}}
 
             <tr><td colspan="2" style="text-align:center;">
-                    <button class="companybtn" onclick="history.go(-1)">返 &nbsp;&nbsp;&nbsp;回</button>
+                    <button class="companybtn" onclick="history.go(-1)">返 回</button>
                     <button type="submit" class="companybtn">保存添加</button>
                 </td></tr>
         </table>

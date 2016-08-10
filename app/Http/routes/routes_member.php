@@ -22,8 +22,8 @@ Route::group(['prefix'=>'regist'], function(){
 /**
  * 这里是会员路由
  */
-//Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Member'], function(){
-Route::group(['prefix'=>'member','namespace'=>'Member'], function(){
+Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Member'], function(){
+//Route::group(['prefix'=>'member','namespace'=>'Member'], function(){
     //账户首页
     Route::get('/','HomeController@index');
     Route::get('/home','HomeController@index');
@@ -127,13 +127,12 @@ Route::group(['prefix'=>'member','namespace'=>'Member'], function(){
     Route::get('{genre}/rent','RentController@index');
     Route::resource('rent','RentController');
         //娱乐供求
-    Route::post('entertain/{id}','EntertainController@update');
-    Route::get('entertain/{id}/destroy','EntertainController@destroy');
-    Route::get('entertain/{id}/restore','EntertainController@restore');
-    Route::get('entertain/{id}/forceDelete','EntertainController@forceDelete');
-    Route::get('entertain/trash','EntertainController@trash');
-    Route::get('{genre}/entertain','EntertainController@index');
-    Route::resource('entertain','EntertainController');
+    Route::post('entertainS/{id}','EntertainSController@update');
+    Route::get('entertainS/{id}/destroy','EntertainSController@destroy');
+    Route::get('entertainS/{id}/restore','EntertainSController@restore');
+    Route::get('entertainS/{id}/forceDelete','EntertainSController@forceDelete');
+    Route::get('entertainS/trash','EntertainSController@trash');
+    Route::resource('entertainS','EntertainSController');
         //创意管理
     Route::post('idea/{id}','IdeaController@update');
     Route::get('idea/{id}/destroy','IdeaController@destroy');
@@ -168,11 +167,27 @@ Route::group(['prefix'=>'member','namespace'=>'Member'], function(){
     Route::get('storyboard/{id}/forceDelete','StoryBoardController@forceDelete');
     Route::post('storyboard/{id}','StoryBoardController@update');
     Route::resource('storyboard','StoryBoardController');
-        //设计管理
-    Route::post('design/{id}','DesignController@update');
-    Route::get('design/trash','DesignController@trash');
-    Route::get('design/{id}/destroy','DesignController@destroy');
-    Route::resource('design','DesignController');
+        //个人设计供应
+    Route::post('designPerS/{id}','DesignPerSController@update');
+    Route::get('designPerS/trash','DesignPerSController@trash');
+    Route::get('designPerS/{id}/destroy','DesignPerSController@destroy');
+    Route::resource('{cate}/designPerS','DesignPerSController');
+    Route::resource('designPerS','DesignPerSController');
+        //个人设计需求
+    Route::post('designPerD/{id}','DesignPerDController@update');
+    Route::get('designPerD/trash','DesignPerDController@trash');
+    Route::get('designPerD/{id}/destroy','DesignPerDController@destroy');
+    Route::resource('designPerD','DesignPerDController');
+        //公司设计供应
+    Route::post('designComS/{id}','DesignComSController@update');
+    Route::get('designComS/trash','DesignComSController@trash');
+    Route::get('designComS/{id}/destroy','DesignComSController@destroy');
+    Route::resource('designComS','DesignComSController');
+        //公司设计需求
+    Route::post('designComD/{id}','DesignComDController@update');
+    Route::get('designComD/trash','DesignComDController@trash');
+    Route::get('designComD/{id}/destroy','DesignComDController@destroy');
+    Route::resource('designComD','DesignComDController');
     //订单路由
         //订单流程
     Route::get('order/{id}/{genre}/{money}','OrderController@setMoney');
@@ -185,4 +200,12 @@ Route::group(['prefix'=>'member','namespace'=>'Member'], function(){
     Route::resource('orderfirm','OrderFirmController');
         //在线创作路由
     Route::resource('orderpro','OrderProductController');
+        //话题管理
+    Route::resource('talk','TalkController');
+    Route::get('talk/click','TalkController@click');
+    Route::get('talk/collect','TalkController@collect');
+    Route::get('talk/follow','TalkController@follow');
+    Route::get('talk/reply','TalkController@reply');
+    Route::get('talk/share','TalkController@share');
+    Route::get('talk/thank','TalkController@thank');
 });

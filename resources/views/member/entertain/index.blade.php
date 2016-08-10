@@ -1,7 +1,7 @@
 @extends('member.main')
 @section('content')
     @include('member.common.crumb')
-    @include('member.entertain.search')
+    {{--@include('member.entertain.search')--}}
     <div class="mem_tab">@include('member.common.lists')</div>
     <div class="hr_tab"></div>
     <!-- 空白 -->
@@ -21,7 +21,7 @@
             <tr>
                 <td>{{ $data->id }}</td>
                 <td>{{ $data->title }}</td>
-                <td>{{ $data->genre==1 ? '娱乐供应' : '娱乐需求' }}</td>
+                {{--<td>{{ $data->genre==1 ? '娱乐供应' : '娱乐需求' }}</td>--}}
                 <td>{{ $data->uname }}</td>
                 <td>{{ $data->created_at }}</td>
                 <td>

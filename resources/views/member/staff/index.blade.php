@@ -3,7 +3,7 @@
     @include('member.common.crumb')
     <div class="mem_tab">
         {{--@include('member.common.lists')--}}
-        <div class="mem_create" style="margin:20px 0;"><a href="/member/actor/create">添加演员</a></div>
+        <div class="mem_create" style="margin:20px 0;"><a href="/member/actor/create">添加人员</a></div>
     </div>
     <div class="hr_tab"></div>
     <!-- 空白 -->

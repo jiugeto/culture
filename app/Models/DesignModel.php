@@ -7,6 +7,10 @@ class DesignModel extends BaseModel
     protected $fillable = [
         'id','name','genre','cate','uid','intro','detail','price','video_id','click','sort','del','created_at','updated_at',
     ];
+    //1企业供应，2企业需求，3个人供应，4个人需求
+    protected $genres = [
+        1=>'企业供应','企业需求','个人供应','个人需求',
+    ];
     //类型：房产，效果图，平面，漫游
     protected $cates = [
         1=>'房产漫游','效果图','平面设计',
@@ -39,7 +43,7 @@ class DesignModel extends BaseModel
 
     public function genreName()
     {
-        return $this->genre==1 ? '设计供应' : '设计需求';
+        return array_key_exists($this->genre,$this->genres) ? $this->genres[$this->genre] : '';
     }
 
     public function getCate()

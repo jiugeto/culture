@@ -10,6 +10,7 @@
             <tr>
                 <td>编号</td>
                 <td>视频名称</td>
+                <td>缩略图</td>
                 <td>创建时间</td>
                 <td>操作</td>
             </tr>
@@ -18,7 +19,8 @@
             <tr>
                 <td>{{ $data->id }}</td>
                 <td><a href="/member/video/{{ $data->id }}">{{ $data->name }}</a></td>
-                <td>{{ $data->created_at }}</td>
+                <td><img src="{{ $data->getPicUrl() }}" style="width:100px;"></td>
+                <td>{{ $data->createTime() }}</td>
                 <td>
                     @if($curr['url']=='')
                         <a href="/member/video/{{ $data->id }}" class="list_btn">查看</a>

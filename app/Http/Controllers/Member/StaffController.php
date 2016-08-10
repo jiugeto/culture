@@ -14,9 +14,9 @@ class StaffController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->lists['func']['name'] = '演员管理';
+        $this->lists['func']['name'] = '娱乐人物';
         $this->lists['func']['url'] = 'entertain';
-        $this->lists['create']['name'] = '添加演员';
+        $this->lists['create']['name'] = '添加人物';
         $this->model = new StaffModel();
     }
 

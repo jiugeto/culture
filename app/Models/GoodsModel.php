@@ -49,17 +49,17 @@ class GoodsModel extends BaseModel
     /**
      * 图片
      */
-    public function pics()
+    public function pics($uid)
     {
-        return PicModel::where('uid',$this->uid)->get();
+        return PicModel::where('uid',$uid)->get();
     }
 
     /**
      * 视频
      */
-    public function videos()
+    public function videos($uid)
     {
-        return VideoModel::where('uid',$this->uid)->get();
+        return VideoModel::where('uid',$uid)->get();
     }
 
     /**

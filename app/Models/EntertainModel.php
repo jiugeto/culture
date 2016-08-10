@@ -7,6 +7,9 @@ class EntertainModel extends BaseModel
     protected $fillable = [
         'id','title','genre','content','uid','sort','del','created_at','updated_at',
     ];
+    protected $genres = [
+        1=>'企业供应','企业需求',
+    ];
 
     /**
      * 娱乐公司的所有职员

@@ -3,7 +3,6 @@ namespace App\Http\Controllers\Member;
 
 use Illuminate\Http\Request;
 use App\Models\GoodsModel;
-use App\Models\CategoryModel;
 
 class PersonSController extends BaseGoodsController
 {
@@ -21,12 +20,12 @@ class PersonSController extends BaseGoodsController
         $this->model = new GoodsModel();
     }
 
-    public function index($type=0,$cate_id=0)
+    public function index($type=0)
     {
         $curr['name'] = $this->lists['']['name'];
         $curr['url'] = $this->lists['']['url'];
         $result = [
-            'datas'=> $this->query($del=0,$type,$cate_id),
+            'datas'=> $this->query($del=0,$type),
             'prefix_url'=> '/member/personS',
             'lists'=> $this->lists,
             'curr'=> $curr,
@@ -34,12 +33,12 @@ class PersonSController extends BaseGoodsController
         return view('member.personSD.index', $result);
     }
 
-    public function trash($type=0,$cate_id=0)
+    public function trash($type=0)
     {
         $curr['name'] = $this->lists['trash']['name'];
         $curr['url'] = $this->lists['trash']['url'];
         $result = [
-            'datas'=> $this->query($del=1,$type,$cate_id),
+            'datas'=> $this->query($del=1,$type),
             'prefix_url'=> '/member/personS/trash',
             'lists'=> $this->lists,
             'curr'=> $curr,
@@ -52,7 +51,8 @@ class PersonSController extends BaseGoodsController
         $curr['name'] = $this->lists['create']['name'];
         $curr['url'] = $this->lists['create']['url'];
         $result = [
-            'categorys'=> $this->model->categorys(),
+            'pics'=> $this->model->pics($this->userid),
+            'videos'=> $this->model->videos($this->userid),
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -73,7 +73,8 @@ class PersonSController extends BaseGoodsController
         $curr['url'] = $this->lists['edit']['url'];
         $result = [
             'data'=> GoodsModel::find($id),
-            'categorys'=> CategoryModel::all(),
+            'pics'=> $this->model->pics($this->userid),
+            'videos'=> $this->model->videos($this->userid),
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];

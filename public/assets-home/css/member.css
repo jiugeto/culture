@@ -196,10 +196,16 @@ a:hover li.a_li,a li.a_li_curr {
     border-bottom:1px solid lightgrey;
 }
 .mem_tab a:hover li { color:red; }
+.p_style {
+    margin:10px 20px;
+    color:gray;
+}
+.p_style a { color:grey; }
+.p_style a:hover { color:red; }
 .hr_tab {
     clear:both;
     margin:0 10px;
-    height:2px;
+    height:1px;
     background:rgb(240,240,240);
 }
 .list_kongbai {

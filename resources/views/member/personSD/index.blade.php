@@ -1,8 +1,15 @@
 @extends('member.main')
 @section('content')
     @include('member.common.crumb')
+    <div class="p_style">需求类型：
+        <a href="{{DOMAIN}}member/{{$lists['func']['url']=='personD'?'personD':'personS'}}">视频</a>
+        <a href="{{DOMAIN}}member/design">设计</a>
+    </div>
+    <div class="hr_tab"></div>
+
     <div class="mem_tab">@include('member.common.lists')</div>
     <div class="hr_tab"></div>
+
     <!-- 空白 -->
     <div class="list_kongbai">&nbsp;</div>
     <div class="list">

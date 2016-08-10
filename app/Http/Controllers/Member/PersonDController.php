@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers\Member;
 
-use App\Models\CategoryModel;
 use Illuminate\Http\Request;
 use App\Models\GoodsModel;
 
@@ -37,12 +36,12 @@ class PersonDController extends BaseGoodsController
         return view('member.personSD.index', $result);
     }
 
-    public function trash($cate_id=0)
+    public function trash()
     {
         $curr['name'] = $this->lists['trash']['name'];
         $curr['url'] = $this->lists['trash']['url'];
         $result = [
-            'datas'=> $this->query($del=1,$this->type,$cate_id),
+            'datas'=> $this->query($del=1,$this->type),
             'prefix_url'=> '/member/personD/trash',
             'lists'=> $this->lists,
             'curr'=> $curr,
@@ -55,11 +54,10 @@ class PersonDController extends BaseGoodsController
         $curr['name'] = $this->lists['create']['name'];
         $curr['url'] = $this->lists['create']['url'];
         $result = [
-            'categorys'=> $this->model->categorys(),
-            'pics'=> count($this->model->pics()) ? $this->model->pics() : [],
-            'videos'=> count($this->model->videos()) ? $this->model->videos() : [],
+            'pics'=> $this->model->pics($this->userid),
+            'videos'=> $this->model->videos($this->userid),
             'lists'=> $this->lists,
-            'curr'=> 'curr',
+            'curr'=> $curr,
         ];
         return view('member.personSD.create', $result);
     }
@@ -68,6 +66,7 @@ class PersonDController extends BaseGoodsController
     {
         $data = $this->getData($request,$this->type);
         $data['created_at'] = time();
+        dd($data);
         GoodsModel::create($data);
         return redirect('/member/personD');
     }
@@ -78,9 +77,7 @@ class PersonDController extends BaseGoodsController
         $curr['url'] = $this->lists['edit']['url'];
         $result = [
             'data'=> GoodsModel::find($id),
-            'pics'=> count($this->model->pics()) ? $this->model->pics() : [],
-            'videos'=> count($this->model->videos()) ? $this->model->videos() : [],
-            'categorys'=> CategoryModel::all(),
+            'model'=> $this->model,
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -89,7 +86,7 @@ class PersonDController extends BaseGoodsController
 
     public function update(Request $request,$id)
     {
-        $data = $this->getData($request,$this->type,$id);
+        $data = $this->getData($request,$this->type);
         $data['updated_at'] = time();
         GoodsModel::where('id',$id)->update($data);
         return redirect('/member/personD');
@@ -101,8 +98,7 @@ class PersonDController extends BaseGoodsController
         $curr['url'] = $this->lists['show']['url'];
         $result = [
             'data'=> GoodsModel::find($id),
-            'pics'=> count($this->model->pics()) ? $this->model->pics() : [],
-            'videos'=> count($this->model->videos()) ? $this->model->videos() : [],
+            'model'=> $this->model,
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];

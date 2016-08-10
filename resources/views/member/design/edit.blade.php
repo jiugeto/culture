@@ -5,6 +5,7 @@
     <form data-am-validator method="POST" action="/member/design/{{ $data->id }}" enctype="multipart/form-data">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="method" value="POST">
+        <p style="text-align:center;"><b>{{ $lists['func']['name'] }}{{ in_array($lists['func']['url'],['designPerD','designComD']) ? '需求' : '供应' }}修改</b></p>
         <table class="table_create">
             <tr>
                 <td><label>设计名称{{-- / Name--}}：</label></td>
@@ -12,13 +13,13 @@
             </tr>
             {{--<tr><td></td></tr>--}}
 
-            <tr>
-                <td><label>供求关系{{-- / Genre--}}：</label></td>
-                <td>
-                    <label><input type="radio" name="genre" value="1" {{ $data->genre==1 ? 'checked' : '' }}/> 设计供应&nbsp;&nbsp;</label>
-                    <label><input type="radio" name="genre" value="2" {{ $data->genre==2 ? 'checked' : '' }}/> 设计需求&nbsp;&nbsp;</label>
-                </td>
-            </tr>
+            {{--<tr>--}}
+                {{--<td><label>供求关系--}}{{-- / Genre--}}{{--：</label></td>--}}
+                {{--<td>--}}
+                    {{--<label><input type="radio" name="genre" value="1" {{ $data->genre==1 ? 'checked' : '' }}/> 设计供应&nbsp;&nbsp;</label>--}}
+                    {{--<label><input type="radio" name="genre" value="2" {{ $data->genre==2 ? 'checked' : '' }}/> 设计需求&nbsp;&nbsp;</label>--}}
+                {{--</td>--}}
+            {{--</tr>--}}
             {{--<tr><td></td></tr>--}}
 
             <tr>
@@ -85,14 +86,14 @@
             </tr>
             {{--<tr><td></td></tr>--}}
 
-            <tr>
-                <td><label>排序{{-- / Sort--}}：</label></td>
-                <td><input type="text" placeholder="值越大越靠前" pattern="^\d+$" required name="sort" value="{{ $data->sort }}"/></td>
-            </tr>
+            {{--<tr>--}}
+                {{--<td><label>排序--}}{{-- / Sort--}}{{--：</label></td>--}}
+                {{--<td><input type="text" placeholder="值越大越靠前" pattern="^\d+$" required name="sort" value="{{ $data->sort }}"/></td>--}}
+            {{--</tr>--}}
             {{--<tr><td></td></tr>--}}
 
             <tr><td colspan="2" style="text-align:center;">
-                    <button class="companybtn" onclick="history.go(-1)">返 &nbsp;&nbsp;&nbsp;回</button>
+                    <button class="companybtn" onclick="history.go(-1)">返 回</button>
                     <button type="submit" class="companybtn">保存修改</button>
                 </td></tr>
         </table>
