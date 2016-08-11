@@ -2,10 +2,9 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Models\TalksModel;
-//use Symfony\Component\HttpFoundation\Request;
+use App\Models\ThemeModel;
 
-class TalkController extends BaseController
+class ThemeController extends BaseController
 {
     /**
      * 网站链接管理
@@ -14,9 +13,9 @@ class TalkController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->model = new TalksModel();
-        $this->crumb['']['name'] = '话题列表';
-        $this->crumb['category']['name'] = '话题管理';
+        $this->model = new ThemeModel();
+        $this->crumb['']['name'] = '专栏列表';
+        $this->crumb['category']['name'] = '专栏管理';
         $this->crumb['category']['url'] = 'talk';
     }
 
@@ -26,11 +25,11 @@ class TalkController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $result = [
             'datas'=> $this->query(),
-            'prefix_url'=> '/admin/talk',
+            'prefix_url'=> '/admin/theme',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
-        return view('admin.talk.index', $result);
+        return view('admin.theme.index', $result);
     }
 
     public function edit($id)
@@ -38,17 +37,17 @@ class TalkController extends BaseController
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
         $result = [
-            'data'=> TalksModel::find($id),
+            'data'=> ThemeModel::find($id),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
-        return view('admin.talk.edit', $result);
+        return view('admin.theme.edit', $result);
     }
 
     public function update(Request $request,$id)
     {
-        TalksModel::where('id',$id)->update(['isshow'=> $request->isshow]);
-        return redirect('/admin/talk');
+        ThemeModel::where('id',$id)->update(['isshow'=> $request->isshow]);
+        return redirect('/admin/theme');
     }
 
     public function show($id)
@@ -56,11 +55,11 @@ class TalkController extends BaseController
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
         $result = [
-            'data'=> TalksModel::find($id),
+            'data'=> ThemeModel::find($id),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
-        return view('admin.talk.show', $result);
+        return view('admin.theme.show', $result);
     }
 
 
@@ -69,6 +68,6 @@ class TalkController extends BaseController
 
     public function query()
     {
-        return TalksModel::paginate($this->limit);
+        return ThemeModel::paginate($this->limit);
     }
 }

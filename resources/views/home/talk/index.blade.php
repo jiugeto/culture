@@ -27,12 +27,16 @@
                         {{--举报：&nbsp;&nbsp;&nbsp;&nbsp;--}}
                     {{--</td></tr>--}}
             {{--</table>--}}
+
             @if(count($datas))
                 @foreach($datas as $data)
             <table>
                 <tr>
                     <td rowspan="3" class="img">
-                        <div><img src="/uploads/images/2016/online1.png"></div>
+                        <div>
+                            {{--<img src="/uploads/images/2016/online1.png">--}}
+                            <div style="width:100px;height:100px;background:rgb(250,250,250);"></div>
+                        </div>
                         <p>{{--数量--}}{{ $data->read }}</p>
                     </td>
                     <td class="small">话题来自 {{ $data->areatoname()  }}
@@ -85,14 +89,14 @@
         <div class="talk_right">
             <div class="theme">
                 {{--<p>我的关注</p>--}}
-                <a href="/talk/mytalk"><div>我的话题</div></a>
-                <a href="/talk/follow"><div>我的关注</div></a>
-                <a href="/talk/collect"><div>我的收藏</div></a>
+                <a href="{{DOMAIN}}talk/mytalk"><div>我的话题</div></a>
+                <a href="{{DOMAIN}}talk/follow"><div>我的关注</div></a>
+                <a href="{{DOMAIN}}talk/collect"><div>我的收藏</div></a>
             </div>
             <div class="theme">
                 <p class="title"><b>话题专栏</b></p>
-                <a href="/talk/theme"><div>专栏·发现</div></a>
-                <a href="/talk/create"><div>写话题</div></a>
+                <a href="{{DOMAIN}}theme"><div>专栏·发现</div></a>
+                <a href="{{DOMAIN}}talk/create"><div>写话题</div></a>
             </div>
         </div>
     </div>

@@ -1,12 +1,21 @@
 <?php
 namespace App\Models;
 
-//use Illuminate\Database\Eloquent\Model;
-
 class ThemeModel extends BaseModel
 {
     protected $table = 'bs_theme';
     protected $fillable = [
-        'id','name','intro','sort','isshow','created_at','updated_at',
+        'id','name','uid','intro','sort','isshow','created_at','updated_at',
     ];
+
+    public function getUserName()
+    {
+        $uid = $this->uid ? $this->uid : 0;
+        $userName = '';
+        if ($uid) {
+            $userModel = UserModel::find($uid);
+            $userName = $userModel?$userModel->username:'';
+        }
+        return $userName ? $userName : '本站';
+    }
 }

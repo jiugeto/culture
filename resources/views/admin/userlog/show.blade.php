@@ -3,8 +3,23 @@
 <div class="admin-content">
     @include('admin.common.crumb')
     <div class="am-g">
-        @include('admin.common.menu')
-        {{--@include('admin.type.search')--}}
+        {{--@include('admin.common.menu')--}}
+        <div class="am-u-sm-12 am-u-md-6">
+            <div class="am-btn-toolbar">
+                <div class="am-btn-group am-btn-group-xs">
+                    <a href="{{DOMAIN}}admin/userlog">
+                        <button type="button" class="am-btn am-btn-default">
+                            <img src="{{PUB}}assets/images/files.png" class="icon"> 返回会员日志
+                        </button>
+                    </a>
+                    <a href="{{DOMAIN}}admin/adminlog">
+                        <button type="button" class="am-btn am-btn-default">
+                            <img src="{{PUB}}assets/images/files.png" class="icon"> 返回管理员日志
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
     <hr/>
 
@@ -18,11 +33,7 @@
                     <td>{{ $data->id }}</td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">平台类型 / Plat：</td>
-                    <td>{{ $data->plat==1 ? '管理员' : '用户' }}</td>
-                </tr>
-                <tr>
-                    <td class="am-hide-sm-only">用户名 / Uname：</td>
+                    <td class="am-hide-sm-only">{{$crumb['category']['url']=='userlog'?'用户':'管理员'}}名称 / Uname：</td>
                     <td>{{ $data->uname }}</td>
                 </tr>
                 <tr>
@@ -31,15 +42,15 @@
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">登录时间 / Login：</td>
-                    <td>{{ $data->loginTime }}</td>
+                    <td>{{ $data->loginTime() }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">退出时间 / Logout：</td>
-                    <td>{{ $data->logoutTime }}</td>
+                    <td>{{ $data->logoutTime() }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">创建时间 / Create Time：</td>
-                    <td>{{ $data->created_at }}</td>
+                    <td>{{ $data->createTime() }}</td>
                 </tr>
                 </tbody>
             </table>

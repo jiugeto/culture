@@ -78,7 +78,7 @@ CREATE TABLE `ba_admin` (
 
 LOCK TABLES `ba_admin` WRITE;
 /*!40000 ALTER TABLE `ba_admin` DISABLE KEYS */;
-INSERT INTO `ba_admin` VALUES (1,'jiuge','jiuge','','jiuge',1,'',10,20160405,0);
+INSERT INTO `ba_admin` VALUES (1,'jiuge','jiuge','','jiuge',1,'',10,1470909119,0);
 /*!40000 ALTER TABLE `ba_admin` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -98,7 +98,7 @@ CREATE TABLE `ba_adminlog` (
   `logoutTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '退出时间',
   `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='管理员日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='管理员日志表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -107,6 +107,7 @@ CREATE TABLE `ba_adminlog` (
 
 LOCK TABLES `ba_adminlog` WRITE;
 /*!40000 ALTER TABLE `ba_adminlog` DISABLE KEYS */;
+INSERT INTO `ba_adminlog` VALUES (1,1,'jiuge','201608111751591496',1470909119,0,1470909119),(2,1,'jiuge','201608112033548285',1470918834,0,1470909119);
 /*!40000 ALTER TABLE `ba_adminlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -172,7 +173,6 @@ DROP TABLE IF EXISTS `ba_userlog`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ba_userlog` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `plat` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '平台标识：1管理员登录，2用户登录',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户id',
   `uname` varchar(255) NOT NULL COMMENT '用户名称',
   `serial` varchar(20) NOT NULL COMMENT '序号，唯一标识',
@@ -180,7 +180,7 @@ CREATE TABLE `ba_userlog` (
   `logoutTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '退出时间',
   `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -189,7 +189,7 @@ CREATE TABLE `ba_userlog` (
 
 LOCK TABLES `ba_userlog` WRITE;
 /*!40000 ALTER TABLE `ba_userlog` DISABLE KEYS */;
-INSERT INTO `ba_userlog` VALUES (1,2,1,'jiuge','201608090833518600',2016,0,20160406),(2,2,1,'jiuge','201608091433021426',2016,0,20160406),(3,2,1,'jiuge','201608101019194125',1470795559,0,20160406),(4,1,1,'jiuge','201608101641353248',1470818495,0,20160405);
+INSERT INTO `ba_userlog` VALUES (1,1,'jiuge','201608090833518600',2016,0,20160406),(2,1,'jiuge','201608091433021426',2016,0,20160406),(3,1,'jiuge','201608101019194125',1470795559,0,1470795559),(4,1,'jiuge','201608101641353248',1470818495,0,1470795559),(5,1,'jiuge','201608110924283826',1470878668,0,1470795559),(6,1,'jiuge','201608111629053357',1470904145,0,1470795559),(7,1,'jiuge','201608111732136842',1470907933,0,1470795559);
 /*!40000 ALTER TABLE `ba_userlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1526,6 +1526,7 @@ CREATE TABLE `bs_talks` (
   `themeid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '话题主题id',
   `content` text NOT NULL COMMENT '创意内容',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布的用户id',
+  `pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '上级id',
   `read` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '浏览次数',
   `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序字段，值越大越靠前，默认10',
   `isshow` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '前台是否显示：0前台列表不显示，1前台列表显示',
@@ -1542,7 +1543,7 @@ CREATE TABLE `bs_talks` (
 
 LOCK TABLES `bs_talks` WRITE;
 /*!40000 ALTER TABLE `bs_talks` DISABLE KEYS */;
-INSERT INTO `bs_talks` VALUES (1,'话题1',0,'<p>而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表</p>',1,0,10,1,0,20160417,20160417),(2,'话题2 222222222222',0,'<p>不服该办法呢GV热豆腐还不太高和今年投入富家女我我的是女附近的八个人工我可v别沮丧的v比对方不能交电费表肯定是你鄙视吧v那地方就不能hiu二个IE人根据IE如何隔日给举动被GV的人覅偶包过户的人发货不固定不v个is独具不</p><p>55555555555555555555555555555</p>',1,0,10,1,0,20160419,20160422),(3,'话题3333333',0,'<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;这里可以排版文字，插入或粘贴图片\r\n &nbsp; &nbsp;&nbsp;</p><p>5151516515615165156165561562626516516515 &nbsp; &nbsp; &nbsp;&nbsp;</p>',1,0,10,1,0,20160422,20160422);
+INSERT INTO `bs_talks` VALUES (1,'话题1',0,'<p>而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表而非v代表</p>',1,0,0,10,1,0,20160417,20160417),(2,'话题2 222222222222',0,'<p>不服该办法呢GV热豆腐还不太高和今年投入富家女我我的是女附近的八个人工我可v别沮丧的v比对方不能交电费表肯定是你鄙视吧v那地方就不能hiu二个IE人根据IE如何隔日给举动被GV的人覅偶包过户的人发货不固定不v个is独具不</p><p>55555555555555555555555555555</p>',1,0,0,10,1,0,20160419,20160422),(3,'话题3333333',0,'<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;这里可以排版文字，插入或粘贴图片\r\n &nbsp; &nbsp;&nbsp;</p><p>5151516515615165156165561562626516516515 &nbsp; &nbsp; &nbsp;&nbsp;</p>',1,0,0,10,1,0,20160422,20160422);
 /*!40000 ALTER TABLE `bs_talks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1711,6 +1712,7 @@ DROP TABLE IF EXISTS `bs_theme`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `bs_theme` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户id，0代表默认专栏',
   `name` varchar(255) NOT NULL COMMENT '主题名称',
   `intro` varchar(255) NOT NULL COMMENT '内容说明',
   `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序字段，值越大越靠前，默认10',
@@ -1718,7 +1720,7 @@ CREATE TABLE `bs_theme` (
   `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updated_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='话题主题表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='话题主题表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1727,34 +1729,8 @@ CREATE TABLE `bs_theme` (
 
 LOCK TABLES `bs_theme` WRITE;
 /*!40000 ALTER TABLE `bs_theme` DISABLE KEYS */;
+INSERT INTO `bs_theme` VALUES (1,0,'视频制作','<p>视频视频视频视频视频视频视频上视频拍摄拍视频视频视频视频视频上刷屏刷屏刷屏刷屏刷屏刷屏刷屏刷屏刷屏刷屏刷屏刷屏刷屏刷屏刷屏刷屏是视频视频视频视频说啪啪啪啪啪啪啪啪啪刷屏刷屏刷屏刷屏刷屏刷屏刷屏刷屏刷屏刷屏刷屏刷屏刷屏视频视频视频视频上视频拍摄拍视频视频视频视频视频上</p>',10,1,1470905599,0);
 /*!40000 ALTER TABLE `bs_theme` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `bs_theme_talk`
---
-
-DROP TABLE IF EXISTS `bs_theme_talk`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `bs_theme_talk` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `talkid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '话题id',
-  `themeid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '话题主题id',
-  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '收集的用户uid',
-  `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
-  `updated_at` int(10) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='话题主题表';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `bs_theme_talk`
---
-
-LOCK TABLES `bs_theme_talk` WRITE;
-/*!40000 ALTER TABLE `bs_theme_talk` DISABLE KEYS */;
-/*!40000 ALTER TABLE `bs_theme_talk` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -2094,11 +2070,11 @@ DROP TABLE IF EXISTS `persons`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `persons` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '会员id',
   `realname` varchar(255) NOT NULL COMMENT '真实名称',
   `sex` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '性别：1男，2女',
   `idcard` char(18) NOT NULL COMMENT '身份证号码，18位',
   `idfront` varchar(255) NOT NULL COMMENT '身份证正面照',
-  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '会员id',
   `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updated_at` int(11) NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`)
@@ -2111,7 +2087,7 @@ CREATE TABLE `persons` (
 
 LOCK TABLES `persons` WRITE;
 /*!40000 ALTER TABLE `persons` DISABLE KEYS */;
-INSERT INTO `persons` VALUES (1,'jiuge',1,'123456789012345678','',1,20160410,0),(2,'jiuge',1,'123456789012345678','',1,20160410,0),(3,'九哥',1,'123456789012345678','',1,20160410,0),(4,'九哥',1,'123456789012345678','',1,20160410,0);
+INSERT INTO `persons` VALUES (1,1,'jiuge',1,'123456789012345678','',20160410,0),(2,1,'jiuge',1,'123456789012345678','',20160410,0),(3,1,'九哥',1,'123456789012345678','',20160410,0),(4,1,'九哥',1,'123456789012345678','',20160410,0);
 /*!40000 ALTER TABLE `persons` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2195,4 +2171,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-10 19:25:03
+-- Dump completed on 2016-08-11 21:04:23

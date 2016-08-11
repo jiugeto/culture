@@ -36,37 +36,15 @@ class RegisterController extends Controller
 
         //验证码验证
         $rules = [
-//            'username' => 'required|max:15',
-            'captcha' => 'required|captcha',
-//            'password' => 'required|between:6,12|confirmed',
-//            'password_confirmation' => 'required|between:6,12',
-//            'email' => 'required|email|max:50',
         ];
         $messages = [
-//            'username.unique' => '用户名已经存在',
-//            'username.max' => '不能超过15个字符',
             'captcha.required' => '请输入验证码',
             'captcha.captcha' => '验证码错误，请重试',
-//            'email.required' => '必填',
-//            'email.email' => '格式不正确',
-//            'email.max' => '不能超过50个字符',
-//            'password.required' => '请输入密码',
-//            'password.between' => '密码6-12个字符',
-//            'password.confirmed' => '两次密码输入不一致',
-//            'password_confirmation.required' => '请输入重复密码',
-//            'password_confirmation.between' => '重复密码6-12个字符',
         ];
         $validator = Validator::make(Input::all(), $rules, $messages);
-//        dd($validator->fails());
         if ($validator->fails()) {
-//            return redirect('/regist')
-//                ->withErrors($validator)
-//                ->with([
-//                    'username'=>Input::get('username'),
-//                    'email'=>Input::get('email')
-//                ]);
             echo "<script>alert('验证码错误！');history.go(-1);</script>";exit;
-            return redirect('/regist');
+//            return redirect('/regist');
         }
 
         //数据写入用户表
@@ -74,7 +52,7 @@ class RegisterController extends Controller
             'username'=> Input::get('username'),
             'password'=> Hash::make(Input::get('password')),
             'email'=> Input::get('email'),
-            'created_at'=> date('Y-m-d H:i:s', time()),
+            'created_at'=> time(),
         ];
         UserModel::create($data);
 

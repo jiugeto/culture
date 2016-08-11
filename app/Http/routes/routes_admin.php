@@ -147,6 +147,7 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::get('type/tableid/{table_id}','TypeController@index');
         //用户日志管理
     Route::resource('userlog','UserlogController');
+    Route::resource('adminlog','AdminlogController');
         //地区管理
     Route::post('area/{id}','AreaController@update');
     Route::resource('area','AreaController');
@@ -174,8 +175,11 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::post('idea/{id}','IdeaController@update');
     Route::resource('idea','IdeaController');
         //话题管理
-    Route::post('talk/{id}','TalkController@update');
+//    Route::post('talk/{id}','TalkController@update');
     Route::resource('talk','TalkController');
+        //话题专题管理
+    Route::post('theme/{id}','ThemeController@update');
+    Route::resource('theme','ThemeController');
     //订单管理
         //订单路由
     Route::get('order/{del}/{isshow}','OrderController@index');

@@ -1,14 +1,57 @@
 <?php
 namespace App\Models;
 
-//use Illuminate\Database\Eloquent\Model;
-
 class TalksModel extends BaseModel
 {
     protected $table = 'bs_talks';
     protected $fillable = [
-        'id','name','content','uid','read','sort','isshow','del','created_at','updated_at',
+        'id','name','content','uid','read','pid','sort','isshow','del','created_at','updated_at',
     ];
+
+    /**
+     * 话题的主题
+     */
+    public function theme()
+    {
+        $themeid = $this->themeid ? $this->themeid : 0;
+        $themeModel = ThemeModel::find($themeid);
+        return $themeModel ? $themeModel : '';
+    }
+
+    /**
+     * 话题的主题标题
+     */
+    public function getThemeName()
+    {
+        return $this->theme() ? $this->theme()->name : '';
+    }
+
+    /**
+     * 发布人信息
+     */
+    public function user()
+    {
+        $uid = $this->uid ? $this->uid : 0;
+        $userModel = UserModel::find($uid);
+        return $userModel ? $userModel : '';
+    }
+
+    /**
+     * 发布人名称
+     */
+    public function getUserName()
+    {
+        return $this->user() ? $this->user()->username : '';
+    }
+
+    /**
+     * 点击话题
+     */
+    public function click()
+    {
+        $datas = TalksClickModel::where('talkid',$this->id)->get();
+        return count($datas) ? $datas : 0;
+    }
 
     /**
      * 关注话题
@@ -55,54 +98,18 @@ class TalksModel extends BaseModel
         return count($datas) ? $datas : 0;
     }
 
-    /**
-     * 点赞话题
-     */
-    public function click()
-    {
-        $datas = TalksClickModel::where('talkid',$this->id)->get();
-        return count($datas) ? $datas : 0;
-    }
-
-//    public function followStr()
-//    {
-//        if ($this->follow()) { foreach ($this->follow() as $v) { $follows = $v->followid; } }
-//        return isset($follows) ? count($follows) : 0;
-//    }
-//
-//    public function shareStr()
-//    {
-//        if ($this->share()) { foreach ($this->share() as $v) { $shares = $v->shareid; } }
-//        return isset($shares) ? count($shares) : 0;
-//    }
-//
-//    public function reportStr()
-//    {
-//        if ($this->report()) { foreach ($this->report() as $v) { $reports = $v->reportid; } }
-//        return isset($reports) ? count($reports) : 0;
-//    }
-//
-//    public function collectStr()
-//    {
-//        if ($this->collect()) { foreach ($this->collect() as $v) { $collects = $v->collectid; } }
-//        return isset($collects) ? count($collects) : 0;
-//    }
-//
-//    public function thankStr()
-//    {
-//        if ($this->thank()) { foreach ($this->thank() as $v) { $thanks = $v->thankid; } }
-//        return isset($thanks) ? count($thanks) : 0;
-//    }
-//
-//    public function clickStr()
-//    {
-//        if ($this->click()) { foreach ($this->click() as $v) { $clicks = $v->clickid; } }
-//        return isset($clicks) ? count($clicks) : 0;
-//    }
-
     public function areatoname()
     {
         $userInfo = UserModel::find($this->uid);
-        return $userInfo->area ? AreaModel::find($userInfo->area)->cityname : '未知城市';
+        $areaName = $userInfo->area ? $this->getAreaName($userInfo->area) : '';
+//        return $userInfo->area ? AreaModel::find($userInfo->area)->cityname : '未知城市';
+        return $areaName ? $areaName : '未知城市';
+    }
+
+    public function parent()
+    {
+        $pid = $this->pid ? $this->pid : 0;
+        $parent = TalksModel::find($pid);
+        return $parent ? $parent : '';
     }
 }

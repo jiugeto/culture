@@ -1,16 +1,32 @@
 @extends('member.main')
 @section('content')
     @include('member.common.crumb')
-    <div class="p_style">供求类型：
-        <a href="{{DOMAIN}}member/talk" style="color:{{$lists['func']['url']=='talk'?'red':'grey'}};"><b>我发布的</b></a>&nbsp;
-        <a href="{{DOMAIN}}member/talk/click" style="color:{{$lists['func']['url']=='talk/click'?'red':'grey'}};"><b>我点赞的</b></a>&nbsp;
-        <a href="{{DOMAIN}}member/talk/collect" style="color:{{$lists['func']['url']=='talk/collect'?'red':'grey'}};"><b>我收藏的</b></a>&nbsp;
-        <a href="{{DOMAIN}}member/talk/follow" style="color:{{$lists['func']['url']=='talk/follow'?'red':'grey'}};"><b>我关注的</b></a>&nbsp;
-        <a href="{{DOMAIN}}member/talk/reply" style="color:{{$lists['func']['url']=='talk/reply'?'red':'grey'}};"><b>我回复的</b></a>&nbsp;
-        <a href="{{DOMAIN}}member/talk/share" style="color:{{$lists['func']['url']=='talk/share'?'red':'grey'}};"><b>我分享的</b></a>&nbsp;
-        <a href="{{DOMAIN}}member/talk/thank" style="color:{{$lists['func']['url']=='talk/thank'?'red':'grey'}};"><b>我感谢的</b></a>&nbsp;
+    {{--<div class="p_style">--}}
+        {{--<a href="{{DOMAIN}}member/talk" style="color:{{$index==0?'red':'grey'}};"><b>我发布的</b></a>&nbsp;--}}
+        {{--<a href="{{DOMAIN}}member/talk/i/1" style="color:{{$index==1?'red':'grey'}};"><b>我点赞的</b></a>&nbsp;--}}
+        {{--<a href="{{DOMAIN}}member/talk/i/2" style="color:{{$index==2?'red':'grey'}};"><b>我收藏的</b></a>&nbsp;--}}
+        {{--<a href="{{DOMAIN}}member/talk/i/3" style="color:{{$index==3?'red':'grey'}};"><b>我关注的</b></a>&nbsp;--}}
+        {{--<a href="{{DOMAIN}}member/talk/i/4" style="{{$index==4?'red':'grey'}};"><b>我回复的</b></a>&nbsp;--}}
+        {{--<a href="{{DOMAIN}}member/talk/i/5" style="color:{{$index==5?'red':'grey'}};"><b>我分享的</b></a>&nbsp;--}}
+        {{--<a href="{{DOMAIN}}member/talk/i/6" style="color:{{$index==6?'red':'grey'}};"><b>我感谢的</b></a>&nbsp;--}}
+    {{--</div>--}}
+    <div class="mem_tab">
+        <ul>
+            <a href="{{DOMAIN}}member/talk" style="color:{{$index==0?'red':'grey'}};"><li><b>我发布的</b></li></a>
+            <li>|</li>
+            <a href="{{DOMAIN}}member/talk/i/1" style="color:{{$index==1?'red':'grey'}};"><li><b>我点赞的</b></li></a>
+            <li>|</li>
+            <a href="{{DOMAIN}}member/talk/i/2" style="color:{{$index==2?'red':'grey'}};"><li><b>我收藏的</b></li></a>
+            <li>|</li>
+            <a href="{{DOMAIN}}member/talk/i/3" style="color:{{$index==3?'red':'grey'}};"><li><b>我关注的</b></li></a>
+            <li>|</li>
+            <a href="{{DOMAIN}}member/talk/i/4" style="color:{{$index==4?'red':'grey'}};"><li><b>我回复的</b></li></a>
+            <li>|</li>
+            <a href="{{DOMAIN}}member/talk/i/5" style="color:{{$index==5?'red':'grey'}};"><li><b>我分享的</b></li></a>
+            <li>|</li>
+            <a href="{{DOMAIN}}member/talk/i/6" style="color:{{$index==6?'red':'grey'}};"><li><b>我感谢的</b></li></a>
+        </ul>
     </div>
-    {{--<div class="mem_tab"></div>--}}
     <div class="hr_tab"></div>
     <!-- 空白 -->
     <div class="list_kongbai">&nbsp;</div>

@@ -3,8 +3,22 @@
     <div class="admin-content">
         @include('admin.common.crumb')
         <div class="am-g">
-            {{--@include('admin.common.menu')--}}
-            {{--@include('admin.type.search')--}}
+            <div class="am-u-sm-12 am-u-md-6">
+                <div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <a href="{{DOMAIN}}admin/userlog">
+                            <button type="button" class="am-btn am-btn-default">
+                                <img src="{{PUB}}assets/images/files.png" class="icon"> 会员日志
+                            </button>
+                        </a>
+                        <a href="{{DOMAIN}}admin/adminlog">
+                            <button type="button" class="am-btn am-btn-default">
+                                <img src="{{PUB}}assets/images/files.png" class="icon"> 管理员日志
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="am-g">
@@ -14,8 +28,7 @@
                     <tr>
                         <th class="table-check"><input type="checkbox"/></th>
                         <th class="table-id">ID</th>
-                        <th class="table-title">用户名称</th>
-                        <th class="table-title">平台类型</th>
+                        <th class="table-title">{{$crumb['category']['url']=='userlog'?'用户':'管理员'}}名称</th>
                         <th class="table-type">登陆时间</th>
                         <th class="table-date am-hide-sm-only">退出时间</th>
                         <th class="table-date am-hide-sm-only">创建时间</th>
@@ -29,10 +42,9 @@
                         <td class="am-hide-sm-only"><input type="checkbox" /></td>
                         <td class="am-hide-sm-only">{{ $data->id }}</td>
                         <td class="am-hide-sm-only">{{ $data->uname }}</td>
-                        <td class="am-hide-sm-only">{{ $data->plat==1 ? '管理员' : '用户' }}</td>
-                        <td class="am-hide-sm-only">{{ $data->loginTime }}</td>
-                        <td class="am-hide-sm-only">{{ $data->logoutTime }}</td>
-                        <td class="am-hide-sm-only">{{ $data->created_at }}</td>
+                        <td class="am-hide-sm-only">{{ $data->loginTime() }}</td>
+                        <td class="am-hide-sm-only">{{ $data->logoutTime() }}</td>
+                        <td class="am-hide-sm-only">{{ $data->createTime() }}</td>
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">

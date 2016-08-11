@@ -202,10 +202,11 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
     Route::resource('orderpro','OrderProductController');
         //话题管理
     Route::resource('talk','TalkController');
-    Route::get('talk/click','TalkController@click');
-    Route::get('talk/collect','TalkController@collect');
-    Route::get('talk/follow','TalkController@follow');
-    Route::get('talk/reply','TalkController@reply');
-    Route::get('talk/share','TalkController@share');
-    Route::get('talk/thank','TalkController@thank');
+    Route::get('talk/i/{index}','TalkController@index');      //i代表index
+//    Route::get('talk/click','TalkController@click');
+//    Route::get('talk/collect','TalkController@collect');
+//    Route::get('talk/follow','TalkController@follow');
+//    Route::get('talk/reply','TalkController@reply');
+//    Route::get('talk/share','TalkController@share');
+//    Route::get('talk/thank','TalkController@thank');
 });

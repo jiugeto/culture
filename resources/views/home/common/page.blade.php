@@ -5,7 +5,7 @@
 --}}
 
 
-<div style="margin:20px auto;">
+<div style="margin:20px auto;color:lightgrey;">
     每页 {{ $datas->limit }}{{--{{ $datas->count() }}--}} 条记录，共 {{ $datas->lastPage() }} 页，共 {{ $datas->total() }} 条记录，当前是第 {{ $datas->currentPage() }} 页
     <div style="margin:5px auto;">
         <ul class="ul_css">

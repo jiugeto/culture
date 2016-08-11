@@ -87,7 +87,6 @@ class LoginController extends Controller
 
         //登陆加入用户日志表
         $userlog = [
-            'plat'=> 2,     //1用户登录
             'uid'=> $userModel->id,
             'uname'=> Input::get('username'),
             'loginTime'=> time(),

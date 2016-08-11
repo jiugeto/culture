@@ -21,6 +21,7 @@ class TalkController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
         $this->userid = \Session::get('user.uid');
     }
 
@@ -33,13 +34,8 @@ class TalkController extends BaseController
 
     public function index()
     {
-        $datas = TalksModel::where('del',0)
-//                    ->where('uid',$this->userid)
-                    ->orderBy('sort','desc')
-                    ->orderBy('id','desc')
-                    ->paginate($this->limit);
         $result = [
-            'datas'=> $datas,
+            'datas'=> $this->query(),
             'curr'=> '',
         ];
         return view('home.talk.index', $result);
@@ -51,16 +47,29 @@ class TalkController extends BaseController
     public function mytalk()
     {
         $this->islogin();
-        $datas = TalksModel::where('del',0)
-                    ->where('uid',$this->userid)
-                    ->orderBy('sort','desc')
-                    ->orderBy('id','desc')
-                    ->paginate($this->limit);
         $result = [
-            'datas'=> $datas,
+            'datas'=> $this->query($this->userid),
             'curr'=> 'mytalk',
         ];
         return view('home.talk.index', $result);
+    }
+
+    public function query($uid=null)
+    {
+        if ($uid) {
+            $datas = TalksModel::where('del',0)
+            ->where('uid',$uid)
+            ->orderBy('sort','desc')
+            ->orderBy('id','desc')
+            ->paginate($this->limit);
+        } else {
+            $datas = TalksModel::where('del',0)
+                ->orderBy('sort','desc')
+                ->orderBy('id','desc')
+                ->paginate($this->limit);
+        }
+        $datas->limit = $this->limit;
+        return $datas;
     }
 
     /**
@@ -111,20 +120,22 @@ class TalkController extends BaseController
         return view('home.talk.index', $result);
     }
 
-    /**
-     * 话题主题发现
-     */
-    public function theme()
-    {
-        $result = [
-            'datas'=> ThemeModel::where(['isshow'=>1])
-                                ->orderBy('sort','desc')
-                                ->orderBy('id','desc')
-                                ->paginate($this->limit * 2),
-            'curr'=> 'theme',
-        ];
-        return view('home.talk.theme', $result);
-    }
+//    /**
+//     * 话题主题发现
+//     */
+//    public function theme()
+//    {
+//        $datas = ThemeModel::where(['isshow'=>1])
+//            ->orderBy('sort','desc')
+//            ->orderBy('id','desc')
+//            ->paginate($this->limit * 2);
+//        $datas->limit = $this->limit;
+//        $result = [
+//            'datas'=> $datas,
+//            'curr'=> 'theme',
+//        ];
+//        return view('home.talk.theme', $result);
+//    }
 
     /**
      * 我收藏的话题

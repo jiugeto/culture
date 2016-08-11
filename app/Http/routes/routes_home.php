@@ -60,7 +60,7 @@ Route::group(['prefix'=>'/','namespace'=>'Home'],function(){
     Route::post('talk/{id}','TalkController@update');
     Route::get('talk/mytalk','TalkController@mytalk');
     Route::get('talk/follow','TalkController@follow');
-    Route::get('talk/theme','TalkController@theme');
+//    Route::get('talk/theme','TalkController@theme');
     Route::get('talk/collect','TalkController@collect');
     Route::get('talk/tofollow','TalkController@tofollow');
     Route::get('talk/tothank','TalkController@tothank');
@@ -72,7 +72,11 @@ Route::group(['prefix'=>'/','namespace'=>'Home'],function(){
     Route::get('talk/{id}/destroy','TalkController@destroy');
     Route::get('talk/{id}/restore','TalkController@restore');
     Route::get('talk/{id}/forceDelete','TalkController@forceDelete');
+    Route::get('talk/theme/{themeid}','TalkController@index');
     Route::resource('talk','TalkController');
+    //话题专栏路由
+    Route::get('theme/u/{uid}','ThemeController@index');
+    Route::resource('theme','ThemeController');
     //新手帮助路由
     Route::resource('newuser','NewUserController');
 });

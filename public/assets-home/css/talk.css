@@ -112,9 +112,11 @@
 
 .talk_theme {
     margin:20px auto;
+    margin-top:0;
     width:1000px;
 }
 .talk_theme .title {
+    padding-top:20px;
     width:1000px;
     height:50px;
     text-align:center;
@@ -124,6 +126,13 @@
 }
 .talk_theme .title a { color:grey;text-decoration:none; }
 .talk_theme .title a:hover { color:red; }
+.talk_theme .title a#apply {
+    padding:5px 20px;
+    border:1px dashed lightgrey;
+    border-radius:5px;
+    color:lightgrey;
+}
+.talk_theme .title a#apply:hover { color:red;border:1px solid red; }
 .talk_theme .list {
     width:250px;
     float:left;
@@ -140,6 +149,11 @@
     padding:10px;
     border:0;
     text-align:center;
+}
+.theme div.con {
+    margin-top:-30px;
+    height:150px;
+    overflow:hidden;
 }
 .theme .totheme a {
     padding:5px 10px;
