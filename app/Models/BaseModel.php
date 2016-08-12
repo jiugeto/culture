@@ -48,4 +48,41 @@ class BaseModel extends Model
         }
         return $areaName;
     }
+
+    public function isshow()
+    {
+        return $this->isshow==1 ? '前台显示' : '前台不显示';
+    }
+
+    /**
+     * 发布方名称
+     */
+    public function getSellName()
+    {
+        $userModel = $this->getUser($this->seller);
+        return $userModel ? $userModel->username : '';
+    }
+
+    /**
+     * 申请方名称
+     */
+    public function getBuyName()
+    {
+        $userModel = $this->getUser($this->buyer);
+        return $userModel ? $userModel->username : '';
+    }
+
+    /**
+     * 由uid得到 用户信息
+     */
+    public function getUser($uid)
+    {
+        $userInfo = UserModel::find($uid);
+        return $userInfo ? $userInfo : '';
+    }
+
+    public function money()
+    {
+        return $this->money ? $this->money.'元' : '未定';
+    }
 }

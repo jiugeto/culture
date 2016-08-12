@@ -14,5 +14,5 @@
         </div>
     </div>--}}
 
-    @include('admin.partials.content')
+    @include('admin.home.content')
 @endsection

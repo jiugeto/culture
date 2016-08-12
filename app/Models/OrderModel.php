@@ -1,8 +1,6 @@
 <?php
 namespace App\Models;
 
-//use Illuminate\Database\Eloquent\Model;
-
 class OrderModel extends BaseModel
 {
     /**
@@ -36,7 +34,7 @@ class OrderModel extends BaseModel
         return array_key_exists($this->genre,$this->genreNames) ? $this->genreNames[$this->genre] : '无';
     }
 
-    public function status()
+    public function statusName()
     {
         if (in_array($this->genre,[1,2,3,4])) {
             $status = array_key_exists($this->status,$this->status1s)?$this->status1s[$this->status]:'无';
@@ -69,32 +67,5 @@ class OrderModel extends BaseModel
         elseif (in_array($this->genre,[3,4])) { $model = StoryBoardModel::find($this->fromid); }
         elseif (in_array($this->genre,[5,6])) { $model = GoodsModel::find($this->fromid); }
         return isset($model) ? $model : '';
-    }
-
-    /**
-     * 发布方名称
-     */
-    public function getSellName()
-    {
-        $userModel = $this->getUser($this->seller);
-        return $userModel ? $userModel->username : '';
-    }
-
-    /**
-     * 申请方名称
-     */
-    public function getBuyName()
-    {
-        $userModel = $this->getUser($this->buyer);
-        return $userModel ? $userModel->username : '';
-    }
-
-    /**
-     * 由uid得到 用户信息
-     */
-    public function getUser($uid)
-    {
-        $userInfo = UserModel::find($uid);
-        return $userInfo ? $userInfo : '';
     }
 }

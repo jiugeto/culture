@@ -4,6 +4,7 @@
     @include('admin.common.crumb')
     <div class="am-g">
         @include('admin.common.menu')
+        {{--@include('admin.type.search')--}}
     </div>
     <hr/>
 
@@ -17,20 +18,24 @@
                     <td>{{ $data->id }}</td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">设计名称 / Name：</td>
+                    <td class="am-hide-sm-only">专栏名称 / Name：</td>
                     <td>{{ $data->name }}</td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">供求类型  / Genre：</td>
-                    <td>{{ $data->genreName() }}</td>
+                    <td class="am-hide-sm-only">内容  / Introduce：</td>
+                    <td>{!! $data->intro !!}</td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">设计类型 / Category：</td>
-                    <td>{{ $data->getCateName() }}</td>
+                    <td class="am-hide-sm-only">发布人 / UserName：</td>
+                    <td>{{ $data->getUserName() }}</td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">价格 / Price：</td>
-                    <td>{{ $data->money() }}</td>
+                    <td class="am-hide-sm-only">前台是否显示 / Is Show：</td>
+                    <td>{{ $data->isshow() }}</td>
+                </tr>
+                <tr>
+                    <td class="am-hide-sm-only">排序 / Sort：</td>
+                    <td>{{ $data->sort }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">创建时间 / Create Time：</td>

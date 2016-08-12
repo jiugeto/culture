@@ -111,11 +111,13 @@ class StaffController extends BaseController
 
     public function query()
     {
-        return StaffModel::where('del',0)
+        $datas = StaffModel::where('del',0)
             ->where('isshow',1)
             ->orderBy('sort','desc')
             ->orderBy('id','desc')
             ->paginate($this->limit);
+        $datas->limit = $this->limit;
+        return $datas;
     }
 
     public function getData(Request $request)

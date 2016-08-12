@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class VersionlogController extends BaseController
 {
     /**
-     * 用户日志管理
+     * 版本管理
      */
 
     public function __construct()
@@ -103,6 +103,8 @@ class VersionlogController extends BaseController
 
     public function query()
     {
-        return VersionlogModel::orderBy('id','desc')->paginate($this->limit);
+        $datas = VersionlogModel::orderBy('id','desc')->paginate($this->limit);
+        $datas->limit = $this->limit;
+        return $datas;
     }
 }

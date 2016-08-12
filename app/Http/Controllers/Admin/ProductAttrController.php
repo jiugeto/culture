@@ -409,9 +409,11 @@ class ProductAttrController extends BaseController
      */
     public function query($del)
     {
-        return ProductAttrModel::where('del',$del)
+        $datas = ProductAttrModel::where('del',$del)
             ->orderBy('id','desc')
             ->paginate($this->limit);
+        $datas->limit = $this->limit;
+        return $datas;
     }
 
     /**

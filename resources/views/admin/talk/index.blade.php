@@ -29,7 +29,7 @@
                         <td class="am-hide-sm-only"><input type="checkbox" /></td>
                         <td class="am-hide-sm-only">{{ $data->id }}</td>
                         <td class="am-hide-sm-only">{{ $data->name }}</td>
-                        <td class="am-hide-sm-only">{{ $data->uid }}</td>
+                        <td class="am-hide-sm-only">{{ $data->uname }}</td>
                         <td class="am-hide-sm-only">{{ $data->read }}</td>
                         <td class="am-hide-sm-only">{{ count($data->click()) }}</td>
                         <td class="am-hide-sm-only">{{ $data->isshow ? '显示' : '不显示' }}</td>

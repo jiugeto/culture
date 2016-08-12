@@ -5,7 +5,7 @@ class TalksModel extends BaseModel
 {
     protected $table = 'bs_talks';
     protected $fillable = [
-        'id','name','content','uid','read','pid','sort','isshow','del','created_at','updated_at',
+        'id','name','content','uid','uname','read','pid','sort','isshow','del','created_at','updated_at',
     ];
 
     /**

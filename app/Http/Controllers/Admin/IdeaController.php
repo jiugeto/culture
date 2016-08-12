@@ -68,6 +68,10 @@ class IdeaController extends BaseController
 
     public function query()
     {
-        return IdeasModel::orderBy('id','desc')->paginate($this->limit);
+        $datas = IdeasModel::where('del',0)
+            ->orderBy('id','desc')
+            ->paginate($this->limit);
+        $datas->limit = $this->limit;
+        return $datas;
     }
 }

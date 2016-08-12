@@ -44,6 +44,8 @@ class AdminlogController extends BaseController
 
     public function query()
     {
-        return AdminlogModel::orderBy('id','desc')->paginate($this->limit);
+        $datas = AdminlogModel::orderBy('id','desc')->paginate($this->limit);
+        $datas->limit = $this->limit;
+        return $datas;
     }
 }

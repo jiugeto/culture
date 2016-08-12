@@ -15,6 +15,8 @@ class BaseController extends Controller
      * 系统后台基础控制器
      */
 
+    protected $limit = 20;       //每页显示记录数
+
     /**
      * 面包屑
      */

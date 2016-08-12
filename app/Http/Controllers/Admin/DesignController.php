@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Models\DesignModel;
 
-class DesignPerController extends BaseController
+class DesignController extends BaseController
 {
     /**
      * 系统后台设计管理
@@ -17,7 +17,7 @@ class DesignPerController extends BaseController
         $this->model = new DesignModel();
         $this->crumb['']['name'] = '设计列表';
         $this->crumb['category']['name'] = '设计管理';
-        $this->crumb['category']['url'] = 'designPer';
+        $this->crumb['category']['url'] = 'design';
     }
 
     public function index()
@@ -26,11 +26,11 @@ class DesignPerController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $result = [
             'datas'=> $this->query($del=0),
-            'prefix_url'=> '/admin/designPer',
+            'prefix_url'=> DOMAIN.'admin/design',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
-        return view('admin.designPer.index', $result);
+        return view('admin.design.index', $result);
     }
 
     public function trash()
@@ -39,11 +39,11 @@ class DesignPerController extends BaseController
         $curr['url'] = $this->crumb['trash']['url'];
         $result = [
             'datas'=> $this->query($del=0),
-            'prefix_url'=> '/admin/designPer/trash',
+            'prefix_url'=> DOMAIN.'admin/design/trash',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
-        return view('admin.designPer.index', $result);
+        return view('admin.design.index', $result);
     }
 
     public function create()
@@ -51,11 +51,11 @@ class DesignPerController extends BaseController
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
-            'types'=> $this->model->types(),
+            'model'=> $this->model,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
-        return view('admin.designPer.create', $result);
+        return view('admin.design.create', $result);
     }
 
     public function store(Request $request)
@@ -63,7 +63,7 @@ class DesignPerController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = time();
         DesignModel::create($data);
-        return redirect('/admin/designPer');
+        return redirect(DOMAIN.'admin/design');
     }
 
     public function edit($id)
@@ -71,12 +71,12 @@ class DesignPerController extends BaseController
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
         $result = [
-            'types'=> $this->model->types(),
             'data'=> DesignModel::find($id),
+            'model'=> $this->model,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
-        return view('admin.designPer.edit', $result);
+        return view('admin.design.edit', $result);
     }
 
     public function update(Request $request,$id)
@@ -84,13 +84,12 @@ class DesignPerController extends BaseController
         $data = $this->getData($request);
         $data['updated_at'] = time();
         DesignModel::where('id',$id)->update($data);
-        return redirect('/admin/designPer');
+        return redirect(DOMAIN.'admin/design');
     }
 
     public function show($id)
     {
         $data = DesignModel::find($id);
-        $data->type_name = $this->model->getOneType($data->type_id);
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
         $result = [
@@ -135,8 +134,10 @@ class DesignPerController extends BaseController
      */
     public function query($del=0)
     {
-        return DesignModel::where('del',$del)
+        $datas = DesignModel::where('del',$del)
             ->orderBy('id','desc')
             ->paginate($this->limit);
+        $datas->limit = $this->limit;
+        return $datas;
     }
 }

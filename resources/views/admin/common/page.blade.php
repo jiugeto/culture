@@ -5,7 +5,7 @@
 --}}
 
 <div class="am-cf">
-    每页 {{ $datas->count() }} 条记录，共 {{ $datas->lastPage() }} 页，共 {{ $datas->total() }} 条记录，当前是第 {{ $datas->currentPage() }} 页
+    每页 {{ $datas->limit }}{{--{{ $datas->count() }}--}} 条记录，共 {{ $datas->lastPage() }} 页，共 {{ $datas->total() }} 条记录，当前是第 {{ $datas->currentPage() }} 页
     <div class="am-fr">
         <ul class="am-pagination">
             @if ($datas->currentPage() > 1 && $datas->currentPage() != 1)

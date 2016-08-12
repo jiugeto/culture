@@ -115,8 +115,10 @@ class EntertainController extends BaseController
      */
     public function query($del=0)
     {
-        return EntertainModel::where('del',$del)
+        $datas = EntertainModel::where('del',$del)
             ->orderBy('id','desc')
             ->paginate($this->limit);
+        $datas->limit = $this->limit;
+        return $datas;
     }
 }

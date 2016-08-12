@@ -21,20 +21,18 @@
 
                         <div class="am-form-group">
                             <label>供求类型 / Genre：</label>
-                            <input type="radio" name="genre" value="1" {{ $data->genre==1 ? 'checked' : '' }}/> 供应商&nbsp;&nbsp;
-                            <input type="radio" name="genre" value="2" {{ $data->genre==2 ? 'checked' : '' }}/> 需求方&nbsp;&nbsp;
+                            @foreach($model['genres'] as $kgenre=>$vgenre)
+                                <label><input type="radio" name="genre" value="{{ $kgenre }}"
+                                            {{ $kgenre==$data->genre ? 'checked' : '' }}/> {{ $vgenre }}&nbsp;&nbsp;</label>
+                            @endforeach
                         </div>
 
                         <div class="am-form-group">
-                            <label>设计类型 / Type：</label>
-                            <select name="type_id" required>
-                            @if($types)
-                                @foreach($types as $type)
-                                        <option value="{{ $type->id }}"
-                                                {{ $data->type_id==$type->id ? 'selected' : '' }}>
-                                            {{ $type->name }}</option>
-                                @endforeach
-                            @endif
+                            <label>设计类型 / Category：</label>
+                            <select name="cate" required>
+                            @foreach($model['cates'] as $kcate=>$vcate)
+                                <option value="{{ $kcate }}" {{ $kcate==$data->cate ? 'selected' : '' }}>{{ $vcate }}</option>
+                            @endforeach
                             </select>
                         </div>
 
@@ -50,7 +48,7 @@
 
                         <div class="am-form-group">
                             <label>价格 / Price：</label>
-                            <input type="text" placeholder="数字" pattern="^\d+\(\d+\.\d{1,2})$" required name="price" {{ $data->price }}/>
+                            <input type="text" placeholder="数字" pattern="^\d+\(\d+\.\d{1,2})$" required name="price" value="{{ $data->price }}"/>
                         </div>
 
                         <button type="submit" class="am-btn am-btn-primary">保存修改</button>

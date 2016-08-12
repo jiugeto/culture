@@ -176,9 +176,11 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::resource('idea','IdeaController');
         //话题管理
 //    Route::post('talk/{id}','TalkController@update');
+    Route::get('talk/c/{uname}','TalkController@index');
     Route::resource('talk','TalkController');
         //话题专题管理
     Route::post('theme/{id}','ThemeController@update');
+    Route::get('theme/u/{uname}','ThemeController@index');      //u代表用户简写
     Route::resource('theme','ThemeController');
     //订单管理
         //订单路由

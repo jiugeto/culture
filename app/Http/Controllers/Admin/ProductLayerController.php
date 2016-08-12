@@ -148,9 +148,11 @@ class ProductLayerController extends BaseController
      */
     public function query($del)
     {
-        return ProductLayerModel::where('del',$del)
+        $datas = ProductLayerModel::where('del',$del)
                     ->orderBy('id','desc')
                     ->paginate($this->limit);
+        $datas->limit = $this->limit;
+        return $datas;
     }
 
     /**

@@ -14,7 +14,8 @@
                         <th class="table-check"><input type="checkbox"/></th>
                         <th class="table-id">ID</th>
                         <th class="table-title">设计名称</th>
-                        <th class="table-type">类型</th>
+                        <th class="table-type">供求类型</th>
+                        <th class="table-type">设计类型</th>
                         <th class="table-type">价格</th>
                         <th class="table-date am-hide-sm-only">添加时间</th>
                         <th class="table-set">操作</th>
@@ -26,15 +27,11 @@
                     <tr>
                         <td class="am-hide-sm-only"><input type="checkbox" /></td>
                         <td class="am-hide-sm-only">{{ $data->id }}</td>
-                        <td class="am-hide-sm-only"><a href="/admin/design/{{$data->id}}">
-                                @if(mb_strlen($data->name)>6)
-                                    {{ mb_substr($data->name,0,5,'utf-8').'...' }}
-                                @else {{ $data->name }}
-                                @endif
-                            </a></td>
-                        <td class="am-hide-sm-only">{{ $data->type_id }}</td>
-                        <td class="am-hide-sm-only">{{ $data->price }}</td>
-                        <td class="am-hide-sm-only">{{ $data->created_at }}</td>
+                        <td class="am-hide-sm-only"><a href="/admin/design/{{$data->id}}">{{ str_limit($data->name,20) }}</a></td>
+                        <td class="am-hide-sm-only">{{ $data->genreName() }}</td>
+                        <td class="am-hide-sm-only">{{ $data->getCateName() }}</td>
+                        <td class="am-hide-sm-only">{{ $data->money() }}</td>
+                        <td class="am-hide-sm-only">{{ $data->createTime() }}</td>
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">

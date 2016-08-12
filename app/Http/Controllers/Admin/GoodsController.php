@@ -77,6 +77,7 @@ class GoodsController extends BaseController
                 ->orderBy('id','desc')
                 ->paginate($this->limit);
         }
+        $datas->limit = $this->limit;
         return $datas;
     }
 }

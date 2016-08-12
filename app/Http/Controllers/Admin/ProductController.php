@@ -146,8 +146,10 @@ class ProductController extends BaseController
      */
     public function query($del=0)
     {
-        return ProductModel::where('del',$del)
+        $datas = ProductModel::where('del',$del)
             ->orderBy('id','desc')
             ->paginate($this->limit);
+        $datas->limit = $this->limit;
+        return $datas;
     }
 }

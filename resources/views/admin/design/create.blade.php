@@ -19,20 +19,19 @@
                         </div>
 
                         <div class="am-form-group">
-                            <label>供求类型 / Genre：</label>
-                            <input type="radio" name="genre" value="1" checked/> 供应商&nbsp;&nbsp;
-                            <input type="radio" name="genre" value="2"/> 需求方&nbsp;&nbsp;
+                            <label>供求类型 / Genre：</label><br>
+                            @foreach($model['genres'] as $kgenre=>$vgenre)
+                            <label><input type="radio" name="genre" value="{{ $kgenre }}"
+                                        {{ $kgenre==1 ? 'checked' : '' }}/> {{ $vgenre }}&nbsp;&nbsp;</label>
+                            @endforeach
                         </div>
 
                         <div class="am-form-group">
-                            <label>设计类型 / Type：</label>
-                            <select name="type_id">
-                                <option value="">-请选择-</option>
-                            @if($types)
-                                @foreach($types as $type)
-                                        <option value="{{ $type->id }}">{{ $type->name }}</option>
-                                @endforeach
-                            @endif
+                            <label>设计类型 / Category：</label>
+                            <select name="cate" required>
+                            @foreach($model['cates'] as $kcate=>$vcate)
+                                <option value="{{ $kcate }}">{{ $vcate }}</option>
+                            @endforeach
                             </select>
                         </div>
 

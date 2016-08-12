@@ -115,8 +115,10 @@ class RentController extends BaseController
      */
     public function query($del=0)
     {
-        return RentModel::where('del',$del)
+        $datas = RentModel::where('del',$del)
             ->orderBy('id','desc')
             ->paginate($this->limit);
+        $datas->limit = $this->limit;
+        return $datas;
     }
 }

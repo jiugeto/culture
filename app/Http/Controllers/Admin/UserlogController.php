@@ -44,6 +44,8 @@ class UserlogController extends BaseController
 
     public function query()
     {
-        return UserlogModel::orderBy('id','desc')->paginate($this->limit);
+        $datas = UserlogModel::orderBy('id','desc')->paginate($this->limit);
+        $datas->limit = $this->limit;
+        return $datas;
     }
 }

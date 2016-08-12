@@ -20,15 +20,16 @@ class TalkController extends BaseController
         $this->crumb['category']['url'] = 'talk';
     }
 
-    public function index()
+    public function index($uname=0)
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'datas'=> $this->query(),
+            'datas'=> $this->query($uname),
             'prefix_url'=> '/admin/talk',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
+            'uname'=> $uname ? $uname : '',
         ];
         return view('admin.talk.index', $result);
     }
@@ -67,8 +68,19 @@ class TalkController extends BaseController
 
 
 
-    public function query()
+    public function query($uname)
     {
-        return TalksModel::paginate($this->limit);
+        if ($uname) {
+            $datas = TalksModel::where('uname','like','%'.$uname.'%')
+                ->orderBy('sort','desc')
+                ->orderBy('id','desc')
+                ->paginate($this->limit);
+        } else {
+            $datas = TalksModel::orderBy('sort','desc')
+                ->orderBy('id','desc')
+                ->paginate($this->limit);
+        }
+        $datas->limit = $this->limit;
+        return $datas;
     }
 }
