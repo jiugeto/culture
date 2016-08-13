@@ -19,14 +19,11 @@ class AdController extends BaseController
 
     public function index()
     {
-        $datas = AdModel::where('del',0)
-            ->orderBy('id','desc')
-            ->paginate($this->limit);
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'datas'=> $datas,
-            'prefix_url'=> '/admin/ad',
+            'datas'=> $this->query(),
+            'prefix_url'=> DOMAIN.'admin/ad',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -34,4 +31,17 @@ class AdController extends BaseController
     }
 
     public function create(){}
+
+
+
+
+
+    public function query()
+    {
+        $datas = AdModel::where('del',0)
+            ->orderBy('id','desc')
+            ->paginate($this->limit);
+        $datas->limit = $this->limit;
+        return $datas;
+    }
 }

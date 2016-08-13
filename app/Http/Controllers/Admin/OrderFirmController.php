@@ -94,6 +94,7 @@ class OrderFirmController extends BaseController
                 $datas = OrderFirmModel::where('del',$del)->where('isshow',$isshow)->orderBy('id','desc')->paginate($this->limit);
             }
         }
+        $datas->limit = $this->limit;
         return $datas;
     }
 }

@@ -28,9 +28,12 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
         //操作路由
     Route::get('action/create/{pid}','ActionController@create');
     Route::post('action/{id}','ActionController@update');
-    Route::get('action/{id}/forceDelete','ActionController@forceDelete');
     Route::get('action/increase/{id}','ActionController@increase');
     Route::get('action/reduce/{id}','ActionController@reduce');
+    Route::get('action/trash','ActionController@trash');
+    Route::get('action/{id}/destroy','ActionController@destroy');
+    Route::get('action/{id}/restore','ActionController@restore');
+    Route::get('action/{id}/forceDelete','ActionController@forceDelete');
     Route::resource('action','ActionController');
         //用户权限分配
     Route::resource('authorization','AuthorizationController');
@@ -90,11 +93,11 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::post('{layerid}/prolayerattr/{id}','ProductLayerAttrController@update');
     Route::resource('{layerid}/prolayerattr','ProductLayerAttrController');
         //产品类型路由
-    Route::get('category/{id}/destroy','CategoryController@destroy');
-    Route::get('category/{id}/restore','CategoryController@restore');
-    Route::get('category/{id}/forceDelete','CategoryController@forceDelete');
-    Route::post('category/{id}','CategoryController@update');
-    Route::resource('category','CategoryController');
+//    Route::get('category/{id}/destroy','CategoryController@destroy');
+//    Route::get('category/{id}/restore','CategoryController@restore');
+//    Route::get('category/{id}/forceDelete','CategoryController@forceDelete');
+//    Route::post('category/{id}','CategoryController@update');
+//    Route::resource('category','CategoryController');
     //租赁路由
     Route::post('rent/{id}','RentController@update');
     Route::resource('rent','RentController');
@@ -141,10 +144,10 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::get('pic/create/{id}','PicController@create');
     Route::resource('pic','PicController');
         //类型管理
-    Route::post('type/{id}','TypeController@update');
-    Route::get('type/create/{id}','TypeController@create');
-    Route::resource('type','TypeController');
-    Route::get('type/tableid/{table_id}','TypeController@index');
+//    Route::post('type/{id}','TypeController@update');
+//    Route::get('type/create/{id}','TypeController@create');
+//    Route::resource('type','TypeController');
+//    Route::get('type/tableid/{table_id}','TypeController@index');
         //用户日志管理
     Route::resource('userlog','UserlogController');
     Route::resource('adminlog','AdminlogController');
@@ -161,6 +164,9 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
         //企业功能路由
     Route::post('comfunc/{id}','ComFuncController@update');
     Route::resource('comfunc','ComFuncController');
+        //企业宣传路由
+    Route::post('comppt/{id}','ComPptController@update');
+    Route::resource('comppt','ComPptController');
     //广告路由
         //广告管理
     Route::resource('ad','AdController');
@@ -174,6 +180,13 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
         //创意管理
     Route::post('idea/{id}','IdeaController@update');
     Route::resource('idea','IdeaController');
+        //分镜管理
+    Route::post('storyboard/{id}','StoryBoardController@update');
+    Route::get('storyboard/{id}/destroy','StoryBoardController@destroy');
+    Route::get('storyboard/{id}/restore','StoryBoardController@restore');
+    Route::get('storyboard/{id}/forceDelete','StoryBoardController@forceDelete');
+    Route::get('storyboard/trash','StoryBoardController@trash');
+    Route::resource('storyboard','StoryBoardController');
         //话题管理
 //    Route::post('talk/{id}','TalkController@update');
     Route::get('talk/c/{uname}','TalkController@index');

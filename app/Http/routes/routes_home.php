@@ -22,7 +22,7 @@ Route::group(['prefix'=>'/','namespace'=>'Home'],function(){
     //创意脚本
     //分镜画面
     Route::get('storyboard/like/{way}/{id}','StoryBoardController@like');
-    Route::get('{way}/storyboard','StoryBoardController@index');
+    Route::get('storyboard/w/{way}','StoryBoardController@index');      //条件检索方式
     Route::get('storyboard/{id}','StoryBoardController@show');
     Route::any('storyboard','StoryBoardController@index');
     //供应单位

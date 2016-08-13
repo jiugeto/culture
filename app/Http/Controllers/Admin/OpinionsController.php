@@ -106,6 +106,7 @@ class OpinionsController extends BaseController
             $datas = OpinionModel::where('del',$del)
                 ->paginate($this->limit);
         }
+        $datas->limit = $this->limit;
         return $datas;
     }
 }

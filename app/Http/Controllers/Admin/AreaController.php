@@ -64,6 +64,8 @@ class AreaController extends BaseController
      */
     public function query()
     {
-        return AreaModel::paginate($this->limit);
+        $datas = AreaModel::paginate($this->limit);
+        $datas->limit = $this->limit;
+        return $datas;
     }
 }

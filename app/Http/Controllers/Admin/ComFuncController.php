@@ -28,7 +28,7 @@ class ComFuncController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $result = [
             'datas'=> $this->query(),
-            'prefix_url'=> '/admin/comfunc',
+            'prefix_url'=> DOMAIN.'admin/comfunc',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -58,7 +58,7 @@ class ComFuncController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = time();
         ComFuncModel::create($data);
-        return redirect('/admin/comfunc');
+        return redirect(DOMAIN.'admin/comfunc');
     }
 
     public function edit($id)
@@ -81,7 +81,7 @@ class ComFuncController extends BaseController
         $data = $this->getData($request);
         $data['updated_at'] = time();
         ComFuncModel::where('id',$id)->update($data);
-        return redirect('/admin/comfunc');
+        return redirect(DOMAIN.'admin/comfunc');
     }
 
     public function show($id)
@@ -102,7 +102,7 @@ class ComFuncController extends BaseController
     public function forceDelete($id)
     {
         ComFuncModel::where('id',$id)->delete();
-        return redirect('/admin/comfunc');
+        return redirect(DOMAIN.'admin/comfunc');
     }
 
 
@@ -134,6 +134,8 @@ class ComFuncController extends BaseController
      */
     public function query()
     {
-        return ComFuncModel::orderBy('id','desc')->paginate($this->limit);
+        $datas = ComFuncModel::orderBy('id','desc')->paginate($this->limit);
+        $datas->limit = $this->limit;
+        return $datas;
     }
 }

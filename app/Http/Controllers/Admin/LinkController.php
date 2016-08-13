@@ -25,8 +25,8 @@ class LinkController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'types'=> $this->model->type(),
-            'datas'=> LinkModel::paginate($this->limit),
+            'datas'=> $this->query(),
+            'types'=> $this->model['types'],
             'prefix_url'=> '/admin/link',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -102,6 +102,13 @@ class LinkController extends BaseController
      * 一下是公用方法
      * ==========================
      */
+
+    public function query()
+    {
+        $datas = LinkModel::paginate($this->limit);
+        $datas->limit = $this->limit;
+        return $datas;
+    }
 
     /**
      * 收集数据

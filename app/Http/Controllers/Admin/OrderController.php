@@ -21,7 +21,6 @@ class OrderController extends BaseController
 
     public function index($isshow=0)
     {
-//        dd($del,$isshow);
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
@@ -95,6 +94,7 @@ class OrderController extends BaseController
                 $datas = OrderModel::where('del',$del)->where('isshow',$isshow)->orderBy('id','desc')->paginate($this->limit);
             }
         }
+        $datas->limit = $this->limit;
         return $datas;
     }
 }

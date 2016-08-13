@@ -22,14 +22,10 @@ class AdPlaceController extends BaseController
 
     public function index()
     {
-        $datas = AdPlaceModel::where('del',0)
-            ->orderBy('id','desc')
-            ->paginate($this->limit);
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-//            'actions'=> $this->actions(),
-            'datas'=> $datas,
+            'datas'=> $this->query(),
             'prefix_url'=> '/admin/place',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -42,7 +38,6 @@ class AdPlaceController extends BaseController
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
-            'types'=> $this->model->getTypes(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -56,7 +51,6 @@ class AdPlaceController extends BaseController
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
         $result = [
-            'types'=> $this->model->type(),
             'data'=> AdPlaceModel::find($id),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -87,6 +81,15 @@ class AdPlaceController extends BaseController
      * 以下是公用方法
      * =================
      */
+
+    public function query()
+    {
+        $datas = AdPlaceModel::where('del',0)
+            ->orderBy('id','desc')
+            ->paginate($this->limit);
+        $datas->limit = $this->limit;
+        return $datas;
+    }
 
     /**
      * 收集数据

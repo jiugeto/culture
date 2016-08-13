@@ -55,7 +55,7 @@ class BaseModel extends Model
     }
 
     /**
-     * 发布方名称
+     * 发布方名称：bs_order，bs_order_pro，bs_order_firm
      */
     public function getSellName()
     {
@@ -75,14 +75,35 @@ class BaseModel extends Model
     /**
      * 由uid得到 用户信息
      */
-    public function getUser($uid)
+    public function getUser($uid=null)
     {
         $userInfo = UserModel::find($uid);
         return $userInfo ? $userInfo : '';
     }
 
+    public function getUserName()
+    {
+       return $this->getUser() ? $this->getUser()->username : '';
+    }
+
+    /**
+     * 价格：bs_storyboard，bs_designs，bs_goods，bs_ideas，bs_rents，bs_staffs，
+     */
     public function money()
     {
         return $this->money ? $this->money.'元' : '未定';
+    }
+
+    /**
+     * 获得某个会员的所有图片
+     */
+    public function getUserPics($uid=null)
+    {
+        if ($uid) {
+            $datas = PicModel::where('uid',$uid)->get();
+        } else {
+            $datas = PicModel::all();
+        }
+        return $datas;
     }
 }

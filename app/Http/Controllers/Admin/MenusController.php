@@ -176,6 +176,7 @@ class MenusController extends BaseController
                 ->orderBy('sort','desc')
                 ->paginate($this->limit);
         }
+        $datas->limit = $this->limit;
         return $datas;
     }
 }

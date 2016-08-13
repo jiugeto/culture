@@ -64,6 +64,7 @@ class OrderProductController extends BaseController
                     ->paginate($this->limit);
             }
         }
+        $datas->limit = $this->limit;
         return $datas;
     }
 }

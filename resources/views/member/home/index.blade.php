@@ -27,7 +27,7 @@
             <div class="chart_text">订单</div>
         </div>
         <div class="mem_info">
-            <div class="circle"><img src="/assets/images/person.png" style="width:40px;"></div>
+            <div class="circle"><img src="{{DOMAIN}}assets/images/person.png" style="width:40px;"></div>
             <div class="mem_user">MEMBER INFO<br>{{ Session::get('user.username') }}</div>
             <div class="detail">详情</div>
             <div class="userInfoDetail">

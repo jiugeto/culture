@@ -34,39 +34,5 @@
                 </a>
             @endif
         </div>
-        {{--<div class="am-btn-group am-btn-group-xs">
-            @if(array_key_exists('trash',$crumb))
-                @if($crumb['function']['url']=='')
-                    <a href="/admin/{{$crumb['category']['url']}}/create">
-                        <button type="button" class="am-btn am-btn-default">
-                            <img src="/assets/images/add.png" class="icon">
-                            @if($crumb['category']['url']=='action') 新增0级操作
-                            @else 添加
-                            @endif
-                        </button>
-                    </a>
-                @endif
-                <a href="/admin/{{$crumb['trash']['url']}}">
-                    <button type="button" class="am-btn am-btn-default">
-                        <img src="/assets/images/del.png" class="icon">
-                        {{ $crumb['trash']['name'] }}
-                    </button>
-                </a>
-            @else
-                @if($crumb['category']['url']=='type')
-                <a onclick="history.go(-1)">
-                    <button type="button" class="am-btn am-btn-default">
-                        <img src="/assets/images/files.png" class="icon">返回上页
-                    </button>
-                </a>&nbsp;
-                @endif
-                <a href="/admin/{{$crumb['category']['url']}}">
-                    <button type="button" class="am-btn am-btn-default">
-                        <img src="/assets/images/files.png" class="icon">
-                        返回{{ $crumb['category']['name'] }}
-                    </button>
-                </a>
-            @endif
-        </div>--}}
     </div>
 </div>

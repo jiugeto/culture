@@ -26,7 +26,7 @@ class ComMainController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $result = [
             'datas'=> $this->query(),
-            'prefix_url'=> '/admin/commain',
+            'prefix_url'=> DOMAIN.'admin/commain',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -50,7 +50,7 @@ class ComMainController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = time();
         ComMainModel::create($data);
-        return redirect('/admin/commain');
+        return redirect(DOMAIN.'admin/commain');
     }
 
     public function edit($id)
@@ -70,7 +70,7 @@ class ComMainController extends BaseController
         $data = $this->getData($request,$id);
         $data['updated_at'] = time();
         ComMainModel::where('id',$id)->update($data);
-        return redirect('admin/commain');
+        return redirect(DOMAIN.'admin/commain');
     }
 
     public function show($id)
@@ -147,6 +147,8 @@ class ComMainController extends BaseController
      */
     public function query()
     {
-        return ComMainModel::paginate($this->limit);
+        $datas = ComMainModel::paginate($this->limit);
+        $datas->limit = $this->limit;
+        return $datas;
     }
 }

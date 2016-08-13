@@ -1,8 +1,6 @@
 <?php
 namespace App\Models;
 
-//use Illuminate\Database\Eloquent\Model;
-
 class StoryBoardModel extends BaseModel
 {
     /**
@@ -10,19 +8,23 @@ class StoryBoardModel extends BaseModel
      */
     protected $table = 'bs_storyboards';
     protected $fillable = [
-        'id','name','genre','cate_id','thumb','detail','intro','uid','money','isnew','ishot','sort','isshow','sort2','isshow2','del','created_at','updated_at',
+        'id','name','genre','cate','thumb','detail','intro','uid','uname','money','isnew','ishot','sort','isshow','sort2','isshow2','del','created_at','updated_at',
+    ];
+    protected $genres = [
+        1=>'企业供应','企业需求','个人供应','个人需求',
+    ];
+    protected $cates = [
+        1=>'宣传片','广告片','微电影','专题片','汇报片','主题片','晚会视频','婚纱摄影','淘宝视频',
     ];
 
-    public function cates()
+    public function genreName()
     {
-        return CategoryModel::where('pid',1)->get();
+        return array_key_exists($this->genre,$this->genres) ? $this->genres[$this->genre] : '';
     }
 
-    public function cate()
+    public function getCateName()
     {
-        $cate_id = $this->cate_id ? $this->cate_id : 0;
-        $cateModel = CategoryModel::find($cate_id);
-        return $cateModel ? $cateModel->name : '无';
+        return array_key_exists($this->cate,$this->cates) ? $this->cates[$this->cate] : '';
     }
 
     public function user()
@@ -83,4 +85,20 @@ class StoryBoardModel extends BaseModel
 //        }
 //        return (isset($orderModel)&&$orderModel) ? 1 : 0;
 //    }
+
+    /**
+     * 是否为最新记录
+     */
+    public function isnew()
+    {
+        return $this->isnew ? '最新' : '非最新';
+    }
+
+    /**
+     * 是否为最热记录
+     */
+    public function ishot()
+    {
+        return $this->ishot ? '最热' : '非最热';
+    }
 }

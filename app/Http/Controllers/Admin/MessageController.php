@@ -52,6 +52,8 @@ class MessageController extends BaseController
      */
     public function query($del=0)
     {
-        return MessageModel::where('del',$del)->paginate($this->limit);
+        $datas = MessageModel::where('del',$del)->paginate($this->limit);
+        $datas->limit = $this->limit;
+       return $datas;
     }
 }

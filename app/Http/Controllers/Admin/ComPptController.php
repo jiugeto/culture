@@ -25,7 +25,7 @@ class ComPptController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $result = [
             'datas'=> $this->query($del=0),
-            'prefix_url'=> '/admin/comppt',
+            'prefix_url'=> DOMAIN.'admin/comppt',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -38,7 +38,7 @@ class ComPptController extends BaseController
         $curr['url'] = $this->crumb['trash']['url'];
         $result = [
             'datas'=> $this->query($del=1),
-            'prefix_url'=> '/admin/comppt',
+            'prefix_url'=> DOMAIN.'admin/comppt',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -65,7 +65,7 @@ class ComPptController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = time();
         ComPptModel::create($data);
-        return redirect('/admin/comppt');
+        return redirect(DOMAIN.'admin/comppt');
     }
 
     public function edit($id)
@@ -86,7 +86,7 @@ class ComPptController extends BaseController
         $data = $this->getData($request);
         $data['updated_at'] = time();
         ComPptModel::where('id',$id)->update($data);
-        return redirect('/admin/comppt');
+        return redirect(DOMAIN.'admin/comppt');
     }
 
     public function show($id)
@@ -104,19 +104,19 @@ class ComPptController extends BaseController
     public function destroy($id)
     {
         ComPptModel::where('id',$id)->update(array('del'=> 1));
-        return redirect('/admin/comppt');
+        return redirect(DOMAIN.'admin/comppt');
     }
 
     public function restore($id)
     {
         ComPptModel::where('id',$id)->update(array('del'=> 0));
-        return redirect('/admin/comppt/trash');
+        return redirect(DOMAIN.'admin/comppt/trash');
     }
 
     public function forceDelete($id)
     {
         ComPptModel::where('id',$id)->delete();
-        return redirect('/admin/comppt/trash');
+        return redirect(DOMAIN.'admin/comppt/trash');
     }
 
 
@@ -146,9 +146,11 @@ class ComPptController extends BaseController
 
     public function query($del=0)
     {
-        return ComPptModel::where('del',$del)
+        $datas = ComPptModel::where('del',$del)
                 ->orderBy('sort','desc')
                 ->orderBy('id','desc')
                 ->paginate($this->limit);
+        $datas->limit = $this->limit;
+        return $datas;
     }
 }

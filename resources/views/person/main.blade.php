@@ -12,7 +12,6 @@
     @include('layout.header')
     {{--@include('layout.navigate')--}}
     <div class="mem_con">
-
         <!-- 中间内容 -->
         <div class="mem_float">
             <div class="mem_right">

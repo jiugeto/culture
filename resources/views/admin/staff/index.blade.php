@@ -25,7 +25,7 @@
                     <tr>
                         <th class="table-check"><input type="checkbox"/></th>
                         <th class="table-id">ID</th>
-                        <th class="table-title">演员艺名</th>
+                        <th class="table-title">人员艺名</th>
                         <th class="table-type">性别</th>
                         <th class="table-date am-hide-sm-only">添加时间</th>
                         <th class="table-set">操作</th>

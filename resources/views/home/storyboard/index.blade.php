@@ -5,9 +5,10 @@
     {{--分镜来一个瀑布流--}}
     <link rel="stylesheet" type="text/css" href="/assets-home/css/waterfall.css">
     <div class="pbl_title">
-        <a href="/storyboard" class="{{ $way=='' ? 'star' : '' }}">全部分镜</a>：
-        <a href="/1/storyboard" class="{{ $way=='isnew' ? 'star' : '' }}">最新</a>
-        <a href="/2/storyboard" class="{{ $way=='ishot' ? 'star' : '' }}">热门</a>
+        <a href="{{DOMAIN}}storyboard" class="{{ $way=='' ? 'star' : '' }}">全部分镜</a>：
+        {{-- w代表检索方式 --}}
+        <a href="{{DOMAIN}}storyboard/w/1" class="{{ $way=='isnew' ? 'star' : '' }}">最新</a>
+        <a href="{{DOMAIN}}storyboard/w/2" class="{{ $way=='ishot' ? 'star' : '' }}">热门</a>
         <span class="right">分镜：{{ count($datas) }}</span>
     </div>
     <div class="pbl_out">

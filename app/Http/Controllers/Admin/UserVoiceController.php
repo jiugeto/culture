@@ -83,6 +83,12 @@ class UserVoiceController extends BaseController
      */
     public function query($isshow=null)
     {
-        return UserVoiceModel::where('isshow',$isshow)->paginate($this->limit);
+        $datas = UserVoiceModel::where('del',0)
+            ->where('isshow',$isshow)
+            ->orderBy('sort','desc')
+            ->orderBy('id','desc')
+            ->paginate($this->limit);
+        $datas->limit = $this->limit;
+        return $datas;
     }
 }

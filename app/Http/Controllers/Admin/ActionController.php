@@ -25,12 +25,25 @@ class ActionController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'datas'=> ActionModel::paginate($this->limit),
+            'datas'=> $this->query($del=0),
             'prefix_url'=> '/admin/action',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
         return view('admin.action.index', $result);
+    }
+
+    public function trash()
+    {
+        $curr['name'] = $this->crumb['trash']['name'];
+        $curr['url'] = $this->crumb['trash']['url'];
+        $result = [
+            'datas'=> $this->query($del=1),
+            'prefix_url'=> DOMAIN.'admin/action/trash',
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.action.trash', $result);
     }
 
     public function create($pid=0)
@@ -83,13 +96,25 @@ class ActionController extends BaseController
         $data = $this->getData($request);
         $data['updated_at'] = time();
         ActionModel::where('id',$id)->update($data);
-        return redirect('/admin/action');
+        return redirect(DOMAIN.'admin/action');
+    }
+
+    public function destroy($id)
+    {
+        ActionModel::where('id',$id)->update(array('del'=> 1));
+        return redirect(DOMAIN.'admin/action');
+    }
+
+    public function restore($id)
+    {
+        ActionModel::where('id',$id)->update(array('del'=> 0));
+        return redirect(DOMAIN.'admin/action');
     }
 
     public function forceDelete($id)
     {
         ActionModel::where('id',$id)->delete();
-        return redirect('/admin/action');
+        return redirect(DOMAIN.'admin/action');
     }
 
 
@@ -142,7 +167,16 @@ class ActionController extends BaseController
     /**
      *查询方法
      */
-//    public function query(){}
+    public function query($del=0)
+    {
+        $datas = ActionModel::where('del',$del)
+            ->where('isshow',1)
+            ->orderBy('sort','desc')
+            ->orderBy('id','desc')
+            ->paginate($this->limit);
+        $datas->limit = $this->limit;
+        return $datas;
+    }
 
     /**
      * 排序 +1 increase
@@ -150,7 +184,7 @@ class ActionController extends BaseController
     public function increase($id)
     {
         ActionModel::where('id', $id)->increment('sort', 1);
-        return redirect('/admin/action');
+        return redirect(DOMAIN.'admin/action');
     }
 
     /**
@@ -158,7 +192,10 @@ class ActionController extends BaseController
      */
     public function reduce($id)
     {
-        ActionModel::where('id', $id)->increment('sort', -1);
-        return redirect('/admin/action');
+        $action = ActionModel::find($id);
+        if ($action->sort > 0) {
+            ActionModel::where('id', $id)->increment('sort', -1);
+        }
+        return redirect(DOMAIN.'admin/action');
     }
 }

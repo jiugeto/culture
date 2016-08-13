@@ -50,7 +50,7 @@ class BaseController extends Controller
             'url'=> 'trash',
         ],
         'notrash'=> [
-            'action','menus','admin','role','link','commain','cominfo','comfirm','commodule','comfunc','staff','works',
+            /*'action',*/'menus','admin','role','link','commain','cominfo','comfirm','commodule','comfunc','staff','works',
         ],
     ];
 

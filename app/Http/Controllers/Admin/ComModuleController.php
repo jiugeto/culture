@@ -50,7 +50,7 @@ class ComModuleController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = time();
         ComModuleModel::create($data);
-        return redirect('/admin/commodule');
+        return redirect(DOMAIN.'admin/commodule');
     }
 
     public function edit($id)
@@ -71,7 +71,7 @@ class ComModuleController extends BaseController
         $data = $this->getData($request);
         $data['updated_at'] = time();
         ComModuleModel::where('id',$id)->update($data);
-        return redirect('/admin/commodule');
+        return redirect(DOMAIN.'admin/commodule');
     }
 
     public function show($id)
@@ -90,7 +90,7 @@ class ComModuleController extends BaseController
     public function forceDelete($id)
     {
         ComModuleModel::where('id',$id)->delete();
-        return redirect('/admin/commodule');
+        return redirect(DOMAIN.'admin/commodule');
     }
 
 
@@ -117,6 +117,8 @@ class ComModuleController extends BaseController
      */
     public function query()
     {
-        return ComModuleModel::orderBy('id','desc')->paginate($this->limit);
+        $datas = ComModuleModel::orderBy('id','desc')->paginate($this->limit);
+        $datas->limit = $this->limit;
+        return $datas;
     }
 }

@@ -26,7 +26,7 @@ class AdminController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'datas'=> AdminModel::orderBy('id','desc')->paginate($this->limit),
+            'datas'=> $this->query(),
             'prefix_url'=> '/admin/admin',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -102,6 +102,13 @@ class AdminController extends BaseController
 
 
 
+
+    public function query()
+    {
+        $datas = AdminModel::orderBy('id','desc')->paginate($this->limit);
+        $datas->limit = $this->limit;
+        return $datas;
+    }
 
     /**
      * 收集数据

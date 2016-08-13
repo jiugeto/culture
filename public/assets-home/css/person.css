@@ -4,21 +4,64 @@
 .per_body {
     margin:10px auto;
     margin-top:40px;
-    width:1000px;height:700px;
-    /*background:ghostwhite;*/
-    /*background:rgb(250,250,250);*/
-    /*border:1px solid lightblue;*/
+    width:1000px;
+    height:700px;
+    background:rgb(253,253,253);
+    border:1px solid rgb(240,240,240);
     font-size:20px;
 }
 .per_menu {
     margin:0 auto;
-    width:800px;
+    padding-bottom:10px;
+    width:965px;
+    font-family:'黑体';
+    font-size:16px;
+    /*font-weight:bold;*/
+    border-bottom:1px solid rgb(240,240,240);
 }
-.per_menu span a {
-    color:#00b7ee;
+.per_menu select {
+    padding:1px 2px;
+    border:1px solid rgb(230,230,230);
+    font-weight:bold;
+    font-size:16px;
+    color:grey;
+}
+.per_menu a {
+    margin:0;
+    padding:0 5px;
+    border:0;
+    color:grey;
     text-decoration:none;
 }
+.per_menu a:hover,.per_menu a.curr { color:#00b7ee; }
 .per_menu .right { float:right; }
+.per_menu .right img {
+    width:20px;height:20px;
+    border-radius:2px;
+    position:relative;top:5px;
+    overflow:hidden;
+}
+.per_work {
+    margin:5px;
+    padding:5px;
+    height:350px;
+    /*border-bottom:1px solid gainsboro;*/
+}
+div.per_waterfall {
+    margin:10px 5px;
+    padding:5px;
+    width:220px; height:120px;
+    border:1px solid ghostwhite;
+    float:left;
+}
+div:hover.per_waterfall { border:1px solid red; }
+.per_waterfall .img {
+    width:220px; height:100px;
+    overflow:hidden;
+}
+div.per_waterfall .text { text-align:center;color:grey; }
+div:hover.per_waterfall .text { color:red; }
+.per_waterfall .img img { width:220px; }
 
 .per_body p {
     margin:0;

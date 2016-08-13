@@ -14,14 +14,13 @@ class OpinionController extends BaseController
 
     public function __construct()
     {
-//        $this->menus['opinion'] = '用户意见';
+        parent::__construct();
     }
 
     public function index($status=0)
     {
         $result = [
             'datas'=> $this->query($status),
-//            'menus'=> $this->menus,
             'curr_menu'=> $this->url_curr,
             'status'=> $status,
         ];
@@ -32,9 +31,7 @@ class OpinionController extends BaseController
     {
         //如果 reply 是0。则无此记录，为新意见 isreply==0 ，否则是 isreply==1
         if (OpinionModel::find($reply)) { $isreply = 1; }else{ $isreply = 0; }
-//        $this->menus['create'] = '发布意见';
         $result = [
-//            'menus'=> $this->menus,
             'curr_menu'=> $this->url_curr,
             'curr'=> 'create',
             'isreply'=> $isreply,
@@ -176,6 +173,7 @@ class OpinionController extends BaseController
                 ->where('status',5)
                 ->paginate($this->limit);
         }
+        $datas->limit = $this->limit;
         return $datas;
     }
 }

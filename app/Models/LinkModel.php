@@ -17,13 +17,6 @@ class LinkModel extends BaseModel
        '不显示','显示',
     ];
 
-//    /**
-//     * 关联类型表
-//     */
-//    public function type()
-//    {
-//        return $this->hasOne('App\Models\TypeModel', 'id', 'type_id');
-//    }
     public function type()
     {
         return $this->type_id ? $this->types[$this->type_id] : '';

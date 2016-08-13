@@ -24,7 +24,7 @@ class PicController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'datas'=> PicModel::paginate($this->limit),
+            'datas'=> $this->query(),
             'prefix_url'=> '/admin/pic',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -94,6 +94,13 @@ class PicController extends BaseController
      * 以下是公用方法
      * ======================
      */
+
+    public function query()
+    {
+        $datas = PicModel::paginate($this->limit);
+        $datas->limit = $this->limit;
+        return $datas;
+    }
 
     /**
      * 收集数据

@@ -19,6 +19,11 @@ class AdminMenuComposer
 
     public static function getActions()
     {
-        return Tools::getChild(ActionModel::where('isshow',1)->orderBy('sort','desc')->get(),$pid=0);
+        return Tools::getChild(
+                ActionModel::where('isshow',1)
+                ->where('del',0)
+                ->orderBy('sort','desc')
+                ->get(),
+            $pid=0);
     }
 }
