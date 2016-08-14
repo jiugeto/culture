@@ -10,7 +10,8 @@
 Route::group(['prefix'=>'person','middleware' =>'MemberAuth','namespace'=>'Person'], function(){
 //Route::group(['prefix'=>'person','namespace'=>'Person'], function(){
     Route::get('/','HomeController@index');
-    Route::get('/home','HomeController@index');
+    Route::get('home','HomeController@index');
+    Route::get('s/{from}/{type}','HomeController@index');       //s代表检索
     //个人资料设置
     Route::resource('setting','SettingController');
 });

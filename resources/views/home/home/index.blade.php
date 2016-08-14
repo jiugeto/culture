@@ -68,7 +68,7 @@
         <!-- 最新话题 -->
         <div class="talk">
             <p class="floor">
-                <img src="/assets-home/images/floor_red.png" class="floor_img">
+                <img src="{{DOMAIN}}assets-home/images/floor_red.png" class="floor_img">
                 <span class="floor_text">{{ $number[2] }}F</span>
                 <span class="floor_text2">&nbsp;{{ $floors[$number[2]] }}</span>
                 <span class="more" onclick="window.location.href='/talk';">>更多</span>
@@ -99,7 +99,7 @@
         <!-- 在线创作 -->
         <div class="online">
             <p class="floor">
-                <img src="/assets-home/images/floor_red.png" class="floor_img">
+                <img src="{{DOMAIN}}assets-home/images/floor_red.png" class="floor_img">
                 <span class="floor_text">{{ $number[3] }}F</span>
                 <span class="floor_text2">&nbsp;{{ $floors[$number[3]] }}</span>
                 <span class="more" onclick="window.location.href='/creation';">>更多</span>
@@ -107,42 +107,42 @@
             <div class="online_con">
                 <div class="online_first">
                     <a href="" title="online1">
-                        <div class="con_img"><img src="/uploads/images/2016/online1.png"></div>
+                        <div class="con_img"><img src="{{DOMAIN}}uploads/images/2016/online1.png"></div>
                     </a>
                 </div>
                 <div class="online_div">
                     <a href="" title="online1">
-                        <div class="con_img"><img src="/uploads/images/2016/online2.png"></div>
+                        <div class="con_img"><img src="{{DOMAIN}}uploads/images/2016/online2.png"></div>
                         <div class="con_text"><a href="">样片</a></div>
                     </a>
                 </div>
                 <div class="online_div">
                     <a href="" title="online1">
-                        <div class="con_img"><img src="/uploads/images/2016/online3.png"></div>
+                        <div class="con_img"><img src="{{DOMAIN}}uploads/images/2016/online3.png"></div>
                         <div class="con_text"><a href="">样片</a></div>
                     </a>
                 </div>
                 <div class="online_div">
                     <a href="" title="online1">
-                        <div class="con_img"><img src="/uploads/images/2016/online4.png"></div>
+                        <div class="con_img"><img src="{{DOMAIN}}uploads/images/2016/online4.png"></div>
                         <div class="con_text"><a href="">样片</a></div>
                     </a>
                 </div>
                 <div class="online_div">
                     <a href="" title="online1">
-                        <div class="con_img"><img src="/uploads/images/2016/online2.png"></div>
+                        <div class="con_img"><img src="{{DOMAIN}}uploads/images/2016/online2.png"></div>
                         <div class="con_text"><a href="">样片</a></div>
                     </a>
                 </div>
                 <div class="online_div">
                     <a href="" title="online1">
-                        <div class="con_img"><img src="/uploads/images/2016/online3.png"></div>
+                        <div class="con_img"><img src="{{DOMAIN}}uploads/images/2016/online3.png"></div>
                         <div class="con_text"><a href="">样片</a></div>
                     </a>
                 </div>
                 <div class="online_div">
                     <a href="" title="online1">
-                        <div class="con_img"><img src="/uploads/images/2016/online4.png"></div>
+                        <div class="con_img"><img src="{{DOMAIN}}uploads/images/2016/online4.png"></div>
                         <div class="con_text"><a href="">样片</a></div>
                     </a>
                 </div>
@@ -160,7 +160,7 @@
         <!-- 特色产品：产品样片 -->
         <div class="trait">
             <p class="floor">
-                <img src="/assets-home/images/floor_red.png" class="floor_img">
+                <img src="{{DOMAIN}}assets-home/images/floor_red.png" class="floor_img">
                 <span class="floor_text">{{ $number[4] }}F</span>
                 <span class="floor_text2">&nbsp;{{ $floors[$number[4]] }}</span>
                 <span class="more" onclick="window.location.href='/product';">>更多</span>
@@ -169,7 +169,7 @@
                 @if(count($goods))
                 @foreach($goods as $good)
                     <div class="img" onmouseover="over({{ $good->id }})" onmouseout="out({{ $good->id }})">
-                        <a href="/product/video/{{ $good->id }}/{{ $good->video_id }}" title="查看详情：{{ $good->title() }}">
+                        <a href="{{DOMAIN}}product/video/{{ $good->id }}/{{ $good->video_id }}" title="查看详情：{{ $good->title() }}">
                             <img src="{{ $good->getPicUrl() }}" style="@if($size=$good->getPicSize($w=148,$h=100)) width:{{$size}}px; @endif height:100px;">
                         </a>
                         <div class="text" style="top:0;pointer-events:none;" id="goodText_{{ $good->id }}">
@@ -187,12 +187,12 @@
                     function out(id){ $("#goodText_"+id).animate({top:'0px'},100); }
                 </script>
                 @if(count($goods)<6)
-                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
-                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
-                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
-                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
-                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
-                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
+                <div class="img"><a href=""><img src="{{DOMAIN}}uploads/images/2016/online1.png"></a></div>
+                <div class="img"><a href=""><img src="{{DOMAIN}}uploads/images/2016/online1.png"></a></div>
+                <div class="img"><a href=""><img src="{{DOMAIN}}uploads/images/2016/online1.png"></a></div>
+                <div class="img"><a href=""><img src="{{DOMAIN}}uploads/images/2016/online1.png"></a></div>
+                <div class="img"><a href=""><img src="{{DOMAIN}}uploads/images/2016/online1.png"></a></div>
+                <div class="img"><a href=""><img src="{{DOMAIN}}uploads/images/2016/online1.png"></a></div>
                 @endif
             </div>
             {{--箭头--}}
@@ -206,18 +206,18 @@
         <!-- 热门品牌：供应单位 -->
         <div class="hot">
             <p class="floor">
-                <img src="/assets-home/images/floor_red.png" class="floor_img">
+                <img src="{{DOMAIN}}assets-home/images/floor_red.png" class="floor_img">
                 <span class="floor_text">{{ $number[5] }}F</span>
                 <span class="floor_text2">&nbsp;{{ $floors[$number[5]] }}</span>
                 <span class="more" onclick="window.location.href='/supply';">>更多</span>
             </p>
             <div class="trait_con">
-                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
-                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
-                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
-                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
-                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
-                <div class="img"><a href=""><img src="/uploads/images/2016/online1.png"></a></div>
+                <div class="img"><a href=""><img src="{{DOMAIN}}uploads/images/2016/online1.png"></a></div>
+                <div class="img"><a href=""><img src="{{DOMAIN}}uploads/images/2016/online1.png"></a></div>
+                <div class="img"><a href=""><img src="{{DOMAIN}}uploads/images/2016/online1.png"></a></div>
+                <div class="img"><a href=""><img src="{{DOMAIN}}uploads/images/2016/online1.png"></a></div>
+                <div class="img"><a href=""><img src="{{DOMAIN}}uploads/images/2016/online1.png"></a></div>
+                <div class="img"><a href=""><img src="{{DOMAIN}}uploads/images/2016/online1.png"></a></div>
             </div>
             {{--箭头--}}
             <div class="arrow">

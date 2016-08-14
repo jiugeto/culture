@@ -5,9 +5,9 @@
     margin:10px auto;
     margin-top:40px;
     width:1000px;
-    height:700px;
-    background:rgb(253,253,253);
-    border:1px solid rgb(240,240,240);
+    height:680px;
+    background:rgb(252,252,252);
+    border:1px solid rgb(230,230,230);
     font-size:20px;
 }
 .per_menu {
@@ -32,6 +32,7 @@
     border:0;
     color:grey;
     text-decoration:none;
+    cursor:pointer;
 }
 .per_menu a:hover,.per_menu a.curr { color:#00b7ee; }
 .per_menu .right { float:right; }
@@ -41,18 +42,26 @@
     position:relative;top:5px;
     overflow:hidden;
 }
+.per_menu a.userinfo {
+    padding:8px 15px;
+    color:white;
+    background:grey;
+}
+.per_menu a:hover.userinfo { background:darkred; }
 .per_work {
     margin:5px;
     padding:5px;
-    height:350px;
+    /*height:350px;*/
     /*border-bottom:1px solid gainsboro;*/
 }
 div.per_waterfall {
     margin:10px 5px;
     padding:5px;
     width:220px; height:120px;
-    border:1px solid ghostwhite;
+    border:1px solid rgb(240,240,240);
+    background:white;
     float:left;
+    cursor:pointer;
 }
 div:hover.per_waterfall { border:1px solid red; }
 .per_waterfall .img {
@@ -70,8 +79,12 @@ div:hover.per_waterfall .text { color:red; }
 }
 .per_left p,.per_center p,.per_right p {
     clear:both;
-    background:#fff2e5;
-    border-bottom:1px solid #ffbf80;
+    /*标题颜色*/
+    /*background:#fff2e5;*/
+    /*border-bottom:1px solid #ffbf80;*/
+    color:grey;
+    background:rgb(245,245,245);
+    border-bottom:1px solid gainsboro;
 }
 /*页面顶部布局*/
 .per_top {
@@ -81,17 +94,18 @@ div:hover.per_waterfall .text { color:red; }
 /*页面主体布局*/
 .per_left,.per_center,.per_right {
     height:500px;
-    /*background:ghostwhite;*/
     float:left
 }
 .per_left div,.per_center div,.per_right div {
-    margin:2px;
+    margin:5px;
     border:1px solid lightblue;
 }
+.per_left div { margin-left:0; }
 /*页面左边布局*/
 .per_left { width:200px; }
 .per_left1,.per_left2,.per_left3 { width:196px; }
 .per_left1 { height:200px; }
+.per_left1 .img { margin:10px auto;width:120px;height:100px; }
 .per_left2 { height:100px; }
 .per_left3 { height:286px; }
 /*页面中间布局*/
@@ -101,16 +115,16 @@ div:hover.per_waterfall .text { color:red; }
 .per_center2 { height:400px; }
 .per_center3 { height:136px; }
 /*页面右侧布局*/
-.per_right { width:200px; }
-.per_right1,.per_right2,.per_right3 { width:196px; }
+.per_right { margin-left:5px;width:192px; }
+.per_right1,.per_right2,.per_right3 { width:188px; }
 .per_right1 { height:300px; }
 .per_right2 { height:200px; }
 .per_right3 { height:86px; }
 /*页面底部布局*/
 
 .per_bottom {
-    margin-top:600px;
+    margin-top:610px;
     margin-bottom:100px;
-    width:100%;height:200px;
+    width:100%;height:100px;
     /*border:1px solid lightblue;*/
 }

@@ -181,7 +181,7 @@ CREATE TABLE `ba_userlog` (
   `logoutTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '退出时间',
   `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -190,7 +190,7 @@ CREATE TABLE `ba_userlog` (
 
 LOCK TABLES `ba_userlog` WRITE;
 /*!40000 ALTER TABLE `ba_userlog` DISABLE KEYS */;
-INSERT INTO `ba_userlog` VALUES (1,1,'jiuge','201608090833518600',2016,0,20160406),(2,1,'jiuge','201608091433021426',2016,0,20160406),(3,1,'jiuge','201608101019194125',1470795559,0,1470795559),(4,1,'jiuge','201608101641353248',1470818495,0,1470795559),(5,1,'jiuge','201608110924283826',1470878668,0,1470795559),(6,1,'jiuge','201608111629053357',1470904145,0,1470795559),(7,1,'jiuge','201608111732136842',1470907933,0,1470795559),(8,1,'jiuge','201608131631298911',1471077089,0,20160406);
+INSERT INTO `ba_userlog` VALUES (1,1,'jiuge','201608090833518600',2016,0,20160406),(2,1,'jiuge','201608091433021426',2016,0,20160406),(3,1,'jiuge','201608101019194125',1470795559,0,1470795559),(4,1,'jiuge','201608101641353248',1470818495,0,1470795559),(5,1,'jiuge','201608110924283826',1470878668,0,1470795559),(6,1,'jiuge','201608111629053357',1470904145,0,1470795559),(7,1,'jiuge','201608111732136842',1470907933,0,1470795559),(8,1,'jiuge','201608131631298911',1471077089,0,20160406),(9,1,'jiuge','201608141059419660',1471143581,0,20160406);
 /*!40000 ALTER TABLE `ba_userlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -588,7 +588,7 @@ CREATE TABLE `bs_goods` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL COMMENT '视频名称',
   `genre` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '片源类型：1产品系列，2花絮系列',
-  `type` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '产品主体：1个人需求，2设计师供应，3企业需求，4企业供应',
+  `type` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '产品主体：1个人需求，2设计师供应，3企业需求，4企业供应',
   `intro` varchar(1000) NOT NULL COMMENT '视频简介',
   `title` varchar(255) NOT NULL COMMENT '鼠标移动的文字',
   `pic_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '图片链接id，关联图片表bs_pics',
@@ -1147,7 +1147,7 @@ DROP TABLE IF EXISTS `bs_products`;
 CREATE TABLE `bs_products` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL COMMENT '视频名称',
-  `genre` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '发布者身份：1个人，2企业',
+  `genre` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '发布者身份：1个人供应，2企业供应',
   `gif` int(10) unsigned NOT NULL DEFAULT '0' COMMENT ' 动态缩略图，关联图片表bs_pics',
   `intro` varchar(1000) NOT NULL COMMENT '视频简介',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '提供者：需求用户，设计师，公司',
@@ -1994,13 +1994,13 @@ INSERT INTO `com_modules` VALUES (1,'关于公司',0,1,'<p>ggggggggggggggggggggg
 UNLOCK TABLES;
 
 --
--- Table structure for table `com_ppts`
+-- Table structure for table `com_ppts待删除`
 --
 
-DROP TABLE IF EXISTS `com_ppts`;
+DROP TABLE IF EXISTS `com_ppts待删除`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `com_ppts` (
+CREATE TABLE `com_ppts待删除` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `pic_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '图片id，关联bs_pics',
   `cid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '公司id',
@@ -2018,13 +2018,13 @@ CREATE TABLE `com_ppts` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `com_ppts`
+-- Dumping data for table `com_ppts待删除`
 --
 
-LOCK TABLES `com_ppts` WRITE;
-/*!40000 ALTER TABLE `com_ppts` DISABLE KEYS */;
-INSERT INTO `com_ppts` VALUES (1,1,0,'玩儿体育','##',10,10,1,0,0,20160501,0),(2,1,0,'铭播放v对方更不能吃','##',10,10,1,0,0,20160501,0),(3,1,0,'内部v查询速度法国红酒','##',10,10,1,0,0,20160501,0),(4,1,1,'玩儿体育','##',10,10,1,0,0,20160501,0),(5,1,1,'铭播放v对方更不能吃','##',10,10,1,0,0,20160501,0),(6,1,1,'内部v查询速度法国红酒','##',10,10,1,0,0,20160501,0);
-/*!40000 ALTER TABLE `com_ppts` ENABLE KEYS */;
+LOCK TABLES `com_ppts待删除` WRITE;
+/*!40000 ALTER TABLE `com_ppts待删除` DISABLE KEYS */;
+INSERT INTO `com_ppts待删除` VALUES (1,1,0,'玩儿体育','##',10,10,1,0,0,20160501,0),(2,1,0,'铭播放v对方更不能吃','##',10,10,1,0,0,20160501,0),(3,1,0,'内部v查询速度法国红酒','##',10,10,1,0,0,20160501,0),(4,1,1,'玩儿体育','##',10,10,1,0,0,20160501,0),(5,1,1,'铭播放v对方更不能吃','##',10,10,1,0,0,20160501,0),(6,1,1,'内部v查询速度法国红酒','##',10,10,1,0,0,20160501,0);
+/*!40000 ALTER TABLE `com_ppts待删除` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -2176,4 +2176,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-13 21:35:03
+-- Dump completed on 2016-08-14 21:13:46

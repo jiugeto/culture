@@ -8,7 +8,9 @@
                 <div class="text" style="@if($userInfo['per']<10)left:12px;@endif">{{ $userInfo['per'] }}%</div>
                 <input type="hidden" id="onePer" value="{{ $userInfo['per']/100 }}">
             </div>
-            <div class="chart_text">个人 <a style="font-size:12px;position:relative;">详情</a></div>
+            <div class="chart_text">个人
+                <a href="{{DOMAIN}}member/setting">详情</a>
+            </div>
         </div>
         <div class="chart1">
             <div class="circle circle2">
@@ -16,7 +18,9 @@
                 <div class="text" style="@if($companyInfo['per']<10)left:12px;@endif">{{ $companyInfo['per'] }}%</div>
                 <input type="hidden" id="twoPer" value="{{ $companyInfo['per']/100 }}">
             </div>
-            <div class="chart_text">公司</div>
+            <div class="chart_text">公司
+                <a href="{{DOMAIN}}company/admin">详情</a>
+            </div>
         </div>
         <div class="chart1">
             <div class="circle circle3">
@@ -24,7 +28,9 @@
                 <div class="text" style="@if($orderInfo['per']<10)left:12px;@endif">{{ $orderInfo['per'] }}%</div>
                 <input type="hidden" id="threePer" value="{{ $orderInfo['per']/100 }}">
             </div>
-            <div class="chart_text">订单</div>
+            <div class="chart_text">订单
+                <a href="{{DOMAIN}}member/order">详情</a>
+            </div>
         </div>
         <div class="mem_info">
             <div class="circle"><img src="{{DOMAIN}}assets/images/person.png" style="width:40px;"></div>

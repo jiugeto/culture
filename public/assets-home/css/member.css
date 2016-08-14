@@ -131,6 +131,12 @@ a:hover li.a_li,a li.a_li_curr {
     color:gray;
     position:relative;top:-40px;left:50px;
 }
+.chart_text a {
+    font-size:12px;
+    color:grey;
+    position:relative;top:10px;left:20px;
+}
+.chart_text a:hover { color:red; }
 .mem_user {
     font-size:12px;
     position:relative;top:-50px;left:35px;
