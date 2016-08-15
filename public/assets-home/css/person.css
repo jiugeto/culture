@@ -77,7 +77,7 @@ div:hover.per_waterfall .text { color:red; }
     padding:5px 10px;
     font-size:12px;
 }
-.per_left p,.per_center p,.per_right p {
+.per_left p.title,.per_center p.title,.per_right p.title {
     clear:both;
     /*标题颜色*/
     /*background:#fff2e5;*/
@@ -86,11 +86,24 @@ div:hover.per_waterfall .text { color:red; }
     background:rgb(245,245,245);
     border-bottom:1px solid gainsboro;
 }
+.per_left p.title a,.per_center p.title a,.per_right p.title a {
+    color:grey;
+    text-decoration:none;
+    float:right;
+}
+.per_left p.title a:hover,.per_center p.title a:hover,.per_right p.title a:hover { color:red; }
 /*页面顶部布局*/
 .per_top {
-    width:998px;height:100px;
-    border:1px solid lightblue;
+    padding-left:10px;
+    padding-bottom:10px;
+    width:988px;height:100px;
+    border:1px solid /*lightblue*/lightgrey;
+    color:rgb(14,144,210);
+    background:url(../../uploads/images/2016/ppt.png);
 }
+.per_top a { color:rgb(14,144,210);text-decoration:none; }
+.per_top a:hover { color:red; }
+.per_top .t { margin-top:8px;font-size:14px; }
 /*页面主体布局*/
 .per_left,.per_center,.per_right {
     height:500px;
@@ -98,26 +111,86 @@ div:hover.per_waterfall .text { color:red; }
 }
 .per_left div,.per_center div,.per_right div {
     margin:5px;
-    border:1px solid lightblue;
+    border:1px solid /*lightblue*/lightgrey;
 }
 .per_left div { margin-left:0; }
-/*页面左边布局*/
 .per_left { width:200px; }
+.per_left table { margin:0 2%;width:98%; }
+.per_left td { padding:0 10px;color:grey;font-size:14px; }
+.per_left td a { color:rgb(14,144,210);text-decoration:none;font-size:16px; }
+.per_left td a:hover { color:red; }
+.per_left .cometo { color:grey;font-weight:bold; }
+/*页面左边布局*/
 .per_left1,.per_left2,.per_left3 { width:196px; }
-.per_left1 { height:200px; }
-.per_left1 .img { margin:10px auto;width:120px;height:100px; }
-.per_left2 { height:100px; }
-.per_left3 { height:286px; }
+.per_left1 { height:190px; }
+.per_left1 .img {
+    margin:10px auto;
+    margin-bottom:0px;
+    width:120px; height:100px;
+}
+.per_left1 .nicheng {
+    margin:0;
+    text-align:center;
+    font-size:14px;
+    border:0;
+    color:rgb(14,144,210);
+}
+.per_left2 { height:200px; }
+.per_left3 { height:206px; }
+.per_left3 .img {
+    margin:5px 0 0 6px;
+    width:55px; height:50px;
+    overflow:hidden;
+    float:left;
+}
 /*页面中间布局*/
 .per_center { width:600px; }
+.per_center table { margin:5px; }
+.per_center td { padding:0 10px;color:grey;font-size:14px; }
 .per_center1,.per_center2,.per_center3 { width:596px; }
-.per_center1 { height:50px; }
-.per_center2 { height:400px; }
+/*.per_center1 { height:50px; }*/
+.per_center2 { height:200px; }
+.per_center2 .video {
+    margin:5px 0 0 5px;
+    width:110px;height:80px;
+    border:0;
+    float:left;
+}
+.per_center2 .video .img {
+    margin:0 auto;margin-top:5px;
+    width:100px;height:50px;
+    overflow:hidden;
+}
+.per_center2 .video .vname {
+    padding:0;
+    text-align:center;
+    color:grey;
+}
 .per_center3 { height:136px; }
 /*页面右侧布局*/
 .per_right { margin-left:5px;width:192px; }
 .per_right1,.per_right2,.per_right3 { width:188px; }
-.per_right1 { height:300px; }
+.per_right1 { height:200px; }
+.per_right1 .friend {
+    margin-left:10px;
+    margin-right:0;
+    width:80px;
+    height:70px;
+    border:0;
+    float:left;
+    cursor:pointer;
+}
+.per_right1 .img {
+    margin:0 auto;
+    margin-top:5px;
+    padding:2px;
+    width:50px; height:50px;
+    border:1px solid lightgrey;
+    border-radius:3px;
+}
+.per_right1 .friend:hover .img { border:1px solid red; }
+.per_right1 .friend:hover .nicheng { color:red; }
+.per_right1 .nicheng { margin:0;padding:0;color:grey;text-align:center; }
 .per_right2 { height:200px; }
 .per_right3 { height:86px; }
 /*页面底部布局*/
