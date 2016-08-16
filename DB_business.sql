@@ -181,7 +181,7 @@ CREATE TABLE `ba_userlog` (
   `logoutTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '退出时间',
   `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -190,7 +190,7 @@ CREATE TABLE `ba_userlog` (
 
 LOCK TABLES `ba_userlog` WRITE;
 /*!40000 ALTER TABLE `ba_userlog` DISABLE KEYS */;
-INSERT INTO `ba_userlog` VALUES (1,1,'jiuge','201608090833518600',2016,0,20160406),(2,1,'jiuge','201608091433021426',2016,0,20160406),(3,1,'jiuge','201608101019194125',1470795559,0,1470795559),(4,1,'jiuge','201608101641353248',1470818495,0,1470795559),(5,1,'jiuge','201608110924283826',1470878668,0,1470795559),(6,1,'jiuge','201608111629053357',1470904145,0,1470795559),(7,1,'jiuge','201608111732136842',1470907933,0,1470795559),(8,1,'jiuge','201608131631298911',1471077089,0,20160406),(9,1,'jiuge','201608141059419660',1471143581,0,20160406),(10,1,'jiuge','201608150827595148',1471220879,0,20160406),(11,1,'jiuge','201608151732473848',1471253567,0,20160406);
+INSERT INTO `ba_userlog` VALUES (1,1,'jiuge','201608090833518600',2016,0,20160406),(2,1,'jiuge','201608091433021426',2016,0,20160406),(3,1,'jiuge','201608101019194125',1470795559,0,1470795559),(4,1,'jiuge','201608101641353248',1470818495,0,1470795559),(5,1,'jiuge','201608110924283826',1470878668,0,1470795559),(6,1,'jiuge','201608111629053357',1470904145,0,1470795559),(7,1,'jiuge','201608111732136842',1470907933,0,1470795559),(8,1,'jiuge','201608131631298911',1471077089,0,20160406),(9,1,'jiuge','201608141059419660',1471143581,0,20160406),(10,1,'jiuge','201608150827595148',1471220879,0,20160406),(11,1,'jiuge','201608151732473848',1471253567,0,20160406),(12,1,'jiuge','201608160839461907',1471307986,0,20160406);
 /*!40000 ALTER TABLE `ba_userlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -411,7 +411,7 @@ DROP TABLE IF EXISTS `bs_designs`;
 CREATE TABLE `bs_designs` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL COMMENT '设计名称',
-  `genre` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '供求类型：1企业供应，2企业需求，3个人供应，个人需求',
+  `genre` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '供求类型：1个人供应，2个人需求，3企业供应，4企业需求，',
   `cate` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '设计类型：房产，效果图，平面，漫游',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布者id',
   `intro` varchar(255) NOT NULL COMMENT '简介',
@@ -883,7 +883,7 @@ CREATE TABLE `bs_menus` (
 
 LOCK TABLES `bs_menus` WRITE;
 /*!40000 ALTER TABLE `bs_menus` DISABLE KEYS */;
-INSERT INTO `bs_menus` VALUES (1,'账户首页',1,'会员后台左侧菜单控制','App\\Http\\Controllers\\Member','Home','member','home','index','',0,1,1,10,10,20160306,20160306),(2,'会员账户',1,'','App\\Http\\Controllers\\Member','Setting','member','setting','index','',0,1,1,10,10,20160229,20160412),(3,'在线创作',1,'','App\\Http\\Controllers\\Member','Product','member','product','index','',0,1,1,10,10,20160312,20160314),(4,'个人供求',1,'','App\\Http\\Controllers\\Member','PersonD','member','personD','index','',0,1,1,10,10,20160229,20160319),(5,'企业供求',1,'','App\\Http\\Controllers\\Member','CompanyD','member','companyD','index','',0,1,1,10,10,20160312,20160319),(6,'视频需求',1,'','App\\Http\\Controllers\\Member','PersonD','member','personD','index','',4,1,1,10,10,20160312,20160319),(7,'视频作品',1,'','App\\Http\\Controllers\\Member','PersonS','member','personS','index','',4,1,1,10,10,20160312,20160319),(8,'视频需求',1,'','App\\Http\\Controllers\\Member','CompanyD','member','companyD','index','',5,1,1,10,10,20160312,20160319),(9,'视频作品',1,'','App\\Http\\Controllers\\Member','CompanyS','member','companyS','index','',5,1,1,10,10,20160312,20160319),(10,'租赁供求',1,'','App\\Http\\Controllers\\Member','Rent','member','rent','index','',5,1,1,10,10,20160312,20160319),(11,'娱乐供应',1,'','App\\Http\\Controllers\\Member','EntertainS','member','entertainS','index','',5,1,1,10,10,20160312,20160313),(12,'综合管理',1,'','App\\Http\\Controllers\\Member','Pic','member','pic','index','',0,1,1,10,10,20160313,20160424),(13,'话题管理',1,'','App\\Http\\Controllers\\Member','Talk','member','talk','index','',0,1,1,0,10,20160313,20160319),(14,'创意管理',1,'','App\\Http\\Controllers\\Member','Idea','member','idea','index','',12,1,1,10,10,20160416,0),(15,'个人主页',1,'','App\\Http\\Controllers\\Person','Home','person','home','index','',4,1,1,20,10,20160417,20160422),(16,'企业主页',1,'','App\\Http\\Controllers\\Company','Home','company','home','index','',5,1,1,20,10,20160417,20160417),(17,'娱乐人物',1,'','App\\Http\\Controllers\\Member','Staff','member','staff','index','',5,1,1,10,10,20160423,0),(18,'我的图片',1,'','App\\Http\\Controllers\\Member','Pic','member','pic','index','',12,1,1,20,10,20160424,20160424),(19,'我的视频',1,'','App\\Http\\Controllers\\Member','Videos','member','video','index','',12,1,1,20,10,20160424,20160424),(20,'首页参数',3,'','App\\Http\\Controllers\\Company','Home','company/admin','home','index','',0,1,1,10,10,20160426,0),(21,'后台权限',3,'页面布局','App\\Http\\Controllers\\Company','Auth','company/admin','auth','index','',0,0,1,10,10,20160426,20160426),(22,'公司信息',3,'','App\\Http\\Controllers\\Company','Info','company/admin','info','index','',0,1,1,10,10,20160426,20160426),(23,'内容设置',3,'','App\\Http\\Controllers\\Company','Content','company/admin','content','index','',0,1,1,10,10,20160426,20160426),(24,'页面布局',3,'','App\\Http\\Controllers\\Company','Layout','company/admin','layout','index','',22,1,1,10,10,20160426,20160426),(25,'基本设置',3,'','App\\Http\\Controllers\\Company','Basic','company/admin','basic','index','',22,1,1,10,10,20160426,20160426),(26,'其他页面',3,'','App\\Http\\Controllers\\Company','Single','company/admin','single','index','',22,1,1,10,10,20160426,20160426),(27,'宣传编辑',3,'','App\\Http\\Controllers\\Company','Ppt','company/admin','ppt','index','',23,1,1,5,5,20160426,0),(28,'产品编辑',3,'','App\\Http\\Controllers\\Company','Product','company/admin','product','index','',23,1,1,10,10,20160426,0),(29,'团队编辑',3,'','App\\Http\\Controllers\\Company','Team','company/admin','team','index','',23,1,1,10,10,20160426,20160429),(30,'招聘编辑',3,'','App\\Http\\Controllers\\Company','Job','company/admin','job','index','',23,1,1,10,10,20160426,0),(31,'联系编辑',3,'','App\\Http\\Controllers\\Company','Contact','company/admin','contact','index','',23,1,1,10,10,20160426,20160428),(32,'花絮编辑',3,'','App\\Http\\Controllers\\Company','Part','company/admin','part','index','',23,1,1,10,10,20160428,20160428),(33,'图片管理',3,'','App\\Http\\Controllers\\Company','Pic','company/admin','pic','index','',23,1,1,10,5,20160428,20160428),(34,'视频管理',3,'','App\\Http\\Controllers\\Company','Video','company/admin','video','index','',23,1,1,10,5,20160428,20160428),(35,'关于公司',3,'','App\\Http\\Controllers\\Company','About','company/admin','abouts','index','',23,1,1,10,20,20160428,20160429),(36,'服务编辑',3,'','App\\Http\\Controllers\\Company','Firm','company/admin','firms','index','',23,1,1,10,10,20160428,20160429),(37,'新闻资讯',3,'','App\\Http\\Controllers\\Company','News','company/admin','news','index','',23,1,1,10,10,20160428,20160429),(38,'链接管理',3,'','App\\Http\\Controllers\\Company','Link','company/admin','link','index','',22,1,1,10,10,20160506,0),(39,'产品属性',1,'','App\\Http\\Controllers\\Member','ProductAttr','member','productattr','index','',3,1,1,10,10,20160513,20160513),(40,'产品动画',1,'','App\\Http\\Controllers\\Member','ProductLayer','member','productlayer','index','',3,1,1,10,10,20160513,0),(41,'产品内容',1,'','App\\Http\\Controllers\\Member','ProductCon','member','productcon','index','',3,1,1,10,10,20160513,20160513),(42,'订单管理',1,'','App\\Http\\Controllers\\Member','Order','member','order','index','',0,1,1,10,10,20160524,20160524),(43,'订单管理',1,'','App\\Http\\Controllers\\Member','Order','member','order','index','',42,1,1,10,10,20160524,0),(44,'售后修改',1,'','App\\Http\\Controllers\\Member','OrderFirm','member','orderfirm','index','',42,1,1,10,10,20160524,0),(45,'创作订单',1,'','App\\Http\\Controllers\\Member','OrderProduct','member','orderpro','index','',42,1,1,10,10,20160524,0),(46,'分镜管理',1,'','App\\Http\\Controllers\\Member','StoryBoard','member','storyboard','index','',12,1,1,10,10,20160524,0),(47,'个人设计',1,'','App\\Http\\Controllers\\Member','DesignPerS','member','designPerS','index','',4,1,1,10,10,2016,1470818534),(48,'企业设计',1,'','App\\Http\\Controllers\\Member','DesignComD','member','designComD','index','',5,1,1,10,10,1470818610,1470818832),(49,'话题列表',1,'','App\\Http\\Controllers\\Member','Talk','member','talk','index','',13,1,1,10,10,1470819935,0);
+INSERT INTO `bs_menus` VALUES (1,'账户首页',1,'会员后台左侧菜单控制','App\\Http\\Controllers\\Member','Home','member','home','index','',0,1,1,10,10,20160306,20160306),(2,'会员账户',1,'','App\\Http\\Controllers\\Member','Setting','member','setting','index','',0,1,1,10,10,20160229,20160412),(3,'在线创作',1,'','App\\Http\\Controllers\\Member','Product','member','product','index','',0,1,1,10,10,20160312,20160314),(4,'个人供求',1,'','App\\Http\\Controllers\\Member','PersonD','member','personD','index','',0,1,1,10,10,20160229,20160319),(5,'企业供求',1,'','App\\Http\\Controllers\\Member','CompanyD','member','companyD','index','',0,1,1,10,10,20160312,20160319),(6,'视频需求',1,'','App\\Http\\Controllers\\Member','PersonD','member','personD','index','',4,1,1,10,10,20160312,20160319),(7,'视频作品',1,'','App\\Http\\Controllers\\Member','PersonS','member','personS','index','',4,1,1,10,10,20160312,20160319),(8,'视频需求',1,'','App\\Http\\Controllers\\Member','CompanyD','member','companyD','index','',5,1,1,10,10,20160312,20160319),(9,'视频作品',1,'','App\\Http\\Controllers\\Member','CompanyS','member','companyS','index','',5,1,1,10,10,20160312,20160319),(10,'租赁供求',1,'','App\\Http\\Controllers\\Member','Rent','member','rent','index','',5,1,1,10,10,20160312,20160319),(11,'娱乐供应',1,'','App\\Http\\Controllers\\Member','EntertainS','member','entertainS','index','',5,1,1,10,10,20160312,20160313),(12,'综合管理',1,'','App\\Http\\Controllers\\Member','Pic','member','pic','index','',0,1,1,10,10,20160313,20160424),(13,'话题管理',1,'','App\\Http\\Controllers\\Member','Talk','member','talk','index','',0,1,1,0,10,20160313,20160319),(14,'创意管理',1,'','App\\Http\\Controllers\\Member','Idea','member','idea','index','',12,1,1,10,10,20160416,0),(15,'个人主页',1,'','App\\Http\\Controllers\\Person','Home','person','s','index','',4,1,1,20,10,20160417,20160422),(16,'企业主页',1,'','App\\Http\\Controllers\\Company','Home','company','home','index','',5,1,1,20,10,20160417,20160417),(17,'娱乐人物',1,'','App\\Http\\Controllers\\Member','Staff','member','staff','index','',5,1,1,10,10,20160423,0),(18,'我的图片',1,'','App\\Http\\Controllers\\Member','Pic','member','pic','index','',12,1,1,20,10,20160424,20160424),(19,'我的视频',1,'','App\\Http\\Controllers\\Member','Videos','member','video','index','',12,1,1,20,10,20160424,20160424),(20,'首页参数',3,'','App\\Http\\Controllers\\Company','Home','company/admin','home','index','',0,1,1,10,10,20160426,0),(21,'后台权限',3,'页面布局','App\\Http\\Controllers\\Company','Auth','company/admin','auth','index','',0,0,1,10,10,20160426,20160426),(22,'公司信息',3,'','App\\Http\\Controllers\\Company','Info','company/admin','info','index','',0,1,1,10,10,20160426,20160426),(23,'内容设置',3,'','App\\Http\\Controllers\\Company','Content','company/admin','content','index','',0,1,1,10,10,20160426,20160426),(24,'页面布局',3,'','App\\Http\\Controllers\\Company','Layout','company/admin','layout','index','',22,1,1,10,10,20160426,20160426),(25,'基本设置',3,'','App\\Http\\Controllers\\Company','Basic','company/admin','basic','index','',22,1,1,10,10,20160426,20160426),(26,'其他页面',3,'','App\\Http\\Controllers\\Company','Single','company/admin','single','index','',22,1,1,10,10,20160426,20160426),(27,'宣传编辑',3,'','App\\Http\\Controllers\\Company','Ppt','company/admin','ppt','index','',23,1,1,5,5,20160426,0),(28,'产品编辑',3,'','App\\Http\\Controllers\\Company','Product','company/admin','product','index','',23,1,1,10,10,20160426,0),(29,'团队编辑',3,'','App\\Http\\Controllers\\Company','Team','company/admin','team','index','',23,1,1,10,10,20160426,20160429),(30,'招聘编辑',3,'','App\\Http\\Controllers\\Company','Job','company/admin','job','index','',23,1,1,10,10,20160426,0),(31,'联系编辑',3,'','App\\Http\\Controllers\\Company','Contact','company/admin','contact','index','',23,1,1,10,10,20160426,20160428),(32,'花絮编辑',3,'','App\\Http\\Controllers\\Company','Part','company/admin','part','index','',23,1,1,10,10,20160428,20160428),(33,'图片管理',3,'','App\\Http\\Controllers\\Company','Pic','company/admin','pic','index','',23,1,1,10,5,20160428,20160428),(34,'视频管理',3,'','App\\Http\\Controllers\\Company','Video','company/admin','video','index','',23,1,1,10,5,20160428,20160428),(35,'关于公司',3,'','App\\Http\\Controllers\\Company','About','company/admin','abouts','index','',23,1,1,10,20,20160428,20160429),(36,'服务编辑',3,'','App\\Http\\Controllers\\Company','Firm','company/admin','firms','index','',23,1,1,10,10,20160428,20160429),(37,'新闻资讯',3,'','App\\Http\\Controllers\\Company','News','company/admin','news','index','',23,1,1,10,10,20160428,20160429),(38,'链接管理',3,'','App\\Http\\Controllers\\Company','Link','company/admin','link','index','',22,1,1,10,10,20160506,0),(39,'产品属性',1,'','App\\Http\\Controllers\\Member','ProductAttr','member','productattr','index','',3,1,1,10,10,20160513,20160513),(40,'产品动画',1,'','App\\Http\\Controllers\\Member','ProductLayer','member','productlayer','index','',3,1,1,10,10,20160513,0),(41,'产品内容',1,'','App\\Http\\Controllers\\Member','ProductCon','member','productcon','index','',3,1,1,10,10,20160513,20160513),(42,'订单管理',1,'','App\\Http\\Controllers\\Member','Order','member','order','index','',0,1,1,10,10,20160524,20160524),(43,'订单管理',1,'','App\\Http\\Controllers\\Member','Order','member','order','index','',42,1,1,10,10,20160524,0),(44,'售后修改',1,'','App\\Http\\Controllers\\Member','OrderFirm','member','orderfirm','index','',42,1,1,10,10,20160524,0),(45,'创作订单',1,'','App\\Http\\Controllers\\Member','OrderProduct','member','orderpro','index','',42,1,1,10,10,20160524,0),(46,'分镜管理',1,'','App\\Http\\Controllers\\Member','StoryBoard','member','storyboard','index','',12,1,1,10,10,20160524,0),(47,'个人设计',1,'','App\\Http\\Controllers\\Member','DesignPerS','member','designPerS','index','',4,1,1,10,10,2016,1470818534),(48,'企业设计',1,'','App\\Http\\Controllers\\Member','DesignComD','member','designComD','index','',5,1,1,10,10,1470818610,1470818832),(49,'话题列表',1,'','App\\Http\\Controllers\\Member','Talk','member','talk','index','',13,1,1,10,10,1470819935,0);
 /*!40000 ALTER TABLE `bs_menus` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -897,15 +897,14 @@ DROP TABLE IF EXISTS `bs_message`;
 CREATE TABLE `bs_message` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL COMMENT '消息标题',
-  `genre` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '消息主体：1个人消息，2企业消息',
-  `type` tinyint(3) unsigned NOT NULL DEFAULT '2' COMMENT '消息类型：1在线消息，2离线消息',
-  `content` varchar(500) DEFAULT NULL COMMENT '消息内容',
+  `genre` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '消息主体：1个人消息，2企业消息',
+  `intro` varchar(1000) NOT NULL COMMENT '消息内容',
   `sender` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发件人id',
-  `sender_time` int(20) unsigned NOT NULL DEFAULT '0' COMMENT '发送时间',
+  `sender_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发送时间',
   `accept` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '收件人id',
-  `accept_time` int(20) unsigned NOT NULL DEFAULT '0' COMMENT '收件时间',
+  `accept_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '收件时间',
   `status` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '消息状态：1未发送，2已发送未接收，3已接收未读，4已读',
-  `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站功能：0不放入回收站，1放入回收站',
+  `del` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '回收站功能：0不放入回收站，1放入回收站',
   `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updated_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`)
@@ -1769,6 +1768,32 @@ INSERT INTO `bs_types待处理` VALUES (1,'header头链接','bs_links网站头�
 UNLOCK TABLES;
 
 --
+-- Table structure for table `bs_user_gold`
+--
+
+DROP TABLE IF EXISTS `bs_user_gold`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bs_user_gold` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户id',
+  `gold` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '单次获得的金币数量：1--5个随机',
+  `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `updated_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户金币表 bs_user_gold';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bs_user_gold`
+--
+
+LOCK TABLES `bs_user_gold` WRITE;
+/*!40000 ALTER TABLE `bs_user_gold` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bs_user_gold` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `bs_user_level待处理`
 --
 
@@ -1792,6 +1817,31 @@ CREATE TABLE `bs_user_level待处理` (
 LOCK TABLES `bs_user_level待处理` WRITE;
 /*!40000 ALTER TABLE `bs_user_level待处理` DISABLE KEYS */;
 /*!40000 ALTER TABLE `bs_user_level待处理` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bs_user_sign`
+--
+
+DROP TABLE IF EXISTS `bs_user_sign`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bs_user_sign` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户id',
+  `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `updated_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户签到表 bs_user_sign';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bs_user_sign`
+--
+
+LOCK TABLES `bs_user_sign` WRITE;
+/*!40000 ALTER TABLE `bs_user_sign` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bs_user_sign` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -2132,7 +2182,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'jiuge','$2y$10$Ys0R.RAweFTJYXNTAH.tL.84VE8ZswnjMzJtrMr5P89Wg.4H26He.','jiuge@qq.com','946493655',63929131,4294967295,0,'',0,1,1,4,0,15,20160406,0,0),(2,'jiuge2','$2y$10$X5BdoH0p0n.E3hxCVag/neinTfiHXbMrCHUEEqf8ZpUQGaeOxUUBe','946493655@qq.com','',0,0,0,'',0,0,0,0,0,10,20160617,0,0);
+INSERT INTO `users` VALUES (1,'jiuge','$2y$10$Ys0R.RAweFTJYXNTAH.tL.84VE8ZswnjMzJtrMr5P89Wg.4H26He.','jiuge@qq.com','946493655',63929131,4294967295,20,'',0,1,1,4,0,15,20160406,0,0),(2,'jiuge2','$2y$10$X5BdoH0p0n.E3hxCVag/neinTfiHXbMrCHUEEqf8ZpUQGaeOxUUBe','946493655@qq.com','',0,0,30,'',0,0,0,0,0,10,20160617,0,0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2151,6 +2201,7 @@ CREATE TABLE `users_params` (
   `lecloud` varchar(255) NOT NULL COMMENT '乐视云账户',
   `lepwd` varchar(255) NOT NULL COMMENT '乐视云密码',
   `leplay` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否自动播放：0手动播放，1自动播放',
+  `gold` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户金币总数量',
   `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updated_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`)
@@ -2163,7 +2214,7 @@ CREATE TABLE `users_params` (
 
 LOCK TABLES `users_params` WRITE;
 /*!40000 ALTER TABLE `users_params` DISABLE KEYS */;
-INSERT INTO `users_params` VALUES (1,1,15,1,'946493655@qq.com','zwx4074553864',0,20160406,0);
+INSERT INTO `users_params` VALUES (1,1,15,1,'946493655@qq.com','zwx4074553864',0,0,20160406,0);
 /*!40000 ALTER TABLE `users_params` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -2176,4 +2227,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-15 21:18:36
+-- Dump completed on 2016-08-16 21:14:49

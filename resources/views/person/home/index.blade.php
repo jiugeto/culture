@@ -38,7 +38,7 @@
             <span class="right">
                 <img src="{{DOMAIN}}assets/images/person.png">
                 {{ \Session::has('user') ? \Session::get('user.username') : '' }}
-                <a href="{{DOMAIN}}person/setting" class="userinfo">个人资料</a>
+                <a href="{{DOMAIN}}person/space" class="userinfo">个人资料</a>
             </span>
         </div>
 

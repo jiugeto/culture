@@ -9,20 +9,22 @@ class BaseController extends Controller
      * 个人后台基础控制器
      */
 
-    protected $list = [
-//        ''=> '所有列表',
-//        'trash'=> '回收站',
-//        'create'=> [
-//            'url'=> 'create',
-//            'name'=> '创建作品',
-//        ],
-//        'edit'=> [
-//            'url'=> 'edit',
-//            'name'=> '修改作品',
-//        ],
-//        'show'=> [
-//            'url'=> 'show',
-//            'name'=> '查看详情',
-//        ],
+    protected $links = [
+        'home'=> '空间首页',
+        'pic'=> '相册',
+        'user'=> '资料',
+        'video'=> '视频',
+        'works'=> '作品',
+        'design'=> '设计',
+        'message'=> '留言',
+        'frield'=> '好友',
+        'visitor'=> '访问',
+        'census'=> '统计',
     ];
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->userid = \Session::has('user.uid') ? \Session::get('user.uid') : redirect('/login');
+    }
 }

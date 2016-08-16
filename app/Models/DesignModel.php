@@ -9,7 +9,7 @@ class DesignModel extends BaseModel
     ];
     //1企业供应，2企业需求，3个人供应，4个人需求
     protected $genres = [
-        1=>'企业供应','企业需求','个人供应','个人需求',
+        1=>'个人供应','个人需求','企业供应','企业需求',
     ];
     //类型：房产，效果图，平面，漫游
     protected $cates = [

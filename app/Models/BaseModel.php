@@ -64,7 +64,7 @@ class BaseModel extends Model
     }
 
     /**
-     * 申请方名称
+     * 申请方名称：bs_order，bs_order_pro，bs_order_firm
      */
     public function getBuyName()
     {

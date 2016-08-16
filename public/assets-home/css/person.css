@@ -5,7 +5,7 @@
     margin:10px auto;
     margin-top:40px;
     width:1000px;
-    height:680px;
+    height:900px;
     background:rgb(252,252,252);
     border:1px solid rgb(230,230,230);
     font-size:20px;
@@ -102,7 +102,7 @@ div:hover.per_waterfall .text { color:red; }
     background:url(../../uploads/images/2016/ppt.png);
 }
 .per_top a { color:rgb(14,144,210);text-decoration:none; }
-.per_top a:hover { color:red; }
+.per_top a:hover,.per_top a.curr_link { color:red; }
 .per_top .t { margin-top:8px;font-size:14px; }
 /*页面主体布局*/
 .per_left,.per_center,.per_right {
@@ -117,16 +117,18 @@ div:hover.per_waterfall .text { color:red; }
 .per_left { width:200px; }
 .per_left table { margin:0 2%;width:98%; }
 .per_left td { padding:0 10px;color:grey;font-size:14px; }
-.per_left td a { color:rgb(14,144,210);text-decoration:none;font-size:16px; }
+.per_left td a { color:rgb(14,144,210);text-decoration:none;font-size:14px; }
 .per_left td a:hover { color:red; }
 .per_left .cometo { color:grey;font-weight:bold; }
 /*页面左边布局*/
 .per_left1,.per_left2,.per_left3 { width:196px; }
-.per_left1 { height:190px; }
+.per_left1 { height:210px; }
 .per_left1 .img {
     margin:10px auto;
     margin-bottom:0px;
+    padding:2px;
     width:120px; height:100px;
+    border:1px solid lightgrey;
 }
 .per_left1 .nicheng {
     margin:0;
@@ -142,7 +144,9 @@ div:hover.per_waterfall .text { color:red; }
     width:55px; height:50px;
     overflow:hidden;
     float:left;
+    cursor:pointer;
 }
+.per_left3 .img:hover { border:1px solid red; }
 /*页面中间布局*/
 .per_center { width:600px; }
 .per_center table { margin:5px; }
@@ -150,6 +154,9 @@ div:hover.per_waterfall .text { color:red; }
 .per_center1,.per_center2,.per_center3 { width:596px; }
 /*.per_center1 { height:50px; }*/
 .per_center2 { height:200px; }
+.per_center2 span:hover { color:red;cursor:pointer; }
+.per_center2 a:hover .img { border:1px solid red; }
+.per_center2 a:hover .vname { color:red; }
 .per_center2 .video {
     margin:5px 0 0 5px;
     width:110px;height:80px;
@@ -166,7 +173,24 @@ div:hover.per_waterfall .text { color:red; }
     text-align:center;
     color:grey;
 }
-.per_center3 { height:136px; }
+.per_center3 { height:186px; }
+.per_center3 .message {
+    margin:10px; margin-bottom:0;
+    width:575px;height:60px;
+    border:1px solid rgb(250,250,250);
+    border-bottom:1px dashed lightgrey;
+    color:grey;
+}
+.per_center3 .message p { padding:0 20px;float:right; }
+.per_center3 textarea {
+    width:570px;
+    border:0;
+    border-bottom:1px dotted rgb(250,250,250);
+    color:grey;
+    background:white;
+    resize:none;
+    overflow:hidden;
+}
 /*页面右侧布局*/
 .per_right { margin-left:5px;width:192px; }
 .per_right1,.per_right2,.per_right3 { width:188px; }
@@ -192,7 +216,14 @@ div:hover.per_waterfall .text { color:red; }
 .per_right1 .friend:hover .nicheng { color:red; }
 .per_right1 .nicheng { margin:0;padding:0;color:grey;text-align:center; }
 .per_right2 { height:200px; }
-.per_right3 { height:86px; }
+.per_right3 { height:256px; }
+.per_right3 .title span { cursor:pointer; }
+.per_right3 .img {
+    margin:5px 0 0 8px;
+    width:80px; height:100px;
+    overflow:hidden;
+    float:left;
+}
 /*页面底部布局*/
 
 .per_bottom {
@@ -201,3 +232,73 @@ div:hover.per_waterfall .text { color:red; }
     width:100%;height:100px;
     /*border:1px solid lightblue;*/
 }
+
+
+/*列表页面*/
+.per_list {
+    margin:5px 0;
+    width:790px;
+    color:grey;
+    float:left;
+}
+.per_list p {
+    background:rgb(245,245,245);
+    border:1px solid lightgrey;
+    border-bottom:0;
+}
+.per_list .list {
+    padding:20px;
+    border:1px solid lightgrey;
+    border-top:0;
+    font-size:14px;
+}
+.per_list .list p.user_info {
+    padding:5px;
+    border:0;
+    background:white;
+}
+.per_list .list .uname {
+    margin:5px 0;
+    padding:5px 0;
+    width:100%;
+    border-top:1px dotted lightgrey;
+    border-bottom:1px dotted lightgrey;
+}
+.per_list .list .line {
+    margin:5px 0;
+    padding:5px 0;
+    border-top:1px dotted lightgrey;
+    border-bottom:1px dotted lightgrey;
+}
+.blue { color:rgb(14,144,210); }
+.red { color:red; }
+/*头像*/
+.per_right_head {
+    margin-top:5px;
+    width:200px;
+    border:1px solid lightgrey;
+    float:right;
+}
+.per_right_head .img {
+    margin:10px auto;
+    margin-bottom:0px;
+    padding:2px;
+    width:120px; height:100px;
+    border:1px solid lightgrey;
+}
+.per_right_head .title {
+    color:grey;
+    background:rgb(245,245,245);
+    border-bottom:1px solid gainsboro;
+}
+.per_right_head .nicheng {
+    margin:0;
+    text-align:center;
+    font-size:14px;
+    border:0;
+    color:rgb(14,144,210);
+}
+.per_right_head table { margin:0 2%;margin-bottom:5px;width:98%; }
+.per_right_head td { padding:0 10px;color:grey;font-size:14px; }
+.per_right_head td a { color:rgb(14,144,210);text-decoration:none;font-size:14px; }
+.per_right_head td a:hover { color:red; }
