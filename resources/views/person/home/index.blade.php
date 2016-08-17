@@ -1,6 +1,6 @@
 @extends('person.main')
 @section('content')
-    <div class="per_body">
+    <div class="per_body" style="height:670px;">
         <div style="height:10px;">{{--空白--}}</div>
         {{--个人首页：选项依据：年龄（出生、满月、幼年、童年、少年、成年、中年、老年、寿终）；--}}
         {{--<br>节日（元旦、情人节、除夕、春节、元宵节、妇女节、植树节、315、愚人节、清明节、劳动节、儿童节、教师节、中秋节、国庆节、光棍节、感恩节、平安夜、圣诞节）--}}

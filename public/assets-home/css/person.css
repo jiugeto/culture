@@ -86,12 +86,12 @@ div:hover.per_waterfall .text { color:red; }
     background:rgb(245,245,245);
     border-bottom:1px solid gainsboro;
 }
-.per_left p.title a,.per_center p.title a,.per_right p.title a {
+.per_left p.title a,.per_center p.title a,.per_right p.title a,.per_list p.title a {
     color:grey;
     text-decoration:none;
     float:right;
 }
-.per_left p.title a:hover,.per_center p.title a:hover,.per_right p.title a:hover { color:red; }
+.per_left p.title a:hover,.per_center p.title a:hover,.per_right p.title a:hover,.per_list p.title a:hover { color:red; }
 /*页面顶部布局*/
 .per_top {
     padding-left:10px;
@@ -114,7 +114,7 @@ div:hover.per_waterfall .text { color:red; }
     border:1px solid /*lightblue*/lightgrey;
 }
 .per_left div { margin-left:0; }
-.per_left { width:200px; }
+.per_left { width:210px; }
 .per_left table { margin:0 2%;width:98%; }
 .per_left td { padding:0 10px;color:grey;font-size:14px; }
 .per_left td a { color:rgb(14,144,210);text-decoration:none;font-size:14px; }
@@ -126,9 +126,10 @@ div:hover.per_waterfall .text { color:red; }
 .per_left1 .img {
     margin:10px auto;
     margin-bottom:0px;
-    padding:2px;
+    /*padding:2px;*/
     width:120px; height:100px;
-    border:1px solid lightgrey;
+    /*border:1px solid lightgrey;*/
+    overflow:hidden;
 }
 .per_left1 .nicheng {
     margin:0;
@@ -148,17 +149,17 @@ div:hover.per_waterfall .text { color:red; }
 }
 .per_left3 .img:hover { border:1px solid red; }
 /*页面中间布局*/
-.per_center { width:600px; }
+.per_center { width:590px; }
 .per_center table { margin:5px; }
 .per_center td { padding:0 10px;color:grey;font-size:14px; }
-.per_center1,.per_center2,.per_center3 { width:596px; }
+.per_center1,.per_center2,.per_center3 { width:576px; }
 /*.per_center1 { height:50px; }*/
 .per_center2 { height:200px; }
 .per_center2 span:hover { color:red;cursor:pointer; }
 .per_center2 a:hover .img { border:1px solid red; }
 .per_center2 a:hover .vname { color:red; }
 .per_center2 .video {
-    margin:5px 0 0 5px;
+    margin:5px 0 0 4px;
     width:110px;height:80px;
     border:0;
     float:left;
@@ -176,14 +177,14 @@ div:hover.per_waterfall .text { color:red; }
 .per_center3 { height:186px; }
 .per_center3 .message {
     margin:10px; margin-bottom:0;
-    width:575px;height:60px;
+    width:550px;height:60px;
     border:1px solid rgb(250,250,250);
     border-bottom:1px dashed lightgrey;
     color:grey;
 }
 .per_center3 .message p { padding:0 20px;float:right; }
 .per_center3 textarea {
-    width:570px;
+    width:550px;
     border:0;
     border-bottom:1px dotted rgb(250,250,250);
     color:grey;
@@ -247,11 +248,14 @@ div:hover.per_waterfall .text { color:red; }
     border-bottom:0;
 }
 .per_list .list {
+    margin:0 auto;
     padding:20px;
+    width:748px;
     border:1px solid lightgrey;
     border-top:0;
     font-size:14px;
 }
+.per_list .list .head { width:200px;height:200px;overflow:hidden; }
 .per_list .list p.user_info {
     padding:5px;
     border:0;
@@ -265,13 +269,75 @@ div:hover.per_waterfall .text { color:red; }
     border-bottom:1px dotted lightgrey;
 }
 .per_list .list .line {
-    margin:5px 0;
-    padding:5px 0;
+    margin:10px 0;
+    padding:10px 0;
     border-top:1px dotted lightgrey;
     border-bottom:1px dotted lightgrey;
 }
+.per_list td { padding:5px; }
+.per_list td .nopic {
+    margin:0;
+    width:200px;height:200px;
+    text-align:center;
+    line-height:200px;
+    background:rgb(240,240,240);
+    border:0;
+}
+.per_list td a {
+    padding:4px 10px;
+    border:1px solid lightgrey;
+    color:grey;
+    text-decoration:none;
+    cursor:pointer;
+}
+.per_list td a:hover { border:1px solid red;color:red; }
+.per_list td .pic_list {
+    width:550px; height:325px;
+    border:1px solid lightgrey;
+    overflow:auto;
+    display:none;
+}
+.per_list td .pic_list div.img {
+    margin-left:5px; margin-top:5px;
+    width:100px; height:100px;
+    border:1px solid white;
+    overflow:hidden;
+    cursor:pointer;
+    float:left;
+}
+.per_list td .pic_list div:hover.img,.per_list td .pic_list div.img_curr {
+    border:1px solid red;
+}
+.per_list td .pic_list_sure { display:none; }
+.per_list td .pic_list .bianhao {
+    font-size:12px;
+    position:relative;top:-100%;left:40%;
+}
+.per_list .message {
+    margin:10px; margin-bottom:0;
+    width:720px;height:65px;
+    border:1px solid rgb(250,250,250);
+    border-bottom:1px dashed rgb(150,150,150);
+    color:grey;
+}
+.per_list textarea {
+    padding:5px;
+    width:710px;
+    border:0;
+    border-bottom:1px dotted lightgrey;
+    color:grey;
+    background:white;
+    resize:none;
+    overflow:hidden;
+}
+.per_list .message p {
+    padding:0 5px;
+    background:0; border:0;
+    float:right;
+}
 .blue { color:rgb(14,144,210); }
 .red { color:red; }
+
 /*头像*/
 .per_right_head {
     margin-top:5px;
@@ -279,12 +345,16 @@ div:hover.per_waterfall .text { color:red; }
     border:1px solid lightgrey;
     float:right;
 }
-.per_right_head .img {
+.per_right_head .head {
     margin:10px auto;
     margin-bottom:0px;
     padding:2px;
     width:120px; height:100px;
     border:1px solid lightgrey;
+}
+.per_right_head .img {
+    width:120px; height:100px;
+    overflow:hidden;
 }
 .per_right_head .title {
     color:grey;
@@ -302,3 +372,27 @@ div:hover.per_waterfall .text { color:red; }
 .per_right_head td { padding:0 10px;color:grey;font-size:14px; }
 .per_right_head td a { color:rgb(14,144,210);text-decoration:none;font-size:14px; }
 .per_right_head td a:hover { color:red; }
+
+
+/*编辑页面*/
+.per_list table.tform { margin:0 20%; }
+.per_list table.tform input {
+    padding:5px 10px;
+    border:1px solid lightgrey;
+    border-radius:5px;
+    font-size:16px;
+}
+button.companybtn {
+    padding:5px 20px;
+    border:1px solid lightgrey;
+    /*border-radius:3px;*/
+    color:grey;
+    /*font-family:'微软雅黑';*/
+    font-size:14px;
+    background:white;
+    cursor:pointer;
+}
+button:hover.companybtn {
+    border:1px solid red;
+    color:red;
+}

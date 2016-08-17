@@ -11,4 +11,16 @@ class MessageModel extends BaseModel
     protected $genres = [
         1=>'个人消息','企业消息',
     ];
+
+    public function user()
+    {
+        $uid = $this->uid ? $this->uid : 0;
+        $userInfo = UserModel::find($uid);
+        return $userInfo ? $userInfo : '';
+    }
+
+    public function userName()
+    {
+        return $this->user() ? $this->user()->username : '';
+    }
 }

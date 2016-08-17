@@ -1,22 +1,34 @@
-@extends('person.main')
-@section('content')
-    <div class="per_body" style="border:0;height:700px;background:0;">
-        @include('person.partials.top')
+{{--右边头像模板--}}
 
-        <div class="per_list">
-            <p class="title">个人头像</p>
-            <div class="list">
-                原来头像：
-                @if($data->head)
-                <img src="{{ $data->head() }}">
-                @else
-                    <div style="margin:0;width:300px;height:300px;background:rgb(240,240,240);border:0;"></div>
-                @endif
-                <br>
-                选择头像：
-            </div>
+
+<div class="per_right_head">
+    <p class="title">头像</p>
+    <div class="head">
+        <div class="img">
+            @if($user && $user->head())
+            <img src="{{ $user->head() }}"
+                 style="@if($size=$user->getUserPicSize($user,$w=120,$h=100))width:{{$size}}px;@endif height:100px;">
+            @else
+            <div style="margin:0;width:120px;height:100px;background:rgb(240,240,240);border:0;"></div>
+            @endif
         </div>
-
-        @include('person.user.right')
     </div>
-@stop
+    <div class="nicheng">{{ $user ? $user->username : '' }}</div>
+    <table cellpadding="0" cellspacing="0">
+        {{--@if(!isset(explode('/',$_SERVER['REQUEST_URI'])[3]) || explode('/',$_SERVER['REQUEST_URI'])[3]!='gethead')--}}
+        <tr>
+            <td><a href="{{DOMAIN}}person/user/gethead">编辑头像</a></td>
+            <td><a href="{{DOMAIN}}person/message">查看留言</a></td>
+        </tr>
+        <tr>
+            <td><a href="{{DOMAIN}}person/user/{{ $user->id }}/edit">资料编辑</a></td>
+            <td><a href="{{DOMAIN}}person/user/getpwd">更新密码</a></td>
+        </tr>
+        {{--@else--}}
+        {{--<tr>--}}
+            {{--<td><a href="">查看留言</a></td>--}}
+            {{--<td><a href="">资料编辑</a></td>--}}
+        {{--</tr>--}}
+        {{--@endif--}}
+    </table>
+</div>

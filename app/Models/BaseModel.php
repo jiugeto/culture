@@ -106,4 +106,19 @@ class BaseModel extends Model
         }
         return $datas;
     }
+
+    /**
+     * 获取用户图片尺寸：高度$w，确定宽度$h
+     */
+    public function getUserPicSize($picModel,$w,$h)
+    {
+        $pic = $picModel;
+        if ($pic && $pic->width && $pic->height) {
+            $ratio_h = $h / $pic->height;
+            //确定高度 $h，计算$w
+            $width=$ratio_h*$pic->width;
+            if ($width>$w) { $size = $width; } else  { $size = $w; }
+        }
+        return (isset($size)&&$size) ? $size : 0;
+    }
 }

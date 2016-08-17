@@ -10,20 +10,20 @@
                 <p class="title">头像</p>
                 <div class="img">
                     @if($user && $user->head())
-                    <img src="{{ $user->head() }}" style="width:120px;">
+                    <img src="{{ $user->head() }}" style="@if($size=$user->getUserPicSize($user,$w=120,$h=100)) width:{{$size}}px; @endif height:100px;">
                     @else
                     <div style="margin:0;width:120px;height:100px;background:rgb(240,240,240);border:0;"></div>
                     @endif
                 </div>
-                <div class="nicheng">00</div>
+                <div class="nicheng">{{ $user->username }}</div>
                 <table cellpadding="0" cellspacing="0">
                     <tr>
-                        <td><a href="">编辑头像</a></td>
-                        <td><a href="">查看留言</a></td>
+                        <td><a href="{{DOMAIN}}person/user/gethead">编辑头像</a></td>
+                        <td><a href="{{DOMAIN}}person/message">查看留言</a></td>
                     </tr>
                     <tr>
-                        <td><a href="">资料编辑</a></td>
-                        <td><a href=""></a></td>
+                        <td><a href="{{DOMAIN}}person/user/{{$user->id}}/edit">资料编辑</a></td>
+                        <td><a href="{{DOMAIN}}person/user/getpwd">更新密码</a></td>
                     </tr>
                 </table>
             </div>
@@ -67,7 +67,7 @@
             <div class="per_center1">
                 <p class="title">资料 <a href="">编辑资料</a></p>
                 <table cellpadding="0" cellspacing="0" width="100%">
-                    <tr><td>用户名称：{{ $user->username }}</td><td>真实姓名：{{ $user->realname }}</td></tr>
+                    <tr><td>用户名称：{{ $user->username }}</td><td>真实姓名：{{ $user->realname() }}</td></tr>
                     <tr><td>性别：{{ $user->sex() }}</td><td>地区：{{ $user->getAreaName() }}</td></tr>
                 </table>
             </div>
@@ -80,16 +80,18 @@
                 </p>
                 @if(count($goods))
                     @foreach($goods as $good)
-                <a href="{{DOMAIN}}person/video/pre/{{ $good->id }}" target="_blank"><div class="video">
-                    <div class="img">
-                        @if($good->getPicUrl())
-                        <img src="{{ $good->getPicUrl() }}" style="@if($size=$good->getPicSize($w=100,$h=50)) width:{{$size}}px; @endif height:50px;">
-                        @else
-                        <div style="margin:0;width:100px;height:50px;background:rgb(240,240,240);border:0;"></div>
-                        @endif
+                <a href="{{DOMAIN}}person/video/pre/{{ $good->id }}" target="_blank">
+                    <div class="video">
+                        <div class="img">
+                            @if($good->getPicUrl())
+                            <img src="{{ $good->getPicUrl() }}" style="@if($size=$good->getPicSize($w=100,$h=50)) width:{{$size}}px; @endif height:50px;">
+                            @else
+                            <div style="margin:0;width:100px;height:50px;background:rgb(240,240,240);border:0;"></div>
+                            @endif
+                        </div>
+                        <p class="vname">{{ $good->name }}</p>
                     </div>
-                    <p class="vname">{{ $good->name }}</p>
-                </div></a>
+                </a>
                     @endforeach
                 @endif
                 @if(count($goods)<10)

@@ -17,8 +17,15 @@ Route::group(['prefix'=>'person','middleware' =>'MemberAuth','namespace'=>'Perso
     Route::resource('space','SpaceController');
     //用户资料
     Route::get('user/gethead','UserController@getHead');
+    Route::get('user/sethead/{picid}','UserController@setHead');
+    Route::get('user/getpwd','UserController@getPwd');
+    Route::post('user/pwd/{id}','UserController@setPwd');
     Route::get('user','UserController@index');
+    Route::post('user/{id}','UserController@update');
+    Route::resource('user','UserController');
     //视频列表
     Route::get('video/pre/{id}','VideoController@pre');
     Route::resource('video','VideoController');
+    //好友留言
+    Route::resource('message','MessageController');
 });

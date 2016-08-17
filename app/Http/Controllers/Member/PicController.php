@@ -81,6 +81,9 @@ class PicController extends BaseController
     {
         $data = $this->getData($request);
         $data['updated_at'] = time();
+        //处理图片
+        $picModel = PicModel::find($id);
+        if (!$data['url'] && $picModel->url) { $data['url'] = $picModel->url; }
         PicModel::where('id',$id)->update($data);
         return redirect('/member/pic');
     }
@@ -119,11 +122,34 @@ class PicController extends BaseController
 
     public function getData(Request $request)
     {
+        //图片上传
+        if($request->hasFile('url_ori')){  //判断图片存在
+            foreach ($_FILES as $pic1) {
+                if ($pic1['size'] > $this->uploadSizeLimit) {
+                    echo "<script>alert('对不起，你上传的文件大于5M，请重新选择');history.go(-1);</script>";exit;
+                }
+            }
+            $file = $request->file('url_ori');  //获取文件
+            $picUrl = \App\Tools::upload($file);
+//            $config = [
+//                'fileField' => 'url_ori1',    //文件域字段名
+//                'allowFiles'=> $this->pic_suffixs,   //允许上传的文件后辍
+//                'maxSize'   => $this->uploadSizeLimit, //允许上传文件的大小5M 单位 b
+//                'nameFormat'=> $this->pic_path,
+//            ];
+//            $rst = Uploader::save($config, $request);
+//            if ($rst['state']=='SUCCESS') { $data['pic'] = $rst['url']; }
+//            else { echo "<script>alert('图片上传错误，".$rst['state']."！');history.go(-1);</script>";exit; }
+        } elseif ($request->url) {
+            $picUrl = $request->url;
+        } else {
+            echo "<script>alert('图片未上传或者地址为空！');history.go(-1);</script>";exit;
+        }
         $data = [
             'uid'=> $this->userid,
             'name'=> $request->name,
             'intro'=> $request->intro,
-            'url'=> $request->url,
+            'url'=> isset($picUrl) ? $picUrl : '',
         ];
         return $data;
     }

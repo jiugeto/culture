@@ -9,7 +9,7 @@ class UserModel extends BaseModel
 
     protected $table = 'users';
     protected $fillable = [
-        'id','username','password','email','qq','tel','mobile','area','address','head','isauth','emailck','isuser','isvip','limit','created_at','updated_at','lastLogin',
+        'id','username','password','pwd','email','qq','tel','mobile','area','address','head','isauth','emailck','isuser','isvip','limit','created_at','updated_at','lastLogin',
     ];
     protected $isauths = [      //用户认证：0未认证，1认证，2认证失败，3认证成功
         '未认证','认证中','认证失败','认证成功',
@@ -66,5 +66,18 @@ class UserModel extends BaseModel
     public function sex()
     {
         return $this->person()->sex==1 ? '男' : '女';
+    }
+
+    public function realname()
+    {
+        return $this->person()->realname;
+    }
+
+    /**
+     * 身份证号码
+     */
+    public function idcard()
+    {
+        return $this->person()->idcard;
     }
 }

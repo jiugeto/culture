@@ -10,7 +10,7 @@ class BaseController extends Controller
      */
 
     protected $links = [
-        'home'=> '空间首页',
+        'space'=> '空间首页',
         'pic'=> '相册',
         'user'=> '资料',
         'video'=> '视频',
@@ -26,5 +26,6 @@ class BaseController extends Controller
     {
         parent::__construct();
         $this->userid = \Session::has('user.uid') ? \Session::get('user.uid') : redirect('/login');
+        $this->user = \App\Models\UserModel::find($this->userid);
     }
 }

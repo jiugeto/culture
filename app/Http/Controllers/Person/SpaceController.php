@@ -16,6 +16,8 @@ class SpaceController extends BaseController
      * 个人后台个人空间
      */
 
+    protected $curr = 'curr';
+
     public function __construct()
     {
         parent::__construct();
@@ -34,7 +36,7 @@ class SpaceController extends BaseController
             'g_type'=> $g_type,
             'p_type'=> $p_type,
             'd_type'=> $d_type,
-            'curr'=> 'home',
+            'curr'=> $this->curr,
         ];
         return view('person.space.index', $result);
     }

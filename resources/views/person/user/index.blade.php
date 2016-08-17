@@ -48,6 +48,6 @@
                 </p>
             </div>
         </div>
-        @include('person.user.right')
+        @include('person.user.head')
     </div>
 @stop
