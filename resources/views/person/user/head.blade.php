@@ -15,7 +15,6 @@
     </div>
     <div class="nicheng">{{ $user ? $user->username : '' }}</div>
     <table cellpadding="0" cellspacing="0">
-        {{--@if(!isset(explode('/',$_SERVER['REQUEST_URI'])[3]) || explode('/',$_SERVER['REQUEST_URI'])[3]!='gethead')--}}
         <tr>
             <td><a href="{{DOMAIN}}person/user/gethead">编辑头像</a></td>
             <td><a href="{{DOMAIN}}person/message">查看留言</a></td>
@@ -24,11 +23,5 @@
             <td><a href="{{DOMAIN}}person/user/{{ $user->id }}/edit">资料编辑</a></td>
             <td><a href="{{DOMAIN}}person/user/getpwd">更新密码</a></td>
         </tr>
-        {{--@else--}}
-        {{--<tr>--}}
-            {{--<td><a href="">查看留言</a></td>--}}
-            {{--<td><a href="">资料编辑</a></td>--}}
-        {{--</tr>--}}
-        {{--@endif--}}
     </table>
 </div>

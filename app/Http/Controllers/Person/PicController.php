@@ -1,16 +1,15 @@
 <?php
 namespace App\Http\Controllers\Person;
 
-use App\Models\GoodsModel;
-use App\Models\VideoModel;
+use App\Models\PicModel;
 
-class VideoController extends BaseController
+class PicController extends BaseController
 {
     /**
-     * 个人后台 视频列表
+     * 个人后台 图片管理
      */
 
-    protected $curr = 'video';
+    protected $curr = 'pic';
     protected $limit = 15;
 
     public function __construct()
@@ -22,24 +21,12 @@ class VideoController extends BaseController
     {
         $result = [
             'datas'=> $this->query(),
-            'prefix_url'=> DOMAIN.'person/video',
+            'prefix_url'=> DOMAIN.'person/pic',
             'user'=> $this->user,
             'links'=> $this->links,
             'curr'=> $this->curr,
         ];
-        return view('person.video.index', $result);
-    }
-
-    public function pre($id)
-    {
-        $data = GoodsModel::find($id);
-        $videoid = $data->video_id ? $data->video_id : 0;
-        $result = [
-            'data'=> $data,
-            'video'=> VideoModel::find($videoid),
-            'uid'=> $this->userid,
-        ];
-        return view('layout.videoPre', $result);
+        return view('person.pic.index', $result);
     }
 
 
@@ -49,7 +36,7 @@ class VideoController extends BaseController
     public function query()
     {
         $uid = $this->userid ? $this->userid : 0;
-        $datas = VideoModel::where('del',0)
+        $datas = PicModel::where('del',0)
             ->where('uid',$uid)
             ->orderBy('id','desc')
             ->paginate($this->limit);

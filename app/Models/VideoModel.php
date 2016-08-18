@@ -1,8 +1,6 @@
 <?php
 namespace App\Models;
 
-//use Illuminate\Database\Eloquent\Model;
-
 class VideoModel extends BaseModel
 {
     protected $table = 'bs_videos';
@@ -27,10 +25,15 @@ class VideoModel extends BaseModel
         return $userParam ? $userParam->leplay : 0;
     }
 
-    public function getPicUrl()
+    public function getPic()
     {
         $pic_id = $this->pic_id ? $this->pic_id : 0;
         $picModel = PicModel::find($pic_id);
-        return $picModel ? $picModel->url : '';
+        return $picModel ? $picModel : '';
+    }
+
+    public function getPicUrl()
+    {
+        return $this->getPic() ? $this->getPic()->url : '';
     }
 }

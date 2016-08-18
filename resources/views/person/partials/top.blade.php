@@ -16,7 +16,7 @@
             {{--<a href="">访问</a> &nbsp;--}}
             {{--<a href="">统计</a> &nbsp;--}}
             @foreach($links as $klink=>$vlink)
-                <a href="{{ $klink }}" class="{{ $curr==$klink ? 'curr_link' : '' }}">{{ $vlink }}</a> &nbsp;
+                <a href="{{ DOMAIN.'person/'.$klink }}" class="{{ $curr==$klink ? 'curr_link' : '' }}">{{ $vlink }}</a> &nbsp;
             @endforeach
         </b></p>
 </div>

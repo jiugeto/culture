@@ -247,6 +247,20 @@ div:hover.per_waterfall .text { color:red; }
     border:1px solid lightgrey;
     border-bottom:0;
 }
+.per_list p#search {
+    margin:0 auto;
+    width:700px;
+    border:0;
+    background:0;
+}
+.per_list select {
+    padding:1px 5px;
+    color:grey;
+    border:1px solid lightgrey;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius:3px;
+}
 .per_list .list {
     margin:0 auto;
     padding:20px;
@@ -255,7 +269,27 @@ div:hover.per_waterfall .text { color:red; }
     border-top:0;
     font-size:14px;
 }
-.per_list .list .head { width:200px;height:200px;overflow:hidden; }
+.per_list .l_pic {
+    height:800px;
+    border:1px solid lightgrey;
+    border-top:0;
+}
+.per_list .l_design {
+    height:820px;
+    border:1px solid lightgrey;
+    border-top:0;
+}
+.per_list .l_design .per_waterfall {
+    margin-bottom:30px;margin-left:7px;
+    width:125px;height:200px;
+}
+.per_list .l_design .img {
+    width:125px;height:200px;
+}
+.per_list .list .head {
+    width:200px; height:200px;
+    overflow:hidden;
+}
 .per_list .list p.user_info {
     padding:5px;
     border:0;
@@ -314,9 +348,9 @@ div:hover.per_waterfall .text { color:red; }
     position:relative;top:-100%;left:40%;
 }
 .per_list .message {
-    margin:10px; margin-bottom:0;
+    margin:20px 10px;
     width:720px;height:65px;
-    border:1px solid rgb(250,250,250);
+    border:1px solid rgb(230,230,230);
     border-bottom:1px dashed rgb(150,150,150);
     color:grey;
 }
@@ -330,11 +364,19 @@ div:hover.per_waterfall .text { color:red; }
     resize:none;
     overflow:hidden;
 }
-.per_list .message p {
+.per_list .message p.right {
     padding:0 5px;
     background:0; border:0;
     float:right;
 }
+.per_list .message a {
+    padding:1px 10px;
+    text-decoration:none;
+    color:rgb(14,144,210);
+    border:1px solid ghostwhite;
+}
+.per_list .message a:hover { border:1px solid red;color:red; }
+.per_list .per_waterfall p.text { border:0;background:0; }
 .blue { color:rgb(14,144,210); }
 .red { color:red; }
 
@@ -372,15 +414,36 @@ div:hover.per_waterfall .text { color:red; }
 .per_right_head td { padding:0 10px;color:grey;font-size:14px; }
 .per_right_head td a { color:rgb(14,144,210);text-decoration:none;font-size:14px; }
 .per_right_head td a:hover { color:red; }
+.per_right_head .menu {
+    padding:5px 20px;
+    font-size:16px;
+    color:grey;
+    border-bottom:1px dotted lightgrey;
+    cursor:pointer;
+}
+.per_right_head div:hover.menu,.per_right_head div.m_curr {
+    color:red;background:ghostwhite;
+}
 
 
 /*编辑页面*/
-.per_list table.tform { margin:0 20%; }
+.per_list table.tform { margin:0 20%;font-size:16px; }
 .per_list table.tform input {
     padding:5px 10px;
     border:1px solid lightgrey;
     border-radius:5px;
     font-size:16px;
+}
+.per_list .tform input { width:300px; }
+.per_list .tform textarea {
+    width:310px; height:200px;
+    border:1px solid lightgrey;
+    border-radius:5px;
+}
+.per_list .tshow {
+    padding:5px 10px;
+    width:100%;
+    border-bottom:1px solid ghostwhite;
 }
 button.companybtn {
     padding:5px 20px;

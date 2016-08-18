@@ -54,4 +54,22 @@ class DesignModel extends BaseModel
         $design_id = $this->id ? $this->id : 0;
         return DesignPicModel::where('design_id',$design_id)->get();
     }
+
+    /**
+     * 设计的一张图片
+     */
+    public function getOnePic()
+    {
+        $pic_id = count($this->getPics()) ? $this->getPics()[0]->pic_id : 0;
+        $picModel = PicModel::find($pic_id);
+        return $picModel ? $picModel : '';
+    }
+
+    /**
+     * 设计的一张图片url
+     */
+    public function getOnePicUrl()
+    {
+        return $this->getOnePic() ? $this->getOnePic()->url : '';
+    }
 }

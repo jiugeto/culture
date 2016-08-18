@@ -27,5 +27,15 @@ Route::group(['prefix'=>'person','middleware' =>'MemberAuth','namespace'=>'Perso
     Route::get('video/pre/{id}','VideoController@pre');
     Route::resource('video','VideoController');
     //好友留言
+    Route::get('message/send/{id}','MessageController@setSend');
+    Route::post('message/{id}','MessageController@update');
+    Route::get('message/m/{menu}','MessageController@index');
+//    Route::get('message/m/{menu}/{time}','MessageController@index');
     Route::resource('message','MessageController');
+    //图片管理
+    Route::resource('pic','PicController');
+    //作品管理
+    Route::resource('works','WorksController');
+    //设计管理
+    Route::resource('design','DesignController');
 });
