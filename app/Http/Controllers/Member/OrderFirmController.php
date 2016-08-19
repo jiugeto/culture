@@ -27,7 +27,7 @@ class OrderFirmController extends BaseController
         $curr['url'] = $this->lists['']['url'];
         $result = [
             'datas'=> $this->query(),
-            'prefix_url'=> '/member/orderfirm',
+            'prefix_url'=> DOMAIN.'member/orderfirm',
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];

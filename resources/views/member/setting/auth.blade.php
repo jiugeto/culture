@@ -2,10 +2,10 @@
 @section('content')
     {{--@include('member.common.crumb')--}}
     <div class="mem_crumb">
-        <a href="/member">会员后台</a> / 会员设置 / 资料设置
+        <a href="{{DOMAIN}}member">会员后台</a> / 会员设置 / 资料设置
     </div>
 
-    <form data-am-validator method="POST" action="/member/setting/{{ $data->id }}" enctype="multipart/form-data">
+    <form data-am-validator method="POST" action="{{DOMAIN}}member/setting/{{ $data->id }}" enctype="multipart/form-data">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="_method" value="POST">
 
@@ -126,7 +126,7 @@
         <table class="table_create">
             {{--<tr><td colspan="2"><div class="div_hr"></div></td></tr>--}}
             {{--<tr><td colspan="2" class="center">--}}
-                    {{--<a href="/member/setting/pwd/{{ $data->id }}"><button class="companybtn">更新密码</button></a>--}}
+                    {{--<a href="{{DOMAIN}}member/setting/pwd/{{ $data->id }}"><button class="companybtn">更新密码</button></a>--}}
                 {{--</td></tr>--}}
             {{--<tr><td colspan="2"><div class="div_hr"></div></td></tr>--}}
             {{--<tr><td>&nbsp;</td></tr>--}}

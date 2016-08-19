@@ -24,7 +24,7 @@ class AreaController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $result = [
             'datas'=> $this->query(),
-            'prefix_url'=> '/admin/area',
+            'prefix_url'=> DOMAIN.'admin/area',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];

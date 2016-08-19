@@ -2,7 +2,7 @@
 @section('content')
     @include('member.common.crumb')
 
-    <form data-am-validator method="POST" action="/member/entertain/{{ $data->id }}" enctype="multipart/form-data">
+    <form data-am-validator method="POST" action="{{DOMAIN}}member/entertain/{{ $data->id }}" enctype="multipart/form-data">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="_methodn" value="POST">
         <table class="table_create">

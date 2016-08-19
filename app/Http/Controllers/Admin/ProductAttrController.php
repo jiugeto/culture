@@ -27,7 +27,7 @@ class ProductAttrController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $result = [
             'datas'=> $this->query($del=0),
-            'prefix_url'=> '/admin/productattr',
+            'prefix_url'=> DOMAIN.'admin/productattr',
             'model'=> $this->model,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -41,7 +41,7 @@ class ProductAttrController extends BaseController
         $curr['url'] = $this->crumb['trash']['url'];
         $result = [
             'datas'=> $this->query($del=1),
-            'prefix_url'=> '/admin/productattr/trash',
+            'prefix_url'=> DOMAIN.'admin/productattr/trash',
             'model'=> $this->model,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -70,7 +70,7 @@ class ProductAttrController extends BaseController
         $data['style_name'] = $this->prefix_attr.$uid.'_'.$request->productid.'_'.rand(0,1000);
         $data['created_at'] = time();
         ProductAttrModel::create($data);
-        return redirect('/admin/productattr');
+        return redirect(DOMAIN.'admin/productattr');
     }
 
     public function edit($id)
@@ -96,7 +96,7 @@ class ProductAttrController extends BaseController
         $data = $this->getData($request);
         $data['updated_at'] = time();
         ProductAttrModel::where('id',$id)->update($data);
-        return redirect('/admin/productattr');
+        return redirect(DOMAIN.'admin/productattr');
     }
 
     public function edit2($id)
@@ -127,7 +127,7 @@ class ProductAttrController extends BaseController
         $data['updated_at'] = time();
         $data['switch'.$request->index] = $request->switch;
         ProductAttrModel::where('id',$id)->update(['attrs2'=> serialize($data)]);
-        return redirect('/admin/productattr');
+        return redirect(DOMAIN.'admin/productattr');
     }
 
     /**
@@ -162,7 +162,7 @@ class ProductAttrController extends BaseController
         $data['updated_at'] = time();
         $data['switch'.$request->index] = $request->switch;
         ProductAttrModel::where('id',$id)->update(['attrs3'=> serialize($data)]);
-        return redirect('/admin/productattr');
+        return redirect(DOMAIN.'admin/productattr');
     }
 
     /**
@@ -197,7 +197,7 @@ class ProductAttrController extends BaseController
         $data['updated_at'] = time();
         $data['switch'.$request->index] = $request->switch;
         ProductAttrModel::where('id',$id)->update(['img'=> serialize($data)]);
-        return redirect('/admin/productattr');
+        return redirect(DOMAIN.'admin/productattr');
     }
 
     /**
@@ -232,7 +232,7 @@ class ProductAttrController extends BaseController
         $data['updated_at'] = time();
         $data['switch'.$request->index] = $request->switch;
         ProductAttrModel::where('id',$id)->update(['text'=> serialize($data)]);
-        return redirect('/admin/productattr');
+        return redirect(DOMAIN.'admin/productattr');
     }
 
     public function show($id)
@@ -279,19 +279,19 @@ class ProductAttrController extends BaseController
     public function destroy($id)
     {
         ProductAttrModel::where('id',$id)->update(['del'=> 1]);
-        return redirect('/admin/productattr');
+        return redirect(DOMAIN.'admin/productattr');
     }
 
     public function restore($id)
     {
         ProductAttrModel::where('id',$id)->update(['del'=> 0]);
-        return redirect('/admin/productattr/trash');
+        return redirect(DOMAIN.'admin/productattr/trash');
     }
 
     public function forceDelete($id)
     {
         ProductAttrModel::where('id',$id)->delete();
-        return redirect('/admin/productattr/trash');
+        return redirect(DOMAIN.'admin/productattr/trash');
     }
 
 

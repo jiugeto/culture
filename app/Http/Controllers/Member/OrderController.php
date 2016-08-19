@@ -31,7 +31,7 @@ class OrderController extends BaseController
         $curr['url'] = $this->lists['']['url'];
         $result = [
             'datas'=> $this->query(),
-            'prefix_url'=> '/member/order',
+            'prefix_url'=> DOMAIN.'member/order',
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -86,7 +86,7 @@ class OrderController extends BaseController
 
             echo json_encode(array('code'=>'0', 'message' =>'操作成功！'));exit;
         }
-//        return redirect('/member/order');
+//        return redirect(DOMAIN.'member/order');
         echo json_encode(array('code'=>'-1', 'message' =>'非法操作!'));exit;
     }
 
@@ -140,7 +140,7 @@ class OrderController extends BaseController
                 $update = array('status'=>3,'remarks'=>$data['remarks'],'updated_at'=>$updated_at);
                 OrderModel::where(['id'=>$data['id'],'status'=>1])->update($update);
             }
-//            return redirect('/member/order/'.$data['id']);
+//            return redirect(DOMAIN.'member/order/'.$data['id']);
             echo json_encode(array('code'=>0,'message'=>'操作成功！'));exit;
         }
         echo json_encode(array('code'=>-1,'message'=>'参数有误！'));exit;
@@ -159,7 +159,7 @@ class OrderController extends BaseController
             elseif ($status==13) { $s = 13; }
         }
         OrderModel::where('id',$id)->update(['status'=> $s]);
-        return redirect('/member/order/'.$id);
+        return redirect(DOMAIN.'member/order/'.$id);
     }
 
     /**
@@ -175,7 +175,7 @@ class OrderController extends BaseController
             'updated_at'=> time(),
         ];
         OrderModel::where('id',$id)->update($update);
-        return redirect('/member/order/'.$id);
+        return redirect(DOMAIN.'member/order/'.$id);
     }
 
     /**

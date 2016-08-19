@@ -25,7 +25,7 @@ class VersionlogController extends BaseController
         $result = [
             'datas'=> $this->query(),
             'crumb'=> $this->crumb,
-            'prefix_url'=> '/admin/versionlog',
+            'prefix_url'=> DOMAIN.'admin/versionlog',
             'curr'=> $curr,
         ];
         return view('admin.versionlog.index', $result);
@@ -53,7 +53,7 @@ class VersionlogController extends BaseController
             'created_at'=> time(),
         ];
         VersionlogModel::create($versionlog);
-        return redirect('/admin/versionlog');
+        return redirect(DOMAIN.'admin/versionlog');
     }
 
     public function show($id)
@@ -91,13 +91,13 @@ class VersionlogController extends BaseController
             'updated_at'=> date('Y-m-d H:i:s', time()),
         ];
         VersionlogModel::where('id',$id)->update($versionlog);
-        return redirect('/admin/versionlog');
+        return redirect(DOMAIN.'admin/versionlog');
     }
 
     public function forceDelete($id)
     {
         VersionlogModel::where('id',$id)->delete();
-        return redirect('/admin/versionlog');
+        return redirect(DOMAIN.'admin/versionlog');
     }
 
 

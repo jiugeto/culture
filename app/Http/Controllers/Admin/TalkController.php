@@ -26,7 +26,7 @@ class TalkController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $result = [
             'datas'=> $this->query($uname),
-            'prefix_url'=> '/admin/talk',
+            'prefix_url'=> DOMAIN.'admin/talk',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
             'uname'=> $uname ? $uname : '',
@@ -49,7 +49,7 @@ class TalkController extends BaseController
     public function update(Request $request,$id)
     {
         TalksModel::where('id',$id)->update(['isshow'=> $request->isshow]);
-        return redirect('/admin/talk');
+        return redirect(DOMAIN.'admin/talk');
     }
 
     public function show($id)

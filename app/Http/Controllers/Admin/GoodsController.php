@@ -24,7 +24,7 @@ class GoodsController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $result = [
             'datas'=> $this->query($type),
-            'prefix_url'=> '/admin/goods',
+            'prefix_url'=> DOMAIN.'admin/goods',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
             'types'=> $this->model['types'],

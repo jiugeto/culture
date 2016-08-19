@@ -16,9 +16,9 @@
         genre.change(function(){
 //            alert(genre.val());
             if(genre.val()!=0){
-                window.location.href = '/member/'+genre.val()+'/rent';
+                window.location.href = '{{DOMAIN}}member/'+genre.val()+'/rent';
             } else {
-                window.location.href = '/member/rent';
+                window.location.href = '{{DOMAIN}}member/rent';
             }
         });
     });

@@ -23,21 +23,21 @@
 
         <div class="title">一、 假如没有乐视账户，先去 <a href="http://uc.lecloud.com/registerView/registerUserView.do" target="_blank" title="点击去乐视云注册">注册</a></div>
         <div class="intro">
-            <p>1> <span class="star">注册乐视账户</span>：&nbsp;&nbsp;点击上面注册，进入乐云注册页面,其中带（*）是必填，<img src="/assets-home/images/le_regist.png" title="点击看大图" id="toBigReg">。</p>
+            <p>1> <span class="star">注册乐视账户</span>：&nbsp;&nbsp;点击上面注册，进入乐云注册页面,其中带（*）是必填，<img src="{{PUB}}assets-home/images/le_regist.png" title="点击看大图" id="toBigReg">。</p>
             <p>2> <span class="star">开通视频服务</span>：&nbsp;&nbsp;注册完，在右上角进入自己的账户中心，下一个页面中用户中心》我的服务，点击开通云点播功能(云点播是免费的)</p>
             <p>3> <span class="star">管理视频</span>：&nbsp;&nbsp;然后进入 <a href="http://vod.lecloud.com/Video/upload" target="_blank" title="点击进入乐视视频管理页面">视频管理</a> 页面</p>
         </div>
 
         <div class="title">二、 假如有乐视账户，就去 <a href="http://uc.lecloud.com/login.do" target="_blank" title="点击登录乐视云">登陆</a></div>
         <div class="intro">
-            <p>1> <span class="star">登陆乐视账户</span>：&nbsp;&nbsp;点击上面登录，进入乐云登陆页面<img src="/assets-home/images/le_login.png" title="点击看大图" id="toBigLog">。</p>
+            <p>1> <span class="star">登陆乐视账户</span>：&nbsp;&nbsp;点击上面登录，进入乐云登陆页面<img src="{{PUB}}assets-home/images/le_login.png" title="点击看大图" id="toBigLog">。</p>
             <p>2> <span class="star">管理视频</span>：&nbsp;&nbsp;登陆后，进入 <a href="http://vod.lecloud.com/Video/upload" target="_blank" title="点击进入乐视视频管理页面">视频管理</a> 页面。</p>
         </div>
 
-        <div class="title">三、 在视频管理页面 <img src="/assets-home/images/le_video.png" title="点击看大图" id="toBigVideo"></div>
+        <div class="title">三、 在视频管理页面 <img src="{{PUB}}assets-home/images/le_video.png" title="点击看大图" id="toBigVideo"></div>
         <div class="intro">
-            <p>1> <span class="star">视频列表</span>：在乐视 <a href="http://vod.lecloud.com/Video/lists" target="_blank" title="乐视视频管理列表">视频列表</a> ，确保视频在启用状态，<img src="/assets-home/images/le_btn.png" title="点击看大图" id="toBigBtn">，画出来的红框按钮常用，其他按钮不用管</p>
-            <p>2> <span class="star">代码复制</span>：视频列表中已上传完成的视频，点击代码，选择视频地址，点击复制代码，将代码按钮中的代码复制到本站的添加或编辑的视频地址处粘贴，<img src="/assets-home/images/le_code.png" title="点击看大图" id="toBigCode">，其余选项不用管。</p>
+            <p>1> <span class="star">视频列表</span>：在乐视 <a href="http://vod.lecloud.com/Video/lists" target="_blank" title="乐视视频管理列表">视频列表</a> ，确保视频在启用状态，<img src="{{PUB}}assets-home/images/le_btn.png" title="点击看大图" id="toBigBtn">，画出来的红框按钮常用，其他按钮不用管</p>
+            <p>2> <span class="star">代码复制</span>：视频列表中已上传完成的视频，点击代码，选择视频地址，点击复制代码，将代码按钮中的代码复制到本站的添加或编辑的视频地址处粘贴，<img src="{{PUB}}assets-home/images/le_code.png" title="点击看大图" id="toBigCode">，其余选项不用管。</p>
             <p>3> <span class="star">静帧显示</span>：乐视视频编辑中可选择播放前的静帧画面，<img src="/assets-home/images/le_shot.png" title="点击看大图" id="toBigShot">。</p>
         </div>
 
@@ -47,12 +47,12 @@
     </div>
 
     <div class="bigshow" style="display:none;">
-        <img src="/assets-home/images/le_regist.png" id="reg" style="display:none;">
-        <img src="/assets-home/images/le_login.png" id="log" style="display:none;">
-        <img src="/assets-home/images/le_video.png" id="video" style="width:750px;display:none;">
-        <img src="/assets-home/images/le_btn.png" id="btn" style="display:none;">
-        <img src="/assets-home/images/le_code.png" id="code" style="display:none;">
-        <img src="/assets-home/images/le_shot.png" id="shot" style="display:none;">
+        <img src="{{PUB}}assets-home/images/le_regist.png" id="reg" style="display:none;">
+        <img src="{{PUB}}assets-home/images/le_login.png" id="log" style="display:none;">
+        <img src="{{PUB}}assets-home/images/le_video.png" id="video" style="width:750px;display:none;">
+        <img src="{{PUB}}assets-home/images/le_btn.png" id="btn" style="display:none;">
+        <img src="{{PUB}}assets-home/images/le_code.png" id="code" style="display:none;">
+        <img src="{{PUB}}assets-home/images/le_shot.png" id="shot" style="display:none;">
         <a id="close">X</a>
     </div>
 

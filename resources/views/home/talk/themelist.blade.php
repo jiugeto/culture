@@ -8,7 +8,7 @@
                 <div class="theme">
                     <div>话题标题{{ $data->name }}</div>
                     <div>标题内容{{ strip_tags($data->content) }}</div>
-                    <div><a href="/talk/mycollect/{{$data->id}}">收藏此话题</a></div>
+                    <div><a href="{{DOMAIN}}talk/mycollect/{{$data->id}}">收藏此话题</a></div>
                     <div></div>
                 </div>
             </div>

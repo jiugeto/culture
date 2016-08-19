@@ -30,7 +30,7 @@ class CompanySController extends BaseGoodsController
         $curr['url'] = $this->lists['']['url'];
         $result = [
             'datas'=> $this->query($del=0,$this->type),
-            'prefix_url'=> '/member/companyS',
+            'prefix_url'=> DOMAIN.'member/companyS',
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -43,7 +43,7 @@ class CompanySController extends BaseGoodsController
         $curr['url'] = $this->lists['trash']['url'];
         $result = [
             'datas'=> $this->query($del=1,$this->type),
-            'prefix_url'=> '/member/companyS/trash',
+            'prefix_url'=> DOMAIN.'member/companyS/trash',
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -66,7 +66,7 @@ class CompanySController extends BaseGoodsController
         $data = $this->getData($request,$this->type);
         $data['created_at'] = time();
         GoodsModel::create($data);
-        return redirect('/member/companyS');
+        return redirect(DOMAIN.'member/companyS');
     }
 
     public function edit($id)
@@ -86,7 +86,7 @@ class CompanySController extends BaseGoodsController
         $data = $this->getData($request,$this->type);
         $data['updated_at'] = time();
         GoodsModel::where('id',$id)->update($data);
-        return redirect('/member/companyS');
+        return redirect(DOMAIN.'member/companyS');
     }
 
     public function show($id)
@@ -106,18 +106,18 @@ class CompanySController extends BaseGoodsController
     public function destroy($id)
     {
         GoodsModel::where('id',$id)->update(['del'=> 1]);
-        return redirect('/member/companyS');
+        return redirect(DOMAIN.'member/companyS');
     }
 
     public function restore($id)
     {
         GoodsModel::where('id',$id)->update(['del'=> 0]);
-        return redirect('/member/companyS/trash');
+        return redirect(DOMAIN.'member/companyS/trash');
     }
 
     public function forceDelete($id)
     {
         GoodsModel::where('id',$id)->delete();
-        return redirect('/member/companyS/trash');
+        return redirect(DOMAIN.'member/companyS/trash');
     }
 }

@@ -1,7 +1,7 @@
 @extends('member.main')
 @section('content')
     @include('member.common.crumb')
-    <form data-am-validator method="POST" action="/member/{{$menus['func']['url']}}" enctype="multipart/form-data">
+    <form data-am-validator method="POST" action="{{DOMAIN}}member/{{$menus['func']['url']}}" enctype="multipart/form-data">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <table class="table_create">
             <tr>
@@ -30,7 +30,7 @@
                             {{--@endif--}}
                         {{--@endforeach--}}
                     {{--</select>--}}
-                    {{--<a href="/member/category/create/{{'个人需求'}}">[+添加类型]</a>--}}
+                    {{--<a href="{{DOMAIN}}member/category/create/{{'个人需求'}}">[+添加类型]</a>--}}
                 {{--</td>--}}
             {{--</tr>--}}
             {{--<tr><td></td></tr>--}}

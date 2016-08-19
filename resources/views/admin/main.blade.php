@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <title>微文化--系统后台管理</title>
-  <link rel="icon" type="image/png" href="/assets/images/icon.png">
-  <link rel="stylesheet" href="/assets/css/amazeui.min.css"/>
-  <link rel="stylesheet" href="/assets/css/admin.css">
-  <link rel="stylesheet" href="/assets/css/admin_cus.css">
-  <link rel="stylesheet" type="text/css" href="/assets/css/video.css">
-  <script src="/assets/js/jquery-1.10.2.min.js"></script>
+  <link rel="icon" type="image/png" href="{{PUB}}assets/images/icon.png">
+  <link rel="stylesheet" href="{{PUB}}assets/css/amazeui.min.css"/>
+  <link rel="stylesheet" href="{{PUB}}assets/css/admin.css">
+  <link rel="stylesheet" href="{{PUB}}assets/css/admin_cus.css">
+  <link rel="stylesheet" type="text/css" href="{{PUB}}assets/css/video.css">
+  <script src="{{PUB}}assets/js/jquery-1.10.2.min.js"></script>
 </head>
 <body>
 <!--[if lte IE 9]>

@@ -32,11 +32,11 @@
             @foreach($datas as $data)
             <table class="idea">
                 <tr>
-                    <td rowspan="3" class="img"><div><img src="/uploads/images/2016/online1.png"></div></td>
+                    <td rowspan="3" class="img"><div><img src="{{PUB}}uploads/images/2016/online1.png"></div></td>
                     <td>
-                        <a href="/idea/{{$data->id}}"><b>{{ $data->name }}</b></a>
+                        <a href="{{DOMAIN}}idea/{{$data->id}}"><b>{{ $data->name }}</b></a>
                         <span class="right">{{ count($data->read($userid)) }}</span>
-                        <span class="right"><a href="/idea/{{$data->id}}">查看</a></span>
+                        <span class="right"><a href="{{DOMAIN}}idea/{{$data->id}}">查看</a></span>
                     </td>
                 </tr>
                 <tr><td class="con">{{ $data->intro }}</td></tr>

@@ -25,7 +25,7 @@ class ProductLayerController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $result = [
             'datas'=> $this->query($del=0),
-            'prefix_url'=> '/admin/productlayer',
+            'prefix_url'=> DOMAIN.'admin/productlayer',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -52,7 +52,7 @@ class ProductLayerController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = time();
         ProductLayerModel::create($data);
-        return redirect('/admin/productlayer');
+        return redirect(DOMAIN.'admin/productlayer');
     }
 
     public function edit($id)
@@ -73,7 +73,7 @@ class ProductLayerController extends BaseController
         $data = $this->getData($request);
         $data['updated_at'] = time();
         ProductLayerModel::where('id',$id)->update($data);
-        return redirect('/admin/productlayer');
+        return redirect(DOMAIN.'admin/productlayer');
     }
 
     public function show($id)

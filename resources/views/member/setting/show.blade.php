@@ -2,7 +2,7 @@
 @section('content')
     {{--@include('member.common.crumb')--}}
     <div class="mem_crumb">
-        <a href="/member">会员后台</a> / 会员设置
+        <a href="{{DOMAIN}}member">会员后台</a> / 会员设置
     </div>
 
     <table class="table_create">

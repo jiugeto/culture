@@ -65,7 +65,7 @@
         {{--页面中间布局--}}
         <div class="per_center">
             <div class="per_center1">
-                <p class="title">资料 <a href="">编辑资料</a></p>
+                <p class="title">资料 <a href="{{DOMAIN}}person/user/{{ $user->id }}/edit">编辑资料</a></p>
                 <table cellpadding="0" cellspacing="0" width="100%">
                     <tr><td>用户名称：{{ $user->username }}</td><td>真实姓名：{{ $user->realname() }}</td></tr>
                     <tr><td>性别：{{ $user->sex() }}</td><td>地区：{{ $user->getAreaName() }}</td></tr>

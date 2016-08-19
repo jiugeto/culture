@@ -27,7 +27,7 @@ class OrderProductController extends BaseController
         $curr['url'] = $this->lists['']['url'];
         $result = [
             'datas'=> $this->query(),
-            'prefix_url'=> '/member/orderpro',
+            'prefix_url'=> DOMAIN.'member/orderpro',
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];

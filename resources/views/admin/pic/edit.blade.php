@@ -11,7 +11,7 @@
         <div class="am-g">
             @include('admin.common.info')
             <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
-                <form class="am-form" data-am-validator method="POST" action="/admin/pic/{{ $data->id }}" enctype="multipart/form-data">
+                <form class="am-form" data-am-validator method="POST" action="{{DOMAIN}}admin/pic/{{ $data->id }}" enctype="multipart/form-data">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input type="hidden" name="_method" value="POST">
                     <fieldset>
@@ -22,7 +22,7 @@
 
                         <div class="am-form-group">
                             <label for="url_ori">图片上传 / Upload Pictures：</label>
-                            <script src="/assets/js/local_pre.js"></script>
+                            <script src="{{PUB}}assets/js/local_pre.js"></script>
                         @if($data->url)
                             <img src="{{ $data->url }}">
                             {{--<a style="cursor:pointer;" id="change">更换图片</a>--}}

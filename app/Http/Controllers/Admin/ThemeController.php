@@ -26,7 +26,7 @@ class ThemeController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $result = [
             'datas'=> $this->query($uname),
-            'prefix_url'=> '/admin/theme',
+            'prefix_url'=> DOMAIN.'admin/theme',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
             'uname'=> $uname ? $uname :'',

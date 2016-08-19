@@ -26,7 +26,7 @@ class RoleController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $result = [
             'datas'=> RoleModel::orderBy('id','desc')->paginate($this->limit),
-            'prefix_url'=> '/admin/role',
+            'prefix_url'=> DOMAIN.'admin/role',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -49,7 +49,7 @@ class RoleController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = time();
         RoleModel::create($data);
-        return redirect('/admin/role');
+        return redirect(DOMAIN.'admin/role');
     }
 
     public function show($id)
@@ -81,7 +81,7 @@ class RoleController extends BaseController
         $data = $this->getData($request);
         $data['updated_at'] = time();
         RoleModel::where('id',$id)->update($data);
-        return redirect('/admin/role');
+        return redirect(DOMAIN.'admin/role');
     }
 
     public function forceDelete($id)

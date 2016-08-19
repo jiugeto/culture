@@ -25,7 +25,7 @@ class IdeaController extends BaseController
         $result = [
             'datas'=> $this->query(),
             'crumb'=> $this->crumb,
-            'prefix_url'=> '/admin/idea',
+            'prefix_url'=> DOMAIN.'admin/idea',
             'curr'=> $curr,
         ];
         return view('admin.idea.index', $result);
@@ -50,7 +50,7 @@ class IdeaController extends BaseController
             'sort'=> $request->sort,
         ];
         IdeasModel::where('id',$id)->update($data);
-        return redirect('/admin/idea');
+        return redirect(DOMAIN.'admin/idea');
     }
 
     public function show($id)

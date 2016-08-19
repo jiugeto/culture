@@ -50,7 +50,7 @@ class LoginController extends BaseController
         Session::put('admin.created_at',$adminModel->created_at);
         Session::put('admin.loginTime',$loginTime);
 
-        return redirect('/admin');
+        return redirect(DOMAIN.'admin');
     }
     public function dologout()
     {
@@ -65,6 +65,6 @@ class LoginController extends BaseController
         Session::forget('admin.serial');
         Session::forget('admin.created_at');
         Session::forget('admin.loginTime');
-        return Redirect('/admin/login');
+        return Redirect(DOMAIN.'admin/login');
     }
 }

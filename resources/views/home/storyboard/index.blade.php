@@ -3,7 +3,7 @@
     @include('home.common.crumb')
 
     {{--分镜来一个瀑布流--}}
-    <link rel="stylesheet" type="text/css" href="/assets-home/css/waterfall.css">
+    <link rel="stylesheet" type="text/css" href="{{PUB}}assets-home/css/waterfall.css">
     <div class="pbl_title">
         <a href="{{DOMAIN}}storyboard" class="{{ $way=='' ? 'star' : '' }}">全部分镜</a>：
         {{-- w代表检索方式 --}}
@@ -27,11 +27,11 @@
             @if(count($datas))
             @foreach($datas as $data)
                 <div class="img">
-                    <a href="/storyboard/{{ $data->id }}" title="点击进入查看{{ $data->name }}">
+                    <a href="{{DOMAIN}}storyboard/{{ $data->id }}" title="点击进入查看{{ $data->name }}">
                         <img src="{{ $data->thumb() }}">
                     </a></div>
                 <div class="title">
-                    <a href="/storyboard/{{ $data->id }}" title="点击进入查看{{ $data->name }}">
+                    <a href="{{DOMAIN}}storyboard/{{ $data->id }}" title="点击进入查看{{ $data->name }}">
                         {{ $data->limits($data->name,15) }}</a>
                 </div>
                 @if($data->company())<a href="">{{ $data->getComName() }}</a>@endif
@@ -65,7 +65,7 @@
         });
 
         function like(id){
-            window.location.href = "/storyboard/like/1/"+id;
+            window.location.href = "{{DOMAIN}}storyboard/like/1/"+id;
         }
     </script>
 @stop

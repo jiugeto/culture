@@ -31,7 +31,7 @@ class UserController extends BaseController
         $result = [
             'datas'=> $this->query($isuser,$isauth),
             'crumb'=> $this->crumb,
-            'prefix_url'=> '/admin/user',
+            'prefix_url'=> DOMAIN.'admin/user',
             'curr'=> $curr,
             'isusers'=> $this->model['isusers'],
             'isuser'=> $isuser,
@@ -76,7 +76,7 @@ class UserController extends BaseController
     public function update(Request $request,$id)
     {
         UserModel::where('id',$id)->update(['limit'=> $request->limit]);
-        return redirect('/admin/user');
+        return redirect(DOMAIN.'admin/user');
     }
 
 
@@ -89,7 +89,7 @@ class UserController extends BaseController
     public function toauth($id)
     {
         UserModel::where('id',$id)->update(['isauth'=>3]);
-        return redirect('/admin/user');
+        return redirect(DOMAIN.'admin/user');
     }
     /**
      * 拒绝通过认证 isauth==1
@@ -97,7 +97,7 @@ class UserController extends BaseController
     public function noauth($id)
     {
         UserModel::where('id',$id)->update(['isauth'=>2]);
-        return redirect('/admin/user');
+        return redirect(DOMAIN.'admin/user');
     }
 
     public function query($isuser,$isauth)

@@ -25,7 +25,7 @@ class OrderController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $result = [
             'datas'=> $this->query($del=0,$isshow),
-            'prefix_url'=> '/admin/order',
+            'prefix_url'=> DOMAIN.'admin/order',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
             'del'=> $del,
@@ -56,7 +56,7 @@ class OrderController extends BaseController
             'updated_at'=> time(),
         ];
         OrderModel::where('id',$id)->update($data);
-        return redirect('/admin/order');
+        return redirect(DOMAIN.'admin/order');
     }
 
     public function show($id)

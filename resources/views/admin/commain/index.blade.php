@@ -27,7 +27,7 @@
                     <tr>
                         <td class="am-hide-sm-only"><input type="checkbox" /></td>
                         <td class="am-hide-sm-only">{{ $data->id }}</td>
-                        <td class="am-hide-sm-only"><a href="/admin/commain/{{$data->id}}">
+                        <td class="am-hide-sm-only"><a href="{{DOMAIN}}admin/commain/{{$data->id}}">
                                 @if(mb_strlen($data->cname)==0) 无公司默认信息
                                 @elseif(mb_strlen($data->cname)>6)
                                     {{ mb_substr($data->cname,0,5,'utf-8').'...' }}

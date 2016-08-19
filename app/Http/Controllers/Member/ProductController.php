@@ -29,7 +29,7 @@ class ProductController extends BaseController
         $result = [
             'datas'=> $this->query($del=0),
             'lists'=> $this->lists,
-            'prefix_url'=> '/member/product',
+            'prefix_url'=> DOMAIN.'member/product',
             'curr'=> $curr,
         ];
         return view('member.product.index', $result);
@@ -42,7 +42,7 @@ class ProductController extends BaseController
         $result = [
             'datas'=> $this->query($del=0),
             'lists'=> $this->lists,
-            'prefix_url'=> '/member/product/trash',
+            'prefix_url'=> DOMAIN.'member/product/trash',
             'curr'=> $curr,
         ];
         return view('member.product.index', $result);
@@ -64,7 +64,7 @@ class ProductController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = time();
         ProductModel::create($data);
-        return redirect('/member/product');
+        return redirect(DOMAIN.'member/product');
     }
 
     public function edit($id)
@@ -84,7 +84,7 @@ class ProductController extends BaseController
         $data = $this->getData($request);
         $data['updated_at'] = time();
         ProductModel::where('id',$id)->update($data);
-        return redirect('/member/product');
+        return redirect(DOMAIN.'member/product');
     }
 
     public function show($id)

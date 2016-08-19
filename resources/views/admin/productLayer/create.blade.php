@@ -11,7 +11,7 @@
         <div class="am-g">
             @include('admin.common.info')
             <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
-                <form class="am-form" data-am-validator method="POST" action="/admin/productlayer" enctype="multipart/form-data">
+                <form class="am-form" data-am-validator method="POST" action="{{DOMAIN}}admin/productlayer" enctype="multipart/form-data">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <fieldset>
                         <div class="am-form-group">
@@ -21,7 +21,7 @@
 
                         <div class="am-form-group">
                             <label>产品名称 / Product：
-                                <a href="/admin/product">产品列表</a></label>
+                                <a href="{{DOMAIN}}admin/product">产品列表</a></label>
                             <select name="productid">
                                 @if($model->productAll())
                                     @foreach($model->productAll() as $product)
@@ -33,7 +33,7 @@
 
                         <div class="am-form-group">
                             <label>属性名称 / Attr：
-                                <a href="/admin/productattr">属性列表</a></label>
+                                <a href="{{DOMAIN}}admin/productattr">属性列表</a></label>
                             <select name="attrid">
                                 @if($model->attrAll())
                                     @foreach($model->attrAll() as $attr)

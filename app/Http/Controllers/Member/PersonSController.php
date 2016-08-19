@@ -26,7 +26,7 @@ class PersonSController extends BaseGoodsController
         $curr['url'] = $this->lists['']['url'];
         $result = [
             'datas'=> $this->query($del=0,$type),
-            'prefix_url'=> '/member/personS',
+            'prefix_url'=> DOMAIN.'member/personS',
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -39,7 +39,7 @@ class PersonSController extends BaseGoodsController
         $curr['url'] = $this->lists['trash']['url'];
         $result = [
             'datas'=> $this->query($del=1,$type),
-            'prefix_url'=> '/member/personS/trash',
+            'prefix_url'=> DOMAIN.'member/personS/trash',
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -64,7 +64,7 @@ class PersonSController extends BaseGoodsController
         $data = $this->getData($request,$this->model['types'][1]);
         $data['created_at'] = time();
         GoodsModel::create($data);
-        return redirect('/member/personS');
+        return redirect(DOMAIN.'member/personS');
     }
 
     public function edit($id)
@@ -86,7 +86,7 @@ class PersonSController extends BaseGoodsController
         $data = $this->getData($request,$id);
         $data['updated_at'] = time();
         GoodsModel::where('id',$id)->update($data);
-        return redirect('/member/personS');
+        return redirect(DOMAIN.'member/personS');
     }
 
     public function show($id)
@@ -104,18 +104,18 @@ class PersonSController extends BaseGoodsController
     public function destroy($id)
     {
         GoodsModel::where('id',$id)->update(['del'=> 1]);
-        return redirect('/member/personS');
+        return redirect(DOMAIN.'member/personS');
     }
 
     public function restore($id)
     {
         GoodsModel::where('id',$id)->update(['del'=> 0]);
-        return redirect('/member/personS/trash');
+        return redirect(DOMAIN.'member/personS/trash');
     }
 
     public function forceDelete($id)
     {
         GoodsModel::where('id',$id)->delete();
-        return redirect('/member/personS/trash');
+        return redirect(DOMAIN.'member/personS/trash');
     }
 }

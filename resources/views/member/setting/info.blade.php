@@ -5,7 +5,7 @@
         <a href="/member">会员后台</a> / 会员设置 / 其他更新
     </div>
 
-    <form data-am-validator method="POST" action="/member/setting/updateinfo/{{ $data->id }}" enctype="multipart/form-data">
+    <form data-am-validator method="POST" action="{{DOMAIN}}member/setting/updateinfo/{{ $data->id }}" enctype="multipart/form-data">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="_method" value="POST">
 

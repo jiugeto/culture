@@ -29,7 +29,7 @@ class PersonDController extends BaseGoodsController
         $curr['url'] = $this->lists['']['url'];
         $result = [
             'datas'=> $this->query($del=0,$this->type),
-            'prefix_url'=> '/member/personD',
+            'prefix_url'=> DOMAIN.'member/personD',
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -42,7 +42,7 @@ class PersonDController extends BaseGoodsController
         $curr['url'] = $this->lists['trash']['url'];
         $result = [
             'datas'=> $this->query($del=1,$this->type),
-            'prefix_url'=> '/member/personD/trash',
+            'prefix_url'=> DOMAIN.'member/personD/trash',
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -66,9 +66,8 @@ class PersonDController extends BaseGoodsController
     {
         $data = $this->getData($request,$this->type);
         $data['created_at'] = time();
-        dd($data);
         GoodsModel::create($data);
-        return redirect('/member/personD');
+        return redirect(DOMAIN.'member/personD');
     }
 
     public function edit($id)
@@ -89,7 +88,7 @@ class PersonDController extends BaseGoodsController
         $data = $this->getData($request,$this->type);
         $data['updated_at'] = time();
         GoodsModel::where('id',$id)->update($data);
-        return redirect('/member/personD');
+        return redirect(DOMAIN.'member/personD');
     }
 
     public function show($id)
@@ -108,18 +107,18 @@ class PersonDController extends BaseGoodsController
     public function destroy($id)
     {
         GoodsModel::where('id',$id)->update(['del'=> 1]);
-        return redirect('/member/personD');
+        return redirect(DOMAIN.'member/personD');
     }
 
     public function restore($id)
     {
         GoodsModel::where('id',$id)->update(['del'=> 0]);
-        return redirect('/member/personD/trash');
+        return redirect(DOMAIN.'member/personD/trash');
     }
 
     public function forceDelete($id)
     {
         GoodsModel::where('id',$id)->delete();
-        return redirect('/member/personD/trash');
+        return redirect(DOMAIN.'member/personD/trash');
     }
 }

@@ -18,7 +18,7 @@ class SettingController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        if ($this->userid) { return redirect('/login'); }
+        if ($this->userid) { return redirect(DOMAIN.'login'); }
         $this->model = new UserModel();
     }
 
@@ -96,7 +96,7 @@ class SettingController extends BaseController
             ];
             CompanyModel::create($company);
         }
-        return redirect('/member/setting');
+        return redirect(DOMAIN.'member/setting');
     }
 
     /**
@@ -123,7 +123,7 @@ class SettingController extends BaseController
             echo "<script>alert('新密码必填！');history.go(-1);</script>";exit;
         }
         UserModel::where('id',$id)->update(['password'=> Hash::make($request->password2)]);
-        return redirect('/member/setting');
+        return redirect(DOMAIN.'member/setting');
     }
 
     /**
@@ -145,6 +145,6 @@ class SettingController extends BaseController
     public function updateinfo(Request $request,$id)
     {
         UserModel::where('id',$id)->update(['limit'=> $request->limit]);
-        return redirect('/member/setting');
+        return redirect(DOMAIN.'member/setting');
     }
 }

@@ -16,9 +16,9 @@
         genre.change(function(){
 //            alert(genre.val());
             if(genre.val()!=0){
-                window.location.href = '/member/'+genre.val()+'/entertain';
+                window.location.href = '{{DOMAIN}}member/'+genre.val()+'/entertain';
             } else {
-                window.location.href = '/member/entertain';
+                window.location.href = '{{DOMAIN}}member/entertain';
             }
         });
     });

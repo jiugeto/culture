@@ -26,7 +26,7 @@ class ProductConController extends BaseController
         $result = [
             'datas'=> $this->query($del=0),
             'lists'=> $this->lists,
-            'prefix_url'=> '/member/productcon',
+            'prefix_url'=> DOMAIN.'member/productcon',
             'curr'=> $curr,
         ];
         return view('member.productcon.index', $result);
@@ -39,7 +39,7 @@ class ProductConController extends BaseController
         $result = [
             'datas'=> $this->query($del=1),
             'lists'=> $this->lists,
-            'prefix_url'=> '/member/productcon/trash',
+            'prefix_url'=> DOMAIN.'member/productcon/trash',
             'curr'=> $curr,
         ];
         return view('member.productcon.index', $result);
@@ -62,7 +62,7 @@ class ProductConController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = time();
         ProductConModel::create($data);
-        return redirect('/member/productcon');
+        return redirect(DOMAIN.'member/productcon');
     }
 
     public function edit($id)
@@ -83,7 +83,7 @@ class ProductConController extends BaseController
         $data = $this->getData($request);
         $data['updated_at'] = time();
         ProductConModel::where('id',$id)->update($data);
-        return redirect('/member/productcon');
+        return redirect(DOMAIN.'member/productcon');
     }
 
     public function show($id)
@@ -102,19 +102,19 @@ class ProductConController extends BaseController
     public function destroy($id)
     {
         ProductConModel::where('id',$id)->update(['del'=> 1]);
-        return redirect('/member/productcon');
+        return redirect(DOMAIN.'member/productcon');
     }
 
     public function restore($id)
     {
         ProductConModel::where('id',$id)->update(['del'=> 0]);
-        return redirect('/member/productcon/trash');
+        return redirect(DOMAIN.'member/productcon/trash');
     }
 
     public function forceDelete($id)
     {
         ProductConModel::where('id',$id)->delete();
-        return redirect('/member/productcon/trash');
+        return redirect(DOMAIN.'member/productcon/trash');
     }
 
 

@@ -25,7 +25,7 @@ class ProductController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $result = [
             'datas'=> $this->query($del=0),
-            'prefix_url'=> '/admin/product',
+            'prefix_url'=> DOMAIN.'admin/product',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -38,7 +38,7 @@ class ProductController extends BaseController
         $curr['url'] = $this->crumb['trash']['url'];
         $result = [
             'datas'=> $this->query($del=1),
-            'prefix_url'=> '/admin/product/trash',
+            'prefix_url'=> DOMAIN.'admin/product/trash',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -61,7 +61,7 @@ class ProductController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = time();
         ProductModel::create($data);
-        return redirect('/admin/product');
+        return redirect(DOMAIN.'admin/product');
     }
 
     public function edit($id)
@@ -81,7 +81,7 @@ class ProductController extends BaseController
         $data = $this->getData($request);
         $data['updated_at'] = time();
         ProductModel::where('id',$id)->update($data);
-        return redirect('/admin/product');
+        return redirect(DOMAIN.'admin/product');
     }
 
     public function show($id)
@@ -99,19 +99,19 @@ class ProductController extends BaseController
     public function destroy($id)
     {
         ProductModel::where('id',$id)->update(['del'=> 1]);
-        return redirect('/admin/product');
+        return redirect(DOMAIN.'admin/product');
     }
 
     public function restore($id)
     {
         ProductModel::where('id',$id)->update(['del'=> 0]);
-        return redirect('/admin/product/trash');
+        return redirect(DOMAIN.'admin/product/trash');
     }
 
     public function forceDelete($id)
     {
         ProductModel::where('id',$id)->delete();
-        return redirect('/admin/product/trash');
+        return redirect(DOMAIN.'admin/product/trash');
     }
 
 

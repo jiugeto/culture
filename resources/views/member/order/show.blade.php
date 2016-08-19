@@ -38,7 +38,7 @@
                 @elseif($data->status>2 && $data->money)
                     {{ $data->money ? $data->money.'元' : '免费' }}
                 @endif
-                {{--&nbsp;&nbsp;<a href="/member/idea/{{ $data->fromid }}" target="_blank">查看创意</a>--}}
+                {{--&nbsp;&nbsp;<a href="{{DOMAIN}}member/idea/{{ $data->fromid }}" target="_blank">查看创意</a>--}}
             </td>
         </tr>
         @elseif(in_array($data->genre,[3,4]))
@@ -50,7 +50,7 @@
                 @elseif($data->status>2 && $data->money)
                     {{ $data->money ? $data->money.'元' : '免费' }}
                 @endif
-                {{--&nbsp;&nbsp;<a href="/member/storyboard/{{ $data->fromid }}" target="_blank">查看分镜</a>--}}
+                {{--&nbsp;&nbsp;<a href="{{DOMAIN}}member/storyboard/{{ $data->fromid }}" target="_blank">查看分镜</a>--}}
             </td>
         </tr>
         @elseif(in_array($data->genre,[5,6]))
@@ -313,7 +313,7 @@
                     dataType: 'json',
                     success: function(data) {
                         if (data.message<0) { alert(data.message); }
-                        else { window.location.href = "/member/order/"+id; }
+                        else { window.location.href = "{{DOMAIN}}member/order/"+id; }
                     }
                 });
             }
@@ -329,14 +329,14 @@
                     }
 //                    alert(money);return;
                     if(money==''){ alert(genreName+"价格必填！"); return; }
-                    window.location.href = "/member/order/"+id+"/"+genreUrl+"/"+money;
+                    window.location.href = "{{DOMAIN}}member/order/"+id+"/"+genreUrl+"/"+money;
                 } else if (status==4 || status==5 || status==6 || status==7 || status==12) {
-                    window.location.href = "/member/order/"+id+"/"+status;
+                    window.location.href = "{{DOMAIN}}member/order/"+id+"/"+status;
                 }
             });
                 //订单成功
             $("#true").click(function(){
-                window.location.href = "/member/order/"+id+"/"+12;
+                window.location.href = "{{DOMAIN}}member/order/"+id+"/"+12;
             });
                 //订单失败
             $("#false").click(function(){
@@ -348,12 +348,12 @@
                 if (money || realMoney1 || realMoney2 || realMoney3 || realMoney4) {
                     alert("对不起，已产生交易价格，不能取消订单！"); return;
                 }
-                window.location.href = "/member/order/"+id+"/"+13;
+                window.location.href = "{{DOMAIN}}member/order/"+id+"/"+13;
             });
                 //订单下一步：弹窗
             $("#next").click(function(){
                 $(".popup").show(); $("#story").show(); $("#video").show();
-//                window.location.href = "/member/order/"+id+"/next/"+1;
+//                window.location.href = "{{DOMAIN}}member/order/"+id+"/next/"+1;
             });
             $(".close").click(function(){ $(".popup").hide(); $(".popup2").hide(); });
 

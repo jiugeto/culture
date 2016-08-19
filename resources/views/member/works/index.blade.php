@@ -26,10 +26,10 @@
                 <td>{{ $data->uname }}</td>
                 <td>{{ $data->created_at }}</td>
                 <td>
-                    <a href="/member/personD/{{ $data->id }}/pre" class="list_btn">预览</a>
-                    <a href="/member/personD/{{ $data->id }}" class="list_btn">查看</a>
-                    <a href="/member/personD/{{ $data->id }}/edit" class="list_btn">编辑</a>
-                    <a href="/member/personD/{{ $data->id }}/destroy" class="list_btn">删除</a>
+                    <a href="{{DOMAIN}}member/personD/{{ $data->id }}/pre" class="list_btn">预览</a>
+                    <a href="{{DOMAIN}}member/personD/{{ $data->id }}" class="list_btn">查看</a>
+                    <a href="{{DOMAIN}}member/personD/{{ $data->id }}/edit" class="list_btn">编辑</a>
+                    <a href="{{DOMAIN}}member/personD/{{ $data->id }}/destroy" class="list_btn">删除</a>
                 </td>
             </tr>
             @endforeach

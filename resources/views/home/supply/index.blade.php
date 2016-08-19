@@ -17,9 +17,9 @@
                     var genre = $("select[name='genre']");
                     genre.change(function(){
                         if (genre.val()==0) {
-                            window.location.href = '/supply';
+                            window.location.href = '{{DOMAIN}}supply';
                         } else {
-                            window.location.href = '/'+genre.val()+'/supply';
+                            window.location.href = '{{DOMAIN}}'+genre.val()+'/supply';
                         }
                     });
                 });
@@ -48,7 +48,7 @@
             @include('home.common.page')
         </div>
         <div class="s_right">
-            {{--<img src="/uploads/images/2016/ppt.png">--}}
+            {{--<img src="{{PUB}}uploads/images/2016/ppt.png">--}}
             <div style="width:280px;height:300px;background:rgb(250,250,250);"></div>
         </div>
     </div>

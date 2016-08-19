@@ -14,7 +14,7 @@
         <div class="am-g">
             @include('admin.common.info')
             <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
-                <form class="am-form" data-am-validator method="POST" action="/admin/productattr" enctype="multipart/form-data">
+                <form class="am-form" data-am-validator method="POST" action="{{DOMAIN}}admin/productattr" enctype="multipart/form-data">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input type="hidden" name="index" value="{{ $index }}">
                     <fieldset>

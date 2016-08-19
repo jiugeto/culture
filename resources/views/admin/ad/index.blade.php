@@ -29,15 +29,15 @@
                     <tr>
                         <td class="am-hide-sm-only"><input type="checkbox" /></td>
                         <td class="am-hide-sm-only">{{ $data->id }}</td>
-                        <td class="am-hide-sm-only"><a href="/admin/ad/{{$data->id}}">{{ $data->name }}</a></td>
+                        <td class="am-hide-sm-only"><a href="{{DOMAIN}}admin/ad/{{$data->id}}">{{ $data->name }}</a></td>
                         <td class="am-hide-sm-only">{{ $data->ad_place }}</td>
                         <td class="am-hide-sm-only">{{ $data->created_at }}</td>
                         <td class="am-hide-sm-only">{{ $data->updated_at }}</td>
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
-                                    <a href="/admin/ad/{{$data->id}}/edit"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="/assets/images/edit.png" class="icon"> 编辑</button></a>
-                                    <a href="/admin/ad/{{$data->id}}/forceDelete"><button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><img src="/assets/images/forceDelete_red.png" class="icon"> 销毁记录</button></a>
+                                    <a href="{{DOMAIN}}admin/ad/{{$data->id}}/edit"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 编辑</button></a>
+                                    <a href="{{DOMAIN}}admin/ad/{{$data->id}}/forceDelete"><button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><img src="{{PUB}}assets/images/forceDelete_red.png" class="icon"> 销毁记录</button></a>
                                 </div>
                             </div>
                         </td>

@@ -44,7 +44,7 @@ class OpinionController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = date('Y-m-d', time());
         OpinionModel::create($data);
-        return redirect('/opinion');
+        return redirect(DOMAIN.'opinion');
     }
 
     public function show($id)
@@ -52,7 +52,6 @@ class OpinionController extends BaseController
         $this->menus['show'] = '意见详情';
         $result = [
             'data'=> OpinionModel::find($id),
-//            'menus'=> $this->menus,
             'curr_menu'=> $this->url_curr,
             'curr'=> 'show',
         ];
@@ -64,7 +63,6 @@ class OpinionController extends BaseController
         $this->menus['edit'] = '修改意见';
         $result = [
             'data'=> OpinionModel::find($id),
-//            'menus'=> $this->menus,
             'curr_menu'=> $this->url_curr,
             'curr'=> 'edit',
         ];
@@ -76,7 +74,7 @@ class OpinionController extends BaseController
         $data = $this->getData($request,$id);
         $data['updated_at'] = date('Y-m-d', time());
         OpinionModel::where('id',$id)->update($data);
-        return redirect('/opinion');
+        return redirect(DOMAIN.'opinion');
     }
 
 

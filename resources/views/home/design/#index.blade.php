@@ -26,7 +26,7 @@
             <table class="record">
                 <tr>
                     <td rowspan="3">
-                        <div class="img"><img src="/uploads/images/2016/online1.png"></div>
+                        <div class="img"><img src="{{PUB}}uploads/images/2016/online1.png"></div>
                     </td>
                     <td class="text1"><b>c4d作品</b></td>
                 </tr>

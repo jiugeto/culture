@@ -7,7 +7,7 @@ use App\Models\DesignModel;
 class DesignComDController extends DesignController
 {
     /**
-     * 会员后台：设计管理
+     * 会员后台：公司设计需求管理
      */
 
     protected $genre = 2;       //1企业供应，2企业需求，3个人供应，4个人需求
@@ -66,7 +66,7 @@ class DesignComDController extends DesignController
         $data['genre'] = $this->genre;
         $data['created_at'] = time();
         DesignModel::create($data);
-        return redirect('/member/designComD');
+        return redirect(DOMAIN.'member/designComD');
     }
 
     public function edit($id)

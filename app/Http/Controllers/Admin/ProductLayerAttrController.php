@@ -27,7 +27,7 @@ class ProductLayerAttrController extends BaseController
         $result = [
             'datas'=> $this->query($layerid,$del=0),
             'layerModel'=> ProductLayerModel::find($layerid),
-            'prefix_url'=> '/admin/prolayerattr',
+            'prefix_url'=> DOMAIN.'admin/prolayerattr',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -52,7 +52,7 @@ class ProductLayerAttrController extends BaseController
         $data = $this->getData($request,$layerid);
         $data['created_at'] = time();
         ProductLayerAttrModel::create($data);
-        return redirect('/admin/'.$layerid.'/prolayerattr');
+        return redirect(DOMAIN.'admin/'.$layerid.'/prolayerattr');
     }
 
     public function edit($layerid,$id)
@@ -74,7 +74,7 @@ class ProductLayerAttrController extends BaseController
         $data = $this->getData($request,$layerid);
         $data['updated_at'] = time();
         ProductLayerAttrModel::where('id',$id)->update($data);
-        return redirect('/admin/'.$layerid.'/prolayerattr');
+        return redirect(DOMAIN.'admin/'.$layerid.'/prolayerattr');
     }
 
     public function show($layerid,$id)
@@ -94,7 +94,7 @@ class ProductLayerAttrController extends BaseController
     public function forceDelete($layerid,$id)
     {
         ProductLayerAttrModel::where('id',$id)->delete();
-        return redirect('/admin/'.$layerid.'/prolayerattr');
+        return redirect(DOMAIN.'admin/'.$layerid.'/prolayerattr');
     }
 
 

@@ -23,7 +23,7 @@ class MessageController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $result = [
             'datas'=> $this->query(0),
-            'prefix_url'=> '/admin/message',
+            'prefix_url'=> DOMAIN.'admin/message',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -36,7 +36,7 @@ class MessageController extends BaseController
         $curr['url'] = $this->crumb['trash']['url'];
         $result = [
             'datas'=> $this->query(0),
-            'prefix_url'=> '/admin/message/trash',
+            'prefix_url'=> DOMAIN.'admin/message/trash',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];

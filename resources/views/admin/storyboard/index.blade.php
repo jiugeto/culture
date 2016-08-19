@@ -44,7 +44,7 @@
                                     <a href="{{DOMAIN}}admin/storyboard/{{$data->id}}/destroy"><button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><img src="{{PUB}}assets/images/del_red.png" class="icon"> 删除</button></a>
                                     @else
                                     <a href="{{DOMAIN}}admin/storyboard/{{$data->id}}/restore"><button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><img src="{{PUB}}assets/images/redo.png" class="icon"> 还原</button></a>
-                                        <a href="/admin/actor/{{$data->id}}/forceDelete"><button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><img src="/assets/images/forceDelete_red.png" class="icon"> 销毁记录</button></a>
+                                        <a href="{{DOMAIN}}admin/actor/{{$data->id}}/forceDelete"><button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><img src="{{PUB}}assets/images/forceDelete_red.png" class="icon"> 销毁记录</button></a>
                                     @endif
                                 </div>
                             </div>

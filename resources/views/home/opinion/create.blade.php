@@ -3,7 +3,7 @@
     @include('home.common.crumb')
 
     <div class="home_create">
-        <form class="form" data-am-validator method="POST" action="/opinion" enctype="multipart/form-data">
+        <form class="form" data-am-validator method="POST" action="{{DOMAIN}}opinion" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <table class="table_create">
                 <tr>

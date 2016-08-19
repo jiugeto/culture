@@ -6,7 +6,7 @@
             {{--<table>--}}
                 {{--<tr>--}}
                     {{--<td rowspan="3" class="img">--}}
-                        {{--<div><img src="/uploads/images/2016/online1.png"></div>--}}
+                        {{--<div><img src="{{PUB}}uploads/images/2016/online1.png"></div>--}}
                         {{--<p>数量</p>--}}
                     {{--</td>--}}
                     {{--<td class="small">话题来自--}}
@@ -34,15 +34,15 @@
                 <tr>
                     <td rowspan="3" class="img">
                         <div>
-                            {{--<img src="/uploads/images/2016/online1.png">--}}
+                            {{--<img src="{{PUB}}uploads/images/2016/online1.png">--}}
                             <div style="width:100px;height:100px;background:rgb(250,250,250);"></div>
                         </div>
                         <p>{{--数量--}}{{ $data->read }}</p>
                     </td>
                     <td class="small">话题来自 {{ $data->areatoname()  }}
-                        <span class="right_close"><a href="/talk/{{$data->id}}/destroy" title="删除此话题">×</a></span>
+                        <span class="right_close"><a href="{{DOMAIN}}talk/{{$data->id}}/destroy" title="删除此话题">×</a></span>
                         @if($curr!='mytalk')
-                        <span class="right_close"><a href="/talk/{{$data->id}}/edit" title="修改此话题">修改</a></span>
+                        <span class="right_close"><a href="{{DOMAIN}}talk/{{$data->id}}/edit" title="修改此话题">修改</a></span>
                         @endif
                     </td>
                 </tr>
@@ -57,18 +57,18 @@
                     </td></tr>
                 <tr><td>&nbsp;</td><td class="small">
                     @if($curr!='mytalk')
-                        <a title="点击关注" onclick="window.location.href='/talk/tofollow';">关注</a>：
+                        <a title="点击关注" onclick="window.location.href='{{DOMAIN}}talk/tofollow';">关注</a>：
                         {{ count($data->follow()) }} &nbsp;&nbsp;&nbsp;&nbsp;
                         {{--评论：&nbsp;&nbsp;&nbsp;&nbsp;--}}
-                        <a title="点击感谢" onclick="window.location.href='/talk/tothank';">感谢</a>：
+                        <a title="点击感谢" onclick="window.location.href='{{DOMAIN}}talk/tothank';">感谢</a>：
                         {{ count($data->thank()) }} &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a title="点击点赞" onclick="window.location.href='/talk/toclick';">点赞</a>：
+                        <a title="点击点赞" onclick="window.location.href='{{DOMAIN}}talk/toclick';">点赞</a>：
                         {{ count($data->click()) }} &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a title="点击分享" onclick="window.location.href='/talk/toshare';">分享</a>：
+                        <a title="点击分享" onclick="window.location.href='{{DOMAIN}}talk/toshare';">分享</a>：
                         {{ count($data->share()) }} &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a title="点击收藏" onclick="window.location.href='/talk/toreport';">收藏</a>：
+                        <a title="点击收藏" onclick="window.location.href='{{DOMAIN}}talk/toreport';">收藏</a>：
                         {{ count($data->collect()) }} &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a title="点击举报" onclick="window.location.href='/talk/tocollect';">举报</a>：
+                        <a title="点击举报" onclick="window.location.href='{{DOMAIN}}talk/tocollect';">举报</a>：
                         {{ count($data->report()) }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     @else
                         关注：{{ $data->follow() }} &nbsp;&nbsp;&nbsp;&nbsp;

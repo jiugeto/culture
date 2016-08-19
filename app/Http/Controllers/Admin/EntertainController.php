@@ -25,7 +25,7 @@ class EntertainController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $result = [
             'datas'=> $this->query($del=0),
-            'prefix_url'=> '/admin/entertain',
+            'prefix_url'=> DOMAIN.'admin/entertain',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -48,7 +48,7 @@ class EntertainController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = time();
         EntertainModel::create($data);
-        return view('/admin/entertain');
+        return view(DOMAIN.'admin/entertain');
     }
 
     public function edit($id)
@@ -69,7 +69,7 @@ class EntertainController extends BaseController
         $data = $this->getData($request);
         $data['updated_at'] = time();
         EntertainModel::where('id',$id)->update($data);
-        return redirect('/admin/entertain');
+        return redirect(DOMAIN.'admin/entertain');
     }
 
     public function show($id)

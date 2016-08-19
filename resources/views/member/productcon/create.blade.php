@@ -2,7 +2,7 @@
 @section('content')
     @include('member.common.crumb')
 
-    <form data-am-validator method="POST" action="/member/productcon" enctype="multipart/form-data">
+    <form data-am-validator method="POST" action="{{DOMAIN}}member/productcon" enctype="multipart/form-data">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <table class="table_create">
             <tr>
@@ -62,7 +62,7 @@
                         @endforeach
                     @endif
                     </select>
-                    &nbsp;<a href="/member/product" class="star">产品列表</a>
+                    &nbsp;<a href="{{DOMAIN}}member/product" class="star">产品列表</a>
                 </td>
             </tr>
             {{--<tr><td></td></tr>--}}
@@ -77,7 +77,7 @@
                         @endforeach
                     @endif
                     </select>
-                    &nbsp;<a href="/member/productattr" class="star">属性列表</a>
+                    &nbsp;<a href="{{DOMAIN}}member/productattr" class="star">属性列表</a>
                 </td>
             </tr>
             {{--<tr><td></td></tr>--}}

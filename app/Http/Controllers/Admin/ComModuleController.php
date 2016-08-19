@@ -26,7 +26,7 @@ class ComModuleController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $result = [
             'datas'=> $this->query(),
-            'prefix_url'=> '/admin/commodule',
+            'prefix_url'=> DOMAIN.'admin/commodule',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];

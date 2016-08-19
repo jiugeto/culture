@@ -25,7 +25,7 @@ class PicController extends BaseController
         $curr['url'] = $this->lists['']['url'];
         $result = [
             'datas'=> $this->query($del=0),
-            'prefix_url'=> '/member/pic',
+            'prefix_url'=> DOMAIN.'member/pic',
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -39,7 +39,7 @@ class PicController extends BaseController
         $curr['url'] = $this->lists['trash']['url'];
         $result = [
             'datas'=> $this->query($del=1),
-            'prefix_url'=> '/member/pic/trash',
+            'prefix_url'=> DOMAIN.'member/pic/trash',
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -62,7 +62,7 @@ class PicController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = time();
         PicModel::create($data);
-        return redirect('/member/pic');
+        return redirect(DOMAIN.'member/pic');
     }
 
     public function edit($id)
@@ -85,7 +85,7 @@ class PicController extends BaseController
         $picModel = PicModel::find($id);
         if (!$data['url'] && $picModel->url) { $data['url'] = $picModel->url; }
         PicModel::where('id',$id)->update($data);
-        return redirect('/member/pic');
+        return redirect(DOMAIN.'member/pic');
     }
 
     public function show($id)
@@ -103,19 +103,19 @@ class PicController extends BaseController
     public function destroy($id)
     {
         PicModel::where('id',$id)->update(['del'=> 1]);
-        return redirect('/member/pic');
+        return redirect(DOMAIN.'member/pic');
     }
 
     public function restore($id)
     {
         PicModel::where('id',$id)->update(['del'=> 0]);
-        return redirect('/member/pic/trash');
+        return redirect(DOMAIN.'member/pic/trash');
     }
 
     public function forceDelete($id)
     {
         PicModel::where('id',$id)->delete();
-        return redirect('/member/pic/trash');
+        return redirect(DOMAIN.'member/pic/trash');
     }
 
 

@@ -25,7 +25,7 @@ class PicController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $result = [
             'datas'=> $this->query(),
-            'prefix_url'=> '/admin/pic',
+            'prefix_url'=> DOMAIN.'admin/pic',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -50,7 +50,7 @@ class PicController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = time();
         PicModel::create($data);
-        return redirect('/admin/pic');
+        return redirect(DOMAIN.'admin/pic');
     }
 
     public function edit($id)
@@ -70,7 +70,7 @@ class PicController extends BaseController
         $data = $this->getData($request);
         $data['updated_at'] = time();
         PicModel::where('id',$id)->update($data);
-        return redirect('/admin/pic');
+        return redirect(DOMAIN.'admin/pic');
     }
 
     public function show($id)

@@ -18,17 +18,17 @@
             @foreach($datas as $data)
             <tr>
                 <td>{{ $data->id }}</td>
-                <td><a href="/member/pic/{{ $data->id }}">{{ $data->name }}</a></td>
+                <td><a href="{{DOMAIN}}member/pic/{{ $data->id }}">{{ $data->name }}</a></td>
                 <td><img src="{{ $data->url }}" style="width:100px;"></td>
                 <td>{{ $data->createTime() }}</td>
                 <td>
                     @if($curr['url']=='')
-                        <a href="/member/pic/{{ $data->id }}" class="list_btn">查看</a>
-                        <a href="/member/pic/{{ $data->id }}/edit" class="list_btn">编辑</a>
-                        <a href="/member/pic/{{ $data->id }}/destroy" class="list_btn">删除</a>
+                        <a href="{{DOMAIN}}member/pic/{{ $data->id }}" class="list_btn">查看</a>
+                        <a href="{{DOMAIN}}member/pic/{{ $data->id }}/edit" class="list_btn">编辑</a>
+                        <a href="{{DOMAIN}}member/pic/{{ $data->id }}/destroy" class="list_btn">删除</a>
                     @else
-                        <a href="/member/pic/{{ $data->id }}/restore" class="list_btn">还原</a>
-                        <a href="/member/pic/{{ $data->id }}/forceDelete" class="list_btn">销毁记录</a>
+                        <a href="{{DOMAIN}}member/pic/{{ $data->id }}/restore" class="list_btn">还原</a>
+                        <a href="{{DOMAIN}}member/pic/{{ $data->id }}/forceDelete" class="list_btn">销毁记录</a>
                     @endif
                 </td>
             </tr>

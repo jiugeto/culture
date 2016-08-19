@@ -28,7 +28,7 @@ class CategoryController extends BaseController
         $curr['url'] = $this->lists['']['url'];
         $result = [
             'datas'=> $this->query($del=0),
-            'prefix_url'=> '/member/category',
+            'prefix_url'=> DOMAIN.'member/category',
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -41,7 +41,7 @@ class CategoryController extends BaseController
         $curr['url'] = $this->lists['trash']['url'];
         $result = [
             'datas'=> $this->query($del=1),
-            'prefix_url'=> '/member/category/trash',
+            'prefix_url'=> DOMAIN.'member/category/trash',
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -65,7 +65,7 @@ class CategoryController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = time();
         CategoryModel::create($data);
-        return redirect('/member/category');
+        return redirect(DOMAIN.'member/category');
     }
 
     public function edit($id)
@@ -86,7 +86,7 @@ class CategoryController extends BaseController
         $data = $this->getData($request);
         $data['updated_at'] = time();
         CategoryModel::where('id',$id)->update($data);
-        return redirect('/member/category');
+        return redirect(DOMAIN.'member/category');
     }
 
     public function show($id)
@@ -104,19 +104,19 @@ class CategoryController extends BaseController
     public function destroy($id)
     {
         CategoryModel::where('id',$id)->update(['del'=> 1]);
-        return redirect('/member/category');
+        return redirect(DOMAIN.'member/category');
     }
 
     public function restore($id)
     {
         CategoryModel::where('id',$id)->update(['del'=> 0]);
-        return redirect('/member/category/trash');
+        return redirect(DOMAIN.'member/category/trash');
     }
 
     public function forceDelete($id)
     {
         CategoryModel::where('id',$id)->delete();
-        return redirect('/member/category/trash');
+        return redirect(DOMAIN.'member/category/trash');
     }
 
 

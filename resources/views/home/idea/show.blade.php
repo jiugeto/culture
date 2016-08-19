@@ -38,7 +38,7 @@
     <div class="layback">
         <h4 style="text-align:center;">订单申请</h4>
         <p id="backcon"></p>
-        <p><a href="/member/order">进入订单列表</a></p>
+        <p><a href="{{DOMAIN}}member/order">进入订单列表</a></p>
         <a class="close" onclick="$('.layback').hide();"> X </a>
     </div>
 
@@ -71,7 +71,7 @@
             //订单申请
             $.ajaxSetup({headers : {'X-CSRF-TOKEN':$('input[name="_token"]').val()}});
             $(".toOrder").click(function(){
-//                window.location.href = '/member/order/create/idea-'+$("input[name='id']").val();
+//                window.location.href = '{{DOMAIN}}}member/order/create/idea-'+$("input[name='id']").val();
                 //1创意供应，2创意需求，3分镜供应，4分镜需求，5商品供应，6商品需求，7娱乐供应，8娱乐需求，9演员供应，10演员需求，1租赁供应，12租赁需求
                 var id = $("input[name='id']").val();
                 var genre0 = $("input[name='genre']").val();
@@ -79,7 +79,7 @@
                 if (genre0===1) { genre = 1; } else if (genre0==2) { genre = 1; }
                 $.ajax({
                     type: 'POST',
-                    url: '/member/order/create',
+                    url: '{{DOMAIN}}member/order/create',
                     data: {'genre':genre,'id':id},
                     dataType: 'json',
                     success: function(data) {

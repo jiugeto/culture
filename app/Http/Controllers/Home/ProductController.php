@@ -75,7 +75,7 @@ class ProductController extends BaseController
             $arr = array('gid'=> $id, 'uid'=> $this->uid, 'created_at'=> time());
             GoodsClickModel::create($arr);
         }
-        return redirect('/product/'.$id);
+        return redirect(DOMAIN.'product/'.$id);
     }
 
     /**
@@ -84,7 +84,7 @@ class ProductController extends BaseController
     public function click($id)
     {
         GoodsModel::where('id',$id)->increment('click', 1);
-        return redirect('/product');
+        return redirect(DOMAIN.'product');
     }
 
     /**
@@ -102,7 +102,7 @@ class ProductController extends BaseController
             $arr['created_at'] = time();
             GoodsClickModel::create($arr);
         }
-        return redirect('/product');
+        return redirect(DOMAIN.'product');
     }
 
     /**
@@ -120,7 +120,7 @@ class ProductController extends BaseController
             $arr['created_at'] = time();
             GoodsLikeModel::create($arr);
         }
-        return redirect('/product');
+        return redirect(DOMAIN.'product');
     }
 
     /**

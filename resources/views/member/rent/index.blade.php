@@ -26,12 +26,12 @@
                 <td>{{ $data->created_at }}</td>
                 <td>
                     @if($curr['url']=='')
-                        <a href="/member/rent/{{ $data->id }}" class="list_btn">查看</a>
-                        <a href="/member/rent/{{ $data->id }}/edit" class="list_btn">编辑</a>
-                        <a href="/member/rent/{{ $data->id }}/destroy" class="list_btn">删除</a>
+                        <a href="{{DOMAIN}}member/rent/{{ $data->id }}" class="list_btn">查看</a>
+                        <a href="{{DOMAIN}}member/rent/{{ $data->id }}/edit" class="list_btn">编辑</a>
+                        <a href="{{DOMAIN}}member/rent/{{ $data->id }}/destroy" class="list_btn">删除</a>
                     @else
-                        <a href="/member/rent/{{ $data->id }}/restore" class="list_btn">还原</a>
-                        <a href="/member/rent/{{ $data->id }}/forceDelete" class="list_btn">销毁记录</a>
+                        <a href="{{DOMAIN}}member/rent/{{ $data->id }}/restore" class="list_btn">还原</a>
+                        <a href="{{DOMAIN}}member/rent/{{ $data->id }}/forceDelete" class="list_btn">销毁记录</a>
                     @endif
                 </td>
             </tr>

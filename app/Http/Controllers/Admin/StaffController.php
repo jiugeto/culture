@@ -26,7 +26,7 @@ class StaffController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $result = [
             'datas'=> $this->query(),
-            'prefix_url'=> '/admin/staff',
+            'prefix_url'=> DOMAIN.'admin/staff',
             'model'=> $this->model,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -51,7 +51,7 @@ class StaffController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = time();
         StaffModel::create($data);
-        return redirect('/admin/staff');
+        return redirect(DOMAIN.'admin/staff');
     }
 
     public function edit($id)
@@ -72,7 +72,7 @@ class StaffController extends BaseController
         $data = $this->getData($request);
         $data['updated_at'] = time();
         StaffModel::where('id',$id)->update($data);
-        return redirect('/admin/staff');
+        return redirect(DOMAIN.'admin/staff');
     }
 
     public function show($id)
@@ -91,19 +91,19 @@ class StaffController extends BaseController
     public function destroy($id)
     {
         StaffModel::where('id',$id)->update(['del'=> 1]);
-        return redirect('/admin/staff');
+        return redirect(DOMAIN.'admin/staff');
     }
 
     public function restore($id)
     {
         StaffModel::where('id',$id)->update(['del'=> 0]);
-        return redirect('/admin/staff');
+        return redirect(DOMAIN.'admin/staff');
     }
 
     public function forceDelete($id)
     {
         StaffModel::where('id',$id)->delete();
-        return redirect('/admin/staff');
+        return redirect(DOMAIN.'admin/staff');
     }
 
 

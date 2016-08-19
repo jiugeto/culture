@@ -6,13 +6,13 @@
         {{-- 产品广告位 --}}
         <div class="pro_ad">
             <div class="pro_ad_pic">
-                <img src="{{DOMAIN}}uploads/images/2016/ppt.png">
+                <img src="{{PUB}}uploads/images/2016/ppt.png">
             </div>
             <div class="pro_ad_change">
                 <div class="ppt_change_bg"></div>
                 <ul class="ppt_change_pic">
-                    <a href="##"><li><img src="{{DOMAIN}}uploads/images/2016/ppt.png"></li></a>
-                    <a href=""><li><img src="{{DOMAIN}}uploads/images/2016/ppt2.png"></li></a>
+                    <a href="##"><li><img src="{{PUB}}uploads/images/2016/ppt.png"></li></a>
+                    <a href=""><li><img src="{{PUB}}uploads/images/2016/ppt2.png"></li></a>
                 </ul>
             </div>
         </div>
@@ -25,7 +25,7 @@
                 <ul>
                     @if(count($recommends))
                         @foreach($recommends as $recommend)
-                    <li><a href="/product/{{ $recommend->id }}">{{ $recommend->name }}</a></li>
+                    <li><a href="{{DOMAIN}}product/{{ $recommend->id }}">{{ $recommend->name }}</a></li>
                         @endforeach
                     @else
                         @for($i=0;$i<4-count($recommends);++$i)
@@ -38,7 +38,7 @@
             <div class="pro_big">
                 @if(count($recommends))
                     <div class="img"><img src="{{ $recommends[0]->getPicUrl() }}"></div>
-                    <a href="/product/{{ $recommend->id }}">{{ $recommends[0]->name }}</a>
+                    <a href="{{DOMAIN}}product/{{ $recommend->id }}">{{ $recommends[0]->name }}</a>
                 @else
                     <div class="img"><div class="none">无</div></div>
                     <a href="">没有推荐大图</a>
@@ -50,9 +50,9 @@
                     @foreach($recommends as $recommend)
                 <div class="img_text">
                     <div class="img">
-                        <a href="/product/{{ $recommend->id }}"><img src="{{ $recommend->getPicUrl() }}"></a>
+                        <a href="{{DOMAIN}}product/{{ $recommend->id }}"><img src="{{ $recommend->getPicUrl() }}"></a>
                     </div>
-                    <div class="text"><a href="/product/{{ $recommend->id }}">{{ $recommend->name }}</a></div>
+                    <div class="text"><a href="{{DOMAIN}}product/{{ $recommend->id }}">{{ $recommend->name }}</a></div>
                 </div>
                     @endforeach
                 @endif
@@ -79,10 +79,10 @@
                     @foreach($model->getNewests([]) as $newest)
                 <div class="img_text">
                     <div class="img">
-                        <a href="/product/{{ $newest->id }}"><img src="{{ $newest->getPicUrl() }}" style="@if($size=$newest->getPicSize($w=150,$h=125)) width:{{$size}}px; @endif height:125px;"></a>
+                        <a href="{{DOMAIN}}product/{{ $newest->id }}"><img src="{{ $newest->getPicUrl() }}" style="@if($size=$newest->getPicSize($w=150,$h=125)) width:{{$size}}px; @endif height:125px;"></a>
                     </div>
                     <div class="text">
-                        <a href="/product/{{ $newest->id }}">{{ $newest->name }}</a>
+                        <a href="{{DOMAIN}}product/{{ $newest->id }}">{{ $newest->name }}</a>
                         <span style="color:red;float:right;">{{ $newest->click }}</span>
                     </div>
                 </div>
@@ -107,10 +107,10 @@
                         @foreach($model->getNewests([2,4,5,6]) as $newest)
                     <div class="img_text">
                         {{--<div class="img_num"> 1 </div>--}}
-                        <div class="img"><a href="/product/{{ $newest->id }}">
+                        <div class="img"><a href="{{DOMAIN}}product/{{ $newest->id }}">
                                 <img src="{{ $newest->getPicUrl() }}" style="@if($size=$newest->getPicSize($w=150,$h=125)) width:{{$size}}px; @endif height:125px;"></a>
                         </div>
-                        <a href="/product/{{ $newest->id }}">{{ str_limit($newest->name,10) }}</a>
+                        <a href="{{DOMAIN}}product/{{ $newest->id }}">{{ str_limit($newest->name,10) }}</a>
                         <a href="" class="click">点击<span>{{ $newest->click }}</span></a>
                     </div>
                         @endforeach
@@ -137,8 +137,8 @@
                         @foreach($model->getNewests([1,3]) as $newest)
                     <div class="img_text">
                         {{--<div class="img_num"> 1 </div>--}}
-                        <div class="img"><a href="/product/{{ $newest->id }}"><img src="{{ $newest->getPicUrl() }}" style="@if($size=$newest->getPicSize($w=150,$h=125)) width:{{$size}}px; @endif height:125px;"></a></div>
-                        <a href="/product/{{ $newest->id }}">{{ str_limit($newest->name,10) }}</a>
+                        <div class="img"><a href="{{DOMAIN}}product/{{ $newest->id }}"><img src="{{ $newest->getPicUrl() }}" style="@if($size=$newest->getPicSize($w=150,$h=125)) width:{{$size}}px; @endif height:125px;"></a></div>
+                        <a href="{{DOMAIN}}product/{{ $newest->id }}">{{ str_limit($newest->name,10) }}</a>
                         <a href="" class="click">点击<span>{{ $newest->click }}</span></a>
                     </div>
                         @endforeach
@@ -168,7 +168,7 @@
             {{--<div class="guess">--}}
                 {{--<div class="img_text">--}}
                     {{--<div class="img">--}}
-                        {{--<a href=""><img src="/uploads/images/2016/online1.png"></a>--}}
+                        {{--<a href=""><img src="{{PUB}}uploads/images/2016/online1.png"></a>--}}
                     {{--</div>--}}
                     {{--<div class="text"><a href="">原创视频</a></div>--}}
                 {{--</div>--}}

@@ -26,7 +26,7 @@ class ProductLayerController extends BaseController
         $result = [
             'datas'=> $this->query($del=0),
             'lists'=> $this->lists,
-            'prefix_url'=> '/member/productlayer',
+            'prefix_url'=> DOMAIN.'member/productlayer',
             'curr'=> $curr,
         ];
         return view('member.productlayer.index', $result);
@@ -39,7 +39,7 @@ class ProductLayerController extends BaseController
         $result = [
             'datas'=> $this->query($del=1),
             'lists'=> $this->lists,
-            'prefix_url'=> '/member/productlayer/trash',
+            'prefix_url'=> DOMAIN.'member/productlayer/trash',
             'curr'=> $curr,
         ];
         return view('member.productlayer.index', $result);
@@ -62,7 +62,7 @@ class ProductLayerController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = time();
         ProductLayerModel::create($data);
-        return redirect('/member/produvtlayer');
+        return redirect(DOMAIN.'member/produvtlayer');
     }
 
     public function edit($id)

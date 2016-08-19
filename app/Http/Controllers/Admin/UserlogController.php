@@ -24,7 +24,7 @@ class UserlogController extends BaseController
         $result = [
             'datas'=> $this->query(),
             'crumb'=> $this->crumb,
-            'prefix_url'=> '/admin/userlog',
+            'prefix_url'=> DOMAIN.'admin/userlog',
             'curr'=> $curr,
         ];
         return view('admin.userlog.index', $result);

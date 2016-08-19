@@ -62,7 +62,7 @@ class RentController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = time();
         RentModel::create($data);
-        return redirect('/member/rent');
+        return redirect(DOMAIN.'member/rent');
     }
 
     public function edit($id)
@@ -82,7 +82,7 @@ class RentController extends BaseController
         $data = $this->getData($request);
         $data['updated_at'] = time();
         RentModel::where('id',$id)->update($data);
-        return redirect('/member/rent');
+        return redirect(DOMAIN.'member/rent');
     }
 
     public function show($id)
@@ -100,19 +100,19 @@ class RentController extends BaseController
     public function destroy($id)
     {
         RentModel::where('id',$id)->update(['del'=> 1]);
-        return redirect('/member/rent');
+        return redirect(DOMAIN.'member/rent');
     }
 
     public function restore($id)
     {
         RentModel::where('id',$id)->update(['del'=> 0]);
-        return redirect('/member/rent/trash');
+        return redirect(DOMAIN.'member/rent/trash');
     }
 
     public function forceDelete($id)
     {
         RentModel::where('id',$id)->delete();
-        return redirect('/member/rent/trash');
+        return redirect(DOMAIN.'member/rent/trash');
     }
 
 

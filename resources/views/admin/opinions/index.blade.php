@@ -23,9 +23,9 @@
 //                            var status = $("select[name='status']");
                             isshow.change(function(){
                                 if(isshow.val()==0){
-                                    window.location.href = '/admin/opinions';
+                                    window.location.href = '{{DOMAIN}}admin/opinions';
                                 } else {
-                                    window.location.href = '/admin/'+isshow.val()+'/opinions';
+                                    window.location.href = '{{DOMAIN}}admin/'+isshow.val()+'/opinions';
                                 }
                             });
                         });
@@ -58,7 +58,7 @@
                         <td class="am-hide-sm-only">{{ $data->id }}</td>
                         <td class="am-hide-sm-only">
                         @if($curr['url']=='')
-                            <a href="/admin/opinions/{{$data->id}}">{{ $data->name }}</a>
+                            <a href="{{DOMAIN}}admin/opinions/{{$data->id}}">{{ $data->name }}</a>
                         @else {{ $data->name }}
                         @endif
                         </td>
@@ -70,13 +70,13 @@
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
                                 @if($curr['url']=='')
-                                    <a href="/admin/opinions/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="/assets/images/show.png" class="icon"> 查看</button>
+                                    <a href="{{DOMAIN}}admin/opinions/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="{{PUB}}assets/images/show.png" class="icon"> 查看</button>
                                     </a>
-                                    <a href="/admin/opinions/{{$data->id}}/edit"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="/assets/images/edit.png" class="icon"> 编辑</button></a>
-                                    <a href="/admin/opinions/{{$data->id}}/destroy"><button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><img src="/assets/images/forceDelete_red.png" class="icon"> 放入回收站</button></a>
+                                    <a href="{{DOMAIN}}admin/opinions/{{$data->id}}/edit"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 编辑</button></a>
+                                    <a href="{{DOMAIN}}admin/opinions/{{$data->id}}/destroy"><button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><img src="{{PUB}}assets/images/forceDelete_red.png" class="icon"> 放入回收站</button></a>
                                 @else
-                                    <a href="/admin/opinions/{{$data->id}}/restore"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="/assets/images/edit.png" class="icon"> 还原</button></a>
-                                    <a href="/admin/opinions/{{$data->id}}/forceDelete"><button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><img src="/assets/images/forceDelete_red.png" class="icon"> 销毁</button></a>
+                                    <a href="{{DOMAIN}}admin/opinions/{{$data->id}}/restore"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 还原</button></a>
+                                    <a href="{{DOMAIN}}admin/opinions/{{$data->id}}/forceDelete"><button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><img src="{{PUB}}assets/images/forceDelete_red.png" class="icon"> 销毁</button></a>
                                 @endif
                                 </div>
                             </div>

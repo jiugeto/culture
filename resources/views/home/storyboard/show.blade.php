@@ -3,7 +3,7 @@
     @include('home.common.crumb')
 
     {{--分镜来一个瀑布流--}}
-    <link rel="stylesheet" type="text/css" href="/assets-home/css/waterfall.css">
+    <link rel="stylesheet" type="text/css" href="{{PUB}}assets-home/css/waterfall.css">
     <div class="pbl_title pbl_show_title"><b>{{ $data->name }}</b></div>
     <div class="pbl_out">
         <div class="pbl_show_user">{{ $data->user() }} 发布于 {{ $data->created_at }}</div>
@@ -54,7 +54,7 @@
     <div class="layback">
         <h4 style="text-align:center;">订单申请</h4>
         <p id="backcon"></p>
-        <p><a href="/member/order">进入订单列表</a></p>
+        <p><a href="{{DOMAIN}}member/order">进入订单列表</a></p>
         <a class="close" onclick="$('.layback').hide();"> X </a>
     </div>
 
@@ -93,7 +93,7 @@
                 if (genre0==1) { genre = 3; } else if (genre0==2) { genre = 4; }
                 $.ajax({
                     type: 'POST',
-                    url: '/member/order/create',
+                    url: '{{DOMAIN}}}member/order/create',
                     data: {'genre':genre,'id':id},
                     dataType: 'json',
                     success: function(data) {
@@ -105,7 +105,7 @@
         });
 
         function like(id){
-            window.location.href = "/storyboard/like/2/"+id;
+            window.location.href = "{{DOMAIN}}storyboard/like/2/"+id;
         }
     </script>
 @stop

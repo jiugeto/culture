@@ -39,10 +39,9 @@ class VideoController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-//            'actions'=> $this->actions(),
             'datas'=> $this->query(0),
             'cate'=> $this->model->cate(),
-            'prefix_url'=> '/admin/video',
+            'prefix_url'=> DOMAIN.'admin/video',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -65,7 +64,7 @@ class VideoController extends BaseController
     {
         $data = $this->getData($request);
         $data['created_at'] = time();
-        return redirect('/admin/video');
+        return redirect(DOMAIN.'admin/video');
     }
 
     public function edit($id)
@@ -86,7 +85,7 @@ class VideoController extends BaseController
         $data = $this->getData($request);
         $data['updated_at'] = time();
         VideoModel::where('id',$id)->update($data);
-        return redirect('/admin/video');
+        return redirect(DOMAIN.'admin/video');
     }
 
     public function show($id)

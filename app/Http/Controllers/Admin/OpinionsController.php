@@ -25,7 +25,7 @@ class OpinionsController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $result = [
             'datas'=> $this->query($isshow,$del=0),
-            'prefix_url'=> '/admin/opinions',
+            'prefix_url'=> DOMAIN.'admin/opinions',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
             'isshow'=> $isshow,
@@ -39,7 +39,7 @@ class OpinionsController extends BaseController
         $curr['url'] = $this->crumb['trash']['url'];
         $result = [
             'datas'=> $this->query($isshow,$del=1),
-            'prefix_url'=> '/admin/opinions/trash',
+            'prefix_url'=> DOMAIN.'admin/opinions/trash',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
             'isshow'=> $isshow,
@@ -63,7 +63,7 @@ class OpinionsController extends BaseController
     {
         $data = ['isshow'=>$request->isshow];
         OpinionModel::where('id',$id)->update($data);
-        return redirect('/admin/opinions');
+        return redirect(DOMAIN.'admin/opinions');
     }
 
     public function show($id)
@@ -81,19 +81,19 @@ class OpinionsController extends BaseController
     public function destroy($id)
     {
         OpinionModel::where('id',$id)->update(['del'=> 1]);
-        return redirect('/admin/opinions');
+        return redirect(DOMAIN.'admin/opinions');
     }
 
     public function restore($id)
     {
         OpinionModel::where('id',$id)->update(['del'=> 0]);
-        return redirect('/admin/opinions/trash');
+        return redirect(DOMAIN.'admin/opinions/trash');
     }
 
     public function forceDelete($id)
     {
         OpinionModel::where('id',$id)->delete;
-        return redirect('/admin/opinions/trash');
+        return redirect(DOMAIN.'admin/opinions/trash');
     }
 
     public function query($isshow,$del)

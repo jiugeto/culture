@@ -25,7 +25,7 @@ class TypeController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $result = [
             'datas'=> $this->query($table_id),
-            'prefix_url'=> '/admin/type',
+            'prefix_url'=> DOMAIN.'admin/type',
             'table_id'=> $table_id,
             'tableIds'=> $this->getTableIds(),
             'crumb'=> $this->crumb,
@@ -57,7 +57,7 @@ class TypeController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = time();
         TypeModel::create($data);
-        return redirect('/admin/type');
+        return redirect(DOMAIN.'admin/type');
     }
 
     public function edit($id)
@@ -77,7 +77,7 @@ class TypeController extends BaseController
         $data = $this->getData($request);
         $data['updated_at'] = time();
         TypeModel::where('id',$id)->update($data);
-        return redirect('/admin/type');
+        return redirect(DOMAIN.'admin/type');
     }
 
     public function show($id)

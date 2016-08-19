@@ -27,7 +27,7 @@ class StoryBoardController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $result = [
             'datas'=> $this->query($del=0),
-            'prefix_url'=> '/admin/storyboard',
+            'prefix_url'=> DOMAIN.'admin/storyboard',
             'model'=> $this->model,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -41,7 +41,7 @@ class StoryBoardController extends BaseController
         $curr['url'] = $this->crumb['trash']['url'];
         $result = [
             'datas'=> $this->query($del=1),
-            'prefix_url'=> '/admin/storyboard/trash',
+            'prefix_url'=> DOMAIN.'admin/storyboard/trash',
             'model'=> $this->model,
             'crumb'=> $this->crumb,
             'curr'=> $curr,

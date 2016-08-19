@@ -15,9 +15,9 @@
         <script>
             function toList(value){
                 if(value==0){
-                    window.location.href = '/admin/type';
+                    window.location.href = '{{DOMAIN}}admin/type';
                 } else {
-                    window.location.href = '/admin/type/tableid/'+value;
+                    window.location.href = '{{DOMAIN}}admin/type/tableid/'+value;
                 }
             }
         </script>

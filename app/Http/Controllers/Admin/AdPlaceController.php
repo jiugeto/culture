@@ -26,7 +26,7 @@ class AdPlaceController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $result = [
             'datas'=> $this->query(),
-            'prefix_url'=> '/admin/place',
+            'prefix_url'=> DOMAIN.'admin/place',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];

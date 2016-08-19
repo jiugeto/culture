@@ -25,7 +25,7 @@ class CategoryController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $result = [
             'datas'=> $this->query(),
-            'prefix_url'=> '/admin/category',
+            'prefix_url'=> DOMAIN.'admin/category',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -38,7 +38,7 @@ class CategoryController extends BaseController
         $curr['url'] = $this->crumb['trash']['url'];
         $result = [
             'datas'=> $this->query(),
-            'prefix_url'=> '/admin/category/trash',
+            'prefix_url'=> DOMAIN.'admin/category/trash',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -61,7 +61,7 @@ class CategoryController extends BaseController
     {
         $data = $this->getData($request);
         $data['created_at'] = time();
-        return redirect('/admin/category');
+        return redirect(DOMAIN.'admin/category');
     }
 
     public function edit($id)
@@ -82,7 +82,7 @@ class CategoryController extends BaseController
         $data = $this->getData($request);
         $data['updated_at'] = time();
         CategoryModel::where('id',$id)->update($data);
-        return redirect('/admin/category');
+        return redirect(DOMAIN.'admin/category');
     }
 
     public function show($id)
@@ -100,19 +100,19 @@ class CategoryController extends BaseController
     public function destroy($id)
     {
         CategoryModel::where('id',$id)->update(['del'=> 1]);
-        return redirect('/admin/category');
+        return redirect(DOMAIN.'admin/category');
     }
 
     public function restore($id)
     {
         CategoryModel::where('id',$id)->update(['del'=> 0]);
-        return redirect('/admin/category/trash');
+        return redirect(DOMAIN.'admin/category/trash');
     }
 
     public function forceDelete($id)
     {
         CategoryModel::where('id',$id)->delete();
-        return redirect('/admin/category/trash');
+        return redirect(DOMAIN.'admin/category/trash');
     }
 
 

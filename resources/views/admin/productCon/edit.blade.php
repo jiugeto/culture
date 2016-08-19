@@ -11,7 +11,7 @@
         <div class="am-g">
             @include('admin.common.info')
             <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
-                <form class="am-form" data-am-validator method="POST" action="/admin/productcon/{{ $data->id }}" enctype="multipart/form-data">
+                <form class="am-form" data-am-validator method="POST" action="{{DOMAIN}}admin/productcon/{{ $data->id }}" enctype="multipart/form-data">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input type="hidden" name="_method" value="POST">
                     <fieldset>
@@ -27,7 +27,7 @@
                         </div>
 
                         <div class="am-form-group" id="pic">
-                            <label>图片 / Picture：<a href="/admin/pic">图片预览</a></label>
+                            <label>图片 / Picture：<a href="{{DOMAIN}}admin/pic">图片预览</a></label>
                             <select name="pic_id">
                                 <option value="">选择图片</option>
                                 @if($model->picAll())

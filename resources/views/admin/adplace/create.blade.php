@@ -11,7 +11,7 @@
         <div class="am-g">
             @include('admin.common.info')
             <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
-                <form class="am-form" data-am-validator method="POST" action="/admin/place" enctype="multipart/form-data">
+                <form class="am-form" data-am-validator method="POST" action="{{DOMAIN}}admin/place" enctype="multipart/form-data">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <fieldset>
                         <div class="am-form-group">
@@ -26,7 +26,7 @@
 
                         <div class="am-form-group">
                             <label>广告位类型 / Type：
-                                <a href="/admin/type/create/{{'广告位-type_id'}}">[+添加类别]</a></label>
+                                <a href="{{DOMAIN}}admin/type/create/{{'广告位-type_id'}}">[+添加类别]</a></label>
                             <select required name="type_id">
                                 <option value="">-选择类型-</option>
                                 @foreach($types as $type)

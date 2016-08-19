@@ -28,9 +28,9 @@
                         var isauth = $("select[name='isauth']");
                         isuser.change(function(){
                             if(isuser.val()=='' && isauth.val()==''){
-                                window.location.href = '/admin/user';
+                                window.location.href = '{{DOMAIN}}admin/user';
                             } else {
-                                window.location.href = '/admin/'+isuser.val()+isauth.val()+'/user';
+                                window.location.href = '{{DOMAIN}}admin/'+isuser.val()+isauth.val()+'/user';
                             }
                         });
                     </script>

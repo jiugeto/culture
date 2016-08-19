@@ -27,7 +27,7 @@ class EntertainSController extends EntertainController
         $curr['url'] = $this->lists['']['url'];
         $result = [
             'datas'=> $this->query($del=0,$this->genre),
-            'prefix_url'=> '/admin/entertainS',
+            'prefix_url'=> DOMAIN.'member/entertainS',
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -40,7 +40,7 @@ class EntertainSController extends EntertainController
         $curr['url'] = $this->lists['trash']['url'];
         $result = [
             'datas'=> $this->query($del=1,$this->genre),
-            'prefix_url'=> '/admin/entertainS',
+            'prefix_url'=> DOMAIN.'member/entertainS',
             'lists'=> $this->lists,
             'curr'=> $curr,
             'genre'=> $genre,
@@ -65,7 +65,7 @@ class EntertainSController extends EntertainController
         $data['genre'] = $this->genre;
         $data['created_at'] = time();
         EntertainModel::create($data);
-        return redirect('/member/entertainS');
+        return redirect(DOMAIN.'member/entertainS');
     }
 
     public function edit($id)
@@ -85,7 +85,7 @@ class EntertainSController extends EntertainController
         $data = $this->getData($request);
         $data['updated_at'] = time();
         EntertainModel::where('id',$id)->update($data);
-        return redirect('/member/entertainS');
+        return redirect(DOMAIN.'member/entertainS');
     }
 
 }

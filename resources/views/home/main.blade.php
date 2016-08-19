@@ -3,17 +3,17 @@
 <head>
     <title>微文化</title>
     <meta charset="utf-8">
-    <link rel="icon" type="image/png" href="/assets/images/icon.png">
-    <link rel="stylesheet" type="text/css" href="/assets-home/css/home.css">
-    <link rel="stylesheet" type="text/css" href="/assets-home/css/home_body.css">
-    <link rel="stylesheet" type="text/css" href="/assets-home/css/product.css">
-    <link rel="stylesheet" type="text/css" href="/assets-home/css/creation.css">
-    <link rel="stylesheet" type="text/css" href="/assets-home/css/supply.css">
-    <link rel="stylesheet" type="text/css" href="/assets-home/css/design.css">
-    <link rel="stylesheet" type="text/css" href="/assets-home/css/about.css">
-    <link rel="stylesheet" type="text/css" href="/assets-home/css/opinion.css">
-    <link rel="stylesheet" type="text/css" href="/assets-home/css/talk.css">
-    <script src="/assets/js/jquery-1.10.2.min.js"></script>
+    <link rel="icon" type="image/png" href="{{PUB}}assets/images/icon.png">
+    <link rel="stylesheet" type="text/css" href="{{PUB}}assets-home/css/home.css">
+    <link rel="stylesheet" type="text/css" href="{{PUB}}assets-home/css/home_body.css">
+    <link rel="stylesheet" type="text/css" href="{{PUB}}assets-home/css/product.css">
+    <link rel="stylesheet" type="text/css" href="{{PUB}}assets-home/css/creation.css">
+    <link rel="stylesheet" type="text/css" href="{{PUB}}assets-home/css/supply.css">
+    <link rel="stylesheet" type="text/css" href="{{PUB}}assets-home/css/design.css">
+    <link rel="stylesheet" type="text/css" href="{{PUB}}assets-home/css/about.css">
+    <link rel="stylesheet" type="text/css" href="{{PUB}}assets-home/css/opinion.css">
+    <link rel="stylesheet" type="text/css" href="{{PUB}}assets-home/css/talk.css">
+    <script src="{{PUB}}assets/js/jquery-1.10.2.min.js"></script>
 </head>
 <body>
 {{--浏览器问题--}}

@@ -19,19 +19,19 @@
             @foreach($datas as $data)
             <tr>
                 <td>{{ $data->id }}</td>
-                <td><a href="/member/orderpro">{{ $data->product() }}</a></td>
+                <td><a href="{{DOMAIN}}member/orderpro">{{ $data->product() }}</a></td>
                 <td>{{ $data->buyerName }}</td>
                 <td>{{ $data->sellerName }}</td>
                 <td>{{ $data->created_at }}</td>
                 <td>
                     {{--@if($curr['url']=='')--}}
-                        {{--<a href="/member/order/{{ $data->id }}/pre" class="list_btn">预览</a>--}}
-                        <a href="/member/orderpro/{{ $data->id }}" class="list_btn">查看</a>
-                        {{--<a href="/member/order/{{ $data->id }}/edit" class="list_btn">编辑</a>--}}
-                        {{--<a href="/member/order/{{ $data->id }}/destroy" class="list_btn">删除</a>--}}
+                        {{--<a href="{{DOMAIN}}member/order/{{ $data->id }}/pre" class="list_btn">预览</a>--}}
+                        <a href="{{DOMAIN}}member/orderpro/{{ $data->id }}" class="list_btn">查看</a>
+                        {{--<a href="{{DOMAIN}}member/order/{{ $data->id }}/edit" class="list_btn">编辑</a>--}}
+                        {{--<a href="{{DOMAIN}}member/order/{{ $data->id }}/destroy" class="list_btn">删除</a>--}}
                     {{--@elseif($curr['url']=='trash')--}}
-                        {{--<a href="/member/order/{{ $data->id }}/restore" class="list_btn">还原</a>--}}
-                        {{--<a href="/member/order/{{ $data->id }}/forceDelete" class="list_btn">销毁记录</a>--}}
+                        {{--<a href="{{DOMAIN}}member/order/{{ $data->id }}/restore" class="list_btn">还原</a>--}}
+                        {{--<a href="{{DOMAIN}}member/order/{{ $data->id }}/forceDelete" class="list_btn">销毁记录</a>--}}
                     {{--@endif--}}
                 </td>
             </tr>

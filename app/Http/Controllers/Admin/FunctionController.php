@@ -25,7 +25,7 @@ class FunctionController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $result = [
             'datas'=> $this->query($del=0),
-            'prefix_url'=> '/admin/function',
+            'prefix_url'=> DOMAIN.'admin/function',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -38,7 +38,7 @@ class FunctionController extends BaseController
         $curr['url'] = $this->crumb['trash']['url'];
         $result = [
             'datas'=> $this->query($del=1),
-            'prefix_url'=> '/admin/function/trash',
+            'prefix_url'=> DOMAIN.'admin/function/trash',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -61,7 +61,7 @@ class FunctionController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = time();
         FunctionModel::create($data);
-        return redirect('/admin/function');
+        return redirect(DOMAIN.'admin/function');
     }
 
     public function edit($id)
@@ -81,13 +81,13 @@ class FunctionController extends BaseController
         $data = $this->getData($request);
         $data['updated_at'] = time();
         FunctionModel::where('id',$id)->update($data);
-        return redirect('/admin/function');
+        return redirect(DOMAIN.'admin/function');
     }
 
     public function destroy($id)
     {
         FunctionModel::where('id',$id)->update(['del'=>1]);
-        return redirect('/admin/function');
+        return redirect(DOMAIN.'admin/function');
     }
 
 

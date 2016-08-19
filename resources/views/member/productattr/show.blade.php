@@ -34,7 +34,7 @@
             @if($attrs && isset($attrs['switch']))
                 @if($attrs['switch'])
                     启用 &nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="/member/productattr/{{$data->id}}/1" class="list_btn">查看</a>
+                    <a href="{{DOMAIN}}member/productattr/{{$data->id}}/1" class="list_btn">查看</a>
                 @else 未启用
                 @endif
             @else 无
@@ -47,7 +47,7 @@
             @if($attrs2 && isset($attrs2['switch2']))
                 @if($attrs2['switch2'])
                     启用 &nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="/member/productattr/{{$data->id}}/2" class="list_btn">查看</a>
+                    <a href="{{DOMAIN}}member/productattr/{{$data->id}}/2" class="list_btn">查看</a>
                 @else 未启用
                 @endif
             @else 无

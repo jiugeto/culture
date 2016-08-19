@@ -25,7 +25,7 @@ class IdeaController extends BaseController
         $curr['url'] = $this->lists['']['url'];
         $result = [
             'datas'=> $this->query($del=0,$cate_id),
-            'prefix_url'=> '/member/idea',
+            'prefix_url'=> DOMAIN.'member/idea',
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -38,7 +38,7 @@ class IdeaController extends BaseController
         $curr['url'] = $this->lists['trash']['url'];
         $result = [
             'datas'=> $this->query($del=1,$cate_id),
-            'prefix_url'=> '/member/idea/trash',
+            'prefix_url'=> DOMAIN.'member/idea/trash',
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -65,7 +65,7 @@ class IdeaController extends BaseController
 //        //将自己加入查看权限表
 //        $ideaModel = IdeasModel::where($data)->first();
 //        IdeasShowModel::create(['ideaid'=>$ideaModel->id,'uid'=>$this->userid,'created_at'=>date('Y-m-d H:i:s',time())]);
-        return redirect('/member/idea');
+        return redirect(DOMAIN.'member/idea');
     }
 
     public function edit($id)
@@ -86,7 +86,7 @@ class IdeaController extends BaseController
         $data = $this->getData($request);
         $data['updated_at'] = time();
         IdeasModel::where('id',$id)->update($data);
-        return redirect('/member/idea');
+        return redirect(DOMAIN.'member/idea');
     }
 
     public function show($id)
@@ -104,19 +104,19 @@ class IdeaController extends BaseController
     public function destroy($id)
     {
         IdeasModel::where('id',$id)->update(['del'=> 1]);
-        return redirect('/member/idea');
+        return redirect(DOMAIN.'member/idea');
     }
 
     public function restore($id)
     {
         IdeasModel::where('id',$id)->update(['del'=> 0]);
-        return redirect('/member/idea/trash');
+        return redirect(DOMAIN.'member/idea/trash');
     }
 
     public function forceDelete($id)
     {
         IdeasModel::where('id',$id)->delete();
-        return redirect('/member/idea/trash');
+        return redirect(DOMAIN.'member/idea/trash');
     }
 
     /**

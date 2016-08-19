@@ -18,9 +18,9 @@
                     var status = $("select[name='status']");
                     status.change(function(){
                         if(status.val()==0){
-                            window.location.href = '/opinion';
+                            window.location.href = '{{DOMAIN}}opinion';
                         } else {
-                            window.location.href = '/'+status.val()+'/opinion';
+                            window.location.href = '{{DOMAIN}}'+status.val()+'/opinion';
                         }
                     });
                     //发布按钮位置
@@ -39,7 +39,7 @@
                 @foreach($datas as $data)
             <table class="record">
                 <tr>
-                    <td class="first"><div><img src="/uploads/images/2016/online1.png"></div></td>
+                    <td class="first"><div><img src="{{PUB}}uploads/images/2016/online1.png"></div></td>
                     <td class="text">意见标题：{{ $data->name }}</td>
                     <td class="text">状态：{{ $data->status() }}</td>
                     <td class="text">回复：{{ count($data->replyModels()) }}
@@ -47,11 +47,11 @@
                     </td>
                     <td class="text">发布时间：{{ $data->created_at }}</td>
                     <td class="detail">
-                        <a href="/opinion/{{$data->id}}">查看</a>
+                        <a href="{{DOMAIN}}opinion/{{$data->id}}">查看</a>
                         @if($data->status==1)
-                            <a href="/opinion/{{$data->id}}/edit">修改</a>
+                            <a href="{{DOMAIN}}opinion/{{$data->id}}/edit">修改</a>
                         @elseif($data->status==4)
-                            <a href="/opinion/create/{{$data->id}}">回复</a>
+                            <a href="{{DOMAIN}}opinion/create/{{$data->id}}">回复</a>
                         @endif
                     </td>
                 </tr>

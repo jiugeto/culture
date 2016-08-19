@@ -40,7 +40,7 @@
                 <tr>
                     <td rowspan="2" class="td_r_img">
                         <div class="r_img">
-                            {{--<img src="/uploads/images/2016/online1.png">--}}
+                            {{--<img src="{{PUB}}uploads/images/2016/online1.png">--}}
                             @if(count($data->getPics()))
                                 <img src="{{ $pic[0]->getPicUrl() }}">
                             @else
@@ -67,7 +67,7 @@
         </div>
         <div class="s_right">
             <div class="cate"></div>
-            {{--<img src="/uploads/images/2016/ppt.png">--}}
+            {{--<img src="{{PUB}}uploads/images/2016/ppt.png">--}}
             <div style="width:280px;height:400px;background:rgb(250,250,250);"></div>
         </div>
     </div>

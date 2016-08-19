@@ -27,17 +27,17 @@
                 <td>{{ $data->created_at }}</td>
                 <td>
                 {{--@if($curr['url']=='')--}}
-                    <a href="/member/productattr/{{ $data->id }}" class="list_btn">查看</a>
-                    <a href="/member/productattr/{{ $data->id }}/edit" class="list_btn">编辑</a>
-                    <a href="/member/productattr/{{ $data->id }}/edit2" class="list_btn">二级样式</a>
+                    <a href="{{DOMAIN}}member/productattr/{{ $data->id }}" class="list_btn">查看</a>
+                    <a href="{{DOMAIN}}member/productattr/{{ $data->id }}/edit" class="list_btn">编辑</a>
+                    <a href="{{DOMAIN}}member/productattr/{{ $data->id }}/edit2" class="list_btn">二级样式</a>
                     <div style="height:10px;">{{--空白--}}</div>
-                    <a href="/member/productattr/{{ $data->id }}/edit3" class="list_btn">三级样式</a>
-                    <a href="/member/productattr/{{ $data->id }}/edit4" class="list_btn">图片样式</a>
-                    <a href="/member/productattr/{{ $data->id }}/edit5" class="list_btn">文字样式</a>
-                    {{--<a href="/member/productattr/{{ $data->id }}/destroy" class="list_btn">删除</a>--}}
+                    <a href="{{DOMAIN}}member/productattr/{{ $data->id }}/edit3" class="list_btn">三级样式</a>
+                    <a href="{{DOMAIN}}member/productattr/{{ $data->id }}/edit4" class="list_btn">图片样式</a>
+                    <a href="{{DOMAIN}}member/productattr/{{ $data->id }}/edit5" class="list_btn">文字样式</a>
+                    {{--<a href="{{DOMAIN}}member/productattr/{{ $data->id }}/destroy" class="list_btn">删除</a>--}}
                 {{--@else--}}
-                    {{--<a href="/member/productattr/{{ $data->id }}/restore" class="list_btn">还原</a>--}}
-                    {{--<a href="/member/productattr/{{ $data->id }}/forceDelete" class="list_btn">销毁记录</a>--}}
+                    {{--<a href="{{DOMAIN}}member/productattr/{{ $data->id }}/restore" class="list_btn">还原</a>--}}
+                    {{--<a href="{{DOMAIN}}member/productattr/{{ $data->id }}/forceDelete" class="list_btn">销毁记录</a>--}}
                 {{--@endif--}}
                 </td>
             </tr>

@@ -27,7 +27,7 @@ class LinkController extends BaseController
         $result = [
             'datas'=> $this->query(),
             'types'=> $this->model['types'],
-            'prefix_url'=> '/admin/link',
+            'prefix_url'=> DOMAIN.'admin/link',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -53,7 +53,7 @@ class LinkController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = time();
         LinkModel::create($data);
-        return redirect('/admin/link');
+        return redirect(DOMAIN.'admin/link');
     }
 
     public function edit($id)
@@ -76,7 +76,7 @@ class LinkController extends BaseController
         $data = $this->getData($request);
         $data['updated_at'] = time();
         LinkModel::where('id',$id)->update($data);
-        return redirect('/admin/link');
+        return redirect(DOMAIN.'admin/link');
     }
 
     public function show($id)

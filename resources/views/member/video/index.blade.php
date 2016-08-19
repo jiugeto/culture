@@ -18,17 +18,17 @@
             @foreach($datas as $data)
             <tr>
                 <td>{{ $data->id }}</td>
-                <td><a href="/member/video/{{ $data->id }}">{{ $data->name }}</a></td>
+                <td><a href="{{DOMAIN}}member/video/{{ $data->id }}">{{ $data->name }}</a></td>
                 <td><img src="{{ $data->getPicUrl() }}" style="width:100px;"></td>
                 <td>{{ $data->createTime() }}</td>
                 <td>
                     @if($curr['url']=='')
-                        <a href="/member/video/{{ $data->id }}" class="list_btn">查看</a>
-                        <a href="/member/video/{{ $data->id }}/edit" class="list_btn">编辑</a>
-                        <a href="/member/video/{{ $data->id }}/destroy" class="list_btn">删除</a>
+                        <a href="{{DOMAIN}}member/video/{{ $data->id }}" class="list_btn">查看</a>
+                        <a href="{{DOMAIN}}member/video/{{ $data->id }}/edit" class="list_btn">编辑</a>
+                        <a href="{{DOMAIN}}member/video/{{ $data->id }}/destroy" class="list_btn">删除</a>
                     @else
-                        <a href="/member/video/{{ $data->id }}/restore" class="list_btn">还原</a>
-                        <a href="/member/video/{{ $data->id }}/forceDelete" class="list_btn">销毁记录</a>
+                        <a href="{{DOMAIN}}member/video/{{ $data->id }}/restore" class="list_btn">还原</a>
+                        <a href="{{DOMAIN}}member/video/{{ $data->id }}/forceDelete" class="list_btn">销毁记录</a>
                     @endif
                 </td>
             </tr>
@@ -42,7 +42,7 @@
             <script>
                 $(document).ready(function(){
                     $("input[name='leplay']").change(function(){
-                        window.location.href = '/member/video/leplay/'+$(this).val();
+                        window.location.href = '{{DOMAIN}}member/video/leplay/'+$(this).val();
                     });
                 });
             </script>

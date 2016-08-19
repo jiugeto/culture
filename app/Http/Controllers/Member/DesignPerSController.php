@@ -7,7 +7,7 @@ use App\Models\DesignModel;
 class DesignPerSController extends DesignController
 {
     /**
-     * 会员后台：设计管理
+     * 会员后台：个人设计供应管理
      */
 
     protected $genre = 3;       //1企业供应，2企业需求，3个人供应，4个人需求

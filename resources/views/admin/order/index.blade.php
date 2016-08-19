@@ -24,16 +24,16 @@
                             var isshow = $("select[name='isshow']");
                             del.change(function(){
                                 if(del.val()==0 && isshow.val()==0){
-                                    window.location.href = '/admin/opinions';
+                                    window.location.href = '{{DOMAIN}}admin/opinions';
                                 } else {
-                                    window.location.href = '/admin/opinions/'+del.val()+isshow.val();
+                                    window.location.href = '{{DOMAIN}}admin/opinions/'+del.val()+isshow.val();
                                 }
                             });
                             isshow.change(function(){
                                 if(del.val()==0 && isshow.val()==0){
-                                    window.location.href = '/admin/opinions';
+                                    window.location.href = '{{DOMAIN}}admin/opinions';
                                 } else {
-                                    window.location.href = '/admin/opinions/'+del.val()+isshow.val();
+                                    window.location.href = '{{DOMAIN}}admin/opinions/'+del.val()+isshow.val();
                                 }
                             });
                         });

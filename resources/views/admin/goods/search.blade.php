@@ -15,10 +15,10 @@
             $(document).ready(function(){
                 $("select[name='type']").change(function(){
                     if(this.value==0){
-                        window.location.href = '/admin/goods';
+                        window.location.href = '{{DOMAIN}}admin/goods';
                     }
                     if(this.value!=0){
-                        window.location.href = '/admin/'+this.value+'/goods';
+                        window.location.href = '{{DOMAIN}}admin/'+this.value+'/goods';
                     }
                 });
             });

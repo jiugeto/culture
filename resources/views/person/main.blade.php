@@ -3,10 +3,10 @@
 <head>
     <title>微文化-个人页面</title>
     <meta charset="utf-8">
-    <link rel="icon" type="image/png" href="/assets/images/icon.png">
-    <link rel="stylesheet" type="text/css" href="/assets-home/css/home.css">
-    <link rel="stylesheet" type="text/css" href="/assets-home/css/person.css">
-    <script src="/assets/js/jquery-1.10.2.min.js"></script>
+    <link rel="icon" type="image/png" href="{{PUB}}assets/images/icon.png">
+    <link rel="stylesheet" type="text/css" href="{{PUB}}assets-home/css/home.css">
+    <link rel="stylesheet" type="text/css" href="{{PUB}}assets-home/css/person.css">
+    <script src="{{PUB}}assets/js/jquery-1.10.2.min.js"></script>
 </head>
 <body>
     @include('layout.header')

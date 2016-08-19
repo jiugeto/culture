@@ -30,7 +30,7 @@ class ProductLayerAttrController extends BaseController
             'datas'=> $this->query($layerid),
             'layerModel'=> ProductLayerModel::find($layerid),
             'lists'=> $this->lists,
-            'prefix_url'=> '/member/prolayerattr',
+            'prefix_url'=> DOMAIN.'member/prolayerattr',
             'curr'=> $curr,
         ];
         return view('member.prolayerattr.index', $result);
@@ -54,7 +54,7 @@ class ProductLayerAttrController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = time();
         ProductLayerAttrModel::create($data);
-        return redirect('/member/prolayerattr');
+        return redirect(DOMAIN.'member/prolayerattr');
     }
 
     public function edit($layerid,$id)
@@ -76,7 +76,7 @@ class ProductLayerAttrController extends BaseController
         $data = $this->getData($request);
         $data['updated_at'] = time();
         ProductLayerAttrModel::where('id',$id)->update($data);
-        return redirect('/member/prolayerAttr');
+        return redirect(DOMAIN.'member/prolayerAttr');
     }
 
     public function show($layerid,$id)
@@ -96,19 +96,19 @@ class ProductLayerAttrController extends BaseController
     public function destroy($id)
     {
         ProductLayerAttrModel::where('id',$id)->update(['del'=> 1]);
-        return redirect('/member/prolayerattr');
+        return redirect(DOMAIN.'member/prolayerattr');
     }
 
     public function restore($id)
     {
         ProductLayerAttrModel::where('id',$id)->update(['del'=> 0]);
-        return redirect('/member/prolayerattr');
+        return redirect(DOMAIN.'member/prolayerattr');
     }
 
     public function forceDelete($id)
     {
         ProductLayerAttrModel::where('id',$id)->delete();
-        return redirect('/member/prolayerattr');
+        return redirect(DOMAIN.'member/prolayerattr');
     }
 
 

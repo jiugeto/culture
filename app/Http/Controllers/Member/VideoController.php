@@ -30,7 +30,7 @@ class VideoController extends BaseController
         $result = [
             'datas'=> $this->query($del=0),
             'user'=> $this->userParam,
-            'prefix_url'=> '/member/video',
+            'prefix_url'=> DOMAIN.'member/video',
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -44,7 +44,7 @@ class VideoController extends BaseController
         $result = [
             'datas'=> $this->query($del=1),
             'user'=> $this->userParam,
-            'prefix_url'=> '/member/video/trash',
+            'prefix_url'=> DOMAIN.'member/video/trash',
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -68,7 +68,7 @@ class VideoController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = time();
         VideoModel::create($data);
-        return redirect('/member/video');
+        return redirect(DOMAIN.'member/video');
     }
 
     public function edit($id)
@@ -89,7 +89,7 @@ class VideoController extends BaseController
         $data = $this->getData($request);
         $data['updated_at'] = time();
         VideoModel::where('id',$id)->update($data);
-        return redirect('/member/video');
+        return redirect(DOMAIN.'member/video');
     }
 
     public function show($id)
@@ -108,19 +108,19 @@ class VideoController extends BaseController
     public function destroy($id)
     {
         VideoModel::where('id',$id)->update(['del'=> 1]);
-        return redirect('/member/video');
+        return redirect(DOMAIN.'member/video');
     }
 
     public function restore($id)
     {
         VideoModel::where('id',$id)->update(['del'=> 0]);
-        return redirect('/member/video/trash');
+        return redirect(DOMAIN.'member/video/trash');
     }
 
     public function forceDelete($id)
     {
         VideoModel  ::where('id',$id)->delete();
-        return redirect('/member/video/trash');
+        return redirect(DOMAIN.'member/video/trash');
     }
 
     public function uploadWay()
@@ -140,7 +140,7 @@ class VideoController extends BaseController
     public function setLeplay($play)
     {
         UserParamsModel::where('id',$this->userid)->update(['leplay'=> $play]);
-        return redirect('/member/video');
+        return redirect(DOMAIN.'member/video');
     }
 
 

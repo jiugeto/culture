@@ -27,7 +27,7 @@ class AdminController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $result = [
             'datas'=> $this->query(),
-            'prefix_url'=> '/admin/admin',
+            'prefix_url'=> DOMAIN.'admin/admin',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -51,7 +51,7 @@ class AdminController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = time();
         AdminModel::create($data);
-        return redirect('/admin/admin');
+        return redirect(DOMAIN.'admin/admin');
     }
 
     public function show($id)
@@ -84,19 +84,19 @@ class AdminController extends BaseController
         $data = $this->getData($request);
         $data['updated_at'] = time();
         AdminModel::where('id',$id)->update($data);
-        return redirect('/admin/admin');
+        return redirect(DOMAIN.'admin/admin');
     }
 
 //    public function destroy($id)
 //    {
 //        AdminModel::where('id',$id)->update(['del'=>1]);
-//        return redirect('/admin/admin');
+//        return redirect(DOMAIN.'admin/admin');
 //    }
 
     public function forceDelete($id)
     {
         AdminModel::where('id',$id)->delete();
-        return redirect('/admin/admin');
+        return redirect(DOMAIN.'admin/admin');
     }
 
 

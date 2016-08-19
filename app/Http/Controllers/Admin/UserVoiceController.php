@@ -25,7 +25,7 @@ class UserVoiceController extends BaseController
         $result = [
             'datas'=> $this->query(),
             'crumb'=> $this->crumb,
-            'prefix_url'=> '/admin/uservoice',
+            'prefix_url'=> DOMAIN.'admin/uservoice',
             'curr'=> $curr,
         ];
         return view('admin.uservoice.index', $result);
@@ -48,7 +48,7 @@ class UserVoiceController extends BaseController
         $data = $this->getData($request);
         $data['updated_at'] = time();
         UserVoiceModel::where('id',$id)->update($data);
-        return redirect('/admin/uservoice');
+        return redirect(DOMAIN.'admin/uservoice');
     }
 
     public function show($id)

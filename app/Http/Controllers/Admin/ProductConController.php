@@ -25,7 +25,7 @@ class ProductConController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $result = [
             'datas'=> $this->query($del=0),
-            'prefix_url'=> '/admin/productcon',
+            'prefix_url'=> DOMAIN.'admin/productcon',
             'model'=> $this->model,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -39,7 +39,7 @@ class ProductConController extends BaseController
         $curr['url'] = $this->crumb['trash']['url'];
         $result = [
             'datas'=> $this->query($del=0),
-            'prefix_url'=> '/admin/productcon/trash',
+            'prefix_url'=> DOMAIN.'admin/productcon/trash',
             'model'=> $this->model,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -64,7 +64,7 @@ class ProductConController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = time();
         ProductConModel::create($data);
-        return redirect('/admin/productcon');
+        return redirect(DOMAIN.'admin/productcon');
     }
 
     public function edit($id)
@@ -85,7 +85,7 @@ class ProductConController extends BaseController
         $data = $this->getData($request);
         $data['updated_at'] = time();
         ProductConModel::where('id',$id)->update($data);
-        return redirect('/admin/productcon');
+        return redirect(DOMAIN.'admin/productcon');
     }
 
     public function show($id)

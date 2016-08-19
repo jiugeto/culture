@@ -25,7 +25,7 @@ class OrderProductController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $result = [
             'datas'=> $this->query($del=0,$isshow),
-            'prefix_url'=> '/admin/orderpro',
+            'prefix_url'=> DOMAIN.'admin/orderpro',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
             'del'=> $del,

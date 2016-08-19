@@ -27,7 +27,7 @@
                     <tr>
                         <td class="am-hide-sm-only"><input type="checkbox" /></td>
                         <td class="am-hide-sm-only">{{ $data->id }}</td>
-                        <td class="am-hide-sm-only"><a href="/admin/productattr/{{$data->id}}">{{ $data->name }}</a></td>
+                        <td class="am-hide-sm-only"><a href="{{DOMAIN}}admin/productattr/{{$data->id}}">{{ $data->name }}</a></td>
                         <td class="am-hide-sm-only">{{ $data->product() }}</td>
                         <td class="am-hide-sm-only">{{ $data->created_at }}</td>
                         <td class="am-hide-sm-only">

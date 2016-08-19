@@ -26,7 +26,7 @@ class StaffController extends BaseController
         $curr['url'] = $this->lists['']['url'];
         $result = [
             'datas'=> $this->query(),
-            'prefix_url'=> '/admin/staff',
+            'prefix_url'=> DOMAIN.'member/staff',
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -50,7 +50,7 @@ class StaffController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = time();
         StaffModel::create($data);
-        return redirect('/member/staff');
+        return redirect(DOMAIN.'member/staff');
     }
 
     public function edit($id)
@@ -71,7 +71,7 @@ class StaffController extends BaseController
         $data = $this->getData($request);
         $data['updated_at'] = time();
         StaffModel::where('id',$id)->update($data);
-        return redirect('/member/staff');
+        return redirect(DOMAIN.'member/staff');
     }
 
     public function show($id)
@@ -90,19 +90,19 @@ class StaffController extends BaseController
     public function destroy($id)
     {
         StaffModel::where('id',$id)->update(['del'=> 1]);
-        return redirect('/member/staff');
+        return redirect(DOMAIN.'member/staff');
     }
 
     public function restore($id)
     {
         StaffModel::where('id',$id)->update(['del'=> 0]);
-        return redirect('/member/staff/trash');
+        return redirect(DOMAIN.'member/staff/trash');
     }
 
     public function forceDelete($id)
     {
         StaffModel::where('id',$id)->delete();
-        return redirect('/member/staff/trash');
+        return redirect(DOMAIN.'member/staff/trash');
     }
 
 

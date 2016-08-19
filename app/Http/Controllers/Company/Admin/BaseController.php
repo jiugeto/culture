@@ -56,7 +56,7 @@ class BaseController extends Controller
 //            $this->cid = $this->company['cid'];
         } else {
 //            echo "<script>alert('你还木有做公司认证！');</script>";exit;
-//            return redirect('/member/setting/'.$this->userid.'/auth');
+//            return redirect(DOMAIN.'member/setting/'.$this->userid.'/auth');
         }
     }
 

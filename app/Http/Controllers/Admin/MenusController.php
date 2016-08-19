@@ -26,7 +26,7 @@ class MenusController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $result = [
             'datas'=> $this->query($type),
-            'prefix_url'=> '/admin/menus',
+            'prefix_url'=> DOMAIN.'admin/menus',
             'types'=> $this->model['types'],
             'type_curr'=> $type,
             'crumb'=> $this->crumb,
@@ -53,7 +53,7 @@ class MenusController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = time();
         MenusModel::create($data);
-        return redirect('/admin/menus');
+        return redirect(DOMAIN.'admin/menus');
     }
 
     public function show($id)
@@ -87,7 +87,7 @@ class MenusController extends BaseController
         $data = $this->getData($request);
         $data['updated_at'] = time();
         MenusModel::where('id',$id)->update($data);
-        return redirect('/admin/menus');
+        return redirect(DOMAIN.'admin/menus');
     }
 
     public function forceDelete($id)

@@ -26,7 +26,7 @@ class AuthorizationController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $result = [
             'datas'=> $this->query($del=0),
-            'prefix_url'=> '/admin/authorization',
+            'prefix_url'=> DOMAIN.'admin/authorization',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];

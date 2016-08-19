@@ -1,7 +1,7 @@
 @extends('home.main')
 @section('content')
     <div class="talk_con">
-        <form class="form" data-am-validator method="POST" action="/talk" enctype="multipart/form-data">
+        <form class="form" data-am-validator method="POST" action="{{DOMAIN}}talk" enctype="multipart/form-data">
             <div class="head">添加新的话题</div>
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 

@@ -2,7 +2,7 @@
 @section('content')
     @include('member.common.crumb')
 
-    <form data-am-validator method="POST" action="/member/design/{{ $data->id }}" enctype="multipart/form-data">
+    <form data-am-validator method="POST" action="{{DOMAIN}}member/design/{{ $data->id }}" enctype="multipart/form-data">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="method" value="POST">
         <p style="text-align:center;"><b>{{ $lists['func']['name'] }}{{ in_array($lists['func']['url'],['designPerD','designComD']) ? '需求' : '供应' }}修改</b></p>

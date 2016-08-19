@@ -6,24 +6,24 @@
     <div class="am-btn-toolbar">
         <div class="am-btn-group am-btn-group-xs">
             @if(mb_substr($curr['name'],-2)=='列表')
-                <a href="/admin/{{$crumb['category']['url']}}/{{$crumb['create']['url']}}">
+                <a href="{{DOMAIN}}admin/{{$crumb['category']['url']}}/{{$crumb['create']['url']}}">
                     <button type="button" class="am-btn am-btn-default">
-                        <img src="/assets/images/add.png" class="icon">
+                        <img src="{{PUB}}assets/images/add.png" class="icon">
                         {{ $crumb['create']['name'] }}
                     </button>
                 </a>
                 @if(!in_array($crumb['category']['url'],$crumb['notrash']))
-                <a href="/admin/{{$crumb['category']['url']}}/{{$crumb['trash']['url']}}">
+                <a href="{{DOMAIN}}admin/{{$crumb['category']['url']}}/{{$crumb['trash']['url']}}">
                     <button type="button" class="am-btn am-btn-default">
-                        <img src="/assets/images/del.png" class="icon">
+                        <img src="{{PUB}}assets/images/del.png" class="icon">
                         {{ $crumb['trash']['name'] }}
                     </button>
                 </a>
                 @endif
             @else
-                <a href="/admin/{{$crumb['category']['url']}}">
+                <a href="{{DOMAIN}}admin/{{$crumb['category']['url']}}">
                     <button type="button" class="am-btn am-btn-default">
-                        <img src="/assets/images/files.png" class="icon">
+                        <img src="{{PUB}}assets/images/files.png" class="icon">
                         返回{{ $crumb['']['name'] }}
                     </button>
                 </a>

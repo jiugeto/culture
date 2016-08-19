@@ -20,9 +20,9 @@
                     var type = $("select[name='type']");
                     type.change(function(){
                         if(type.val()==0){
-                            window.location.href = '/admin/menus';
+                            window.location.href = '{{DOMAIN}}admin/menus';
                         } else {
-                            window.location.href = '/admin/'+type.val()+'/menus';
+                            window.location.href = '{{DOMAIN}}admin/'+type.val()+'/menus';
                         }
                     });
                 });
@@ -57,7 +57,7 @@
                     <tr>
                         <td class="am-hide-sm-only"><input type="checkbox" /></td>
                         <td class="am-hide-sm-only">{{ $data->id }}</td>
-                        <td class="am-hide-sm-only"><a href="/admin/menus/{{$data->id}}">{{ $data->name }}</a></td>
+                        <td class="am-hide-sm-only"><a href="{{DOMAIN}}admin/menus/{{$data->id}}">{{ $data->name }}</a></td>
                         <td class="am-hide-sm-only">
                             @foreach($types as $kt=>$type)
                                 @if($data->type==$kt) {{ $type }} @endif
@@ -71,9 +71,9 @@
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
-                                    <a href="/admin/menus/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="/assets/images/show.png" class="icon"> 查看</button></a>
-                                    <a href="/admin/menus/{{$data->id}}/edit"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="/assets/images/edit.png" class="icon"> 编辑</button></a>
-                                    <a href="/admin/menus/{{$data->id}}/forceDelete"><button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><img src="/assets/images/forceDelete_red.png" class="icon"> 销毁记录</button></a>
+                                    <a href="{{DOMAIN}}admin/menus/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="{{PUB}}assets/images/show.png" class="icon"> 查看</button></a>
+                                    <a href="{{DOMAIN}}admin/menus/{{$data->id}}/edit"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 编辑</button></a>
+                                    <a href="{{DOMAIN}}admin/menus/{{$data->id}}/forceDelete"><button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><img src="{{PUB}}assets/images/forceDelete_red.png" class="icon"> 销毁记录</button></a>
                                 </div>
                             </div>
                         </td>

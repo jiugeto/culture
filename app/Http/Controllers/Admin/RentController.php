@@ -26,7 +26,7 @@ class RentController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $result = [
             'datas'=> $this->query($del=0),
-            'prefix_url'=> '/admin/rent',
+            'prefix_url'=> DOMAIN.'admin/rent',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -49,7 +49,7 @@ class RentController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = time();
         RentModel::create($data);
-        return redirect('/admin/rent');
+        return redirect(DOMAIN.'admin/rent');
     }
 
     public function edit($id)
@@ -69,7 +69,7 @@ class RentController extends BaseController
         $data = $this->getData($request);
         $data['updated_at'] = time();
         RentModel::where('id',$id)->update($data);
-        return redirect('/admin/rent');
+        return redirect(DOMAIN.'admin/rent');
     }
 
     public function show($id)

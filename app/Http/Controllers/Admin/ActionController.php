@@ -26,7 +26,7 @@ class ActionController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $result = [
             'datas'=> $this->query($del=0),
-            'prefix_url'=> '/admin/action',
+            'prefix_url'=> DOMAIN.'admin/action',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -63,7 +63,7 @@ class ActionController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = time();
         ActionModel::create($data);
-        return redirect('/admin/action');
+        return redirect(DOMAIN.'admin/action');
     }
 
     public function show($id)

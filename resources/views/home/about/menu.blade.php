@@ -15,8 +15,8 @@
     .menu a:hover.close,.menu a:hover.open  { color:white;background:red; }
 </style>
 <div class="menu">
-    <div class="pos"><a href="/about"><div class="bg"></div><div class="text">平台功能</div></a></div>
-    <div class="pos"><a href="/about/join"><div class="bg"></div><div class="text">招募同伙</div></a></div>
+    <div class="pos"><a href="{{DOMAIN}}about"><div class="bg"></div><div class="text">平台功能</div></a></div>
+    <div class="pos"><a href="{{DOMAIN}}about/join"><div class="bg"></div><div class="text">招募同伙</div></a></div>
     <div><a class="close">X</a> <a class="open" style="display:none;"> >> </a></div>
 </div>
 <script>

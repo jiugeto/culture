@@ -27,7 +27,7 @@ class StoryBoardController extends BaseController
         $curr['url'] = $this->lists['']['url'];
         $result = [
             'datas'=> $this->query($del=0),
-            'prefix_url'=> '/member/storyboard',
+            'prefix_url'=> DOMAIN.'member/storyboard',
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -40,7 +40,7 @@ class StoryBoardController extends BaseController
         $curr['url'] = $this->lists['trash']['url'];
         $result = [
             'datas'=> $this->query($del=1),
-            'prefix_url'=> '/member/storyboard/trash',
+            'prefix_url'=> DOMAIN.'member/storyboard/trash',
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -53,7 +53,7 @@ class StoryBoardController extends BaseController
         $curr['url'] = $this->lists['create']['url'];
         $result = [
             'model'=> $this->model,
-            'prefix_url'=> '/member/storyboard',
+            'prefix_url'=> DOMAIN.'member/storyboard',
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -65,7 +65,7 @@ class StoryBoardController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = time();
         StoryBoardModel::create($data);
-        return redirect('/member/storyboard');
+        return redirect(DOMAIN.'member/storyboard');
     }
 
     public function edit($id)
@@ -86,7 +86,7 @@ class StoryBoardController extends BaseController
         $data = $this->getData($request);
         $data['updated_at'] = time();
         StoryBoardModel::where('id',$id)->update($data);
-        return redirect('/member/storyboard');
+        return redirect(DOMAIN.'member/storyboard');
     }
 
     public function show($id)
@@ -105,19 +105,19 @@ class StoryBoardController extends BaseController
     public function destroy($id)
     {
         StoryBoardModel::where('id',$id)->update(['del'=> 1]);
-        return redirect('/member/storyboard');
+        return redirect(DOMAIN.'member/storyboard');
     }
 
     public function restore($id)
     {
         StoryBoardModel::where('id',$id)->update(['del'=> 0]);
-        return redirect('/member/storyboard/trash');
+        return redirect(DOMAIN.'member/storyboard/trash');
     }
 
     public function forceDelete($id)
     {
         StoryBoardModel::where('id',$id)->delete();
-        return redirect('/member/storyboard/trash');
+        return redirect(DOMAIN.'member/storyboard/trash');
     }
 
     public function getData(Request $request)

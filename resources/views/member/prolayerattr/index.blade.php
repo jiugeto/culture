@@ -5,11 +5,11 @@
     {{--<div class="mem_tab">@include('member.common.lists')</div>--}}
     <div class="mem_tab">
         <ul>
-            <a href="/member/productlayer"><li>返回产品动画列表</li></a>
+            <a href="{{DOMAIN}}member/productlayer"><li>返回产品动画列表</li></a>
             <li class="star">&nbsp;&nbsp;此为{{ $layerModel->name }}的属性动画</li>
         </ul>
     </div>
-    <div class="mem_create"><a href="/member/{{$layerModel->id}}/prolayerattr/create">添加属性动画</a></div>
+    <div class="mem_create"><a href="{{DOMAIN}}member/{{$layerModel->id}}/prolayerattr/create">添加属性动画</a></div>
     <div class="hr_tab"></div>
     <!-- 空白 -->
     <div class="list_kongbai"></div>
@@ -33,12 +33,12 @@
                 <td>{{ $data->created_at }}</td>
                 <td>
                     @if($curr['url']=='')
-                        <a href="/member/{{$layerModel->id}}/prolayerattr/{{ $data->id }}" class="list_btn">查看</a>
-                        <a href="/member/{{$layerModel->id}}/prolayerattr/{{ $data->id }}/edit" class="list_btn">编辑</a>
-                        <a href="/member/{{$layerModel->id}}/prolayerattr/{{ $data->id }}/destroy" class="list_btn">删除</a>
+                        <a href="{{DOMAIN}}member/{{$layerModel->id}}/prolayerattr/{{ $data->id }}" class="list_btn">查看</a>
+                        <a href="{{DOMAIN}}member/{{$layerModel->id}}/prolayerattr/{{ $data->id }}/edit" class="list_btn">编辑</a>
+                        <a href="{{DOMAIN}}member/{{$layerModel->id}}/prolayerattr/{{ $data->id }}/destroy" class="list_btn">删除</a>
                     @else
-                        <a href="/member/{{$layerModel->id}}/prolayerattr/{{ $data->id }}/restore" class="list_btn">还原</a>
-                        <a href="/member/{{$layerModel->id}}/prolayerattr/{{ $data->id }}/forceDelete" class="list_btn">销毁记录</a>
+                        <a href="{{DOMAIN}}member/{{$layerModel->id}}/prolayerattr/{{ $data->id }}/restore" class="list_btn">还原</a>
+                        <a href="{{DOMAIN}}member/{{$layerModel->id}}/prolayerattr/{{ $data->id }}/forceDelete" class="list_btn">销毁记录</a>
                     @endif
                 </td>
             </tr>
