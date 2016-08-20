@@ -33,15 +33,6 @@ class LoginController extends BaseController
 
         $serial = date('YmdHis',time()).rand(0,10000);
         $loginTime = time();
-        //登陆加入用户日志表
-        $userlog = [
-            'uid'=> $adminModel->id,
-            'uname'=> Input::get('username'),
-            'loginTime'=> $loginTime,
-            'serial'=> $serial,
-            'created_at'=> $adminModel->created_at,
-        ];
-        AdminLogModel::create($userlog);
         //加入session
         Session::put('admin.adminid',$adminModel->id);
         Session::put('admin.username',$username);
@@ -49,6 +40,17 @@ class LoginController extends BaseController
         Session::put('admin.serial',$serial);
         Session::put('admin.created_at',$adminModel->created_at);
         Session::put('admin.loginTime',$loginTime);
+
+        //登陆加入用户日志表
+        $userlog = [
+            'uid'=> $adminModel->id,
+            'uname'=> Input::get('username'),
+            'ip'=> \App\Tools::getIp(),
+            'loginTime'=> $loginTime,
+            'serial'=> $serial,
+            'created_at'=> $adminModel->created_at,
+        ];
+        AdminLogModel::create($userlog);
 
         return redirect(DOMAIN.'admin');
     }

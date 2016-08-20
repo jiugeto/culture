@@ -47,7 +47,7 @@ class LoginController extends Controller
         $validator = Validator::make(Input::all(), $rules, $messages);
         if ($validator->fails()) {
             echo "<script>alert('验证码错误！');history.go(-1);</script>";exit;
-//            return redirect('/login');
+//            return redirect(DOMAIN.'login');
         }
         //个人资料
         if (in_array($userModel->isuser,[1,3])) {
@@ -89,13 +89,14 @@ class LoginController extends Controller
         $userlog = [
             'uid'=> $userModel->id,
             'uname'=> Input::get('username'),
+            'ip'=> \App\Tools::getIp(),
             'loginTime'=> time(),
             'serial'=> $serial,
             'created_at'=> $userModel->created_at,
         ];
         UserlogModel::create($userlog);
 
-        return redirect('/member');
+        return redirect(DOMAIN.'member');
     }
 
     public function dologout()
@@ -117,6 +118,6 @@ class LoginController extends Controller
         Session::forget('user.loginTime');
         Session::forget('user.person');
         Session::forget('user.company');
-        return redirect('/login');
+        return redirect(DOMAIN.'login');
     }
 }

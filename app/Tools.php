@@ -207,7 +207,8 @@ class Tools
      * @param int $height 缩略图高度
      * @return string '/'.$thumb_path 缩略图保存路径
      */
-    public static function thumb($filePath, $width, $height){
+    public static function thumb($filePath, $width, $height)
+    {
         if ($filePath) {
             //得到文件名
             $url = explode('/',$filePath);
@@ -221,5 +222,22 @@ class Tools
                 ->save($thumb_path);
             return '/'.$thumb_path;
         }
+    }
+
+    /**
+     * 定义一个方法，获取用户端ip
+     */
+    public static function getIp()
+    {
+        if (getenv("HTTP_CLIENT_IP")) {
+            $ip = getenv("HTTP_CLIENT_IP");
+        } else if (getenv("HTTP_X_FORWARDED_FOR")) {
+            $ip = getenv("HTTP_X_FORWARDED_FOR");
+        } else if (getenv("REMOTE_ADDR")) {
+            $ip = getenv("REMOTE_ADDR");
+        } else {
+            $ip = "Unknow";
+        }
+        return $ip;
     }
 }
