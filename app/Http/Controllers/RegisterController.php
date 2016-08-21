@@ -58,10 +58,16 @@ class RegisterController extends Controller
 
         //加入session
         $userinfo = UserModel::where('username',Input::get('username'))->first();
-        Session::put('user.uid',$userinfo->id);
-        Session::put('user.username',Input::get('username'));
-        Session::put('user.password',Input::get('password'));
-        Session::put('user.email',Input::get('email'));
+//        Session::put('user.uid',$userinfo->id);
+//        Session::put('user.username',Input::get('username'));
+//        Session::put('user.password',Input::get('password'));
+//        Session::put('user.email',Input::get('email'));
+        $userInfo = [
+            'uid'=> $userinfo->id,
+            'username'=> Input::get('username'),
+            'email'=> Input::get('email'),
+        ];
+        Session::put('user',$userInfo);
 
         return redirect('/regist/success');
     }

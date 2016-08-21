@@ -47,6 +47,6 @@
                 </table>
             </form>
         </div>
-        @include('person.user.head')
+        @include('person.common.head')
     </div>
 @stop

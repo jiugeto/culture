@@ -377,6 +377,37 @@ div:hover.per_waterfall .text { color:red; }
 }
 .per_list .message a:hover { border:1px solid red;color:red; }
 .per_list .per_waterfall p.text { border:0;background:0; }
+.list .frield {
+    margin-left:20px;margin-bottom:20px;
+    width:215px;height:100px;
+    border-radius:5px;
+    background:rgb(252,252,252);
+    overflow:hidden;
+    float:left;
+}
+.list .frield .left {
+    margin-top:5px;margin-left:10px;
+    width:90px;height:90px;
+    overflow:hidden;
+    float:left;
+}
+.list .frield .left p {
+    padding:0; padding-top:10px;
+    border:0;background:0;
+}
+.list .frield p span.uname {
+    font-size:18px;border:0;
+}
+.list .frield p span.level {
+    color:orangered;
+    font-weight:bold;
+    float:right;
+}
+.list .frield .head {
+    border:1px solid lightgrey;
+    border-radius:3px;
+    background:ghostwhite;
+}
 .blue { color:rgb(14,144,210); }
 .red { color:red; }
 

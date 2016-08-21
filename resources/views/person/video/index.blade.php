@@ -33,6 +33,6 @@
                 @include('person.common.page')
             </div>
         </div>
-        @include('person.user.head')
+        @include('person.common.head')
     </div>
 @stop

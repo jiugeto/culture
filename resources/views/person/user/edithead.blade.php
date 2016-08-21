@@ -53,7 +53,7 @@
             </table>
         </div>
 
-        @include('person.user.head')
+        @include('person.common.head')
     </div>
 
     <input type="hidden" name="picid">

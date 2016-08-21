@@ -36,7 +36,11 @@
             </script>
 
             <span class="right">
+                @if($user->head())
+                <img src="{{ $user->head() }}">
+                @else
                 <img src="{{DOMAIN}}assets/images/person.png">
+                @endif
                 {{ \Session::has('user') ? \Session::get('user.username') : '' }}
                 <a href="{{DOMAIN}}person/space" class="userinfo">个人资料</a>
             </span>
@@ -51,8 +55,22 @@
                 <div class="per_waterfall" {{--onclick="window.location.href='';"--}}>
                     <div class="img">
                         {{--<img src="{{DOMAIN}}uploads/images/2016/online1.png">--}}
-                        <img src="{{ $data->getPicUrl() }}" style="@if($size=$data->getPicSize($w=148,$h=100))width:{{$size}}px;@endif height:120px;">
-                        {{--<div style="width:220px;height:120px;background:rgb(240,240,240);"></div>--}}
+                    @if($data->pic())
+                        <img src="{{ $data->getPicUrl() }}" style="
+                        @if($from==1)
+                            @if($size=$data->getPicSize($w=148,$h=100))
+                                width:{{$size}}px;
+                            @endif
+                        @elseif($from==2)
+                            @if($size=$data->getUserPicSize($data->pic(),$w=148,$h=100))
+                                width:{{$size}}px;
+                            @endif
+                        @endif
+                                height:120px;
+                        ">
+                    @else
+                        <div style="width:220px;height:120px;background:rgb(240,240,240);"></div>
+                    @endif
                     </div>
                     <p class="text">{{ $data->name }}</p>
                 </div>
@@ -65,7 +83,7 @@
                 <div class="per_waterfall" {{--onclick="window.location.href='';"--}}>
                     <div class="img">
                         {{--<img src="{{DOMAIN}}uploads/images/2016/online1.png">--}}
-                        <div style="width:220px;height:120px;background:rgb(240,240,240);"></div>
+                        <div style="width:220px;height:120px;color:lightgrey;text-align:center;line-height:100px;background:rgb(240,240,240);">无</div>
                     </div>
                     <p class="text">暂无</p>
                 </div>

@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Person;
 
 use App\Models\GoodsModel;
 use App\Models\ProductModel;
+use App\Models\UserModel;
 
 class HomeController extends BaseController
 {
@@ -31,6 +32,7 @@ class HomeController extends BaseController
             'prefix_url'=> $prefix_url,
             'goodsModel'=> $this->goodsModel,
             'productModel'=> $this->productModel,
+            'user'=> UserModel::find($this->userid),
             'from'=> $from,
             'type'=> $type,
         ];
@@ -47,6 +49,7 @@ class HomeController extends BaseController
     public function query($from,$type)
     {
         //视频供应：type==0:[2,4];
+        //type==1:2设计师供应; type==2:4企业供应
         if ($from==1) {
             $datas = $this->goods($type);
         } elseif ($from==2) {
@@ -61,11 +64,9 @@ class HomeController extends BaseController
      */
     public function goods($type)
     {
-        //type==1:2设计师供应; type==2:4企业供应
         if ($type) {
             $datas = GoodsModel::where('del',0)
                 ->where('genre',1)          //1代表产品，2代表花絮
-                ->where('type',$type)
                 ->where('isshow',1)
                 ->whereIn('type',[2,4])
                 ->orderBy('sort','desc')

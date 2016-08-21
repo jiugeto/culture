@@ -55,7 +55,7 @@ class ProductModel extends BaseModel
     /**
      * 得到图片信息
      */
-    public function pic()
+    public function getPic()
     {
         $pic_id = $this->gif ? $this->gif : 0;
         $picModel = PicModel::find($pic_id);
@@ -67,6 +67,6 @@ class ProductModel extends BaseModel
      */
     public function getPicUrl()
     {
-        return $this->pic() ? $this->pic()->url : '';
+        return $this->getPic() ? $this->getPic()->url : '';
     }
 }

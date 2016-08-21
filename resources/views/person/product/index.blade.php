@@ -3,18 +3,27 @@
     <div class="per_body" style="border:0;height:1000px;background:0;">
         @include('person.partials.top')
         <div class="per_list">
-            <p class="title">相册列表</p>
+            <p class="title">作品列表</p>
             <div class="list l_pic">
                 @if(count($datas))
                     @foreach($datas as $data)
-                {{--<a href="{{DOMAIN}}person/pic/{{ $data->id }}">--}}
+                <a href="{{DOMAIN}}person/product/pre/{{ $data->id }}" target="_blank">
                     <div class="per_waterfall">
                         <div class="img">
-                            <img src="{{ $data->url }}" style="@if($size=$data->getPicSize($data,$w=148,$h=100))width:{{$size}}px;@endif height:120px;">
+                        @if($data->getPic())
+                            <img src="{{ $data->getPicUrl() }}" style="
+                            @if($size=$data->getUserPicSize($data->getPic(),$w=148,$h=100))
+                                    width:{{$size}}px;
+                            @endif
+                                    height:120px;
+                        ">
+                        @else
+                            <div style="width:220px;height:120px;background:rgb(240,240,240);"></div>
+                        @endif
                         </div>
                         <p class="text">{{ $data->name }}</p>
                     </div>
-                {{--</a>--}}
+                </a>
                     @endforeach
                 @endif
                 @if(count($datas)<$datas->limit)
@@ -22,7 +31,7 @@
                 <a href="">
                     <div class="per_waterfall">
                         <div class="img">
-                            <div style="width:220px;height:120px;background:rgb(240,240,240);"></div>
+                            <div style="width:220px;height:120px;color:lightgrey;text-align:center;line-height:100px;background:rgb(240,240,240);">无</div>
                         </div>
                         <p class="text">暂无</p>
                     </div>

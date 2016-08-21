@@ -34,12 +34,20 @@ class LoginController extends BaseController
         $serial = date('YmdHis',time()).rand(0,10000);
         $loginTime = time();
         //加入session
-        Session::put('admin.adminid',$adminModel->id);
-        Session::put('admin.username',$username);
-        Session::put('admin.password',$password);
-        Session::put('admin.serial',$serial);
-        Session::put('admin.created_at',$adminModel->created_at);
-        Session::put('admin.loginTime',$loginTime);
+//        Session::put('admin.adminid',$adminModel->id);
+//        Session::put('admin.username',$username);
+//        Session::put('admin.password',$password);
+//        Session::put('admin.serial',$serial);
+//        Session::put('admin.created_at',$adminModel->created_at);
+//        Session::put('admin.loginTime',$loginTime);
+        $adminInfo = [
+            'adminid'=> $adminModel->id,
+            'username'=> $adminModel->username,
+            'serial'=> $adminModel->serial,
+            'createTime'=> $adminModel->createTime(),
+            'loginTime'=> $loginTime,
+        ];
+        Session::put('admin',$adminInfo);
 
         //登陆加入用户日志表
         $userlog = [
@@ -61,12 +69,13 @@ class LoginController extends BaseController
         AdminlogModel::where('serial',Session::get('admin.serial'))
             ->update(['logoutTime'=>$logoutTime]);
         //去除session
-        Session::forget('admin.adminid');
-        Session::forget('admin.username');
-        Session::forget('admin.password');
-        Session::forget('admin.serial');
-        Session::forget('admin.created_at');
-        Session::forget('admin.loginTime');
+//        Session::forget('admin.adminid');
+//        Session::forget('admin.username');
+//        Session::forget('admin.password');
+//        Session::forget('admin.serial');
+//        Session::forget('admin.created_at');
+//        Session::forget('admin.loginTime');
+        Session::forget('admin');
         return Redirect(DOMAIN.'admin/login');
     }
 }

@@ -72,18 +72,30 @@ class LoginController extends Controller
 
         $serial = date('YmdHis',time()).rand(0,10000);
         //加入session
-        Session::put('user.uid',$userModel->id);
-        Session::put('user.username',Input::get('username'));
-        Session::put('user.password',Input::get('password'));
-        Session::put('user.email',$userModel->email);
-        Session::put('user.serial',$serial);
-//        Session::put('user.limit',$userModel->limit);
-        Session::put('user.area',$userModel->area);
-        Session::put('user.address',$userModel->address);
-        Session::put('user.cid',isset($companyModel)?$companyModel->id:'');
-        Session::put('user.loginTime',time());
-        Session::put('user.person',$userperson);
-        Session::put('user.company',$usercompany);
+//        Session::put('user.uid',$userModel->id);
+//        Session::put('user.username',Input::get('username'));
+//        Session::put('user.password',Input::get('password'));
+//        Session::put('user.email',$userModel->email);
+//        Session::put('user.serial',$serial);
+//        Session::put('user.area',$userModel->area);
+//        Session::put('user.address',$userModel->address);
+//        Session::put('user.cid',isset($companyModel)?$companyModel->id:'');
+//        Session::put('user.loginTime',time());
+//        Session::put('user.person',$userperson);
+//        Session::put('user.company',$usercompany);
+        $userInfo = [
+            'uid'=> $userModel->id,
+            'username'=> Input::get('username'),
+            'email'=> $userModel->email,
+            'serial'=> $userModel->serial,
+            'area'=> $userModel->area,
+            'address'=> $userModel->address,
+            'cid'=> isset($companyModel)?$companyModel->id:'',
+            'loginTime'=> time(),
+            'person'=> $userperson,
+            'company'=> $usercompany,
+        ];
+        Session::put('user',$userInfo);
 
         //登陆加入用户日志表
         $userlog = [
@@ -106,18 +118,18 @@ class LoginController extends Controller
         UserlogModel::where('serial',Session::get('user.serial'))
                     ->update(['logoutTime'=>$logoutTime]);
         //去除session
-        Session::forget('user.uid');
-        Session::forget('user.username');
-        Session::forget('user.password');
-        Session::forget('user.email');
-        Session::forget('user.serial');
-//        Session::forget('user.limit');
-        Session::forget('user.area');
-        Session::forget('user.address');
-        Session::forget('user.cid');
-        Session::forget('user.loginTime');
-        Session::forget('user.person');
-        Session::forget('user.company');
+//        Session::forget('user.uid');
+//        Session::forget('user.username');
+//        Session::forget('user.password');
+//        Session::forget('user.email');
+//        Session::forget('user.serial');
+//        Session::forget('user.area');
+//        Session::forget('user.address');
+//        Session::forget('user.cid');
+//        Session::forget('user.loginTime');
+//        Session::forget('user.person');
+//        Session::forget('user.company');
+        Session::forget('user');
         return redirect(DOMAIN.'login');
     }
 }

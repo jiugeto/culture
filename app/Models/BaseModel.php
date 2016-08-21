@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use App\Models\Company\ComMainModel;
 use Illuminate\Database\Eloquent\Model;
 
 class BaseModel extends Model
@@ -81,9 +82,29 @@ class BaseModel extends Model
         return $userInfo ? $userInfo : '';
     }
 
-    public function getUserName()
+    public function getUserName($uid=null)
     {
-       return $this->getUser() ? $this->getUser()->username : '';
+       return $this->getUser($uid) ? $this->getUser($uid)->username : '';
+    }
+
+    /**
+     * 由uid得到 公司信息
+     */
+    public function getCompany($uid=null)
+    {
+        $companyInfo = CompanyModel::where('uid',$uid)->first();
+        return $companyInfo ? $companyInfo : '';
+    }
+
+    public function getCompanyMain($uid=null)
+    {
+        $comMainInfo = ComMainModel::where('uid',$uid)->first();
+        return $comMainInfo ? $comMainInfo : '';
+    }
+
+    public function getCompanyName($uid=null)
+    {
+        return $this->getCompany($uid) ? $this->getCompany($uid)->name : '';
     }
 
     /**

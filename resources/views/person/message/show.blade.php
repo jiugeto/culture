@@ -47,6 +47,6 @@
                 </tr>
             </table>
         </div>
-        @include('person.user.head')
+        @include('person.common.head')
     </div>
 @stop

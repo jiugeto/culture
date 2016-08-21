@@ -110,7 +110,7 @@
                 <p class="title">我的作品 [
                     <span id="p_collect" style="color:{{$p_type==1?'red':'grey'}};">收集的</span> |
                     <span id="p_create" style="color:{{$p_type==2?'red':'grey'}};">发布的</span>
-                    ] <a href="{{DOMAIN}}person/works">更多</a></p>
+                    ] <a href="{{DOMAIN}}person/product">更多</a></p>
                 @if(count($products))
                     @foreach($products as $product)
                 <a href=""><div class="video">

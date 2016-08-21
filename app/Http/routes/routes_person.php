@@ -34,8 +34,10 @@ Route::group(['prefix'=>'person','middleware' =>'MemberAuth','namespace'=>'Perso
     Route::resource('message','MessageController');
     //图片管理
     Route::resource('pic','PicController');
-    //作品管理
-    Route::resource('works','WorksController');
+    //产品管理
+    Route::resource('product','ProductController');
     //设计管理
     Route::resource('design','DesignController');
+    //好友管理
+    Route::resource('frield','FrieldController');
 });

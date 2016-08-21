@@ -43,7 +43,7 @@
             </div>
         </div>
 
-        @include('person.user.head')
+        @include('person.common.head')
         <div class="per_right_head">
             <p class="title">消息菜单</p>
             <div class="menu {{ $m==1 ? 'm_curr' : '' }}" id="inbox">收件箱</div>
