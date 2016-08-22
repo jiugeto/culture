@@ -19,7 +19,19 @@
       <span class="header_right">
         <div class="head_right"><a href="/online">在线创作</a></div>
         <div class="head_right"><a href="/newuser">新手点这里</a></div>
-        <div class="head_right"><a href="/" style="color:red;">淘文化首页</a></div>
+        <div class="head_right">
+            <a href="/" style="color:red;">淘文化首页</a>
+            {{--<select name="urlType">--}}
+                {{--<option value="/" {{explode($_SERVER['REQUEST_URI'],'/')[1]==''?'selected':''}}>淘文化首页</option>--}}
+                {{--<option value="/member" {{ explode($_SERVER['REQUEST_URI'],'/')[1]=='member' ? 'selected' : '' }}>会员后台</option>--}}
+                {{--<option value="/person/space" {{ explode($_SERVER['REQUEST_URI'],'/')[1]=='person' ? 'selected' : '' }}>个人后台</option>--}}
+            {{--</select>--}}
+            {{--<script>--}}
+                {{--$("select[name='urlType']").change(function(){--}}
+                    {{--window.location.href = $(this).val();--}}
+                {{--});--}}
+            {{--</script>--}}
+        </div>
       </span>
     </div>
 </div>

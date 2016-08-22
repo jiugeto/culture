@@ -22,19 +22,17 @@ class AdminAuth
 {
     public function handle($request, Closure $next)
     {
-//        dd(Session::get('admin.username'));
         //判断系统后台有无此登录的用户
         if(!Session::has('admin.username')){
-//            Session::put('msg', '请先登录');
             return redirect('/admin/login');
         }
-        //验证密码
-        $username = Session::get('admin.username');
-        $adminModel = AdminModel::where('username',$username)->first();
-        if (!$adminModel) { return redirect('/admin/login'); }
-        if(Session::get('admin.password')!=$adminModel->password){
-            return redirect('/admin/login');
-        }
+//        //验证密码
+//        $username = Session::get('admin.username');
+//        $adminModel = AdminModel::where('username',$username)->first();
+//        if (!$adminModel) { return redirect('/admin/login'); }
+//        if(Session::get('admin.password')!=$adminModel->password){
+//            return redirect('/admin/login');
+//        }
         return $next($request);
     }
 }

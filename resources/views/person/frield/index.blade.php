@@ -32,9 +32,9 @@
         @include('person.common.head')
         <div class="per_right_head">
             <p class="title">好友菜单</p>
-            <div class="menu">新申请的</div>
-            <div class="menu">我的好友</div>
-            <div class="menu">寻找好友</div>
+            <div class="menu" onclick="window.location.href='{{DOMAIN}}person/frield/m/1';" {{ $m==1 ? 'selected' : '' }}>新的申请</div>
+            <div class="menu" onclick="window.location.href='{{DOMAIN}}person/frield';" {{ $m==0 ? 'selected' : '' }}>我的好友</div>
+            <div class="menu" onclick="window.location.href='{{DOMAIN}}person/frield/m/2';" {{ $m==2 ? 'selected' : '' }}>寻找好友</div>
             {{--<div class="menu">黑名单</div>--}}
             <div style="height:10px;"></div>
         </div>

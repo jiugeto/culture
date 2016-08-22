@@ -36,7 +36,7 @@ class DesignModel extends BaseModel
         return $userModel ? $userModel : '';
     }
 
-    public function getUserName()
+    public function UserName()
     {
         return $this->user() ? $this->user()->username : '';
     }

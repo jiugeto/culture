@@ -39,5 +39,6 @@ Route::group(['prefix'=>'person','middleware' =>'MemberAuth','namespace'=>'Perso
     //设计管理
     Route::resource('design','DesignController');
     //好友管理
+    Route::get('frield/m/{menu}','FrieldController@index');
     Route::resource('frield','FrieldController');
 });
