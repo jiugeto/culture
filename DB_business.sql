@@ -182,7 +182,7 @@ CREATE TABLE `ba_userlog` (
   `logoutTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '退出时间',
   `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -191,7 +191,7 @@ CREATE TABLE `ba_userlog` (
 
 LOCK TABLES `ba_userlog` WRITE;
 /*!40000 ALTER TABLE `ba_userlog` DISABLE KEYS */;
-INSERT INTO `ba_userlog` VALUES (1,1,'jiuge','192.168.2.101','201608222028542991',1471868934,0,1470795559);
+INSERT INTO `ba_userlog` VALUES (1,1,'jiuge','192.168.2.101','201608222028542991',1471868934,0,1470795559),(2,1,'jiuge','192.168.2.100','201608230723281699',1471908208,0,1470795559);
 /*!40000 ALTER TABLE `ba_userlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2251,6 +2251,33 @@ LOCK TABLES `users_params` WRITE;
 INSERT INTO `users_params` VALUES (1,1,15,1,'946493655@qq.com','zwx4074553864',0,0,20160406,0);
 /*!40000 ALTER TABLE `users_params` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `users_space`
+--
+
+DROP TABLE IF EXISTS `users_space`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users_space` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '用户id',
+  `top_bg_img` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '顶部背景图，图片id',
+  `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `updated_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户个人空间设置表 bs_users_space';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users_space`
+--
+
+LOCK TABLES `users_space` WRITE;
+/*!40000 ALTER TABLE `users_space` DISABLE KEYS */;
+INSERT INTO `users_space` VALUES (1,0,0,1470795559,1471420755),(2,0,0,1470795559,0);
+/*!40000 ALTER TABLE `users_space` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -2261,4 +2288,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-22 21:03:30
+-- Dump completed on 2016-08-23 22:17:48

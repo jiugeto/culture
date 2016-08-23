@@ -8,6 +8,5 @@
             @foreach($links as $klink=>$vlink)
                 <a href="{{ DOMAIN.'person/'.$klink }}" class="{{ $curr==$klink ? 'curr_link' : '' }}">{{ $vlink }}</a> &nbsp;
             @endforeach
-            <a href="">皮肤</a> &nbsp;
         </b></p>
 </div>

@@ -20,6 +20,7 @@ class BaseController extends Controller
         'frield'=> '好友',
         'visitor'=> '访问',
         'census'=> '统计',
+        'skin'=> '皮肤',
     ];
 
     public function __construct()

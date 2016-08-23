@@ -392,7 +392,7 @@ div:hover.per_waterfall .text { color:red; }
     float:left;
 }
 .list .frield .left p {
-    padding:0; padding-top:10px;
+    padding:0; padding-top:5px;
     border:0;background:0;
 }
 .list .frield p span.uname {
@@ -403,10 +403,23 @@ div:hover.per_waterfall .text { color:red; }
     font-weight:bold;
     float:right;
 }
+.list .frield .toshow { text-align:right; }
+.list .frield .toshow a {
+    color:orangered;
+    text-decoration:none;
+}
+.list .frield .toshow a:hover { text-decoration:underline; }
 .list .frield .head {
     border:1px solid lightgrey;
     border-radius:3px;
     background:ghostwhite;
+}
+.list .top_bg {
+    margin:0 10px;
+    width:700px; height:77px;
+    border:0;
+    background:ghostwhite;
+    overflow:hidden;
 }
 .blue { color:rgb(14,144,210); }
 .red { color:red; }

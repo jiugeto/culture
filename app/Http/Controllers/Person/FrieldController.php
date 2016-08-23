@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Person;
 
 use App\Models\UserFrieldModel;
+use App\Models\UserModel;
 
 class FrieldController extends BaseController
 {
@@ -9,6 +10,7 @@ class FrieldController extends BaseController
      * 个人后台 好友管理
      */
 
+    protected $limit = 15;
     protected $curr = 'frield';
 
     public function __construct()
@@ -19,9 +21,15 @@ class FrieldController extends BaseController
     public function index($m=0)
     {
         //m==0:我的好友;1:新的申请;2:寻找好友
+        if ($m==0) {
+            $prefix_url = DOMAIN.'member/frield';
+        } else {
+            $prefix_url = DOMAIN.'member/frield/m/'.$m;
+        }
         $result = [
             'datas'=> $this->query($m),
             'user'=> $this->user,
+            'prefix_url'=> $prefix_url,
             'links'=> $this->links,
             'curr'=> $this->curr,
             'm'=> $m,
@@ -39,7 +47,7 @@ class FrieldController extends BaseController
 
     public function query($m=0)
     {
-//        $uid = $this->userid ? $this->userid : 0;
+        //m==0:我的好友;1:新的申请;2:寻找好友
         if ($m==0) {
             $datas = UserFrieldModel::where('isauth',3)
                 ->where(function($query){
@@ -54,6 +62,9 @@ class FrieldController extends BaseController
                 ->orderBy('id','desc')
                 ->paginate($this->limit);
         } elseif ($m=2) {
+            $datas = UserModel::where('id','>',$this->userid)
+                ->orderBy('id','desc')
+                ->paginate($this->limit);
         }
         $datas->limit = $this->limit;
         return $datas;

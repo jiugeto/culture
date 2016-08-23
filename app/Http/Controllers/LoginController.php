@@ -108,6 +108,9 @@ class LoginController extends Controller
         ];
         UserlogModel::create($userlog);
 
+        //最近登录更新
+        UserModel::where('id',$userModel->id)->update(['lastLogin'=> time()]);
+
         return redirect(DOMAIN.'member');
     }
 
