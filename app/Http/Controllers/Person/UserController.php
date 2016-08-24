@@ -23,6 +23,9 @@ class UserController extends BaseController
     {
         $result = [
             'user'=> $this->user,
+            'frields'=> $this->frields(),
+            'messages'=> $this->messages(),
+            'talks'=> $this->talks(),
             'links'=> $this->links,
             'curr'=> $this->curr,
         ];
@@ -111,5 +114,40 @@ class UserController extends BaseController
             'area'=> $request->area,
             'address'=> $request->address,
         );
+    }
+
+    /**
+     * 好友数量
+     */
+    public function frields()
+    {
+        return \App\Models\UserFrieldModel::where('del',0)
+            ->where(function($query){
+                $query->where('uid',$this->userid)
+                    ->where('frield_id',$this->userid);
+            })
+            ->where('isauth',2)
+            ->get();
+    }
+
+    /**
+     * 留言数量
+     */
+    public function messages()
+    {
+        return \App\Models\MessageModel::where('del',0)
+            ->where('accept',$this->userid)
+            ->where('status','>',2)
+            ->get();
+    }
+
+    /**
+     * 话题数量
+     */
+    public function talks()
+    {
+        return \App\Models\TalksModel::where('del',0)
+            ->where('uid',$this->userid)
+            ->get();
     }
 }

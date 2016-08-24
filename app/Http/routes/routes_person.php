@@ -42,5 +42,6 @@ Route::group(['prefix'=>'person','middleware' =>'MemberAuth','namespace'=>'Perso
     Route::get('frield/m/{menu}','FrieldController@index');
     Route::resource('frield','FrieldController');
     //个人后台皮肤管理
+    Route::get('skin/pic/{pic_id}','SkinController@setTopBg');
     Route::resource('skin','SkinController');
 });

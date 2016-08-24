@@ -18,8 +18,9 @@ class BaseController extends Controller
         'design'=> '设计',
         'message'=> '留言',
         'frield'=> '好友',
-        'visitor'=> '访问',
-        'census'=> '统计',
+//        'visitor'=> '访问',
+//        'census'=> '统计',
+        'sign'=> '签到',
         'skin'=> '皮肤',
     ];
 
@@ -27,6 +28,8 @@ class BaseController extends Controller
     {
         parent::__construct();
         $this->userid = \Session::has('user.uid') ? \Session::get('user.uid') : redirect('/login');
+        $userSpace = \App\Models\Base\UserSpaceModel::where('uid',$this->userid)->first();
         $this->user = \App\Models\UserModel::find($this->userid);
+        $this->user->spaceTopBgImg = $userSpace->getPicUrl();
     }
 }

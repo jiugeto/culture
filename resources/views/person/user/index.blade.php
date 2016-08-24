@@ -5,18 +5,34 @@
         <div class="per_list">
             <p class="title">个人资料</p>
             <div class="list">
-                <p class="user_info"><b>用户名</b> (ID:0000)</p>
+                <p class="user_info">
+                    <b>{{ $user->username }}{{--用户名--}}</b> {{--(ID:0000)--}}
+                    {{'( ID:'}}@if(strlen($user->id)==1) 000{{$user->id}}
+                    @elseif(strlen($user->id)==2) 00{{$user->id}}
+                    @elseif(strlen($user->id)==3) 0{{$user->id}}
+                    @elseif(strlen($user->id)>=4) {{$user->id}}
+                    @endif
+                    {{')'}}
+                </p>
                 <table width="80%">
                     <tr>
-                        <td>邮箱认证：</td><td>手机认证：</td><td>QQ：</td>
+                        <td>邮箱认证：{{ $user->emailck?$user->email:'无' }}</td>
+                        <td>手机认证：{{ $user->mobile?$user->mobile:'无' }}</td>
+                        <td>QQ：{{ $user->qq?$user->qq:'无' }}</td>
                     </tr>
                 </table>
                 <br>
-                <p class="user_info">统计信息：好友数 | 记录数 0 | 回帖数 0 | 主题数 0 | 分享数 0</p>
+                <p class="user_info">统计信息：
+                    好友数 {{ count($frields) }} |
+                    留言数 {{ count($messages) }} |
+                    话题数 {{ count($talks) }}
+                </p>
 
                 <table class="uname">
                     <tr>
-                        <td>真实姓名：</td><td>性别：</td>
+                        <td>真实姓名：{{ $user->realname() }}</td>
+                        <td>性别：{{ $user->sex() }}</td>
+                        <td>地址：{{ $user->address }}</td>
                     </tr>
                 </table>
 

@@ -412,7 +412,7 @@ div:hover.per_waterfall .text { color:red; }
 .list .frield .head {
     border:1px solid lightgrey;
     border-radius:3px;
-    background:ghostwhite;
+    background:gainsboro;
 }
 .list .top_bg {
     margin:0 10px;
@@ -420,6 +420,28 @@ div:hover.per_waterfall .text { color:red; }
     border:0;
     background:ghostwhite;
     overflow:hidden;
+}
+.list #change_bg { color:red;cursor:pointer; }
+.pic_list {
+    width:660px; height:300px;
+    border:1px solid lightgrey;
+    background:white;
+    position:relative;top:-80px;left:30px;
+    overflow:auto;
+    float:left;
+    display:none;
+}
+.pic_list .img {
+    margin-top:5px; margin-left:5px;
+    width:100px; height:50px;
+    border:1px solid gainsboro;
+    background:whitesmoke;
+    overflow:hidden;
+    float:left;
+}
+.pic_list div:hover.img {
+    border:1px solid red;
+    cursor:pointer;
 }
 .blue { color:rgb(14,144,210); }
 .red { color:red; }

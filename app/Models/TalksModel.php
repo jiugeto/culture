@@ -26,23 +26,23 @@ class TalksModel extends BaseModel
         return $this->theme() ? $this->theme()->name : '';
     }
 
-    /**
-     * 发布人信息
-     */
-    public function user()
-    {
-        $uid = $this->uid ? $this->uid : 0;
-        $userModel = UserModel::find($uid);
-        return $userModel ? $userModel : '';
-    }
-
-    /**
-     * 发布人名称
-     */
-    public function getUserName()
-    {
-        return $this->user() ? $this->user()->username : '';
-    }
+//    /**
+//     * 发布人信息
+//     */
+//    public function user()
+//    {
+//        $uid = $this->uid ? $this->uid : 0;
+//        $userModel = UserModel::find($uid);
+//        return $userModel ? $userModel : '';
+//    }
+//
+//    /**
+//     * 发布人名称
+//     */
+//    public function getUserName()
+//    {
+//        return $this->user() ? $this->user()->username : '';
+//    }
 
     /**
      * 点击话题

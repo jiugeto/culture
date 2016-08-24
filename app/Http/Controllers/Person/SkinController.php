@@ -21,11 +21,18 @@ class SkinController extends BaseController
     {
         $result = [
             'data'=> $this->query(),
+            'pics'=> $this->model->pics($this->userid),
             'user'=> $this->user,
             'links'=> $this->links,
             'curr'=> $this->curr,
         ];
         return view('person.skin.index', $result);
+    }
+
+    public function setTopBg($pic_id)
+    {
+        UserSpaceModel::where('uid',$this->userid)->update(['top_bg_img'=>$pic_id]);
+        return redirect(DOMAIN.'person/skin');
     }
 
 

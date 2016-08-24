@@ -31,8 +31,11 @@
                             <span class="level">等级</span></p>
                         <p>签名签名签名签名签名</p>
                         <p class="toshow">
+                            @if($m==1)
+                                <a href="">同意</a>&nbsp;
+                                <a href="">拒绝</a>&nbsp;
+                            @endif
                             <a href="">查看</a>
-                            @if($m==2)<a href="">查看</a>@endif
                         </p>
                     </div>
                 </div>

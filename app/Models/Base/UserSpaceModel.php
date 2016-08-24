@@ -20,4 +20,15 @@ class UserSpaceModel extends \App\Models\BaseModel
         $picModel = PicModel::find($pic_id);
         return $picModel ? $picModel->url : '';
     }
+
+    public function pics($uid)
+    {
+        return PicModel::where('uid',$uid)->get();
+    }
+
+    public function getPicUrl()
+    {
+        $picModel = PicModel::find($this->top_bg_img);
+        return $picModel ? $picModel->url : '';
+    }
 }
