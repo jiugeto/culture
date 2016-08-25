@@ -38,10 +38,11 @@
 
                 <p class="user_info"><b>该会员签到详情</b></p>
                 <p class="user_info">
-                    累计签到总天数：<b>0</b> 天 <br>
-                    本月签到天数：<b>0</b> 天 <br>
-                    上次签到时间：<span class="red">XXX</span> <br>
-                    该会员目前获取总金币数：<b class="red">0</b> 枚，上次获得金币：<b class="red">0</b> 枚 <br>
+                    累计签到总天数：<b>{{ $signs->signsCount }}</b> 天 <br>
+                    本月签到天数：<b>{{ count($signs) }}</b> 天 <br>
+                    上次签到时间：<span class="red">{{ count($signs) ? $signs[0]->createTime() : '' }}</span> <br>
+                    该会员目前获取总金币数：<b class="red">{{ count($signs) ? $signs->rewardCount : 0 }}</b> 枚，
+                        上次获得金币：<b class="red">{{ count($signs) ? $signs[0]->reward() : 0 }}</b> <br>
                     该会员目前签到等级：<b class="blue">[几等级]XX，离下一级 <span class="red">[XX]</span> 还差 <span class="red">0</span> 天</b> <br>
                     <b style="color:rgb(14,144,210);">[今天是否签到]</b>
                 </p>

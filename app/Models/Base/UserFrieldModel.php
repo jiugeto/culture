@@ -1,13 +1,13 @@
 <?php
-namespace App\Models;
+namespace App\Models\Base;
 
-class UserFrieldModel extends BaseModel
+class UserFrieldModel extends \App\Models\BaseModel
 {
     /**
-     * 这是用户签到表
+     * 这是用户好友表
      */
 
-    protected $table = 'users_frield';
+    protected $table = 'bs_user_frield';
     protected $fillable = [
         'id','uid','frield_id','isauth','remarks','remarks2','del','created_at','updated_at',
     ];

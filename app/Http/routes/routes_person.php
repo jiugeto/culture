@@ -44,4 +44,7 @@ Route::group(['prefix'=>'person','middleware' =>'MemberAuth','namespace'=>'Perso
     //个人后台皮肤管理
     Route::get('skin/pic/{pic_id}','SkinController@setTopBg');
     Route::resource('skin','SkinController');
+    //个人签到管理
+    Route::get('sign/add/{day}','SignController@add');
+    Route::resource('sign','SignController');
 });

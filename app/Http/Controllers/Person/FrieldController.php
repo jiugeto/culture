@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Person;
 
-use App\Models\UserFrieldModel;
+use App\Models\Base\UserFrieldModel;
 use App\Models\UserModel;
 
 class FrieldController extends BaseController

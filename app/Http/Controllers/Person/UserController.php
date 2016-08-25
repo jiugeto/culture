@@ -3,6 +3,11 @@ namespace App\Http\Controllers\Person;
 
 use App\Models\PicModel;
 use App\Models\UserModel;
+use App\Models\Base\UserFrieldModel;
+use App\Models\MessageModel;
+use App\Models\TalksModel;
+use App\Models\Base\UserSignModel;
+use App\Models\UserParamsModel;
 use Illuminate\Http\Request;
 use Hash;
 
@@ -26,6 +31,7 @@ class UserController extends BaseController
             'frields'=> $this->frields(),
             'messages'=> $this->messages(),
             'talks'=> $this->talks(),
+            'signs'=> $this->signs(),
             'links'=> $this->links,
             'curr'=> $this->curr,
         ];
@@ -121,7 +127,7 @@ class UserController extends BaseController
      */
     public function frields()
     {
-        return \App\Models\UserFrieldModel::where('del',0)
+        return UserFrieldModel::where('del',0)
             ->where(function($query){
                 $query->where('uid',$this->userid)
                     ->where('frield_id',$this->userid);
@@ -135,7 +141,7 @@ class UserController extends BaseController
      */
     public function messages()
     {
-        return \App\Models\MessageModel::where('del',0)
+        return MessageModel::where('del',0)
             ->where('accept',$this->userid)
             ->where('status','>',2)
             ->get();
@@ -146,8 +152,37 @@ class UserController extends BaseController
      */
     public function talks()
     {
-        return \App\Models\TalksModel::where('del',0)
+        return TalksModel::where('del',0)
             ->where('uid',$this->userid)
             ->get();
+    }
+
+    /**
+     * 会员签到情况
+     */
+    public function signs()
+    {
+        $date = date('Ym',time());     //当前月份
+        $fromdate = $date.'01000000';        //当前月初
+        //推算月份
+        $yuefen = ltrim(date('m',time()),'0');
+        if ($yuefen==2) {
+            $month = date('Y',time())%4==0 ? 29 : 28;
+        } elseif (in_array($yuefen,[1,3,5,7,8,10,12])) {
+            $month = 31;
+        } elseif (in_array($yuefen,[4,6,9,11])) {
+            $month = 30;
+        }
+        $todate = isset($month)?$date.$month.'240000':$date.'00240000';
+        $signs = UserSignModel::where('uid',$this->userid)->get();      //签到总数
+        $userParam = UserParamsModel::where('uid',$this->userid)->first();
+        $datas = UserSignModel::where('uid',$this->userid)
+            ->where('created_at','>',strtotime($fromdate))
+            ->where('created_at','<',strtotime($todate))
+            ->orderBy('id','desc')
+            ->get();
+        $datas->signsCount = count($signs);
+        $datas->rewardCount = $userParam->sign;
+        return $datas;
     }
 }

@@ -182,7 +182,7 @@ CREATE TABLE `ba_userlog` (
   `logoutTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '退出时间',
   `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -191,7 +191,7 @@ CREATE TABLE `ba_userlog` (
 
 LOCK TABLES `ba_userlog` WRITE;
 /*!40000 ALTER TABLE `ba_userlog` DISABLE KEYS */;
-INSERT INTO `ba_userlog` VALUES (1,1,'jiuge','192.168.2.101','201608222028542991',1471868934,0,1470795559),(2,1,'jiuge','192.168.2.100','201608230723281699',1471908208,0,1470795559),(3,1,'jiuge','192.168.2.102','201608240856034411',1472000163,0,1470795559),(4,1,'jiuge','192.168.2.102','201608241807583940',1472033278,0,1470795559);
+INSERT INTO `ba_userlog` VALUES (1,1,'jiuge','192.168.2.101','201608222028542991',1471868934,0,1470795559),(2,1,'jiuge','192.168.2.100','201608230723281699',1471908208,0,1470795559),(3,1,'jiuge','192.168.2.102','201608240856034411',1472000163,0,1470795559),(4,1,'jiuge','192.168.2.102','201608241807583940',1472033278,0,1470795559),(5,1,'jiuge','192.168.2.101','201608250944357919',1472089475,0,1470795559);
 /*!40000 ALTER TABLE `ba_userlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1770,6 +1770,37 @@ INSERT INTO `bs_types待处理` VALUES (1,'header头链接','bs_links网站头�
 UNLOCK TABLES;
 
 --
+-- Table structure for table `bs_user_frield`
+--
+
+DROP TABLE IF EXISTS `bs_user_frield`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bs_user_frield` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户id',
+  `frield_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '好友id',
+  `isauth` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '好友验证：1申请好友，2拒绝好友，3同意好友',
+  `remarks` varchar(255) NOT NULL COMMENT '申请备注',
+  `remarks2` varchar(255) NOT NULL COMMENT '拒绝理由',
+  `del` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '回收站：0不删除，1删除',
+  `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `updated_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户好友表 bs_users_frield';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bs_user_frield`
+--
+
+LOCK TABLES `bs_user_frield` WRITE;
+/*!40000 ALTER TABLE `bs_user_frield` DISABLE KEYS */;
+INSERT INTO `bs_user_frield` VALUES (1,0,0,1,'','',0,1470795559,1471420755),(2,0,0,1,'','',0,1470795559,0);
+/*!40000 ALTER TABLE `bs_user_frield` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `bs_user_gold`
 --
 
@@ -1831,10 +1862,11 @@ DROP TABLE IF EXISTS `bs_user_sign`;
 CREATE TABLE `bs_user_sign` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户id',
+  `reward` tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT '签到奖励，1--10随机',
   `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updated_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户签到表 bs_user_sign';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户签到表 bs_user_sign';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1843,6 +1875,7 @@ CREATE TABLE `bs_user_sign` (
 
 LOCK TABLES `bs_user_sign` WRITE;
 /*!40000 ALTER TABLE `bs_user_sign` DISABLE KEYS */;
+INSERT INTO `bs_user_sign` VALUES (1,1,3,1472121253,0);
 /*!40000 ALTER TABLE `bs_user_sign` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2185,39 +2218,8 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'jiuge','$2y$10$b8.ce.ma17MKiuN8iiJMO.QM5fdJ1Zwl7rpMNahjPGfNOKGoC/Kyy','123456','jiuge@qq.com','946493655',63929131,4294967295,20,'滨江区 浦沿街道 联庄一区 几号 几楼',2,1,1,4,0,15,1470795559,1471420755,1472033278),(2,'jiuge2','$2y$10$X5BdoH0p0n.E3hxCVag/neinTfiHXbMrCHUEEqf8ZpUQGaeOxUUBe','','946493655@qq.com','',0,0,30,'',0,0,0,0,0,10,1470795559,0,0);
+INSERT INTO `users` VALUES (1,'jiuge','$2y$10$b8.ce.ma17MKiuN8iiJMO.QM5fdJ1Zwl7rpMNahjPGfNOKGoC/Kyy','123456','jiuge@qq.com','946493655',63929131,4294967295,20,'滨江区 浦沿街道 联庄一区 几号 几楼',2,1,1,4,0,15,1470795559,1471420755,1472089475),(2,'jiuge2','$2y$10$X5BdoH0p0n.E3hxCVag/neinTfiHXbMrCHUEEqf8ZpUQGaeOxUUBe','','946493655@qq.com','',0,0,30,'',0,0,0,0,0,10,1470795559,0,0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `users_frield`
---
-
-DROP TABLE IF EXISTS `users_frield`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `users_frield` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户id',
-  `frield_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '好友id',
-  `isauth` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '好友验证：1申请好友，2拒绝好友，3同意好友',
-  `remarks` varchar(255) NOT NULL COMMENT '申请备注',
-  `remarks2` varchar(255) NOT NULL COMMENT '拒绝理由',
-  `del` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '回收站：0不删除，1删除',
-  `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
-  `updated_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户好友表 bs_users_frield';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `users_frield`
---
-
-LOCK TABLES `users_frield` WRITE;
-/*!40000 ALTER TABLE `users_frield` DISABLE KEYS */;
-INSERT INTO `users_frield` VALUES (1,0,0,1,'','',0,1470795559,1471420755),(2,0,0,1,'','',0,1470795559,0);
-/*!40000 ALTER TABLE `users_frield` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -2235,6 +2237,7 @@ CREATE TABLE `users_params` (
   `lecloud` varchar(255) NOT NULL COMMENT '乐视云账户',
   `lepwd` varchar(255) NOT NULL COMMENT '乐视云密码',
   `leplay` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否自动播放：0手动播放，1自动播放',
+  `sign` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '会员签到总奖励数',
   `gold` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户金币总数量',
   `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updated_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
@@ -2248,7 +2251,7 @@ CREATE TABLE `users_params` (
 
 LOCK TABLES `users_params` WRITE;
 /*!40000 ALTER TABLE `users_params` DISABLE KEYS */;
-INSERT INTO `users_params` VALUES (1,1,15,1,'946493655@qq.com','zwx4074553864',0,0,20160406,0);
+INSERT INTO `users_params` VALUES (1,1,15,1,'946493655@qq.com','zwx4074553864',0,3,0,20160406,0);
 /*!40000 ALTER TABLE `users_params` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2288,4 +2291,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-24 21:15:28
+-- Dump completed on 2016-08-25 21:17:50

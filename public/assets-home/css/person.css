@@ -445,6 +445,71 @@ div:hover.per_waterfall .text { color:red; }
 }
 .blue { color:rgb(14,144,210); }
 .red { color:red; }
+/*用户签到列表*/
+.list .rili {
+    width:100%; height:470px;
+    border:1px solid lightgrey;
+}
+.list .rili .oneday,.list .rili .overdue,.list .rili .nodue {
+    margin:5px;
+    width:112px; height:80px;
+    text-align:center;
+    border:1px solid lightgrey;
+    float:left;
+}
+.list .rili .oneday .title,.list .rili .overdue .title,.list .rili .nodue .title {
+    border:1px solid ghostwhite;
+    background:ghostwhite;
+}
+.list .rili .oneday .signbtn,.list .rili .overdue .signbtn,.list .rili .nodue .signbtn {
+    margin:15px auto;
+    width:60px; height:20px;
+    text-align:center;
+    border:1px solid lightgrey;
+    background:ghostwhite;
+    cursor:pointer;
+}
+.list .rili .day_curr {
+    border:1px solid orangered;
+    background:rgb(255,245,250);
+}
+.list .rili .day_curr .title {
+    color:white;
+    border:1px solid orangered;
+    background:orangered;
+}
+.list .rili .overdue:hover {
+    border:1px solid orange;
+}
+.list .rili .oneday:hover,.list .rili .nodue:hover {
+    border:1px solid orange;
+    background:rgb(255,250,234);
+}
+.list .rili .oneday:hover .title,.list .rili .nodue:hover .title {
+    color:white;
+    border:1px solid orange;
+    background:orange;
+}
+.list .rili .oneday .signbtn:hover,.list .rili .nodue .signbtn:hover,.list .rili .oneday .curr {
+    color:white;
+    border:1px solid orange;
+    background:orange;
+}
+.list .rili .oneday .curr {
+    color:white;
+    border:1px solid orangered;
+    background:orangered;
+}
+.list .usersign {
+    width:100%;
+    border:1px solid ghostwhite;
+}
+.list .usersign th { background:ghostwhite; }
+.list .usersign td {
+    text-align:center;
+    border-bottom:1px dashed lightgrey;
+    background:rgb(253,253,253);
+}
 
 /*头像*/
 .per_right_head {
