@@ -50,7 +50,8 @@ class BaseController extends Controller
             'url'=> 'trash',
         ],
         'notrash'=> [
-            /*'action',*/'menus','admin','role','link','commain','cominfo','comfirm','commodule','comfunc','staff','works',
+            /*'action',*/'menus','admin','role','link','commain','cominfo','comfirm','commodule','comfunc',
+            'staff','works','place','ad',
         ],
     ];
 
@@ -59,6 +60,7 @@ class BaseController extends Controller
         parent::__construct();
         if (\Session::has('admin.username')) {
             $this->limit = AdminModel::where('username',\Session::get('admin.username'))->first()->limit;
+            $this->userid = \Session::get('admin.adminid');
         }
     }
 

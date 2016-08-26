@@ -9,6 +9,6 @@ class UserParamsModel extends BaseModel
 
     protected $table = 'users_params';
     protected $fillable = [
-        'id','uid','limit','foot_switch','lecloud','lepwd','leplay','gold','created_at','updated_at',
+        'id','uid','limit','foot_switch','lecloud','lepwd','leplay','sign','gold','created_at','updated_at',
     ];
 }

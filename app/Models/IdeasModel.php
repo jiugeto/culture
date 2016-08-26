@@ -9,23 +9,16 @@ class IdeasModel extends BaseModel
 
     protected $table = 'bs_ideas';
     protected $fillable = [
-        'id','name','cate_id','intro','content','uid','sort','isshow','del','created_at','updated_at',
+        'id','name','cate','intro','content','uid','sort','isshow','del','created_at','updated_at',
+    ];
+    //类型：房产，效果图，平面，漫游
+    protected $cates = [
+        1=>'房产漫游','效果图','平面设计',
     ];
 
-    /**
-     * 得到所有分类
-     */
-    public function categorys()
+    public function getCate()
     {
-        $categorys =  CategoryModel::where('del',0)->get();
-//        $categorys = Tools::category($categorys);
-        $categorys = \App\Tools::getChild($categorys);
-        return $categorys;
-    }
-
-    public function cate()
-    {
-        return $this->hasOne('\App\Models\CategoryModel','id','cate_id');
+       return array_key_exists($this->cate,$this->cates) ? $this->cates[$this->cate] : '';
     }
 
     public function read($uid)
@@ -46,21 +39,36 @@ class IdeasModel extends BaseModel
         return count($datas) ? $datas : 0;
     }
 
+    /**
+     * 用户信息
+     */
     public function user()
     {
-        $uid = $this->uid ? $this->uid : 0;
+        $uid = $this->uid?$this->uid:0;
         $userModel = UserModel::find($uid);
-        $userModel->company = '';
-        if ($companyModel = CompanyModel::where('uid',$uid)->first()) {
-            $userModel->company = $companyModel;
-        }
         return $userModel ? $userModel : '';
     }
 
-    public function getUserName()
+    /**
+     * 公司信息
+     */
+    public function company()
     {
-        $userModel = $this->user();
-        return $userModel ? $userModel->username : '';
+        $uid = $this->uid?$this->uid:0;
+        $companyModel = CompanyModel::where('uid',$uid)->first();
+        return $companyModel ? $companyModel : '';
+    }
+
+    /**
+     * 获得公司名称或用户名称
+     */
+    public function getUName()
+    {
+        $name = $this->company() ? $this->company()->name : '';
+        if (!$name) {
+            $name = $this->user() ? $this->user()->username : '';
+        }
+        return $name;
     }
 
 //    /**

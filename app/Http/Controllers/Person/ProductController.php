@@ -7,11 +7,10 @@ use App\Models\VideoModel;
 class ProductController extends BaseController
 {
     /**
-     * 个人后台 视频列表
+     * 个人后台 视频列表，在线创作的
      */
 
     protected $curr = 'product';
-    protected $limit = 15;
 
     public function __construct()
     {

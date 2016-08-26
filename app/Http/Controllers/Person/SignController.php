@@ -13,19 +13,33 @@ class SignController extends BaseController
     protected $curr = 'sign';
     protected $fromtime;    //当天凌晨0点
     protected $totime;    //当天晚上24点
+    protected $fromMonth;    //当月1号凌晨0点
+    protected $toMonth;    //当月最后一天晚上24点
 
     public function __construct()
     {
         parent::__construct();
-        $this->fromime = date('Ymd',time()).'000000';    //当天凌晨0点
+        $this->fromtime = date('Ymd',time()).'000000';    //当天凌晨0点
         $this->totime = date('Ymd',time()).'240000';    //当天晚上24点
+        $this->fromMonth = date('Ym',time()).'00000000';    //当天凌晨0点
+        //计算当月天数
+        $yuefen = date('m',time());
+        if ($yuefen==2) {
+            $month = date('Y',time())%4==0 ? 29 : 28;
+        } elseif (in_array($yuefen,[1,3,5,7,8,10,12])) {
+            $month = 31;
+        } elseif (in_array($yuefen,[4,6,9,11])) {
+            $month = 30;
+        }
+        $month = (isset($month)&&$month) ? $month : 30;
+        $this->toMonth = date('Ym',time()).$month.'240000';    //当天晚上24点
         $this->model = new UserSignModel();
     }
 
-    public function index()
+    public function index($date='')
     {
         $result = [
-            'datas'=> $this->query(),
+            'datas'=> $this->query($date),
             'month'=> $this->getMonth(),
 //            'userSignCount'=> $this->queryCount(),
             'model'=> $this->model,
@@ -34,13 +48,14 @@ class SignController extends BaseController
             'links'=> $this->links,
             'curr'=> $this->curr,
             'uid'=> $this->userid,
+            'd'=> $date,
         ];
         return view('person.sign.index', $result);
     }
 
     public function add($day)
     {
-        if ($this->getDay()) {
+        if ($this->getDaySign()) {
             echo "<script>alert('今天已经签到过了！');history.go(-1);</script>";exit;
         }
         if (ltrim(date('d',time()),'0')!=$day) {
@@ -63,12 +78,26 @@ class SignController extends BaseController
 
 
 
-    public function query()
+    /**
+     * 当天、月、总签到的用户
+     */
+    public function query($date='')
     {
-        $datas = UserSignModel::where('created_at','>',strtotime($this->fromtime))
-            ->where('created_at','<',strtotime($this->totime))
-            ->orderBy('id','desc')
-            ->paginate($this->limit);
+        if ($date=='') {
+            $datas = UserSignModel::where('created_at','>',strtotime($this->fromtime))
+                ->where('created_at','<',strtotime($this->totime))
+                ->orderBy('id','desc')
+                ->paginate($this->limit);
+        } elseif ($date=='month') {
+            $datas = UserSignModel::where('created_at','>',strtotime($this->fromMonth))
+                ->where('created_at','<',strtotime($this->toMonth))
+                ->orderBy('id','desc')
+                ->paginate($this->limit);
+        } elseif ($date=='all') {
+            $datas = UserSignModel::orderBy('id','desc')
+                ->paginate($this->limit);
+        }
+        $datas->hasDay = $this->getDaySign() ? 1 : 0;
         $datas->limit = $this->limit;
         return $datas;
     }
@@ -81,7 +110,7 @@ class SignController extends BaseController
     /**
      * 查询当前用户当天签到情况
      */
-    public function getDay()
+    public function getDaySign()
     {
         $userSign = UserSignModel::where('uid',$this->userid)
             ->where('created_at','>',strtotime($this->fromtime))

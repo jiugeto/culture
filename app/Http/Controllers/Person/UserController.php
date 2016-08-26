@@ -176,13 +176,22 @@ class UserController extends BaseController
         $todate = isset($month)?$date.$month.'240000':$date.'00240000';
         $signs = UserSignModel::where('uid',$this->userid)->get();      //签到总数
         $userParam = UserParamsModel::where('uid',$this->userid)->first();
+        //当月签到情况
         $datas = UserSignModel::where('uid',$this->userid)
             ->where('created_at','>',strtotime($fromdate))
             ->where('created_at','<',strtotime($todate))
             ->orderBy('id','desc')
             ->get();
+        //当天签到情况
+        $fromday = date('Ymd', time()).'000000';    //当天凌晨0点
+        $today = date('Ymd', time()).'240000';    //当天夜里24点
+        $day = UserSignModel::where('uid',$this->userid)
+            ->where('created_at','>',strtotime($fromday))
+            ->where('created_at','<',strtotime($today))
+            ->first();
         $datas->signsCount = count($signs);
         $datas->rewardCount = $userParam->sign;
+        $datas->day = $date?1:0;
         return $datas;
     }
 }

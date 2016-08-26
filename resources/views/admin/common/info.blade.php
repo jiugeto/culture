@@ -14,8 +14,8 @@
                     {{--距离下一级别：<strong>160</strong></p>--}}
                 {{--<p>管理员信息</p>--}}
                 <p class="user-info-order">管理员名称：<strong>{{ Session::get('admin.username') }}</strong></p>
-                <p class="user-info-order">所在角色组：<strong></strong></p>
-                <p class="user-info-order">注册时间：<strong>{{ Session::get('admin.created_at') }}</strong></p>
+                <p class="user-info-order">所在角色组：{{ Session::get('admin.role_name') }}<strong></strong></p>
+                <p class="user-info-order">注册时间：<strong>{{ Session::get('admin.createTime') }}</strong></p>
                 <p>登陆时间：<strong>{{ Session::get('admin.loginTime') }}</strong></p>
             </div>
             {{--<div class="user-info">--}}

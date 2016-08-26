@@ -12,7 +12,8 @@
         <table class="list_tab">
             <tr>
                 <td>编号</td>
-                <td>演员名称</td>
+                <td>人员</td>
+                <td>职务</td>
                 <td>性别</td>
                 <td>创建时间</td>
                 <td>操作</td>
@@ -21,13 +22,14 @@
             @foreach($datas as $data)
             <tr>
                 <td>{{ $data->id }}</td>
-                <td><a href="/member/actor/{{$data->id}}">{{ $data->name }}</a></td>
+                <td><a href="/member/staff/{{$data->id}}">{{ $data->name }}</a></td>
+                <td>{{ $data->genreName() }}</td>
                 <td>{{ $data->sex }}</td>
-                <td>{{ $data->created_at }}</td>
+                <td>{{ $data->createTime() }}</td>
                 <td>
-                    <a href="/member/actor/{{ $data->id }}" class="list_btn">查看</a>
-                    <a href="/member/actor/{{ $data->id }}/edit" class="list_btn">编辑</a>
-                    <a href="/member/actor/{{ $data->id }}/destroy" class="list_btn">删除</a>
+                    <a href="/member/staff/{{ $data->id }}" class="list_btn">查看</a>
+                    <a href="/member/staff/{{ $data->id }}/edit" class="list_btn">编辑</a>
+                    <a href="/member/staff/{{ $data->id }}/destroy" class="list_btn">删除</a>
                 </td>
             </tr>
             @endforeach

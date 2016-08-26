@@ -6,12 +6,12 @@ use App\Models\BaseModel;
 class AdminlogModel extends BaseModel
 {
     /**
-     * 这是用户日志表model
+     * 这是管理员日志表
      */
 
     protected $table = 'ba_adminlog';
     protected $fillable = [
-        'id','uid','uname','serial','loginTime','logoutTime','created_at',
+        'id','uid','uname','serial','ip','ipaddress','loginTime','logoutTime',
     ];
 
     public function loginTime()

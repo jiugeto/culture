@@ -20,6 +20,8 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
         //管理员路由
     Route::post('admin/{id}','AdminController@update');
     Route::get('admin/{id}/forceDelete','AdminController@forceDelete');
+    Route::get('admin/pwd/{id}','AdminController@pwd');
+    Route::post('admin/setpwd/{id}','AdminController@setPwd');
     Route::resource('admin','AdminController');
         //角色路由
     Route::post('role/{id}','RoleController@update');
@@ -171,7 +173,7 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
         //广告管理
     Route::resource('ad','AdController');
         //广告位管理
-    Route::get('place/create','AdPlaceController@create');
+    Route::post('place/{id}','AdPlaceController@update');
     Route::resource('place','AdPlaceController');
         //修改（版本）日志管理
     Route::get('versionlog/{id}/forceDelete','VersionlogController@forceDelete');

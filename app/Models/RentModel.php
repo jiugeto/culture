@@ -29,9 +29,9 @@ class RentModel extends BaseModel
     }
 
     /**
-     * 获得公司名称或银行名称
+     * 获得公司名称或用户名称
      */
-    public function getUserName()
+    public function getUName()
     {
         $name = $this->company() ? $this->company()->name : '';
         if (!$name) {

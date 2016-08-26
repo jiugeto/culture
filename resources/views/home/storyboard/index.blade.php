@@ -23,9 +23,10 @@
                     {{--<a class="click" onclick="">回复：0</a>--}}
                 {{--</span>--}}
             {{--</div></div>--}}
-        <div class="pbl_one"><div class="pbl_in">
-            @if(count($datas))
+        @if(count($datas))
             @foreach($datas as $data)
+        <div class="pbl_one">
+            <div class="pbl_in">
                 <div class="img">
                     <a href="{{DOMAIN}}storyboard/{{ $data->id }}" title="点击进入查看{{ $data->name }}">
                         <img src="{{ $data->thumb() }}">
@@ -39,17 +40,22 @@
                     <a class="click" onclick="like({{$data->id}})" title="点击喜欢或者不喜欢">喜欢：{{ $data->getLike() }}</a>&nbsp;&nbsp;
                     {{--<a class="click" id="apply">申请分镜</a>--}}
                 </span>
+            </div>
+        </div>
             @endforeach
-            @else
+        @else
+        <div class="pbl_one">
+            <div class="pbl_in">
                 <div class="img"><a href="" title="">无</a></div>
                 <div class="title"><a href="">分镜名称</a></div>
                 <a href="">公司名称</a>
-                <span class="right">
-                    <a class="click" onclick="">喜欢：0</a>&nbsp;&nbsp;
-                    {{--<a class="click" onclick="">回复：0</a>--}}
-                </span>
-            @endif
-            </div></div>
+            <span class="right">
+                <a class="click" onclick="">喜欢：0</a>&nbsp;&nbsp;
+                {{--<a class="click" onclick="">回复：0</a>--}}
+            </span>
+            </div>
+        </div>
+        @endif
     </div>
     {{--前台分页--}}
     <div class="page"></div>

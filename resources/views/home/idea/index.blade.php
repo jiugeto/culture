@@ -7,18 +7,19 @@
 
     <div class="opinion_con">
         <div class="opinion_list">
-            {{--<p class="cate">大分类：</p>--}}
-            <p class="cate">
-                @if($cates)
-                @foreach($cates as $cate)
-                    {{ $cate->name }}：
-                    @if($cate->child)
-                        @foreach($cate->child as $subcate)
-                            <a href="{{ $subcate->id }}">{{ $subcate->name }}</a>
-                        @endforeach
-                    @endif <br>
-                @endforeach
-                @endif
+            {{--<p class="cate">--}}
+                {{--@if($cates)--}}
+                {{--@foreach($cates as $cate)--}}
+                    {{--{{ $cate->name }}：--}}
+                    {{--@if($cate->child)--}}
+                        {{--@foreach($cate->child as $subcate)--}}
+                            {{--<a href="{{ $subcate->id }}">{{ $subcate->name }}</a>--}}
+                        {{--@endforeach--}}
+                    {{--@endif <br>--}}
+                {{--@endforeach--}}
+                {{--@endif--}}
+            {{--</p>--}}
+            <p class="cate">分类：@foreach($model['cates'] as $kcate=>$cate)<a href="">{{ $cate }}</a>@endforeach
             </p>
             {{--<table class="idea">--}}
                 {{--<tr>--}}
@@ -49,7 +50,7 @@
                         <a id="noclick" style="display:{{ $data->click($userid) ? 'block' : 'none' }};">取消关注：{{ $data->click($userid) }}</a>
                         <a id="collect" style="display:{{ !$data->collect($userid) ? 'block' : 'none' }};">收藏：{{ $data->collect($userid) }}</a>
                         <a id="nocollect" style="display:{{ $data->collect($userid) ? 'block' : 'none' }};">取消收藏：{{ $data->collect($userid) }}</a>
-                        <span class="right">时间：{{ $data->created_at }}&nbsp;&nbsp;发布人：{{ $data->getUserName() }}</span>
+                        <span class="right">时间：{{ $data->createTime() }}&nbsp;&nbsp;发布人：{{ $data->getUName() }}</span>
                     </td>
                 </tr>
             </table>

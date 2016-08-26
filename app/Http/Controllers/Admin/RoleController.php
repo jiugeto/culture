@@ -25,7 +25,7 @@ class RoleController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'datas'=> RoleModel::orderBy('id','desc')->paginate($this->limit),
+            'datas'=> $this->query(),
             'prefix_url'=> DOMAIN.'admin/role',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -107,6 +107,7 @@ class RoleController extends BaseController
         $data = [
             'name'=> $request->name,
             'intro'=> $request->intro,
+            'uid'=> $this->userid,
         ];
         return $data;
     }
@@ -114,5 +115,11 @@ class RoleController extends BaseController
     /**
      * 查询方法
      */
-//    public function query(){}
+    public function query()
+    {
+        $datas = RoleModel::orderBy('id','asc')
+            ->paginate($this->limit);
+        $datas->limit = $this->limit;
+        return $datas;
+    }
 }

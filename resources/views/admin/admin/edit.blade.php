@@ -24,15 +24,15 @@
                             <input type="text" placeholder="至少2个字符" minlength="2" required name="realname" value="{{ $data->realname }}"/>
                         </div>
 
-                        <div class="am-form-group">
-                            <label>密码 / Password：</label>
-                            <input type="text" placeholder="至少5个字符" minlength="5" required name="password" value="{{ $data->password }}"/>
-                        </div>
+                        {{--<div class="am-form-group">--}}
+                            {{--<label>密码 / Password：</label>--}}
+                            {{--<input type="text" placeholder="至少5个字符" minlength="5" required name="password" value="{{ $data->password }}"/>--}}
+                        {{--</div>--}}
 
-                        <div class="am-form-group">
-                            <label>Email / email：</label>
-                            <input type="text" placeholder="例：12345@qq.com" pattern="^[0-9a-zA-Z-_]+@([0-9a-zA-Z-_])+(.[0-9a-zA-Z-_])+$" name="email" value="{{ $data->email }}"/>
-                        </div>
+                        {{--<div class="am-form-group">--}}
+                            {{--<label>Email / email：</label>--}}
+                            {{--<input type="text" placeholder="例：12345@qq.com" pattern="^[0-9a-zA-Z-_]+@([0-9a-zA-Z-_])+(.[0-9a-zA-Z-_])+$" name="email" value="{{ $data->email }}"/>--}}
+                        {{--</div>--}}
 
                         <div class="am-form-group">
                             <label>所在角色组 / Role：</label>

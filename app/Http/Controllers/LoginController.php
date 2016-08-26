@@ -47,7 +47,6 @@ class LoginController extends Controller
         $validator = Validator::make(Input::all(), $rules, $messages);
         if ($validator->fails()) {
             echo "<script>alert('验证码错误！');history.go(-1);</script>";exit;
-//            return redirect(DOMAIN.'login');
         }
         //个人资料
         if (in_array($userModel->isuser,[1,3])) {
@@ -71,23 +70,11 @@ class LoginController extends Controller
         $usercompany = isset($companys) ? serialize($companys) : [];
 
         $serial = date('YmdHis',time()).rand(0,10000);
-        //加入session
-//        Session::put('user.uid',$userModel->id);
-//        Session::put('user.username',Input::get('username'));
-//        Session::put('user.password',Input::get('password'));
-//        Session::put('user.email',$userModel->email);
-//        Session::put('user.serial',$serial);
-//        Session::put('user.area',$userModel->area);
-//        Session::put('user.address',$userModel->address);
-//        Session::put('user.cid',isset($companyModel)?$companyModel->id:'');
-//        Session::put('user.loginTime',time());
-//        Session::put('user.person',$userperson);
-//        Session::put('user.company',$usercompany);
         $userInfo = [
             'uid'=> $userModel->id,
             'username'=> Input::get('username'),
             'email'=> $userModel->email,
-            'serial'=> $userModel->serial,
+            'serial'=> $serial,
             'area'=> $userModel->area,
             'address'=> $userModel->address,
             'cid'=> isset($companyModel)?$companyModel->id:'',
@@ -98,10 +85,13 @@ class LoginController extends Controller
         Session::put('user',$userInfo);
 
         //登陆加入用户日志表
+        $ip = \App\Tools::getIp();
+        $ipaddress = \App\Tools::getCityByIp($ip);
         $userlog = [
             'uid'=> $userModel->id,
             'uname'=> Input::get('username'),
-            'ip'=> \App\Tools::getIp(),
+            'ip'=> $ip,
+            'ipaddress'=> $ipaddress,
             'loginTime'=> time(),
             'serial'=> $serial,
             'created_at'=> $userModel->created_at,
@@ -117,21 +107,9 @@ class LoginController extends Controller
     public function dologout()
     {
         //更新用户日志表
-        $logoutTime = time();
         UserlogModel::where('serial',Session::get('user.serial'))
-                    ->update(['logoutTime'=>$logoutTime]);
+                    ->update(['logoutTime'=> time()]);
         //去除session
-//        Session::forget('user.uid');
-//        Session::forget('user.username');
-//        Session::forget('user.password');
-//        Session::forget('user.email');
-//        Session::forget('user.serial');
-//        Session::forget('user.area');
-//        Session::forget('user.address');
-//        Session::forget('user.cid');
-//        Session::forget('user.loginTime');
-//        Session::forget('user.person');
-//        Session::forget('user.company');
         Session::forget('user');
         return redirect(DOMAIN.'login');
     }

@@ -18,16 +18,25 @@ class IdeaController extends BaseController
 
     protected $curr = 'idea';
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->model = new IdeasModel();
+    }
+
     public function islogin()
     {
-        if (!\Session::has('user.uid')) { echo "<script>alert('您还没有登录，请先登录！');window.location.href='/login';</script>";exit; }
+        if (!\Session::has('user.uid')) {
+            echo "<script>alert('您还没有登录，请先登录！');window.location.href='/login';</script>";exit;
+        }
     }
 
     public function index()
     {
         $result = [
             'datas'=> $this->query(),
-            'cates'=> Tools::getChild(CategoryModel::all()),
+            'model'=> $this->model,
+//            'cates'=> Tools::getChild(CategoryModel::all()),
             'lists'=> $this->list,
             'curr_menu'=> $this->curr,
             'userid'=> $this->userid,
@@ -105,9 +114,11 @@ class IdeaController extends BaseController
 
     public function query()
     {
-        return IdeasModel::where('del',0)
+        $datas = IdeasModel::where('del',0)
             ->orderBy('sort','desc')
             ->orderBy('id','desc')
             ->paginate($this->limit);
+        $datas->limit = $this->limit;
+        return $datas;
     }
 }

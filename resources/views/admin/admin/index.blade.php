@@ -34,7 +34,8 @@
                                 <div class="am-btn-group am-btn-group-xs">
                                     <a href="{{DOMAIN}}admin/admin/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/show.png" class="icon"> 查看</button></a>
                                     <a href="{{DOMAIN}}admin/admin/{{$data->id}}/edit"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 编辑</button></a>
-                                    <a href="{{DOMAIN}}admin/admin/{{$data->id}}/forceDelete"><button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><img src="{{PUB}}assets/images/forceDelete_red.png" class="icon"> 销毁记录</button></a>
+                                    <a href="{{DOMAIN}}admin/admin/pwd/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 重置密码</button></a>
+                                    {{--<a href="{{DOMAIN}}admin/admin/{{$data->id}}/forceDelete"><button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><img src="{{PUB}}assets/images/forceDelete_red.png" class="icon"> 销毁记录</button></a>--}}
                                 </div>
                             </div>
                         </td>

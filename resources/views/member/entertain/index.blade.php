@@ -22,8 +22,8 @@
                 <td>{{ $data->id }}</td>
                 <td>{{ $data->title }}</td>
                 {{--<td>{{ $data->genre==1 ? '娱乐供应' : '娱乐需求' }}</td>--}}
-                <td>{{ $data->uname }}</td>
-                <td>{{ $data->created_at }}</td>
+                <td>{{ $data->getUName() }}</td>
+                <td>{{ $data->createTime() }}</td>
                 <td>
                     @if($curr['url']=='')
                     <a href="{{DOMAIN}}member/entertain/{{ $data->id }}" class="list_btn">查看</a>

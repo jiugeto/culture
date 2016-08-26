@@ -31,7 +31,7 @@ class HomeController extends BaseController
             'cooperations'=> $this->getCooperations(6),
             'uservoices'=> $this->getUserVoices(5),
 //            'menus'=> $this->menus,
-            'curr_menu'=> '/',
+            'curr_menu'=> '',
             'number'=> $this->number,
             'floors'=> $this->floors,
         ];

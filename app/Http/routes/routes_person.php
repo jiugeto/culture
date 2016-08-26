@@ -26,16 +26,15 @@ Route::group(['prefix'=>'person','middleware' =>'MemberAuth','namespace'=>'Perso
     //视频列表
     Route::get('video/pre/{id}','VideoController@pre');
     Route::resource('video','VideoController');
+    //产品作品管理
+    Route::resource('product','ProductController');
     //好友留言
     Route::get('message/send/{id}','MessageController@setSend');
     Route::post('message/{id}','MessageController@update');
     Route::get('message/m/{menu}','MessageController@index');
-//    Route::get('message/m/{menu}/{time}','MessageController@index');
     Route::resource('message','MessageController');
     //图片管理
     Route::resource('pic','PicController');
-    //产品管理
-    Route::resource('product','ProductController');
     //设计管理
     Route::resource('design','DesignController');
     //好友管理
@@ -46,5 +45,6 @@ Route::group(['prefix'=>'person','middleware' =>'MemberAuth','namespace'=>'Perso
     Route::resource('skin','SkinController');
     //个人签到管理
     Route::get('sign/add/{day}','SignController@add');
+    Route::get('sign/{date}','SignController@index');
     Route::resource('sign','SignController');
 });

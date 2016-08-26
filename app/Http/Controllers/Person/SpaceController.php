@@ -16,7 +16,7 @@ class SpaceController extends BaseController
      * 个人后台个人空间
      */
 
-    protected $curr = 'curr';
+    protected $curr = 'space';
 
     public function __construct()
     {
@@ -27,7 +27,7 @@ class SpaceController extends BaseController
     {
         $result = [
             'links'=> $this->links,
-            'user'=> $this->user(),
+            'user'=> $this->user,
             'pics'=> $this->pics(),
             'goods'=> $this->goods($g_type),
             'products'=> $this->products($p_type),
@@ -45,12 +45,12 @@ class SpaceController extends BaseController
 
 
 
-    public function user()
-    {
-        $uid = $this->userid ? $this->userid : 0;
-        $userModel = UserModel::find($uid);
-        return $userModel ? $userModel : '';
-    }
+//    public function user()
+//    {
+//        $uid = $this->userid ? $this->userid : 0;
+//        $userModel = UserModel::find($uid);
+//        return $userModel ? $userModel : '';
+//    }
 
     public function pics()
     {

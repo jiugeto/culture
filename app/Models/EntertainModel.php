@@ -40,14 +40,6 @@ class EntertainModel extends BaseModel
     }
 
     /**
-     * 发布人名称
-     */
-    public function getUserName()
-    {
-        return $this->user() ? $this->user()->username : '';
-    }
-
-    /**
      * 发布人公司信息
      */
     public function company()
@@ -58,10 +50,14 @@ class EntertainModel extends BaseModel
     }
 
     /**
-     * 发布人公司名称
+     * 获得公司名称或用户名称
      */
-    public function getCompanyName()
+    public function getUName()
     {
-        return $this->company() ? $this->company()->name : '';
+        $name = $this->company() ? $this->company()->name : '';
+        if (!$name) {
+            $name = $this->user() ? $this->user()->username : '';
+        }
+        return $name;
     }
 }

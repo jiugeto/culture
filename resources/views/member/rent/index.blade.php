@@ -22,8 +22,8 @@
                 <td>{{ $data->id }}</td>
                 <td>{{ $data->name }}</td>
                 <td>{{ $data->genre==1 ? '需求方' : '供应方' }}</td>
-                <td>{{ $data->uname }}</td>
-                <td>{{ $data->created_at }}</td>
+                <td>{{ $data->getUName() }}</td>
+                <td>{{ $data->createTime() }}</td>
                 <td>
                     @if($curr['url']=='')
                         <a href="{{DOMAIN}}member/rent/{{ $data->id }}" class="list_btn">查看</a>

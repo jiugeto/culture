@@ -26,7 +26,7 @@
 
 /*=== 搜索 ===*/
 .s_search {
-    padding:10px 30px;
+    padding:5px 30px;
     width:938px;
     background:rgb(250,250,250);
     border-radius:3px;
@@ -54,7 +54,7 @@
 }
 .s_list .record td { width:30%; }
 /*.s_list .record*/ a.toshow {
-    padding:3px 20px;
+    padding:2px 20px;
     color:lightgrey;
     text-decoration:none;
     background:darkred;

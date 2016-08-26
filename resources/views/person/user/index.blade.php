@@ -44,20 +44,17 @@
                     该会员目前获取总金币数：<b class="red">{{ count($signs) ? $signs->rewardCount : 0 }}</b> 枚，
                         上次获得金币：<b class="red">{{ count($signs) ? $signs[0]->reward() : 0 }}</b> <br>
                     该会员目前签到等级：<b class="blue">[几等级]XX，离下一级 <span class="red">[XX]</span> 还差 <span class="red">0</span> 天</b> <br>
-                    <b style="color:rgb(14,144,210);">[今天是否签到]</b>
+                    <b style="color:rgb(14,144,210);">[今天是否签到 <span class="red">{{ $signs->day ? '√' : '×' }}</span>]</b>
                 </p>
 
                 <div class="line">
                     <b class="blue">活跃情况</b><br>
-                    用户组： <br>
-                    在线时间： <br>
-                    注册时间： <br>
-                    最后访问： <br>
-                    注册 IP： <br>
-                    上次访问 IP： <br>
-                    上次活动时间： <br>
-                    上次发表时间： <br>
-                    所在时区： <br>
+                    用户组： 无<br>
+                    注册时间： {{ $user->createTime() }}<br>
+                    上次访问： {{ $user->lastLogin() }}<br>
+                    注册 IP： @if($userlogfirst=$user->userlog[0]){{ $userlogfirst->ip }} - - {{ $userlogfirst->ipaddress }}@endif<br>
+                    上次访问 IP：@if($userloglast=$user->userlog[count($user->userlog)-1])
+                                {{ $userloglast->ip }} - - {{ $userloglast->ipaddress }}@endif <br>
                 </div>
 
                 <p class="user_info">

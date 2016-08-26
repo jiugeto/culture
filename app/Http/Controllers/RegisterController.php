@@ -53,21 +53,33 @@ class RegisterController extends Controller
             'password'=> Hash::make(Input::get('password')),
             'email'=> Input::get('email'),
             'created_at'=> time(),
+            'lastLogin'=> time(),
         ];
         UserModel::create($data);
 
         //加入session
         $userinfo = UserModel::where('username',Input::get('username'))->first();
-//        Session::put('user.uid',$userinfo->id);
-//        Session::put('user.username',Input::get('username'));
-//        Session::put('user.password',Input::get('password'));
-//        Session::put('user.email',Input::get('email'));
         $userInfo = [
             'uid'=> $userinfo->id,
             'username'=> Input::get('username'),
             'email'=> Input::get('email'),
         ];
         Session::put('user',$userInfo);
+
+        //登陆加入用户日志表
+        $serial = date('YmdHis',time()).rand(0,10000);
+        $ip = \App\Tools::getIp();
+        $ipaddress = \App\Tools::getCityByIp($ip);
+        $userlog = [
+            'uid'=> $userModel->id,
+            'uname'=> Input::get('username'),
+            'ip'=> $ip,
+            'ipaddress'=> $ipaddress,
+            'loginTime'=> time(),
+            'serial'=> $serial,
+            'created_at'=> $userModel->created_at,
+        ];
+        \App\Models\Admin\UserlogModel::create($userlog);
 
         return redirect('/regist/success');
     }

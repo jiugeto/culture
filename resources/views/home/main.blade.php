@@ -21,7 +21,7 @@
 {{--浏览器问题--}}
 
     @include('layout.header')
-    {{--@include('layout.navigate')--}}
+    @include('layout.navigate')
 
     <!-- 空白 -->
     <div class="content_kongbai">&nbsp;</div>

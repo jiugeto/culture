@@ -44,7 +44,13 @@ class AdPlaceController extends BaseController
         return view('admin.adplace.create', $result);
     }
 
-    public function store(Request $request){}
+    public function store(Request $request)
+    {
+        $data = $this->getData($request);
+        $data['created_at'] = time();
+        AdPlaceModel::create($data);
+        return redirect(DOMAIN.'admin/place');
+    }
 
     public function edit($id)
     {
@@ -58,7 +64,13 @@ class AdPlaceController extends BaseController
         return view('admin.adplace.edit', $result);
     }
 
-    public function update(Request $request, $id){}
+    public function update(Request $request, $id)
+    {
+        $data = $this->getData($request);
+        $data['updated_at'] = time();
+        AdPlaceModel::where('id',$id)->update($data);
+        return redirect(DOMAIN.'admin/place');
+    }
 
     public function show($id)
     {
@@ -76,16 +88,25 @@ class AdPlaceController extends BaseController
 
 
 
-    /**
-     * =================
-     * 以下是公用方法
-     * =================
-     */
+    public function getData(Request $request)
+    {
+        if (!$request->name || !$request->width || !$request->height || !$request->price || !$request->number) {
+            echo "<script>alert('广告位名称、宽度、高度、价格、数量必填！');history.go(-1);</script>";exit;
+        }
+       return array(
+           'name'=> $request->name,
+           'intro'=> $request->intro,
+           'width'=> $request->width,
+           'height'=> $request->height,
+           'price'=> $request->price,
+           'uid'=> $this->userid,
+           'number'=> $request->number,
+       );
+    }
 
     public function query()
     {
-        $datas = AdPlaceModel::where('del',0)
-            ->orderBy('id','desc')
+        $datas = AdPlaceModel::orderBy('id','desc')
             ->paginate($this->limit);
         $datas->limit = $this->limit;
         return $datas;

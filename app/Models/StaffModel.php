@@ -39,24 +39,6 @@ class StaffModel extends BaseModel
         return $this->entertain() ? $this->entertain()->title : '';
     }
 
-    /**
-     * 所在公司信息
-     */
-    public function getCompany()
-    {
-        $uid = $this->uid ? $this->uid : 0;
-        $companyModel = CompanyModel::where('uid',$uid)->first();
-        return $companyModel ? $companyModel : '';
-    }
-
-    /**
-     * 所在公司名称
-     */
-    public function getCompanyName()
-    {
-        return $this->getCompany() ? $this->getCompany()->name : '';
-    }
-
     public function genreName()
     {
         return array_key_exists($this->genre,$this->genres) ? $this->genres[$this->genre] : '';
@@ -83,11 +65,25 @@ class StaffModel extends BaseModel
     }
 
     /**
-     * 发布人名称
+     * 公司信息
      */
-    public function getUserName()
+    public function company()
     {
-        return $this->user() ? $this->user()->username : '';
+        $uid = $this->uid?$this->uid:0;
+        $companyModel = CompanyModel::where('uid',$uid)->first();
+        return $companyModel ? $companyModel : '';
+    }
+
+    /**
+     * 获得公司名称或用户名称
+     */
+    public function getUName()
+    {
+        $name = $this->company() ? $this->company()->name : '';
+        if (!$name) {
+            $name = $this->user() ? $this->user()->username : '';
+        }
+        return $name;
     }
 
     public function getHobby()

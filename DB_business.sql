@@ -60,13 +60,12 @@ DROP TABLE IF EXISTS `ba_admin`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ba_admin` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) NOT NULL COMMENT '管理员名称',
-  `realname` varchar(255) NOT NULL COMMENT '真实名字',
-  `email` varchar(255) NOT NULL COMMENT '邮箱',
-  `password` varchar(255) NOT NULL COMMENT '登陆密码',
+  `username` varchar(50) NOT NULL COMMENT '管理员名称',
+  `realname` varchar(50) NOT NULL COMMENT '真实名字',
+  `password` varchar(255) NOT NULL COMMENT '加密过得密码',
+  `pwd` varchar(50) NOT NULL COMMENT '登陆原始密码',
   `role_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '管理员组别，关联ba_role',
   `intro` varchar(255) NOT NULL COMMENT '管理员介绍',
-  `limit` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '列表每页记录数，默认10条',
   `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updated_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`)
@@ -79,7 +78,7 @@ CREATE TABLE `ba_admin` (
 
 LOCK TABLES `ba_admin` WRITE;
 /*!40000 ALTER TABLE `ba_admin` DISABLE KEYS */;
-INSERT INTO `ba_admin` VALUES (1,'jiuge','jiuge','','jiuge',1,'',10,1470909119,0);
+INSERT INTO `ba_admin` VALUES (1,'jiuge','jiuge','$2y$10$P9SN9.5CySu6AKGqSig0SO0M4cE5NMptcA8gr1GW7JfCBzEHrCiQO','jiuge',1,'',1470909119,1472215772);
 /*!40000 ALTER TABLE `ba_admin` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -96,11 +95,11 @@ CREATE TABLE `ba_adminlog` (
   `uname` varchar(255) NOT NULL COMMENT '用户名称',
   `serial` varchar(20) NOT NULL COMMENT '序号，唯一标识',
   `ip` varchar(15) NOT NULL COMMENT 'ip地址',
+  `ipaddress` varchar(100) NOT NULL COMMENT '管理员IP所在地',
   `loginTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '登陆时间',
   `logoutTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '退出时间',
-  `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='管理员日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='管理员日志表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -109,6 +108,7 @@ CREATE TABLE `ba_adminlog` (
 
 LOCK TABLES `ba_adminlog` WRITE;
 /*!40000 ALTER TABLE `ba_adminlog` DISABLE KEYS */;
+INSERT INTO `ba_adminlog` VALUES (1,1,'jiuge','201608261936344970','192.168.2.101','浙江省 杭州市 滨江区',1472211394,1472218222),(2,1,'jiuge','201608262132257107','192.168.2.101','浙江省 杭州市 滨江区',1472218345,1472218507),(3,1,'jiuge','201608262135094048','192.168.2.101','浙江省 杭州市 滨江区',1472218509,0);
 /*!40000 ALTER TABLE `ba_adminlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -121,12 +121,13 @@ DROP TABLE IF EXISTS `ba_role`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ba_role` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布人adminid',
   `name` varchar(255) NOT NULL COMMENT '角色名称',
   `intro` varchar(255) NOT NULL COMMENT '角色简介',
   `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updated_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='系统后台角色表（管理组别）';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='系统后台角色表（管理组别）';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -135,7 +136,7 @@ CREATE TABLE `ba_role` (
 
 LOCK TABLES `ba_role` WRITE;
 /*!40000 ALTER TABLE `ba_role` DISABLE KEYS */;
-INSERT INTO `ba_role` VALUES (1,'超级管理员','最高权限',20160405,0);
+INSERT INTO `ba_role` VALUES (1,1,'超级管理员','最高权限，本站创始人',20160405,1472213198),(2,0,'普通管理员','一般管理',1472213596,0);
 /*!40000 ALTER TABLE `ba_role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -177,12 +178,12 @@ CREATE TABLE `ba_userlog` (
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户id',
   `uname` varchar(255) NOT NULL COMMENT '用户名称',
   `ip` varchar(15) NOT NULL COMMENT '用户端ip',
+  `ipaddress` varchar(100) NOT NULL COMMENT '访问用户ip所在城市',
   `serial` varchar(20) NOT NULL COMMENT '序号，唯一标识',
   `loginTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '登陆时间',
   `logoutTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '退出时间',
-  `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户日志表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -191,7 +192,7 @@ CREATE TABLE `ba_userlog` (
 
 LOCK TABLES `ba_userlog` WRITE;
 /*!40000 ALTER TABLE `ba_userlog` DISABLE KEYS */;
-INSERT INTO `ba_userlog` VALUES (1,1,'jiuge','192.168.2.101','201608222028542991',1471868934,0,1470795559),(2,1,'jiuge','192.168.2.100','201608230723281699',1471908208,0,1470795559),(3,1,'jiuge','192.168.2.102','201608240856034411',1472000163,0,1470795559),(4,1,'jiuge','192.168.2.102','201608241807583940',1472033278,0,1470795559),(5,1,'jiuge','192.168.2.101','201608250944357919',1472089475,0,1470795559);
+INSERT INTO `ba_userlog` VALUES (1,1,'jiuge','192.168.2.101','浙江省 杭州市 滨江区','201608261546479648',1472197607,1472216822);
 /*!40000 ALTER TABLE `ba_userlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -231,19 +232,17 @@ DROP TABLE IF EXISTS `bs_ad_places`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `bs_ad_places` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL COMMENT '广告位名称',
-  `intro` varchar(500) DEFAULT NULL COMMENT '广告位简介 ',
-  `type_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '广告位类型，关联bs_types',
-  `uid` int(10) unsigned DEFAULT '0' COMMENT '用户id',
+  `name` varchar(100) NOT NULL COMMENT '广告位名称',
+  `intro` varchar(255) NOT NULL COMMENT '广告位简介 ',
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户id',
   `width` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '广告位宽度，单位px',
   `height` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '广告位高度，单位px',
-  `price` decimal(10,0) unsigned NOT NULL DEFAULT '0' COMMENT '广告位价格，单位元/月',
-  `number` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '广告数量',
-  `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站功能：0不放入回收站，1放入回收站',
+  `price` float(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '广告位价格，单位元/月',
+  `number` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '广告数量',
   `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updated_at` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='类型表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='类型表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -252,6 +251,7 @@ CREATE TABLE `bs_ad_places` (
 
 LOCK TABLES `bs_ad_places` WRITE;
 /*!40000 ALTER TABLE `bs_ad_places` DISABLE KEYS */;
+INSERT INTO `bs_ad_places` VALUES (1,'前台首页横幅','前台首页上面宽横幅广告位',1,1500,400,1.00,5,1472217158,1472217735);
 /*!40000 ALTER TABLE `bs_ad_places` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -344,13 +344,13 @@ LOCK TABLES `bs_authorizations待处理` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `bs_category待处理`
+-- Table structure for table `bs_category待删除`
 --
 
-DROP TABLE IF EXISTS `bs_category待处理`;
+DROP TABLE IF EXISTS `bs_category待删除`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `bs_category待处理` (
+CREATE TABLE `bs_category待删除` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL COMMENT '视频分类名称',
   `pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '父id',
@@ -363,13 +363,13 @@ CREATE TABLE `bs_category待处理` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `bs_category待处理`
+-- Dumping data for table `bs_category待删除`
 --
 
-LOCK TABLES `bs_category待处理` WRITE;
-/*!40000 ALTER TABLE `bs_category待处理` DISABLE KEYS */;
-INSERT INTO `bs_category待处理` VALUES (1,'专业',0,'按专业分类',0,20160313,20160313),(2,'行业',0,'按行业分类',0,20160317,0),(3,'年龄',0,'按年龄分类',0,20160317,0),(4,'视频',1,'视频组',0,20160317,0),(5,'平面设计',1,'平面组',0,20160317,0),(6,'建筑设计',1,'建筑组',0,20160317,0),(7,'房产漫游',1,'房产组，包括效果图',0,20160317,0),(8,'游戏制作',1,'游戏组，包括Unity 3D',0,20160317,0);
-/*!40000 ALTER TABLE `bs_category待处理` ENABLE KEYS */;
+LOCK TABLES `bs_category待删除` WRITE;
+/*!40000 ALTER TABLE `bs_category待删除` DISABLE KEYS */;
+INSERT INTO `bs_category待删除` VALUES (1,'专业',0,'按专业分类',0,20160313,20160313),(2,'行业',0,'按行业分类',0,20160317,0),(3,'年龄',0,'按年龄分类',0,20160317,0),(4,'视频',1,'视频组',0,20160317,0),(5,'平面设计',1,'平面组',0,20160317,0),(6,'建筑设计',1,'建筑组',0,20160317,0),(7,'房产漫游',1,'房产组，包括效果图',0,20160317,0),(8,'游戏制作',1,'游戏组，包括Unity 3D',0,20160317,0);
+/*!40000 ALTER TABLE `bs_category待删除` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1866,7 +1866,7 @@ CREATE TABLE `bs_user_sign` (
   `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updated_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户签到表 bs_user_sign';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户签到表 bs_user_sign';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1875,7 +1875,7 @@ CREATE TABLE `bs_user_sign` (
 
 LOCK TABLES `bs_user_sign` WRITE;
 /*!40000 ALTER TABLE `bs_user_sign` DISABLE KEYS */;
-INSERT INTO `bs_user_sign` VALUES (1,1,3,1472121253,0);
+INSERT INTO `bs_user_sign` VALUES (1,1,3,1472121253,0),(2,1,2,1472173411,0);
 /*!40000 ALTER TABLE `bs_user_sign` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2218,7 +2218,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'jiuge','$2y$10$b8.ce.ma17MKiuN8iiJMO.QM5fdJ1Zwl7rpMNahjPGfNOKGoC/Kyy','123456','jiuge@qq.com','946493655',63929131,4294967295,20,'滨江区 浦沿街道 联庄一区 几号 几楼',2,1,1,4,0,15,1470795559,1471420755,1472089475),(2,'jiuge2','$2y$10$X5BdoH0p0n.E3hxCVag/neinTfiHXbMrCHUEEqf8ZpUQGaeOxUUBe','','946493655@qq.com','',0,0,30,'',0,0,0,0,0,10,1470795559,0,0);
+INSERT INTO `users` VALUES (1,'jiuge','$2y$10$b8.ce.ma17MKiuN8iiJMO.QM5fdJ1Zwl7rpMNahjPGfNOKGoC/Kyy','123456','jiuge@qq.com','946493655',63929131,4294967295,20,'滨江区 浦沿街道 联庄一区 几号 几楼',2,1,1,4,0,15,1470795559,1471420755,1472197607),(2,'jiuge2','$2y$10$X5BdoH0p0n.E3hxCVag/neinTfiHXbMrCHUEEqf8ZpUQGaeOxUUBe','','946493655@qq.com','',0,0,30,'',0,0,0,0,0,10,1470795559,0,0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2251,7 +2251,7 @@ CREATE TABLE `users_params` (
 
 LOCK TABLES `users_params` WRITE;
 /*!40000 ALTER TABLE `users_params` DISABLE KEYS */;
-INSERT INTO `users_params` VALUES (1,1,15,1,'946493655@qq.com','zwx4074553864',0,3,0,20160406,0);
+INSERT INTO `users_params` VALUES (1,1,15,1,'946493655@qq.com','zwx4074553864',0,5,0,20160406,0);
 /*!40000 ALTER TABLE `users_params` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2291,4 +2291,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-25 21:17:50
+-- Dump completed on 2016-08-26 21:38:39

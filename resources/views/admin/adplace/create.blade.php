@@ -16,7 +16,7 @@
                     <fieldset>
                         <div class="am-form-group">
                             <label>广告位名称 / Ad Place：</label>
-                            <input type="text" placeholder="至少2个字符" minlength="2" required name="Ad_place"/>
+                            <input type="text" placeholder="至少2个字符" minlength="2" required name="name"/>
                         </div>
 
                         <div class="am-form-group">
@@ -25,34 +25,23 @@
                         </div>
 
                         <div class="am-form-group">
-                            <label>广告位类型 / Type：
-                                <a href="{{DOMAIN}}admin/type/create/{{'广告位-type_id'}}">[+添加类别]</a></label>
-                            <select required name="type_id">
-                                <option value="">-选择类型-</option>
-                                @foreach($types as $type)
-                                    <option value="{{ $type->id }}">{{ $type->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="am-form-group">
-                            <label>用户名称 / User Name：</label>
-                            <input type="text" placeholder="至少2个字符" minlength="2" required name="user_name"/>
-                        </div>
-
-                        <div class="am-form-group">
                             <label>宽度 / Width：</label>
-                            <input type="text" placeholder="广告位宽度" pattern="^\d{1,4}$" required name="width"/>
+                            <input type="text" placeholder="输入1-4位数字" pattern="^\d{1,4}$" required name="width"/>
                         </div>
 
                         <div class="am-form-group">
                             <label>高度 / Height：</label>
-                            <input type="text" placeholder="广告位高度" pattern="^\d{1,4}$" required name="height"/>
+                            <input type="text" placeholder="输入1-3位数字" pattern="^\d{1,3}$" required name="height"/>
                         </div>
 
                         <div class="am-form-group">
                             <label>价格 / Price：</label>
-                            <input type="text" placeholder="广告位价格(保留2位小数)" pattern="^\d+|\d+\.\d{2}$" required name="price"/>
+                            <input type="text" placeholder="输入数字" pattern="^(\d+)|(\d+\.\d{1,2})$" required name="price"/>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label>广告数量 / Number：</label>
+                            <input type="text" placeholder="输入数字" pattern="^\d+$" required name="number"/>
                         </div>
 
                         <button type="submit" class="am-btn am-btn-primary">保存添加</button>

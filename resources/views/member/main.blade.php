@@ -12,7 +12,7 @@
 </head>
 <body>
     @include('layout.header')
-    {{--@include('layout.navigate')--}}
+    @include('layout.navigate')
     <div class="mem_con">
         @include('member.partials.menu')
 

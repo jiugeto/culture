@@ -7,7 +7,7 @@
         <div class="s_search">
             公司类型：
             <select name="genre" class="home_search">
-                <option value="0" {{ $genre==0 ? 'selected' : '' }}>-所有-</option>
+                <option value="0" {{ $genre==0 ? 'selected' : '' }}>所有</option>
                 @foreach($model['genres'] as $kgenre=>$vgenre)
                     <option value="{{ $kgenre }}" {{ $genre==$kgenre ? 'selected' : '' }}>{{ $vgenre }}</option>
                 @endforeach
@@ -29,9 +29,9 @@
         {{-- 列表 --}}
         <div class="cre_kong">&nbsp;{{--10px高度留空--}}</div>
         <div class="s_list">
+            @if(count($datas))
+                @foreach($datas as $data)
             <table class="record">
-                @if(count($datas))
-                    @foreach($datas as $data)
                 <tr>
                     <td>公司名称：{{ str_limit($data->name,20) }}</td>
                     <td>公司类型：{{ $data->genreName() }}</td>
@@ -42,9 +42,9 @@
                     <td>时间：{{ $data->createTime() }}</td>
                     <td><a href="{{DOMAIN}}supply/{{ $data->id }}" class="toshow">详情</a></td>
                 </tr>
-                    @endforeach
-                @endif
             </table>
+                @endforeach
+            @endif
             @include('home.common.page')
         </div>
         <div class="s_right">

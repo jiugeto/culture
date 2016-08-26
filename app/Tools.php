@@ -236,8 +236,45 @@ class Tools
         } else if (getenv("REMOTE_ADDR")) {
             $ip = getenv("REMOTE_ADDR");
         } else {
-            $ip = "Unknow";
+            $ip = "";
         }
         return $ip;
+    }
+
+    /**
+     * 把数据的对象格式转换成数据格式
+     * @param $object
+     * @return mixed
+     */
+    public static function objectToArray(&$object) {
+        $object =  json_decode(json_encode( $object), true);
+        return  $object;
+    }
+
+    /**
+     * 由ip获得所在城市
+     */
+    public static function getCityByIp($ip='')
+    {
+        $address = '';
+        if ($ip && substr($ip,0,7)!='192.168') {
+            $key = 'Tj1ciyqmG0quiNgpr0nmAimUCCMB5qMk';      //自己申请的百度地图api的key
+            $curl = new \Curl\Curl();
+            $apiUrl = 'http://api.map.baidu.com/location/ip';
+            $curl->post($apiUrl, array(
+                'ak'=> $key,
+                'ip'=> $ip,
+            ));
+            $response = $curl->response;
+            $response = \App\Tools::objectToArray($response);
+            if ($response['status']==0) {
+                $address = $response['content']['address'];
+            }
+        } elseif ($ip && substr($ip,0,7)=='192.168') {
+            $address = '浙江省 杭州市 滨江区';
+        } elseif (!$ip) {
+            $address = '未知';
+        }
+        return $address;
     }
 }

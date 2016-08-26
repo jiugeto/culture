@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Models\Admin\AdminModel;
 use App\Models\Admin\RoleModel;
+use Hash;
 
 class AdminController extends BaseController
 {
@@ -15,7 +16,6 @@ class AdminController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->model = new RoleModel();
         $this->crumb['']['name'] = '管理员列表';
         $this->crumb['category']['name'] = '管理员管理';
         $this->crumb['category']['url'] = 'admin';
@@ -87,6 +87,36 @@ class AdminController extends BaseController
         return redirect(DOMAIN.'admin/admin');
     }
 
+    public function pwd($id)
+    {
+        $curr['name'] = '重置密码';
+        $curr['url'] = 'pwd';
+        $result = [
+            'data'=> AdminModel::find($id),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.admin.pwd', $result);
+    }
+
+    public function setPwd(Request $request,$id)
+    {
+        $adminModel = AdminModel::find($id);
+        if (!Hash::check($request->pwd1,$adminModel->password) || $request->pwd1!=$adminModel->pwd) {
+            echo "<script>alert('老密码错误！');history.go(-1);</script>";exit;
+        }
+        if ($request->pwd1!=$request->pwd2) {
+            echo "<script>alert('2次老密码不一致！');history.go(-1);</script>";exit;
+        }
+        $data = [
+            'password'=> Hash::make($request->pwd3),
+            'pwd'=> $request->pwd3,
+            'updated_at'=> time(),
+        ];
+        AdminModel::where('id',$id)->update($data);
+        return redirect(DOMAIN.'admin/admin');
+    }
+
 //    public function destroy($id)
 //    {
 //        AdminModel::where('id',$id)->update(['del'=>1]);
@@ -103,26 +133,22 @@ class AdminController extends BaseController
 
 
 
+    public function getData(Request $request)
+    {
+        return array(
+            'username'=> $request->username,
+            'realname'=> $request->realname,
+//            'password'=> $request->password,
+//            'email'=> $request->email,
+            'role_id'=> $request->role_id,
+            'intro'=> $request->intro,
+        );
+    }
+
     public function query()
     {
         $datas = AdminModel::orderBy('id','desc')->paginate($this->limit);
         $datas->limit = $this->limit;
         return $datas;
-    }
-
-    /**
-     * 收集数据
-     */
-    public function getData(Request $request)
-    {
-        $data = [
-            'username'=> $request->username,
-            'realname'=> $request->realname,
-            'password'=> $request->password,
-            'email'=> $request->email,
-            'role_id'=> $request->role_id,
-            'intro'=> $request->intro,
-        ];
-        return $data;
     }
 }
