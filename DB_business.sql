@@ -99,7 +99,7 @@ CREATE TABLE `ba_adminlog` (
   `loginTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '登陆时间',
   `logoutTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '退出时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='管理员日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='管理员日志表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -108,7 +108,7 @@ CREATE TABLE `ba_adminlog` (
 
 LOCK TABLES `ba_adminlog` WRITE;
 /*!40000 ALTER TABLE `ba_adminlog` DISABLE KEYS */;
-INSERT INTO `ba_adminlog` VALUES (1,1,'jiuge','201608261936344970','192.168.2.101','浙江省 杭州市 滨江区',1472211394,1472218222),(2,1,'jiuge','201608262132257107','192.168.2.101','浙江省 杭州市 滨江区',1472218345,1472218507),(3,1,'jiuge','201608262135094048','192.168.2.101','浙江省 杭州市 滨江区',1472218509,0);
+INSERT INTO `ba_adminlog` VALUES (1,1,'jiuge','201608261936344970','192.168.2.101','浙江省 杭州市 滨江区',1472211394,1472218222),(2,1,'jiuge','201608262132257107','192.168.2.101','浙江省 杭州市 滨江区',1472218345,1472218507),(3,1,'jiuge','201608262135094048','192.168.2.101','浙江省 杭州市 滨江区',1472218509,0),(4,1,'jiuge','2016082707445961','192.168.2.101','浙江省 杭州市 滨江区',1472255099,0),(5,1,'jiuge','201608272054095978','192.168.2.101','浙江省 杭州市 滨江区',1472302449,0);
 /*!40000 ALTER TABLE `ba_adminlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -242,7 +242,7 @@ CREATE TABLE `bs_ad_places` (
   `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updated_at` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='类型表';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='类型表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -251,7 +251,7 @@ CREATE TABLE `bs_ad_places` (
 
 LOCK TABLES `bs_ad_places` WRITE;
 /*!40000 ALTER TABLE `bs_ad_places` DISABLE KEYS */;
-INSERT INTO `bs_ad_places` VALUES (1,'前台首页横幅','前台首页上面宽横幅广告位',1,1500,400,1.00,5,1472217158,1472217735);
+INSERT INTO `bs_ad_places` VALUES (1,'前台首页横幅','前台首页上面宽横幅广告位',1,1500,400,1.00,9,1472217158,1472303435),(2,'前台供应右侧','前台供应的公司列表右侧广告栏',1,270,300,1.00,2,1472288234,1472303383),(3,'前台需求右侧','前台需求页面广告栏',1,270,300,1.00,2,1472303080,1472303369),(4,'前台娱乐右侧','前台娱乐频道右侧广告栏',1,270,500,1.00,1,1472303732,0),(5,'前台租赁右侧','前台租赁页面右侧广告栏',1,270,300,1.00,3,1472304513,0);
 /*!40000 ALTER TABLE `bs_ad_places` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -265,21 +265,21 @@ DROP TABLE IF EXISTS `bs_ads`;
 CREATE TABLE `bs_ads` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL COMMENT '广告名称',
-  `ad_place_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '广告位id，关联bs_ad_place',
+  `adplace_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '广告位id，关联bs_ad_place',
   `intro` varchar(500) NOT NULL COMMENT '广告内容',
   `pic_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '图片链接id，关联bs_pics',
   `link` varchar(255) NOT NULL COMMENT '广告链接',
-  `fromtime` int(10) unsigned NOT NULL COMMENT '投放开始时间',
-  `totime` int(10) unsigned NOT NULL COMMENT '投放结束时间',
+  `fromTime` int(10) unsigned NOT NULL COMMENT '投放开始时间',
+  `toTime` int(10) unsigned NOT NULL COMMENT '投放结束时间',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布会员id',
-  `uname` varchar(255) NOT NULL COMMENT '用户名称',
-  `auth` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '审核状态：0未审核，1未通过审核，2通过审核',
-  `status` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '投放状态：0未投放，1已过期，2投放中',
-  `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站功能：0不放入回收站，1放入回收站',
+  `isauth` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '审核状态：0未审核，1未通过审核，2通过审核',
+  `isshow` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '前台是否显示：0不显示，1显示，默认1',
+  `isuse` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '控制开关：0关闭，1开启，默认1',
+  `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序，值越大越靠前',
   `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updated_at` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='类型表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='类型表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -288,6 +288,7 @@ CREATE TABLE `bs_ads` (
 
 LOCK TABLES `bs_ads` WRITE;
 /*!40000 ALTER TABLE `bs_ads` DISABLE KEYS */;
+INSERT INTO `bs_ads` VALUES (1,'前台横幅001',1,'1111111111111111111111',1,'/',1469980800,1472659199,0,0,1,1,10,1472269325,1472277145),(2,'前台横幅002',1,'',2,'/',1470067200,1472659199,0,0,1,1,10,1472285541,0),(3,'前台供应右侧',2,'前台供应公司列表右侧广告栏',3,'/',1469980800,1475251199,0,0,1,1,10,1472289344,0);
 /*!40000 ALTER TABLE `bs_ads` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1102,7 +1103,7 @@ CREATE TABLE `bs_pics` (
 
 LOCK TABLES `bs_pics` WRITE;
 /*!40000 ALTER TABLE `bs_pics` DISABLE KEYS */;
-INSERT INTO `bs_pics` VALUES (1,1,'图片111','/uploads/images/2016/ppt.png',1920,400,'ergdfbghrgtfh\r\n111111111111',0,0,20160430),(2,1,'图片2','/uploads/images/2016/ppt2.png',1920,400,'',0,20160529,20160529),(3,1,'图片3','/uploads/images/2016/ppt3.png',1920,400,'',0,20160529,20160529),(4,1,'图片4','/uploads/images/2016/ppt4.png',1920,400,'',0,20160529,20160529),(5,1,'图片5','/uploads/images/2016/ppt5.png',1920,400,'',0,20160529,20160529);
+INSERT INTO `bs_pics` VALUES (1,1,'图片111','/uploads/images/2016/ppt.png',1920,400,'ergdfbghrgtfh\r\n111111111111',0,0,20160430),(2,1,'图片2','/uploads/images/2016/ppt2.png',1920,400,'',0,20160529,20160529),(3,1,'图片3','/uploads/images/2016/online1.png',300,300,'',0,20160529,20160529),(4,1,'图片4','/uploads/images/2016/ppt4.png',1920,400,'',0,20160529,20160529),(5,1,'图片5','/uploads/images/2016/ppt5.png',1920,400,'',0,20160529,20160529);
 /*!40000 ALTER TABLE `bs_pics` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2291,4 +2292,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-26 21:38:39
+-- Dump completed on 2016-08-27 21:37:40

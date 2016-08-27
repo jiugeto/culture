@@ -6,9 +6,9 @@
     width:1920px;
     height:400px;
     overflow:hidden;
-    background:pink;
+    /*background:pink;*/
     /*position:relative;top:45px;*/
-    position:relative;top:48px;
+    position:relative;top:46px;
 }
 .ppt_pic { width:3840px; }
 .ppt_pic li { list-style:none;float:left;position:relative;left:-40px;top:-15px; }
@@ -34,6 +34,7 @@
     overflow:hidden;
     cursor:pointer;
 }
+.ppt_change_pic li:hover,.ppt_change_pic li.curr { border:2px solid red; }
 .ppt_change_pic img {
     width:250px;
     position:relative;left:-60px;

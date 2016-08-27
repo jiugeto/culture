@@ -20,7 +20,7 @@ class SignController extends BaseController
     {
         parent::__construct();
         $this->fromtime = date('Ymd',time()).'000000';    //当天凌晨0点
-        $this->totime = date('Ymd',time()).'240000';    //当天晚上24点
+        $this->totime = date('Ymd',time()).'235959';    //当天晚上24点
         $this->fromMonth = date('Ym',time()).'00000000';    //当天凌晨0点
         //计算当月天数
         $yuefen = date('m',time());
@@ -32,7 +32,7 @@ class SignController extends BaseController
             $month = 30;
         }
         $month = (isset($month)&&$month) ? $month : 30;
-        $this->toMonth = date('Ym',time()).$month.'240000';    //当天晚上24点
+        $this->toMonth = date('Ym',time()).$month.'235959';    //当天晚上24点
         $this->model = new UserSignModel();
     }
 

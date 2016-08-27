@@ -40,6 +40,7 @@ class DemandController extends BaseController
     {
         $result = [
             'datas'=> $this->query($genre),
+            'ads'=> $this->ads(),
             'lists'=> $this->list,
             'curr_menu'=> $this->curr,
             'genres'=> $this->genres,
@@ -109,5 +110,21 @@ class DemandController extends BaseController
         }
         $datas->limit = $this->limit;
         return $datas;
+    }
+
+    public function ads()
+    {
+        //adplace_id==3，前台需求页面右侧
+        $limit = 2;
+        $ads = \App\Models\AdModel::where('uid',0)
+            ->where('adplace_id',3)
+            ->where('isuse',1)
+            ->where('isshow',1)
+            ->where('fromTime','<',time())
+            ->where('toTime','>',time())
+            ->orderBy('sort','desc')
+            ->paginate($limit);
+        $ads->limit = $limit;
+        return $ads;
     }
 }

@@ -20,7 +20,8 @@ class SupplyController extends BaseController
     public function index($genre=0)
     {
         $result = [
-            'datas'=> $this->companys($genre),
+            'datas'=> $this->query($genre),
+            'ads'=> $this->ads(),
             'model'=> $this->model,
             'lists'=> $this->list,
             'curr_menu'=> $this->curr,
@@ -31,7 +32,11 @@ class SupplyController extends BaseController
         return view('home.supply.index', $result);
     }
 
-    public function companys($genre)
+
+
+
+
+    public function query($genre)
     {
         if ($genre) {
             $datas = CompanyModel::where('genre',$genre)->paginate($this->limit);
@@ -40,5 +45,21 @@ class SupplyController extends BaseController
         }
         $datas->limit = $this->limit;
         return $datas;
+    }
+
+    public function ads()
+    {
+        //adplace_id==2，前台供应页面右侧
+        $limit = 2;
+        $ads = \App\Models\AdModel::where('uid',0)
+            ->where('adplace_id',2)
+            ->where('isuse',1)
+            ->where('isshow',1)
+            ->where('fromTime','<',time())
+            ->where('toTime','>',time())
+            ->orderBy('sort','desc')
+            ->paginate($limit);
+        $ads->limit = $limit;
+        return $ads;
     }
 }

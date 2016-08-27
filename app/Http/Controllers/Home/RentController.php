@@ -18,8 +18,9 @@ class RentController extends BaseController
             echo "<script>alert('租金格式错误！');history.go(-1);</script>";exit;
         }
         $result = [
-            'lists'=> $this->list,
             'datas'=> $this->query($fromMoney,$toMoney),
+            'ads'=> $this->ads(),
+            'lists'=> $this->list,
             'curr_menu'=> $this->curr,
             'fromMoney'=> $fromMoney,
             'toMoney'=> $toMoney,
@@ -56,5 +57,21 @@ class RentController extends BaseController
             ->paginate($this->limit);
         $datas->limit = $this->limit;
         return $datas;
+    }
+
+    public function ads()
+    {
+        //adplace_id==4，前台租赁页面右侧
+        $limit = 3;
+        $ads = \App\Models\AdModel::where('uid',0)
+            ->where('adplace_id',4)
+            ->where('isuse',1)
+            ->where('isshow',1)
+            ->where('fromTime','<',time())
+            ->where('toTime','>',time())
+            ->orderBy('sort','desc')
+            ->paginate($limit);
+        $ads->limit = $limit;
+        return $ads;
     }
 }

@@ -3,19 +3,36 @@
     <!-- 广告PPT -->
     <div class="ppt">
         <ul class="ppt_pic">
-            <li><a href="" title="ppt"><img src="{{PUB}}uploads/images/2016/ppt.png"></a></li>
-            <li><a href="" title="ppt2"><img src="{{PUB}}uploads/images/2016/ppt2.png"></a></li>
-            <li></li>
+            @if($ppts)
+                @foreach($ppts as $ppt)
+            <li id="ppt_{{ $ppt->id }}">
+                <a href="{{ $ppt->link }}" title="{{ $ppt->name }}"><img src="{{ $ppt->getPicUrl() }}"></a>
+            </li>
+                @endforeach
+            @endif
+            {{--<li><a href="" title="ppt"><img src="{{PUB}}uploads/images/2016/ppt.png"></a></li>--}}
+            {{--<li><a href="" title="ppt2"><img src="{{PUB}}uploads/images/2016/ppt2.png"></a></li>--}}
+            {{--<li></li>--}}
         </ul>
         <div class="ppt_change">
             <div class="ppt_change_bg"></div>
             {{--<span class="jiantou_left">◀</span>--}}
             {{--<span class="jiantou_right">▶</span>--}}
             <ul class="ppt_change_pic">
-                <a href=""><li><img src="{{PUB}}uploads/images/2016/ppt.png"></li></a>
-                <a href=""><li><img src="{{PUB}}uploads/images/2016/ppt2.png"></li></a>
-                <a href=""><li><img src="{{PUB}}uploads/images/2016/ppt.png"></li></a>
-                <a href=""><li><img src="{{PUB}}uploads/images/2016/ppt2.png"></li></a>
+                @if($ppts)
+                    @foreach($ppts as $ppt)
+                <li id="ppt_thumb_{{ $ppt->id }}" onmouseover="move({{ $ppt->id }})"><img src="{{ $ppt->getPicUrl() }}" title="{{ $ppt->name }}"></li>
+                    @endforeach
+                @endif
+                @if(count($ppts))
+                    @for($i=0;$i<$ppts->limit-count($ppts);++$i)
+                <li><div style="width:100px;height:50px;background:gainsboro;color:ghostwhite;text-align:center;line-height:50px;">空白</div></li>
+                    @endfor
+                @endif
+                {{--<a href=""><li><img src="{{PUB}}uploads/images/2016/ppt.png"></li></a>--}}
+                {{--<a href=""><li><img src="{{PUB}}uploads/images/2016/ppt2.png"></li></a>--}}
+                {{--<a href=""><li><img src="{{PUB}}uploads/images/2016/ppt.png"></li></a>--}}
+                {{--<a href=""><li><img src="{{PUB}}uploads/images/2016/ppt2.png"></li></a>--}}
             </ul>
         </div>
     </div>
@@ -24,6 +41,11 @@
             var clientWidth = document.body.clientWidth;
             $(".ppt").css('width',clientWidth);
         });
+
+        function move(ppt_id){
+            $(".ppt_pic > li").hide(); $("#ppt_"+ppt_id).show();
+            $(".ppt_change_pic > li").removeClass('curr'); $("#ppt_thumb_"+ppt_id).addClass('curr');
+        }
     </script>
     <!-- 广告PPT -->
 

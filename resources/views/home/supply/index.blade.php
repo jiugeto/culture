@@ -48,10 +48,23 @@
             @include('home.common.page')
         </div>
         <div class="s_right">
-            {{--<img src="{{PUB}}uploads/images/2016/ppt.png">--}}
-            <div style="width:280px;height:300px;background:rgb(250,250,250);"></div>
+            @if(count($ads))
+                @foreach($ads as $ad)
+            <a href="{{ $ad->link }}">
+                <div class="img" title="{{ $ad->name }}">
+                    <img src="{{ $ad->getPicUrl() }}">
+                </div>
+            </a>
+                @endforeach
+            @endif
+            @if(count($ads)<$ads->limit)
+                @for($i=0;$i<$ads->limit-Count($ads);++$i)
+                <div class="img"></div>
+                @endfor
+            @endif
         </div>
     </div>
+    <div class="cre_kong" style="height:400px;">&nbsp;{{--10px高度留空--}}</div>
 
     <script>
         $(document).ready(function(){

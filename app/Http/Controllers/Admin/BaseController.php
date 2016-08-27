@@ -59,7 +59,6 @@ class BaseController extends Controller
     {
         parent::__construct();
         if (\Session::has('admin.username')) {
-            $this->limit = AdminModel::where('username',\Session::get('admin.username'))->first()->limit;
             $this->userid = \Session::get('admin.adminid');
         }
     }

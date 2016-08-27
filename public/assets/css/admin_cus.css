@@ -96,3 +96,29 @@ a:hover.increase,a:hover.reduce { background:white; }
 }
 .switch_pic a { padding:5px 250px; }
 /*=== 系统后台添加修改页面 ===*/
+
+
+/*图片列表*/
+.am-form a { cursor:pointer; }
+.pic_list {
+    padding:5px;
+    width:560px; height:200px;
+    border:1px solid lightgrey;
+    background:white;
+    box-shadow:0 10px 20px 0 lightgrey;
+    position:absolute; top:380px; left:40px;
+    overflow:auto;
+    float:left;
+    display:none;
+}
+.pic_list .img {
+    margin-right:5px; margin-bottom:5px;
+    width:100px; height:50px;
+    border:1px solid gainsboro;
+    background:ghostwhite;
+    overflow:hidden;
+    float:left;
+}
+.pic_list .img:hover,.pic_list .curr {
+    border:1px solid orangered;
+}

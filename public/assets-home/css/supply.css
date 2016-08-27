@@ -23,6 +23,27 @@
     margin:0 auto;
     width:1000px;
 }
+.s_con input {
+    padding:2px 5px;
+    width:50px;
+    border:1px solid lightgrey;
+    border-radius:3px;
+}
+.s_con_rent { color:grey; }
+.s_con a.a_search {
+    padding:0 10px;padding-bottom:3px;
+    color:grey;
+    border:1px solid lightgrey;
+    background:rgb(245,245,245);
+    text-decoration:none;
+    font-size:16px;
+    cursor:pointer;
+}
+.s_con a:hover.a_search {
+    color:red;
+    border:1px solid red;
+    background:white;
+}
 
 /*=== 搜索 ===*/
 .s_search {
@@ -55,18 +76,17 @@
 .s_list .record td { width:30%; }
 /*.s_list .record*/ a.toshow {
     padding:2px 20px;
-    color:lightgrey;
+    color:white;
     text-decoration:none;
-    background:darkred;
+    background:orangered;
 }
-/*.s_list .record*/ a.toshow:hover { color:white;background:red; }
+/*.s_list .record*/ a.toshow:hover { color:white;background:darkred; }
 /*娱乐列表entertain*/
 .e_list { width:860px; }
 .e_list .record {
-    margin:20px 0;
+    margin:10px 0;
     padding:0 5px;
     width:728px;
-    /*height:80px;*/
     border:1px solid rgb(230,230,230);
     border-radius:3px;
 }
@@ -101,13 +121,25 @@
 /*=== 广告 ===*/
 /*供应广告supply*/
 .s_right {
-    width:280px;height:500px;
+    width:270px; height:600px;
     overflow:hidden;
-    /*position:absolute;top:225px;right:0;*/
+}
+.s_right_rent { margin-top:-10px; }
+.s_right .img {
+    margin:5px auto;
+    width:270px; height:300px;
+    background:rgb(250,250,250);
+    overflow:hidden;
 }
 /*娱乐广告entertain*/
 .e_right {
+    margin-top:-30px;
     width:260px;height:500px;
     overflow:hidden;
-    /*position:absolute;top:225px;right:0;*/
+}
+.e_right .img {
+    margin:5px auto;
+    width:270px; height:500px;
+    background:rgb(250,250,250);
+    overflow:hidden;
 }

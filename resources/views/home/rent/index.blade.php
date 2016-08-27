@@ -1,12 +1,7 @@
 @extends('home.main')
 @section('content')
     @include('home.common.crumb')
-    <style>
-        .s_con { color:grey; }
-        input { padding:2px 5px;width:50px;border:1px solid lightgrey;border-radius:3px; }
-        a.a_search { padding:0 10px;padding-bottom:3px;color:grey;border:1px solid lightgrey;background:rgb(245,245,245);text-decoration:none;font-size:16px;cursor:pointer; }
-        a:hover.a_search { color:red;border:1px solid red;background:white; }
-    </style>
+
     <div class="s_con">
         {{-- 搜索 --}}
         <div class="cre_kong">&nbsp;{{--10px高度留空--}}</div>
@@ -32,7 +27,7 @@
         </script>
 
         {{-- 列表 --}}
-        <div class="cre_kong">&nbsp;{{--10px高度留空--}}</div>
+        {{--<div class="cre_kong">&nbsp;--}}{{--10px高度留空--}}{{--</div>--}}
         <div class="s_list">
             <table class="record">
             @if(Count($datas))
@@ -65,12 +60,25 @@
             @endif
             </table>
         </div>
-        <div class="s_right">
+        <div class="s_right s_right_rent">
             <div class="cate"></div>
-            {{--<img src="{{PUB}}uploads/images/2016/ppt.png">--}}
-            <div style="width:280px;height:400px;background:rgb(250,250,250);"></div>
+            @if(count($ads))
+                @foreach($ads as $ad)
+                    <a href="{{ $ad->link }}">
+                        <div class="img" title="{{ $ad->name }}">
+                            <img src="{{ $ad->getPicUrl() }}">
+                        </div>
+                    </a>
+                @endforeach
+            @endif
+            @if(count($ads)<$ads->limit)
+                @for($i=0;$i<$ads->limit-Count($ads);++$i)
+                    <div class="img"></div>
+                @endfor
+            @endif
         </div>
     </div>
+    <div class="cre_kong" style="height:600px;">&nbsp;{{--10px高度留空--}}</div>
 
     <script>
         $(document).ready(function(){

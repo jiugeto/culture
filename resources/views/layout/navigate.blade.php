@@ -11,7 +11,7 @@
             <span id="shang">▲</span><span id="xia" style="display:none;">▼</span>
         </div>
         <div class="nav_qh">
-            <div class="nav_hide">
+            <div class="nav_hide" style="display:none;">
                 @foreach($navigates as $navigate)
                     <a href="{{ $navigate->link }}" class="@if(isset($curr_menu) && $curr_menu==ltrim($navigate->link,'/')) curr @else nav_a @endif" title="{{ $navigate->title }}">{{ $navigate->name }}</a>
                 @endforeach
@@ -54,11 +54,11 @@
         var nav_qiehuan = $(".nav_qiehuan");
         var nav_qh = $(".nav_qh");
         var nav_hide = $(".nav_hide");
-        nav_qiehuan.mouseover(function(){
-            nav_hide.show(200);
-            nav_qiehuan.css('border-bottom','0');
-            $("#shang").hide(); $("#xia").show();
-        });
+//        nav_qiehuan.mouseover(function(){
+//            nav_hide.show(200);
+//            nav_qiehuan.css('border-bottom','0');
+//            $("#shang").hide(); $("#xia").show();
+//        });
 //        nav_qh.mouseleave(function(){
 //            nav_hide.hide();
 //            nav_qiehuan.css('border-bottom','1px solid lightgray');

@@ -127,7 +127,7 @@ a.curr {
     padding:11px 0;
     border-bottom:2px solid pink;
     box-shadow:0 10px 20px 0 lightgrey;
-    display:none;
+    /*display:none;*/
 }
 .imgMiniSize { width:15px; }
 .opinion {

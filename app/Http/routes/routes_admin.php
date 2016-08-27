@@ -171,6 +171,8 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::resource('comppt','ComPptController');
     //广告路由
         //广告管理
+    Route::get('ad/use/{id}/{use}','AdController@setUse');
+    Route::post('ad/{id}','AdController@update');
     Route::resource('ad','AdController');
         //广告位管理
     Route::post('place/{id}','AdPlaceController@update');
