@@ -61,7 +61,7 @@
             </table>
         </div>
         <div class="s_right s_right_rent">
-            <div class="cate"></div>
+            {{--<div class="cate"></div>--}}
             @if(count($ads))
                 @foreach($ads as $ad)
                     <a href="{{ $ad->link }}">
@@ -78,7 +78,7 @@
             @endif
         </div>
     </div>
-    <div class="cre_kong" style="height:600px;">&nbsp;{{--10px高度留空--}}</div>
+    <div class="cre_kong" style="height:850px;">&nbsp;{{--10px高度留空--}}</div>
 
     <script>
         $(document).ready(function(){

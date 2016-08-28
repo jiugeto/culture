@@ -1,9 +1,6 @@
 @extends('home.main')
 @section('content')
     @include('home.common.crumb')
-    <style>
-        .a_to_show { font-size:12px;color:grey;text-decoration:none;float:right; }
-    </style>
 
     <div class="s_con">
         {{-- 搜索 --}}
@@ -82,9 +79,20 @@
                     {{--<div class="de_con"><div></div>平面</div>--}}
                 {{--</div>--}}
             {{--</div>--}}
-            <div class="img">
-                <div style="width:260px;height:500px;background:rgb(250,250,250);"></div>
-            </div>
+            @if(count($ads))
+                @foreach($ads as $ad)
+                    <a href="{{ $ad->link }}">
+                        <div class="img" title="{{ $ad->name }}">
+                            <img src="{{ $ad->getPicUrl() }}">
+                        </div>
+                    </a>
+                @endforeach
+            @endif
+            @if(count($ads)<$ads->limit)
+                @for($i=0;$i<$ads->limit-Count($ads);++$i)
+                    <div class="img"></div>
+                @endfor
+            @endif
         </div>
     </div>
     <div style="height:500px;">{{--空白--}}</div>

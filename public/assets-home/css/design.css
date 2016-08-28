@@ -27,6 +27,12 @@
     text-align:center;
 }
 .de_list td.text1 { font-size:20px; }
+.de_list td.text1 a.a_to_show {
+    font-size:12px;
+    color:grey;
+    text-decoration:none;
+    float:right;
+}
 .de_list td.text2 { color:grey;font-size:12px; }
 .de_list td.text3 { color:grey; }
 
@@ -53,5 +59,6 @@
 .de_right .img {
     margin:10px 0;
     width:260px;height:500px;
+    background:rgb(250,250,250);
     overflow:hidden;
 }

@@ -2,8 +2,6 @@
 namespace App\Http\Controllers\Company;
 
 use App\Models\Company\ComFuncModel;
-use App\Models\Company\ComMainModel;
-use App\Models\Company\ComPptModel;
 use App\Models\ProductModel;
 
 class HomeController extends BaseController
@@ -19,14 +17,15 @@ class HomeController extends BaseController
         $this->list['func']['url'] = '';
     }
 
-    public function index()
+    public function index($cid=0)
     {
+        $company = $this->company($cid);
         $result = [
-            'comMain'=> $this->getComMain(),
-            'ppts'=> $this->getPpts(),
-            'firms'=> $this->getFirms(),
-            'news'=> $this->getNews(),
-            'products'=> $this->getProducts(),
+            'ppts'=> $this->getPpts($company['uid']),
+            'comMain'=> $this->getComMain($company['cid']),
+            'firms'=> $this->getFirms($company['cid']),
+            'news'=> $this->getNews($company['cid']),
+            'products'=> $this->getProducts($company['uid']),
             'parterners'=> $this->getParterners(),
             'topmenus'=> $this->topmenus,
             'curr'=> 'home',
@@ -37,95 +36,53 @@ class HomeController extends BaseController
     /**
      * 企业宣传PPT
      */
-    public function getPpts()
+    public function getPpts($uid)
     {
-        //假如没有。即可生成默认记录
-        $pptModels = ComPptModel::where('cid',$this->cid)->get();
-        $pptModels0 = ComPptModel::where('cid',0)->get();
-        //有则补充记录
-//        if (count($pptModels) && count($pptModels)<$this->comPptNum) {
-        if (count($pptModels) && count($pptModels)<count($pptModels0)) {
-            foreach ($pptModels0 as $key=>$pptModel) {
-                if ($pptModels0[$key]->cid!=$this->cid) {
-                    $data = [
-                        'pic_id'=> $pptModel->pic_id,
-                        'cid'=> $this->cid,
-                        'title'=> $pptModel->title,
-                        'url'=> $pptModel->url,
-                        'created_at'=> date('Y-m-d H:i:s', time()),
-                    ];
-                    ComPptModel::create($data);
-                }
-            }
-        }
-        //无则生成一组记录
-        if (!count($pptModels)) {
-            foreach (ComPptModel::where('cid',0)->get() as $pptModel) {
-                $data = [
-                    'pic_id'=> $pptModel->pic_id,
-                    'cid'=> $this->cid,
-                    'title'=> $pptModel->title,
-                    'url'=> $pptModel->url,
-                    'created_at'=> date('Y-m-d H:i:s', time()),
-                ];
-                ComPptModel::create($data);
-            }
-        }
-        return ComPptModel::where('cid',$this->cid)->get();
+        //adplace_id==6，前台公司首页PPT
+        $limit = 10;
+        $ads = \App\Models\AdModel::where('uid',$uid)
+            ->where('adplace_id',5)
+            ->where('isuse',1)
+            ->where('isshow',1)
+            ->where('fromTime','<',time())
+            ->where('toTime','>',time())
+            ->orderBy('sort','desc')
+            ->paginate($limit);
+        $ads->limit = $limit;
+        return $ads;
     }
 
     /**
      * 企业服务 genre==2
      */
-    public function getFirms()
+    public function getFirms($cid)
     {
         //假如没有。即可生成默认记录
         $module = $this->getModuleId($genre=2);
-        $firmModels = $this->getFuncs($cid=$this->cid,$module);
-        $firmModels0 = $this->getFuncs($cid=0,$module);
-        //有则补充记录
-        if (count($firmModels) && count($firmModels)<count($firmModels0)) {
-            foreach ($firmModels0 as $key=>$firmModel) {
-                if ($firmModels0[$key]->cid!=$this->cid) {
-                    ComFuncModel::create($this->getFuncData($module,$firmModel));
-                }
-            }
-        }
-        //无则生成一组记录
-        if (!count($firmModels)) {
-            foreach ($this->getFuncs($cid=0,$module) as $firmModel) {
-                ComFuncModel::create($this->getFuncData($module,$firmModel));
-            }
-        }
-        return $this->getFuncs($cid=$this->cid,$module);
+        return $this->getFuncs($cid,$module);
     }
 
     /**
      * 企业新闻资讯 genre==6
      */
-    public function getNews()
+    public function getNews($cid)
     {
         //假如没有。即可生成默认记录
         $module = $this->getModuleId($genre=6);
-        $newModels = $this->getFuncs($cid=$this->cid,$module);
-        $newModels0 = $this->getFuncs($cid=0,$module);
-        if (!count($newModels)) {
-            foreach ($newModels0 as $newModel) {
-                ComFuncModel::create($this->getFuncData($module,$newModel));
-            }
-        }
-        return $this->getFuncs($cid=$this->cid,$module);
+        return $this->getFuncs($cid,$module);
     }
 
     /**
      * 企业产品
      */
-    public function getProducts()
+    public function getProducts($uid)
     {
-        //假如没有。即可生成默认记录
-        $productModels = ProductModel::where('uid',$this->userid)->get();
-        //有则补充记录
-        //无则生成一组记录
+        $limit = 4;
+        $products = ProductModel::where('uid',$uid)
+            ->orderBy('id','desc')
+            ->paginate($limit);
+        $products->limit = $limit;
+      return $products;
     }
 
     /**
@@ -139,25 +96,5 @@ class HomeController extends BaseController
     public function getFuncs($cid,$module)
     {
         return ComFuncModel::where('cid',$cid)->where('module_id',$module)->get();
-    }
-
-    /**
-     * 收集功能数据
-     */
-    public function getFuncData($module_id,$model)
-    {
-        return array(
-            'name'=> $model->name,
-            'cid'=> $this->cid,
-            'module_id'=> $module_id,
-            'type'=> $model->type,
-            'genre'=> $model->genre,
-            'pic_id'=> $model->pic_id,
-            'intro'=> $model->intro,
-            'small'=> $model->small,
-            'sort'=> $model->sort,
-            'isshow'=> $model->isshow,
-            'created_at'=> date('Y-m-d H:i:s', time()),
-        );
     }
 }

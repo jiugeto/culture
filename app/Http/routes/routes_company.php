@@ -1,32 +1,31 @@
 <?php
 /**
- * 这里是会员路由
+ * 这里是公司路由
  */
 
-//Route::get('member',function(){
-//    return 'member';
-//});
-
-Route::group(['prefix'=>'company','middleware' =>'MemberAuth','namespace'=>'Company'], function(){
-    //企业页面展示
-        //首页路由
+//企业页面展示
+Route::group(['prefix'=>'c/{cid}','namespace'=>'Company'], function(){
+    //首页路由
     Route::get('/','HomeController@index');
-    Route::get('home','HomeController@index');
-        //关于公司路由
+    //关于公司路由
     Route::get('{type}/about','AboutController@index');
     Route::resource('about','AboutController');
-        //产品路由
+    //产品路由
     Route::resource('product','ProductController');
-        //花絮路由
+    //花絮路由
     Route::resource('part','PartController');
-        //服务路由
+    //服务路由
     Route::resource('firm','FirmController');
-        //团队路由
+    //团队路由
     Route::resource('team','TeamController');
-        //招聘路由
+    //招聘路由
     Route::resource('recruit','RecruitController');
-        //联系方式路由
+    //联系方式路由
     Route::resource('contact','ContactController');
+});
+
+
+Route::group(['prefix'=>'company','middleware' =>'MemberAuth','namespace'=>'Company'], function(){
     //企业后台控制
     Route::group(['prefix'=>'admin','namespace'=>'Admin'], function(){
         //后台首页路由

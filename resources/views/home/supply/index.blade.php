@@ -40,7 +40,8 @@
                 <tr>
                     <td>地区：{{ $data->getAreaName($data->area) }}</td>
                     <td>时间：{{ $data->createTime() }}</td>
-                    <td><a href="{{DOMAIN}}supply/{{ $data->id }}" class="toshow">详情</a></td>
+                    {{--<td><a href="{{DOMAIN}}supply/{{ $data->id }}" class="toshow">详情</a></td>--}}
+                    <td><a href="{{DOMAIN}}c/{{ $data->id }}" class="toshow">主页</a></td>
                 </tr>
             </table>
                 @endforeach

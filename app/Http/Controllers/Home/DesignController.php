@@ -20,8 +20,9 @@ class DesignController extends BaseController
     public function index($cate=0)
     {
         $result = [
-            'lists'=> $this->list,
             'datas'=> $this->query($cate),
+            'ads'=> $this->ads(),
+            'lists'=> $this->list,
             'model'=> $this->model,
             'curr_menu'=> $this->curr,
             'cate'=> $cate,
@@ -59,5 +60,21 @@ class DesignController extends BaseController
         }
         $datas->limit = $this->limit;
         return $datas;
+    }
+
+    public function ads()
+    {
+        //adplace_id==5，前台设计页面右侧
+        $limit = 2;
+        $ads = \App\Models\AdModel::where('uid',0)
+            ->where('adplace_id',5)
+            ->where('isuse',1)
+            ->where('isshow',1)
+            ->where('fromTime','<',time())
+            ->where('toTime','>',time())
+            ->orderBy('sort','desc')
+            ->paginate($limit);
+        $ads->limit = $limit;
+        return $ads;
     }
 }

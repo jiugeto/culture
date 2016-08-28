@@ -124,7 +124,7 @@
     width:270px; height:600px;
     overflow:hidden;
 }
-.s_right_rent { margin-top:-10px; }
+.s_right_rent { margin-top:-15px; height:920px; }
 .s_right .img {
     margin:5px auto;
     width:270px; height:300px;

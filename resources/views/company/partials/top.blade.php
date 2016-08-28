@@ -15,24 +15,26 @@
                 </a>
         </div>
         <ul>
-            <a href="/company/admin"><li>后台</li></a>
-            {{--<a href="##"><li>联系方式</li></a>--}}
-            {{--<a href="##"><li>招聘</li></a>--}}
-            {{--<a href="##"><li>服务项目</li></a>--}}
-            {{--<a href="##"><li>团队</li></a>--}}
-            {{--<a href="##"><li>花絮</li></a>--}}
-            {{--<a href="##"><li>作品</li></a>--}}
-            {{--<a href="##"><li class="curr">首页</li></a>--}}
-            {{--@foreach($topmenus as $kmenu=>$topmenu)--}}
-                {{--<a href="/company/{{ $kmenu }}"><li class="{{$curr==$kmenu?'curr':''}}">{{ $topmenu }}</li></a>--}}
-            {{--@endforeach--}}
+            {{--<a href="{{DOMAIN}}company/admin"><li>后台</li></a>--}}
+            @if(count($topmenus))
             @foreach($topmenus as $topmenu)
                 @if(count($topmenu)<8)
-                <a href="/company/{{ $topmenu->link }}">
-                    <li class="{{$curr==$topmenu->link?'curr':''}}">{{ $topmenu->name }}</li>
-                </a>
+                    <a href="{{DOMAIN}}company/{{ $topmenu->link }}">
+                        <li class="{{$curr==$topmenu->link?'curr':''}}">{{ $topmenu->name }}</li>
+                    </a>
                 @endif
             @endforeach
+            @else
+                @if($url=DOMAIN.'company/')
+                <a href="{{$url}}contact"><li>联系方式</li></a>
+                <a href="{{$url}}recruit"><li>招聘</li></a>
+                <a href="{{$url}}firm"><li>服务项目</li></a>
+                <a href="{{$url}}team"><li>团队</li></a>
+                <a href="{{$url}}part"><li>花絮</li></a>
+                <a href="{{$url}}product"><li>作品</li></a>
+                @endif
+                <a href="{{DOMAIN}}company"><li class="curr">首页</li></a>
+            @endif
         </ul>
     </div>
 </div>

@@ -2,26 +2,45 @@
 @section('content')
     <div class="com_ppt">
         <div class="com_ad">
+            @if(count($ppts))
             @foreach($ppts as $ppt)
-            <div class="ppt_img">
-                <div class="img"><a href="{{ $ppt->url }}"><img src="{{ $ppt->pic()?$ppt->pic()->url:'' }}"></a></div>
-            </div>
+                <div class="ppt_img">
+                    <a href="{{ $ppt->link }}">
+                        <div class="img"><img src="{{ $ppt->getPicUrl() }}"></div>
+                    </a>
+                    <a href="{{ $ppt->link }}">
+                        <div class="img"><img src="{{ $ppt->getPicUrl() }}"></div>
+                    </a>
+                </div>
             @endforeach
+            @else
+                <div class="ppt_img">
+                    {{--<a href="{{ $ppt->link }}">--}}
+                        <div class="img"><img src="{{DOMAIN}}uploads/images/2016/ppt.png"></div>
+                    {{--</a>--}}
+                </div>
+            @endif
         </div>
         <div class="com_ppt_point">
             <ul>
-                @foreach($ppts as $ppt)
+                {{--@if(count($ppts))--}}
+                {{--@foreach($ppts as $ppt)--}}
                 {{--<li class="li_curr"></li>--}}
-                <li></li>
-                @endforeach
+                {{--@endforeach--}}
+                {{--@endif--}}
+                @if(count($ppts)<$ppts->limit)
+                    @for($i=0;$i<$ppts->limit-count($ppts);++$i)
+                        <li class="{{ $i==0?'li_curr':'' }}"></li>
+                    @endfor
+                @endif
             </ul>
         </div>
     </div>
 
     <div class="com_floor1">
-        <br><hr>
+        <hr>
         <p>→ OUR SERVICE 服务项目 <span class="float_right"><a href="">详情</a></span></p>
-        <a class="com_floor">
+        <div class="com_floor">
             @foreach($firms as $firm)
             <span class="service">
                 <div class="serve">

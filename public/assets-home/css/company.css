@@ -33,8 +33,6 @@
 .com_body {
     margin:0 auto;
     width:1000px;
-    /*height:700px;*/
-    /*background:rgb(250,250,250);*/
 }
 .com_ppt {
     width:100%;height:300px;
@@ -42,13 +40,14 @@
 }
 .com_ad {
     width:1000px;height:300px;
-    background:rgb(150,150,150);
+    background:rgb(200,200,200);
     overflow:hidden;
 }
 .com_ad div.ppt_img {
     width:3000px;
     height:300px;
-    float:left;
+    background:ghostwhite;
+    /*float:left;*/
 }
 .com_ad div.img {
     width:1000px;height:300px;
@@ -56,10 +55,10 @@
 }
 .com_ppt_point {
     width:100%;height:30px;
-    background:rgb(50,50,50);
+    background:rgba(50,50,50,0.8);
     position:relative;bottom:30px;z-index:1;
 }
-.com_ppt_point ul { margin:0 auto;width:100px; }
+.com_ppt_point ul { margin:0 auto;width:200px; }
 .com_ppt_point li {
     margin:10px 5px;
     width:10px;height:10px;
@@ -85,6 +84,7 @@
     width:208px;height:198px;
     border:1px solid lightgrey;
 }
+.com_floor .serve p { padding:0; }
 .com_floor div {
     margin-right:20px;
     width:210px;height:200px;

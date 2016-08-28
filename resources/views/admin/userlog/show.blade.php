@@ -37,6 +37,14 @@
                     <td>{{ $data->uname }}</td>
                 </tr>
                 <tr>
+                    <td class="am-hide-sm-only">用户ip / Ip：</td>
+                    <td>{{ $data->serial }}</td>
+                </tr>
+                <tr>
+                    <td class="am-hide-sm-only">ip地址 / Ip Address：</td>
+                    <td>{{ $data->ipaddress }}</td>
+                </tr>
+                <tr>
                     <td class="am-hide-sm-only">序列号 / Serial：</td>
                     <td>{{ $data->serial }}</td>
                 </tr>
