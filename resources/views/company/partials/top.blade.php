@@ -4,28 +4,25 @@
 <div class="com_top">
     <div class="com_center">
         <div class="com_logo">
-            {{--<a href="##"><div class="img"></div></a>--}}
-                <a href="/company/home">
-                    <div class="img">
-                        @if($comMain)
-                            <img src="{{ $comMain->logo }}" title="{{ $comMain->company()?$comMain->company()->name:'某某公司' }}-{{ $comMain->title }}" class="com_logo_size">
-                        @else <img src="/assets/images/del_red.png" title="logo名称或公司名称" class="com_logo_size">
-                        @endif
-                    </div>
-                </a>
+            <a href="/company/home">
+                <div class="img">
+                    @if($comMain)
+                        <img src="{{ $comMain->logo }}" title="{{ $comMain->company()?$comMain->company()->name:'某某公司' }}-{{ $comMain->title }}" class="com_logo_size">
+                    @else <img src="/assets/images/del_red.png" title="logo名称或公司名称" class="com_logo_size">
+                    @endif
+                </div>
+            </a>
         </div>
         <ul>
-            {{--<a href="{{DOMAIN}}company/admin"><li>后台</li></a>--}}
+            {{--<a href="{{DOMAIN}}c/{{CID}}/admin"><li>后台</li></a>--}}
             @if(count($topmenus))
             @foreach($topmenus as $topmenu)
-                @if(count($topmenu)<8)
-                    <a href="{{DOMAIN}}company/{{ $topmenu->link }}">
-                        <li class="{{$curr==$topmenu->link?'curr':''}}">{{ $topmenu->name }}</li>
-                    </a>
-                @endif
+                <a href="{{ $topmenu->link }}">
+                    <li class="{{$curr==$topmenu->link?'curr':''}}">{{ $topmenu->name }}</li>
+                </a>
             @endforeach
             @else
-                @if($url=DOMAIN.'company/')
+                @if($url=DOMAIN.'c/')
                 <a href="{{$url}}contact"><li>联系方式</li></a>
                 <a href="{{$url}}recruit"><li>招聘</li></a>
                 <a href="{{$url}}firm"><li>服务项目</li></a>

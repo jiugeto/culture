@@ -99,7 +99,7 @@ CREATE TABLE `ba_adminlog` (
   `loginTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '登陆时间',
   `logoutTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '退出时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='管理员日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='管理员日志表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -108,7 +108,7 @@ CREATE TABLE `ba_adminlog` (
 
 LOCK TABLES `ba_adminlog` WRITE;
 /*!40000 ALTER TABLE `ba_adminlog` DISABLE KEYS */;
-INSERT INTO `ba_adminlog` VALUES (1,1,'jiuge','201608261936344970','192.168.2.101','浙江省 杭州市 滨江区',1472211394,1472218222),(2,1,'jiuge','201608262132257107','192.168.2.101','浙江省 杭州市 滨江区',1472218345,1472218507),(3,1,'jiuge','201608262135094048','192.168.2.101','浙江省 杭州市 滨江区',1472218509,0),(4,1,'jiuge','2016082707445961','192.168.2.101','浙江省 杭州市 滨江区',1472255099,0),(5,1,'jiuge','201608272054095978','192.168.2.101','浙江省 杭州市 滨江区',1472302449,0),(6,1,'jiuge','201608280854487434','192.168.2.101','浙江省 杭州市 滨江区',1472345688,0);
+INSERT INTO `ba_adminlog` VALUES (1,1,'jiuge','201608261936344970','192.168.2.101','浙江省 杭州市 滨江区',1472211394,1472218222),(2,1,'jiuge','201608262132257107','192.168.2.101','浙江省 杭州市 滨江区',1472218345,1472218507),(3,1,'jiuge','201608262135094048','192.168.2.101','浙江省 杭州市 滨江区',1472218509,0),(4,1,'jiuge','2016082707445961','192.168.2.101','浙江省 杭州市 滨江区',1472255099,0),(5,1,'jiuge','201608272054095978','192.168.2.101','浙江省 杭州市 滨江区',1472302449,0),(6,1,'jiuge','201608280854487434','192.168.2.101','浙江省 杭州市 滨江区',1472345688,0),(7,1,'jiuge','201608292018083662','192.168.2.101','浙江省 杭州市 滨江区',1472473088,0);
 /*!40000 ALTER TABLE `ba_adminlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -342,35 +342,6 @@ CREATE TABLE `bs_authorizations待处理` (
 LOCK TABLES `bs_authorizations待处理` WRITE;
 /*!40000 ALTER TABLE `bs_authorizations待处理` DISABLE KEYS */;
 /*!40000 ALTER TABLE `bs_authorizations待处理` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `bs_category待删除`
---
-
-DROP TABLE IF EXISTS `bs_category待删除`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `bs_category待删除` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL COMMENT '视频分类名称',
-  `pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '父id',
-  `intro` varchar(1000) DEFAULT NULL COMMENT '分类简介',
-  `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站功能：0不放入回收站，1放入回收站',
-  `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
-  `updated_at` int(10) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='分类表 bs_category';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `bs_category待删除`
---
-
-LOCK TABLES `bs_category待删除` WRITE;
-/*!40000 ALTER TABLE `bs_category待删除` DISABLE KEYS */;
-INSERT INTO `bs_category待删除` VALUES (1,'专业',0,'按专业分类',0,20160313,20160313),(2,'行业',0,'按行业分类',0,20160317,0),(3,'年龄',0,'按年龄分类',0,20160317,0),(4,'视频',1,'视频组',0,20160317,0),(5,'平面设计',1,'平面组',0,20160317,0),(6,'建筑设计',1,'建筑组',0,20160317,0),(7,'房产漫游',1,'房产组，包括效果图',0,20160317,0),(8,'游戏制作',1,'游戏组，包括Unity 3D',0,20160317,0);
-/*!40000 ALTER TABLE `bs_category待删除` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -800,10 +771,10 @@ CREATE TABLE `bs_links` (
   `name` varchar(255) NOT NULL COMMENT '链接名称',
   `cid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '企业id，0代表本站',
   `title` varchar(255) NOT NULL COMMENT '鼠标移动的提示文字',
-  `type_id` int(10) unsigned NOT NULL DEFAULT '1' COMMENT '类型id，关联bs_types：2navigate，3footer',
+  `type_id` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '页面的哪个部位：1header，2navigate，3footer',
   `pic_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '图片id，关联bs_pics',
   `intro` varchar(500) NOT NULL COMMENT '链接介绍',
-  `link` varchar(255) NOT NULL COMMENT '访问地址链接',
+  `link` varchar(255) NOT NULL COMMENT '访问地址链接：前台(cid==0，/XXX)，企业前台(cid!=0，/c/{cid}/XXX)',
   `display_way` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '显示方式：1文字链接，2图片链接',
   `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序字段，值越大越靠前，默认10',
   `isshow` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '在前台页面是否显示：0不显示，1显示',
@@ -820,7 +791,7 @@ CREATE TABLE `bs_links` (
 
 LOCK TABLES `bs_links` WRITE;
 /*!40000 ALTER TABLE `bs_links` DISABLE KEYS */;
-INSERT INTO `bs_links` VALUES (1,'首页',0,'',2,0,'','/',1,20,1,0,20160113,0),(2,'产品样片',0,'',2,0,'','/product',1,20,1,0,20160417,0),(3,'在线作品',0,'',2,0,'','/creation',1,20,1,0,20160417,0),(4,'供应企业',0,'',2,0,'','/supply',1,10,1,0,20160417,0),(5,'需求信息',0,'',2,0,'','/demand',1,10,1,0,20160417,0),(6,'娱乐频道',0,'',2,0,'','/entertain',1,10,1,0,20160417,0),(7,'租赁频道',0,'',2,0,'','/rent',1,10,1,0,20160417,0),(8,'设计频道',0,'',2,0,'','/design',1,10,1,0,20160417,0),(9,'关于我们',0,'',2,0,'','/about',1,10,1,0,20160417,0),(10,'创意点子',0,'',2,0,'','/idea',1,10,1,0,20160417,0),(11,'用户意见',0,'请留下您的宝贵意见哦',2,0,'','/opinion',1,10,1,0,20160417,0),(12,'首页',0,'底部链接，此链接带修改',3,0,'','home',1,10,1,0,20160417,20160417),(13,'友情链接',0,'此链接带修改',3,0,'','home',1,10,1,0,20160417,20160417),(14,'安全网盾',0,'此链接带修改',3,0,'','home',1,10,1,0,20160417,0),(15,'链接1',0,'此链接带修改',3,0,'','home',1,10,1,0,20160417,0),(16,'链接2',0,'此链接带修改',3,0,'','home',1,10,1,0,20160417,0),(17,'链接3',0,'此链接带修改',3,0,'','home',1,10,1,0,20160417,0),(18,'首页',1,'',2,0,'','home',1,10,1,0,20160506,20160506),(19,'关于公司',1,'',2,0,'','about',1,10,1,0,20160506,0),(20,'产品',1,'',2,0,'','product',1,10,1,0,20160506,0),(21,'花絮',1,'',2,0,'','part',1,10,1,0,20160506,0),(22,'服务项目',1,'',2,0,'','firm',1,10,1,0,20160506,0),(23,'团队',1,'',2,0,'','team',1,10,1,0,20160506,0),(24,'招聘',1,'',2,0,'','recruit',1,10,1,0,20160506,0),(25,'联系方式',1,'',2,0,'','contact',1,10,1,0,20160506,0),(26,'故事分镜',0,'分镜画面列表',2,0,'','/storyboard',1,20,1,0,20160624,0);
+INSERT INTO `bs_links` VALUES (1,'首页',0,'',2,0,'','/',1,20,1,0,20160113,0),(2,'产品样片',0,'',2,0,'','/product',1,20,1,0,20160417,0),(3,'在线作品',0,'',2,0,'','/creation',1,20,1,0,20160417,0),(4,'供应企业',0,'',2,0,'','/supply',1,10,1,0,20160417,0),(5,'需求信息',0,'',2,0,'','/demand',1,10,1,0,20160417,0),(6,'娱乐频道',0,'',2,0,'','/entertain',1,10,1,0,20160417,0),(7,'租赁频道',0,'',2,0,'','/rent',1,10,1,0,20160417,0),(8,'设计频道',0,'',2,0,'','/design',1,10,1,0,20160417,0),(9,'关于我们',0,'',2,0,'','/about',1,10,1,0,20160417,0),(10,'创意点子',0,'',2,0,'','/idea',1,10,1,0,20160417,0),(11,'用户意见',0,'请留下您的宝贵意见哦',2,0,'','/opinion',1,10,1,0,20160417,0),(12,'首页',0,'底部链接，此链接带修改',3,0,'','/',1,10,1,0,20160417,20160417),(13,'友情链接',0,'此链接带修改',3,0,'','/',1,10,1,0,20160417,20160417),(14,'安全网盾',0,'此链接带修改',3,0,'','/',1,10,1,0,20160417,0),(15,'链接1',0,'此链接带修改',3,0,'','/',1,10,1,0,20160417,0),(16,'链接2',0,'此链接带修改',3,0,'','/',1,10,1,0,20160417,0),(17,'链接3',0,'此链接带修改',3,0,'','/',1,10,1,0,20160417,0),(18,'首页',1,'',2,0,'','/c/1',1,10,1,0,20160506,20160506),(19,'关于公司',1,'',2,0,'','/c/1/about',1,10,1,0,20160506,0),(20,'产品',1,'',2,0,'','/c/1/product',1,10,1,0,20160506,0),(21,'花絮',1,'',2,0,'','/c/1/part',1,10,1,0,20160506,0),(22,'服务',1,'',2,0,'','/c/1/firm',1,10,1,0,20160506,0),(23,'团队',1,'',2,0,'','/c/1/team',1,10,1,0,20160506,0),(24,'招聘',1,'',2,0,'','/c/1/recruit',1,10,1,0,20160506,0),(25,'联系方式',1,'',2,0,'','/c/1/contact',1,10,1,0,20160506,0),(26,'故事分镜',0,'分镜画面列表',2,0,'','/storyboard',1,20,1,0,20160624,0);
 /*!40000 ALTER TABLE `bs_links` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1740,37 +1711,6 @@ INSERT INTO `bs_theme` VALUES (1,'视频制作','<p>视频视频视频视频视�
 UNLOCK TABLES;
 
 --
--- Table structure for table `bs_types待处理`
---
-
-DROP TABLE IF EXISTS `bs_types待处理`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `bs_types待处理` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL COMMENT '类型名称',
-  `intro` varchar(500) DEFAULT NULL COMMENT '类型说明',
-  `table_id` int(10) unsigned NOT NULL COMMENT '所在表id',
-  `table_name` varchar(255) NOT NULL COMMENT '所在表名称',
-  `field` varchar(255) NOT NULL COMMENT '字段名',
-  `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站功能：0不放入回收站，1放入回收站',
-  `created_at` date NOT NULL DEFAULT '0000-00-00' COMMENT '创建时间',
-  `updated_at` date NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='类型表';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `bs_types待处理`
---
-
-LOCK TABLES `bs_types待处理` WRITE;
-/*!40000 ALTER TABLE `bs_types待处理` DISABLE KEYS */;
-INSERT INTO `bs_types待处理` VALUES (1,'header头链接','bs_links网站头部链接',1,'网站链接','type_id',0,'2016-01-13','2016-01-13'),(2,'navigate菜单导航栏链接','bs_links',1,'网站链接','type_id',0,'2016-01-13','0000-00-00'),(3,'footer脚部链接','bs_links',1,'网站链接','type_id',0,'2016-01-13','0000-00-00'),(4,'行业','bs_videos_category视频类型表的类型划分依据',2,'视频类别','type_id',0,'2016-02-16','2016-02-16'),(5,'地区','bs_videos_category视频类别表',2,'视频类别','type_id',0,'2016-02-16','0000-00-00'),(6,'人群','bs_videos_category视频类别表',2,'视频类别','type_id',0,'2016-02-16','0000-00-00'),(7,'行为','bs_videos_category视频类别表',2,'视频类别','type_id',0,'2016-02-16','0000-00-00'),(8,'内容','bs_videos_category视频类别表',2,'视频类别','type_id',0,'2016-02-16','0000-00-00'),(9,'幻灯片','bs_ad_places广告位表\r\n用于前台页面广告展示的位置',3,'广告位','type_id',0,'2016-02-16','0000-00-00'),(10,'图片','bs_ad_places广告位表\r\n前台页面广告展示的位置',3,'广告位','type_id',0,'2016-02-16','0000-00-00'),(11,'悬浮','bs_ad_places广告位表\r\n前台页面广告展示的位置',3,'广告位','type_id',0,'2016-02-16','0000-00-00'),(12,'赞助商','bs_ad_places广告位表\r\n前台页面广告展示的位置',3,'广告位','type_id',0,'2016-02-16','0000-00-00'),(13,'文字','bs_ad_places广告位表\r\n前台页面广告展示的位置',3,'广告位','type_id',0,'2016-02-16','0000-00-00');
-/*!40000 ALTER TABLE `bs_types待处理` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `bs_user_frield`
 --
 
@@ -1990,17 +1930,16 @@ CREATE TABLE `com_funcs` (
   `name` varchar(255) NOT NULL COMMENT '功能名称',
   `cid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '公司id',
   `module_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '所属模块id',
-  `type` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '功能类型：1简介，2历程，3服务，4团队，5招聘，6联系，7新闻，8资讯',
-  `genre` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '模块类型：1默认模块，2新加单页',
+  `type` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '功能类型：1简介，2历程，3新闻，4资讯，5服务，6团队，7招聘，',
   `pic_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '图片id',
   `intro` varchar(2000) NOT NULL COMMENT '详情',
-  `small` varchar(255) NOT NULL COMMENT '备用字段：\r\n如果是服务，为小字，多组用|隔开；\r\n如果是工作，为数字；\r\n如果是类型，为坐标，经纬度|隔开；',
+  `small` varchar(255) NOT NULL COMMENT '备用字段：\r\n如果是服务，为小字，多组用|隔开；\r\n如果是工作，为数字；\r\n如果是合作伙伴，为链接；',
   `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '用户企业排序，值越大越靠前，默认10',
   `isshow` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '用户的公司后台控制是否显示：0不显示，1显示',
   `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updated_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COMMENT='企业功能表 com_funcs';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='企业功能表 com_funcs';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2009,7 +1948,7 @@ CREATE TABLE `com_funcs` (
 
 LOCK TABLES `com_funcs` WRITE;
 /*!40000 ALTER TABLE `com_funcs` DISABLE KEYS */;
-INSERT INTO `com_funcs` VALUES (1,'公司简介',0,1,1,1,0,'<p>vrbggtrhjytjty&nbsp;</p>','',10,1,20160504,0),(2,'公司历程',0,1,2,1,0,'<p>简介简介简介简介简介</p>','',10,1,20160504,0),(3,'服务1',0,2,3,1,1,'<p>服务服务服务服务服务</p>','小字1|小字2|',10,1,20160504,0),(4,'团队1',0,3,4,1,1,'<p>团队团队团队团队团队</p>','',10,1,20160504,0),(5,'招聘',0,4,5,1,0,'<p>招聘招聘招聘招聘招聘招聘</p>','1',10,1,20160504,20160504),(6,'联系方式',0,5,6,1,0,'<p>联系联系联系联系联系联系</p>','120.210|30.214',10,1,20160504,0),(7,'企业新闻',0,6,7,1,1,'<p>新闻新闻新闻新闻新闻</p>','',10,1,20160504,20160504),(8,'行业资讯',0,6,8,1,1,'<p>资讯资讯资讯资讯资讯资讯</p>','',10,1,20160504,20160504),(9,'服务1',1,9,1,1,1,'<p>服务服务服务服务服务</p>','小字1|小字2|',10,1,20160504,0),(10,'企业新闻',1,13,7,1,1,'<p>新闻新闻新闻新闻新闻</p>','',10,1,20160504,0),(11,'行业资讯',1,13,8,1,1,'<p>资讯资讯资讯资讯资讯资讯</p>','',10,1,20160504,0),(12,'行业资讯2',1,13,8,1,1,'<p>资讯资讯资讯资讯资讯资讯</p><p>33333333333333333</p>','',10,1,20160504,20160505),(14,'公司简介',1,8,1,1,0,'<p>vrbggtrhjytjty&nbsp;</p>','',10,1,20160505,0),(15,'公司历程',1,8,2,1,0,'<p>简介简介简介简介简介</p>','',10,1,20160505,0),(16,'招聘',1,11,5,1,0,'<p>招聘招聘招聘招聘招聘招聘</p>','1',10,1,20160505,0),(17,'服务2',1,9,3,1,0,'<p>werjhgfbgdfvdbvdfbdfb</p>','',10,1,20160505,0),(18,'团队1',1,10,4,1,1,'<p>团队团队团队团队团队</p><p>55555555555</p>','',10,1,20160505,20160505),(19,'页面01',1,7,0,2,0,'<p>扩展页面11</p>','',10,1,20160505,20160505);
+INSERT INTO `com_funcs` VALUES (1,'公司简介',1,1,1,1,'<p>公司简单介绍</p>','',10,1,1472474573,0),(2,'公司历史',1,1,2,0,'<p>公司历史</p>','',10,1,1472474631,0),(3,'公司新闻',1,1,3,2,'<p>新闻新闻</p>','',10,1,1472474666,0),(4,'资讯',1,1,4,2,'<p>资讯资讯</p>','',10,1,1472474698,0),(5,'服务项目',1,2,5,0,'<p>服务项目服务项目</p>','小字|小字|小字|小字|',10,1,1472474749,0),(6,'团队',1,3,6,2,'<p>团队成员团队成员</p>','',10,1,1472474821,0),(7,'招聘',1,4,7,0,'<p>招聘人才招聘人才</p>','小字|小字|小字|小字|',10,1,1472474999,0);
 /*!40000 ALTER TABLE `com_funcs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2057,16 +1996,16 @@ DROP TABLE IF EXISTS `com_modules`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `com_modules` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL COMMENT '模块名称',
+  `name` varchar(20) NOT NULL COMMENT '模块名称',
   `cid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '公司id',
-  `genre` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '功能类型：1公司，2服务，3团队，4招聘，5联系，6新闻，7前台扩展',
+  `genre` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '功能类型：1公司信息，2服务，3团队，4招聘，',
   `intro` varchar(2000) NOT NULL COMMENT '介绍',
   `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '用户企业排序，值越大越靠前，默认10',
   `isshow` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '用户的公司后台控制是否显示：0不显示，1显示',
   `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updated_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='企业模块表 com_modules';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='企业模块表 com_modules';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2075,42 +2014,8 @@ CREATE TABLE `com_modules` (
 
 LOCK TABLES `com_modules` WRITE;
 /*!40000 ALTER TABLE `com_modules` DISABLE KEYS */;
-INSERT INTO `com_modules` VALUES (1,'关于公司',0,1,'<p>ggggggggggggggggggggggggggggg</p>',10,1,20160504,0),(2,'服务项目',0,2,'<p>服务服务服务服务服务服务服务</p>',10,1,20160504,0),(3,'团队',0,3,'<p>团队团队团队团队团队团队团队团队团队</p>',10,1,20160504,0),(4,'招聘',0,4,'<p>招聘招聘招聘招聘招聘招聘招聘招聘</p>',10,1,20160504,0),(5,'联系方式',0,5,'<p>联系联系联系联系联系联系联系联系</p>',10,1,20160504,0),(6,'新闻资讯',0,6,'<p>新闻新闻新闻新闻新闻资讯资讯资讯资讯资讯</p>',10,1,20160504,0),(7,'扩展01',1,7,'<p>&nbsp;扩展模块测试01</p><p>&nbsp;更新</p>',10,1,20160505,20160505),(8,'关于公司',1,1,'<p>ggggggggggggggggggggggggggggg</p>',10,1,20160506,0),(9,'服务项目',1,2,'<p>服务服务服务服务服务服务服务</p>',10,1,20160506,0),(10,'团队',1,3,'<p>团队团队团队团队团队团队团队团队团队</p>',10,1,20160506,0),(11,'招聘',1,4,'<p>招聘招聘招聘招聘招聘招聘招聘招聘</p>',10,1,20160506,0),(12,'联系方式',1,5,'<p>联系联系联系联系联系联系联系联系</p>',10,1,20160506,0),(13,'新闻资讯',1,6,'<p>新闻新闻新闻新闻新闻资讯资讯资讯资讯资讯</p>',10,1,20160506,0);
+INSERT INTO `com_modules` VALUES (1,'公司信息',0,1,'<p>公司简介、公司历史、公司新闻、行业资讯</p>',10,1,1472473358,0),(2,'服务',0,2,'<p>公司的服务项目</p>',10,1,1472473462,0),(3,'团队',0,3,'<p>公司成员</p>',10,1,1472473539,0),(4,'招聘',0,4,'<p>公司所需人员</p>',10,1,1472473584,0),(5,'合作伙伴',0,5,'<p>公司联系地址、联系方式</p>',10,1,1472473618,0),(6,'其他单页',0,6,'<p>公司自定义添加的单页</p>',10,0,1472473699,0);
 /*!40000 ALTER TABLE `com_modules` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `com_ppts待删除`
---
-
-DROP TABLE IF EXISTS `com_ppts待删除`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `com_ppts待删除` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `pic_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '图片id，关联bs_pics',
-  `cid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '公司id',
-  `title` varchar(255) NOT NULL COMMENT '鼠标移动显示',
-  `url` varchar(255) NOT NULL COMMENT '链接',
-  `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序字段，值越大越靠前，默认10',
-  `sort2` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '用户企业控制的排序，值越大越靠前，默认10',
-  `isshow` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '系统后台控制是否显示：0不显示，1显示',
-  `isshow2` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '用户的公司后台控制是否显示：0不显示，1显示',
-  `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站功能：0不删除，1删除',
-  `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
-  `updated_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='企业宣传PPT表';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `com_ppts待删除`
---
-
-LOCK TABLES `com_ppts待删除` WRITE;
-/*!40000 ALTER TABLE `com_ppts待删除` DISABLE KEYS */;
-INSERT INTO `com_ppts待删除` VALUES (1,1,0,'玩儿体育','##',10,10,1,0,0,20160501,0),(2,1,0,'铭播放v对方更不能吃','##',10,10,1,0,0,20160501,0),(3,1,0,'内部v查询速度法国红酒','##',10,10,1,0,0,20160501,0),(4,1,1,'玩儿体育','##',10,10,1,0,0,20160501,0),(5,1,1,'铭播放v对方更不能吃','##',10,10,1,0,0,20160501,0),(6,1,1,'内部v查询速度法国红酒','##',10,10,1,0,0,20160501,0);
-/*!40000 ALTER TABLE `com_ppts待删除` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -2292,4 +2197,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-28 20:51:19
+-- Dump completed on 2016-08-29 21:35:11

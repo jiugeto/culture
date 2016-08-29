@@ -13,37 +13,15 @@ class BaseController extends Controller
      * 公司后台基础控制器
      */
 
-    protected $topmenus = [
-//        'contact'=> '联系方式',
-//        'recruit'=> '招聘',
-//        'team'=> '团队',
-//        'firm'=> '服务项目',
-//        'part'=> '花絮',
-//        'product'=> '产品',
-//        'about'=> '关于公司',
-//        'home'=> '首页',
-    ];
+    protected $topmenus = array();
+    protected $prefix_url = '';
 
     public function __construct()
     {
         parent::__construct();
-//        if (!\Session::has('user.uid')) { return redirect('/login'); }
-//        $this->userid = \Session::get('user.uid');
-//        if (!\Session::has('user.cid')) { return redirect('/member/setting/auth'); }
-//        $this->cid = \Session::get('user.cid');
-//        $this->company = unserialize(\Session::get('user.company'));
-//
-//        //企业页面header菜单 type_id==2
-//        $this->getComModules();
-//        $this->topmenus = LinkModel::where('cid',$this->cid)
-//                                ->where('type_id', 2)
-//                                ->where('isshow', 1)
-//                                ->orderBy('sort','desc')
-//                                ->orderBy('id','desc')
-//                                ->get();
     }
 
-    public function company($cid)
+    public function company($cid,$url)
     {
         //判断cid
         if (!$cid && !\Session::has('user.cid')) {
@@ -57,13 +35,20 @@ class BaseController extends Controller
             $this->cid = \Session::get('user.cid');
             $this->company = unserialize(\Session::get('user.company'));
         }
+        define('CID',$this->cid);
         $this->getComModules($this->cid);
         $this->topmenus = LinkModel::where('cid',$this->cid)
             ->where('type_id', 2)
             ->where('isshow', 1)
             ->orderBy('sort','desc')
             ->orderBy('id','desc')
-            ->get();
+            ->paginate(8);
+        //拼接url
+        if ($url) {
+            $this->prefix_url = DOMAIN.'c/'.$this->cid.'/'.$this->list['func']['url'];
+        } else {
+            $this->prefix_url = DOMAIN.'c/'.$this->cid.$this->list['func']['url'];
+        }
         return array(
             'uid'=> $this->userid,
             'cid'=> $this->cid,
@@ -77,7 +62,7 @@ class BaseController extends Controller
      */
     public function getComMain($cid)
     {
-        return ComMainModel::where('cid',$this->cid)->first();
+        return ComMainModel::where('cid',$cid)->first();
     }
 
     /**
@@ -85,15 +70,15 @@ class BaseController extends Controller
      */
     public function getComModules($cid)
     {
-        return ComModuleModel::where('cid',$this->cid)->get();
+        return ComModuleModel::where('cid',$cid)->get();
     }
 
     /**
      * 获取所属模块id
      */
-    public function getModuleId($genre)
+    public function getModuleId($cid,$genre)
     {
-        $moduleModel = ComModuleModel::where('cid',$this->cid)->where('genre',$genre)->first();
+        $moduleModel = ComModuleModel::where('cid',$cid)->where('genre',$genre)->first();
         if (!$moduleModel) { $moduleModel = ComModuleModel::where('cid',0)->where('genre',$genre)->first(); }
         return $moduleModel->id;
     }

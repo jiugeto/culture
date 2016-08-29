@@ -8,7 +8,7 @@
         <div class="head_left">
             @if(Session::has('user.username'))
                 <a href="/member">{{ Session::get('user.username') }}</a>
-                <a href="/member">会员中心</a>
+                <a href="/member" target="_blank">会员中心</a>
                 <a href="/login/dologout">退出</a>
             @else
                 <a href="/regist">免费注册</a>

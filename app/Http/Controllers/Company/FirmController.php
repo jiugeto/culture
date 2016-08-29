@@ -18,17 +18,18 @@ class FirmController extends BaseController
         parent::__construct();
         $this->list['func']['name'] = '服务项目';
         $this->list['func']['url'] = 'firm';
-        $this->moduleid = $this->getModuleId($this->genre);
     }
 
-    public function index()
+    public function index($cid)
     {
+        $company = $this->company($cid,$this->list['func']['url']);
+        $this->moduleid = $this->getModuleId($company['cid'],$this->genre);
         $result = [
             'firm'=> $this->getModule(),
             'datas'=> $this->query(),
-            'comMain'=> $this->getComMain(),
+            'comMain'=> $this->getComMain($company['cid']),
             'topmenus'=> $this->topmenus,
-            'curr'=> 'firm',
+            'curr'=> $this->prefix_url,
         ];
         return view('company.firm.index', $result);
     }

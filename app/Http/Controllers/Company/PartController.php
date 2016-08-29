@@ -14,12 +14,13 @@ class PartController extends BaseController
         $this->list['func']['url'] = 'part';
     }
 
-    public function index()
+    public function index($cid)
     {
+        $company = $this->company($cid,$this->list['func']['url']);
         $result = [
-            'comMain'=> $this->getComMain(),
+            'comMain'=> $this->getComMain($company['cid']),
             'topmenus'=> $this->topmenus,
-            'curr'=> 'part',
+            'curr'=> $this->prefix_url,
         ];
         return view('company.part.index', $result);
     }

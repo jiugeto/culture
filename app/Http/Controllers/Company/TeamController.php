@@ -17,36 +17,33 @@ class TeamController extends BaseController
         $this->list['func']['url'] = 'team';
     }
 
-    public function index()
+    public function index($cid)
     {
+        $company = $this->company($cid,$this->list['func']['url']);
         $result = [
-            'team'=> $this->getModule(),
-            'datas'=> $this->query(),
-            'comMain'=> $this->getComMain(),
+            'team'=> $this->getModule($company['cid']),
+            'datas'=> $this->query($company['cid']),
+            'comMain'=> $this->getComMain($company['cid']),
             'topmenus'=> $this->topmenus,
-            'curr'=> 'team',
+            'curr'=> $this->prefix_url,
         ];
         return view('company.team.index', $result);
     }
 
-    public function query()
+    public function query($cid)
     {
-        $datas = ComFuncModel::where('cid',$this->cid)
+        $limit = 10;
+        $datas = ComFuncModel::where('cid',$cid)
                         ->where('type',4)
                         ->where('isshow',1)
-                        ->get();
-        if (!count($datas)) {
-            $datas = ComFuncModel::where('cid',0)
-                ->where('type',4)
-                ->where('isshow',1)
-                ->get();
-        }
+                        ->paginate($limit);
+        $datas->limit = $limit;
         return $datas;
     }
 
-    public function getModule()
+    public function getModule($cid)
     {
-        if (count($this->query())) { $firm = $this->query()[0]; }
+        if (count($this->query($cid))) { $firm = $this->query($cid)[0]; }
         return isset($firm) ? ComModuleModel::find($firm->module_id) : '';
     }
 }

@@ -13,9 +13,9 @@
                 @foreach($abouts as $about)
                 {{--<a href=""><div> ▶ 简介</div></a>--}}
                     @if($about->type==1)
-                <a href="/company/about"><div> ▶ {{ $about->name }}</div></a>
+                <a href="/c/{{CID}}/about"><div> ▶ {{ $about->name }}</div></a>
                     @else
-                <a href="/company/{{$about->type}}/about"><div> ▶ {{ $about->name }}</div></a>
+                <a href="/c/{{CID}}/about/{{$about->type}}"><div> ▶ {{ $about->name }}</div></a>
                     @endif
                 @endforeach
             @endif

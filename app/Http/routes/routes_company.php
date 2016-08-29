@@ -8,20 +8,22 @@ Route::group(['prefix'=>'c/{cid}','namespace'=>'Company'], function(){
     //首页路由
     Route::get('/','HomeController@index');
     //关于公司路由
-    Route::get('{type}/about','AboutController@index');
-    Route::resource('about','AboutController');
+    Route::get('about','AboutController@index');
+    Route::get('about/{type}','AboutController@index');
     //产品路由
-    Route::resource('product','ProductController');
+    Route::get('product','ProductController@index');
     //花絮路由
-    Route::resource('part','PartController');
+    Route::get('part','PartController@index');
     //服务路由
-    Route::resource('firm','FirmController');
+    Route::get('firm','FirmController@index');
     //团队路由
-    Route::resource('team','TeamController');
+    Route::get('team','TeamController@index');
     //招聘路由
-    Route::resource('recruit','RecruitController');
+    Route::get('recruit','RecruitController@index');
     //联系方式路由
-    Route::resource('contact','ContactController');
+    Route::get('contact','ContactController@index');
+    //合作伙伴路由
+    Route::get('parterner','AboutController@parterner');
 });
 
 

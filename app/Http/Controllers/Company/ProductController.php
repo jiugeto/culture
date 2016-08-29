@@ -14,12 +14,13 @@ class ProductController extends BaseController
         $this->list['func']['url'] = 'product';
     }
 
-    public function index()
+    public function index($cid)
     {
+        $company = $this->company($cid,$this->list['func']['url']);
         $result = [
-            'comMain'=> $this->getComMain(),
+            'comMain'=> $this->getComMain($company['cid']),
             'topmenus'=> $this->topmenus,
-            'curr'=> 'product',
+            'curr'=> $this->prefix_url,
         ];
         return view('company.product.index', $result);
     }

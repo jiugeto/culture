@@ -118,7 +118,7 @@ class ComFuncController extends BaseController
         $data = [
             'name'=> $request->name,
             'type'=> $request->type,
-            'genre'=> $request->genre,
+//            'genre'=> $request->genre,
             'module_id'=> $request->module_id,
             'pic_id'=> $request->pic_id?$request->pic_id:0,
             'intro'=> $request->intro,

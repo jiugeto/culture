@@ -11,8 +11,6 @@ class AboutController extends BaseController
      */
 
     //type：1公司简介，2公司历程，...
-
-    protected $moduleid;
     protected $genre = 1;       //此处1代表关于公司
 
     public function __construct()
@@ -20,44 +18,35 @@ class AboutController extends BaseController
         parent::__construct();
         $this->list['func']['name'] = '关于公司';
         $this->list['func']['url'] = 'about';
-        $this->moduleid = $this->getModuleId($this->genre);
     }
 
-    public function index($type=1)
+    public function index($cid,$type=1)
     {
+        $company = $this->company($cid,$this->list['func']['url']);
+        $moduleid = $this->getModuleId($company['cid'],$this->genre);
         $result = [
-            'abouts'=> $this->getAbouts(),
-            'company'=> CompanyModel::find($this->cid),
-            'data'=> $this->query($type),
-            'comMain'=> $this->getComMain(),
+            'data'=> $this->query($company['cid'],$moduleid,$type),
+            'abouts'=> $this->getAbouts($company['cid'],$moduleid),
+            'company'=> CompanyModel::find($company['cid']),
+            'comMain'=> $this->getComMain($company['cid']),
             'topmenus'=> $this->topmenus,
-            'curr'=> 'about',
+            'curr'=> $this->prefix_url,
         ];
         return view('company.about.index', $result);
     }
 
-    public function query($type)
+    public function query($cid,$moduleid,$type)
     {
-        $data = ComFuncModel::where('cid',$this->cid)->where('module_id',$this->moduleid)->where('type',$type)->first();
-        if (!$data) {
-            $data = ComFuncModel::where('cid',0)->where('module_id',$this->moduleid)->where('type',$type)->first();
-            $about = [
-                'name'=> $data->name,
-                'cid'=> $this->cid,
-                'module_id'=> 1,
-                'type'=> $type,
-                'genre'=> $data->genre,
-                'pic_id'=> $data->pic_id,
-                'intro'=> $data->intro,
-                'small'=> $data->small,
-            ];
-            ComFuncModel::create($about);
-        }
-        return ComFuncModel::where('cid',$this->cid)->where('module_id',$this->moduleid)->where('type',$type)->first();
+        return ComFuncModel::where('cid',$cid)
+            ->where('module_id',$moduleid)
+            ->where('type',$type)
+            ->first();
     }
 
-    public function getAbouts()
+    public function getAbouts($cid,$moduleid)
     {
-        return ComFuncModel::where('cid',$this->cid)->where('module_id',$this->moduleid)->get();
+        return ComFuncModel::where('cid',$cid)
+            ->where('module_id',$moduleid)
+            ->get();
     }
 }

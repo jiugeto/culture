@@ -29,16 +29,12 @@
                         <td class="am-hide-sm-only"><input type="checkbox" /></td>
                         <td class="am-hide-sm-only">{{ $data->id }}</td>
                         <td class="am-hide-sm-only"><a href="{{DOMAIN}}admin/comfunc/{{$data->id}}">
-                                @if(mb_strlen($data->name)>6)
-                                    {{ mb_substr($data->name,0,5,'utf-8').'...' }}
-                                @else {{ $data->name }}
-                                @endif
-                            </a></td>
+                                {{ str_limit($data->name,20) }}</a></td>
                         <td class="am-hide-sm-only">{{ $data->module() }}</td>
                         <td class="am-hide-sm-only">{{ $data->company() }}</td>
                         <td class="am-hide-sm-only">{{ $data->sort }}</td>
                         <td class="am-hide-sm-only">{{ $data->isshow() }}</td>
-                        <td class="am-hide-sm-only">{{ $data->created_at }}</td>
+                        <td class="am-hide-sm-only">{{ $data->createTime() }}</td>
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">

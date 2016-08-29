@@ -30,16 +30,16 @@
                             </select>
                         </div>
 
-                        <div class="am-form-group">
-                            <label>类型 / Genre：</label>
-                            <select name="genre" required>
-                                @if(count($model['genres']))
-                                    @foreach($model['genres'] as $kgenre=>$genre)
-                                    <option value="{{ $kgenre }}">{{ $genre }}</option>
-                                    @endforeach
-                                @endif
-                            </select>
-                        </div>
+                        {{--<div class="am-form-group">--}}
+                            {{--<label>类型 / Genre：</label>--}}
+                            {{--<select name="genre" required>--}}
+                                {{--@if(count($model['genres']))--}}
+                                    {{--@foreach($model['genres'] as $kgenre=>$genre)--}}
+                                    {{--<option value="{{ $kgenre }}">{{ $genre }}</option>--}}
+                                    {{--@endforeach--}}
+                                {{--@endif--}}
+                            {{--</select>--}}
+                        {{--</div>--}}
 
                         <div class="am-form-group">
                             <label>类型 / Type：</label>
@@ -85,7 +85,7 @@
 
                         <div class="am-form-group">
                             <label>小字 / Small：</label>
-                            <input type="text" placeholder="多组用|隔开" name="small">
+                            <input type="text" placeholder="小字/数字/合作伙伴，多组用|隔开" name="small">
                         </div>
 
                         <div class="am-form-group">

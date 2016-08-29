@@ -17,22 +17,22 @@ class ContactController extends BaseController
         $this->list['func']['url'] = 'contact';
     }
 
-    public function index()
+    public function index($cid)
     {
+        $company = $this->company($cid,$this->list['func']['url']);
         $result = [
-            'company'=> CompanyModel::find($this->cid),
-            'data'=> $this->query(),
-            'comMain'=> $this->getComMain(),
+            'company'=> CompanyModel::find($company['cid']),
+            'data'=> $this->query($company['cid']),
+            'comMain'=> $this->getComMain($company['cid']),
             'topmenus'=> $this->topmenus,
-            'curr'=> 'contact',
+            'curr'=> $this->prefix_url,
         ];
         return view('company.contact.index', $result);
     }
 
-    public function query()
+    public function query($cid)
     {
-        $data = ComFuncModel::where('cid',$this->cid)->where('type',6)->first();
-        if (!$data) { $data = ComFuncModel::where('cid',0)->where('type',6)->first(); }
+        $data = ComFuncModel::where('cid',$cid)->where('type',6)->first();
         $data->axis_x = $data->small?explode('|',$data->small)[0]:120;
         $data->axis_y = $data->small?explode('|',$data->small)[1]:30;
         return $data;

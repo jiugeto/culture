@@ -3,88 +3,106 @@
     <div class="com_ppt">
         <div class="com_ad">
             @if(count($ppts))
-            @foreach($ppts as $ppt)
-                <div class="ppt_img">
-                    <a href="{{ $ppt->link }}">
+            @foreach($ppts as $kppt=>$ppt)
+                {{--<div class="ppt_img">--}}
+                    <a href="{{ $ppt->link }}" title="{{ $ppt->name }}" id="ppt_{{$ppt->id}}">
                         <div class="img"><img src="{{ $ppt->getPicUrl() }}"></div>
                     </a>
-                    <a href="{{ $ppt->link }}">
-                        <div class="img"><img src="{{ $ppt->getPicUrl() }}"></div>
-                    </a>
-                </div>
+                {{--</div>--}}
             @endforeach
             @else
                 <div class="ppt_img">
-                    {{--<a href="{{ $ppt->link }}">--}}
-                        <div class="img"><img src="{{DOMAIN}}uploads/images/2016/ppt.png"></div>
-                    {{--</a>--}}
+                    <div class="img"><img src="{{DOMAIN}}uploads/images/2016/ppt.png"></div>
                 </div>
             @endif
         </div>
         <div class="com_ppt_point">
             <ul>
-                {{--@if(count($ppts))--}}
-                {{--@foreach($ppts as $ppt)--}}
-                {{--<li class="li_curr"></li>--}}
-                {{--@endforeach--}}
-                {{--@endif--}}
-                @if(count($ppts)<$ppts->limit)
-                    @for($i=0;$i<$ppts->limit-count($ppts);++$i)
-                        <li class="{{ $i==0?'li_curr':'' }}"></li>
-                    @endfor
-                @endif
+            @if(count($ppts)<$ppts->limit)
+                @for($i=0;$i<$ppts->limit-count($ppts);++$i)
+                    <li class="{{ $i==0?'li_curr':'' }}" id="li_{{$i}}" onmouseover="move({{$i}})"></li>
+                @endfor
+            @endif
             </ul>
         </div>
+        <script>
+            function move(i){
+                $(".com_ppt_point > ul li").removeClass('li_curr'); $("#li_"+i).addClass('li_curr');
+                $(".com_ad > a").hide(); $("#ppt_"+i).show();
+            }
+        </script>
     </div>
 
+    <div class="fengexian">{{--分割线--}}</div>
     <div class="com_floor1">
-        <hr>
-        <p>→ OUR SERVICE 服务项目 <span class="float_right"><a href="">详情</a></span></p>
+        <p class="bigtitle">→ OUR SERVICE 服务项目 <span class="float_right"><a href="{{DOMAIN}}c/{{CID}}/firm">更多</a></span></p>
         <div class="com_floor">
-            @foreach($firms as $firm)
-            <span class="service">
-                <div class="serve">
+            @if(count($firms))
+            @foreach($firms as $kfirm=>$firm)
+                <div class="serve" style="{{$kfirm>3?"margin-top:20px;":""}}">
                     <p class="title">{{ $firm->name }}</p>
                     <p>{{ strip_tags($firm->intro) }}</p>
                 </div>
-            </span>
             @endforeach
+            @endif
+            @if(count($firms)<$infos->limit)
+                @for($i=0;$i<$firms->limit-count($firms);++$i)
+                <div class="serve">
+                    <p class="title">服务名称</p>
+                    <p>服务的内容介绍</p>
+                </div>
+                @endfor
+            @endif
         </div>
     </div>
 
+    <div class="fengexian">{{--分割线--}}</div>
     <div class="com_floor2">
-        <br><hr>
-        <p>→ OUR NEWS 新闻咨询 <span class="float_right"><a href="">更多</a></span></p>
+        <p class="bigtitle">→ OUR NEWS 新闻资讯 <span class="float_right"><a href="{{DOMAIN}}c/{{CID}}/about/7">更多</a></span></p>
         <div class="com_floor">
             <div class="com_news">
-                <div><img src="/uploads/images/2016/ppt.png"></div>
+                <div class="img"><img src="/uploads/images/2016/ppt.png"></div>
             </div>
             <div class="com_news_text">
                 <p class="title">公司新闻</p>
+                @if(count($news))
                 @foreach($news as $new)
-                    @if($new->type==7)
-                    <p>{{ $new->name }}
-                        <span style="float:right;">{{ $new->created_at }}</span>
+                    <p>
+                        <a href="">{{ $new->name }}</a>
+                        <span class="time">{{ $new->createTime() }}</span>
                     </p>
-                    @endif
                 @endforeach
+                @endif
+                @if(count($news)<$news->limit)
+                    @for($i=0;$i<$news->limit-count($news);++$i)
+                        <p>企业新闻
+                            <span class="time">某年某月某日</span>
+                        </p>
+                    @endfor
+                @endif
             </div>
             <div class="trade_news">
                 <p class="title">行业资讯</p>
-                @foreach($news as $new)
-                    @if($new->type==8)
-                    <p>{{ $new->name }}
-                        <span style="float:right;">{{ $new->created_at }}</span>
+                @if(count($infos))
+                @foreach($infos as $info)
+                    <p>
+                        <a href="">{{ $info->name }}</a>
+                        <span class="time">{{ $info->createTime() }}</span>
                     </p>
-                    @endif
                 @endforeach
+                @endif
+                @if(count($infos)<$infos->limit)
+                    @for($i=0;$i<$infos->limit-count($infos);++$i)
+                        <p>行业资讯<span class="time">某年某月某日</span></p>
+                    @endfor
+                @endif
             </div>
         </div>
     </div>
 
+    <div class="fengexian">{{--分割线--}}</div>
     <div class="com_floor3">
-        <br><hr>
-        <p>→ OUR PRODUCT 某某产品 <span class="float_right"><a href="">更多</a></span></p>
+        <p class="bigtitle">→ OUR PRODUCT 公司作品 <span class="float_right"><a href="{{DOMAIN}}c/{{CID}}/works">更多</a></span></p>
         <div class="com_product">
             <div class="com_tab">
                 <a>影视广告</a>
@@ -92,67 +110,71 @@
                 <a>宣传片</a>
             </div>
             <div class="com_con">
-                <span class="onlyone">
-                    <div class="com_pro">
-                        <div><img src="/uploads/images/2016/online1.png"></div>
-                        <p>rgtnhj</p>
+                @if(count($works))
+                    @foreach($works as $kwork=>$work)
+                <a href="" title="{{ $work->name }}">
+                    <div class="com_pro" style="{{$kwork>3?"margin-top:20px;":""}}">
+                        <div class="img">
+                            <img src="{{ $work->getPicUrl() }}"
+                                 style="@if($size=$work->getPicSize($w=240,$h=140))width:{{$size}}px;height:140px @endif">
+                        </div>
+                        <p class="text">{{ $work->name }}</p>
                     </div>
-                </span>
-                <span class="onlyone">
+                </a>
+                    @endforeach
+                @endif
+                @if(count($works)<$works->limit)
+                    @for($i=0;$i<$works->limit-count($works);++$i)
+                <a href="" title="">
                     <div class="com_pro">
-                        <div><img src="/uploads/images/2016/online1.png"></div>
-                        <p>rgtnhj</p>
+                        <div class="img"></div>
+                        <p class="text">视频作品</p>
                     </div>
-                </span>
-                <span class="onlyone">
-                    <div class="com_pro">
-                        <div><img src="/uploads/images/2016/online1.png"></div>
-                        <p>rgtnhj</p>
-                    </div>
-                </span>
-                <span class="onlyone">
-                    <div class="com_pro">
-                        <div><img src="/uploads/images/2016/online1.png"></div>
-                        <p>rgtnhj</p>
-                    </div>
-                </span>
+                </a>
+                    @endfor
+                @endif
             </div>
         </div>
     </div>
 
-    <div class="com_floor3">
-        <br><hr>
-        <p>→ OUR PARTERNERS 某某合作伙伴 <span class="float_right"><a href="">更多</a></span></p>
+    <div class="fengexian">{{--分割线--}}</div>
+    <div class="com_floor4">
+        <p class="bigtitle">→ OUR PARTERNERS 合作伙伴 <span class="float_right"><a href="{{DOMAIN}}c/{{CID}}/parterner">更多</a></span></p>
         <div class="com_parterner">
-            <span class="onlyone">
+            @if(count($parterners))
+                @foreach($parterners as $parterner)
+            <a href="" title="{{ $parterner->name }}">
                 <div class="com_par">
-                    <div><img src="/uploads/images/2016/online1.png"></div>
+                    <div class="img"><img src="{{ $parterner->getPicUrl() }}"></div>
                 </div>
-            </span>
-            <span class="onlyone">
+            </a>
+                @endforeach
+            @endif
+            @if(count($parterners)<$parterners->limit)
+                @for($i=0;$i<$parterners->limit-count($parterners);++$i)
+            <a href="">
                 <div class="com_par">
-                    <div><img src="/uploads/images/2016/online1.png"></div>
+                    <div class="img"></div>
                 </div>
-            </span>
-            <span class="onlyone">
-                <div class="com_par">
-                    <div><img src="/uploads/images/2016/online1.png"></div>
-                </div>
-            </span>
-            <span class="onlyone">
-                <div class="com_par">
-                    <div><img src="/uploads/images/2016/online1.png"></div>
-                </div>
-            </span>
-            <span class="onlyone">
-                <div class="com_par">
-                    <div><img src="/uploads/images/2016/online1.png"></div>
-                </div>
-            </span>
+            </a>
+                @endfor
+            @endif
         </div>
     </div>
 
+    <div class="fengexian">{{--分割线--}}</div>
     <div class="com_buttom">
-        <p><a href="">脚部链接</a></p>
+        <div class="foot">
+            @if(count($footlinks))
+                @foreach($footlinks as $footlink)
+            <a href="{{ $footlink->link }}">{{ $footlink->name }}</a>
+                @endforeach
+            @endif
+            @if(count($footlinks)<$footlinks->limit)
+                @for($i=0;$i<$footlinks->limit-count($footlinks);++$i)
+            <a href="">脚部链接</a>
+                @endfor
+            @endif
+        </div>
     </div>
 @stop

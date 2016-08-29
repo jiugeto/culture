@@ -1,13 +1,11 @@
 <?php
 namespace App\Models;
 
-//use Illuminate\Database\Eloquent\Model;
-
 class LinkModel extends BaseModel
 {
     protected $table = 'bs_links';
     protected $fillable = [
-        'id','name','cid','title','type_id','pic','intro','link','display_way','isshow','pid','sort','created_at','updated_at',
+        'id','name','cid','title','type_id','pic_id','intro','link','display_way','isshow','pid','sort','created_at','updated_at',
     ];
 
     protected $types = [
@@ -34,10 +32,6 @@ class LinkModel extends BaseModel
     {
         return $this->hasOne('App\Models\PicModel', 'id', 'pic_id');
     }
-//    public function pic()
-//    {
-//        return $this->pic_id ? PicModel::find($this->pic_id) : '';
-//    }
 
     /**
      * 顶部链接：type_id==1
@@ -76,17 +70,4 @@ class LinkModel extends BaseModel
     {
         return $this->cid ? CompanyModel::find($this->id) : '本网站';
     }
-
-//    /**
-//     * 企业页面header菜单 type_id==2
-//     */
-//    public function comHeaders()
-//    {
-//        return LinkModel::where('cid',$this->cid)
-//                ->where('type_id', 2)
-//                ->where('isshow', 1)
-//                ->orderBy('sort','desc')
-//                ->orderBy('id','desc')
-//                ->get();
-//    }
 }
