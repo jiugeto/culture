@@ -21,29 +21,30 @@ class TeamController extends BaseController
     {
         $company = $this->company($cid,$this->list['func']['url']);
         $result = [
-            'team'=> $this->getModule($company['cid']),
             'datas'=> $this->query($company['cid']),
+//            'team'=> $this->getModule($company['cid']),
             'comMain'=> $this->getComMain($company['cid']),
             'topmenus'=> $this->topmenus,
-            'curr'=> $this->prefix_url,
+            'prefix_url'=> $this->prefix_url,
         ];
         return view('company.team.index', $result);
     }
 
     public function query($cid)
     {
-        $limit = 10;
+        $limit = 6;
         $datas = ComFuncModel::where('cid',$cid)
-                        ->where('type',4)
-                        ->where('isshow',1)
-                        ->paginate($limit);
+                //团队module_id==3
+                ->where('module_id',3)
+                ->where('isshow',1)
+                ->paginate($limit);
         $datas->limit = $limit;
         return $datas;
     }
 
-    public function getModule($cid)
-    {
-        if (count($this->query($cid))) { $firm = $this->query($cid)[0]; }
-        return isset($firm) ? ComModuleModel::find($firm->module_id) : '';
-    }
+//    public function getModule($cid)
+//    {
+//        if (count($this->query($cid))) { $firm = $this->query($cid)[0]; }
+//        return isset($firm) ? ComModuleModel::find($firm->module_id) : '';
+//    }
 }

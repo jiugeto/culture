@@ -3,17 +3,19 @@
     <div class="com_ppt">
         <div class="com_ad">
             @if(count($ppts))
-            @foreach($ppts as $kppt=>$ppt)
-                {{--<div class="ppt_img">--}}
-                    <a href="{{ $ppt->link }}" title="{{ $ppt->name }}" id="ppt_{{$ppt->id}}">
-                        <div class="img"><img src="{{ $ppt->getPicUrl() }}"></div>
-                    </a>
-                {{--</div>--}}
-            @endforeach
-            @else
-                <div class="ppt_img">
-                    <div class="img"><img src="{{DOMAIN}}uploads/images/2016/ppt.png"></div>
+                @foreach($ppts as $kppt=>$ppt)
+                <a href="{{ $ppt->link }}" title="{{ $ppt->name }}">
+                    <div class="img" id="ppt_{{$ppt->id}}"><img src="{{ $ppt->getPicUrl() }}"></div>
+                </a>
+                @endforeach
+            @endif
+
+            @if(count($ppts)<$ppts->limit)
+                @for($i=0;$i<$ppts->limit-count($ppts);++$i)
+                <div class="img" id="ppt_{{$i}}">广告待添加 {{$i+1}}
+                    {{--<img src="{{DOMAIN}}uploads/images/2016/ppt.png">--}}
                 </div>
+                @endfor
             @endif
         </div>
         <div class="com_ppt_point">
@@ -28,7 +30,7 @@
         <script>
             function move(i){
                 $(".com_ppt_point > ul li").removeClass('li_curr'); $("#li_"+i).addClass('li_curr');
-                $(".com_ad > a").hide(); $("#ppt_"+i).show();
+                $(".com_ad > div.img").hide(); $("#ppt_"+i).show();
             }
         </script>
     </div>
@@ -41,6 +43,11 @@
             @foreach($firms as $kfirm=>$firm)
                 <div class="serve" style="{{$kfirm>3?"margin-top:20px;":""}}">
                     <p class="title">{{ $firm->name }}</p>
+                    @if($firm->pic_id)
+                        <p class="img"><img src="{{ $firm->pic()->url }}"></p>
+                    @else
+                        <p class="img">图片待添加</p>
+                    @endif
                     <p>{{ strip_tags($firm->intro) }}</p>
                 </div>
             @endforeach
@@ -48,8 +55,9 @@
             @if(count($firms)<$infos->limit)
                 @for($i=0;$i<$firms->limit-count($firms);++$i)
                 <div class="serve">
-                    <p class="title">服务名称</p>
-                    <p>服务的内容介绍</p>
+                    <p class="title">服务名称 待添加</p>
+                    <p class="img">图片待添加</p>
+                    <p>服务的内容介绍 待添加</p>
                 </div>
                 @endfor
             @endif
@@ -58,10 +66,22 @@
 
     <div class="fengexian">{{--分割线--}}</div>
     <div class="com_floor2">
-        <p class="bigtitle">→ OUR NEWS 新闻资讯 <span class="float_right"><a href="{{DOMAIN}}c/{{CID}}/about/7">更多</a></span></p>
+        <p class="bigtitle">→ OUR NEWS 新闻资讯 <span class="float_right"><a href="{{DOMAIN}}c/{{CID}}/about/3">更多</a></span></p>
         <div class="com_floor">
+            {{--图片是最新的新闻显示--}}
             <div class="com_news">
-                <div class="img"><img src="/uploads/images/2016/ppt.png"></div>
+                @if(count($news))
+                    @foreach($news as $new)
+                <div class="img">
+                    @if($new->pic_id)
+                        <img src="{{ $new->getPicUrl() }}"
+                             style="@if($size=$new->getUserPicSize($new->pic(),$w=210,$h=200))width:{{$size}}px;height:200px; @endif">
+                    @else 待添加
+                    @endif
+                </div>
+                    @endforeach
+                @else <div class="img">待添加</div>
+                @endif
             </div>
             <div class="com_news_text">
                 <p class="title">公司新闻</p>
@@ -75,7 +95,7 @@
                 @endif
                 @if(count($news)<$news->limit)
                     @for($i=0;$i<$news->limit-count($news);++$i)
-                        <p>企业新闻
+                        <p>企业新闻 待添加
                             <span class="time">某年某月某日</span>
                         </p>
                     @endfor
@@ -93,7 +113,9 @@
                 @endif
                 @if(count($infos)<$infos->limit)
                     @for($i=0;$i<$infos->limit-count($infos);++$i)
-                        <p>行业资讯<span class="time">某年某月某日</span></p>
+                        <p>行业资讯 待添加
+                            <span class="time">某年某月某日</span>
+                        </p>
                     @endfor
                 @endif
             </div>
@@ -102,13 +124,13 @@
 
     <div class="fengexian">{{--分割线--}}</div>
     <div class="com_floor3">
-        <p class="bigtitle">→ OUR PRODUCT 公司作品 <span class="float_right"><a href="{{DOMAIN}}c/{{CID}}/works">更多</a></span></p>
+        <p class="bigtitle">→ OUR PRODUCT 公司作品 <span class="float_right"><a href="{{DOMAIN}}c/{{CID}}/product">更多</a></span></p>
         <div class="com_product">
-            <div class="com_tab">
-                <a>影视广告</a>
-                <a>微电影</a>
-                <a>宣传片</a>
-            </div>
+            {{--<div class="com_tab">--}}
+                {{--<a>影视广告</a>--}}
+                {{--<a>微电影</a>--}}
+                {{--<a>宣传片</a>--}}
+            {{--</div>--}}
             <div class="com_con">
                 @if(count($works))
                     @foreach($works as $kwork=>$work)
@@ -127,8 +149,8 @@
                     @for($i=0;$i<$works->limit-count($works);++$i)
                 <a href="" title="">
                     <div class="com_pro">
-                        <div class="img"></div>
-                        <p class="text">视频作品</p>
+                        <div class="img">待添加</div>
+                        <p class="text">视频作品 待添加</p>
                     </div>
                 </a>
                     @endfor
@@ -154,7 +176,7 @@
                 @for($i=0;$i<$parterners->limit-count($parterners);++$i)
             <a href="">
                 <div class="com_par">
-                    <div class="img"></div>
+                    <div class="img">待添加</div>
                 </div>
             </a>
                 @endfor
@@ -172,7 +194,7 @@
             @endif
             @if(count($footlinks)<$footlinks->limit)
                 @for($i=0;$i<$footlinks->limit-count($footlinks);++$i)
-            <a href="">脚部链接</a>
+            <a href="">待添加链接</a>
                 @endfor
             @endif
         </div>

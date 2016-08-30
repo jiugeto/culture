@@ -14,10 +14,10 @@ class WorksModel extends BaseModel
         'id','name','cateid','intro','detail','video_id','pic_id','sort','isshow','del','created_at','updated_at',
     ];
 
-    protected $cates = [
-        //1电视剧，2电影，3微电影，4广告，5宣传片，6汇报片，7纪录片，
-        1=>'电视剧','电影','微电影','广告','宣传片','汇报片','纪录片',
-    ];
+//    protected $cates = [
+//        //1电视剧，2电影，3微电影，4广告，5宣传片，6汇报片，7纪录片，
+//        1=>'电视剧','电影','微电影','广告','宣传片','汇报片','纪录片',
+//    ];
 
     public function cate()
     {

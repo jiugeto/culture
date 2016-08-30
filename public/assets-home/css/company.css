@@ -18,9 +18,13 @@
 .com_logo_size { height:50px; }
 .com_logo img { padding:7px 5px; }
 .com_center { margin:0 auto;width:1000px; }
-.com_center a { color:white;font-size:20px; }
+.com_center a {
+    color:white;
+    font-size:20px;
+}
 .com_center li {
-    padding:20px 20px;
+    margin-right:2px;
+    padding:20px 15px;
     padding-bottom:25px;
     list-style:none;
     float:right;
@@ -44,14 +48,12 @@
     background:rgb(200,200,200);
     overflow:hidden;
 }
-.com_ad .ppt_img {
-    width:3000px;
-    height:300px;
-    background:ghostwhite;
-    /*float:left;*/
-}
 .com_ad .img {
     width:1000px;height:300px;
+    color:grey;
+    text-align:center;
+    line-height:250px;
+    background:gainsboro;
     overflow:hidden;
 }
 .com_ppt_point {
@@ -114,7 +116,11 @@
     float:left;
 }
 .com_floor .com_news .img {
-    width:210px;
+    width:210px; height:200px;
+    color:grey;
+    text-align:center;
+    line-height:200px;
+    background:gainsboro;
     overflow:hidden;
 }
 .com_floor .com_news_text,.com_floor .trade_news {
@@ -162,6 +168,8 @@
 }
 .com_floor3 .com_pro .img {
     width:238px;height:140px;
+    text-align:center;
+    line-height:140px;
     background:rgb(240,240,240);
     overflow:hidden;
 }
@@ -185,10 +193,16 @@
 }
 .com_floor4 .com_par .img {
     width:188px;height:98px;
+    color:grey;
+    text-align:center;
+    line-height:98px;
     background:rgb(240,240,240);
     overflow:hidden;
 }
-a .com_pro,a .com_par { border:1px solid lightgrey;border-bottom:1px dashed gainsboro; }
+a .com_pro,a .com_par {
+    border:1px solid lightgrey;
+    border-bottom:1px dashed gainsboro;
+}
 a:hover .com_pro,a:hover .com_par { border:1px solid orangered; }
 /*=== 脚部链接 ===*/
 .com_buttom { clear:both;margin-top:10px; }
@@ -236,7 +250,8 @@ span.float_right a:hover { text-decoration:underline; }
 /*===== 产品列表页面 =====*/
 .com_product {}
 .com_product p {
-    padding:10px 20px;
+    margin-bottom:20px;
+    padding:10px;
     border-bottom:1px solid lightgrey;
     background:rgb(250,250,250);
 }
@@ -249,17 +264,42 @@ span.float_right a:hover { text-decoration:underline; }
 .com_product .com_tab a:hover {
     background:darkred;
 }
-.com_product .com_list {
-    margin:20px 0;
-}
-.com_list span { float:left; }
+.com_product .com_list {  }
 .com_list .com_pro {
-    margin-top: 20px;
     margin-right: 20px;
-    width:230px;
-    height:150px;
+    margin-bottom: 20px;
+    width:228px;
+    height:148px;
+    border:1px dashed gainsboro;
+    border-bottom:1px solid ghostwhite;
+    overflow:hidden;
+    float:left;
+}
+.com_list .com_pro .img {
+    width:228px; height:120px;
+    color:grey;
+    text-align:center;
+    line-height:120px;
+    background:gainsboro;
     overflow:hidden;
 }
+.com_list .com_pro .text {
+    padding:5px;
+    color:grey;
+    text-align:center;
+    background:rgb(253,253,253);
+}
+.com_list a:hover .com_pro { border:1px solid orangered; }
+.com_list a:hover .com_pro .text { color:orangered; }
+.com_list .com_pro .textbtn {
+    padding:5px;
+    color:gainsboro;
+    text-align:center;
+    background:rgba(50,50,50,0.5);
+    position:relative;top:0px;
+    cursor:pointer;
+}
+.com_list .com_pro div:hover.textbtn { color:orangered; }
 /*===== 产品列表页面 =====*/
 
 
@@ -285,21 +325,27 @@ span.float_right a:hover { text-decoration:underline; }
     text-align:center;
 }
 .com_firm .com_firm_con {
-    padding:0 80px;
+    padding:0 40px;
     height:420px;
     background:rgb(240,240,240);
 }
 .com_firm_con span { float:left; }
 .com_firm_con .onlyone {
-    margin:20px 10px;
-    width:250px;height:340px;
+    margin:20px;
+    width:265px;height:340px;
     background:white;
+}
+.com_firm_con .onlyone .img {
+    width:100px; height:60px;
+    color:grey;
+    text-align:center;
+    line-height:60px;
+    background:gainsboro;
 }
 .com_firm_con .onlyone p,.com_firm_con .onlyone div { margin:10px auto; }
 .com_firm_con .onlyone div.title {
-    /*margin:0 auto;*/
     padding-top:20px;
-    width:100px;
+    width:150px;
     text-align:center;
     font-size:20px;
     border:0;
@@ -315,21 +361,29 @@ span.float_right a:hover { text-decoration:underline; }
 
 
 /*===== 团队列表页面 =====*/
-.com_team_con {}
-.com_team_con span { float:left; }
+.com_team_con { margin:20px auto; }
 .com_team_con .onlyone {
-    margin:10px auto;
-    width:330px;height:250px;
+    margin:0 auto;
+    width:330px;height:400px;
+    overflow:hidden;
+    float:left;
 }
-.com_team_con .onlyone div.img {
-    margin-right:10px;
-    width:310px;height:220px;
+.com_team_con .onlyone .img {
+    margin:0 auto;
+    width:328px;height:398px;
+    border:1px solid lightgrey;
+    color:grey;
+    text-align:center;
+    line-height:398px;
+    background:gainsboro;
     overflow:hidden;
 }
-.com_team_con .onlyone img { width:310px; }
-.com_team_con .onlyone p {
-    margin:0 auto;
-    padding:5px;
+.com_team_con .onlyone .text {
+    padding:10px 5px;
+    text-align:center;
+    color:white;
+    background:rgba(50,50,50,0.3);
+    position:relative; top:0;
 }
 /*===== 团队列表页面 =====*/
 
@@ -361,27 +415,25 @@ span.float_right a:hover { text-decoration:underline; }
 }
 .com_about span.left { float:left; }
 .com_about span.right { float:right; }
-.com_about div.about_con { margin-right:10px;width:790px; }
+.com_about .about_con { margin-right:10px;width:790px; }
 .about_con .star {
     padding:10px;
     border-bottom:1px solid lightgrey;
 }
 .about_con .con { margin:20px; }
-.com_about div.about_a {
+.com_about .about_a {
     width:200px;
     height:100%;
 }
-.com_about div.about_a a {
+.com_about .about_a div {
+    padding:5px 0; padding-left:20px;
+    width:160px;
     color:grey;
-    text-decoration:none;
-}
-.com_about div.about_a a:hover { color:red; }
-.com_about div.about_a a div {
-    margin:0 auto;
-    padding:5px 20px;
+    border-bottom:1px dashed gainsboro;
     background:rgb(250,250,250);
+    cursor:pointer;
 }
-.com_about div.about_a a:hover div { background:lightgrey; }
+.com_about .about_a div:hover,.com_about .about_a div.curr { color:orangered;background:lightgrey; }
 /*===== 关于公司页面 =====*/
 
 

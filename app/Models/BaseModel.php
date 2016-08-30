@@ -8,6 +8,18 @@ class BaseModel extends Model
 {
     public $timestamps = false;
 
+    //支持 DesignModel、IdeasModel
+    //类型：房产，效果图，平面，漫游
+    protected $cates1 = [
+        1=>'房产漫游','效果图','平面设计',
+    ];
+
+    //支持 GoodsModel、WorksModel
+    //样片类型：1电视剧，2电影，3微电影，4广告，5宣传片，6汇报片，7纪录片，8晚会，9淘宝视频，
+    protected $cates2 = [
+        1=>'电视剧','电影','微电影','广告','宣传片','汇报片','纪录片','晚会','淘宝视频',
+    ];
+
     /**
      * 创建时间转换
      */

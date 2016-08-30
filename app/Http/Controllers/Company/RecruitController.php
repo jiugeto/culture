@@ -28,7 +28,7 @@ class RecruitController extends BaseController
             'company'=> $companyModel,
             'comMain'=> $this->getComMain($company['cid']),
             'topmenus'=> $this->topmenus,
-            'curr'=> $this->prefix_url,
+            'prefix_url'=> $this->prefix_url,
         ];
         return view('company.recruit.index', $result);
     }

@@ -13,7 +13,7 @@ Route::group(['prefix'=>'c/{cid}','namespace'=>'Company'], function(){
     //产品路由
     Route::get('product','ProductController@index');
     //花絮路由
-    Route::get('part','PartController@index');
+    Route::get('part','ProductController@part');
     //服务路由
     Route::get('firm','FirmController@index');
     //团队路由
@@ -23,7 +23,8 @@ Route::group(['prefix'=>'c/{cid}','namespace'=>'Company'], function(){
     //联系方式路由
     Route::get('contact','ContactController@index');
     //合作伙伴路由
-    Route::get('parterner','AboutController@parterner');
+    Route::get('parterner','HomeController@parterner');
+    Route::get('parterner/{id}','HomeController@partShow');
 });
 
 

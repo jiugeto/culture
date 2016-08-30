@@ -18,7 +18,7 @@
             @if(count($topmenus))
             @foreach($topmenus as $topmenu)
                 <a href="{{ $topmenu->link }}">
-                    <li class="{{$curr==$topmenu->link?'curr':''}}">{{ $topmenu->name }}</li>
+                    <li class="{{$prefix_url==$topmenu->link?'curr':''}}">{{ $topmenu->name }}</li>
                 </a>
             @endforeach
             @else

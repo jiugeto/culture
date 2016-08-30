@@ -25,7 +25,7 @@ class ContactController extends BaseController
             'data'=> $this->query($company['cid']),
             'comMain'=> $this->getComMain($company['cid']),
             'topmenus'=> $this->topmenus,
-            'curr'=> $this->prefix_url,
+            'prefix_url'=> $this->prefix_url,
         ];
         return view('company.contact.index', $result);
     }

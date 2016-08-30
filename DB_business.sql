@@ -562,6 +562,7 @@ CREATE TABLE `bs_goods` (
   `name` varchar(255) NOT NULL COMMENT '视频名称',
   `genre` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '片源类型：1产品系列，2花絮系列',
   `type` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '产品主体：1个人需求，2设计师供应，3企业需求，4企业供应',
+  `cate` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '样片类型：1电视剧，2电影，3微电影，4广告，5宣传片，6汇报片，7纪录片，8晚会，9淘宝视频，',
   `intro` varchar(1000) NOT NULL COMMENT '视频简介',
   `title` varchar(255) NOT NULL COMMENT '鼠标移动的文字',
   `pic_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '图片链接id，关联图片表bs_pics',
@@ -589,7 +590,7 @@ CREATE TABLE `bs_goods` (
 
 LOCK TABLES `bs_goods` WRITE;
 /*!40000 ALTER TABLE `bs_goods` DISABLE KEYS */;
-INSERT INTO `bs_goods` VALUES (1,'作品1',1,0,'v部分的白癜风b','',1,1,0,0,1,'',0,0,1,10,1,1,0,20160312,0),(2,'企业需求001',1,3,'','',1,1,0,0,1,'',0,0,1,10,1,1,0,20160313,0),(3,'企业作品001',1,4,'','',1,1,0,0,1,'',0,0,1,10,1,1,0,20160313,0),(4,'视频产品0003',1,4,'rgfgewfrgtnh','wferbgrwefrgtfh',1,1,0,0,1,'',0,0,1,10,1,1,0,20160428,0);
+INSERT INTO `bs_goods` VALUES (1,'作品1',1,0,1,'v部分的白癜风b','',1,1,0,0,1,'',0,0,1,10,1,1,0,20160312,0),(2,'企业需求001',1,3,1,'','',1,1,0,0,1,'',0,0,1,10,1,1,0,20160313,0),(3,'企业作品001',1,4,1,'','',1,1,0,0,1,'',0,0,1,10,1,1,0,20160313,0),(4,'视频产品0003',1,4,1,'rgfgewfrgtnh','wferbgrwefrgtfh',1,1,0,0,1,'',0,0,1,10,1,1,0,20160428,0);
 /*!40000 ALTER TABLE `bs_goods` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1929,11 +1930,11 @@ CREATE TABLE `com_funcs` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL COMMENT '功能名称',
   `cid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '公司id',
-  `module_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '所属模块id',
-  `type` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '功能类型：1简介，2历程，3新闻，4资讯，5服务，6团队，7招聘，',
+  `module_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '所属模块id：1公司信息，2服务，3团队，4招聘，5合作伙伴',
+  `type` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '功能类型：1简介，2历程，3新闻，4资讯，5服务，6团队，7招聘，8合作伙伴，',
   `pic_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '图片id',
   `intro` varchar(2000) NOT NULL COMMENT '详情',
-  `small` varchar(255) NOT NULL COMMENT '备用字段：\r\n如果是服务，为小字，多组用|隔开；\r\n如果是工作，为数字；\r\n如果是合作伙伴，为链接；',
+  `small` varchar(255) NOT NULL COMMENT '备用字段：\r\n如果是服务，为小字，多组用|隔开；\r\n如果是招聘，为数字；\r\n如果是合作伙伴，为链接；',
   `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '用户企业排序，值越大越靠前，默认10',
   `isshow` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '用户的公司后台控制是否显示：0不显示，1显示',
   `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
@@ -1948,7 +1949,7 @@ CREATE TABLE `com_funcs` (
 
 LOCK TABLES `com_funcs` WRITE;
 /*!40000 ALTER TABLE `com_funcs` DISABLE KEYS */;
-INSERT INTO `com_funcs` VALUES (1,'公司简介',1,1,1,1,'<p>公司简单介绍</p>','',10,1,1472474573,0),(2,'公司历史',1,1,2,0,'<p>公司历史</p>','',10,1,1472474631,0),(3,'公司新闻',1,1,3,2,'<p>新闻新闻</p>','',10,1,1472474666,0),(4,'资讯',1,1,4,2,'<p>资讯资讯</p>','',10,1,1472474698,0),(5,'服务项目',1,2,5,0,'<p>服务项目服务项目</p>','小字|小字|小字|小字|',10,1,1472474749,0),(6,'团队',1,3,6,2,'<p>团队成员团队成员</p>','',10,1,1472474821,0),(7,'招聘',1,4,7,0,'<p>招聘人才招聘人才</p>','小字|小字|小字|小字|',10,1,1472474999,0);
+INSERT INTO `com_funcs` VALUES (1,'公司简介',1,1,1,1,'<p>公司简单介绍</p>','',10,1,1472474573,0),(2,'公司历史',1,1,2,0,'<p>公司历史</p>','',10,1,1472474631,0),(3,'公司新闻',1,1,3,2,'<p>新闻新闻</p>','',10,1,1472474666,0),(4,'行业资讯',1,1,4,2,'<p>资讯资讯</p>','',10,1,1472474698,0),(5,'服务项目',1,2,5,0,'<p>服务项目服务项目</p>','小字|小字|小字|小字|',10,1,1472474749,0),(6,'团队',1,3,6,2,'<p>团队成员团队成员</p>','',10,1,1472474821,0),(7,'招聘',1,4,7,0,'<p>招聘人才招聘人才</p>','2',10,1,1472474999,0);
 /*!40000 ALTER TABLE `com_funcs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2014,7 +2015,7 @@ CREATE TABLE `com_modules` (
 
 LOCK TABLES `com_modules` WRITE;
 /*!40000 ALTER TABLE `com_modules` DISABLE KEYS */;
-INSERT INTO `com_modules` VALUES (1,'公司信息',0,1,'<p>公司简介、公司历史、公司新闻、行业资讯</p>',10,1,1472473358,0),(2,'服务',0,2,'<p>公司的服务项目</p>',10,1,1472473462,0),(3,'团队',0,3,'<p>公司成员</p>',10,1,1472473539,0),(4,'招聘',0,4,'<p>公司所需人员</p>',10,1,1472473584,0),(5,'合作伙伴',0,5,'<p>公司联系地址、联系方式</p>',10,1,1472473618,0),(6,'其他单页',0,6,'<p>公司自定义添加的单页</p>',10,0,1472473699,0);
+INSERT INTO `com_modules` VALUES (1,'公司信息',0,1,'<p>公司简介、公司历史、公司新闻、行业资讯</p>',10,1,1472473358,0),(2,'服务',0,2,'<p>公司的服务项目</p>',10,1,1472473462,0),(3,'团队',0,3,'<p>公司成员</p>',10,1,1472473539,0),(4,'招聘',0,4,'<p>公司所需人员</p>',10,1,1472473584,0),(5,'合作伙伴',0,5,'<p>合作方名称、介绍、链接、形象图</p>',10,1,1472473618,0),(6,'备用单页',0,6,'<p>公司自定义添加的单页</p>',10,0,1472473699,0);
 /*!40000 ALTER TABLE `com_modules` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2030,6 +2031,7 @@ CREATE TABLE `companys` (
   `name` varchar(255) NOT NULL COMMENT '公司名称',
   `genre` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '公司的类型，对应users表的isuser：2普通企业，4广告公司，5影视公司，6租赁公司',
   `area` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '所在地ID',
+  `point` varchar(50) NOT NULL COMMENT '地图坐标，格式 (x,y)',
   `address` varchar(255) NOT NULL COMMENT '详细地址',
   `yyzzid` varchar(255) NOT NULL COMMENT '营业执照注册码',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '会员id',
@@ -2053,7 +2055,7 @@ CREATE TABLE `companys` (
 
 LOCK TABLES `companys` WRITE;
 /*!40000 ALTER TABLE `companys` DISABLE KEYS */;
-INSERT INTO `companys` VALUES (1,'这是广告公司',2,10,'滨盛路1870','0123456789012345',1,'0571',88888888,100000,'www.jiuge.com',12345678,311301,'123@456.com',10,20160428,0),(2,'',0,0,'','',1,'0',0,0,'',0,0,'',10,1470735629,0);
+INSERT INTO `companys` VALUES (1,'这是广告公司',2,10,'','滨盛路1870','0123456789012345',1,'0571',88888888,100000,'www.jiuge.com',12345678,311301,'123@456.com',10,20160428,0),(2,'',0,0,'','','',1,'0',0,0,'',0,0,'',10,1470735629,0);
 /*!40000 ALTER TABLE `companys` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2197,4 +2199,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-29 21:35:11
+-- Dump completed on 2016-08-30 22:04:25

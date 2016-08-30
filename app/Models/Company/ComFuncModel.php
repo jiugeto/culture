@@ -46,7 +46,8 @@ class ComFuncModel extends BaseModel
 
     public function pic()
     {
-        return $this->pic_id ? PicModel::find($this->pic_id) :'';
+        $pic_id = $this->pic_id ? $this->pic_id : 0;
+        return $this->pic_id ? PicModel::find($pic_id) :'';
     }
 
     /**
@@ -76,5 +77,31 @@ class ComFuncModel extends BaseModel
     {
         if (!$cid) { $cid = 0; }
         return \App\Models\Company\ComModuleModel::where('genre',2)->where('cid',$cid)->get();
+    }
+
+    /**
+     * 得到对应模块
+     */
+    public function getModule()
+    {
+        $module_id = $this->module_id ? $this->module_id : 0;
+        $moduleModel = ComModuleModel::find($module_id);
+        return $moduleModel ? $moduleModel : '';
+    }
+
+    /**
+     * 得到对应模块的名称
+     */
+    public function getModuleName()
+    {
+        return $this->getModule() ? $this->getModule()->name : '';
+    }
+
+    /**
+     * 得到对应模块的介绍
+     */
+    public function getModuleIntro()
+    {
+        return $this->getModule() ? $this->getModule()->intro : '';
     }
 }

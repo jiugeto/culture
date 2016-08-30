@@ -15,7 +15,7 @@ class GoodsModel extends BaseModel
 
     protected $table = 'bs_goods';
     protected $fillable = [
-        'id','name','genre','type','intro','title','pic_id','video_id','video_id2','money','uid','uname','click','recommend','newest','sort','isshow','isshow2','del','created_at','updated_at',
+        'id','name','genre','type','cate','intro','title','pic_id','video_id','video_id2','money','uid','uname','click','recommend','newest','sort','isshow','isshow2','del','created_at','updated_at',
     ];
 
     //片源类型：1产品，2花絮
@@ -26,6 +26,10 @@ class GoodsModel extends BaseModel
     protected $types = [
         1=>'个人需求','设计师供应','企业需求','企业供应',
     ];
+//    //样片类型：1电视剧，2电影，3微电影，4广告，5宣传片，6汇报片，7纪录片，
+//    protected $cates = [
+//        1=>'电视剧','电影','微电影','广告','宣传片','汇报片','纪录片',
+//    ];
     protected $recommends = [
         '不推荐','推荐',
     ];

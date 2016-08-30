@@ -31,9 +31,43 @@ class HomeController extends BaseController
             'parterners'=> $this->getParterners($company['cid'],$limit=5),
             'topmenus'=> $this->topmenus,
             'footlinks'=> $this->footlinks($company['cid'],$limit=10),
-            'curr'=> $this->prefix_url,
+            'prefix_url'=> $this->prefix_url,
         ];
         return view('company.home.index', $result);
+    }
+
+    /**
+     * 合作伙伴列表
+     */
+    public function parterner($cid)
+    {
+        $limit = 20;
+        $moduleid = 5;      //5代表合作伙伴
+        $company = $this->company($cid,$this->list['func']['url']);
+        $datas = ComFuncModel::where('cid',$company['cid'])
+            ->where('module_id',$moduleid)
+            ->paginate($limit);
+        $datas->limit = $limit;
+        $result = [
+            'datas'=> $datas,
+            'comMain'=> $this->getComMain($company['cid']),
+            'topmenus'=> $this->topmenus,
+            'prefix_url'=> $this->prefix_url,
+        ];
+        return view('company.home.parterner', $result);
+    }
+
+    /**
+     * 合作伙伴列表
+     */
+    public function partShow($cid,$id)
+    {
+        $company = $this->company($cid,$this->list['func']['url']);
+        $result = [
+            'datas'=> ComFuncModel::find($id),
+            'topmenus'=> $this->topmenus,
+        ];
+        return view('company.home.partShow', $result);
     }
 
     /**
@@ -134,10 +168,14 @@ class HomeController extends BaseController
             $datas = ComFuncModel::where('cid',$cid)
                 ->where('module_id',$module)
                 ->where('type',$type)
+                ->orderBy('sort','desc')
+                ->orderBy('id','desc')
                 ->paginate($limit);
         } else {
             $datas = ComFuncModel::where('cid',$cid)
                 ->where('module_id',$module)
+                ->orderBy('sort','desc')
+                ->orderBy('id','desc')
                 ->paginate($limit);
         }
         $datas->limit = $limit;

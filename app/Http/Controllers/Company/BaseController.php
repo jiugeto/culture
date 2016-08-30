@@ -45,9 +45,9 @@ class BaseController extends Controller
             ->paginate(8);
         //拼接url
         if ($url) {
-            $this->prefix_url = DOMAIN.'c/'.$this->cid.'/'.$this->list['func']['url'];
+            $this->prefix_url = DOMAIN.'c/'.$this->cid.'/'.$url;
         } else {
-            $this->prefix_url = DOMAIN.'c/'.$this->cid.$this->list['func']['url'];
+            $this->prefix_url = DOMAIN.'c/'.$this->cid.$url;
         }
         return array(
             'uid'=> $this->userid,

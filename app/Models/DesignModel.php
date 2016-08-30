@@ -11,10 +11,10 @@ class DesignModel extends BaseModel
     protected $genres = [
         1=>'个人供应','个人需求','企业供应','企业需求',
     ];
-    //类型：房产，效果图，平面，漫游
-    protected $cates = [
-        1=>'房产漫游','效果图','平面设计',
-    ];
+//    //类型：房产，效果图，平面，漫游
+//    protected $cates = [
+//        1=>'房产漫游','效果图','平面设计',
+//    ];
 
     public function genreName()
     {

@@ -11,10 +11,10 @@ class IdeasModel extends BaseModel
     protected $fillable = [
         'id','name','cate','intro','content','uid','sort','isshow','del','created_at','updated_at',
     ];
-    //类型：房产，效果图，平面，漫游
-    protected $cates = [
-        1=>'房产漫游','效果图','平面设计',
-    ];
+//    //类型：房产，效果图，平面，漫游
+//    protected $cates = [
+//        1=>'房产漫游','效果图','平面设计',
+//    ];
 
     public function getCate()
     {

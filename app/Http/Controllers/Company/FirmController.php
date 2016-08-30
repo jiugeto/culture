@@ -29,19 +29,22 @@ class FirmController extends BaseController
             'datas'=> $this->query(),
             'comMain'=> $this->getComMain($company['cid']),
             'topmenus'=> $this->topmenus,
-            'curr'=> $this->prefix_url,
+            'prefix_url'=> $this->prefix_url,
         ];
         return view('company.firm.index', $result);
     }
 
     public function query()
     {
-        return ComFuncModel::where('cid',$this->cid)
+        $limit = 3;
+        $datas = ComFuncModel::where('cid',$this->cid)
                         ->where('module_id',$this->moduleid)
                         ->where('isshow',1)
                         ->orderBy('sort','desc')
                         ->orderBy('id','desc')
-                        ->get();
+                        ->paginate($limit);
+        $datas->limit = $limit;
+        return $datas;
     }
 
     public function getModule()
