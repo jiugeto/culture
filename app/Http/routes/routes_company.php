@@ -10,10 +10,18 @@ Route::group(['prefix'=>'c/{cid}','namespace'=>'Company'], function(){
     //关于公司路由
     Route::get('about','AboutController@index');
     Route::get('about/{type}','AboutController@index');
+        //新闻资讯详情
+    Route::get('news/{id}','AboutController@news');
     //产品路由
     Route::get('product','ProductController@index');
-    //花絮路由
+    Route::get('product/{cate}','ProductController@index');
+        //花絮路由
     Route::get('part','ProductController@part');
+    Route::get('part/{cate}','ProductController@part');
+//        //产品、花絮详情
+//    Route::get('goods/{id}','ProductController@show');
+        //视频预览
+    Route::get('video/{id}/{videoid}','ProductController@video');
     //服务路由
     Route::get('firm','FirmController@index');
     //团队路由
@@ -54,8 +62,8 @@ Route::group(['prefix'=>'company','middleware' =>'MemberAuth','namespace'=>'Comp
         //公司内容设置路由
         Route::resource('content','ContentController');
             //关于公司路由
-        Route::post('abouts/{id}','AboutController@update');
-        Route::resource('abouts','AboutController');
+        Route::post('about/{id}','AboutController@update');
+        Route::resource('about','AboutController');
             //产品路由
         Route::get('product/trash','ProductController@trash');
         Route::get('product/{id}/destroy','ProductController@destroy');

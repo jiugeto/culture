@@ -64,7 +64,6 @@ class BaseFuncController extends BaseController
         }
         return ComFuncModel::where('cid',$this->cid)
                         ->where('module_id',$module)
-                        ->where('genre',$this->genre)
                         ->orderBy('sort','desc')
                         ->orderBy('id','desc')
                         ->paginate($this->limit);

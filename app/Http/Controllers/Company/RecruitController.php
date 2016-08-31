@@ -23,8 +23,8 @@ class RecruitController extends BaseController
         $company = $this->company($cid,$this->list['func']['url']);
         $companyModel = CompanyModel::find($company['cid']);
         $result = [
-            'job'=> $this->getModule($company['cid']),
             'datas'=> $this->query($company['cid']),
+//            'job'=> $this->getModule($company['cid']),
             'company'=> $companyModel,
             'comMain'=> $this->getComMain($company['cid']),
             'topmenus'=> $this->topmenus,
@@ -46,9 +46,9 @@ class RecruitController extends BaseController
         return $datas;
     }
 
-    public function getModule($cid)
-    {
-        if (count($this->query($cid))) { $job = $this->query($cid)[0]; }
-        return isset($job) ? ComModuleModel::find($job->module_id) : '';
-    }
+//    public function getModule($cid)
+//    {
+//        if (count($this->query($cid))) { $job = $this->query($cid)[0]; }
+//        return isset($job) ? ComModuleModel::find($job->module_id) : '';
+//    }
 }

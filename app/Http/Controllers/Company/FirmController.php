@@ -25,8 +25,8 @@ class FirmController extends BaseController
         $company = $this->company($cid,$this->list['func']['url']);
         $this->moduleid = $this->getModuleId($company['cid'],$this->genre);
         $result = [
-            'firm'=> $this->getModule(),
             'datas'=> $this->query(),
+//            'firm'=> $this->getModule(),
             'comMain'=> $this->getComMain($company['cid']),
             'topmenus'=> $this->topmenus,
             'prefix_url'=> $this->prefix_url,
@@ -47,9 +47,9 @@ class FirmController extends BaseController
         return $datas;
     }
 
-    public function getModule()
-    {
-        if (count($this->query())) { $firm = $this->query()[0]; }
-        return isset($firm) ? ComModuleModel::find($firm->module_id) : '';
-    }
+//    public function getModule()
+//    {
+//        if (count($this->query())) { $firm = $this->query()[0]; }
+//        return isset($firm) ? ComModuleModel::find($firm->module_id) : '';
+//    }
 }

@@ -42,6 +42,22 @@ class AboutController extends BaseController
         return view('company.about.index', $result);
     }
 
+    /**
+     * 新闻资讯详情
+     */
+    public function news($cid,$id)
+    {
+        $company = $this->company($cid,$this->list['func']['url']);
+        $result = [
+            'data'=> ComFuncModel::find($id),
+//            'company'=> CompanyModel::find($company['cid']),
+            'comMain'=> $this->getComMain($company['cid']),
+            'topmenus'=> $this->topmenus,
+            'prefix_url'=> $this->prefix_url,
+        ];
+        return view('company.about.news',$result);
+    }
+
 
 
 

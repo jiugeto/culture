@@ -1,29 +1,31 @@
 @extends('company.main')
 @section('content')
-    <div style="height:10px;">{{--空白--}}</div>
-    {{-- <<<<<载入百度地图>>>>> --}}
     <style type="text/css">
         .iw_poi_title {color:#CC5522;font-size:14px;font-weight:bold;overflow:hidden;padding-right:13px;white-space:nowrap}
         .iw_poi_content {font:12px arial,sans-serif;overflow:visible;padding-top:4px;white-space:-moz-pre-wrap;word-wrap:break-word}
-        /*.anchorBL{display:none}     !*去除地图中百度图标*!*/
     </style>
-    <script type="text/javascript" src="http://api.map.baidu.com/api?ak={{$ak}}&v=2.0&services=true"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
+
+    {{--<div style="height:20px;"></div>--}}
+    {{--<a href="http://www.gzhatu.com/dingwei.html" class="com_a_show">经纬度定位查询工具(多试些数字，更精确定位)</a>&nbsp;&nbsp;--}}
+    {{--<a href="http://api.map.baidu.com/lbsapi/getpoint/index.html" class="com_a_show">此为获取坐标定位的API</a>--}}
+    {{--<div style="height:10px;"></div>--}}
     <!--百度地图容器-->
-    <div style="width:100%;height:550px;border:#ccc solid 1px;" id="dituContent"></div>
+    <div style="width:1000px;height:550px;border:#ccc solid 1px;" id="dituContent"></div>
     <p>
-        公司名称：{{ $data->name }} &nbsp;&nbsp;&nbsp;&nbsp;
-        地址：{{ $data->address }} &nbsp;&nbsp;&nbsp;&nbsp;
-        电话： {{ $data->tel }} &nbsp;&nbsp;&nbsp;&nbsp;
-        QQ： {{ $data->qq }} &nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="hidden" name="companyname" value="{{ $data->name }}">
-        <input type="hidden" name="address" value="{{ $data->address }}">
-        <input type="hidden" name="axis_x" value="{{ $data->getPointX() }}">
-        <input type="hidden" name="axis_y" value="{{ $data->getPointY() }}">
+        {{--地址：雅安国际公寓 &nbsp;&nbsp;&nbsp;&nbsp;--}}
+        {{--电话：0000-00000000 &nbsp;&nbsp;&nbsp;&nbsp;--}}
+        {{--邮箱：xxxx@xx.xxx--}}
+        地址：{{ $company->address }} &nbsp;&nbsp;&nbsp;&nbsp;
+        电话：{{ $company->areacode.'-'.$company->tel }} &nbsp;&nbsp;&nbsp;&nbsp;
+        邮箱：{{ $company->email }}
+        <input type="hidden" name="companyname" value="{{ $company->name }}">
+        <input type="hidden" name="intro" value="{{ strip_tags($data->intro) }}">
+        <input type="hidden" name="axis_x" value="{{ $data->axis_x }}">
+        <input type="hidden" name="axis_y" value="{{ $data->axis_y }}">
     </p>
 
     <script type="text/javascript">
-        var axis_x = $("input[name='axis_x']").val();
-        var axis_y = $("input[name='axis_y']").val();
         //创建和初始化地图函数：
         function initMap(){
             createMap();//创建地图
@@ -34,7 +36,8 @@
         //创建地图函数：
         function createMap(){
             var map = new BMap.Map("dituContent");//在百度地图容器中创建一个地图
-            var point = new BMap.Point(axis_x,axis_y);//定义一个中心点坐标
+//            var point = new BMap.Point(116.438005,39.93459);//定义一个中心点坐标
+            var point = new BMap.Point($("input[name='axis_x']").val(),$("input[name='axis_y']").val());//定义一个中心点坐标
             map.centerAndZoom(point,14);//设定地图的中心点和坐标并将地图显示在地图容器中
             window.map = map;//将map变量存储在全局
         }
@@ -47,20 +50,21 @@
         }
         //地图控件添加函数：
         function addMapControl(){
-            //向地图中添加缩放控件
+//向地图中添加缩放控件
             var ctrl_nav = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE});
             map.addControl(ctrl_nav);
-            //向地图中添加缩略图控件
-                var ctrl_ove = new BMap.OverviewMapControl({anchor:BMAP_ANCHOR_BOTTOM_RIGHT,isOpen:1});
+//向地图中添加缩略图控件
+            var ctrl_ove = new BMap.OverviewMapControl({anchor:BMAP_ANCHOR_BOTTOM_RIGHT,isOpen:1});
             map.addControl(ctrl_ove);
-            //向地图中添加比例尺控件
+//向地图中添加比例尺控件
             var ctrl_sca = new BMap.ScaleControl({anchor:BMAP_ANCHOR_BOTTOM_LEFT});
             map.addControl(ctrl_sca);
         }
         //标注点数组
-        var markerArr = [{title:$("input[name='companyname']").val(),content:$("input[name='address']").val(),point:axis_x+"|"+axis_y,isOpen:0,icon:{w:21,h:21,l:-30,t:-20,x:6,lb:5}}
+//        var markerArr = [{title:"雅安国际公寓",content:"南楼403",point:"116.440179|39.921214",isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}}
+        var markerArr = [{title:$("input[name='companyname']").val(),content:$("input[name='intro']").val(),point:$("input[name='axis_x']").val()+"|"+$("input[name='axis_y']").val(),isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}}
         ];
-        //创建marker标识
+        //创建marker
         function addMarker(){
             for(var i=0;i<markerArr.length;i++){
                 var json = markerArr[i];
@@ -74,17 +78,9 @@
                 marker.setLabel(label);
                 map.addOverlay(marker);
                 label.setStyle({
-//                            borderColor:"#808080",
-//                            color:"#333",
-                    cursor:"pointer",
-                    borderColor:"red",
-                    color:"red",
-                    fontSize:"16px",
-                    fontFamily:"微软雅黑",
-                    fontWeight:"bold",
-                    boxShadow:"5px 5px 10px grey",
-                    border:"2px solid red",
-                    padding:"5px"
+                    borderColor:"#808080",
+                    color:"#333",
+                    cursor:"pointer"
                 });
                 (function(){
                     var index = i;
@@ -94,35 +90,30 @@
                         this.openInfoWindow(_iw);
                     });
                     _iw.addEventListener("open",function(){
-                        _marker.getLabel().hide(188);
-                    });
+                        _marker.getLabel().hide();
+                    })
                     _iw.addEventListener("close",function(){
-                        _marker.getLabel().show(188);
-                    });
+                        _marker.getLabel().show();
+                    })
                     label.addEventListener("click",function(){
                         _marker.openInfoWindow(_iw);
-                    });
-                    if(json.isOpen){
-                        label.hide(188);
+                    })
+                    if(!!json.isOpen){
+                        label.hide();
                         _marker.openInfoWindow(_iw);
                     }
                 })()
             }
         }
-        //创建InfoWindow，点击图标后的内容窗口
+        //创建InfoWindow
         function createInfoWindow(i){
             var json = markerArr[i];
             var iw = new BMap.InfoWindow("<b class='iw_poi_title' title='" + json.title + "'>" + json.title + "</b><div class='iw_poi_content'>"+json.content+"</div>");
             return iw;
         }
-        //创建一个Icon，定位的图标
+        //创建一个Icon
         function createIcon(json){
-            var thmb = '/assets-home/images/pos.png';
-            var icon = new BMap.Icon(thmb, new BMap.Size(json.w*4,json.h*4),{
-                imageOffset: new BMap.Size(-json.l,-json.t),
-                infoWindowOffset:new BMap.Size(json.lb+5,1),
-                offset:new BMap.Size(json.x,json.h)
-            });
+            var icon = new BMap.Icon("http://map.baidu.com/image/us_cursor.gif", new BMap.Size(json.w,json.h),{imageOffset: new BMap.Size(-json.l,-json.t),infoWindowOffset:new BMap.Size(json.lb+5,1),offset:new BMap.Size(json.x,json.h)})
             return icon;
         }
         initMap();//创建和初始化地图

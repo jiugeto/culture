@@ -3,8 +3,8 @@
     <div class="com_firm">
         {{--<div class="title"><div>公司的服务</div></div>--}}
         {{--<p>服务的简单介绍...</p>--}}
-        <div class="title"><div>{{ $firm?$firm->name:'无' }}</div></div>
-        <p>{!! $firm?$firm->intro:'无' !!}</p>
+        <div class="title"><div>{{ count($datas)?$datas[0]->name:'无' }}</div></div>
+        <p>{!! count($datas)?$datas[0]->intro:'无' !!}</p>
         {{--<div class="com_firm_con" style="height:@if(!count($datas)){{'0'}}@elseif(ceil(count($datas)/3)){{ceil(count($datas)/3)*400+20}}@endif px">--}}
         <div class="com_firm_con" style="height:{{ceil($datas->limit/3)*400+20}}px">
             <div style="height:20px;"></div>

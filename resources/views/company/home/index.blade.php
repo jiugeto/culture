@@ -19,7 +19,7 @@
             @endif
         </div>
         <div class="com_ppt_point">
-            <ul>
+            <ul style="width:{{$ppts->limit/10*400}}px;">
             @if(count($ppts)<$ppts->limit)
                 @for($i=0;$i<$ppts->limit-count($ppts);++$i)
                     <li class="{{ $i==0?'li_curr':'' }}" id="li_{{$i}}" onmouseover="move({{$i}})"></li>
@@ -140,7 +140,7 @@
                             <img src="{{ $work->getPicUrl() }}"
                                  style="@if($size=$work->getPicSize($w=240,$h=140))width:{{$size}}px;height:140px @endif">
                         </div>
-                        <p class="text">{{ $work->name }}</p>
+                        <p class="text pname">{{ $work->name }}</p>
                     </div>
                 </a>
                     @endforeach
@@ -150,7 +150,7 @@
                 <a href="" title="">
                     <div class="com_pro">
                         <div class="img">待添加</div>
-                        <p class="text">视频作品 待添加</p>
+                        <p class="text pname">视频作品 待添加</p>
                     </div>
                 </a>
                     @endfor

@@ -49,6 +49,7 @@ class BaseController extends Controller
 
     public function __construct()
     {
+        parent::__construct();
         if (\Session::has('user.cid')) { $this->cid = \Session::get('user.cid'); }
         $this->userid = \Session::get('user.uid');
         if (\Session::has('user.company')) {

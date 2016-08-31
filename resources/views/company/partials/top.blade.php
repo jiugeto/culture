@@ -14,7 +14,9 @@
             </a>
         </div>
         <ul>
-            {{--<a href="{{DOMAIN}}c/{{CID}}/admin"><li>后台</li></a>--}}
+            @if(Session::has('user.cid') && Session::get('user.cid')==$comMain->cid)
+            <a href="{{DOMAIN}}company/admin"><li>后台</li></a>
+            @endif
             @if(count($topmenus))
             @foreach($topmenus as $topmenu)
                 <a href="{{ $topmenu->link }}">

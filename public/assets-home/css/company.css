@@ -179,6 +179,7 @@
     border:0;
     background:rgb(253,253,253);
 }
+.com_floor3 .com_pro .pname { margin:0;padding:7px 10px; }
 .com_floor3 a { color:gray; }
 .com_floor3 a:hover { color:orangered; }
 /*=== 合作 ===*/
@@ -249,7 +250,7 @@ span.float_right a:hover { text-decoration:underline; }
 
 /*===== 产品列表页面 =====*/
 .com_product {}
-.com_product p {
+.com_product .com_tab {
     margin-bottom:20px;
     padding:10px;
     border-bottom:1px solid lightgrey;
@@ -261,7 +262,8 @@ span.float_right a:hover { text-decoration:underline; }
     color:white;
     cursor:pointer;
 }
-.com_product .com_tab a:hover {
+.com_product .com_tab a:hover,.com_product .com_tab a.curr {
+    border:0;
     background:darkred;
 }
 .com_product .com_list {  }
@@ -273,6 +275,7 @@ span.float_right a:hover { text-decoration:underline; }
     border:1px dashed gainsboro;
     border-bottom:1px solid ghostwhite;
     overflow:hidden;
+    cursor:pointer;
     float:left;
 }
 .com_list .com_pro .img {
@@ -289,8 +292,8 @@ span.float_right a:hover { text-decoration:underline; }
     text-align:center;
     background:rgb(253,253,253);
 }
-.com_list a:hover .com_pro { border:1px solid orangered; }
-.com_list a:hover .com_pro .text { color:orangered; }
+.com_list div:hover.com_pro { border:1px solid orangered; }
+.com_list div:hover.com_pro .text { color:orangered; }
 .com_list .com_pro .textbtn {
     padding:5px;
     color:gainsboro;
@@ -410,7 +413,7 @@ span.float_right a:hover { text-decoration:underline; }
 
 /*===== 关于公司页面 =====*/
 .com_about {
-    margin:20px auto;
+    margin:10px auto;
     width:1000px;
 }
 .com_about span.left { float:left; }
@@ -421,6 +424,23 @@ span.float_right a:hover { text-decoration:underline; }
     border-bottom:1px solid lightgrey;
 }
 .about_con .con { margin:20px; }
+.about_con .newslist {
+    padding:5px;
+    height:50px;
+    border-bottom:1px dashed gainsboro;
+    cursor:pointer;
+}
+.about_con .newslist div { margin:5px;margin-right:20px;float:left; }
+.about_con .newslist .img {
+    width:100px; height:40px;
+    color:grey;
+    text-align:center;
+    line-height:40px;
+    background:gainsboro;
+    overflow:hidden;
+}
+.about_con .newslist .text { color:grey; }
+.about_con div:hover.newslist { background:gainsboro; }
 .com_about .about_a {
     width:200px;
     height:100%;

@@ -19,22 +19,15 @@ class ContactController extends BaseController
 
     public function index($cid)
     {
+        $key = 'Tj1ciyqmG0quiNgpr0nmAimUCCMB5qMk';      //自己申请的百度地图api的key
         $company = $this->company($cid,$this->list['func']['url']);
         $result = [
-            'company'=> CompanyModel::find($company['cid']),
-            'data'=> $this->query($company['cid']),
+            'data'=> CompanyModel::find($company['cid']),
             'comMain'=> $this->getComMain($company['cid']),
             'topmenus'=> $this->topmenus,
             'prefix_url'=> $this->prefix_url,
+            'ak'=> $key,
         ];
         return view('company.contact.index', $result);
-    }
-
-    public function query($cid)
-    {
-        $data = ComFuncModel::where('cid',$cid)->where('type',6)->first();
-        $data->axis_x = $data->small?explode('|',$data->small)[0]:120;
-        $data->axis_y = $data->small?explode('|',$data->small)[1]:30;
-        return $data;
     }
 }

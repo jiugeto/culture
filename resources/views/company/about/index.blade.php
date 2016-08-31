@@ -8,14 +8,32 @@
                 <div class="con">
                     <img src="{{ $data->getPicUrl() }}" style="
                          @if($size=$data->getUserPicSize($data->pic(),$w=500,$h=150))
-                                 width:{{$size}}px;height:150px;
+                             width:{{$size}}px;height:150px;
                          @endif
                     ">
                 </div>
                 <div class="con">{!! $data->intro !!}</div>
             @elseif(in_array($type,[3,4]))
-                <div class="star">{{ $datas->name }}</div>
-                <div class="con">{!! $datas->intro !!}</div>
+                <div class="star">{{ $type==3 ? '公司新闻' : '行业资讯' }}</div>
+                @if(count($datas))
+                    @foreach($datas as $data)
+                <div class="newslist" title="点击进入 {{ $data->name }}"
+                     onclick="window.location.href='{{DOMAIN}}c/{{CID}}/news/{{$data->id}}';">
+                    <div class="img">
+                    @if($data->pic_id)
+                        <img src="{{ $data->getPicUrl() }}" style="
+                            @if($size=$data->getUserPicSize($data->pic(),$w=100,$h=40))
+                                width:{{$size}}px;height:40px;
+                            @endif
+                                ">
+                    @else 待添加
+                    @endif
+                    </div>
+                    <div class="text">{{ $data->name }}</div>
+                    <div class="text" style="float:right;">{{ $data->createTime() }}</div>
+                </div>
+                    @endforeach
+                @endif
             @endif
             </div>
         </span>
