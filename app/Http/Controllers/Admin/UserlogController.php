@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Admin\UserlogModel;
+use App\Models\Admin\LogModel;
 
 class UserlogController extends BaseController
 {
@@ -35,7 +35,7 @@ class UserlogController extends BaseController
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
         $result = [
-            'data'=> UserlogModel::find($id),
+            'data'=> LogModel::find($id),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -44,7 +44,7 @@ class UserlogController extends BaseController
 
     public function query()
     {
-        $datas = UserlogModel::orderBy('id','desc')->paginate($this->limit);
+        $datas = LogModel::where('genre',1)->orderBy('id','desc')->paginate($this->limit);
         $datas->limit = $this->limit;
         return $datas;
     }

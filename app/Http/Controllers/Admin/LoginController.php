@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Support\Facades\Input;
 use Session;
 use App\Models\Admin\AdminModel;
-use App\Models\Admin\AdminlogModel;
+use App\Models\Admin\LogModel;
 use Hash;
 
 class LoginController extends BaseController
@@ -52,12 +52,14 @@ class LoginController extends BaseController
             'uid'=> $adminModel->id,
             'uname'=> Input::get('username'),
             'ip'=> $ip,
-            'ipaddress'=> $ipaddress,
-            'loginTime'=> $loginTime,
+            'genre'=> 2,    //2代表管理员
             'serial'=> $serial,
+            'ipaddress'=> $ipaddress,
+            'action'=> $_SERVER['REQUEST_URI'],
+            'loginTime'=> $loginTime,
             'created_at'=> $adminModel->created_at,
         ];
-        AdminLogModel::create($userlog);
+        LogModel::create($userlog);
 
         return redirect(DOMAIN.'admin');
     }
@@ -65,7 +67,7 @@ class LoginController extends BaseController
     {
         //更新用户日志表
         $logoutTime = time();
-        AdminlogModel::where('serial',Session::get('admin.serial'))
+        LogModel::where('serial',Session::get('admin.serial'))
             ->update(['logoutTime'=>$logoutTime]);
         //去除session
         Session::forget('admin');

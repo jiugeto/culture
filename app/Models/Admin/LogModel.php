@@ -3,15 +3,18 @@ namespace App\Models\Admin;
 
 use App\Models\BaseModel;
 
-class UserlogModel extends BaseModel
+class LogModel extends BaseModel
 {
     /**
-     * 这是用户日志表model
+     * 这是管理员日志表
      */
 
-    protected $table = 'ba_userlog';
+    protected $table = 'ba_log';
     protected $fillable = [
-        'id','uid','uname','serial','ip','ipaddress','loginTime','logoutTime',
+        'id','uid','uname','genre','action','serial','ip','ipaddress','loginTime','logoutTime',
+    ];
+    protected $genres = [
+        1=>'用户记录','管理员记录',
     ];
 
     public function loginTime()

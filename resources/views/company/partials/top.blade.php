@@ -8,13 +8,13 @@
                 <div class="img">
                     @if($comMain)
                         <img src="{{ $comMain->logo }}" title="{{ $comMain->company()?$comMain->company()->name:'某某公司' }}-{{ $comMain->title }}" class="com_logo_size">
-                    @else <img src="/assets/images/del_red.png" title="logo名称或公司名称" class="com_logo_size">
+                    @else <img src="/assets-home/images/logo.png" title="logo名称或公司名称" class="com_logo_size">
                     @endif
                 </div>
             </a>
         </div>
         <ul>
-            @if(Session::has('user.cid') && Session::get('user.cid')==$comMain->cid)
+            @if(Session::has('user.cid') && $comMain && Session::get('user.cid')==$comMain->cid)
             <a href="{{DOMAIN}}company/admin"><li>后台</li></a>
             @endif
             @if(count($topmenus))

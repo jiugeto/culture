@@ -1,7 +1,7 @@
 <?php
 namespace App\Models\Base;
 
-class UserFrieldModel extends \App\Models\BaseModel
+class UserFrieldModel extends BaseModel
 {
     /**
      * 这是用户好友表

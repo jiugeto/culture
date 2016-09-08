@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CompanyModel;
 use App\Models\PersonModel;
 use App\Models\UserModel;
-use App\Models\Admin\UserlogModel;
+use App\Models\Admin\LogModel;
 use Session;
 use Hash;
 use Illuminate\Support\Facades\Input;
@@ -90,13 +90,15 @@ class LoginController extends Controller
         $userlog = [
             'uid'=> $userModel->id,
             'uname'=> Input::get('username'),
+            'genre'=> 1,    //1代表用户
+            'serial'=> $serial,
             'ip'=> $ip,
             'ipaddress'=> $ipaddress,
+            'action'=> $_SERVER['REQUEST_URI'],
             'loginTime'=> time(),
-            'serial'=> $serial,
             'created_at'=> $userModel->created_at,
         ];
-        UserlogModel::create($userlog);
+        LogModel::create($userlog);
 
         //最近登录更新
         UserModel::where('id',$userModel->id)->update(['lastLogin'=> time()]);
@@ -107,7 +109,7 @@ class LoginController extends Controller
     public function dologout()
     {
         //更新用户日志表
-        UserlogModel::where('serial',Session::get('user.serial'))
+        LogModel::where('serial',Session::get('user.serial'))
                     ->update(['logoutTime'=> time()]);
         //去除session
         Session::forget('user');

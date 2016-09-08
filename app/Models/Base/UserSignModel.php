@@ -1,7 +1,7 @@
 <?php
 namespace App\Models\Base;
 
-class UserSignModel extends \App\Models\BaseModel
+class UserSignModel extends BaseModel
 {
     /**
      * 这是用户签到表

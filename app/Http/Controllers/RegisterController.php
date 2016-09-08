@@ -73,13 +73,15 @@ class RegisterController extends Controller
         $userlog = [
             'uid'=> $userModel->id,
             'uname'=> Input::get('username'),
+            'genre'=> 1,    //1代表用户
+            'serial'=> $serial,
             'ip'=> $ip,
             'ipaddress'=> $ipaddress,
+            'action'=> $_SERVER['REQUEST_URI'],
             'loginTime'=> time(),
-            'serial'=> $serial,
             'created_at'=> $userModel->created_at,
         ];
-        \App\Models\Admin\UserlogModel::create($userlog);
+        \App\Models\Admin\LogModel::create($userlog);
 
         return redirect('/regist/success');
     }

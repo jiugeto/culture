@@ -17,7 +17,7 @@ class HomeController extends BaseController
     public function index()
     {
         $result = [
-            'ppts'=> $this->getPpts(),      //首页轮播大图
+            'ppts'=> $this->getPpts(9),      //首页轮播大图
             'ideas'=> $this->getIdeas(3),
             'talks'=> $this->getTalks(3),
             'products'=> $this->getProducts(10),        //在线创作
@@ -42,16 +42,15 @@ class HomeController extends BaseController
     /**
      * 前台首页轮播大图
      */
-    public function getPpts()
+    public function getPpts($limit)
     {
         //adplace_id==1，前台首页横幅
-        $limit = 9;
         $datas = \App\Models\AdModel::where('uid',0)
             ->where('adplace_id',1)
             ->where('isuse',1)
             ->where('isshow',1)
-            ->where('fromTime','<',time())
-            ->where('toTime','>',time())
+//            ->where('fromTime','<',time())
+//            ->where('toTime','>',time())
             ->orderBy('sort','desc')
             ->paginate($limit);
         $datas->limit = $limit;

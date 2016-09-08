@@ -3,7 +3,7 @@ namespace App\Models\Base;
 
 use App\Models\PicModel;
 
-class UserSpaceModel extends \App\Models\BaseModel
+class UserSpaceModel extends BaseModel
 {
     /**
      * 这是用户空间设置表

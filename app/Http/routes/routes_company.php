@@ -33,6 +33,8 @@ Route::group(['prefix'=>'c/{cid}','namespace'=>'Company'], function(){
     //合作伙伴路由
     Route::get('parterner','HomeController@parterner');
     Route::get('parterner/{id}','HomeController@partShow');
+    //访问日志路由
+    Route::post('visitlog/set','VisitlogController@setVisit');
 });
 
 
