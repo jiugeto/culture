@@ -9,6 +9,6 @@ class VisitlogModel extends BaseModel
 
     protected $table = 'bs_visitlog';
     protected $fillable = [
-        'id','cid','visit_id','action','ip','ipaddress','serial','loginTime','logoutTime',
+        'id','cid','visit_id','action','ip','ipaddress','serial','dayCount','timeCount','loginTime','logoutTime',
     ];
 }

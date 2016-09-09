@@ -82,6 +82,9 @@ Route::group(['prefix'=>'company','middleware' =>'MemberAuth','namespace'=>'Comp
             //联系路由
         Route::post('contact/{id}','ContactController@update');
         Route::resource('contact','ContactController');
+            //地图路由
+        Route::get('contact/map','ContactController@map');
+        Route::get('contact/map/{x}/{y}','ContactController@map');
             //服务路由
         Route::post('firms/{id}','FirmController@update');
         Route::resource('firms','FirmController');
@@ -119,5 +122,7 @@ Route::group(['prefix'=>'company','middleware' =>'MemberAuth','namespace'=>'Comp
             //链接管理
         Route::post('link/{id}','LinkController@update');
         Route::resource('link','LinkController');
+        //访问日志路由
+        Route::get('visit','VisitlogController@index');
     });
 });

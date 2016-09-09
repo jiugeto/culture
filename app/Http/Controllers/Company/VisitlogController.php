@@ -2,9 +2,10 @@
 namespace App\Http\Controllers\Company;
 
 use App\Models\Base\VisitlogModel;
+use App\Models\Company\ComMainModel;
 use Illuminate\Support\Facades\Request as AjaxRequest;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Cookie;
+use Redis;
 
 class VisitlogController extends BaseController
 {
@@ -12,17 +13,22 @@ class VisitlogController extends BaseController
      * 公司页面的用户访问记录日志
      */
 
-    protected $time = 1;       //设置cookie有效期1/30分钟
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     public function setVisit()
     {
         if (AjaxRequest::ajax()) {
             $data = Input::all();
+            //公司页面访问日志刷新频率
+            $comMainModel = ComMainModel::where('cid',$data['cid'])->first();
+            $visitRate = $comMainModel->visitRate;
             if ($data['cid']) {
-                $this->getCookie($data); exit;
+                $this->getRedis($data,$visitRate);
             }
         }
-//        echo json_encode(array('code'=>'-1', 'message' =>'操作有误！'));exit;
         dd('操作有误！');
     }
 
@@ -30,22 +36,59 @@ class VisitlogController extends BaseController
 
 
 
-    public function getCookie($data)
+    public function getRedis($data,$visitRate)
     {
-        if ($visit = Cookie::get('visit')) {
-            //有访问的cookie就更新下
-            if ($visit['cid']==$data['cid'] && $visit['uid']==$data['uid'] && $visit['logoutTime']+1000*$this->time<time()) {
-                $visit1 = $this->getData($data);
-                $visit1['logoutTime'] = time();
-                VisitlogModel::where('serial',$visit1['serial'])->update($visit1);
-                Cookie('visit',serialize($visit1),10);
+        $suffix = $this->getUrl($data['visit_url'],$data['cid']);
+        $key = 'visit_'.$suffix;
+        $time = time();
+        if (Redis::exists($key)) {
+            $visit = unserialize(Redis::get($key));
+            if ($visit['logoutTime']+$visitRate < time()) {
+                $visit1 = $visit;
+                $visit1['logoutTime'] = $time;
+                Redis::setex($key, 3600, serialize($visit1));       //更新缓存，有效1小时
+                //更新数据库
+                VisitlogModel::where('serial',$visit['serial'])->update(['logoutTime'=> $time]);
+                VisitlogModel::where('serial',$visit['serial'])->increment('timeCount',$visitRate);
             }
+            dd('更新成功！'); exit;
         } else {
-            //没有就创建cookie
-            $visit1 = $this->getData($data);
-            VisitlogModel::create($visit1);
-            Cookie('visit',$visit1,10);
-            dd($visit1,Cookie('visit'));
+            $visit = $this->getData($data);
+            $visit['logoutTime'] = $time;
+            Redis::setex($key, 3600, serialize($visit));       //添加缓存，有效1小时
+
+            //插入或更新数据库
+            $where = [
+                'visit_id'=> $data['uid'],
+                'action'=> $data['visit_url'],
+                'cid'=> $data['cid'],
+            ];
+            $visitModel = VisitlogModel::where($where)
+                ->where('loginTime','>',strtotime(date('Ymd',time()).'000000'))
+                ->where('logoutTime','<',strtotime(date('Ymd',time()).'235959'))
+                ->first();
+            $visitModel2 = VisitlogModel::where($where)
+                ->where('ip',$visit['ip'])
+                ->where('loginTime','>',strtotime(date('Ymd',time()).'000000'))
+                ->where('logoutTime','<',strtotime(date('Ymd',time()).'235959'))
+                ->first();
+            if ($data['uid'] && $visitModel) {
+                //假如是注册会员，并且当天有记录，则更新数据库
+                VisitlogModel::where($where)->update(['logoutTime'=> $time]);
+                VisitlogModel::where($where)->increment('timeCount',$visitRate);
+                VisitlogModel::where($where)->increment('dayCount');
+                dd('更新成功！'); exit;
+            } elseif (!$data['uid'] && $visitModel2) {
+                //假如是非注册会员同地区，并且当天有记录，则更新数据库
+                VisitlogModel::where($where)->where('ip',$visit['ip'])->update(['logoutTime'=> $time]);
+                VisitlogModel::where($where)->increment('timeCount',$visitRate);
+                VisitlogModel::where($where)->increment('dayCount');
+                dd('更新成功！'); exit;
+            } else {
+                //假如非注册会员，不在同一地区
+                VisitlogModel::create($visit);
+                dd('添加成功！'); exit;
+            }
         }
     }
 
@@ -63,5 +106,34 @@ class VisitlogController extends BaseController
             'serial'=> $serial,
             'loginTime'=> time(),
         );
+    }
+
+    public function getUrl($url,$cid)
+    {
+        $prefix = DOMAIN.'c/'.$cid;
+        if ($url==$prefix) {
+            $suffix = 1;
+        } elseif ($url==$prefix.'/about') {
+            $suffix = 2;
+        } elseif ($url==$prefix.'/news') {
+            $suffix = 3;
+        } elseif ($url==$prefix.'/product') {
+            $suffix = 4;
+        } elseif ($url==$prefix.'/part') {
+            $suffix = 5;
+        } elseif ($url==$prefix.'/video') {
+            $suffix = 6;
+        } elseif ($url==$prefix.'/firm') {
+            $suffix = 7;
+        } elseif ($url==$prefix.'/team') {
+            $suffix = 8;
+        } elseif ($url==$prefix.'/recruit') {
+            $suffix = 9;
+        } elseif ($url==$prefix.'/contact') {
+            $suffix = 10;
+        } elseif ($url==$prefix.'/parterner') {
+            $suffix = 11;
+        }
+        return isset($suffix) ? $suffix : 0;
     }
 }

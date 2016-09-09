@@ -10,7 +10,7 @@ use App\Models\LinkModel;
 class BaseController extends Controller
 {
     /**
-     * 公司后台基础控制器
+     * 公司页面基础控制器
      */
 
     protected $topmenus = array();
@@ -36,6 +36,9 @@ class BaseController extends Controller
             $this->company = unserialize(\Session::get('user.company'));
         }
         define('CID',$this->cid);
+        //公司页面访问日志刷新频率
+        $comMain = ComMainModel::where('cid',$this->cid)->first();
+        define('VISITRATE',$comMain->visitRate);
         $this->getComModules($this->cid);
         $this->topmenus = LinkModel::where('cid',$this->cid)
             ->where('type_id', 2)
