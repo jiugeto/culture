@@ -1,5 +1,7 @@
 @extends('company.admin.main')
 @section('content')
+    @include('company.admin.common.crumb')
+
     <div class="com_admin_list">
         <h3 class="center pos">
             {{ $data->company() ? $data->company()->name : '某某公司' }}的{{ $lists['func']['name'] }}{{--详情页--}}

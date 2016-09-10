@@ -30,7 +30,7 @@ class BaseController extends Controller
             $this->cid = $cid;
             $this->company = CompanyModel::find($cid);
             $this->userid = $this->company->uid;
-        }elseif (!$cid && \Session::has('user.cid')) {
+        } elseif ((!$cid || $cid) && \Session::has('user.cid')) {
             $this->userid = \Session::get('user.uid');
             $this->cid = \Session::get('user.cid');
             $this->company = unserialize(\Session::get('user.company'));

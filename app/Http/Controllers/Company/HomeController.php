@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Company;
 
 use App\Models\Company\ComFuncModel;
+use App\Models\Company\ComMainModel;
 use App\Models\GoodsModel;
 use App\Models\LinkModel;
 
@@ -31,8 +32,10 @@ class HomeController extends BaseController
             'parterners'=> $this->getParterners($company['cid'],$limit=5),
             'topmenus'=> $this->topmenus,
             'footlinks'=> $this->footlinks($company['cid'],$limit=10),
+            'layoutHomeSwitchs'=> $this->getLayoutHomeSwitchs($company['cid']),
             'prefix_url'=> $this->prefix_url,
         ];
+//        $this->getHomeSwitch($company['cid']);  //初始化公司首页开关
         return view('company.home.index', $result);
     }
 
@@ -180,5 +183,26 @@ class HomeController extends BaseController
         }
         $datas->limit = $limit;
         return $datas;
+    }
+
+    /**
+     * 获取企业首页的功能显示列表
+     */
+    public function getLayoutHomeSwitchs($cid)
+    {
+        $comMainModel = ComMainModel::where('cid',$cid)->first();
+        return unserialize($comMainModel->layoutHome);
+    }
+
+    /**
+     * 首页开关初始化
+     */
+    public function getHomeSwitch($cid)
+    {
+        $comMainModel = new ComMainModel();
+        foreach ($comMainModel['layoutHomes'] as $layoutHome) {
+            $arr[$layoutHome] = 1;
+        }
+        ComMainModel::where('cid',$cid)->update(['layoutHome'=> serialize($arr)]);
     }
 }

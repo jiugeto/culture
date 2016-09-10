@@ -49,8 +49,8 @@ Route::group(['prefix'=>'company','middleware' =>'MemberAuth','namespace'=>'Comp
         //公司信息路由
         Route::resource('info','InfoController');
             //布局路由
-        Route::get('layout/isshow/{data}','LayoutController@isshow');
-        Route::get('layout/sort/{data}','LayoutController@sort');
+        Route::get('layout/module/isshow/{id}/{isshow}','LayoutController@isshow');
+        Route::get('layout/module/sort/{id}/{sort}','LayoutController@sort');
         Route::resource('layout','LayoutController');
             //基本设置路由
         Route::post('basic/{id}','BasicController@update');

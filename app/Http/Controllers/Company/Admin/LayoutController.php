@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Company\Admin;
 
+use App\Models\Company\ComMainModel;
 use App\Models\Company\ComModuleModel;
 
 class LayoutController extends BaseController
@@ -20,13 +21,14 @@ class LayoutController extends BaseController
 
     public function index()
     {
-        $curr['name'] = $this->lists['show']['name'];
-        $curr['url'] = $this->lists['show']['url'];
+        $curr['name'] = $this->lists['']['name'];
+        $curr['url'] = $this->lists['']['url'];
         $result = [
-            'modules'=> $this->query(),
-            'homes'=> $this->getHomes(),
+            'modules'=> $this->modules(),
+            'layoutHomeSwitchs'=> $this->getLayoutHomeSwitchs(),
             'lists'=> $this->lists,
             'curr'=> $curr,
+            'curr_func'=> $this->lists['func']['url'],
         ];
         return view('company.admin.layout.index', $result);
     }
@@ -34,45 +36,38 @@ class LayoutController extends BaseController
     /**
      * 控制模块是否显示
      */
-    public function isshow($isshow)
+    public function isshow($id,$isshow)
     {
-        $isshow = explode('-',$isshow);
-        ComModuleModel::where('id',$isshow[0])->update(['isshow'=>$isshow[1]]);
-        return redirect('/company/admin/layout');
+        ComModuleModel::where('id',$id)->update(['isshow'=> $isshow]);
+        return redirect(DOMAIN.'company/admin/layout');
     }
 
     /**
      * 控制模块排序
      */
-    public function sort($sort)
+    public function sort($id,$sort)
     {
-        $sort = explode('-',$sort);
-        ComModuleModel::where('id',$sort[0])->update(['sort'=>$sort[1]]);
-        return redirect('/company/admin/layout');
+        ComModuleModel::where('id',$id)->update(['sort'=> $sort]);
+        return redirect(DOMAIN.'company/admin/layout');
     }
 
 
 
 
-    public function query()
+    public function modules()
     {
-        return ComModuleModel::where('cid',$this->cid)
-//            ->orderBy('sort','desc')
-            ->orderBy('id','desc')
+        return ComModuleModel::whereIn('cid',[0,$this->cid])
+            ->orderBy('sort','desc')
+            ->orderBy('id','asc')
             ->get();
     }
 
     /**
      * 获取企业首页的功能显示列表
      */
-    public function getHomes()
+    public function getLayoutHomeSwitchs()
     {
-        return array(
-//            'ppts'=> ,
-//            'firms'=> ,
-//            'news'=> ,
-//            'products'=> ,
-//            'parterners'=> ,
-        );
+        $comMainModel = ComMainModel::where('cid',$this->cid)->first();
+        return unserialize($comMainModel->layoutHome);
     }
 }

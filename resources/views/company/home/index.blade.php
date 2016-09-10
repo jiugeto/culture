@@ -1,5 +1,6 @@
 @extends('company.main')
 @section('content')
+    @if($layoutHomeSwitchs['pptSwitch'])
     <div class="com_ppt">
         <div class="com_ad">
             @if(count($ppts))
@@ -34,7 +35,9 @@
             }
         </script>
     </div>
+    @endif
 
+    @if($layoutHomeSwitchs['serviceSwitch'])
     <div class="fengexian">{{--分割线--}}</div>
     <div class="com_floor1">
         <p class="bigtitle">→ OUR SERVICE 服务项目 <span class="float_right"><a href="{{DOMAIN}}c/{{CID}}/firm">更多</a></span></p>
@@ -63,7 +66,9 @@
             @endif
         </div>
     </div>
+    @endif
 
+    @if($layoutHomeSwitchs['newsSwitch'])
     <div class="fengexian">{{--分割线--}}</div>
     <div class="com_floor2">
         <p class="bigtitle">→ OUR NEWS 新闻资讯 <span class="float_right"><a href="{{DOMAIN}}c/{{CID}}/about/3">更多</a></span></p>
@@ -121,7 +126,9 @@
             </div>
         </div>
     </div>
+    @endif
 
+    @if($layoutHomeSwitchs['productSwitch'])
     <div class="fengexian">{{--分割线--}}</div>
     <div class="com_floor3">
         <p class="bigtitle">→ OUR PRODUCT 公司作品 <span class="float_right"><a href="{{DOMAIN}}c/{{CID}}/product">更多</a></span></p>
@@ -158,7 +165,9 @@
             </div>
         </div>
     </div>
+    @endif
 
+    @if($layoutHomeSwitchs['parternerSwitch'])
     <div class="fengexian">{{--分割线--}}</div>
     <div class="com_floor4">
         <p class="bigtitle">→ OUR PARTERNERS 合作伙伴 <span class="float_right"><a href="{{DOMAIN}}c/{{CID}}/parterner">更多</a></span></p>
@@ -183,7 +192,9 @@
             @endif
         </div>
     </div>
+    @endif
 
+    @if($layoutHomeSwitchs['footLinkSwitch'])
     <div class="fengexian">{{--分割线--}}</div>
     <div class="com_buttom">
         <div class="foot">
@@ -199,4 +210,5 @@
             @endif
         </div>
     </div>
+    @endif
 @stop

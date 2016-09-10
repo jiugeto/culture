@@ -1,11 +1,15 @@
 @extends('company.admin.main')
 @section('content')
+    <div class="com_admin_crumb">
+        <p>首页</p>
+    </div>
+
     <div class="com_admin_home">
         <br>
         <div class="com_space">
             公司名称：某某公司 &nbsp;&nbsp;&nbsp;&nbsp;
             地址：某某地点 &nbsp;&nbsp;&nbsp;&nbsp;
-            <span style="float:right;"><a href="">详情信息</a></span>
+            {{--<span style="float:right;"><a href="">详情信息</a></span>--}}
         </div>
         <br>
         <div class="com_space">空间大小：20 %
@@ -23,7 +27,7 @@
         <div class="com_space">新闻数量：50 %
             <div class="bottom"><div class="top4"></div></div>
         </div>
-        <br>
-        <div class="com_space"><a href="">更多</a></div>
+        {{--<br>--}}
+        {{--<div class="com_space"><a href="">更多</a></div>--}}
     </div>
 @stop

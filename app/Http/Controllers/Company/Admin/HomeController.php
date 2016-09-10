@@ -9,7 +9,8 @@ class HomeController extends BaseController
 
     public function __construct()
     {
-        $this->list['func']['name'] = '企业管理首页';
+        parent::__construct();
+        $this->list['func']['name'] = '首页';
         $this->list['func']['url'] = '';
     }
 
@@ -17,6 +18,7 @@ class HomeController extends BaseController
     {
         $result = [
             'lists'=> $this->list,
+            'curr_func'=> 'home',
         ];
         return view('company.admin.home.index', $result);
     }

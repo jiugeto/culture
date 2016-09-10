@@ -25,6 +25,7 @@ class BasicController extends BaseController
             'data'=> ComMainModel::where('cid',$this->cid)->first(),
             'lists'=> $this->lists,
             'curr'=> $curr,
+            'curr_func'=> $this->lists['func']['url'],
         ];
         return view('company.admin.basic.index', $result);
     }

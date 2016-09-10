@@ -1,8 +1,6 @@
 <?php
 namespace App\Http\Controllers\Company\Admin;
 
-use App\Models\Company\ComMainModel;
-
 class InfoController extends BaseController
 {
     /**
@@ -19,8 +17,12 @@ class InfoController extends BaseController
     public function index()
     {
         $result = [
-            'datas'=> $this->query(),
+            'layout'=> $this->layout(),
+            'basic'=> $this->basic(),
+            'singles'=> $this->singles(),
+            'links'=> $this->links(),
             'lists'=> $this->lists,
+            'curr_func'=> $this->lists['func']['url'],
         ];
         return view('company.admin.info.index', $result);
     }
@@ -28,10 +30,23 @@ class InfoController extends BaseController
 
 
 
-    public function query()
+    //页面布局
+    public function layout()
     {
-        //页面布局
-        //基本设置
-        //扩展页面
+    }
+
+    //基本设置
+    public function basic()
+    {
+    }
+
+    //单页管理
+    public function singles()
+    {
+    }
+
+    //链接管理
+    public function links()
+    {
     }
 }
