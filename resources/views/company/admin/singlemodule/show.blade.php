@@ -22,22 +22,22 @@
                 <td>{{ $data->sort }}</td>
             </tr>
             <tr>
-                <td class="field_name">企业前台显示否：</td>
+                <td class="field_name">前台显示否：</td>
                 <td>{{ $data->isshow() }}</td>
             </tr>
             <tr>
                 <td class="field_name">创建时间：</td>
-                <td>{{ $data->created_at }}</td>
+                <td>{{ $data->createTime() }}</td>
             </tr>
             <tr>
                 <td class="field_name">更新时间：</td>
-                <td>{{ $data->updated_at=='0000-00-00 00:00:00' ? '未更新' : $data->updated_at }}</td>
+                <td>{{ $data->updateTime() }}</td>
             </tr>
 
             <tr><td class="center" colspan="3" style="border:0;cursor:pointer;">
                     <a href="/company/admin/intro/{{$data->id}}/edit">
-                        <button class="companybtn">修&nbsp;&nbsp;改</button></a>
-                    <a><button class="companybtn" onclick="history.go(-1)">返&nbsp;&nbsp;回</button></a>
+                        <button class="companybtn">修&nbsp; 改</button></a>
+                    <a><button class="companybtn" onclick="history.go(-1)">返&nbsp; 回</button></a>
                 </td></tr>
         </table>
     </div>

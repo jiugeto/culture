@@ -19,16 +19,18 @@ class LayoutController extends BaseController
         $this->lists['func']['url'] = 'layout';
     }
 
-    public function index()
+    public function index($m=0)
     {
         $curr['name'] = $this->lists['']['name'];
         $curr['url'] = $this->lists['']['url'];
         $result = [
             'modules'=> $this->modules(),
             'layoutHomeSwitchs'=> $this->getLayoutHomeSwitchs(),
+            'comMain'=> ComMainModel::where('cid',$this->cid)->first(),
             'lists'=> $this->lists,
             'curr'=> $curr,
             'curr_func'=> $this->lists['func']['url'],
+            'm'=> $m,   //0模块，1首页
         ];
         return view('company.admin.layout.index', $result);
     }
@@ -51,9 +53,39 @@ class LayoutController extends BaseController
         return redirect(DOMAIN.'company/admin/layout');
     }
 
+    /**
+     * 控制公司首页信息显示
+     */
+    public function layoutHomeSwitch($key,$switch)
+    {
+        $comMainModel = ComMainModel::where('cid',$this->cid)->first();
+        $layoutHome = $comMainModel->layoutHome;
+        if ($layoutHome) {
+            $arrs = unserialize($layoutHome);
+            foreach ($arrs as $karr=>$arr) {
+                if($arr['key']==$key) { $arrs[$karr]['value'] = $switch; }
+            }
+        }
+        $arrResult = (isset($arrs)&&$arrs) ? serialize($arrs) : $comMainModel->layoutHome;
+        ComMainModel::where('cid',$this->cid)->update(['layoutHome'=> $arrResult]);
+        return redirect(DOMAIN.'company/admin/layout/m/1');
+    }
+
+    /**
+     * 公司页面皮肤更换
+     */
+    public function setSkin($skin)
+    {
+        ComMainModel::where('cid',$this->cid)->update(['skin'=> $skin]);
+        return redirect(DOMAIN.'company/admin/layout/m/1');
+    }
 
 
 
+
+    /**
+     * 公司首页模块
+     */
     public function modules()
     {
         return ComModuleModel::whereIn('cid',[0,$this->cid])

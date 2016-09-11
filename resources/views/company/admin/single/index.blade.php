@@ -3,11 +3,7 @@
     @include('company.admin.common.crumb')
 
     <div class="com_admin_list">
-        <div class="search_type" style="height:20px;border:0;">
-            <a href="/company/admin/single" class="list_btn">页面列表</a>
-            <a href="/company/admin/singlemodule" class="list_btn">模块列表</a>
-            <span class="create_right"><a href="/company/admin/single/create" class="list_btn">添加页面</a></span>
-        </div>
+        @include('company.admin.single.menu')
         <table cellspacing="0">
             <tr>
                 <td>页面名称</td>
@@ -33,6 +29,6 @@
             @else @include('member.common.norecord')
             @endif
         </table>
-        <div style="margin:10px;">@include('member.common.page')</div>
+        <div style="margin:10px;">@include('company.admin.common.page')</div>
     </div>
 @stop

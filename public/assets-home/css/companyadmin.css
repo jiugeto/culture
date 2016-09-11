@@ -162,7 +162,7 @@
 .com_admin_list .search_type span.create_right a { padding:5px 20px; }
 /*列表按钮*/
 .com_admin_list a.list_btn {
-    padding:5px 20px;
+    padding:3px 15px;
     background:orangered;
     border-radius:2px;
     color:white;
@@ -255,6 +255,21 @@ select {
     color:red;
     text-decoration:underline;
 }
+.com_admin_list .tlist {
+    padding:2px;
+    width:400px; /*height:150px;*/
+    /*border:1px dashed lightgrey;*/
+    /*border-radius:3px;*/
+}
+.com_admin_list .img {
+    margin-right:2px; margin-bottom:2px;
+    width:94px; height:46px;
+    border:2px solid gainsboro;
+    background:lightgrey;
+    float:left;
+    cursor:pointer;
+}
+.com_admin_list .img:hover { border:2px solid orangered; }
 /*===== 右部分列表 =====*/
 
 

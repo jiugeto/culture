@@ -14,9 +14,9 @@ class ComFuncModel extends BaseModel
     protected $fillable = [
         'id','name','cid','module_id','type','pic_id','intro','small','sort','isshow','created_at','updated_at',
     ];
-    //功能类型：1简介，2历程，3新闻，4资讯，5服务，6团队，7招聘，8联系，单页
+    //功能类型：1简介，2历程，3新闻，4资讯，5服务，6团队，7招聘，单页
     protected $types = [
-        1=>'简介','历程','新闻','资讯','服务','团队','招聘','联系',
+        1=>'简介','历程','新闻','资讯','服务','团队','招聘',
         21=>'单页'
     ];
     protected $isshows = [
@@ -76,7 +76,7 @@ class ComFuncModel extends BaseModel
     public function singelModules($cid=null)
     {
         if (!$cid) { $cid = 0; }
-        return \App\Models\Company\ComModuleModel::where('genre',2)->where('cid',$cid)->get();
+        return ComModuleModel::where('genre','>',20)->whereIn('cid',[0,$cid])->get();
     }
 
     /**

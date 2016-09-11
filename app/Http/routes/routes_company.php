@@ -49,8 +49,11 @@ Route::group(['prefix'=>'company','middleware' =>'MemberAuth','namespace'=>'Comp
         //公司信息路由
         Route::resource('info','InfoController');
             //布局路由
-        Route::get('layout/module/isshow/{id}/{isshow}','LayoutController@isshow');
-        Route::get('layout/module/sort/{id}/{sort}','LayoutController@sort');
+        Route::get('layout/module/isshow/{id}/{isshow}','LayoutController@isshow');     //公司页面模块显示设置
+        Route::get('layout/module/sort/{id}/{sort}','LayoutController@sort');       //公司页面模块排序设置
+        Route::get('layout/h/show/{key}/{switch}','LayoutController@layoutHomeSwitch');       //公司首页信息显示开关
+        Route::get('layout/skin/{skin}','LayoutController@setSkin');       //公司页面皮肤更换
+        Route::get('layout/m/{m}','LayoutController@index');       //m代表标签选择
         Route::resource('layout','LayoutController');
             //基本设置路由
         Route::post('basic/{id}','BasicController@update');

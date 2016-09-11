@@ -2,7 +2,6 @@
 namespace App\Http\Controllers\Company\Admin;
 
 use App\Models\Company\ComModuleModel;
-//use Symfony\Component\HttpFoundation\Request;
 use Illuminate\Http\Request;
 
 class SingleModuleController extends BaseController
@@ -11,7 +10,7 @@ class SingleModuleController extends BaseController
      * 企业后台 其他页面（单页）
      */
 
-    protected $genre = 7;       //7代表新加的单页
+    protected $genre = 21;       //21代表新加的单页
 
     public function __construct()
     {
@@ -27,7 +26,9 @@ class SingleModuleController extends BaseController
         $result = [
             'datas'=> $this->query(),
             'lists'=> $this->lists,
+            'prefix_url'=> DOMAIN.'company/admin/singlemodule',
             'curr'=> $curr,
+            'curr_func'=> $this->lists['func']['url'],
         ];
         return view('company.admin.singlemodule.index', $result);
     }
@@ -39,6 +40,7 @@ class SingleModuleController extends BaseController
         $result = [
             'lists'=> $this->lists,
             'curr'=> $curr,
+            'curr_func'=> $this->lists['func']['url'],
         ];
         return view('company.admin.singlemodule.create', $result);
     }
@@ -59,6 +61,7 @@ class SingleModuleController extends BaseController
             'data'=> ComModuleModel::find($id),
             'lists'=> $this->lists,
             'curr'=> $curr,
+            'curr_func'=> $this->lists['func']['url'],
         ];
         return view('company.admin.singlemodule.edit', $result);
     }
@@ -79,6 +82,7 @@ class SingleModuleController extends BaseController
             'data'=> ComModuleModel::find($id),
             'lists'=> $this->lists,
             'curr'=> $curr,
+            'curr_func'=> $this->lists['func']['url'],
         ];
         return view('company.admin.singlemodule.show', $result);
     }
@@ -102,10 +106,12 @@ class SingleModuleController extends BaseController
 
     public function query()
     {
-        return ComModuleModel::where('genre',$this->genre)
-                        ->where('cid',$this->cid)
-                        ->orderBy('sort','desc')
-                        ->orderBy('id','desc')
-                        ->paginate($this->limit);
+        $datas = ComModuleModel::where('genre',$this->genre)
+                ->where('cid',$this->cid)
+                ->orderBy('sort','desc')
+                ->orderBy('id','desc')
+                ->paginate($this->limit);
+        $datas->limit = $this->limit;
+        return $datas;
     }
 }

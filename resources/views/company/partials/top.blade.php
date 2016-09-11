@@ -1,14 +1,14 @@
 {{-- 企业后台顶部菜单栏 --}}
 
 
-<div class="com_top">
+<div class="com_top" style="background:{{$comMain->getSkin()}};">
     <div class="com_center">
         <div class="com_logo">
-            <a href="/company/home">
+            <a href="{{DOMAIN}}company/home">
                 <div class="img">
                     @if($comMain)
                         <img src="{{ $comMain->logo }}" title="{{ $comMain->company()?$comMain->company()->name:'某某公司' }}-{{ $comMain->title }}" class="com_logo_size">
-                    @else <img src="/assets-home/images/logo.png" title="logo名称或公司名称" class="com_logo_size">
+                    @else <img src="{{PUB}}assets-home/images/logo.png" title="logo名称或公司名称" class="com_logo_size">
                     @endif
                 </div>
             </a>

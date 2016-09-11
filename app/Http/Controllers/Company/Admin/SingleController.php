@@ -1,9 +1,9 @@
 <?php
 namespace App\Http\Controllers\Company\Admin;
 
-//use App\Http\Requests\Request;
 use Illuminate\Http\Request;
 use App\Models\Company\ComFuncModel;
+use App\Models\Company\ComModuleModel;
 
 class SingleController extends BaseController
 {
@@ -11,7 +11,7 @@ class SingleController extends BaseController
      * 企业后台 其他页面（单页）
      */
 
-    protected $genre = 2;       //2代表新加的单页
+    protected $genre = 21;       //21代表新加的单页
 
     public function __construct()
     {
@@ -29,19 +29,27 @@ class SingleController extends BaseController
             'datas'=> $this->query(),
             'modules'=> $this->model->singelModules($this->cid),
             'lists'=> $this->lists,
+            'prefix_url'=> DOMAIN.'company/admin/single',
             'curr'=> $curr,
+            'curr_func'=> $this->lists['func']['url'],
         ];
         return view('company.admin.single.index', $result);
     }
 
     public function create()
     {
+        //判断有无该公司的扩展单页
+        if (!count(ComModuleModel::where('cid',$this->cid)->get())) {
+            echo "<script>alert('没有单页模，先去添加模块！');history.go(-1);</script>";exit;
+        }
         $curr['name'] = $this->lists['create']['name'];
         $curr['url'] = $this->lists['create']['url'];
         $result = [
             'modules'=> $this->model->singelModules($this->cid),
+            'model'=> $this->model,
             'lists'=> $this->lists,
             'curr'=> $curr,
+            'curr_func'=> $this->lists['func']['url'],
         ];
         return view('company.admin.single.create', $result);
     }
@@ -63,6 +71,7 @@ class SingleController extends BaseController
             'modules'=> $this->model->singelModules($this->cid),
             'lists'=> $this->lists,
             'curr'=> $curr,
+            'curr_func'=> $this->lists['func']['url'],
         ];
         return view('company.admin.single.edit', $result);
     }
@@ -84,6 +93,7 @@ class SingleController extends BaseController
             'modules'=> $this->model->singelModules($this->cid),
             'lists'=> $this->lists,
             'curr'=> $curr,
+            'curr_func'=> $this->lists['func']['url'],
         ];
         return view('company.admin.single.show', $result);
     }
@@ -108,10 +118,13 @@ class SingleController extends BaseController
 
     public function query()
     {
-        return ComFuncModel::where('genre',$this->genre)
-                        ->where('cid',$this->cid)
-                        ->orderBy('sort','desc')
-                        ->orderBy('id','desc')
-                        ->paginate($this->limit);
+        $datas = ComFuncModel::where('cid',$this->cid)
+            //type>20，为其他单页
+            ->where('type','>',20)
+            ->orderBy('sort','desc')
+            ->orderBy('id','desc')
+            ->paginate($this->limit);
+        $datas->limit = $this->limit;
+        return $datas;
     }
 }

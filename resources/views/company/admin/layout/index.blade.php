@@ -5,10 +5,10 @@
     <div class="com_admin_list" style="height:870px;overflow:auto;">
         {{--<h3 class="center pos">{{ $lists['func']['name'] }}</h3>--}}
         <div class="menu">
-            <a class="list_btn curr" id="amodule"><b>模块</b></a>
-            <a class="list_btn" id="ahome"><b>首页</b></a>
+            <a class="list_btn {{$m==0?'curr':''}}" href="{{DOMAIN}}company/admin/layout" id="amodule"><b>模块</b></a>
+            <a class="list_btn {{$m==1?'curr':''}}" href="{{DOMAIN}}company/admin/layout/m/1" id="ahome"><b>首页</b></a>
         </div>
-        <table class="table_create" cellspacing="0" cellpadding="0" id="tmodule">
+        <table class="table_create" cellspacing="0" cellpadding="0" id="tmodule" style="display:{{$m==0?'block':'none'}};">
             <tr>
                 <td class="field_name" style="text-align:center;" colspan="3">
                     <b>模块设置</b>
@@ -27,7 +27,7 @@
                             <td><label><input type="radio" class="radio_pos" name="module_isshow_{{$module->id}}" value="1" {{ $module->isshow==1 ? 'checked' : '' }}> 显示&nbsp;&nbsp;</label><br></td>
                             @if($module->cid)
                                 <td><label><input type="radio" class="radio_pos" name="module_isshow_{{$module->id}}" value="0" {{ $module->isshow==0 ? 'checked' : '' }}> 不显示&nbsp;&nbsp;</label></td>
-                                <td><button class="companybtn sure" onclick="module_sure({{$module->id}})" id="sure_{{$module->id}}">确定更新</button>
+                                <td><button class="companybtn sure" onclick="module_sure({{$module->id}})">确定更新</button>
                                     <input type="hidden" name="m_isshow_{{$module->id}}" value="{{ $module->isshow }}">
                                 </td>
                             @else
@@ -62,7 +62,7 @@
             </tr>
         </table>
 
-        <table class="table_create" cellspacing="0" cellpadding="0" id="thome" style="display:none;">
+        <table class="table_create" cellspacing="0" cellpadding="0" id="thome" style="display:{{$m==1?'block':'none'}};">
             <tr>
                 <td class="field_name" style="text-align:center;" colspan="3">
                     <b>首页设置</b>
@@ -71,12 +71,35 @@
             </tr>
             <tr>
                 <td class="field_name">显示控制：</td>
-                <td></td>
+                <td>
+                    <table class="radio">
+                        @foreach($layoutHomeSwitchs as $k=>$switch)
+                    <tr>
+                        <td class="first"><b>{{ $switch['name'] }}</b></td>
+                        <td><label><input type="radio" class="radio_pos" name="{{ $k }}" value="1" {{ $switch['value']==1 ? 'checked' : '' }} onclick="getLayoutHomeShow({{$switch['key']}})"> 显示&nbsp;&nbsp;</label><br></td>
+                        <td><label><input type="radio" class="radio_pos" name="{{ $k }}" value="0" {{ $switch['value']==0 ? 'checked' : '' }} onclick="getLayoutHomeHide({{$switch['key']}})"> 不显示&nbsp;&nbsp;</label></td>
+                        <td><button class="companybtn sure" onclick="setLayoutHomeShow({{$switch['key']}})">确定更新</button>
+                            <input type="hidden" name="layoutSwitch_{{$switch['key']}}">
+                        </td>
+                    </tr>
+                        @endforeach
+                    </table>
+                </td>
             </tr>
-            {{--<tr>--}}
-                {{--<td class="field_name">顺序控制：</td>--}}
-                {{--<td></td>--}}
-            {{--</tr>--}}
+            <tr>
+                <td class="field_name">皮肤颜色：
+                    <p style="color:darkgrey;font-size:14px;">当前选择：{{ $comMain->getSkinName() }}</p>
+                    <div class="img" style="background:{{$comMain['skin s'][$comMain->skin]}};border:0;float:right;"></div>
+                </td>
+                <td>
+                    <div class="tlist">
+                        @foreach($comMain['skins'] as $kskin=>$skin)
+                        <div class="img" title="选择这个{{$comMain['skinNames'][$kskin]}}" style="background:{{$skin}};" onclick="setSkin({{$kskin}})"></div>
+                        @endforeach
+                    </div>
+                    <input type="hidden" name="skin">
+                </td>
+            </tr>
         </table>
     </div>
 
@@ -114,6 +137,17 @@
             var m_sort = $("input[name='m_sort_"+id+"']").val();
             if (module_sort==m_sort) { alert('排序值没有变化！'); return; }
             window.location.href = '{{DOMAIN}}company/admin/layout/module/sort/'+id+'/'+module_sort;
+        }
+        //首页的显示控制
+        function getLayoutHomeShow(key){ $("input[name='layoutSwitch_"+key+"']")[0].value = 1; }
+        function getLayoutHomeHide(key){ $("input[name='layoutSwitch_"+key+"']")[0].value = 0; }
+        function setLayoutHomeShow(key){
+            var layoutSwitch = $("input[name='layoutSwitch_"+key+"']").val();
+            window.location.href = '{{DOMAIN}}company/admin/layout/h/show/'+key+'/'+layoutSwitch;
+        }
+        //皮肤控制
+        function setSkin(skin){
+            window.location.href = '{{DOMAIN}}company/admin/layout/skin/'+skin;
         }
     </script>
 @stop

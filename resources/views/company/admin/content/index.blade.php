@@ -1,12 +1,14 @@
 @extends('company.admin.main')
 @section('content')
+    @include('company.admin.common.crumb')
+
     <div class="com_admin_list">
         <table cellspacing="0">
             <tr>
                 <td>序号</td>
                 <td>功能名称</td>
                 <td>排序</td>
-                <td>在前台公司页面显示否</td>
+                <td>前台是否显示</td>
                 <td>创建时间</td>
                 {{--<td>操作</td>--}}
             </tr>
@@ -18,7 +20,7 @@
                 <td>{{ $data['name'] ? $data['name'] : '企业默认信息' }}</td>
                 <td>{{ $data['sort'] }}</td>
                 <td>{{ $data['isshow'] ? '显示' : '不显示' }}</td>
-                <td>{{ $data['created_at'] }}</td>
+                <td>{{ date('Y年m月d日 H:i',$data['created_at']) }}</td>
                 <td>
                     {{--<a href="/company/admin/content/{{ $data['id'] }}" class="list_btn">查看</a>--}}
                     {{--<a href="/company/admin/content/{{ $data['id'] }}/edit" class="list_btn">编辑</a>--}}

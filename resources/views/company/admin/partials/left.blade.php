@@ -20,7 +20,8 @@
             @if($companyMenu->child)
                 @foreach($companyMenu->child as $subMenu)
                     <a href="{{DOMAIN.$subMenu->platUrl}}/{{$subMenu->url}}">
-                        <div class="level2 menu {{$curr_func==$subMenu->url?'curr':''}}">﹂{{ $subMenu->name }}</div>
+                        <div class="level2 menu {{($curr_func==$subMenu->url||$curr_func==$subMenu->url.'module')?'curr':''}}">
+                            ﹂{{ $subMenu->name }}</div>
                     </a>
                 @endforeach
             @endif

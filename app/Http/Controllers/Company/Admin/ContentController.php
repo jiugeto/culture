@@ -20,9 +20,14 @@ class ContentController extends BaseController
 
     public function index()
     {
+        $curr['name'] = $this->lists['']['name'];
+        $curr['url'] = $this->lists['']['url'];
         $result = [
             'datas'=> $this->query(),
             'lists'=> $this->lists,
+            'prefix_url'=> DOMAIN.'company/admin/content',
+            'curr'=> $curr,
+            'curr_func'=> $this->lists['func']['url'],
         ];
         return view('company.admin.content.index', $result);
     }

@@ -101,7 +101,7 @@ CREATE TABLE `ba_log` (
   `loginTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '登陆时间',
   `logoutTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '退出时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='管理员日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='管理员日志表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -110,7 +110,7 @@ CREATE TABLE `ba_log` (
 
 LOCK TABLES `ba_log` WRITE;
 /*!40000 ALTER TABLE `ba_log` DISABLE KEYS */;
-INSERT INTO `ba_log` VALUES (1,1,'jiuge',1,'20160908075940137','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473292780,0),(2,1,'jiuge',1,'201609100906318268','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473469591,0),(3,1,'jiuge',1,'201609101339029262','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473485942,0);
+INSERT INTO `ba_log` VALUES (1,1,'jiuge',1,'20160908075940137','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473292780,0),(2,1,'jiuge',1,'201609100906318268','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473469591,0),(3,1,'jiuge',1,'201609101339029262','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473485942,0),(4,1,'jiuge',1,'201609110851236265','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473555083,0);
 /*!40000 ALTER TABLE `ba_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1877,7 +1877,7 @@ CREATE TABLE `bs_visitlog` (
   `loginTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '第一次登陆时间',
   `logoutTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '最后退出时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='用户访问公司页面的日志表 bs_visitlog（bs_user_company_visit_log）';
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='用户访问公司页面的日志表 bs_visitlog（bs_user_company_visit_log）';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1886,7 +1886,7 @@ CREATE TABLE `bs_visitlog` (
 
 LOCK TABLES `bs_visitlog` WRITE;
 /*!40000 ALTER TABLE `bs_visitlog` DISABLE KEYS */;
-INSERT INTO `bs_visitlog` VALUES (1,1,0,'/c/1','192.168.2.100','浙江省 杭州市 滨江区','201609091654354360',1,0,1473411275,1473421673),(2,1,0,'/c/1','192.168.2.100','浙江省 杭州市 滨江区','201609091657167135',1,0,1473411436,1473421673),(3,1,0,'/c/1','192.168.2.100','浙江省 杭州市 滨江区','201609091704382313',1,0,1473411878,1473421673),(4,1,0,'/c/1/product','192.168.2.100','浙江省 杭州市 滨江区','201609091811281741',2,0,1473415888,1473421938),(5,1,0,'/c/1/part','192.168.2.100','浙江省 杭州市 滨江区','201609091828036412',1,0,1473416883,1473421257),(6,1,0,'/c/1/firm','192.168.2.100','浙江省 杭州市 滨江区','201609091941128083',1,0,1473421272,1473421643),(7,1,0,'/c/1/about','192.168.2.100','浙江省 杭州市 滨江区','20160909195506769',1,0,1473422106,1473422106),(8,1,0,'/c/1/recruit','192.168.2.100','浙江省 杭州市 滨江区','201609091955137876',1,5,1473422113,1473422519),(9,1,0,'/c/1/contact','192.168.2.100','浙江省 杭州市 滨江区','201609091955217864',1,705,1473422121,1473423617),(10,1,1,'/c/1','192.168.2.100','浙江省 杭州市 滨江区','201609101833306148',2,3015,1473503610,1473511573);
+INSERT INTO `bs_visitlog` VALUES (1,1,0,'/c/1','192.168.2.100','浙江省 杭州市 滨江区','201609091654354360',1,0,1473411275,1473421673),(2,1,0,'/c/1','192.168.2.100','浙江省 杭州市 滨江区','201609091657167135',1,0,1473411436,1473421673),(3,1,0,'/c/1','192.168.2.100','浙江省 杭州市 滨江区','201609091704382313',1,0,1473411878,1473421673),(4,1,0,'/c/1/product','192.168.2.100','浙江省 杭州市 滨江区','201609091811281741',2,0,1473415888,1473421938),(5,1,0,'/c/1/part','192.168.2.100','浙江省 杭州市 滨江区','201609091828036412',1,0,1473416883,1473421257),(6,1,0,'/c/1/firm','192.168.2.100','浙江省 杭州市 滨江区','201609091941128083',1,0,1473421272,1473421643),(7,1,0,'/c/1/about','192.168.2.100','浙江省 杭州市 滨江区','20160909195506769',1,0,1473422106,1473422106),(8,1,0,'/c/1/recruit','192.168.2.100','浙江省 杭州市 滨江区','201609091955137876',1,5,1473422113,1473422519),(9,1,0,'/c/1/contact','192.168.2.100','浙江省 杭州市 滨江区','201609091955217864',1,705,1473422121,1473423617),(10,1,1,'/c/1','192.168.2.100','浙江省 杭州市 滨江区','201609101833306148',3,3020,1473503610,1473571791),(11,1,1,'/c/1','192.168.2.100','浙江省 杭州市 滨江区','201609110915338538',2,655,1473556533,1473571791),(12,1,1,'/c/1/about','192.168.2.100','浙江省 杭州市 滨江区','201609111809022085',1,395,1473588542,1473589037);
 /*!40000 ALTER TABLE `bs_visitlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1970,14 +1970,15 @@ CREATE TABLE `com_main` (
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '公司所在用户id',
   `cid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '公司id',
   `name` varchar(100) NOT NULL COMMENT '公司名称',
-  `title` varchar(255) NOT NULL COMMENT '鼠标移动显示',
+  `title` varchar(100) NOT NULL COMMENT '鼠标移动显示',
   `keyword` varchar(255) NOT NULL COMMENT '关键字',
   `description` varchar(255) NOT NULL COMMENT '描述',
   `logo` varchar(255) NOT NULL COMMENT '公司logo',
-  `layoutHome` varchar(500) NOT NULL COMMENT '公司页面布局开关，0关闭，1开启：serviceSwitch服务开关，newsSwitch新闻开关，productSwitch产品开关，parternerSwitch合作伙伴，introSwitch公司简介，partSwitch花絮开关，teamSwitch团队开关，recruitSwitch招聘开关，contactSwicth类型开关，',
+  `layoutHome` varchar(2000) NOT NULL COMMENT '公司页面布局开关，0关闭，1开启：serviceSwitch服务开关，newsSwitch新闻开关，productSwitch产品开关，parternerSwitch合作伙伴，introSwitch公司简介，partSwitch花絮开关，teamSwitch团队开关，recruitSwitch招聘开关，contactSwicth类型开关，footLinkSwitch底部链接，',
+  `skin` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '公司页面皮肤颜色值选择',
   `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序字段，值越大越靠前，默认10',
-  `istop` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '是否置顶：0不置定，1置顶',
-  `isshow` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '系统后台控制是否显示：0不显示，1显示',
+  `istop` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否置顶：0不置定，1置顶',
+  `isshow` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '系统后台控制是否显示：0不显示，1显示',
   `visitRate` tinyint(3) unsigned NOT NULL DEFAULT '20' COMMENT '用户对公司页面访问刷新频率，单位秒，值越大频率越小',
   `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updated_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
@@ -1991,7 +1992,7 @@ CREATE TABLE `com_main` (
 
 LOCK TABLES `com_main` WRITE;
 /*!40000 ALTER TABLE `com_main` DISABLE KEYS */;
-INSERT INTO `com_main` VALUES (1,0,0,'某某公司','某某公司','某某关键字','某某描述','/assets/images/icon.png','',10,0,1,5,20160427,20160427),(2,1,1,'这是广告公司','某某公司','某某关键字','某某描述\r\n4444444','/uploads/images/2016-05-06/572c4f5fdf276.png','a:11:{s:13:\"serviceSwitch\";i:1;s:10:\"newsSwitch\";i:1;s:13:\"productSwitch\";i:1;s:15:\"parternerSwitch\";i:1;s:11:\"introSwitch\";i:1;s:10:\"partSwitch\";i:1;s:10:\"teamSwitch\";i:1;s:13:\"recruitSwitch\";i:1;s:13:\"contactSwicth\";i:1;s:9:\"pptSwitch\";i:1;s:14:\"footLinkSwitch\";i:1;}',10,0,1,5,20160506,20160506);
+INSERT INTO `com_main` VALUES (1,0,0,'某某公司','某某公司','某某关键字','某某描述','/assets/images/icon.png','',1,10,0,1,5,20160427,20160427),(2,1,1,'这是广告公司','某某公司','某某关键字','某某描述\r\n4444444','/uploads/images/2016-05-06/572c4f5fdf276.png','a:11:{s:13:\"serviceSwitch\";a:3:{s:3:\"key\";i:1;s:4:\"name\";s:12:\"服务开关\";s:5:\"value\";s:1:\"1\";}s:10:\"newsSwitch\";a:3:{s:3:\"key\";i:2;s:4:\"name\";s:12:\"新闻开关\";s:5:\"value\";i:1;}s:13:\"productSwitch\";a:3:{s:3:\"key\";i:3;s:4:\"name\";s:12:\"产品开关\";s:5:\"value\";i:1;}s:15:\"parternerSwitch\";a:3:{s:3:\"key\";i:4;s:4:\"name\";s:12:\"合作伙伴\";s:5:\"value\";i:1;}s:11:\"introSwitch\";a:3:{s:3:\"key\";i:5;s:4:\"name\";s:12:\"公司简介\";s:5:\"value\";i:1;}s:10:\"partSwitch\";a:3:{s:3:\"key\";i:6;s:4:\"name\";s:12:\"花絮开关\";s:5:\"value\";i:1;}s:10:\"teamSwitch\";a:3:{s:3:\"key\";i:7;s:4:\"name\";s:12:\"团队开关\";s:5:\"value\";i:1;}s:13:\"recruitSwitch\";a:3:{s:3:\"key\";i:8;s:4:\"name\";s:12:\"招聘开关\";s:5:\"value\";i:1;}s:13:\"contactSwicth\";a:3:{s:3:\"key\";i:9;s:4:\"name\";s:12:\"联系开关\";s:5:\"value\";i:1;}s:9:\"pptSwitch\";a:3:{s:3:\"key\";i:10;s:4:\"name\";s:12:\"宣传开关\";s:5:\"value\";i:1;}s:14:\"footLinkSwitch\";a:3:{s:3:\"key\";i:11;s:4:\"name\";s:12:\"底部链接\";s:5:\"value\";i:1;}}',8,10,0,1,5,20160506,20160506);
 /*!40000 ALTER TABLE `com_main` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2006,7 +2007,7 @@ CREATE TABLE `com_modules` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL COMMENT '模块名称',
   `cid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '公司id',
-  `genre` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '功能类型：1公司信息，2服务，3团队，4招聘，',
+  `genre` tinyint(2) unsigned NOT NULL DEFAULT '1' COMMENT '功能类型：1公司信息，2服务，3团队，4招聘，',
   `intro` varchar(2000) NOT NULL COMMENT '介绍',
   `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '用户企业排序，值越大越靠前，默认10',
   `isshow` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '用户的公司后台控制是否显示：0不显示，1显示',
@@ -2022,7 +2023,7 @@ CREATE TABLE `com_modules` (
 
 LOCK TABLES `com_modules` WRITE;
 /*!40000 ALTER TABLE `com_modules` DISABLE KEYS */;
-INSERT INTO `com_modules` VALUES (1,'公司信息',0,1,'<p>公司简介、公司历史、公司新闻、行业资讯</p>',10,1,1472473358,0),(2,'服务',0,2,'<p>公司的服务项目</p>',10,1,1472473462,0),(3,'团队',0,3,'<p>公司成员</p>',10,1,1472473539,0),(4,'招聘',0,4,'<p>公司所需人员</p>',10,1,1472473584,0),(5,'合作伙伴',0,5,'<p>合作方名称、介绍、链接、形象图</p>',10,1,1472473618,0),(6,'备用单页',1,6,'<p>公司自定义添加的单页</p>',10,0,1472473699,0);
+INSERT INTO `com_modules` VALUES (1,'公司信息',0,1,'<p>公司简介、公司历史、公司新闻、行业资讯</p>',10,1,1472473358,0),(2,'服务',0,2,'<p>公司的服务项目</p>',10,1,1472473462,0),(3,'团队',0,3,'<p>公司成员</p>',10,1,1472473539,0),(4,'招聘',0,4,'<p>公司所需人员</p>',10,1,1472473584,0),(5,'合作伙伴',0,5,'<p>合作方名称、介绍、链接、形象图</p>',10,1,1472473618,0),(6,'备用单页',0,6,'<p>公司自定义添加的单页</p>',10,0,1472473699,0);
 /*!40000 ALTER TABLE `com_modules` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2133,7 +2134,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'jiuge','$2y$10$b8.ce.ma17MKiuN8iiJMO.QM5fdJ1Zwl7rpMNahjPGfNOKGoC/Kyy','123456','jiuge@qq.com','946493655',63929131,4294967295,20,'滨江区 浦沿街道 联庄一区 几号 几楼',2,1,1,4,0,15,1470795559,1471420755,1473485942),(2,'jiuge2','$2y$10$X5BdoH0p0n.E3hxCVag/neinTfiHXbMrCHUEEqf8ZpUQGaeOxUUBe','','946493655@qq.com','',0,0,30,'',0,0,0,0,0,10,1470795559,0,0);
+INSERT INTO `users` VALUES (1,'jiuge','$2y$10$b8.ce.ma17MKiuN8iiJMO.QM5fdJ1Zwl7rpMNahjPGfNOKGoC/Kyy','123456','jiuge@qq.com','946493655',63929131,4294967295,20,'滨江区 浦沿街道 联庄一区 几号 几楼',2,1,1,4,0,15,1470795559,1471420755,1473555083),(2,'jiuge2','$2y$10$X5BdoH0p0n.E3hxCVag/neinTfiHXbMrCHUEEqf8ZpUQGaeOxUUBe','','946493655@qq.com','',0,0,30,'',0,0,0,0,0,10,1470795559,0,0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2206,4 +2207,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-10 21:59:29
+-- Dump completed on 2016-09-11 21:34:31

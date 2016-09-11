@@ -26,7 +26,9 @@ class LinkController extends BaseController
         $result = [
             'datas'=> $this->query(),
             'lists'=> $this->lists,
+            'prefix_url'=> DOMAIN.'company/admin/link',
             'curr'=> $curr,
+            'curr_func'=> $this->lists['func']['url'],
         ];
         return view('company.admin.link.index', $result);
     }
@@ -40,6 +42,7 @@ class LinkController extends BaseController
             'types'=> $this->model['types'],
             'lists'=> $this->lists,
             'curr'=> $curr,
+            'curr_func'=> $this->lists['func']['url'],
         ];
         return view('company.admin.link.create', $result);
     }
@@ -62,6 +65,7 @@ class LinkController extends BaseController
             'types'=> $this->model['types'],
             'lists'=> $this->lists,
             'curr'=> $curr,
+            'curr_func'=> $this->lists['func']['url'],
         ];
         return view('company.admin.link.edit', $result);
     }
@@ -84,6 +88,7 @@ class LinkController extends BaseController
             'types'=> $this->model['types'],
             'lists'=> $this->lists,
             'curr'=> $curr,
+            'curr_func'=> $this->lists['func']['url'],
         ];
         return view('company.admin.link.show', $result);
     }
@@ -109,10 +114,12 @@ class LinkController extends BaseController
 
     public function query()
     {
-        return LinkModel::where('cid',$this->cid)
-                    ->where('type_id', 2)
-                    ->orderBy('sort','desc')
-                    ->orderBy('id','desc')
-                    ->paginate($this->limit);
+        $datas = LinkModel::where('cid',$this->cid)
+                ->where('type_id', 2)
+                ->orderBy('sort','desc')
+                ->orderBy('id','desc')
+                ->paginate($this->limit);
+        $datas->limit = $this->limit;
+        return $datas;
     }
 }

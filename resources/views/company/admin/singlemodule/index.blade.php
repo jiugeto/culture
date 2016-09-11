@@ -3,16 +3,12 @@
     @include('company.admin.common.crumb')
 
     <div class="com_admin_list">
-        <div class="search_type" style="height:20px;border:0;">
-            <a href="/company/admin/single" class="list_btn">页面列表</a>
-            <a href="/company/admin/singlemodule" class="list_btn">模块列表</a>
-            <span class="create_right"><a href="/company/admin/singlemodule/create" class="list_btn">添加模块</a></span>
-        </div>
+        @include('company.admin.single.menu')
         <table cellspacing="0">
             <tr>
                 <td>模块名称</td>
                 <td>排序</td>
-                <td>在公司页面显示否</td>
+                <td>显示否</td>
                 <td>创建时间</td>
                 <td>操作</td>
             </tr>
@@ -23,16 +19,16 @@
                         <td>{{ $data->name }}</td>
                         <td>{{ $data->sort }}</td>
                         <td>{{ $data->isshow() }}</td>
-                        <td>{{ $data->created_at }}</td>
+                        <td>{{ $data->createTime() }}</td>
                         <td>
-                            <a href="/company/admin/singlemodule/{{ $data->id }}" class="list_btn">查看</a>
-                            <a href="/company/admin/singlemodule/{{ $data->id }}/edit" class="list_btn">编辑</a>
+                            <a href="{{DOMAIN}}company/admin/singlemodule/{{ $data->id }}" class="list_btn">查看</a>
+                            <a href="{{DOMAIN}}company/admin/singlemodule/{{ $data->id }}/edit" class="list_btn">编辑</a>
                         </td>
                     </tr>
                 @endforeach
             @else @include('member.common.norecord')
             @endif
         </table>
-        <div style="margin:10px;">@include('member.common.page')</div>
+        <div style="margin:10px;">@include('company.admin.common.page')</div>
     </div>
 @stop

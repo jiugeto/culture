@@ -22,6 +22,7 @@ class HomeController extends BaseController
     public function index($cid=0)
     {
         $company = $this->company($cid,$this->list['func']['url']);
+//        dd($this->getLayoutHomeSwitchs($company['cid']));
         $result = [
             'ppts'=> $this->getPpts($company['uid'],$limit=10),
             'comMain'=> $this->getComMain($company['cid']),
@@ -33,6 +34,7 @@ class HomeController extends BaseController
             'topmenus'=> $this->topmenus,
             'footlinks'=> $this->footlinks($company['cid'],$limit=10),
             'layoutHomeSwitchs'=> $this->getLayoutHomeSwitchs($company['cid']),
+            'layoutSkin'=> $this->getLayoutSkin($company['cid']),
             'prefix_url'=> $this->prefix_url,
         ];
 //        $this->getHomeSwitch($company['cid']);  //初始化公司首页开关
@@ -195,13 +197,27 @@ class HomeController extends BaseController
     }
 
     /**
+     * 获取企业页面皮肤颜色
+     */
+    public function getLayoutSkin($cid)
+    {
+        $comMainModel = ComMainModel::where('cid',$cid)->first();
+        return array(
+            'skin'=> $comMainModel->getSkin(),
+            'name'=> $comMainModel->getSkinName(),
+        );
+    }
+
+    /**
      * 首页开关初始化
      */
     public function getHomeSwitch($cid)
     {
         $comMainModel = new ComMainModel();
-        foreach ($comMainModel['layoutHomes'] as $layoutHome) {
-            $arr[$layoutHome] = 1;
+        foreach ($comMainModel['layoutHomes'] as $k=>$layoutHome) {
+            $arr[$layoutHome]['key'] = $k;
+            $arr[$layoutHome]['name'] = $comMainModel['layoutHomeNames'][$k];
+            $arr[$layoutHome]['value'] = 1;
         }
         ComMainModel::where('cid',$cid)->update(['layoutHome'=> serialize($arr)]);
     }
