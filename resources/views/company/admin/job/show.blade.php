@@ -9,12 +9,6 @@
                 <td class="field_name">工作：</td>
                 <td>{{ $data->name }}</td>
             </tr>
-            @if($data->pic_id)
-            <tr>
-                <td class="field_name">图片：</td>
-                <td><img src="{{ $data->pic_id ? $data->pic()->url : '无' }}"></td>
-            </tr>
-            @endif
             <tr>
                 <td class="field_name">要求：</td>
                 <td><div class="admin_show_con">{!! $data->intro !!}</div></td>
@@ -33,11 +27,11 @@
             </tr>
             <tr>
                 <td class="field_name">创建时间：</td>
-                <td>{{ $data->created_at }}</td>
+                <td>{{ $data->createTime() }}</td>
             </tr>
             <tr>
                 <td class="field_name">更新时间：</td>
-                <td>{{ $data->updated_at=='0000-00-00 00:00:00' ? '未更新' : $data->updated_at }}</td>
+                <td>{{ $data->updateTime() }}</td>
             </tr>
 
             <tr><td class="center" colspan="3" style="border:0;cursor:pointer;">

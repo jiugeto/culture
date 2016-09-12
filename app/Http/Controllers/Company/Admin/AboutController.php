@@ -19,14 +19,16 @@ class AboutController extends BaseFuncController
         $this->module = $this->getModuleId($genre=1);
     }
 
-    public function index()
+    public function index($type=0)
     {
         $curr['name'] = $this->lists['']['name'];
         $curr['url'] = $this->lists['']['url'];
         $result = [
-            'datas'=> $this->query($this->module),
+            'datas'=> $this->query($this->module,$type),
             'lists'=> $this->lists,
             'curr'=> $curr,
+            'curr_func'=> $this->lists['func']['url'],
+            'type'=> $type,
         ];
         return view('company.admin.about.index', $result);
     }
@@ -39,6 +41,7 @@ class AboutController extends BaseFuncController
             'model'=> $this->model,
             'lists'=> $this->lists,
             'curr'=> $curr,
+            'curr_func'=> $this->lists['func']['url'],
         ];
         return view('company.admin.about.create', $result);
     }
@@ -54,7 +57,7 @@ class AboutController extends BaseFuncController
             if ($aboutModel) { echo "<script>alert('已有公司简介或公司历程！');history.go(-1);</script>";exit; }
         }
         $data = $this->getData($request,$this->module);
-        $data['created_at'] = date('Y-m-d H:i:s', time());
+        $data['created_at'] = time();
         ComFuncModel::create($data);
         return redirect('/company/admin/about');
     }
@@ -68,6 +71,7 @@ class AboutController extends BaseFuncController
             'model'=> $this->model,
             'lists'=> $this->lists,
             'curr'=> $curr,
+            'curr_func'=> $this->lists['func']['url'],
         ];
         return view('company.admin.about.edit', $result);
     }
@@ -75,7 +79,7 @@ class AboutController extends BaseFuncController
     public function update(Request $request,$id)
     {
         $data = $this->getData($request,$this->module);
-        $data['updated_at'] = date('Y-m-d H:i:s', time());
+        $data['updated_at'] = time();
         ComFuncModel::where('id',$id)->update($data);
         return redirect('/company/admin/about');
     }
@@ -89,6 +93,7 @@ class AboutController extends BaseFuncController
             'model'=> $this->model,
             'lists'=> $this->lists,
             'curr'=> $curr,
+            'curr_func'=> $this->lists['func']['url'],
         ];
         return view('company.admin.about.show', $result);
     }

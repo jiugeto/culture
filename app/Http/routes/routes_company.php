@@ -66,8 +66,9 @@ Route::group(['prefix'=>'company','middleware' =>'MemberAuth','namespace'=>'Comp
         Route::resource('singlemodule','SingleModuleController');
         //公司内容设置路由
         Route::resource('content','ContentController');
-            //关于公司路由
+            //关于公司路由：公司简介、公司历程、公司新闻、行业资讯、
         Route::post('about/{id}','AboutController@update');
+        Route::get('about/t/{type}','AboutController@index');
         Route::resource('about','AboutController');
             //产品路由
         Route::get('product/trash','ProductController@trash');
@@ -75,6 +76,7 @@ Route::group(['prefix'=>'company','middleware' =>'MemberAuth','namespace'=>'Comp
         Route::get('product/{id}/restore','ProductController@restore');
         Route::get('product/{id}/forceDelete','ProductController@forceDelete');
         Route::post('product/{id}','ProductController@update');
+        Route::get('product/cate/{cate}','ProductController@index');
         Route::resource('product','ProductController');
             //团队路由
         Route::post('team/{id}','TeamController@update');
@@ -83,11 +85,10 @@ Route::group(['prefix'=>'company','middleware' =>'MemberAuth','namespace'=>'Comp
         Route::post('job/{id}','JobController@update');
         Route::resource('job','JobController');
             //联系路由
+        Route::get('contact/map','ContactController@map');      //地图路由
+        Route::get('contact/map/{x}/{y}','ContactController@map');
         Route::post('contact/{id}','ContactController@update');
         Route::resource('contact','ContactController');
-            //地图路由
-        Route::get('contact/map','ContactController@map');
-        Route::get('contact/map/{x}/{y}','ContactController@map');
             //服务路由
         Route::post('firms/{id}','FirmController@update');
         Route::resource('firms','FirmController');

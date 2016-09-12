@@ -1,55 +1,117 @@
 @extends('company.admin.main')
 @section('content')
-    @include('company.admin.common.crumb')
+    <div class="com_admin_crumb">
+        <p>首页 / 内容设置</p>
+    </div>
 
-    <div class="com_admin_list">
+    <div class="com_admin_list" style="height:960px;">
         <table cellspacing="0">
             <tr>
-                <td>序号</td>
-                <td>功能名称</td>
-                <td>排序</td>
-                <td>前台是否显示</td>
-                <td>创建时间</td>
-                {{--<td>操作</td>--}}
+                <td>页面</td>
+                <td>数量</td>
+                <td>子页面</td>
+                <td>操作</td>
             </tr>
             <tr><td colspan="10"></td></tr>
-            @if($datas->items)
-                @foreach($datas->items as $data)
             <tr>
-                <td>{{ $data['id'] }}</td>
-                <td>{{ $data['name'] ? $data['name'] : '企业默认信息' }}</td>
-                <td>{{ $data['sort'] }}</td>
-                <td>{{ $data['isshow'] ? '显示' : '不显示' }}</td>
-                <td>{{ date('Y年m月d日 H:i',$data['created_at']) }}</td>
+                <td>关于公司</td>
+                <td>{{ count($data->abouts) }}</td>
+                <td width="300">简介，历程，新闻，资讯</td>
                 <td>
-                    {{--<a href="/company/admin/content/{{ $data['id'] }}" class="list_btn">查看</a>--}}
-                    {{--<a href="/company/admin/content/{{ $data['id'] }}/edit" class="list_btn">编辑</a>--}}
+                    <a href="{{DOMAIN}}company/admin/about" class="list_btn">查看</a>
                 </td>
             </tr>
-                @endforeach
-            @endif
+            <tr>
+                <td>产品编辑</td>
+                <td>{{ count($data->products) }}</td>
+                <td>样片</td>
+                <td>
+                    <a href="{{DOMAIN}}company/admin/product" class="list_btn">查看</a>
+                </td>
+            </tr>
+            <tr>
+                <td>团队编辑</td>
+                <td>{{ count($data->teams) }}</td>
+                <td>人员</td>
+                <td>
+                    <a href="{{DOMAIN}}company/admin/team" class="list_btn">查看</a>
+                </td>
+            </tr>
+            <tr>
+                <td>招聘编辑</td>
+                <td>{{ count($data->jobs) }}</td>
+                <td>人才</td>
+                <td>
+                    <a href="{{DOMAIN}}company/admin/job" class="list_btn">查看</a>
+                </td>
+            </tr>
+            <tr>
+                <td>联系编辑</td>
+                <td>{{ $data->contact }} / {{ count($data->contactFields) }}</td>
+                <td>@foreach($data->contactFieldNames as $contactFieldName){{ $contactFieldName.'，' }}@endforeach</td>
+                <td>
+                    <a href="{{DOMAIN}}company/admin/contact" class="list_btn">查看</a>
+                </td>
+            </tr>
+            <tr>
+                <td>花絮编辑</td>
+                <td>{{ count($data->parts) }}</td>
+                <td>样片花絮</td>
+                <td>
+                    <a href="{{DOMAIN}}company/admin/part" class="list_btn">查看</a>
+                </td>
+            </tr>
+            <tr>
+                <td>服务编辑</td>
+                <td>{{ count($data->firms) }}</td>
+                <td>服务项目</td>
+                <td>
+                    <a href="{{DOMAIN}}company/admin/firm" class="list_btn">查看</a>
+                </td>
+            </tr>
         </table>
-        {{--<div style="margin:10px;">@include('member.common.page')</div><--}}
-        <div style="margin:10px;">
-            每页 {{ $datas->count }} 条记录，共 {{ $datas->lastPage }} 页，共 {{ $datas->total }} 条记录，
-            当前是第 {{ $datas->currentPage }} 页 (每页记录数20条以内)
-            <div style="margin:5px auto;">
-                <ul class="ul_css">
-                    @if ($datas->currentPage > 1 && $datas->currentPage != 1)
-                        <li class="li_css"><a href="{{ url($prefix_url.'/?page=1') }}">首页</a></li>
-                    @elseif ($datas->currentPage == 1 && $datas->currentPage == 1)
-                    @endif
-                    @if ($datas->lastPage > 1 && $datas->currentPage != 1)
-                        <li class="li_css"><a href="{{ $datas->previousPageUrl }}">«上一页</a></li>
-                    @elseif ($datas->currentPage == 1)
-                    @endif
-                    @if ($datas->lastPage > 1 && $datas->currentPage != $datas->lastPage)
-                        <li class="li_css"><a href="{{ $datas->nextPageUrl }}">下一页»</a></li>
-                        <li class="li_css"><a href="{{ url($prefix_url.'/?page='.$datas->lastPage) }}">尾页</a></li>
-                    @elseif ($datas->currentPage == $datas->lastPage)
-                    @endif
-                </ul>
-            </div>
-        </div>
     </div>
+
+    {{--<div class="com_admin_home">--}}
+        {{--<br>--}}
+        {{--<div class="com_space">关于公司 ---}}
+            {{--<span onclick="window.location.href='{{DOMAIN}}company/admin/about';" class="com_info">详情</span>--}}
+            {{--<div class="bottom"><div class="top1"></div></div>--}}
+        {{--</div>--}}
+        {{--<br>--}}
+        {{--<div class="com_space">产品编辑 ---}}
+            {{--<span onclick="window.location.href='{{DOMAIN}}company/admin/product';" class="com_info">详情</span>--}}
+            {{--<div class="bottom"><div class="top2"></div></div>--}}
+        {{--</div>--}}
+        {{--<br>--}}
+        {{--<div class="com_space">团队编辑 ---}}
+            {{--<span onclick="window.location.href='{{DOMAIN}}company/admin/team';" class="com_info">详情</span>--}}
+            {{--<div class="bottom"><div class="top3"></div></div>--}}
+        {{--</div>--}}
+        {{--<br>--}}
+        {{--<div class="com_space">招聘编辑 ---}}
+            {{--<span onclick="window.location.href='{{DOMAIN}}company/admin/job';" class="com_info">详情</span>--}}
+            {{--<div class="bottom"><div class="top4"></div></div>--}}
+        {{--</div>--}}
+        {{--<br>--}}
+        {{--<div class="com_space">联系编辑 ---}}
+            {{--<span onclick="window.location.href='{{DOMAIN}}company/admin/contact';" class="com_info">详情</span>--}}
+            {{--<div class="bottom"><div class="top1"></div></div>--}}
+        {{--</div>--}}
+        {{--<br>--}}
+        {{--<div class="com_space">花絮编辑 ---}}
+            {{--<span onclick="window.location.href='{{DOMAIN}}company/admin/part';" class="com_info">详情</span>--}}
+            {{--<div class="bottom"><div class="top2"></div></div>--}}
+        {{--</div>--}}
+        {{--<br>--}}
+        {{--<div class="com_space">服务编辑 ---}}
+            {{--<span onclick="window.location.href='{{DOMAIN}}company/admin/firms';" class="com_info">详情</span>--}}
+            {{--<div class="bottom"><div class="top3"></div></div>--}}
+        {{--</div>--}}
+        {{--<br>--}}
+        {{--<div class="com_space">招聘编辑 ---}}
+            {{--<span onclick="window.location.href='{{DOMAIN}}company/admin/job';" class="com_info">详情</span>--}}
+            {{--<div class="bottom"><div class="top4"></div></div>--}}
+        {{--</div>--}}
+    {{--</div>--}}
 @stop

@@ -11,7 +11,7 @@
             </tr>
             <tr>
                 <td class="field_name">分类：</td>
-                <td>{{ $data->cate() ? $data->cate()->name : '' }}</td>
+                <td>{{ $data->getCate() }}</td>
             </tr>
             <tr>
                 <td class="field_name">简单介绍：</td>
@@ -23,16 +23,11 @@
             </tr>
             <tr>
                 <td class="field_name">图片：</td>
-                <td>@if($data->pic()) <p>{{ $data->pic()->name }}</p><br><img src="{{ $data->pic()->url }}"> @endif</td>
+                <td><div style="width:450px;height:200px;overflow:auto;"><img src="{{ $data->getPicUrl() }}" style="@if($size=$data->getUserPicSize($data->pic(),$w=300,$h=200))width:{{$size}}px;@endif height:200px;"></div></td>
             </tr>
             <tr>
-                <td class="field_name">视频：</td>
-                <td>
-                    @if($data->pic())
-                        <p>{{ $data->pic()->name }}<a href="" class="job">预览</a></p>
-                        <br>{{ $data->pic()->url }}
-                    @endif
-                </td>
+                <td class="field_name">视频地址：</td>
+                <td>{{ $data->getVideoUrl() }}</td>
             </tr>
             <tr>
                 <td class="field_name">前台显示否：</td>

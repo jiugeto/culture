@@ -3,35 +3,22 @@
     @include('company.admin.common.crumb')
 
     <div class="com_admin_list">
-        <form data-am-validator method="POST" action="/company/admin/product" enctype="multipart/form-data">
+        <form data-am-validator method="POST" action="{{DOMAIN}}company/admin/product" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <table class="table_create">
                 <tr>
                     <td class="field_name"><label>产品名称：</label></td>
-                    <td class="right"><input type="text" class="field_value" name="name"/></td>
+                    <td class="right"><input type="text" class="field_value" minlength="2" placeholder="只是2个字符" required name="name"/></td>
                 </tr>
 
                 <tr>
                     <td class="field_name"><label>类型：</label></td>
                     <td class="right">
                         <select name="cate_id">
-                            <option value="">选择类型</option>
-                            @foreach($categorys as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                @if($category->child)
-                                    @foreach($category->child as $subcate)
-                                        <option value="{{ $subcate->id }}">{{ '&nbsp;=='.$subcate->name }}</option>
-                                        @if($subcate->child)
-                                            @foreach($subcate->child as $subcate2)
-                                                <option value="{{ $subcate2->id }}">
-                                                    {{ '&nbsp;&nbsp;&nbsp;&nbsp;=='.$subcate2->name }}</option>
-                                            @endforeach
-                                        @endif
-                                    @endforeach
-                                @endif
+                            @foreach($model['cates2'] as $kcate=>$cate)
+                                <option value="{{ $kcate }}">{{ $cate }}</option>
                             @endforeach
                         </select>
-                        <a href="/company/admin/category" class="job">添加链接</a>
                     </td>
                 </tr>
 
@@ -48,31 +35,21 @@
                 <tr>
                     <td class="field_name"><label>图片：</label></td>
                     <td class="right">
-                        <select name="pic_id">
-                            <option value="">选择图片</option>
-                            @if($pics)
-                                @foreach($pics as $pic)
-                                    <option value="{{ $pic->id }}">
-                                        <img src="{{ $pic->url }}" style="width:50px;"> {{ $pic->name }}</option>
-                                @endforeach
-                            @endif
-                        </select>
-                        <a href="/company/admin/pic" class="job">添加链接</a>
+                        @include('company.admin.common.piclist')
                     </td>
                 </tr>
 
                 <tr>
                     <td class="field_name"><label>产品链接：</label></td>
                     <td class="right">
-                        <select name="video_id">
-                            <option value="">选择链接</option>
+                        <select name="video_id" style="font-size:14px;">
                             @if($videos)
                                 @foreach($videos as $video)
-                                    <option value="{{ $video->id }}">{{ $video->name }}</option>
+                                    <option value="{{ $video->id }}">{{ $video->name }} - {{ $video->url }}</option>
                                 @endforeach
                             @endif
                         </select>
-                        <a href="/company/admin/video" class="job">添加链接</a>
+                        <a href="{{DOMAIN}}company/admin/video" class="job">视频列表</a>
                     </td>
                 </tr>
 

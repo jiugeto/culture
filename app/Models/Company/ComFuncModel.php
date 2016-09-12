@@ -3,6 +3,7 @@ namespace App\Models\Company;
 
 use App\Models\BaseModel;
 use App\Models\PicModel;
+use App\Models\CompanyModel;
 
 class ComFuncModel extends BaseModel
 {
@@ -25,7 +26,7 @@ class ComFuncModel extends BaseModel
 
     public function company()
     {
-        return $this->cid ? \App\Models\CompanyModel::find($this->cid)->name : '';
+        return $this->cid ? CompanyModel::find($this->cid)->name : '';
     }
 
     public function type()
@@ -51,21 +52,19 @@ class ComFuncModel extends BaseModel
     }
 
     /**
+     * 获取图片名称
+     */
+    public function getPicName()
+    {
+        return $this->pic() ? $this->pic()->name : '';
+    }
+
+    /**
      * 获取图片链接
      */
     public function getPicUrl()
     {
         return $this->pic() ? $this->pic()->url : '';
-    }
-
-    public function module()
-    {
-        return $this->module_id ? ComModuleModel::find($this->module_id)->name : '';
-    }
-
-    public function moduleModel()
-    {
-        return $this->module_id ? ComModuleModel::find($this->module_id) : '';
     }
 
     public function small()
@@ -77,6 +76,14 @@ class ComFuncModel extends BaseModel
     {
         if (!$cid) { $cid = 0; }
         return ComModuleModel::where('genre','>',20)->whereIn('cid',[0,$cid])->get();
+    }
+
+    /**
+     * 该用户的公司页面模块
+     */
+    public function getModules()
+    {
+        return ComModuleModel::whereIn('cid',[0,$this->cid])->where('isshow',1)->get();
     }
 
     /**

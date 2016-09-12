@@ -10,7 +10,7 @@
                     <span>
                         @if($companyMenu->url=='home')
                             <img src="{{DOMAIN}}assets/images/home.png">
-                        @elseif(in_array($companyMenu->url,['auth','info','content']))
+                        @elseif(in_array($companyMenu->url,['auth','info','content','general']))
                             <img src="{{DOMAIN}}assets/images/tool.png">
                         @endif
                     </span>

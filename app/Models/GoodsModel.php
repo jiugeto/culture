@@ -17,7 +17,6 @@ class GoodsModel extends BaseModel
     protected $fillable = [
         'id','name','genre','type','cate','intro','title','pic_id','video_id','video_id2','money','uid','uname','click','recommend','newest','sort','isshow','isshow2','del','created_at','updated_at',
     ];
-
     //片源类型：1产品，2花絮
     protected $genres = [
         1=>'产品','花絮',
@@ -81,6 +80,14 @@ class GoodsModel extends BaseModel
     {
 //        return $this->hasOne('\App\Models\PicModel','id','pic_id');
         return $this->pic_id ? PicModel::find($this->pic_id) : '';
+    }
+
+    /**
+     * 图片
+     */
+    public function getPicName()
+    {
+        return $this->pic_id ? PicModel::find($this->pic_id)->name : '';
     }
 
     /**
@@ -247,5 +254,13 @@ class GoodsModel extends BaseModel
         $gid = $this->id ? $this->id : 0;
         $likeModels = GoodsLikeModel::where(array('gid'=>$gid, 'uid'=>$uid))->get();
         return count($likeModels) ? count($likeModels) : 0;
+    }
+
+    /**
+     *  样片类别
+     */
+    public function getCate()
+    {
+        return $this->cate ? $this->cates2[$this->cate] : '';
     }
 }

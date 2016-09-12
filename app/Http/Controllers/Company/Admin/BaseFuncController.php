@@ -19,7 +19,7 @@ class BaseFuncController extends BaseController
     {
         parent::__construct();
         $this->model = new ComFuncModel();
-        $this->pics = PicModel::where('uid',$this->userid)->get();
+        $this->pics = PicModel::where('uid',$this->userid)->where('del',0)->get();
     }
 
     /**
@@ -28,75 +28,39 @@ class BaseFuncController extends BaseController
     public function getData(Request $request,$module)
     {
         if (!$request->intro) { echo "<script>alert('内容不能空！');history.go(-1);</script>";exit; }
-        $data = [
+        return array(
             'name'=> $request->name,
             'cid'=> $this->cid,
             'module_id'=> $module,
-            'genre'=> $request->genre,
             'type'=> $request->type,
             'intro'=> $request->intro,
             'sort'=> $request->sort,
             'isshow'=> $request->isshow,
-        ];
-        return $data;
+        );
     }
 
     /**
      * 查询方法
      */
-    public function query($module)
+    public function query($module,$type)
     {
-        $abouts = ComFuncModel::where('cid',$this->cid)->where('module_id',$module)->get();
-        $abouts0 = ComFuncModel::where('cid',0)->where('module_id',$module)->get();
-        //有则补充记录
-        if (count($abouts) && count($abouts)<count($abouts0)) {
-            foreach ($abouts0 as $key=>$about) {
-                if ($abouts0[$key]->cid!=$this->cid) {
-                    ComFuncModel::create($this->getFuncData($module,$about));
-                }
-            }
+        //type==0，代表[1,2,3,4]
+        if ($type) {
+            $datas = ComFuncModel::where('cid',$this->cid)
+                ->where('module_id',$module)
+                ->where('type',$type)
+                ->orderBy('sort','desc')
+                ->orderBy('id','desc')
+                ->paginate($this->limit);
+        } else {
+            $datas = ComFuncModel::where('cid',$this->cid)
+                ->where('module_id',$module)
+                ->whereIn('type',[1,2,3,4])
+                ->orderBy('sort','desc')
+                ->orderBy('id','desc')
+                ->paginate($this->limit);
         }
-        //无则生成一组记录
-        if (!count($abouts)) {
-            foreach ($this->getFuncs($cid=0,$module) as $about) {
-                ComFuncModel::create($this->getFuncData($module,$about));
-            }
-        }
-        return ComFuncModel::where('cid',$this->cid)
-                        ->where('module_id',$module)
-                        ->orderBy('sort','desc')
-                        ->orderBy('id','desc')
-                        ->paginate($this->limit);
-    }
-
-    /**
-     * 企业功能查询 未分页
-     */
-    public function getFuncs($cid,$module)
-    {
-        return ComFuncModel::where('cid',$cid)
-                        ->where('module_id',$module)
-//                        ->where('genre',$this->genre)
-                        ->get();
-    }
-
-    /**
-     * 收集功能数据
-     */
-    public function getFuncData($module_id,$model)
-    {
-        return array(
-            'name'=> $model->name,
-            'cid'=> $this->cid,
-            'module_id'=> $module_id,
-            'type'=> $model->type,
-            'genre'=> $model->genre,
-            'pic_id'=> $model->pic_id,
-            'intro'=> $model->intro,
-            'small'=> $model->small,
-            'sort'=> $model->sort,
-            'isshow'=> $model->isshow,
-            'created_at'=> date('Y-m-d H:i:s', time()),
-        );
+        $datas->limit = $this->limit;
+       return $datas;
     }
 }

@@ -12,7 +12,7 @@
             @if($data->pic_id)
             <tr>
                 <td class="field_name">图片：</td>
-                <td><img src="{{ $data->pic_id ? $data->pic()->url : '无' }}"></td>
+                <td><div class="img"><img src="{{ $data->getPicUrl() }}" style="@if($size=$data->getUserPicSize($data->pic(),$w=150,$h=$data->pic()->height))width:{{$size}}px;@endif height:{{$data->pic()->height}}px;"></div></td>
             </tr>
             @endif
             <tr>

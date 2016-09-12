@@ -3,7 +3,7 @@
     @include('company.admin.common.crumb')
 
     <div class="com_admin_list">
-        <form data-am-validator method="POST" action="/company/admin/product/{id}" enctype="multipart/form-data">
+        <form data-am-validator method="POST" action="{{DOMAIN}}company/admin/product/{{ $data->id }}" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" name="_method" value="POST">
             <table class="table_create">
@@ -16,23 +16,10 @@
                     <td class="field_name"><label>类型：</label></td>
                     <td class="right">
                         <select name="cate_id">
-                            <option value="" {{ $data->cate_id=='' ? 'selected' : '' }}>选择类型</option>
-                            @foreach($categorys as $category)
-                                <option value="{{ $category->id }}" {{ $data->cate_id==$category->id ? 'selected' : '' }}>{{ $category->name }}</option>
-                                @if($category->child)
-                                    @foreach($category->child as $subcate)
-                                        <option value="{{ $subcate->id }}" {{ $data->cate_id==$subcate->id ? 'selected' : '' }}>{{ '&nbsp;=='.$subcate->name }}</option>
-                                        @if($subcate->child)
-                                            @foreach($subcate->child as $subcate2)
-                                                <option value="{{ $subcate2->id }}" {{ $data->cate_id==$subcate2->id ? 'selected' : '' }}>
-                                                    {{ '&nbsp;&nbsp;&nbsp;&nbsp;=='.$subcate2->name }}</option>
-                                            @endforeach
-                                        @endif
-                                    @endforeach
-                                @endif
+                            @foreach($model['cates2'] as $kcate=>$cate)
+                                <option value="{{ $kcate }}" {{ $data->cate==$kcate ? 'selected' : '' }}>{{ $cate }}</option>
                             @endforeach
                         </select>
-                        <a href="/company/admin/category" class="job">添加链接</a>
                     </td>
                 </tr>
 
@@ -49,31 +36,22 @@
                 <tr>
                     <td class="field_name"><label>图片：</label></td>
                     <td class="right">
-                        <select name="pic_id">
-                            <option value="" {{ $data->pic_id=='' ? 'selected' : '' }}>选择图片</option>
-                            @if($pics)
-                                @foreach($pics as $pic)
-                                    <option value="{{ $pic->id }}" {{ $data->pic_id==$pic->id ? 'selected' : '' }}>
-                                        <img src="{{ $pic->url }}" style="width:50px;"> {{ $pic->name }}</option>
-                                @endforeach
-                            @endif
-                        </select>
-                        <a href="/company/admin/pic" class="job">添加链接</a>
+                        @include('company.admin.common.piclist')
                     </td>
                 </tr>
 
                 <tr>
                     <td class="field_name"><label>产品链接：</label></td>
                     <td class="right">
-                        <select name="video_id">
-                            <option value="" {{ $data->video_id=='' ? 'selected' : '' }}>选择链接</option>
+                        <select name="video_id" style="font-size:14px;">
                             @if($videos)
                                 @foreach($videos as $video)
-                                    <option value="{{ $video->id }}" {{ $data->video_id==$video->id ? 'selected' : '' }}>{{ $video->name }}</option>
+                                    <option value="{{ $video->id }}" {{ $data->video_id==$video->id ? 'selected' : '' }}>
+                                        {{ $video->name }} - {{ $video->url }}</option>
                                 @endforeach
                             @endif
                         </select>
-                        <a href="/company/admin/video" class="job">添加链接</a>
+                        <a href="{{DOMAIN}}company/admin/video" class="job">视频列表</a>
                     </td>
                 </tr>
 

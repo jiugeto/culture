@@ -31,6 +31,7 @@
             </tr>
 
             <tr><td class="center" colspan="2" style="border:0;cursor:pointer;">
+                    <a href="{{DOMAIN}}company/admin/contact/map"><button class="companybtn">地图定位</button></a>
                     <a href="/company/admin/contact/{{$data->id}}/edit">
                         <button class="companybtn">修&nbsp;&nbsp;改</button></a>
                     <a><button class="companybtn" onclick="history.go(-1)">返&nbsp;&nbsp;回</button></a>

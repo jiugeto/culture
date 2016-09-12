@@ -30,6 +30,7 @@ class ContactController extends BaseController
             'data'=> $this->query(),
             'lists'=> $this->lists,
             'curr'=> $curr,
+            'curr_func' => $this->lists['func']['url'],
         ];
         return view('company.admin.contact.index', $result);
     }
@@ -44,6 +45,7 @@ class ContactController extends BaseController
             'data'=> $data,
             'lists'=> $this->lists,
             'curr'=> $curr,
+            'curr_func' => $this->lists['func']['url'],
         ];
         return view('company.admin.contact.edit', $result);
     }

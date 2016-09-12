@@ -10,12 +10,15 @@ class JobController extends BaseFuncController
      *  公司招聘
      */
 
+    protected $type = 7;        //7代表类型招聘
+    protected $moduleGnere = 4;        //4代表模块招聘
+
     public function __construct()
     {
         parent::__construct();
         $this->lists['func']['name'] = '招聘编辑';
         $this->lists['func']['url'] = 'job';
-        $this->module = $this->getModuleId($genre=4);
+        $this->module = $this->getModuleId($this->moduleGnere);
     }
 
     public function index()
@@ -23,9 +26,10 @@ class JobController extends BaseFuncController
         $curr['name'] = $this->lists['']['name'];
         $curr['url'] = $this->lists['']['url'];
         $result = [
-            'datas'=> $this->query($this->module),
+            'datas'=> $this->query($this->module,$this->type),
             'lists'=> $this->lists,
             'curr'=> $curr,
+            'curr_func' => $this->lists['func']['url'],
         ];
         return view('company.admin.job.index', $result);
     }
@@ -38,6 +42,7 @@ class JobController extends BaseFuncController
             'model'=> $this->model,
             'lists'=> $this->lists,
             'curr'=> $curr,
+            'curr_func' => $this->lists['func']['url'],
         ];
         return view('company.admin.job.create', $result);
     }
@@ -47,7 +52,7 @@ class JobController extends BaseFuncController
         $data = $this->getData($request,$this->module);
         $data['created_at'] = date('Y-m-d H:i:s', time());
         ComFuncModel::create($data);
-        return redirect('/company/admin/job');
+        return redirect(DOMAIN.'company/admin/job');
     }
 
     public function edit($id)
@@ -59,6 +64,7 @@ class JobController extends BaseFuncController
             'model'=> $this->model,
             'lists'=> $this->lists,
             'curr'=> $curr,
+            'curr_func' => $this->lists['func']['url'],
         ];
         return view('company.admin.job.edit', $result);
     }
@@ -68,7 +74,7 @@ class JobController extends BaseFuncController
         $data = $this->getData($request,$this->module);
         $data['updated_at'] = date('Y-m-d H:i:s', time());
         ComFuncModel::where('id',$id)->update($data);
-        return redirect('/company/admin/job');
+        return redirect(DOMAIN.'company/admin/job');
     }
 
     public function show($id)
@@ -80,6 +86,7 @@ class JobController extends BaseFuncController
             'model'=> $this->model,
             'lists'=> $this->lists,
             'curr'=> $curr,
+            'curr_func' => $this->lists['func']['url'],
         ];
         return view('company.admin.job.show', $result);
     }

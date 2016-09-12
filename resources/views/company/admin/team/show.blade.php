@@ -12,7 +12,7 @@
             @if($data->pic_id)
             <tr>
                 <td class="field_name">图片：</td>
-                <td><img src="{{ $data->pic_id ? $data->pic()->url : '无' }}"></td>
+                <td><div class="img"><img src="{{ $data->getPicUrl() }}" style="@if($size=$data->getUserPicSize($data->pic(),$w=150,$h=$data->pic()->height))width:{{$size}}px;@endif height:{{$data->pic()->height}}px;"></div></td>
             </tr>
             @endif
             <tr>
@@ -29,11 +29,11 @@
             </tr>
             <tr>
                 <td class="field_name">创建时间：</td>
-                <td>{{ $data->created_at }}</td>
+                <td>{{ $data->createTime() }}</td>
             </tr>
             <tr>
                 <td class="field_name">更新时间：</td>
-                <td>{{ $data->updated_at=='0000-00-00 00:00:00' ? '未更新' : $data->updated_at }}</td>
+                <td>{{ $data->updateTime() }}</td>
             </tr>
 
             <tr><td class="center" colspan="3" style="border:0;cursor:pointer;">

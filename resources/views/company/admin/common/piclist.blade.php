@@ -1,0 +1,25 @@
+{{--图片列表--}}
+
+
+<span id="pic_curr" style="color:grey;">当前图片：{{ isset($data) ? $data->getPicName() : '未选择' }}</span><br>
+<input type="hidden" name="pic_id">
+<a class="selpic" onclick="$('.pic_list').toggle(200);">选择图片</a>
+<a href="{{DOMAIN}}company/admin/pic" class="job">图片列表</a>
+<div class="pic_list">
+    @if(count($pics))
+        @foreach($pics as $pic)
+            <div class="img" onclick="getpic({{$pic->id}})">
+                <img src="{{ $pic->url }}" title="选择 {{ $pic->name }}" style="@if($size=$pic->getUserPicSize($pic,$w=100,$h=50))width:{{$size}}px;@endif height:50px;"></div>
+            <input type="hidden" name="picName_{{ $pic->id }}" value="{{ $pic->name }}">
+        @endforeach
+    @endif
+</div>
+
+<script>
+    function getpic(picid){
+        var picName = $("input[name='picName_"+picid+"']").val();
+        $("#pic_curr").html("当前图片："+picName);
+        $("input[name='pic_id']")[0].value = picid;
+        $(".pic_list").hide();
+    }
+</script>
