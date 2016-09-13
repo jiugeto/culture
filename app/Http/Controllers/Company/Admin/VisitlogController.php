@@ -10,7 +10,7 @@ class VisitlogController extends BaseController
      * 公司后台访问统计
      */
 
-    protected $vsitRate;       //访问频率
+    protected $visitRate;       //访问频率
 
     public function __construct()
     {
