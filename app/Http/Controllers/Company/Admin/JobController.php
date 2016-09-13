@@ -50,7 +50,8 @@ class JobController extends BaseFuncController
     public function store(Request $request)
     {
         $data = $this->getData($request,$this->module);
-        $data['created_at'] = date('Y-m-d H:i:s', time());
+        $data['type'] = $this->type;
+        $data['created_at'] = time();
         ComFuncModel::create($data);
         return redirect(DOMAIN.'company/admin/job');
     }
@@ -72,7 +73,8 @@ class JobController extends BaseFuncController
     public function update(Request $request,$id)
     {
         $data = $this->getData($request,$this->module);
-        $data['updated_at'] = date('Y-m-d H:i:s', time());
+        $data['type'] = $this->type;
+        $data['updated_at'] = time();
         ComFuncModel::where('id',$id)->update($data);
         return redirect(DOMAIN.'company/admin/job');
     }

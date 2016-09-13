@@ -20,6 +20,9 @@
                     <td class="am-hide-sm-only">广告位名称 / Name：</td>
                     <td>{{ $data->name }}</td>
                 </tr>
+                    <td class="am-hide-sm-only">平台 / Plat：</td>
+                    <td>{{ $data->getPlat() }}</td>
+                </tr>
                 <tr>
                     <td class="am-hide-sm-only">介绍 / Introduce：</td>
                     <td>{{ $data->intro }}</td>
@@ -39,6 +42,10 @@
                 <tr>
                     <td class="am-hide-sm-only">数量 / Number：(单位：个)</td>
                     <td>{{ $data->number }}</td>
+                </tr>
+                <tr>
+                    <td class="am-hide-sm-only">创建时间 / Create Time：</td>
+                    <td>{{ $data->createTime() }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">修改时间 / Update Time：</td>

@@ -12,27 +12,39 @@
                     <td class="right"><input type="text" class="field_value" name="name" value="{{ $data->name }}"/></td>
                 </tr>
 
-                {{--<tr>--}}
-                    {{--<td class="field_name"><label>链接：</label></td>--}}
-                    {{--<td class="right"><input type="text" class="field_value" name="url"/></td>--}}
-                {{--</tr>--}}
+                <tr>
+                    <td class="field_name"><label>缩略图地址：</label></td>
+                    <td class="right">
+                        @if($data->thumb)
+                            <div class="img"><img src="{{ $data->getPicUrl() }}" width="500"></div>
+                        @else
+                            {{--<input type="text" class="field_value" placeholder="填写缩略图地址" required name="thumb"/>--}}
+                            @include('company.admin.common.piclist')
+                        @endif
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="field_name"><label>链接：</label></td>
+                    <td class="right"><input type="text" class="field_value" placeholder="填写视频地址" required name="url" value="{{ $data->url.'?'.$data->url2 }}"/></td>
+                </tr>
 
                 <tr>
                     <td class="field_name"><label>介绍：</label></td>
                     <td class="right"><textarea name="intro" cols="40" rows="5">{{ $data->intro }}</textarea></td>
                 </tr>
 
-                <tr>
-                    <td class="field_name"><label>上传：</label></td>
-                    <td class="right">
+                {{--<tr>--}}
+                    {{--<td class="field_name"><label>上传：</label></td>--}}
+                    {{--<td class="right">--}}
                         {{--<input type="text" class="field_value" placeholder="本地视频地址" disabled name="url_file">--}}
                         {{--<input type="button" class="pic_find" onclick="path.click()" value="[找 图]">--}}
                         {{--<input type="file" id="path" style="display:none" onchange="url_file.value=this.value;" name="url_ori">--}}
-                    </td>
-                </tr>
+                    {{--</td>--}}
+                {{--</tr>--}}
 
                 <tr><td colspan="2" style="text-align:center;">
-                        <button class="companybtn" onclick="history.go(-1)">返 &nbsp;&nbsp;&nbsp;回</button>
+                        <button class="companybtn" onclick="history.go(-1)">返&nbsp; 回</button>
                         <button type="submit" class="companybtn">保存修改</button>
                     </td></tr>
             </table>

@@ -15,6 +15,7 @@
                         <th class="table-check"><input type="checkbox"/></th>
                         <th class="table-id">ID</th>
                         <th class="table-title">广告位名称</th>
+                        <th class="table-type">广告位模块</th>
                         <th class="table-type">价格(元)</th>
                         <th class="table-type">广告数量</th>
                         <th class="table-date am-hide-sm-only">创建时间</th>
@@ -27,7 +28,9 @@
                     <tr>
                         <td class="am-hide-sm-only"><input type="checkbox" /></td>
                         <td class="am-hide-sm-only">{{ $data->id }}</td>
-                        <td class="am-hide-sm-only"><a href="{{DOMAIN}}admin/place/{{$data->id}}">{{ $data->name }}</a></td>
+                        <td class="am-hide-sm-only"><a href="{{DOMAIN}}admin/place/{{$data->id}}">
+                                {{ str_limit($data->name,20) }}</a></td>
+                        <td class="am-hide-sm-only">{{ $data->getPlat() }}</td>
                         <td class="am-hide-sm-only">{{ $data->price }}</td>
                         <td class="am-hide-sm-only">{{ $data->number }}</td>
                         <td class="am-hide-sm-only">{{ $data->createTime() }}</td>

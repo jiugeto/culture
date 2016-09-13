@@ -3,18 +3,7 @@
     @include('company.admin.common.crumb')
 
     <div class="com_admin_list">
-        <div class="search_type">
-            分类：
-            <select name="type">
-                <option value="">所有</option>
-            </select>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="/company/admin/part" class="list_btn">花絮列表</a>
-            <a href="/company/admin/part/trash" class="list_btn">回收站</a>
-            @if($curr['url']!='trash')
-            <span class="create_right"><a href="/company/admin/product/create" class="list_btn">发布花絮</a></span>
-            @endif
-        </div>
+        @include('company.admin.product.menu')
         <table cellspacing="0">
             <tr>
                 <td>序号</td>
@@ -48,6 +37,6 @@
             @else @include('member.common.norecord')
             @endif
         </table>
-        <div style="margin:10px 20px;">@include('member.common.page')</div>
+        <div style="margin:10px 20px;">@include('company.admin.common.page')</div>
     </div>
 @stop

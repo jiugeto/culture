@@ -20,26 +20,32 @@ class PartController extends BaseController
         $this->model = new GoodsModel();
     }
 
-    public function index()
+    public function index($cate=0)
     {
         $curr['name'] = $this->lists['']['name'];
         $curr['url'] = $this->lists['']['url'];
         $result = [
-            'datas'=> $this->query($del=0),
+            'datas'=> $this->query($del=0,$cate),
+            'model'=> $this->model,
             'lists'=> $this->lists,
             'curr'=> $curr,
+            'curr_func'=> $this->lists['func']['url'],
+            'cate'=> $cate,
         ];
         return view('company.admin.part.index', $result);
     }
 
-    public function trash()
+    public function trash($cate=0)
     {
         $curr['name'] = $this->lists['trash']['name'];
         $curr['url'] = $this->lists['trash']['url'];
         $result = [
-            'datas'=> $this->query($del=1),
+            'datas'=> $this->query($del=1,$cate),
+            'model'=> $this->model,
             'lists'=> $this->lists,
             'curr'=> $curr,
+            'curr_func'=> $this->lists['func']['url'],
+            'cate'=> $cate,
         ];
         return view('company.admin.part.index', $result);
     }
@@ -49,11 +55,12 @@ class PartController extends BaseController
         $curr['name'] = $this->lists['create']['name'];
         $curr['url'] = $this->lists['create']['url'];
         $result = [
-            'categorys'=> $this->model->categorys(),
-            'pics'=> $this->model->pics(),
-            'videos'=> $this->model->videos(),
+            'model'=> $this->model,
+            'pics'=> $this->model->pics($this->userid),
+            'videos'=> $this->model->videos($this->userid),
             'lists'=> $this->lists,
             'curr'=> $curr,
+            'curr_func'=> $this->lists['func']['url'],
         ];
         return view('company.admin.part.create', $result);
     }
@@ -61,9 +68,9 @@ class PartController extends BaseController
     public function store(Request $request)
     {
        $data = $this->getData($request);
-       $data['created_at'] = date('Y-m-d H:i:s', time());
+       $data['created_at'] = time();
        GoodsModel::create($data);
-       return redirect('/company/admin/part');
+       return redirect(DOMAIN.'company/admin/part');
     }
 
     public function edit($id)
@@ -72,11 +79,12 @@ class PartController extends BaseController
         $curr['url'] = $this->lists['edit']['url'];
         $result = [
             'data'=> GoodsModel::find($id),
-            'categorys'=> $this->model->categorys(),
-            'pics'=> $this->model->pics(),
-            'videos'=> $this->model->videos(),
+            'model'=> $this->model,
+            'pics'=> $this->model->pics($this->userid),
+            'videos'=> $this->model->videos($this->userid),
             'lists'=> $this->lists,
             'curr'=> $curr,
+            'curr_func'=> $this->lists['func']['url'],
         ];
         return view('company.admin.part.edit', $result);
     }
@@ -84,9 +92,9 @@ class PartController extends BaseController
     public function update(Request $request,$id)
     {
         $data = $this->getData($request);
-        $data['updated_at'] = date('Y-m-d H:i:s', time());
+        $data['updated_at'] = time();
         GoodsModel::where('id',$id)->update($data);
-        return redirect('/company/admin/part');
+        return redirect(DOMAIN.'company/admin/part');
     }
 
     public function show($id)
@@ -95,11 +103,12 @@ class PartController extends BaseController
         $curr['url'] = $this->lists['show']['url'];
         $result = [
             'data'=> GoodsModel::find($id),
-            'categorys'=> $this->model->categorys(),
-            'pics'=> $this->model->pics(),
-            'videos'=> $this->model->videos(),
+            'model'=> $this->model,
+            'pics'=> $this->model->pics($this->userid),
+            'videos'=> $this->model->videos($this->userid),
             'lists'=> $this->lists,
             'curr'=> $curr,
+            'curr_func'=> $this->lists['func']['url'],
         ];
         return view('company.admin.part.show', $result);
     }
@@ -107,19 +116,19 @@ class PartController extends BaseController
     public function destroy($id)
     {
         GoodsModel::where('id',$id)->update(array('del'=> 1));
-        return redirect('/company/admin/part');
+        return redirect(DOMAIN.'company/admin/part');
     }
 
     public function restore($id)
     {
         GoodsModel::where('id',$id)->update(array('del'=> 0));
-        return redirect('/company/admin/part');
+        return redirect(DOMAIN.'company/admin/part');
     }
 
     public function forceDelete($id)
     {
         GoodsModel::where('id',$id)->delete();
-        return redirect('/company/admin/part');
+        return redirect(DOMAIN.'company/admin/part');
     }
 
 
@@ -131,8 +140,6 @@ class PartController extends BaseController
      */
     public function getData(Request $request)
     {
-        $this->userid = 0;      //假如uid==0
-        $uname = '';      //假如uname==''
         $data = [
             'name'=> $request->name,
             'genre'=> 2,     //1代表产品，2代表花絮
@@ -143,7 +150,7 @@ class PartController extends BaseController
             'pic_id'=> $request->pic_id,
             'video_id'=> $request->video_id,
             'uid'=> $this->userid,
-            'uname'=> $uname,
+            'uname'=> \Session::get('user.username'),
             'isshow2'=> $request->isshow2,
         ];
         return $data;
@@ -152,14 +159,22 @@ class PartController extends BaseController
     /**
      * 查询方法
      */
-    public function query($del=0)
+    public function query($del=0,$cate=0)
     {
-        $this->userid = 0;     //假如默认值
         //说明：genre==1产品，2花絮；type==1个人需求，2个人供应，3企业需求，4企业供应
-        $datas = GoodsModel::where('uid',$this->userid)
-            ->where('del',$del)
-            ->where(array('genre'=>2, 'type'=>4))
-            ->paginate($this->limit);
+        if ($cate) {
+            $datas = GoodsModel::where('uid',$this->userid)
+                ->where('del',$del)
+                ->where('cate',$cate)
+                ->where(array('genre'=>2, 'type'=>4))
+                ->paginate($this->limit);
+        } else {
+            $datas = GoodsModel::where('uid',$this->userid)
+                ->where('del',$del)
+                ->where(array('genre'=>2, 'type'=>4))
+                ->paginate($this->limit);
+        }
+        $datas->limit = $this->limit;
         return $datas;
     }
 }

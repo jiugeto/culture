@@ -60,9 +60,10 @@ class ContactController extends BaseController
             'fax'=> $request->fax,
             'zipcode'=> $request->zipcode,
             'email'=> $request->email,
+            'address'=> $request->address,
         ];
         CompanyModel::where('id',$id)->update($data);
-        return redirect('/company/admin/contact');
+        return redirect(DOMAIN.'company/admin/contact');
     }
 
     /**
@@ -83,8 +84,9 @@ class ContactController extends BaseController
             'pointer'=> $point,
             'data'=> $company,
             'ak'=> $key,
+            'curr_func' => $this->lists['func']['url'],
         ];
-        return view('admin.alliance.map', $result);
+        return view('company.admin.contact.map', $result);
     }
 
     /**
@@ -132,7 +134,7 @@ class ContactController extends BaseController
     {
         if (!$x || !$y) { echo "<script>alert('未成功获取坐标！');</script>";exit; }
         $point = $x.','.$y;
-        CompanyModel::where('id',\Session::get('user.cid'))->update(['point'=> $point]);
+        CompanyModel::where('id',\Session::get('user.cid'))->update(['point'=> $point, 'updated_at'=> time()]);
         return redirect(DOMAIN.'company/admin/contact/map');
     }
 

@@ -21,6 +21,17 @@
                         </div>
 
                         <div class="am-form-group">
+                            <label>广告位平台 / Plat：</label>
+                            <select name="plat">
+                                @if(count($model['plats']))
+                                    @foreach($model['plats'] as $kplat=>$plat)
+                                        <option value="{{ $kplat }}" {{ $data->plat==$kplat ? 'selected' : '' }}>{{ $plat }}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                        </div>
+
+                        <div class="am-form-group">
                             <label>广告位简介 / Introduce：</label>
                             <textarea name="intro" cols="50" rows="5">{{ $data->intro }}</textarea>
                         </div>

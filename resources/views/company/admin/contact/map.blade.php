@@ -4,57 +4,59 @@
         <p>首页 / 内容设置 / 联系编辑 / 地图坐标</p>
     </div>
 
-    {{--<a href="http://www.gzhatu.com/dingwei.html">经纬度定位查询工具(多试些数字，更精确定位)</a>--}}
-    {{--<a href="http://api.map.baidu.com/lbsapi/getpoint/index.html">此为获取坐标定位的API</a>--}}
-    <style>
-        #map { margin:0 20px;width:70%;height:500px;border:1px solid lightgrey;float:left; }
-        .text { width:200px;float:left; }
-        p.small { color:red;font-size:14px; }
-        a.a_link { padding:5px 20px;border:1px solid lightgrey;background:rgb(250,250,250);cursor:pointer; }
-        a.a_link:hover { border:1px solid rgb(14,144,210);color:white;background:rgb(14,144,210); }
-        #msg { color:grey;font-size:14px; }
-    </style>
-    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak={{$ak}}"></script>
+    <div class="com_admin_list">
+        <h3 class="center pos">公司地址坐标</h3>
+        {{--<a href="http://www.gzhatu.com/dingwei.html">经纬度定位查询工具(多试些数字，更精确定位)</a>--}}
+        {{--<a href="http://api.map.baidu.com/lbsapi/getpoint/index.html">此为获取坐标定位的API</a>--}}
+        <style>
+            #map { margin:0 20px;width:70%;height:500px;border:1px solid lightgrey;float:left; }
+            .text { width:200px;float:left; }
+            p.small { color:red;font-size:14px; }
+            a.a_link { padding:5px 20px;border:1px solid lightgrey;background:gainsboro;cursor:pointer; }
+            a.a_link:hover { border:1px solid orangered;color:white;background:orangered; }
+            #msg { color:grey;font-size:14px; }
+        </style>
+        <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak={{$ak}}"></script>
 
-    <div id="map"></div>
-    <div class="text">
-        <p>{{ $data->name }}</p>
-        <p><label>重新精准定位地址</label>
-            <br>地区：{{ $data->getAreaName($data->area) }}
-            <br>地址：{{ $data->address }}
-        </p>
-        <p class="small">=>用法：在地图上找到您确定的位置单击，然后点击“确定”按钮即可 <br>建议地图放到最大再确定，更加精确</p>
-        <p><a id="submit" class="a_link">确定</a>
-            <a class="a_link" onclick="history.go(-1);">返回</a>
-        </p>
+        <div id="map"></div>
+        <div class="text">
+            <p>{{ $data->name }}</p>
+            <p><label>重新精准定位地址</label>
+                <br>地区：{{ $data->getAreaName($data->area) }}
+                <br>地址：{{ $data->address }}
+            </p>
+            <p class="small">=>用法：在地图上找到您确定的位置单击，然后点击“确定”按钮即可 <br>建议地图放到最大再确定，更加精确</p>
+            <p><a id="submit" class="a_link">确定</a>
+                <a class="a_link" onclick="window.location.href='{{DOMAIN}}company/admin/contact';">返回</a>
+            </p>
 
-        <script>
-            $(document).ready(function(){
-                var id = $("input[name='id']").val();
-                var jing_du = $("#jing_du");
-                var wei_du = $("#wei_du");
-                $("#submit").click(function(){
-//                        alert(jing_du.html()); alert(wei_du.html());
-                    window.location.href = '{{DOMAIN}}company/admin/contact/map/'+jing_du.html()+'/'+wei_du.html();
+            <script>
+                $(document).ready(function(){
+                    var id = $("input[name='id']").val();
+                    var jing_du = $("#jing_du");
+                    var wei_du = $("#wei_du");
+                    $("#submit").click(function(){
+                        window.location.href = '{{DOMAIN}}company/admin/contact/map/'+jing_du.html()+'/'+wei_du.html();
+                    });
                 });
-            });
-        </script>
+            </script>
 
-        {{--经纬度显示--}}
-        <div id="msg">
-            <div style="height:50px;"></div>
-            当前选择的经纬度<br>
-            经度 <span id="jing_du"></span><br>
-            纬度 <span id="wei_du"></span>
+            {{--经纬度显示--}}
+            <div id="msg">
+                <div style="height:50px;"></div>
+                当前选择的经纬度<br>
+                经度 <span id="jing_du"></span><br>
+                纬度 <span id="wei_du"></span>
+            </div>
+
+            <input type="hidden" name="id" value="{{ $data->id }}">
+            <input type="hidden" name="name" value="{{ $data->name }}">
+            <input type="hidden" name="tel" value="{{ $data->tel }}">
+            <input type="hidden" name="email" value="{{ $data->email }}">
+            <input type="hidden" name="area" value="{{ $data->area }}">
+            <input type="hidden" name="axis_x" value="{{ $pointer['lng'] }}">
+            <input type="hidden" name="axis_y" value="{{ $pointer['lat'] }}">
         </div>
-
-        <input type="hidden" name="id" value="{{ $data->id }}">
-        <input type="hidden" name="name" value="{{ $data->name }}">
-        <input type="hidden" name="tel" value="{{ $data->tel }}">
-        <input type="hidden" name="email" value="{{ $data->email }}">
-        <input type="hidden" name="area" value="{{ $data->area }}">
-        <input type="hidden" name="axis_x" value="{{ $pointer['lng'] }}">
-        <input type="hidden" name="axis_y" value="{{ $pointer['lat'] }}">
     </div>
 
     <script type="text/javascript">

@@ -10,19 +10,31 @@
                 <td>{{ $data->id }}</td>
             </tr>
             <tr>
-                <td class="field_name">图片名称：</td>
+                <td class="field_name">PPT名称：</td>
                 <td>{{ $data->name }}</td>
             </tr>
             <tr>
-                <td class="field_name">预览：</td>
+                <td class="field_name">广告位：</td>
+                <td>{{ $data->getAdplaceName() }}</td>
+            </tr>
+            <tr>
+                <td class="field_name">图片预览：</td>
                 <td>
-                    {{--<div class="img"><img src="{{ $data->url }}" style="@if($size=$data->getPicSize($data,$w=150,$h=$data->height))width:{{$size}}px;@endif height:{{$data->height}}px;"></div>--}}
-                    <img src="{{ $data->getUrl() }}" width="500">
+                    {{--<div class="img"><img src="{{ $data->getPicUrl() }}" style="@if($size=$data->getUserPicSize($data->pic(),$w=150,$h=$data->pic()->height))width:{{$size}}px;@endif height:{{$data->pic()->height}}px;"></div>--}}
+                    <img src="{{ $data->getPicUrl() }}" width="500">
                 </td>
             </tr>
             <tr>
-                <td class="field_name">介绍：</td>
-                <td>{{ $data->intro }}</td>
+                <td class="field_name">链接：</td>
+                <td>{{ $data->link }}</td>
+            </tr>
+            <tr>
+                <td class="field_name">鼠标移动显示：</td>
+                <td>{{ $data->title }}</td>
+            </tr>
+            <tr>
+                <td class="field_name">排序：</td>
+                <td>{{ $data->sort2 }}</td>
             </tr>
             {{--<tr>--}}
                 {{--<td class="field_name">是否删除：</td>--}}

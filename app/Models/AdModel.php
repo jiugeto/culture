@@ -11,20 +11,20 @@ class AdModel extends BaseModel
         1=>'未审核','未通过审核','通过审核',
     ];
 
-//    /**
-//     * 广告位
-//     */
-//    public function adPlace()
-//    {
-//        return $this->hasOne('App\Models\AdPlaceModel','id','ad_place_id');
-//    }
-
     /**
      * 所有广告位
      */
     public function adplaces()
     {
         return AdPlaceModel::all();
+    }
+
+    /**
+     * 指定用户的所有广告位
+     */
+    public function userAdplaces($uid=0)
+    {
+        return AdPlaceModel::where('plat',2)->whereIn('uid',[0,$uid])->get();
     }
 
     /**
@@ -44,14 +44,6 @@ class AdModel extends BaseModel
         return $this->adplace() ? $this->adplace()->name : '';
     }
 
-//    /**
-//     * 广告位数量
-//     */
-//    public function getAdplaceNumber()
-//    {
-//        return $this->adplace() ? $this->adplace()->number : '';
-//    }
-
     public function pic()
     {
         $picModel = PicModel::find($this->pic_id);
@@ -60,7 +52,7 @@ class AdModel extends BaseModel
 
     public function getPicUrl()
     {
-        return $this->pic() ? $this->pic()->url : '';
+        return $this->pic() ? $this->pic()->getUrl() : '';
     }
 
     /**

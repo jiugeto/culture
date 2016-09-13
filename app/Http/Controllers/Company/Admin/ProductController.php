@@ -139,8 +139,6 @@ class ProductController extends BaseController
      */
     public function getData(Request $request)
     {
-        $this->userid = 0;      //假如uid==0
-        $uname = '';      //假如uname==''
         $data = [
             'name'=> $request->name,
             'genre'=> 1,     //1代表产品，2代表花絮
@@ -151,7 +149,7 @@ class ProductController extends BaseController
             'pic_id'=> $request->pic_id,
             'video_id'=> $request->video_id,
             'uid'=> $this->userid,
-            'uname'=> $uname,
+            'uname'=> \Session::get('user.username'),
             'isshow2'=> $request->isshow2,
         ];
         return $data;

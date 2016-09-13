@@ -6,6 +6,7 @@ use App\Models\Company\ComMainModel;
 use Illuminate\Support\Facades\Request as AjaxRequest;
 use Illuminate\Support\Facades\Input;
 use Redis;
+use App\Tools;
 
 class VisitlogController extends BaseController
 {
@@ -41,6 +42,35 @@ class VisitlogController extends BaseController
         $suffix = $this->getUrl($data['visit_url'],$data['cid']);
         $key = 'visit_'.$suffix;
         $time = time();
+        //1>假如同一天同一ip同一页面，先是游客，再是会员访问，则认为是同一人访问
+        $visitOneDay = VisitlogModel::where('ip',Tools::getIp())
+            ->where('visit_id',0)
+            ->where('loginTime','>',strtotime(date('Ymd',time()).'000000'))
+            ->where('action',$data['visit_url'])
+            ->orderBy('id','desc')
+            ->first();
+        if ($visitOneDay && $data['uid']) {
+            VisitlogModel::where('ip',Tools::getIp())
+                ->where('visit_id',0)
+                ->where('loginTime','>',strtotime(date('Ymd',time()).'000000'))
+                ->where('action',$data['visit_url'])
+                ->update(array('uid'=> $data['uid'], 'logoutTime'=> time()));
+        }
+        //2>假如同一天同一ip同一页面，先是会员，再是游客访问，则认为是同一人访问
+        $visitOneDay = VisitlogModel::where('ip',Tools::getIp())
+            ->where('visit_id','>',0)
+            ->where('loginTime','>',strtotime(date('Ymd',time()).'000000'))
+            ->where('action',$data['visit_url'])
+            ->orderBy('id','desc')
+            ->first();
+        if ($visitOneDay && !$data['uid']) {
+            VisitlogModel::where('ip',Tools::getIp())
+                ->where('visit_id','>',0)
+                ->where('loginTime','>',strtotime(date('Ymd',time()).'000000'))
+                ->where('action',$data['visit_url'])
+                ->update(array('uid'=> 0, 'logoutTime'=> time()));
+        }
+        //3>以下是更新访问日志的几种情况
         if (Redis::exists($key)) {
             $visit = unserialize(Redis::get($key));
             if ($visit['logoutTime']+$visitRate < time()) {
@@ -95,8 +125,8 @@ class VisitlogController extends BaseController
     public function getData($data)
     {
         $serial = date('YmdHis',time()).rand(0,10000);
-        $ip = \App\Tools::getIp();
-        $ipaddress = \App\Tools::getCityByIp($ip);
+        $ip = Tools::getIp();
+        $ipaddress = Tools::getCityByIp($ip);
         return array(
             'cid'=> $data['cid'],
             'visit_id'=> $data['uid'],

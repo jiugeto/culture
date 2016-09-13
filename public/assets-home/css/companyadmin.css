@@ -277,6 +277,13 @@ select {
     text-decoration:underline;
     border:1px solid orangered;
 }
+.com_admin_list .pic_list .picsize{
+    color:white;
+    font-size:12px;
+    text-align:center;
+    background:rgba(50,50,50,0.5);
+    position:relative;bottom:0;
+}
 .com_admin_list .tlist {
     padding:2px;
     width:400px; /*height:150px;*/

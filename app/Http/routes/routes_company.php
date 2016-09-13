@@ -86,12 +86,12 @@ Route::group(['prefix'=>'company','middleware' =>'MemberAuth','namespace'=>'Comp
         Route::resource('job','JobController');
             //联系路由
         Route::get('contact/map','ContactController@map');      //地图路由
-        Route::get('contact/map/{x}/{y}','ContactController@map');
+        Route::get('contact/map/{x}/{y}','ContactController@setPoint');
         Route::post('contact/{id}','ContactController@update');
         Route::resource('contact','ContactController');
             //服务路由
-        Route::post('firms/{id}','FirmController@update');
-        Route::resource('firms','FirmController');
+        Route::post('firm/{id}','FirmController@update');
+        Route::resource('firm','FirmController');
             //新闻资讯路由
         Route::post('news/{id}','NewsController@update');
         Route::resource('news','NewsController');
@@ -101,6 +101,7 @@ Route::group(['prefix'=>'company','middleware' =>'MemberAuth','namespace'=>'Comp
         Route::get('part/{id}/restore','PartController@restore');
         Route::get('part/{id}/forceDelete','PartController@forceDelete');
         Route::post('part/{id}','PartController@update');
+        Route::get('part/cate/{cate}','PartController@index');
         Route::resource('part','PartController');
             //图片管理路由
         Route::get('pic/trash','PicController@trash');
@@ -127,6 +128,6 @@ Route::group(['prefix'=>'company','middleware' =>'MemberAuth','namespace'=>'Comp
         Route::post('link/{id}','LinkController@update');
         Route::resource('link','LinkController');
         //访问日志路由
-        Route::get('visit','VisitlogController@index');
+        Route::resource('visit','VisitlogController');
     });
 });

@@ -10,12 +10,15 @@ class FirmController extends BaseFuncController
      *  公司服务
      */
 
+    protected $type = 5;        //5代表类型服务
+    protected $moduleGnere = 2;        //2代表模块服务
+
     public function __construct()
     {
         parent::__construct();
         $this->lists['func']['name'] = '服务编辑';
         $this->lists['func']['url'] = 'firms';
-        $this->module = $this->getModuleId($genre=2);
+        $this->module = $this->getModuleId($this->moduleGnere);
     }
 
     public function index()
@@ -23,9 +26,10 @@ class FirmController extends BaseFuncController
         $curr['name'] = $this->lists['']['name'];
         $curr['url'] = $this->lists['']['url'];
         $result = [
-            'datas' => $this->query($this->module),
+            'datas' => $this->query($this->module,$this->type),
             'lists' => $this->lists,
             'curr' => $curr,
+            'curr_func' => $this->lists['func']['url'],
         ];
         return view('company.admin.firm.index', $result);
     }
@@ -36,9 +40,9 @@ class FirmController extends BaseFuncController
         $curr['url'] = $this->lists['create']['url'];
         $result = [
             'pics'=> $this->pics,
-//            'model'=> $this->model,
             'lists'=> $this->lists,
             'curr'=> $curr,
+            'curr_func' => $this->lists['func']['url'],
         ];
         return view('company.admin.firm.create', $result);
     }
@@ -49,9 +53,10 @@ class FirmController extends BaseFuncController
         if ($request->small) {
             $data['small'] = mb_substr($request->small,-1,1,'utf-8')=='|'?$request->small:$request->small.'|';
         }
-        $data['created_at'] = date('Y-m-d H:i:s', time());
+        $data['type'] = $this->type;
+        $data['created_at'] = time();
         ComFuncModel::create($data);
-        return redirect('/company/admin/firms');
+        return redirect(DOMAIN.'company/admin/firms');
     }
 
     public function edit($id)
@@ -61,9 +66,9 @@ class FirmController extends BaseFuncController
         $result = [
             'data'=> ComFuncModel::find($id),
             'pics'=> $this->pics,
-//            'model'=> $this->model,
             'lists'=> $this->lists,
             'curr'=> $curr,
+            'curr_func' => $this->lists['func']['url'],
         ];
         return view('company.admin.firm.edit', $result);
     }
@@ -74,9 +79,10 @@ class FirmController extends BaseFuncController
         if ($request->small) {
             $data['small'] = mb_substr($request->small,-1,1,'utf-8')=='|'?$request->small:$request->small.'|';
         }
-        $data['updated_at'] = date('Y-m-d H:i:s', time());
+        $data['type'] = $this->type;
+        $data['updated_at'] = time();
         ComFuncModel::where('id',$id)->update($data);
-        return redirect('/company/admin/firms');
+        return redirect(DOMAIN.'company/admin/firm');
     }
 
     public function show($id)
@@ -86,9 +92,9 @@ class FirmController extends BaseFuncController
         $result = [
             'data'=> ComFuncModel::find($id),
             'pics'=> $this->pics,
-//            'model'=> $this->model,
             'lists'=> $this->lists,
             'curr'=> $curr,
+            'curr_func' => $this->lists['func']['url'],
         ];
         return view('company.admin.firm.show', $result);
     }

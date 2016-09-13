@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Company\Admin;
 
-use App\Models\Company\ComPptModel;
+use App\Models\AdModel;
 use App\Models\PicModel;
 use Illuminate\Http\Request;
 
@@ -18,7 +18,7 @@ class PptController extends BaseController
         $this->lists['category']['url'] = 'content';
         $this->lists['func']['name'] = '宣传编辑';
         $this->lists['func']['url'] = 'ppt';
-        $this->model = new ComPptModel();
+        $this->model = new AdModel();
     }
 
     public function index()
@@ -26,9 +26,10 @@ class PptController extends BaseController
         $curr['name'] = $this->lists['']['name'];
         $curr['url'] = $this->lists['']['url'];
         $result = [
-            'datas'=> $this->query($del=0),
+            'datas'=> $this->query($isuse=1),
             'lists'=> $this->lists,
             'curr'=> $curr,
+            'curr_func'=> $this->lists['func']['url'],
         ];
         return view('company.admin.ppt.index', $result);
     }
@@ -38,25 +39,24 @@ class PptController extends BaseController
         $curr['name'] = $this->lists['trash']['name'];
         $curr['url'] = $this->lists['trash']['url'];
         $result = [
-            'datas'=> $this->query($del=1),
+            'datas'=> $this->query($isuse=0),
             'lists'=> $this->lists,
             'curr'=> $curr,
+            'curr_func'=> $this->lists['func']['url'],
         ];
         return view('company.admin.ppt.index', $result);
     }
 
     public function create()
     {
-        $pptModels = ComPptModel::where('cid',$this->cid)->get();
-        if (count($pptModels)>$this->comPptNum-1) {
-            echo "<script>alert('您的公司已有".$this->comPptNum."宣传记录！');history.go(-1);</script>";exit;
-        }
         $curr['name'] = $this->lists['create']['name'];
         $curr['url'] = $this->lists['create']['url'];
         $result = [
+            'adplaces'=> $this->model->userAdplaces($this->userid),
             'pics'=> PicModel::where('uid',$this->userid)->get(),
             'lists'=> $this->lists,
             'curr'=> $curr,
+            'curr_func'=> $this->lists['func']['url'],
         ];
         return view('company.admin.ppt.create', $result);
     }
@@ -65,8 +65,8 @@ class PptController extends BaseController
     {
         $data = $this->getData($request);
         $data['created_at'] = date('Y-m-d H:i:s', time());
-        ComPptModel::create($data);
-        return redirect('/company/admin/ppt');
+        AdModel::create($data);
+        return redirect(DOMAIN.'company/admin/ppt');
     }
 
     public function edit($id)
@@ -74,30 +74,31 @@ class PptController extends BaseController
         $curr['name'] = $this->lists['edit']['name'];
         $curr['url'] = $this->lists['edit']['url'];
         $result = [
-            'data'=> ComPptModel::find($id),
+            'data'=> AdModel::find($id),
             'pics'=> PicModel::where('uid',$this->userid)->get(),
             'lists'=> $this->lists,
             'curr'=> $curr,
+            'curr_func'=> $this->lists['func']['url'],
         ];
         return view('company.admin.ppt.edit', $result);
     }
 
     public function destroy($id)
     {
-        ComPptModel::where('id',$id)->update(['del'=> 1]);
-        return redirect('/company/admin/ppt');
+        AdModel::where('id',$id)->update(['del'=> 1]);
+        return redirect(DOMAIN.'company/admin/ppt');
     }
 
     public function restore($id)
     {
-        ComPptModel::where('id',$id)->update(['del'=> 0]);
-        return redirect('/company/admin/ppt/trash');
+        AdModel::where('id',$id)->update(['del'=> 0]);
+        return redirect(DOMAIN.'company/admin/ppt/trash');
     }
 
     public function forceDelete($id)
     {
-        ComPptModel::where('id',$id)->delete();
-        return redirect('/company/admin/ppt/trash');
+        AdModel::where('id',$id)->delete();
+        return redirect(DOMAIN.'company/admin/ppt/trash');
     }
 
 
@@ -122,13 +123,15 @@ class PptController extends BaseController
     /**
      * 查询方法
      */
-    public function query($del=0)
+    public function query($isuse=1)
     {
-        return ComPptModel::where('cid',$this->cid)
-            ->where('del',$del)
+        $datas = AdModel::where('uid',$this->userid)
+            ->where('isuse',$isuse)
             ->where('isshow',1)
             ->orderBy('sort','desc')
             ->orderBy('id','desc')
             ->paginate($this->limit);
+        $datas->limit = $this->limit;
+        return $datas;
     }
 }

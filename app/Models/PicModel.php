@@ -7,7 +7,7 @@ class PicModel extends BaseModel
 {
     protected $table = 'bs_pics';
     protected $fillable = [
-        'id','uid','name','url','width','height','intro','del','created_at','updated_at',
+        'id','uid','name','urlSel','url','url2','width','height','intro','del','created_at','updated_at',
     ];
 
     /**
@@ -53,5 +53,13 @@ class PicModel extends BaseModel
             if ($width>$w) { $size = $width; } else  { $size = $w; }
         }
         return (isset($size)&&$size) ? $size : 0;
+    }
+
+    /**
+     * 确定图片链接
+     */
+    public function getUrl()
+    {
+        return $this->urlSel ? $this->url : $this->url2;
     }
 }

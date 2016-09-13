@@ -25,7 +25,17 @@ class VideoModel extends BaseModel
         return $userParam ? $userParam->leplay : 0;
     }
 
-    public function getPic()
+    public function pics($uid=0)
+    {
+        if ($uid) {
+            $picModels = PicModel::where('uid',$uid)->get();
+        } else {
+            $picModels = PicModel::all();
+        }
+        return $picModels ? $picModels : [];
+    }
+
+    public function pic()
     {
         $pic_id = $this->pic_id ? $this->pic_id : 0;
         $picModel = PicModel::find($pic_id);
@@ -34,6 +44,11 @@ class VideoModel extends BaseModel
 
     public function getPicUrl()
     {
-        return $this->getPic() ? $this->getPic()->url : '';
+        return $this->pic() ? $this->pic()->url : '';
+    }
+
+    public function getPicName()
+    {
+        return $this->pic() ? $this->pic()->name : '';
     }
 }

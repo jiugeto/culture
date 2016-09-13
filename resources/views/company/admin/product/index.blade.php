@@ -3,21 +3,7 @@
     @include('company.admin.common.crumb')
 
     <div class="com_admin_list">
-        <div class="search_type">
-            分类：
-            <select name="cate">
-                <option value="0" {{ $cate==0 ? 'selected' : '' }}>所有</option>
-                @foreach($model['cates2'] as $kcate=>$vcate)
-                    <option value="{{ $kcate }}" {{ $cate==$kcate ? 'selected' : '' }}>{{ $vcate }}</option>
-                @endforeach
-            </select>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            {{--<a href="/company/admin/product" class="list_btn">产品列表</a>--}}
-            {{--<a href="/company/admin/product/trash" class="list_btn">回收站</a>--}}
-            @if($curr['url']!='trash')
-            <span class="create_right"><a href="/company/admin/product/create" class="list_btn">发布产品</a></span>
-            @endif
-        </div>
+        @include('company.admin.product.menu')
         <table cellspacing="0">
             <tr>
                 <td>序号</td>
@@ -56,16 +42,6 @@
             @else @include('member.common.norecord')
             @endif
         </table>
-        <div style="margin:10px 20px;">@include('member.common.page')</div>
+        <div style="margin:10px 20px;">@include('company.admin.common.page')</div>
     </div>
-
-    <script>
-        $("select[name='cate']").change(function(){
-            if ($(this).val()==0) {
-                window.location.href = '{{DOMAIN}}company/admin/product';
-            } else {
-                window.location.href = '{{DOMAIN}}company/admin/product/cate/'+$(this).val();;
-            }
-        });
-    </script>
 @stop

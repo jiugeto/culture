@@ -38,6 +38,7 @@ class AdPlaceController extends BaseController
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
+            'model'=> $this->model,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -58,6 +59,7 @@ class AdPlaceController extends BaseController
         $curr['url'] = $this->crumb['edit']['url'];
         $result = [
             'data'=> AdPlaceModel::find($id),
+            'model'=> $this->model,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -99,7 +101,7 @@ class AdPlaceController extends BaseController
            'width'=> $request->width,
            'height'=> $request->height,
            'price'=> $request->price,
-           'uid'=> $this->userid,
+//           'uid'=> $this->userid,
            'number'=> $request->number,
        );
     }

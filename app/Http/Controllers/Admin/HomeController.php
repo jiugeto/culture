@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests;
-use App\Models\Admin\UserlogModel;
+use App\Models\Admin\LogModel;
 use App\Models\OrderFirmModel;
 use App\Models\OrderModel;
 use App\Models\OrderProductModel;
@@ -35,11 +35,11 @@ class HomeController extends BaseController
     public function users()
     {
         $users_all = UserModel::all();
-        $users_week = UserlogModel::where('loginTime','>',time()-3600*24*7)
+        $users_week = LogModel::where('loginTime','>',time()-3600*24*7)
             ->distinct('uid')
 //            ->orderBy('id','desc')
             ->get();
-        $users_hour = UserlogModel::where('loginTime','>',time()-3600)
+        $users_hour = LogModel::where('loginTime','>',time()-3600)
             ->distinct('uid')
 //            ->orderBy('id','desc')
             ->get();

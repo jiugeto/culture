@@ -4,7 +4,7 @@
 
     <div class="com_admin_list">
         <div class="search_type" style="height:20px;border:0;">
-            <span class="create_right"><a href="/company/admin/link/create" class="list_btn">添加链接</a></span>
+            <span class="create_right"><a href="{{DOMAIN}}company/admin/link/create" class="list_btn">添加链接</a></span>
         </div>
         <table cellspacing="0">
             <tr>
@@ -25,9 +25,9 @@
                 <td>{{ $data->isshow() }}</td>
                 <td width="100">{{ $data->createTime() }}</td>
                 <td>
-                    <a href="/company/admin/link/{{ $data->id }}" class="list_btn">查看</a>
+                    <a href="{{DOMAIN}}company/admin/link/{{ $data->id }}" class="list_btn">查看</a>
                     {{--<div style="height:10px;"></div>--}}
-                    <a href="/company/admin/link/{{ $data->id }}/edit" class="list_btn">编辑</a>
+                    <a href="{{DOMAIN}}company/admin/link/{{ $data->id }}/edit" class="list_btn">编辑</a>
                 </td>
             </tr>
                 @endforeach
