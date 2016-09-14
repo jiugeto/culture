@@ -20,7 +20,7 @@
     </tr>
     <tr>
         <td class="field_name">图片：</td>
-        <td><div style="width:450px;height:200px;overflow:auto;"><img src="{{ $data->getPicUrl() }}" style="@if($size=$data->getUserPicSize($data->pic(),$w=300,$h=200))width:{{$size}}px;@endif height:200px;"></div></td>
+        <td><div style="width:450px;height:200px;overflow:auto;"><img src="{{ $data->getPicUrl() }}" style="@if($size=$data->getUserPicSize($data->pic(),$w=300,$h=200))width:{{$size['w']}}px;height:{{$size['h']}}px;@endif"></div></td>
     </tr>
     <tr>
         <td class="field_name">视频地址：</td>

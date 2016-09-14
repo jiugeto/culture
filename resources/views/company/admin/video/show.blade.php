@@ -15,7 +15,7 @@
             </tr>
             <tr>
                 <td class="field_name">缩略图：</td>
-                <td><div class="img"><img src="{{ $data->getPicUrl() }}" style="@if($size=$data->getUserPicSize($data->pic(),$w=150,$h=$data->pic()->height))width:{{$size}}px;@endif height:{{$data->pic()->height}}px;"></div></td>
+                <td><div class="img"><img src="{{ $data->getPicUrl() }}" style="@if($size=$data->getUserPicSize($data->pic(),$w=150,$h=$data->pic()->height))width:{{$size['w']}}px;height:{{$size['h']}}px;@endif "></div></td>
             </tr>
             <tr>
                 <td class="field_name">链接：</td>

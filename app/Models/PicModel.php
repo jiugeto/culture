@@ -47,12 +47,21 @@ class PicModel extends BaseModel
     {
         $pic = $picModel;
         if ($pic && $pic->width && $pic->height) {
-            $ratio_h = $h / $pic->height;
-            //确定高度 $h，计算$w
-            $width=$ratio_h*$pic->width;
-            if ($width>$w) { $size = $width; } else  { $size = $w; }
+//            $ratio_h = $h / $pic->height;
+//            //确定高度 $h，计算$w
+//            $width=$ratio_h*$pic->width;
+//            if ($width>$w) { $size = $width; } else  { $size = $w; }
+            $ratio1 = $w / $h;
+            $ratio2 = $pic->width / $pic->height;
+            if ($ratio1>$ratio2) {
+                $size['w'] = $w;
+                $size['h'] = $pic->width / $ratio1;
+            } else {
+                $size['w'] = $h * $ratio2;
+                $size['h'] = $h;
+            }
         }
-        return (isset($size)&&$size) ? $size : 0;
+        return (isset($size)&&$size) ? $size : [];
     }
 
     /**

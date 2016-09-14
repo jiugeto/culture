@@ -23,7 +23,7 @@ class DesignModel extends BaseModel
 
     public function getCateName()
     {
-        return array_key_exists($this->cate,$this->cates) ? $this->cates[$this->cate] : '';
+        return array_key_exists($this->cate,$this->cates1) ? $this->cates1[$this->cate] : '';
     }
 
     /**

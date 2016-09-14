@@ -7,7 +7,7 @@
         <div class="img">
             @if($user && $user->head())
             <img src="{{ $user->head() }}"
-                 style="@if($size=$user->getUserPicSize($user,$w=120,$h=100))width:{{$size}}px;@endif height:100px;">
+                 style="@if($size=$user->getUserPicSize($user,$w=120,$h=100)) width:{{$size['w']}}px;height:{{$size['h']}}px; @endif">
             @else
             <div style="margin:0;width:120px;height:100px;background:rgb(240,240,240);border:0;"></div>
             @endif

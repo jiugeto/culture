@@ -15,7 +15,7 @@
                 <div class="con">
                     <img src="{{ $data->getPicUrl() }}" style="
                     @if($size=$data->getUserPicSize($data->pic(),$w=500,$h=150))
-                            width:{{$size}}px;height:150px;
+                            width:{{$size['w']}}px;height:{{$size['h']}}px;
                     @endif
                             ">
                 </div>

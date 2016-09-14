@@ -42,7 +42,7 @@
                         <td>样片截图：</td>
                         <td>
                             <a href="/product/video/{{ $data->id }}/{{ $data->video_id }}" title="点进去看视频">
-                                <img src="{{ $data->getPicUrl() }}" style="@if($size=$data->getPicSize($w=300,$h=110)) width:{{$size}}px; @endif height:150px;">
+                                <img src="{{ $data->getPicUrl() }}" style="@if($size=$data->getPicSize($w=300,$h=110)) width:{{$size['w']}}px;height:{{$size['h']}}px; @endif">
                             </a>
                         </td>
                     </tr>

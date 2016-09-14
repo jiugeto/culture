@@ -10,7 +10,7 @@
                 <a href="{{DOMAIN}}person/video/pre/{{ $data->id }}" target="_blank">
                     <div class="per_waterfall">
                         <div class="img">
-                            <img src="{{ $data->getPicUrl() }}" style="@if($size=$data->getUserPicSize($data->getPic(),$w=148,$h=100))width:{{$size}}px;@endif height:120px;">
+                            <img src="{{ $data->getPicUrl() }}" style="@if($size=$data->getUserPicSize($data->getPic(),$w=148,$h=100))width:{{$size['w']}}px;height:{{$size['h']}}px; @endif">
                         </div>
                         <p class="text">{{ $data->name }}</p>
                     </div>

@@ -1,6 +1,10 @@
 {{--图片列表--}}
 
 
+<style>
+    .pic_list .pic_one { width:100px;height:50px;overflow:hidden; }
+</style>
+
 <span id="pic_curr" style="color:grey;">当前图片：{{ isset($data) ? $data->getPicName() : '未选择' }}</span>
 <div style="height:10px"></div>
 <input type="hidden" name="pic_id">
@@ -10,7 +14,7 @@
     @if(count($pics))
         @foreach($pics as $pic)
             <div class="img" onclick="getpic({{$pic->id}})" onmouseover="move({{$pic->id}})">
-                <img src="{{ $pic->url }}" title="选择 {{ $pic->name }}" style="@if($size=$pic->getUserPicSize($pic,$w=100,$h=50))width:{{$size}}px;@endif height:50px;">
+                <div class="pic_one"><img src="{{ $pic->url }}" title="选择 {{ $pic->name }}" style="@if($size=$pic->getUserPicSize($pic,$w=100,$h=50))width:{{$size['w']}}px;height:{{$size['h']}}px;@endif"></div>
                 <div class="picsize size_{{$pic->id}}">{{ $pic->width.'*'.$pic->height }}</div>
             </div>
             <input type="hidden" name="picName_{{ $pic->id }}" value="{{ $pic->name }}">

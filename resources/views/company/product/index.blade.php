@@ -18,7 +18,7 @@
             <a href="{{DOMAIN}}c/{{CID}}/video/{{$data->id}}/{{$data->video_id}}" target="_blank">
                 <div class="com_pro" title="点击开始预览 {{ $data->name }}">
                     <div class="img">
-                        <img src="{{ $data->getPicUrl() }}" style="@if($size=$data->getPicSize($w=228,$h=120))width:{{$size}}px;height:120px; @endif">
+                        <img src="{{ $data->getPicUrl() }}" style="@if($size=$data->getPicSize($w=228,$h=120))width:{{$size['w']}}px;height:{{$size['h']}}px; @endif">
                     </div>
                     <div class="text">{{ $data->name }}</div>
                 </div>

@@ -20,7 +20,7 @@
                 @foreach($datas as $data)
             <tr>
                 <td>{{ $data->name }}</td>
-                <td><div style="width:60px;height:30px;overflow:hidden;"><img src="{{ $data->pic()->url }}" style="@if($size=$data->getUserPicSize($data->pic(),$w=50,$h=30))width:{{$size}}px;@endif height:30px;"></div></td>
+                <td><div style="width:60px;height:30px;overflow:hidden;"><img src="{{ $data->pic()->url }}" style="@if($size=$data->getUserPicSize($data->pic(),$w=50,$h=30))width:{{$size['w']}}px;height:{{$size['h']}}px;@endif"></div></td>
                 <td>{{ $data->sort }}</td>
                 <td>{{ $data->isshow() }}</td>
                 <td>{{ $data->createTime() }}</td>

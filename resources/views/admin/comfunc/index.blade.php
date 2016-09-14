@@ -30,7 +30,7 @@
                         <td class="am-hide-sm-only">{{ $data->id }}</td>
                         <td class="am-hide-sm-only"><a href="{{DOMAIN}}admin/comfunc/{{$data->id}}">
                                 {{ str_limit($data->name,20) }}</a></td>
-                        <td class="am-hide-sm-only">{{ $data->module() }}</td>
+                        <td class="am-hide-sm-only">{{ $data->getModuleName() }}</td>
                         <td class="am-hide-sm-only">{{ $data->company() }}</td>
                         <td class="am-hide-sm-only">{{ $data->sort }}</td>
                         <td class="am-hide-sm-only">{{ $data->isshow() }}</td>

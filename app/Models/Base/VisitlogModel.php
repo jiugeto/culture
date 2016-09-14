@@ -1,6 +1,7 @@
 <?php
 namespace App\Models\Base;
 
+use App\Models\Company\ComMainModel;
 use App\Models\CompanyModel;
 use App\Models\UserModel;
 
@@ -84,10 +85,19 @@ class VisitlogModel extends BaseModel
     }
 
     /**
+     * 得到访问频率
+     */
+    public function getVisitRate()
+    {
+        $comMainModel = ComMainModel::where('cid',$this->cid)->first();
+        return $comMainModel ? $comMainModel->visitRate : 0;
+    }
+
+    /**
      * 用户当天访问时长
      */
     public function getTimeCount()
     {
-        return $this->timeCount ? $this->timeCount.' 秒' : '不到 '.$visitRate.' 秒';
+        return $this->timeCount ? $this->timeCount.' 秒' : '不到 '.$this->getVisitRate().' 秒';
     }
 }

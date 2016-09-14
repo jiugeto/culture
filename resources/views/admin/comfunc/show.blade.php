@@ -37,7 +37,7 @@
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">所属模块 / Genre：</td>
-                    <td>{{ $data->module() }}</td>
+                    <td>{{ $data->getModuleName() }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">内容 / Introduce：</td>
@@ -47,7 +47,7 @@
                     <td class="am-hide-sm-only">小字 /  Small：</td>
                     <td>
                         @if($data->small)
-                            @foreach(explode('|',$data->small) as $small) {{ $small }} @endforeach
+                            @foreach(explode('|',$data->small) as $small) {{ $small }} <br> @endforeach
                         @endif
                     </td>
                 </tr>
@@ -61,11 +61,11 @@
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">创建时间 / Create Time：</td>
-                    <td>{{ $data->created_at }}</td>
+                    <td>{{ $data->createTime() }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">修改时间 / Update Time：</td>
-                    <td>{{ $data->updated_at!='0000-00-00 00:00:00' ? $data->updated_at : '未修改' }}</td>
+                    <td>{{ $data->updateTime() }}</td>
                 </tr>
                 </tbody>
             </table>

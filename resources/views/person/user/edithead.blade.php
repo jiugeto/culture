@@ -32,7 +32,7 @@
                                 @foreach($pics as $pic)
                             <div class="img {{$pic->id==$user->head?'img_curr':''}}" onclick="getPic({{$pic->id}});" title="点击获取该图片">
                                 <img src="{{ $pic->url }}"
-                                     style="@if($size=$pic->getPicSize($pic,$w=100,$h=100)) width:{{$size}}px; @endif height:100px;">
+                                     style="@if($size=$pic->getPicSize($pic,$w=100,$h=100)) width:{{$size['w']}}px;height:{{$size['h']}}px; @endif">
                                 <div class="bianhao">编号：{{ $pic->id }}</div>
                             </div>
                                 @endforeach

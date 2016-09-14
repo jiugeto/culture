@@ -13,11 +13,10 @@
                 <form class="am-form" data-am-validator method="POST" action="{{DOMAIN}}admin/commain" enctype="multipart/form-data">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <fieldset>
-                        {{--<div class="am-form-group">--}}
-                            {{--<label>公司名称 / Name：</label>--}}
-                            {{--<input type="text" placeholder="至少2个字符" minlength="2" required name="name"/>--}}
-                            {{--{{ $data->company()->name }}--}}
-                        {{--</div>--}}
+                        <div class="am-form-group">
+                            <label>公司名称 / Name：</label>
+                            <input type="text" placeholder="至少2个字符" minlength="2" required name="name"/>
+                        </div>
 
                         <div class="am-form-group">
                             <label>鼠标移动显示 / Title：</label>
@@ -36,37 +35,11 @@
 
                         <div class="am-form-group">
                             <label>logo / Logo：</label>
-                            {{--<input type="text" name="logo"/>--}}
-                            <input type="text" placeholder="本地logo地址" readonly name="url_file">
-                            <input type="button" value="[找图]" onclick="path.click()" class="am-btn am-btn-primary">
-                            <input type="file" id="path" style="display:none" onchange="url_file.value=this.value;" name="url_ori">
+                            @include('admin.common.piclist')
+                            {{--<input type="text" placeholder="本地logo地址" readonly name="url_file">--}}
+                            {{--<input type="button" value="[找图]" onclick="path.click()" class="am-btn am-btn-primary">--}}
+                            {{--<input type="file" id="path" style="display:none" onchange="url_file.value=this.value;" name="url_ori">--}}
                         </div>
-
-                        {{--<div class="am-form-group" id="job">--}}
-                            {{--<label>招聘岗位 / Job：(多组信息用|隔开)</label>--}}
-                            {{--<textarea placeholder="多组信息用|隔开" name="job" cols="50" rows="5"></textarea>--}}
-                        {{--</div>--}}
-
-                        {{--<div class="am-form-group" id="num">--}}
-                            {{--<label>岗位人数 / Job Number：(多组信息用|隔开，必须与岗位一一对应)</label>--}}
-                            {{--<textarea placeholder="多组信息用|隔开" name="job_num" cols="50" rows="5"></textarea>--}}
-                        {{--</div>--}}
-
-                        {{--<div class="am-form-group" id="require">--}}
-                            {{--<label>岗位要求 / Job Require：(多组信息用|隔开，必须与岗位一一对应)</label>--}}
-                            {{--<textarea placeholder="多组信息用|隔开" name="job_require" cols="50" rows="5"></textarea>--}}
-                        {{--</div>--}}
-                        {{--<script>--}}
-                            {{--$(document).ready(function(){--}}
-                                {{--var job = $("#job");--}}
-                                {{--var num = $("#num");--}}
-                                {{--var require = $("#require");--}}
-                                {{--job.change(function(){--}}
-                                    {{--if(job.val()){ num.show(); require.show(); }--}}
-                                    {{--else { num.hide(); require.hide(); }--}}
-                                {{--});--}}
-                            {{--});--}}
-                        {{--</script>--}}
 
                         <div class="am-form-group">
                             <label>排序 / Sort：</label>
@@ -75,8 +48,8 @@
 
                         <div class="am-form-group">
                             <label>是否置顶 / Is Top：</label>
-                            <label><input type="radio" name="istop" value="0"> 不置顶&nbsp;&nbsp;</label>
-                            <label><input type="radio" name="istop" value="1" checked> 置顶&nbsp;&nbsp;</label>
+                            <label><input type="radio" name="istop" value="0" checked> 不置顶&nbsp;&nbsp;</label>
+                            <label><input type="radio" name="istop" value="1"> 置顶&nbsp;&nbsp;</label>
                         </div>
 
                         <div class="am-form-group">

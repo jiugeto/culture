@@ -192,7 +192,7 @@
                 @foreach($goods as $good)
                     <div class="img" onmouseover="over({{ $good->id }})" onmouseout="out({{ $good->id }})">
                         <a href="{{DOMAIN}}product/video/{{ $good->id }}/{{ $good->video_id }}" title="查看详情：{{ $good->title() }}">
-                            <img src="{{ $good->getPicUrl() }}" style="@if($size=$good->getPicSize($w=148,$h=100)) width:{{$size}}px; @endif height:100px;">
+                            <img src="{{ $good->getPicUrl() }}" style="@if($size=$good->getPicSize($w=148,$h=100)) width:{{$size['w']}}px; height:{{$size['h']}}px; @endif">
                         </a>
                         <div class="text" style="top:0;pointer-events:none;" id="goodText_{{ $good->id }}">
                             <div>{{ $good->name }}</div>

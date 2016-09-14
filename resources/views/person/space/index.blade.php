@@ -10,7 +10,7 @@
                 <p class="title">头像</p>
                 <div class="img">
                     @if($user && $user->head())
-                    <img src="{{ $user->head() }}" style="@if($size=$user->getUserPicSize($user,$w=120,$h=100)) width:{{$size}}px; @endif height:100px;">
+                    <img src="{{ $user->head() }}" style="@if($size=$user->getUserPicSize($user,$w=120,$h=100)) width:{{$size['w']}}px; height:{{$size['h']}}px; @endif">
                     @else
                     <div style="margin:0;width:120px;height:100px;background:rgb(240,240,240);border:0;"></div>
                     @endif
@@ -44,7 +44,7 @@
                     @foreach($pics as $pic)
                 <div class="img">
                     @if($pic->url)
-                    <img src="{{ $pic->url }}" style="@if($size=$pic->getPicSize($pic,$w=55,$h=50)) width:{{$size}}px; @endif height:50px;">
+                    <img src="{{ $pic->url }}" style="@if($size=$pic->getPicSize($pic,$w=55,$h=50)) width:{{$size['w']}}px;height:{{$size['h}}px; @endif">
                     @else
                     <div style="margin:0;width:55px;height:50px;background:rgb(240,240,240);border:0;"></div>
                     @endif
@@ -84,7 +84,7 @@
                     <div class="video">
                         <div class="img">
                             @if($good->getPicUrl())
-                            <img src="{{ $good->getPicUrl() }}" style="@if($size=$good->getPicSize($w=100,$h=50)) width:{{$size}}px; @endif height:50px;">
+                            <img src="{{ $good->getPicUrl() }}" style="@if($size=$good->getPicSize($w=100,$h=50)) width:{{$size['w']}}px;height:{{$size['h}}px; @endif">
                             @else
                             <div style="margin:0;width:100px;height:50px;background:rgb(240,240,240);border:0;"></div>
                             @endif
@@ -116,7 +116,7 @@
                 <a href=""><div class="video">
                     <div class="img">
                         @if($product->getPicUrl())
-                        <img src="{{ $product->getPicUrl() }}" style="@if($size=$product->getPicSize($w=100,$h=50)) width:{{$size}}px; @endif height:50px;">
+                        <img src="{{ $product->getPicUrl() }}" style="@if($size=$product->getPicSize($w=100,$h=50)) width:{{$size['w']}}px;height:{{$size['h']}}px; @endif">
                         @else
                         <div style="margin:0;width:100px;height:50px;background:rgb(240,240,240);border:0;"></div>
                         @endif

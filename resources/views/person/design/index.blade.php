@@ -11,7 +11,7 @@
                     <div class="per_waterfall">
                         <div class="img">
                             @if($data->getOnePic())
-                            <img src="{{ $data->getOnePicUrl() }}" style="@if($size=$data->getUserPicSize($data->getOnePic(),$w=150,$h=200))width:{{$size}}px;@endif height:200px;">
+                            <img src="{{ $data->getOnePicUrl() }}" style="@if($size=$data->getUserPicSize($data->getOnePic(),$w=150,$h=200))width:{{$size['w']}}px;height:{{$size['h']}}px; @endif">
                             @else
                                 <div style="width:125px;height:200px;background:rgb(240,240,240);"></div>
                             @endif

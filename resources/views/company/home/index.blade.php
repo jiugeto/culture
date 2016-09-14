@@ -80,7 +80,7 @@
                 <div class="img">
                     @if($new->pic_id)
                         <img src="{{ $new->getPicUrl() }}"
-                             style="@if($size=$new->getUserPicSize($new->pic(),$w=210,$h=200))width:{{$size}}px;height:200px; @endif">
+                             style="@if($size=$new->getUserPicSize($new->pic(),$w=210,$h=200)) width:{{$size['w']}}px;height:{{$size['h']}}px; @endif">
                     @else 待添加
                     @endif
                 </div>
@@ -145,7 +145,7 @@
                     <div class="com_pro" style="{{$kwork>3?"margin-top:20px;":""}}">
                         <div class="img">
                             <img src="{{ $work->getPicUrl() }}"
-                                 style="@if($size=$work->getPicSize($w=240,$h=140))width:{{$size}}px;height:140px @endif">
+                                 style="@if($size=$work->getPicSize($w=240,$h=140))width:{{$size['w']}}px;height:{{$size['h']}}px @endif">
                         </div>
                         <p class="text pname">{{ $work->name }}</p>
                     </div>

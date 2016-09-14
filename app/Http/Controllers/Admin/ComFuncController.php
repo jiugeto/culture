@@ -17,9 +17,9 @@ class ComFuncController extends BaseController
     {
         parent::__construct();
         $this->model = new ComFuncModel();
-        $this->crumb['']['name'] = '企业功能列表';
         $this->crumb['category']['name'] = '企业功能管理';
         $this->crumb['category']['url'] = 'comfunc';
+        $this->crumb['']['name'] = '企业功能列表';
     }
 
     public function index()
@@ -134,7 +134,8 @@ class ComFuncController extends BaseController
      */
     public function query()
     {
-        $datas = ComFuncModel::orderBy('id','desc')->paginate($this->limit);
+        $datas = ComFuncModel::orderBy('id','desc')
+            ->paginate($this->limit);
         $datas->limit = $this->limit;
         return $datas;
     }

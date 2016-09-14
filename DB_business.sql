@@ -47,7 +47,7 @@ CREATE TABLE `ba_action` (
 
 LOCK TABLES `ba_action` WRITE;
 /*!40000 ALTER TABLE `ba_action` DISABLE KEYS */;
-INSERT INTO `ba_action` VALUES (1,'首页','','App\\Http\\Controllers\\Admin','Home','home','index','am-cf',0,0,1,0,20160109,0),(2,'权限管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,0,1,0,20160109,0),(3,'操作管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',2,0,1,0,20160110,20160112),(4,'资料审核','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,0,1,0,0,20160110),(5,'供求管理','企业，设计师的','App\\Http\\Controllers\\Admin','Goods','goods','index','am-cf',0,0,1,0,0,20160409),(6,'角色管理','','App\\Http\\Controllers\\Admin','Role','role','index','am-cf',2,0,1,0,0,20160112),(7,'管理员管理','','App\\Http\\Controllers\\Admin','Admin','admin','index','am-cf',2,0,1,0,20160112,20160112),(8,'产品管理','','App\\Http\\Controllers\\Admin','Product','action','index','am-cf',0,0,1,0,20160112,20160216),(9,'系统管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,0,1,0,20160112,0),(10,'话题管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,0,1,0,20160112,0),(11,'企业功能管理','','App\\Http\\Controllers\\Admin','ComInfo','cominfo','index','am-cf',0,0,1,0,20160112,20160426),(12,'功能管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,0,1,0,20160112,20160404),(13,'消息管理','','App\\Http\\Controllers\\Admin','Message','message','index','am-cf',12,0,1,0,20160112,0),(14,'链接管理','','App\\Http\\Controllers\\Admin','Link','link','index','am-cf',12,0,1,0,20160112,0),(15,'心声管理','','App\\Http\\Controllers\\Admin','UserVoice','uservoice','index','am-cf',12,0,1,0,20160112,20160409),(16,'类型管理','','App\\Http\\Controllers\\Admin','Type','type','index','am-cf',12,0,1,1,20160113,20160411),(17,'图片管理','','App\\Http\\Controllers\\Admin','Pic','pic','index','am-cf',12,0,1,0,20160113,20160411),(18,'广告管理','','App\\Http\\Controllers\\Admin','Ad','ad','index','am-cf',0,0,1,0,20160215,0),(19,'广告管理','','App\\Http\\Controllers\\Admin','Ad','ad','index','am-cf',18,0,1,0,20160215,0),(20,'广告位管理','','App\\Http\\Controllers\\Admin','AdPlace','place','index','am-cf',18,0,1,0,20160215,0),(21,'内部产品','','App\\Http\\Controllers\\Admin','Product','product','index','',8,0,1,0,20160216,20160216),(22,'产品属性','','App\\Http\\Controllers\\Admin','ProductAttr','productattr','index','',8,0,1,0,20160216,20160508),(23,'视频管理','制作公司，设计师的','App\\Http\\Controllers\\Admin','Goods','goods','index','',5,0,1,0,20160216,20160409),(24,'产品类型','','App\\Http\\Controllers\\Admin','Category','category','index','',12,5,1,1,20160216,20160411),(25,'租赁管理','','App\\Http\\Controllers\\Admin','Rent','rent','index','',5,0,1,0,20160216,0),(26,'娱乐管理','','App\\Http\\Controllers\\Admin','Entertain','entertain','index','',5,0,1,0,20160216,0),(27,'设计管理','','App\\Http\\Controllers\\Admin','Design','design','index','',5,0,1,0,20160217,0),(28,'用户权限','','App\\Http\\Controllers\\Admin','Authorization','authorization','index','',2,0,1,1,20160217,0),(29,'前台功能','','App\\Http\\Controllers\\Admin','Function','function','index','',2,0,1,1,20160217,0),(30,'前台控制菜单','','App\\Http\\Controllers\\Admin','Menus','menus','index','',2,0,1,0,20160229,0),(31,'意见管理','','App\\Http\\Controllers\\Admin','Opinions','opinions','index','',12,0,1,0,20160404,0),(32,'用户日志','','App\\Http\\Controllers\\Admin','Userlog','userlog','index','',9,0,1,0,20160407,20160411),(33,'会员管理','','App\\Http\\Controllers\\Admin','User','user','index','',4,0,1,0,20160411,0),(34,'地区管理','','App\\Http\\Controllers\\Admin','Area','area','index','',12,0,1,0,20160411,0),(35,'版本管理','','App\\Http\\Controllers\\Admin','Versionlog','versionlog','index','',9,0,1,1,20160415,0),(36,'创意管理','','App\\Http\\Controllers\\Admin','Idea','idea','index','',5,0,1,0,20160416,0),(37,'话题列表','','App\\Http\\Controllers\\Admin','Talk','talk','index','',10,0,1,0,20160417,0),(38,'人员管理','','App\\Http\\Controllers\\Admin','Staff','staff','index','',5,0,1,0,20160423,0),(39,'企业模块','','App\\Http\\Controllers\\Admin','ComModule','commodule','index','',11,0,1,0,20160426,20160426),(40,'企业主体','','App\\Http\\Controllers\\Admin','ComMain','commain','index','',11,0,1,0,20160426,0),(41,'企业功能','','App\\Http\\Controllers\\Admin','ComFunc','comfunc','index','',11,0,1,0,20160426,0),(42,'访问管理','','App\\Http\\Controllers\\Admin','Visitlog','visit','index','',11,0,1,0,20160501,0),(43,'产品动画','','App\\Http\\Controllers\\Admin','ProductLayer','productlayer','index','',8,0,1,0,20160502,20160518),(44,'动画内容','','App\\Http\\Controllers\\Admin','ProductCon','productcon','index','',8,0,1,0,20160511,20160511),(45,'订单管理','','App\\Http\\Controllers\\Admin','Order','order','index','',0,0,1,0,20160524,0),(46,'订单管理','','App\\Http\\Controllers\\Admin','Order','order','index','',45,0,1,0,20160524,0),(47,'售后服务','','App\\Http\\Controllers\\Admin','OrderFirm','orderfirm','index','',45,0,1,0,20160524,0),(48,'创作订单','','App\\Http\\Controllers\\Admin','OrderProduct','orderpro','index','',45,0,1,0,20160524,0),(49,'分镜管理','','App\\Http\\Controllers\\Admin','StoryBoard','storyboard','index','',12,0,1,0,20160524,20160524);
+INSERT INTO `ba_action` VALUES (1,'首页','','App\\Http\\Controllers\\Admin','Home','home','index','am-cf',0,0,1,0,20160109,0),(2,'权限管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,0,1,0,20160109,0),(3,'操作管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',2,0,1,0,20160110,20160112),(4,'资料审核','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,0,1,0,0,20160110),(5,'供求管理','企业，设计师的','App\\Http\\Controllers\\Admin','Goods','goods','index','am-cf',0,0,1,0,0,20160409),(6,'角色管理','','App\\Http\\Controllers\\Admin','Role','role','index','am-cf',2,0,1,0,0,20160112),(7,'管理员管理','','App\\Http\\Controllers\\Admin','Admin','admin','index','am-cf',2,0,1,0,20160112,20160112),(8,'产品管理','','App\\Http\\Controllers\\Admin','Product','action','index','am-cf',0,0,1,0,20160112,20160216),(9,'系统管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,0,1,0,20160112,0),(10,'话题管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,0,1,0,20160112,0),(11,'企业功能管理','','App\\Http\\Controllers\\Admin','ComInfo','cominfo','index','am-cf',0,0,1,0,20160112,20160426),(12,'基本管理','','App\\Http\\Controllers\\Admin','Action','action','index','am-cf',0,0,1,0,20160112,20160404),(13,'消息管理','','App\\Http\\Controllers\\Admin','Message','message','index','am-cf',12,0,1,0,20160112,0),(14,'链接管理','','App\\Http\\Controllers\\Admin','Link','link','index','am-cf',12,0,1,0,20160112,0),(15,'心声管理','','App\\Http\\Controllers\\Admin','UserVoice','uservoice','index','am-cf',12,0,1,0,20160112,20160409),(16,'类型管理','','App\\Http\\Controllers\\Admin','Type','type','index','am-cf',12,0,1,1,20160113,20160411),(17,'图片管理','','App\\Http\\Controllers\\Admin','Pic','pic','index','am-cf',12,0,1,0,20160113,20160411),(18,'广告管理','','App\\Http\\Controllers\\Admin','Ad','ad','index','am-cf',0,0,1,0,20160215,0),(19,'广告管理','','App\\Http\\Controllers\\Admin','Ad','ad','index','am-cf',18,0,1,0,20160215,0),(20,'广告位管理','','App\\Http\\Controllers\\Admin','AdPlace','place','index','am-cf',18,0,1,0,20160215,0),(21,'内部产品','','App\\Http\\Controllers\\Admin','Product','product','index','',8,0,1,0,20160216,20160216),(22,'产品属性','','App\\Http\\Controllers\\Admin','ProductAttr','productattr','index','',8,0,1,0,20160216,20160508),(23,'视频管理','制作公司，设计师的','App\\Http\\Controllers\\Admin','Goods','goods','index','',5,0,1,0,20160216,20160409),(24,'产品类型','','App\\Http\\Controllers\\Admin','Category','category','index','',12,5,1,1,20160216,20160411),(25,'租赁管理','','App\\Http\\Controllers\\Admin','Rent','rent','index','',5,0,1,0,20160216,0),(26,'娱乐管理','','App\\Http\\Controllers\\Admin','Entertain','entertain','index','',5,0,1,0,20160216,0),(27,'设计管理','','App\\Http\\Controllers\\Admin','Design','design','index','',5,0,1,0,20160217,0),(28,'用户权限','','App\\Http\\Controllers\\Admin','Authorization','authorization','index','',2,0,1,1,20160217,0),(29,'前台功能','','App\\Http\\Controllers\\Admin','Function','function','index','',2,0,1,1,20160217,0),(30,'前台控制菜单','','App\\Http\\Controllers\\Admin','Menus','menus','index','',2,0,1,0,20160229,0),(31,'意见管理','','App\\Http\\Controllers\\Admin','Opinions','opinions','index','',12,0,1,0,20160404,0),(32,'用户日志','','App\\Http\\Controllers\\Admin','Userlog','userlog','index','',9,0,1,0,20160407,20160411),(33,'会员管理','','App\\Http\\Controllers\\Admin','User','user','index','',4,0,1,0,20160411,0),(34,'地区管理','','App\\Http\\Controllers\\Admin','Area','area','index','',12,0,1,0,20160411,0),(35,'版本管理','','App\\Http\\Controllers\\Admin','Versionlog','versionlog','index','',9,0,1,1,20160415,0),(36,'创意管理','','App\\Http\\Controllers\\Admin','Idea','idea','index','',5,0,1,0,20160416,0),(37,'话题列表','','App\\Http\\Controllers\\Admin','Talk','talk','index','',10,0,1,0,20160417,0),(38,'人员管理','','App\\Http\\Controllers\\Admin','Staff','staff','index','',5,0,1,0,20160423,0),(39,'企业模块','','App\\Http\\Controllers\\Admin','ComModule','commodule','index','',11,0,1,0,20160426,20160426),(40,'企业主体','','App\\Http\\Controllers\\Admin','ComMain','commain','index','',11,0,1,0,20160426,0),(41,'企业功能','','App\\Http\\Controllers\\Admin','ComFunc','comfunc','index','',11,0,1,0,20160426,0),(42,'访问管理','','App\\Http\\Controllers\\Admin','Visitlog','visit','index','',11,0,1,0,20160501,0),(43,'产品动画','','App\\Http\\Controllers\\Admin','ProductLayer','productlayer','index','',8,0,1,0,20160502,20160518),(44,'动画内容','','App\\Http\\Controllers\\Admin','ProductCon','productcon','index','',8,0,1,0,20160511,20160511),(45,'订单管理','','App\\Http\\Controllers\\Admin','Order','order','index','',0,0,1,0,20160524,0),(46,'订单管理','','App\\Http\\Controllers\\Admin','Order','order','index','',45,0,1,0,20160524,0),(47,'售后服务','','App\\Http\\Controllers\\Admin','OrderFirm','orderfirm','index','',45,0,1,0,20160524,0),(48,'创作订单','','App\\Http\\Controllers\\Admin','OrderProduct','orderpro','index','',45,0,1,0,20160524,0),(49,'分镜管理','','App\\Http\\Controllers\\Admin','StoryBoard','storyboard','index','',5,0,1,0,20160524,20160524);
 /*!40000 ALTER TABLE `ba_action` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -101,7 +101,7 @@ CREATE TABLE `ba_log` (
   `loginTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '登陆时间',
   `logoutTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '退出时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='管理员日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='管理员日志表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -110,7 +110,7 @@ CREATE TABLE `ba_log` (
 
 LOCK TABLES `ba_log` WRITE;
 /*!40000 ALTER TABLE `ba_log` DISABLE KEYS */;
-INSERT INTO `ba_log` VALUES (1,1,'jiuge',1,'20160908075940137','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473292780,0),(2,1,'jiuge',1,'201609100906318268','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473469591,0),(3,1,'jiuge',1,'201609101339029262','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473485942,0),(4,1,'jiuge',1,'201609110851236265','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473555083,0),(5,1,'jiuge',1,'201609120752378324','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473637957,0),(6,1,'jiuge',1,'20160912135742704','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473659862,0),(7,1,'jiuge',1,'201609121405091197','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473660309,0),(8,1,'jiuge',1,'201609130751197676','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473724279,0),(9,1,'jiuge',2,'20160913170458395','192.168.2.100','浙江省 杭州市 滨江区','/admin/login',1473757498,0);
+INSERT INTO `ba_log` VALUES (1,1,'jiuge',1,'20160908075940137','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473292780,0),(2,1,'jiuge',1,'201609100906318268','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473469591,0),(3,1,'jiuge',1,'201609101339029262','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473485942,0),(4,1,'jiuge',1,'201609110851236265','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473555083,0),(5,1,'jiuge',1,'201609120752378324','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473637957,0),(6,1,'jiuge',1,'20160912135742704','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473659862,0),(7,1,'jiuge',1,'201609121405091197','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473660309,0),(8,1,'jiuge',1,'201609130751197676','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473724279,0),(9,1,'jiuge',2,'20160913170458395','192.168.2.100','浙江省 杭州市 滨江区','/admin/login',1473757498,0),(10,1,'jiuge',2,'2016091409015949','192.168.2.101','浙江省 杭州市 滨江区','/admin/login',1473814919,0);
 /*!40000 ALTER TABLE `ba_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -166,33 +166,6 @@ CREATE TABLE `ba_role_action` (
 LOCK TABLES `ba_role_action` WRITE;
 /*!40000 ALTER TABLE `ba_role_action` DISABLE KEYS */;
 /*!40000 ALTER TABLE `ba_role_action` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `ba_versions`
---
-
-DROP TABLE IF EXISTS `ba_versions`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `ba_versions` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL COMMENT '名称',
-  `intro` varchar(2000) NOT NULL COMMENT '修改的内容',
-  `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
-  `updated_at` int(10) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='修改（版本）日志表：开发者自己记录使用';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `ba_versions`
---
-
-LOCK TABLES `ba_versions` WRITE;
-/*!40000 ALTER TABLE `ba_versions` DISABLE KEYS */;
-INSERT INTO `ba_versions` VALUES (2,'修改2','<p>fdbfdbgnttghngfnghn不同风格日发布的个v</p><p>让他发布GV</p>',20160416,0);
-/*!40000 ALTER TABLE `ba_versions` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1050,7 +1023,7 @@ CREATE TABLE `bs_pics` (
 
 LOCK TABLES `bs_pics` WRITE;
 /*!40000 ALTER TABLE `bs_pics` DISABLE KEYS */;
-INSERT INTO `bs_pics` VALUES (1,1,'图片111',1,'/uploads/images/2016/ppt.png','',1920,400,'ergdfbghrgtfh\r\n111111111111\r\n0000000000000',0,0,2016),(2,1,'图片2',1,'/uploads/images/2016/ppt2.png','',1920,400,'',0,20160529,20160529),(3,1,'图片3',1,'/uploads/images/2016/online1.png','',300,300,'',0,20160529,20160529),(4,1,'图片4',1,'http://i0.letvimg.com/lc09_yunzhuanma/201606/08/16/46/af5d92d3e90c0f86894c8a3a13eb600b_NTg1MDEzMDg=/thumb/2.jpg','',120,90,'',0,20160529,1473754267),(5,1,'图片5',1,'/uploads/images/2016/ppt5.png','',1920,400,'',0,20160529,20160529);
+INSERT INTO `bs_pics` VALUES (1,1,'图片111',1,'/uploads/images/2016/ppt.png','',1920,400,'ergdfbghrgtfh\r\n111111111111\r\n0000000000000',0,0,2016),(2,1,'图片2',1,'/uploads/images/2016/ppt2.png','',1920,400,'',0,20160529,20160529),(3,1,'图片3',1,'/uploads/images/2016/online1.png','',300,300,'',0,20160529,20160529),(4,1,'图片4',1,'http://i0.letvimg.com/lc09_yunzhuanma/201606/08/16/46/af5d92d3e90c0f86894c8a3a13eb600b_NTg1MDEzMDg=/thumb/2.jpg','',120,90,'',0,20160529,1473754267),(5,1,'图片5',1,'/assets/images/icon.png','',150,150,'',0,20160529,20160529);
 /*!40000 ALTER TABLE `bs_pics` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1870,7 +1843,9 @@ DROP TABLE IF EXISTS `bs_visitlog`;
 CREATE TABLE `bs_visitlog` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `cid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '企业网站企业id',
+  `cname` varchar(100) NOT NULL COMMENT '企业名称',
   `visit_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '访问者uid',
+  `uname` varchar(100) NOT NULL COMMENT '用户名称',
   `action` varchar(100) NOT NULL,
   `ip` varchar(15) NOT NULL COMMENT '用户端ip',
   `ipaddress` varchar(100) NOT NULL COMMENT '访问用户ip所在城市',
@@ -1889,7 +1864,7 @@ CREATE TABLE `bs_visitlog` (
 
 LOCK TABLES `bs_visitlog` WRITE;
 /*!40000 ALTER TABLE `bs_visitlog` DISABLE KEYS */;
-INSERT INTO `bs_visitlog` VALUES (1,1,0,'/c/1','192.168.2.100','浙江省 杭州市 滨江区','201609091654354360',1,0,1473411275,1473421673),(2,1,0,'/c/1','192.168.2.100','浙江省 杭州市 滨江区','201609091657167135',1,0,1473411436,1473421673),(3,1,0,'/c/1','192.168.2.100','浙江省 杭州市 滨江区','201609091704382313',1,0,1473411878,1473421673),(4,1,0,'/c/1/product','192.168.2.100','浙江省 杭州市 滨江区','201609091811281741',2,0,1473415888,1473421938),(5,1,0,'/c/1/part','192.168.2.100','浙江省 杭州市 滨江区','201609091828036412',1,0,1473416883,1473421257),(6,1,0,'/c/1/firm','192.168.2.100','浙江省 杭州市 滨江区','201609091941128083',1,0,1473421272,1473421643),(7,1,0,'/c/1/about','192.168.2.100','浙江省 杭州市 滨江区','20160909195506769',1,0,1473422106,1473422106),(8,1,0,'/c/1/recruit','192.168.2.100','浙江省 杭州市 滨江区','201609091955137876',1,5,1473422113,1473422519),(9,1,0,'/c/1/contact','192.168.2.100','浙江省 杭州市 滨江区','201609091955217864',1,705,1473422121,1473423617),(10,1,1,'/c/1','192.168.2.100','浙江省 杭州市 滨江区','201609101833306148',3,3020,1473503610,1473571791),(11,1,1,'/c/1','192.168.2.100','浙江省 杭州市 滨江区','201609110915338538',2,655,1473556533,1473571791),(12,1,1,'/c/1/about','192.168.2.100','浙江省 杭州市 滨江区','201609111809022085',1,395,1473588542,1473589037),(13,1,1,'/c/1','192.168.2.100','浙江省 杭州市 滨江区','201609131539132984',1,0,1473752353,1473752353),(14,1,1,'/c/1/contact','192.168.2.100','浙江省 杭州市 滨江区','201609131539176170',1,40,1473752357,1473752405);
+INSERT INTO `bs_visitlog` VALUES (1,1,'这是广告公司',0,'	游客','/c/1','192.168.2.100','浙江省 杭州市 滨江区','201609091654354360',1,0,1473411275,1473421673),(2,1,'这是广告公司',0,'	游客','/c/1','192.168.2.100','浙江省 杭州市 滨江区','201609091657167135',1,0,1473411436,1473421673),(3,1,'这是广告公司',0,'	游客','/c/1','192.168.2.100','浙江省 杭州市 滨江区','201609091704382313',1,0,1473411878,1473421673),(4,1,'这是广告公司',0,'	游客','/c/1/product','192.168.2.100','浙江省 杭州市 滨江区','201609091811281741',2,0,1473415888,1473421938),(5,1,'这是广告公司',0,'	游客','/c/1/part','192.168.2.100','浙江省 杭州市 滨江区','201609091828036412',1,0,1473416883,1473421257),(6,1,'这是广告公司',0,'	游客','/c/1/firm','192.168.2.100','浙江省 杭州市 滨江区','201609091941128083',1,0,1473421272,1473421643),(7,1,'这是广告公司',0,'	游客','/c/1/about','192.168.2.100','浙江省 杭州市 滨江区','20160909195506769',1,0,1473422106,1473422106),(8,1,'这是广告公司',0,'	游客','/c/1/recruit','192.168.2.100','浙江省 杭州市 滨江区','201609091955137876',1,5,1473422113,1473422519),(9,1,'这是广告公司',0,'	游客','/c/1/contact','192.168.2.100','浙江省 杭州市 滨江区','201609091955217864',1,705,1473422121,1473423617),(10,1,'这是广告公司',1,'jiuge','/c/1','192.168.2.100','浙江省 杭州市 滨江区','201609101833306148',3,3020,1473503610,1473571791),(11,1,'这是广告公司',1,'jiuge','/c/1','192.168.2.100','浙江省 杭州市 滨江区','201609110915338538',2,655,1473556533,1473571791),(12,1,'这是广告公司',1,'jiuge','/c/1/about','192.168.2.100','浙江省 杭州市 滨江区','201609111809022085',1,395,1473588542,1473589037),(13,1,'这是广告公司',1,'jiuge','/c/1','192.168.2.100','浙江省 杭州市 滨江区','201609131539132984',1,0,1473752353,1473752353),(14,1,'这是广告公司',1,'jiuge','/c/1/contact','192.168.2.100','浙江省 杭州市 滨江区','201609131539176170',1,40,1473752357,1473752405);
 /*!40000 ALTER TABLE `bs_visitlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1976,7 +1951,7 @@ CREATE TABLE `com_main` (
   `title` varchar(100) NOT NULL COMMENT '鼠标移动显示',
   `keyword` varchar(255) NOT NULL COMMENT '关键字',
   `description` varchar(255) NOT NULL COMMENT '描述',
-  `logo` varchar(255) NOT NULL COMMENT '公司logo',
+  `logo` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '公司logo',
   `layoutHome` varchar(2000) NOT NULL COMMENT '公司页面布局开关，0关闭，1开启：serviceSwitch服务开关，newsSwitch新闻开关，productSwitch产品开关，parternerSwitch合作伙伴，introSwitch公司简介，partSwitch花絮开关，teamSwitch团队开关，recruitSwitch招聘开关，contactSwicth类型开关，footLinkSwitch底部链接，',
   `skin` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '公司页面皮肤颜色值选择',
   `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序字段，值越大越靠前，默认10',
@@ -1995,7 +1970,7 @@ CREATE TABLE `com_main` (
 
 LOCK TABLES `com_main` WRITE;
 /*!40000 ALTER TABLE `com_main` DISABLE KEYS */;
-INSERT INTO `com_main` VALUES (1,0,0,'某某公司','某某公司','某某关键字','某某描述','/assets/images/icon.png','',1,10,0,1,5,20160427,20160427),(2,1,1,'这是广告公司','某某公司','某某关键字','某某描述\r\n4444444','/uploads/images/2016-05-06/572c4f5fdf276.png','a:11:{s:13:\"serviceSwitch\";a:3:{s:3:\"key\";i:1;s:4:\"name\";s:12:\"服务开关\";s:5:\"value\";s:1:\"1\";}s:10:\"newsSwitch\";a:3:{s:3:\"key\";i:2;s:4:\"name\";s:12:\"新闻开关\";s:5:\"value\";i:1;}s:13:\"productSwitch\";a:3:{s:3:\"key\";i:3;s:4:\"name\";s:12:\"产品开关\";s:5:\"value\";i:1;}s:15:\"parternerSwitch\";a:3:{s:3:\"key\";i:4;s:4:\"name\";s:12:\"合作伙伴\";s:5:\"value\";i:1;}s:11:\"introSwitch\";a:3:{s:3:\"key\";i:5;s:4:\"name\";s:12:\"公司简介\";s:5:\"value\";i:1;}s:10:\"partSwitch\";a:3:{s:3:\"key\";i:6;s:4:\"name\";s:12:\"花絮开关\";s:5:\"value\";i:1;}s:10:\"teamSwitch\";a:3:{s:3:\"key\";i:7;s:4:\"name\";s:12:\"团队开关\";s:5:\"value\";i:1;}s:13:\"recruitSwitch\";a:3:{s:3:\"key\";i:8;s:4:\"name\";s:12:\"招聘开关\";s:5:\"value\";i:1;}s:13:\"contactSwicth\";a:3:{s:3:\"key\";i:9;s:4:\"name\";s:12:\"联系开关\";s:5:\"value\";i:1;}s:9:\"pptSwitch\";a:3:{s:3:\"key\";i:10;s:4:\"name\";s:12:\"宣传开关\";s:5:\"value\";i:1;}s:14:\"footLinkSwitch\";a:3:{s:3:\"key\";i:11;s:4:\"name\";s:12:\"底部链接\";s:5:\"value\";i:1;}}',8,10,0,1,5,20160506,20160506);
+INSERT INTO `com_main` VALUES (1,0,0,'某某公司','某某公司','某某关键字','某某描述',5,'',1,10,0,1,5,20160427,20160427),(2,1,1,'这是广告公司','某某公司','某某关键字','某某描述\r\n4444444',2,'a:11:{s:13:\"serviceSwitch\";a:3:{s:3:\"key\";i:1;s:4:\"name\";s:12:\"服务开关\";s:5:\"value\";s:1:\"1\";}s:10:\"newsSwitch\";a:3:{s:3:\"key\";i:2;s:4:\"name\";s:12:\"新闻开关\";s:5:\"value\";i:1;}s:13:\"productSwitch\";a:3:{s:3:\"key\";i:3;s:4:\"name\";s:12:\"产品开关\";s:5:\"value\";i:1;}s:15:\"parternerSwitch\";a:3:{s:3:\"key\";i:4;s:4:\"name\";s:12:\"合作伙伴\";s:5:\"value\";i:1;}s:11:\"introSwitch\";a:3:{s:3:\"key\";i:5;s:4:\"name\";s:12:\"公司简介\";s:5:\"value\";i:1;}s:10:\"partSwitch\";a:3:{s:3:\"key\";i:6;s:4:\"name\";s:12:\"花絮开关\";s:5:\"value\";i:1;}s:10:\"teamSwitch\";a:3:{s:3:\"key\";i:7;s:4:\"name\";s:12:\"团队开关\";s:5:\"value\";i:1;}s:13:\"recruitSwitch\";a:3:{s:3:\"key\";i:8;s:4:\"name\";s:12:\"招聘开关\";s:5:\"value\";i:1;}s:13:\"contactSwicth\";a:3:{s:3:\"key\";i:9;s:4:\"name\";s:12:\"联系开关\";s:5:\"value\";i:1;}s:9:\"pptSwitch\";a:3:{s:3:\"key\";i:10;s:4:\"name\";s:12:\"宣传开关\";s:5:\"value\";i:1;}s:14:\"footLinkSwitch\";a:3:{s:3:\"key\";i:11;s:4:\"name\";s:12:\"底部链接\";s:5:\"value\";i:1;}}',8,10,0,1,5,20160506,20160506);
 /*!40000 ALTER TABLE `com_main` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2137,7 +2112,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'jiuge','$2y$10$b8.ce.ma17MKiuN8iiJMO.QM5fdJ1Zwl7rpMNahjPGfNOKGoC/Kyy','123456','jiuge@qq.com','946493655',63929131,4294967295,20,'滨江区 浦沿街道 联庄一区 几号 几楼',2,1,1,4,0,15,1470795559,1471420755,1473724280),(2,'jiuge2','$2y$10$X5BdoH0p0n.E3hxCVag/neinTfiHXbMrCHUEEqf8ZpUQGaeOxUUBe','','946493655@qq.com','',0,0,30,'',0,0,0,0,0,10,1470795559,0,0);
+INSERT INTO `users` VALUES (1,'jiuge','$2y$10$b8.ce.ma17MKiuN8iiJMO.QM5fdJ1Zwl7rpMNahjPGfNOKGoC/Kyy','123456','jiuge@qq.com','946493655',63929131,4294967295,20,'滨江区 浦沿街道 联庄一区 几号 几楼',2,1,1,4,0,10,1470795559,1471420755,1473724280),(2,'jiuge2','$2y$10$X5BdoH0p0n.E3hxCVag/neinTfiHXbMrCHUEEqf8ZpUQGaeOxUUBe','','946493655@qq.com','',0,0,30,'',0,0,0,0,0,10,1470795559,0,0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2210,4 +2185,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-13 22:07:00
+-- Dump completed on 2016-09-14 17:07:00

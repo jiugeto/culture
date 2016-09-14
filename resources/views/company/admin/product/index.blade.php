@@ -21,7 +21,7 @@
                 <td>{{ $data->id }}</td>
                 <td><a href="{{DOMAIN}}company/admin/product/{{ $data['id'] }}" class="list_a">
                         {{ $data->name ? $data->name : '企业默认信息' }}</a></td>
-                <td><div style="width:60px;height:30px;overflow:hidden;"><img src="{{ $data->pic()->url }}" style="@if($size=$data->getUserPicSize($data->pic(),$w=50,$h=30))width:{{$size}}px;@endif height:30px;"></div></td>
+                <td><div style="width:60px;height:30px;overflow:hidden;"><img src="{{ $data->pic()->url }}" style="@if($size=$data->getUserPicSize($data->pic(),$w=50,$h=30))width:{{$size['w']}}px;height:{{$size['h']}}px;@endif"></div></td>
                 <td>{{ $data->getCate() }}</td>
                 <td>{{ $data->isshow2 ? '显示' : '不显示' }}</td>
                 <td>{{ $data->createTime() }}</td>

@@ -52,21 +52,19 @@
             @if(count($datas))
                 @foreach($datas as $data)
             <a href="{{DOMAIN}}person/@if($from==1){{'goods'}}@else{{'product'}}@endif/{{ $data->id }}">
-                <div class="per_waterfall" {{--onclick="window.location.href='';"--}}>
+                <div class="per_waterfall">
                     <div class="img">
-                        {{--<img src="{{DOMAIN}}uploads/images/2016/online1.png">--}}
                     @if($data->pic())
                         <img src="{{ $data->getPicUrl() }}" style="
                         @if($from==1)
                             @if($size=$data->getPicSize($w=148,$h=100))
-                                width:{{$size}}px;
+                                width:{{$size['w']}}px;height:{{$size['h']}}px;
                             @endif
                         @elseif($from==2)
                             @if($size=$data->getUserPicSize($data->pic(),$w=148,$h=100))
-                                width:{{$size}}px;
+                                width:{{$size['w']}}px;height:{{$size['h']}}px;
                             @endif
                         @endif
-                                height:120px;
                         ">
                     @else
                         <div style="width:220px;height:120px;background:rgb(240,240,240);"></div>

@@ -2,6 +2,7 @@
 namespace App\Models\Company;
 
 use App\Models\BaseModel;
+use App\Models\PicModel;
 
 class ComMainModel extends BaseModel
 {
@@ -46,5 +47,32 @@ class ComMainModel extends BaseModel
     public function company()
     {
         return $this->cid ? \App\Models\CompanyModel::find($this->cid) : '';
+    }
+
+    /**
+     * 得到公司logo
+     */
+    public function logo()
+    {
+        $pic_id = $this->logo ? $this->logo : 0;
+        $picModel = PicModel::find($pic_id);
+        return $picModel ? $picModel : '';
+    }
+
+    /**
+     * 公司logo链接
+     */
+    public function getLogo()
+    {
+
+        return $this->logo() ? $this->logo()->getUrl() : '';
+    }
+
+    /**
+     * 得到logo图片名称
+     */
+    public function getPicName()
+    {
+        return $this->logo() ? $this->logo()->name : '';
     }
 }

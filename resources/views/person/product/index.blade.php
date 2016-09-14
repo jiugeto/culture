@@ -13,9 +13,8 @@
                         @if($data->getPic())
                             <img src="{{ $data->getPicUrl() }}" style="
                             @if($size=$data->getUserPicSize($data->getPic(),$w=148,$h=100))
-                                    width:{{$size}}px;
+                                    width:{{$size['w']}}px;height:{{$size['h']}}px;
                             @endif
-                                    height:120px;
                         ">
                         @else
                             <div style="width:220px;height:120px;background:rgb(240,240,240);"></div>

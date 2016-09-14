@@ -7,7 +7,7 @@
             <span class="am-icon-file"></span>  {{ $action->name }}
             <span class="am-icon-angle-right am-fr am-margin-right"></span>
         </a>
-        <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav{{$action->id}}">
+        <ul class="am-list am-collapse admin-sidebar-sub am-out" id="collapse-nav{{$action->id}}">
             @if($action->child)
                 @foreach($action->child as $sub_action)
             <li>
@@ -24,5 +24,9 @@
 </ul>
 
 <script>
-    function toggle(id){ $("#collapse-nav"+id).toggle(200); }
+    function toggle(id){
+        $("#collapse-nav"+id).toggle(200);
+//        $(".am-list").removeClass('am-in').addClass('am-out');
+//        $("#collapse-nav"+id).removeClass('am-out').addClass('am-in');
+    }
 </script>

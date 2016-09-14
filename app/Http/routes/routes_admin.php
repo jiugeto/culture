@@ -157,6 +157,7 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::resource('comfunc','ComFuncController');
         //访问日志路由
     Route::post('visit/{id}','VisitlogController@update');
+    Route::get('visit/u/{g}/{uname}','VisitlogController@index');
     Route::resource('visit','VisitlogController');
     //广告路由
         //广告管理
@@ -166,10 +167,6 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
         //广告位管理
     Route::post('place/{id}','AdPlaceController@update');
     Route::resource('place','AdPlaceController');
-        //修改（版本）日志管理
-    Route::get('versionlog/{id}/forceDelete','VersionlogController@forceDelete');
-    Route::post('versionlog/{id}','VersionlogController@update');
-    Route::resource('versionlog','VersionlogController');
         //创意管理
     Route::post('idea/{id}','IdeaController@update');
     Route::resource('idea','IdeaController');

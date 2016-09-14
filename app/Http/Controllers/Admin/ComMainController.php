@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\PicModel;
 use Illuminate\Http\Request;
 use App\Models\Company\ComMainModel;
 
@@ -35,10 +36,11 @@ class ComMainController extends BaseController
 
     public function create()
     {
-        if (count(ComMainModel::all())) { echo "<script>alert('已有默认记录！');history.go(-1);</script>";exit; }
+//        if (count(ComMainModel::all())) { echo "<script>alert('已有默认记录！');history.go(-1);</script>";exit; }
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
+            'pics'=> PicModel::all(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -59,6 +61,7 @@ class ComMainController extends BaseController
         $curr['url'] = $this->crumb['edit']['url'];
         $result = [
             'data'=> ComMainModel::find($id),
+            'pics'=> PicModel::all(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -96,22 +99,6 @@ class ComMainController extends BaseController
      */
     public function getData(Request $request,$id=null)
     {
-        //判断处理工作岗位
-//        if ((!$request->job && $request->job_require) || ($request->job && !$request->job_require)) {
-//            echo "<script>alert('岗位和岗位要求必须同时填写，或者同时不填写！');history.go(-1);</script>";exit;
-//        }
-//        if ($request->job && $request->job_require && count(explode('|',$request->job))!=count(explode('|',$request->job_require))) {
-//            echo "<script>alert('岗位数量必须对应岗位要求！');history.go(-1);</script>";exit;
-//        }
-        if ($request->job && (!$request->job_num || !$request->job_require)) {
-            echo "<script>alert('岗位、岗位人数和岗位要求必须同时填写，或者同时不填写！');history.go(-1);</script>";exit;
-        }
-        if ($request->job) {
-            $jobNUm = count(explode('|',$request->job));
-            if (count(explode('|',$request->job_num))!=$jobNUm || count(explode('|',$request->job_require))!=$jobNUm) {
-                echo "<script>alert('岗位、数量、要求的个数必须一致！');history.go(-1);</script>";exit;
-            }
-        }
         //判断logo
         $logo = '';     //给个默认值
         if ($id) { $logo = ComMainModel::find($id)->logo; }

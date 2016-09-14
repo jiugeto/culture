@@ -79,7 +79,7 @@
                     @foreach($model->getNewests([]) as $newest)
                 <div class="img_text">
                     <div class="img">
-                        <a href="{{DOMAIN}}product/{{ $newest->id }}"><img src="{{ $newest->getPicUrl() }}" style="@if($size=$newest->getPicSize($w=150,$h=125)) width:{{$size}}px; @endif height:125px;"></a>
+                        <a href="{{DOMAIN}}product/{{ $newest->id }}"><img src="{{ $newest->getPicUrl() }}" style="@if($size=$newest->getPicSize($w=150,$h=125)) width:{{$size['w']}}px;height:{{$size['h']}}px; @endif"></a>
                     </div>
                     <div class="text">
                         <a href="{{DOMAIN}}product/{{ $newest->id }}">{{ $newest->name }}</a>
@@ -108,7 +108,7 @@
                     <div class="img_text">
                         {{--<div class="img_num"> 1 </div>--}}
                         <div class="img"><a href="{{DOMAIN}}product/{{ $newest->id }}">
-                                <img src="{{ $newest->getPicUrl() }}" style="@if($size=$newest->getPicSize($w=150,$h=125)) width:{{$size}}px; @endif height:125px;"></a>
+                                <img src="{{ $newest->getPicUrl() }}" style="@if($size=$newest->getPicSize($w=150,$h=125)) width:{{$size['w']}}px;height:{{$size['h']}}px; @endif"></a>
                         </div>
                         <a href="{{DOMAIN}}product/{{ $newest->id }}">{{ str_limit($newest->name,10) }}</a>
                         <a href="" class="click">点击<span>{{ $newest->click }}</span></a>
@@ -137,7 +137,7 @@
                         @foreach($model->getNewests([1,3]) as $newest)
                     <div class="img_text">
                         {{--<div class="img_num"> 1 </div>--}}
-                        <div class="img"><a href="{{DOMAIN}}product/{{ $newest->id }}"><img src="{{ $newest->getPicUrl() }}" style="@if($size=$newest->getPicSize($w=150,$h=125)) width:{{$size}}px; @endif height:125px;"></a></div>
+                        <div class="img"><a href="{{DOMAIN}}product/{{ $newest->id }}"><img src="{{ $newest->getPicUrl() }}" style="@if($size=$newest->getPicSize($w=150,$h=125)) width:{{$size['w']}}px;height:{{$size['h']}}px; @endif"></a></div>
                         <a href="{{DOMAIN}}product/{{ $newest->id }}">{{ str_limit($newest->name,10) }}</a>
                         <a href="" class="click">点击<span>{{ $newest->click }}</span></a>
                     </div>

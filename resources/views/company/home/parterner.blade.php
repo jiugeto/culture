@@ -13,7 +13,7 @@
             <a href="" title="{{ $data->name }}">
                 <div class="com_pro" style="height:120px;" id="par_{{$data->id}}" onmouseover="over({{$data->id}})" onmouseout="out({{$data->id}})">
                     <div class="img">
-                        <img src="{{ $data->getPicUrl() }}" style="@if($size=$data->getPicSize($w=228,$h=120))width:{{$size}}px;height:120px; @endif">
+                        <img src="{{ $data->getPicUrl() }}" style="@if($size=$data->getPicSize($w=228,$h=120))width:{{$size['w']}}px;height:{{$size['h']}}px; @endif">
                     </div>
                     <div class="textbtn" onclick="getPar({{$data->id}})" onmouseover="over({{$data->id}})">看资料</div>
                 </div>
