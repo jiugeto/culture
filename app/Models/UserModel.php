@@ -1,6 +1,8 @@
 <?php
 namespace App\Models;
 
+use App\Models\Base\PicModel;
+
 class UserModel extends BaseModel
 {
     /**
@@ -41,13 +43,11 @@ class UserModel extends BaseModel
      */
     public function person()
     {
-//        return $this->hasOne('\App\Models\PersonModel','id','uid');
         return PersonModel::where('uid',$this->id)->first();
     }
 
     public function company($uid)
     {
-//        return $this->hasOne('\App\Models\CompanyModel','id','uid');
         $companyModel = CompanyModel::where('uid',$uid)->first();
         return $companyModel ? $companyModel : '';
     }

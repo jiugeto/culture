@@ -1,8 +1,8 @@
 <?php
 namespace App\Http\Controllers\Company\Admin;
 
-use App\Models\AdModel;
-use App\Models\PicModel;
+use App\Models\Base\AdModel;
+use App\Models\Base\PicModel;
 use Illuminate\Http\Request;
 
 class PptController extends BaseController

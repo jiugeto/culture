@@ -1,5 +1,6 @@
 <?php
 namespace App\Models;
+use App\Models\Base\PicModel;
 
 class ProductConModel extends BaseModel
 {
@@ -160,21 +161,18 @@ class ProductConModel extends BaseModel
     public function pic()
     {
         $picModel = PicModel::find($this->pic_id);
-//        return $this->pic_id ? PicModel::find($this->pic_id) : '';
         return isset($picModel) ? $picModel : '';
     }
 
     public function picurl()
     {
         $picModel = PicModel::find($this->pic_id);
-//        return $this->pic_id ? PicModel::find($this->pic_id) : '';
         return isset($picModel) ? $picModel->url : '';
     }
 
     public function picname()
     {
         $picModel = PicModel::find($this->pic_id);
-//        return $this->pic_id ? PicModel::find($this->pic_id) : '';
         return isset($picModel) ? $picModel->name : '';
     }
 

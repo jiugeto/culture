@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Member;
 
 use Illuminate\Http\Request;
-use App\Models\PicModel;
+use App\Models\Base\PicModel;
 
 class PicController extends BaseController
 {
@@ -156,8 +156,10 @@ class PicController extends BaseController
 
     public function query($del)
     {
-        return PicModel::where('del',$del)
+        $datas = PicModel::where('del',$del)
             ->where('uid',\Session::get('user.uid'))
             ->paginate($this->limit);
+        $datas->limit = $this->limit;
+        return $datas;
     }
 }

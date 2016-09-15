@@ -63,7 +63,7 @@ class RentController extends BaseController
     {
         //adplace_id==4，前台租赁页面右侧
         $limit = 3;
-        $ads = \App\Models\AdModel::where('uid',0)
+        $ads = \App\Models\Base\AdModel::where('uid',0)
             ->where('adplace_id',4)
             ->where('isuse',1)
             ->where('isshow',1)

@@ -66,7 +66,7 @@ class DesignController extends BaseController
     {
         //adplace_id==5，前台设计页面右侧
         $limit = 2;
-        $ads = \App\Models\AdModel::where('uid',0)
+        $ads = \App\Models\Base\AdModel::where('uid',0)
             ->where('adplace_id',5)
             ->where('isuse',1)
             ->where('isshow',1)

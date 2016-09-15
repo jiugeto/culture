@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Models\PicModel;
+use App\Models\Base\PicModel;
 
 class PicController extends BaseController
 {

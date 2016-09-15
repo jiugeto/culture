@@ -1,6 +1,8 @@
 <?php
 namespace App\Models;
 
+use App\Models\Base\PicModel;
+
 class StaffPicModel extends BaseModel
 {
     protected $table = 'bs_staff_pic';
@@ -19,10 +21,6 @@ class StaffPicModel extends BaseModel
     /**
      * 关联图片
      */
-//    public function pic()
-//    {
-//        return $this->hasOne('App\Models\PicModel', 'id', 'pic_id');
-//    }
     public function pic()
     {
         $pic_id = $this->pic_id ? $this->pic_id : 0;

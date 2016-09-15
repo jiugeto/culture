@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Company\Admin;
 
-use App\Models\VideoModel;
+use App\Models\Base\VideoModel;
 use Illuminate\Http\Request;
 
 class VideoController extends BaseController

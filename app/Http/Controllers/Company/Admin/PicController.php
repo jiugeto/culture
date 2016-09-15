@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Company\Admin;
 
-use App\Models\PicModel;
+use App\Models\Base\PicModel;
 use Illuminate\Http\Request;
 
 class PicController extends BaseController

@@ -1,7 +1,5 @@
 <?php
-namespace App\Models;
-
-//use Illuminate\Database\Eloquent\Model;
+namespace App\Models\Base;
 
 class OrderFirmModel extends BaseModel
 {
@@ -10,7 +8,7 @@ class OrderFirmModel extends BaseModel
      */
     protected $table = 'bs_orders_firm';
     protected $fillable = [
-        'id','name','orderid','genre','seller','sellerName','buyer','buyerName','money','status','isshow','del','created_at','updated_at',
+        'id','name','orderid','genre','seller','sellerName','buyer','buyerName','status','isshow','del','created_at','updated_at',
     ];
 
     protected $genres = [
@@ -35,5 +33,24 @@ class OrderFirmModel extends BaseModel
     public function status()
     {
         return array_key_exists($this->status,$this->statuss) ? $this->statuss[$this->status] : '无';
+    }
+
+    /**
+     * 获取对应支付信息
+     */
+    public function getPay()
+    {
+        $payModel = PayModel::where('genre',2)
+            ->where('order_id',$this->id)
+            ->first();
+        return $payModel ? $payModel : '';
+    }
+
+    /**
+     * 获取对应支付金额
+     */
+    public function getMoney()
+    {
+        return $this->getPay() ? $this->getPay()->money() : '';
     }
 }

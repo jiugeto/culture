@@ -116,7 +116,7 @@ class DemandController extends BaseController
     {
         //adplace_id==3，前台需求页面右侧
         $limit = 2;
-        $ads = \App\Models\AdModel::where('uid',0)
+        $ads = \App\Models\Base\AdModel::where('uid',0)
             ->where('adplace_id',3)
             ->where('isuse',1)
             ->where('isshow',1)

@@ -10,6 +10,7 @@
             <tr>
                 <td>编号</td>
                 <td>订单名称</td>
+                <td>订单类型</td>
                 <td>申请人</td>
                 <td>发布人</td>
                 <td>创建时间</td>
@@ -20,6 +21,7 @@
             <tr>
                 <td>{{ $data->id }}</td>
                 <td><a href="{{DOMAIN}}member/order">{{ $data->name }}</a></td>
+                <td>{{ $data->genreName() }}</td>
                 <td>{{ $data->buyerName }}</td>
                 <td>{{ $data->sellerName }}</td>
                 <td>{{ $data->created_at }}</td>

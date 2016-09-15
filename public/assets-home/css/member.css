@@ -284,6 +284,9 @@ input.radio { position:relative;top:10px; }
     /*width:50%;*/
     border-bottom:1px solid lightgrey;
 }
+.table_show a.tshow { color:grey;cursor:pointer; }
+.table_show a#open,a#close { color:rgba(14,144,210,1);cursor:pointer; }
+.table_show a:hover#open,a:hover#close { color:red; }
 /*=========右侧查看窗口==========*/
 
 /*=== *号备注 ===*/

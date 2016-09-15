@@ -37,11 +37,6 @@
                     <td><a href="#">{{ $data->isuser() }}</a></td>
                     <td><span class="am-badge am-badge-success">{{ $data->createTime() }}</span></td>
                     <td>
-                        {{--<div class="am-btn-toolbar">--}}
-                            {{--<div class="am-btn-group am-btn-group-xs">--}}
-                                {{--<a href="{{DOMAIN}}admin/user/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/show.png" class="icon"> 查看</button></a>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
                         <div class="am-dropdown" data-am-dropdown>
                             <button class="am-btn am-btn-default am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle><span class="am-icon-cog"></span> <span class="am-icon-caret-down"></span></button>
                             <ul class="am-dropdown-content">
@@ -82,7 +77,7 @@
                                 <td>{{$orderC->id}}</td>
                                 <td>{{$orderC->buyerName}}</td>
                                 <td>{{$orderC->sellerName}}</td>
-                                <td>{{$orderC->money()}}</td>
+                                <td>{{$orderC->getMoney()}}</td>
                                 <td>{{$orderC->statusName()}}</td>
                                 <td>{{date("Y年m月d日",$orderC->created_at)}}</td>
                                 <td><a href="{{DOMAIN}}admin/orderpro/{{$orderC->id}}"
@@ -92,18 +87,6 @@
                         @else @include('admin.common.norecord')
                         @endif
                     </table>
-                    {{--<ul class="am-list admin-content-task">--}}
-                        {{--@if(count($orders['ordersC']))--}}
-                            {{--@foreach($orders['ordersC'] as $orderC)--}}
-                        {{--<li>--}}
-                            {{--<div class="admin-task-meta"> 创建于 {{$orderC->createTime()}} 通过 {{$orderC->getBuyName()}}</div>--}}
-                            {{--<div class="admin-task-bd">订单编号：{{$orderC->serial}}，&nbsp;&nbsp;发布方：{{$orderC->sellerName}}，&nbsp;&nbsp;申请方：{{$orderC->buyerName}}，&nbsp;&nbsp;价位：{{$orderC->money()}}，&nbsp;&nbsp;状态：{{$orderC->statusName}}。</div>--}}
-                        {{--</li>--}}
-                            {{--@endforeach--}}
-                        {{--@else--}}
-                            {{--<li><p style="text-align:center;">没有记录</p></li>--}}
-                        {{--@endif--}}
-                    {{--</ul>--}}
                 </div>
             </div>
             {{--售后订单--}}
@@ -127,7 +110,7 @@
                                 <td>{{$orderF->id}}</td>
                                 <td>{{$orderF->buyerName}}</td>
                                 <td>{{$orderF->sellerName}}</td>
-                                <td>{{$orderF->money()}}</td>
+                                <td>{{$orderF->getMoney()}}</td>
                                 <td>{{$orderF->statusName()}}</td>
                                 <td>{{date("Y年m月d日",$orderF->created_at)}}</td>
                                 <td><a href="{{DOMAIN}}admin/orderfirm/{{$orderF->id}}"
@@ -137,22 +120,10 @@
                         @else @include('admin.common.norecord')
                         @endif
                     </table>
-                    {{--<ul class="am-list admin-content-task">--}}
-                        {{--@if(count($orders['ordersF']))--}}
-                            {{--@foreach($orders['ordersF'] as $orderF)--}}
-                        {{--<li>--}}
-                            {{--<div class="admin-task-meta"> 创建于 {{$orderF->createTime()}} 通过 {{$orderF->buyerName()}}</div>--}}
-                            {{--<div class="admin-task-bd">订单编号：{{$orderF->serial}}，&nbsp;&nbsp;发布方：{{$orderF->sellerName}}，&nbsp;&nbsp;申请方：{{$orderF->buyerName}}，&nbsp;&nbsp;价位：{{$orderF->money()}}，&nbsp;&nbsp;状态：{{$orderF->statusName}}。</div>--}}
-                        {{--</li>--}}
-                            {{--@endforeach--}}
-                        {{--@else--}}
-                            {{--<li><p style="text-align:center;">没有记录</p></li>--}}
-                        {{--@endif--}}
-                    {{--</ul>--}}
                 </div>
             </div>
         </div>
-        {{--横向列表--}}
+        {{--横向列表：创意、分镜、样片订单--}}
         <div class="am-u-md-6">
             <div class="am-panel am-panel-default">
                 <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-2'}">交易订单<span class="am-icon-chevron-down am-fr" ></span></div>
@@ -174,7 +145,7 @@
                             <td>{{$orderA->id}}</td>
                             <td>{{$orderA->buyerName}}</td>
                             <td>{{$orderA->sellerName}}</td>
-                            <td>{{$orderA->money()}}</td>
+                            <td>{{$orderA->getMoney()}}</td>
                             <td>{{$orderA->statusName()}}</td>
                             <td>{{date("Y年m月d日",$orderA->created_at)}}</td>
                             <td><a href="{{DOMAIN}}admin/order/{{$orderA->id}}"

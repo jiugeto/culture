@@ -3,7 +3,6 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Models\VideoModel;
-use App\Models\VideoCategoryModel;
 
 class VideoController extends BaseController
 {
@@ -53,7 +52,6 @@ class VideoController extends BaseController
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
-            'cates'=> VideoCategoryModel::all(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -72,7 +70,6 @@ class VideoController extends BaseController
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
         $result = [
-            'cates'=> VideoCategoryModel::all(),
             'data'=> VideoModel::find($id),
             'crumb'=> $this->crumb,
             'curr'=> $curr,

@@ -25,13 +25,13 @@ class LinkModel extends BaseModel
         return $this->isshow ? $this->isshows[$this->isshow] : '';
     }
 
-    /**
-     * 关联图片表
-     */
-    public function pic()
-    {
-        return $this->hasOne('App\Models\PicModel', 'id', 'pic_id');
-    }
+//    /**
+//     * 关联图片表
+//     */
+//    public function pic()
+//    {
+//        return $this->hasOne('App\Models\PicModel', 'id', 'pic_id');
+//    }
 
     /**
      * 顶部链接：type_id==1

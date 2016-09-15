@@ -5,7 +5,7 @@ use App\Models\GoodsClickModel;
 use App\Models\GoodsLikeModel;
 use App\Models\GoodsModel;
 use App\Models\UserParamsModel;
-use App\Models\VideoModel;
+use App\Models\Base\VideoModel;
 
 class ProductController extends BaseController
 {

@@ -143,6 +143,7 @@ class StoryBoardController extends BaseController
             ->orderBy('sort','desc')
             ->orderBy('id','desc')
             ->paginate($this->limit);
+        $datas->limit = $this->limit;
         return $datas;
     }
 }

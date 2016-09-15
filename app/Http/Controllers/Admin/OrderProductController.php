@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Models\OrderProductModel;
+use App\Models\Base\OrderProductModel;
 use Illuminate\Http\Request;
 
 class OrderProductController extends BaseController

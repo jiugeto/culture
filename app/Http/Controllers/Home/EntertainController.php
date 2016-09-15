@@ -103,7 +103,7 @@ class EntertainController extends BaseController
     {
         //adplace_id==4，前台娱乐页面右侧
         $limit = 1;
-        $ads = \App\Models\AdModel::where('uid',0)
+        $ads = \App\Models\Base\AdModel::where('uid',0)
             ->where('adplace_id',4)
             ->where('isuse',1)
             ->where('isshow',1)

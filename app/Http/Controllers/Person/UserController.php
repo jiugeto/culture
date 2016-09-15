@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Person;
 
-use App\Models\PicModel;
+use App\Models\Base\PicModel;
 use App\Models\UserModel;
 use App\Models\Base\UserFrieldModel;
 use App\Models\MessageModel;

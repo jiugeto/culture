@@ -1,8 +1,8 @@
 <?php
 namespace App\Http\Controllers\Member;
 
-//use Illuminate\Http\Request;
-use App\Models\OrderProductModel;
+use Illuminate\Http\Request;
+use App\Models\Base\OrderProductModel;
 
 class OrderProductController extends BaseController
 {
@@ -52,6 +52,7 @@ class OrderProductController extends BaseController
             ->where('isshow',1)
             ->orderBy('id','desc')
             ->paginate($this->limit);
+        $datas->limit = $this->limit;
         return $datas;
     }
 }

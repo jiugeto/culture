@@ -2,7 +2,7 @@
 namespace App\Models\Company;
 
 use App\Models\BaseModel;
-use App\Models\PicModel;
+use App\Models\Base\PicModel;
 
 class ComMainModel extends BaseModel
 {

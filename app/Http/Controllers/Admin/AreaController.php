@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Models\AreaModel;
+use App\Models\Base\AreaModel;
 use Illuminate\Http\Request;
 
 class AreaController extends BaseController

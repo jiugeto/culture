@@ -143,15 +143,16 @@ class RentController extends BaseController
     public function query($del=0,$genre=0)
     {
         if ($genre) {
-            $rents = RentModel::where('del',$del)
+            $datas = RentModel::where('del',$del)
                 ->where('genre',$genre)
                 ->orderBy('id','desc')
                 ->paginate($this->limit);
         } else {
-            $rents = RentModel::where('del',$del)
+            $datas = RentModel::where('del',$del)
                 ->orderBy('id','desc')
                 ->paginate($this->limit);
         }
-        return $rents;
+        $datas->limit = $this->limit;
+        return $datas;
     }
 }

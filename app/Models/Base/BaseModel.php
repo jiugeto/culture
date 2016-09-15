@@ -2,6 +2,8 @@
 namespace App\Models\Base;
 
 use App\Models\Company\ComMainModel;
+use App\Models\CompanyModel;
+use App\Models\UserModel;
 use Illuminate\Database\Eloquent\Model;
 
 class BaseModel extends Model
@@ -18,6 +20,15 @@ class BaseModel extends Model
     //样片类型：1电视剧，2电影，3微电影，4广告，5宣传片，6汇报片，7纪录片，8晚会，9淘宝视频，
     protected $cates2 = [
         1=>'电视剧','电影','微电影','广告','宣传片','汇报片','纪录片','晚会','淘宝视频',
+    ];
+
+    //支持 OrderModel、OrdersFirmModel、OrdersProdustModel
+    //视频格式：网络版640*480，标清720*576，小高清1280*720，高清1920*1080，
+    protected $formats = [
+        1=>'640*480','720*576','1280*720','1920*1080',
+    ];
+    protected $formatNames = [
+        1=>'网络版','标清','小高清','高清',
     ];
 
     /**

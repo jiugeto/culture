@@ -1,9 +1,9 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Models\AdModel;
-use App\Models\AdPlaceModel;
-use App\Models\PicModel;
+use App\Models\Base\AdModel;
+use App\Models\Base\AdPlaceModel;
+use App\Models\Base\PicModel;
 use Illuminate\Http\Request;
 
 class AdController extends BaseController

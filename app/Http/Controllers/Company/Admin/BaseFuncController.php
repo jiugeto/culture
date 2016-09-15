@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Company\Admin;
 
 use App\Models\Company\ComFuncModel;
-use App\Models\PicModel;
+use App\Models\Base\PicModel;
 use Illuminate\Http\Request;
 
 class BaseFuncController extends BaseController

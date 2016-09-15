@@ -1,9 +1,8 @@
 <?php
 namespace App\Models;
 
-//use Illuminate\Database\Eloquent\Model;
-
-use App\Http\Controllers\Admin\ComMainController;
+use App\Models\Base\PicModel;
+use App\Models\Base\VideoModel;
 use App\Models\Company\ComMainModel;
 use App\Tools;
 
@@ -78,7 +77,6 @@ class GoodsModel extends BaseModel
      */
     public function pic()
     {
-//        return $this->hasOne('\App\Models\PicModel','id','pic_id');
         return $this->pic_id ? PicModel::find($this->pic_id) : '';
     }
 
@@ -119,7 +117,6 @@ class GoodsModel extends BaseModel
     public function video()
     {
         return $this->video_id ? VideoModel::find($this->video_id) : '';
-//        return $this->hasOne('\App\Models\VideoModel','id','video_id');
     }
 
     /**
@@ -128,7 +125,6 @@ class GoodsModel extends BaseModel
     public function video1()
     {
         return $this->video_id ? VideoModel::find($this->video_id1) : '';
-//        return $this->hasOne('\App\Models\VideoModel','id','video_id');
     }
 
     /**

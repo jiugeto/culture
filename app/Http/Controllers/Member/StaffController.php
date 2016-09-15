@@ -140,7 +140,9 @@ class StaffController extends BaseController
      */
     public function query()
     {
-        $datas =  StaffModel::orderBy('id','desc')->paginate($this->limit);
+        $datas =  StaffModel::orderBy('id','desc')
+            ->paginate($this->limit);
+        $datas->limit = $this->limit;
         return $datas;
     }
 }

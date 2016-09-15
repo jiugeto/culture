@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Member;
 
 use Illuminate\Http\Request;
-use App\Models\VideoModel;
+use App\Models\Base\VideoModel;
 use App\Models\UserParamsModel;
 
 class VideoController extends BaseController
@@ -186,8 +186,10 @@ class VideoController extends BaseController
 
     public function query($del)
     {
-        return VideoModel::where('del',$del)
+        $datas = VideoModel::where('del',$del)
             ->where('uid',\Session::get('user.uid'))
             ->paginate($this->limit);
+        $datas->limit = $this->limit;
+        return $datas;
     }
 }

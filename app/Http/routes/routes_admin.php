@@ -178,7 +178,6 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::get('storyboard/trash','StoryBoardController@trash');
     Route::resource('storyboard','StoryBoardController');
         //话题管理
-//    Route::post('talk/{id}','TalkController@update');
     Route::get('talk/c/{uname}','TalkController@index');
     Route::resource('talk','TalkController');
         //话题专题管理

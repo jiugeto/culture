@@ -1,14 +1,13 @@
 <?php
 namespace App\Http\Controllers\Home;
 
-use App\Models\CategoryModel;
 use App\Models\IdeasClickModel;
 use App\Models\IdeasCollectModel;
 use App\Models\IdeasModel;
 use App\Models\IdeasReadModel;
-use App\Models\OrderModel;
+use App\Models\Base\OrderModel;
 use App\Tools;
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
 
 class IdeaController extends BaseController
 {

@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Models\OrderFirmModel;
+use App\Models\Base\OrderFirmModel;
 
 class OrderFirmController extends BaseController
 {

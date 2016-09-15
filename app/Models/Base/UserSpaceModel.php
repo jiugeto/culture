@@ -1,7 +1,7 @@
 <?php
 namespace App\Models\Base;
 
-use App\Models\PicModel;
+use App\Models\Base\PicModel;
 
 class UserSpaceModel extends BaseModel
 {

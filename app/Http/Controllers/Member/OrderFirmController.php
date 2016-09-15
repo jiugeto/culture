@@ -1,8 +1,8 @@
 <?php
 namespace App\Http\Controllers\Member;
 
-//use Illuminate\Http\Request;
-use App\Models\OrderFirmModel;
+use Illuminate\Http\Request;
+use App\Models\Base\OrderFirmModel;
 
 class OrderFirmController extends BaseController
 {
@@ -39,9 +39,11 @@ class OrderFirmController extends BaseController
 
     public function query()
     {
-        return OrderFirmModel::where('del',0)
+        $datas = OrderFirmModel::where('del',0)
             ->where('isshow',1)
             ->orderBy('id','desc')
             ->paginate($this->limit);
+        $datas->limit = $this->limit;
+        return $datas;
     }
 }

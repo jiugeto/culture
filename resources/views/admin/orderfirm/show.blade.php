@@ -38,11 +38,11 @@
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">价格 / Money：</td>
-                    <td>{{ $data->money }}元</td>
+                    <td>{{ $data->getMoney() }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">状态 / Status：</td>
-                    <td>{{ $data->status() }}</td>
+                    <td>{{ $data->statusName() }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">前台显示否 / Is Show：</td>

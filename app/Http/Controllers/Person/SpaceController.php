@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Person;
 use App\Models\DesignModel;
 use App\Models\GoodsModel;
 use App\Models\MessageModel;
-use App\Models\OrderModel;
-use App\Models\OrderProductModel;
-use App\Models\PicModel;
+use App\Models\Base\OrderModel;
+use App\Models\Base\OrderProductModel;
+use App\Models\Base\PicModel;
 use App\Models\ProductModel;
 use App\Models\UserModel;
 

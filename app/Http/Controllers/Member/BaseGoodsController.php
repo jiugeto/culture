@@ -19,11 +19,12 @@ class BaseGoodsController extends BaseController
      */
     public function query($del=0,$type)
     {
-        $goods =  GoodsModel::where('del',$del)
+        $datas =  GoodsModel::where('del',$del)
             ->where('type',$type)
             ->orderBy('id','desc')
             ->paginate($this->limit);
-        return $goods;
+        $datas->limit = $this->limit;
+        return $datas;
     }
 
     /**

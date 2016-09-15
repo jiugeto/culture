@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Person;
 
-use App\Models\PicModel;
+use App\Models\Base\PicModel;
 
 class PicController extends BaseController
 {

@@ -3,6 +3,8 @@ namespace App\Http\Controllers\Company;
 
 use App\Models\Base\VisitlogModel;
 use App\Models\Company\ComMainModel;
+use App\Models\CompanyModel;
+use App\Models\UserModel;
 use Illuminate\Support\Facades\Request as AjaxRequest;
 use Illuminate\Support\Facades\Input;
 use Redis;
@@ -122,14 +124,21 @@ class VisitlogController extends BaseController
         }
     }
 
+    /**
+     * 收集数据
+     */
     public function getData($data)
     {
         $serial = date('YmdHis',time()).rand(0,10000);
         $ip = Tools::getIp();
         $ipaddress = Tools::getCityByIp($ip);
+        $companyModel = CompanyModel::find($data['cid']);
+        $userModel = UserModel::find($data['uid']);
         return array(
             'cid'=> $data['cid'],
+            'cname'=> $companyModel->name,
             'visit_id'=> $data['uid'],
+            'uname'=> $userModel->username,
             'action'=> $data['visit_url'],
             'ip'=> $ip,
             'ipaddress'=> $ipaddress,
@@ -138,6 +147,9 @@ class VisitlogController extends BaseController
         );
     }
 
+    /**
+     * 确定访问的是哪一个页面
+     */
     public function getUrl($url,$cid)
     {
         $prefix = DOMAIN.'c/'.$cid;

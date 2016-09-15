@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Home;
 //use Illuminate\Http\Request;
 use App\Models\StoryBoardModel;
 use App\Models\StoryBoardLikeModel;
-use App\Models\OrderModel;
+use App\Models\Base\OrderModel;
 
 class StoryBoardController extends BaseController
 {

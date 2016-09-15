@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Member;
 
 use App\Models\Company\ComMainModel;
 use App\Models\CompanyModel;
-use App\Models\OrderModel;
+use App\Models\Base\OrderModel;
 use App\Models\UserModel;
 
 class HomeController extends BaseController

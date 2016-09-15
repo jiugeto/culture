@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use App\Models\Base\AreaModel;
 use App\Models\Company\ComMainModel;
 use Illuminate\Database\Eloquent\Model;
 

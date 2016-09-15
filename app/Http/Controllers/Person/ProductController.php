@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Person;
 
 use App\Models\ProductModel;
-use App\Models\VideoModel;
+use App\Models\Base\VideoModel;
 
 class ProductController extends BaseController
 {
@@ -28,18 +28,6 @@ class ProductController extends BaseController
         ];
         return view('person.product.index', $result);
     }
-
-//    public function pre($id)
-//    {
-//        $data = ProductModel::find($id);
-//        $videoid = $data->video_id ? $data->video_id : 0;
-//        $result = [
-//            'data'=> $data,
-//            'video'=> VideoModel::find($videoid),
-//            'uid'=> $this->userid,
-//        ];
-//        return view('layout.videoPre', $result);
-//    }
 
 
 

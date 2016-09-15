@@ -45,7 +45,7 @@ class HomeController extends BaseController
     public function getPpts($limit)
     {
         //adplace_id==1，前台首页横幅
-        $datas = \App\Models\AdModel::where('uid',0)
+        $datas = \App\Models\Base\AdModel::where('uid',0)
             ->where('adplace_id',1)
             ->where('isuse',1)
             ->where('isshow',1)
@@ -193,7 +193,7 @@ class HomeController extends BaseController
      */
     public function getOrders($limit)
     {
-        return \App\Models\OrderModel::where('isshow',1)
+        return \App\Models\Base\OrderModel::where('isshow',1)
                     ->orderBy('id','desc')
 //                    ->get();
                     ->paginate($limit);

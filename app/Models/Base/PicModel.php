@@ -1,7 +1,5 @@
 <?php
-namespace App\Models;
-
-//use Illuminate\Database\Eloquent\Model;
+namespace App\Models\Base;
 
 class PicModel extends BaseModel
 {

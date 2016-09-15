@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Online;
 
 use Illuminate\Http\Request;
-use App\Models\PicModel;
+use App\Models\Base\PicModel;
 use App\Models\ProductModel;
 use App\Models\ProductAttrModel;
 use App\Models\ProductLayerModel;

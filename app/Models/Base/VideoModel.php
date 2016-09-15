@@ -1,5 +1,7 @@
 <?php
-namespace App\Models;
+namespace App\Models\Base;
+
+use App\Models\UserParamsModel;
 
 class VideoModel extends BaseModel
 {

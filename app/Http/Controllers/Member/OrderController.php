@@ -2,8 +2,9 @@
 namespace App\Http\Controllers\Member;
 
 //use Illuminate\Http\Request;
+use App\Models\Base\PayModel;
 use App\Models\CompanyModel;
-use App\Models\OrderModel;
+use App\Models\Base\OrderModel;
 use App\Models\UserModel;
 use Illuminate\Support\Facades\Request as AjaxRequest;
 use Illuminate\Support\Facades\Input;
@@ -62,7 +63,7 @@ class OrderController extends BaseController
                 $productname = $storyBoardModel->name;
                 $sellerid = $storyBoardModel->uid;
             } elseif (in_array($data['genre'],[5,6])) {
-                $videoModel = \App\Models\VideoModel::find($data['id']);
+                $videoModel = \App\Models\Base\VideoModel::find($data['id']);
                 $productname = $videoModel->name;
                 $sellerid = $videoModel->uid;
             }
@@ -70,7 +71,8 @@ class OrderController extends BaseController
             //获取供应方信息
             $userModel = UserModel::find($sellerid);
 
-            $create = [
+            //插入订单表
+            $order = [
                 'name'=> $productname,
                 'serial'=> date('YmdHis',time()).rand(0,10000),
                 'genre'=> $data['genre'],
@@ -80,13 +82,21 @@ class OrderController extends BaseController
                 'buyer'=> $this->userid,
                 'buyerName'=> \Session::get('user.username'),
                 'status'=> 1,
-                'created_at'=> date('Y-m-d H:i:s',time()),
+                'created_at'=> time(),
             ];
-            OrderModel::create($create);
+            OrderModel::create($order);
+
+            //插入支付表
+            $orderModel = OrderModel::where($order)->first();
+            $pay = [
+                'genre'=> 1,    //1订单表，2售后服务，3在线创作订单
+                'order_id'=> $orderModel->id,
+                'created_at'=> time(),
+            ];
+            PayModel::create($pay);
 
             echo json_encode(array('code'=>'0', 'message' =>'操作成功！'));exit;
         }
-//        return redirect(DOMAIN.'member/order');
         echo json_encode(array('code'=>'-1', 'message' =>'非法操作!'));exit;
     }
 
@@ -140,7 +150,6 @@ class OrderController extends BaseController
                 $update = array('status'=>3,'remarks'=>$data['remarks'],'updated_at'=>$updated_at);
                 OrderModel::where(['id'=>$data['id'],'status'=>1])->update($update);
             }
-//            return redirect(DOMAIN.'member/order/'.$data['id']);
             echo json_encode(array('code'=>0,'message'=>'操作成功！'));exit;
         }
         echo json_encode(array('code'=>-1,'message'=>'参数有误！'));exit;
@@ -215,6 +224,7 @@ class OrderController extends BaseController
             ->where('isshow',1)
             ->orderBy('id','desc')
             ->paginate($this->limit);
+        $datas->limit = $this->limit;
         return $datas;
     }
 }

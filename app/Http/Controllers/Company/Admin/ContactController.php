@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Company\Admin;
 
-use App\Models\AreaModel;
+use App\Models\Base\AreaModel;
 use App\Models\CompanyModel;
 use Illuminate\Http\Request;
 

@@ -1,7 +1,7 @@
 <?php
-namespace App\Models;
+namespace App\Models\Base;
 
-//use Illuminate\Database\Eloquent\Model;
+use App\Models\ProductModel;
 
 class OrderProductModel extends BaseModel
 {
@@ -26,5 +26,24 @@ class OrderProductModel extends BaseModel
     public function statusName()
     {
         return array_key_exists($this->status,$this->statuss) ? $this->statuss[$this->status] : '';
+    }
+
+    /**
+     * 获取对应支付信息
+     */
+    public function getPay()
+    {
+        $payModel = PayModel::where('genre',3)
+            ->where('order_id',$this->id)
+            ->first();
+        return $payModel ? $payModel : '';
+    }
+
+    /**
+     * 获取对应支付金额
+     */
+    public function getMoney()
+    {
+        return $this->getPay() ? $this->getPay()->money() : '';
     }
 }

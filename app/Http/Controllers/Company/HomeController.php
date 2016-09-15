@@ -81,7 +81,7 @@ class HomeController extends BaseController
     public function getPpts($uid,$limit)
     {
         //adplace_id==6，前台公司首页PPT
-        $ads = \App\Models\AdModel::where('uid',$uid)
+        $ads = \App\Models\Base\AdModel::where('uid',$uid)
             ->where('adplace_id',5)
             ->where('isuse',1)
             ->where('isshow',1)

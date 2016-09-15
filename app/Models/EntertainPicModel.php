@@ -30,10 +30,6 @@ class EntertainPicModel extends BaseModel
     /**
      * 关联图片
      */
-//    public function pic()
-//    {
-//        return $this->hasOne('App\Models\PicModel', 'id', 'pic_id');
-//    }
     public function pic()
     {
         $pic_id = $this->pic_id ? $this->pic_id : 0;

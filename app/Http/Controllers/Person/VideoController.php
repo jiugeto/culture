@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Person;
 
 use App\Models\GoodsModel;
-use App\Models\VideoModel;
+use App\Models\Base\VideoModel;
 
 class VideoController extends BaseController
 {

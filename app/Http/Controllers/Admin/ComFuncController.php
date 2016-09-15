@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Company\ComModuleModel;
-use App\Models\PicModel;
+use App\Models\Base\PicModel;
 use Illuminate\Http\Request;
 use App\Models\Company\ComFuncModel;
 

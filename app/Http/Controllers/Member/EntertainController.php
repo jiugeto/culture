@@ -80,15 +80,16 @@ class EntertainController extends BaseController
     public function query($del=0,$genre)
     {
         if ($genre) {
-            $entertains =  EntertainModel::where('del',$del)
+            $datas =  EntertainModel::where('del',$del)
                 ->where('genre',$genre)
                 ->orderBy('id','desc')
                 ->paginate($this->limit);
         } else {
-            $entertains =  EntertainModel::where('del',$del)
+            $datas =  EntertainModel::where('del',$del)
                 ->orderBy('id','desc')
                 ->paginate($this->limit);
         }
-        return $entertains;
+        $datas->limit = $this->limit;
+        return $datas;
     }
 }

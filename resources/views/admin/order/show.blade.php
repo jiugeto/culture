@@ -38,32 +38,31 @@
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">订单状态 / Status：</td>
-                    <td>{{ $data->status() }}</td>
+                    <td>{{ $data->statusName() }}</td>
                 </tr>
+                @if(!in_array($data->genre,[5,6]))
                 <tr>
-                    <td class="am-hide-sm-only">创意价格 / Idea Money：</td>
-                    <td>{{ $data->IdeaMoney }}元</td>
+                    <td class="am-hide-sm-only">价格 / Real Money：</td>
+                    <td>{{ $data->getMoney() }}</td>
                 </tr>
-                <tr>
-                    <td class="am-hide-sm-only">分镜价格 / Story Money：</td>
-                    <td>{{ $data->storyMoney }}元</td>
-                </tr>
+                @elseif(in_array($data->genre,[5,6]))
                 <tr>
                     <td class="am-hide-sm-only">分期首款 / Real Money1：</td>
-                    <td>{{ $data->realMoney1 }}元</td>
+                    <td>{{ $data->getMoney(0) }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">二期付款 / Real Money2：</td>
-                    <td>{{ $data->realMoney2 }}元</td>
+                    <td>{{ $data->getMoney(1) }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">三期付款 / Real Money3：</td>
-                    <td>{{ $data->realMoney3 }}元</td>
+                    <td>{{ $data->getMoney(2) }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">分期尾款 / Real Money4：</td>
-                    <td>{{ $data->realMoney4 }}元</td>
+                    <td>{{ $data->getMoney(3) }}</td>
                 </tr>
+                @endif
                 <tr>
                     <td class="am-hide-sm-only">前台显示否 / Is Show：</td>
                     <td>{{ $data->isshow ? '显示' : '不显示' }}</td>

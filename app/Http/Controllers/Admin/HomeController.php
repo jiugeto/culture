@@ -3,9 +3,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests;
 use App\Models\Admin\LogModel;
-use App\Models\OrderFirmModel;
-use App\Models\OrderModel;
-use App\Models\OrderProductModel;
+use App\Models\Base\OrderFirmModel;
+use App\Models\Base\OrderModel;
+use App\Models\Base\OrderProductModel;
 use App\Models\UserModel;
 
 class HomeController extends BaseController
