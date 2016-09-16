@@ -26,24 +26,6 @@ class TalksModel extends BaseModel
         return $this->theme() ? $this->theme()->name : '';
     }
 
-//    /**
-//     * 发布人信息
-//     */
-//    public function user()
-//    {
-//        $uid = $this->uid ? $this->uid : 0;
-//        $userModel = UserModel::find($uid);
-//        return $userModel ? $userModel : '';
-//    }
-//
-//    /**
-//     * 发布人名称
-//     */
-//    public function getUserName()
-//    {
-//        return $this->user() ? $this->user()->username : '';
-//    }
-
     /**
      * 点击话题
      */
@@ -111,5 +93,11 @@ class TalksModel extends BaseModel
         $pid = $this->pid ? $this->pid : 0;
         $parent = TalksModel::find($pid);
         return $parent ? $parent : '';
+    }
+
+    public function getUName()
+    {
+        $uid = $this->uid ? $this->uid : 0;
+        return $this->getUserName($uid);
     }
 }

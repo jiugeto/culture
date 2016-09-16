@@ -17,7 +17,7 @@
     border-bottom:1px solid darkgrey;
 }
 .talk_left table {
-    padding:5px;
+    padding:10px 5px;
     width:788px;
     border-bottom:1px dashed lightgrey;
 }
@@ -80,7 +80,7 @@
     padding:5px 110px 5px 10px;
     color:grey;
 }
-.talk_right .theme a:hover div {
+.talk_right .theme a:hover div,.talk_right .theme .curr {
     background:rgb(240,240,240);
 }
 .talk_left .small a {
@@ -91,6 +91,7 @@
 .talk_left .small a:hover {
     color:red;
 }
+.talk_left .con { color:grey;font-size:12px; }
 
 
 .talk_input {

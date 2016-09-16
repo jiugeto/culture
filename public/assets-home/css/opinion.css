@@ -23,6 +23,7 @@
 /*}*/
 .opinion_list .text {
     padding-left:10px;
+    width:200px;
     text-align:left;
 }
 .opinion_list .first { width:70px; }
@@ -34,7 +35,8 @@
     overflow:hidden;
 }
 .opinion_list .first img { width:60px; }
-.opinion_list .record .detail { width:180px; }
+.opinion_list .record .detail { width:300px; }
+.opinion_list .record .detail a { margin-left:2px; }
 .opinion_list .record a {
     /*margin:0 5px;*/
     padding:5px 20px;
@@ -43,6 +45,7 @@
     background:orangered;
 }
 .opinion_list .record a:hover { background:darkred; }
+.opinion_list .small  a { cursor:pointer; }
 /*发布意见按钮*/
 .s_search a.opinion_create {
     padding:5px 20px;
@@ -96,6 +99,13 @@
     padding-top:10px;
     padding-bottom:10px;
 }
+.table_create input {
+    padding:4px 10px;
+    width:90%;
+    border:1px solid rgb(220,220,220);
+    border-radius:3px;
+    font-size:16px;
+}
 .div_content {
     width:100%;height:100px;
     padding:5px;
@@ -106,19 +116,27 @@
 
 /*=== 创意列表页面 ===*/
 .opinion_list p.cate {
-    padding:5px 20px;
-    border:1px solid lightgrey;
+    padding:10px 20px;
+    border:1px solid gainsboro;
+    border-radius:3px;
+    background:rgb(250,250,250);
 }
 .opinion_list p.cate a {
     margin:0 5px;
     color:grey;
     text-decoration:none;
 }
+.opinion_list p.cate a:hover,.opinion_list p.cate a.curr {
+    color:orangered;
+    text-decoration:underline;
+    border:0;
+}
 .opinion_list table.idea {
     margin:10px 0;
     padding:10px 0;
     width:100%;
-    border:1px solid lightgrey;
+    border:1px solid gainsboro;
+    border-radius:3px;
     color:grey;
 }
 .opinion_list table.idea .img { width:220px; }

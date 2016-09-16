@@ -1,11 +1,12 @@
 <?php
 namespace App\Http\Controllers\Member;
 
-//use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 use App\Models\Base\PayModel;
 use App\Models\CompanyModel;
 use App\Models\Base\OrderModel;
 use App\Models\UserModel;
+use App\Models\UserParamsModel;
 use Illuminate\Support\Facades\Request as AjaxRequest;
 use Illuminate\Support\Facades\Input;
 
@@ -105,12 +106,14 @@ class OrderController extends BaseController
         $curr['name'] = $this->lists['show']['name'];
         $curr['url'] = $this->lists['show']['url'];
         $data = OrderModel::find($id);
+
         //联系方式
         if (in_array($data->genre,[1,3,5,7,9,11])) {
-            $userInfo = UserModel::find($data->buyer);
-        } elseif (in_array($data->genre,[2,4,6,8,10,12])) {
             $userInfo = UserModel::find($data->seller);
+        } elseif (in_array($data->genre,[2,4,6,8,10,12])) {
+            $userInfo = UserModel::find($data->buyer);
         }
+
         $result = [
             'data'=> $data,
             'model'=> $this->model,
@@ -156,6 +159,40 @@ class OrderController extends BaseController
     }
 
     /**
+     * 确认支付宝是否打款
+     */
+    public function setPay()
+    {
+        if (AjaxRequest::ajax()) {
+            $data = Input::all();
+
+            //插入支付宝数据
+            $pay = [
+                'genre'=> 1,    //1订单表，2售后，3创作订单
+                'order_id'=> $data['order_id'],
+                'money'=> $data['money'],
+                'created_at'=> time(),
+            ];
+            PayModel::create($pay);
+
+            //更新订单表对应记录
+            $orderModel = OrderModel::find($data['order_id']);
+            if (!in_array($orderModel->genre,[5,6])) {
+                OrderModel::where('id',$data['order_id'])
+                    ->where('status',3)
+                    ->update(['status'=>5, 'updated_at'=>time()]);
+            } else {
+                OrderModel::where('id',$data['order_id'])
+                    ->where('status',3)
+                    ->update(['status'=>4, 'updated_at'=>time()]);
+            }
+            echo json_encode(array('code'=>0,'message'=>'操作成功！'));exit;
+//            return redirect(DOMAIN.'member/order/'.$data['order_id']);
+        }
+        echo json_encode(array('code'=>-1,'message'=>'参数有误！'));exit;
+    }
+
+    /**
      * 设置创意、分镜状态：6办理,、7收到、12成功、13失败
      */
     public function setStatus($id,$status)
@@ -172,50 +209,38 @@ class OrderController extends BaseController
     }
 
     /**
-     * 设置创意、分镜价格 2
+     * 确认支付宝打款完毕，设置订单办理状态
      */
-    public function setMoney($id,$genre,$money)
+    public function setOrderStatus($id,$payStatus)
     {
-        if (!in_array($genre,['idea','story'])) { echo "<script>alert('参数有误！');history.go(-1);</script>";exit; }
-        if (!$money) { $status = 4; }else{ $status = 5; }
-        $update = [
-            'money'=> $money,
-            'status'=>$status,
-            'updated_at'=> time(),
-        ];
-        OrderModel::where('id',$id)->update($update);
+        //订单支付状态：pay表中，订单类型表示，(1,2,3,4)为视频订单专用，其他订单用0表示
+        if ($payStatus==0) {
+            OrderModel::where('id',$id)->update(['status'=>6 ,'updated_at'=>time()]);
+        } elseif ($payStatus==1) {
+            OrderModel::where('id',$id)->update(['status'=>5 ,'updated_at'=>time()]);
+        } elseif ($payStatus==2) {
+            OrderModel::where('id',$id)->update(['status'=>7 ,'updated_at'=>time()]);
+        } elseif ($payStatus==3) {
+            OrderModel::where('id',$id)->update(['status'=>9 ,'updated_at'=>time()]);
+        } elseif ($payStatus==4) {
+            OrderModel::where('id',$id)->update(['status'=>11 ,'updated_at'=>time()]);
+        }
         return redirect(DOMAIN.'member/order/'.$id);
     }
 
     /**
-     * 设置分期价格
+     * 卖方确定已到款，下一步办理
      */
-    public function setRealMoney($id,$real,$money)
+    public function setPayStatus($id,$cate,$status)
     {
-        if ($real==1) {     //一期，确认收款，协商效果
-            $update = [
-                'realMoney1'=> $money,
-                'status'=> 13,
-            ];
-        } elseif ($real==2) {       //二期，确认收款，协商效果
-            $update = [
-                'realMoney2'=> $money,
-                'status'=> 15,
-            ];
-        } elseif ($real==3) {       //三期，确认收款，协商效果
-            $update = [
-                'realMoney3'=> $money,
-                'status'=> 17,
-            ];
-        } elseif ($real==4) {       //四期，确认尾款
-            $update = [
-                'realMoney4'=> $money,
-                'status'=> 19,
-            ];
+        $orderModel = OrderModel::find($id);
+        if (!in_array($orderModel->genre,[5,6])) {
+            PayModel::where('order_id',$id)->update(['ispay'=>$status, 'updated_at'=>time()]);
+        } else {
+            $payModels = PayModel::where('order_id',$id)->get();
+            PayModel::where('id',$payModels[$cate-1])->update(['ispay'=>$status, 'updated_at'=>time()]);
         }
-        $update['realTime'] = time();
-        OrderModel::where('id',$id)->update($update);
-        return redirect('/member/order/'.$id);
+        return redirect(DOMAIN.'member/order/'.$id);
     }
 
     public function query()

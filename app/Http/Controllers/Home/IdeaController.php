@@ -7,7 +7,7 @@ use App\Models\IdeasModel;
 use App\Models\IdeasReadModel;
 use App\Models\Base\OrderModel;
 use App\Tools;
-//use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 
 class IdeaController extends BaseController
 {
@@ -30,15 +30,15 @@ class IdeaController extends BaseController
         }
     }
 
-    public function index()
+    public function index($cate=0)
     {
         $result = [
-            'datas'=> $this->query(),
+            'datas'=> $this->query($cate),
             'model'=> $this->model,
-//            'cates'=> Tools::getChild(CategoryModel::all()),
             'lists'=> $this->list,
             'curr_menu'=> $this->curr,
             'userid'=> $this->userid,
+            'cate'=> $cate,
         ];
         return view('home.idea.index', $result);
     }
@@ -77,7 +77,11 @@ class IdeaController extends BaseController
             elseif ($orderModel->status == 12) { $data->iscon = 3; }
             $data->remarks = $orderModel->remarks;
         }
-        return view('home.idea.show',compact('data'));
+        $result = [
+            'data'=> $data,
+            'curr_menu'=> $this->curr,
+        ];
+        return view('home.idea.show', $result);
     }
 
     /**
@@ -111,12 +115,20 @@ class IdeaController extends BaseController
     }
 
 
-    public function query()
+    public function query($cate)
     {
-        $datas = IdeasModel::where('del',0)
-            ->orderBy('sort','desc')
-            ->orderBy('id','desc')
-            ->paginate($this->limit);
+        if ($cate) {
+            $datas = IdeasModel::where('del',0)
+                ->where('cate',$cate)
+                ->orderBy('sort','desc')
+                ->orderBy('id','desc')
+                ->paginate($this->limit);
+        } else {
+            $datas = IdeasModel::where('del',0)
+                ->orderBy('sort','desc')
+                ->orderBy('id','desc')
+                ->paginate($this->limit);
+        }
         $datas->limit = $this->limit;
         return $datas;
     }

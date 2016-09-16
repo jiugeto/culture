@@ -1,5 +1,14 @@
 @extends('home.main')
 @section('content')
+    <div class="s_crumb">
+        <div class="crumb">
+            <div class="right">
+                <a href="/">首页</a> /
+                <a href="{{DOMAIN}}idea">创意</a> / 详情
+            </div>
+        </div>
+    </div>
+
     <div class="idea_show">
         <span class="idea_left">
             <div class="idea_con">
@@ -18,9 +27,9 @@
         <span class="idea_right">
             @if($userInfo = $data->user())
             <div class="userinfo">
-                <p class="title">{{ $userInfo->company ? $userInfo->company->name.'的' : '' }}{{ $userInfo->username }}</p>
-                <p>地址：{{ $userInfo->address }}</p>
-                <p>发布时间：{{ $userInfo->created_at }}</p>
+                <p class="title">{{ $data->getUName() }}</p>
+                <p>地址：{{ str_limit($userInfo->address,20) }}</p>
+                <p>发布时间：{{ $userInfo->createTime() }}</p>
             </div>
             @endif
         </span>

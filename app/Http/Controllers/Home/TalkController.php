@@ -88,6 +88,7 @@ class TalkController extends BaseController
                 ->orderBy('sort','desc')
                 ->orderBy('id','desc')
                 ->paginate($this->limit);
+            $datas->limit = $this->limit;
         }
         $result = [
             'datas'=> isset($datas) ? $datas : [],

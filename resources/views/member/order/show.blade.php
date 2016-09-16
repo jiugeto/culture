@@ -12,14 +12,17 @@
             <td class="field_name">类型：</td>
             <td>{{ $data->genreName() }}</td>
         </tr>
+        @if($data->buyer==$userid)
         <tr>
             <td class="field_name">供应方：</td>
             <td>{{ $data->sellerName }}</td>
         </tr>
+        @elseif($data->seller==$userid)
         <tr>
             <td class="field_name">需求方：</td>
             <td>{{ $data->buyerName }}</td>
         </tr>
+        @endif
         <tr>
             <td class="field_name">状态：</td>
             <td>{{ $data->statusName() }}</td>
@@ -30,13 +33,22 @@
         <tr>
             <td class="field_name">创意交易价格：</td>
             <td class="statusbtn">
-                @if($data->status==3 && $data->status<4)
-                    @if($data->seller==$userid)
-                        <input type="text" placeholder="0代表免费" pattern="^\d+$" name="money"> 元
+                @if($data->status==3)
+                    @if($data->buyer==$userid)
+                        <input type="text" placeholder="0代表免费" pattern="^\d+$" name="pay"> 元
+                        &nbsp;<a class="tshow" onclick="getSureMoney(1)">价格确定</a>
                     @else <span class="star">双方实际定价中</span>
                     @endif
-                @elseif($data->status>2 && $data->getMoney() && $data->status>=4)
+                @elseif($data->status>=4 && $data->getMoney())
                     {{ $data->getMoney() ? $data->getMoney().'元' : '免费' }}
+                    @if($data->getPayStatus())
+                        &nbsp;&nbsp;<b style="color:red;font-size:12px;">{{ $data->getPayName() }}</b>
+                    @endif
+                    @if($data->buyer==$userid)
+                        &nbsp;<a class="tshow paycode">支付二维码</a>
+                    @elseif($data->seller==$userid && !$data->getPayStatus())
+                        <br><br><a class="tshow" href="{{DOMAIN}}member/order/getPay/{{$data->id}}/0/1">确定收款</a>
+                    @endif
                 @endif
             </td>
         </tr>
@@ -44,11 +56,22 @@
         <tr>
             <td class="field_name">分镜交易价格：</td>
             <td class="statusbtn">
-                @if($data->status==3 && $data->seller==$userid && $data->status<4)
-                    <input type="text" placeholder="0代表免费" pattern="^\d+$" name="money"> 元
-                    &nbsp;<a class="tshow" onclick="">价格确定</a>
-                @elseif($data->status>2 && $data->getMoney() && $data->status>=4)
-                    {{ $data->getMoney() ? $data->getMoney().'元' : '免费' }}
+                @if($data->status==3 && !$data->getMoney())
+                    @if($data->buyer==$userid)
+                        <input type="text" placeholder="0代表免费" pattern="^\d+$" name="pay"> 元
+                        &nbsp;<a class="tshow" onclick="getSureMoney(2)">价格确定</a>
+                    @else <span class="star">双方实际定价中</span>
+                    @endif
+                @elseif($data->status>=4 && $data->getMoney())
+                    {{ $data->getMoney() ? $data->getMoney() : '免费' }}
+                    @if($data->getPayStatus())
+                        &nbsp;&nbsp;<b style="color:red;font-size:12px;">{{ $data->getPayName() }}</b>
+                    @endif
+                    @if($data->buyer==$userid)
+                        &nbsp;<a class="tshow paycode">支付二维码</a>
+                    @elseif($data->seller==$userid && !$data->getPayStatus())
+                        <br><br><a class="tshow" href="{{DOMAIN}}member/order/getPay/{{$data->id}}/0/1">确定收款</a>
+                    @endif
                 @endif
             </td>
         </tr>
@@ -56,12 +79,24 @@
         <tr>
             <td class="field_name">分期首款：</td>
             <td class="statusbtn">
-                @if($data->status==3 && $data->seller==$userid && $data->status<4)
-                    <input type="text" placeholder="一期收费" pattern="^([1-9])|([1-9]\d+)$" required name="realMoney1"> 元 &nbsp;
-                @elseif($data->status>2)
-                    {{ $data->getMoney(0) }}元
-                @endif
                 @if($data->status==3)
+                    @if($data->buyer==$userid)
+                        <input type="text" placeholder="一期收费" pattern="^([1-9])|([1-9]\d+)$" required name="pay"> 元
+                        &nbsp;<a class="tshow" onclick="getSureMoney(3)">价格确定</a>
+                    @else <span class="star">双方实际定价中</span>
+                    @endif
+                @elseif($data->status>=4)
+                    {{ $data->getMoney(0) }}元
+                    @if($data->getPayStatus(0))
+                        &nbsp;&nbsp;<b style="color:red;font-size:12px;">{{ $data->getPayName() }}</b>
+                    @endif
+                    @if($data->buyer==$userid)
+                        &nbsp;<a class="tshow paycode">支付二维码</a>
+                    @elseif($data->seller==$userid && !$data->getPayStatus(0))
+                        <br><br><a class="tshow" href="{{DOMAIN}}member/order/getPay/{{$data->id}}/1/1">确定收款</a>
+                    @endif
+                @endif
+                @if($data->status==5)
                     <span class="orange">效果协商中</span>
                 @elseif($data->status>3)
                     <span class="green">效果已协商</span>
@@ -71,15 +106,27 @@
         <tr>
             <td class="field_name">二期付款：</td>
             <td class="statusbtn">
-                @if($data->status==4 && $data->seller==$userid && $data->status<4)
-                    <input type="text" placeholder="二期收费" pattern="^([1-9])|([1-9]\d+)$" required name="realMoney2"> 元
-                @elseif($data->status>4)
+                @if($data->status==5)
+                    @if($data->buyer==$userid)
+                        <input type="text" placeholder="二期收费" pattern="^([1-9])|([1-9]\d+)$" required name="pay"> 元
+                        &nbsp;<a class="tshow" onclick="getSureMoney(4)">价格确定</a>
+                    @else <span class="star">双方实际定价中</span>
+                    @endif
+                @elseif($data->status>6)
                     {{ $data->getMoney(1) }}元
+                    @if($data->getPayStatus(1))
+                        &nbsp;&nbsp;<b style="color:red;font-size:12px;">{{ $data->getPayName() }}</b>
+                    @endif
+                    @if($data->buyer==$userid)
+                        &nbsp;<a class="tshow paycode">支付二维码</a>
+                    @elseif($data->seller==$userid && !$data->getPayStatus(1))
+                        <br><br><a class="tshow" href="{{DOMAIN}}member/order/getPay/{{$data->id}}/2/1">确定收款</a>
+                    @endif
                 @else 无
                 @endif
-                @if($data->status==5)
+                @if($data->status==6)
                     <span class="orange">效果待确定</span>
-                @elseif($data->status>5)
+                @elseif($data->status>6)
                     <span class="green">效果已确定</span>
                 @endif
             </td>
@@ -87,10 +134,22 @@
         <tr>
             <td class="field_name">三期付款：</td>
             <td class="statusbtn">
-                @if($data->status==6 || $data->seller==$userid)
-                    <input type="text" placeholder="三期收费" pattern="^([1-9])|([1-9]\d+)$" required name="realMoney3"> 元
+                @if($data->status==6)
+                    @if($data->buyer==$userid)
+                        <input type="text" placeholder="三期收费" pattern="^([1-9])|([1-9]\d+)$" required name="pay"> 元
+                        &nbsp;<a class="tshow" onclick="getSureMoney(5)">价格确定</a>
+                    @else <span class="star">双方实际定价中</span>
+                    @endif
                 @elseif($data->status>6)
                     {{ $data->getMoney(2) }}元
+                    @if($data->getPayStatus(2))
+                        &nbsp;&nbsp;<b style="color:red;font-size:12px;">{{ $data->getPayName() }}</b>
+                    @endif
+                    @if($data->buyer==$userid)
+                        &nbsp;<a class="tshow paycode">支付二维码</a>
+                    @elseif($data->seller==$userid && !$data->getPayStatus(2))
+                        <br><br><a class="tshow" href="{{DOMAIN}}member/order/getPay/{{$data->id}}/3/1">确定收款</a>
+                    @endif
                 @else 无
                 @endif
                 @if($data->status==7)
@@ -103,10 +162,22 @@
         <tr>
             <td class="field_name">分期尾款：</td>
             <td class="statusbtn">
-                @if($data->status==8 || $data->seller==$userid)
-                    <input type="text" placeholder="四期收费" pattern="^([1-9])|([1-9]\d+)$" required name="realMoney4"> 元
+                @if($data->status==8)
+                    @if($data->buyer==$userid)
+                        <input type="text" placeholder="四期收费" pattern="^([1-9])|([1-9]\d+)$" required name="pay"> 元
+                        &nbsp;<a class="tshow" onclick="getSureMoney(6)">价格确定</a>
+                    @else <span class="star">双方实际定价中</span>
+                    @endif
                 @elseif($data->status>8)
                     {{ $data->getMoney(3) }}元
+                    @if($data->getPayStatus(3))
+                        &nbsp;&nbsp;<b style="color:red;font-size:12px;">{{ $data->getPayName() }}</b>
+                    @endif
+                    @if($data->buyer==$userid)
+                        &nbsp;<a class="tshow paycode">支付二维码</a>
+                    @elseif($data->seller==$userid && !$data->getPayStatus(3))
+                        <br><br><a class="tshow" href="{{DOMAIN}}member/order/getPay/{{$data->id}}/4/1">确定收款</a>
+                    @endif
                 @else 无
                 @endif
                 @if($data->status==9)
@@ -121,11 +192,11 @@
 
         <tr>
             <td class="field_name">创建时间：</td>
-            <td>{{ $data->getCreateTime() }}</td>
+            <td>{{ $data->createTime() }}</td>
         </tr>
     @if(in_array($data->genre,[1,2,3,4]))
         <tr>
-            <td class="field_name">更新时间：</td>
+            <td class="field_name">付款时间：</td>
             <td>{{ $data->getCreateTime() }}</td>
         </tr>
     @elseif(in_array($data->genre,[5,6]))
@@ -166,7 +237,7 @@
     </p>
     <table class="table_create table_show" cellspacing="0" cellpadding="0" id="userinfo" style="display:none;">
         <tr>
-            <td class="field_name">供应方名称：</td>
+            <td class="field_name">{{ $data->buyer==$userid ? '供应方' : '需求方' }}名称：</td>
             <td>{{ $userInfo->username }}</td>
         </tr>
         <tr>
@@ -178,12 +249,16 @@
             <td>{{ $userInfo->qq }}</td>
         </tr>
         <tr>
+            <td class="field_name">支付宝：</td>
+            <td>{{ $userInfo->zfb }}</td>
+        </tr>
+        <tr>
             <td class="field_name">地址：</td>
             <td>{{ $userInfo->address }}</td>
         </tr>
         @if($userInfo->company($userInfo->id))
         <tr>
-            <td class="field_name">需求方公司：</td>
+            <td class="field_name">{{ $data->buyer==$userid ? '供应方' : '需求方' }}公司：</td>
             <td>{{ $userInfo->company($userInfo->id)->name }}</td>
         </tr>
         @endif
@@ -241,18 +316,17 @@
                     <a class="tshow" id="refuse" title="{{ $data->statusbtn() }}"><button class="companybtn">拒绝订单</button></a>
                 @endif
                 @if(in_array($data->genre,[1,2,3,4]))
-                    @if(in_array($data->status,[2,4,5,6,7]))
+                    @if(in_array($data->status,[3,4,5,6,7]))
                     <a class="tshow" id="tostatus" title="{{ $data->statusbtn() }}">
                         <button class="companybtn">
-                            @if($data->status==2)提交价格
-                            @elseif(in_array($data->status,[4,5]))办理订单
+                            @if(in_array($data->status,[4,5]) && $data->getMoney())办理订单
                             @elseif($data->status==6)确认收到
                             @elseif($data->status==7)订单成功
                             @endif
                         </button></a>
                     @endif
                 @endif
-                @if(in_array($data->status,[3,11]))
+                @if(in_array($data->status,[2,11]))
                     <a class="tshow" id="false" title="{{ $data->statusbtn() }}失败">
                         <button class="companybtn">订单失败</button></a>
                 @elseif(in_array($data->status,[11]))
@@ -271,6 +345,11 @@
     <input type="hidden" name="realMoney2" value="{{ $data->getMoney(1) }}">
     <input type="hidden" name="realMoney3" value="{{ $data->getMoney(2) }}">
     <input type="hidden" name="realMoney4" value="{{ $data->getMoney(3) }}">
+    <input type="hidden" name="payStatus" value="{{ $data->getPayStatus() }}">
+    <input type="hidden" name="payStatus1" value="{{ $data->getPayStatus(0) }}">
+    <input type="hidden" name="payStatus2" value="{{ $data->getPayStatus(1) }}">
+    <input type="hidden" name="payStatus3" value="{{ $data->getPayStatus(2) }}">
+    <input type="hidden" name="payStatus4" value="{{ $data->getPayStatus(3) }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     {{--弹出窗口--}}
     <div class="popup">
@@ -286,16 +365,43 @@
         <div id="torefuse">确定拒绝</div>
         <a class="tshow close" onclick="$('.popup').hide();">X</a>
     </div>
+    {{--支付的二维码--}}
+    @if($data->buyer==$userid)
+    <div class="popup3" style="display:{{$data->getPayStatus()?'none':'block'}};">
+        <img src="{{PUB}}assets-home/images/cul_paycode.png">
+        <div class="close">确 定</div>
+        <a class="tshow close" onclick="$('.popup').hide();">X</a>
+    </div>
+    @endif
 
     <script>
+        $.ajaxSetup({headers : {'X-CSRF-TOKEN':$('input[name="_token"]').val()}});
+        var id = $("input[name='id']").val();
+        var genre = $("input[name='genre']").val();
+        var status = $("input[name='status']").val();
+
+        //确定价格
+        function getSureMoney(i){
+            var pay = $("input[name='pay']").val();
+            if (pay=='') { alert('价格未填写！');return; }
+            //cate同一订单第几次打款：1创意，2分镜，3视频，
+            $.ajax({
+                type: 'POST',
+                url: '/member/order/pay',
+                data: {'order_id':id,'cate':i,'money':pay},
+                dataType: 'json',
+                success: function(data) {
+                    if (data.code==0) { window.location.href = '{{DOMAIN}}member/order/'+id; }
+                }
+            });
+        }
+        //二维码支付
+        $(".paycode").click(function(){ $(".popup3").show(); });
+
+        //订单流程
         $(document).ready(function(){
-            var id = $("input[name='id']").val();
-            var genre = $("input[name='genre']").val();
-            var status = $("input[name='status']").val();
             var remarks = $("textarea[name='remarks']");
-            //确定价格，再异步调用二维码支付
             //订单流程：创意、分镜、视频
-            $.ajaxSetup({headers : {'X-CSRF-TOKEN':$('input[name="_token"]').val()}});
                 //确认、拒绝订单
             $("#sure").click(function(){ checkAjax(1); });
             $("#refuse").click(function(){ $(".popup2").show(); });
@@ -314,18 +420,46 @@
             }
                 //走流程
             $("#tostatus").click(function(){
-                if (status==2 && genre <= 4) {
-                    var money = $("input[name='money']").val();
-                    var genreName =''; var genreUrl = '';
-                    if(genre==1 || genre==2){
-                        genreName = '创意'; genreUrl = 'idea';
-                    } else if(genre==3 || genre==4){
-                        genreName = '分镜'; genreUrl = 'story';
+                if ((status>4&&genre<=4) || (status>=4&&(genre==5||genre==6))) {
+                    //订单支付状态：pay表中，订单类型表示，(1,2,3,4)为视频订单专用，其他订单用0表示
+                    var payStatus = $("input[name='payStatus']").val();
+                    var payStatus1 = $("input[name='payStatus1']").val();
+                    var payStatus2 = $("input[name='payStatus2']").val();
+                    var payStatus3 = $("input[name='payStatus3']").val();
+                    var payStatus4 = $("input[name='payStatus4']").val();
+                    if(genre<=4 && status>=4){
+                        if (payStatus!=3) {
+                            alert("对方未确定支付宝到账！"); return;
+                        } else {
+                            window.location.href = "{{DOMAIN}}member/order/paystatus/"+id+'/'+0;
+                        }
+                    } else if ((genre==4||genre==6) && status==4) {
+                        if (payStatus1!=3) {
+                            alert("对方未确定支付宝到账！"); return;
+                        } else {
+                            window.location.href = "{{DOMAIN}}member/order/paystatus/"+id+'/'+1;
+                        }
+                    } else if ((genre==4||genre==6) && status==6 && payStatus1==3) {
+                        if (payStatus2!=3) {
+                            alert("对方未确定支付宝到账！"); return;
+                        } else {
+                            window.location.href = "{{DOMAIN}}member/order/paystatus/"+id+'/'+2;
+                        }
+                    } else if ((genre==4||genre==6) && status==8 && payStatus2==3) {
+                        if (payStatus3!=3) {
+                            alert("对方未确定支付宝到账！"); return;
+                        } else {
+                            window.location.href = "{{DOMAIN}}member/order/paystatus/"+id+'/'+3;
+                        }
+                    } else if ((genre==4||genre==6) && status==10 && payStatus3==3) {
+                        if (payStatus4!=3) {
+                            alert("对方未确定支付宝到账！"); return;
+                        } else {
+                            window.location.href = "{{DOMAIN}}member/order/paystatus/"+id+'/'+4;
+                        }
                     }
-//                    alert(money);return;
-                    if(money==''){ alert(genreName+"价格必填！"); return; }
-                    window.location.href = "{{DOMAIN}}member/order/"+id+"/"+genreUrl+"/"+money;
                 } else if (status==4 || status==5 || status==6 || status==7 || status==12) {
+                    //订单其他状态
                     window.location.href = "{{DOMAIN}}member/order/"+id+"/"+status;
                 }
             });
@@ -348,20 +482,19 @@
                 //订单下一步：弹窗
             $("#next").click(function(){
                 $(".popup").show(); $("#story").show(); $("#video").show();
-//                window.location.href = "{{DOMAIN}}member/order/"+id+"/next/"+1;
             });
-            $(".close").click(function(){ $(".popup").hide(); $(".popup2").hide(); });
-
-            //订单流程线
-            $("#status1").mouseover(function(){ $("#statustext1").show(); }).mouseout(function(){ $("#statustext1").hide(); });
-            $("#status2").mouseover(function(){ $("#statustext2").show(); }).mouseout(function(){ $("#statustext2").hide(); });
-            $("#status3").mouseover(function(){ $("#statustext3").show(); }).mouseout(function(){ $("#statustext3").hide(); });
-            $("#status4").mouseover(function(){ $("#statustext4").show(); }).mouseout(function(){ $("#statustext4").hide(); });
-            $("#status5").mouseover(function(){ $("#statustext5").show(); }).mouseout(function(){ $("#statustext5").hide(); });
-            $("#status6").mouseover(function(){ $("#statustext6").show(); }).mouseout(function(){ $("#statustext6").hide(); });
-            $("#status7").mouseover(function(){ $("#statustext7").show(); }).mouseout(function(){ $("#statustext7").hide(); });
-            $("#status12").mouseover(function(){ $("#statustext12").show(); }).mouseout(function(){ $("#statustext12").hide(); });
-            $("#status13").mouseover(function(){ $("#statustext13").show(); }).mouseout(function(){ $("#statustext13").hide(); });
+            $(".close").click(function(){ $(this).parent().hide(); });
         });
+
+        //订单流程线
+        $("#status1").mouseover(function(){ $("#statustext1").show(); }).mouseout(function(){ $("#statustext1").hide(); });
+        $("#status2").mouseover(function(){ $("#statustext2").show(); }).mouseout(function(){ $("#statustext2").hide(); });
+        $("#status3").mouseover(function(){ $("#statustext3").show(); }).mouseout(function(){ $("#statustext3").hide(); });
+        $("#status4").mouseover(function(){ $("#statustext4").show(); }).mouseout(function(){ $("#statustext4").hide(); });
+        $("#status5").mouseover(function(){ $("#statustext5").show(); }).mouseout(function(){ $("#statustext5").hide(); });
+        $("#status6").mouseover(function(){ $("#statustext6").show(); }).mouseout(function(){ $("#statustext6").hide(); });
+        $("#status7").mouseover(function(){ $("#statustext7").show(); }).mouseout(function(){ $("#statustext7").hide(); });
+        $("#status12").mouseover(function(){ $("#statustext12").show(); }).mouseout(function(){ $("#statustext12").hide(); });
+        $("#status13").mouseover(function(){ $("#statustext13").show(); }).mouseout(function(){ $("#statustext13").hide(); });
     </script>
 @stop

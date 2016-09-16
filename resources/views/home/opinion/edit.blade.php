@@ -1,6 +1,13 @@
 @extends('home.main')
 @section('content')
-    @include('home.common.crumb')
+    <div class="s_crumb">
+        <div class="crumb">
+            <div class="right">
+                <a href="/">首页</a> /
+                <a href="{{DOMAIN}}opition">意见</a> / 编辑
+            </div>
+        </div>
+    </div>
 
     <div class="home_create">
         <form class="form" data-am-validator method="POST" action="{{DOMAIN}}opinion/{{$data->id}}" enctype="multipart/form-data">
@@ -24,44 +31,10 @@
 
                 <tr>
                     <td><label>内容 <span class="star">*</span>：</label></td>
-                    <td>
-                        {{--<input type="text" placeholder="至少2个字符" minlength="2" required name="name"/>--}}
-                        @include('UEditor::head')
-                        <script id="container" name="intro" type="text/plain">
-                            {!! $data->intro !!}
-                        </script>
-                        <!-- 实例化编辑器 -->
-                        <script type="text/javascript">
-                            var ue = UE.getEditor('container',{
-                                initialFrameWidth:550,
-                                initialFrameHeight:100,
-                                    toolbars:[['redo','undo','bold','italic','underline','strikethrough','horizontal','forecolor','fontfamily','fontsize','indent','priview','directionality','paragraph','searchreplace','insertimage','imagefloat','pasteplain','help']]
-                            });
-                            ue.ready(function() {
-                                //此处为支持laravel5 csrf ,根据实际情况修改,目的就是设置 _token 值.
-                                ue.execCommand('serverparam', '_token', '{{ csrf_token() }}');
-                            });
-                        </script>
+                    <td style="position:relative;z-index:5;">
+                        @include('home.common.editor')
                     </td>
                 </tr>
-                <tr><td colspan="2"><div class="div_hr"></div></td></tr>
-
-                @if($data->pic)
-                <tr>
-                    <td><label>已上传的图片：</label></td>
-                    <td><img src="{{ $data->pic }}"></td>
-                </tr>
-                @else
-                <tr>
-                    <td><label>上传图片：</label></td>
-                    <td>
-                        {{--<input type="text" placeholder="至少2个字符" minlength="2" required name="pic"/>--}}
-                        <input type="text" placeholder="地址" class="readonly" title="显示地址" readonly name="url_file">
-                        <input type="button" value="[查找]" onclick="path.click()" class="uploadpic">
-                        <input type="file" id="path" style="display:none" onchange="url_file.value=this.value;" name="url_ori">
-                    </td>
-                </tr>
-                @endif
                 <tr><td colspan="2"><div class="div_hr"></div></td></tr>
 
                 <tr><td colspan="2" style="text-align:center;">

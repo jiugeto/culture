@@ -10,8 +10,14 @@ class ThemeController extends BaseController
      * 前台话题专栏管理
      */
 
-    public function index($uid=0)
+    public function __construct()
     {
+        parent::__construct();
+    }
+
+    public function index()
+    {
+        $uid = $this->userid ? $this->userid : 0;
         $result = [
             'datas'=> $this->query($uid),
             'curr'=> 'theme',

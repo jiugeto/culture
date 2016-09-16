@@ -24,7 +24,7 @@
                 </div>
             </div>
             @endforeach
-        @else <div class="title">暂无主题</div>
+        @else <div class="title">暂无专栏</div>
         @endif
 
         <div style="height:{{count($datas)?ceil(count($datas)/4)*350:0}}px;">{{--空白--}}</div>

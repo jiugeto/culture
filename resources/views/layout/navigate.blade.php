@@ -7,7 +7,7 @@
     <div class="nav_body">
         <div><a href="/"><img src="/assets-home/images/logo.png" class="logo"></a></div>
         <div class="nav_qiehuan" style="display:{{explode('/',$_SERVER['REQUEST_URI'])[1]?'block':'none'}};" title="点击显示或隐藏菜单">
-            <img src="/assets/images/daohang.png" class="imgMiniSize"> 导航
+            <img src="{{PUB}}assets/images/daohang.png" class="imgMiniSize"> 导航
             <span id="shang">▲</span><span id="xia" style="display:none;">▼</span>
         </div>
         <div class="nav_qh">

@@ -1,36 +1,16 @@
 @extends('home.main')
 @section('content')
     @include('home.common.crumb')
-    <style>
-        .small a { cursor:pointer; }
-    </style>
 
     <div class="opinion_con">
         <div class="opinion_list">
-            {{--<p class="cate">--}}
-                {{--@if($cates)--}}
-                {{--@foreach($cates as $cate)--}}
-                    {{--{{ $cate->name }}：--}}
-                    {{--@if($cate->child)--}}
-                        {{--@foreach($cate->child as $subcate)--}}
-                            {{--<a href="{{ $subcate->id }}">{{ $subcate->name }}</a>--}}
-                        {{--@endforeach--}}
-                    {{--@endif <br>--}}
-                {{--@endforeach--}}
-                {{--@endif--}}
-            {{--</p>--}}
-            <p class="cate">分类：@foreach($model['cates'] as $kcate=>$cate)<a href="">{{ $cate }}</a>@endforeach
+            <p class="cate">分类：<a href="{{DOMAIN}}idea" class="{{$cate==0?'curr':''}}">所有</a>
+                @foreach($model['cates2'] as $kcate=>$vcate)
+                    <a href="{{DOMAIN}}idea/cate/{{$kcate}}" class="{{$cate==$kcate?'curr':''}}">{{ $vcate }}</a>
+                @endforeach
             </p>
-            {{--<table class="idea">--}}
-                {{--<tr>--}}
-                    {{--<td rowspan="3" class="img"><div><img src="/uploads/images/2016/online1.png"></div></td>--}}
-                    {{--<td><a href=""><b>创意标题：让他发给你哈</b></a><span class="right">浏览量</span></td>--}}
-                {{--</tr>--}}
-                {{--<tr><td class="con">创意内容：个人部分人共同发布不太好听任何人挺好呢个人部分人共同发布不太好听任何人挺好呢个人部分人共同发布不太好听任何人挺好呢个人部分人共同发布不太好听任何人挺好呢个人部分人共同发布不太好听任何人挺好呢个人部分人共同发布不太好听任何人挺好呢个人部分人共同发布不太好听任何人挺好呢</td></tr>--}}
-                {{--<tr><td class="small">关注标签：<span class="right">时间</span></td></tr>--}}
-            {{--</table>--}}
             @if($datas->total())
-            @foreach($datas as $data)
+                @foreach($datas as $data)
             <table class="idea">
                 <tr>
                     <td rowspan="3" class="img"><div><img src="{{PUB}}uploads/images/2016/online1.png"></div></td>
@@ -54,7 +34,7 @@
                     </td>
                 </tr>
             </table>
-            @endforeach
+                @endforeach
             @endif
             @include('home.common.page')
         </div>

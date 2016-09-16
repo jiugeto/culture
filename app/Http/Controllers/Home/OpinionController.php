@@ -17,6 +17,12 @@ class OpinionController extends BaseController
         parent::__construct();
     }
 
+    public function is_login()
+    {
+        if (\Session::has('user')) { return redirect(DOMAIN.'login'); }
+        return \Session::get('user.uid');
+    }
+
     public function index($status=0)
     {
         $result = [
@@ -29,6 +35,7 @@ class OpinionController extends BaseController
 
     public function create($reply=0)
     {
+        $uid = $this->is_login();
         //如果 reply 是0。则无此记录，为新意见 isreply==0 ，否则是 isreply==1
         if (OpinionModel::find($reply)) { $isreply = 1; }else{ $isreply = 0; }
         $result = [
@@ -49,6 +56,7 @@ class OpinionController extends BaseController
 
     public function show($id)
     {
+        $uid = $this->is_login();
         $this->menus['show'] = '意见详情';
         $result = [
             'data'=> OpinionModel::find($id),
@@ -60,6 +68,7 @@ class OpinionController extends BaseController
 
     public function edit($id)
     {
+        $uid = $this->is_login();
         $this->menus['edit'] = '修改意见';
         $result = [
             'data'=> OpinionModel::find($id),
@@ -90,46 +99,10 @@ class OpinionController extends BaseController
         if (!isset($request->intro)) {
             echo "<script>alert('内容不能为空！');history.go(-1);</script>";exit;
         }
-        //用户uid，暂时默认为0
-        $uid = 0;
-        //回复isreply，0是无回复，1是有回复
-        $isreply = 0;
-        $reply = 0;
-        //上传图片
-        if($request->hasFile('url_ori')){  //判断图片存在
-            foreach ($_FILES as $pic1) {
-                if ($pic1['size'] > $this->uploadSizeLimit) {
-                    echo "<script>alert('对不起，你上传的文件大于5M，请重新选择');history.go(-1);</script>";exit;
-                }
-            }
-            $file1 = $request->file('url_ori');  //获取文件
-            $pic = Tools::upload($file1);
-//            $config = [
-//                'fileField' => 'url_ori1',    //文件域字段名
-//                'allowFiles'=> $this->pic_suffixs,   //允许上传的文件后辍
-//                'maxSize'   => $this->uploadSizeLimit, //允许上传文件的大小5M 单位 b
-//                'nameFormat'=> $this->pic_path,
-//            ];
-//            $rst = Uploader::save($config, $request);
-//            if ($rst['state']=='SUCCESS') { $data['pic'] = $rst['url']; }
-//            else { echo "<script>alert('图片上传错误，".$rst['state']."！');history.go(-1);</script>";exit; }
-        }
-        if ($id) {
-            $opinion = OpinionModel::find($id);
-            $isreply = $opinion->isreply;
-            $reply = $opinion->reply;
-            if (!isset($pic)) { $pic = $opinion->pic; }
-        }
         $data = [
             'name'=> $request->name,
             'intro'=> $request->intro,
-            'pic'=> isset($pic) ? $pic : '',
-            'uid'=> $uid,
-            'status'=> 1,       //1是新发布
-            'remarks'=> '',
-            'isreply'=> $isreply,
-            'reply'=> $reply,
-            'isshow'=> 2,       //2是前台列表显示
+            'uid'=> \Session::has('user')?\Session::get('user.uid'):0,
         ];
         return $data;
     }
@@ -143,14 +116,14 @@ class OpinionController extends BaseController
             //所有意见
             $datas = OpinionModel::where([
                     'del'=> 0,
-                    'isshow'=> 2,
+                    'isshow'=> 1,
                 ])
                 ->paginate($this->limit);
         } elseif ($status==2) {
             //未处理
             $datas = OpinionModel::where([
                     'del'=> 0,
-                    'isshow'=> 2,
+                    'isshow'=> 1,
                 ])
                 ->where('status','<',3)
                 ->paginate($this->limit);
@@ -158,7 +131,7 @@ class OpinionController extends BaseController
             //已处理
             $datas = OpinionModel::where([
                     'del'=> 0,
-                    'isshow'=> 2,
+                    'isshow'=> 1,
                 ])
                 ->where('status','>',3)
                 ->paginate($this->limit);
@@ -166,7 +139,7 @@ class OpinionController extends BaseController
             //处理并且满意
             $datas = OpinionModel::where([
                     'del'=> 0,
-                    'isshow'=> 2,
+                    'isshow'=> 1,
                 ])
                 ->where('status',5)
                 ->paginate($this->limit);

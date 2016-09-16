@@ -55,6 +55,7 @@ Route::group(['prefix'=>'/','namespace'=>'Home'],function(){
     //创意路由
     Route::get('idea/click/{id}/{click}','IdeaController@click');
     Route::get('idea/collect/{id}/{collect}','IdeaController@collect');
+    Route::get('idea/cate/{cate}','IdeaController@index');
     Route::resource('idea','IdeaController');
     //话题路由
     Route::post('talk/{id}','TalkController@update');

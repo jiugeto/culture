@@ -8,7 +8,7 @@ class ThemeModel extends BaseModel
         'id','name','intro','uid','uname','sort','isshow','created_at','updated_at',
     ];
 
-    public function getUserName()
+    public function getUName()
     {
         $uid = $this->uid ? $this->uid : 0;
         $userName = '';

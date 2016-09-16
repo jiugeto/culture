@@ -73,6 +73,8 @@ class OrderModel extends BaseModel
         return isset($model) ? $model : '';
     }
 
+    //以下是支付类方法
+
     /**
      * 获取对应支付信息
      */
@@ -109,15 +111,8 @@ class OrderModel extends BaseModel
         }
     }
 
-//    /**
-//     * 获取对应支付金额，视频专用
-//     */
-//    public function getVideoMoney($i)
-//    {
-//    }
-
     /**
-     * 得到时间1
+     * 得到付款时间1
      */
     public function getCreateTime($i=null)
     {
@@ -126,6 +121,58 @@ class OrderModel extends BaseModel
             return (isset($pay[$i])&&$pay[$i]) ? date('Y年m月d日 H:i',$pay->created_at) : '';
         } else {
             return $this->getPay() ? date('Y年m月d日 H:i',$this->getPay()->created_at) : '';
+        }
+    }
+
+    /**
+     * 得到付款来源表类型
+     */
+    public function getPayGenreName($i=null)
+    {
+        if (in_array($this->genre,[5,6])) {
+            $pay = $this->getPays();
+            return (isset($pay[$i])&&$pay[$i]) ? $pay->getGenreName() : '';
+        } else {
+            return $this->getPay() ? $this->getPay()->getGenreName() : '';
+        }
+    }
+
+    /**
+     * 得到付款的延时赔付
+     */
+    public function getPayFine($i=null)
+    {
+        if (in_array($this->genre,[5,6])) {
+            $pay = $this->getPays();
+            return (isset($pay[$i])&&$pay[$i]) ? $pay->getFineName() : '';
+        } else {
+            return $this->getPay() ? $this->getPay()->getFineName() : '';
+        }
+    }
+
+    /**
+     * 得到付款的支付宝确认状态码
+     */
+    public function getPayStatus($i=null)
+    {
+        if (in_array($this->genre,[5,6])) {
+            $pay = $this->getPays();
+            return (isset($pay[$i])&&$pay[$i]) ? $pay->ispay : 0;
+        } else {
+            return $this->getPay() ? $this->getPay()->ispay : 0;
+        }
+    }
+
+    /**
+     * 得到付款的支付宝确认状态值
+     */
+    public function getPayName($i=null)
+    {
+        if (in_array($this->genre,[5,6])) {
+            $pay = $this->getPays();
+            return (isset($pay[$i])&&$pay[$i]) ? $pay->getPayName() : '';
+        } else {
+            return $this->getPay() ? $this->getPay()->getPayName() : '';
         }
     }
 }

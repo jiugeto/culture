@@ -101,7 +101,7 @@ CREATE TABLE `ba_log` (
   `loginTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '登陆时间',
   `logoutTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '退出时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='管理员日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COMMENT='管理员日志表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -110,7 +110,7 @@ CREATE TABLE `ba_log` (
 
 LOCK TABLES `ba_log` WRITE;
 /*!40000 ALTER TABLE `ba_log` DISABLE KEYS */;
-INSERT INTO `ba_log` VALUES (1,1,'jiuge',1,'20160908075940137','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473292780,0),(2,1,'jiuge',1,'201609100906318268','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473469591,0),(3,1,'jiuge',1,'201609101339029262','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473485942,0),(4,1,'jiuge',1,'201609110851236265','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473555083,0),(5,1,'jiuge',1,'201609120752378324','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473637957,0),(6,1,'jiuge',1,'20160912135742704','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473659862,0),(7,1,'jiuge',1,'201609121405091197','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473660309,0),(8,1,'jiuge',1,'201609130751197676','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473724279,0),(9,1,'jiuge',2,'20160913170458395','192.168.2.100','浙江省 杭州市 滨江区','/admin/login',1473757498,0),(10,1,'jiuge',2,'2016091409015949','192.168.2.101','浙江省 杭州市 滨江区','/admin/login',1473814919,0),(11,1,'jiuge',2,'201609150820596747','192.168.2.101','浙江省 杭州市 滨江区','/admin/login',1473898859,0),(12,1,'jiuge',2,'201609151505435076','192.168.2.101','浙江省 杭州市 滨江区','/admin/login',1473923143,0),(13,1,'jiuge',1,'201609151740117655','192.168.2.101','浙江省 杭州市 滨江区','/login/dologin',1473932411,0);
+INSERT INTO `ba_log` VALUES (1,1,'jiuge',1,'20160908075940137','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473292780,0),(2,1,'jiuge',1,'201609100906318268','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473469591,0),(3,1,'jiuge',1,'201609101339029262','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473485942,0),(4,1,'jiuge',1,'201609110851236265','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473555083,0),(5,1,'jiuge',1,'201609120752378324','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473637957,0),(6,1,'jiuge',1,'20160912135742704','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473659862,0),(7,1,'jiuge',1,'201609121405091197','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473660309,0),(8,1,'jiuge',1,'201609130751197676','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473724279,0),(9,1,'jiuge',2,'20160913170458395','192.168.2.100','浙江省 杭州市 滨江区','/admin/login',1473757498,0),(10,1,'jiuge',2,'2016091409015949','192.168.2.101','浙江省 杭州市 滨江区','/admin/login',1473814919,0),(11,1,'jiuge',2,'201609150820596747','192.168.2.101','浙江省 杭州市 滨江区','/admin/login',1473898859,0),(12,1,'jiuge',2,'201609151505435076','192.168.2.101','浙江省 杭州市 滨江区','/admin/login',1473923143,0),(13,1,'jiuge',1,'201609151740117655','192.168.2.101','浙江省 杭州市 滨江区','/login/dologin',1473932411,0),(14,1,'jiuge',1,'201609160853344212','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473987214,1473992233),(15,2,'jiuge2',1,'201609161017314217','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473992251,0),(16,1,'jiuge',1,'201609161738121898','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1474018692,0);
 /*!40000 ALTER TABLE `ba_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -693,7 +693,7 @@ CREATE TABLE `bs_ideas_read` (
   `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updated_at` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8 COMMENT='创意阅读表';
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8 COMMENT='创意阅读表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -702,7 +702,7 @@ CREATE TABLE `bs_ideas_read` (
 
 LOCK TABLES `bs_ideas_read` WRITE;
 /*!40000 ALTER TABLE `bs_ideas_read` DISABLE KEYS */;
-INSERT INTO `bs_ideas_read` VALUES (1,0,2,20160703,0),(2,0,2,20160703,0),(3,0,2,20160703,0),(4,0,2,20160703,0),(5,0,2,20160703,0),(6,0,2,20160703,0),(7,0,2,20160703,0),(8,0,2,20160703,0),(9,0,2,20160703,0),(10,0,2,20160703,0),(11,0,2,20160703,0),(12,0,2,20160703,0),(13,0,2,20160703,0),(14,0,2,20160705,0),(15,0,2,20160705,0),(16,0,2,20160705,0),(17,0,2,20160705,0),(18,0,2,20160705,0),(19,0,2,20160705,0),(20,0,2,20160705,0),(21,0,2,20160705,0),(22,0,2,20160705,0),(23,0,2,20160705,0),(24,0,2,20160705,0),(25,0,2,20160705,0),(26,0,2,20160705,0),(27,0,2,20160705,0),(28,0,2,20160705,0),(29,0,2,20160707,0),(30,0,2,20160707,0),(31,0,2,20160707,0),(32,0,2,20160707,0),(33,0,2,20160707,0),(34,0,2,20160707,0),(35,0,2,20160707,0),(36,0,2,20160707,0),(37,0,2,20160707,0),(38,0,2,20160707,0),(39,0,2,20160707,0);
+INSERT INTO `bs_ideas_read` VALUES (1,0,2,20160703,0),(2,0,2,20160703,0),(3,0,2,20160703,0),(4,0,2,20160703,0),(5,0,2,20160703,0),(6,0,2,20160703,0),(7,0,2,20160703,0),(8,0,2,20160703,0),(9,0,2,20160703,0),(10,0,2,20160703,0),(11,0,2,20160703,0),(12,0,2,20160703,0),(13,0,2,20160703,0),(14,0,2,20160705,0),(15,0,2,20160705,0),(16,0,2,20160705,0),(17,0,2,20160705,0),(18,0,2,20160705,0),(19,0,2,20160705,0),(20,0,2,20160705,0),(21,0,2,20160705,0),(22,0,2,20160705,0),(23,0,2,20160705,0),(24,0,2,20160705,0),(25,0,2,20160705,0),(26,0,2,20160705,0),(27,0,2,20160705,0),(28,0,2,20160705,0),(29,0,2,20160707,0),(30,0,2,20160707,0),(31,0,2,20160707,0),(32,0,2,20160707,0),(33,0,2,20160707,0),(34,0,2,20160707,0),(35,0,2,20160707,0),(36,0,2,20160707,0),(37,0,2,20160707,0),(38,0,2,20160707,0),(39,0,2,20160707,0),(40,0,2,2016,0),(41,0,2,2016,0),(42,0,2,2016,0),(43,0,2,2016,0),(44,0,2,2016,0),(45,0,2,2016,0),(46,0,2,2016,0),(47,0,2,2016,0),(48,0,2,2016,0),(49,0,2,2016,0),(50,0,2,2016,0),(51,0,2,2016,0);
 /*!40000 ALTER TABLE `bs_ideas_read` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -850,16 +850,14 @@ DROP TABLE IF EXISTS `bs_opinions`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `bs_opinions` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL COMMENT '标题',
+  `name` varchar(100) NOT NULL COMMENT '标题',
   `intro` varchar(2000) NOT NULL COMMENT '内容',
-  `pic` varchar(255) NOT NULL COMMENT '截图',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户id',
   `status` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '意见状态：1新意见，2已查看，3处理中，4不满意，5满意',
   `remarks` varchar(255) NOT NULL COMMENT '不满意理由',
-  `isreply` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回复id：0表示无回复，1表示有回复',
   `reply` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '回复id，关联本表上级id，0是无回复',
-  `isshow` tinyint(3) unsigned NOT NULL DEFAULT '2' COMMENT '在前台列表是否显示：1不显示，2显示，0代表全部显示',
-  `del` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '回收站功能：0不放入回收站，1放入回收站',
+  `isshow` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '在前台列表是否显示：0不显示，1显示，',
+  `del` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '回收站功能：0不放入回收站，1放入回收站',
   `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updated_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`)
@@ -872,7 +870,7 @@ CREATE TABLE `bs_opinions` (
 
 LOCK TABLES `bs_opinions` WRITE;
 /*!40000 ALTER TABLE `bs_opinions` DISABLE KEYS */;
-INSERT INTO `bs_opinions` VALUES (1,'意见001','<p>ergtbfrgtbf</p>','/uploads/images/2016-04-03/5700c2d90606d.png',0,1,'',0,0,2,0,20160403,0);
+INSERT INTO `bs_opinions` VALUES (1,'意见001','<p>ergtbfrgtbf</p>',0,1,'',0,1,0,20160403,0);
 /*!40000 ALTER TABLE `bs_opinions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -909,7 +907,7 @@ CREATE TABLE `bs_orders` (
 
 LOCK TABLES `bs_orders` WRITE;
 /*!40000 ALTER TABLE `bs_orders` DISABLE KEYS */;
-INSERT INTO `bs_orders` VALUES (2,'创意123456','201607031309426817',1,3,1,'jiuge',2,'jiuge2',12,'',1,0,20160703,20160703),(4,'ergth','201607071804515298',3,1,1,'jiuge',2,'jiuge2',3,'',1,0,20160707,20160710);
+INSERT INTO `bs_orders` VALUES (2,'创意123456','201607031309426817',1,3,1,'jiuge',2,'jiuge2',12,'',1,0,20160703,20160703),(4,'ergth','201607071804515298',3,1,1,'jiuge',2,'jiuge2',5,'',1,0,20160707,1474005529);
 /*!40000 ALTER TABLE `bs_orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -996,11 +994,11 @@ CREATE TABLE `bs_pay` (
   `order_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '订单id',
   `money` float unsigned NOT NULL DEFAULT '0' COMMENT '支付金额，单位元',
   `isfine` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否延时赔付，赔付付款额的10%：0不延时，1延时罚款，2罚款已经到位',
-  `ispay` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '付款是否到位：0未到支付宝，1已到支付宝',
+  `ispay` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '付款是否到位：0未到支付宝，1支付宝已收款',
   `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updated_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='订单支付表 bs_pay';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='订单支付表 bs_pay';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1009,7 +1007,7 @@ CREATE TABLE `bs_pay` (
 
 LOCK TABLES `bs_pay` WRITE;
 /*!40000 ALTER TABLE `bs_pay` DISABLE KEYS */;
-INSERT INTO `bs_pay` VALUES (2,1,0,100,0,0,0,0),(4,1,0,10,0,0,0,0);
+INSERT INTO `bs_pay` VALUES (1,1,4,100,0,1,1474005529,1474024833);
 /*!40000 ALTER TABLE `bs_pay` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2107,6 +2105,7 @@ CREATE TABLE `users` (
   `username` varchar(255) NOT NULL COMMENT '用户名称',
   `password` varchar(255) NOT NULL COMMENT '登陆密码，hash加密',
   `pwd` varchar(20) NOT NULL COMMENT '原密码',
+  `ip` varchar(15) NOT NULL COMMENT '用户注册的电脑ip地址',
   `email` varchar(255) NOT NULL COMMENT '邮箱',
   `qq` varchar(255) NOT NULL COMMENT 'qq号码',
   `tel` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '电话',
@@ -2114,6 +2113,7 @@ CREATE TABLE `users` (
   `area` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户所在地区id',
   `address` varchar(255) NOT NULL COMMENT '用户所在具体地址',
   `head` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '头像图片id，关联表bs_pics',
+  `zfb` varchar(100) NOT NULL COMMENT '支付宝账号',
   `isauth` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '用户认证：0未认证，1认证中 ，2认证失败，2认证成功',
   `emailck` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '邮箱认证：0未认证，1认证失败，2认证成功',
   `isuser` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '会员身份：0非会员，1个人消费者，2普通企业，3设计师，4广告公司，5影视公司，6租赁公司',
@@ -2132,7 +2132,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'jiuge','$2y$10$b8.ce.ma17MKiuN8iiJMO.QM5fdJ1Zwl7rpMNahjPGfNOKGoC/Kyy','123456','jiuge@qq.com','946493655',63929131,4294967295,20,'滨江区 浦沿街道 联庄一区 几号 几楼',2,1,1,4,0,10,1470795559,1471420755,1473932411),(2,'jiuge2','$2y$10$X5BdoH0p0n.E3hxCVag/neinTfiHXbMrCHUEEqf8ZpUQGaeOxUUBe','','946493655@qq.com','',0,0,30,'',0,0,0,0,0,10,1470795559,0,0);
+INSERT INTO `users` VALUES (1,'jiuge','$2y$10$b8.ce.ma17MKiuN8iiJMO.QM5fdJ1Zwl7rpMNahjPGfNOKGoC/Kyy','123456','','jiuge@qq.com','946493655',63929131,4294967295,20,'滨江区 浦沿街道 联庄一区 几号 几楼',2,'946493655@qq.com',1,1,4,0,10,1470795559,1471420755,1474018692),(2,'jiuge2','$2y$10$X5BdoH0p0n.E3hxCVag/neinTfiHXbMrCHUEEqf8ZpUQGaeOxUUBe','','','946493655@qq.com','',0,0,30,'',0,'',0,0,0,0,10,1470795559,0,1473992251);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2206,4 +2206,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-15 21:55:31
+-- Dump completed on 2016-09-16 21:16:23

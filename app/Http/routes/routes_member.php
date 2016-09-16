@@ -190,9 +190,10 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
     Route::resource('designComD','DesignComDController');
     //订单路由
         //订单流程
-    Route::get('order/{id}/{genre}/{money}','OrderController@setMoney');
+    Route::post('order/pay','OrderController@setPay');
+    Route::get('order/paystatus/{id}','OrderController@setOrderStatus');
+    Route::get('order/getPay/{id}/{cate}/{status}','OrderController@setPayStatus');
     Route::get('order/{id}/{status}','OrderController@setStatus');
-    Route::get('order/{id}/{real}/{money}','OrderController@setRealMoney');
     Route::post('order/tosure','OrderController@tosure');
     Route::post('order/create','OrderController@create');
     Route::resource('order','OrderController');
