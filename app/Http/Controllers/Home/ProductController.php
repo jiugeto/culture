@@ -27,9 +27,10 @@ class ProductController extends BaseController
     {
         $result = [
             'lists'=> $this->list,
+            'datas'=> $this->query(),
             'recommends'=> $this->queryR(),
 //            'newests'=> $this->queryN(),
-            'datas'=> $this->query(),
+            'ppts'=> $this->ppts(9),
             'curr_menu'=> $this->curr,
             'model'=> $this->model,
         ];
@@ -174,4 +175,18 @@ class ProductController extends BaseController
 ////            ->paginate($this->limit);
 //            ->get();
 //    }
+
+    public function ppts($limit)
+    {
+        $datas = \App\Models\Base\AdModel::where('uid',0)
+            ->where('adplace_id',1)
+            ->where('isuse',1)
+            ->where('isshow',1)
+//            ->where('fromTime','<',time())
+//            ->where('toTime','>',time())
+            ->orderBy('sort','desc')
+            ->paginate($limit);
+        $datas->limit = $limit;
+        return $datas;
+    }
 }

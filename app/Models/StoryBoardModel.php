@@ -1,6 +1,8 @@
 <?php
 namespace App\Models;
 
+use App\Models\Base\PicModel;
+
 class StoryBoardModel extends BaseModel
 {
     /**
@@ -13,9 +15,9 @@ class StoryBoardModel extends BaseModel
     protected $genres = [
         1=>'企业供应','企业需求','个人供应','个人需求',
     ];
-    protected $cates = [
-        1=>'宣传片','广告片','微电影','专题片','汇报片','主题片','晚会视频','婚纱摄影','淘宝视频',
-    ];
+//    protected $cates = [
+//        1=>'宣传片','广告片','微电影','专题片','汇报片','主题片','晚会视频','婚纱摄影','淘宝视频',
+//    ];
 
     public function genreName()
     {
@@ -24,7 +26,7 @@ class StoryBoardModel extends BaseModel
 
     public function getCateName()
     {
-        return array_key_exists($this->cate,$this->cates) ? $this->cates[$this->cate] : '';
+        return array_key_exists($this->cate,$this->cates2) ? $this->cates2[$this->cate] : '';
     }
 
     public function user()

@@ -19,11 +19,10 @@ Route::group(['prefix'=>'/','namespace'=>'Home'],function(){
     Route::get('product/video/{id}/{videoid}','ProductController@video');
     //在线作品
     Route::any('creation','CreationController@index');
-    //创意脚本
     //分镜画面
     Route::get('storyboard/like/{way}/{id}','StoryBoardController@like');
-    Route::get('storyboard/w/{way}','StoryBoardController@index');      //条件检索方式
     Route::get('storyboard/{id}','StoryBoardController@show');
+    Route::get('storyboard/w/{way}/{cate}','StoryBoardController@index');      //w条件检索方式
     Route::any('storyboard','StoryBoardController@index');
     //供应单位
     Route::get('{genre}/supply','SupplyController@index');
@@ -61,7 +60,6 @@ Route::group(['prefix'=>'/','namespace'=>'Home'],function(){
     Route::post('talk/{id}','TalkController@update');
     Route::get('talk/mytalk','TalkController@mytalk');
     Route::get('talk/follow','TalkController@follow');
-//    Route::get('talk/theme','TalkController@theme');
     Route::get('talk/collect','TalkController@collect');
     Route::get('talk/tofollow','TalkController@tofollow');
     Route::get('talk/tothank','TalkController@tothank');
@@ -80,4 +78,6 @@ Route::group(['prefix'=>'/','namespace'=>'Home'],function(){
     Route::resource('theme','ThemeController');
     //新手帮助路由
     Route::resource('newuser','NewUserController');
+    //搜索栏
+    Route::get('s/{genre}/{keyword}','SearchController@index');
 });

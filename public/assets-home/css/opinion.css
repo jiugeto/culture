@@ -122,13 +122,18 @@
     background:rgb(250,250,250);
 }
 .opinion_list p.cate a {
-    margin:0 5px;
+    margin-left:5px;
+    padding:0;
     color:grey;
     text-decoration:none;
 }
-.opinion_list p.cate a:hover,.opinion_list p.cate a.curr {
+.opinion_list p.cate a:hover {
     color:orangered;
     text-decoration:underline;
+    border:0;
+}
+.opinion_list p.cate a.curr {
+    color:orangered;
     border:0;
 }
 .opinion_list table.idea {

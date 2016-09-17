@@ -26,10 +26,14 @@
     position:absolute;bottom:-12px;left:-35px;
 }
 .ppt_change_pic li {
-    margin:2px;
+    margin-left:5px;
     width:100px;height:45px;
     border:2px solid white;
     list-style:none;
+    font-size:30px;
+    color:ghostwhite;
+    text-align:center;
+    background:gainsboro;
     float:left;
     overflow:hidden;
     cursor:pointer;
@@ -385,6 +389,11 @@
 
 /*===== 推荐创意 =====*/
 .idea {}
+.idea .img {
+    width:220px; height:100px;
+    background:rgb(240,240,240);
+    overflow:hidden;
+}
 .idea_con .left,.idea_con .right {
     margin-right:5px;
     border:1px solid lightgrey;
@@ -430,6 +439,27 @@
 }
 .talk_con .right { width:693px;height:98px;overflow:hidden; }
 .talk_con .right div { padding:10px;height:98px; }
+
+
+/*===== 搜索页面 =====*/
+.searchlist { width:100%; }
+.searchlist .waterfall {
+    margin-right:20px; margin-bottom:20px;
+    width:200px; height:220px;
+    background:rgb(250,250,250);
+    float:left;
+}
+.searchlist .waterfall .img {
+    margin:10px;
+    width:180px; height:150px;
+    background:white;
+}
+.searchlist .waterfall .img img { width:180px; }
+.searchlist .waterfall .text {
+    font-size:14px;
+    text-align:center;
+}
+.searchlist .waterfall .cname { padding:0 5px; }
 
 
 

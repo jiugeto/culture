@@ -508,7 +508,7 @@ CREATE TABLE `bs_goods` (
   `name` varchar(255) NOT NULL COMMENT '视频名称',
   `genre` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '片源类型：1产品系列，2花絮系列',
   `type` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '产品主体：1个人需求，2设计师供应，3企业需求，4企业供应',
-  `cate` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '样片类型：1电视剧，2电影，3微电影，4广告，5宣传片，6汇报片，7纪录片，8晚会，9淘宝视频，',
+  `cate` tinyint(2) unsigned NOT NULL DEFAULT '1' COMMENT '样片类型：1电视剧，2电影，3微电影，4广告，5宣传片，6专题片，7汇报片，8主题片，9纪录片，10晚会，11淘宝视频，12婚纱摄影，13个人短片，',
   `intro` varchar(1000) NOT NULL COMMENT '视频简介',
   `title` varchar(255) NOT NULL COMMENT '鼠标移动的文字',
   `pic_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '图片链接id，关联图片表bs_pics',
@@ -603,7 +603,8 @@ CREATE TABLE `bs_ideas` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL COMMENT '名称',
   `genre` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '供求类型：1供应，2需求',
-  `cate_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分类，关联分类表category',
+  `cate` tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT '创意类型：1电视剧，2电影，3微电影，4广告，5宣传片，6专题片，7汇报片，8主题片，9纪录片，10晚会，11淘宝视频，12婚纱摄影，13个人短片，',
+  `thumb` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '缩略图id',
   `intro` varchar(255) NOT NULL COMMENT '简介',
   `content` text NOT NULL COMMENT '创意内容',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布的用户id',
@@ -623,7 +624,7 @@ CREATE TABLE `bs_ideas` (
 
 LOCK TABLES `bs_ideas` WRITE;
 /*!40000 ALTER TABLE `bs_ideas` DISABLE KEYS */;
-INSERT INTO `bs_ideas` VALUES (1,'创意1',1,4,'efrbgrdfbg','<p>而非v代表</p>',1,0,10,1,0,20160417,20160417),(2,'创意部分的白癜风',1,4,'wefdgbefdv','<p>不辜负你发个你突然发红包让头发的非v别的人副本二本的日本</p>',1,0,10,1,0,20160421,0),(3,'创意123456',1,4,'fngbvrrthgfbrthf','<p>不同功能同一个男人太烦恼吧 不同人反复给你发给你发的吧v辅导班该方法v表单v废话么放入后天就能GV干嘛换个号部分或讲不出的生物科技获得鼠标不同人还能听任何人挺好投入和</p>',1,10,10,1,0,20160421,0);
+INSERT INTO `bs_ideas` VALUES (1,'创意1',1,4,0,'efrbgrdfbg','<p>而非v代表</p>',1,0,10,1,0,20160417,20160417),(2,'创意部分的白癜风',1,4,0,'wefdgbefdv','<p>不辜负你发个你突然发红包让头发的非v别的人副本二本的日本</p>',1,0,10,1,0,20160421,0),(3,'创意123456',1,4,0,'fngbvrrthgfbrthf','<p>不同功能同一个男人太烦恼吧 不同人反复给你发给你发的吧v辅导班该方法v表单v废话么放入后天就能GV干嘛换个号部分或讲不出的生物科技获得鼠标不同人还能听任何人挺好投入和</p>',1,10,10,1,0,20160421,0);
 /*!40000 ALTER TABLE `bs_ideas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1088,7 +1089,8 @@ CREATE TABLE `bs_products` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL COMMENT '视频名称',
   `genre` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '发布者身份：1个人供应，2企业供应',
-  `gif` int(10) unsigned NOT NULL DEFAULT '0' COMMENT ' 动态缩略图，关联图片表bs_pics',
+  `cate` tinyint(2) unsigned NOT NULL DEFAULT '1' COMMENT '样片类型：1电视剧，2电影，3微电影，4广告，5宣传片，6专题片，7汇报片，8主题片，9纪录片，10晚会，11淘宝视频，12婚纱摄影，13个人短片，',
+  `gif` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '缩略图，关联图片表bs_pics',
   `intro` varchar(1000) NOT NULL COMMENT '视频简介',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '提供者：需求用户，设计师，公司',
   `uname` varchar(255) NOT NULL COMMENT '提供者名称',
@@ -1113,7 +1115,7 @@ CREATE TABLE `bs_products` (
 
 LOCK TABLES `bs_products` WRITE;
 /*!40000 ALTER TABLE `bs_products` DISABLE KEYS */;
-INSERT INTO `bs_products` VALUES (1,'产品1',1,0,'',0,'',960,540,3,0,0,0,10,1,0,20160509,0),(2,'产品333',2,0,'而沟通与法规和若干个',1,'jiuge',960,540,2,0,0,0,10,1,0,20160512,0);
+INSERT INTO `bs_products` VALUES (1,'产品1',1,1,0,'',0,'',960,540,3,0,0,0,10,1,0,20160509,0),(2,'产品333',2,1,0,'而沟通与法规和若干个',1,'jiuge',960,540,2,0,0,0,10,1,0,20160512,0);
 /*!40000 ALTER TABLE `bs_products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1296,6 +1298,34 @@ INSERT INTO `bs_rents` VALUES (1,'租赁供应0323',1,'yyyyyyyyyyyyyyyyyyyyyyyyy
 UNLOCK TABLES;
 
 --
+-- Table structure for table `bs_search`
+--
+
+DROP TABLE IF EXISTS `bs_search`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bs_search` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `keyword` varchar(100) NOT NULL COMMENT '关键字',
+  `genre` tinyint(2) unsigned NOT NULL DEFAULT '1' COMMENT '检索条件：样片，创意，分镜，设计师，企业，影视，演员，设备，设计，',
+  `rate` int(10) unsigned NOT NULL DEFAULT '1' COMMENT '搜索频率',
+  `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `updated_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户搜索表 bs_search';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bs_search`
+--
+
+LOCK TABLES `bs_search` WRITE;
+/*!40000 ALTER TABLE `bs_search` DISABLE KEYS */;
+INSERT INTO `bs_search` VALUES (1,'gbhbth',1,1,1470795559,1471420755),(2,'nrtjhndtyjmty',1,1,1470795559,0);
+/*!40000 ALTER TABLE `bs_search` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `bs_staff_pic`
 --
 
@@ -1357,7 +1387,7 @@ DROP TABLE IF EXISTS `bs_staffs`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `bs_staffs` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL COMMENT '演员名称',
+  `name` varchar(255) NOT NULL COMMENT '人员名称',
   `entertain_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '娱乐id，关联娱乐表bs_entertains',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布人',
   `genre` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '职位类型：1=>演员，导演，摄影师，灯光师，化妆师，21=>剪辑师，特效师，合成师，配音，背景音',
@@ -1399,7 +1429,7 @@ CREATE TABLE `bs_storyboards` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL COMMENT '名称',
   `genre` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '供求类型：1供应，2需求',
-  `cate` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分类',
+  `cate` tinyint(2) unsigned NOT NULL DEFAULT '1' COMMENT '：1电视剧，2电影，3微电影，4广告，5宣传片，6专题片，7汇报片，8主题片，9纪录片，10晚会，11淘宝视频，12婚纱摄影，13个人短片，',
   `thumb` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分镜缩略图，关联 bs_storyboards_pic',
   `intro` varchar(255) NOT NULL COMMENT '简单介绍',
   `detail` varchar(2000) NOT NULL COMMENT '分镜细节',
@@ -1896,7 +1926,7 @@ DROP TABLE IF EXISTS `bs_works`;
 CREATE TABLE `bs_works` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL COMMENT '作品名称',
-  `cateid` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '影片类型：1电视剧，2电影，3微电影，4广告，5宣传片，6汇报片，7纪录片，',
+  `cate` tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT '影片类型：1电视剧，2电影，3微电影，4广告，5宣传片，6专题片，7汇报片，8主题片，9纪录片，10晚会，11淘宝视频，12婚纱摄影，13个人短片，',
   `intro` varchar(255) NOT NULL COMMENT '简介',
   `detail` varchar(1000) NOT NULL COMMENT '详情',
   `video_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '视频链接id，链接视频表bs_videos',
@@ -2206,4 +2236,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-16 21:16:23
+-- Dump completed on 2016-09-17 22:26:17

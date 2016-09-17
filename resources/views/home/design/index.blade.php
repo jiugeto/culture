@@ -9,7 +9,7 @@
             分类：
             <select name="cate" class="home_search">
                 <option value="0" {{ $cate==0 ? 'selected' : '' }}>所有</option>
-                @foreach($model['cates'] as $kcate=>$vcate)
+                @foreach($model['cates1'] as $kcate=>$vcate)
                     <option value="{{ $kcate }}" {{ $cate==$kcate ? 'selected' : '' }}>{{ $vcate }}</option>
                 @endforeach
             </select>
@@ -36,15 +36,16 @@
                 @foreach($datas as $kdata=>$data)
                     <tr>
                         <td rowspan="3">
-                            <div class="img">
+                            <a href="{{DOMAIN}}design/{{ $data->id }}" title="{{ $data->name }}">
+                                <div class="img">
                                 @if(count($data->getPics()))
                                     <img src="{{ $pic[0]->getPicUrl() }}">
                                 @else
                                     <div style="width:280px;height:500px;background:rgb(250,250,250);"></div>
                                 @endif
-                            </div>
+                            </div></a>
                         </td>
-                        <td class="text1"><b>{{ $data->name }}</b>
+                        <td class="text1"><b><a href="{{DOMAIN}}design/{{ $data->id }}">{{ $data->name }}</a></b>
                             <a href="{{DOMAIN}}design/{{ $data->id }}" class="a_to_show">详情</a>
                         </td>
                     </tr>
@@ -70,6 +71,7 @@
             @endif
             </table>
         </div>
+        @include('home.common.page')
 
         <div class="de_right">
             {{--<div class="cate">--}}

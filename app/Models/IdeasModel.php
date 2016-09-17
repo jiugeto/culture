@@ -1,6 +1,8 @@
 <?php
 namespace App\Models;
 
+use App\Models\Base\PicModel;
+
 class IdeasModel extends BaseModel
 {
     /**
@@ -9,12 +11,8 @@ class IdeasModel extends BaseModel
 
     protected $table = 'bs_ideas';
     protected $fillable = [
-        'id','name','cate','intro','content','uid','sort','isshow','del','created_at','updated_at',
+        'id','name','cate','thumb','intro','content','uid','sort','isshow','del','created_at','updated_at',
     ];
-//    //类型：房产，效果图，平面，漫游
-//    protected $cates = [
-//        1=>'房产漫游','效果图','平面设计',
-//    ];
 
     public function getCate()
     {
@@ -100,4 +98,22 @@ class IdeasModel extends BaseModel
 //        }
 //        return array('iscon'=> $iscon, 'remarks'=> isset($remarks)?$remarks:'');
 //    }
+
+    /**
+     * 获取图片
+     */
+    public function pic()
+    {
+        $pic_id = $this->pic_id ? $this->pic_id : 0;
+        $picModel = PicModel::find($pic_id);
+        return $picModel ? $picModel : '';
+    }
+
+    /**
+     * 获取图片url
+     */
+    public function getPicUrl()
+    {
+        return $this->pic() ? $this->pic()->getUrl() : '';
+    }
 }

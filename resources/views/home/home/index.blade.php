@@ -3,7 +3,7 @@
     <!-- 广告PPT -->
     <div class="ppt">
         <ul class="ppt_pic">
-            @if($ppts)
+            @if(count($ppts))
                 @foreach($ppts as $ppt)
             <li id="ppt_{{ $ppt->id }}">
                 <a href="{{ $ppt->link }}" title="{{ $ppt->name }}"><img src="{{ $ppt->getPicUrl() }}"></a>

@@ -28,10 +28,16 @@
 }
 .de_list td.text1 { font-size:20px; }
 .de_list td.text1 a.a_to_show {
+    padding:2px 10px;
     font-size:12px;
     color:grey;
     text-decoration:none;
     float:right;
+}
+.de_list td a { color:black;text-decoration:none; }
+.de_list td.text1 a:hover.a_to_show {
+    color:orangered;
+    background:gainsboro;
 }
 .de_list td.text2 { color:grey;font-size:12px; }
 .de_list td.text3 { color:grey; }

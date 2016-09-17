@@ -36,6 +36,10 @@ class ViewServiceProvider extends ServiceProvider
         View::composer(
             'company.admin.partials.left', 'App\Http\ViewComposers\CompanyAdminMenuComposer'
         );
+        //前台搜索栏
+        View::composer(
+            ['layout.navigate','home.search.crumb'], 'App\Http\ViewComposers\HomeSearchComposer'
+        );
     }
 
     public function register()

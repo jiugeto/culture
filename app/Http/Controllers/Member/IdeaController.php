@@ -50,7 +50,7 @@ class IdeaController extends BaseController
         $curr['name'] = $this->lists['create']['name'];
         $curr['url'] = $this->lists['create']['url'];
         $result = [
-            'categorys'=> $this->model->categorys(),
+            'model'=> $this->model,
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -74,7 +74,7 @@ class IdeaController extends BaseController
         $curr['url'] = $this->lists['edit']['url'];
         $result = [
             'data'=> IdeasModel::find($id),
-            'categorys'=> $this->model->categorys(),
+            'model'=> $this->model,
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -127,7 +127,7 @@ class IdeaController extends BaseController
         $curr['name'] = '用户列表';
         $curr['url'] = $this->lists['show']['url'];
         $result = [
-            'users'=> IdeasShowModel::where('ideaid',$id)->get(),
+//            'users'=> IdeasShowModel::where('ideaid',$id)->get(),
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];

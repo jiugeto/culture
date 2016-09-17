@@ -4,7 +4,8 @@
 
     <div class="opinion_con">
         <div class="opinion_list">
-            <p class="cate">分类：<a href="{{DOMAIN}}idea" class="{{$cate==0?'curr':''}}">所有</a>
+            <p class="cate">分类：
+                <a href="{{DOMAIN}}idea" class="{{$cate==0?'curr':''}}">所有</a>
                 @foreach($model['cates2'] as $kcate=>$vcate)
                     <a href="{{DOMAIN}}idea/cate/{{$kcate}}" class="{{$cate==$kcate?'curr':''}}">{{ $vcate }}</a>
                 @endforeach
@@ -13,10 +14,16 @@
                 @foreach($datas as $data)
             <table class="idea">
                 <tr>
-                    <td rowspan="3" class="img"><div><img src="{{PUB}}uploads/images/2016/online1.png"></div></td>
+                    <td rowspan="3" width="230">
+                        <div class="img">
+                            @if($data->pic_id && $data->getPicUrl())
+                            <img src="{{PUB}}uploads/images/2016/online1.png">
+                            @endif
+                        </div>
+                    </td>
                     <td>
                         <a href="{{DOMAIN}}idea/{{$data->id}}"><b>{{ $data->name }}</b></a>
-                        <span class="right">{{ count($data->read($userid)) }}</span>
+                        <span class="right">阅读：{{ count($data->read($userid)) }}</span>
                         <span class="right"><a href="{{DOMAIN}}idea/{{$data->id}}">查看</a></span>
                     </td>
                 </tr>

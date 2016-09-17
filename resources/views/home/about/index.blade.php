@@ -1,6 +1,14 @@
 @extends('home.main')
 @section('content')
-    @include('home.common.crumb')
+    {{--@include('home.common.crumb')--}}
+    <div class="s_crumb">
+        <div class="crumb">
+            <div class="right">
+                <a href="/">首页</a> / 关于本站
+            </div>
+        </div>
+    </div>
+
     <div class="about_con">
         <h3>平台功能</h3>
         <p>

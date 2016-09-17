@@ -170,17 +170,14 @@ class TalkController extends BaseController
     public function create()
     {
         $this->islogin();
-        if (!$this->userid) { echo "<script>alert('您还未登陆/注册！');window.location.href='/login';</script>";exit; }
         return view('home.talk.create');
     }
 
     public function store(Request $request)
     {
         $this->islogin();
-        if (!$this->userid) { return redirect('/login'); }
         $data = $this->getData($request);
         $data['created_at'] = date('Y-m-d H:i:s', time());
-//        dd($data);
         TalksModel::create($data);
         return redirect('/talk');
     }
@@ -188,14 +185,12 @@ class TalkController extends BaseController
     public function edit($id)
     {
         $this->islogin();
-        if (!$this->userid) { echo "<script>alert('您还未登陆/注册！');window.location.href='/login';</script>";exit; }
         return view('home.talk.edit', array('data'=> TalksModel::find($id)));
     }
 
     public function update(Request $request,$id)
     {
         $this->islogin();
-        if (!$this->userid) { return redirect('/login'); }
         $data = $this->getData($request);
         $data['updated_at'] = date('Y-m-d H:i:s', time());
         TalksModel::where('id',$id)->update($data);
@@ -316,12 +311,4 @@ class TalkController extends BaseController
         ];
         return $data;
     }
-
-//    public function query()
-//    {
-//        return TalksModel::where('del',0)
-//            ->orderBy('sort','desc')
-//            ->orderBy('id','desc')
-//            ->paginate($this->limit);
-//    }
 }

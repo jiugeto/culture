@@ -10,8 +10,16 @@
     color:grey;
     background:rgba(240,240,240,1);
 }
-.pbl_title a { margin:0 5px;color:grey;text-decoration:none; }
-.pbl_title a:hover { color:red;text-decoration:underline; }
+.pbl_title a {
+    margin:0 5px;
+    color:grey;
+    text-decoration:none;
+    cursor:pointer;
+}
+.pbl_title a:hover {
+    color:red;
+    text-decoration:underline;
+}
 .pbl_out {
     margin:10px auto;
     margin-top:0;
@@ -45,6 +53,10 @@
 .pbl_in .img {
     width:218px;height:248px;
     border:1px solid rgba(230,230,230,1);
+    color:gainsboro;
+    font-size:30px;
+    line-height:200px;
+    background:rgb(240,240,240);
     text-align:center;
     overflow:hidden;
 }

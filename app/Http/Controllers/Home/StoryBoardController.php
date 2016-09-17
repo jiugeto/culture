@@ -13,18 +13,24 @@ class StoryBoardController extends BaseController
      */
 
     protected $curr = 'storyboard';
+    protected $genre = 1;       //1代表供应
 
-    public function index($way='',$genre=0)
+    public function __construct()
     {
-        if ($way==1) { $way = 'isnew'; }
-        elseif ($way==2) { $way = 'ishot'; }
+        parent::__construct();
+        $this->model = new StoryBoardModel();
+    }
+
+    public function index($way=0,$cate=0)
+    {
         $this->isnew();
         $result = [
-            'datas'=> $this->query($way,$genre),
+            'datas'=> $this->query($way,$cate),
+            'model'=> $this->model,
             'lists'=> $this->list,
             'curr_menu'=> $this->curr,
-            'genre'=> $genre,
             'way'=> $way,
+            'cate'=> $cate,
         ];
         return view('home.storyboard.index', $result);
     }
@@ -96,45 +102,66 @@ class StoryBoardController extends BaseController
         elseif ($way==1) { return redirect('/storyboard'); }
     }
 
-    public function query($way,$genre)
+    public function query($way,$cate)
     {
-        if ($way) {
-            if ($genre) {
+        //way：0所有，1最新isnew，2最热ishot
+        if ($way==0) {
+            if ($cate) {
                 $datas = StoryBoardModel::where('del',0)
                     ->where('isshow',1)
-//                ->where('img','<>',0)
-                    ->where('genre',$genre)
-                    ->where($way,1)
+                    ->where('cate',$cate)
+                    ->where('genre',$this->genre)
                     ->orderBy('sort','desc')
                     ->orderBy('id','desc')
                     ->paginate($this->limit);
             } else {
                 $datas = StoryBoardModel::where('del',0)
                     ->where('isshow',1)
-//                ->where('img','<>',0)
-                    ->where($way,1)
+                    ->where('genre',$this->genre)
                     ->orderBy('sort','desc')
                     ->orderBy('id','desc')
                     ->paginate($this->limit);
             }
-        } else {
-            if ($genre) {
+        } elseif ($way==1) {
+            if ($cate) {
                 $datas = StoryBoardModel::where('del',0)
                     ->where('isshow',1)
-//                ->where('img','<>',0)
-                    ->where('genre',$genre)
+                    ->where('isnew',1)
+                    ->where('cate',$cate)
+                    ->where('genre',$this->genre)
                     ->orderBy('sort','desc')
                     ->orderBy('id','desc')
                     ->paginate($this->limit);
             } else {
                 $datas = StoryBoardModel::where('del',0)
                     ->where('isshow',1)
-//                ->where('img','<>',0)
+                    ->where('isnew',1)
+                    ->where('genre',$this->genre)
+                    ->orderBy('sort','desc')
+                    ->orderBy('id','desc')
+                    ->paginate($this->limit);
+            }
+        } elseif ($way==2) {
+            if ($cate) {
+                $datas = StoryBoardModel::where('del',0)
+                    ->where('isshow',1)
+                    ->where('ishot',1)
+                    ->where('cate',$cate)
+                    ->where('genre',$this->genre)
+                    ->orderBy('sort','desc')
+                    ->orderBy('id','desc')
+                    ->paginate($this->limit);
+            } else {
+                $datas = StoryBoardModel::where('del',0)
+                    ->where('isshow',1)
+                    ->where('ishot',1)
+                    ->where('genre',$this->genre)
                     ->orderBy('sort','desc')
                     ->orderBy('id','desc')
                     ->paginate($this->limit);
             }
         }
+        $datas->limit = $this->limit;
         return $datas;
     }
 }

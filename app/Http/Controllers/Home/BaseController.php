@@ -2,8 +2,7 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
-//use App\Models\LinkModel;
-//use App\Tools;
+use App\Models\Base\SearchModel;
 
 class BaseController extends Controller
 {

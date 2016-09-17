@@ -6,16 +6,40 @@
         {{-- 产品广告位 --}}
         <div class="pro_ad">
             <div class="pro_ad_pic">
-                <img src="{{PUB}}uploads/images/2016/ppt.png">
+                {{--<img src="{{PUB}}uploads/images/2016/ppt.png">--}}
+                @if(count($ppts))
+                    @foreach($ppts as $ppt)
+                    <a href="{{ $ppt->link }}" title="{{ $ppt->name }}" id="ppt_{{$ppt->id}}">
+                        <img src="{{ $ppt->getPicUrl() }}">
+                    </a>
+                    @endforeach
+                @endif
             </div>
             <div class="pro_ad_change">
                 <div class="ppt_change_bg"></div>
                 <ul class="ppt_change_pic">
-                    <a href="##"><li><img src="{{PUB}}uploads/images/2016/ppt.png"></li></a>
-                    <a href=""><li><img src="{{PUB}}uploads/images/2016/ppt2.png"></li></a>
+                    {{--<li><img src="{{PUB}}uploads/images/2016/ppt.png"></li>--}}
+                    @if(count($ppts))
+                        @foreach($ppts as $kppt=>$ppt)
+                            <li class="{{$kppt==0?'curr':''}}" onmouseover="over({{$ppt->id}})">
+                                <img src="{{$ppt->getPicUrl()}}">
+                            </li>
+                        @endforeach
+                    @endif
+                    @if(count($ppts))
+                        @for($i=0;$i<$ppts->limit-count($ppts);++$i)
+                            <li>+</li>
+                        @endfor
+                    @endif
                 </ul>
             </div>
         </div>
+        <script>
+            function over(pptid){
+                $(".ppt_change_pic > li").removeClass('curr'); $(this).addClass('curr');
+                $(".pro_ad_pic > a").hide(); $("#ppt_"+pptid).show();
+            }
+        </script>
 
         {{-- 一楼 --}}
         <div class="pro_floor">

@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use App\Models\Base\AreaModel;
+use App\Models\Base\PicModel;
 use App\Models\Company\ComMainModel;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,16 +10,16 @@ class BaseModel extends Model
 {
     public $timestamps = false;
 
-    //支持 DesignModel、IdeasModel
+    //支持 DesignModel
     //类型：房产，效果图，平面，漫游
     protected $cates1 = [
         1=>'房产漫游','效果图','平面设计',
     ];
 
-    //支持 GoodsModel、WorksModel
-    //样片类型：1电视剧，2电影，3微电影，4广告，5宣传片，6汇报片，7纪录片，8晚会，9淘宝视频，
+    //支持 IdeasModel、StoryBoardModel、GoodsModel、WorksModel
+    //样片类型：1电视剧，2电影，3微电影，4广告，5宣传片，6专题片，7汇报片，8主题片，9纪录片，10晚会，11淘宝视频，12婚纱摄影，13个人短片，
     protected $cates2 = [
-        1=>'电视剧','电影','微电影','广告','宣传片','汇报片','纪录片','晚会','淘宝视频',
+        1=>'电视剧','电影','微电影','广告','宣传片','专题片','汇报片','主题片','纪录片','晚会','淘宝视频','婚纱摄影','个人短片',
     ];
 
     /**

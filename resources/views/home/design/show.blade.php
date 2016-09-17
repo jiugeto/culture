@@ -1,6 +1,14 @@
 @extends('home.main')
 @section('content')
-    @include('home.common.crumb')
+    {{--@include('home.common.crumb')--}}
+    <div class="s_crumb">
+        <div class="crumb">
+            <div class="right">
+                <a href="/">首页</a> /
+                <a href="{{DOMAIN}}design">设计频道</a> / 详情
+            </div>
+        </div>
+    </div>
 
     <div class="idea_show">
         <span class="idea_left">
@@ -13,7 +21,7 @@
                     </tr>
                     <tr>
                         <td>设计类型：</td>
-                        <td>{{ $data->getCate() }}</td>
+                        <td>{{ $data->getCateName() }}</td>
                     </tr>
                     <tr>
                         <td>价格：</td>
