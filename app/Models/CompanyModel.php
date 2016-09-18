@@ -1,6 +1,8 @@
 <?php
 namespace App\Models;
 
+use App\Models\Company\ComMainModel;
+
 class CompanyModel extends BaseModel
 {
     /**
@@ -49,5 +51,11 @@ class CompanyModel extends BaseModel
     {
         return $this->getPoint() ? $this->getPoint()[1] : '30';
 
+    }
+
+    public function getLogo()
+    {
+        $comMainModel = ComMainModel::where('cid',$this->id)->first();
+        return $comMainModel->logo;
     }
 }

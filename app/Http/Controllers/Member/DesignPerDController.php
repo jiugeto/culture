@@ -66,6 +66,11 @@ class DesignPerDController extends DesignController
         $data['genre'] = $this->genre;
         $data['created_at'] = time();
         DesignModel::create($data);
+
+        //插入搜索表
+        $designModel = DesignModel::where($data)->first();
+        \App\Models\Base\SearchModel::change($designModel,9,'create');
+
         return redirect(DOMAIN.'member/designPerD');
     }
 
@@ -87,6 +92,11 @@ class DesignPerDController extends DesignController
         $data = $this->getData($request);
         $data['updated_at'] = time();
         DesignModel::where('id',$id)->update($data);
+
+        //更新搜索表
+        $designModel = DesignModel::where('id',$id)->first();
+        \App\Models\Base\SearchModel::change($designModel,9,'update');
+
         return redirect(DOMAIN.'member/designPerD');
     }
 }

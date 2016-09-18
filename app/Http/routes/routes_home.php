@@ -35,6 +35,7 @@ Route::group(['prefix'=>'/','namespace'=>'Home'],function(){
     Route::any('entertain','EntertainController@index');
     Route::get('entertain/{id}','EntertainController@show');
     Route::get('entertain/staff/show/{id}','EntertainController@staffShow');
+    Route::get('entertain/works/show/{id}','EntertainController@worksShow');
     //租赁频道
     Route::get('rent/SD/{genre}','RentController@index');
     Route::get('rent/m/{from}/{to}','RentController@index');

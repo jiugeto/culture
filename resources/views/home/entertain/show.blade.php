@@ -11,6 +11,7 @@
                     <tr><td colspan="2">
                             <textarea readonly class="show_intro">{{ $data->content }}</textarea>
                         </td></tr>
+
                     <tr><td colspan="2">&nbsp;</td></tr>
                     <tr>
                         <td>&nbsp;</td>

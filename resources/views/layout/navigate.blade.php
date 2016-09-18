@@ -24,12 +24,12 @@
             <input type="submit" class="search_text" value="搜 索" onclick="getSearch()">
             <div class="search_sel">
                 <div class="curr_sel">
-                    <span class="curr_sel_text">{{isset($searchGenre)?$searchs['genres'][$searchGenre]:'样片'}}</span>
+                    <span class="curr_sel_text">{{isset($searchGenre)?$searchs['genres'][$searchGenre]:'创作'}}</span>
                     <img src="{{PUB}}assets-home/images/sel_down.png">
                 </div>
                 <div class="sel_more">
                     <div class="sel_one">
-                        <span class="curr_sel_text">{{isset($searchGenre)?$searchs['genres'][$searchGenre]:'样片'}}</span>
+                        <span class="curr_sel_text">{{isset($searchGenre)?$searchs['genres'][$searchGenre]:'创作'}}</span>
                         <img src="{{PUB}}assets-home/images/sel_down.png">
                     </div>
                     @if(count($searchs['genres']))

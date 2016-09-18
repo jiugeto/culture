@@ -62,6 +62,11 @@ class IdeaController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = time();
         IdeasModel::create($data);
+
+        //插入搜索表
+        $ideaModel = IdeasModel::where($data)->first();
+        \App\Models\Base\SearchModel::change($ideaModel,3,'create');
+
 //        //将自己加入查看权限表
 //        $ideaModel = IdeasModel::where($data)->first();
 //        IdeasShowModel::create(['ideaid'=>$ideaModel->id,'uid'=>$this->userid,'created_at'=>date('Y-m-d H:i:s',time())]);
@@ -86,6 +91,11 @@ class IdeaController extends BaseController
         $data = $this->getData($request);
         $data['updated_at'] = time();
         IdeasModel::where('id',$id)->update($data);
+
+        //更新搜索表
+        $ideaModel = IdeasModel::where('id',$id)->first();
+        \App\Models\Base\SearchModel::change($ideaModel,3,'update');
+
         return redirect(DOMAIN.'member/idea');
     }
 

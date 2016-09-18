@@ -174,4 +174,14 @@ class BaseModel extends Model
         }
         return (isset($size)&&$size) ? $size : [];
     }
+
+    /**
+     * 支持 DesignModel、GoodsModel、ProductModel、RentModel、StaffModel、StoryBoardModel、WorksModel
+     * 得到图片信息
+     */
+    public function getPic($picid)
+    {
+        $picModel = PicModel::find($picid);
+        return $picModel ? $picModel->getUrl() : '';
+    }
 }

@@ -64,6 +64,11 @@ class PersonSController extends BaseGoodsController
         $data = $this->getData($request,$this->model['types'][1]);
         $data['created_at'] = time();
         GoodsModel::create($data);
+
+        //插入搜索表
+        $goodsModel = GoodsModel::where($data)->first();
+        \App\Models\Base\SearchModel::change($goodsModel,2,'create');
+
         return redirect(DOMAIN.'member/personS');
     }
 
@@ -86,6 +91,12 @@ class PersonSController extends BaseGoodsController
         $data = $this->getData($request,$id);
         $data['updated_at'] = time();
         GoodsModel::where('id',$id)->update($data);
+
+        //更新搜索表
+        $goodsModel = GoodsModel::where('id',$id)->first();
+        \App\Models\Base\SearchModel::change($goodsModel,2,'update');
+
+
         return redirect(DOMAIN.'member/personS');
     }
 

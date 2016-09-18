@@ -95,6 +95,11 @@ class SettingController extends BaseController
                 'created_at'=> time(),
             ];
             CompanyModel::create($company);
+
+            //插入搜索表
+            $companyModel = CompanyModel::where($company)->first();
+            \App\Models\Base\SearchModel::change($companyModel,5,'create');
+
         }
         return redirect(DOMAIN.'member/setting');
     }

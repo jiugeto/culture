@@ -335,7 +335,8 @@ CREATE TABLE `bs_designs` (
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布者id',
   `intro` varchar(255) NOT NULL COMMENT '简介',
   `detail` varchar(1000) NOT NULL COMMENT '详情',
-  `price` decimal(10,0) unsigned NOT NULL DEFAULT '0' COMMENT '价格，单位元',
+  `money` float unsigned NOT NULL DEFAULT '0' COMMENT '价格，单位元',
+  `thumb` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '缩略图id',
   `video_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '视频链接id',
   `click` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '点击量',
   `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序字段，值越大越靠前，默认10',
@@ -352,7 +353,7 @@ CREATE TABLE `bs_designs` (
 
 LOCK TABLES `bs_designs` WRITE;
 /*!40000 ALTER TABLE `bs_designs` DISABLE KEYS */;
-INSERT INTO `bs_designs` VALUES (1,'嘎嘎嘎',1,1,1,'而过的风格吧而过的风格吧而过的风格吧而过的风格吧而过的风格吧而过的风格吧而过的风格吧而过的风格吧','<p>而地方吧</p>',55,0,0,10,0,1470573399,1470574616),(2,'设计001',3,1,1,'ggggggggggg','<p>gggggggggggggggggggggg</p>',11,0,0,10,0,1470816620,0);
+INSERT INTO `bs_designs` VALUES (1,'嘎嘎嘎',1,1,1,'而过的风格吧而过的风格吧而过的风格吧而过的风格吧而过的风格吧而过的风格吧而过的风格吧而过的风格吧','<p>而地方吧</p>',55,0,0,0,10,0,1470573399,1470574616),(2,'设计001',3,1,1,'ggggggggggg','<p>gggggggggggggggggggggg</p>',11,0,0,0,10,0,1470816620,0);
 /*!40000 ALTER TABLE `bs_designs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -406,32 +407,6 @@ CREATE TABLE `bs_entertain_pic` (
 LOCK TABLES `bs_entertain_pic` WRITE;
 /*!40000 ALTER TABLE `bs_entertain_pic` DISABLE KEYS */;
 /*!40000 ALTER TABLE `bs_entertain_pic` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `bs_entertain_work`
---
-
-DROP TABLE IF EXISTS `bs_entertain_work`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `bs_entertain_work` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `entertainid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '娱乐id',
-  `workid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '影视作品id',
-  `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
-  `updated_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='娱乐公司与作品关联表 bs_entertain_work';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `bs_entertain_work`
---
-
-LOCK TABLES `bs_entertain_work` WRITE;
-/*!40000 ALTER TABLE `bs_entertain_work` DISABLE KEYS */;
-/*!40000 ALTER TABLE `bs_entertain_work` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1273,6 +1248,7 @@ CREATE TABLE `bs_rents` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL COMMENT '设备名称',
   `genre` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '类型：1供应，2需求',
+  `thumb` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '缩略图id',
   `intro` varchar(500) NOT NULL COMMENT '设备介绍',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布者id',
   `area` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '地区id',
@@ -1293,7 +1269,7 @@ CREATE TABLE `bs_rents` (
 
 LOCK TABLES `bs_rents` WRITE;
 /*!40000 ALTER TABLE `bs_rents` DISABLE KEYS */;
-INSERT INTO `bs_rents` VALUES (1,'租赁供应0323',1,'yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy',1,0,0.00,0,0,10,0,20160323,20160323);
+INSERT INTO `bs_rents` VALUES (1,'租赁供应0323',1,0,'yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy',1,0,0.00,0,0,10,0,20160323,20160323);
 /*!40000 ALTER TABLE `bs_rents` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1308,6 +1284,7 @@ CREATE TABLE `bs_search` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `keyword` varchar(100) NOT NULL COMMENT '关键字',
   `genre` tinyint(2) unsigned NOT NULL DEFAULT '1' COMMENT '检索条件：样片，创意，分镜，设计师，企业，影视，演员，设备，设计，',
+  `formid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '来源表的id',
   `rate` int(10) unsigned NOT NULL DEFAULT '1' COMMENT '搜索频率',
   `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updated_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
@@ -1321,7 +1298,7 @@ CREATE TABLE `bs_search` (
 
 LOCK TABLES `bs_search` WRITE;
 /*!40000 ALTER TABLE `bs_search` DISABLE KEYS */;
-INSERT INTO `bs_search` VALUES (1,'gbhbth',1,1,1470795559,1471420755),(2,'nrtjhndtyjmty',1,1,1470795559,0);
+INSERT INTO `bs_search` VALUES (1,'gbhbth',1,0,1,1470795559,1471420755),(2,'nrtjhndtyjmty',1,0,1,1470795559,0);
 /*!40000 ALTER TABLE `bs_search` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1391,6 +1368,7 @@ CREATE TABLE `bs_staffs` (
   `entertain_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '娱乐id，关联娱乐表bs_entertains',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布人',
   `genre` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '职位类型：1=>演员，导演，摄影师，灯光师，化妆师，21=>剪辑师，特效师，合成师，配音，背景音',
+  `thumb` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '缩略图id',
   `sex` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '性别：1男，2女',
   `realname` varchar(255) NOT NULL COMMENT '真实名字',
   `origin` varchar(255) NOT NULL COMMENT '籍贯',
@@ -1414,7 +1392,7 @@ CREATE TABLE `bs_staffs` (
 
 LOCK TABLES `bs_staffs` WRITE;
 /*!40000 ALTER TABLE `bs_staffs` DISABLE KEYS */;
-INSERT INTO `bs_staffs` VALUES (1,'拿斧头男',1,1,1,1,'能否规范','个人方法',1,'他人观花','',0,172,10,1,0,20160423,0),(2,'如果它不符合',1,1,1,1,'乳房的不过','而发表格式的风格',1,'而对方不改变','1,2,3',0,150,10,1,0,20160613,20160613);
+INSERT INTO `bs_staffs` VALUES (1,'拿斧头男',1,1,1,0,1,'能否规范','个人方法',1,'他人观花','',0,172,10,1,0,20160423,0),(2,'如果它不符合',1,1,1,0,1,'乳房的不过','而发表格式的风格',1,'而对方不改变','1,2,3',0,150,10,1,0,20160613,20160613);
 /*!40000 ALTER TABLE `bs_staffs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1926,11 +1904,13 @@ DROP TABLE IF EXISTS `bs_works`;
 CREATE TABLE `bs_works` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL COMMENT '作品名称',
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户id',
+  `cid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '娱乐公司id',
   `cate` tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT '影片类型：1电视剧，2电影，3微电影，4广告，5宣传片，6专题片，7汇报片，8主题片，9纪录片，10晚会，11淘宝视频，12婚纱摄影，13个人短片，',
   `intro` varchar(255) NOT NULL COMMENT '简介',
   `detail` varchar(1000) NOT NULL COMMENT '详情',
-  `video_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '视频链接id，链接视频表bs_videos',
   `pic_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '图片id，关联bs_pics',
+  `video_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '视频链接id，链接视频表bs_videos',
   `sort` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '排序，值越大越靠前，默认10',
   `isshow` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '前台显示否：0不显示，1显示',
   `del` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '回收站：0不删除，1删除',
@@ -1946,7 +1926,7 @@ CREATE TABLE `bs_works` (
 
 LOCK TABLES `bs_works` WRITE;
 /*!40000 ALTER TABLE `bs_works` DISABLE KEYS */;
-INSERT INTO `bs_works` VALUES (1,'作品26256',1,'','<p>efdbgesfsdf</p>',0,0,15,1,0,20160614,0);
+INSERT INTO `bs_works` VALUES (1,'作品26256',1,1,1,'gggggggggggggggggggggggggggggggggggggggggggg','<p>efdbgesfsdf</p>',0,0,15,1,0,20160614,0);
 /*!40000 ALTER TABLE `bs_works` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2236,4 +2216,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-17 22:26:17
+-- Dump completed on 2016-09-18 22:00:21

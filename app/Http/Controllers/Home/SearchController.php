@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Home;
 
 use App\Models\Base\SearchModel;
+use App\Models\CompanyModel;
 use App\Models\DesignModel;
 use App\Models\GoodsModel;
 use App\Models\IdeasModel;
@@ -17,6 +18,8 @@ class SearchController extends BaseController
      * 前台搜索
      */
 
+    protected $limit = 20;  //每页显示20条记录
+
     public function __construct()
     {
         parent::__construct();
@@ -25,44 +28,46 @@ class SearchController extends BaseController
 
     public function index($genre=1,$keyword='')
     {
-        //genre==1样片，2创意，3分镜，4企业，5影视，6演员，7设备，8设计，
+        //genre==1创作，2样片，3创意，4分镜，5企业，6影视，7演员，8设备，9设计，
         if ($genre==1) {
-            $goods = $this->goods($keyword);
-            $products = $this->products($keyword);
+            $datas = $this->goods($keyword);
+            $datas->url = DOMAIN.'creation/';
         } elseif ($genre==2) {
-            $ideas = $this->ideas($keyword);
+            $datas = $this->products($keyword);
+            $datas->url = DOMAIN.'product/';
         } elseif ($genre==3) {
-            $storyboards = $this->storyboards($keyword);
+            $datas = $this->ideas($keyword);
+            $datas->url = DOMAIN.'idea/';
         } elseif ($genre==4) {
-            $companys = $this->companys($keyword);
+            $datas = $this->storyboards($keyword);
+            $datas->url = DOMAIN.'storyboard/';
         } elseif ($genre==5) {
-            $works = $this->works($keyword);
+            $datas = $this->companys($keyword);
+            $datas->url = DOMAIN.'company/';
         } elseif ($genre==6) {
-            $actors = $this->actors($keyword);
+            $datas = $this->works($keyword);
+            $datas->url = DOMAIN.'entertain/works/show/';
         } elseif ($genre==7) {
-            $rents = $this->rents($keyword);
+            $datas = $this->actors($keyword);
+            $datas->url = DOMAIN.'entertain/staff/show/';
         } elseif ($genre==8) {
-            $designs = $this->designs($keyword);
+            $datas = $this->rents($keyword);
+            $datas->url = DOMAIN.'rent/';
+        } elseif ($genre==9) {
+            $datas = $this->designs($keyword);
+            $datas->url = DOMAIN.'design/';
         }
-        if ($genre==2) {
-            $view = 'text';
-        } else {
-            $view = 'img';
-        }
+
+        //查询次数自增
+//        SearchModel::where('fromid',$fromid)->increment('rate');
+
         $result = [
             'searchGenre'=> $genre,
             'keyword'=> $keyword,
-            'goods'=> isset($goods) ? $goods : [],
-            'products'=> isset($products) ? $products : [],
-            'ideas'=> isset($ideas) ? $ideas : [],
-            'storyboards'=> isset($storyboards) ? $storyboards : [],
-            'companys'=> isset($companys) ? $companys : [],
-            'works'=> isset($works) ? $works : [],
-            'actors'=> isset($actors) ? $actors : [],
-            'rents'=> isset($rents) ? $rents : [],
-            'designs'=> isset($designs) ? $designs : [],
+            'datas'=> isset($datas) ? $datas : [],
+            'prefix_url'=> DOMAIN.'s/'.$genre.'/'.$keyword,
         ];
-        return view('home.search.'.$view, $result);
+        return view('home.search.index', $result);
     }
 
 
@@ -70,13 +75,12 @@ class SearchController extends BaseController
 
 
     /**
-     * 上传的样片
+     * 在线创作的
      */
-    public function goods($keyword)
+    public function products($keyword)
     {
-        //genre==1：产品系列，type==2/4：设计师供应/企业供应，cate样片类型
-        $datas = GoodsModel::where('genre',1)
-            ->whereIn('type',[2,4])
+        //genre==1：个人供应，cate样片类型
+        $datas = ProductModel::where('genre',1)
             ->where('name','%'.$keyword.'%')
             ->paginate($this->limit);
         if (!count($datas) && $cate=$this->getCate($keyword)) {
@@ -90,12 +94,13 @@ class SearchController extends BaseController
     }
 
     /**
-     * 在线创作的
+     * 上传的样片
      */
-    public function products($keyword)
+    public function goods($keyword)
     {
-        //genre==1：个人供应，cate样片类型
-        $datas = ProductModel::where('genre',1)
+        //genre==1：产品系列，type==2/4：设计师供应/企业供应，cate样片类型
+        $datas = GoodsModel::where('genre',1)
+            ->whereIn('type',[2,4])
             ->where('name','%'.$keyword.'%')
             ->paginate($this->limit);
         if (!count($datas) && $cate=$this->getCate($keyword)) {
@@ -150,7 +155,7 @@ class SearchController extends BaseController
     public function companys($keyword)
     {
         //genre==1：供应
-        $datas = StoryBoardModel::where('genre',1)
+        $datas = CompanyModel::where('genre',1)
             ->where('name','%'.$keyword.'%')
             ->paginate($this->limit);
         $datas->limit = $this->limit;

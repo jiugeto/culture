@@ -34,6 +34,7 @@ class IdeaController extends BaseController
     {
         $result = [
             'datas'=> $this->query($cate),
+            'prefix_url'=> DOMAIN.'idea',
             'model'=> $this->model,
             'lists'=> $this->list,
             'curr_menu'=> $this->curr,

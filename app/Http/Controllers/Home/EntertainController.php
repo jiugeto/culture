@@ -22,12 +22,15 @@ class EntertainController extends BaseController
 
     public function index($genre0=1,$genre=0)
     {
+        if ($genre0==1) { $prefix_url = DOMAIN.'entertain'; }
+        elseif ($genre0==2) { $prefix_url = DOMAIN.'entertain/2/0'; }
+        elseif ($genre0==3) { $prefix_url = DOMAIN.'entertain/3/0'; }
         $result = [
             'datas'=> $this->query($genre0,$genre),
             'ads'=> $this->ads(),
             'lists'=> $this->list,
             'staffModel'=> $this->staffModel,
-            'prefix_url'=> DOMAIN.'entertain',
+            'prefix_url'=> $prefix_url,
             'curr_menu'=> $this->curr,
             'genre0'=> $genre0,
             'genre'=> $genre,
@@ -56,13 +59,28 @@ class EntertainController extends BaseController
         $submenu['name'] = '人员详情';
         $data = StaffModel::find($id);
         $result = [
-            'lists'=> $this->list,
             'data'=> $data,
+            'lists'=> $this->list,
             'curr_menu'=> $this->curr,
             'curr_submenu'=> $submenu,
             'uid'=> $data->uid,
         ];
         return view('home.entertain.staffShow', $result);
+    }
+
+    public function worksShow($id)
+    {
+        $submenu['url'] = 'show';
+        $submenu['name'] = '作品详情';
+        $data = WorksModel::find($id);
+        $result = [
+            'data'=> $data,
+            'lists'=> $this->list,
+            'curr_menu'=> $this->curr,
+            'curr_submenu'=> $submenu,
+            'uid'=> $data->uid,
+        ];
+        return view('home.entertain.worksShow', $result);
     }
 
 
@@ -94,6 +112,12 @@ class EntertainController extends BaseController
                     ->orderBy('id','desc')
                     ->paginate($this->limit);
             }
+        } elseif ($genre0==3) {
+            $datas = WorksModel::where('del',0)
+                ->where('isshow',1)
+                ->orderBy('sort','desc')
+                ->orderBy('id','desc')
+                ->paginate($this->limit);
         }
         $datas->limit = $this->limit;
         return $datas;

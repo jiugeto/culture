@@ -8,7 +8,7 @@
             搜索方式：
             <label><input type="radio" name="genre0" value="1" {{ $genre0==1 ? 'checked' : '' }} onclick="window.location.href='{{DOMAIN}}entertain';">公司</label>
             <label><input type="radio" name="genre0" value="2" {{ $genre0==2 ? 'checked' : '' }} onclick="window.location.href='{{DOMAIN}}entertain/2/0';">人员</label>
-            {{--<label><input type="radio" name="genre0" value="3" {{ $genre0==3 ? 'checked' : '' }} onclick="window.location.href='{{DOMAIN}}entertain/3/0';">作品</label>--}}
+            <label><input type="radio" name="genre0" value="3" {{ $genre0==3 ? 'checked' : '' }} onclick="window.location.href='{{DOMAIN}}entertain/3/0';">作品</label>
             <input type="hidden" name="genre_0" value="{{ $genre0 }}">
             @if($genre0==2)
             &nbsp;&nbsp;&nbsp;&nbsp;
@@ -58,7 +58,7 @@
                             <td>
                                 <div class="title"><b>标题：{{ $data->title }}</b></div>
                                 <div class="con"><textarea cols="40" rows="2" readonly class="index_intro">
-                                        {{ str_limit($data->content,40) }}</textarea></div>
+                                        {{ str_limit($data->intro,40) }}</textarea></div>
                             </td>
                             <td>
                                 <div class="comName">公司：{{ $data->getCompanyName() }}</div>
@@ -69,11 +69,22 @@
                             <td>
                                 <div class="title"><b>艺名：{{ $data->name }}</b></div>
                                 <div class="con"><textarea cols="40" rows="2" readonly style="border:0;resize:none;">
-                                    {{ str_limit($data->content,40) }}</textarea></div>
+                                    {{ str_limit($data->intro,40) }}</textarea></div>
                             </td>
                             <td>
                                 <div class="comName">公司：{{ $data->getCompanyName() }}</div>
                                 <p><a href="{{DOMAIN}}entertain/staff/show/{{ $data->id }}" class="toshow">详情</a></p>
+                            </td>
+                        @elseif($genre0==3)
+                            {{--人员--}}
+                            <td>
+                                <div class="title"><b>影视作品：{{ $data->name }}</b></div>
+                                <div class="con"><textarea cols="40" rows="2" readonly style="border:0;resize:none;">
+                                    {{ str_limit($data->intro,40) }}</textarea></div>
+                            </td>
+                            <td>
+                                <div class="comName">公司：{{ $data->getCompanyName() }}</div>
+                                <p><a href="{{DOMAIN}}entertain/works/show/{{ $data->id }}" class="toshow">详情</a></p>
                             </td>
                         @endif
                     </tr>

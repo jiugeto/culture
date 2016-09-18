@@ -1,8 +1,7 @@
 <?php
 namespace App\Models;
 
-//use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Base\PicModel;
 use App\Models\Base\VideoModel;
 
 class WorksModel extends BaseModel
@@ -13,17 +12,12 @@ class WorksModel extends BaseModel
 
     protected $table = 'bs_works';
     protected $fillable = [
-        'id','name','cateid','intro','detail','video_id','pic_id','sort','isshow','del','created_at','updated_at',
+        'id','name','uid','cid','cate','intro','detail','video_id','pic_id','sort','isshow','del','created_at','updated_at',
     ];
 
-//    protected $cates = [
-//        //1电视剧，2电影，3微电影，4广告，5宣传片，6汇报片，7纪录片，
-//        1=>'电视剧','电影','微电影','广告','宣传片','汇报片','纪录片',
-//    ];
-
-    public function cate()
+    public function getCateName()
     {
-        return in_array($this->cateid,$this->cates) ? $this->cates[$this->cateid] : '无';
+        return array_key_exists($this->cate,$this->cates2) ? $this->cates2[$this->cate] : '';
     }
 
     public function videos()
@@ -35,7 +29,7 @@ class WorksModel extends BaseModel
     {
         $videoid = $this->videoid ? $this->videoid : 0;
         $videoModel = VideoModel::find($videoid);
-        return $videoModel ? $videoModel : '无';
+        return $videoModel ? $videoModel : '';
     }
 
     public function staffs()
@@ -62,5 +56,40 @@ class WorksModel extends BaseModel
     {
         $staff_id = $this->id ? $this->id : 0;
         return StaffPicModel::where('staff_id',$staff_id)->get();
+    }
+
+    /**
+     * 发布人信息
+     */
+    public function user()
+    {
+        $uid = $this->uid ? $this->uid : 0;
+        $userModel = UserModel::find($uid);
+        return $userModel ? $userModel : '';
+    }
+
+    /**
+     * 得到大图url
+     */
+    public function getPicUrl()
+    {
+        $picModel = PicModel::find($this->pic_id);
+        return $picModel ? $picModel->getUrl() : '';
+    }
+
+    /**
+     * 得到该片演员
+     */
+    public function getActors()
+    {
+        $staffWorks = StaffWorksModel::where('works_id',$this->id)->get();
+        $staffIds = array();
+        if (count($staffWorks)) {
+            foreach ($staffWorks as $staffWork) {
+                $staffIds[] = $staffWork->id;
+            }
+        }
+        $staffModels = StaffModel::whereIn('id',$staffIds)->get();
+        return $staffModels ? $staffModels : [];
     }
 }
