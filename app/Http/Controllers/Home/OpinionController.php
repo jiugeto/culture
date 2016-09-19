@@ -17,16 +17,11 @@ class OpinionController extends BaseController
         parent::__construct();
     }
 
-    public function is_login()
-    {
-        if (\Session::has('user')) { return redirect(DOMAIN.'login'); }
-        return \Session::get('user.uid');
-    }
-
     public function index($status=0)
     {
         $result = [
             'datas'=> $this->query($status),
+            'prefix_url'=> DOMAIN.'opinion',
             'curr_menu'=> $this->url_curr,
             'status'=> $status,
         ];
@@ -35,7 +30,9 @@ class OpinionController extends BaseController
 
     public function create($reply=0)
     {
-        $uid = $this->is_login();
+        if (!\Session::has('user')) {
+            echo "<script>alert('你还没有登录！');history.go(-1);</script>";
+        }
         //如果 reply 是0。则无此记录，为新意见 isreply==0 ，否则是 isreply==1
         if (OpinionModel::find($reply)) { $isreply = 1; }else{ $isreply = 0; }
         $result = [
@@ -56,7 +53,6 @@ class OpinionController extends BaseController
 
     public function show($id)
     {
-        $uid = $this->is_login();
         $this->menus['show'] = '意见详情';
         $result = [
             'data'=> OpinionModel::find($id),
@@ -68,7 +64,9 @@ class OpinionController extends BaseController
 
     public function edit($id)
     {
-        $uid = $this->is_login();
+        if (!\Session::has('user')) {
+            echo "<script>alert('你还没有登录！');history.go(-1);</script>";
+        }
         $this->menus['edit'] = '修改意见';
         $result = [
             'data'=> OpinionModel::find($id),

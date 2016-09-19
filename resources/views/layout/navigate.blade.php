@@ -80,7 +80,7 @@
             {{--</div>--}}
             &nbsp;&nbsp;<a href="/idea" style="color:red;">创意</a>
             &nbsp;&nbsp;<a href="/talk" style="color:red;">话题</a>
-            &nbsp;&nbsp;<a href="/opinion" class="opinion" style="color:white;">用户意见</a>
+            &nbsp;&nbsp;<a href="/opinion" class="opinion" style="color:white;">用户建议</a>
         </span>
         <div class="navigate">
             <div class="navigate_a" style="display:{{explode('/',$_SERVER['REQUEST_URI'])[1]?'none':'block'}};">

@@ -98,7 +98,8 @@ class BaseModel extends Model
 
     public function getUserName($uid=null)
     {
-       return $this->getUser($uid) ? $this->getUser($uid)->username : '';
+        $userid = $uid ? $uid : $this->uid;
+       return $this->getUser($userid) ? $this->getUser($userid)->username : '';
     }
 
     /**

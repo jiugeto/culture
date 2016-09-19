@@ -1,6 +1,14 @@
 @extends('home.main')
 @section('content')
-    @include('home.common.crumb')
+    {{--@include('home.common.crumb')--}}
+    <div class="s_crumb">
+        <div class="crumb">
+            <div class="right">
+                <a href="/">首页</a> / 用户建议
+            </div>
+        </div>
+    </div>
+
     <div class="opinion_con">
         {{-- 搜索 --}}
         <div class="cre_kong">&nbsp;{{--10px高度留空--}}</div>
@@ -12,7 +20,7 @@
                 <option value="3" {{ $status==3 ? 'selected' : '' }}>已处理</option>
                 <option value="5" {{ $status==5 ? 'selected' : '' }}>已处理并满意</option>
             </select>
-            <a href="/opinion/create" class="opinion_create">发布意见</a>
+            <a href="{{DOMAIN}}opinion/create" class="opinion_create">发布意见</a>
             <script>
                 $(document).ready(function(){
                     var status = $("select[name='status']");
@@ -46,9 +54,9 @@
                     </td>
                     <td class="text" style="width:300px;font-size:14px;">时间：{{ $data->createTime() }}</td>
                     <td class="detail">
-                        @if($data->status==1 && $data->uid==Session::get('user.uid'))
+                        @if($data->status==1 && $data->uid && $data->uid==Session::get('user.uid'))
                             <a href="{{DOMAIN}}opinion/{{$data->id}}/edit" style="float:right;">修改</a>
-                        @elseif($data->status==4 && $data->uid!=Session::get('user.uid'))
+                        @elseif($data->status==4 && $data->uid && $data->uid!=Session::get('user.uid'))
                             <a href="{{DOMAIN}}opinion/create/{{$data->id}}" style="float:right;">回复</a>
                         @endif
                         <a href="{{DOMAIN}}opinion/{{$data->id}}" style="float:right;">查看</a>
