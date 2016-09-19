@@ -50,6 +50,11 @@ class StaffController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = time();
         StaffModel::create($data);
+
+        //插入搜索表
+        $staffModel = StaffModel::where($data)->first();
+        \App\Models\Home\SearchModel::change($staffModel,7,'create');
+
         return redirect(DOMAIN.'member/staff');
     }
 
@@ -71,6 +76,11 @@ class StaffController extends BaseController
         $data = $this->getData($request);
         $data['updated_at'] = time();
         StaffModel::where('id',$id)->update($data);
+
+        //更新搜索表
+        $staffModel = StaffModel::where('id',$id)->first();
+        \App\Models\Home\SearchModel::change($staffModel,7,'update');
+
         return redirect(DOMAIN.'member/staff');
     }
 

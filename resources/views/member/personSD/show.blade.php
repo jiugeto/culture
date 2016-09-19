@@ -9,32 +9,32 @@
             <td>{{ $data->name }}</td>
         </tr>
         <tr>
-            <td>类 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型：</td>
-            <td>{{ $data->type }}</td>
+            <td>类&nbsp; 型：</td>
+            <td>{{ $data->type() }}</td>
         </tr>
         <tr>
-            <td>分 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类：</td>
-            <td>{{ $data->cate_id }}</td>
+            <td>分&nbsp; 类：</td>
+            <td>{{ $data->getCate() }}</td>
         </tr>
         <tr>
-            <td>介 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;绍：</td>
+            <td>介&nbsp; 绍：</td>
             <td>{{ $data->intro }}</td>
         </tr>
         <tr>
             <td>文件链接：</td>
-            <td>{{ $data->link_id }}</td>
+            <td>{{ $data->getVideoUrl() }}</td>
         </tr>
         <tr>
             <td>用户名称：</td>
-            <td>{{ $data->uid }}</td>
+            <td>{{ $data->userName() }}</td>
         </tr>
         <tr>
             <td>创建时间：</td>
-            <td>{{ $data->created_at }}</td>
+            <td>{{ $data->createTime() }}</td>
         </tr>
         <tr>
             <td>更新时间：</td>
-            <td>{{ $data->updated_at ? '未更新' : $data->updated_at }}</td>
+            <td>{{ $data->updateTime() }}</td>
         </tr>
         <tr><td class="center" colspan="2" style="border:0;cursor:pointer;">
                 {{--<a class="list_btn" onclick="history.go(-1)">返回</a>--}}

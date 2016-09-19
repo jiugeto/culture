@@ -65,7 +65,7 @@ class IdeaController extends BaseController
 
         //插入搜索表
         $ideaModel = IdeasModel::where($data)->first();
-        \App\Models\Base\SearchModel::change($ideaModel,3,'create');
+        \App\Models\Home\SearchModel::change($ideaModel,3,'create');
 
 //        //将自己加入查看权限表
 //        $ideaModel = IdeasModel::where($data)->first();
@@ -94,7 +94,7 @@ class IdeaController extends BaseController
 
         //更新搜索表
         $ideaModel = IdeasModel::where('id',$id)->first();
-        \App\Models\Base\SearchModel::change($ideaModel,3,'update');
+        \App\Models\Home\SearchModel::change($ideaModel,3,'update');
 
         return redirect(DOMAIN.'member/idea');
     }

@@ -14,17 +14,11 @@
         <tr>
             <td class="field_name"><label>作品类型：</label></td>
             <td>
-                <select name="cate_id">
-                    <option value="0"
-                            {{ $data->cate_id==0 ? 'selected' : '' }}>
-                        -请选择-</option>
-                    @foreach($categorys as $category)
-                        <option value="{{ $category->id }}"
-                                {{ $data->cate_id==$category->id ? 'selected' : '' }}>
-                            {{ $category->name }}</option>
+                <select name="cate" required>
+                    @foreach($model['cates2'] as $kcate=>$vcate)
+                        <option value="{{ $kcate }}" {{ $data->cate==$kcate ? 'selected' : '' }}>{{ $vcate }}</option>
                     @endforeach
                 </select>
-                {{--<a href="{{DOMAIN}}member/category/create/{{'个人需求'}}">[+添加类型]</a>--}}
             </td>
         </tr>
         <tr><td></td></tr>
@@ -53,25 +47,13 @@
 
         <tr>
             <td class="field_name"><label>鼠标移动的文字：</label></td>
-            <td><input type="text" class="field_value" placeholder="至少2个字符" minlength="2" required name="title" value="{{ $data->title }}"/></td>
+            <td><input type="text" class="field_value" placeholder="" name="title" value="{{ $data->title }}"/></td>
         </tr>
         <tr><td></td></tr>
 
         <tr>
             <td class="field_name"><label>视频截图：</label></td>
-            <td>
-                {{--<input type="text" class="field_value" placeholder="至少2个字符" minlength="2" required name="link_id"/>--}}
-                <select name="pic_id" required>
-                    <option value="">图片选择</option>
-                    @if($pics)
-                        @foreach($pics as $pic)
-                            <option value="{{ $pic->id }}" {{ $data->pic_id==$pic->id ? 'selected' : '' }}>
-                                <img src="{{ $pic->url }}" style="width:50px;"> {{ $pic->name }}</option>
-                        @endforeach
-                    @endif
-                </select>
-                <a href="{{DOMAIN}}member/pic">图片列表</a>
-            </td>
+            <td>@include('member.common.piclist')</td>
         </tr>
         <tr><td></td></tr>
 
@@ -84,11 +66,11 @@
                     @if($videos)
                         @foreach($videos as $video)
                             <option value="{{ $video->id }}" {{ $data->video_id==$video->id ? 'selected' : '' }}>
-                                {{ $video->name }}</option>
+                                {{ $video->name.' --> '.$video->url }}</option>
                         @endforeach
                     @endif
                 </select>
-                <a href="{{DOMAIN}}member/video">视频列表</a>
+                <a href="{{DOMAIN}}member/video" class="job">视频列表</a>
             </td>
         </tr>
         <tr><td></td></tr>

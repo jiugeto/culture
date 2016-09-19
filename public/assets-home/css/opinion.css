@@ -176,9 +176,11 @@
 }
 .idea_show .idea_left { float:left; }
 .idea_show .idea_right { margin:10px;box-shadow:0 0 10px rgba(200,200,200,0.5);float:right; }
-.idea_show .idea_left .idea_con {
-    width:700px;
-}
+.idea_show .idea_left .idea_con { width:700px; }
+.idea_show .idea_left .idea_con a.onclick { color:grey;cursor:pointer; }
+.idea_show .idea_left .idea_con a:hover.onclick { color:red; }
+.idea_show .idea_left .idea_con td { padding:5px 10px;padding-right:20px; }
+.idea_show .idea_left .idea_con .showVideo { color:orangered;text-decoration:none; }
 .idea_show .idea_left .idea_con p.title {
     padding-bottom:20px;
     color:black;

@@ -32,18 +32,16 @@ class BaseGoodsController extends BaseController
      */
     public function getData(Request $request,$type)
     {
-        $data = $request->all();
-        //uid暂且为10,uname暂且为''
-        $uid = 0; $uname = '';
         $goods = [
-            'name'=> $data['name'],
+            'name'=> $request->name,
             'type'=> $type,
-            'intro'=> $data['intro'],
-            'title'=> $data['title'],
-            'pic_id'=> $data['pic_id'],
-            'video_id'=> $data['video_id'],
-            'uid'=> $uid,
-            'uname'=> $uname,
+            'cate'=> $request->cate,
+            'intro'=> $request->intro,
+            'title'=> $request->title,
+            'pic_id'=> $request->pic_id,
+            'video_id'=> $request->video_id,
+            'uid'=> $this->userid,
+            'uname'=> \Session::get('user.username'),
         ];
         return $goods;
     }

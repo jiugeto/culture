@@ -265,7 +265,7 @@ input,textarea,select {
 }
 input,select { margin:5px 0;height:30px; }
 input.field_value { padding:2px 5px;width:300px; }
-select { font-size:20px;font-family:'微软雅黑'; }
+select { font-size:16px;font-family:'微软雅黑'; }
 input.radio { position:relative;top:10px; }
 .td_border { padding:5px;border:1px dashed lightgrey; }
 .table_create .upload {

@@ -62,6 +62,11 @@ class RentController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = time();
         RentModel::create($data);
+
+        //插入搜索表
+        $rentModel = RentModel::where($data)->first();
+        \App\Models\Home\SearchModel::change($rentModel,8,'create');
+
         return redirect(DOMAIN.'member/rent');
     }
 
@@ -82,6 +87,11 @@ class RentController extends BaseController
         $data = $this->getData($request);
         $data['updated_at'] = time();
         RentModel::where('id',$id)->update($data);
+
+        //更新搜索表
+        $rentModel = RentModel::where('id',$id)->first();
+        \App\Models\Home\SearchModel::change($rentModel,8,'update');
+
         return redirect(DOMAIN.'member/rent');
     }
 
@@ -132,7 +142,7 @@ class RentController extends BaseController
             'genre'=> $data['genre'],
             'intro'=> $data['intro'],
             'uid'=> $data['uid'],
-            'price'=> $data['price'],
+            'money'=> $data['price'],
         ];
         return $rent;
     }

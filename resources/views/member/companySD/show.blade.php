@@ -8,38 +8,42 @@
             <td style="width:100px;">作品名称：</td>
             <td>{{ $data->name }}</td>
         </tr>
+
         <tr>
             <td>类 &nbsp;型：</td>
-            <td>{{ $data->type }}
-                @foreach($types as $ktype=>$type)
-                    @if($data->type==$ktype) {{ $type }} @endif
-                @endforeach
-            </td>
+            <td>{{ $data->type() }}</td>
         </tr>
+
         <tr>
             <td>分 &nbsp;类：</td>
-            <td>{{ $data->cate_id }}</td>
+            <td>{{ $data->getCate() }}</td>
         </tr>
+
         <tr>
             <td>介 &nbsp;绍：</td>
             <td>{{ $data->intro }}</td>
         </tr>
+
         <tr>
             <td>文件链接：</td>
-            <td>{{ $data->link_id }}</td>
+            <td>{{ $data->getVideoUrl() }}</td>
         </tr>
+
         <tr>
             <td>用户名称：</td>
-            <td>{{ $data->uid }}</td>
+            <td>{{ $data->getUserName() }}</td>
         </tr>
+
         <tr>
             <td>创建时间：</td>
-            <td>{{ $data->created_at }}</td>
+            <td>{{ $data->createTime() }}</td>
         </tr>
+
         <tr>
             <td>更新时间：</td>
-            <td>{{ $data->updated_at ? '未更新' : $data->updated_at }}</td>
+            <td>{{ $data->updateTime() }}</td>
         </tr>
+
         <tr><td class="center" colspan="2" style="border:0;cursor:pointer;">
                 {{--<a class="list_btn" onclick="history.go(-1)">返回</a>--}}
                 <button class="companybtn" onclick="history.go(-1)">返 &nbsp;回</button>

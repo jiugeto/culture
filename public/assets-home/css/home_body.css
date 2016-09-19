@@ -460,6 +460,7 @@
     text-align:center;
     line-height:160px;
     background:white;
+    overflow:hidden;
 }
 .searchlist .waterfall .img img { width:160px; }
 .searchlist .waterfall .text {

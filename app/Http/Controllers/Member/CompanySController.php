@@ -55,6 +55,7 @@ class CompanySController extends BaseGoodsController
         $curr['name'] = $this->lists['create']['name'];
         $curr['url'] = $this->lists['create']['url'];
         $result = [
+            'model'=> $this->model,
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -69,7 +70,7 @@ class CompanySController extends BaseGoodsController
 
         //更新搜索表
         $goodsModel = GoodsModel::where($data)->first();
-        \App\Models\Base\SearchModel::change($goodsModel,2,'create');
+        \App\Models\Home\SearchModel::change($goodsModel,2,'create');
 
         return redirect(DOMAIN.'member/companyS');
     }
@@ -80,6 +81,7 @@ class CompanySController extends BaseGoodsController
         $curr['url'] = $this->lists['edit']['url'];
         $result = [
             'data'=> GoodsModel::find($id),
+            'model'=> $this->model,
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -94,7 +96,7 @@ class CompanySController extends BaseGoodsController
 
         //插入搜索表
         $goodsModel = GoodsModel::where('id',$id)->first();
-        \App\Models\Base\SearchModel::change($goodsModel,2,'update');
+        \App\Models\Home\SearchModel::change($goodsModel,2,'update');
 
         return redirect(DOMAIN.'member/companyS');
     }
@@ -106,6 +108,7 @@ class CompanySController extends BaseGoodsController
         $data = GoodsModel::find($id);
         $result = [
             'data'=> $data,
+            'model'=> $this->model,
             'types'=> $this->model['types'],
             'lists'=> $this->lists,
             'curr'=> $curr,

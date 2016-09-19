@@ -14,7 +14,7 @@
     @endforeach
 </ul>
 {{--@if($lists['func']['url']!='product')--}}
-    <div class="mem_create"><a href="/member/{{$lists['func']['url']}}/create">{{$lists['create']['name']}}</a></div>
+    <div class="mem_create"><a href="{{DOMAIN}}member/{{$lists['func']['url']}}/create">{{$lists['create']['name']}}</a></div>
 {{--@else--}}
     {{--<div class="mem_create"><a href="/online">在线创作</a></div>--}}
 {{--@endif--}}

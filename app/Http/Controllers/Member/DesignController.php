@@ -61,7 +61,7 @@ class DesignController extends BaseController
             'uid'=> $this->userid ? $this->userid : 0,
             'intro'=> $request->intro,
             'detail'=> $request->detail,
-            'price'=> $request->money,
+            'money'=> $request->money,
         );
     }
 

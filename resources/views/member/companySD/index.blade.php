@@ -19,13 +19,13 @@
             @foreach($datas as $data)
             <tr>
                 <td>{{ $data->id }}</td>
-                <td><a href="{{DOMAIN}}member/{{$lists['func']['url']}}/{{ $data->id }}">{{ $data->name }}</a></td>
-                <td>{{ $data->catename==''?'暂无':$data->catename }}</td>
-                <td>{{ $data->uname }}</td>
-                <td>{{ $data->created_at }}</td>
+                <td><a href="{{DOMAIN}}member/{{$lists['func']['url']}}/{{ $data->id }}">{{ str_limit($data->name,20) }}</a></td>
+                <td>{{ $data->getCate() }}</td>
+                <td>{{ $data->getUserName() }}</td>
+                <td>{{ $data->createTime() }}</td>
                 <td>
                     @if($curr['url']=='')
-                        <a href="{{DOMAIN}}member/{{$lists['func']['url']}}/{{ $data->id }}/pre" class="list_btn">预览</a>
+                        <a href="{{DOMAIN}}product/video/{{ $data->id }}/{{ $data->video_id }}" target="_blank" class="list_btn">预览</a>
                         <a href="{{DOMAIN}}member/{{$lists['func']['url']}}/{{ $data->id }}" class="list_btn">查看</a>
                         <a href="{{DOMAIN}}member/{{$lists['func']['url']}}/{{ $data->id }}/edit" class="list_btn">编辑</a>
                         <a href="{{DOMAIN}}member/{{$lists['func']['url']}}/{{ $data->id }}/destroy" class="list_btn">删除</a>

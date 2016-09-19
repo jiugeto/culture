@@ -126,7 +126,7 @@ class BaseModel extends Model
      */
     public function money()
     {
-        return $this->money ? $this->money.'元' : '未定';
+        return $this->money ? $this->money.'元' : '';
     }
 
     /**

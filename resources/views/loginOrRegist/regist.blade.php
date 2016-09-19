@@ -4,7 +4,7 @@
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="login_div login_first"><input type="text" placeholder="用户名(2~50字符)" minlength="2" minlength="50" name="username" required></div>
         <div class="login_div"><input type="text" placeholder="邮箱" pattern="^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" name="email" required></div>
-        <div class="login_div"><input type="text" placeholder="密码(至少6~12字符)" minlength="6" minlength="12" name="password" required></div>
+        <div class="login_div"><input type="password" placeholder="密码(至少6~12字符)" minlength="6" minlength="12" name="password" required></div>
         {{--<div class="login_div"><input type="text" placeholder="再次输入密码(至少6~12字符)" minlength="6" minlength="12" name="password_confirmation" required></div>--}}
         <div class="login_div"><input type="text" placeholder="再次输入密码(至少6~12字符)" minlength="6" minlength="12" name="password2" required></div>
         <div class="login_div login_last"><input type="text" placeholder="验证码" minlength="4" maxlength="4" name="captcha" required><a href="javascript:void(0)" class="captcha" onclick="yzmfresh(this);">{!! captcha_img() !!}</a></div>

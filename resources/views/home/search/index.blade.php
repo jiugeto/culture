@@ -14,17 +14,20 @@
             <div class="waterfall" onclick="window.location.href='{{$datas->url.$data->id}}';">
                 <div class="img">
                     <img src="
-                    @if($searchGenre==1 && $url=$data->gif) {{ $data->getPic($url) }}
-                    @elseif($searchGenre==2 && $url=$data->pic_id) {{ $data->getPic($url) }}
-                    @elseif($searchGenre==3 && $url=$data->thumb) {{ $data->getPic($url) }}
-                    @elseif($searchGenre==4 && $url=$data->thumb) {{ $data->getPic($url) }}
-                    @elseif($searchGenre==5 && $url=$data->getLogo()) {{ $data->getPic($url) }}
-                    @elseif($searchGenre==6 && $url=$data->pic_id) {{ $data->getPic($url) }}
-                    @elseif($searchGenre==7 && $url=$data->thumb) {{ $data->getPic($url) }}
-                    @elseif($searchGenre==8 && $url=$data->thumb) {{ $data->getPic($url) }}
-                    @elseif($searchGenre==9 && $url=$data->thumb) {{ $data->getPic($url) }}
+                    @if($searchGenre==1) {{ $data->getPicUrl() }}
+                    @elseif($searchGenre==2) {{ $data->getPicUrl() }}
+                    @elseif($searchGenre==3) {{ $data->getPicUrl() }}
+                    @elseif($searchGenre==4) {{ $data->getPicUrl() }}
+                    @elseif($searchGenre==5) {{ $data->getLogo() }}
+                    @elseif($searchGenre==6) {{ $data->getPicUrl() }}
+                    @elseif($searchGenre==7) {{ $data->getPicUrl() }}
+                    @elseif($searchGenre==8) {{ $data->getPicUrl() }}
+                    @elseif($searchGenre==9) {{ $data->getPicUrl() }}
                     @endif
-                    ">
+                    " style="
+                    @if($size=$data->getUserPicSize($data->pic(),$w=160,$h=165))
+                            width:{{$size['w']}}px;height:{{$size['h']}}px;
+                    @endif">
                 </div>
                 <div class="text">{{ $data->name }}</div>
                 <div class="cname">

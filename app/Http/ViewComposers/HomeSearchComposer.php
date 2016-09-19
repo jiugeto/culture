@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\ViewComposers;
 
-use App\Models\Base\SearchModel;
+use App\Models\Home\SearchModel;
 use Illuminate\Contracts\View\View;
 //use Illuminate\Support\Facades\DB;
 
@@ -13,7 +13,10 @@ class HomeSearchComposer
 
     public function compose(View $view)
     {
-        $view->with('searchs', array('genres'=>$this::getSearchGenres(), 'hotwords'=>$this->getSearchs()));
+        $view->with('searchs', array(
+            'genres'=>$this::getSearchGenres(),
+            'hotwords'=>$this->getSearchKeyWords()
+        ));
     }
 
     public function getSearchGenres()
@@ -22,7 +25,7 @@ class HomeSearchComposer
         return $searchModel['genres'];
     }
 
-    public static function getSearchs()
+    public static function getSearchKeyWords()
     {
         return SearchModel::getHotWords();
     }

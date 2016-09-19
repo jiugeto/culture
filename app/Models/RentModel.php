@@ -1,11 +1,13 @@
 <?php
 namespace App\Models;
 
+use App\Models\Base\PicModel;
+
 class RentModel extends BaseModel
 {
     protected $table = 'bs_rents';
     protected $fillable = [
-        'id','name','genre','intro','uid','area','price','sort','del','created_at','updated_at',
+        'id','name','genre','thumb','intro','uid','area','money','sort','del','created_at','updated_at',
     ];
 
     /**
@@ -66,7 +68,7 @@ class RentModel extends BaseModel
 
     public function money()
     {
-        return $this->price ? $this->price.'元' : '暂无';
+        return $this->price ? $this->money.'元' : '暂无';
     }
 
     /**
@@ -83,5 +85,23 @@ class RentModel extends BaseModel
             $statusName = '未开始';
         }
         return $statusName;
+    }
+
+    /**
+     * 获取图片
+     */
+    public function pic()
+    {
+        $pic_id = $this->thumb ? $this->thumb : 0;
+        $picModel = PicModel::find($pic_id);
+        return $picModel ? $picModel : '';
+    }
+
+    /**
+     * 获取图片url
+     */
+    public function getPicUrl()
+    {
+        return $this->pic() ? $this->pic()->getUrl() : '';
     }
 }

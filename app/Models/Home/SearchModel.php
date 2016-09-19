@@ -1,11 +1,11 @@
 <?php
-namespace App\Models\Base;
+namespace App\Models\Home;
 
 use App\Models\CompanyModel;
 use App\Models\RentModel;
 use App\Models\StaffModel;
 
-class SearchModel extends BaseModel
+class SearchModel extends \App\Models\BaseModel
 {
     /**
      * 搜索表
@@ -13,7 +13,7 @@ class SearchModel extends BaseModel
 
     protected $table = 'bs_search';
     protected $fillable = [
-        'id','keyword','genre','rate','created_at','updated_at',
+        'id','keyword','genre','fromid','created_at','updated_at',
     ];
 
     //检索条件：1创作，2样片，3创意，4分镜，5企业，6影视，7演员，8设备，9设计，
@@ -26,7 +26,7 @@ class SearchModel extends BaseModel
      */
     public static function getHotWords()
     {
-        return SearchModel::orderBy('rate','desc')->paginate(5);
+        return SearchKeywordModel::orderBy('rate','desc')->paginate(5);
     }
 
     /**
@@ -51,7 +51,8 @@ class SearchModel extends BaseModel
                 SearchModel::intoDB($keyword,4,$data->id);
             } elseif ($genre=='company') {
                 $companyModel = new CompanyModel();
-                $keyword = $data->name.$data->uname.$companyModel['genres'][$data->genre].
+                $genreName = array_key_exists($data->genre,$companyModel['genres']) ? $companyModel['genres'][$data->genre] : '';
+                $keyword = $data->name.$data->uname.$genreName.
                     $companyModel->getAreaName($data->area).$data->address;
                 SearchModel::intoDB($keyword,5,$data->id);
             } elseif ($genre=='works') {
@@ -59,7 +60,8 @@ class SearchModel extends BaseModel
                 SearchModel::intoDB($keyword,6,$data->id);
             } elseif ($genre=='actor') {
                 $education = new StaffModel();
-                $keyword = $data->name.$data->realname.$data->origin.$education['educations'][$data->education].$data->school.$education->getAreaName($data->area);
+                $keyword = $data->name.$data->realname.$data->origin.
+                    $education['educations'][$data->education].$data->school.$education->getAreaName($data->area);
                 SearchModel::intoDB($keyword,7,$data->id);
             } elseif ($genre=='rent') {
                 $rentModel = new RentModel();

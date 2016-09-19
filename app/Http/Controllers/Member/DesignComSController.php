@@ -69,7 +69,7 @@ class DesignComSController extends DesignController
 
         //插入搜索表
         $designModel = DesignModel::where($data)->first();
-        \App\Models\Base\SearchModel::change($designModel,9,'create');
+        \App\Models\Home\SearchModel::change($designModel,9,'create');
 
         return redirect(DOMAIN.'member/designComS');
     }
@@ -95,7 +95,7 @@ class DesignComSController extends DesignController
 
         //更新搜索表
         $designModel = DesignModel::where('id',$id)->first();
-        \App\Models\Base\SearchModel::change($designModel,9,'update');
+        \App\Models\Home\SearchModel::change($designModel,9,'update');
 
         return redirect(DOMAIN.'member/designComS');
     }

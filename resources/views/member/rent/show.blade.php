@@ -7,30 +7,37 @@
             <td style="width:100px;">设备名称：</td>
             <td>{{ $data->name }}</td>
         </tr>
+
         <tr>
             <td>供求关系：</td>
             <td>{{ $data->genre==1 ? '供应' : '需求' }}</td>
         </tr>
+
         <tr>
             <td>简 &nbsp;介：</td>
             <td>{{ $data->intro }}</td>
         </tr>
+
         <tr>
             <td>发布者：</td>
             <td>{{ $data->uid }}</td>
         </tr>
+
         <tr>
             <td>价 &nbsp;格：</td>
-            <td>{{ $data->price }}</td>
+            <td>{{ $data->money() }}</td>
         </tr>
+
         <tr>
             <td>创建时间：</td>
-            <td>{{ $data->created_at }}</td>
+            <td>{{ $data->createTime() }}</td>
         </tr>
+
         <tr>
             <td>更新时间：</td>
-            <td>{{ $data->updated_at ? '未更新' : $data->updated_at }}</td>
+            <td>{{ $data->updateTime() }}</td>
         </tr>
+
         <tr><td class="center" colspan="2" style="border:0;cursor:pointer;">
                 {{--<a class="list_btn" onclick="history.go(-1)">返回</a>--}}
                 <button class="companybtn" onclick="history.go(-1)">返 &nbsp;回</button>

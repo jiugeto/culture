@@ -1,11 +1,13 @@
 <?php
 namespace App\Models;
 
+use App\Models\Base\PicModel;
+
 class DesignModel extends BaseModel
 {
     protected $table = 'bs_designs';
     protected $fillable = [
-        'id','name','genre','cate','uid','intro','detail','price','video_id','click','sort','del','created_at','updated_at',
+        'id','name','genre','cate','uid','intro','detail','money','thumb','click','sort','del','created_at','updated_at',
     ];
     //1企业供应，2企业需求，3个人供应，4个人需求
     protected $genres = [
@@ -56,20 +58,20 @@ class DesignModel extends BaseModel
     }
 
     /**
-     * 设计的一张图片
+     * 获取图片
      */
-    public function getOnePic()
+    public function pic()
     {
-        $pic_id = count($this->getPics()) ? $this->getPics()[0]->pic_id : 0;
+        $pic_id = $this->thumb ? $this->thumb : 0;
         $picModel = PicModel::find($pic_id);
         return $picModel ? $picModel : '';
     }
 
     /**
-     * 设计的一张图片url
+     * 获取图片url
      */
-    public function getOnePicUrl()
+    public function getPicUrl()
     {
-        return $this->getOnePic() ? $this->getOnePic()->url : '';
+        return $this->pic() ? $this->pic()->getUrl() : '';
     }
 }

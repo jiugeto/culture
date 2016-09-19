@@ -26,13 +26,13 @@
             @foreach($datas as $data)
             <tr>
                 <td>{{ $data->id }}</td>
-                <td>{{ $data->name }}</td>
-                <td>{{ $data->cate_id }}</td>
-                <td>{{ $data->uname }}</td>
-                <td>{{ $data->created_at }}</td>
+                <td>{{ str_limit($data->name,20) }}</td>
+                <td>{{ $data->getCate() }}</td>
+                <td>{{ $data->getuserName() }}</td>
+                <td>{{ $data->createTime() }}</td>
                 <td>
                     @if($curr['url']=='')
-                        <a href="{{DOMAIN}}member/personD/{{ $data->id }}/pre" class="list_btn">预览</a>
+                        <a href="{{DOMAIN}}product/video/{{ $data->id }}/{{ $data->video_id }}" target="_blank" class="list_btn">预览</a>
                         <a href="{{DOMAIN}}member/personD/{{ $data->id }}" class="list_btn">查看</a>
                         <a href="{{DOMAIN}}member/personD/{{ $data->id }}/edit" class="list_btn">编辑</a>
                         <a href="{{DOMAIN}}member/personD/{{ $data->id }}/destroy" class="list_btn">删除</a>

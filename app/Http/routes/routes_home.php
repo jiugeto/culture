@@ -81,4 +81,5 @@ Route::group(['prefix'=>'/','namespace'=>'Home'],function(){
     Route::resource('newuser','NewUserController');
     //搜索栏
     Route::get('s/{genre}/{keyword}','SearchController@index');
+    Route::get('s/init','SearchController@init');      //搜索表初始化
 });

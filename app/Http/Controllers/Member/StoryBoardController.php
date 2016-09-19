@@ -68,7 +68,7 @@ class StoryBoardController extends BaseController
 
         //插入搜索表
         $storyBoardModel = StoryBoardModel::where($data)->first();
-        \App\Models\Base\SearchModel::change($storyBoardModel,4,'create');
+        \App\Models\Home\SearchModel::change($storyBoardModel,4,'create');
 
         return redirect(DOMAIN.'member/storyboard');
     }
@@ -94,7 +94,7 @@ class StoryBoardController extends BaseController
 
         //更新搜索表
         $storyBoardModel = StoryBoardModel::where('id',$id)->first();
-        \App\Models\Base\SearchModel::change($storyBoardModel,4,'update');
+        \App\Models\Home\SearchModel::change($storyBoardModel,4,'update');
 
         return redirect(DOMAIN.'member/storyboard');
     }

@@ -1,11 +1,13 @@
 <?php
 namespace App\Models;
 
+use App\Models\Base\PicModel;
+
 class StaffModel extends BaseModel
 {
     protected $table = 'bs_staffs';
     protected $fillable = [
-        'id','name','entertain_id','uid','genre','sex','realname','origin','education','school','hobby',
+        'id','name','entertain_id','uid','genre','thumb','sex','realname','origin','education','school','hobby',
         'area','height','sort','isshow','del','created_at','updated_at',
     ];
     //1=>演员，导演，摄影师，灯光师，化妆师，21=>剪辑师，特效师，合成师，配音，背景音
@@ -115,5 +117,23 @@ class StaffModel extends BaseModel
     {
         $staff_id = $this->id ? $this->id : 0;
         return StaffPicModel::where('staff_id',$staff_id)->get();
+    }
+
+    /**
+     * 获取图片
+     */
+    public function pic()
+    {
+        $pic_id = $this->thumb ? $this->thumb : 0;
+        $picModel = PicModel::find($pic_id);
+        return $picModel ? $picModel : '';
+    }
+
+    /**
+     * 获取图片url
+     */
+    public function getPicUrl()
+    {
+        return $this->pic() ? $this->pic()->getUrl() : '';
     }
 }

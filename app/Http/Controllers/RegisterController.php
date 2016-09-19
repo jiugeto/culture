@@ -23,8 +23,8 @@ class RegisterController extends Controller
 
     public function doregist()
     {
-        //查看同ip是否已有注册
-        if (UserModel::where('ip',Tools::getIp())->first()) {
+        //查看同ip是否已有3个注册，满3个则限制
+        if (count(UserModel::where('ip',Tools::getIp())->get())==3) {
             echo "<script>alert('此用户已经注册过，不要重复注册！');history.go(-1);</script>";exit;
         }
         //查看是否有此用户

@@ -67,7 +67,7 @@ class ProductController extends BaseController
 
         //插入搜索表
         $productModel = ProductModel::where($data)->first();
-        \App\Models\Base\SearchModel::change($productModel,1,'create');
+        \App\Models\Home\SearchModel::change($productModel,1,'create');
 
         return redirect(DOMAIN.'member/product');
     }
@@ -92,7 +92,7 @@ class ProductController extends BaseController
 
         //更新搜索表
         $productModel = ProductModel::where('id',$id)->first();
-        \App\Models\Base\SearchModel::change($productModel,1,'update');
+        \App\Models\Home\SearchModel::change($productModel,1,'update');
 
         return redirect(DOMAIN.'member/product');
     }

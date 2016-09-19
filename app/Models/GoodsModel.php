@@ -14,7 +14,7 @@ class GoodsModel extends BaseModel
 
     protected $table = 'bs_goods';
     protected $fillable = [
-        'id','name','genre','type','cate','intro','title','pic_id','video_id','video_id2','money','uid','uname','click','recommend','newest','sort','isshow','isshow2','del','created_at','updated_at',
+        'id','name','genre','type','cate','intro','title','pic_id','video_id','money','uid','uname','click','recommend','newest','sort','isshow','isshow2','del','created_at','updated_at',
     ];
     //片源类型：1产品，2花絮
     protected $genres = [
@@ -65,14 +65,6 @@ class GoodsModel extends BaseModel
     }
 
     /**
-     * 花絮
-     */
-    public function video1s()
-    {
-        return VideoModel::where('uid',$this->uid)->get();
-    }
-
-    /**
      * 图片
      */
     public function pic()
@@ -120,27 +112,11 @@ class GoodsModel extends BaseModel
     }
 
     /**
-     * 花絮
-     */
-    public function video1()
-    {
-        return $this->video_id ? VideoModel::find($this->video_id1) : '';
-    }
-
-    /**
      * 获取视频链接
      */
     public function getVideoUrl()
     {
         return $this->video() ? $this->video()->url : '';
-    }
-
-    /**
-     * 获取花絮链接
-     */
-    public function getVideo1Url()
-    {
-        return $this->video1() ? $this->video1()->url : '';
     }
 
     public function title()
