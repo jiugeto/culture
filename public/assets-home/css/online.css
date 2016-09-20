@@ -11,83 +11,121 @@ body { font-family:'微软雅黑'; }
     background:rgb(40,40,40);
 }
 .online_win {
-    margin:20px auto;
+    margin:40px auto;
     margin-bottom:50px;
-    width:960px;
-    border:10px solid black;
-    background:rgb(50,50,50);
-    /*box-shadow: 10px 10px 5px #888888;*/
+    width:720px;
 }
-.online_win .timeline {
-    height:35px;
+.online_win .frame_title {
+    padding:5px 0;
+    width:740px;
     color:grey;
+    text-align:center;
     background:black;
 }
-.online_win .animate {
-    width:960px;
-    height:540px;
-    background:white;
-    overflow:hidden;
+.online_win iframe { border:10px solid black;border-top:0; }
+/*.online_win .timeline {*/
+    /*height:30px;*/
+    /*color:grey;*/
+    /*background:black;*/
+/*}*/
+/*.timeline div { float:left; }*/
+/*.timeline .start,.timeline .stop {*/
+    /*padding:0 10px;*/
+    /*font-size:30px;*/
+/*}*/
+/*.timeline .stop { display:none; }*/
+/*.timeline .time,.timeline .time div {*/
+    /*width:860px;*/
+    /*height:30px;*/
+    /*filter:alpha(opacity:40);opacity:0.4;-moz-opacity:0.4;-khtml-opacity:0.4;*/
+/*}*/
+/*.timeline .time { margin:5px;background:blue; }*/
+/*.timeline .time div {*/
+    /*width:800px;*/
+    /*background:deepskyblue;*/
+    /*filter:alpha(opacity:60);opacity:0.6;-moz-opacity:0.86;-khtml-opacity:0.6;*/
+/*}*/
+/*.timeline .right img { width:40px; }*/
+
+
+/*========== 动画作品列表 ==========*/
+.online_list {
+    width:100%;
+    text-align:center;
+    position:absolute; bottom:90px;
 }
-.timeline div { float:left; }
-.timeline .start,.timeline .stop {
-    padding:0 10px;
-    font-size:30px;
+.online_list .listbtn {
+    padding-top:2px;
+    padding-bottom:4px;
+    background:#333333;
 }
-.timeline .stop { display:none; }
-.timeline .time,.timeline .time div {
-    width:860px;
-    height:30px;
-    filter:alpha(opacity:40);opacity:0.4;-moz-opacity:0.4;-khtml-opacity:0.4;
+.online_list a {
+    padding:2px 20px; padding-bottom:4px;
+    color:grey;
+    background:black;
+    cursor:pointer;
 }
-.timeline .time { margin:5px;background:blue; }
-.timeline .time div {
-    width:800px;
-    background:deepskyblue;
-    filter:alpha(opacity:60);opacity:0.6;-moz-opacity:0.86;-khtml-opacity:0.6;
+.online_list a:hover {
+    color:white;
+    background:darkred;
 }
-.timeline .right img { width:40px; }
+.online_list .pro_list {
+    height:150px;
+    background:rgb(40,40,40);
+}
 
 
 /*========== 动画内容 ==========*/
-.img {
-    /*width:218px;*/
-    /*height:198px;*/
-    background:gainsboro;
-    border:1px solid darkgrey;
-}
-.img div {
-    margin:0 auto;
-    padding-top:10px;
-    width:200px;
-    height:150px;
-    overflow:hidden;
-}
-.img .title {
-    text-align:center;
-}
+/*.img {*/
+    /*background:gainsboro;*/
+    /*border:1px solid darkgrey;*/
+/*}*/
+/*.img div {*/
+    /*margin:0 auto;*/
+    /*padding-top:10px;*/
+    /*width:200px;*/
+    /*height:150px;*/
+    /*overflow:hidden;*/
+/*}*/
+/*.img .title {*/
+    /*text-align:center;*/
+/*}*/
 
 
 /*========== 动画控制 ==========*/
-.switch {
-    margin:0 auto;
-    margin-top:-50px;
-    width:980px;
-}
-.onlinebtn {
-    padding:2px 20px;
-    border:1px solid orangered;
-    border-radius:1px;
-    color:white;
-    font-family:'微软雅黑';
-    font-size:20px;
-    background:orangered;
-    cursor:pointer;
-}
-a:hover .onlinebtn {
-    border:1px solid darkred;
-    background:darkred;
-}
+/*.switch {*/
+    /*margin:0 auto;*/
+    /*margin-top:-50px;*/
+    /*width:720px;*/
+    /*height:32px;*/
+    /*border:10px solid black;*/
+    /*border-top:0;*/
+/*}*/
+/*.onlinebtn {*/
+    /*padding:3px 0;*/
+    /*width:240px;*/
+    /*border:0;*/
+    /*color:lightgrey;*/
+    /*font-family:'微软雅黑';*/
+    /*font-size:18px;*/
+    /*background:rgb(50,10,10);*/
+    /*cursor:pointer;*/
+    /*float:left;*/
+/*}*/
+/*a:hover .onlinebtn {*/
+    /*color:white;*/
+    /*border:0;*/
+    /*background:darkred;*/
+/*}*/
+/*.switch .timeline {*/
+    /*width:720px; height:5px;*/
+    /*overflow:hidden;*/
+/*}*/
+/*.switch .timeline div.dh {*/
+    /*width:720px; height:2px;*/
+    /*background:red;*/
+    /*position:relative; left:-720px;*/
+/*}*/
 
 
 /*========== 动画与属性编辑 ==========*/

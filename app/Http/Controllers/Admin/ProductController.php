@@ -13,10 +13,10 @@ class ProductController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->model = new ProductModel();
         $this->crumb['']['name'] = '产品列表';
         $this->crumb['category']['name'] = '产品管理';
         $this->crumb['category']['url'] = 'product';
+        $this->model = new ProductModel();
     }
 
     public function index()
@@ -24,7 +24,7 @@ class ProductController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'datas'=> $this->query($del=0),
+            'datas'=> $this->query(0),
             'prefix_url'=> DOMAIN.'admin/product',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -37,7 +37,7 @@ class ProductController extends BaseController
         $curr['name'] = $this->crumb['trash']['name'];
         $curr['url'] = $this->crumb['trash']['url'];
         $result = [
-            'datas'=> $this->query($del=1),
+            'datas'=> $this->query(1),
             'prefix_url'=> DOMAIN.'admin/product/trash',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -61,6 +61,11 @@ class ProductController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = time();
         ProductModel::create($data);
+
+        //插入搜索表
+        $productModel = ProductModel::where($data)->first();
+        \App\Models\Home\SearchModel::change($productModel,1,'create');
+
         return redirect(DOMAIN.'admin/product');
     }
 
@@ -81,6 +86,11 @@ class ProductController extends BaseController
         $data = $this->getData($request);
         $data['updated_at'] = time();
         ProductModel::where('id',$id)->update($data);
+
+        //更新搜索表
+        $productModel = ProductModel::where('id',$id)->first();
+        \App\Models\Home\SearchModel::change($productModel,1,'update');
+
         return redirect(DOMAIN.'admin/product');
     }
 
@@ -132,10 +142,8 @@ class ProductController extends BaseController
         $product = [
             'name'=> $request->name,
             'intro'=> $request->intro,
-            'width'=> $request->width,
-            'height'=> $request->height,
-            'istop'=> $request->istop,
             'sort'=> $request->sort,
+            'istop'=> $request->istop,
             'isshow'=> $request->isshow,
         ];
         return $product;

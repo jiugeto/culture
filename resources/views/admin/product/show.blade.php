@@ -38,14 +38,6 @@
                     <td>{{ $data->uname }}px</td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">视频宽度 / Width：</td>
-                    <td>{{ $data->width }}px</td>
-                </tr>
-                <tr>
-                    <td class="am-hide-sm-only">视频高度 / height：</td>
-                    <td>{{ $data->height }}</td>
-                </tr>
-                <tr>
                     <td class="am-hide-sm-only">是否置顶 / Is Top：</td>
                     <td>{{ $data->istop() }}</td>
                 </tr>

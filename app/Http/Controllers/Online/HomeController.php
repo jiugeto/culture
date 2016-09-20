@@ -13,10 +13,13 @@ class HomeController extends BaseController
      * 在线创作窗口主页
      */
 
+//    public function __construct()
+//    {
+//        parent::__construct();
+//    }
+
     public function index($productid=1)
     {
-        $urls = explode('/',$_SERVER['REQUEST_URI']);
-        $restart = $urls[count($urls)-1]=='restart'?1:0;
         $result = [
             'data'=> $this->product($productid),
             'attrs'=> $this->attrs($productid),
@@ -25,10 +28,9 @@ class HomeController extends BaseController
             'layerModel'=> new ProductLayerModel(),
             'layerAttrModel'=> new ProductLayerAttrModel(),
             'conModel'=> new ProductConModel(),
-            'restart'=> $restart,
         ];
-        return view('online.home.index', $result);
-//        return view('online.home.demo1', $result);
+//        return view('online.home.index', $result);
+        return view('online.home.demo1', $result);
     }
 
 
@@ -45,18 +47,31 @@ class HomeController extends BaseController
 
     public function attrs($productid)
     {
-        $uid = $this->userid ? $this->userid : 0;
+//        $uid = $this->userid ? $this->userid : 0;
         return ProductAttrModel::where('productid',$productid)
             ->where('del',0)
-            ->where('uid',$uid)
+//            ->where('uid',$uid)
             ->get();
     }
 
     public function layers($productid)
     {
-        $uid = $this->userid ? $this->userid : 0;
+//        $uid = $this->userid ? $this->userid : 0;
         return ProductLayerModel::where('productid',$productid)
             ->where('del',0)
             ->get();
+    }
+
+
+
+
+
+
+    /**
+     * 在线创作动画预览
+     */
+    public function lay()
+    {
+        return view('online.pre.index');
     }
 }

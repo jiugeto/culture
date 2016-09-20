@@ -5,7 +5,7 @@
     #liulanq { padding:5px 20px;font-size:20px;background:white;position:fixed;z-index:1000;display:none; }
 </style>
 <script>
-    $(function isIE() {
+    (function isIE() {
         var userAgent = window.navigator.userAgent; //取得浏览器的userAgent字符串
         if (userAgent.indexOf("MSIE")/*!=-1*/>0) {
             alert('你的IE系列浏览器过旧，建议升级为谷歌、火狐等浏览器，正常浏览！');

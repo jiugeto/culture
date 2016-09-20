@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Admin\AdminModel;
 use App\Models\Admin\MenusModel;
-//use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\ActionModel;
 use App\Models\LinkModel;
@@ -51,7 +51,7 @@ class BaseController extends Controller
         ],
         'notrash'=> [
             /*'action',*/'menus','admin','role','link','commain','cominfo','comfirm','commodule','comfunc',
-            'staff','works','place','ad',
+            'staff','works','place','ad','product',
         ],
     ];
 

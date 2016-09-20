@@ -17,7 +17,7 @@
                     <fieldset>
                         <div class="am-form-group">
                             <label>产品名称 / Name：</label>
-                            <input type="text" placeholder="至少2个字符" minlength="2" required name="name" value="{{ $data-name }}"/>
+                            <input type="text" placeholder="至少2个字符" minlength="2" required name="name" value="{{ $data->name }}"/>
                         </div>
 
                         <div class="am-form-group">
@@ -26,13 +26,13 @@
                         </div>
 
                         <div class="am-form-group">
-                            <label>视频宽度 / Width：</label>
-                            <input type="text" placeholder="" pattern="^\d{3,4}$" required name="width" value="{{ $data->width }}">px
+                            <label>视频宽度 / Width：(单位px)</label>
+                            <input type="text" placeholder="" pattern="^\d{3,4}$" required name="width" value="{{ $data->width }}">
                         </div>
 
                         <div class="am-form-group">
-                            <label>视频高度 / Height：</label>
-                            <input type="text" placeholder="" pattern="^\d{3,4}$" required name="height" value="{{ $data->height }}">px
+                            <label>视频高度 / Height：(单位px)</label>
+                            <input type="text" placeholder="" pattern="^\d{3,4}$" required name="height" value="{{ $data->height }}">
                         </div>
 
                         <div class="am-form-group">
@@ -43,7 +43,7 @@
 
                         <div class="am-form-group">
                             <label>排序 / sort：</label>
-                            <input type="text" placeholder="" pattern="^\d+$" required name="sort" value="{{ $daa->sort }}">
+                            <input type="text" placeholder="" pattern="^\d+$" required name="sort" value="{{ $data->sort }}">
                         </div>
 
                         <div class="am-form-group">
