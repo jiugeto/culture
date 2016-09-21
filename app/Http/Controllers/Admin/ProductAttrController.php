@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Models\ProductAttrModel;
+use App\Models\Online\ProductAttrModel;
 use Illuminate\Http\Request;
 
 class ProductAttrController extends BaseController
@@ -18,38 +18,25 @@ class ProductAttrController extends BaseController
         $this->model = new ProductAttrModel();
         $this->crumb['']['name'] = '产品属性列表';
         $this->crumb['category']['name'] = '产品属性';
-        $this->crumb['category']['url'] = 'productattr';
+        $this->crumb['category']['url'] = 'proAttr';
     }
 
-    public function index()
+    public function index($productid)
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'datas'=> $this->query($del=0),
-            'prefix_url'=> DOMAIN.'admin/productattr',
+            'datas'=> $this->query($productid),
+            'prefix_url'=> DOMAIN.'admin/'.$productid.'/proAttr',
             'model'=> $this->model,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
+            'productid'=> $productid,
         ];
-        return view('admin.productAttr.index', $result);
+        return view('admin.proAttr.index', $result);
     }
 
-    public function trash()
-    {
-        $curr['name'] = $this->crumb['trash']['name'];
-        $curr['url'] = $this->crumb['trash']['url'];
-        $result = [
-            'datas'=> $this->query($del=1),
-            'prefix_url'=> DOMAIN.'admin/productattr/trash',
-            'model'=> $this->model,
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
-        ];
-        return view('admin.productAttr.index', $result);
-    }
-
-    public function create()
+    public function create($productid)
     {
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
@@ -57,491 +44,248 @@ class ProductAttrController extends BaseController
             'model'=> $this->model,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
-            'index'=> 1,        //一级样式
+            'productid'=> $productid,
         ];
-       return view('admin.productAttr.create', $result);
+       return view('admin.proAttr.create', $result);
     }
 
-    public function store(Request $request)
+    public function store(Request $request,$productid)
     {
-        $data = $this->getData($request);
+        $data = $this->getData($request,$productid);
         //类样式名称相同自动添加：属性前缀+用户id_+产品id_+随机值
-        $uid = 0;
-        $data['style_name'] = $this->prefix_attr.$uid.'_'.$request->productid.'_'.rand(0,1000);
+        $data['style_name'] = $this->prefix_attr.$productid.'_'.rand(0,1000);
+        $data['name'] = $request->name;
+        $data['genre'] = 1;         //1代表开始层
         $data['created_at'] = time();
         ProductAttrModel::create($data);
-        return redirect(DOMAIN.'admin/productattr');
+        return redirect(DOMAIN.'admin/'.$productid.'/proAttr');
     }
 
-    public function edit($id)
+    public function edit($productid,$id)
     {
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
-        $data = ProductAttrModel::find($id);
-        $attrs = $data->attrs ? unserialize($data->attrs) : $this->attrs();
-        $attrs['switch'] = isset($attrs['switch']) ? $attrs['switch'] : 0;
         $result = [
-            'data'=> $data,
-            'attrs'=> $attrs,
+            'data'=> ProductAttrModel::find($id),
             'model'=> $this->model,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
-            'index'=> 1,        //一级样式
+            'productid'=> $productid,
         ];
-        return view('admin.productAttr.edit', $result);
+        return view('admin.proAttr.edit', $result);
     }
 
-    public function update(Request $request,$id)
+    public function update(Request $request,$productid,$id)
     {
-        $data = $this->getData($request);
+        $data = $this->getData($request,$productid);
+        $data['name'] = $request->name;
         $data['updated_at'] = time();
         ProductAttrModel::where('id',$id)->update($data);
-        return redirect(DOMAIN.'admin/productattr');
+        return redirect(DOMAIN.'admin/'.$productid.'/proAttr');
     }
 
-    public function edit2($id)
+    public function show($productid,$id)
+    {
+        $curr['name'] = $this->crumb['show']['name'];
+        $curr['url'] = $this->crumb['show']['url'];
+        $result = [
+            'data'=> ProductAttrModel::find($id),
+            'model'=> $this->model,
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+            'productid'=> $productid,
+        ];
+        return view('admin.proAttr.show', $result);
+    }
+
+    /**
+     * 定位层添加
+     */
+    public function create2($productid,$id)
+    {
+        $curr['name'] = $this->crumb['create']['name'];
+        $curr['url'] = $this->crumb['create']['url'];
+        $result = [
+            'model'=> $this->model,
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+            'productid'=> $productid,
+            'parent'=> ProductAttrModel::find($id),
+        ];
+        return view('admin.proAttr.create2', $result);
+    }
+
+    /**
+     * 定位层插入
+     */
+    public function store2(Request $request,$productid,$id)
+    {
+        $data = $this->getData($request,$productid);
+        $attrModel = ProductAttrModel::find($id);
+        $data['name'] = $attrModel->name;
+        $data['style_name'] = $attrModel->style_name;
+        $data['genre'] = 2;
+        $data['parent'] = $id;
+        $data['created_at'] = time();
+        ProductAttrModel::create($data);
+        return redirect(DOMAIN.'admin/'.$productid.'/proAttr');
+    }
+
+    /**
+     * 编辑定位层
+     */
+    public function edit2($productid,$id,$subid)
     {
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
-        $data = ProductAttrModel::find($id);
-        $attrs = $data->attrs2 ? unserialize($data->attrs2) : $this->attrs();
-        $attrs['switch'] = isset($attrs['switch2']) ? $attrs['switch2'] : 0;
         $result = [
-            'data'=> $data,
-            'attrs'=> $attrs,
+            'data'=> ProductAttrModel::find($subid),
             'model'=> $this->model,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
-            'index'=> 2,        //一级样式
+            'productid'=> $productid,
+            'parent'=> ProductAttrModel::find($id),
         ];
-        return view('admin.productAttr.edit2', $result);
+        return view('admin.proAttr.edit2', $result);
     }
 
     /**
-     * 二级样式更新
+     * 更新定位层
      */
-    public function update2(Request $request, $id)
+    public function update2(Request $request,$productid,$id,$subid)
     {
-//        dd(2,$request->all());
-        $data = $this->toAttrs($request);
+        $data = $this->getData($request,$productid);
+        $attrModel = ProductAttrModel::find($id);
+        $data['name'] = $attrModel->name;
+        $data['style_name'] = $attrModel->style_name;
+        $data['genre'] = 2;
+        $data['parent'] = $id;
         $data['updated_at'] = time();
-        $data['switch'.$request->index] = $request->switch;
-        ProductAttrModel::where('id',$id)->update(['attrs2'=> serialize($data)]);
-        return redirect(DOMAIN.'admin/productattr');
+        ProductAttrModel::where('id',$subid)->update($data);
+        return redirect(DOMAIN.'admin/'.$productid.'/proAttr');
     }
 
     /**
-     * 三级样式编辑
+     * 动画层添加
      */
-    public function edit3($id)
+    public function create3($productid,$id)
     {
-        $curr['name'] = $this->lists['edit']['name'];
-        $curr['url'] = $this->lists['edit']['url'];
-        $data = ProductAttrModel::find($id);
-        $attrs = $data->attrs3 ? unserialize($data->attrs3) : $this->attrs();
-        $attrs['switch'] = isset($attrs['switch3']) ? $attrs['switch3'] : 0;
+        $curr['name'] = $this->crumb['create']['name'];
+        $curr['url'] = $this->crumb['create']['url'];
         $result = [
-            'data'=> $data,
-            'attrs'=> $attrs,
             'model'=> $this->model,
             'crumb'=> $this->crumb,
-            'lists'=> $this->lists,
             'curr'=> $curr,
-            'index'=> 3,    //属性级别索引
+            'productid'=> $productid,
+            'parent'=> ProductAttrModel::find($id),
         ];
-        return view('admin.productAttr.edit2', $result);
+        return view('admin.proAttr.create3', $result);
     }
 
     /**
-     * 三级样式更新
+     * 动画层插入
      */
-    public function update3(Request $request, $id)
+    public function store3(Request $request,$productid,$id)
     {
-//        dd(3,$request->all());
-        $data = $this->toAttrs($request);
+        $data = $this->getData($request,$productid);
+        $attrModel = ProductAttrModel::find($id);
+        $data['name'] = $attrModel->name;
+        $data['style_name'] = $attrModel->style_name;
+        $data['genre'] = 3;
+        $data['parent'] = $id;
+        $data['created_at'] = time();
+        ProductAttrModel::create($data);
+        return redirect(DOMAIN.'admin/'.$productid.'/proAttr');
+    }
+
+    /**
+     * 编辑动画层
+     */
+    public function edit3($productid,$id,$subid)
+    {
+        $curr['name'] = $this->crumb['edit']['name'];
+        $curr['url'] = $this->crumb['edit']['url'];
+        $result = [
+            'data'=> ProductAttrModel::find($subid),
+            'model'=> $this->model,
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+            'productid'=> $productid,
+            'parent'=> ProductAttrModel::find($id),
+        ];
+        return view('admin.proAttr.edit3', $result);
+    }
+
+    /**
+     * 更新动画层
+     */
+    public function update3(Request $request,$productid,$id,$subid)
+    {
+        $data = $this->getData($request,$productid);
+        $attrModel = ProductAttrModel::find($id);
+        $data['name'] = $attrModel->name;
+        $data['style_name'] = $attrModel->style_name;
+        $data['genre'] = 3;
+        $data['parent'] = $id;
         $data['updated_at'] = time();
-        $data['switch'.$request->index] = $request->switch;
-        ProductAttrModel::where('id',$id)->update(['attrs3'=> serialize($data)]);
-        return redirect(DOMAIN.'admin/productattr');
-    }
-
-    /**
-     * 图片样式编辑
-     */
-    public function edit4($id)
-    {
-        $curr['name'] = $this->lists['edit']['name'];
-        $curr['url'] = $this->lists['edit']['url'];
-        $data = ProductAttrModel::find($id);
-        $attrs = $data->img ? unserialize($data->img) : $this->imgs();
-        $attrs['switch'] = isset($attrs['switch4']) ? $attrs['switch4'] : 0;
-        $result = [
-            'data'=> $data,
-            'attrs'=> $attrs,
-            'model'=> $this->model,
-            'crumb'=> $this->crumb,
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-            'index'=> 4,    //属性级别索引
-        ];
-        return view('admin.productAttr.edit2', $result);
-    }
-
-    /**
-     * 图片样式更新
-     */
-    public function update4(Request $request, $id)
-    {
-//        dd(4,$request->all());
-        $data = $this->toAttrs($request);
-        $data['updated_at'] = time();
-        $data['switch'.$request->index] = $request->switch;
-        ProductAttrModel::where('id',$id)->update(['img'=> serialize($data)]);
-        return redirect(DOMAIN.'admin/productattr');
-    }
-
-    /**
-     * 文字样式编辑
-     */
-    public function edit5($id)
-    {
-        $curr['name'] = $this->lists['edit']['name'];
-        $curr['url'] = $this->lists['edit']['url'];
-        $data = ProductAttrModel::find($id);
-        $attrs = $data->text ? unserialize($data->text) : $this->attrs();
-        $attrs['switch'] = isset($attrs['switch5']) ? $attrs['switch5'] : 0;
-        $result = [
-            'data'=> $data,
-            'attrs'=> $attrs,
-            'model'=> $this->model,
-            'crumb'=> $this->crumb,
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-            'index'=> 5,    //属性级别索引
-        ];
-        return view('admin.productAttr.edit2', $result);
-    }
-
-    /**
-     * 文字样式更新
-     */
-    public function update5(Request $request, $id)
-    {
-//        dd(5,$request->all());
-        $data = $this->toAttrs($request);
-        $data['updated_at'] = time();
-        $data['switch'.$request->index] = $request->switch;
-        ProductAttrModel::where('id',$id)->update(['text'=> serialize($data)]);
-        return redirect(DOMAIN.'admin/productattr');
-    }
-
-    public function show($id)
-    {
-        $curr['name'] = $this->lists['show']['name'];
-        $curr['url'] = $this->lists['show']['url'];
-        $data = ProductAttrModel::find($id);
-        $result = [
-            'data'=> $data,
-            'attrs'=> $data->attrs ? unserialize($data->attrs) : [],
-            'attrs2'=> $data->attrs2 ? unserialize($data->attrs2) : [],
-            'attrs3'=> $data->attrs3 ? unserialize($data->attrs3) : [],
-            'pics'=> $data->img ? unserialize($data->img) : [],
-            'texts'=> $data->text ? unserialize($data->text) : [],
-            'crumb'=> $this->crumb,
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-        ];
-        return view('admin.productAttr.show', $result);
-    }
-
-    public function show2($id,$index)
-    {
-        $curr['name'] = $this->lists['show']['name'];
-        $curr['url'] = $this->lists['show']['url'];
-        $data = ProductAttrModel::find($id);
-        if ($index==1) { $attrs = $this->getAttrs($data); }
-        elseif ($index==2) { $attrs = $this->getAttrs2($data); }
-        elseif ($index==3) { $attrs = $this->getAttrs3($data); }
-        elseif ($index==4) { $attrs = $this->getImg($data); }
-        elseif ($index==5) { $attrs = $this->getText($data); }
-        $result = [
-            'data'=> $data,
-            'attrs'=> isset($attrs) ? $attrs : [],
-            'model'=> $this->model,
-            'crumb'=> $this->crumb,
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-            'index'=> $index,
-        ];
-        return view('admin.productAttr.show2', $result);
-    }
-
-    public function destroy($id)
-    {
-        ProductAttrModel::where('id',$id)->update(['del'=> 1]);
-        return redirect(DOMAIN.'admin/productattr');
-    }
-
-    public function restore($id)
-    {
-        ProductAttrModel::where('id',$id)->update(['del'=> 0]);
-        return redirect(DOMAIN.'admin/productattr/trash');
-    }
-
-    public function forceDelete($id)
-    {
-        ProductAttrModel::where('id',$id)->delete();
-        return redirect(DOMAIN.'admin/productattr/trash');
+        ProductAttrModel::where('id',$subid)->update($data);
+        return redirect(DOMAIN.'admin/'.$productid.'/proAttr');
     }
 
 
 
 
 
-    /**
-     * =================
-     * 一下是公用方法
-     * =================
-     */
 
     /**
      * 数据收集
      */
-    public function getData(Request $request)
+    public function getData(Request $request,$productid)
     {
-        $attrs = $this->toAttrs($request);
-        if ($request->index==1) { $switch = 'switch'; }else{ $switch = 'switch'.$request->index; }
-        $attrs[$switch] = $request->switch;
+        //内边距处理
+        if (!$request->padType) {
+            $padding = '';
+        } elseif ($request->padType==1) {
+            if (!$request->pad1)  { echo "<script>alert('边距必填！');history.go(-1);</script>";exit; }
+            $padding = $request->pad1;
+        } elseif ($request->padType==2) {
+            if ($request->pad2=='' || $request->pad3=='')  {
+                echo "<script>alert('边距必填！');history.go(-1);</script>";exit;
+            }
+            $padding = $request->pad2.','.$request->pad3;
+        } elseif ($request->padType==3) {
+            if ($request->pad4=='' || $request->pad5=='' || $request->pad6=='' || $request->pad7=='')  {
+                echo "<script>alert('边距必填！');history.go(-1);</script>";exit;
+            }
+            $padding = $request->pad4.','.$request->pad5.','.$request->pad6.','.$request->pad7;
+        }
+        //处理透明度
+        if ($request->isopacity && $request->opacity=='') {
+            echo "<script>alert('透明度不能空！');history.go(-1);</script>";exit;
+        }
         $data = [
-            'name'=> $request->name,
-            'productid'=> $request->productid,
-            'attrs'=> serialize($attrs),
-            'intro'=> $request->intro,
+//            'name'=> $request->name,
+            'productid'=> $productid,
+            'padding'=> $padding,
+            'size'=> $request->width.','.$request->height,
+            'pos'=> $request->posType.','.$request->left.','.$request->top,
+            'float'=> $request->float,
+            'opacity'=> $request->isopacity.','.$request->opacity,
+            'text'=> '',
         ];
         return $data;
     }
 
     /**
-     * 属性收集
-     */
-    public function toAttrs(Request $request)
-    {
-        //外边距：margin1上下，margin2左右，
-        if ($request->ismargin==2) { $request->margin1 = 'auto'; $request->margin2 = 'auto'; }
-        if ($request->ismargin==3) {
-            $request->margin1 = 'auto';
-            if ($request->margin2=='') { echo "<script>alert('左右外边距必填！');history.go(-1);</script>";exit; }
-        }
-        if ($request->ismargin==4) {
-            $request->margin2 = 'auto';
-            if ($request->margin1=='') { echo "<script>alert('上下外边距必填！');history.go(-1);</script>";exit; }
-        }
-        if ($request->ismargin==5) {
-            if ($request->margin3=='' || $request->margin4=='' || $request->margin5=='' || $request->margin6=='') {
-                echo "<script>alert('上下左右外边距必填！');history.go(-1);</script>";exit;
-            }
-        }
-        //内边距margin1上下，margin2左右，
-        if ($request->ispadding==3) {
-            $request->padding1 = 'auto';
-            if ($request->padding2=='') { echo "<script>alert('左右内边距必填！');history.go(-1);</script>";exit; }
-        }
-        if ($request->ispadding==3) { $request->padding1 = 'auto'; $request->padding2 = 'auto'; }
-        if ($request->ispadding==4) {
-            $request->padding2 = 'auto';
-            if ($request->padding1=='') { echo "<script>alert('上下内边距必填！');history.go(-1);</script>";exit; }
-        }
-        if ($request->ispadding==5) {
-            if ($request->padding3=='' || $request->padding4=='' || $request->padding5=='' || $request->padding6=='') {
-                echo "<script>alert('上下左右内边距必填！');history.go(-1);</script>";exit;
-            }
-        }
-        //边框
-        if ($request->border1) {
-            if (!$request->border2 || !$request->border3 || !$request->border4) {
-                echo "<script>alert('边框宽度、类型、颜色必填！');history.go(-1);</script>";exit;
-            }
-        }
-        $attrs =  array(
-            'ismargin'=> $request->ismargin,
-            'margin1'=> $request->margin1,
-            'margin2'=> $request->margin2,
-            'margin3'=> $request->margin3,
-            'margin4'=> $request->margin4,
-            'margin5'=> $request->margin5,
-            'margin6'=> $request->margin6,
-            'ispadding'=> $request->ispadding,
-            'padding1'=> $request->padding1,
-            'padding2'=> $request->padding2,
-            'padding3'=> $request->padding3,
-            'padding4'=> $request->padding4,
-            'padding5'=> $request->padding5,
-            'padding6'=> $request->padding6,
-            'width'=> $request->width,
-            'height'=> $request->height,
-            'border1'=> $request->border1,
-            'border2'=> $request->border2,
-            'border3'=> $request->border3,
-            'border4'=> $request->border4,
-            'position'=> $request->position,
-            'left'=> $request->left,
-            'top'=> $request->top,
-            'overflow'=> $request->overflow,
-            'opacity'=> $request->opacity,
-            'float'=> $request->float,
-        );
-        if (in_array($request->index,[1,2,3,5])) {
-            $attrs['iscolor'] = $request->iscolor;
-            $attrs['color'] = $request->color;
-            $attrs['font_size'] = $request->font_size;
-            $attrs['word_spacing'] = $request->word_spacing;
-            $attrs['line_height'] = $request->line_height;
-            $attrs['text_transform'] = $request->text_transform;
-            $attrs['text_align'] = $request->text_align;
-            $attrs['isbackground'] = $request->isbackground;
-            $attrs['background'] = $request->background;
-        }
-        return $attrs;
-    }
-
-    /**
      * 查询方法
      */
-    public function query($del)
+    public function query($productid)
     {
-        $datas = ProductAttrModel::where('del',$del)
+        $datas = ProductAttrModel::where('productid',$productid)
+            ->where('parent',0)
             ->orderBy('id','desc')
             ->paginate($this->limit);
         $datas->limit = $this->limit;
         return $datas;
-    }
-
-    /**
-     * 转换数据 attrs
-     */
-    public function getAttrs($data)
-    {
-        $attrs = $data->attrs?unserialize($data->attrs):[];
-        if (!$attrs) { $attrs = $this->attrs(); $attrs['switch'] = 0; }
-        return $attrs;
-    }
-
-    /**
-     * 转换数据 attrs2
-     */
-    public function getAttrs2($data)
-    {
-        $attrs = $data->attrs2?unserialize($data->attrs2):[];
-        if (!$attrs) { $attrs = $this->attrs(); $attrs['switch2'] = 0; }
-        return $attrs;
-    }
-
-    /**
-     * 转换数据 attrs3
-     */
-    public function getAttrs3($data)
-    {
-        $attrs = $data->attrs3?unserialize($data->attrs3):[];
-        if (!$attrs) { $attrs = $this->attrs(); $attrs['switch3'] = 0; }
-        return $attrs;
-    }
-
-    /**
-     * 转换数据 img
-     */
-    public function getImg($data)
-    {
-        $attrs = $data->img?unserialize($data->img):[];
-        if (!$attrs) { $attrs = $this->attrs(); $attrs['switch4'] = 0; }
-        return $attrs;
-    }
-
-    /**
-     * 转换数据 text
-     */
-    public function getText($data)
-    {
-        $attrs = $data->text?unserialize($data->text):[];
-        if (!$attrs) { $attrs = $this->attrs(); $attrs['switch5'] = 0; }
-        return $attrs;
-    }
-
-    /**
-     * 初始化 attrs
-     */
-    public function attrs()
-    {
-        return array(
-            'ismargin'=> 0,
-            'margin1'=> '',
-            'margin2'=> '',
-            'margin3'=> '',
-            'margin4'=> '',
-            'margin5'=> '',
-            'margin6'=> '',
-            'ispadding'=> 0,
-            'padding1'=> '',
-            'padding2'=> '',
-            'padding3'=> '',
-            'padding4'=> '',
-            'padding5'=> '',
-            'padding6'=> '',
-            'width'=> '',
-            'height'=> '',
-            'border1'=> '',
-            'border2'=> '',
-            'border3'=> '',
-            'border4'=> '',
-            'iscolor'=> 0,
-            'color'=> '',
-            'font_size'=> '',
-            'word_spacing'=> '',
-            'line_height'=> '',
-            'text_transform'=> '',
-            'text_align'=> '',
-            'isbackground'=> 0,
-            'background'=> '',
-            'position'=> '',
-            'left'=> '',
-            'top'=> '',
-            'overflow'=> '',
-            'opacity'=> '',
-            'float'=> '',
-        );
-    }
-
-    /**
-     * 初始化 imgs
-     */
-    public function imgs()
-    {
-        return array(
-            'ismargin'=> 0,
-            'margin1'=> '',
-            'margin2'=> '',
-            'margin3'=> '',
-            'margin4'=> '',
-            'margin5'=> '',
-            'margin6'=> '',
-            'ispadding'=> 0,
-            'padding1'=> '',
-            'padding2'=> '',
-            'padding3'=> '',
-            'padding4'=> '',
-            'padding5'=> '',
-            'padding6'=> '',
-            'width'=> '',
-            'height'=> '',
-            'border1'=> '',
-            'border2'=> '',
-            'border3'=> '',
-            'border4'=> '',
-            'position'=> '',
-            'left'=> '',
-            'top'=> '',
-            'overflow'=> '',
-            'opacity'=> '',
-            'float'=> '',
-        );
     }
 }

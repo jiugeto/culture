@@ -64,35 +64,24 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::get('{type}/goods','GoodsController@index');
     Route::resource('goods','GoodsController');
     //内部产品管理
-    Route::get('product/trash','ProductController@trash');
     Route::post('product/{id}','ProductController@update');
     Route::resource('product','ProductController');
-        //内部产品动画层级路由
-    Route::post('productlayer/{id}','ProductLayerController@update');
-    Route::resource('productlayer','ProductLayerController');
-        //内部产品属性路由
-    Route::get('productattr/{id}/edit2','ProductAttrController@edit2');
-    Route::post('productattr/{id}/update2','ProductAttrController@update2');
-    Route::get('productattr/{id}/edit3','ProductAttrController@edit3');
-    Route::post('productattr/{id}/update3','ProductAttrController@update3');
-    Route::get('productattr/{id}/edit4','ProductAttrController@edit4');
-    Route::post('productattr/{id}/update4','ProductAttrController@update4');
-    Route::get('productattr/{id}/edit5','ProductAttrController@edit5');
-    Route::post('productattr/{id}/update5','ProductAttrController@update5');
-    Route::get('productattr/{id}/destroy','ProductAttrController@destroy');
-    Route::get('productattr/{id}/restore','ProductAttrController@restore');
-    Route::get('productattr/{id}/forceDelete','ProductAttrController@forceDelete');
-    Route::get('productattr/trash','ProductAttrController@trash');
-    Route::post('productattr/{id}','ProductAttrController@update');
-    Route::resource('productattr','ProductAttrController');
-    Route::get('productattr/{id}/{index}','ProductAttrController@show2');
-    //产品动画的图片文字路由
-    Route::get('productcon/trash','ProductConController@trash');
-    Route::post('productcon/{id}','ProductConController@update');
-    Route::resource('productcon','ProductConController');
-        //动画属性路由
-    Route::get('{layerid}/prolayerattr/{id}/forceDelete','ProductLayerAttrController@forceDelete');
-    Route::post('{layerid}/prolayerattr/{id}','ProductLayerAttrController@update');
+        //图层路由
+    Route::post('{pro_id}/{id}/{subid}/proAttr3/update','ProductAttrController@update3');
+    Route::get('{pro_id}/{id}/{subid}/proAttr3/edit','ProductAttrController@edit3');
+    Route::post('{pro_id}/{id}/proAttr3','ProductAttrController@store3');
+    Route::get('{pro_id}/{id}/proAttr3','ProductAttrController@create3');
+    Route::post('{pro_id}/{id}/{subid}/proAttr2/update','ProductAttrController@update2');
+    Route::get('{pro_id}/{id}/{subid}/proAttr2/edit','ProductAttrController@edit2');
+    Route::post('{pro_id}/{id}/proAttr2','ProductAttrController@store2');
+    Route::get('{pro_id}/{id}/proAttr2','ProductAttrController@create2');
+    Route::post('{pro_id}/proAttr/{id}','ProductAttrController@update');
+    Route::resource('{pro_id}/proAttr','ProductAttrController');
+        //动画设置路由
+    Route::resource('{pro_id}/{attr_id}/proLayer','ProductLayerController');
+        //图片文字路由
+    Route::resource('{pro_id}/{attr_id}/proCon','ProductConController');
+        //属性动画路由
     Route::resource('{layerid}/prolayerattr','ProductLayerAttrController');
     //租赁路由
     Route::post('rent/{id}','RentController@update');

@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Models\ProductLayerModel;
+use App\Models\Online\ProductLayerModel;
 
 class ProductLayerController extends BaseController
 {
@@ -19,17 +19,17 @@ class ProductLayerController extends BaseController
         $this->crumb['category']['url'] = 'productlayer';
     }
 
-    public function index()
+    public function index($productid,$attrid)
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'datas'=> $this->query($del=0),
-            'prefix_url'=> DOMAIN.'admin/productlayer',
+            'datas'=> $this->query($attrid),
+            'prefix_url'=> DOMAIN.'admin/proLayer',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
-        return view('admin.productLayer.index', $result);
+        return view('admin.proLayer.index', $result);
     }
 
     public function create()
@@ -41,7 +41,7 @@ class ProductLayerController extends BaseController
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
-       return view('admin.productLayer.create', $result);
+       return view('admin.proLayer.create', $result);
     }
 
     public function store(Request $request)
@@ -52,7 +52,7 @@ class ProductLayerController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = time();
         ProductLayerModel::create($data);
-        return redirect(DOMAIN.'admin/productlayer');
+        return redirect(DOMAIN.'admin/proLayer');
     }
 
     public function edit($id)
@@ -65,7 +65,7 @@ class ProductLayerController extends BaseController
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
-        return view('admin.productLayer.edit', $result);
+        return view('admin.proLayer.edit', $result);
     }
 
     public function update(Request $request,$id)
@@ -73,7 +73,7 @@ class ProductLayerController extends BaseController
         $data = $this->getData($request);
         $data['updated_at'] = time();
         ProductLayerModel::where('id',$id)->update($data);
-        return redirect(DOMAIN.'admin/productlayer');
+        return redirect(DOMAIN.'admin/proLayer');
     }
 
     public function show($id)
@@ -86,7 +86,7 @@ class ProductLayerController extends BaseController
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
-        return view('admin.productLayer.show', $result);
+        return view('admin.proLayer.show', $result);
     }
 
 
@@ -146,9 +146,9 @@ class ProductLayerController extends BaseController
     /**
      * 查询方法
      */
-    public function query($del)
+    public function query($attrid)
     {
-        $datas = ProductLayerModel::where('del',$del)
+        $datas = ProductLayerModel::where('attrid',$attrid)
                     ->orderBy('id','desc')
                     ->paginate($this->limit);
         $datas->limit = $this->limit;

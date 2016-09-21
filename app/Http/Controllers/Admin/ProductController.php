@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Models\ProductModel;
+use App\Models\Online\ProductModel;
 use Illuminate\Http\Request;
 
 class ProductController extends BaseController
@@ -26,19 +26,6 @@ class ProductController extends BaseController
         $result = [
             'datas'=> $this->query(0),
             'prefix_url'=> DOMAIN.'admin/product',
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
-        ];
-        return view('admin.product.index', $result);
-    }
-
-    public function trash()
-    {
-        $curr['name'] = $this->crumb['trash']['name'];
-        $curr['url'] = $this->crumb['trash']['url'];
-        $result = [
-            'datas'=> $this->query(1),
-            'prefix_url'=> DOMAIN.'admin/product/trash',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -106,23 +93,23 @@ class ProductController extends BaseController
         return view('admin.product.show', $result);
     }
 
-    public function destroy($id)
-    {
-        ProductModel::where('id',$id)->update(['del'=> 1]);
-        return redirect(DOMAIN.'admin/product');
-    }
-
-    public function restore($id)
-    {
-        ProductModel::where('id',$id)->update(['del'=> 0]);
-        return redirect(DOMAIN.'admin/product/trash');
-    }
-
-    public function forceDelete($id)
-    {
-        ProductModel::where('id',$id)->delete();
-        return redirect(DOMAIN.'admin/product/trash');
-    }
+//    public function destroy($id)
+//    {
+//        ProductModel::where('id',$id)->update(['del'=> 1]);
+//        return redirect(DOMAIN.'admin/product');
+//    }
+//
+//    public function restore($id)
+//    {
+//        ProductModel::where('id',$id)->update(['del'=> 0]);
+//        return redirect(DOMAIN.'admin/product/trash');
+//    }
+//
+//    public function forceDelete($id)
+//    {
+//        ProductModel::where('id',$id)->delete();
+//        return redirect(DOMAIN.'admin/product/trash');
+//    }
 
 
 
@@ -152,10 +139,9 @@ class ProductController extends BaseController
     /**
      * 查询方法
      */
-    public function query($del=0)
+    public function query()
     {
-        $datas = ProductModel::where('del',$del)
-            ->orderBy('id','desc')
+        $datas = ProductModel::orderBy('id','desc')
             ->paginate($this->limit);
         $datas->limit = $this->limit;
         return $datas;

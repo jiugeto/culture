@@ -18,14 +18,13 @@
                         <th class="table-type">用户名称</th>
                         <th class="table-type">排序</th>
                         <th class="table-type">前台是否显示</th>
-                        <th class="table-type">是否审核</th>
                         <th class="table-type">是否置顶</th>
                         <th class="table-date am-hide-sm-only" width="150">添加时间</th>
                         <th class="table-set">操作</th>
                     </tr>
                     </thead>
                     <tbody>
-                @if($datas->total())
+                @if(count($datas))
                     @foreach($datas as $data)
                     <tr>
                         <td class="am-hide-sm-only"><input type="checkbox" /></td>
@@ -34,7 +33,6 @@
                         <td class="am-hide-sm-only">{{ $data->uname }}</td>
                         <td class="am-hide-sm-only">{{ $data->sort }}</td>
                         <td class="am-hide-sm-only">{{ $data->isshow() }}</td>
-                        <td class="am-hide-sm-only">{{ $data->isauth() }}</td>
                         <td class="am-hide-sm-only">{{ $data->istop() }}</td>
                         <td class="am-hide-sm-only">{{ $data->createTime() }}</td>
                         <td class="am-hide-sm-only">
@@ -42,6 +40,7 @@
                                 <div class="am-btn-group am-btn-group-xs">
                                     <a href="{{DOMAIN}}admin/product/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="{{PUB}}assets/images/show.png" class="icon"> 查看</button></a>
                                     <a href="{{DOMAIN}}admin/product/{{$data->id}}/edit"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 编辑</button></a>
+                                    <a href="{{DOMAIN}}admin/{{$data->id}}/proAttr"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"> 图层列表</button></a>
                                     {{--<a href="{{DOMAIN}}admin/product/{{$data->id}}/forceDelete"><button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><img src="{{PUB}}assets/images/forceDelete_red.png" class="icon"> 销毁记录</button></a>--}}
                                 </div>
                             </div>

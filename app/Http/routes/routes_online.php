@@ -8,13 +8,13 @@
 Route::group(['prefix'=>'online','middleware' =>'MemberAuth','namespace'=>'Online'],function(){
     Route::get('u','HomeController@userlist');
     //单帧编辑路由
-    Route::resource('{productid}/frame','FrameController');
-    Route::get('{productid}/frame/con/{attrid}','FrameController@setCon');
-    Route::get('{productid}/frame/style/{attrid}','FrameController@setStyle');
-    Route::get('{productid}/frame/layer/{layerid}','FrameController@setLayer');
+    Route::resource('{pid}/frame','FrameController');
+    Route::get('{pid}/frame/con/{attrid}','FrameController@setCon');
+    Route::get('{pid}/frame/style/{attrid}','FrameController@setStyle');
+    Route::get('{pid}/frame/layer/{layerid}','FrameController@setLayer');
     //当前动画设置的路由
-    Route::get('{productid}/frame/timecurr/{layerid}','FrameController@setTimeCurr');
-    Route::get('{productid}/frame/timecurr2/{timecurr}','FrameController@setTimeCurr2');
+    Route::get('{pid}/frame/timecurr/{layerid}','FrameController@setTimeCurr');
+    Route::get('{pid}/frame/timecurr2/{timecurr}','FrameController@setTimeCurr2');
 });
 
 //创作效果样片大厅

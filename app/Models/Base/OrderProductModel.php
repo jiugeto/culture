@@ -1,7 +1,7 @@
 <?php
 namespace App\Models\Base;
 
-use App\Models\ProductModel;
+use App\Models\Online\ProductModel;
 
 class OrderProductModel extends BaseModel
 {
