@@ -8,7 +8,7 @@ class ProductModel extends BaseModel
 {
     protected $table = 'bs_products';
     protected $fillable = [
-        'id','name','genre','gif','intro','uid','uname','isattr','isauth','istop','sort','isshow','created_at','updated_at',
+        'id','name','genre','cate','gif','intro','uid','uname','isattr','isauth','istop','sort','isshow','created_at','updated_at',
     ];
     protected $genres = [
         1=>'个人供应','企业供应',
@@ -45,7 +45,14 @@ class ProductModel extends BaseModel
      */
     public function getPicUrl()
     {
-        $pic_id = $this->gif ? $this->gif : 0;
-        return $this->getPic($pic_id) ? $this->getPic($pic_id)->getUrl() : '';
+        return $this->getPic($this->gif);
+    }
+
+    /**
+     * 获取该产品的属性
+     */
+    public function getAttrs()
+    {
+        return ProductAttrModel::where('productid',$this->id)->get();
     }
 }

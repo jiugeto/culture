@@ -17,13 +17,25 @@ class ProductLayerModel extends BaseModel
         1=>'匀速','默认，先慢再快后慢','低速开始','低速结束','低速开始和结束',/*'贝塞尔函数自定义',*/
     ];
 
+    /**
+     * 获得同产品的所有属性
+     */
+    public function getAttrs($attrid=null)
+    {
+        $attrid = $attrid ? $attrid : $this->attrid;
+        $attrModel = ProductAttrModel::find($attrid);
+        $productModel = ProductModel::find($attrModel->productid);
+        $attrs = ProductAttrModel::where('genre',1)->where('productid',$productModel->id)->get();
+        return count($attrs) ? $attrs : [];
+    }
+
     public function getAttrName()
     {
         if ($this->attrid) {
             $attrModel = ProductAttrModel::find($this->attrid);
-            if ($attrModel) { $attrname = $attrModel->style_name; }
+            if ($attrModel) { $attrName = $attrModel->name; }
         }
-        return isset($attrname) ? $attrname : '';
+        return isset($attrName) ? $attrName : '';
     }
 
     public function getFunc()

@@ -78,11 +78,17 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::post('{pro_id}/proAttr/{id}','ProductAttrController@update');
     Route::resource('{pro_id}/proAttr','ProductAttrController');
         //动画设置路由
-    Route::resource('{pro_id}/{attr_id}/proLayer','ProductLayerController');
+    Route::post('{attr_id}/proLayer/{id}','ProductLayerController@update');
+    Route::resource('{attr_id}/proLayer','ProductLayerController');
         //图片文字路由
-    Route::resource('{pro_id}/{attr_id}/proCon','ProductConController');
+    Route::post('{attr_id}/proCon/{id}','ProductConController@update');
+    Route::resource('{attr_id}/proCon','ProductConController');
         //属性动画路由
     Route::resource('{layerid}/prolayerattr','ProductLayerAttrController');
+        //实时创作路由
+    Route::get('{pro_id}/creation','ProCreationController@index');
+    Route::get('{pro_id}/pro/play','ProCreationController@play');
+    Route::get('{pro_id}/pro/edit','ProCreationController@edit');
     //租赁路由
     Route::post('rent/{id}','RentController@update');
     Route::resource('rent','RentController');

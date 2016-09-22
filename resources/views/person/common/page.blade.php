@@ -3,9 +3,11 @@
 
 <style>
     .p_out { width:100%;text-align:center;color:grey; }
-    .p_out a { padding:2px 10px;border:1px solid lightgrey;color:grey;text-decoration:none;cursor:pointer; }
-    .p_out a:hover/*,.p_out a.curr*/ { border:1px solid red;color:red; }
-    .p_out input { padding:2px 5px;width:20px;border:1px solid lightgrey;text-align:center;color:grey;font-size:18px;position:relative;top:-1px; }
+    .p_out a { padding:2px 10px;border:1px solid grey;color:lightgrey;text-decoration:none;cursor:pointer; }
+    .p_out a:hover/*,.p_out a.curr*/ { border:1px solid
+        opacity:;;color:orangered; }
+    .p_out input { padding:2px 5px;width:20px;border:1px solid grey;text-align:center;color:lightgrey;font-size:18px;
+        background:rgb(50,50,50);position:relative;top:-1px; }
     .p_out p { margin-top:10px;border:0;background:0;position:relative;top:-10px; }
 </style>
 <div class="p_out">

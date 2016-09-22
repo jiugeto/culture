@@ -15,6 +15,12 @@ body { font-family:'微软雅黑'; }
     margin-bottom:50px;
     width:720px;
 }
+.online_win a.getpro { text-decoration:none; }
+.online_win a.getpro .frame_title { margin-top:-5px; }
+.online_win a:hover.getpro .frame_title {
+    color:white;
+    background:darkred;
+}
 .online_win .frame_title {
     padding:5px 0;
     width:740px;
@@ -50,28 +56,52 @@ body { font-family:'微软雅黑'; }
 
 /*========== 动画作品列表 ==========*/
 .online_list {
+    margin:30px 0;
+}
+.online_list .condition {
+    padding:5px 10px;
     width:100%;
-    text-align:center;
-    position:absolute; bottom:90px;
-}
-.online_list .listbtn {
-    padding-top:2px;
-    padding-bottom:4px;
-    background:rgb(35,35,35);
-}
-.online_list div:hover.listbtn { background:rgb(45,45,45); }
-.online_list a {
-    padding:2px 20px; padding-bottom:4px;
-    color:grey;
-    background:black;
-    cursor:pointer;
-}
-.online_list a:hover {
-    color:white;
-    background:darkred;
-}
-.online_list .pro_list {
+    border-bottom:1px solid rgb(60,60,60);
     background:rgb(30,30,30);
+}
+.online_list .condition .attr {
+    margin:5px auto;
+    width:1000px;
+    color:grey;
+}
+.online_list .condition a {
+    padding:0 5px;
+    color:grey;
+    text-decoration:none;
+    border:0;
+}
+.online_list .condition a:hover,.online_list .condition a.curr { color:orangered; }
+.online_list .list {
+    margin:20px auto;
+    width:1000px;
+}
+.online_list .list a { text-decoration:none; }
+.online_list .list a .prolist {
+    margin:10px 15px;
+    width:220px; height:200px;
+    float:left;
+}
+.online_list .list .pro_one {
+    width:210px; height:140px;
+    border:5px solid grey;
+    background:rgb(50,50,50);
+    overflow:hidden;
+}
+.online_list .list .pname {
+    padding:5px;
+    color:lightgrey;
+    text-align:center;
+}
+.online_list a:hover .prolist .pro_one { border:5px solid orangered; }
+.online_list a:hover .prolist .pname { color:orangered; }
+.online_list .list .pname .small {
+    color:grey;
+    font-size:14px;
 }
 
 

@@ -249,6 +249,6 @@ class ProductAttrModel extends BaseModel
      */
     public function getConList()
     {
-        return ProductLayerModel::where('attrid',$this->id)->first();
+        return ProductConModel::where('attrid',$this->id)->get();
     }
 }

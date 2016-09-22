@@ -179,9 +179,14 @@ class BaseModel extends Model
      * 支持 DesignModel、GoodsModel、ProductModel、RentModel、StaffModel、StoryBoardModel、WorksModel
      * 得到图片信息
      */
-    public function getPic($picid)
+    public function pic($picid)
     {
         $picModel = PicModel::find($picid);
-        return $picModel ? $picModel->getUrl() : '';
+        return $picModel ? $picModel : '';
+    }
+
+    public function getPic($picid)
+    {
+        return $this->pic($picid) ? $this->pic($picid)->getUrl() : '';
     }
 }

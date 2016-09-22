@@ -21,7 +21,6 @@ class AdminMenuComposer
     {
         return Tools::getChild(
                 ActionModel::where('isshow',1)
-                ->where('del',0)
                 ->orderBy('sort','desc')
                 ->get(),
             $pid=0);

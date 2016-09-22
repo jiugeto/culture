@@ -1,23 +1,23 @@
 <?php
 namespace App\Models\Admin;
 
-//use Illuminate\Database\Eloquent\Model;
 use App\Models\BaseModel;
 
 class ActionModel extends BaseModel
 {
     protected $table = 'ba_action';
     protected $fillable = [
-        'id','name','intro','namespace','controller_prefix','url','action','style_class','pid','sort','isshow','del','created_at','updated_at',
+        'id','name','intro','namespace','controller_prefix','url','action','style_class','pid','sort','isshow','created_at','updated_at',
     ];
 
-//    public function child()
+//    public function getSubUrls()
 //    {
-//        return $this->hasMany($this, 'pid');
-//    }
-//
-//    public function parent()
-//    {
-//        return $this->belongsTo($this, 'pid');
+//        $actions = ActionModel::where('pid',$this->id)->get();
+//        if (count($actions)) {
+//            foreach ($actions as $action) {
+//                $arr[] = $action->url;
+//            }
+//        }
+//        return isset($arr) ? $arr : [];
 //    }
 }

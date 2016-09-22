@@ -1,7 +1,8 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Models\ProductConModel;
+use App\Models\Online\ProductAttrModel;
+use App\Models\Online\ProductConModel;
 use Illuminate\Http\Request;
 
 class ProductConController extends BaseController
@@ -10,95 +11,78 @@ class ProductConController extends BaseController
      * 系统后台 产品动画的图片文字管理
      */
 
+    protected $attrModel;
+
     public function __construct()
     {
         parent::__construct();
+        $this->crumb['']['name'] = '图文列表';
+        $this->crumb['category']['name'] = '图文管理';
+        $this->crumb['category']['url'] = 'proCon';
         $this->model = new ProductConModel();
-        $this->crumb['']['name'] = '图片文字列表';
-        $this->crumb['category']['name'] = '图片文字';
-        $this->crumb['category']['url'] = 'productcon';
+        $this->attrModel = new ProductAttrModel();
     }
 
-    public function index()
+    public function index($attrid)
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'datas'=> $this->query($del=0),
-            'prefix_url'=> DOMAIN.'admin/productcon',
+            'datas'=> $this->query($attrid),
+            'prefix_url'=> DOMAIN.'admin/'.$attrid.'/proCcon',
             'model'=> $this->model,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
+            'productid'=> $this->getAttrIdByProductId($attrid),
+            'attrid'=> $attrid,
         ];
-        return view('admin.productCon.index', $result);
+        return view('admin.proCon.index', $result);
     }
 
-    public function trash()
-    {
-        $curr['name'] = $this->crumb['trash']['name'];
-        $curr['url'] = $this->crumb['trash']['url'];
-        $result = [
-            'datas'=> $this->query($del=0),
-            'prefix_url'=> DOMAIN.'admin/productcon/trash',
-            'model'=> $this->model,
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
-        ];
-        return view('admin.productCon.index', $result);
-    }
-
-    public function create()
+    public function create($attrid)
     {
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
             'model'=> $this->model,
+            'pics'=> $this->model->picAll(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
+            'attrModel'=> ProductAttrModel::find($attrid),
         ];
-        return view('admin.productCon.create', $result);
+        return view('admin.proCon.create', $result);
     }
 
-    public function store(Request $request)
+    public function store(Request $request,$attrid)
     {
         $data = $this->getData($request);
+        $data['attrid'] = $attrid;
         $data['created_at'] = time();
         ProductConModel::create($data);
-        return redirect(DOMAIN.'admin/productcon');
+        return redirect(DOMAIN.'admin/'.$attrid.'/proCon');
     }
 
-    public function edit($id)
+    public function edit($attrid,$id)
     {
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
         $result = [
-            'data'=> $this->getOne(ProductConModel::find($id)),
+            'data'=> ProductConModel::find($id),
+            'pics'=> $this->model->picAll(),
             'model'=> $this->model,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
+            'attrModel'=> ProductAttrModel::find($attrid),
         ];
-        return view('admin.productCon.edit', $result);
+        return view('admin.proCon.edit', $result);
     }
 
-    public function update(Request $request,$id)
+    public function update(Request $request,$attrid,$id)
     {
         $data = $this->getData($request);
         $data['updated_at'] = time();
         ProductConModel::where('id',$id)->update($data);
-        return redirect(DOMAIN.'admin/productcon');
-    }
-
-    public function show($id)
-    {
-        $curr['name'] = $this->crumb['show']['name'];
-        $curr['url'] = $this->crumb['show']['url'];
-        $result = [
-            'data'=> $this->getOne(ProductConModel::find($id)),
-            'model'=> $this->model,
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
-        ];
-        return view('admin.productCon.show', $result);
+        return redirect(DOMAIN.'admin/'.$attrid.'/proCon');
     }
 
 
@@ -109,60 +93,26 @@ class ProductConController extends BaseController
      */
     public function getData(Request $request)
     {
-        if ($request->margin1 || $request->margin2) { $margin = $request->margin1.'-'.$request->margin2; }
-        if ($request->padding1 || $request->padding2) { $padding = $request->padding1.'-'.$request->padding2; }
-        if ($request->border1) {
-            if (!$request->border2 || !$request->border3 || !$request->border4) {
-                echo "<script>alert('边框宽度、类型或颜色必选填！');history.go(-1);</script>";exit;
-            }
-            $border = $request->border1.'-'.$request->border1.'-'.$request->border1.'-'.$request->border1.'-';
+        if ($request->genre==1 && !$request->pic_id) {
+            echo "<script>alert('图片必选！');history.go(-1);</script>";exit;
         }
-        $text_attr = $this->getText($request);
+        if ($request->genre==2 && !$request->name) {
+            echo "<script>alert('名称必填！');history.go(-1);</script>";exit;
+        }
         $data = [
-            'name'=> $request->name,
-            'productid'=> $request->productid,
-            'attrid'=> $request->attrid,
             'genre'=> $request->genre,
             'pic_id'=> $request->pic_id,
-            'margin'=> isset($margin) ? $margin : '',
-            'padding'=> isset($padding) ? $padding : '',
-            'width'=> $request->width,
-            'height'=> $request->height,
-            'border'=> isset($border) ? $border : '',
-            'background'=> $request->background,
-            'position'=> $request->position,
-            'left'=> $request->left,
-            'top'=> $request->top,
-            'overflow'=> $request->overflow,
-            'opacity'=> $request->opacity,
-            'text_attr'=> $text_attr,
-            'intro'=> $request->intro,
+            'name'=> $request->name,
         ];
         return $data;
     }
 
     /**
-     *  文字信息
-     */
-    public function getText(Request $request)
-    {
-        $text = [
-            'color'=> isset($request->color) ? $request->color : '',
-            'font_size'=> isset($request->font_size) ? $request->font_size : 0,
-            'word_spacing'=> isset($request->word_spacing) ? $request->word_spacing : 0,
-            'line_height'=> isset($request->line_height) ? $request->line_height : 0,
-            'text_transform'=> isset($request->text_transform) ? $request->text_transform : 0,
-            'text_align'=> isset($request->text_align) ? $request->text_align : 0,
-        ];
-        return serialize($text);
-    }
-
-    /**
      * 查询方法
      */
-    public function query($del)
+    public function query($attrid)
     {
-        $datas = ProductConModel::where('del',$del)
+        $datas = ProductConModel::where('attrid',$attrid)
             ->orderBy('id','desc')
             ->paginate($this->limit);
         $datas->limit = $this->limit;
@@ -170,34 +120,11 @@ class ProductConController extends BaseController
     }
 
     /**
-     * 查询一条记录，数据转换
+     * 通过 attrid 得到 productid
      */
-    public function getOne($data)
+    public function getAttrIdByProductId($attrid)
     {
-        //外边距
-        if ($data->margin) {
-            $margins = explode('-',$data->margin);
-            $data->margin1 = $margins[0]; $data->margin2 = $margins[2];
-        } else {
-            $data->margin1 = ''; $data->margin2 = '';
-        }
-        //内边距
-        if ($data->padding) {
-            $paddings = explode('-',$data->padding);
-            $data->padding1 = $paddings[0]; $data->padding2 = $paddings[2];
-        } else {
-            $data->padding1 = ''; $data->padding2 = '';
-        }
-        //边框
-        if ($data->border) {
-            $borders = explode('-',$data->border);
-            $data->border1 = $borders[0];
-            $data->border2 = $borders[1];
-            $data->border4 = $borders[2];
-            $data->border1 = $borders[3];
-        }
-        //文字属性
-        $data->text = unserialize($data->text_attr);
-        return $data;
+        $attrModel = ProductAttrModel::find($attrid);
+        return $attrModel ? $attrModel->productid : 0;
     }
 }

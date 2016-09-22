@@ -20,6 +20,7 @@
                         <th class="table-type">前台是否显示</th>
                         <th class="table-type">是否置顶</th>
                         <th class="table-date am-hide-sm-only" width="150">添加时间</th>
+                        <th class="table-set">视图创作</th>
                         <th class="table-set">操作</th>
                     </tr>
                     </thead>
@@ -35,6 +36,13 @@
                         <td class="am-hide-sm-only">{{ $data->isshow() }}</td>
                         <td class="am-hide-sm-only">{{ $data->istop() }}</td>
                         <td class="am-hide-sm-only">{{ $data->createTime() }}</td>
+                        <td class="am-hide-sm-only">
+                            <div class="am-btn-toolbar">
+                                <div class="am-btn-group am-btn-group-xs">
+                                    <a href="{{DOMAIN}}admin/{{$data->id}}/creation"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="{{PUB}}assets/images/show.png" class="icon"> 实时创作</button></a>
+                                </div>
+                            </div>
+                        </td>
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">

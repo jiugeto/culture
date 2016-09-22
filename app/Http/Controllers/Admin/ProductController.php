@@ -24,7 +24,7 @@ class ProductController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'datas'=> $this->query(0),
+            'datas'=> $this->query(),
             'prefix_url'=> DOMAIN.'admin/product',
             'crumb'=> $this->crumb,
             'curr'=> $curr,

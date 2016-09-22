@@ -157,7 +157,7 @@ class ProductAttrController extends BaseController
         $data = $this->getData($request,$productid);
         $attrModel = ProductAttrModel::find($id);
         $data['name'] = $attrModel->name;
-        $data['style_name'] = $attrModel->style_name;
+//        $data['style_name'] = $attrModel->style_name;
         $data['genre'] = 2;
         $data['parent'] = $id;
         $data['updated_at'] = time();
@@ -224,7 +224,7 @@ class ProductAttrController extends BaseController
         $data = $this->getData($request,$productid);
         $attrModel = ProductAttrModel::find($id);
         $data['name'] = $attrModel->name;
-        $data['style_name'] = $attrModel->style_name;
+//        $data['style_name'] = $attrModel->style_name;
         $data['genre'] = 3;
         $data['parent'] = $id;
         $data['updated_at'] = time();

@@ -16,7 +16,7 @@
         text-decoration:underline;
         border:1px solid orangered;
     }
-    .pic_list {
+    .piclist {
         padding:5px;
         width:420px; height:250px;
         border:1px solid lightgrey;
@@ -25,15 +25,15 @@
         overflow:auto;
         display:none;
     }
-    .pic_list .picsize{
+    .piclist .picsize{
         color:white;
         font-size:12px;
         text-align:center;
         background:rgba(50,50,50,0.5);
         position:relative;bottom:0;
     }
-    .pic_list .pic_one { width:100px;height:50px;overflow:hidden; }
-    /*.com_admin_list*/ .pic_list .img {
+    .piclist .pic_one { width:100px;height:50px;overflow:hidden; }
+    .piclist .img {
         margin-right:2px; margin-bottom:2px;
         width:100px; height:50px;
         border:1px solid lightgrey;
@@ -48,14 +48,17 @@
 <span id="pic_curr" style="color:grey;">当前图片：{{ isset($data) ? $data->getPicName() : '未选择' }}</span>
 <div style="height:10px"></div>
 <input type="hidden" name="pic_id" value="{{ isset($data->pic_id) ? $data->pic_id : 0 }}">
-<a class="selpic" onclick="$('.pic_list').toggle(200);" title="点击展开或关闭图片列表">图片切换</a>
+<a class="selpic" onclick="$('.piclist').toggle(200);" title="点击展开或关闭图片列表">图片切换</a>
 <a href="{{DOMAIN}}admin/pic" class="job">图片列表</a>
-<div class="pic_list">
+<div class="piclist">
     @if(count($pics))
         @foreach($pics as $pic)
             <div class="img" onclick="getpic({{$pic->id}})" onmouseover="move({{$pic->id}})">
                 <div class="pic_one"><img src="{{ $pic->url }}" title="选择 {{ $pic->name }}" style="@if($size=$pic->getUserPicSize($pic,$w=100,$h=50))width:{{$size['w']}}px;height:{{$size['h']}}px;@endif"></div>
-                <div class="picsize size_{{$pic->id}}" onmousemove="move2({{$pic->id}})">{{ $pic->width.'*'.$pic->height }}</div>
+                <div class="picsize size_{{$pic->id}}" onmousemove="move2({{$pic->id}})">
+                    {{--{{ $pic->width.'*'.$pic->height }}--}}
+                    {{ $pic->name }}
+                </div>
             </div>
             <input type="hidden" name="picName_{{ $pic->id }}" value="{{ $pic->name }}">
         @endforeach
@@ -71,6 +74,6 @@
         var picName = $("input[name='picName_"+picid+"']").val();
         $("#pic_curr").html("当前图片："+picName);
         $("input[name='pic_id']")[0].value = picid;
-        $(".pic_list").hide();
+        $(".piclist").hide();
     }
 </script>
