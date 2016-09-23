@@ -176,6 +176,22 @@ class ProductAttrModel extends BaseModel
     }
 
     /**
+     * 定位左边距
+     */
+    public function getPosLeft()
+    {
+        return $this->getPos()['left'];
+    }
+
+    /**
+     * 定位顶边距
+     */
+    public function getPosTop()
+    {
+        return $this->getPos()['top'];
+    }
+
+    /**
      * 浮动方式
      */
     public function getFloat()
@@ -192,7 +208,7 @@ class ProductAttrModel extends BaseModel
         if ($opacityArr[0]) {
             $opacity = $opacityArr[1];
         }
-        return ($opacityArr&&isset($opacity)) ? $opacity : '无';
+        return ($opacityArr&&isset($opacity)) ? $opacity : 0;
     }
 
     /**
