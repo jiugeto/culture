@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Online\ProductAttrModel;
+use App\Models\Online\ProductLayerModel;
 use App\Models\Online\ProductConModel;
 use Illuminate\Http\Request;
 
@@ -11,7 +11,7 @@ class ProductConController extends BaseController
      * 系统后台 产品动画的图片文字管理
      */
 
-    protected $attrModel;
+    protected $layerModel;
 
     public function __construct()
     {
@@ -20,26 +20,27 @@ class ProductConController extends BaseController
         $this->crumb['category']['name'] = '图文管理';
         $this->crumb['category']['url'] = 'proCon';
         $this->model = new ProductConModel();
-        $this->attrModel = new ProductAttrModel();
+        $this->layerModel = new ProductLayerModel();
     }
 
-    public function index($attrid)
+    public function index($productid,$layerid)
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'datas'=> $this->query($attrid),
-            'prefix_url'=> DOMAIN.'admin/'.$attrid.'/proCcon',
+            'datas'=> $this->query($productid,$layerid),
+            'prefix_url'=> DOMAIN.'admin/'.$productid.'/'.$layerid.'/proCon',
             'model'=> $this->model,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
-            'productid'=> $this->getAttrIdByProductId($attrid),
-            'attrid'=> $attrid,
+            'productid'=> $productid,
+            'layerid'=> $layerid,
+            'layerid'=> $layerid,
         ];
         return view('admin.proCon.index', $result);
     }
 
-    public function create($attrid)
+    public function create($productid,$layerid)
     {
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
@@ -48,21 +49,21 @@ class ProductConController extends BaseController
             'pics'=> $this->model->picAll(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
-            'attrModel'=> ProductAttrModel::find($attrid),
+            'productid'=> $productid,
+            'layerid'=> $layerid,
         ];
         return view('admin.proCon.create', $result);
     }
 
-    public function store(Request $request,$attrid)
+    public function store(Request $request,$productid,$layerid)
     {
-        $data = $this->getData($request);
-        $data['attrid'] = $attrid;
+        $data = $this->getData($request,$productid,$layerid);
         $data['created_at'] = time();
         ProductConModel::create($data);
-        return redirect(DOMAIN.'admin/'.$attrid.'/proCon');
+        return redirect(DOMAIN.'admin/'.$productid.'/'.$layerid.'/proCon');
     }
 
-    public function edit($attrid,$id)
+    public function edit($productid,$layerid,$id)
     {
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
@@ -72,17 +73,18 @@ class ProductConController extends BaseController
             'model'=> $this->model,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
-            'attrModel'=> ProductAttrModel::find($attrid),
+            'productid'=> $productid,
+            'layerid'=> $layerid,
         ];
         return view('admin.proCon.edit', $result);
     }
 
-    public function update(Request $request,$attrid,$id)
+    public function update(Request $request,$productid,$layerid,$id)
     {
-        $data = $this->getData($request);
+        $data = $this->getData($request,$productid,$layerid);
         $data['updated_at'] = time();
         ProductConModel::where('id',$id)->update($data);
-        return redirect(DOMAIN.'admin/'.$attrid.'/proCon');
+        return redirect(DOMAIN.'admin/'.$productid.'/'.$layerid.'/proCon');
     }
 
 
@@ -91,7 +93,7 @@ class ProductConController extends BaseController
     /**
      * 收集数据
      */
-    public function getData(Request $request)
+    public function getData(Request $request,$productid,$layerid)
     {
         if ($request->genre==1 && !$request->pic_id) {
             echo "<script>alert('图片必选！');history.go(-1);</script>";exit;
@@ -100,6 +102,8 @@ class ProductConController extends BaseController
             echo "<script>alert('名称必填！');history.go(-1);</script>";exit;
         }
         $data = [
+            'productid'=> $productid,
+            'layerid'=> $layerid,
             'genre'=> $request->genre,
             'pic_id'=> $request->pic_id,
             'name'=> $request->name,
@@ -110,21 +114,13 @@ class ProductConController extends BaseController
     /**
      * 查询方法
      */
-    public function query($attrid)
+    public function query($productid,$layerid)
     {
-        $datas = ProductConModel::where('attrid',$attrid)
+        $datas = ProductConModel::where('productid',$productid)
+            ->where('layerid',$layerid)
             ->orderBy('id','desc')
             ->paginate($this->limit);
         $datas->limit = $this->limit;
         return $datas;
-    }
-
-    /**
-     * 通过 attrid 得到 productid
-     */
-    public function getAttrIdByProductId($attrid)
-    {
-        $attrModel = ProductAttrModel::find($attrid);
-        return $attrModel ? $attrModel->productid : 0;
     }
 }

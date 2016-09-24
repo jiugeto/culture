@@ -18,36 +18,28 @@
                     <td>{{ $data->id }}</td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">产品名称 / Product：</td>
-                    <td>{{ $data->product() }}</td>
+                    <td class="am-hide-sm-only">动画设置名称 / Layer：</td>
+                    <td>{{ $data->getLayerName() }}</td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">属性统称 / Attr：</td>
-                    <td>{{ $data->attrname() }}</td>
+                    <td class="am-hide-sm-only">动画属性名称 / LayerAttr：</td>
+                    <td>{{ $data->getAttrSelName() }}</td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">动画名称 / Layer：</td>
-                    <td>{{ $data->layer() }}</td>
-                </tr>
-                <tr>
-                    <td class="am-hide-sm-only">动画属性 / LayerAttr：</td>
-                    <td>{{ $data->layerAttr() }}</td>
-                </tr>
-                <tr>
-                    <td class="am-hide-sm-only">动画点 / Per：</td>
+                    <td class="am-hide-sm-only">动画点 / Per：(单位%)</td>
                     <td>{{ $data->per }}</td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">动画值 / Per：</td>
-                    <td>{{ $data->val }}</td>
+                    <td class="am-hide-sm-only">动画值 / Value：</td>
+                    <td>{{ $data->getVal() }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">创建时间 / Create Time：</td>
-                    <td>{{ $data->created_at }}</td>
+                    <td>{{ $data->createTime() }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">修改时间 / Update Time：</td>
-                    <td>{{ $data->updated_at!='0000-00-00' ? $data->updated_at : '未修改' }}</td>
+                    <td>{{ $data->updateTime() }}</td>
                 </tr>
                 </tbody>
             </table>

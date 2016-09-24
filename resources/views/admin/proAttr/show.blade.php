@@ -3,9 +3,20 @@
 <div class="admin-content">
     @include('admin.common.crumb')
     <div class="am-g">
-        @include('admin.common.menu')
+        {{--@include('admin.common.menu')--}}
+        <div class="am-u-sm-12 am-u-md-6">
+            <div class="am-btn-toolbar">
+                <div class="am-btn-group am-btn-group-xs">
+                    <a onclick="history.go(-1)">
+                        <button type="button" class="am-btn am-btn-default">
+                            <img src="{{PUB}}assets/images/files.png" class="icon"> 返回
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
-    <hr/>
+    <hr>
 
     <div class="am-g">
         @include('admin.common.info')
@@ -21,13 +32,9 @@
                     <td class="am-hide-sm-only">名称 / Name：</td>
                     <td>{{ $data->name }}</td>
                 </tr>
-                {{--<tr>--}}
-                    {{--<td class="am-hide-sm-only">样式名称 / Style Name：</td>--}}
-                    {{--<td>{{ $data->style_name }}</td>--}}
-                {{--</tr>--}}
                 <tr>
-                    <td class="am-hide-sm-only">产品名称 / Name：</td>
-                    <td>{{ $data->getProductName() }}</td>
+                    <td class="am-hide-sm-only">动画设置名称 / Name：</td>
+                    <td>{{ $data->getLayerName() }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">动画层 / Genre：</td>

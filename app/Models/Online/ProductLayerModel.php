@@ -7,35 +7,29 @@ class ProductLayerModel extends BaseModel
 {
     protected $table = 'bs_pro_layer';
     protected $fillable = [
-        'id','name','attrid','a_name','timelong','func','delay','created_at','updated_at',
+        'id','name','productid','a_name','timelong','func','delay','created_at','updated_at',
     ];
     //速度曲线
     protected $funcs = [
         1=>'linear','ease','ease-in','ease-out','ease-in-out',/*'cubic-bezier',*/
     ];
     protected $funcNames = [
-        1=>'匀速','默认，先慢再快后慢','低速开始','低速结束','低速开始和结束',/*'贝塞尔函数自定义',*/
+        1=>'默认，先慢再快后慢','匀速','低速开始','低速结束','低速开始和结束',/*'贝塞尔函数自定义',*/
     ];
 
     /**
-     * 获得同产品的所有属性
+     * 获得产品信息
      */
-    public function getAttrs($attrid=null)
+    public function getProduct($pro_id=null)
     {
-        $attrid = $attrid ? $attrid : $this->attrid;
-        $attrModel = ProductAttrModel::find($attrid);
-        $productModel = ProductModel::find($attrModel->productid);
-        $attrs = ProductAttrModel::where('genre',1)->where('productid',$productModel->id)->get();
-        return count($attrs) ? $attrs : [];
+        $pro_id = $pro_id ? $pro_id : $this->productid;
+        $productModel = ProductModel::find($pro_id);
+        return $productModel ? $productModel : '';
     }
 
-    public function getAttrName()
+    public function getProductName()
     {
-        if ($this->attrid) {
-            $attrModel = ProductAttrModel::find($this->attrid);
-            if ($attrModel) { $attrName = $attrModel->name; }
-        }
-        return isset($attrName) ? $attrName : '';
+        return $this->getProduct() ? $this->getProduct()->name : '';
     }
 
     public function getFunc()
@@ -46,5 +40,13 @@ class ProductLayerModel extends BaseModel
     public function getFuncName()
     {
         return array_key_exists($this->func,$this->funcNames) ? $this->funcNames[$this->func] : '';
+    }
+
+    /**
+     * 获取动画关键帧
+     */
+    public function getLayerAttrs()
+    {
+        return ProductLayerAttrModel::where('layerid',$this->id)->get();
     }
 }

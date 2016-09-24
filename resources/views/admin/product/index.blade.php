@@ -48,7 +48,7 @@
                                 <div class="am-btn-group am-btn-group-xs">
                                     <a href="{{DOMAIN}}admin/product/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="{{PUB}}assets/images/show.png" class="icon"> 查看</button></a>
                                     <a href="{{DOMAIN}}admin/product/{{$data->id}}/edit"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 编辑</button></a>
-                                    <a href="{{DOMAIN}}admin/{{$data->id}}/proAttr"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"> 图层列表</button></a>
+                                    <a href="{{DOMAIN}}admin/{{$data->id}}/proLayer"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"> 动画设置</button></a>
                                     {{--<a href="{{DOMAIN}}admin/product/{{$data->id}}/forceDelete"><button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><img src="{{PUB}}assets/images/forceDelete_red.png" class="icon"> 销毁记录</button></a>--}}
                                 </div>
                             </div>

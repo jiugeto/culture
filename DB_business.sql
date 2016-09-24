@@ -100,7 +100,7 @@ CREATE TABLE `ba_log` (
   `loginTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '登陆时间',
   `logoutTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '退出时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COMMENT='管理员日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COMMENT='管理员日志表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -109,7 +109,7 @@ CREATE TABLE `ba_log` (
 
 LOCK TABLES `ba_log` WRITE;
 /*!40000 ALTER TABLE `ba_log` DISABLE KEYS */;
-INSERT INTO `ba_log` VALUES (1,1,'jiuge',1,'20160908075940137','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473292780,0),(2,1,'jiuge',1,'201609100906318268','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473469591,0),(3,1,'jiuge',1,'201609101339029262','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473485942,0),(4,1,'jiuge',1,'201609110851236265','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473555083,0),(5,1,'jiuge',1,'201609120752378324','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473637957,0),(6,1,'jiuge',1,'20160912135742704','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473659862,0),(7,1,'jiuge',1,'201609121405091197','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473660309,0),(8,1,'jiuge',1,'201609130751197676','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473724279,0),(9,1,'jiuge',2,'20160913170458395','192.168.2.100','浙江省 杭州市 滨江区','/admin/login',1473757498,0),(10,1,'jiuge',2,'2016091409015949','192.168.2.101','浙江省 杭州市 滨江区','/admin/login',1473814919,0),(11,1,'jiuge',2,'201609150820596747','192.168.2.101','浙江省 杭州市 滨江区','/admin/login',1473898859,0),(12,1,'jiuge',2,'201609151505435076','192.168.2.101','浙江省 杭州市 滨江区','/admin/login',1473923143,0),(13,1,'jiuge',1,'201609151740117655','192.168.2.101','浙江省 杭州市 滨江区','/login/dologin',1473932411,0),(14,1,'jiuge',1,'201609160853344212','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473987214,1473992233),(15,2,'jiuge2',1,'201609161017314217','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473992251,0),(16,1,'jiuge',1,'201609161738121898','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1474018692,0),(17,1,'jiuge',1,'201609191007557056','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1474250875,0),(18,1,'jiuge',1,'201609191759138230','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1474279153,0),(19,1,'jiuge',1,'20160920070913436','192.168.2.101','浙江省 杭州市 滨江区','/login/dologin',1474326553,1474352679),(20,1,'jiuge',2,'201609200909427023','192.168.2.101','浙江省 杭州市 滨江区','/admin/login',1474333782,0),(21,1,'jiuge',2,'201609211100499646','192.168.2.101','浙江省 杭州市 滨江区','/admin/login',1474426849,0),(22,1,'jiuge',2,'201609220743138043','192.168.2.100','浙江省 杭州市 滨江区','/admin/login',1474501393,0),(23,1,'jiuge',1,'201609221736199194','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1474536979,0),(24,1,'jiuge',2,'201609230805417001','192.168.2.101','浙江省 杭州市 滨江区','/admin/login',1474589141,0),(25,1,'jiuge',2,'201609231340524843','192.168.2.111','浙江省 杭州市 滨江区','/admin/login',1474609252,0),(26,1,'jiuge',2,'201609232010071968','192.168.2.111','浙江省 杭州市 滨江区','/admin/login',1474632607,0);
+INSERT INTO `ba_log` VALUES (1,1,'jiuge',1,'20160908075940137','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473292780,0),(2,1,'jiuge',1,'201609100906318268','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473469591,0),(3,1,'jiuge',1,'201609101339029262','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473485942,0),(4,1,'jiuge',1,'201609110851236265','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473555083,0),(5,1,'jiuge',1,'201609120752378324','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473637957,0),(6,1,'jiuge',1,'20160912135742704','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473659862,0),(7,1,'jiuge',1,'201609121405091197','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473660309,0),(8,1,'jiuge',1,'201609130751197676','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473724279,0),(9,1,'jiuge',2,'20160913170458395','192.168.2.100','浙江省 杭州市 滨江区','/admin/login',1473757498,0),(10,1,'jiuge',2,'2016091409015949','192.168.2.101','浙江省 杭州市 滨江区','/admin/login',1473814919,0),(11,1,'jiuge',2,'201609150820596747','192.168.2.101','浙江省 杭州市 滨江区','/admin/login',1473898859,0),(12,1,'jiuge',2,'201609151505435076','192.168.2.101','浙江省 杭州市 滨江区','/admin/login',1473923143,0),(13,1,'jiuge',1,'201609151740117655','192.168.2.101','浙江省 杭州市 滨江区','/login/dologin',1473932411,0),(14,1,'jiuge',1,'201609160853344212','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473987214,1473992233),(15,2,'jiuge2',1,'201609161017314217','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1473992251,0),(16,1,'jiuge',1,'201609161738121898','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1474018692,0),(17,1,'jiuge',1,'201609191007557056','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1474250875,0),(18,1,'jiuge',1,'201609191759138230','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1474279153,0),(19,1,'jiuge',1,'20160920070913436','192.168.2.101','浙江省 杭州市 滨江区','/login/dologin',1474326553,1474352679),(20,1,'jiuge',2,'201609200909427023','192.168.2.101','浙江省 杭州市 滨江区','/admin/login',1474333782,0),(21,1,'jiuge',2,'201609211100499646','192.168.2.101','浙江省 杭州市 滨江区','/admin/login',1474426849,0),(22,1,'jiuge',2,'201609220743138043','192.168.2.100','浙江省 杭州市 滨江区','/admin/login',1474501393,0),(23,1,'jiuge',1,'201609221736199194','192.168.2.100','浙江省 杭州市 滨江区','/login/dologin',1474536979,0),(24,1,'jiuge',2,'201609230805417001','192.168.2.101','浙江省 杭州市 滨江区','/admin/login',1474589141,0),(25,1,'jiuge',2,'201609231340524843','192.168.2.111','浙江省 杭州市 滨江区','/admin/login',1474609252,0),(26,1,'jiuge',2,'201609232010071968','192.168.2.111','浙江省 杭州市 滨江区','/admin/login',1474632607,0),(27,1,'jiuge',2,'201609240817297850','192.168.2.101','浙江省 杭州市 滨江区','/admin/login',1474676249,0);
 /*!40000 ALTER TABLE `ba_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1030,8 +1030,8 @@ CREATE TABLE `bs_pro_attr` (
   `name` varchar(255) NOT NULL COMMENT '样式简称',
   `style_name` varchar(20) NOT NULL COMMENT '类样式名称，加个前缀好区分==》改为自动添加，用户ID+产品id+属性id',
   `productid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '产品表id，关联bs_products',
-  `parent` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '第一层的父id，0代表顶级',
-  `genre` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '属性类型：1图层，pos图层定位，2dh动画层',
+  `layerid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '动画设置id',
+  `genre` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '属性类型：1图层开始，pos图层定位，2dh动画层',
   `padding` varchar(15) NOT NULL COMMENT '内边距，单位px：\r\n类型，0无，1(上下左右)，2(上下、左右)，3(上、下、左、右)；\r\npadType，pad1，pad2，pad3，pad4，pad5，pad6，pad7，',
   `size` varchar(10) NOT NULL COMMENT '宽度，高度，单位px，空则没有，中间逗号隔开',
   `pos` varchar(255) NOT NULL COMMENT '定位方式，左边距离，顶部距离：\r\n定位方式，0没有，1relative相对定位；\r\n左边距离，空则没有，相对定位时有效，单位px；\r\n顶部距离，空则没有，相对定位时有效，单位px',
@@ -1042,7 +1042,7 @@ CREATE TABLE `bs_pro_attr` (
   `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updated_at` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='在线创作div类样式属性表：在线写的属性';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='在线创作div类样式属性表：在线写的属性';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1051,7 +1051,7 @@ CREATE TABLE `bs_pro_attr` (
 
 LOCK TABLES `bs_pro_attr` WRITE;
 /*!40000 ALTER TABLE `bs_pro_attr` DISABLE KEYS */;
-INSERT INTO `bs_pro_attr` VALUES (1,'属性11','attr_2_626',2,0,1,'','720,405','0,,',0,'0,0','','',1474446190,1474450800),(2,'属性22','attr_2_626',2,1,2,'',',','0,,',0,'0,0','','',1474461783,1474464125),(3,'属性33','attr_2_626',2,1,3,'',',','0,,',0,'0,0','','',1474464582,1474464882);
+INSERT INTO `bs_pro_attr` VALUES (1,'样式11','attr_2_81',2,1,1,'1',',','0,,',0,'0,0','','',1474722160,1474722662),(2,'样式11','attr_2_783',2,1,2,'',',','0,,',0,'0,','','',1474723783,0);
 /*!40000 ALTER TABLE `bs_pro_attr` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1065,7 +1065,7 @@ DROP TABLE IF EXISTS `bs_pro_con`;
 CREATE TABLE `bs_pro_con` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `productid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '产品id',
-  `attrid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '产品属性id，关联bs_pro_attr',
+  `layerid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '动画设置id',
   `genre` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '发布者身份：1图片，2文字',
   `pic_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '图片，关联图片表bs_pics',
   `name` varchar(255) NOT NULL COMMENT '文字内容',
@@ -1074,7 +1074,7 @@ CREATE TABLE `bs_pro_con` (
   `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updated_at` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='在线创作的图片文字表 bs_products_con';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='在线创作的图片文字表 bs_products_con';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1083,7 +1083,7 @@ CREATE TABLE `bs_pro_con` (
 
 LOCK TABLES `bs_pro_con` WRITE;
 /*!40000 ALTER TABLE `bs_pro_con` DISABLE KEYS */;
-INSERT INTO `bs_pro_con` VALUES (1,2,1,1,1,'',10,1,1474525576,1474526487);
+INSERT INTO `bs_pro_con` VALUES (1,2,1,2,1,'12345',10,1,1474525576,1474714768),(2,2,1,1,1,'',10,1,1474714716,0);
 /*!40000 ALTER TABLE `bs_pro_con` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1097,7 +1097,7 @@ DROP TABLE IF EXISTS `bs_pro_layer`;
 CREATE TABLE `bs_pro_layer` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL COMMENT '动画层名称',
-  `attrid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '属性id，关联bs_products_attr',
+  `productid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '产品id',
   `a_name` varchar(255) NOT NULL COMMENT '动画名称，系统自动添加，act_+用户id_+产品id_+动画id',
   `timelong` float(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '动画时长，单位秒(s)',
   `func` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '速度曲线：linear匀速，ease默认慢快慢，ease-in低速开始，ease-out低速结束，ease-in-out低速开始和结束，cubic-bezier(n,n,n,n)贝塞尔函数自定义',
@@ -1114,7 +1114,7 @@ CREATE TABLE `bs_pro_layer` (
 
 LOCK TABLES `bs_pro_layer` WRITE;
 /*!40000 ALTER TABLE `bs_pro_layer` DISABLE KEYS */;
-INSERT INTO `bs_pro_layer` VALUES (1,'动画11',3,'dh_3_2143',1.00,1,0.00,1474511275,1474512450);
+INSERT INTO `bs_pro_layer` VALUES (1,'动画设置11',2,'layer_2_9930',5.00,1,1.00,1474714196,1474714280);
 /*!40000 ALTER TABLE `bs_pro_layer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1127,14 +1127,15 @@ DROP TABLE IF EXISTS `bs_pro_layer_attr`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `bs_pro_layer_attr` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `productid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '产品id',
   `layerid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '动画id，关联动画表bs_products_layer',
   `attrSel` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '属性选择',
   `per` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '动画点，单位%',
-  `val` varchar(255) NOT NULL COMMENT '属性值',
+  `val` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '属性值',
   `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updated_at` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='在线创作动画层表：在线写的动画';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='在线创作动画层表：在线写的动画';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1143,6 +1144,7 @@ CREATE TABLE `bs_pro_layer_attr` (
 
 LOCK TABLES `bs_pro_layer_attr` WRITE;
 /*!40000 ALTER TABLE `bs_pro_layer_attr` DISABLE KEYS */;
+INSERT INTO `bs_pro_layer_attr` VALUES (1,2,1,1,0,0,1474720357,1474721309);
 /*!40000 ALTER TABLE `bs_pro_layer_attr` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2215,4 +2217,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-23 22:26:30
+-- Dump completed on 2016-09-24 22:08:49

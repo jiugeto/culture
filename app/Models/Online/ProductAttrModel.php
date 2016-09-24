@@ -7,12 +7,12 @@ class ProductAttrModel extends BaseModel
 {
     protected $table = 'bs_pro_attr';
     protected $fillable = [
-        'id','name','style_name','productid','genre','parent',
-        'padding','size','pos','float','opacity','text',
+        'id','name','style_name','productid','layerid','genre',
+        'padding','size','pos','float','opacity','bg','text',
         'created_at','updated_at',
     ];
 
-    //每个层确定为定位专用、动画专用
+    //定位、定位、动画
     protected $genres = [
         1=>'开始层','定位层','动画层',
     ];
@@ -51,29 +51,20 @@ class ProductAttrModel extends BaseModel
     }
 
     /**
-     * 得到该产品信息
+     * 得到动画设置信息
      */
-    public function getProduct()
+    public function getLayer()
     {
-        $productModel = ProductModel::find($this->productid);
-        return $productModel ? $productModel : '';
-    }
-
-    /**
-     * 得到该产品同用户名下所有产品
-     */
-    public function getUserProducts()
-    {
-        $uid = $this->getProduct() ? $this->getProduct()->uid : 0;
-        return ProductModel::where('uid',$uid)->get();
+        $layerModel = ProductLayerModel::find($this->layerid);
+        return $layerModel ? $layerModel : '';
     }
 
     /**
      * 得到该产品名称
      */
-    public function getProductName()
+    public function getLayerName()
     {
-        return $this->getProduct() ? $this->getProduct()->name : '';
+        return $this->getLayer() ? $this->getLayer()->name : '';
     }
 
     /**
@@ -119,15 +110,22 @@ class ProductAttrModel extends BaseModel
     /**
      * 内边距几个边的值
      */
-    public function getPadVal2($k)
+    public function getPadVal2()
     {
-        $vals = $this->getPadVal();
-        if ($k==1) {
-            $v = $vals;
-        } else {
-            $v = explode('，',$vals);
+        $padType = $this->getPadType();
+        $pads = $this->padding ? explode(',',$this->padding) : '';
+        if ($padType==1) {
+            $val[0] = $pads[0];
+        } elseif ($padType==2) {
+            $val[0] = $pads[0];
+            $val[1] = $pads[1];
+        } elseif ($padType==3) {
+            $val[0] = $pads[0];
+            $val[1] = $pads[1];
+            $val[2] = $pads[2];
+            $val[3] = $pads[3];
         }
-        return $v;
+        return isset($val) ? $val : [];
     }
 
     /**
@@ -233,38 +231,5 @@ class ProductAttrModel extends BaseModel
     public function getSub($genre)
     {
         return ProductAttrModel::where('parent',$this->id)->where('genre',$genre)->first();
-    }
-
-//    /**
-//     * 获取子级属性定位层名称
-//     */
-//    public function getSubName()
-//    {
-//        return $this->getSub(2) ? $this->getSub(2)->name : '';
-//    }
-//
-//    /**
-//     * 获取子级属性动画层名称
-//     */
-//    public function getSubName2()
-//    {
-//        return $this->getSub(3) ? $this->getSub(3)->name : '';
-//    }
-
-    /**
-     * 获取该属性的动画设置
-     */
-    public function getLayer()
-    {
-        $attrid = $this->getSub(3) ? $this->getSub(3)->id : 0;
-        return ProductLayerModel::where('attrid',$attrid)->first();
-    }
-
-    /**
-     * 获取该属性的动画设置
-     */
-    public function getConList()
-    {
-        return ProductConModel::where('attrid',$this->id)->get();
     }
 }

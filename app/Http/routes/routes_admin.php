@@ -66,33 +66,27 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     //内部产品管理
     Route::post('product/{id}','ProductController@update');
     Route::resource('product','ProductController');
-        //图层路由
-    Route::post('{pro_id}/{id}/{subid}/proAttr3/update','ProductAttrController@update3');
-    Route::get('{pro_id}/{id}/{subid}/proAttr3/edit','ProductAttrController@edit3');
-    Route::post('{pro_id}/{id}/proAttr3','ProductAttrController@store3');
-    Route::get('{pro_id}/{id}/proAttr3','ProductAttrController@create3');
-    Route::post('{pro_id}/{id}/{subid}/proAttr2/update','ProductAttrController@update2');
-    Route::get('{pro_id}/{id}/{subid}/proAttr2/edit','ProductAttrController@edit2');
-    Route::post('{pro_id}/{id}/proAttr2','ProductAttrController@store2');
-    Route::get('{pro_id}/{id}/proAttr2','ProductAttrController@create2');
-    Route::post('{pro_id}/proAttr/{id}','ProductAttrController@update');
-    Route::resource('{pro_id}/proAttr','ProductAttrController');
         //动画设置路由
-    Route::post('{attr_id}/proLayer/{id}','ProductLayerController@update');
-    Route::resource('{attr_id}/proLayer','ProductLayerController');
+    Route::post('{pro_id}/proLayer/{id}','ProductLayerController@update');
+    Route::resource('{pro_id}/proLayer','ProductLayerController');
         //图片文字路由
-    Route::post('{attr_id}/proCon/{id}','ProductConController@update');
-    Route::resource('{attr_id}/proCon','ProductConController');
+    Route::post('{pro_id}/{layerid}/proCon/{id}','ProductConController@update');
+    Route::resource('{pro_id}/{layerid}/proCon','ProductConController');
+        //图层路由
+    Route::post('{pro_id}/{layerid}/proAttr/{id}','ProductAttrController@update');
+    Route::resource('{pro_id}/{layerid}/proAttr','ProductAttrController');
         //属性动画路由
-    Route::resource('{layerid}/prolayerattr','ProductLayerAttrController');
+    Route::post('{pro_id}/{layerid}/proLayerAttr/{id}','ProductLayerAttrController@update');
+    Route::resource('{pro_id}/{layerid}/proLayerAttr','ProductLayerAttrController');
         //实时创作路由
     Route::post('{pro_id}/creation/editCon/{con_id}','ProCreationController@updateCon');      //图文修改
     Route::post('{pro_id}/creation/addCon','ProCreationController@insertCon');      //图文添加
     Route::get('{pro_id}/creation','ProCreationController@index');      //预览、编辑
+    Route::get('{pro_id}/creation/{layerid}/{con_id}/{genre}','ProCreationController@index');
     Route::get('{pro_id}/creation/edit','ProCreationController@edit');  //修改页面，默认第一条图文
-    Route::get('{pro_id}/creation/edit/{con_id}/{genre}','ProCreationController@edit');
-    Route::get('{pro_id}/pro/play','ProCreationController@play');       //动画模板
-    Route::get('{pro_id}/pro/edit','ProCreationController@play2');
+    Route::get('{pro_id}/creation/edit/{layerid}/{con_id}/{genre}','ProCreationController@edit');
+    Route::get('{pro_id}/pro/play/{layerid}/{con_id}/{genre}','ProCreationController@play');       //动画模板
+    Route::get('{pro_id}/pro/edit/{layerid}/{con_id}/{genre}','ProCreationController@play2');
     //租赁路由
     Route::post('rent/{id}','RentController@update');
     Route::resource('rent','RentController');

@@ -9,7 +9,7 @@
                 @foreach($cons as $con)
                     <div class="edit_con">
                         @if($con->id<$content->id)
-                            <a href="{{DOMAIN}}admin/{{$product->id}}/creation/edit/{{$con->id}}">
+                            <a href="{{DOMAIN}}admin/{{$product->id}}/creation/edit/{{$layerid}}/{{$con->id}}/1">
                                 <b>{{ $con->getName() }}</b>
                             </a>
                         @endif
@@ -77,13 +77,13 @@
         @if($attr)
             <div class="con">
                 <div class="edit_con">
-                    @if($attr->genre!=1)<a href="{{DOMAIN}}admin/{{$product->id}}/creation/edit/{{$con->id}}/1">@endif
+                    @if($attr->genre!=1)<a href="{{DOMAIN}}admin/{{$product->id}}/creation/edit/{{$layerid}}/{{$con->id}}/1">@endif
                         <b>一 层</b>
                     @if($attr->genre!=1)</a>@endif
-                    @if($attr->genre!=2)<a href="{{DOMAIN}}admin/{{$product->id}}/creation/edit/{{$con->id}}/2">@endif
+                    @if($attr->genre!=2)<a href="{{DOMAIN}}admin/{{$product->id}}/creation/edit/{{$layerid}}/{{$con->id}}/2">@endif
                         <b>二 层</b>
                     @if($attr->genre!=2)</a>@endif
-                    @if($attr->genre!=3)<a href="{{DOMAIN}}admin/{{$product->id}}/creation/edit/{{$con->id}}/3">@endif
+                    @if($attr->genre!=3)<a href="{{DOMAIN}}admin/{{$product->id}}/creation/edit/{{$layerid}}/{{$con->id}}/3">@endif
                         <b>三 层</b>
                     @if($attr->genre!=3)</a>@endif
                     <br>
@@ -94,8 +94,8 @@
                             属性名称：<input type="text" class="t" name="name" value="{{ $attr->name }}">
                         </div>
                         <div class="con_one">
-                            宽：<input type="text" class="t" style="width:30px" name="width" value="{{ $attr->getWidth() }}">px，
-                            高：<input type="text" class="t" style="width:30px" name="height" value="{{ $attr->getHeight() }}">px
+                            宽：<input type="text" class="t" style="width:40px" name="width" value="{{ $attr->getWidth() }}">px，
+                            高：<input type="text" class="t" style="width:40px" name="height" value="{{ $attr->getHeight() }}">px
                         </div>
                         <div class="con_one">
                             边框：
@@ -104,23 +104,20 @@
                                     <option value="{{ $kpad }}" {{ $attr->getPadType()==$kpad ? 'selected' : '' }}>{{ $padType }}</option>
                                 @endforeach
                             </select>
-                                <span class="pad pad1" style="display:{{$attr->getPadType()==1?'block':'none'}};">
-                                    <br>&nbsp;&nbsp;
-                                    四边：<input type="text" class="t" style="width:30px" placeholder="上" name="pad1" value="{{$attr->getPadType()==1?$attr->getPadVal2(0):''}}">px
-                                </span>
-                                <span class="pad pad2" style="display:{{$attr->getPadType()==2?'block':'none'}};">
-                                    <br>&nbsp;&nbsp;
-                                    上下：<input type="text" class="t" style="width:30px" placeholder="上" name="pad1" value="{{$attr->getPadType()==1?$attr->getPadVal2(0):''}}">，
-                                    左右：<input type="text" class="t" style="width:30px" placeholder="上" name="pad1" value="{{$attr->getPadType()==1?$attr->getPadVal2(1):''}}">px
-                                </span>
-                                <span class="pad pad3" style="display:{{$attr->getPadType()==3?'block':'none'}};">
-                                    <br>&nbsp;&nbsp;
-                                    各边：
-                                    <input type="text" class="t" style="width:30px" placeholder="上" name="pad1" value="{{$attr->getPadType()==1?$attr->getPadVal2(0):''}}">
-                                    <input type="text" class="t" style="width:30px" placeholder="下" name="pad1" value="{{$attr->getPadType()==1?$attr->getPadVal2(1):''}}">
-                                    <input type="text" class="t" style="width:30px" placeholder="左" name="pad1" value="{{$attr->getPadType()==1?$attr->getPadVal2(2):''}}">
-                                    <input type="text" class="t" style="width:30px" placeholder="右" name="pad1" value="{{$attr->getPadType()==1?$attr->getPadVal2(3):''}}">px
-                                </span>
+                            <span class="pad pad1" style="display:{{$attr->getPadType()==1?'block':'none'}};">
+                                &nbsp;&nbsp;
+                                四边：<input type="text" class="t" style="width:30px" placeholder="上" name="pad1" value="{{$attr->getPadType()==1?$attr->getPadVal2()[0]:''}}">px
+                            </span>
+                            <span class="pad pad2" style="display:{{$attr->getPadType()==2?'block':'none'}};">
+                                <br>&nbsp;&nbsp;
+                                上下：<input type="text" class="t" style="width:30px" placeholder="上" name="pad1" value="{{$attr->getPadType()==2?$attr->getPadVal2()[0]:''}}">，
+                                左右：<input type="text" class="t" style="width:30px" placeholder="上" name="pad1" value="{{$attr->getPadType()==2?$attr->getPadVal2()[1]:''}}">px
+                            </span>
+                            <span class="pad pad3" style="display:{{$attr->getPadType()==3?'block':'none'}};">
+                                <br>&nbsp;&nbsp;
+                                各边：
+                                <input type="text" class="t" style="width:27px" placeholder="上" name="pad1" value="{{$attr->getPadType()==3?$attr->getPadVal2()[0]:''}}"><input type="text" class="t" style="width:27px" placeholder="下" name="pad1" value="{{$attr->getPadType()==3?$attr->getPadVal2()[1]:''}}"><input type="text" class="t" style="width:27px" placeholder="左" name="pad1" value="{{$attr->getPadType()==3?$attr->getPadVal2()[2]:''}}"><input type="text" class="t" style="width:27px" placeholder="右" name="pad1" value="{{$attr->getPadType()==3?$attr->getPadVal2()[3]:''}}">px
+                            </span>
                         </div>
                         <div class="con_one">
                             定位：

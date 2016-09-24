@@ -12,16 +12,27 @@ class ProductConModel extends BaseModel
 
     protected $table = 'bs_pro_con';
     protected $fillable = [
-        'id','attrid','genre','pic_id','name','attrid','sort','created_at','updated_at',
+        'id','productid','layerid','genre','pic_id','name','attrid','sort','created_at','updated_at',
     ];
     protected $genres = [
         1=>'图片','文字'
     ];
 
-    public function getAttrName()
+    /**
+     * 动画设置信息
+     */
+    public function getLayer()
     {
-        $attrModel = ProductAttrModel::find($this->attrid);
-        return $attrModel ? $attrModel->name : '';
+        return ProductLayerModel::find($this->layerid);
+    }
+
+    /**
+     * 动画设置名称
+     */
+    public function getlayerName()
+    {
+        $layerModel = $this->getLayer();
+        return $layerModel ? $layerModel->name : '';
     }
 
     public function getName()

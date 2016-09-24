@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Base\PicModel;
 use App\Models\Online\ProductAttrModel;
 use App\Models\Online\ProductConModel;
+use App\Models\Online\ProductLayerAttrModel;
+use App\Models\Online\ProductLayerModel;
 use App\Models\Online\ProductModel;
 use Illuminate\Http\Request;
 
@@ -15,6 +17,8 @@ class ProCreationController extends BaseController
 
     protected $prefix_url = 'attr_';
     protected $attrModel;
+    protected $layerModel;
+    protected $layerAttrModel;
 
     public function __construct()
     {
@@ -24,19 +28,32 @@ class ProCreationController extends BaseController
         $this->crumb['category']['url'] = 'product';
         $this->model = new ProductModel();
         $this->attrModel = new ProductAttrModel();
+        $this->layerModel = new ProductLayerModel();
+        $this->layerAttrModel = new ProductLayerAttrModel();
     }
 
-    public function index($productid)
+    public function index($productid,$layerid=0,$con_id=0,$genre=1)
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
+        $layer = $this->getOneLayer($productid,$layerid);
         $result = [
-//            'datas'=> $this->getAttrs($productid),
             'product'=> ProductModel::find($productid),
+            'layers'=> $this->getLayers($productid),
+            'layer'=> $layer,
+//            'layerModel'=> $this->layerModel,
+//            'layerAttrModel'=> $this->layerAttrModel,
+            'cons'=> $this->getCons($productid,$layer->id),
+            'content'=> $this->getOneCon($productid,$layer->id,$con_id),
+            'attr'=> $this->getOneAttr($productid,$layer->id,$genre),
+            'attrModel'=> $this->attrModel,
             'pics'=> PicModel::all(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
             'currUrl'=> 'play',
+            'layerid'=> $layer->id,
+            'con_id'=> $con_id,
+            'attrGenre'=> $genre,
         ];
         return view('admin.proCreation.index', $result);
     }
@@ -44,20 +61,28 @@ class ProCreationController extends BaseController
     /**
      * 总编辑窗口
      */
-    public function edit($productid,$con_id=0,$genre=1)
+    public function edit($productid,$layerid=0,$con_id=0,$genre=1)
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
+        $layer = $this->getOneLayer($productid,$layerid);
         $result = [
             'product'=> ProductModel::find($productid),
-            'cons'=> $this->getCons($productid),
-            'content'=> $this->getOneCon($productid,$con_id),
-            'attr'=> $this->getOneAttr($productid,$con_id,$genre),
+            'layers'=> $this->getLayers($productid),
+            'layer'=> $layer,
+//            'layerModel'=> $this->layerModel,
+//            'layerAttrModel'=> $this->layerAttrModel,
+            'cons'=> $this->getCons($productid,$layer->id),
+            'content'=> $this->getOneCon($productid,$layer->id,$con_id),
+            'attr'=> $this->getOneAttr($productid,$layer->id,$genre),
             'attrModel'=> $this->attrModel,
             'pics'=> PicModel::all(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
             'currUrl'=> 'edit',
+            'layerid'=> $layer->id,
+            'con_id'=> $con_id,
+            'attrGenre'=> $genre,
         ];
         return view('admin.proCreation.index', $result);
     }
@@ -117,38 +142,104 @@ class ProCreationController extends BaseController
 
 
 
-    public function play($productid)
+    /**
+     * 动画预览
+     */
+    public function play($productid,$layerid,$con_id,$genre)
     {
         $urls = explode('/',$_SERVER['REQUEST_URI']);
-        return view('admin.proCreation.basic.play', array(
+        $layer = $this->getOneLayer($productid,$layerid);
+        $result = [
             'currUrl'=> $urls[count($urls)-1],
-        ));
+            'layer'=> $layer,
+            'attrs'=> $this->getOneAttrs($productid,$layer->id),
+            'attr'=> $this->getOneAttr($productid,$layer->id,$genre),
+            'layerAttrs'=> $this->getLayerAttrs($layerid),
+            'layerAttrModel'=> $this->layerAttrModel,
+        ];
+        return view('admin.proCreation.basic.play', $result);
     }
 
-    public function play2($productid)
+    /**
+     * 动画编辑
+     */
+    public function play2($productid,$layerid,$con_id,$genre)
     {
         $urls = explode('/',$_SERVER['REQUEST_URI']);
-        return view('admin.proCreation.basic.edit', array(
+        $layer = $this->getOneLayer($productid,$layerid);
+        $result = [
             'currUrl'=> $urls[count($urls)-1],
-        ));
+            'layer'=> $layer,
+            'attrs'=> $this->getOneAttrs($productid,$layer->id),
+            'attr'=> $this->getOneAttr($productid,$layer->id,$genre),
+            'layerAttrs'=> $this->getLayerAttrs($layerid),
+            'layerAttrModel'=> $this->layerAttrModel,
+        ];
+        return view('admin.proCreation.basic.edit', $result);
     }
 
+    /**
+     * 获取该产品所有动画设置
+     */
+    public function getLayers($productid)
+    {
+        return ProductLayerModel::where('productid',$productid)
+            ->orderBy('delay','asc')
+            ->orderBy('id','asc')
+            ->get();
+    }
+
+    /**
+     * 获取属性
+     */
     public function getAttrs($productid)
     {
         return ProductAttrModel::where('productid',$productid)->get();
     }
 
-    public function getCons($productid)
+    /**
+     * 获取图文内容
+     */
+    public function getCons($productid,$layerid)
     {
         return ProductConModel::where('productid',$productid)
+            ->where('layerid',$layerid)
             ->orderBy('id','desc')
             ->get();
     }
 
-    public function getOneCon($productid,$con_id)
+    /**
+     * 获取动画关键帧
+     */
+    public function getLayerAttrs($layerid)
+    {
+        return ProductLayerAttrModel::where('layerid',$layerid)->get();
+    }
+
+    /**
+     * 获取一条动画记录
+     */
+    public function getOneLayer($productid,$layerid)
+    {
+        if ($layerid) {
+            $layer = ProductLayerModel::find($layerid);
+        } else {
+            $layer = ProductLayerModel::where('productid',$productid)
+                ->orderBy('delay','asc')
+                ->orderBy('id','asc')
+                ->first();
+        }
+        return $layer;
+    }
+
+    /**
+     * 获取一条图文记录
+     */
+    public function getOneCon($productid,$layerid,$con_id)
     {
         if ($con_id==0) {
             $data = ProductConModel::where('productid',$productid)
+                ->where('layerid',$layerid)
                 ->orderBy('id','asc')
                 ->first();
         } else {
@@ -158,22 +249,24 @@ class ProCreationController extends BaseController
     }
 
     /**
-     * 获取第一级属性
+     * 获取一条属性
      */
-    public function getOneAttr($productid,$con_id,$genre)
+    public function getOneAttr($productid,$layerid,$genre)
     {
-        $con = $this->getOneCon($productid,$con_id);
-        if ($genre==1) {
-            $attr = ProductAttrModel::where('productid',$productid)
-                ->where('parent',0)
-                ->where('genre',$genre)
-                ->first();
-        } else {
-            $attr = ProductAttrModel::where('productid',$productid)
-            ->where('parent',$con->attrid)
-            ->where('genre',$genre)
-            ->first();
-        }
+        $attr = ProductAttrModel::where('productid',$productid)
+        ->where('layerid',$layerid)
+        ->where('genre',$genre)
+        ->first();
         return $attr;
+    }
+
+    /**
+     * 获取一个属性组合
+     */
+    public function getOneAttrs($productid,$layerid)
+    {
+        return ProductAttrModel::where('productid',$productid)
+        ->where('layerid',$layerid)
+        ->get();
     }
 }

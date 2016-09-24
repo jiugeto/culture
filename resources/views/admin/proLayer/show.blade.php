@@ -29,8 +29,8 @@
                     <td>{{ $data->name }}</td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">属性名称 / Attribute Name：</td>
-                    <td>{{ $data->getAttrName() }}</td>
+                    <td class="am-hide-sm-only">属性名称 / Product Name：</td>
+                    <td>{{ $data->getProductName() }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">时长 / Time Long：(单位s)</td>

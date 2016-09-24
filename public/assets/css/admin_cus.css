@@ -162,23 +162,60 @@ a:hover.increase,a:hover.reduce { background:white; }
 .admin_out .timetab {
     margin:5px 0;
     width:720px;
-    border:1px solid lightgrey;
     background:rgb(250,250,250);
+}
+.admin_out .tabt {
+    margin:0; padding:0;
+    text-align:center;
+    border:1px solid lightgrey;
+    background:gainsboro;
+    border-bottom:0;
 }
 .admin_out .timetab .title {
     padding:0;
     height:30px;
     color:rgb(100,100,100);
+    border:1px solid lightgrey;
     background:rgb(230,230,230);
+    clear:both;
 }
 .admin_out .timetab .title .tab {
-    padding:2px 0; padding-bottom:3px;
-    width:100px;
+    padding:2px 5px; padding-bottom:1px;
+    width:120px;
     text-align:center;
     border-right:1px solid lightgrey;
+    border-bottom:1px solid lightgrey;
     background:rgb(240,240,240);
     cursor:pointer;
     float:left;
+}
+.admin_out .timetab .layerlist { clear:both; }
+.admin_out .timetab .layerlist .layer {
+    height:150px;
+    color:grey;
+    border:1px solid lightgrey;
+    border-top:0;
+    float:left;
+}
+.admin_out .timetab input,.admin_out .timetab select {
+    padding:0 5px;
+    width:50px; height:20px;
+    border:1px solid lightgrey;
+}.admin_out .timetab select {
+    width:100px; height:25px;
+ }
+.admin_out .timetab .layerlist p { margin:0; }
+.admin_out .timetab .layerlist .set {
+    padding:0 5px;
+    width:200px;
+}
+.admin_out .timetab .layerlist .attr {
+    padding:0 5px;
+    width:520px;
+}
+.timetab .layerlist .submit {
+    margin:20px;
+    padding:2px 15px;
 }
 /*属性菜单*/
 .admin_menu {

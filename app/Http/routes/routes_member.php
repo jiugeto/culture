@@ -76,11 +76,11 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
     Route::post('productcon/{id}','ProductConController@update');
     Route::resource('productcon','ProductConController');
         //动画属性
-    Route::get('{layerid}/prolayerattr/{id}/destroy','ProductLayerAttrController@destroy');
-    Route::get('{layerid}/prolayerattr/{id}/restore','ProductLayerAttrController@restore');
-    Route::get('{layerid}/prolayerattr/{id}/forceDelete','ProductLayerAttrController@forceDelete');
-    Route::post('{layerid}/prolayerattr/{id}','ProductLayerAttrController@update');
-    Route::resource('{layerid}/prolayerattr','ProductLayerAttrController');
+    Route::get('{layerid}/proLayerAttr/{id}/destroy','ProductLayerAttrController@destroy');
+    Route::get('{layerid}/proLayerAttr/{id}/restore','ProductLayerAttrController@restore');
+    Route::get('{layerid}/proLayerAttr/{id}/forceDelete','ProductLayerAttrController@forceDelete');
+    Route::post('{layerid}/proLayerAttr/{id}','ProductLayerAttrController@update');
+    Route::resource('{layerid}/proLayerAttr','ProductLayerAttrController');
     //个人供求
         //个人需求
     Route::post('personD/{id}','PersonDController@update');
