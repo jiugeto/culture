@@ -96,7 +96,7 @@ class HomeController extends BaseController
      */
     public function getProducts($limit)
     {
-        return \App\Models\ProductModel::where(['del'=>0, 'isshow'=>1])
+        return \App\Models\Online\ProductModel::where('isshow',1)
                     ->orderBy('sort','desc')
                     ->orderBy('id','desc')
 //                    ->get();

@@ -11,6 +11,7 @@
             @if($vattr->getWidth()) width:{{$vattr->getWidth()}}px; @endif
             @if($vattr->getHeight()) height:{{$vattr->getHeight()}}px; @endif
             @if($vattr->getFloat()) float:{{$vattr->getFloat()}}; @endif
+            @if($vattr->getIsBorder()) border:{{$vattr->getBorder()}}; @endif
             overflow:hidden;
         }
         @elseif($vattr->genre==2)
@@ -20,11 +21,13 @@
             @if($vattr->getPosType()) position:relative; @endif
             @if($vattr->getPosLeft()) top:{{$vattr->getPosLeft()}}px; @endif
             @if($vattr->getPosTop()) top:{{$vattr->getPosTop()}}px; @endif
+            @if($vattr->getIsBorder()) border:{{$vattr->getBorder()}}; @endif
             overflow:hidden;
         }
         @elseif($vattr->genre==3)
     {{'.'.$vattr->style_name}} img {
             @if($vattr->getHeight()) height:{{$vattr->getHeight()}}px; @endif
+            @if($vattr->getIsBorder()) border:{{$vattr->getBorder()}}; @endif
         }
         @endif
     @endforeach

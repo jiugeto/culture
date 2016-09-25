@@ -168,6 +168,12 @@ class ProductAttrController extends BaseController
         if ($request->isopacity && $request->opacity=='') {
             echo "<script>alert('透明度不能空！');history.go(-1);</script>";exit;
         }
+        //处理边框
+        if ($request->isborder) {
+            if (!$request->borderText || !$request->borderType || !$request->borderColor) {
+                echo "<script>alert('边框信息未填满！');history.go(-1);</script>";exit;
+            }
+        }
         $data = [
             'name'=> $name,
             'productid'=> $productid,
@@ -177,6 +183,7 @@ class ProductAttrController extends BaseController
             'pos'=> $request->posType.','.$request->left.','.$request->top,
             'float'=> $request->float,
             'opacity'=> $request->isopacity.','.$request->opacity,
+            'border'=> $request->isborder.','.$request->borderText.','.$request->borderType.','.$request->borderColor,
         ];
         return $data;
     }

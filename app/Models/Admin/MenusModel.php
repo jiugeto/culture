@@ -7,11 +7,19 @@ class MenusModel extends BaseModel
 {
     protected $table = 'bs_menus';
     protected $fillable = [
-        'id','name','type','intro','namespace','controller_prefix','platUrl','url','action','style_class','pid','isshow','sort','created_at','updated_at',
+        'id','name','type','intro','namespace','controller_prefix','platUrl','url','action','style_class','pid','isshow','isshow2','sort','sort2','created_at','updated_at',
     ];
     protected $types = [
         1=>'会员后台member',2=>'个人后台person',3=>'企业后台company',
     ];
+    protected $isshows = [
+        1=>'不显示','显示',
+    ];
+
+    public function getIsShow()
+    {
+        return array_key_exists($this->isshow,$this->isshows) ? $this->isshows[$this->isshow] : '';
+    }
 
     public function parent()
     {
@@ -23,7 +31,7 @@ class MenusModel extends BaseModel
      */
     public static function MemberMenus()
     {
-        return MenusModel::where(['type'=>1,'isshow'=>1])->orderBy('sort','desc')->get();
+        return MenusModel::where(['type'=>1,'isshow'=>2])->orderBy('sort','desc')->get();
     }
 
     /**
@@ -31,7 +39,7 @@ class MenusModel extends BaseModel
      */
     public static function PersonMenus()
     {
-        return MenusModel::where(['type'=>2,'isshow'=>1])->orderBy('sort','desc')->get();
+        return MenusModel::where(['type'=>2,'isshow'=>2])->orderBy('sort','desc')->get();
     }
 
     /**
@@ -39,6 +47,6 @@ class MenusModel extends BaseModel
      */
     public static function CompanyMenus()
     {
-        return MenusModel::where(['type'=>3,'isshow'=>1])->orderBy('sort2','desc')->get();
+        return MenusModel::where(['type'=>3,'isshow'=>2])->orderBy('sort2','desc')->get();
     }
 }

@@ -8,7 +8,7 @@ class ProductAttrModel extends BaseModel
     protected $table = 'bs_pro_attr';
     protected $fillable = [
         'id','name','style_name','productid','layerid','genre',
-        'padding','size','pos','float','opacity','bg','text',
+        'padding','size','pos','float','opacity','border','bg','text',
         'created_at','updated_at',
     ];
 
@@ -27,6 +27,22 @@ class ProductAttrModel extends BaseModel
     //浮动方式选择
     protected $floats = [
         '无','左浮动','右浮动',
+    ];
+    //边框类型
+    protected $borderTypes = [
+        1=>'dotted','dashed','solid',
+    ];
+    //边框名称
+    protected $borderTypeNames = [
+        1=>'实线','点状','虚线',
+    ];
+    //边框类型
+    protected $borderColors = [
+        1=>'lightgrey','grey','black','white','red','green','blue',
+    ];
+    //边框名称
+    protected $borderColorNames = [
+        1=>'淡灰','灰色','黑色','白色','红色','绿色','蓝色',
     ];
 
     /**
@@ -207,6 +223,38 @@ class ProductAttrModel extends BaseModel
             $opacity = $opacityArr[1];
         }
         return ($opacityArr&&isset($opacity)) ? $opacity : 0;
+    }
+
+    /**
+     * 边框判断
+     */
+    public function getIsBorder()
+    {
+        return explode(',',$this->border)[0];
+    }
+
+    /**
+     * 边框中文信息
+     */
+    public function getBorderName()
+    {
+        $borders = explode(',',$this->border);
+        if ($borders[0]) {
+            $borderName = $borders[1].'px，'.$this->borderTypeNames[$borders[2]].'，'.$this->borderColorNames[$borders[3]];
+        }
+        return isset($borderName) ? $borderName : '无';
+    }
+
+    /**
+     * 边框英文信息
+     */
+    public function getBorder()
+    {
+        $borders = explode(',',$this->border);
+        if ($borders[0]) {
+            $border = $borders[1].'px,'.$this->borderTypes[$borders[2]].','.$this->borderColors[$borders[3]];
+        }
+        return isset($border) ? $border : '';
     }
 
     /**

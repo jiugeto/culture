@@ -44,15 +44,16 @@ class AdModel extends BaseModel
         return $this->adplace() ? $this->adplace()->name : '';
     }
 
-    public function pic()
+    public function pic($picid=null)
     {
-        $picModel = PicModel::find($this->pic_id);
+        $picid = $picid ? $picid : $this->pic_id;
+        $picModel = PicModel::find($picid);
         return $picModel ? $picModel : '';
     }
 
     public function getPicUrl()
     {
-        return $this->pic() ? $this->pic()->getUrl() : '';
+        return $this->pic($this->pic_id) ? $this->pic($this->pic_id)->getUrl() : '';
     }
 
     /**

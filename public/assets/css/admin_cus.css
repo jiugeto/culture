@@ -217,6 +217,17 @@ a:hover.increase,a:hover.reduce { background:white; }
     margin:20px;
     padding:2px 15px;
 }
+.addTimeTab {
+    margin-top:-5px;
+    width:720px;
+    border:1px solid lightgrey;
+    border-top:0;
+    text-align:center;
+    color:grey;
+    background:rgb(250,250,250);
+    cursor:pointer;
+}
+div:hover.addTimeTab { color:orangered; }
 /*属性菜单*/
 .admin_menu {
     margin:5px 0;
@@ -249,7 +260,10 @@ a:hover.increase,a:hover.reduce { background:white; }
     border-right:1px dashed lightgrey;
     border-bottom:1px dashed lightgrey;
 }
-.admin_menu .con .con_one { padding:0 20px; }
+.admin_menu .con .con_one {
+    padding:0 20px;  padding-bottom:2px;
+    border-bottom:1px dotted rgb(230,230,230);
+}
 .admin_menu .con .submit {
     margin:5px 70px;
     padding:2px 15px;

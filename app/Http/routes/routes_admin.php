@@ -32,10 +32,11 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::post('action/{id}','ActionController@update');
     Route::get('action/increase/{id}','ActionController@increase');
     Route::get('action/reduce/{id}','ActionController@reduce');
-    Route::get('action/trash','ActionController@trash');
     Route::get('action/{id}/destroy','ActionController@destroy');
     Route::get('action/{id}/restore','ActionController@restore');
     Route::get('action/{id}/forceDelete','ActionController@forceDelete');
+    Route::get('action/isshow/{id}/{pid}/{isshow}','ActionController@setIsShow');
+    Route::get('action/s/{isshow}/{pid}','ActionController@index');         //s代表检索
     Route::resource('action','ActionController');
         //用户权限分配
     Route::resource('authorization','AuthorizationController');
@@ -46,9 +47,8 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
         //前台左侧菜单链接功能
     Route::post('menus/{id}','MenusController@update');
     Route::get('menus/{id}/forceDelete','MenusController@forceDelete');
-    Route::get('menus/trash','MenusController@trash');
-    Route::get('{type}/menus/trash','MenusController@trash');
-    Route::get('{type}/menus','MenusController@index');
+    Route::get('menus/s/{type}/{isshow}','MenusController@index');      //s代表检索
+    Route::get('menus/isshow/{id}/{isshow}','MenusController@setIsShow');
     Route::resource('menus','MenusController');
     //资料审核
         //会员管理
@@ -81,6 +81,7 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
         //实时创作路由
     Route::post('{pro_id}/creation/editCon/{con_id}','ProCreationController@updateCon');      //图文修改
     Route::post('{pro_id}/creation/addCon','ProCreationController@insertCon');      //图文添加
+    Route::post('{pro_id}/creation/editAttr/{attrid}','ProCreationController@updateAttr');      //属性修改
     Route::get('{pro_id}/creation','ProCreationController@index');      //预览、编辑
     Route::get('{pro_id}/creation/{layerid}/{con_id}/{genre}','ProCreationController@index');
     Route::get('{pro_id}/creation/edit','ProCreationController@edit');  //修改页面，默认第一条图文

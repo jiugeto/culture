@@ -69,6 +69,10 @@
                     <td>{{ $data->getOpacity() }}</td>
                 </tr>
                 <tr>
+                    <td class="am-hide-sm-only">边框 / Border：</td>
+                    <td>{{ $data->getBorderName() }}</td>
+                </tr>
+                <tr>
                     <td class="am-hide-sm-only">创建时间 / Create Time：</td>
                     <td>{{ $data->createTime() }}</td>
                 </tr>

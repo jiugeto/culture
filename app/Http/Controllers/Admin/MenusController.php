@@ -20,17 +20,18 @@ class MenusController extends BaseController
         $this->crumb['']['name'] = '前台菜单列表';
     }
 
-    public function index($type=0)
+    public function index($type=0,$isshow=0)
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'datas'=> $this->query($type),
+            'datas'=> $this->query($type,$isshow),
             'prefix_url'=> DOMAIN.'admin/menus',
             'types'=> $this->model['types'],
-            'type_curr'=> $type,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
+            'type'=> $type,
+            'isshow'=> $isshow,
         ];
         return view('admin.menus.index', $result);
     }
@@ -93,6 +94,15 @@ class MenusController extends BaseController
     public function forceDelete($id)
     {
         MenusModel::find($id)->delete();
+    }
+
+    /**
+     * 设置是否显示
+     */
+    public function setIsShow($id,$isshow)
+    {
+        MenusModel::where('id',$id)->update(['isshow'=> $isshow]);
+        return redirect(DOMAIN.'admin/menus');
     }
 
 
@@ -164,14 +174,25 @@ class MenusController extends BaseController
     /**
      *查询方法
      */
-    public function query($type=0)
+    public function query($type,$isshow)
     {
-        if ($type) {
+        if ($type && $isshow) {
+            $datas =  MenusModel::where('type',$type)
+                ->where('isshow',$isshow)
+                ->orderBy('id','desc')
+                ->orderBy('sort','desc')
+                ->paginate($this->limit);
+        } elseif (!$type && $isshow) {
+            $datas =  MenusModel::where('isshow',$isshow)
+                ->orderBy('id','desc')
+                ->orderBy('sort','desc')
+                ->paginate($this->limit);
+        } elseif ($type && !$isshow) {
             $datas =  MenusModel::where('type',$type)
                 ->orderBy('id','desc')
                 ->orderBy('sort','desc')
                 ->paginate($this->limit);
-        } else {
+        } elseif (!$type && !$isshow) {
             $datas =  MenusModel::orderBy('id','desc')
                 ->orderBy('sort','desc')
                 ->paginate($this->limit);

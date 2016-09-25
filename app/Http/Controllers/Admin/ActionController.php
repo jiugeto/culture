@@ -14,36 +14,26 @@ class ActionController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->model = new ActionModel();
         $this->crumb['']['name'] = '权限列表';
         $this->crumb['category']['name'] = '权限管理';
         $this->crumb['category']['url'] = 'action';
+        $this->model = new ActionModel();
     }
 
-    public function index()
+    public function index($isshow=0,$pid=0)
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'datas'=> $this->query($del=0),
+            'datas'=> $this->query($isshow,$pid),
+            'model'=> $this->model,
             'prefix_url'=> DOMAIN.'admin/action',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
+            'isshow'=> $isshow,
+            'pid'=> $pid,
         ];
         return view('admin.action.index', $result);
-    }
-
-    public function trash()
-    {
-        $curr['name'] = $this->crumb['trash']['name'];
-        $curr['url'] = $this->crumb['trash']['url'];
-        $result = [
-            'datas'=> $this->query($del=1),
-            'prefix_url'=> DOMAIN.'admin/action/trash',
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
-        ];
-        return view('admin.action.trash', $result);
     }
 
     public function create($pid=0)
@@ -117,6 +107,16 @@ class ActionController extends BaseController
         return redirect(DOMAIN.'admin/action');
     }
 
+    /**
+     * 设置是否显示
+     */
+    public function setIsShow($id,$pid,$isshow)
+    {
+        $action = ActionModel::find($id);
+        ActionModel::where('id',$id)->update(['isshow'=> $isshow]);
+        return redirect(DOMAIN.'admin/action/s/'.$action->isshow.'/'.$pid);
+    }
+
 
 
 
@@ -167,13 +167,29 @@ class ActionController extends BaseController
     /**
      *查询方法
      */
-    public function query($del=0)
+    public function query($isshow,$pid)
     {
-        $datas = ActionModel::where('del',$del)
-            ->where('isshow',1)
-            ->orderBy('sort','desc')
-            ->orderBy('id','desc')
-            ->paginate($this->limit);
+        if (!$isshow && !$pid) {
+            $datas = ActionModel::orderBy('sort','desc')
+                ->orderBy('id','desc')
+                ->paginate($this->limit);
+        } elseif ($isshow && !$pid) {
+            $datas = ActionModel::where('isshow',$isshow)
+                ->orderBy('sort','desc')
+                ->orderBy('id','desc')
+                ->paginate($this->limit);
+        } elseif (!$isshow && $pid) {
+            $datas = ActionModel::where('pid',$pid)
+                ->orderBy('sort','desc')
+                ->orderBy('id','desc')
+                ->paginate($this->limit);
+        } elseif ($isshow && $pid) {
+            $datas = ActionModel::where('isshow',$isshow)
+                ->where('pid',$pid)
+                ->orderBy('sort','desc')
+                ->orderBy('id','desc')
+                ->paginate($this->limit);
+        }
         $datas->limit = $this->limit;
         return $datas;
     }

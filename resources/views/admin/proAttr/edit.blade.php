@@ -25,6 +25,33 @@
                         </div>
 
                         <div class="am-form-group">
+                            <label>边框 / Border：
+                                <span style="color:grey;font-size:14px;">(宽度,类型,颜色)</span>
+                            </label>
+                            <label><input type="radio" name="isborder" value="0" {{$data->getIsBorder()==0?'checked':''}} onclick="$('#border').hide();"> 无&nbsp;</label>
+                            <label><input type="radio" name="isborder" value="1" {{$data->getIsBorder()==1?'checked':''}} onclick="$('#border').show();"> 有&nbsp;</label>
+                            <span id="border" style="display:{{$data->getIsBorder()==1?'block':'none'}};">
+                                <input type="text" placeholder="边框宽度，单位px" name="borderText" value="{{ explode(',',$data->border)[1] }}">
+                                <div style="height:5px;"></div>
+                                <select name="borderType">
+                                    @if(count($model['borderTypeNames']))
+                                        @foreach($model['borderTypeNames'] as $kborderType=>$vborderTypeName)
+                                            <option value="{{ $kborderType }}" {{ explode(',',$data->border)[2]==$kborderType ? 'selected' : '' }}>{{ $vborderTypeName }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                                <div style="height:5px;"></div>
+                                <select name="borderColor">
+                                    @if(count($model['borderColorNames']))
+                                        @foreach($model['borderColorNames'] as $kborderColor=>$vborderColorName)
+                                            <option value="{{ $kborderColor }}" {{ explode(',',$data->border)[3]==$kborderColor ? 'selected' : '' }}>{{ $vborderColorName }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="am-form-group">
                             <label>内边距 / Padding：</label>
                             <select name="padType">
                                 @if(count($model['padTypes']))
@@ -49,20 +76,20 @@
 
                         <div class="am-form-group pad pad2" style="display:{{$data->getPadType()==2?'block':'none'}};">
                             <label>内边距宽度 / Padding：(单位px)</label>
-                            <input type="text" placeholder="上下" pattern="^\d+$" name="pad2" value="{{ $data->getPadType()==1?$data->getPadVal2(2)[0]:'' }}"/>
+                            <input type="text" placeholder="上下" pattern="^\d+$" name="pad2" value="{{ $data->getPadType()==2?$data->getPadVal2(2)[0]:'' }}"/>
                             <div style="height:2px;"></div>
-                            <input type="text" placeholder="左右" pattern="^\d+$" name="pad3" value="{{ $data->getPadType()==1?$data->getPadVal2(2)[1]:'' }}"/>
+                            <input type="text" placeholder="左右" pattern="^\d+$" name="pad3" value="{{ $data->getPadType()==2?$data->getPadVal2(2)[1]:'' }}"/>
                         </div>
 
                         <div class="am-form-group pad pad3" style="display:{{$data->getPadType()==3?'block':'none'}};">
                             <label>内边距宽度 / Padding：(单位px)</label>
-                            <input type="text" placeholder="上" pattern="^\d+$" name="pad4" value="{{ $data->getPadType()==1?$data->getPadVal2(3)[0]:'' }}"/>
+                            <input type="text" placeholder="上" pattern="^\d+$" name="pad4" value="{{ $data->getPadType()==3?$data->getPadVal2(3)[0]:'' }}"/>
                             <div style="height:2px;"></div>
-                            <input type="text" placeholder="下" pattern="^\d+$" name="pad5" value="{{ $data->getPadType()==1?$data->getPadVal2(3)[1]:'' }}"/>
+                            <input type="text" placeholder="下" pattern="^\d+$" name="pad5" value="{{ $data->getPadType()==3?$data->getPadVal2(3)[1]:'' }}"/>
                             <div style="height:2px;"></div>
-                            <input type="text" placeholder="左" pattern="^\d+$" name="pad6" value="{{ $data->getPadType()==1?$data->getPadVal2(3)[2]:'' }}"/>
+                            <input type="text" placeholder="左" pattern="^\d+$" name="pad6" value="{{ $data->getPadType()==3?$data->getPadVal2(3)[2]:'' }}"/>
                             <div style="height:2px;"></div>
-                            <input type="text" placeholder="右" pattern="^\d+$" name="pad7" value="{{ $data->getPadType()==1?$data->getPadVal2(3)[3]:'' }}"/>
+                            <input type="text" placeholder="右" pattern="^\d+$" name="pad7" value="{{ $data->getPadType()==3?$data->getPadVal2(3)[3]:'' }}"/>
                         </div>
 
                         <div class="am-form-group">

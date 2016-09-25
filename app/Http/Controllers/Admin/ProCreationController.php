@@ -41,8 +41,6 @@ class ProCreationController extends BaseController
             'product'=> ProductModel::find($productid),
             'layers'=> $this->getLayers($productid),
             'layer'=> $layer,
-//            'layerModel'=> $this->layerModel,
-//            'layerAttrModel'=> $this->layerAttrModel,
             'cons'=> $this->getCons($productid,$layer->id),
             'content'=> $this->getOneCon($productid,$layer->id,$con_id),
             'attr'=> $this->getOneAttr($productid,$layer->id,$genre),
@@ -70,8 +68,6 @@ class ProCreationController extends BaseController
             'product'=> ProductModel::find($productid),
             'layers'=> $this->getLayers($productid),
             'layer'=> $layer,
-//            'layerModel'=> $this->layerModel,
-//            'layerAttrModel'=> $this->layerAttrModel,
             'cons'=> $this->getCons($productid,$layer->id),
             'content'=> $this->getOneCon($productid,$layer->id,$con_id),
             'attr'=> $this->getOneAttr($productid,$layer->id,$genre),
@@ -93,40 +89,22 @@ class ProCreationController extends BaseController
     public function insertCon(Request $request,$productid)
     {
         //一些限制
-        if ($request->genre==1 && !$request->pic) {
+        if ($request->conGenre==1 && !$request->conPic) {
             echo "<script>alert('图片必选！');history.go(-1);</script>";exit;
         }
-        if ($request->genre==2 && !$request->text) {
+        if ($request->conGenre==2 && !$request->conText) {
             echo "<script>alert('文字必填！');history.go(-1);</script>";exit;
         }
-        dd('000');
-
-        //添加一个默认属性样式记录
-        $attr = [
-            'name'=> '',
-            'style_name'=> $this->prefix_url.$productid.'_'.rand(0,1000),
-            'genre'=> 1,        //图层默认第一层
-            'padding'=> '',     //边框默认无
-            'size'=> '100,100',     //默认宽高100*100
-            'pos'=> '0,,',      //定位默认无
-            'float'=> 0,        //浮动默认无
-            'opacity'=> '0,0',      //默认无
-            'created_at'=> time(),
-        ];
-        ProductAttrModel::create($attr);
-
-        //增加内容记录
-        $attrModel = ProductAttrModel::where($attr)->first();
         $data = [
-            'productid'=> $request->productid,
-            'attrid'=> $attrModel->id,
-            'genre'=> $request->genre,
-            'pic_id'=> $request->pic,
-            'name'=> $request->text,
+            'productid'=> $productid,
+            'layerid'=> $request->layerid,
+            'genre'=> $request->conGenre,
+            'pic_id'=> $request->conPic,
+            'name'=> $request->conText,
             'created_at'=> time(),
         ];
         ProductConModel::create($data);
-        return redirect(DOMAIN.'admin/'.$productid.'/creation/editCon');
+        return redirect(DOMAIN.'admin/'.$productid.'/creation/edit/'.$request->layerid.'/'.$request->con_id.'/'.$request->attrGenre);
     }
 
     /**
@@ -134,7 +112,63 @@ class ProCreationController extends BaseController
      */
     public function updateCon(Request $request,$productid,$id)
     {
-        dd('111',$request->all());
+        if ($request->conGenre==1 && !$request->conPic) {
+            echo "<script>alert('图片必选！');history.go(-1);</script>";exit;
+        }
+        if ($request->conGenre==2 && !$request->conText) {
+            echo "<script>alert('文字必填！');history.go(-1);</script>";exit;
+        }
+        $data = [
+            'genre'=> $request->conGenre,
+            'pic_id'=> $request->conPic,
+            'name'=> $request->conText,
+            'updated_at'=> time(),
+        ];
+        ProductConModel::where('id',$id)->update($data);
+        return redirect(DOMAIN.'admin/'.$productid.'/creation/edit/'.$request->layerid.'/'.$request->con_id.'/'.$request->attrGenre);
+    }
+
+    /**
+     * 属性修改，这里id是attrid
+     */
+    public function updateAttr(Request $request,$productid,$id)
+    {
+        //处理名称
+        if ($request->genre==1) {
+            $attrName = $request->name;
+        } else {
+            $attrModel = ProductAttrModel::find($id);
+            $attrName= $attrModel->name;
+        }
+        //内边距处理
+        if (!$request->padType) {
+            $padding = '';
+        } elseif ($request->padType==1) {
+            if (!$request->pad1)  { echo "<script>alert('边距必填！');history.go(-1);</script>";exit; }
+            $padding = $request->pad1;
+        } elseif ($request->padType==2) {
+            if ($request->pad2=='' || $request->pad3=='')  {
+                echo "<script>alert('边距必填！');history.go(-1);</script>";exit;
+            }
+            $padding = $request->pad2.','.$request->pad3;
+        } elseif ($request->padType==3) {
+            if ($request->pad4=='' || $request->pad5=='' || $request->pad6=='' || $request->pad7=='')  {
+                echo "<script>alert('边距必填！');history.go(-1);</script>";exit;
+            }
+            $padding = $request->pad4.','.$request->pad5.','.$request->pad6.','.$request->pad7;
+        }
+        $data = [
+            'name'=> $attrName,
+            'size'=> $request->width.','.$request->height,
+            'padding'=> $padding,
+            'border'=> $request->isborder.','.$request->borderWidth.','.$request->borderType.','.$request->borderColor,
+            'pos'=> $request->posType.','.$request->left.','.$request->top,
+            'float'=> $request->float,
+            'opacity'=> $request->isopacity.','.$request->opacity,
+            'updated_at'=> time(),
+        ];
+        ProductAttrModel::where('id',$id)->update($data);
+        return redirect(DOMAIN.'admin/'.$productid.'/creation/edit/'.$request->layerid.'/'.$request->con_id.'/'.$request->genre);
     }
 
 
@@ -156,6 +190,7 @@ class ProCreationController extends BaseController
             'attr'=> $this->getOneAttr($productid,$layer->id,$genre),
             'layerAttrs'=> $this->getLayerAttrs($layerid),
             'layerAttrModel'=> $this->layerAttrModel,
+            'cons'=> $this->getCons($productid,$layer->id),
         ];
         return view('admin.proCreation.basic.play', $result);
     }
@@ -174,6 +209,7 @@ class ProCreationController extends BaseController
             'attr'=> $this->getOneAttr($productid,$layer->id,$genre),
             'layerAttrs'=> $this->getLayerAttrs($layerid),
             'layerAttrModel'=> $this->layerAttrModel,
+            'cons'=> $this->getCons($productid,$layer->id),
         ];
         return view('admin.proCreation.basic.edit', $result);
     }
@@ -192,9 +228,11 @@ class ProCreationController extends BaseController
     /**
      * 获取属性
      */
-    public function getAttrs($productid)
+    public function getAttrs($productid,$layerid)
     {
-        return ProductAttrModel::where('productid',$productid)->get();
+        return ProductAttrModel::where('productid',$productid)
+            ->where('layerid',$layerid)
+            ->get();
     }
 
     /**

@@ -4,36 +4,41 @@
         @include('admin.common.crumb')
         <div class="am-g">
             @include('admin.common.menu')
-            <div>
-                类型
-                <select name="type">
-                    <option value="0">所有</option>
-                    @foreach($types as $kt=>$type)
-                        <option value="{{ $kt }}"
-                                {{ $type_curr==$kt ? 'selected' : '' }}>
-                            {{ $type }}</option>
-                    @endforeach
-                </select>
-            </div>
+            <select name="type" style="padding:2px 10px;border:1px solid lightgrey;">
+                <option value="0">所有</option>
+                @foreach($types as $kt=>$vtype)
+                    <option value="{{ $kt }}"
+                            {{ $type==$kt ? 'selected' : '' }}>
+                        {{ $vtype }}</option>
+                @endforeach
+            </select>
+            <select name="isshow" style="padding:2px 10px;border:1px solid lightgrey;">
+                <option value="0" {{ $isshow==0 ? 'selected' : '' }}>所有</option>
+                <option value="1" {{ $isshow==1 ? 'selected' : '' }}>不显示</option>
+                <option value="2" {{ $isshow==2 ? 'selected' : '' }}>显示</option>
+            </select>
             <script>
-                $(document).ready(function(){
-                    var type = $("select[name='type']");
-                    type.change(function(){
-                        if(type.val()==0){
-                            window.location.href = '{{DOMAIN}}admin/menus';
-                        } else {
-                            window.location.href = '{{DOMAIN}}admin/'+type.val()+'/menus';
-                        }
-                    });
+                $("select[name='type']").change(function(){
+                    var type = $("select[name='type']").val();
+                    var isshow = $("select[name='isshow']").val();
+                    if(type==0 && isshow==0){
+                        window.location.href = '{{DOMAIN}}admin/menus';
+                    } else {
+                        window.location.href = '{{DOMAIN}}admin/menus/s/'+type+'/'+isshow;
+                    }
+                });
+                $("select[name='isshow']").change(function(){
+                    var type = $("select[name='type']").val();
+                    var isshow = $("select[name='isshow']").val();
+                    if(type==0 && isshow==0){
+                        window.location.href = '{{DOMAIN}}admin/menus';
+                    } else {
+                        window.location.href = '{{DOMAIN}}admin/menus/s/'+type+'/'+isshow;
+                    }
                 });
             </script>
         </div>
 
-        {{--<hr>
-        <div class="am-u-sm-12 am-u-md-3">
-            <span class="action_span" id="span_list" onclick="tolist()">列表模式</span>
-            <span class="action_span" id="span_accordion" onclick="toaccordion()">层叠模式</span>
-        </div>--}}
         <div class="am-g" id="list">
             <div class="am-u-sm-12">
                 <table class="am-table am-table-striped am-table-hover table-main">
@@ -44,9 +49,8 @@
                         <th class="table-title">菜单名称</th>
                         <th class="table-title">菜单类型</th>
                         <th class="table-type">控制器名称</th>
-                        {{--<th class="table-type">菜单方法</th>--}}
                         <th class="table-author am-hide-sm-only">父ID</th>
-                        <th class="table-author am-hide-sm-only">会员后台是否显示</th>
+                        <th class="table-author am-hide-sm-only" width="80">会员后台是否显示</th>
                         <th class="table-date am-hide-sm-only">添加时间</th>
                         <th class="table-set">操作</th>
                     </tr>
@@ -64,16 +68,20 @@
                             @endforeach
                         </td>
                         <td class="am-hide-sm-only">{{ $data->controller_prefix.'Controller' }}</td>
-                        {{--<td class="am-hide-sm-only">{{ $data->action }}</td>--}}
                         <td class="am-hide-sm-only">{{ $data->pid }}</td>
-                        <td class="am-hide-sm-only">{{ $data->isshow==0 ? '不显示' : '显示' }}</td>
-                        <td class="am-hide-sm-only">{{ $data->created_at }}</td>
+                        <td class="am-hide-sm-only">{{ $data->getIsShow() }}</td>
+                        <td class="am-hide-sm-only">{{ $data->createTime() }}</td>
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
                                     <a href="{{DOMAIN}}admin/menus/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="{{PUB}}assets/images/show.png" class="icon"> 查看</button></a>
                                     <a href="{{DOMAIN}}admin/menus/{{$data->id}}/edit"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 编辑</button></a>
-                                    <a href="{{DOMAIN}}admin/menus/{{$data->id}}/forceDelete"><button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><img src="{{PUB}}assets/images/forceDelete_red.png" class="icon"> 销毁记录</button></a>
+                                    @if($data->isshow==2)
+                                    <a href="{{DOMAIN}}admin/menus/isshow/{{$data->id}}/1"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 去隐藏</button></a>
+                                    @elseif($data->isshow==1)
+                                    <a href="{{DOMAIN}}admin/menus/isshow/{{$data->id}}/2"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 去显示</button></a>
+                                    @endif
+                                    {{--<a href="{{DOMAIN}}admin/menus/{{$data->id}}/forceDelete"><button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><img src="{{PUB}}assets/images/forceDelete_red.png" class="icon"> 销毁记录</button></a>--}}
                                 </div>
                             </div>
                         </td>

@@ -23,6 +23,33 @@
                         </div>
 
                         <div class="am-form-group">
+                            <label>边框 / Border：
+                                <span style="color:grey;font-size:14px;">(宽度,类型,颜色)</span>
+                            </label>
+                            <label><input type="radio" name="isborder" value="0" checked onclick="$('#border').hide();"> 无&nbsp;</label>
+                            <label><input type="radio" name="isborder" value="1" onclick="$('#border').show();"> 有&nbsp;</label>
+                            <span id="border" style="display:none;">
+                                <input type="text" placeholder="边框宽度，单位px" name="borderText">
+                                <div style="height:5px;"></div>
+                                <select name="borderType">
+                                    @if(count($model['borderTypeNames']))
+                                        @foreach($model['borderTypeNames'] as $kborderType=>$vborderTypeName)
+                                            <option value="{{ $kborderType }}">{{ $vborderTypeName }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                                <div style="height:5px;"></div>
+                                <select name="borderColor">
+                                    @if(count($model['borderColorNames']))
+                                        @foreach($model['borderColorNames'] as $kborderColor=>$vborderColorName)
+                                            <option value="{{ $kborderColor }}">{{ $vborderColorName }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="am-form-group">
                             <label>内边距 / Padding：</label>
                             <select name="padType">
                                 @if(count($model['padTypes']))
