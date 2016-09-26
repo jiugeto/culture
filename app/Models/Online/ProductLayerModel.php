@@ -14,7 +14,7 @@ class ProductLayerModel extends BaseModel
         1=>'linear','ease','ease-in','ease-out','ease-in-out',/*'cubic-bezier',*/
     ];
     protected $funcNames = [
-        1=>'默认，先慢再快后慢','匀速','低速开始','低速结束','低速开始和结束',/*'贝塞尔函数自定义',*/
+        1=>'慢-快-慢，默认','匀速','低速开始','低速结束','低速开始和结束',/*'贝塞尔函数自定义',*/
     ];
 
     /**
@@ -45,8 +45,18 @@ class ProductLayerModel extends BaseModel
     /**
      * 获取动画关键帧
      */
-    public function getLayerAttrs()
+    public function getLayerAttrs($attrSel=null)
     {
-        return ProductLayerAttrModel::where('layerid',$this->id)->get();
+        if ($attrSel) {
+            $datas = ProductLayerAttrModel::where('productid',$this->productid)
+                ->where('layerid',$this->id)
+                ->where('attrSel',$attrSel)
+                ->get();
+        } else {
+            $datas = ProductLayerAttrModel::where('productid',$this->productid)
+                ->where('layerid',$this->id)
+                ->get();
+        }
+        return $datas;
     }
 }

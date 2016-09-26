@@ -164,16 +164,16 @@
                             </select>
                             <span class="pos" style="display:{{$attr->getPosType()?'block':'none'}};">
                                 <br>&nbsp;&nbsp;左边距：
-                                <input type="text" class="t" style="width:30px" name="left" value="{{ $attr->getPosLeft() }}">px
+                                <input type="text" class="t" style="width:40px" name="left" value="{{ $attr->getPosLeft() }}">px
                                 <br>&nbsp;&nbsp;顶边距：
-                                <input type="text" class="t" style="width:30px" name="top" value="{{ $attr->getPosTop() }}">px
+                                <input type="text" class="t" style="width:40px" name="top" value="{{ $attr->getPosTop() }}">px
                             </span>
                         </div>
                         <div class="con_one">
                             浮动方式：
                             <select name="float">
-                                @foreach($attrModel['floats'] as $kfloat=>$float)
-                                    <option value="{{ $kfloat }}">{{ $float }}</option>
+                                @foreach($attrModel['floats'] as $kfloat=>$vfloat)
+                                    <option value="{{ $kfloat }}" {{ $attr->float==$kfloat ? 'selected' : '' }}>{{ $vfloat }}</option>
                                 @endforeach
                             </select>
                         </div>

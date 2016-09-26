@@ -79,6 +79,10 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::post('{pro_id}/{layerid}/proLayerAttr/{id}','ProductLayerAttrController@update');
     Route::resource('{pro_id}/{layerid}/proLayerAttr','ProductLayerAttrController');
         //实时创作路由
+    Route::post('{pro_id}/creation/addLayer','ProCreationController@insertLayer');      //动画设置添加
+    Route::post('{pro_id}/creation/editLayer/{layerid}','ProCreationController@updateLayer');      //动画设置修改
+    Route::get('{pro_id}/creation/addLayerAttr/{layerid}/{con_id}/{genre}/{attrSel}/{per}/{val}','ProCreationController@insertLayerAttr');      //动画关键帧添加
+    Route::get('{pro_id}/creation/editLayerAttr/{layerid}/{con_id}/{genre}/{layerAttrId}/{attrSel}/{per}/{val}','ProCreationController@updateLayerAttr');      //动画关键帧修改
     Route::post('{pro_id}/creation/editCon/{con_id}','ProCreationController@updateCon');      //图文修改
     Route::post('{pro_id}/creation/addCon','ProCreationController@insertCon');      //图文添加
     Route::post('{pro_id}/creation/editAttr/{attrid}','ProCreationController@updateAttr');      //属性修改

@@ -14,7 +14,7 @@ class ProductLayerAttrModel extends BaseModel
         1=>'width','height','left','top','opacity',
     ];
     protected $attrSelNames = [
-        1=>'宽度','高度','左边距离','右边距离','透明度',
+        1=>'宽度','高度','左边距离','顶边距离','透明度',
     ];
 
     /**

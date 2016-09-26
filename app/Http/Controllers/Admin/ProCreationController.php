@@ -68,10 +68,13 @@ class ProCreationController extends BaseController
             'product'=> ProductModel::find($productid),
             'layers'=> $this->getLayers($productid),
             'layer'=> $layer,
+            'layerModel'=> $this->layerModel,
             'cons'=> $this->getCons($productid,$layer->id),
             'content'=> $this->getOneCon($productid,$layer->id,$con_id),
             'attr'=> $this->getOneAttr($productid,$layer->id,$genre),
             'attrModel'=> $this->attrModel,
+//            'layerAttrs'=> $this->getLayerAttrs($productid,$layerid),
+            'layerAttrModel'=> $this->layerAttrModel,
             'pics'=> PicModel::all(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -81,6 +84,36 @@ class ProCreationController extends BaseController
             'attrGenre'=> $genre,
         ];
         return view('admin.proCreation.index', $result);
+    }
+
+    /**
+     * 添加动画设置
+     */
+    public function insertLayer(Request $request,$productid)
+    {
+        dd($productid,$request->all());
+        return redirect(DOMAIN.'admin/'.$productid.'/creation/edit/'.$request->layerid.'/'.$request->con_id.'/'.$request->attrGenre);
+    }
+
+    /**
+     * 添加动画关键帧
+     */
+    public function insertLayerAttr($productid,$layerid,$con_id,$genre,$attrSel,$per,$val)
+    {
+        if (!$productid || !$layerid || !$con_id || !$genre || !$attrSel || $per=='' || $val=='') {
+            echo "<script>alert('参数不对！');history.go(-1);</script>";exit;
+        }
+//        dd($per,$layerid,$con_id,$attrSel,$genre,$per,$val);
+        $data = [
+            'productid'=> $productid,
+            'layerid'=> $layerid,
+            'attrSel'=> $attrSel,
+            'per'=> $per,
+            'val'=> $val,
+            'created_at'=> time(),
+        ];
+        ProductLayerAttrModel::create($data);
+        return redirect(DOMAIN.'admin/'.$productid.'/creation/edit/'.$layerid.'/'.$con_id.'/'.$genre);
     }
 
     /**
@@ -105,6 +138,45 @@ class ProCreationController extends BaseController
         ];
         ProductConModel::create($data);
         return redirect(DOMAIN.'admin/'.$productid.'/creation/edit/'.$request->layerid.'/'.$request->con_id.'/'.$request->attrGenre);
+    }
+
+    /**
+     * 动画设置修改，这里id是layerid
+     */
+    public function updateLayer(Request $request,$productid,$id)
+    {
+        if ($request->delay=='' || $request->timelong=='') {
+            echo "<script>alert('延时或者时长必填！');history.go(-1);</script>";exit;
+        }
+        if ($request->timelong==0) {
+            echo "<script>alert('时长不能为0！');history.go(-1);</script>";exit;
+        }
+        $data = [
+            'delay'=> $request->delay,
+            'timelong'=> $request->timelong,
+            'func'=> $request->func,
+            'updated_at'=> time(),
+        ];
+        ProductLayerModel::where('id',$id)->update($data);
+        return redirect(DOMAIN.'admin/'.$productid.'/creation/edit/'.$request->layerid.'/'.$request->con_id.'/'.$request->attrGenre);
+    }
+
+    /**
+     * 动画设置修改，这里id是layerAttrid
+     */
+    public function updateLayerAttr($productid,$layerid,$con_id,$genre,$layerAttrId,$attrSel,$per,$val)
+    {
+        if (!$productid || !$layerid || !$con_id || !$genre || !$layerAttrId || !$attrSel || $per=='' || $val=='') {
+            echo "<script>alert('参数有误！');history.go(-1);</script>";exit;
+        }
+        $data = [
+            'attrSel'=> $attrSel,
+            'per'=> $per,
+            'val'=> $val,
+            'updated_at'=> time(),
+        ];
+        ProductLayerAttrModel::where('id',$layerAttrId)->update($data);
+        return redirect(DOMAIN.'admin/'.$productid.'/creation/edit/'.$layerid.'/'.$con_id.'/'.$genre);
     }
 
     /**
@@ -188,7 +260,7 @@ class ProCreationController extends BaseController
             'layer'=> $layer,
             'attrs'=> $this->getOneAttrs($productid,$layer->id),
             'attr'=> $this->getOneAttr($productid,$layer->id,$genre),
-            'layerAttrs'=> $this->getLayerAttrs($layerid),
+            'layerAttrs'=> $this->getLayerAttrs($productid,$layerid),
             'layerAttrModel'=> $this->layerAttrModel,
             'cons'=> $this->getCons($productid,$layer->id),
         ];
@@ -207,7 +279,7 @@ class ProCreationController extends BaseController
             'layer'=> $layer,
             'attrs'=> $this->getOneAttrs($productid,$layer->id),
             'attr'=> $this->getOneAttr($productid,$layer->id,$genre),
-            'layerAttrs'=> $this->getLayerAttrs($layerid),
+            'layerAttrs'=> $this->getLayerAttrs($productid,$layerid),
             'layerAttrModel'=> $this->layerAttrModel,
             'cons'=> $this->getCons($productid,$layer->id),
         ];
@@ -249,9 +321,11 @@ class ProCreationController extends BaseController
     /**
      * 获取动画关键帧
      */
-    public function getLayerAttrs($layerid)
+    public function getLayerAttrs($productid,$layerid)
     {
-        return ProductLayerAttrModel::where('layerid',$layerid)->get();
+        return ProductLayerAttrModel::where('productid',$productid)
+            ->where('layerid',$layerid)
+            ->get();
     }
 
     /**

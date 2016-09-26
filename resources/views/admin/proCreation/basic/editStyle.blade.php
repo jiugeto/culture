@@ -10,7 +10,7 @@
     {{'.'.$vattr->style_name}} div.pos {
             @if($vattr->getWidth()) width:{{$vattr->getWidth()}}px; @endif
             @if($vattr->getHeight()) height:{{$vattr->getHeight()}}px; @endif
-            @if($vattr->getFloat()) float:{{$vattr->getFloat()}}; @endif
+            @if($vattr->getFloatType()) float:{{$vattr->getFloatType()}}; @endif
             @if($vattr->getIsBorder()) border:{{$vattr->getBorder()}}; @endif
             overflow:hidden;
         }

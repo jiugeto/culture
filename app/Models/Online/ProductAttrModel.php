@@ -24,6 +24,10 @@ class ProductAttrModel extends BaseModel
     protected $posTypes = [
         '无','相对定位',
     ];
+    //浮动方式
+    protected $floatTypes = [
+        '','left','right',
+    ];
     //浮动方式选择
     protected $floats = [
         '无','左浮动','右浮动',
@@ -211,6 +215,14 @@ class ProductAttrModel extends BaseModel
     public function getFloat()
     {
         return array_key_exists($this->float,$this->floats) ? $this->floats[$this->float] : '';
+    }
+
+    /**
+     * 浮动方式
+     */
+    public function getFloatType()
+    {
+        return array_key_exists($this->float,$this->floatTypes) ? $this->floatTypes[$this->float] : '';
     }
 
     /**
