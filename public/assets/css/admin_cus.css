@@ -196,9 +196,10 @@ a:hover.increase,a:hover.reduce { background:white; }
     border:1px solid lightgrey;
     border-top:0;
     background:rgb(252,252,252);
-    overflow:hidden;
+    overflow:auto;
     float:left;
 }
+.admin_out .timetab .layerlist .layer td { border-bottom:1px dotted rgb(230,230,230); }
 .admin_out .timetab input,.admin_out .timetab select {
     padding:0 5px;
     width:50px; height:20px;
@@ -220,12 +221,12 @@ a:hover.increase,a:hover.reduce { background:white; }
     float:left;
 }
 .timetab .layerlist table .left {
-    width:30px;
+    width:40px;
     border-top-left-radius:3px;
     border-bottom-left-radius:3px;
 }
 .timetab .layerlist table .right {
-    width:40px;
+    width:50px;
     border-top-right-radius:3px;
     border-bottom-right-radius:3px;
 }

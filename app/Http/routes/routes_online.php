@@ -6,7 +6,7 @@
 
 //用户自己的创作房间
 Route::group(['prefix'=>'online/u','middleware' =>'MemberAuth','namespace'=>'Online'],function(){
-    Route::get('product/getpro/{id}','ProductController@getPro');
+    Route::get('product/getpro/{id}','ProductController@getPro');       //获取创作模板
     Route::get('product/c/{cate}','ProductController@index');
     Route::resource('product','ProductController');
 });
@@ -19,7 +19,7 @@ Route::group(['prefix'=>'online','namespace'=>'Online'],function() {
     //在线预览
     Route::get('pre/{id}', 'HomeController@show');
     //动画模板
-    Route::get('p/lay', 'HomeController@lay');
+    Route::get('pro/play/{id}', 'HomeController@play');
 });
 
 //用户参数路由

@@ -21,6 +21,7 @@ class DesignController extends BaseController
     {
         $result = [
             'datas'=> $this->query($cate),
+            'prefix_url'=> DOMAIN.'design',
             'ads'=> $this->ads(),
             'lists'=> $this->list,
             'model'=> $this->model,

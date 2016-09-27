@@ -21,12 +21,12 @@ class SupplyController extends BaseController
     {
         $result = [
             'datas'=> $this->query($genre),
+            'prefix_url'=> DOMAIN.'supply',
             'ads'=> $this->ads(),
             'model'=> $this->model,
             'lists'=> $this->list,
             'curr_menu'=> $this->curr,
             'genre'=> $genre,
-
         ];
 //        dd(date('Y-m-d H',time()),time(),date('Y-m-d H',time()));
         return view('home.supply.index', $result);

@@ -3,7 +3,7 @@
     div#win_out { width:720px; height:405px; overflow:hidden; }
     .attr { width:720px; height:405px; position:absolute; top:0; }
 
-    /*1>================================*/
+    /*================================*/
     @if(count($attrs))
     @foreach($attrs as $kattr=>$vattr)
         @if($vattr->genre==1)
@@ -34,7 +34,7 @@
     @endif
 
     /*================================*/
-    .timeline { width:720px; background:#000066; position:absolute; top:30px; }
+    .timeline { width:720px; background:darkred; position:absolute; top:30px; }
     .timeline div.dh { width:720px; height:3px; background:red; position:relative; left:-750px; }
 
     {{--动画样式--}}
@@ -44,7 +44,7 @@
         @if($vattr->genre==1)
     {{'.'.$vattr->style_name}} div.dh {
         animation-name:{{$layer->a_name}};
-        animation-play-state:paused;
+        animation-play-state:running;
         animation-duration:{{$layer->timelong-$layer->delay}}s;
         animation-timing-function:ease;
         animation-delay:0s;
@@ -69,7 +69,7 @@
     {{'{'}}
         @if(count($layerAttrs))
             @foreach($layerAttrs as $layerAttr)
-         {{$layerAttr->per.'% { '.$layerAttrModel['attrSels'][$layerAttr->attrSel].':'.$layerAttr->val}}@if(in_array($layerAttr->attrSel,[1,2,3,4])){{'px'}}@elseif($layerAttr->attrSel==5){{'%'}}@endif
+         {{$layerAttr->per.'% { '.$layerAttrModel['attrSels'][$layerAttr->attrSel].':'}}{{$layerAttr->attrSel==5?$layerAttr->val/100:$layerAttr->val}}@if(in_array($layerAttr->attrSel,[1,2,3,4])){{'px;'}}@elseif($layerAttr->attrSel==5){{';'}}@endif{{'}'}}
             @endforeach
         @endif
     {{'}'}}

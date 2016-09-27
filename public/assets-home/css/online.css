@@ -89,6 +89,10 @@ body { font-family:'微软雅黑'; }
 .online_list .list .pro_one {
     width:210px; height:140px;
     border:5px solid grey;
+    color:rgb(70,70,70);
+    text-align:center;
+    line-height:140px;
+    font-size:40px;
     background:rgb(50,50,50);
     overflow:hidden;
 }

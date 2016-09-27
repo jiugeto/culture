@@ -84,13 +84,13 @@
         @if($attr)
             <div class="con">
                 <div class="edit_con">
-                    @if($attr->genre!=1)<a href="{{DOMAIN}}admin/{{$product->id}}/creation/edit/{{$layerid}}/{{$con->id}}/1">@endif
+                    @if($attr->genre!=1)<a href="{{DOMAIN}}admin/{{$product->id}}/creation/edit/{{$layerid}}/{{$content->id}}/1">@endif
                         <b>一 层</b>
                     @if($attr->genre!=1)</a>@endif
-                    @if($attr->genre!=2)<a href="{{DOMAIN}}admin/{{$product->id}}/creation/edit/{{$layerid}}/{{$con->id}}/2">@endif
+                    @if($attr->genre!=2)<a href="{{DOMAIN}}admin/{{$product->id}}/creation/edit/{{$layerid}}/{{$content->id}}/2">@endif
                         <b>二 层</b>
                     @if($attr->genre!=2)</a>@endif
-                    @if($attr->genre!=3)<a href="{{DOMAIN}}admin/{{$product->id}}/creation/edit/{{$layerid}}/{{$con->id}}/3">@endif
+                    @if($attr->genre!=3)<a href="{{DOMAIN}}admin/{{$product->id}}/creation/edit/{{$layerid}}/{{$content->id}}/3">@endif
                         <b>三 层</b>
                     @if($attr->genre!=3)</a>@endif
                     <br>

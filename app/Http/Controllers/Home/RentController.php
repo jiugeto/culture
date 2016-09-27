@@ -50,8 +50,8 @@ class RentController extends BaseController
     {
         $datas = RentModel::where('genre',1)
             ->where('del',0)
-            ->where('price','>',$fromMoney)
-            ->where('price','<',$toMoney)
+            ->where('money','>',$fromMoney)
+            ->where('money','<',$toMoney)
             ->orderBy('sort','desc')
             ->orderBy('id','desc')
             ->paginate($this->limit);

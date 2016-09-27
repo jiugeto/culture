@@ -32,6 +32,11 @@ class HomeController extends BaseController
     {
         $result = [
             'data'=> ProductModel::find($id),
+            'layers'=> $this->getLayers($id),
+            'cons'=> $this->getCons($id,0),
+            'attrs'=> $this->getAttrs($id,0),
+            'attrModel'=> $this->attrModel,
+            'currUrl'=> 'play',
         ];
         return view('online.home.show', $result);
     }
@@ -47,30 +52,21 @@ class HomeController extends BaseController
     {
         if ($cate) {
             $datas = ProductModel::where('cate',$cate)
+                ->where('isauth',3)
                 ->where('isshow',1)
+                ->where('uid',0)
                 ->orderBy('sort','desc')
                 ->orderBy('id','desc')
                 ->paginate($this->limit);
         } else {
             $datas = ProductModel::where('isshow',1)
+                ->where('isauth',3)
+                ->where('uid',0)
                 ->orderBy('sort','desc')
                 ->orderBy('id','desc')
                 ->paginate($this->limit);
         }
         $datas->limit = $this->limit;
         return $datas;
-    }
-
-
-
-
-
-
-    /**
-     * 在线创作动画预览
-     */
-    public function lay()
-    {
-        return view('online.pre.index');
     }
 }

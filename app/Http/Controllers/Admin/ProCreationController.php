@@ -15,7 +15,8 @@ class ProCreationController extends BaseController
      * 系统后台实时创作窗口
      */
 
-    protected $prefix_url = 'attr_';
+    protected $prefix_attr = 'attr_';
+    protected $prefix_layer = 'layer_';
     protected $attrModel;
     protected $layerModel;
     protected $layerAttrModel;
@@ -91,8 +92,25 @@ class ProCreationController extends BaseController
      */
     public function insertLayer(Request $request,$productid)
     {
-        dd($productid,$request->all());
-        return redirect(DOMAIN.'admin/'.$productid.'/creation/edit/'.$request->layerid.'/'.$request->con_id.'/'.$request->attrGenre);
+        if (!$request->layerName || $request->timelong=='') {
+            echo "<script>alert('动画设置名称或者时长必填！');history.go(-1);</script>";exit;
+        }
+        $data = [
+            'productid'=> $productid,
+            'name'=> $request->layerName,
+            'a_name'=> $this->prefix_layer.$productid.'_'.rand(0,10000),
+            'timelong'=> $request->timelong,
+            'func'=> $request->func,
+            'delay'=> $request->delay,
+            'created_at'=> time(),
+        ];
+        ProductLayerModel::create($data);
+        $layerModel = ProductLayerModel::where($data)->first();
+        //初始化内容
+        $conModel = $this->initCon($productid,$layerModel->id);
+        //初始化属性1、2、3
+        $this->initAttr($productid,$layerModel->id);
+        return redirect(DOMAIN.'admin/'.$productid.'/creation/edit/'.$layerModel->id.'/'.$conModel->id.'/1');
     }
 
     /**
@@ -257,6 +275,7 @@ class ProCreationController extends BaseController
         $layer = $this->getOneLayer($productid,$layerid);
         $result = [
             'currUrl'=> $urls[count($urls)-1],
+            'layers'=> $this->getLayers($productid),
             'layer'=> $layer,
             'attrs'=> $this->getOneAttrs($productid,$layer->id),
             'attr'=> $this->getOneAttr($productid,$layer->id,$genre),
@@ -380,5 +399,50 @@ class ProCreationController extends BaseController
         return ProductAttrModel::where('productid',$productid)
         ->where('layerid',$layerid)
         ->get();
+    }
+
+    /**
+     * 初始化一条内容
+     */
+    public function initCon($productid,$layerid)
+    {
+        $data = [
+            'productid'=> $productid,
+            'layerid'=> $layerid,
+            'genre'=> 1,
+            'pic_id'=> 1,
+            'name'=> '',
+            'created_at'=> time(),
+        ];
+        ProductConModel::create($data);
+        $conModel = ProductConModel::where($data)->first();
+        return $conModel;
+    }
+
+    /**
+     * 初始化属性
+     */
+    public function initAttr($productid,$layerid)
+    {
+        $data = [
+            'name'=> '样式'.$layerid,
+            'style_name'=> $this->prefix_attr.$productid.'_'.rand(0,10000),
+            'productid'=> $productid,
+            'layerid'=> $layerid,
+            'padding'=> '',
+            'size'=> '720,405',
+            'pos'=> '0,,',
+            'float'=> 0,
+            'opacity'=> '0,0',
+            'border'=> '0,,1,1',
+            'created_at'=> time(),
+        ];
+        $data1 = $data; $data2 = $data; $data3 = $data;
+        $data1['genre'] = 1;
+        $data2['genre'] = 2;
+        $data3['genre'] = 3;
+        ProductAttrModel::create($data1);
+        ProductAttrModel::create($data2);
+        ProductAttrModel::create($data3);
     }
 }

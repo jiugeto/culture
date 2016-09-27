@@ -11,10 +11,10 @@ class ProductModel extends BaseModel
         'id','name','genre','cate','gif','intro','uid','uname','isattr','isauth','istop','sort','isshow','created_at','updated_at',
     ];
     protected $genres = [
-        1=>'个人供应','企业供应',
+        1=>'个人供应','企业供应','平台供应',
     ];
     protected $isauths = [
-        '未审核','未通过审核','通过审核',
+        1=>'未审核','未通过审核','通过审核',
     ];
     protected $istops = [
         '不置顶','置顶',

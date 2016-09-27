@@ -12,7 +12,7 @@ class ProductConModel extends BaseModel
 
     protected $table = 'bs_pro_con';
     protected $fillable = [
-        'id','productid','layerid','genre','pic_id','name','attrid','sort','created_at','updated_at',
+        'id','productid','layerid','genre','pic_id','name','sort','isshow','created_at','updated_at',
     ];
     protected $genres = [
         1=>'图片','文字'
@@ -67,5 +67,15 @@ class ProductConModel extends BaseModel
     {
         $picModels = PicModel::where('del',0)->get();
         return count($picModels) ? $picModels : [];
+    }
+
+    /**
+     * 获得属性样式名称
+     */
+    public function getAttrName()
+    {
+//        $layer = ProductLayerModel::where('layerid',$this->layerid)->first();
+        $attrModel = ProductAttrModel::where('layerid',$this->layerid)->first();
+        return $attrModel ? $attrModel->style_name : '';
     }
 }

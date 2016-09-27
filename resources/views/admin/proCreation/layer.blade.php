@@ -4,15 +4,18 @@
     <div class="title">
         @if(count($layers))
             @foreach($layers as $layer)
+            <a href="{{DOMAIN}}admin/{{$product->id}}/creation/edit/{{$layer->id}}/{{$content->id}}/1">
                 <div class="tab" @if($layer->id==$layerid)style="color:orangered;"@endif>
                     {{str_limit($layer->name,6)}}({{$layer->delay}}-{{$layer->delay+$layer->timelong}}s)
                 </div>
+            </a>
             @endforeach
         @endif
     </div>
     <div class="layerlist">
         @if(count($layers))
             @foreach($layers as $layer)
+                @if($layer->id==$layerid)
                 <div class="layer set">
                     <form method="POST" id="formLayer" action="{{DOMAIN}}admin/{{$product->id}}/creation/editLayer/{{$layerid}}" enctype="multipart/form-data">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -34,19 +37,19 @@
                     </form>
                 </div>
                 <div class="layer attr">
-                    @if(count($layer->getLayerAttrs()))
+                    {{--@if(count($layer->getLayerAttrs()))--}}
                         <input type="hidden" name="productid" value="{{$product->id}}">
                         <input type="hidden" name="layerid" value="{{$layerid}}">
                         <input type="hidden" name="con_id" value="{{$content->id}}">
                         <input type="hidden" name="attrGenre" value="{{$attr->genre}}">
                         <table>
                             <tr>
-                                <td>宽：</td>
+                                <td width="70">宽：</td>
                                 <td>
                                     @if(count($layer->getLayerAttrs(1)) && $layerAttrs=$layer->getLayerAttrs(1))
                                         @foreach($layerAttrs as $layerAttr)
                                             <div class="keyval">
-                                                <input type="text" class="left" name="per_1_{{$layerAttr->id}}" value="{{ $layerAttr->val }}"><input type="text" class="right" name="val_1_{{$layerAttr->id}}" value="{{ $layerAttr->val }}">
+                                                <input type="text" class="left" name="per_1_{{$layerAttr->id}}" value="{{ $layerAttr->per }}"><input type="text" class="right" name="val_1_{{$layerAttr->id}}" value="{{ $layerAttr->val }}">
                                                 <input type="hidden" name="layerAttrId_1" value="{{ $layerAttr->id }}">
                                                 <input type="button" style="font-size:14px;" value="更新" onclick="editLayerAttr(1);">
                                             </div>
@@ -64,7 +67,7 @@
                                     @if(count($layer->getLayerAttrs(2)) && $layerAttrs=$layer->getLayerAttrs(2))
                                         @foreach($layerAttrs as $layerAttr)
                                             <div class="keyval">
-                                                <input type="text" class="left" name="per_2_{{$layerAttr->id}}" value="{{ $layerAttr->val }}"><input type="text" class="right" name="val_2_{{$layerAttr->id}}" value="{{ $layerAttr->val }}">
+                                                <input type="text" class="left" name="per_2_{{$layerAttr->id}}" value="{{ $layerAttr->per }}"><input type="text" class="right" name="val_2_{{$layerAttr->id}}" value="{{ $layerAttr->val }}">
                                                 <input type="hidden" name="layerAttrId_2" value="{{ $layerAttr->id }}">
                                                 <input type="button" style="font-size:14px;" value="更新" onclick="editLayerAttr(2);">
                                             </div>
@@ -82,7 +85,7 @@
                                     @if(count($layer->getLayerAttrs(3)) && $layerAttrs=$layer->getLayerAttrs(3))
                                         @foreach($layerAttrs as $layerAttr)
                                             <div class="keyval">
-                                                <input type="text" class="left" name="per_3_{{$layerAttr->id}}" value="{{ $layerAttr->val }}"><input type="text" class="right" name="val_3_{{$layerAttr->id}}" value="{{ $layerAttr->val }}">
+                                                <input type="text" class="left" name="per_3_{{$layerAttr->id}}" value="{{ $layerAttr->per }}"><input type="text" class="right" name="val_3_{{$layerAttr->id}}" value="{{ $layerAttr->val }}">
                                                 <input type="hidden" name="layerAttrId_3" value="{{ $layerAttr->id }}">
                                                 <input type="button" style="font-size:14px;" value="更新" onclick="editLayerAttr(3);">
                                             </div>
@@ -118,7 +121,7 @@
                                     @if(count($layer->getLayerAttrs(5)) && $layerAttrs=$layer->getLayerAttrs(5))
                                         @foreach($layerAttrs as $layerAttr)
                                             <div class="keyval">
-                                                <input type="text" class="left" name="per_5_{{$layerAttr->id}}" value="{{ $layerAttr->val }}"><input type="text" class="right" name="val_5_{{$layerAttr->id}}" value="{{ $layerAttr->val }}">
+                                                <input type="text" class="left" name="per_5_{{$layerAttr->id}}" value="{{ $layerAttr->per }}"><input type="text" class="right" name="val_5_{{$layerAttr->id}}" value="{{ $layerAttr->val }}">
                                                 <input type="hidden" name="layerAttrId_5" value="{{ $layerAttr->id }}">
                                                 <input type="button" style="font-size:14px;" value="更新" onclick="editLayerAttr(5);">
                                             </div>
@@ -131,8 +134,10 @@
                                 </td>
                             </tr>
                         </table>
-                    @endif
+                    {{--@endif--}}
+                    <div style="height:10px"></div>
                 </div>
+                @endif
             @endforeach
         @endif
     </div>
@@ -142,11 +147,9 @@
     <form method="POST" id="formlayerAttr" action="{{DOMAIN}}admin/{{$product->id}}/creation/addLayer" enctype="multipart/form-data">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="_method" value="POST">
-        <input type="hidden" name="con_id" value="{{$content->id}}">
-        <input type="hidden" name="attrGenre" value="{{$attr->genre}}">
         动画设置：<input type="text" placeholder="动画设置名称" name="layerName">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        延 &nbsp;&nbsp;&nbsp;迟 &nbsp;&nbsp;：<input type="text" placeholder="动画等待时间" name="delay">s
+        延 &nbsp;&nbsp;&nbsp;时 &nbsp;&nbsp;：<input type="text" placeholder="动画等待时间" name="delay" value="0">s
         <br>时 &nbsp;&nbsp;&nbsp;长 &nbsp;&nbsp;：<input type="text" placeholder="动画持续时间" name="timelong">s
         &nbsp;&nbsp;&nbsp;&nbsp;
         动画曲线：

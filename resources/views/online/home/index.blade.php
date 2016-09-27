@@ -29,18 +29,18 @@
             </a>
                 @endforeach
             @endif
-            @if(count($datas))
+            {{--@if(count($datas))--}}
                 @for($i=0;$i<$datas->limit-count($datas);++$i)
             <a href="" title="点击预览">
                 <div class="prolist">
-                    <div class="pro_one"><img src=""></div>
+                    <div class="pro_one">+</div>
                     <div class="pname"><b>产品名称</b>
                         <div class="small">时间</div>
                     </div>
                 </div>
             </a>
                 @endfor
-            @endif
+            {{--@endif--}}
 
             <div style="clear:both;"></div>
             <div style="margin-top:20px;">@include('person.common.page')</div>

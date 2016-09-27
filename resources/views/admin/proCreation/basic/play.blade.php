@@ -2,54 +2,21 @@
 
 <div style="width:720px;height:405px;background:ghostwhite;">{{--背景--}}</div>
 <div id="win_out">
-    <div class="img img1">
+    @if(count($cons))
+        @foreach($cons as $con)
+    <div class="attr {{$attr->style_name}}">
         <div class="pos">
-            <div class="dh"><img src="/uploads/images/2016/ppt.png"></div>
+            <div class="dh">
+                @if($con->genre==1)
+                    <img src="{{ $con->getPicUrl() }}">
+                @else
+                    {{ $con->name }}
+                @endif
+            </div>
         </div>
     </div>
-
-    <div class="img img2">
-        <div class="pos">
-            <div class="dh"><img src="/uploads/images/2016/online1.png"></div>
-        </div>
-        <div class="pos">
-            <div class="dh"><img src="/uploads/images/2016/online1.png"></div>
-        </div>
-        <div class="pos">
-            <div class="dh"><img src="/uploads/images/2016/online1.png"></div>
-        </div>
-    </div>
-
-    <div class="img img3">
-        <div class="pos">
-            <div class="dh"><img src="/uploads/images/2016/online1.png"></div>
-        </div>
-        <div class="pos">
-            <div class="dh"><img src="/uploads/images/2016/online1.png"></div>
-        </div>
-    </div>
-
-    <div class="img img4">
-        <div class="pos">
-            <div class="dh"><img src="/uploads/images/2016/ppt.png"></div>
-        </div>
-    </div>
-
-    <div class="img img4">
-        <div class="pos">
-            <div class="dh"><img src="/uploads/images/2016/ppt.png"></div>
-        </div>
-    </div>
-
-    <div class="img img5">
-        <div class="pos">
-            <div class="dh"><img src="/uploads/images/2016/ppt.png"></div>
-        </div>
-    </div>
-
-    <div class="img end">
-        <div class="dh">END</div>
-    </div>
+        @endforeach
+    @endif
 </div>
 
 <audio id="audio" {{--autoplay--}}>
@@ -65,11 +32,6 @@
 
 <script src="{{PUB}}assets/js/jquery-1.10.2.min.js"></script>
 <script>
-    //函数自调用，来暂停播放
-//    (function(){
-//        $(".dh").css('animation-play-state','paused');
-//        $(".stop").hide(); $(".play").show();
-//    })();
     //播放、暂停切换
     $(document).ready(function(){
         var dh = $(".dh");

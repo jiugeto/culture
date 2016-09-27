@@ -71,7 +71,7 @@
             @endif
             </table>
         </div>
-        @include('home.common.page')
+        <div style="position:relative;top:20px;left:-100px;">@include('home.common.page')</div>
 
         <div class="de_right">
             {{--<div class="cate">--}}

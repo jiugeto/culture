@@ -59,4 +59,12 @@ class ProductLayerModel extends BaseModel
         }
         return $datas;
     }
+
+    /**
+     * 获得动画的属性名
+     */
+    public function getAttrStyleName()
+    {
+        return ProductAttrModel::where('layerid',$this->id)->first()->style_name;
+    }
 }
