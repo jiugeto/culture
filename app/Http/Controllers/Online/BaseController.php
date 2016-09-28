@@ -57,18 +57,14 @@ class BaseController extends Controller
      */
     public function play2($productid,$layerid,$con_id,$genre)
     {
-        $urls = explode('/',$_SERVER['REQUEST_URI']);
-        $layer = $this->getOneLayer($productid,$layerid);
         $result = [
-            'currUrl'=> $urls[count($urls)-1],
-            'layer'=> $layer,
-            'attrs'=> $this->getOneAttrs($productid,$layer->id),
-            'attr'=> $this->getOneAttr($productid,$layer->id,$genre),
-            'layerAttrs'=> $this->getLayerAttrs($productid,$layerid),
-            'layerAttrModel'=> $this->layerAttrModel,
-            'cons'=> $this->getCons($productid,$layer->id),
+            'data'=> ProductModel::find($productid),
+            'layers'=> $this->getLayers($productid),
+            'cons'=> $this->getCons($productid,$layerid),
+            'attrs'=> $this->getAttrs($productid,$layerid),
+            'attrModel'=> $this->attrModel,
         ];
-        return view('online.pre.edit', $result);
+        return view('online.frame.basic.index', $result);
     }
 
     /**

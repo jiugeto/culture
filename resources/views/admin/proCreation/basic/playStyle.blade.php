@@ -34,7 +34,7 @@
     @endif
 
     /*================================*/
-    .timeline { width:720px; background:darkred; position:absolute; top:30px; }
+    .timeline { width:720px; background:#660033; position:absolute; top:30px; }
     .timeline div.dh { width:720px; height:3px; background:red; position:relative; left:-750px; }
 
     {{--动画样式--}}

@@ -1,6 +1,8 @@
+{{--系统后台创作模板时间栏--}}
+
 
 <div class="timetab">
-    <p class="tabt" style="">时间栏</p>
+    <p class="tabt">时间栏</p>
     <div class="title">
         @if(count($layers))
             @foreach($layers as $layer)

@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Member;
 
-use App\Models\ProductModel;
+use App\Models\Online\ProductModel;
 use App\Models\UserModel;
 //use Illuminate\Support\Facades\Request;
 use Illuminate\Http\Request;
@@ -141,8 +141,8 @@ class ProductController extends BaseController
      */
     public function query($del=0)
     {
-        return ProductModel::where('del',$del)
-                ->orderBy('id','desc')
-                ->paginate($this->limit);
+        return ProductModel::where('isshow',2)
+            ->orderBy('id','desc')
+            ->paginate($this->limit);
     }
 }

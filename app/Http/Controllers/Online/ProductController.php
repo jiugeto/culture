@@ -53,17 +53,25 @@ class ProductController extends BaseController
         //复制con记录
         $conNewIds = $this->getCon($id,$productNewId,$layerArr);
         //复制layerattr记录
-        $layerAttrNewIds = $this->getLayerAttrs($id,$productNewId,$layerArr);
-        dd($id);
+        $layerAttrNewIds = $this->getLayerAttr($id,$productNewId,$layerArr);
+        if (!$productNewId || !$layerArr || !$attrNewIds || !$conNewIds || !$layerAttrNewIds) {
+            echo "<script>alert('获取失败！');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN.'online/u/product/pre/'.$productNewId);
     }
 
-//    public function show($id)
-//    {
-//        $result = [
-//            'data'=> ProductModel::find($id),
-//        ];
-//        return view('online.home.show', $result);
-//    }
+    public function show($id)
+    {
+        $result = [
+            'data'=> ProductModel::find($id),
+            'layers'=> $this->getLayers($id),
+            'cons'=> $this->getCons($id,0),
+            'attrs'=> $this->getAttrs($id,0),
+            'attrModel'=> $this->attrModel,
+            'currUrl'=> 'play',
+        ];
+        return view('online.home.show', $result);
+    }
 
 
 
@@ -75,13 +83,13 @@ class ProductController extends BaseController
     {
         if ($cate) {
             $datas = ProductModel::where('cate',$cate)
+                ->where('isshow',2)
                 ->where('uid',$this->userid)
-                ->where('isshow',1)
                 ->orderBy('sort','desc')
                 ->orderBy('id','desc')
                 ->paginate($this->limit);
         } else {
-            $datas = ProductModel::where('isshow',1)
+            $datas = ProductModel::where('isshow',2)
                 ->where('uid',$this->userid)
                 ->orderBy('sort','desc')
                 ->orderBy('id','desc')
@@ -99,10 +107,10 @@ class ProductController extends BaseController
         $productModel = ProductModel::find($id);
         $data = [
             'name'=> $productModel->name,
-            'serial'=> date('YmdHis',time()).rand(0,10000),
+            'serial'=> $productModel->serial,
             'cate'=> $productModel->cate,
             'gif'=> $productModel->gif,
-            'intro'=> $productModel->intrp,
+            'intro'=> $productModel->intro,
             'uid'=> $this->userid,
             'pid'=> $id,
             'created_at'=> time(),
@@ -151,16 +159,18 @@ class ProductController extends BaseController
     public function getAttr($pid,$newpid,$layerArr)
     {
         foreach ($layerArr['layerOld'] as $key=>$layerOld) {
-            $this->getAttrData($pid,$layerArr['layerOld'][$key],1,$newpid,$layerArr['layerNew'][$key]);
-            $this->getAttrData($pid,$layerArr['layerOld'][$key],2,$newpid,$layerArr['layerNew'][$key]);
-            $this->getAttrData($pid,$layerArr['layerOld'][$key],3,$newpid,$layerArr['layerNew'][$key]);
+            $styleName = $this->prefix_attr.$layerArr['layerNew'][$key].rand(0,10000);
+            $this->getAttrData($pid,$layerArr['layerOld'][$key],1,$newpid,$layerArr['layerNew'][$key],$styleName);
+            $this->getAttrData($pid,$layerArr['layerOld'][$key],2,$newpid,$layerArr['layerNew'][$key],$styleName);
+            $this->getAttrData($pid,$layerArr['layerOld'][$key],3,$newpid,$layerArr['layerNew'][$key],$styleName);
         }
+        return true;
     }
 
     /**
      * 收集属性数据
      */
-    public function getAttrData($pid,$layerid,$genre,$newpid,$layerNewId)
+    public function getAttrData($pid,$layerid,$genre,$newpid,$layerNewId,$styleName)
     {
         $attrModel = ProductAttrModel::where('productid',$pid)
             ->where('layerid',$layerid)
@@ -168,7 +178,7 @@ class ProductController extends BaseController
             ->first();
         $data = [
             'name'=> $attrModel->name,
-            'style_name'=> $this->prefix_attr.$layerNewId.rand(0,10000),
+            'style_name'=> $styleName,
             'productid'=> $newpid,
             'layerid'=> $layerNewId,
             'genre'=> $genre,
@@ -191,6 +201,7 @@ class ProductController extends BaseController
         foreach ($layerArr['layerOld'] as $key=>$layerOld) {
             $this->getConData($pid,$layerArr['layerOld'][$key],$newpid,$layerArr['layerNew'][$key]);
         }
+        return true;
     }
 
     /**
@@ -233,5 +244,6 @@ class ProductController extends BaseController
                 }
             }
         }
+        return true;
     }
 }

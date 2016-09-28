@@ -8,7 +8,7 @@ class ProductModel extends BaseModel
 {
     protected $table = 'bs_products';
     protected $fillable = [
-        'id','name','genre','cate','gif','intro','uid','uname','isattr','isauth','istop','sort','isshow','created_at','updated_at',
+        'id','name','serial','genre','cate','gif','intro','uid','pid','isauth','istop','sort','isshow','created_at','updated_at',
     ];
     protected $genres = [
         1=>'个人供应','企业供应','平台供应',
@@ -20,7 +20,7 @@ class ProductModel extends BaseModel
         '不置顶','置顶',
     ];
     protected $isshows = [
-        '不显示','显示',
+        1=>'不显示','显示',
     ];
 
     public function genre()

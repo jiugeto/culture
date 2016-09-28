@@ -3,7 +3,15 @@
     <div class="online_list" style="height:900px;background:rgb(40,40,40);">
         <div class="condition">
             <div class="attr" style="text-align:right">
-                <b>{{ Session::has('user') ? Session::get('user.username').'作品列表' : '作品大厅' }}</b>
+                <a href="{{DOMAIN}}online" style="color:{{isset(explode('/',$_SERVER['REQUEST_URI'])[2])?'grey':'orangered'}};">
+                    <b>作品大厅</b>
+                </a>
+                @if(Session::has('user'))
+                    <a href="{{DOMAIN}}online/u/product"
+                       style="color:{{isset(explode('/',$_SERVER['REQUEST_URI'])[2])?'orangered':'grey'}};">
+                        <b>我的作品列表</b>
+                    </a>
+                @endif
             </div>
             <div class="attr">
                 样片类型：

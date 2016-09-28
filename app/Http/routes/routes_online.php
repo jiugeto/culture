@@ -6,9 +6,15 @@
 
 //用户自己的创作房间
 Route::group(['prefix'=>'online/u','middleware' =>'MemberAuth','namespace'=>'Online'],function(){
+    //会员作品
     Route::get('product/getpro/{id}','ProductController@getPro');       //获取创作模板
+    Route::get('product/pre/{id}','ProductController@show');
     Route::get('product/c/{cate}','ProductController@index');
     Route::resource('product','ProductController');
+    //编辑作品
+    Route::get('{productid}/frame/{layerid}/{con_id}/{attrid}','FrameController@index');
+    Route::resource('{productid}/frame','FrameController');
+    Route::get('{productid}/frame/play2/{layerid}/{con_id}/{attrid}', 'HomeController@play');
 });
 
 //创作效果样片大厅

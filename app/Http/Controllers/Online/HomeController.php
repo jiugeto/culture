@@ -52,14 +52,14 @@ class HomeController extends BaseController
     {
         if ($cate) {
             $datas = ProductModel::where('cate',$cate)
+                ->where('isshow',2)
                 ->where('isauth',3)
-                ->where('isshow',1)
                 ->where('uid',0)
                 ->orderBy('sort','desc')
                 ->orderBy('id','desc')
                 ->paginate($this->limit);
         } else {
-            $datas = ProductModel::where('isshow',1)
+            $datas = ProductModel::where('isshow',2)
                 ->where('isauth',3)
                 ->where('uid',0)
                 ->orderBy('sort','desc')
