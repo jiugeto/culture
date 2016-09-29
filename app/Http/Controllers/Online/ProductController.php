@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Online;
 
+use App\Models\Online\OrderProductModel;
 use App\Models\Online\ProductAttrModel;
 use App\Models\Online\ProductConModel;
 use App\Models\Online\ProductLayerAttrModel;
@@ -16,11 +17,13 @@ class ProductController extends BaseController
 
     protected $limit = 12;
     protected $prefix_attr = 'attr_';
+    protected $orderProModel;
 
     public function __construct()
     {
         parent::__construct();
         $this->model = new ProductModel();
+        $this->orderProModel = new OrderProductModel();
     }
 
     public function index($cate=0)
@@ -62,12 +65,14 @@ class ProductController extends BaseController
 
     public function show($id)
     {
+        $data = ProductModel::find($id);
         $result = [
-            'data'=> ProductModel::find($id),
+            'data'=> $data,
             'layers'=> $this->getLayers($id),
             'cons'=> $this->getCons($id,0),
             'attrs'=> $this->getAttrs($id,0),
             'attrModel'=> $this->attrModel,
+            'orderProModel'=> $this->orderProModel,
             'currUrl'=> 'play',
         ];
         return view('online.home.show', $result);
@@ -131,6 +136,11 @@ class ProductController extends BaseController
         $layerOldArr = array();
         $layerNewArr = array();
         foreach ($layerModels as $layerModel) {
+            $record = [
+                'timelong'=> 0,
+                'func'=> 0,
+                'delay'=> 0,
+            ];
             $data = [
                 'name'=> $layerModel->name,
                 'productid'=> $newpid,
@@ -139,6 +149,7 @@ class ProductController extends BaseController
                 'func'=> $layerModel->func,
                 'delay'=> $layerModel->delay,
                 'created_at'=> time(),
+                'record'=> serialize($record),
             ];
             ProductLayerModel::create($data);
             $layerModelNew = ProductLayerModel::where($data)->first();
@@ -176,6 +187,14 @@ class ProductController extends BaseController
             ->where('layerid',$layerid)
             ->where('genre',$genre)
             ->first();
+        $record = [
+            'padding'=> 0,
+            'size'=> 0,
+            'pos'=> 0,
+            'float'=> 0,
+            'opacity'=> 0,
+            'border'=> 0,
+        ];
         $data = [
             'name'=> $attrModel->name,
             'style_name'=> $styleName,
@@ -189,6 +208,7 @@ class ProductController extends BaseController
             'opacity'=> $attrModel->opacity,
             'border'=> $attrModel->border,
             'created_at'=> time(),
+            'record'=> serialize($record),
         ];
         ProductAttrModel::create($data);
     }
@@ -219,6 +239,7 @@ class ProductController extends BaseController
             'pic_id'=> $conModel->pic_id,
             'name'=> $conModel->name,
             'created_at'=> time(),
+            'record'=> 0,
         ];
         ProductConModel::create($data);
     }
@@ -239,6 +260,7 @@ class ProductController extends BaseController
                         'per'=> $layerAttr->per,
                         'val'=> $layerAttr->val,
                         'created_at'=> time(),
+                        'record'=> 0,
                     ];
                     ProductLayerAttrModel::create($data);
                 }

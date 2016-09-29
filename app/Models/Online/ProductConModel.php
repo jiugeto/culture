@@ -12,7 +12,7 @@ class ProductConModel extends BaseModel
 
     protected $table = 'bs_pro_con';
     protected $fillable = [
-        'id','productid','layerid','genre','pic_id','name','sort','isshow','created_at','updated_at',
+        'id','productid','layerid','genre','pic_id','name','record','sort','isshow','created_at','updated_at',
     ];
     protected $genres = [
         1=>'图片','文字'

@@ -15,9 +15,21 @@
             </div>
             <div class="attr">
                 样片类型：
-                <a href="{{DOMAIN}}online" class="{{$cate==0?'curr':''}}">全部</a>
+                <a href="
+                    @if($_SERVER['REQUEST_URI']=='/online/u/product')
+                    {{DOMAIN}}online/u/product
+                    @else
+                    {{DOMAIN}}online
+                    @endif
+                    " class="{{$cate==0?'curr':''}}">全部</a>
                 @foreach($model['cates2'] as $kcate=>$vcate)
-                    <a href="{{DOMAIN}}online/c/{{$kcate}}" class="{{$cate==$kcate?'curr':''}}">{{ $vcate }}</a>
+                    <a href="
+                        @if($_SERVER['REQUEST_URI']=='/online/u/product')
+                        {{DOMAIN}}online/u/product/c/{{$kcate}}
+                        @else
+                        {{DOMAIN}}online/c/{{$kcate}}
+                        @endif
+                            " class="{{$cate==$kcate?'curr':''}}">{{ $vcate }}</a>
                 @endforeach
             </div>
         </div>
@@ -25,7 +37,13 @@
         <div class="list">
             @if(count($datas))
                 @foreach($datas as $data)
-            <a href="{{DOMAIN}}online/pre/{{$data->id}}" target="_blank" title="点击预览">
+            <a href="
+                @if($_SERVER['REQUEST_URI']=='/online/u/product')
+                {{DOMAIN}}online/u/product/{{$data->id}}
+                @else
+                {{DOMAIN}}online/pre/{{$data->id}}
+                @endif
+                    " target="_blank" title="点击预览">
                 <div class="prolist">
                     <div class="pro_one">
                         <img src="{{ $data->getPicUrl() }}" style="@if($size=$data->getUserPicSize($data->pic($data->gif),$w=200,$h=150))width:{{$size['w']}}px;height:{{$size['h']}}px; @endif">

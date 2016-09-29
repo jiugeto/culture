@@ -9,7 +9,7 @@ class ProductAttrModel extends BaseModel
     protected $fillable = [
         'id','name','style_name','productid','layerid','genre',
         'padding','size','pos','float','opacity','border','bg','text',
-        'created_at','updated_at',
+        'record','created_at','updated_at',
     ];
 
     //定位、定位、动画
@@ -48,6 +48,7 @@ class ProductAttrModel extends BaseModel
     protected $borderColorNames = [
         1=>'淡灰','灰色','黑色','白色','红色','绿色','蓝色',
     ];
+    //record：padding，size，pos，float，opacity，border
 
     /**
      * 以下几个文字属性

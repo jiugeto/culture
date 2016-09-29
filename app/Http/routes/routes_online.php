@@ -12,9 +12,13 @@ Route::group(['prefix'=>'online/u','middleware' =>'MemberAuth','namespace'=>'Onl
     Route::get('product/c/{cate}','ProductController@index');
     Route::resource('product','ProductController');
     //编辑作品
-    Route::get('{productid}/frame/{layerid}/{con_id}/{attrid}','FrameController@index');
+    Route::get('{productid}/frame/addLayerAttr/{layerid}/{con_id}/{genre}/{layerAttr}/{per}/{val}','FrameController@insertLayerAttr');                        //动画设置添加
+    Route::post('{productid}/frame/addCon','FrameController@insertCon');                        //动画设置添加
+    Route::post('{productid}/frame/editLayer/{layerid}','FrameController@updateLayer');                        //动画设置修改
+    Route::post('{productid}/frame/addLayer','FrameController@insertLayer');                        //动画设置添加
+    Route::get('{productid}/frame/{layerid}/{con_id}/{attrGenre}','FrameController@index');            //编辑页面
     Route::resource('{productid}/frame','FrameController');
-    Route::get('{productid}/frame/play2/{layerid}/{con_id}/{attrid}', 'HomeController@play');
+    Route::get('{productid}/frame/play2/{layerid}/{con_id}/{attrid}', 'HomeController@play');       //动画模板
 });
 
 //创作效果样片大厅

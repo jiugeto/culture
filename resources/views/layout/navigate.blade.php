@@ -19,10 +19,10 @@
         </div>
 
         <div class="search">
-            <input type="text" class="search_input" name="global_search" placeholder="{{--想要啥效果，赶紧找哦--}}暂不可用" value="{{ isset($keyword) ? $keyword : '' }}">
+            <input type="text" class="search_input" style="height:{{explode('/',$_SERVER['REQUEST_URI'])[1]=='member'?42:40}};" name="global_search" placeholder="找啥呢？来试试" value="{{ isset($keyword) ? $keyword : '' }}">
             <input type="hidden" name="global_search_genre" value="{{isset($searchGenre)?$searchGenre:1}}">
             <input type="submit" class="search_text" value="搜 索" onclick="getSearch()">
-            <div class="search_sel">
+            <div class="search_sel" style="top:{{explode('/',$_SERVER['REQUEST_URI'])[1]=='member'?10:5}}px;">
                 <div class="curr_sel">
                     <span class="curr_sel_text">{{isset($searchGenre)?$searchs['genres'][$searchGenre]:'创作'}}</span>
                     <img src="{{PUB}}assets-home/images/sel_down.png">

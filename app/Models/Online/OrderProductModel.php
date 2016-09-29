@@ -1,7 +1,8 @@
 <?php
-namespace App\Models\Base;
+namespace App\Models\Online;
 
-use App\Models\Online\ProductModel;
+use App\Models\Base\BaseModel;
+use App\Models\Base\PayModel;
 
 class OrderProductModel extends BaseModel
 {
@@ -10,23 +11,31 @@ class OrderProductModel extends BaseModel
      */
     protected $table = 'bs_orders_pro';
     protected $fillable = [
-        'id','productid','serial','seller','sellerName','buyer','buyerName','money','status','isshow','del','created_at','updated_at',
+        'id','productid','serial','seller','sellerName','buyer','buyerName','record','format','status','isshow','created_at','updated_at',
+    ];
+    //视频格式
+    protected $formatNames = [
+        1=>'标清(720*405)','小高清(1280*720)','高清(1920*1080)',
+    ];
+    protected $formatMoneys = [
+        1=>20,40,60,
     ];
 
-    protected $statuss = [
-        1=>''
-    ];
+//    protected $statuss = [
+//        1=>''
+//    ];
 
-    public function product()
+    //得到创作订单信息
+    public function getProductName()
     {
         $product = ProductModel::find($this->productid);
         return isset($product) ? $product->name : '';
     }
 
-    public function statusName()
-    {
-        return array_key_exists($this->status,$this->statuss) ? $this->statuss[$this->status] : '';
-    }
+//    public function statusName()
+//    {
+//        return array_key_exists($this->status,$this->statuss) ? $this->statuss[$this->status] : '';
+//    }
 
     /**
      * 获取对应支付信息

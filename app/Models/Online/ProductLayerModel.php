@@ -7,7 +7,7 @@ class ProductLayerModel extends BaseModel
 {
     protected $table = 'bs_pro_layer';
     protected $fillable = [
-        'id','name','productid','a_name','timelong','func','delay','created_at','updated_at',
+        'id','name','productid','a_name','timelong','func','delay','record','is_add','created_at','updated_at',
     ];
     //速度曲线
     protected $funcs = [
@@ -16,6 +16,7 @@ class ProductLayerModel extends BaseModel
     protected $funcNames = [
         1=>'慢-快-慢，默认','匀速','低速开始','低速结束','低速开始和结束',/*'贝塞尔函数自定义',*/
     ];
+    //record：timelong，func，delay
 
     /**
      * 获得产品信息

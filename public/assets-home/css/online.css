@@ -55,6 +55,11 @@ body { font-family:'微软雅黑'; }
     padding:2px 10px;
     background:rgb(50,50,50);
 }
+.online_win .render table {
+    padding:0 10px;
+    width:100%;
+    background:rgb(50,50,50);
+}
 
 /*===== 内容列表 =====*/
 .online_win .frame_right { position:absolute;top:0px;left:745px; }

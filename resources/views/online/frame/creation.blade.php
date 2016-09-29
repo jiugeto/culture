@@ -48,6 +48,7 @@
         <b>添 加</b>
         <form method="POST" id="form2" action="{{DOMAIN}}online/u/{{$product->id}}/frame/addCon" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="_method" value="POST">
             <input type="hidden" name="layerid" value="{{$layerid}}">
             <input type="hidden" name="con_id" value="{{$con->id}}">
             <input type="hidden" name="attrGenre" value="{{$attr->genre}}">

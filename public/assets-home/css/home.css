@@ -166,7 +166,7 @@ a.curr {
 }
 .search_input {
     padding-left:80px;
-    width:160px;height:40px;
+    width:160px; height:40px;
     border:2px solid #e34220;
 }
 .search_text {

@@ -7,7 +7,7 @@ class ProductLayerAttrModel extends BaseModel
 {
     protected $table = 'bs_pro_layer_attr';
     protected $fillable = [
-        'id','productid','layerid','attrSel','per','val','created_at','updated_at',
+        'id','productid','layerid','attrSel','per','val','record','created_at','updated_at',
     ];
 
     protected $attrSels = [

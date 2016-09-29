@@ -18,10 +18,10 @@
         @foreach($layers as $layer)
             @if($layer->id==$layerid)
             <div class="layer set">
-                <form method="POST" id="formLayer" action="{{DOMAIN}}admin/{{$product->id}}/creation/editLayer/{{$layerid}}" enctype="multipart/form-data">
+                <form method="POST" id="formLayer" action="{{DOMAIN}}online/u/{{$product->id}}/frame/editLayer/{{$layer->id}}" enctype="multipart/form-data">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input type="hidden" name="_method" value="POST">
-                    <input type="hidden" name="layerid" value="{{$layerid}}">
+                    {{--<input type="hidden" name="layerid" value="{{$layerid}}">--}}
                     <input type="hidden" name="con_id" value="{{$content->id}}">
                     <input type="hidden" name="attrGenre" value="{{$attr->genre}}">
                     <p>设置名称：{{ str_limit($layer->name,10) }}</p>
@@ -138,6 +138,7 @@
         <form method="POST" id="formlayerAttr" action="{{DOMAIN}}online/u/{{$product->id}}/frame/addLayer" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" name="_method" value="POST">
+            {{--<input type="hidden" name="productid" value="{{$product->id}}">--}}
             动画设置：<input type="text" placeholder="动画设置名称" name="layerName">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             延 &nbsp;&nbsp;&nbsp;时 &nbsp;&nbsp;：<input type="text" placeholder="动画等待时间" name="delay" value="0">s
@@ -153,3 +154,33 @@
         </form>
     </div>
 </div>
+
+<script>
+    function addLayerAttr(layerAttr){
+        var productid = $("input[name='productid']").val();
+        var layerid = $("input[name='layerid']").val();
+        var con_id = $("input[name='con_id']").val();
+        var attrGenre = $("input[name='attrGenre']").val();
+        var per = $("input[name='per_"+layerAttr+"']").val();
+        var val = $("input[name='val_"+layerAttr+"']").val();
+        if (per=='' || val=='') {
+            alert('百分比或者值未填！');return;
+        } else {
+            window.location.href = '{{DOMAIN}}admin/'+productid+'/creation/addLayerAttr/'+layerid+'/'+con_id+'/'+attrGenre+'/'+layerAttr+'/'+per+'/'+val;
+        }
+    }
+    function editLayerAttr(layerAttr){
+        var productid = $("input[name='productid']").val();
+        var layerid = $("input[name='layerid']").val();
+        var con_id = $("input[name='con_id']").val();
+        var attrGenre = $("input[name='attrGenre']").val();
+        var layerAttrId = $("input[name='layerAttrId_"+layerAttr+"']").val();
+        var per = $("input[name='per_"+layerAttr+"_"+layerAttrId+"']").val();
+        var val = $("input[name='val_"+layerAttr+"_"+layerAttrId+"']").val();
+        if (per=='' || val=='') {
+            alert('百分比或者值未填！');return;
+        } else {
+            window.location.href = '{{DOMAIN}}admin/'+productid+'/creation/editLayerAttr/'+layerid+'/'+con_id+'/'+attrGenre+'/'+layerAttrId+'/'+layerAttr+'/'+per+'/'+val;
+        }
+    }
+</script>
