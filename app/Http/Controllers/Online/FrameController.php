@@ -7,6 +7,8 @@ use App\Models\Online\ProductLayerAttrModel;
 use App\Models\Online\ProductLayerModel;
 use App\Models\Online\ProductModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request as Ajax;
+use Illuminate\Support\Facades\Input;
 
 class FrameController extends BaseController
 {
@@ -114,23 +116,26 @@ class FrameController extends BaseController
     /**
      * 关键帧添加
      */
-    public function insertLayerAttr($productid,$layerid,$con_id,$attrGenre,$layerAttr,$per,$val)
+    public function insertLayerAttr()
     {
-        if (!$productid || !$layerid || !$con_id || !$attrGenre || !$layerAttr || !$per || !$val) {
-            echo "<script>alert('参数有误！');history.go(-1);</script>";exit;
+        if (Ajax::ajax()) {
+            $data = Input::all();
+            if (!$data['productid'] || !$data['layerid'] || !$data['con_id'] || !$data['genre'] || !$data['attrSel'] || !$data['per'] || !$data['val']) {
+                echo json_encode(array('code'=>'-1', 'message' =>'参数有误！'));exit;
+            }
+            $data = [
+                'productid'=> $data['productid'],
+                'layerid'=> $data['layerid'],
+                'attrSel'=> $data['layerAttr'],
+                'per'=> $data['per'],
+                'val'=> $data['val'],
+                'record'=> 0,
+                'is_add'=> 1,
+            ];
+            ProductLayerAttrModel::create($data);
+            echo json_encode(array('code'=>'0', 'message' =>'操作成功！'));exit;
         }
-        $data = [
-            'productid'=> $productid,
-            'layerid'=> $layerid,
-            'attrSel'=> $layerAttr,
-            'per'=> $per,
-            'val'=> $val,
-            'record'=> 0,
-            'is_add'=> 1,
-        ];
-        ProductLayerAttrModel::create($data);
-//        $layerAttrModel = ProductLayerAttrModel::where($data)->first();
-        return redirect(DOMAIN.'online/u/'.$productid.'/frame/'.$layerid.'/'.$con_id.'/'.$attrGenre);
+        echo json_encode(array('code'=>'-2', 'message' =>'操作失败！'));exit;
     }
 
     /**
@@ -174,17 +179,43 @@ class FrameController extends BaseController
     /**
      * 内容修改
      */
-    public function updateCon(Request $request){}
+    public function updateCon(Request $request,$productid,$con_id)
+    {
+        dd('con');
+    }
 
     /**
      * 属性样式修改
      */
-    public function updateAttr(Request $request){}
+    public function updateAttr(Request $request,$productid,$attrid)
+    {
+        dd('attr');
+    }
 
     /**
      * 关键帧修改
      */
-    public function updateLayerAttr(Request $request){}
+    public function updateLayerAttr(Request $request,$productid,$layerAttrId)
+    {
+        if (Ajax::ajax()) {
+            $data = Input::all();
+            if (!$data['productid'] || !$data['layerid'] || !$data['con_id'] || !$data['genre'] || !$data['LayerAttrId'] || !$data['attrSel'] || !$data['per'] || !$data['val']) {
+                echo json_encode(array('code'=>'-1', 'message' =>'参数有误！'));exit;
+            }
+            $data = [
+                'productid'=> $data['productid'],
+                'layerid'=> $data['layerid'],
+                'attrSel'=> $data['layerAttr'],
+                'per'=> $data['per'],
+                'val'=> $data['val'],
+                'record'=> 0,
+                'is_add'=> 1,
+            ];
+            ProductLayerAttrModel::where('id',$data['layerAttrId'])->update($data);
+            echo json_encode(array('code'=>'0', 'message' =>'操作成功！'));exit;
+        }
+        echo json_encode(array('code'=>'-2', 'message' =>'操作失败！'));exit;
+    }
 
     /**
      * 初始化一条内容

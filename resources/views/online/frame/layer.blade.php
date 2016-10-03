@@ -18,7 +18,7 @@
         @foreach($layers as $layer)
             @if($layer->id==$layerid)
             <div class="layer set">
-                <form method="POST" id="formLayer" action="{{DOMAIN}}online/u/{{$product->id}}/frame/editLayer/{{$layer->id}}" enctype="multipart/form-data">
+                <form method="POST" action="{{DOMAIN}}online/u/{{$product->id}}/frame/editLayer/{{$layer->id}}" enctype="multipart/form-data">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input type="hidden" name="_method" value="POST">
                     {{--<input type="hidden" name="layerid" value="{{$layerid}}">--}}
@@ -135,7 +135,7 @@
     </div>
     <div class="addTimeTab" title="点击隐藏或显示添加的动画选项" onclick="$('.addlayer').toggle(200);">+添加动画设置</div>
     <div class="addlayer" style="display:none;">
-        <form method="POST" id="formlayerAttr" action="{{DOMAIN}}online/u/{{$product->id}}/frame/addLayer" enctype="multipart/form-data">
+        <form method="POST" action="{{DOMAIN}}online/u/{{$product->id}}/frame/addLayer" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" name="_method" value="POST">
             {{--<input type="hidden" name="productid" value="{{$product->id}}">--}}
@@ -156,31 +156,57 @@
 </div>
 
 <script>
-    function addLayerAttr(layerAttr){
-        var productid = $("input[name='productid']").val();
-        var layerid = $("input[name='layerid']").val();
-        var con_id = $("input[name='con_id']").val();
-        var attrGenre = $("input[name='attrGenre']").val();
-        var per = $("input[name='per_"+layerAttr+"']").val();
-        var val = $("input[name='val_"+layerAttr+"']").val();
+    var productid = $("input[name='productid']").val();
+    var layerid = $("input[name='layerid']").val();
+    var con_id = $("input[name='con_id']").val();
+    var attrGenre = $("input[name='attrGenre']").val();
+    function addLayerAttr(attrSel){
+        var per = $("input[name='per_"+attrSel+"']").val();
+        var val = $("input[name='val_"+attrSel+"']").val();
         if (per=='' || val=='') {
             alert('百分比或者值未填！');return;
-        } else {
-            window.location.href = '{{DOMAIN}}admin/'+productid+'/creation/addLayerAttr/'+layerid+'/'+con_id+'/'+attrGenre+'/'+layerAttr+'/'+per+'/'+val;
         }
+        addAjax(attrSel,per,val);
     }
-    function editLayerAttr(layerAttr){
-        var productid = $("input[name='productid']").val();
-        var layerid = $("input[name='layerid']").val();
-        var con_id = $("input[name='con_id']").val();
-        var attrGenre = $("input[name='attrGenre']").val();
-        var layerAttrId = $("input[name='layerAttrId_"+layerAttr+"']").val();
-        var per = $("input[name='per_"+layerAttr+"_"+layerAttrId+"']").val();
-        var val = $("input[name='val_"+layerAttr+"_"+layerAttrId+"']").val();
+    function editLayerAttr(attrSel){
+        var layerAttrId = $("input[name='layerAttrId_"+attrSel+"']").val();
+        var per = $("input[name='per_"+attrSel+"_"+layerAttrId+"']").val();
+        var val = $("input[name='val_"+attrSel+"_"+layerAttrId+"']").val();
         if (per=='' || val=='') {
             alert('百分比或者值未填！');return;
-        } else {
-            window.location.href = '{{DOMAIN}}admin/'+productid+'/creation/editLayerAttr/'+layerid+'/'+con_id+'/'+attrGenre+'/'+layerAttrId+'/'+layerAttr+'/'+per+'/'+val;
         }
+        editAjax(attrSel,layerAttrId,per,val);
+    }
+
+    $.ajaxSetup({headers : {'X-CSRF-TOKEN':$('input[name="_token"]').val()}});
+    function addAjax(attrSel,per,val){
+        $.ajax({
+            type: 'POST',
+            url: '{{DOMAIN}}online/u/'+productid+'/frame/addLayerAttr',
+            data: {'productid':productid,'layerid':layerid,'con_id':con_id,'genre':attrGenre,'attrSel':attrSel,'per':per,'val':val},
+            dataType: 'json',
+            success: function(data) {
+                if (data.code==0) {
+                    window.location.href = '{{DOMAIN}}online/u/'+productid+'/frame/'+layerid+'/'+con_id+'/'+attrGenre;
+                } else {
+                    alert(data.message);return;
+                }
+            }
+        });
+    }
+    function editAjax(attrSel,layerAttrId,per,val){
+        $.ajax({
+            type: 'POST',
+            url: '{{DOMAIN}}online/u/'+productid+'/frame/editLayerAttr/'+layerAttrId,
+            data: {'productid':productid,'layerid':layerid,'con_id':con_id,'genre':attrGenre,'layerAttrId':layerAttrId,'attrSel':attrSel,'per':per,'val':val},
+            dataType: 'json',
+            success: function(data) {
+                if (data.code==0) {
+                    window.location.href = '{{DOMAIN}}online/u/'+productid+'/frame/'+layerid+'/'+con_id+'/'+attrGenre;
+                } else {
+                    alert(data.message);return;
+                }
+            }
+        });
     }
 </script>

@@ -12,8 +12,13 @@ Route::group(['prefix'=>'online/u','middleware' =>'MemberAuth','namespace'=>'Onl
     Route::get('product/c/{cate}','ProductController@index');
     Route::resource('product','ProductController');
     //编辑作品
-    Route::get('{productid}/frame/addLayerAttr/{layerid}/{con_id}/{genre}/{layerAttr}/{per}/{val}','FrameController@insertLayerAttr');                        //动画设置添加
-    Route::post('{productid}/frame/addCon','FrameController@insertCon');                        //动画设置添加
+//    Route::get('{productid}/frame/addLayerAttr/{layerid}/{con_id}/{genre}/{layerAttr}/{per}/{val}','FrameController@insertLayerAttr');                        //关键帧添加
+    Route::post('{productid}/frame/editLayerAttr/{layerAttrId}','FrameController@updateLayerAttr');                        //关键帧更新
+    Route::post('{productid}/frame/addLayerAttr','FrameController@insertLayerAttr');                        //关键帧添加
+    Route::post('{productid}/frame/editAttr/{attrid}','FrameController@updateAttr');                        //属性样式更新
+    Route::post('{productid}/frame/addAttr','FrameController@insertAttr');                        //属性样式添加
+    Route::post('{productid}/frame/editCon/{con_id}','FrameController@updateCon');                        //动画内容更新
+    Route::post('{productid}/frame/addCon','FrameController@insertCon');                        //动画内容添加
     Route::post('{productid}/frame/editLayer/{layerid}','FrameController@updateLayer');                        //动画设置修改
     Route::post('{productid}/frame/addLayer','FrameController@insertLayer');                        //动画设置添加
     Route::get('{productid}/frame/{layerid}/{con_id}/{attrGenre}','FrameController@index');            //编辑页面

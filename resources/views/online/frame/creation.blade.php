@@ -14,7 +14,7 @@
             @endif
             @if($con->id==$content->id)
                 <b>内容2</b>
-                <form method="POST" id="form1" action="{{DOMAIN}}online/u/{{$product->id}}/frame/editCon/{{$con->id}}" enctype="multipart/form-data">
+                <form method="POST" action="{{DOMAIN}}online/u/{{$product->id}}/frame/editCon/{{$con->id}}" enctype="multipart/form-data">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input type="hidden" name="_method" value="POST">
                     <input type="hidden" name="layerid" value="{{$layerid}}">
@@ -46,7 +46,7 @@
 
     <div class="edit_con">
         <b>添 加</b>
-        <form method="POST" id="form2" action="{{DOMAIN}}online/u/{{$product->id}}/frame/addCon" enctype="multipart/form-data">
+        <form method="POST" action="{{DOMAIN}}online/u/{{$product->id}}/frame/addCon" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" name="_method" value="POST">
             <input type="hidden" name="layerid" value="{{$layerid}}">
@@ -86,7 +86,7 @@
             <b>动 画</b>
             @if($attr->genre!=3)</a>@endif
         <br>
-        <form method="POST" id="form3" action="{{DOMAIN}}online/u/{{$product->id}}/frame/editAttr/{{$attr->id}}" enctype="multipart/form-data">
+        <form method="POST" action="{{DOMAIN}}online/u/{{$product->id}}/frame/editAttr/{{$attr->id}}" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" name="_method" value="POST">
             <input type="hidden" name="layerid" value="{{$layerid}}">
