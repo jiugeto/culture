@@ -12,7 +12,6 @@ Route::group(['prefix'=>'online/u','middleware' =>'MemberAuth','namespace'=>'Onl
     Route::get('product/c/{cate}','ProductController@index');
     Route::resource('product','ProductController');
     //编辑作品
-//    Route::get('{productid}/frame/addLayerAttr/{layerid}/{con_id}/{genre}/{layerAttr}/{per}/{val}','FrameController@insertLayerAttr');                        //关键帧添加
     Route::post('{productid}/frame/editLayerAttr/{layerAttrId}','FrameController@updateLayerAttr');                        //关键帧更新
     Route::post('{productid}/frame/addLayerAttr','FrameController@insertLayerAttr');                        //关键帧添加
     Route::post('{productid}/frame/editAttr/{attrid}','FrameController@updateAttr');                        //属性样式更新

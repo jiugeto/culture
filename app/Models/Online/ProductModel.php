@@ -53,6 +53,76 @@ class ProductModel extends BaseModel
      */
     public function getAttrs()
     {
-        return ProductAttrModel::where('productid',$this->id)->get();
+        $attrModels = ProductAttrModel::where('productid',$this->id)->get();
+        return count($attrModels) ? $attrModels : [];
+    }
+
+    /**
+     * 得到修改过的产品的动画设置
+     */
+    public function getProLayers()
+    {
+        $layerModels = ProductLayerModel::where('productid',$this->id)->get();
+        foreach ($layerModels as $layerModel) {
+            if ($layerModel->record && $records=unserialize($layerModel->record)) {
+                if ($records['delay'] || $records['timelong'] || $records['func']) {
+                    $layerRecord[$layerModel->id] = $layerModel;
+                }
+            }
+            if ($layerModel->is_add) {
+                $layerAdd[$layerModel->id] = $layerModel;
+            }
+        }
+        return array(
+            'records'=> isset($layerRecord)?$layerRecord:[],
+            'adds'=> isset($layerAdd)?$layerAdd:[],
+        );
+    }
+
+    /**
+     * 得到修改过的产品的样式
+     */
+    public function getProAttrs()
+    {
+        foreach ($this->getAttrs() as $attr) {
+            if ($attr->record && $records=unserialize($attr->record)) {
+                if ($records['padding'] || $records['size'] || $records['pos'] || $records['float'] || $records['opacity'] || $records['border']) {
+                    $attrRecords[$attr->id] = $attr;
+                }
+            }
+        }
+        return isset($attrRecords) ? $attrRecords : [];
+    }
+
+    /**
+     * 得到修改过的产品内容
+     */
+    public function getProCons()
+    {
+        $conModels = ProductConModel::where('productid',$this->id)->get();
+        foreach ($conModels as $conModel) {
+            if ($conModel->record) { $conRecord[$conModel->id] = $conModel; }
+            if ($conModel->is_add) { $conAdd[$conModel->id] = $conModel; }
+        }
+        return array(
+            'records'=> isset($conRecord)?$conRecord:[],
+            'adds'=> isset($conAdd)?$conAdd:[],
+        );
+    }
+
+    /**
+     * 得到修改过的产品的关键帧
+     */
+    public function getProLayerAttrs()
+    {
+        $layerAttrs = ProductLayerAttrModel::where('productid',$this->id)->get();
+        foreach ($layerAttrs as $layerAttr) {
+            if ($layerAttr->record) { $layerAttrRecord[$layerAttr->id] = $layerAttr; }
+            if ($layerAttr->is_add) { $layerAttrAdd[$layerAttr->id] = $layerAttr; }
+        }
+        return array(
+            'records'=> isset($layerAttrRecord)?$layerAttrRecord:[],
+            'adds'=> isset($layerAttrAdd)?$layerAttrAdd:[],
+        );
     }
 }

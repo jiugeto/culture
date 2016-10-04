@@ -21,21 +21,22 @@ class OrderProductModel extends BaseModel
         1=>20,40,60,
     ];
 
-//    protected $statuss = [
-//        1=>''
-//    ];
-
-    //得到创作订单信息
-    public function getProductName()
+    /**
+     * 得到创作订单信息
+     */
+    public function getProduct()
     {
-        $product = ProductModel::find($this->productid);
-        return isset($product) ? $product->name : '';
+        $productModel = ProductModel::find($this->productid);
+        return $productModel ? $productModel : '';
     }
 
-//    public function statusName()
-//    {
-//        return array_key_exists($this->status,$this->statuss) ? $this->statuss[$this->status] : '';
-//    }
+    /**
+     * 得到创作订单名称
+     */
+    public function getProductName()
+    {
+        return $this->getProduct() ? $this->getProduct()->name : '';
+    }
 
     /**
      * 获取对应支付信息

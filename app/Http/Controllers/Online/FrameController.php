@@ -181,7 +181,29 @@ class FrameController extends BaseController
      */
     public function updateCon(Request $request,$productid,$con_id)
     {
-        dd('con');
+        if ($request->conGenre==1 && !$request->conPic) {
+            echo "<script>alert('图片必选！');history.go(-1);</script>";exit;
+        } elseif ($request->conGenre==2 && !$request->conText) {
+            echo "<script>alert('文字必填！');history.go(-1);</script>";exit;
+        }
+        $data = [
+            'genre'=> $request->conGenre,
+            'pic_id'=> $request->conPic,
+            'name'=> $request->conText,
+            'updated_at'=> time(),
+//            'record'=> 0,
+//            'is_add'=> 1,
+        ];
+        ProductConModel::where('id',$con_id)->update($data);
+
+        //判断有无更新，判断是否用户自己添加的再更新
+        $conModel = ProductConModel::find($con_id);
+        if ($con_id->genre==$request->conGenre || $con_id->pic_id==$request->conPic || $con_id->name==$request->conText) {
+            $isadd = $conModel->is_add==1 ? 2 : $conModel->is_add;
+            ProductConModel::where('id',$con_id)->update(['record'=> 1,'is_add'=> $isadd]);
+        }
+
+        return redirect(DOMAIN.'online/u/'.$productid.'/frame/'.$request->layerid.'/'.$con_id.'/'.$request->attrGenre);
     }
 
     /**
@@ -189,29 +211,95 @@ class FrameController extends BaseController
      */
     public function updateAttr(Request $request,$productid,$attrid)
     {
-        dd('attr');
+        //样式名称
+        $attrModel = ProductAttrModel::find($attrid);
+        if ($request->genre==1 && !$request->name) {
+            echo "<script>alert('样式名称必填！');history.go(-1);</script>";exit;
+        } elseif ($request->genre!=1) {
+            $request->name = $attrModel->name;
+        }
+        //宽高
+        if (!$request->width || !$request->height) {
+            echo "<script>alert('宽高必填！');history.go(-1);</script>";exit;
+        }
+        $size = $request->width.','.$request->height;
+        //内边距
+        if ($request->padType==0) {
+            $padding = '';
+        } elseif ($request->padType==1) {
+            $padding = $request->pad1;
+        } elseif ($request->padType==2) {
+            $padding = $request->pad2.','.$request->pad3;
+        } elseif ($request->padType==3) {
+            $padding = $request->pad4.','.$request->pad5.','.$request->pad6.','.$request->pad7;
+        }
+        //边框
+        if ($request->isborder==0) {
+            $border = '0,,1,1';
+        } else {
+            if (!$request->borderText) { echo "<script>alert('边框宽度必填！');history.go(-1);</script>";exit; }
+            $border = '1,'.$request->borderText.','.$request->borderType.','.$request->borderColor;
+        }
+        //定位方式
+        if ($request->posType && !$request->left && !$request->top) {
+            echo "<script>alert('宽高未填！');history.go(-1);</script>";exit;
+        }
+        $pos = $request->posType.','.$request->left.','.$request->top;
+        //透明度
+        if ($request->isopacity && $request->opacity=='') {
+            echo "<script>alert('透明度必填！');history.go(-1);</script>";exit;
+        }
+        $opacity = $request->isopacity.','.$request->opacity;
+        //判断更新数据
+        $record['size'] = $attrModel->size==$size ? 1 : 0;
+        $record['padding'] = $attrModel->padding==$padding ? 1 : 0;
+        $record['border'] = $attrModel->border==$border ? 1 : 0;
+        $record['pos'] = $attrModel->pos==$pos ? 1 : 0;
+        $record['float'] = $attrModel->float;
+        $record['opacity'] = $attrModel->opacity==$opacity ? 1 : 0;
+        $data = [
+            'name'=> $request->name,
+            'size'=> $size,
+            'padding'=> $padding,
+            'border'=> $border,
+            'pos'=> $pos,
+            'float'=> $request->float,
+            'opacity'=> $opacity,
+            'updated_at'=> time(),
+            'record'=> serialize($record),
+        ];
+        ProductAttrModel::where('id',$attrid)->update($data);
+        return redirect(DOMAIN.'online/u/'.$productid.'/frame/'.$request->layerid.'/'.$request->con_id.'/'.$request->attrGenre);
     }
 
     /**
      * 关键帧修改
      */
-    public function updateLayerAttr(Request $request,$productid,$layerAttrId)
+    public function updateLayerAttr($productid,$layerAttrId)
     {
         if (Ajax::ajax()) {
             $data = Input::all();
-            if (!$data['productid'] || !$data['layerid'] || !$data['con_id'] || !$data['genre'] || !$data['LayerAttrId'] || !$data['attrSel'] || !$data['per'] || !$data['val']) {
+            if (!$productid || !$data['layerid'] || !$data['con_id'] || !$data['genre'] || !$layerAttrId || !$data['attrSel'] || $data['per']=='' || $data['val']=='') {
                 echo json_encode(array('code'=>'-1', 'message' =>'参数有误！'));exit;
             }
             $data = [
-                'productid'=> $data['productid'],
+                'productid'=> $productid,
                 'layerid'=> $data['layerid'],
-                'attrSel'=> $data['layerAttr'],
+                'attrSel'=> $data['attrSel'],
                 'per'=> $data['per'],
                 'val'=> $data['val'],
-                'record'=> 0,
-                'is_add'=> 1,
+//                'record'=> 0,
+//                'is_add'=> 1,
             ];
-            ProductLayerAttrModel::where('id',$data['layerAttrId'])->update($data);
+            ProductLayerAttrModel::where('id',$layerAttrId)->update($data);
+
+            //判断关键帧是否修改
+            $layerAttr = ProductLayerAttrModel::find($layerAttrId);
+            if ($layerAttr->attrSel==$data['attrSel'] || $layerAttr->per==$data['per'] || $layerAttr->val==$data['val']) {
+                $isadd = $layerAttr->is_add==1 ? 2 : $layerAttr->is_add;
+                ProductLayerAttrModel::where('id',$layerAttrId)->update(['record'=> 1, 'is_add'=> $isadd]);
+            }
+
             echo json_encode(array('code'=>'0', 'message' =>'操作成功！'));exit;
         }
         echo json_encode(array('code'=>'-2', 'message' =>'操作失败！'));exit;

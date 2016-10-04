@@ -18,7 +18,7 @@
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input type="hidden" name="_method" value="POST">
                     <input type="hidden" name="layerid" value="{{$layerid}}">
-                    <input type="hidden" name="con_id" value="{{$con->id}}">
+                    {{--<input type="hidden" name="con_id" value="{{$con->id}}">--}}
                     <input type="hidden" name="attrGenre" value="{{$attr->genre}}">
                     <div class="con_one">类型：
                         <label><input type="radio" class="radio" name="conGenre" value="1" {{$con->genre==1?'checked':''}} onclick="$('.conPic').show();$('.conText').hide();"> 图片&nbsp;</label>
@@ -91,10 +91,10 @@
             <input type="hidden" name="_method" value="POST">
             <input type="hidden" name="layerid" value="{{$layerid}}">
             <input type="hidden" name="con_id" value="{{$con->id}}">
-            <input type="hidden" name="genre" value="{{$attr->genre}}">
+            <input type="hidden" name="attrGenre" value="{{$attr->genre}}">
             @if($attr->genre==1)
                 <div class="con_one">
-                    属性名称：<input type="text" name="name" value="{{ $attr->name }}">
+                    样式名称：<input type="text" name="name" value="{{ $attr->name }}">
                 </div>
             @endif
             <div class="con_one">
@@ -155,10 +155,10 @@
                     @endforeach
                 </select>
                 <span class="pos" style="display:{{$attr->getPosType()?'block':'none'}};">
-                    <br>&nbsp;&nbsp;左边距：
-                    <input type="text" style="width:40px" name="left" value="{{ $attr->getPosLeft() }}">px
+                    &nbsp;&nbsp;左边距：
+                    <input type="text" style="width:40px" placeholder="水平距离" name="left" value="{{ $attr->getPosLeft() }}">px
                     <br>&nbsp;&nbsp;顶边距：
-                    <input type="text" style="width:40px" name="top" value="{{ $attr->getPosTop() }}">px
+                    <input type="text" style="width:40px" placeholder="垂直距离" name="top" value="{{ $attr->getPosTop() }}">px
                 </span>
             </div>
             <div class="con_one">

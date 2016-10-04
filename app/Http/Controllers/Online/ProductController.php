@@ -18,6 +18,8 @@ class ProductController extends BaseController
     protected $limit = 12;
     protected $prefix_attr = 'attr_';
     protected $orderProModel;
+    protected $addMoney = 20;        //添加记录单价
+    protected $editMoney = 5;        //修改记录单价
 
     public function __construct()
     {
@@ -66,6 +68,8 @@ class ProductController extends BaseController
     public function show($id)
     {
         $data = ProductModel::find($id);
+        $data->addMoney = $this->addMoney;
+        $data->editMoney = $this->editMoney;
         $result = [
             'data'=> $data,
             'layers'=> $this->getLayers($id),
