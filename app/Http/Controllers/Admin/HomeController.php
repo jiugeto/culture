@@ -5,7 +5,7 @@ use App\Http\Requests;
 use App\Models\Admin\LogModel;
 use App\Models\Base\OrderFirmModel;
 use App\Models\Base\OrderModel;
-use App\Models\Base\OrderProductModel;
+use App\Models\Online\OrderProductModel;
 use App\Models\UserModel;
 
 class HomeController extends BaseController
@@ -67,8 +67,7 @@ class HomeController extends BaseController
         $orders_all = OrderModel::all();
         $orders_firm = OrderFirmModel::all();
         //各个订单
-        $orders_C = OrderProductModel::where('del',0)
-            ->where('isshow',1)
+        $orders_C = OrderProductModel::where('isshow',1)
             ->paginate($this->limit);
         $orders_A = OrderModel::where('del',0)
             ->where('isshow',1)

@@ -75,10 +75,12 @@ class OrderController extends BaseController
         if (is_array($status)) {
             //status<4未成功渲染的
             $datas = OrderProductModel::where('status','<',4)
+                ->where('isshow',2)
                 ->orderBy('id','desc')
                 ->paginate($limit);
         } elseif ($status==4) {
             $datas = OrderProductModel::where('status',4)
+                ->where('isshow',2)
                 ->orderBy('id','desc')
                 ->paginate($limit);
         }

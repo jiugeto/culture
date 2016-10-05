@@ -78,7 +78,7 @@
                                 <td>{{$orderC->buyerName}}</td>
                                 <td>{{$orderC->sellerName}}</td>
                                 <td>{{$orderC->getMoney()}}</td>
-                                <td>{{$orderC->statusName()}}</td>
+                                <td>{{$orderC->getStatusName()}}</td>
                                 <td>{{date("Y年m月d日",$orderC->created_at)}}</td>
                                 <td><a href="{{DOMAIN}}admin/orderpro/{{$orderC->id}}"
                                        class="am-btn am-btn-default am-btn-xs" style="padding:3px 15px;">查看</a></td>

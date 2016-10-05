@@ -24,6 +24,9 @@ class OrderProductModel extends BaseModel
     protected $statuss = [
         1=>'待确定','未付款或款不对','已付款处理中','已处理',
     ];
+    protected $isshows = [
+        1=>'不显示','显示',
+    ];
 
     /**
      * 得到创作订单信息
@@ -75,5 +78,10 @@ class OrderProductModel extends BaseModel
     public function getFormatName()
     {
         return array_key_exists($this->format,$this->formatNames) ? $this->formatNames[$this->format] : '';
+    }
+
+    public function isshow()
+    {
+        return array_key_exists($this->isshow,$this->isshows) ? $this->isshows[$this->isshow] : '';
     }
 }

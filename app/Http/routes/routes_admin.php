@@ -192,7 +192,8 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::post('orderfirm/{id}','OrderFirmController@update');
     Route::resource('orderfirm','OrderFirmController');
         //在线订单路由
-    Route::get('orderpro/{del}/{isshow}','OrderProductController@index');
+    Route::get('orderpro/isshow/{id}/{isshow}','OrderProductController@setShow');
     Route::post('orderpro/{id}','OrderProductController@update');
+    Route::get('orderpro/{isshow}','OrderProductController@index');
     Route::resource('orderpro','OrderProductController');
 });

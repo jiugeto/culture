@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Base\OrderProductModel;
+use App\Models\Online\OrderProductModel;
 use Illuminate\Http\Request;
 
 class OrderProductController extends BaseController
@@ -24,14 +24,22 @@ class OrderProductController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'datas'=> $this->query($del=0,$isshow),
+            'datas'=> $this->query($isshow),
             'prefix_url'=> DOMAIN.'admin/orderpro',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
-            'del'=> $del,
             'isshow'=> $isshow,
         ];
         return view('admin.orderpro.index', $result);
+    }
+
+    /**
+     * 设置是否显示
+     */
+    public function setShow($id,$isshow)
+    {
+        OrderProductModel::where('id',$id)->update(['isshow'=> $isshow]);
+        return redirect(DOMAIN.'admin/orderpro');
     }
 
 
@@ -39,30 +47,16 @@ class OrderProductController extends BaseController
 
 
 
-    public function query($del,$isshow)
+    public function query($isshow)
     {
-        if ($del=='') { $del = [0,1]; }
         if ($isshow=='') { $isshow = [0,1]; }
-        if (is_array($del)) {
-            if (is_array($isshow)) {
-                $datas = OrderProductModel::orderBy('id','desc')
-                    ->paginate($this->limit);
-            } else {
-                $datas = OrderProductModel::where('isshow',$isshow)
-                    ->orderBy('id','desc')
-                    ->paginate($this->limit);
-            }
+        if (is_array($isshow)) {
+            $datas = OrderProductModel::orderBy('id','desc')
+                ->paginate($this->limit);
         } else {
-            if (is_array($isshow)) {
-                $datas = OrderProductModel::where('del',$del)
-                    ->orderBy('id','desc')
-                    ->paginate($this->limit);
-            } else {
-                $datas = OrderProductModel::where('del',$del)
-                    ->where('isshow',$isshow)
-                    ->orderBy('id','desc')
-                    ->paginate($this->limit);
-            }
+            $datas = OrderProductModel::where('isshow',$isshow)
+                ->orderBy('id','desc')
+                ->paginate($this->limit);
         }
         $datas->limit = $this->limit;
         return $datas;
