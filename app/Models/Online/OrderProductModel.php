@@ -11,7 +11,7 @@ class OrderProductModel extends BaseModel
      */
     protected $table = 'bs_orders_pro';
     protected $fillable = [
-        'id','productid','serial','seller','sellerName','buyer','buyerName','record','format','status','isshow','created_at','updated_at',
+        'id','productid','serial','uid','uname','record','format','status','isshow','created_at','updated_at',
     ];
     //视频格式
     protected $formatNames = [
@@ -19,6 +19,10 @@ class OrderProductModel extends BaseModel
     ];
     protected $formatMoneys = [
         1=>20,40,60,
+    ];
+    //订单状态：待确定，款不对，待处理，已处理
+    protected $statuss = [
+        1=>'待确定','未付款或款不对','已付款处理中','已处理',
     ];
 
     /**
@@ -55,5 +59,21 @@ class OrderProductModel extends BaseModel
     public function getMoney()
     {
         return $this->getPay() ? $this->getPay()->money() : '';
+    }
+
+    /**
+     * 渲染状态
+     */
+    public function getStatusName()
+    {
+        return array_key_exists($this->status,$this->statuss) ? $this->statuss[$this->status] : '';
+    }
+
+    /**
+     * 渲染的格式
+     */
+    public function getFormatName()
+    {
+        return array_key_exists($this->format,$this->formatNames) ? $this->formatNames[$this->format] : '';
     }
 }

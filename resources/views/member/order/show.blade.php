@@ -369,6 +369,7 @@
     @if($data->buyer==$userid)
     <div class="popup3" style="display:{{$data->getPayStatus()?'none':'block'}};">
         <img src="{{PUB}}assets-home/images/cul_paycode.png">
+        <div style="text-align:center;">斯塔克(科幻-视觉控)</div>
         <div class="close">确 定</div>
         <a class="tshow close" onclick="$('.popup').hide();">X</a>
     </div>

@@ -11,6 +11,8 @@
                        style="color:{{isset(explode('/',$_SERVER['REQUEST_URI'])[2])?'orangered':'grey'}};">
                         <b>我的作品列表</b>
                     </a>
+                    <a href="{{DOMAIN}}online/u/order"><b>渲染列表</b></a>
+                    {{--<a href="{{DOMAIN}}online/u/order/finish"><b>我的成品</b></a>--}}
                 @endif
             </div>
             <div class="attr">

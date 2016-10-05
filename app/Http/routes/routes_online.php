@@ -23,6 +23,10 @@ Route::group(['prefix'=>'online/u','middleware' =>'MemberAuth','namespace'=>'Onl
     Route::get('{productid}/frame/{layerid}/{con_id}/{attrGenre}','FrameController@index');            //编辑页面
     Route::resource('{productid}/frame','FrameController');
     Route::get('{productid}/frame/play2/{layerid}/{con_id}/{attrid}', 'HomeController@play');       //动画模板
+    //渲染列表
+    Route::get('order/apply/{productid}/{renderMoney}/{totalMoney}','OrderController@getApply');
+    Route::get('order/finish','OrderController@getFinish');
+    Route::resource('order','OrderController');
 });
 
 //创作效果样片大厅

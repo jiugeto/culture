@@ -1,10 +1,11 @@
 <?php
 namespace App\Http\Controllers\Member;
 
+use App\Models\Online\OrderProductModel;
 use App\Models\Online\ProductModel;
 use App\Models\UserModel;
-//use Illuminate\Support\Facades\Request;
 use Illuminate\Http\Request;
+//use Illuminate\Support\Facades\Request;
 
 class ProductController extends BaseController
 {
@@ -27,22 +28,9 @@ class ProductController extends BaseController
         $curr['name'] = $this->lists['']['name'];
         $curr['url'] = $this->lists['']['url'];
         $result = [
-            'datas'=> $this->query($del=0),
+            'datas'=> $this->query(),
             'lists'=> $this->lists,
             'prefix_url'=> DOMAIN.'member/product',
-            'curr'=> $curr,
-        ];
-        return view('member.product.index', $result);
-    }
-
-    public function trash()
-    {
-        $curr['name'] = $this->lists['trash']['name'];
-        $curr['url'] = $this->lists['trash']['url'];
-        $result = [
-            'datas'=> $this->query($del=0),
-            'lists'=> $this->lists,
-            'prefix_url'=> DOMAIN.'member/product/trash',
             'curr'=> $curr,
         ];
         return view('member.product.index', $result);
@@ -109,8 +97,6 @@ class ProductController extends BaseController
         return view('member.product.show', $result);
     }
 
-    public function attrs($id){}
-
 
 
 
@@ -139,10 +125,12 @@ class ProductController extends BaseController
     /**
      * 查询方法
      */
-    public function query($del=0)
+    public function query()
     {
-        return ProductModel::where('isshow',2)
+        $datas = ProductModel::where('isshow',2)
             ->orderBy('id','desc')
             ->paginate($this->limit);
+        $datas->limit = $this->limit;
+        return $datas;
     }
 }

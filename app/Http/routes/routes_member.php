@@ -39,48 +39,8 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
 //    Route::resource('setting','SettingController');
     //个人设计师、制作企业、经纪公司、租赁公司认证
     //在线视频制作
-    Route::get('product/trash','ProductController@trash');
-    Route::get('product/{id}/destroy','ProductController@destroy');
-    Route::get('product/{id}/restore','ProductController@restore');
-    Route::get('product/{id}/forceDelete','ProductController@forceDelete');
     Route::post('product/{id}','ProductController@update');
     Route::resource('product','ProductController');
-        //产品属性
-    Route::get('productattr/{id}/edit2','ProductAttrController@edit2');
-    Route::post('productattr/{id}/update2','ProductAttrController@update2');
-    Route::get('productattr/{id}/edit3','ProductAttrController@edit3');
-    Route::post('productattr/{id}/update3','ProductAttrController@update3');
-    Route::get('productattr/{id}/edit4','ProductAttrController@edit4');
-    Route::post('productattr/{id}/update4','ProductAttrController@update4');
-    Route::get('productattr/{id}/edit5','ProductAttrController@edit5');
-    Route::post('productattr/{id}/update5','ProductAttrController@update5');
-    Route::get('productattr/trash','ProductAttrController@trash');
-    Route::get('productattr/{id}/destroy','ProductAttrController@destroy');
-    Route::get('productattr/{id}/restore','ProductAttrController@restore');
-    Route::get('productattr/{id}/forceDelete','ProductAttrController@forceDelete');
-    Route::post('productattr/{id}','ProductAttrController@update');
-    Route::resource('productattr','ProductAttrController');
-    Route::get('productattr/{id}/{index}','ProductAttrController@show2');
-        //产品动画
-    Route::get('productlayer/trash','ProductLayerController@trash');
-    Route::get('productlayer/{id}/destroy','ProductLayerController@destroy');
-    Route::get('productlayer/{id}/restore','ProductLayerController@restore');
-    Route::get('productlayer/{id}/forceDelete','ProductLayerController@forceDelete');
-    Route::post('productlayer/{id}','ProductLayerController@update');
-    Route::resource('productlayer','ProductLayerController');
-        //产品内容
-    Route::get('productcon/trash','ProductConController@trash');
-    Route::get('productcon/{id}/destroy','ProductConController@destroy');
-    Route::get('productcon/{id}/restore','ProductConController@restore');
-    Route::get('productcon/{id}/forceDelete','ProductConController@forceDelete');
-    Route::post('productcon/{id}','ProductConController@update');
-    Route::resource('productcon','ProductConController');
-        //动画属性
-    Route::get('{layerid}/proLayerAttr/{id}/destroy','ProductLayerAttrController@destroy');
-    Route::get('{layerid}/proLayerAttr/{id}/restore','ProductLayerAttrController@restore');
-    Route::get('{layerid}/proLayerAttr/{id}/forceDelete','ProductLayerAttrController@forceDelete');
-    Route::post('{layerid}/proLayerAttr/{id}','ProductLayerAttrController@update');
-    Route::resource('{layerid}/proLayerAttr','ProductLayerAttrController');
     //个人供求
         //个人需求
     Route::post('personD/{id}','PersonDController@update');
@@ -96,13 +56,6 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
     Route::get('personS/{id}/restore','PersonSController@restore');
     Route::get('personS/{id}/forceDelete','PersonSController@forceDelete');
     Route::resource('personS','PersonSController');
-        //作品类型
-//    Route::post('category/{id}','CategoryController@update');
-//    Route::get('category/trash','CategoryController@trash');
-//    Route::get('category/{id}/destroy','CategoryController@destroy');
-//    Route::get('category/{id}/restore','CategoryController@restore');
-//    Route::get('category/{id}/forceDelete','CategoryController@forceDelete');
-//    Route::resource('category','CategoryController');
     //企业供求
         //企业需求
     Route::post('companyD/{id}','CompanyDController@update');

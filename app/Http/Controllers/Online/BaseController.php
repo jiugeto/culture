@@ -7,6 +7,7 @@ use App\Models\Online\ProductConModel;
 use App\Models\Online\ProductLayerAttrModel;
 use App\Models\Online\ProductLayerModel;
 use App\Models\Online\ProductModel;
+use App\Models\Online\OrderProductModel;
 
 class BaseController extends Controller
 {
@@ -19,6 +20,7 @@ class BaseController extends Controller
     protected $attrModel;
     protected $layerModel;
     protected $layerAttrModel;
+    protected $orderProModel;
 
     public function __construct()
     {
@@ -28,6 +30,7 @@ class BaseController extends Controller
         $this->attrModel = new ProductAttrModel();
         $this->layerModel = new ProductLayerModel();
         $this->layerAttrModel = new ProductLayerAttrModel();
+        $this->orderProModel = new OrderProductModel();
     }
 
 

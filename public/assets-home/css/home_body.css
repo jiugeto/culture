@@ -182,7 +182,6 @@
 .arrow {
     margin-right:5px;
     width:80px;height:100px;
-    /*border:1px solid red;*/
     float:right;
 }
 .con_left,.con_right {
@@ -215,13 +214,11 @@
 /*===排行列表===*/
 .list {
     width:230px;height:314px;
-    /*border-bottom:1px solid rgb(230,230,230);*/
     overflow:hidden;
-    /*position:relative;top:15px;*/
 }
 .list p,.sole p,.sole p,.rentinfo p {
     padding:5px;
-    border-bottom:2px solid rgb(250,250,250);
+    /*border-bottom:2px solid rgb(250,250,250);*/
 }
 .list_div {
     background:rgb(250,250,250);
@@ -359,7 +356,10 @@
 .cooperation_con img { width:180px; }
 
 /*右侧小列表定位*/
-.selected,.list,.sole,.rentinfo { position:relative;top:22px; }
+.selected,.list,.sole,.rentinfo {
+    position:relative;top:18px;
+}
+.selected p,.list p,.sole p,.rentinfo p { padding-left:10px;color:lightgrey; }
 
 
 /*===== 用户心声 =====*/

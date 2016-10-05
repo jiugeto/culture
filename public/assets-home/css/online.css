@@ -43,19 +43,18 @@ body { font-family:'微软雅黑'; }
 /*===== 渲染面板 =====*/
 .online_win .render {
     margin:10px auto;
-    padding:2px 5px; padding-bottom:5px;
+    padding:5px; padding-bottom:5px;
     width:730px;
     color:grey;
     background:black;
 }
-.online_win .render .title {
-    text-align:center;
-}
-.online_win .render .con {
-    padding:2px 10px;
-    background:rgb(50,50,50);
+/*.online_win .render .title { text-align:center; }*/
+.online_win .render .switch {
+    color:darkred;
+    cursor:pointer;
 }
 .online_win .render table {
+    margin:0px;
     padding:0 10px;
     width:100%;
     background:rgb(50,50,50);
@@ -75,11 +74,13 @@ body { font-family:'微软雅黑'; }
 }
 .big_paycode {
     padding:10px 20px;
+    border:1px solid grey;
     background:ghostwhite;
-    position:absolute;top:60%;left:40%;
+    position:absolute;top:55%;left:40%;
     display:none;
 }
 .big_paycode .close {
+    margin:10px 0;
     padding:5px;
     text-align:center;
     color:ghostwhite;
@@ -88,6 +89,17 @@ body { font-family:'微软雅黑'; }
 }
 .big_paycode div:hover.close {
     background:red;
+}
+.online_win .render a.getSubmit {
+    margin:20px;
+    padding:5px 20px;
+    color:lightgrey;
+    background:darkred;
+    cursor:pointer;
+}
+.online_win .render a:hover.getSubmit {
+    color:white;
+    background:orangered;
 }
 
 /*===== 内容列表 =====*/
@@ -279,12 +291,9 @@ body { font-family:'微软雅黑'; }
     color:grey;
     font-size:14px;
 }
-
-
-/*========== 动画内容 ==========*/
-
-
-/*========== 动画控制 ==========*/
-
-
-/*========== 动画与属性编辑 ==========*/
+/*渲染列表*/
+.online_list table.list { color:grey; }
+.online_list table.list td {
+    padding:5px; padding-top:0;
+    border-bottom:1px dashed rgb(60,60,60);
+}

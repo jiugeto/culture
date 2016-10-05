@@ -32,6 +32,7 @@ class HomeController extends BaseController
     {
         $result = [
             'data'=> ProductModel::find($id),
+            'orderProModel'=> $this->orderProModel,
             'layers'=> $this->getLayers($id),
             'cons'=> $this->getCons($id,0),
             'attrs'=> $this->getAttrs($id,0),

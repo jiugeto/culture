@@ -20,7 +20,7 @@ class PayModel extends BaseModel
     ];
     //支付宝是否正常收款：未到支付宝，支付宝已收款
     protected $ispays = [
-        '未到支付宝','支付宝已收款',
+        '未到支付宝或款不对','支付宝已收款',
     ];
 
     public function money()

@@ -37,20 +37,13 @@ class VideoModel extends BaseModel
         return $picModels ? $picModels : [];
     }
 
-    public function pic()
-    {
-        $pic_id = $this->pic_id ? $this->pic_id : 0;
-        $picModel = PicModel::find($pic_id);
-        return $picModel ? $picModel : '';
-    }
-
     public function getPicUrl()
     {
-        return $this->pic() ? $this->pic()->url : '';
+        return $this->getPic($this->pic_id) ? $this->getPic($this->pic_id)->url : '';
     }
 
     public function getPicName()
     {
-        return $this->pic() ? $this->pic()->name : '';
+        return $this->getPic($this->pic_id) ? $this->getPic($this->pic_id)->name : '';
     }
 }
