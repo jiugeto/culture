@@ -2,6 +2,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\GoodsModel;
+use Illuminate\Http\Request;
+//use Illuminate\Support\Facades\Request;
 
 class GoodsController extends BaseController
 {
@@ -39,10 +41,45 @@ class GoodsController extends BaseController
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
             'model'=> $this->model,
+            'users'=> $this->model->users(),
+            'pics'=> $this->model->pics(0),
+            'videos'=> $this->model->videos(0),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
         return view('admin.goods.create', $result);
+    }
+
+    public function store(Request $request)
+    {
+        $data = $this->getData($request);
+        $data['created_at'] = time();
+        GoodsModel::create($data);
+        return redirect(DOMAIN.'admin/goods');
+    }
+
+    public function edit($id)
+    {
+        $curr['name'] = $this->crumb['edit']['name'];
+        $curr['url'] = $this->crumb['edit']['url'];
+        $result = [
+            'data'=> GoodsModel::find($id),
+            'model'=> $this->model,
+            'users'=> $this->model->users(),
+            'pics'=> $this->model->pics(0),
+            'videos'=> $this->model->videos(0),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.goods.edit', $result);
+    }
+
+    public function update(Request $request,$id)
+    {
+        $data = $this->getData($request);
+        $data['updated_at'] = time();
+        GoodsModel::where('id',$id)->update($data);
+        return redirect(DOMAIN.'admin/goods');
     }
 
     public function show($id)
@@ -61,6 +98,27 @@ class GoodsController extends BaseController
 
 
 
+
+    public function getData(Request $request)
+    {
+        if (!$request->uid) {
+            echo "<script>alert('用户必选！');history.go(-1);</script>";exit;
+        }
+        if (!$request->pic_id) {
+            echo "<script>alert('缩略图必选！');history.go(-1);</script>";exit;
+        }
+        return array(
+            'name'=> $request->name,
+            'genre'=> $request->genre,
+            'type'=> $request->type,
+            'cate'=> $request->cate,
+            'intro'=> $request->intro,
+            'pic_id'=> $request->pic_id,
+            'video_id'=> $request->video_id,
+            'title'=> $request->title,
+            'money'=> $request->money,
+        );
+    }
 
     /**
      * 查询方法

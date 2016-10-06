@@ -21,7 +21,14 @@
         width:420px; height:250px;
         border:1px solid lightgrey;
         background:white;
-        /*position:absolute;top:440px;left:10px;*/
+    @if($urls=explode('/',$_SERVER['REQUEST_URI']))
+        @if(isset($urls[2])) position:absolute;left:20px;
+            @if($urls[2]=='orderpro') top:180px;
+            @elseif($urls[2]=='video') top:210px;
+            @elseif($urls[2]=='goods') top:540px;
+            @endif
+        @endif
+    @endif
         overflow:auto;
         display:none;
     }
@@ -45,7 +52,7 @@
     .pic_list .img:hover { border:1px solid orangered; }
 </style>
 
-<span id="pic_curr" style="color:grey;">当前图片：{{ isset($data) ? $data->getPicName() : '未选择' }}</span>
+<span id="pic_curr" style="color:grey;"><br>当前图片：{{ (isset($data)&&$data->getPicName()) ? $data->getPicName() : '未选择' }}</span>
 <div style="height:10px"></div>
 <input type="hidden" name="pic_id" value="{{ isset($data->pic_id) ? $data->pic_id : 0 }}">
 <a class="selpic" onclick="$('.pic_list').toggle(200);" title="点击展开或关闭图片列表">图片切换</a>
@@ -61,6 +68,7 @@
         @endforeach
     @endif
 </div>
+<p>@if(isset($data)&&$data->getPicName())<img src="{{$data->getPicUrl()}}" width="200">@endif</p>
 
 <script>
     function move(picid){

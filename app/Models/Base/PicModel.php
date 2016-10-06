@@ -67,6 +67,6 @@ class PicModel extends BaseModel
      */
     public function getUrl()
     {
-        return $this->urlSel ? $this->url : $this->url2;
+        return $this->urlSel==1 ? $this->url : $this->url2;
     }
 }

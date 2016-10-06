@@ -14,8 +14,10 @@
     <div class="out">
         <p>{{ $video->name }}-视频播放</p>
         <div class="video">
-            <embed src="{{ $video->url }}" allowFullScreen="true" quality="high" width="{{ $video->width() }}" height="{{ $video->height }}" align="middle" allowScriptAccess="always" flashvars="{{ $video->url2 }}&auto_play={{ $video->isplay($uid) }}&width={{ $video->width() }}&height={{ $video->height() }}" type="application/x-shockwave-flash"></embed>
-            <div class="userinfo"><img src="{{ $data->getComLogo() }}"> {{ $data->getUserInfo()->name }}</div>
+            <embed src="{{ $video->url }}" allowFullScreen="true" quality="high" width="{{ $video->width() }}" height="{{ $video->height }}" align="middle" allowScriptAccess="always" flashvars="{{ $video->url2 }}&auto_play={{ isset($uid)?$video->isplay($uid):0 }}&width={{ $video->width() }}&height={{ $video->height() }}" type="application/x-shockwave-flash"></embed>
+            <div class="userinfo">
+                @if(isset($data))<img src="{{ $data->getComLogo() }}"> {{ $data->getUserInfo()->name }}@endif
+            </div>
         </div>
     </div>
 @stop

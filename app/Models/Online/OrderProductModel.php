@@ -3,6 +3,7 @@ namespace App\Models\Online;
 
 use App\Models\Base\BaseModel;
 use App\Models\Base\PayModel;
+use App\Models\Base\PicModel;
 
 class OrderProductModel extends BaseModel
 {
@@ -11,7 +12,7 @@ class OrderProductModel extends BaseModel
      */
     protected $table = 'bs_orders_pro';
     protected $fillable = [
-        'id','productid','serial','uid','uname','record','format','status','isshow','created_at','updated_at',
+        'id','productid','serial','uid','uname','format','record','thumb','video_id','status','isshow','created_at','updated_at',
     ];
     //视频格式
     protected $formatNames = [
@@ -22,10 +23,10 @@ class OrderProductModel extends BaseModel
     ];
     //订单状态：待确定，款不对，待处理，已处理
     protected $statuss = [
-        1=>'待确定','未付款或款不对','已付款处理中','已处理',
+        '所有','待确定','未付款或款不对','已付款处理中','已处理',
     ];
     protected $isshows = [
-        1=>'不显示','显示',
+        '所有','不显示','显示',
     ];
 
     /**
@@ -83,5 +84,13 @@ class OrderProductModel extends BaseModel
     public function isshow()
     {
         return array_key_exists($this->isshow,$this->isshows) ? $this->isshows[$this->isshow] : '';
+    }
+
+    /**
+     * 获得所有图片名称
+     */
+    public function getPicName()
+    {
+        return $this->getPic($this->thumb);
     }
 }

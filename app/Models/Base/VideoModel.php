@@ -10,6 +10,11 @@ class VideoModel extends BaseModel
         'id','uid','name','url','url2','pic_id','intro','del','created_at','updated_at',
     ];
 
+    public function getUName()
+    {
+        return $this->getUserName($this->uid) ? $this->getUserName($this->uid) : '系统';
+    }
+
     public function width()
     {
         return $this->width ? $this->width : 640;
@@ -39,11 +44,11 @@ class VideoModel extends BaseModel
 
     public function getPicUrl()
     {
-        return $this->getPic($this->pic_id) ? $this->getPic($this->pic_id)->url : '';
+        return $this->getPic($this->pic_id) ? $this->getPic($this->pic_id) : '';
     }
 
     public function getPicName()
     {
-        return $this->getPic($this->pic_id) ? $this->getPic($this->pic_id)->name : '';
+        return $this->pic($this->pic_id) ? $this->pic($this->pic_id)->name : '';
     }
 }

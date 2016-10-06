@@ -189,4 +189,13 @@ class BaseModel extends Model
     {
         return $this->pic($picid) ? $this->pic($picid)->getUrl() : '';
     }
+
+    /**
+     * 获得所有图片
+     */
+    public function pics()
+    {
+        $picModels = PicModel::where('del',0)->get();
+        return count($picModels) ? $picModels : [];
+    }
 }

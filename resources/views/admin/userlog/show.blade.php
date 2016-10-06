@@ -56,10 +56,6 @@
                     <td class="am-hide-sm-only">退出时间 / Logout：</td>
                     <td>{{ $data->logoutTime() }}</td>
                 </tr>
-                <tr>
-                    <td class="am-hide-sm-only">创建时间 / Create Time：</td>
-                    <td>{{ $data->createTime() }}</td>
-                </tr>
                 </tbody>
             </table>
         </div>

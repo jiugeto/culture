@@ -30,7 +30,7 @@
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">分类 / Category：</td>
-                    <td>{{ $data->cate() }}</td>
+                    <td>{{ $data->getCate() }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">鼠标移动显示 / Title：</td>
@@ -66,11 +66,11 @@
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">创建时间 / Create Time：</td>
-                    <td>{{ $data->created_at }}</td>
+                    <td>{{ $data->createTime() }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">修改时间 / Update Time：</td>
-                    <td>{{ $data->updated_at!='0000-00-00' ? $data->updated_at : '未修改' }}</td>
+                    <td>{{ $data->updateTime() }}</td>
                 </tr>
                 </tbody>
             </table>

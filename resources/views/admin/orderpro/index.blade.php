@@ -2,27 +2,42 @@
 @section('content')
     <div class="admin-content">
         @include('admin.common.crumb')
-        <div class="am-g" style="margin:0px 30px;">
-            {{--@include('admin.common.menu')--}}
-            {{--<div class="am-u-sm-12 am-u-md-3">--}}
-                {{--<div class="am-form-group">--}}
-                    前台显示否：
-                    <select name="isshow">
-                        <option value="0" {{ $isshow==0 ? 'selected' : '' }}>所有</option>
-                        <option value="1" {{ $isshow==1 ? 'selected' : '' }}>前台不显示</option>
-                        <option value="2" {{ $isshow==2 ? 'selected' : '' }}>前台显示</option>
-                    </select>
-                    <script>
-                        $("select[name='isshow']").change(function(){
-                            if($(this).val()==0){
-                                window.location.href = '{{DOMAIN}}admin/opinions';
-                            } else {
-                                window.location.href = '{{DOMAIN}}admin/opinions/'+del.val()+isshow.val();
-                            }
-                        });
-                    </script>
-                {{--</div>--}}
-            {{--</div>--}}
+        <div class="am-g list_select">
+            前台显示否
+            <select name="isshow">
+                @foreach($model['isshows'] as $kisshow=>$visshow)
+                    <option value="{{ $kisshow }}" {{ $kisshow==$isshow ? 'selected' : '' }}>{{ $visshow }}</option>
+                @endforeach
+            </select>
+            &nbsp;&nbsp;
+            状态
+            <select name="status">
+                @foreach($model['statuss'] as $kstatus=>$vstatus)
+                    <option value="{{ $kstatus }}" {{ $kstatus==$status ? 'selected' : '' }}>{{ $vstatus }}</option>
+                @endforeach
+            </select>
+            <script>
+                $("select[name='isshow']").change(function(){
+                    var isshow = $("select[name='isshow']").val();
+                    var status = $("select[name='status']").val();
+                    if(isshow==0 && status==0){
+                        window.location.href = '{{DOMAIN}}admin/orderpro';
+                    } else {
+                        //s代表检索
+                        window.location.href = '{{DOMAIN}}admin/orderpro/s/'+isshow+'/'+status;
+                    }
+                });
+                $("select[name='status']").change(function(){
+                    var isshow = $("select[name='isshow']").val();
+                    var status = $("select[name='status']").val();
+                    if(isshow==0 && status==0){
+                        window.location.href = '{{DOMAIN}}admin/orderpro';
+                    } else {
+                        //s代表检索
+                        window.location.href = '{{DOMAIN}}admin/orderpro/s/'+isshow+'/'+status;
+                    }
+                });
+            </script>
         </div>
         <hr>
 
@@ -62,14 +77,19 @@
                                     <a href="{{DOMAIN}}admin/orderpro/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="{{PUB}}assets/images/show.png" class="icon"> 查看</button>
                                     </a>
                                     @if($data->isshow==2)
-                                        <a href="{{DOMAIN}}admin/orderpro/isshow/{{$data->id}}/1"><button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><img src="{{PUB}}assets/images/del_red.png" class="icon"> 隐藏</button></a>
+                                        <a href="{{DOMAIN}}admin/orderpro/isshow/{{$data->id}}/1"><button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><img src="{{PUB}}assets/images/tool.png" class="icon"> 隐藏</button></a>
                                     @elseif($data->isshow==1)
-                                        <a href="{{DOMAIN}}admin/orderpro/isshow/{{$data->id}}/2"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="{{PUB}}assets/images/show.png" class="icon"> 显示</button></a>
+                                        <a href="{{DOMAIN}}admin/orderpro/isshow/{{$data->id}}/2"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="{{PUB}}assets/images/tool.png" class="icon"> 显示</button></a>
                                     @endif
 
+                                    <div style="height:4px"></div>
                                     @if($data->status==1)
-                                        <a href="{{DOMAIN}}admin/orderpro/pay/{{$data->id}}/1"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="{{PUB}}assets/images/tool.png" class="icon"> 确定已支付</button></a>
-                                        <a href="{{DOMAIN}}admin/orderpro/pay/{{$data->id}}/1"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="{{PUB}}assets/images/tool.png" class="icon"> 支付不全</button></a>
+                                        <a href="{{DOMAIN}}admin/orderpro/status/{{$data->id}}/3"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only">已付款待处理</button></a>
+                                        <a href="{{DOMAIN}}admin/orderpro/status/{{$data->id}}/2"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only">未付款或款不对</button></a>
+                                    @elseif($data->status==3 && !$data->thumb && !$data->video_id)
+                                        <a href="{{DOMAIN}}admin/orderpro/{{$data->id}}/edit"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only">视频处理</button></a>
+                                    @elseif($data->status==3 && $data->thumb && $data->video_id)
+                                        <a href="{{DOMAIN}}admin/orderpro/status/{{$data->id}}/4"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only">已处理</button></a>
                                     @endif
                                 </div>
                             </div>

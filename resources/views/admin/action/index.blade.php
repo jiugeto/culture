@@ -43,7 +43,7 @@
                     <tr>
                         <th class="table-check"><input type="checkbox"/></th>
                         <th class="table-id">ID</th>
-                        <th class="table-title">操作名称</th>
+                        <th class="table-title" width="80">操作名称</th>
                         <th class="table-type">控制器名称</th>
                         <th class="table-type">操作方法</th>
                         <th class="table-type">父操作</th>

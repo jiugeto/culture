@@ -62,6 +62,7 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::resource('user','UserController');
     //作品管理（制作公司和设计师的）
     Route::get('{type}/goods','GoodsController@index');
+    Route::post('goods/{id}','GoodsController@update');
     Route::resource('goods','GoodsController');
     //内部产品管理
     Route::post('product/{id}','ProductController@update');
@@ -137,7 +138,12 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::post('pic/{id}','PicController@update');
     Route::get('pic/create/{id}','PicController@create');
     Route::resource('pic','PicController');
-        //用户日志管理
+        //视频管理
+    Route::get('video/pre/{id}','VideoController@pre');
+    Route::get('video/uploadWay','VideoController@uploadWay');
+    Route::post('video/{id}','VideoController@update');
+    Route::resource('video','VideoController');
+    //用户日志管理
     Route::resource('userlog','UserlogController');
     Route::resource('adminlog','AdminlogController');
         //地区管理
@@ -192,8 +198,9 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::post('orderfirm/{id}','OrderFirmController@update');
     Route::resource('orderfirm','OrderFirmController');
         //在线订单路由
+    Route::get('orderpro/status/{id}/{status}','OrderProductController@setStatus');
     Route::get('orderpro/isshow/{id}/{isshow}','OrderProductController@setShow');
     Route::post('orderpro/{id}','OrderProductController@update');
-    Route::get('orderpro/{isshow}','OrderProductController@index');
+    Route::get('orderpro/s/{isshow}/{status}','OrderProductController@index');      //s代表检索
     Route::resource('orderpro','OrderProductController');
 });

@@ -3,9 +3,42 @@
     <div class="admin-content">
         @include('admin.common.crumb')
         <div class="am-g">
-            {{--@include('admin.common.menu')--}}
-            @include('admin.goods.search')
+            <div class="am-u-sm-12">
+                <div class="am-form-group">
+                    {{--<div class="am-btn-toolbar">--}}
+                        <div class="am-btn-group am-btn-group-xs">
+                            <a href="{{DOMAIN}}admin/goods/create">
+                                <button type="button" class="am-btn am-btn-default">
+                                    <img src="{{PUB}}assets/images/add.png" class="icon"> 添加
+                                </button>
+                            </a>
+                        </div>
+                        <div class="am-btn-group am-btn-group-xs list_select" style="float:right;">
+                            发布单位
+                            <select name="type">
+                                <option value="0" {{ $type==0 ? 'selected' : '' }}>所有</option>
+                                @foreach($types as $ktype=>$vtype)
+                                    <option value="{{ $ktype }}" {{ $type==$ktype ? 'selected' : '' }}>{{ $vtype }}</option>
+                                @endforeach
+                            </select>
+                            <script>
+                                $(document).ready(function(){
+                                    $("select[name='type']").change(function(){
+                                        if(this.value==0){
+                                            window.location.href = '{{DOMAIN}}admin/goods';
+                                        }
+                                        if(this.value!=0){
+                                            window.location.href = '{{DOMAIN}}admin/'+this.value+'/goods';
+                                        }
+                                    });
+                                });
+                            </script>
+                        </div>
+                    {{--</div>--}}
+                </div>
+            </div>
         </div>
+        <hr>
 
         <div class="am-g">
             <div class="am-u-sm-12">

@@ -81,8 +81,7 @@
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only" colspan="2">
-                        <button class="backbtn" onclick="history.go(-1)">
-                            返 &nbsp;&nbsp;&nbsp;回</button>
+                        <button class="backbtn" onclick="history.go(-1)">返 回</button>
                     </td>
                 </tr>
                 </tbody>

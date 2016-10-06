@@ -298,3 +298,15 @@ div:hover.addTimeTab { color:orangered; }
     margin:5px 70px;
     padding:2px 15px;
 }
+
+
+/*=== 列表的select检索样式 ===*/
+.list_select {
+    margin:0px 30px;
+    color:grey;
+}
+.list_select select {
+    margin-top:-3px;
+    padding:2px 10px;
+    border:1px solid lightgrey;
+}

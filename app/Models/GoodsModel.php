@@ -35,6 +35,11 @@ class GoodsModel extends BaseModel
         '不显示','显示',
     ];
 
+    public function users()
+    {
+        return UserModel::all();
+    }
+
     public function genre()
     {
         return $this->genre ? $this->genres[$this->genre] : '';
@@ -51,17 +56,14 @@ class GoodsModel extends BaseModel
     /**
      * 图片
      */
-    public function pics($uid)
+    public function pics($uid=null)
     {
-        return PicModel::where('uid',$uid)->get();
-    }
-
-    /**
-     * 视频
-     */
-    public function videos($uid)
-    {
-        return VideoModel::where('uid',$uid)->get();
+        if ($uid) {
+            $picModels = PicModel::where('del',0)->where('uid',$uid)->get();
+        } else {
+            $picModels = PicModel::where('del',0)->get();
+        }
+        return $picModels;
     }
 
     /**
@@ -70,6 +72,27 @@ class GoodsModel extends BaseModel
     public function pic()
     {
         return $this->pic_id ? PicModel::find($this->pic_id) : '';
+    }
+
+    /**
+     * 视频
+     */
+    public function videos($uid=null)
+    {
+        if ($uid) {
+            $datas = VideoModel::where('del',0)->where('uid',$uid)->get();
+        } else {
+            $datas = VideoModel::where('del',0)->get();
+        }
+        return $datas;
+    }
+
+    /**
+     * 视频
+     */
+    public function video()
+    {
+        return $this->video_id ? VideoModel::find($this->video_id) : '';
     }
 
     /**
@@ -101,14 +124,6 @@ class GoodsModel extends BaseModel
             if ($width>$w) { $size = $width; } else  { $size = $w; }
         }
         return (isset($size)&&$size) ? $size : 0;
-    }
-
-    /**
-     * 视频
-     */
-    public function video()
-    {
-        return $this->video_id ? VideoModel::find($this->video_id) : '';
     }
 
     /**
