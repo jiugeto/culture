@@ -86,10 +86,12 @@
                                     @if($data->status==1)
                                         <a href="{{DOMAIN}}admin/orderpro/status/{{$data->id}}/3"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only">已付款待处理</button></a>
                                         <a href="{{DOMAIN}}admin/orderpro/status/{{$data->id}}/2"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only">未付款或款不对</button></a>
-                                    @elseif($data->status==3 && !$data->thumb && !$data->video_id)
+                                    @elseif($data->status==3 && !$data->video_id && !$data->is_new)
                                         <a href="{{DOMAIN}}admin/orderpro/{{$data->id}}/edit"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only">视频处理</button></a>
-                                    @elseif($data->status==3 && $data->thumb && $data->video_id)
-                                        <a href="{{DOMAIN}}admin/orderpro/status/{{$data->id}}/4"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only">已处理</button></a>
+                                    @elseif($data->status==3 && $data->video_id && $data->is_new)
+                                        <a href="{{DOMAIN}}admin/orderpro/status/{{$data->id}}/4"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only">设置已处理</button></a>
+                                    @elseif($data->status==4)
+                                        <a href="{{DOMAIN}}admin/video/pre/{{$data->video_id}}" target="_blank"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only">视频预览</button></a>
                                     @endif
                                 </div>
                             </div>

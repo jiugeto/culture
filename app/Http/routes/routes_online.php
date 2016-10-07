@@ -26,6 +26,7 @@ Route::group(['prefix'=>'online/u','middleware' =>'MemberAuth','namespace'=>'Onl
     //渲染列表
     Route::get('order/apply/{productid}/{renderMoney}/{totalMoney}','OrderController@getApply');
     Route::get('order/finish','OrderController@getFinish');
+    Route::get('order/pre/{id}/{video_id}','OrderController@pre');       //渲染视频预览
     Route::resource('order','OrderController');
 });
 

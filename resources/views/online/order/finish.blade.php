@@ -6,14 +6,14 @@
         <div class="list">
             @if(count($datas))
                 @foreach($datas as $data)
-                    <a href="">
+                    <a href="{{DOMAIN}}online/u/order/pre/{{$data->id}}/{{$data->video_id}}" target="_blank">
                         <div class="prolist">
                             <div class="pro_one">
                                 <img src="{{ $data->getPicUrl() }}" style="@if($size=$data->getUserPicSize($data->pic($data->gif),$w=200,$h=150))width:{{$size['w']}}px;height:{{$size['h']}}px; @endif">
                             </div>
-                            <div class="pname"><b>{{ $data->name }}</b>
-                                <span style="color:red;float:left;">新</span>
-                                <span style="float:right;" title="下载该视频">下载</span>
+                            <div class="pname"><b>{{ $data->getProductName() }}</b>
+                                @if($data->is_new==1)<span style="color:red;float:left;">新</span>@endif
+                                {{--<span style="float:right;" title="下载该视频">下载</span>--}}
                                 <div class="small">{{ date("Y年m月",$data->created_at) }}</div>
                             </div>
                         </div>

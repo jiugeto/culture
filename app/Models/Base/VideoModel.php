@@ -7,7 +7,10 @@ class VideoModel extends BaseModel
 {
     protected $table = 'bs_videos';
     protected $fillable = [
-        'id','uid','name','url','url2','pic_id','intro','del','created_at','updated_at',
+        'id','uid','name','urlSel','url','url2','pic_id','intro','del','created_at','updated_at',
+    ];
+    protected $urlSels = [
+        1=>'乐视视频','腾讯视频','优酷视频',
     ];
 
     public function getUName()

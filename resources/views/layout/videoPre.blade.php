@@ -10,6 +10,9 @@
         .out .video { margin:0 auto;width:{{ $video->width() }}px; }
         .out .video .userinfo { margin:15px;font-size:20px;color:rgba(220,220,220,1);position:absolute;top:20%; }
         .out .video .userinfo img { width:30px; }
+        .out .download { padding:10px;text-align:center; }
+        .out .download a { color:grey; }
+        .out .download a:hover { color:orangered; }
     </style>
     <div class="out">
         <p>{{ $video->name }}-视频播放</p>
@@ -19,5 +22,13 @@
                 @if(isset($data))<img src="{{ $data->getComLogo() }}"> {{ $data->getUserInfo()->name }}@endif
             </div>
         </div>
+
+        {{--创作作品去云盘下载--}}
+        @if(isset($orderProModel)&&Session::has('user.uid')&&$orderProModel->uid==Session::get('user.uid'))
+            <div class="download">
+                <a href="" target="_blank">去下载成品</a>
+                密匙：XXXX
+            </div>
+        @endif
     </div>
 @stop

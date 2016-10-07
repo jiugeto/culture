@@ -38,6 +38,7 @@ class VideoController extends BaseController
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
             'crumb'=> $this->crumb,
+            'pics'=> $this->model->pics(),
             'curr'=> $curr,
         ];
        return view('admin.video.create', $result);
@@ -47,6 +48,7 @@ class VideoController extends BaseController
     {
         $data = $this->getData($request);
         $data['created_at'] = time();
+        dd($data);
         VideoModel::create($data);
         return redirect(DOMAIN.'admin/video');
     }
@@ -107,18 +109,41 @@ class VideoController extends BaseController
      */
     public function getData(Request $request)
     {
-        if (!$request->link) {
+        if (!$request->pic_id) {
+            echo "<script>alert('缩略图必选！');history.go(-1);</script>";exit;
+        } elseif (!$request->link) {
             echo "<script>alert('视频链接信息必填！');history.go(-1);</script>";exit;
         } elseif (!strstr($request->link,'?') || !strstr($request->link,'&')) {
             echo "<script>alert('视频链接信息格式有误！');history.go(-1);</script>";exit;
         }
-        $links = explode('?',$request->link);
+        //url处理
+        if (strstr($request->url,'?')) {
+            $urls = explode('?',$request->url);
+            $url = $urls[0];
+            $url_2 = explode('&',$urls[1]);
+            if (strstr($urls[1],'width') && strstr($urls[1],'height')) {
+                unset($url_2[count($url_2)-1]); unset($url_2[count($url_2)-1]);
+            }
+            if (strstr($urls[1],'auto_play')) { unset($url_2[count($url_2)-2]); }
+            $url2 = implode('&',$url_2);
+        }
+        //视频门户网判断
+        if (strstr($request->url,'letv.com')) {
+            $urlSel = 1;
+        } elseif (strstr($request->url,'qq.com')) {
+            $urlSel = 2;
+        } elseif (strstr($request->url,'youku.com')) {
+            $urlSel = 3;
+        }
         $video = [
             'name'=> $request->name,
             'pic_id'=> $request->pic_id,
-            'url'=> $links[0],
-            'url2'=> $links[1],
             'intro'=> $request->intro,
+            'urlSel'=> $urlSel,
+            'url'=> isset($url) ? $url : '',
+            'url2'=> isset($url2) ? $url2 : '',
+            'width'=> $request->width,
+            'height'=> $request->height,
         ];
         return $video;
     }

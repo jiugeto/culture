@@ -28,7 +28,7 @@
                             <label>视频 / Video：
                                 <a href="{{DOMAIN}}admin/video/uploadWay" target="_blank" title="查看视频上传方法">视频上传方法</a>
                             </label>
-                            <textarea placeholder="将复制的代码粘贴于此" required name="video" cols="30" rows="5"></textarea>
+                            <textarea placeholder="将复制的代码粘贴于此" required name="link" cols="30" rows="5"></textarea>
                         </div>
 
                         <button type="submit" class="am-btn am-btn-primary">保存修改</button>

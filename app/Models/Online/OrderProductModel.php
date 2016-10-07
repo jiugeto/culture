@@ -4,6 +4,7 @@ namespace App\Models\Online;
 use App\Models\Base\BaseModel;
 use App\Models\Base\PayModel;
 use App\Models\Base\PicModel;
+use App\Models\Base\VideoModel;
 
 class OrderProductModel extends BaseModel
 {
@@ -12,7 +13,7 @@ class OrderProductModel extends BaseModel
      */
     protected $table = 'bs_orders_pro';
     protected $fillable = [
-        'id','productid','serial','uid','uname','format','record','thumb','video_id','status','isshow','created_at','updated_at',
+        'id','productid','serial','uid','uname','format','record','video_id','status','isshow','created_at','updated_at',
     ];
     //视频格式
     protected $formatNames = [
@@ -87,10 +88,27 @@ class OrderProductModel extends BaseModel
     }
 
     /**
+     * 获得视频信息
+     */
+    public function getVideo()
+    {
+        $videoModel = VideoModel::find($this->video_id);
+        return $videoModel ? $videoModel : '';
+    }
+
+    /**
      * 获得所有图片名称
      */
     public function getPicName()
     {
-        return $this->getPic($this->thumb);
+        return $this->getVideo() ? $this->getVideo()->getPicName() : '';
+    }
+
+    /**
+     * 获得所有图片名称
+     */
+    public function getPicUrl()
+    {
+        return $this->getVideo() ? $this->getVideo()->getPicUrl() : '';
     }
 }

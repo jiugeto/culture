@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Online;
 
 use App\Models\Base\PayModel;
+use App\Models\Base\VideoModel;
 use App\Models\Online\OrderProductModel;
 
 class OrderController extends BaseController
@@ -75,16 +76,30 @@ class OrderController extends BaseController
         if (is_array($status)) {
             //status<4未成功渲染的
             $datas = OrderProductModel::where('status','<',4)
+                ->where('uid',$this->userid)
                 ->where('isshow',2)
                 ->orderBy('id','desc')
                 ->paginate($limit);
         } elseif ($status==4) {
             $datas = OrderProductModel::where('status',4)
+                ->where('uid',$this->userid)
+                ->where('is_new','>',0)
                 ->where('isshow',2)
                 ->orderBy('id','desc')
                 ->paginate($limit);
         }
         $datas->limit = $limit;
         return $datas;
+    }
+
+    public function pre($id,$video_id)
+    {
+        //去除最新的标识
+        OrderProductModel::where('id',$id)->update(['is_new'=> 2]);
+        $result = [
+            'video'=> VideoModel::find($video_id),
+            'orderProModel'=> OrderProductModel::find($id),
+        ];
+        return view('layout.videoPre', $result);
     }
 }
