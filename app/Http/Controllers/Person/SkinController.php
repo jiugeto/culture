@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Person;
 
-use App\Models\Base\UserSpaceModel;
+use App\Models\UserParamsModel;
 
 class SkinController extends BaseController
 {
@@ -14,7 +14,7 @@ class SkinController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->model = new UserSpaceModel();
+        $this->model = new UserParamsModel();
     }
 
     public function index()
@@ -31,7 +31,7 @@ class SkinController extends BaseController
 
     public function setTopBg($pic_id)
     {
-        UserSpaceModel::where('uid',$this->userid)->update(['top_bg_img'=>$pic_id]);
+        UserParamsModel::where('uid',$this->userid)->update(['per_top_bg_img'=> $pic_id]);
         return redirect(DOMAIN.'person/skin');
     }
 
@@ -41,6 +41,6 @@ class SkinController extends BaseController
 
     public function query()
     {
-        return UserSpaceModel::where('uid',$this->userid)->first();
+        return UserParamsModel::where('uid',$this->userid)->first();
     }
 }

@@ -339,7 +339,7 @@
                 <img src="{{PUB}}assets-home/images/floor_red.png" class="floor_img">
                 <span class="floor_text">{{ $number[8] }}F</span>
                 <span class="floor_text2">&nbsp;{{ $floors[$number[8]] }}</span>
-                <span class="more" onclick="window.location.href='/entertain;">>更多</span>
+                <span class="more" onclick="window.location.href='{{DOMAIN}}entertain';">>更多</span>
             </p>
             <div class="fun_con">
                 <div class="img_text">
@@ -530,20 +530,28 @@
                 <img src="/assets-home/images/floor_red.png" class="floor_img">
                 <span class="floor_text">{{ $number[11] }}F</span>
                 <span class="floor_text2">&nbsp;{{ $floors[$number[11]] }}</span>
-                <span class="more" onclick="window.location.href='/order';">>更多</span>
+                {{--<span class="more" onclick="window.location.href='{{DOMAIN}}order';">>更多</span>--}}
             </p>
             <div class="realtime_con">
                 <ul class="title">
-                    <li class="t1">单号</li>
-                    <li class="t2">名称</li>
-                    <li class="t3">时间</li>
+                    <li class="t">单号</li>
+                    <li class="t">名称</li>
+                    <li class="t">类型</li>
+                    <li class="t">用户</li>
+                    <li class="t">价格</li>
+                    <li class="t">状态</li>
+                    <li class="t">时间</li>
                 </ul>
                 <div class="con_wrap">
                     <div class="animate">
                         <ul>
-                            <li class="t1">单号1</li>
-                            <li class="t2">名称1</li>
-                            <li class="t3">时间1</li>
+                            <li class="t">单号1</li>
+                            <li class="t">名称1</li>
+                            <li class="t">类型1</li>
+                            <li class="t">用户1</li>
+                            <li class="t">价格1</li>
+                            <li class="t">状态1</li>
+                            <li class="t">时间1</li>
                         </ul>
                     </div>
                 </div>
@@ -557,7 +565,7 @@
                 <img src="{{PUB}}assets-home/images/floor_red.png" class="floor_img">
                 <span class="floor_text">{{ $number[12] }}F</span>
                 <span class="floor_text2">&nbsp;{{ $floors[$number[12]] }}</span>
-                <span class="more" onclick="window.location.href='/coopertion';">>更多</span>
+                {{--<span class="more" onclick="window.location.href='/coopertion';">>更多</span>--}}
             </p>
             <div class="cooperation_con">
                 <div class="img">
@@ -588,7 +596,7 @@
                 <img src="{{PUB}}assets-home/images/floor_red.png" class="floor_img">
                 <span class="floor_text">{{ $number[13] }}F</span>
                 <span class="floor_text2">&nbsp;{{ $floors[$number[13]] }}</span>
-                <span class="more" onclick="window.location.href='/uservioce';">>更多</span>
+                <span class="more" onclick="window.location.href='{{DOMAIN}}uservoice';">>更多</span>
             </p>
             <div class="voice_con">
                 <div class="img"><img src="{{PUB}}uploads/images/2016/online1.png"></div>

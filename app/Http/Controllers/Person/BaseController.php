@@ -29,9 +29,9 @@ class BaseController extends Controller
     {
         parent::__construct();
         $this->userid = \Session::has('user.uid') ? \Session::get('user.uid') : redirect('/login');
-        $userSpace = \App\Models\Base\UserSpaceModel::where('uid',$this->userid)->first();
+        $userSpace = \App\Models\UserParamsModel::where('uid',$this->userid)->first();
         $this->user = \App\Models\UserModel::find($this->userid);
-        $userlog = \App\Models\Admin\UserlogModel::where('uid',$this->userid)
+        $userlog = \App\Models\Admin\LogModel::where('uid',$this->userid)
             ->orderBy('id','asc')
             ->get();      //注册的记录
         $this->user->spaceTopBgImg = $userSpace->getPicUrl();

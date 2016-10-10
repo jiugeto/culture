@@ -46,9 +46,11 @@ Route::group(['prefix'=>'/','namespace'=>'Home'],function(){
     //关于我们
     Route::any('about','AboutController@index');
     Route::get('about/join','AboutController@join');
+    //用户心声
+    Route::resource('uservoice','UserVoiceController');
     //用户对本站的意见栏
-    Route::get('opinion/create/{reply}','OpinionController@create');
-    Route::get('opinion/create','OpinionController@create');
+    Route::post('opinion/status/{id}','OpinionController@setStatus');
+    Route::get('opinion/status/{id}','OpinionController@getStatus');
     Route::post('opinion/{id}','OpinionController@update');
     Route::get('{status}/opinion','OpinionController@index');
     Route::resource('opinion','OpinionController');

@@ -10,20 +10,29 @@
     </div>
 
     <div class="home_create">
-        <form class="form" data-am-validator method="POST" action="{{DOMAIN}}opinion/{{$data->id}}" enctype="multipart/form-data">
+        <form class="form" data-am-validator method="POST" action="{{DOMAIN}}opinion/status/{{$data->id}}" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" name="_method" value="POST">
             <table class="table_create">
                 <tr>
-                    <td style="width:100px;"><label>意见标题 <span class="star">*</span>：</label></td>
-                    <td><input type="text" placeholder="至少2个字符" minlength="2" required name="name" value="{{ $data->name }}"/></td>
+                    <td colspan="2"><label>意见：{{ $data->name }}</label></td>
+                </tr>
+
+                <tr>
+                    <td><label>满意度 <span class="star">*</span>：</label></td>
+                    <td>
+                        <select name="status">
+                            <option value="4">满意</option>
+                            <option value="3">不满意</option>
+                        </select>
+                    </td>
                 </tr>
                 <tr><td colspan="2"><div class="div_hr"></div></td></tr>
 
                 <tr>
-                    <td><label>内容 <span class="star">*</span>：</label></td>
-                    <td style="position:relative;z-index:5;">
-                        @include('home.common.editor')
+                    <td><label>留言 <span class="star">*</span>：</label></td>
+                    <td>
+                        <textarea name="remarks" cols="80" rows="10"></textarea>
                     </td>
                 </tr>
                 <tr><td colspan="2"><div class="div_hr"></div></td></tr>

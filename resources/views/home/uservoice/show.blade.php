@@ -5,36 +5,30 @@
         <div class="crumb">
             <div class="right">
                 <a href="/">首页</a> /
-                <a href="{{DOMAIN}}opinion">用户建议</a> / 详情
+                <a href="{{DOMAIN}}opinion">用户心声</a> / 详情
             </div>
         </div>
     </div>
 
     <div class="show_con">
-        <h3 class="center">用户意见详情页</h3>
+        <h3 class="center">用户心声详情页</h3>
         <table class="table_create table_show" cellspacing="0" cellpadding="0">
             <tr>
-                <td width="100">意见名称：</td>
+                <td width="100">心声标题：</td>
                 <td>{{ $data->name }}</td>
-            </tr>
-            <tr>
-                <td>内容：</td>
-                <td><div class="div_content">{!! $data->intro !!}</div></td>
             </tr>
             <tr>
                 <td>用户名称：</td>
                 <td>{{ $data->getUName() }}</td>
             </tr>
             <tr>
-                <td>意见状态：</td>
-                <td>{{ $data->status() }}</td>
+                <td>用户工作：</td>
+                <td>{{ $data->work }}</td>
             </tr>
-            @if($data->status>2)
             <tr>
-                <td>留言：</td>
-                <td>{!! $data->remarks !!}</td>
+                <td>内容：</td>
+                <td><div class="div_content">{{ $data->intro }}</div></td>
             </tr>
-            @endif
             <tr>
                 <td>发布时间：</td>
                 <td>{{ $data->createTime() }}</td>

@@ -29,11 +29,11 @@
         </tr>
         <tr>
             <td class="field_name">创建时间：</td>
-            <td>{{ $data->created_at }}</td>
+            <td>{{ $data->createTime() }}</td>
         </tr>
         <tr>
             <td class="field_name">更新时间：</td>
-            <td>{{ $data->updated_at!='0000-00-00 00:00:00' ? $data->updated_at : '未更新' }}</td>
+            <td>{{ $data->updateTime() }}</td>
         </tr>
         <tr><td class="center" colspan="2" style="border:0;cursor:pointer;">
                 {{--<a class="list_btn" onclick="history.go(-1)">返回</a>--}}

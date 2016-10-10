@@ -232,6 +232,7 @@ a:hover li.a_li,a li.a_li_curr {
     background:orangered;
     border-radius:2px;
     color:white;
+    cursor:pointer;
 }
 a.list_btn:hover { background:darkred; }
 /*=========右侧列表窗口==========*/

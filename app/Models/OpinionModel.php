@@ -1,7 +1,8 @@
 <?php
 namespace App\Models;
 
-//use Illuminate\Database\Eloquent\Model;
+use App\Models\Base\BaseModel;
+use App\Models\Base\UserWalletModel;
 
 class OpinionModel extends BaseModel
 {
@@ -10,22 +11,26 @@ class OpinionModel extends BaseModel
      */
     protected $table = 'bs_opinions';
     protected $fillable = [
-        'id','name','intro','uid','status','remarks','reply','isshow','del','created_at',
+        'id','name','intro','uid','status','remarks','gold1','gold2','isshow','created_at','updated_at',
     ];
     protected $statuss = [
-        1=>'新意见','已查看','处理中','不满意','满意',
+        '所有','新意见','处理中','不满意','满意',
     ];
+
+    public function getUName()
+    {
+        return $this->getUserName($this->uid);
+    }
 
     public function status()
     {
-        return $this->statuss[$this->status];
+        return array_key_exists($this->status,$this->statuss) ? $this->statuss[$this->status] : '';
     }
 
-    public function replyModels()
+    public static function setGold($uid,$gold)
     {
-        if ($this->reply) {
-            $opinions = OpinionModel::where('id',$this->reply)->get();
-        }
-        return isset($opinions) ? $opinions : [];
+        $walletModel = UserWalletModel::where('uid',$uid)->first();
+        $goldCount = $walletModel->gold+$gold;
+        UserWalletModel::where('uid',$uid)->update(['gold'=> $goldCount]);
     }
 }

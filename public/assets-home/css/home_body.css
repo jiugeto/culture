@@ -334,10 +334,11 @@
 .con_wrap {
     width:995px;height:200px;
     border:1px solid lightgrey;
+    border-top:0;
     position:relative;top:-20px;
     overflow:hidden;
 }
-.realtime_con .t1,.realtime_con .t2,.realtime_con .t3 { width:33.2%; }
+.realtime_con .t { width:141.5px; }
 .animate li { border-bottom:1px dashed lightgrey; }
 
 

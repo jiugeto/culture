@@ -61,7 +61,7 @@
 .home_create {
     margin:10px auto;
     width:998px;
-    border:1px solid lightgrey;
+    border:1px solid ghostwhite;
     border-radius:3px;
 }
 .form {
@@ -91,9 +91,10 @@
 .table_create {
     margin:10px auto;
     padding:10px 50px;
-    width:780px;
+    width:800px;
     border:1px solid rgb(240,240,240);
     border-radius:3px;
+    color:grey;
 }
 .table_create td {
     padding-top:10px;
@@ -105,6 +106,11 @@
     border:1px solid rgb(220,220,220);
     border-radius:3px;
     font-size:16px;
+}
+.table_create td select,.table_create td textarea {
+    padding:5px 10px;
+    border:1px solid lightgrey;
+    color:grey;
 }
 .div_content {
     width:100%;height:100px;

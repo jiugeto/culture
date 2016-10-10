@@ -172,10 +172,19 @@ class VideoController extends BaseController
             if (strstr($urls[1],'auto_play')) { unset($url_2[count($url_2)-2]); }
             $url2 = implode('&',$url_2);
         }
+        //视频门户网判断
+        if (strstr($request->url,'letv.com')) {
+            $urlSel = 1;
+        } elseif (strstr($request->url,'qq.com')) {
+            $urlSel = 2;
+        } elseif (strstr($request->url,'youku.com')) {
+            $urlSel = 3;
+        }
         $data = [
             'uid'=> $this->userid,
             'name'=> $request->name,
             'intro'=> $request->intro,
+            'urlSel'=> $urlSel,
             'url'=> isset($url) ? $url : '',
             'url2'=> isset($url2) ? $url2 : '',
             'width'=> $request->width,

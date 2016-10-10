@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Home;
 
+use App\Models\Base\UserWalletModel;
 use App\Models\OpinionModel;
 use Illuminate\Http\Request;
 use App\Tools;
@@ -10,17 +11,20 @@ class OpinionController extends BaseController
     /**
      * 网站前台需求信息
      */
+
     protected $url_curr = 'opinion';
 
     public function __construct()
     {
         parent::__construct();
+        $this->model = new OpinionModel();
     }
 
     public function index($status=0)
     {
         $result = [
             'datas'=> $this->query($status),
+            'model'=> $this->model,
             'prefix_url'=> DOMAIN.'opinion',
             'curr_menu'=> $this->url_curr,
             'status'=> $status,
@@ -33,12 +37,9 @@ class OpinionController extends BaseController
         if (!\Session::has('user')) {
             echo "<script>alert('你还没有登录！');history.go(-1);</script>";
         }
-        //如果 reply 是0。则无此记录，为新意见 isreply==0 ，否则是 isreply==1
-        if (OpinionModel::find($reply)) { $isreply = 1; }else{ $isreply = 0; }
         $result = [
             'curr_menu'=> $this->url_curr,
             'curr'=> 'create',
-            'isreply'=> $isreply,
         ];
         return view('home.opinion.create', $result);
     }
@@ -46,8 +47,14 @@ class OpinionController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
-        $data['created_at'] = date('Y-m-d', time());
+        $data['created_at'] = time();
+        //成功发布后给用户随机奖励金币1-5个
+        $data['gold1'] = rand(1,5);
         OpinionModel::create($data);
+
+        //计算金币总数
+        if (isset($data['gold1'])) { OpinionModel::setGold($this->userid,$data['gold1']); }
+
         return redirect(DOMAIN.'opinion');
     }
 
@@ -79,8 +86,45 @@ class OpinionController extends BaseController
     public function update(Request $request,$id)
     {
         $data = $this->getData($request,$id);
-        $data['updated_at'] = date('Y-m-d', time());
+        $data['updated_at'] = time();
         OpinionModel::where('id',$id)->update($data);
+        return redirect(DOMAIN.'opinion');
+    }
+
+    public function getStatus($id)
+    {
+        if (!\Session::has('user')) {
+            echo "<script>alert('你还没有登录！');history.go(-1);</script>";
+        }
+        $this->menus['edit'] = '意见评价';
+        $result = [
+            'data'=> OpinionModel::find($id),
+            'curr_menu'=> $this->url_curr,
+            'curr'=> 'edit',
+        ];
+        return view('home.opinion.status', $result);
+    }
+
+    public function setStatus(Request $request,$id)
+    {
+        if ($request->status==3 && !$request->remarks) {
+            echo "<script>alert('请填写不满意缘由！');history.go(-1);</script>";exit;
+        }
+        //成功发布后给用户随机奖励金币15-20个
+        if ($request->status==4) {
+            $data['gold2'] = rand(15,20);
+        }
+        $data = [
+            'status'=> $request->status,
+            'remarks'=> $request->remarks,
+            'gold2'=> isset($data['gold2']) ? $data['gold2'] : 0,
+            'updated_at'=> time(),
+        ];
+        OpinionModel::where('id',$id)->update($data);
+
+        //计算金币总数
+        if (isset($data['gold2'])) { OpinionModel::setGold($this->userid,$data['gold2']); }
+
         return redirect(DOMAIN.'opinion');
     }
 
@@ -112,33 +156,21 @@ class OpinionController extends BaseController
     {
         if ($status==0) {
             //所有意见
-            $datas = OpinionModel::where([
-                    'del'=> 0,
-                    'isshow'=> 1,
-                ])
+            $datas = OpinionModel::where('isshow', 2)
+                ->paginate($this->limit);
+        } elseif ($status==1) {
+            //未处理
+            $datas = OpinionModel::where('isshow', 2)
+                ->where('status',1)
                 ->paginate($this->limit);
         } elseif ($status==2) {
-            //未处理
-            $datas = OpinionModel::where([
-                    'del'=> 0,
-                    'isshow'=> 1,
-                ])
-                ->where('status','<',3)
-                ->paginate($this->limit);
-        } elseif ($status==3) {
             //已处理
-            $datas = OpinionModel::where([
-                    'del'=> 0,
-                    'isshow'=> 1,
-                ])
+            $datas = OpinionModel::where('isshow', 1)
                 ->where('status','>',3)
                 ->paginate($this->limit);
-        } elseif ($status==5) {
+        } elseif ($status==4) {
             //处理并且满意
-            $datas = OpinionModel::where([
-                    'del'=> 0,
-                    'isshow'=> 1,
-                ])
+            $datas = OpinionModel::where('isshow', 1)
                 ->where('status',5)
                 ->paginate($this->limit);
         }

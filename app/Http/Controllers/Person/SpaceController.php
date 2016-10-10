@@ -5,9 +5,9 @@ use App\Models\DesignModel;
 use App\Models\GoodsModel;
 use App\Models\MessageModel;
 use App\Models\Base\OrderModel;
-use App\Models\Base\OrderProductModel;
+use App\Models\Online\OrderProductModel;
 use App\Models\Base\PicModel;
-use App\Models\ProductModel;
+use App\Models\Online\ProductModel;
 use App\Models\UserModel;
 
 class SpaceController extends BaseController
@@ -45,12 +45,6 @@ class SpaceController extends BaseController
 
 
 
-//    public function user()
-//    {
-//        $uid = $this->userid ? $this->userid : 0;
-//        $userModel = UserModel::find($uid);
-//        return $userModel ? $userModel : '';
-//    }
 
     public function pics()
     {

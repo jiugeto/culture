@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Person;
 
 use App\Models\Base\UserSignModel;
-use App\Models\UserParamsModel;
+use App\Models\Base\UserWalletModel;
 
 class SignController extends BaseController
 {
@@ -41,7 +41,6 @@ class SignController extends BaseController
         $result = [
             'datas'=> $this->query($date),
             'month'=> $this->getMonth(),
-//            'userSignCount'=> $this->queryCount(),
             'model'=> $this->model,
             'prefix_url'=> DOMAIN.'person/sign',
             'user'=> $this->user,
@@ -69,8 +68,8 @@ class SignController extends BaseController
         ];
         UserSignModel::create($data);
         //奖励加入总数
-        $userParam = UserParamsModel::where('uid',$this->userid)->first();
-        UserParamsModel::where('id',$userParam->id)->update(['sign'=> $userParam->sign+$reward]);
+        $userParam = UserWalletModel::where('uid',$this->userid)->first();
+        UserWalletModel::where('id',$userParam->id)->update(['sign'=> $userParam->sign+$reward]);
         return redirect(DOMAIN.'person/sign');
     }
 
@@ -101,11 +100,6 @@ class SignController extends BaseController
         $datas->limit = $this->limit;
         return $datas;
     }
-
-//    public function queryCount()
-//    {
-//        return UserSignModel::where('uid',$this->userid)->get();
-//    }
 
     /**
      * 查询当前用户当天签到情况
