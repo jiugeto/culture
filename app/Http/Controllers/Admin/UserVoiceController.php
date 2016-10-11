@@ -83,8 +83,7 @@ class UserVoiceController extends BaseController
      */
     public function query($isshow=null)
     {
-        $datas = UserVoiceModel::where('del',0)
-            ->where('isshow',$isshow)
+        $datas = UserVoiceModel::where('isshow',$isshow)
             ->orderBy('sort','desc')
             ->orderBy('id','desc')
             ->paginate($this->limit);

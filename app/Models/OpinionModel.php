@@ -26,11 +26,4 @@ class OpinionModel extends BaseModel
     {
         return array_key_exists($this->status,$this->statuss) ? $this->statuss[$this->status] : '';
     }
-
-    public static function setGold($uid,$gold)
-    {
-        $walletModel = UserWalletModel::where('uid',$uid)->first();
-        $goldCount = $walletModel->gold+$gold;
-        UserWalletModel::where('uid',$uid)->update(['gold'=> $goldCount]);
-    }
 }

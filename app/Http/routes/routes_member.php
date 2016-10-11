@@ -158,6 +158,9 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
     Route::resource('talk','TalkController');
     Route::get('talk/i/{index}','TalkController@index');      //i代表index
     //钱袋管理
-    Route::get('wallet/signtoweal/{sign}','WalletController@setWealBySign');
+    Route::get('wallet/tipToWeal/{tip_id}','WalletController@setTipToWeal');    //红包兑换
+    Route::get('wallet/gettip/{type}/{tip}','WalletController@setTip');     //获取红包
+    Route::get('wallet/tip','WalletController@tipList');        //红包列表
+    Route::get('wallet/signtoweal/{sign}','WalletController@setWealBySign');    //兑换签到
     Route::resource('wallet','WalletController');
 });

@@ -2,8 +2,7 @@
 @section('content')
     {{--@include('member.common.crumb')--}}
     <div class="mem_crumb">
-        <a href="{{DOMAIN}}member">会员后台</a> /
-        <a href="{{DOMAIN}}member">会员福利</a> / 福利中心
+        <a href="{{DOMAIN}}member">会员后台</a> / 会员福利
     </div>
 
     <h3 class="center">福利中心</h3>
@@ -12,6 +11,12 @@
             <td class="field_name" width="200">签到奖励总数：</td>
             <td>{{ $data->sign }} 个
                 <a href="{{DOMAIN}}person/sign" target="_blank" class="list_btn">去签到</a>
+            </td>
+        </tr>
+        <tr>
+            <td class="field_name" width="200">已兑换红包总额：</td>
+            <td>{{ $data->tip }} 元 &nbsp;
+                <a href="{{DOMAIN}}member/wallet/tip" target="_blank" class="list_btn">红包列表</a>
             </td>
         </tr>
         {{--<tr>--}}
@@ -43,10 +48,10 @@
             <td class="field_name">更新时间：</td>
             <td>{{ $data->updateTime() }}</td>
         </tr>
-        <tr><td class="center" colspan="2" style="border:0;cursor:pointer;">
+        {{--<tr><td class="center" colspan="2" style="border:0;cursor:pointer;">--}}
                 {{--<a class="list_btn" onclick="history.go(-1)">返回</a>--}}
-                <button class="companybtn" onclick="history.go(-1)">返 &nbsp;回</button>
-            </td></tr>
+                {{--<button class="companybtn" onclick="history.go(-1)">返 &nbsp;回</button>--}}
+            {{--</td></tr>--}}
     </table>
 
     <script>

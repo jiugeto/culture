@@ -1,6 +1,20 @@
 <?php
 namespace App\Http\Controllers\Home;
 
+use App\Models\Base\AdModel;
+use App\Models\Base\OrderModel;
+use App\Models\Base\UserTipModel;
+use App\Models\CompanyModel;
+use App\Models\DesignModel;
+use App\Models\EntertainModel;
+use App\Models\GoodsModel;
+use App\Models\IdeasModel;
+use App\Models\Online\ProductModel;
+use App\Models\RentModel;
+use App\Models\TalksModel;
+use App\Models\UserModel;
+use App\Models\UserVoiceModel;
+
 class HomeController extends BaseController
 {
     /**
@@ -31,7 +45,7 @@ class HomeController extends BaseController
             'orders'=> $this->getOrders(10),
             'cooperations'=> $this->getCooperations(6),
             'uservoices'=> $this->getUserVoices(5),
-//            'menus'=> $this->menus,
+            'usertip'=> $this->getTip(),
             'curr_menu'=> '',
             'number'=> $this->number,
             'floors'=> $this->floors,
@@ -45,7 +59,7 @@ class HomeController extends BaseController
     public function getPpts($limit)
     {
         //adplace_id==1，前台首页横幅
-        $datas = \App\Models\Base\AdModel::where('uid',0)
+        $datas = AdModel::where('uid',0)
             ->where('adplace_id',1)
             ->where('isuse',1)
             ->where('isshow',1)
@@ -62,10 +76,9 @@ class HomeController extends BaseController
      */
     public function getIdeas($limit)
     {
-        $datas = \App\Models\IdeasModel::where(['del'=>0, 'isshow'=>1])
+        $datas = IdeasModel::where(['del'=>0, 'isshow'=>1])
                     ->orderBy('sort','desc')
                     ->orderBy('id','desc')
-//                    ->get();
                     ->paginate($limit);
         static $number = 1;
         if (count($datas)) {
@@ -79,10 +92,9 @@ class HomeController extends BaseController
      */
     public function getTalks($limit)
     {
-        $datas =  \App\Models\TalksModel::where(['del'=>0, 'isshow'=>1])
+        $datas =  TalksModel::where(['del'=>0, 'isshow'=>1])
                     ->orderBy('sort','desc')
                     ->orderBy('id','desc')
-//                    ->get();
                     ->paginate($limit);
         static $number = 1;
         if (count($datas)) {
@@ -96,10 +108,9 @@ class HomeController extends BaseController
      */
     public function getProducts($limit)
     {
-        return \App\Models\Online\ProductModel::where('isshow',1)
+        return ProductModel::where('isshow',1)
                     ->orderBy('sort','desc')
                     ->orderBy('id','desc')
-//                    ->get();
                     ->paginate($limit);
     }
 
@@ -108,11 +119,10 @@ class HomeController extends BaseController
      */
     public function getGoods($limit)
     {
-        return \App\Models\GoodsModel::where(['del'=>0, 'isshow'=>1])
+        return GoodsModel::where(['del'=>0, 'isshow'=>1])
                     ->whereIn('type',[2,4])
                     ->orderBy('sort','desc')
                     ->orderBy('id','desc')
-//                    ->get();
                     ->paginate($limit);
     }
 
@@ -121,9 +131,8 @@ class HomeController extends BaseController
      */
     public function getCompanys($limit)
     {
-        return \App\Models\CompanyModel::orderBy('sort','desc')
+        return CompanyModel::orderBy('sort','desc')
                     ->orderBy('id','desc')
-//                    ->get();
                     ->paginate($limit);
     }
 
@@ -132,11 +141,10 @@ class HomeController extends BaseController
      */
     public function getRecommendProducts($limit)
     {
-        return \App\Models\GoodsModel::where('recommend',1)
+        return GoodsModel::where('recommend',1)
                     ->whereIn('type',[2,4])
                     ->orderBy('sort','desc')
                     ->orderBy('id','desc')
-//                    ->get();
                     ->paginate($limit);
     }
 
@@ -145,10 +153,9 @@ class HomeController extends BaseController
      */
     public function getDemands($limit)
     {
-        return \App\Models\GoodsModel::whereIn('type',[1,3])
+        return GoodsModel::whereIn('type',[1,3])
                     ->orderBy('sort','desc')
                     ->orderBy('id','desc')
-//                    ->get();
                     ->paginate($limit);
     }
 
@@ -157,10 +164,9 @@ class HomeController extends BaseController
      */
     public function getEntertains($limit)
     {
-        return \App\Models\EntertainModel::where('del',0)
+        return EntertainModel::where('del',0)
                     ->orderBy('sort','desc')
                     ->orderBy('id','desc')
-//                    ->get();
                     ->paginate($limit);
     }
 
@@ -169,10 +175,9 @@ class HomeController extends BaseController
      */
     public function getRents($limit)
     {
-        return \App\Models\RentModel::where('del',0)
+        return RentModel::where('del',0)
                     ->orderBy('sort','desc')
                     ->orderBy('id','desc')
-//                    ->get();
                     ->paginate($limit);
     }
 
@@ -181,10 +186,9 @@ class HomeController extends BaseController
      */
     public function getDesigns($limit)
     {
-        return \App\Models\DesignModel::where('del',0)
+        return DesignModel::where('del',0)
                     ->orderBy('sort','desc')
                     ->orderBy('id','desc')
-//                    ->get();
                     ->paginate($limit);
     }
 
@@ -193,9 +197,8 @@ class HomeController extends BaseController
      */
     public function getOrders($limit)
     {
-        return \App\Models\Base\OrderModel::where('isshow',1)
+        return OrderModel::where('isshow',1)
                     ->orderBy('id','desc')
-//                    ->get();
                     ->paginate($limit);
     }
 
@@ -204,8 +207,7 @@ class HomeController extends BaseController
      */
     public function getCooperations($limit)
     {
-        return \App\Models\UserModel::whereIn('isuser',[3,4,5,6])
-//                    ->get();
+        return UserModel::whereIn('isuser',[3,4,5,6])
                     ->paginate($limit);
     }
 
@@ -214,9 +216,26 @@ class HomeController extends BaseController
      */
     public function getUserVoices($limit)
     {
-        return \App\Models\UserVoiceModel::where('isshow',1)
+        return UserVoiceModel::where('isshow',2)
                     ->orderBy('sort','desc')
-//                    ->get();
                     ->paginate($limit);
+    }
+
+    /**
+     * 给用户发红包
+     */
+    public function getTip()
+    {
+        //新人红包
+        $newModel = new UserTipModel();
+        $new = UserTipModel::where('uid',$this->userid)
+            ->where('type',1)
+            ->first();
+        if (!$new) {
+            $tip['key'] = 1;
+            $tip['name'] = $newModel['types'][1];
+            $tip['val'] = 200;
+        }
+        return isset($tip) ? $tip : [];
     }
 }

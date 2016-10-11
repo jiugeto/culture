@@ -32,10 +32,18 @@ class OpinionController extends BaseController
         return view('home.opinion.index', $result);
     }
 
-    public function create($reply=0)
+    public function create()
     {
         if (!\Session::has('user')) {
             echo "<script>alert('你还没有登录！');history.go(-1);</script>";
+        }
+        //限制用户每日发布意见的数量
+        $datas = OpinionModel::where('uid',$this->userid)
+            ->where('created_at','>',strtotime(date('Ymd',time()).'000000'))
+            ->where('created_at','<',strtotime(date('Ymd',time()).'235959'))
+            ->get();
+        if (count($datas)) {
+            echo "<script>alert('今日意见发布已达上限！');history.go(-1);</script>";
         }
         $result = [
             'curr_menu'=> $this->url_curr,
@@ -53,7 +61,7 @@ class OpinionController extends BaseController
         OpinionModel::create($data);
 
         //计算金币总数
-        if (isset($data['gold1'])) { OpinionModel::setGold($this->userid,$data['gold1']); }
+        if (isset($data['gold1'])) { UserWalletModel::setGold($this->userid,$data['gold1']); }
 
         return redirect(DOMAIN.'opinion');
     }
@@ -123,7 +131,7 @@ class OpinionController extends BaseController
         OpinionModel::where('id',$id)->update($data);
 
         //计算金币总数
-        if (isset($data['gold2'])) { OpinionModel::setGold($this->userid,$data['gold2']); }
+        if (isset($data['gold2'])) { UserWalletModel::setGold($this->userid,$data['gold2']); }
 
         return redirect(DOMAIN.'opinion');
     }

@@ -105,9 +105,9 @@ class OrderModel extends BaseModel
     {
         if (in_array($this->genre,[5,6])) {
             $pay = $this->getPays();
-            return (isset($pay[$i])&&$pay[$i]) ? $pay->money() : '';
+            return (isset($pay[$i])&&$pay[$i]) ? $pay->money() : 0;
         } else {
-            return $this->getPay() ? $this->getPay()->money() : '';
+            return $this->getPay() ? $this->getPay()->money() : 0;
         }
     }
 

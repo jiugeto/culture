@@ -47,10 +47,10 @@
                         <th class="table-type">控制器名称</th>
                         <th class="table-type">操作方法</th>
                         <th class="table-type">父操作</th>
-                        <th class="table-author am-hide-sm-only">排序</th>
+                        <th class="table-author am-hide-sm-only" width="100">排序</th>
                         <th class="table-date am-hide-sm-only">是否显示</th>
                         <th class="table-date am-hide-sm-only">添加时间</th>
-                        <th class="table-set">操作</th>
+                        <th class="table-set" width="300">操作</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -64,8 +64,8 @@
                         <td class="am-hide-sm-only">{{ $data->action }}</td>
                         <td class="am-hide-sm-only">{{ $data->getParentName() }}</td>
                         <td class="am-hide-sm-only">{{ $data->sort }}
-                            {{--<a href="{{DOMAIN}}admin/action/increase/{{ $data->id }}" class="increase" title="增加1">▲</a>--}}
-                            {{--<a href="{{DOMAIN}}admin/action/reduce/{{ $data->id }}" class="reduce" title="减少1">▼</a>--}}
+                            <a href="{{DOMAIN}}admin/action/increase/{{ $data->id }}" class="increase" title="增加1">▲</a>
+                            <a href="{{DOMAIN}}admin/action/reduce/{{ $data->id }}" class="reduce" title="减少1">▼</a>
                         </td>
                         <td class="am-hide-sm-only">{{ $data->getIsShow() }}</td>
                         <td class="am-hide-sm-only">{{ $data->createTime() }}</td>
@@ -77,6 +77,7 @@
                                     @endif
                                     <a href="{{DOMAIN}}admin/action/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="{{PUB}}assets/images/show.png" class="icon"> 查看</button></a>
                                     <a href="{{DOMAIN}}admin/action/{{$data->id}}/edit"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 编辑</button></a>
+                                        <div style="height:5px"></div>
                                     <a href="{{DOMAIN}}admin/action/{{$data->id}}/destroy"><button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><img src="{{PUB}}assets/images/del_red.png" class="icon"> 删除</button></a>
                                     @if($data->isshow==2)
                                     <a href="{{DOMAIN}}admin/action/isshow/{{$data->id}}/{{$pid}}/1"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 去隐藏</button></a>

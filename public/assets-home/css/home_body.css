@@ -338,6 +338,12 @@
     position:relative;top:-20px;
     overflow:hidden;
 }
+.con_wrap .animate {
+    margin-top:5px;
+    padding:2px 0;
+    color:grey;
+    font-size:14px;
+}
 .realtime_con .t { width:141.5px; }
 .animate li { border-bottom:1px dashed lightgrey; }
 
@@ -482,6 +488,74 @@
     cursor:pointer;
 }
 .searchlist .waterfall2 .water_one {
+}
+
+
+/*===== 给用户的红包 =====*/
+.usertip {
+    position:fixed;top:0;left:0;z-index:1000;
+}
+.usertip .bg {
+    width:100%; height:100%;
+    background:rgba(0,0,0,0.3);
+    position:fixed;top:0;left:0;
+}
+.usertip .tip {
+    width:500px;
+    height:300px;
+    border-radius:10px;
+    background:red;
+    position:fixed;top:35%;left:30%;
+}
+.usertip .tip .top {
+    width:500px; height:20px;
+    border-radius:10px;
+    background:rgb(200,0,0);
+    border-bottom-left-radius:0;
+    border-bottom-right-radius:0;
+}
+.usertip .tip .top2 {
+    width:0; height:0;
+    border-left:250px solid transparent;
+    border-right:250px solid transparent;
+    border-top:80px solid rgb(200,0,0);
+    border-radius:5px;
+}
+.usertip .tip .circle {
+    width:80px; height:80px;
+    border-radius:40px;
+    border:5px solid orange;
+    text-align:center;
+    line-height:80px;
+    font-size:25px;
+    color:orangered;
+    background:yellow;
+    position:absolute;left:200px;top:50px;
+}
+.usertip .tip .text {
+    margin:50px auto;
+    text-align:center;
+    color:peachpuff;
+}
+.usertip .tip .btn { text-align:center; }
+.usertip .tip .btn a {
+    padding:5px 20px;
+    color:red;
+    text-decoration:none;
+    border-radius:3px;
+    background:yellow;
+    cursor:pointer;
+}
+.usertip .tip a.close {
+    color:gainsboro;
+    font-size:30px;
+    text-decoration:none;
+    border-radius:50px;
+    position:absolute;left:460px;top:5px;
+}
+.usertip .tip a:hover.close {
+    color:white;
+    cursor:pointer;
 }
 
 

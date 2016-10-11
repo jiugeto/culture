@@ -544,15 +544,21 @@
                 </ul>
                 <div class="con_wrap">
                     <div class="animate">
+                        @if(count($orders))
+                            @foreach($orders as $order)
                         <ul>
-                            <li class="t">单号1</li>
-                            <li class="t">名称1</li>
-                            <li class="t">类型1</li>
-                            <li class="t">用户1</li>
-                            <li class="t">价格1</li>
-                            <li class="t">状态1</li>
-                            <li class="t">时间1</li>
+                            <li class="t">{{ substr($order->serial,4) }}</li>
+                            <li class="t">{{ $order->name }}</li>
+                            <li class="t">{{ $order->genreName() }}</li>
+                            <li class="t">{{ $order->buyerName }}</li>
+                            <li class="t">{{ $order->getMoney() }}</li>
+                            <li class="t">{{ $order->statusName() }}</li>
+                            <li class="t">{{ date('Y-m-d',$order->created_at) }}</li>
                         </ul>
+                            @endforeach
+                        @else
+                            <ul><li class="t" style="width:100%;">没有记录</li></ul>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -600,11 +606,47 @@
             </p>
             <div class="voice_con">
                 <div class="img"><img src="{{PUB}}uploads/images/2016/online1.png"></div>
-                <div class="text">文字</div>
-                <div class="con">内容</div>
+                @if(count($uservoices))
+                    <div class="text">
+                        名称：{{ $uservoices[0]->getUName() }}
+                        <br>工作：{{ $uservoices[0]->work }}
+                    </div>
+                    <div class="con">{{ $uservoices[0]->intro }}</div>
+                @else
+                    <div class="text">
+                        名称：XXX
+                        <br>工作：XX
+                    </div>
+                    <div class="con">内容</div>
+                @endif
             </div>
         </div>
         <!-- 空白 -->
         <div class="content_kongbai">&nbsp;</div>
+
+        {{--给用户发红包--}}
+        @if($usertip)
+        <div class="usertip">
+            <div class="bg"></div>
+            <div class="tip">
+                <div class="top"></div>
+                <div class="top2"></div>
+                <div class="circle">{{$usertip['val']}}元</div>
+                <div class="text">恭喜你，获得 {{$usertip['name']}} 福利{{$usertip['val']}}元</div>
+                <div class="btn">
+                    <a onclick="getTip()">获取红包</a>
+                    <input type="hidden" name="uid" value="{{Session::has('user')?Session::get('user.uid'):0}}">
+                </div>
+                <a class="close" title="关闭" onclick="$('.usertip').hide();">×</a>
+            </div>
+            <script>
+                function getTip(){
+                    var uid = $("input[name='uid']").val();
+                    if (uid==0) { alert('还没登录，先去登录，登录后来这里获取红包！'); }
+                    window.location.href = '{{DOMAIN}}member/wallet/gettip/{{$usertip['key']}}/{{$usertip['val']}}';
+                }
+            </script>
+        </div>
+        @endif
     </div>
 @stop

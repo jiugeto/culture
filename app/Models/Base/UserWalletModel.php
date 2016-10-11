@@ -9,7 +9,7 @@ class UserWalletModel extends BaseModel
 
     protected $table = 'bs_user_wallet';
     protected $fillable = [
-        'id','uid','sign','gold','weal','created_at','updated_at',
+        'id','uid','sign','gold','tip','weal','created_at','updated_at',
     ];
 
 //    /**
@@ -19,4 +19,11 @@ class UserWalletModel extends BaseModel
 //    {
 //        return $this->uid ? $this->getUserName($this->uid) : '';
 //    }
+
+    public static function setGold($uid,$gold)
+    {
+        $walletModel = UserWalletModel::where('uid',$uid)->first();
+        $goldCount = $walletModel->gold+$gold;
+        UserWalletModel::where('uid',$uid)->update(['gold'=> $goldCount]);
+    }
 }
