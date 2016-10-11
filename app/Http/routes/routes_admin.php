@@ -204,5 +204,6 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::get('orderpro/s/{isshow}/{status}','OrderProductController@index');      //s代表检索
     Route::resource('orderpro','OrderProductController');
     //钱包管理
+    Route::get('sign','WalletController@signList');
     Route::resource('wallet','WalletController');
 });

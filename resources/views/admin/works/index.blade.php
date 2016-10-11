@@ -64,7 +64,7 @@
                                 }
                             </script>
                         </td>
-                        <td class="am-hide-sm-only">{{ $data->created_at }}</td>
+                        <td class="am-hide-sm-only">{{ $data->createTime() }}</td>
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">

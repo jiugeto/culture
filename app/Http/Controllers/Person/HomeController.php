@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Person;
 
 use App\Models\GoodsModel;
-use App\Models\ProductModel;
+use App\Models\Online\ProductModel;
 use App\Models\UserModel;
 
 class HomeController extends BaseController

@@ -12,13 +12,13 @@ class UserWalletModel extends BaseModel
         'id','uid','sign','gold','tip','weal','created_at','updated_at',
     ];
 
-//    /**
-//     * 用户名称
-//     */
-//    public function getUName()
-//    {
-//        return $this->uid ? $this->getUserName($this->uid) : '';
-//    }
+    /**
+     * 用户名称
+     */
+    public function getUName()
+    {
+        return $this->uid ? $this->getUserName($this->uid) : '';
+    }
 
     public static function setGold($uid,$gold)
     {

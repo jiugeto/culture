@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Person;
 
-use App\Models\ProductModel;
+use App\Models\Online\ProductModel;
 use App\Models\Base\VideoModel;
 
 class ProductController extends BaseController

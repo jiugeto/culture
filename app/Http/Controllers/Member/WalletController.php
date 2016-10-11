@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Member;
 
 use App\Models\Base\UserTipModel;
 use App\Models\Base\UserWalletModel;
+use App\Models\OpinionModel;
 
 class WalletController extends BaseController
 {
@@ -26,6 +27,7 @@ class WalletController extends BaseController
         $curr['url'] = $this->lists['']['url'];
         $result = [
             'data'=> $this->query(),
+            'golds'=> $this->getGolds(),
             'tips'=> $this->getTips(),
             'prefix_url'=> DOMAIN.'member/wallet',
             'lists'=> $this->lists,
@@ -122,9 +124,26 @@ class WalletController extends BaseController
         return $data1;
     }
 
+    /**
+     * 金币查询
+     */
+    public function getGolds()
+    {
+        $datas = OpinionModel::where('uid',$this->userid)
+            ->where('status',4)
+            ->orderBy('id','desc')
+            ->paginate($this->limit);
+        $datas->limit = $this->limit;
+        return $datas;
+    }
+
+    /**
+     * 红包查询
+     */
     public function getTips()
     {
         $datas = UserTipModel::where('uid',$this->userid)
+            ->orderBy('id','desc')
             ->paginate($this->limit);
         $datas->limit = $this->limit;
         return $datas;

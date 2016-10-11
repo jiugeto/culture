@@ -9,20 +9,22 @@
     <table class="table_create table_show" cellspacing="0" cellpadding="0">
         <tr>
             <td class="field_name" width="200">签到奖励总数：</td>
-            <td>{{ $data->sign }} 个
+            <td>{{ $data->sign }} 个 &nbsp;
                 <a href="{{DOMAIN}}person/sign" target="_blank" class="list_btn">去签到</a>
             </td>
         </tr>
         <tr>
-            <td class="field_name" width="200">已兑换红包总额：</td>
-            <td>{{ $data->tip }} 元 &nbsp;
-                <a href="{{DOMAIN}}member/wallet/tip" target="_blank" class="list_btn">红包列表</a>
+            <td class="field_name" style="width:100px;">金币总数：</td>
+            <td>{{ $data->gold }} 个 &nbsp;
+                <a href="{{DOMAIN}}member/gold" target="_blank" class="list_btn">金币列表</a>
             </td>
         </tr>
-        {{--<tr>--}}
-            {{--<td class="field_name" style="width:100px;">金币总数：</td>--}}
-            {{--<td>{{ $data->gold }} 个</td>--}}
-        {{--</tr>--}}
+        <tr>
+            <td class="field_name" width="200">红包总额：</td>
+            <td>{{ $data->tip }} 元 &nbsp;
+                <a href="{{DOMAIN}}member/tip" target="_blank" class="list_btn">红包列表</a>
+            </td>
+        </tr>
         <tr>
             <td class="field_name">福利额度：</td>
             <td>{{ $data->weal }} 元

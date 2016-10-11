@@ -1,10 +1,7 @@
 <?php
 namespace App\Models;
 
-use App\Models\Base\BaseModel;
-use App\Models\Base\UserWalletModel;
-
-class OpinionModel extends BaseModel
+class OpinionModel extends \App\Models\Base\BaseModel
 {
     /**
      * 用户意见model
