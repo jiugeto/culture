@@ -31,7 +31,7 @@
                         <td class="am-hide-sm-only"><input type="checkbox" /></td>
                         <td class="am-hide-sm-only">{{ $data->id }}</td>
                         <td class="am-hide-sm-only"><a href="{{DOMAIN}}admin/product/{{$data->id}}">{{ $data->name }}</a></td>
-                        <td class="am-hide-sm-only">{{ $data->uname }}</td>
+                        <td class="am-hide-sm-only">{{ $data->getUName() }}</td>
                         <td class="am-hide-sm-only">{{ $data->sort }}</td>
                         <td class="am-hide-sm-only">{{ $data->isshow() }}</td>
                         <td class="am-hide-sm-only">{{ $data->istop() }}</td>

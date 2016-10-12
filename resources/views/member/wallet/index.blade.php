@@ -34,12 +34,34 @@
         <tr>
             <td class="field_name">签到兑换福利：</td>
             <td width="500">
-                <input type="text" style="width:100px" placeholder="30签到起" name="signToWeal">×30个签到
+                <input type="text" style="width:100px" placeholder="{{$data->sign}}签到起" name="signToWeal">×{{$data->signByWeal}}个签到
                 <input type="hidden" name="sign" value="{{ $data->sign }}">
                 <input type="hidden" name="signByWeal" value="{{ $data->signByWeal }}">
                 &nbsp;&nbsp;
-                <a class="list_btn" onclick="getBoonBySign()">确定兑换</a>
-                <br><small style="color:lightgrey;font-size:12px;">(每30签到兑换1元福利，{{$data->sign}}个签到可兑换)</small>
+                <a class="list_btn" onclick="getWealBySign()">确定兑换</a>
+                <br><small style="color:lightgrey;font-size:12px;">(每{{$data->signByWeal}}签到兑换1元福利，{{$data->sign}}个签到可兑换)</small>
+            </td>
+        </tr>
+        <tr>
+            <td class="field_name">金币兑换福利：</td>
+            <td width="500">
+                <input type="text" style="width:100px" placeholder="{{$data->gold}}金币起" name="goldToWeal">×{{$data->goldByWeal}}个签到
+                <input type="hidden" name="gold" value="{{ $data->gold }}">
+                <input type="hidden" name="goldByWeal" value="{{ $data->goldByWeal }}">
+                &nbsp;&nbsp;
+                <a class="list_btn" onclick="getWealByGold()">确定兑换</a>
+                <br><small style="color:lightgrey;font-size:12px;">(每{{$data->goldByWeal}}签到兑换1元福利，{{$data->gold}}个金币可兑换)</small>
+            </td>
+        </tr>
+        <tr>
+            <td class="field_name">红包兑换福利：</td>
+            <td width="500">
+                <input type="text" style="width:100px" placeholder="{{$data->tip}}金币起" name="goldToWeal">×{{$data->tipByWeal}}个签到
+                <input type="hidden" name="tip" value="{{ $data->tip }}">
+                <input type="hidden" name="tipByWeal" value="{{ $data->tipByWeal }}">
+                &nbsp;&nbsp;
+                <a class="list_btn" onclick="getWealByTip()">确定兑换</a>
+                <br><small style="color:lightgrey;font-size:12px;">(每{{$data->tipByWeal}}签到兑换1元福利，{{$data->tip}}个金币可兑换)</small>
             </td>
         </tr>
         <tr>
@@ -57,7 +79,7 @@
     </table>
 
     <script>
-        function getBoonBySign(){
+        function getWealBySign(){
             var sign = $("input[name='sign']").val();
             var signToWeal = $("input[name='signToWeal']").val();
             var signByWeal = $("input[name='signByWeal']").val();
@@ -68,6 +90,30 @@
                 alert('签到数量不足！');return;
             }
             window.location.href = '{{DOMAIN}}member/wallet/signtoweal/'+signCount;
+        }
+        function getWealByGold(){
+            var gold = $("input[name='gold']").val();
+            var goldToWeal = $("input[name='goldToWeal']").val();
+            var goldByWeal = $("input[name='goldByWeal']").val();
+            var goldCount = goldToWeal*goldByWeal;
+            if (goldToWeal=='') {
+                alert('兑换的金币数字必填！');return;
+            } else if (goldCount>gold) {
+                alert('金币数量不足！');return;
+            }
+            window.location.href = '{{DOMAIN}}member/wallet/goldtoweal/'+goldCount;
+        }
+        function getWealByTip(){
+            var tip = $("input[name='tip']").val();
+            var tipToWeal = $("input[name='tipdToWeal']").val();
+            var tipByWeal = $("input[name='tipByWeal']").val();
+            var tipCount = tipToWeal*tipByWeal;
+            if (tipToWeal=='') {
+                alert('兑换的红包数字必填！');return;
+            } else if (tipCount>tip) {
+                alert('红包数量不足！');return;
+            }
+            window.location.href = '{{DOMAIN}}member/wallet/tiptoweal/'+tipCount;
         }
     </script>
 @stop

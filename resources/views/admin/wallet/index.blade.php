@@ -17,7 +17,7 @@
                                 <img src="{{PUB}}assets/images/files.png" class="icon"> 签到列表
                             </button>
                         </a>
-                        <a href="{{DOMAIN}}admin/glod">
+                        <a href="{{DOMAIN}}admin/gold">
                             <button type="button" class="am-btn am-btn-default">
                                 <img src="{{PUB}}assets/images/files.png" class="icon"> 金币列表
                             </button>
@@ -63,9 +63,9 @@
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
-                                    <a href="{{DOMAIN}}admin/signToWeal/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-text-secondary">签到换福利</button></a>
-                                    <a href="{{DOMAIN}}admin/goldToWeal/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-text-secondary">金币换福利</button></a>
-                                    <a href="{{DOMAIN}}admin/tipToWeal/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-text-secondary">红包换福利</button></a>
+                                    <a href="{{DOMAIN}}admin/wallet/toweal/{{$data->id}}/1"><button class="am-btn am-btn-default am-btn-xs am-text-secondary">签到换福利</button></a>
+                                    <a href="{{DOMAIN}}admin/wallet/toweal/{{$data->id}}/2"><button class="am-btn am-btn-default am-btn-xs am-text-secondary">金币换福利</button></a>
+                                    <a href="{{DOMAIN}}admin/wallet/toweal/{{$data->id}}/3"><button class="am-btn am-btn-default am-btn-xs am-text-secondary">红包换福利</button></a>
                                 </div>
                             </div>
                         </td>

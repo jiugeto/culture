@@ -19,10 +19,10 @@
             @foreach($datas as $data)
             <tr>
                 <td>{{ $data->id }}</td>
-                <td><a href="{{DOMAIN}}member/orderpro">{{ $data->product() }}</a></td>
+                <td><a href="{{DOMAIN}}member/orderpro">{{ $data->getProductName() }}</a></td>
                 <td>{{ $data->buyerName }}</td>
                 <td>{{ $data->sellerName }}</td>
-                <td>{{ $data->created_at }}</td>
+                <td>{{ $data->createTime() }}</td>
                 <td>
                     {{--@if($curr['url']=='')--}}
                         {{--<a href="{{DOMAIN}}member/order/{{ $data->id }}/pre" class="list_btn">预览</a>--}}

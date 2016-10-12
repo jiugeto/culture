@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Member;
 
 use Illuminate\Http\Request;
-use App\Models\Base\OrderProductModel;
+use App\Models\Online\OrderProductModel;
 
 class OrderProductController extends BaseController
 {
@@ -48,8 +48,7 @@ class OrderProductController extends BaseController
 
     public function query()
     {
-        $datas = OrderProductModel::where('del',0)
-            ->where('isshow',1)
+        $datas = OrderProductModel::where('isshow',2)
             ->orderBy('id','desc')
             ->paginate($this->limit);
         $datas->limit = $this->limit;

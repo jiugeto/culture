@@ -204,6 +204,10 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::get('orderpro/s/{isshow}/{status}','OrderProductController@index');      //s代表检索
     Route::resource('orderpro','OrderProductController');
     //钱包管理
+    Route::post('wallet/weal/{id}','WalletController@setWeal');
+    Route::get('wallet/toweal/{id}/{type}','WalletController@getWeal');
+    Route::get('tip','WalletController@tipList');
+    Route::get('gold','WalletController@goldList');
     Route::get('sign','WalletController@signList');
     Route::resource('wallet','WalletController');
 });

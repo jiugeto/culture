@@ -20,6 +20,9 @@ class UserWalletModel extends BaseModel
         return $this->uid ? $this->getUserName($this->uid) : '';
     }
 
+    /**
+     * 设置金币奖励
+     */
     public static function setGold($uid,$gold)
     {
         $walletModel = UserWalletModel::where('uid',$uid)->first();

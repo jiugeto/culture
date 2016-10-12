@@ -30,6 +30,11 @@ class OrderProductModel extends BaseModel
         '所有','不显示','显示',
     ];
 
+    public function getUName()
+    {
+        return $this->getUserName($this->uid);
+    }
+
     /**
      * 得到创作订单信息
      */

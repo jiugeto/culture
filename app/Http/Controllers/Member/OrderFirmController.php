@@ -15,7 +15,7 @@ class OrderFirmController extends BaseController
         parent::__construct();
         $this->model = new OrderFirmModel();
         //面包屑处理
-        $this->lists['func']['name'] = '售后服务';
+        $this->lists['func']['name'] = '售后修改';
         $this->lists['func']['url'] = 'orderfirm';
 //        $this->lists['create']['name'] = '添加类型';
 //        $this->lists['edit']['name'] = '修改分类';

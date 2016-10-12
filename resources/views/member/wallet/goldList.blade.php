@@ -15,15 +15,17 @@
     <div class="list">
         <table class="list_tab">
             <tr>
-                <td>红包类型</td>
-                <td>额度</td>
+                <td>意见奖励</td>
+                <td>发布奖励个数</td>
+                <td>满意奖励个数</td>
                 <td>创建时间</td>
             </tr>
         @if(count($datas))
             @foreach($datas as $data)
             <tr>
-                <td>{{ $data->getTypeName() }}</td>
-                <td>{{ $data->tip }}</td>
+                <td>{{ $data->name }}</td>
+                <td>{{ $data->gold1 }}</td>
+                <td>{{ $data->gold2 }}</td>
                 <td>{{ $data->createTime() }}</td>
             </tr>
             @endforeach

@@ -23,6 +23,11 @@ class ProductModel extends BaseModel
         1=>'不显示','显示',
     ];
 
+    public function getUName()
+    {
+        return $this->getUserName($this->uid);
+    }
+
     public function genre()
     {
         return array_key_exists($this->genre,$this->genres) ? $this->genres[$this->genre] : '';
