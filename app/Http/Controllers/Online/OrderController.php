@@ -96,9 +96,11 @@ class OrderController extends BaseController
     {
         //去除最新的标识
         OrderProductModel::where('id',$id)->update(['is_new'=> 2]);
+        $data = VideoModel::find($video_id);
         $result = [
-            'video'=> VideoModel::find($video_id),
+            'video'=> $data,
             'orderProModel'=> OrderProductModel::find($id),
+            'videoName'=> $data->name,
         ];
         return view('layout.videoPre', $result);
     }

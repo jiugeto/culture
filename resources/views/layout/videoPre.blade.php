@@ -15,7 +15,7 @@
         .out .download a:hover { color:orangered; }
     </style>
     <div class="out">
-        <p>{{ $video->name }}-视频播放</p>
+        <p>{{ $videoName }}-视频播放</p>
         <div class="video">
             <embed src="{{ $video->url }}" allowFullScreen="true" quality="high" width="{{ $video->width() }}" height="{{ $video->height }}" align="middle" allowScriptAccess="always" flashvars="{{ $video->url2 }}&auto_play={{ isset($uid)?$video->isplay($uid):0 }}&width={{ $video->width() }}&height={{ $video->height() }}" type="application/x-shockwave-flash"></embed>
             <div class="userinfo">

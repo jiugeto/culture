@@ -88,8 +88,10 @@ class VideoController extends BaseController
 
     public function pre($id)
     {
+        $data = VideoModel::find($id);
         $result = [
-            'video'=> VideoModel::find($id),
+            'video'=> $data,
+            'videoName'=> $data->name,
         ];
         return view('layout.videoPre', $result);
     }

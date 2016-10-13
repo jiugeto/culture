@@ -3,12 +3,13 @@ namespace App\Models\Online;
 
 use App\Models\Base\BaseModel;
 use App\Models\Base\PicModel;
+use App\Models\Base\VideoModel;
 
 class ProductModel extends BaseModel
 {
     protected $table = 'bs_products';
     protected $fillable = [
-        'id','name','serial','genre','cate','gif','intro','uid','pid','isauth','istop','sort','isshow','created_at','updated_at',
+        'id','name','serial','genre','cate','gif','intro','video_id','uid','pid','isauth','istop','sort','isshow','created_at','updated_at',
     ];
     protected $genres = [
         1=>'个人供应','企业供应','平台供应',
@@ -129,5 +130,11 @@ class ProductModel extends BaseModel
             'records'=> isset($layerAttrRecord)?$layerAttrRecord:[],
             'adds'=> isset($layerAttrAdd)?$layerAttrAdd:[],
         );
+    }
+
+    public function getVideo()
+    {
+        $videoModel = VideoModel::find($this->video_id);
+        return $videoModel ? $videoModel : '';
     }
 }

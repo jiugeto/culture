@@ -34,5 +34,7 @@
     <div class="content_kongbai">&nbsp;</div>
 
     @include('layout.footer')
+
+    @include('layout.qqchat')
 </body>
 </html>

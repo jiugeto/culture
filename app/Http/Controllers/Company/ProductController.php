@@ -60,10 +60,12 @@ class ProductController extends BaseController
     public function video($cid,$id,$videoid)
     {
         $company = \App\Models\CompanyModel::find($cid);
+        $data = GoodsModel::find($id);
         $result = [
-            'data'=> GoodsModel::find($id),
+            'data'=> $data,
             'video'=> \App\Models\Base\VideoModel::find($videoid),
             'uid'=> $company->uid,
+            'videoName'=> $data->name,
         ];
         return view('layout.videoPre', $result);
     }

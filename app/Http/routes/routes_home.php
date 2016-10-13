@@ -11,14 +11,15 @@ Route::group(['prefix'=>'/','namespace'=>'Home'],function(){
     //前台首页路由
     Route::any('/','HomeController@index');
     Route::any('home','HomeController@index');
-    Route::any('creation','CreationController@index');
     //产品样片
     Route::any('product','ProductController@index');
     Route::get('product/{id}','ProductController@show');
     Route::get('product/click/{id}/{num}','ProductController@setClick');
     Route::get('product/video/{id}/{videoid}','ProductController@video');
     //在线作品
-    Route::any('creation','CreationController@index');
+    Route::get('creation/s/{cate}','CreationController@index');
+    Route::get('creation','CreationController@index');
+    Route::get('creation/pre/{id}','CreationController@pre');
     //分镜画面
     Route::get('storyboard/like/{way}/{id}','StoryBoardController@like');
     Route::get('storyboard/{id}','StoryBoardController@show');

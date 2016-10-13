@@ -38,6 +38,7 @@ class VideoController extends BaseController
             'data'=> $data,
             'video'=> VideoModel::find($videoid),
             'uid'=> $this->userid,
+            'videoName'=> $data->name,
         ];
         return view('layout.videoPre', $result);
     }

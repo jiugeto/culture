@@ -1170,6 +1170,7 @@ CREATE TABLE `bs_products` (
   `cate` tinyint(2) unsigned NOT NULL DEFAULT '1' COMMENT '样片类型：1电视剧，2电影，3微电影，4广告，5宣传片，6专题片，7汇报片，8主题片，9纪录片，10晚会，11淘宝视频，12婚纱摄影，13个人短片，',
   `gif` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '缩略图，关联图片表bs_pics',
   `intro` varchar(1000) NOT NULL COMMENT '视频简介',
+  `video_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '预览画面id',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '提供者：需求用户，设计师，公司',
   `pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '模板父id，0代表新模板',
   `isauth` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '审核：1未审核，2未通过审核，3通过审核',
@@ -1188,7 +1189,7 @@ CREATE TABLE `bs_products` (
 
 LOCK TABLES `bs_products` WRITE;
 /*!40000 ALTER TABLE `bs_products` DISABLE KEYS */;
-INSERT INTO `bs_products` VALUES (2,'产品333','201609221742345260',3,1,1,'而沟通与法规和若干个',0,0,3,0,10,2,20160512,1474336724),(10,'产品333','201609221742345260',3,1,1,'而沟通与法规和若干个',1,2,1,0,10,2,1475032379,0);
+INSERT INTO `bs_products` VALUES (2,'产品333','201609221742345260',3,1,1,'而沟通与法规和若干个',1,0,0,3,0,10,2,20160512,1474336724),(10,'产品333','201609221742345260',3,1,1,'而沟通与法规和若干个',0,1,2,1,0,10,2,1475032379,0);
 /*!40000 ALTER TABLE `bs_products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2230,4 +2231,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-10-12 16:44:09
+-- Dump completed on 2016-10-13 19:27:12

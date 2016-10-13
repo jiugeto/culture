@@ -40,45 +40,47 @@
 
 /*===== 片源类型 =====*/
 .cre_cate,.cre_source {
-    width:100%;height:265px;
+    padding:10px;
+    width:100%;
     background:rgb(250,250,250);
 }
-.cre_cate .cate {
-    width:248px;height:228px;
-    border:1px solid rgb(240,240,240);
-    float:left;
-}
-.cre_cate .img {
-    margin:20px auto;
-    width:150px;height:120px;
-    overflow:hidden;
-}
-.cre_cate img { width:200px; }
-.cre_cate p {
-    margin:10px 40px;
-    text-align:center;
+.cre_cate { color:grey; }
+.cre_cate a {
+    padding:0 5px;
     color:grey;
-    font-size:12px;
+    text-decoration:none;
+    border:0;
 }
-.cre_cate p.title { font-size:18px; }
+.cre_cate a:hover,.cre_cate a.curr { color:orangered; }
 
 
 /*===== 在线片源 =====*/
-.cre_source { width:100%;border:1px solid rgb(240,240,240); }
+.cre_source { width:100%;height:600px;border:1px solid rgb(240,240,240); }
 .cre_source .source,.cre_source .title { width:990px; }
 .source {
     padding:10px 4px;
-    height:300px;
 }
 .source .title { padding:0 5px; }
 .source .cre_con {
     margin:3px;
-    width:192px;
+    width:190px;
+    border:1px solid ghostwhite;
+    color:grey;
     float:left;
 }
+.source a:hover .cre_con {
+    color:orangered;
+    border:1px solid orangered;
+}
 .source .img {
-    width:192px;height:110px;
+    width:190px;height:110px;
+    color:rgb(240,240,240);
+    font-size:30px;
+    text-align:center;
+    line-height:110px;
+    background:rgb(230,230,230);
     overflow:hidden;
 }
 .source img { height:200px; }
+.source .text { text-align:center; }
 .cre_cate text { margin:0 auto;width:100%; }
