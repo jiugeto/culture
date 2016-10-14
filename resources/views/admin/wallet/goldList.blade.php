@@ -14,8 +14,8 @@
                         <th class="table-check"><input type="checkbox"/></th>
                         <th class="table-id">ID</th>
                         <th class="table-title">会员名称</th>
-                        <th class="table-type">发布奖励数量</th>
-                        <th class="table-type">好评奖励数量</th>
+                        <th class="table-type">金币类型</th>
+                        <th class="table-type">奖励数量</th>
                         <th class="table-date am-hide-sm-only">添加时间</th>
                     </tr>
                     </thead>
@@ -26,8 +26,8 @@
                         <td class="am-hide-sm-only"><input type="checkbox" /></td>
                         <td class="am-hide-sm-only">{{ $data->id }}</td>
                         <td class="am-hide-sm-only">{{ $data->getUName() }}</td>
-                        <td class="am-hide-sm-only">{{ $data->gold1 }}</td>
-                        <td class="am-hide-sm-only">{{ $data->gold2 }}</td>
+                        <td class="am-hide-sm-only">{{ $data->genreName() }}</td>
+                        <td class="am-hide-sm-only">{{ $data->gold }}</td>
                         <td class="am-hide-sm-only">{{ $data->createTime() }}</td>
                     </tr>
                     @endforeach

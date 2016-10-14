@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Home;
 
 use App\Models\Online\ProductModel;
+use App\Models\Online\ProductVideoModel;
 
 class CreationController extends BaseController
 {
@@ -17,13 +18,14 @@ class CreationController extends BaseController
         $this->model = new ProductModel();
     }
 
-    public function index($cate=0)
+    public function index($genre=1,$cate=0)
     {
         $result = [
-            'datas'=> $this->query($cate),
+            'datas'=> $this->query($genre,$cate),
             'prefix_url'=> DOMAIN.'creation',
             'model'=> $this->model,
             'curr_menu'=> 'creation',
+            'genre'=> $genre,
             'cate'=> $cate,
         ];
         return view('home.creation.index', $result);
@@ -47,15 +49,22 @@ class CreationController extends BaseController
 
 
 
-    public function query($cate)
+    public function query($genre,$cate)
     {
-        if ($cate) {
-            $datas = ProductModel::where('cate',$cate)
-                ->where('video_id','>',0)
-                ->orderBy('id','desc')
-                ->paginate($this->limit);
-        } else {
-            $datas = ProductModel::where('video_id','>',0)
+        if ($genre==1) {
+            if ($cate) {
+                $datas = ProductModel::where('cate',$cate)
+                    ->where('video_id','>',0)
+                    ->orderBy('id','desc')
+                    ->paginate($this->limit);
+            } else {
+                $datas = ProductModel::where('video_id','>',0)
+                    ->orderBy('id','desc')
+                    ->paginate($this->limit);
+            }
+        } elseif (in_array($genre,[2,3])) {
+            $datas = ProductVideoModel::where('cate',$cate)
+                ->where('genre',$genre-1)
                 ->orderBy('id','desc')
                 ->paginate($this->limit);
         }

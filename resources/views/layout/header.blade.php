@@ -4,7 +4,7 @@
 <div class="header">
     <div class="header_text text_color">
       <span>
-        <div class="head_left">欢迎来逛逛</div>
+        {{--<div class="head_left">欢迎来逛逛</div>--}}
         <div class="head_left">
             @if(Session::has('user.username'))
                 <a href="/member">{{ Session::get('user.username') }}</a>
@@ -20,6 +20,8 @@
         <div class="head_right"><a href="/online">在线创作</a></div>
         <div class="head_right"><a href="/newuser">新手点这里</a></div>
         <div class="head_right">
+            {{--<a href="javascript:void(0);" onclick="show_Favorite(window.location,document.title);">加入收藏</a>--}}
+            {{--<a href="javascript:void(0);"onclick="show_index(window.location);">设为首页</a>--}}
             <a href="/" style="color:red;">淘文化首页</a>
             {{--<select name="urlType">--}}
                 {{--<option value="/" {{explode($_SERVER['REQUEST_URI'],'/')[1]==''?'selected':''}}>淘文化首页</option>--}}
@@ -36,3 +38,34 @@
     </div>
 </div>
 <!-- header头 -->
+
+{{--<script language="javascript">--}}
+    {{--//收藏本页--}}
+    {{--function show_Favorite (sURL,sTitle) {--}}
+        {{--sURL = encodeURI(sURL);try{window.external.addFavorite(sURL,sTitle);}--}}
+        {{--catch (e) {--}}
+            {{--try{--}}
+                {{--window.sidebar.addPanel(sTitle, sURL, "");--}}
+            {{--} catch (e) {--}}
+                    {{--alert("加入收藏失败，请使用Ctrl+D进行添加,或手动在浏览器里进行设置.");--}}
+            {{--}--}}
+        {{--}--}}
+
+    {{--}--}}
+    {{--function showList (id,num) {--}}
+        {{--if (num==1) {--}}
+            {{--document.getElementById(id).style.display = "block";--}}
+        {{--} else {--}}
+            {{--document.getElementById(id).style.display = "none";--}}
+        {{--}--}}
+    {{--}--}}
+    {{--function show_index (url) {--}}
+        {{--if (document.all) {--}}
+            {{--document.body.style.behavior='url(#default#homepage)';document.body.setHomePage(url);--}}
+        {{--}else{--}}
+            {{--alert("您好,您的浏览器不支持自动设置页面为首页功能,请您手动在浏览器里设置该页面为首页!");--}}
+        {{--}--}}
+
+    {{--}--}}
+
+{{--</script>--}}

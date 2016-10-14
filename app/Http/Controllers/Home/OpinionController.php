@@ -1,7 +1,8 @@
 <?php
 namespace App\Http\Controllers\Home;
 
-use App\Models\Base\UserWalletModel;
+use App\Models\Base\UserGoldModel;
+use App\Models\Base\WalletModel;
 use App\Models\OpinionModel;
 use Illuminate\Http\Request;
 use App\Tools;
@@ -56,12 +57,13 @@ class OpinionController extends BaseController
     {
         $data = $this->getData($request);
         $data['created_at'] = time();
-        //成功发布后给用户随机奖励金币1-5个
-        $data['gold1'] = rand(1,5);
         OpinionModel::create($data);
 
+        //成功发布后给用户随机奖励金币1-5个
+        $data['gold1'] = rand(1,5);
+        UserGoldModel::setGold($this->userid,1,$data['gold1']);
         //计算金币总数
-        if (isset($data['gold1'])) { UserWalletModel::setGold($this->userid,$data['gold1']); }
+        if (isset($data['gold1'])) { WalletModel::setGold($this->userid,$data['gold1']); }
 
         return redirect(DOMAIN.'opinion');
     }
@@ -118,20 +120,20 @@ class OpinionController extends BaseController
         if ($request->status==3 && !$request->remarks) {
             echo "<script>alert('请填写不满意缘由！');history.go(-1);</script>";exit;
         }
-        //成功发布后给用户随机奖励金币15-20个
-        if ($request->status==4) {
-            $data['gold2'] = rand(15,20);
-        }
         $data = [
             'status'=> $request->status,
             'remarks'=> $request->remarks,
-            'gold2'=> isset($data['gold2']) ? $data['gold2'] : 0,
             'updated_at'=> time(),
         ];
         OpinionModel::where('id',$id)->update($data);
 
+        //成功发布后给用户随机奖励金币10-15个
+        if ($request->status==4) {
+            $data['gold2'] = rand(10,15);
+            UserGoldModel::setGold($this->userid,2,$data['gold2']);
+        }
         //计算金币总数
-        if (isset($data['gold2'])) { UserWalletModel::setGold($this->userid,$data['gold2']); }
+        if (isset($data['gold2'])) { WalletModel::setGold($this->userid,$data['gold2']); }
 
         return redirect(DOMAIN.'opinion');
     }

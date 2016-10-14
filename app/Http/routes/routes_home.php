@@ -17,7 +17,7 @@ Route::group(['prefix'=>'/','namespace'=>'Home'],function(){
     Route::get('product/click/{id}/{num}','ProductController@setClick');
     Route::get('product/video/{id}/{videoid}','ProductController@video');
     //在线作品
-    Route::get('creation/s/{cate}','CreationController@index');
+    Route::get('creation/s/{genre}/{cate}','CreationController@index');
     Route::get('creation','CreationController@index');
     Route::get('creation/pre/{id}','CreationController@pre');
     //分镜画面

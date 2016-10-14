@@ -96,6 +96,18 @@
         </tr>
 
         {{--<tr>--}}
+            {{--<td>运动模糊：</td>--}}
+            {{--<td>--}}
+                {{--<label><input type="radio" class="radio" name="isbgsound" value="0">添加&nbsp;</label>--}}
+                {{--<label><input type="radio" class="radio" name="isbgsound" value="1" checked>忽视&nbsp;</label>--}}
+                {{--<br>案例对比<img src="">：--}}
+                {{--<a href="">有运动模糊预览</a>--}}
+                {{--<a href="">无运动模糊预览</a>--}}
+            {{--</td>--}}
+            {{--<td>背景音计价：<span id="soundMoney">0</span> 元</td>--}}
+        {{--</tr>--}}
+
+        {{--<tr>--}}
             {{--<td>背景音乐：</td>--}}
             {{--<td>--}}
                 {{--<label><input type="radio" class="radio" name="isbgsound" value="0">去掉&nbsp;</label>--}}

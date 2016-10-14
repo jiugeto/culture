@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Person;
 
 use App\Models\Base\UserSignModel;
-use App\Models\Base\UserWalletModel;
+use App\Models\Base\WalletModel;
 
 class SignController extends BaseController
 {
@@ -68,8 +68,8 @@ class SignController extends BaseController
         ];
         UserSignModel::create($data);
         //奖励加入总数
-        $userParam = UserWalletModel::where('uid',$this->userid)->first();
-        UserWalletModel::where('id',$userParam->id)->update(['sign'=> $userParam->sign+$reward]);
+        $userParam = WalletModel::where('uid',$this->userid)->first();
+        WalletModel::where('id',$userParam->id)->update(['sign'=> $userParam->sign+$reward]);
         return redirect(DOMAIN.'person/sign');
     }
 

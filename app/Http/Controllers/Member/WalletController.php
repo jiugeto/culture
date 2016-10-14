@@ -1,8 +1,9 @@
 <?php
 namespace App\Http\Controllers\Member;
 
+use App\Models\Base\UserGoldModel;
 use App\Models\Base\UserTipModel;
-use App\Models\Base\UserWalletModel;
+use App\Models\Base\WalletModel;
 use App\Models\OpinionModel;
 
 class WalletController extends BaseController
@@ -20,7 +21,7 @@ class WalletController extends BaseController
         parent::__construct();
         $this->lists['func']['name'] = '会员福利';
         $this->lists['func']['url'] = 'wallet';
-        $this->model = new UserWalletModel();
+        $this->model = new WalletModel();
     }
 
     public function index()
@@ -29,7 +30,7 @@ class WalletController extends BaseController
         $curr['url'] = $this->lists['']['url'];
         $result = [
             'data'=> $this->query(),
-            'golds'=> $this->getGolds(0),
+            'golds'=> $this->getGolds(),
             'tips'=> $this->getTips(),
             'prefix_url'=> DOMAIN.'member/wallet',
             'lists'=> $this->lists,
@@ -46,7 +47,7 @@ class WalletController extends BaseController
         $curr['name'] = '福利中心';
         $curr['url'] = $this->lists['']['url'];
         $result = [
-            'datas'=> $this->getGolds(0),
+            'datas'=> $this->getGolds(),
             'prefix_url'=> DOMAIN.'member/gold',
             'lists'=> $this->lists,
             'curr'=> $curr,
@@ -75,7 +76,7 @@ class WalletController extends BaseController
      */
     public function setWealBySign($sign)
     {
-        $wallet = UserWalletModel::where('uid',$this->userid)->first();
+        $wallet = WalletModel::where('uid',$this->userid)->first();
         if ($sign>$wallet->sign) {
             echo "<script>alert('签到不足！');history.go(-1);</script>";exit;
         }
@@ -84,7 +85,7 @@ class WalletController extends BaseController
             'weal'=> $wallet->weal+$sign/$this->signByWeal,
             'updated_at'=> time(),
         ];
-        UserWalletModel::where('uid',$this->userid)->update($data);
+        WalletModel::where('uid',$this->userid)->update($data);
         return redirect(DOMAIN.'member/wallet');
     }
 
@@ -93,7 +94,7 @@ class WalletController extends BaseController
      */
     public function setWealByGold($gold)
     {
-        $wallet = UserWalletModel::where('uid',$this->userid)->first();
+        $wallet = WalletModel::where('uid',$this->userid)->first();
         if ($gold>$wallet->gold) {
             echo "<script>alert('金币不足！');history.go(-1);</script>";exit;
         }
@@ -102,7 +103,7 @@ class WalletController extends BaseController
             'weal'=> $wallet->weal+$gold/$this->goldByWeal,
             'updated_at'=> time(),
         ];
-        UserWalletModel::where('uid',$this->userid)->update($data);
+        WalletModel::where('uid',$this->userid)->update($data);
         return redirect(DOMAIN.'member/wallet');
     }
 
@@ -126,8 +127,8 @@ class WalletController extends BaseController
         ];
         UserTipModel::create($data);
         //更新用户钱袋的红包
-        $wallet = UserWalletModel::where('uid',$this->userid)->first();
-        UserWalletModel::where('uid',$this->userid)->update(['tip'=> $wallet->tip+$tip]);
+        $wallet = WalletModel::where('uid',$this->userid)->first();
+        WalletModel::where('uid',$this->userid)->update(['tip'=> $wallet->tip+$tip]);
         return redirect(DOMAIN.'member/wallet');
     }
 
@@ -138,15 +139,15 @@ class WalletController extends BaseController
 
     public function query()
     {
-        if (!UserWalletModel::where('uid',$this->userid)->first()) {
+        if (!WalletModel::where('uid',$this->userid)->first()) {
             $data = [
                 'uid'=> $this->userid,
                 'weal'=> 200,
                 'created_at'=> time(),
             ];
-            UserWalletModel::create($data);
+            WalletModel::create($data);
         }
-        $data1 = UserWalletModel::where('uid',$this->userid)->first();
+        $data1 = WalletModel::where('uid',$this->userid)->first();
         $data1->signByWeal = $this->signByWeal;
         $data1->goldByWeal = $this->goldByWeal;
         $data1->tipByWeal = $this->tipByWeal;
@@ -156,18 +157,11 @@ class WalletController extends BaseController
     /**
      * 金币查询
      */
-    public function getGolds($status)
+    public function getGolds()
     {
-        if ($status==4) {
-            $datas = OpinionModel::where('uid',$this->userid)
-                ->where('status',4)
-                ->orderBy('id','desc')
-                ->paginate($this->limit);
-        } else {
-            $datas = OpinionModel::where('uid',$this->userid)
-                ->orderBy('id','desc')
-                ->paginate($this->limit);
-        }
+        $datas = UserGoldModel::where('uid',$this->userid)
+            ->orderBy('id','desc')
+            ->paginate($this->limit);
         $datas->limit = $this->limit;
         return $datas;
     }

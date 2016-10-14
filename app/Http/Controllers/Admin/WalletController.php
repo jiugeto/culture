@@ -1,10 +1,10 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Base\UserGoldModel;
 use App\Models\Base\UserSignModel;
 use App\Models\Base\UserTipModel;
-use App\Models\Base\UserWalletModel;
-use App\Models\OpinionModel;
+use App\Models\Base\WalletModel;
 use Illuminate\Http\Request;
 
 class WalletController extends BaseController
@@ -20,7 +20,7 @@ class WalletController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->model = new UserWalletModel();
+        $this->model = new WalletModel();
         $this->crumb['']['name'] = '财务列表';
         $this->crumb['category']['name'] = '会员钱包';
         $this->crumb['category']['url'] = 'wallet';
@@ -95,7 +95,7 @@ class WalletController extends BaseController
         $curr['name'] = '兑换福利';
         $curr['url'] = $this->crumb['edit']['url'];
         $result = [
-            'data'=> UserWalletModel::find($id),
+            'data'=> WalletModel::find($id),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
             'type'=> $type,
@@ -112,7 +112,7 @@ class WalletController extends BaseController
     public function setWeal(Request $request,$id)
     {
         if (!$request->num) { echo "<script>alert('数量必填！');history.go(-1);</script>";exit; }
-        $wallet = UserWalletModel::find($id);
+        $wallet = WalletModel::find($id);
         if ($request->type==1) {
             $signCount = $request->num * $this->signByWeal;
             $data = [
@@ -132,7 +132,7 @@ class WalletController extends BaseController
                 'weal'=> $wallet->weal + $request->num,
             ];
         }
-        UserWalletModel::where('id',$id)->update($data);
+        WalletModel::where('id',$id)->update($data);
         return redirect(DOMAIN.'admin/wallet');
     }
 
@@ -143,7 +143,7 @@ class WalletController extends BaseController
 
     public function query()
     {
-        $datas = UserWalletModel::orderBy('id','desc')
+        $datas = WalletModel::orderBy('id','desc')
             ->paginate($this->limit);
         $datas->limit = $this->limit;
         $datas->signByWeal = $this->signByWeal;
@@ -162,7 +162,7 @@ class WalletController extends BaseController
 
     public function getGolds()
     {
-        $datas = OpinionModel::orderBy('id','desc')
+        $datas = UserGoldModel::orderBy('id','desc')
             ->paginate($this->limit);
         $datas->limit = $this->limit;
         return $datas;

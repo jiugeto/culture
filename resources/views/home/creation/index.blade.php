@@ -22,6 +22,18 @@
 
         {{-- 片源类型 --}}
         <div class="cre_kong">&nbsp;</div>
+        <div class="cre_cate" style="height:120px">
+            <a href="{{DOMAIN}}creation"><div class="text {{$genre==1?'curr':''}}">☑ 已有动画
+                <div class="small">已有在线模板，方便调节</div>
+            </div></a>
+            <a href="{{DOMAIN}}creation/s/2/0"><div class="text">□ 动画定制
+                <div class="small">只有离线模板，收费预览</div>
+            </div></a>
+            <a href="{{DOMAIN}}creation/s/3/0"><div class="text">☒ 效果定制
+                <div class="small">没有模板，用户提供效果，量身定制</div>
+            </div></a>
+        </div>
+        <div class="cre_kong">&nbsp;</div>
         <div class="cre_cate">
             类型：
             <a href="{{DOMAIN}}creation" class="{{$cate==0?'curr':''}}">全部</a>

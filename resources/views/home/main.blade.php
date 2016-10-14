@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>微文化</title>
+    <title>做视频</title>
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="{{PUB}}assets/images/icon.png">
     <link rel="stylesheet" type="text/css" href="{{PUB}}assets-home/css/home.css">

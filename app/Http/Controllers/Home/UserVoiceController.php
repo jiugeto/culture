@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers\Home;
 
+use App\Models\Base\UserGoldModel;
+use App\Models\Base\WalletModel;
 use App\Models\UserVoiceModel;
 use Illuminate\Http\Request;
 
@@ -38,6 +40,13 @@ class UserVoiceController extends BaseController
         $data = $this->getData($request);
         $data['created_at'] = time();
         UserVoiceModel::create($data);
+
+        //成功发布后给用户随机奖励金币1-5个
+        $gold = rand(1,5);
+        UserGoldModel::setGold($this->userid,3,$gold);
+        //计算金币总数
+        if ($gold) { WalletModel::setGold($this->userid,$gold); }
+
         return redirect(DOMAIN.'uservoice');
     }
 
