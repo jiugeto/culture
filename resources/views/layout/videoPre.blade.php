@@ -1,7 +1,3 @@
-{{-- 这里是视频预览模板 --}}
-
-
-{{--@extends('layout.header')--}}
 @extends('home.main')
 @section('content')
     <style>

@@ -8,7 +8,7 @@ class PayModel extends BaseModel
      */
     protected $table = 'bs_pay';
     protected $fillable = [
-        'id','genre','order_id','money','isfine','ispay','created_at','updated_at',
+        'id','genre','order_id','money','weal','isfine','ispay','created_at','updated_at',
     ];
     //来自哪一张表
     protected $genres = [

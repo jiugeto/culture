@@ -17,6 +17,10 @@ Route::group(['prefix'=>'/','namespace'=>'Home'],function(){
     Route::get('product/click/{id}/{num}','ProductController@setClick');
     Route::get('product/video/{id}/{videoid}','ProductController@video');
     //在线作品
+    Route::post('creation/addEffect','CreationController@insertEffect');     //效果定制添加
+    Route::post('creation/editLayer/{id}','CreationController@updateLayer');     //动画模板修改意见更新
+    Route::get('creation/edit/{id}','CreationController@editLayer');     //动画模板修改意见
+    Route::get('creation/s/{genre}/{cate}/{order}','CreationController@index');     //用户的成片列表
     Route::get('creation/s/{genre}/{cate}','CreationController@index');
     Route::get('creation','CreationController@index');
     Route::get('creation/pre/{id}','CreationController@pre');

@@ -12,7 +12,7 @@
 
 <div class="qqchat">
     <b>QQ咨询</b>
-    <p><a href="http://sighttp.qq.com/msgrd?v=1&uin=2857156840" title="点击QQ咨询：2857156840">
+    <p><a href="http://sighttp.qq.com/msgrd?v=1&uin=2857156840" title="点击QQ咨询">
             <img src="{{PUB}}assets-home/images/qq_icon.png" width="16"> 斯塔克
         </a>
     </p>

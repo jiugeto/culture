@@ -6,9 +6,9 @@ use App\Models\Base\VideoModel;
 
 class ProductVideoModel extends BaseModel
 {
-    protected $table = 'bs_products';
+    protected $table = 'bs_pro_videos';
     protected $fillable = [
-        'id','name','genre','cate','intro','video_id','link','uid','created_at','updated_at',
+        'id','name','genre','cate','intro','gif','video_id','link','uid','created_at','updated_at',
     ];
     protected $genres = [
         1=>'动画定制','效果定制',
@@ -22,6 +22,14 @@ class ProductVideoModel extends BaseModel
     public function genre()
     {
         return array_key_exists($this->genre,$this->genres) ? $this->genres[$this->genre] : '';
+    }
+
+    /**
+     * 获取图片链接
+     */
+    public function getPicUrl()
+    {
+        return $this->getPic($this->gif);
     }
 
     public function getVideo()

@@ -16,7 +16,7 @@
                 @endif
             </div>
             <div class="attr">
-                样片类型：
+                类型：
                 <a href="
                     @if($_SERVER['REQUEST_URI']=='/online/u/product')
                     {{DOMAIN}}online/u/product

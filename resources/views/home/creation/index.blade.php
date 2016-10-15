@@ -23,33 +23,59 @@
         {{-- 片源类型 --}}
         <div class="cre_kong">&nbsp;</div>
         <div class="cre_cate" style="height:120px">
-            <a href="{{DOMAIN}}creation"><div class="text {{$genre==1?'curr':''}}">☑ 已有动画
-                <div class="small">已有在线模板，方便调节</div>
-            </div></a>
-            <a href="{{DOMAIN}}creation/s/2/0"><div class="text">□ 动画定制
-                <div class="small">只有离线模板，收费预览</div>
-            </div></a>
-            <a href="{{DOMAIN}}creation/s/3/0"><div class="text">☒ 效果定制
-                <div class="small">没有模板，用户提供效果，量身定制</div>
-            </div></a>
+            <a href="{{DOMAIN}}creation">
+                <div class="text {{$genre==1?'curr':''}}">☑ 已有动画
+                    <div class="small">已有在线模板，方便调节</div>
+                </div>
+            </a>
+            <a href="{{DOMAIN}}creation/s/2/0">
+                <div class="text {{$genre==2?'curr':''}}">□ 动画定制
+                    <div class="small">只有离线模板，收费预览</div>
+                </div>
+            </a>
+            <a href="{{DOMAIN}}creation/s/3/0">
+                <div class="text {{$genre==3?'curr':''}}">☒ 效果定制
+                    <div class="small">没有模板，用户提供效果，量身定制</div>
+                </div>
+            </a>
         </div>
         <div class="cre_kong">&nbsp;</div>
         <div class="cre_cate">
             类型：
-            <a href="{{DOMAIN}}creation" class="{{$cate==0?'curr':''}}">全部</a>
+            <a href="
+                    @if($genre!=1) {{DOMAIN}}creation/s/{{$genre}}/0
+                    @else {{DOMAIN}}creation
+                    @endif
+                    " class="{{$cate==0?'curr':''}}">全部</a>
             @foreach($model['cates2'] as $kcate=>$vcate)
-                <a href="{{DOMAIN}}creation/s/{{$kcate}}" class="{{$cate==$kcate?'curr':''}}">{{ $vcate }}</a>
+                <a href="{{DOMAIN}}creation/s/{{$genre}}/{{$kcate}}" class="{{$cate==$kcate?'curr':''}}">{{ $vcate }}</a>
             @endforeach
         </div>
 
         {{-- 在线片源 --}}
         <div class="cre_kong">&nbsp;{{--10px高度留空--}}</div>
         <div class="cre_source">
-            <div class="title"><b>最新上线</b></div>
+            <div class="title">
+                <b>@if($genre==1)在线片源@elseif($genre==2)离线片源@elseif($genre==3)效果定制@endif</b>
+                @if($orderPro==1)
+                <a href="{{DOMAIN}}creation/s/{{$genre}}/{{$cate}}/2" class="orderPro">用户成片 ({{count($datas)}})</a>
+                @else
+                <a href="{{DOMAIN}}creation/s/{{$genre}}/{{$cate}}" class="orderPro">返回</a>
+                @endif
+            </div>
             <div class="source">
+            @if($genre==3 && $orderPro==1)
+                @include('home.creation.addEffect')
+            @else
                 @if(count($datas))
                     @foreach($datas as $data)
-                <a href="{{DOMAIN}}creation/pre/{{$data->id}}" title="点击预览改作品" target="_blank">
+                <a href="
+                    @if($genre==1)
+                        {{DOMAIN}}creation/pre/{{$data->id}}
+                    @elseif($genre==2)
+                        {{DOMAIN}}creation/edit/{{$data->id}}
+                    @endif
+                    " title="点击预览改作品" target="_blank">
                     <div class="cre_con">
                         <div class="img"><img src="{{ $data->getPicUrl() }}"></div>
                         <div class="text">{{ $data->name }}</div>
@@ -65,10 +91,14 @@
                 </div>
                     @endfor
                 @endif
+            @endif
             </div>
         </div>
 
-        <div class="cre_kong">&nbsp;{{--10px高度留空--}}</div>
-        @include('home.common.page')
+        @if($genre==3 && $orderPro==1)
+        @else
+            <div class="cre_kong" style="height:20px;">&nbsp;{{--10px高度留空--}}</div>
+            @include('home.common.page')
+        @endif
     </div>
 @stop
