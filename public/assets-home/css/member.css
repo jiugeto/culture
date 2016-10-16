@@ -226,9 +226,9 @@ a:hover li.a_li,a li.a_li_curr {
     border-top:1px solid lightgrey;
     border-bottom:1px solid lightgrey;
 }
-.list_tab td { padding:5px 10px;font-size:14px; }
+.list_tab td { padding:5px;font-size:14px; }
 .list_btn {
-    padding:4px 20px;
+    padding:4px 10px;
     background:orangered;
     border-radius:2px;
     color:white;
@@ -370,7 +370,7 @@ input.radio { position:relative;top:10px; }
 .popup3 {
     height:320px;
     box-shadow:0 0 200px rgb(150,150,150);
-    position:fixed;top:30%;
+    position:fixed;top:30%;z-index:1000;
 }
 .popup a#story,.popup a#video,.popup a#remarks { display:none; }
 .popup a { margin:0 10px;padding:5px;font-size:18px; }
@@ -390,5 +390,11 @@ input.radio { position:relative;top:10px; }
     background:orangered;
     cursor:pointer;
  }
+.popup_bg {
+    width:100%; height:100%;
+    background:rgba(0,0,0,0.5);
+    position:fixed;top:0;left:0;z-index:1000;
+    display:none;
+}
 
 input { padding:0 5px; }

@@ -2,7 +2,7 @@
 <html class="no-js">
 <head>
   <meta charset="utf-8">
-  <title>微文化--系统后台管理</title>
+  <title>做视频--系统后台管理</title>
   <link rel="icon" type="image/png" href="{{PUB}}assets/images/icon.png">
   <link rel="stylesheet" href="{{PUB}}assets/css/amazeui.min.css"/>
   <link rel="stylesheet" href="{{PUB}}assets/css/admin.css">

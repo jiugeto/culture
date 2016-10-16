@@ -84,8 +84,8 @@ class CreationController extends BaseController
             'record'=> $request->intro,
             'created_at'=> $time,
         ];
-        dd($data);
         OrderProductModel::create($data);
+//        dd($data);
 
         //价格处理
         $orderProModel = OrderProductModel::where($data)->first();

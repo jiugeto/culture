@@ -153,6 +153,7 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
         //售后（样片修改）路由
     Route::resource('orderfirm','OrderFirmController');
         //在线创作路由
+    Route::get('orderpro/{id}/destroy','OrderProductController@destroy');
     Route::resource('orderpro','OrderProductController');
         //话题管理
     Route::resource('talk','TalkController');

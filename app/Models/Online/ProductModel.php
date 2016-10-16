@@ -33,14 +33,22 @@ class ProductModel extends BaseModel
     {
         return array_key_exists($this->genre,$this->genres) ? $this->genres[$this->genre] : '';
     }
+
+    public function getCate()
+    {
+        return array_key_exists($this->cate,$this->cates2) ? $this->cates2[$this->cate] : '';
+    }
+
     public function isauth()
     {
         return array_key_exists($this->isauth,$this->isauths) ? $this->isauths[$this->isauth] : '';
     }
+
     public function istop()
     {
         return array_key_exists($this->istop,$this->istops) ? $this->istops[$this->istop] : '';
     }
+
     public function isshow()
     {
         return array_key_exists($this->isshow,$this->isshows) ? $this->isshows[$this->isshow] : '';

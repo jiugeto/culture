@@ -13,12 +13,28 @@
             <td>{{ $data->getUName() }}</td>
         </tr>
         <tr>
-            <td class="field_name">状态：</td>
-            <td>{{ $data->getStatusName() }}</td>
+            <td class="field_name">类型：</td>
+            <td>{{ $data->getGenreName() }}</td>
         </tr>
         <tr>
-            <td class="field_name">价格：</td>
+            <td class="field_name">供应方：</td>
+            <td>{{ $data->getSellerName() }}</td>
+        </tr>
+        <tr>
+            <td class="field_name">总价格(元)：</td>
             <td>{{ $data->getMoney() }}</td>
+        </tr>
+        <tr>
+            <td class="field_name">所用福利(元)：</td>
+            <td>{{ $data->getWeal() }}</td>
+        </tr>
+        <tr>
+            <td class="field_name">需支付(元)：</td>
+            <td>{{ $data->getRealmoney() }}</td>
+        </tr>
+        <tr>
+            <td class="field_name">状态：</td>
+            <td>{{ $data->getStatusName() }}</td>
         </tr>
         <tr>
             <td class="field_name">创建时间：</td>

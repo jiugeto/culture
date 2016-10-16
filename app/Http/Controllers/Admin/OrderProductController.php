@@ -109,6 +109,11 @@ class OrderProductController extends BaseController
         return redirect(DOMAIN.'admin/orderpro');
     }
 
+    /**
+     * 设置定价
+     */
+    public function setMoney(){}
+
 
 
 

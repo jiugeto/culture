@@ -28,6 +28,11 @@ class PayModel extends BaseModel
         return $this->money ? $this->money.'元' : 0;
     }
 
+    public function weal()
+    {
+        return $this->weal ? $this->weal.'元' : 0;
+    }
+
     public function getGenreName()
     {
         return array_key_exists($this->genre,$this->genres) ? $this->genres[$this->genre] : '';

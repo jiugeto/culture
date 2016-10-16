@@ -50,10 +50,12 @@
                         <th class="table-id">序号</th>
                         <th class="table-title">订单名称</th>
                         <th class="table-type">用户</th>
-                        <th class="table-type">价格</th>
+                        <th class="table-type">总价格</th>
+                        <th class="table-type">所用福利</th>
+                        <th class="table-type">需支付</th>
                         <th class="table-type">状态</th>
                         <th class="table-type">是否显示</th>
-                        <th class="table-date am-hide-sm-only">添加时间</th>
+                        <th class="table-date am-hide-sm-only" width="100">添加时间</th>
                         <th class="table-set">操作</th>
                     </tr>
                     </thead>
@@ -67,7 +69,19 @@
                             <a href="{{DOMAIN}}admin/orderpro/{{$data->id}}">{{ $data->getProductName() }}</a>
                         </td>
                         <td class="am-hide-sm-only">{{ $data->uname }}</td>
-                        <td class="am-hide-sm-only">{{ $data->getMoney() }}</td>
+                        <td class="am-hide-sm-only">
+                            @if($data->status==1) <span class="star">? 待定价</span>
+                            @elseif($data->status==2) {{ $data->getMoney() }}
+                            @else /
+                            @endif
+                        </td>
+                        <td class="am-hide-sm-only">{{ $data->getWeal() }}</td>
+                        <td class="am-hide-sm-only">{{ $data->getRealmoney() }} <br>
+                            @if($data->status==2) <span style="color:orangered;">? 未付款</span>
+                            @elseif($data->status==3) <span class="star">× 付错款</span>
+                            @elseif($data->status>3) <span style="color:green;">√ 已付款</span>
+                            @endif
+                        </td>
                         <td class="am-hide-sm-only">{{ $data->getStatusName() }}</td>
                         <td class="am-hide-sm-only">{{ $data->isshow() }}</td>
                         <td class="am-hide-sm-only">{{ $data->createTime() }}</td>
@@ -75,6 +89,7 @@
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
                                     <a href="{{DOMAIN}}admin/orderpro/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="{{PUB}}assets/images/show.png" class="icon"> 查看</button>
+                                    <a onclick="showPopup({{$data->id}})"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="{{PUB}}assets/images/tool.png" class="icon"> 定价</button>
                                     </a>
                                     @if($data->isshow==2)
                                         <a href="{{DOMAIN}}admin/orderpro/isshow/{{$data->id}}/1"><button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><img src="{{PUB}}assets/images/tool.png" class="icon"> 隐藏</button></a>
@@ -106,4 +121,13 @@
             </div>
         </div>
     </div>
+
+    <input type="hidden" name="id">
+    <script>
+        function showPopup(id){
+            $("input[name='id']")[0].value = id;
+            $('.sureMoney').show();
+        }
+    </script>
+    @include('admin.orderpro.money')
 @stop

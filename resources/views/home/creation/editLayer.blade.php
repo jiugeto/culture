@@ -12,7 +12,9 @@
         /*编辑用户修改意见*/
         .out .layer { color:grey;position:absolute;top:180px;left:{{$video->width+200}}px; }
         .out .layer textarea { border:1px solid gainsboro; }
-        .out .layer select { padding:2px 5px;color:grey;border:1px solid gainsboro; }
+        .out .layer select,.out .layer input { padding:2px 5px;color:grey;border:1px solid gainsboro; }
+        .out .layer input { width:50px; }
+        .out a { color:orangered;text-decoration:none; }
     </style>
     <div class="out">
         <p>{{ $videoName }}-视频播放</p>
@@ -45,7 +47,8 @@
                 总价 = 渲染价 + 修改价
 
                 <br>
-                可用福利(元)：{{Session::has('user')?$wallet->weal:0}}
+                可用福利(元)：<input type="text" name="weal" value="{{Session::has('user')?$wallet->weal:0}}">
+                <a href="{{DOMAIN}}member/wallet" target="_blank">去兑换福利</a>
                 <br><br>
 
                 <button type="submit" class="homebtn">保存修改</button>

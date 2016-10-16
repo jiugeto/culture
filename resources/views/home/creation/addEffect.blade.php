@@ -34,7 +34,7 @@
         总价 = 渲染价 + 制作价
 
         <br><br>
-        可用福利(元)：{{Session::has('user')?$wallet->weal:0}}
+        可用福利(元)：<input type="text" name="weal" value="{{Session::has('user')?$wallet->weal:0}}">
         <br><br>
 
         <button type="submit" class="homebtn">保存添加</button>

@@ -13,24 +13,26 @@
             <td>{{ $data->genre() }}</td>
         </tr>
         <tr>
-            <td class="field_name">宽度：</td>
-            <td>{{ $data->width }}</td>
-        </tr>
-        <tr>
-            <td class="field_name">高度：</td>
-            <td>{{ $data->height }}</td>
+            <td class="field_name">类别：</td>
+            <td>{{ $data->getCate() }}</td>
         </tr>
         <tr>
             <td class="field_name">简介：</td>
             <td>{{ $data->intro ? $data->intro : '无' }}</td>
         </tr>
         <tr>
+            <td class="field_name">缩略图：</td>
+            <td><a href="{{DOMAIN}}online/pre/{{ $data->id }}" target="_blank" title="点击预览">
+                    <img src="{{ $data->getPicUrl() }}" width="400"></a>
+            </td>
+        </tr>
+        <tr>
             <td class="field_name">创建时间：</td>
-            <td>{{ $data->created_at }}</td>
+            <td>{{ $data->createTime() }}</td>
         </tr>
         <tr>
             <td class="field_name">更新时间：</td>
-            <td>{{ $data->updated_at!='0000-00-00 00:00:00' ? $data->updated_at : '未更新' }}</td>
+            <td>{{ $data->updateTime() }}</td>
         </tr>
         <tr><td class="center" colspan="2" style="border:0;cursor:pointer;">
                 {{--<a class="list_btn" onclick="history.go(-1)">返回</a>--}}

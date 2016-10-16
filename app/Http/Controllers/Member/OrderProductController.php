@@ -46,6 +46,17 @@ class OrderProductController extends BaseController
         return view('member.orderpro.show', $result);
     }
 
+    public function destroy($id)
+    {
+        OrderProductModel::where('id',$id)->update(['isshow'=> 1]);
+        return redirect(DOMAIN.'member/orderpro');
+    }
+
+
+
+
+
+
     public function query()
     {
         $datas = OrderProductModel::where('isshow',2)
