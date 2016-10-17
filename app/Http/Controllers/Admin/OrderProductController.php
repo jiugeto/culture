@@ -1,7 +1,10 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Base\PayModel;
+use App\Models\Base\UserGoldModel;
 use App\Models\Base\VideoModel;
+use App\Models\Base\WalletModel;
 use App\Models\Online\OrderProductModel;
 use Illuminate\Http\Request;
 
@@ -34,6 +37,19 @@ class OrderProductController extends BaseController
             'status'=> $status,
         ];
         return view('admin.orderpro.index', $result);
+    }
+
+    public function show($id)
+    {
+        $curr['name'] = $this->crumb['show']['name'];
+        $curr['url'] = $this->crumb['show']['url'];
+        $result = [
+            'data'=> OrderProductModel::find($id),
+            'model'=> $this->model,
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.orderpro.show', $result);
     }
 
     /**
@@ -112,7 +128,35 @@ class OrderProductController extends BaseController
     /**
      * 设置定价
      */
-    public function setMoney(){}
+    public function setMoney($id,$money)
+    {
+        $orderProModel = OrderProductModel::find($id);
+        $formatMoney = $orderProModel->getFormatMoney();
+        $data = [
+            'genre'=> 3,        //代表在线创作订单
+            'order_id'=> $id,
+            'money'=> $formatMoney+$money,
+            'weal'=> $formatMoney,
+            'created_at'=> time(),
+        ];
+        PayModel::create($data);
+        //创作订单表状态更新
+        OrderProductModel::where('id',$id)->update(['status'=> 2]);
+        return redirect(DOMAIN.'admin/orderpro');
+    }
+
+    /**
+     * 设置好评的返金币
+     */
+    public function setBackGold($id,$uid)
+    {
+        OrderProductModel::where('id',$id)->update(['status'=> 8]);
+        //更新基本数量
+        UserGoldModel::setGold($uid,4,5);
+        $walletModel = WalletModel::where('uid',$uid)->first();
+        WalletModel::where('uid',$uid)->update(['gold'=> $walletModel->gold+5]);
+        return redirect(DOMAIN.'admin/orderpro');
+    }
 
 
 

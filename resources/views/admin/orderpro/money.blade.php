@@ -22,7 +22,6 @@
     function getSureMoney(){
         var money = $("input[name='money']").val();
         var id = $("input[name='id']").val();
-        alert(id);return;
         if (money=='' || money==0) {
             alert('价格必填！');return;
         } else if (isNaN(money)) {

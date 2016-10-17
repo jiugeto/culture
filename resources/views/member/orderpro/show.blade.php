@@ -34,7 +34,9 @@
         </tr>
         <tr>
             <td class="field_name">状态：</td>
-            <td>{{ $data->getStatusName() }}</td>
+            <td>{{ $data->getStatusName() }} <br>
+                @if($data->status==7)<span style="color:green;">√ 返5金币</span>@endif
+            </td>
         </tr>
         <tr>
             <td class="field_name">创建时间：</td>

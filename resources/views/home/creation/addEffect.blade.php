@@ -6,6 +6,7 @@
     .effect input { padding:5px 10px;width:700px;border:1px solid gainsboro; }
     .effect select { padding:2px 10px;border:1px solid gainsboro;color:grey; }
     .effect textarea { padding:5px;border:1px solid gainsboro; }
+    .effect a { color:orangered;text-decoration:none; }
 </style>
 
 <div class="effect">
@@ -13,6 +14,10 @@
     <form method="POST" action="{{DOMAIN}}creation/addEffect" enctype="multipart/form-data">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         {{--<input type="hidden" name="method" value="POST">--}}
+
+        产品名称：<br>
+        <input type="text" placeholder="至少2个字符" name="name">
+        <br><br>
 
         效果参考链接：<br>
         <input type="text" placeholder="外部视频链接复制、粘贴于此" name="link">
@@ -33,8 +38,9 @@
         <br><br>
         总价 = 渲染价 + 制作价
 
-        <br><br>
-        可用福利(元)：<input type="text" name="weal" value="{{Session::has('user')?$wallet->weal:0}}">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        优先使用福利(元)：{{Session::has('user')?$wallet->weal:0}}
+        <a href="{{DOMAIN}}member/wallet" target="_blank">去兑换福利</a>
         <br><br>
 
         <button type="submit" class="homebtn">保存添加</button>

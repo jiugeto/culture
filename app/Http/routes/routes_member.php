@@ -41,6 +41,7 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
     //在线视频制作
     Route::post('product/{id}','ProductController@update');
     Route::resource('product','ProductController');
+    Route::resource('proVideo','ProductVideoController');
     //个人供求
         //个人需求
     Route::post('personD/{id}','PersonDController@update');
@@ -153,6 +154,7 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
         //售后（样片修改）路由
     Route::resource('orderfirm','OrderFirmController');
         //在线创作路由
+    Route::get('orderpro/comment/{id}/{comment}/{backGold}','OrderProductController@setComment');
     Route::get('orderpro/{id}/destroy','OrderProductController@destroy');
     Route::resource('orderpro','OrderProductController');
         //话题管理

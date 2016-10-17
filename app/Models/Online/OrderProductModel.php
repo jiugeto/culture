@@ -13,7 +13,7 @@ class OrderProductModel extends BaseModel
      */
     protected $table = 'bs_orders_pro';
     protected $fillable = [
-        'id','productid','serial','genre','uid','uname','seller','format','record','video_id','status','isshow','created_at','updated_at',
+        'id','productid','serial','genre','cate','uid','uname','seller','format','record','video_id','status','isshow','created_at','updated_at',
     ];
     protected $genres = [
         1=>'在线模板','离线模板','无模板',
@@ -25,9 +25,9 @@ class OrderProductModel extends BaseModel
     protected $formatMoneys = [
         1=>20,40,60,
     ];
-    //订单状态：待定价，待打款，款不对，待处理，已处理
+    //订单状态：1待定价，2待打款，3款不对，4待处理，5已处理待评价，6坏评价，7好评价并返利
     protected $statuss = [
-        '所有','待定价','待打款','未付款或款不对','已付款处理中','已处理',
+        '所有','待定价','待打款','未付款或款不对','已付款处理中','已处理待评价','评价不好','好评并返利',
     ];
     protected $isshows = [
         '所有','不显示','显示',
@@ -36,6 +36,11 @@ class OrderProductModel extends BaseModel
     public function getGenreName()
     {
         return array_key_exists($this->genre,$this->genres) ? $this->genres[$this->genre] : '';
+    }
+
+    public function getCateName()
+    {
+        return array_key_exists($this->cate,$this->cates2) ? $this->cates2[$this->cate] : '';
     }
 
     /**
@@ -55,7 +60,7 @@ class OrderProductModel extends BaseModel
     }
 
     /**
-     * 得到创作订单信息
+     * 得到在线模板信息
      */
     public function getProduct()
     {
@@ -64,11 +69,25 @@ class OrderProductModel extends BaseModel
     }
 
     /**
+     * 得到离线模板、无模板信息
+     */
+    public function getProVideo()
+    {
+        $productVideo = ProductVideoModel::find($this->productid);
+        return $productVideo ? $productVideo : '';
+    }
+
+    /**
      * 得到创作订单名称
      */
     public function getProductName()
     {
-        return $this->getProduct() ? $this->getProduct()->name : '';
+        if ($this->genre==1) {
+            $proName = $this->getProduct() ? $this->getProduct()->name : '';
+        } else {
+            $proName = $this->getProVideo() ? $this->getProVideo()->name : '';
+        }
+        return $proName;
     }
 
     /**
@@ -87,7 +106,7 @@ class OrderProductModel extends BaseModel
      */
     public function getMoney()
     {
-        return $this->getPay() ? $this->getPay()->money() : '';
+        return $this->getPay() ? $this->getPay()->money() : '/';
     }
 
     /**
@@ -95,7 +114,7 @@ class OrderProductModel extends BaseModel
      */
     public function getWeal()
     {
-        return $this->getPay() ? $this->getPay()->weal() : '';
+        return $this->getPay() ? $this->getPay()->weal() : '/';
     }
 
     /**
@@ -103,7 +122,11 @@ class OrderProductModel extends BaseModel
      */
     public function getRealmoney()
     {
-        return $this->getPay()->money - $this->getPay()->weal . '元';
+        if ($pay=$this->getPay()) {
+            return $pay->money - $pay->weal . '元';
+        } else {
+            return '/';
+        }
     }
 
     /**
@@ -120,6 +143,14 @@ class OrderProductModel extends BaseModel
     public function getFormatName()
     {
         return array_key_exists($this->format,$this->formatNames) ? $this->formatNames[$this->format] : '';
+    }
+
+    /**
+     * 渲染的格式
+     */
+    public function getFormatMoney()
+    {
+        return array_key_exists($this->format,$this->formatMoneys) ? $this->formatMoneys[$this->format] : '';
     }
 
     public function isshow()

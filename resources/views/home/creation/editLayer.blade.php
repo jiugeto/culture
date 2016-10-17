@@ -47,7 +47,7 @@
                 总价 = 渲染价 + 修改价
 
                 <br>
-                可用福利(元)：<input type="text" name="weal" value="{{Session::has('user')?$wallet->weal:0}}">
+                优先使用福利(元)：{{Session::has('user')?$wallet->weal:0}}
                 <a href="{{DOMAIN}}member/wallet" target="_blank">去兑换福利</a>
                 <br><br>
 

@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers\Member;
 
+use App\Models\Base\UserGoldModel;
+use App\Models\Base\WalletModel;
 use Illuminate\Http\Request;
 use App\Models\Online\OrderProductModel;
 
@@ -49,6 +51,25 @@ class OrderProductController extends BaseController
     public function destroy($id)
     {
         OrderProductModel::where('id',$id)->update(['isshow'=> 1]);
+        return redirect(DOMAIN.'member/orderpro');
+    }
+
+    /**
+     * 设置评价、返利
+     */
+    public function setComment($id,$comment,$backGold)
+    {
+        if ($comment==0) {
+            $status = 6;
+        } elseif ($comment==1) {
+            $status = 7;
+        }
+        OrderProductModel::where('id',$id)->where('status',5)->update(['status'=> $status]);
+        //金币返利
+        if ($comment && $backGold) {
+            UserGoldModel::setGold($this->userid,4,$backGold);
+            WalletModel::where('uid',$this->userid)->increment('gold',$backGold);
+        }
         return redirect(DOMAIN.'member/orderpro');
     }
 

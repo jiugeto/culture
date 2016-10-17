@@ -67,36 +67,10 @@ class CreationController extends BaseController
         if (!$request->intro) {
             echo "<script>alert('修改要求必填！');history.go(-1);</script>";exit;
         }
-        $proVideoModel = ProductVideoModel::find($id);
-        $serial = date('YmdHis',time()).rand(0,10000);
-        $formats = array_flip($this->orderProModel['formatMoneys']);
-        $format = array_key_exists($request->formatMoney,$formats)?$formats[$request->formatMoney]:0;
-        $time = time();
-        $data = [
-            'productid'=> $id,
-            'serial'=> $serial,
-            'genre'=> 2,    //离线模板
-            'cate'=> $proVideoModel->cate,
-            'uid'=> $this->userid,
-            'uname'=> \Session::get('user.username'),
-            'seller'=> $proVideoModel->uid,
-            'format'=> $format,
-            'record'=> $request->intro,
-            'created_at'=> $time,
-        ];
-        OrderProductModel::create($data);
-//        dd($data);
 
-        //价格处理
-        $orderProModel = OrderProductModel::where($data)->first();
-        $data1 = [
-            'genre'=> 3,        //代表在线创作订单
-            'order_id'=> $orderProModel->id,
-//            'money'=> ,
-//            'weal'=> ,
-            'created_at'=> $time,
-        ];
-        PayModel::create($data1);
+        //创作订单表
+        $proVideoModel = ProductVideoModel::find($id);
+        $data = $this->addOrderPro($request,2,$proVideoModel);
 
         return redirect(DOMAIN.'member/orderpro');
     }
@@ -107,29 +81,55 @@ class CreationController extends BaseController
     public function insertEffect(Request $request)
     {
         if (!$this->userid) { echo "<script>alert('还没有登录，请先登录！');history.go(-1);</script>";exit; }
-        if (!$request->intro || !$request->link) {
-            echo "<script>alert('视频效果链接、修改要求必填！');history.go(-1);</script>";exit;
+        if (!$request->name || !$request->intro || !$request->link) {
+            echo "<script>alert('视频名称、效果链接、修改要求必填！');history.go(-1);</script>";exit;
+        } elseif (strlen($request->name)<2 || strlen($request->name)>20) {
+            echo "<script>alert('名称2-20字符！');history.go(-1);</script>";exit;
+        } elseif (!preg_match("/https?:\/\/[\w.]+[\w\/]*[\w.]*\??[\w=&\+\%]*/is",$request->link)) {
+            echo "<script>alert('链接地址格式不对！');history.go(-1);</script>";exit;
         }
         $time = time();
-        $data = [
+        $proVideo = [
+            'name'=> $request->name,
             'genre'=> 2,    //代表效果定制
             'intro'=> $request->intro,
             'link'=> $request->link,
             'uid'=> $this->userid,
             'created_at'=> $time,
         ];
-        dd('11',$request->all());
-        ProductVideoModel::create($data);
+        ProductVideoModel::create($proVideo);
 
         //插入创作订单表
-        $data1 = [];
-        OrderProductModel::ceate($data1);
-
-        //支付表
-        $data3 = [];
-        PayModel::create($data3);
+        $proVideoModel = ProductVideoModel::where($proVideo)->first();
+        $this->addOrderPro($request,3,$proVideoModel);
 
         return redirect(DOMAIN.'member/orderpro');
+    }
+
+    /**
+     * 插入创作订单表
+     */
+    public function addOrderPro($request,$genre,$proVideoModel)
+    {
+        $serial = date('YmdHis',time()).rand(0,10000);
+        $formats = array_flip($this->orderProModel['formatMoneys']);
+        $format = array_key_exists($request->formatMoney,$formats)?$formats[$request->formatMoney]:0;
+        $time = time();
+        $data = [
+            'productid'=> $proVideoModel->id,
+            'serial'=> $serial,
+            'genre'=> $genre,
+            'cate'=> $proVideoModel->cate,
+            'uid'=> $this->userid,
+            'uname'=> \Session::get('user.username'),
+            'seller'=> $proVideoModel->uid,
+            'format'=> $format,
+            'record'=> $request->intro,
+//            'video_id'=> ,    //动画成品id
+            'created_at'=> $time,
+        ];
+        OrderProductModel::create($data);
+        return OrderProductModel::where($data)->first();
     }
 
     /**

@@ -372,6 +372,7 @@ input.radio { position:relative;top:10px; }
     box-shadow:0 0 200px rgb(150,150,150);
     position:fixed;top:30%;z-index:1000;
 }
+.popup3 p { line-height:30px; }
 .popup a#story,.popup a#video,.popup a#remarks { display:none; }
 .popup a { margin:0 10px;padding:5px;font-size:18px; }
 .popup a:hover { color:red; }

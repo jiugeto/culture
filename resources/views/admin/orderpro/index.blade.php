@@ -49,6 +49,7 @@
                         <th class="table-check"><input type="checkbox"/></th>
                         <th class="table-id">序号</th>
                         <th class="table-title">订单名称</th>
+                        <th class="table-type">类型</th>
                         <th class="table-type">用户</th>
                         <th class="table-type">总价格</th>
                         <th class="table-type">所用福利</th>
@@ -68,9 +69,10 @@
                         <td class="am-hide-sm-only">
                             <a href="{{DOMAIN}}admin/orderpro/{{$data->id}}">{{ $data->getProductName() }}</a>
                         </td>
+                        <td class="am-hide-sm-only">{{ $data->getGenreName() }}</td>
                         <td class="am-hide-sm-only">{{ $data->uname }}</td>
                         <td class="am-hide-sm-only">
-                            @if($data->status==1) <span class="star">? 待定价</span>
+                            @if($data->status==1) <span style="color:orangered;">? 待定价</span>
                             @elseif($data->status==2) {{ $data->getMoney() }}
                             @else /
                             @endif
@@ -82,7 +84,9 @@
                             @elseif($data->status>3) <span style="color:green;">√ 已付款</span>
                             @endif
                         </td>
-                        <td class="am-hide-sm-only">{{ $data->getStatusName() }}</td>
+                        <td class="am-hide-sm-only">{{ $data->getStatusName() }} <br>
+                            @if($data->status==7)<span style="color:green;">√ 返5金币</span>@endif
+                        </td>
                         <td class="am-hide-sm-only">{{ $data->isshow() }}</td>
                         <td class="am-hide-sm-only">{{ $data->createTime() }}</td>
                         <td class="am-hide-sm-only">
@@ -98,14 +102,14 @@
                                     @endif
 
                                     <div style="height:4px"></div>
-                                    @if($data->status==1)
-                                        <a href="{{DOMAIN}}admin/orderpro/status/{{$data->id}}/3"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only">已付款待处理</button></a>
-                                        <a href="{{DOMAIN}}admin/orderpro/status/{{$data->id}}/2"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only">未付款或款不对</button></a>
-                                    @elseif($data->status==3 && !$data->video_id && !$data->is_new)
+                                    @if($data->status==2)
+                                        <a href="{{DOMAIN}}admin/orderpro/status/{{$data->id}}/4"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only">已付款待处理</button></a>
+                                        <a href="{{DOMAIN}}admin/orderpro/status/{{$data->id}}/3"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only">未付款或款不对</button></a>
+                                    @elseif($data->status==4 && !$data->video_id && !$data->is_new)
                                         <a href="{{DOMAIN}}admin/orderpro/{{$data->id}}/edit"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only">视频处理</button></a>
-                                    @elseif($data->status==3 && $data->video_id && $data->is_new)
+                                    @elseif($data->status==4 && $data->video_id && $data->is_new)
                                         <a href="{{DOMAIN}}admin/orderpro/status/{{$data->id}}/4"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only">设置已处理</button></a>
-                                    @elseif($data->status==4)
+                                    @elseif($data->status==5)
                                         <a href="{{DOMAIN}}admin/video/pre/{{$data->video_id}}" target="_blank"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only">视频预览</button></a>
                                     @endif
                                 </div>
