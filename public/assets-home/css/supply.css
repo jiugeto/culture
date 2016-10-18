@@ -55,7 +55,12 @@
     font-size:18px;
     color:grey;
 }
-.s_search input { width:15px; }
+.s_search input { width:20px;color:grey; }
+.s_search select.s_search_sel {
+    padding:2px 10px;
+    color:grey;
+    font-size:16px;
+}
 .s_select {
     width:120px;height:30px;
     border-radius:2px;

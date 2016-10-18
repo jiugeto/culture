@@ -16,7 +16,7 @@ class DemandController extends BaseController
 
     protected $curr = 'demand';
     protected $genres = [
-        1=>'视频需求','创意剧本','分镜需求','娱乐需求','设备需求','设计需求',
+        1=>'创意剧本','分镜需求','人员需求','设备需求','设计需求',
     ];
     //具体分类genre1：适合视频、创意、分镜
     protected $genre1s = [

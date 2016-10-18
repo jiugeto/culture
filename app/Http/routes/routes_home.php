@@ -43,7 +43,7 @@ Route::group(['prefix'=>'/','namespace'=>'Home'],function(){
     Route::get('entertain/works/show/{id}','EntertainController@worksShow');
     //租赁频道
     Route::get('rent/SD/{genre}','RentController@index');
-    Route::get('rent/m/{from}/{to}','RentController@index');
+    Route::get('rent/s/{type}/{from}/{to}','RentController@index');     //s代表检索
     Route::resource('rent','RentController');
     //设计频道
     Route::get('design/cate/{cate}','DesignController@index');

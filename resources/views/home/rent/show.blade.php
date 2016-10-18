@@ -12,6 +12,10 @@
                         <td>{{ $data->money() }}</td>
                     </tr>
                     <tr>
+                        <td>设备类型：</td>
+                        <td>{{ $data->getType() }}</td>
+                    </tr>
+                    <tr>
                         <td>开始期限：</td>
                         <td>{{ date('Y年m月d日 H:i',$data->fromtime) }}
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

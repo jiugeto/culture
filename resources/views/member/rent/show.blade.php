@@ -14,6 +14,11 @@
         </tr>
 
         <tr>
+            <td>设备类型：</td>
+            <td>{{ $data->getType() }}</td>
+        </tr>
+
+        <tr>
             <td>简 &nbsp;介：</td>
             <td>{{ $data->intro }}</td>
         </tr>

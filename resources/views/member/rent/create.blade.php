@@ -9,7 +9,7 @@
                 <td><label>设备名称 / Name：</label></td>
                 <td><input type="text" placeholder="至少2个字符" minlength="2" required name="name"/></td>
             </tr>
-            <tr><td></td></tr>
+            {{--<tr><td></td></tr>--}}
 
             <tr>
                 <td><label>供求关系 / Genre：</label></td>
@@ -18,7 +18,19 @@
                     <label><input type="radio" name="genre" value="2"/> 租赁需求&nbsp;&nbsp;</label>
                 </td>
             </tr>
-            <tr><td></td></tr>
+            {{--<tr><td></td></tr>--}}
+
+            <tr>
+                <td><label>设备类型 / Type：</label></td>
+                <td>
+                    <select name="type">
+                        @foreach($model['types'] as $ktype=>$vtype)
+                            <option value="{{ $ktype }}">{{ $vtype }}</option>
+                        @endforeach
+                    </select>
+                </td>
+            </tr>
+            {{--<tr><td></td></tr>--}}
 
             <tr>
                 <td><label>简介 / Introduce：</label></td>
@@ -40,13 +52,13 @@
                     </script>--}}
                 </td>
             </tr>
-            <tr><td></td></tr>
+            {{--<tr><td></td></tr>--}}
 
             <tr>
                 <td><label>价格 / Pricce：</label></td>
                 <td><input type="text" placeholder="数字" pattern="^(\d+)|(\d+\.\d{2})$" required name="price"/></td>
             </tr>
-            <tr><td></td></tr>
+            {{--<tr><td></td></tr>--}}
 
             <tr><td colspan="2" style="text-align:center;">
                     <button class="companybtn" onclick="history.go(-1)">返 &nbsp;&nbsp;&nbsp;回</button>

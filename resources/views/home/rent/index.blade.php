@@ -6,6 +6,14 @@
         {{-- 搜索 --}}
         <div class="cre_kong">&nbsp;{{--10px高度留空--}}</div>
         <div class="s_search">
+            类型：
+            <select name="type" class="s_search_sel">
+                <option value="0" {{ $type==0 ? 'selected'  : ''}}>所有</option>
+                @foreach($model['types'] as $ktype=>$vtype)
+                    <option value="{{ $ktype }}" {{ $type==$ktype ? 'selected' : '' }}>{{ $vtype }}</option>
+                @endforeach
+            </select>
+            &nbsp;&nbsp;&nbsp;&nbsp;
             租金：
             <input type="text" name="fromMoney" value="{{ $fromMoney }}"> -
             <input type="text" name="toMoney" value="{{ $toMoney }}"> 元
@@ -15,13 +23,14 @@
         </div>
         <script>
             $("#search").click(function(){
+                var type = $("select[name='type']").val();
                 var fromMoney = $("input[name='fromMoney']").val();
                 var toMoney = $("input[name='toMoney']").val();
                 //m代表money缩写，代表租金
-                if (fromMoney==0 && toMoney==0) {
+                if (type==0 && fromMoney==0 && toMoney==0) {
                     window.location.href = '{{DOMAIN}}rent';
                 } else {
-                    window.location.href = '{{DOMAIN}}rent/m/'+fromMoney+'/'+toMoney;
+                    window.location.href = '{{DOMAIN}}rent/s/'+type+'/'+fromMoney+'/'+toMoney;
                 }
             });
         </script>

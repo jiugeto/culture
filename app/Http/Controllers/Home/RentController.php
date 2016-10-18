@@ -11,17 +11,25 @@ class RentController extends BaseController
 
     protected $curr = 'rent';
 
-    public function index($fromMoney=0,$toMoney=0)
+    public function __construct()
+    {
+        parent::__construct();
+        $this->model = new RentModel();
+    }
+
+    public function index($type=0,$fromMoney=0,$toMoney=0)
     {
         //判断起始租金、结束租金
         if (!is_numeric($fromMoney) || !is_numeric($toMoney)) {
             echo "<script>alert('租金格式错误！');history.go(-1);</script>";exit;
         }
         $result = [
-            'datas'=> $this->query($fromMoney,$toMoney),
+            'datas'=> $this->query($type,$fromMoney,$toMoney),
+            'model'=> $this->model,
             'ads'=> $this->ads(),
             'lists'=> $this->list,
             'curr_menu'=> $this->curr,
+            'type'=> $type,
             'fromMoney'=> $fromMoney,
             'toMoney'=> $toMoney,
         ];
@@ -46,15 +54,26 @@ class RentController extends BaseController
 
 
 
-    public function query($fromMoney,$toMoney)
+    public function query($type,$fromMoney,$toMoney)
     {
-        $datas = RentModel::where('genre',1)
-            ->where('del',0)
-            ->where('money','>',$fromMoney)
-            ->where('money','<',$toMoney)
-            ->orderBy('sort','desc')
-            ->orderBy('id','desc')
-            ->paginate($this->limit);
+        if ($type) {
+            $datas = RentModel::where('genre',1)
+                ->where('del',0)
+                ->where('type',$type)
+                ->where('money','>',$fromMoney)
+                ->where('money','<',$toMoney)
+                ->orderBy('sort','desc')
+                ->orderBy('id','desc')
+                ->paginate($this->limit);
+        } else {
+            $datas = RentModel::where('genre',1)
+                ->where('del',0)
+                ->where('money','>',$fromMoney)
+                ->where('money','<',$toMoney)
+                ->orderBy('sort','desc')
+                ->orderBy('id','desc')
+                ->paginate($this->limit);
+        }
         $datas->limit = $this->limit;
         return $datas;
     }

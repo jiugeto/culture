@@ -7,8 +7,17 @@ class RentModel extends BaseModel
 {
     protected $table = 'bs_rents';
     protected $fillable = [
-        'id','name','genre','thumb','intro','uid','area','money','sort','del','created_at','updated_at',
+        'id','name','genre','type','thumb','intro','uid','area','money','sort','del','created_at','updated_at',
     ];
+    //设备类型：摄像机，摇臂，转接器，镜头，轨道车，脚轮，脚架，话筒，调音台，监视器，灯光，反光板，柔光板，采集卡，硬盘，
+    protected $types = [
+        1=>'摄像机','摇臂','转接器','镜头','轨道车','脚轮','脚架','话筒','调音台','监视器','灯光','反光板','柔光板','采集卡','硬盘',
+    ];
+
+    public function getType()
+    {
+       return array_key_exists($this->type,$this->types) ? $this->types[$this->type] : '';
+    }
 
     /**
      * 用户信息

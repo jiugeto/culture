@@ -51,6 +51,7 @@ class RentController extends BaseController
         $curr['name'] = $this->lists['create']['name'];
         $curr['url'] = $this->lists['create']['url'];
         $result = [
+            'model'=> $this->model,
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -76,6 +77,7 @@ class RentController extends BaseController
         $curr['url'] = $this->lists['edit']['url'];
         $result = [
             'data'=> RentModel::find($id),
+            'model'=> $this->model,
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -140,6 +142,7 @@ class RentController extends BaseController
         $rent = [
             'name'=> $data['name'],
             'genre'=> $data['genre'],
+            'type'=> $data['type'],
             'intro'=> $data['intro'],
             'uid'=> $data['uid'],
             'money'=> $data['price'],
@@ -150,15 +153,17 @@ class RentController extends BaseController
     /**
      * 查询方法
      */
-    public function query($del=0,$genre=0)
+    public function query($del,$genre,$type)
     {
         if ($genre) {
             $datas = RentModel::where('del',$del)
                 ->where('genre',$genre)
+                ->where('type',$type)
                 ->orderBy('id','desc')
                 ->paginate($this->limit);
         } else {
             $datas = RentModel::where('del',$del)
+                ->where('genre',$genre)
                 ->orderBy('id','desc')
                 ->paginate($this->limit);
         }

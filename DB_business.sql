@@ -1265,6 +1265,7 @@ CREATE TABLE `bs_rents` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL COMMENT '设备名称',
   `genre` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '类型：1供应，2需求',
+  `type` tinyint(2) unsigned NOT NULL DEFAULT '1' COMMENT '设备类型：',
   `thumb` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '缩略图id',
   `intro` varchar(500) NOT NULL COMMENT '设备介绍',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布者id',
@@ -1286,7 +1287,7 @@ CREATE TABLE `bs_rents` (
 
 LOCK TABLES `bs_rents` WRITE;
 /*!40000 ALTER TABLE `bs_rents` DISABLE KEYS */;
-INSERT INTO `bs_rents` VALUES (1,'租赁供应0323',1,0,'yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy',1,0,0,0,0,10,0,20160323,20160323);
+INSERT INTO `bs_rents` VALUES (1,'租赁供应0323',1,1,0,'yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy',1,0,0,0,0,10,0,20160323,20160323);
 /*!40000 ALTER TABLE `bs_rents` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2294,4 +2295,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-10-18 18:03:39
+-- Dump completed on 2016-10-18 21:23:26
