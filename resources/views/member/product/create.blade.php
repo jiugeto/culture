@@ -12,16 +12,16 @@
             {{--<tr><td></td></tr>--}}
 
             <tr>
-                <td class="field_name"><label>宽度：</label></td>
-                <td><input type="text" class="field_value" placeholder="宽度，单位px" pattern="^\d+$" required name="width"/></td>
+                <td class="field_name"><label>类别：</label></td>
+                <td>
+                    <select name="cate">
+                        @foreach($model['cates2'] as $kcate=>$vcate)
+                            <option value="{{ $kcate }}">{{ $vcate }}</option>
+                        @endforeach
+                    </select>
+                </td>
             </tr>
             {{--<tr><td></td></tr>--}}
-
-            <tr>
-                <td class="field_name"><label>高度：</label></td>
-                <td><input type="text" class="field_value" placeholder="高度，单位px" pattern="^\d+$" required name="height"/></td>
-            </tr>
-            <tr><td></td></tr>
 
             <tr>
                 <td class="field_name"><label>简介：</label></td>

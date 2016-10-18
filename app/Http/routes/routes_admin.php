@@ -65,8 +65,12 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::post('goods/{id}','GoodsController@update');
     Route::resource('goods','GoodsController');
     //内部产品管理
+        //在线动画路由
     Route::post('product/{id}','ProductController@update');
     Route::resource('product','ProductController');
+        //离线动画路由
+    Route::get('proVideo/pre/{id}','ProductVideoController@pre');   //预览视频
+    Route::resource('proVideo','ProductVideoController');
         //动画设置路由
     Route::post('{pro_id}/proLayer/{id}','ProductLayerController@update');
     Route::resource('{pro_id}/proLayer','ProductLayerController');

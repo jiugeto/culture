@@ -18,37 +18,39 @@
                     <td>{{ $data->id }}</td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">产品名称 / Name：</td>
+                    <td class="am-hide-sm-only">名称 / Name：</td>
                     <td>{{ $data->name }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">类型 / Genre：</td>
-                    <td>{{ $data->genre() }}</td>
+                    <td>{{ $data->getGenreName() }}</td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">图片 / Picture：</td>
-                    <td><img src="{{ $data->gif }}"></td>
+                    <td class="am-hide-sm-only">类别 / Category：</td>
+                    <td>{{ $data->getCate() }}</td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">介绍 / Introduce：</td>
+                    <td class="am-hide-sm-only">修改要求 / Introduce：</td>
                     <td>{{ $data->intro }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">用户名称 / User Name：</td>
                     <td>{{ $data->uname }}</td>
                 </tr>
-                <tr>
-                    <td class="am-hide-sm-only">是否置顶 / Is Top：</td>
-                    <td>{{ $data->istop() }}</td>
-                </tr>
-                <tr>
-                    <td class="am-hide-sm-only">排序 / Sort：</td>
-                    <td>{{ $data->sort }}</td>
-                </tr>
-                <tr>
-                    <td class="am-hide-sm-only">前台是否显示 / Is Show：</td>
-                    <td>{{ $data->isshow() }}</td>
-                </tr>
+                @if($data->genre==1)
+                    <tr>
+                        <td class="am-hide-sm-only">缩略图 / Thumb：</td>
+                        <td><a href="{{DOMAIN}}admin/proVideo/pre/{{$data->id}}" target="_blank">
+                                <img src="{{ $data->getPicUrl() }}" width="200">
+                            </a>
+                        </td>
+                    </tr>
+                @elseif($data->genre==2)
+                    <tr>
+                        <td class="am-hide-sm-only">外部视频链接 / Link：</td>
+                        <td>{{ $data->link }}</td>
+                    </tr>
+                @endif
                 <tr>
                     <td class="am-hide-sm-only">创建时间 / Create Time：</td>
                     <td>{{ $data->createTime() }}</td>

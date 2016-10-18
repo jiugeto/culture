@@ -16,10 +16,10 @@ class ProductController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->lists['func']['name'] = '在线创作';
+        $this->lists['func']['name'] = '在线动画';
         $this->lists['func']['url'] = 'product';
 //        $this->lists['create']['name'] = '开始创作';
-        $this->lists['create']['name'] = '添加产品';
+        $this->lists['create']['name'] = '添加动画';
         $this->model = new ProductModel();
     }
 
@@ -41,6 +41,7 @@ class ProductController extends BaseController
         $curr['name'] = $this->lists['create']['name'];
         $curr['url'] = $this->lists['create']['url'];
         $result = [
+            'model'=> $this->model,
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -66,6 +67,7 @@ class ProductController extends BaseController
         $curr['url'] = $this->lists['edit']['url'];
         $result = [
             'data'=> ProductModel::find($id),
+            'model'=> $this->model,
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -105,19 +107,12 @@ class ProductController extends BaseController
      */
     public function getData(Request $request)
     {
-        //用户类型：0非会员，1个人消费者，2普通企业，3设计师，4广告公司，5影视公司，6租赁公司
-        //genre：1个人发布，2企业发布
-        $userModel = UserModel::find($this->userid);
-        if ($userModel->isuser==3) { $genre = 1; }
-        if (in_array($userModel->isuser,[4,5])) { $genre = 2; }
         $data = [
             'name'=> $request->name,
             'uid'=> $this->userid,
-            'uname'=> $userModel->username,
-            'genre'=> isset($genre) ? $genre : 0,
-            'width'=> $request->width,
-            'height'=> $request->height,
+            'uname'=> \Session::get('user.username'),
             'intro'=> $request->intro,
+            'cate'=> $request->cate,
         ];
         return $data;
     }

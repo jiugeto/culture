@@ -2,15 +2,15 @@
 @section('content')
     @include('member.common.crumb')
 
-    <form data-am-validator method="POST" action="{{DOMAIN}}member/product/{{ $data->id }}" enctype="multipart/form-data">
+    <form data-am-validator method="POST" action="{{DOMAIN}}member/proVideo/{{ $data->id }}" enctype="multipart/form-data">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="_method" value="POST">
         <table class="table_create">
             <tr>
-                <td class="field_name"><label>产品名称：</label></td>
+                <td class="field_name"><label>名称：</label></td>
                 <td><input type="text" class="field_value" placeholder="至少2个字符" minlength="2" required name="name" value="{{ $data->name }}"/></td>
             </tr>
-            {{--<tr><td></td></tr>--}}
+            {{--<tr><td colspan="2"><div style="border-bottom:1px dashed ghostwhite;"></div></td></tr>--}}
 
             <tr>
                 <td class="field_name"><label>类别：</label></td>
@@ -22,29 +22,23 @@
                     </select>
                 </td>
             </tr>
-            {{--<tr><td></td></tr>--}}
+            {{--<tr><td colspan="2"><div style="border-bottom:1px dashed ghostwhite;"></div></td></tr>--}}
 
             <tr>
-                <td class="field_name"><label>简介：</label></td>
+                <td class="field_name"><label>修改要求：</label></td>
                 <td>
                     <textarea name="intro" cols="40" rows="5">{{ $data->intro }}</textarea>
-                    {{--@include('UEditor::head')
-                    <script id="container" name="content" type="text/plain"></script>
-                    <!-- 实例化编辑器 -->
-                    <script type="text/javascript">
-                        var ue = UE.getEditor('container',{
-                            initialFrameWidth:500,
-                            initialFrameHeight:100,
-//                                    toolbars:[['redo','undo','bold','italic','underline','strikethrough','horizontal','forecolor','fontfamily','fontsize','priview','directionality','paragraph','searchreplace','pasteplain','help']]
-                        });
-                        ue.ready(function() {
-                            //此处为支持laravel5 csrf ,根据实际情况修改,目的就是设置 _token 值.
-                            ue.execCommand('serverparam', '_token', '{{ csrf_token() }}');
-                        });
-                    </script>--}}
                 </td>
             </tr>
-            {{--<tr><td></td></tr>--}}
+            {{--<tr><td colspan="2"><div style="border-bottom:1px dashed ghostwhite;"></div></td></tr>--}}
+
+            @if($data->genre==2)
+                <tr>
+                    <td class="field_name"><label>视频效果链接：</label></td>
+                    <td><textarea placeholder="" required name="link" cols="50" rows="5">{{ $data->link }}</textarea></td>
+                </tr>
+                {{--<tr><td colspan="2"><div style="border-bottom:1px dashed ghostwhite;"></div></td></tr>--}}
+            @endif
 
             <tr><td colspan="2" style="text-align:center;">
                     <button class="companybtn" onclick="history.go(-1)">返 &nbsp;&nbsp;&nbsp;回</button>

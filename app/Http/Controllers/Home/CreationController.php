@@ -187,10 +187,12 @@ class CreationController extends BaseController
         if ($cate) {
             $datas = OrderProductModel::where('genre',$genre)
                 ->where('cate',$cate)
+                ->where('video_id','>',0)
                 ->orderBy('id','desc')
                 ->paginate($this->limit);
         } else {
             $datas = OrderProductModel::where('genre',$genre)
+                ->where('video_id','>',0)
                 ->orderBy('id','desc')
                 ->paginate($this->limit);
         }

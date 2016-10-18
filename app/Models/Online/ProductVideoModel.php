@@ -19,9 +19,14 @@ class ProductVideoModel extends BaseModel
         return $this->getUserName($this->uid);
     }
 
-    public function genre()
+    public function getGenreName()
     {
         return array_key_exists($this->genre,$this->genres) ? $this->genres[$this->genre] : '';
+    }
+
+    public function getCate()
+    {
+        return array_key_exists($this->cate,$this->cates2) ? $this->cates2[$this->cate] : '';
     }
 
     /**
@@ -30,6 +35,14 @@ class ProductVideoModel extends BaseModel
     public function getPicUrl()
     {
         return $this->getPic($this->gif);
+    }
+
+    /**
+     * 获取图片名称
+     */
+    public function getPicName()
+    {
+        return $this->pic($this->gif) ? $this->pic($this->gif)->name : '';
     }
 
     public function getVideo()

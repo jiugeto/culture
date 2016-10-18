@@ -19,7 +19,7 @@ class BaseController extends Controller
         'entertain'=> '娱乐频道',
         'rent'=> '租赁频道',
         'design'=> '设计频道',
-        'about'=> '关于我们',
+        'about'=> '关于本站',
         'idea'=> '创意',
         'talk'=> '话题',
         'opinion'=> '用户意见',

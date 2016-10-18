@@ -18,7 +18,7 @@
 <div style="height:10px"></div>
 <input type="hidden" name="pic_id">
 <a class="selpic" onclick="$('.pic_list').toggle(200);" title="点击展开或关闭图片列表">图片切换</a>
-<a href="{{DOMAIN}}company/admin/pic" class="job">图片列表</a>
+<a href="{{DOMAIN}}member/pic" class="job">图片列表</a>
 <div style="height:10px;"></div>
 <div class="pic_list">
     @if(count($pics))
