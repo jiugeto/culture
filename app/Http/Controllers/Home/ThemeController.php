@@ -20,6 +20,7 @@ class ThemeController extends BaseController
         $uid = $this->userid ? $this->userid : 0;
         $result = [
             'datas'=> $this->query($uid),
+            'prefix_url'=> DOMAIN.'theme',
             'curr'=> 'theme',
             'uid'=> $uid,
         ];

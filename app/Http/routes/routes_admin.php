@@ -39,11 +39,9 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::get('action/s/{isshow}/{pid}','ActionController@index');         //s代表检索
     Route::resource('action','ActionController');
         //用户权限分配
-    Route::resource('authorization','AuthorizationController');
-        //前台功能
-    Route::post('function/{id}','FunctionController@update');
-    Route::get('function/trash','FunctionController@trash');
-    Route::resource('function','FunctionController');
+//    Route::get('auth/{auth}/{menu}','AuthsController@setAuth');
+    Route::get('auth/edit/{auth}','AuthsController@edit');
+    Route::resource('auth','AuthsController');
         //前台左侧菜单链接功能
     Route::post('menus/{id}','MenusController@update');
     Route::get('menus/{id}/forceDelete','MenusController@forceDelete');
