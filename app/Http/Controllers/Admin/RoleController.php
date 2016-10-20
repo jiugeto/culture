@@ -1,8 +1,8 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Admin\RoleActionModel;
 use Illuminate\Http\Request;
-//use App\Http\Requests;
 use App\Models\Admin\RoleModel;
 
 class RoleController extends BaseController
@@ -14,10 +14,10 @@ class RoleController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->model = new RoleModel();
         $this->crumb['']['name'] = '角色列表';
         $this->crumb['category']['name'] = '角色管理';
         $this->crumb['category']['url'] = 'role';
+        $this->model = new RoleModel();
     }
 
     public function index()
@@ -87,6 +87,51 @@ class RoleController extends BaseController
     public function forceDelete($id)
     {
         RoleModel::where('id',$id)->delete();
+    }
+
+    /**
+     * 权限操作页面
+     */
+    public function getRoleAction($id)
+    {
+        $curr['name'] = '权限编辑';
+        $curr['url'] = $this->crumb['edit']['url'];
+        $result = [
+            'data'=> RoleModel::find($id),
+            'actions'=> $this->model->getActions(),
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.role.editAction', $result);
+    }
+
+    /**
+     * 更新权限
+     */
+    public function setRoleAction(Request $request,$id)
+    {
+        if (!$request->action) {
+            echo "<script>alert('操作必选！');history.go(-1);</script>";exit;
+        }
+        $roleActions = RoleActionModel::where('role_id',$id)->get();
+        //多余的就删除
+        foreach ($roleActions as $roleAction) {
+            if (!in_array($roleAction->action_id,$request->action)) {
+                RoleActionModel::where('id',$roleAction->id)->delete();
+            }
+        }
+        //没有的就添加
+        foreach ($request->action as $action) {
+            if (!RoleActionModel::where('role_id',$id)->where('action_id',$action)->first()) {
+                $data = [
+                    'role_id'=> $id,
+                    'action_id'=> $action,
+                    'created_at'=> time(),
+                ];
+                RoleActionModel::create($data);
+            }
+        }
+        return redirect(DOMAIN.'admin/role');
     }
 
 

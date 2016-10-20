@@ -20,9 +20,10 @@ class AdminMenuComposer
     public static function getActions()
     {
         return Tools::getChild(
-                ActionModel::where('isshow',2)
-                ->orderBy('sort','desc')
-                ->get(),
+//                ActionModel::where('isshow',2)
+//                ->orderBy('sort','desc')
+//                ->get(),
+                ActionModel::getAdminMenus(),
             $pid=0);
     }
 }

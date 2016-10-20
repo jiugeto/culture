@@ -48,13 +48,23 @@ class AuthsController extends BaseController
     /**
      * 设置权限
      */
-    public function setAuth($auth,$menu)
+    public function setAuth(Request $request,$auth)
     {
-        $authModel = AuthModel::where('auth',$auth)->where('menu',$menu)->first();
-        if ($authModel) {
-            AuthModel::where('auth',$auth)->where('menu',$menu)->delete();
-        } else {
-            $this->insertDB($auth,$menu);
+        if (!$request->menu) {
+            echo "<script>alert('功能必选！');history.go(-1);</script>";exit;
+        }
+        foreach ($request->menu as $menu) {
+            //多余的话删除
+            $authModels = AuthModel::where('auth',$auth)->get();
+            foreach ($authModels as $authModel) {
+                if (!in_array($authModel->menu,$request->menu)) {
+                    AuthModel::where('id',$authModel->id)->delete();
+                }
+            }
+            //没有的话添加
+            if (!AuthModel::where('auth',$auth)->where('menu',$menu)->first()) {
+                $this->insertDB($auth,$menu);
+            }
         }
         return redirect(DOMAIN.'admin/auth');
     }

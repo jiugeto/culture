@@ -14,10 +14,11 @@ class UserModel extends BaseModel
         'id','username','password','pwd','email','qq','tel','mobile','area','address','head','isauth','emailck','isuser','isvip','limit','created_at','updated_at','lastLogin',
     ];
     protected $isauths = [      //用户认证：0未认证，1认证，2认证失败，3认证成功
-        '未认证','认证中','认证失败','认证成功',
+        1=>'未认证','认证失败','认证成功',
     ];
     protected $isusers = [
-        0=>'普通用户',1=>'个人会员','普通企业','设计师','广告公司','影视公司','租赁公司',
+        1=>'普通用户','个人会员','普通企业','设计师','广告公司','影视公司','租赁公司',
+        50=>'超级用户',
     ];
     protected $isvips = [
         '非VIP','VIP会员',

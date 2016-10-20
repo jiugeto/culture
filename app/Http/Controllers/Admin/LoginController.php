@@ -38,6 +38,7 @@ class LoginController extends BaseController
         $adminInfo = [
             'adminid'=> $adminModel->id,
             'username'=> $adminModel->username,
+            'role_id'=> $adminModel->role_id,
             'role_name'=> $adminModel->role(),
             'serial'=> $serial,
             'createTime'=> $adminModel->createTime(),

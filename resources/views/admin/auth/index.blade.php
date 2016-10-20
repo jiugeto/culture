@@ -11,6 +11,7 @@
                 <table class="am-table am-table-striped am-table-hover table-main">
                     <thead>
                     <tr>
+                        <th class="table-id">权限</th>
                         <th class="table-title">会员类型</th>
                         <th class="table-type">拥有功能</th>
                         {{--<th class="table-date am-hide-sm-only">创建时间</th>--}}
@@ -20,6 +21,7 @@
                     <tbody>
                     @foreach($model['auths'] as $kauth=>$vauth)
                         <tr>
+                            <td class="am-hide-sm-only">{{ $kauth }}</td>
                             <td class="am-hide-sm-only">{{ $vauth }}</td>
                             <td class="am-hide-sm-only">{{ count($model->getAuths($kauth)) }}</td>
                             <td class="am-hide-sm-only">

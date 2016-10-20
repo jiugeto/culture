@@ -27,6 +27,9 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::post('role/{id}','RoleController@update');
     Route::get('role/{id}/forceDelete','RoleController@forceDelete');
     Route::resource('role','RoleController');
+        //权限操作路由
+    Route::post('role/action/{id}','RoleController@setRoleAction');
+    Route::get('role/action/{id}','RoleController@getRoleAction');
         //操作路由
     Route::get('action/create/{pid}','ActionController@create');
     Route::post('action/{id}','ActionController@update');
@@ -39,7 +42,7 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::get('action/s/{isshow}/{pid}','ActionController@index');         //s代表检索
     Route::resource('action','ActionController');
         //用户权限分配
-//    Route::get('auth/{auth}/{menu}','AuthsController@setAuth');
+    Route::post('auth/getAuth/{auth}','AuthsController@setAuth');
     Route::get('auth/edit/{auth}','AuthsController@edit');
     Route::resource('auth','AuthsController');
         //前台左侧菜单链接功能
@@ -56,7 +59,7 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::get('user/reduce/{id}','UserController@reduce');
     Route::get('user/limit/{id}/{limit}','UserController@limit');
     Route::post('user/{id}','UserController@update');
-    Route::get('{data}/user','UserController@index');
+    Route::get('user/s/{isauth}/{isuser}','UserController@index');
     Route::resource('user','UserController');
     //作品管理（制作公司和设计师的）
     Route::get('{type}/goods','GoodsController@index');

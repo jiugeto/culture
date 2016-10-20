@@ -21,12 +21,17 @@ class UserController extends BaseController
         $this->crumb['category']['url'] = 'user';
     }
 
-    public function index($data='-')
+    public function index($isauth=0,$isuser=0)
     {
-        $data = explode('-',$data);
-        $isuser = $data[0];
-        $isauth = $data[1];
-        $curr['name'] = $this->crumb['']['name'];
+        if ($isauth==0) {
+            $curr['name'] = $this->crumb['']['name'];
+        } else if ($isauth==1) {
+            $curr['name'] = '未审核';
+        } else if ($isauth==2) {
+            $curr['name'] = '未通过';
+        } else if ($isauth==3) {
+            $curr['name'] = '通过';
+        }
         $curr['url'] = $this->crumb['']['url'];
         $result = [
             'datas'=> $this->query($isuser,$isauth),
@@ -35,7 +40,6 @@ class UserController extends BaseController
             'curr'=> $curr,
             'isusers'=> $this->model['isusers'],
             'isuser'=> $isuser,
-            'isauths'=> $this->model['isauths'],
             'isauth'=> $isauth,
         ];
         return view('admin.user.index', $result);
@@ -46,9 +50,9 @@ class UserController extends BaseController
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
         $userModel = UserModel::find($id);
-        if (in_array($userModel->isuser,[1,3])) {
+        if (in_array($userModel->isuser,[2,4])) {
             $personModel = PersonModel::where('uid',$id)->first();
-        } elseif(in_array($userModel->isuser,[2,4,5,6])) {
+        } elseif(in_array($userModel->isuser,[2,5,6,7])) {
             $companyModel = CompanyModel::where('uid',$id)->first();
         }
         $result = [
@@ -84,15 +88,15 @@ class UserController extends BaseController
 
 
     /**
-     * 通过认证 isauth==2
+     * 通过认证 isauth==3
      */
     public function toauth($id)
     {
-        UserModel::where('id',$id)->update(['isauth'=>3]);
+        UserModel::where('id',$id)->update(['isauth'=> 3]);
         return redirect(DOMAIN.'admin/user');
     }
     /**
-     * 拒绝通过认证 isauth==1
+     * 拒绝通过认证 isauth==2
      */
     public function noauth($id)
     {
@@ -102,8 +106,8 @@ class UserController extends BaseController
 
     public function query($isuser,$isauth)
     {
-        if ($isuser=='') {
-            if ($isauth=='') {
+        if ($isuser==0) {
+            if ($isauth==0) {
                 $datas = UserModel::orderBy('id','desc')
                     ->paginate($this->limit);
             } else {
@@ -112,7 +116,7 @@ class UserController extends BaseController
                     ->paginate($this->limit);
             }
         } else {
-            if ($isauth=='') {
+            if ($isauth==0) {
                 $datas = UserModel::where('isuser',$isuser)
                     ->orderBy('id','desc')
                     ->paginate($this->limit);

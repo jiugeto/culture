@@ -4,37 +4,49 @@
         @include('admin.common.crumb')
         <div class="am-g">
             {{--@include('admin.common.menu')--}}
-            <div class="am-u-sm-12">
-                <div class="am-form-group">
-                    会员类型：
-                    <select name="isuser">
-                        <option value="" {{ $isuser=='' ? 'selected' : '' }}>所有会员</option>
-                        @foreach($isusers as $kisuser=>$isuser)
-                            <option value="{{ $kisuser }}"
-                                    {{ $isuser==$kisuser ? 'selected' : '' }}>{{ $isuser }}</option>
-                        @endforeach
-                    </select>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    是否审核：
-                    <select name="isauth">
-                        <option value="" {{ $isauth=='' ? 'selected' : '' }}>所有会员</option>
-                        @foreach($isauths as $kisauth=>$isauth)
-                            <option value="{{ $kisauth }}"
-                                    {{ $isauth==$kisauth ? 'selected' : '' }}>{{ $isauth }}</option>
-                        @endforeach
-                    </select>
-                    <script>
-                        var isuser = $("select[name='isuser']");
-                        var isauth = $("select[name='isauth']");
-                        isuser.change(function(){
-                            if(isuser.val()=='' && isauth.val()==''){
-                                window.location.href = '{{DOMAIN}}admin/user';
-                            } else {
-                                window.location.href = '{{DOMAIN}}admin/'+isuser.val()+isauth.val()+'/user';
-                            }
-                        });
-                    </script>
+            <div class="am-u-sm-12 am-u-md-6">
+                <div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <a href="{{DOMAIN}}admin/user">
+                            <button type="button" class="am-btn am-btn-default">
+                                <img src="{{PUB}}assets/images/files.png" class="icon"> 所有
+                            </button>
+                        </a>
+                        <a href="{{DOMAIN}}admin/user/s/1/0">
+                            <button type="button" class="am-btn am-btn-default">
+                                <img src="{{PUB}}assets/images/files.png" class="icon"> 未审核
+                            </button>
+                        </a>
+                        <a href="{{DOMAIN}}admin/user/s/2/0">
+                            <button type="button" class="am-btn am-btn-default">
+                                <img src="{{PUB}}assets/images/files.png" class="icon"> 审核失败
+                            </button>
+                        </a>
+                        <a href="{{DOMAIN}}admin/user/s/3/0">
+                            <button type="button" class="am-btn am-btn-default">
+                                <img src="{{PUB}}assets/images/files.png" class="icon"> 审核成功
+                            </button>
+                        </a>
+                    </div>
                 </div>
+            </div>
+            <div class="am-form-group" style="">
+                {{--会员类型：--}}
+                <select name="isuser" style="margin-right:10px;padding:2px 10px;border:1px solid lightgrey;float:right;">
+                    <option value="0" {{ $isuser==0 ? 'selected' : '' }}>所有会员</option>
+                    @foreach($isusers as $kisuser=>$isuser)
+                        <option value="{{ $kisuser }}"
+                                {{ $isuser==$kisuser ? 'selected' : '' }}>{{ $isuser }}</option>
+                    @endforeach
+                </select>
+                <input type="hidden" name="isauth" value="{{ $isauth }}">
+                <script>
+                    var isauth = $("input[name='isauth']").val();
+                    var isuser = $("select[name='isuser']");
+                    isuser.change(function(){
+                        window.location.href = '{{DOMAIN}}admin/user/s/'+isauth+'/'+isuser.val();
+                    });
+                </script>
             </div>
         </div>
 
@@ -70,9 +82,9 @@
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
-                                    <a href="/admin/user/{{$data->id}}/edit"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="/assets/images/edit.png" class="icon">设置</button></a>
-                                    <a href="/admin/user/toauth/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="/assets/images/edit.png" class="icon">通过</button></a>
-                                    <a href="/admin/user/noauth/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="/assets/images/edit.png" class="icon">拒绝</button></a>
+                                    <a href="/admin/user/{{$data->id}}/edit"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="/assets/images/tool.png" class="icon">设置</button></a>
+                                    <a href="/admin/user/toauth/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only" style="font-size:14px;">☑ 通过</button></a>
+                                    <a href="/admin/user/noauth/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" style="font-size:14px;">☒ 拒绝</button></a>
                                     <a href="/admin/user/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="/assets/images/show.png" class="icon"> 查看</button></a>
                                 </div>
                             </div>

@@ -46,13 +46,13 @@
 /*=== 返回键 back ===*/
 button.backbtn {
     padding:5px 20px;
-    border:1px solid orangered;
-    border-radius:3px;
+    /*border-radius:3px;*/
     color:white;
     font-family:'微软雅黑';
     font-size:20px;
     cursor:pointer;
-    background:orangered;
+    border:1px solid rgb(14,144,210);
+    background:rgb(14,144,210);
 }
 
 

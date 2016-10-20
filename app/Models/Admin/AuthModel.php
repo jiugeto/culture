@@ -12,6 +12,7 @@ class AuthModel extends BaseModel
     //用户类型：0普通用户，1个人会员，2普通企业，3设计师，4广告公司，5影视公司，6租赁公司
     protected $auths = [
         '普通用户','个人会员','普通企业','设计师','广告公司','影视公司','租赁公司',
+        50=>'超级用户',
     ];
 
     /**
@@ -40,5 +41,11 @@ class AuthModel extends BaseModel
     {
         $authModel = AuthModel::where('auth',$auth)->get();
         return count($authModel) ? $authModel : '';
+    }
+
+    public function getAuthByTwoId($auth,$menu)
+    {
+        $authModel = AuthModel::where('auth',$auth)->where('menu',$menu)->first();
+        return $authModel ? $authModel->menu : '';
     }
 }
