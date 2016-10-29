@@ -250,4 +250,18 @@ class GoodsModel extends BaseModel
     {
         return $this->cate ? $this->cates2[$this->cate] : '';
     }
+
+    /**
+     * 根据类别cate，获取样片
+     */
+    public function getGoodsByCate($cate=1,$limit=5)
+    {
+        return GoodsModel::where('isshow',1)
+            ->where('isshow2',1)
+            ->where('cate',$cate)
+            ->where('del',0)
+            ->orderBy('sort','desc')
+            ->orderBy('id','desc')
+            ->paginate($limit);
+    }
 }

@@ -6,13 +6,13 @@
         <div class="cre_kong">&nbsp;{{--10px高度留空--}}</div>
         <div class="s_search">
             搜索方式：
-            <label><input type="radio" name="genre0" value="1" {{ $genre0==1 ? 'checked' : '' }} onclick="window.location.href='{{DOMAIN}}entertain';">公司</label>
+            <label><input type="radio" name="genre0" value="1" {{ $genre0==1 ? 'checked' : '' }} onclick="window.location.href='{{DOMAIN}}entertain';">讯息</label>
             <label><input type="radio" name="genre0" value="2" {{ $genre0==2 ? 'checked' : '' }} onclick="window.location.href='{{DOMAIN}}entertain/2/0';">人员</label>
             <label><input type="radio" name="genre0" value="3" {{ $genre0==3 ? 'checked' : '' }} onclick="window.location.href='{{DOMAIN}}entertain/3/0';">作品</label>
             <input type="hidden" name="genre_0" value="{{ $genre0 }}">
             @if($genre0==2)
             &nbsp;&nbsp;&nbsp;&nbsp;
-            娱乐类型：
+            人员类型：
             <select class="{{--s_select--}}home_search" name="genre">
                 <option value="0" {{ $genre==0 ? 'selected'  : '' }}>所有</option>
                 @foreach($staffModel['genres'] as $kgenre=>$vgenre)

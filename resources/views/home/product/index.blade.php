@@ -201,45 +201,25 @@
         {{--<br style="clear:both;"><br>--}}
 
         {{-- 宣传片 --}}
+        @foreach($model['cates2'] as $kcate=>$vcate)
+            @if(count($model->getGoodsByCate($kcate,5)) && $goods=$model->getGoodsByCate($kcate,5))
         <div class="pro_floor">
-            <div class="title">宣传片</div>
-            <div class=""></div>
+            <div class="title">{{ $vcate }}</div>
+            <div class="pro_cate">
+                @foreach($goods as $good)
+                    <div class="img_text">
+                        <div class="img">
+                            <a href="{{DOMAIN}}product/{{ $good->id }}">
+                                <img src="{{ $good->getPicUrl() }}" style="@if($size=$good->getPicSize($w=150,$h=125)) width:{{$size['w']}}px;height:{{$size['h']}}px; @endif">
+                            </a>
+                        </div>
+                        <a href="">{{ $good->name }}</a>
+                    </div>
+                @endforeach
+            </div>
         </div>
         <br style="clear:both;"><br>
-
-        {{-- 广告片 --}}
-        <div class="pro_floor">
-            <div class="title">广告片</div>
-            <div class=""></div>
-        </div>
-        <br style="clear:both;"><br>
-
-        {{-- 微电影 --}}
-        <div class="pro_floor">
-            <div class="title">微电影</div>
-            <div class=""></div>
-        </div>
-        <br style="clear:both;"><br>
-
-        {{-- 汇报片 --}}
-        <div class="pro_floor">
-            <div class="title">汇报片</div>
-            <div class=""></div>
-        </div>
-        <br style="clear:both;"><br>
-
-        {{-- 晚会视频 --}}
-        <div class="pro_floor">
-            <div class="title">晚会视频</div>
-            <div class=""></div>
-        </div>
-        <br style="clear:both;"><br>
-
-        {{-- 淘宝视频 --}}
-        <div class="pro_floor">
-            <div class="title">淘宝视频</div>
-            <div class=""></div>
-        </div>
-        <br style="clear:both;"><br>
+            @endif
+        @endforeach
     </div>
 @stop

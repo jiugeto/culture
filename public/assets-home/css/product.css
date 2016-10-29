@@ -150,13 +150,16 @@
 
 /*===== 三楼：猜你喜欢 =====*/
 .guess { width:100%; }
-.guess .img_text {
+.guess .img_text,.pro_cate .img_text {
     margin-right:4px;
     width:162px;height:150px;
     float:left;
 }
-.guess .img_text .img {
+.guess .img_text .img,.pro_cate .img_text .img {
     width:100%;height:120px;
     overflow:hidden;
 }
-.guess .img_text img { width:170px; }
+.guess .img_text img,.pro_cate .img_text img { width:170px; }
+
+/*===== 分类样片 =====*/
+.pro_floor a { color:grey; }
