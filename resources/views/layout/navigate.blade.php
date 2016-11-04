@@ -130,48 +130,48 @@
         nav_qh.css('position','fixed');
         nav_qh.css('left',(clientWidth-1000)/2+20+'px');
         //根据浏览器设置搜索位置(IE)
-//        var browser = window.navigator.userAgent.indexOf("MSIE");   //判断浏览器IE系列，定左右距离
-//        if (browser>0) {
-//            var search = $(".search");
-//            var search_text = $(".search_text");
-//            var search_sel = $(".search_sel");
-//            var curr_sel_img = $(".curr_sel > img");
-//            var sel_more = $(".sel_more");
-//            var sel_one_img = $(".sel_one > img");
-//            var keyword = $(".keyword_pos");
-//            var search_input = $(".search_input");
-//            search.css('position','fixed');
-//            search.css('left',(clientWidth-1000)/2+340+'px');
-//            search.css('top',37+'px');
-//            search_text.css('position','fixed');
-//            search_text.css('left',(clientWidth-1000)/2+340+245+'px');
-//            search_text.css('top',38+'px');
-//            search_sel.css('position','fixed');
-//            search_sel.css('left',(clientWidth-1000)/2+339+'px');
-//            search_sel.css('top',40+'px');
-//            search_sel.css('padding-bottom',0+'px');
-//            curr_sel_img.css('position','relative');
-//            curr_sel_img.css('left',5+'px');
-//            curr_sel_img.css('top',-15+'px');
-//            sel_more.css('position','fixed');
-//            sel_more.css('left',(clientWidth-1000)/2+340+'px');
-//            sel_more.css('top',40+'px');
-//            sel_more.css('padding-top',0+'px');
-//            sel_one_img.css('position','relative');
-//            sel_one_img.css('left',5+'px');
-//            sel_one_img.css('top',-15+'px');
-//            keyword.css('position','fixed');
-//            keyword.css('left',(clientWidth-1000)/2+340+'px');
-//            keyword.css('top',85+'px');
-//            search_input.css('line-height',40+'px');
-//        }
-//        //根据浏览器设置右侧几个链接位置
-//        if (browser>0) {
-//            var nav_right = $(".nav_right");
-//            var opinion = $("#opinion");
-//            nav_right.css('position','fixed');
-//            nav_right.css('right',(clientWidth-1000)/2+'px');
-//            nav_right.css('top',55+'px');
-//        }
+        var browser = window.navigator.userAgent.indexOf("MSIE");   //判断浏览器IE系列，定左右距离
+        if (browser>0) {
+            var search = $(".search");
+            var search_text = $(".search_text");
+            var search_sel = $(".search_sel");
+            var curr_sel_img = $(".curr_sel > img");
+            var sel_more = $(".sel_more");
+            var sel_one_img = $(".sel_one > img");
+            var keyword = $(".keyword_pos");
+            var search_input = $(".search_input");
+            search.css('position','fixed');
+            search.css('left',(clientWidth-1000)/2+340+'px');
+            search.css('top',37+'px');
+            search_text.css('position','fixed');
+            search_text.css('left',(clientWidth-1000)/2+340+245+'px');
+            search_text.css('top',38+'px');
+            search_sel.css('position','fixed');
+            search_sel.css('left',(clientWidth-1000)/2+339+'px');
+            search_sel.css('top',40+'px');
+            search_sel.css('padding-bottom',0+'px');
+            curr_sel_img.css('position','relative');
+            curr_sel_img.css('left',5+'px');
+            curr_sel_img.css('top',-15+'px');
+            sel_more.css('position','fixed');
+            sel_more.css('left',(clientWidth-1000)/2+340+'px');
+            sel_more.css('top',40+'px');
+            sel_more.css('padding-top',0+'px');
+            sel_one_img.css('position','relative');
+            sel_one_img.css('left',5+'px');
+            sel_one_img.css('top',-15+'px');
+            keyword.css('position','fixed');
+            keyword.css('left',(clientWidth-1000)/2+340+'px');
+            keyword.css('top',85+'px');
+            search_input.css('line-height',40+'px');
+        }
+        //根据浏览器设置右侧几个链接位置
+        if (browser>0) {
+            var nav_right = $(".nav_right");
+            var opinion = $("#opinion");
+            nav_right.css('position','fixed');
+            nav_right.css('right',(clientWidth-1000)/2+'px');
+            nav_right.css('top',55+'px');
+        }
     });
 </script>
