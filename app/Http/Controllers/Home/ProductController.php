@@ -2,6 +2,8 @@
 namespace App\Http\Controllers\Home;
 
 use App\Models\GoodsClickModel;
+use App\Models\GoodsCusModel;
+use App\Models\GoodsCusUserModel;
 use App\Models\GoodsLikeModel;
 use App\Models\GoodsModel;
 use App\Models\UserParamsModel;
@@ -23,18 +25,27 @@ class ProductController extends BaseController
         $this->uid = \Session::has('user.uid') ? \Session::get('user.uid') : 0;
     }
 
-    public function index()
+    public function index($ptype=1)
     {
+        if ($ptype==1) {
+            $view = 'index';
+            $prefix_url = DOMAIN.'product';
+        } elseif ($ptype==2) {
+            $view = 'cus';
+            $prefix_url = DOMAIN.'product/s/2';
+        }
         $result = [
             'lists'=> $this->list,
-            'datas'=> $this->query(),
+            'datas'=> $this->query($ptype),
+            'prefix_url'=> $prefix_url,
             'recommends'=> $this->queryR(),
 //            'newests'=> $this->queryN(),
             'ppts'=> $this->ppts(9),
             'curr_menu'=> $this->curr,
             'model'=> $this->model,
+            'ptype'=> $ptype,
         ];
-        return view('home.product.index', $result);
+        return view('home.product.'.$view, $result);
     }
 
     public function show($id)
@@ -138,14 +149,21 @@ class ProductController extends BaseController
 
 
 
-    public function query()
+    public function query($ptype)
     {
-        return GoodsModel::where('isshow',1)
-            ->where('isshow2',1)
-            ->where('del',0)
-            ->orderBy('sort','desc')
-            ->orderBy('id','desc')
-            ->paginate($this->limit);
+        if ($ptype==1) {
+            $datas = GoodsModel::where('isshow',1)
+                ->where('isshow2',1)
+                ->where('del',0)
+                ->orderBy('sort','desc')
+                ->orderBy('id','desc')
+                ->paginate($this->limit);
+        } elseif ($ptype==2) {
+            $datas = GoodsCusModel::orderBy('id','desc')
+                ->paginate($this->limit);
+        }
+        $datas->limit = $this->limit;
+        return $datas;
     }
 
     /**

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Member;
 use App\Models\Base\UserGoldModel;
 use App\Models\Base\UserTipModel;
 use App\Models\Base\WalletModel;
-use App\Models\OpinionModel;
+use App\Models\Home\OpinionModel;
 
 class WalletController extends BaseController
 {

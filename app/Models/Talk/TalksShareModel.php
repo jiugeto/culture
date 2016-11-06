@@ -1,7 +1,7 @@
 <?php
-namespace App\Models;
+namespace App\Models\Talk;
 
-//use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseModel;
 
 class TalksShareModel extends BaseModel
 {

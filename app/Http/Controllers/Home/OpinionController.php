@@ -3,9 +3,8 @@ namespace App\Http\Controllers\Home;
 
 use App\Models\Base\UserGoldModel;
 use App\Models\Base\WalletModel;
-use App\Models\OpinionModel;
+use App\Models\Home\OpinionModel;
 use Illuminate\Http\Request;
-use App\Tools;
 
 class OpinionController extends BaseController
 {

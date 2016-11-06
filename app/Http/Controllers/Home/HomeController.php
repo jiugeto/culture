@@ -11,9 +11,9 @@ use App\Models\GoodsModel;
 use App\Models\IdeasModel;
 use App\Models\Online\ProductModel;
 use App\Models\RentModel;
-use App\Models\TalksModel;
+use App\Models\Talk\TalksModel;
 use App\Models\UserModel;
-use App\Models\UserVoiceModel;
+use App\Models\Home\UserVoiceModel;
 
 class HomeController extends BaseController
 {

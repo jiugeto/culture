@@ -110,3 +110,14 @@
 .source img { height:200px; }
 .source .text { text-align:center; }
 .cre_cate text { margin:0 auto;width:100%; }
+table.goodCus {
+    margin:5px 10px;
+    width:98%;
+    color:grey;
+    overflow:hidden;
+}
+table.goodCus td {
+    padding:5px 10px;
+    text-align:center;
+    border-bottom:1px dashed lightgrey;
+}

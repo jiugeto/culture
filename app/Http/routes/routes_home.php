@@ -13,6 +13,7 @@ Route::group(['prefix'=>'/','namespace'=>'Home'],function(){
     Route::any('home','HomeController@index');
     //产品样片
     Route::any('product','ProductController@index');
+    Route::get('product/s/{ptype}','ProductController@index');    //s代表检索
     Route::get('product/{id}','ProductController@show');
     Route::get('product/click/{id}/{num}','ProductController@setClick');
     Route::get('product/video/{id}/{videoid}','ProductController@video');

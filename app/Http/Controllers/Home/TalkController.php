@@ -1,15 +1,14 @@
 <?php
 namespace App\Http\Controllers\Home;
 
-use App\Models\TalksClickModel;
-use App\Models\TalksCollectModel;
-use App\Models\TalksFollowModel;
-use App\Models\ThemeModel;
-use App\Models\TalksModel;
-use App\Models\TalksReportModel;
-use App\Models\TalksShareModel;
-use App\Models\TalksThankModel;
-use App\Models\ThemeTalkModel;
+use App\Models\Talk\TalksClickModel;
+use App\Models\Talk\TalksCollectModel;
+use App\Models\Talk\TalksFollowModel;
+use App\Models\Talk\ThemeModel;
+use App\Models\Talk\TalksModel;
+use App\Models\Talk\TalksReportModel;
+use App\Models\Talk\TalksShareModel;
+use App\Models\Talk\TalksThankModel;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
 

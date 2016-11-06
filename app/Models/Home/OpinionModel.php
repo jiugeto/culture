@@ -1,5 +1,5 @@
 <?php
-namespace App\Models;
+namespace App\Models\Home;
 
 class OpinionModel extends \App\Models\Base\BaseModel
 {

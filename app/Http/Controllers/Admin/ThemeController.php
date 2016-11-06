@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\UserModel;
 use Illuminate\Http\Request;
-use App\Models\ThemeModel;
+use App\Models\Talk\ThemeModel;
 
 class ThemeController extends BaseController
 {

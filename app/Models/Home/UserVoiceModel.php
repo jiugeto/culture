@@ -1,7 +1,7 @@
 <?php
-namespace App\Models;
+namespace App\Models\Home;
 
-class UserVoiceModel extends BaseModel
+class UserVoiceModel extends \App\Models\Base\BaseModel
 {
     protected $table = 'bs_user_voice';
     protected $fillable = [

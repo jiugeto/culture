@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Home;
 
 use App\Models\Base\UserGoldModel;
 use App\Models\Base\WalletModel;
-use App\Models\UserVoiceModel;
+use App\Models\Home\UserVoiceModel;
 use Illuminate\Http\Request;
 
 class UserVoiceController extends BaseController

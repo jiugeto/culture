@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Person;
 
 use App\Models\DesignModel;
 use App\Models\GoodsModel;
-use App\Models\MessageModel;
+use App\Models\Base\MessageModel;
 use App\Models\Base\OrderModel;
 use App\Models\Online\OrderProductModel;
 use App\Models\Base\PicModel;

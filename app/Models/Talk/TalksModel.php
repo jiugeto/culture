@@ -1,5 +1,7 @@
 <?php
-namespace App\Models;
+namespace App\Models\Talk;
+
+use App\Models\BaseModel;
 
 class TalksModel extends BaseModel
 {

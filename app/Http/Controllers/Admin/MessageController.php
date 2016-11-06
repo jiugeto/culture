@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Models\MessageModel;
+use App\Models\Base\MessageModel;
 
 class MessageController extends BaseController
 {

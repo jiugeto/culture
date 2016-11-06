@@ -1,9 +1,8 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Models\OpinionModel;
+use App\Models\Home\OpinionModel;
 use Illuminate\Http\Request;
-//use App\Tools;
 
 class OpinionsController extends BaseController
 {

@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Models\TalksModel;
+use App\Models\Talk\TalksModel;
 //use Symfony\Component\HttpFoundation\Request;
 
 class TalkController extends BaseController

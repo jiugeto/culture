@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Person;
 
-use App\Models\MessageModel;
+use App\Models\Base\MessageModel;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
 
