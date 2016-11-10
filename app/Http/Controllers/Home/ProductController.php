@@ -8,6 +8,8 @@ use App\Models\GoodsLikeModel;
 use App\Models\GoodsModel;
 use App\Models\UserParamsModel;
 use App\Models\Base\VideoModel;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ProductController extends BaseController
 {
@@ -63,6 +65,54 @@ class ProductController extends BaseController
         return view('home.product.show', $result);
     }
 
+    /**
+     * 插入新增片源
+     */
+    public function insertProCus(Request $request)
+    {
+        if (!$request->uid || !$request->name || !$request->intro) {
+            echo "<script>alert('片源、需求方或描述有误！');history.go(-1);</script>";exit;
+        }
+        $data = [
+            'name'=> $request->name,
+            'intro'=> $request->intro,
+            'uid'=> $request->uid,
+            'money1'=> $request->money,
+            'created_at'=> time(),
+        ];
+        dd($request->all());
+        GoodsCusModel::create($data);
+        return redirect(DOMAIN.'product/s/2');
+    }
+
+    /**
+     * 插入新的片源申请
+     */
+    public function insertCus(Request $request)
+    {
+        if (!$request->cus_id || !$request->supply || !$request->time) {
+            echo "<script>alert('片源、申请方或周期有误！');history.go(-1);</script>";exit;
+        }
+        if (!preg_match('/^(https?:\/\/)?[_a-zA-Z0-9-]+(.[_a-zA-Z0-9-]+)*$/',$request->link)) {
+            echo "<script>alert('外链格式不对！');history.go(-1);</script>";exit;
+        }
+        $data = [
+            'cus_id'=> $request->cus_id,
+            'uid'=> $request->supply,
+            'link'=> $request->link,
+            'intro'=> $request->intro,
+            'money'=> $request->money,
+            'makeTime'=> $request->time,
+            'created_at'=> time(),
+        ];
+        dd($data);
+        GoodsCusUserModel::create($data);
+        return redirect(DOMAIN.'product/s/2');
+    }
+
+    /**
+     * 供应方发布的样片预览
+     */
     public function video($id,$videoid)
     {
         $data = GoodsModel::find($id);
@@ -75,6 +125,9 @@ class ProductController extends BaseController
         return view('layout.videoPre', $result);
     }
 
+    /**
+     * 设置点击量
+     */
     public function setClick($id,$num)
     {
         if ($num==1) {
@@ -149,6 +202,9 @@ class ProductController extends BaseController
 
 
 
+    /**
+     * 供应方样片才行
+     */
     public function query($ptype)
     {
         if ($ptype==1) {
@@ -178,7 +234,6 @@ class ProductController extends BaseController
             ->orderBy('sort','desc')
             ->orderBy('id','desc')
             ->paginate($this->limit);
-//            ->get();
     }
 
 //    /**

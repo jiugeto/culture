@@ -17,6 +17,9 @@ Route::group(['prefix'=>'/','namespace'=>'Home'],function(){
     Route::get('product/{id}','ProductController@show');
     Route::get('product/click/{id}/{num}','ProductController@setClick');
     Route::get('product/video/{id}/{videoid}','ProductController@video');
+    Route::get('product/cus/{cus_id}/supply','ProductController@cusSupplyList');    //某个片源的供应列表
+    Route::post('product/addProCus','ProductController@insertProCus');    //新增片源
+    Route::post('product/addCus','ProductController@insertCus');    //申请片源
     //在线作品
     Route::post('creation/addEffect','CreationController@insertEffect');     //效果定制添加
     Route::post('creation/editLayer/{id}','CreationController@updateLayer');     //动画模板修改意见更新

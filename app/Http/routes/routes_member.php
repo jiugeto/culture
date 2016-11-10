@@ -41,6 +41,9 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
     //在线视频制作
     Route::post('product/{id}','ProductController@update');
     Route::resource('product','ProductController');
+    //片源定制
+    Route::get('proCus/{id}/cus','ProductCusController@cuslist');
+    Route::resource('proCus','ProductCusController');
     //在线定制
     Route::post('proVideo/{id}','ProductVideoController@update');
     Route::get('proVideo/pre/{id}','ProductVideoController@pre');   //预览视频

@@ -9,8 +9,16 @@ class GoodsCusUserModel extends BaseModel
 
     protected $table = 'bs_goodsCus_users';
     protected $fillable = [
-        'id','cus_id','uid','link','intro','money','created_at','updated_at',
+        'id','cus_id','uid','link','intro','money','makeTime','created_at','updated_at',
     ];
+
+    /**
+     * 片源需求的用户名
+     */
+    public function getUName()
+    {
+        return $this->getUserName($this->uid);
+    }
 
     /**
      * 定制片源信息
@@ -26,5 +34,21 @@ class GoodsCusUserModel extends BaseModel
     public function getGoodCusName()
     {
         return $this->getGoodCustom() ? $this->getGoodCustom()->name : '';
+    }
+
+    /**
+     * 制作周期
+     */
+    public function getPeriod()
+    {
+        return $this->makeTime ? $this->makeTime.'天' : '';
+    }
+
+    /**
+     * 制作报价
+     */
+    public function getMoney()
+    {
+        return $this->money ? $this->money.'元' : '';
     }
 }

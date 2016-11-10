@@ -74,6 +74,7 @@ class LoginController extends Controller
             'uid'=> $userModel->id,
             'username'=> Input::get('username'),
             'email'=> $userModel->email,
+            'userType'=> $userModel->isuser,
             'serial'=> $serial,
             'area'=> $userModel->area,
             'address'=> $userModel->address,
