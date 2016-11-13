@@ -28,7 +28,7 @@
 
     //使用方法名字定时执行方法
     var visitRate = $("input[name='visitRate']");
-    var t2 = window.setInterval("count()",1000 * 2);
-//    window.setInterval("count()",1000 * visitRate.val());
+//    var t2 = window.setInterval("count()",1000 * 2);
+    window.setInterval("count()",1000 * visitRate.val());
 //    window.clearTimeout(t1);//去掉定时器
 </script>

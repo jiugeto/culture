@@ -37,6 +37,14 @@ class GoodsCusUserModel extends BaseModel
     }
 
     /**
+     * 判断是否已选择供应方
+     */
+   public function getIsSupply()
+   {
+       return $this->getGoodCustom() ? $this->getGoodCustom()->supply : 0;
+   }
+
+    /**
      * 制作周期
      */
     public function getPeriod()

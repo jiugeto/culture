@@ -5,11 +5,14 @@ class MessageModel extends BaseModel
 {
     protected $table = 'bs_message';
     protected $fillable = [
-        'id','title','genre','intro','sender','senderTime','accept','acceptTime','status','del','created_at','updated_at',
+        'id','title','genre','genre2','intro','sender','senderTime','accept','acceptTime','status','del','created_at','updated_at',
     ];
 
     protected $genres = [
         1=>'个人消息','企业消息',
+    ];
+    protected $genre2s = [
+        1=>'离线消息','在线消息',
     ];
     //1未发送，2已发送未接收，3已接收未读，4已读
     protected $statuss = [

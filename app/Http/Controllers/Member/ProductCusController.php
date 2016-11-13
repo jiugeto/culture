@@ -45,6 +45,7 @@ class ProductCusController extends BaseController
             'lists'=> $this->lists,
             'prefix_url'=> DOMAIN.'member/proCus/'.$id.'/cus',
             'curr'=> $curr,
+            'zspChat'=> 1,      //调用聊天窗口
         ];
         return view('member.proCus.cusList', $result);
     }

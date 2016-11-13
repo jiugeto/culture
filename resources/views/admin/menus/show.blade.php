@@ -46,7 +46,7 @@
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">访问路径url / Url：</td>
-                    <td>{{ '/admin/'.$data->url }}</td>
+                    <td>{{ $data->getUrl() }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">方法名称 / Action：</td>
@@ -58,7 +58,7 @@
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">会员后台是否显示 / Class Name：</td>
-                    <td>{{ $data->isshow==0 ? '不显示' : '显示' }}</td>
+                    <td>{{ $data->isshow==1 ? '不显示' : '显示' }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">创建时间 / Create Time：</td>

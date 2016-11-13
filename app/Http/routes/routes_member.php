@@ -174,4 +174,8 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
     Route::get('wallet/goldtoweal/{gold}','WalletController@setWealByGold');    //金币兑换
     Route::get('wallet/signtoweal/{sign}','WalletController@setWealBySign');    //兑换签到
     Route::resource('wallet','WalletController');
+    //消息管理
+    Route::resource('message','MessageController');
+    Route::post('message/addmsg','MessageController@insertMsg');
+    Route::post('message/getmsg','MessageController@getLastMsg');
 });

@@ -29,5 +29,7 @@
         <!-- 中间内容 -->
     </div>
     @include('layout.footer')
+
+    @include('layout.qqchat')
 </body>
 </html>

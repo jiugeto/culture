@@ -27,6 +27,21 @@ class MenusModel extends BaseModel
     }
 
     /**
+     * 获取完整url
+     */
+    public function getUrl()
+    {
+        if ($this->type==1) {
+            $url = '/member/'.$this->url;
+        } elseif ($this->type==2) {
+            $url = '/person/'.$this->url;
+        } elseif ($this->type==3) {
+            $url = '/copany/'.$this->url;
+        }
+        return $url;
+    }
+
+    /**
      * 得到会员后台左侧菜单 type==1
      */
     public static function MemberMenus()

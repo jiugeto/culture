@@ -123,8 +123,8 @@
 
                         <div class="am-form-group">
                             <label>会员后台是否显示 / Is Show：</label>
-                            <label><input type="radio" name="isshow" value="0" {{ $data->isshow==0 ? 'checked' : '' }}/> 不显示&nbsp;&nbsp;</label>
-                            <label><input type="radio" name="isshow" value="1" {{ $data->isshow==1 ? 'checked' : '' }}/> 显示&nbsp;&nbsp;</label>
+                            <label><input type="radio" name="isshow" value="1" {{ $data->isshow==1 ? 'checked' : '' }}/> 不显示&nbsp;&nbsp;</label>
+                            <label><input type="radio" name="isshow" value="2" {{ $data->isshow==2 ? 'checked' : '' }}/> 显示&nbsp;&nbsp;</label>
                         </div>
 
                         <div class="am-form-group">

@@ -6,7 +6,7 @@
         <ul>
             <a href="{{DOMAIN}}member/proCus"><li>片源列表</li></a>
             <li>|</li>
-            <a href="{{DOMAIN}}member/proCus"><li>返回</li></a>
+            <a href="{{DOMAIN}}member/proCus" style="color:orangered;"><li><b>返回</b></li></a>
         </ul>
     </div>
     <div class="hr_tab"></div>
@@ -34,8 +34,9 @@
                 <td>{{ $data->createTime() }}</td>
                 <td>
                     {{--<a href="{{DOMAIN}}member/proCus/{{ $data->id }}" class="list_btn">查看</a>--}}
-                    <a href="{{DOMAIN}}member/proCus/{{ $data->id }}/setCus" class="list_btn">确定供应方</a>
-                    <a href="{{DOMAIN}}member/proCus/{{ $data->id }}/msg" class="list_btn">对话</a>
+                    <a @if(!$data->getIsSupply()) href="{{DOMAIN}}member/proCus/{{ $data->id }}/setCus" @else style="background:grey;" onclick="alert('已经选择供应方！');" @endif class="list_btn">确定供应方</a>
+                    <a onclick="$('input[name=chat_uid]')[0].value={{$data->uid}};alert('已经选择{{$data->getUName()}}，请点击右侧的对话！');" class="list_btn">对话选择</a>
+                    <input type="hidden" name="chat_uname_{{$data->uid}}" value="{{$data->getUName()}}">
                 </td>
             </tr>
             @endforeach

@@ -105,8 +105,8 @@
 
                         <div class="am-form-group">
                             <label>会员后台是否显示 / Is Show：</label>
-                            <label><input type="radio" name="isshow" value="0"/> 不显示&nbsp;&nbsp;</label>
-                            <label><input type="radio" name="isshow" value="1" checked/> 显示&nbsp;&nbsp;</label>
+                            <label><input type="radio" name="isshow" value="1"/> 不显示&nbsp;&nbsp;</label>
+                            <label><input type="radio" name="isshow" value="2" checked/> 显示&nbsp;&nbsp;</label>
                         </div>
 
                         <div class="am-form-group">
