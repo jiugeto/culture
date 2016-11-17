@@ -176,6 +176,8 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
     Route::resource('wallet','WalletController');
     //消息管理
     Route::resource('message','MessageController');
+    Route::get('message/chat/{chat_uid}','MessageController@chatList');
+    Route::get('message/list/{list}','MessageController@index');
     Route::post('message/addmsg','MessageController@insertMsg');
     Route::post('message/getmsg','MessageController@getLastMsg');
 });

@@ -19,12 +19,15 @@ class MessageModel extends BaseModel
         1=>'未发送','已发送未接收','已接收未读','已读',
     ];
 
-//    public function user()
-//    {
-//        $uid = $this->sender ? $this->sender : 0;
-//        $userInfo = UserModel::find($uid);
-//        return $userInfo ? $userInfo : '';
-//    }
+    public function getTitle()
+    {
+        return $this->title ? $this->title : '/';
+    }
+
+    public function getGenreName2()
+    {
+        return $this->genre2s[$this->genre2];
+    }
 
     public function senderName()
     {

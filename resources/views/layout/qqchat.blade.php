@@ -27,7 +27,8 @@
     .zsp_chat .con .left b,.zsp_chat .con .right b { color:black;font-size:12px; }
     .zsp_chat .con .left { float:left; }
     .zsp_chat .con .right { float:right; }
-    .zsp_chat .con .history { padding-bottom:2px;color:rgb(14,144,210);border-bottom:1px dashed lightgrey;text-align:center;font-size:12px;cursor:pointer; }
+    .zsp_chat .con .history { padding-bottom:2px;border-bottom:1px dashed lightgrey;text-align:center;font-size:12px; }
+    .zsp_chat .con .history a { color:rgb(14,144,210); }
 </style>
 
 <div class="qqchat">
@@ -51,7 +52,11 @@
     <div class="zsp_chat">
         <p class="uname"><span>用户名称</span> <a>X</a></p>
         <div class="con">
-            <div class="history" onclick="window.location.href='{{DOMAIN}}member/message';" title="点击查看更多消息">更多消息</div>
+            <div class="history">
+                <a href="{{DOMAIN}}member/message" title="点击查看更多消息">更多消息</a>
+                &nbsp;&nbsp;
+                <a href="{{DOMAIN}}member/message/chat" target="_blank" title="对话窗口">单独窗口</a>
+            </div>
             {{--<div class="left"><b>名称-时间：</b>00000</div>--}}
             {{--<div class="right">12345</div>--}}
         </div>
@@ -68,6 +73,7 @@
                 alert('还没有选择对话对象，去点击 对话选择 ！');return;
             }
             $("p.uname > span").html(chat_uname);
+            $(".history > a").attr('href','{{DOMAIN}}member/message/chat/'+chat_uid);
             if (zspChat.css('right')=='0px') {
                 zspChat.animate({'right':-350+'px'});
             } else {

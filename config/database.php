@@ -133,7 +133,7 @@ return [
 //            'password' => "motherfuck",
             'database' => 2,
         ),
-//        'password' => "motherfuck",
+//        'password' => "myredis",
     ],
 
 ];

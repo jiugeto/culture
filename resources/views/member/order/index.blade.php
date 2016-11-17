@@ -24,7 +24,7 @@
                 <td>{{ $data->genreName() }}</td>
                 <td>{{ $data->buyerName }}</td>
                 <td>{{ $data->sellerName }}</td>
-                <td>{{ $data->created_at }}</td>
+                <td>{{ $data->createTime() }}</td>
                 <td>
                     {{--@if($curr['url']=='')--}}
                         {{--<a href="{{DOMAIN}}member/order/{{ $data->id }}/pre" class="list_btn">预览</a>--}}
