@@ -21,8 +21,8 @@
             <tr>
                 <td class="field_name"><label>性别：</label></td>
                 <td>
-                    <label><input type="radio" class="radio" name="sex" value="1" {{ $data->sex==0 ? 'checked' : '' }}> 男&nbsp;&nbsp;</label>
-                    <label><input type="radio" class="radio" name="sex" value="2" {{ $data->sex==1 ? 'checked' : '' }}> 女&nbsp;&nbsp;</label>
+                    <label><input type="radio" name="sex" value="1" {{ $data->sex==0 ? 'checked' : '' }}> 男&nbsp;&nbsp;</label>
+                    <label><input type="radio" name="sex" value="2" {{ $data->sex==1 ? 'checked' : '' }}> 女&nbsp;&nbsp;</label>
                 </td>
             </tr>
             <tr><td></td></tr>
@@ -54,18 +54,7 @@
 
             <tr>
                 <td class="field_name"><label>兴趣爱好：</label></td>
-                <td>
-                    {{--<input type="text" class="field_value" placeholder="至少2个字符" minlength="2" required name="hobby" value="{{ $data->hobby }}"/>--}}
-                    @foreach($model['hobbys'] as $khobby=>$vhobby)
-                        <label><input type="checkbox" class="radio" name="hobby[]" value="{{$khobby}}"
-                              @if($hobbys=$data->getHobby())
-                                  @foreach($hobbys as $hobby)
-                                      {{$khobby==$hobby?'checked':''}}
-                                  @endforeach
-                              @endif
-                            > {{$vhobby}}&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                    @endforeach
-                </td>
+                <td><input type="text" class="field_value" placeholder="至少2个字符" minlength="2" required name="hobby" value="{{ $data->hobby }}"/></td>
             </tr>
             <tr><td></td></tr>
 
@@ -76,11 +65,11 @@
             </tr>
             <tr><td></td></tr>
 
-            <tr>
-                <td class="field_name"><label>职务：</label></td>
-                <td><input type="text" class="field_value" placeholder="至少2个字符" minlength="2" required name="job" value="{{ $data->job }}"/></td>
-            </tr>
-            <tr><td></td></tr>
+            {{--<tr>--}}
+                {{--<td class="field_name"><label>职务：</label></td>--}}
+                {{--<td><input type="text" class="field_value" placeholder="至少2个字符" minlength="2" required name="job" value="{{ $data->job }}"/></td>--}}
+            {{--</tr>--}}
+            {{--<tr><td></td></tr>--}}
 
             <tr><td colspan="2" style="text-align:center;">
                     <button class="companybtn" onclick="history.go(-1)">返 &nbsp;&nbsp;&nbsp;回</button>

@@ -18,7 +18,8 @@ class SettingController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        if ($this->userid) { return redirect(DOMAIN.'login'); }
+        $this->lists['func']['name'] = '会员账户';
+        $this->lists['func']['url'] = 'setting';
         $this->model = new UserModel();
     }
 
@@ -35,6 +36,7 @@ class SettingController extends BaseController
             'data'=> $data,
             'personModel'=> isset($personModel) ? $personModel : '',
             'companyModel'=> isset($companyModel) ? $companyModel : '',
+            'lists'=> $this->lists,
         ];
         return view('member.setting.show', $result);
     }

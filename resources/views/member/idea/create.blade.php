@@ -6,12 +6,12 @@
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <table class="table_create">
             <tr>
-                <td class="field_name"><label>创意名称 / Name：</label></td>
+                <td class="field_name"><label>创意名称：</label></td>
                 <td><input type="text" placeholder="至少2个字符" minlength="2" required name="name"/></td>
             </tr>
 
             <tr>
-                <td class="field_name"><label>分类 / Category：</label></td>
+                <td class="field_name"><label>分类：</label></td>
                 <td>
                     <select name="cate" required>
                         @if(count($model['cates2']))
@@ -24,12 +24,12 @@
             </tr>
 
             <tr>
-                <td class="field_name"><label>内容简介 / Introduce：</label></td>
+                <td class="field_name"><label>内容简介：</label></td>
                 <td><textarea name="intro2" cols="50" rows="5"></textarea></td>
             </tr>
 
             <tr>
-                <td class="field_name"><label>前台内容是否显示 / Is Content：</label></td>
+                <td class="field_name"><label>前台是否显示：</label></td>
                 <td>
                     <label><input type="radio" class="radio" name="iscon" value="0" checked> 不显示&nbsp;&nbsp;</label>
                     <label><input type="radio" class="radio" name="iscon" value="1"> 显示&nbsp;&nbsp;</label>
@@ -37,7 +37,7 @@
             </tr>
 
             <tr>
-                <td class="field_name"><label>内容 / Content：</label></td>
+                <td class="field_name"><label>内容：</label></td>
                 <td style="position:relative;z-index:10;">
                     @include('member.common.editor')
                     {{--@include('UEditor::head')--}}

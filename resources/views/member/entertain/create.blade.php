@@ -6,7 +6,7 @@
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <table class="table_create">
             <tr>
-                <td><label>娱乐名称 / Name：</label></td>
+                <td class="field_name"><label>娱乐名称：</label></td>
                 <td><input type="text" placeholder="至少2个字符" minlength="2" required name="title"/></td>
             </tr>
             {{--<tr><td></td></tr>--}}
@@ -21,7 +21,7 @@
             {{--<tr><td></td></tr>--}}
 
             <tr>
-                <td><label>简介 / Introduce：</label></td>
+                <td class="field_name"><label>简介：</label></td>
                 <td>
                     <textarea name="intro" cols="50" rows="5"></textarea>
                     {{--@include('UEditor::head')

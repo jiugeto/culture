@@ -24,7 +24,7 @@ class MessageController extends BaseController
     }
 
     /**
-     * 消息列表
+     * 消息列表：收件箱
      */
     public function index($list=1)
     {

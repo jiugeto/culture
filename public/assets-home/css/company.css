@@ -254,18 +254,26 @@ span.float_right a:hover { text-decoration:underline; }
 .com_product .com_tab {
     margin-bottom:20px;
     padding:10px;
+    height:55px;
     border-bottom:1px solid lightgrey;
     background:rgb(250,250,250);
 }
-.com_product .com_tab a {
-    padding:5px 20px;
+.com_product .com_tab .link {
+    margin:2px;
+    padding:2px 10px;
     background:hotpink;
     color:white;
     cursor:pointer;
+    float:left;
 }
-.com_product .com_tab a:hover,.com_product .com_tab a.curr {
+.com_product .com_tab div:hover.link,.com_product .com_tab div.curr {
+    margin:2px;
+    padding:2px 10px;
     border:0;
     background:darkred;
+    color:white;
+    cursor:pointer;
+    float:left;
 }
 .com_product .com_list {  }
 .com_list .com_pro {

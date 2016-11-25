@@ -31,9 +31,9 @@ class BaseController extends Controller
     public function __construct()
     {
         parent::__construct();
-        if (\Session::has('user.username')) {
-            $this->limit = UserModel::where('username',\Session::get('user.username'))->first()->limit;
-        }
-        $this->userid = \Session::has('user.uid') ? \Session::get('user.uid') : redirect('/login');
+        if (!\Session::has('user')) { return redirect('/login'); }
+        $this->limit = UserModel::where('username',\Session::get('user.username'))->first()->limit;
+        $this->userid = \Session::get('user.uid');
+        $this->userType = \Session::get('user.userType');
     }
 }

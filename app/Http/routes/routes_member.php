@@ -48,51 +48,43 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
     Route::post('proVideo/{id}','ProductVideoController@update');
     Route::get('proVideo/pre/{id}','ProductVideoController@pre');   //预览视频
     Route::resource('proVideo','ProductVideoController');
-    //个人供求
-        //个人需求
-    Route::post('personD/{id}','PersonDController@update');
-    Route::get('personD/trash','PersonDController@trash');
-    Route::get('personD/{id}/destroy','PersonDController@destroy');
-    Route::get('personD/{id}/restore','PersonDController@restore');
-    Route::get('personD/{id}/forceDelete','PersonDController@forceDelete');
-    Route::resource('personD','PersonDController');
-        //作品供应
-    Route::post('personS/{id}','PersonSController@update');
-    Route::get('personS/trash','PersonSController@trash');
-    Route::get('personS/{id}/destroy','PersonSController@destroy');
-    Route::get('personS/{id}/restore','PersonSController@restore');
-    Route::get('personS/{id}/forceDelete','PersonSController@forceDelete');
-    Route::resource('personS','PersonSController');
-    //企业供求
-        //企业需求
-    Route::post('companyD/{id}','CompanyDController@update');
-    Route::get('companyD/{id}/destroy','CompanyDController@destroy');
-    Route::get('companyD/{id}/restore','CompanyDController@restore');
-    Route::get('companyD/{id}/forceDelete','CompanyDController@forceDelete');
-    Route::get('companyD/trash','CompanyDController@trash');
-    Route::resource('companyD','CompanyDController');
-        //企业产品
-    Route::post('companyS/{id}','CompanySController@update');
-    Route::get('companyS/{id}/destroy','CompanySController@destroy');
-    Route::get('companyS/{id}/restore','CompanySController@restore');
-    Route::get('companyS/{id}/forceDelete','CompanySController@forceDelete');
-    Route::get('companyS/trash','CompanySController@trash');
-    Route::resource('companyS','CompanySController');
-        //租赁供求
+    //供求管理
+        //视频管理
+    Route::post('goods/{id}','GoodsController@update');
+    Route::get('goods/trash','GoodsController@trash');
+    Route::get('goods/{id}/destroy','GoodsController@destroy');
+    Route::get('goods/{id}/restore','GoodsController@restore');
+    Route::get('goods/{id}/forceDelete','GoodsController@forceDelete');
+    Route::resource('goods','GoodsController');
+        //租赁管理
     Route::post('rent/{id}','RentController@update');
     Route::get('rent/{id}/destroy','RentController@destroy');
     Route::get('rent/{id}/restore','RentController@restore');
     Route::get('rent/{id}/forceDelete','RentController@forceDelete');
     Route::get('rent/trash','RentController@trash');
-    Route::get('{genre}/rent','RentController@index');
+    Route::get('rent/s/{genre}/{type}','RentController@index');
     Route::resource('rent','RentController');
-        //娱乐供求
-    Route::post('entertainS/{id}','EntertainSController@update');
-    Route::get('entertainS/{id}/destroy','EntertainSController@destroy');
-    Route::get('entertainS/{id}/restore','EntertainSController@restore');
-    Route::get('entertainS/{id}/forceDelete','EntertainSController@forceDelete');
-    Route::get('entertainS/trash','EntertainSController@trash');
-    Route::resource('entertainS','EntertainSController');
+        //娱乐管理
+    Route::post('entertain/{id}','EntertainController@update');
+    Route::get('entertain/{id}/destroy','EntertainController@destroy');
+    Route::get('entertain/{id}/restore','EntertainController@restore');
+    Route::get('entertain/{id}/forceDelete','EntertainController@forceDelete');
+    Route::get('entertain/trash','EntertainController@trash');
+    Route::resource('entertain','EntertainController');
+        //娱乐员工管理
+    Route::post('staff/{id}','StaffController@update');
+    Route::get('staff/{id}/destroy','StaffController@destroy');
+    Route::get('staff/{id}/restore','StaffController@restore');
+    Route::get('staff/{id}/forceDelete','StaffController@forceDelete');
+    Route::get('staff/trash','StaffController@trash');
+    Route::resource('staff','StaffController');
+        //艺人管理
+    Route::post('actor/{id}','ActorController@update');
+    Route::get('actor/{id}/destroy','ActorController@destroy');
+    Route::get('actor/{id}/restore','ActorController@restore');
+    Route::get('actor/{id}/forceDelete','ActorController@forceDelete');
+    Route::get('actor/trash','ActorController@trash');
+    Route::resource('actor','ActorController');
         //创意管理
     Route::post('idea/{id}','IdeaController@update');
     Route::get('idea/{id}/destroy','IdeaController@destroy');
@@ -102,8 +94,19 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
     Route::get('idea/user/{id}','IdeaController@ideaShow');
     Route::get('idea/user/{id}/{uid}','IdeaController@setIdeaShow');
     Route::resource('idea','IdeaController');
-        //娱乐员工管理
-    Route::resource('staff','StaffController');
+        //分镜管理
+    Route::get('storyboard/trash','StoryBoardController@trash');
+    Route::get('storyboard/{id}/destroy','StoryBoardController@destroy');
+    Route::get('storyboard/{id}/restore','StoryBoardController@restore');
+    Route::get('storyboard/{id}/forceDelete','StoryBoardController@forceDelete');
+    Route::post('storyboard/{id}','StoryBoardController@update');
+    Route::resource('storyboard','StoryBoardController');
+        //设计管理
+    Route::post('design/{id}','DesignController@update');
+    Route::get('design/trash','DesignController@trash');
+    Route::get('design/{id}/destroy','DesignController@destroy');
+    Route::resource('design','DesignController');
+    //基本管理
         //图片管理
     Route::post('pic/{id}','PicController@update');
     Route::get('pic/{id}/destroy','PicController@destroy');
@@ -120,34 +123,12 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
     Route::get('video/uploadWay','VideoController@uploadWay');
     Route::get('video/leplay/{leplay}','VideoController@setLeplay');
     Route::resource('video','VideoController');
-        //分镜路由
-    Route::get('storyboard/trash','StoryBoardController@trash');
-    Route::get('storyboard/{id}/destroy','StoryBoardController@destroy');
-    Route::get('storyboard/{id}/restore','StoryBoardController@restore');
-    Route::get('storyboard/{id}/forceDelete','StoryBoardController@forceDelete');
-    Route::post('storyboard/{id}','StoryBoardController@update');
-    Route::resource('storyboard','StoryBoardController');
-        //个人设计供应
-    Route::post('designPerS/{id}','DesignPerSController@update');
-    Route::get('designPerS/trash','DesignPerSController@trash');
-    Route::get('designPerS/{id}/destroy','DesignPerSController@destroy');
-    Route::resource('{cate}/designPerS','DesignPerSController');
-    Route::resource('designPerS','DesignPerSController');
-        //个人设计需求
-    Route::post('designPerD/{id}','DesignPerDController@update');
-    Route::get('designPerD/trash','DesignPerDController@trash');
-    Route::get('designPerD/{id}/destroy','DesignPerDController@destroy');
-    Route::resource('designPerD','DesignPerDController');
-        //公司设计供应
-    Route::post('designComS/{id}','DesignComSController@update');
-    Route::get('designComS/trash','DesignComSController@trash');
-    Route::get('designComS/{id}/destroy','DesignComSController@destroy');
-    Route::resource('designComS','DesignComSController');
-        //公司设计需求
-    Route::post('designComD/{id}','DesignComDController@update');
-    Route::get('designComD/trash','DesignComDController@trash');
-    Route::get('designComD/{id}/destroy','DesignComDController@destroy');
-    Route::resource('designComD','DesignComDController');
+        //消息管理
+    Route::get('message/list/{list}','MessageController@index');        //list==1收件箱，2发件箱
+    Route::resource('message','MessageController');
+    Route::get('message/chat/{chat_uid}','MessageController@chatList');
+    Route::post('message/addmsg','MessageController@insertMsg');
+    Route::post('message/getmsg','MessageController@getLastMsg');
     //订单路由
         //订单流程
     Route::post('order/pay','OrderController@setPay');
@@ -163,7 +144,7 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
     Route::get('orderpro/comment/{id}/{comment}/{backGold}','OrderProductController@setComment');
     Route::get('orderpro/{id}/destroy','OrderProductController@destroy');
     Route::resource('orderpro','OrderProductController');
-        //话题管理
+    //话题管理
     Route::resource('talk','TalkController');
     Route::get('talk/i/{index}','TalkController@index');      //i代表index
     //钱袋管理
@@ -174,10 +155,4 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
     Route::get('wallet/goldtoweal/{gold}','WalletController@setWealByGold');    //金币兑换
     Route::get('wallet/signtoweal/{sign}','WalletController@setWealBySign');    //兑换签到
     Route::resource('wallet','WalletController');
-    //消息管理
-    Route::resource('message','MessageController');
-    Route::get('message/chat/{chat_uid}','MessageController@chatList');
-    Route::get('message/list/{list}','MessageController@index');
-    Route::post('message/addmsg','MessageController@insertMsg');
-    Route::post('message/getmsg','MessageController@getLastMsg');
 });

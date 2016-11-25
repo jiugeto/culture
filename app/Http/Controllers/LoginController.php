@@ -49,7 +49,7 @@ class LoginController extends Controller
             echo "<script>alert('验证码错误！');history.go(-1);</script>";exit;
         }
         //个人资料
-        if (in_array($userModel->isuser,[1,3])) {
+        if (in_array($userModel->isuser,[1,2,4,50])) {
             $personModel = PersonModel::where('uid',$userModel->id)->first();
             $persons['per_id'] = $personModel->id;
             $persons['realname'] = $personModel->realname;
@@ -59,7 +59,7 @@ class LoginController extends Controller
         }
         $userperson = isset($persons) ? serialize($persons) : [];
         //企业资料
-        if (in_array($userModel->isuser,[2,4])) {
+        if (in_array($userModel->isuser,[3,5,6,7,50])) {
             $companyModel = CompanyModel::where('uid',$userModel->id)->first();
             $companys['cid'] = $companyModel->id;
             $companys['name'] = $companyModel->name;

@@ -14,21 +14,23 @@ class RentController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->lists['func']['name'] = '租赁供求';
+        $this->lists['func']['name'] = '租赁管理';
         $this->lists['func']['url'] = 'rent';
         $this->lists['create']['name'] = '租赁发布';
         $this->model = new RentModel();
     }
 
-    public function index($genre=0)
+    public function index($genre=0,$type=0)
     {
         $curr['name'] = $this->lists['']['name'];
         $curr['url'] = $this->lists['']['url'];
         $result = [
-            'datas'=> $this->query($del=0,$genre),
-            'genre'=> $genre,
+            'datas'=> $this->query($del=0,$genre,$type),
+            'model'=> $this->model,
             'lists'=> $this->lists,
             'curr'=> $curr,
+            'genre'=> $genre,
+            'type'=> $type,
         ];
         return view('member.rent.index', $result);
     }
@@ -155,15 +157,24 @@ class RentController extends BaseController
      */
     public function query($del,$genre,$type)
     {
-        if ($genre) {
+        if ($genre && $type) {
             $datas = RentModel::where('del',$del)
                 ->where('genre',$genre)
                 ->where('type',$type)
                 ->orderBy('id','desc')
                 ->paginate($this->limit);
-        } else {
+        } elseif ($genre && !$type) {
             $datas = RentModel::where('del',$del)
                 ->where('genre',$genre)
+                ->orderBy('id','desc')
+                ->paginate($this->limit);
+        } elseif (!$genre && $type) {
+            $datas = RentModel::where('del',$del)
+                ->where('type',$type)
+                ->orderBy('id','desc')
+                ->paginate($this->limit);
+        } elseif (!$genre && !$type) {
+            $datas = RentModel::where('del',$del)
                 ->orderBy('id','desc')
                 ->paginate($this->limit);
         }

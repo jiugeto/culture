@@ -8,7 +8,7 @@
                 <li>收件箱</li>
             </a>
             <li>|</li>
-            <a href="{{DOMAIN}}member/message/list" style="color:{{$list==2?'red':'black'}};">
+            <a href="{{DOMAIN}}member/message/list/2" style="color:{{$list==2?'red':'black'}};">
                 <li>发件箱</li>
             </a>
             <li>|</li>

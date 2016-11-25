@@ -2,7 +2,18 @@
 @section('content')
     @include('member.common.crumb')
     {{--@include('member.entertain.search')--}}
-    <div class="mem_tab">@include('member.common.lists')</div>
+    <div class="mem_tab">
+        {{--@include('member.common.lists')--}}
+        <ul>
+            <a href="{{DOMAIN}}member/entertain" style="color:{{$curr['url']==''?'red':'black'}};"><li>所有列表</li></a>
+            <li>|</li>
+            <a href="{{DOMAIN}}member/entertain/trash" style="color:{{$curr['url']=='trash'?'red':'black'}};"><li>回收站</li></a>
+            <li>|</li>
+            <a href="{{DOMAIN}}member/staff"><li>人员列表</li></a>
+            <li>|</li>
+        </ul>
+        <div class="mem_create"><a href="{{DOMAIN}}member/{{$lists['func']['url']}}/create">{{$lists['create']['name']}}</a></div>
+    </div>
     <div class="hr_tab"></div>
     <!-- 空白 -->
     <div class="list_kongbai">&nbsp;</div>

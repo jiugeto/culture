@@ -8,7 +8,7 @@
         <p style="text-align:center;"><b>{{ $lists['func']['name'] }}{{ in_array($lists['func']['url'],['designPerD','designComD']) ? '需求' : '供应' }}修改</b></p>
         <table class="table_create">
             <tr>
-                <td><label>设计名称{{-- / Name--}}：</label></td>
+                <td class="field_name"><label>设计名称：</label></td>
                 <td><input type="text" placeholder="至少2个字符" minlength="2" required name="name" value="{{ $data->name }}"/></td>
             </tr>
             {{--<tr><td></td></tr>--}}
@@ -23,10 +23,10 @@
             {{--<tr><td></td></tr>--}}
 
             <tr>
-                <td><label>设计类型{{-- / cate--}}：</label></td>
+                <td class="field_name"><label>设计类型：</label></td>
                 <td>
                     <select name="cate" required>
-                    @foreach($model['cates'] as $kcate=>$vcate)
+                    @foreach($model['cates1'] as $kcate=>$vcate)
                         <option value="{{ $kcate }}" {{ $data->cate==$kcate ? 'selected' : '' }}>{{ $vcate }}</option>
                     @endforeach
                     </select>
@@ -35,13 +35,13 @@
             {{--<tr><td></td></tr>--}}
 
             <tr>
-                <td><label>价格{{-- / Price--}}：(单位元)</label></td>
+                <td class="field_name"><label>价格：(单位元)</label></td>
                 <td><input type="text" placeholder="" pattern="^(\d+)|(\d.\d+)$" required name="money" value="{{ $data->price }}"/></td>
             </tr>
             {{--<tr><td></td></tr>--}}
 
             <tr>
-                <td><label>简介{{-- / Introduce--}}：</label></td>
+                <td class="field_name"><label>简介：</label></td>
                 <td>
                     <textarea name="intro" cols="50" rows="5">{{ $data->intro }}</textarea>
                     {{--@include('UEditor::head')
@@ -63,7 +63,7 @@
             {{--<tr><td></td></tr>--}}
 
             <tr>
-                <td><label>详情{{-- / Detail--}}：</label></td>
+                <td class="field_name"><label>详情：</label></td>
                 <td style="position:relative;z-index:5;">
                     {{--<textarea name="detail" cols="50" rows="5"></textarea>--}}
                     @include('UEditor::head')

@@ -4,6 +4,7 @@
  */
 
 //企业页面展示
+Route::get('c/home','Company\HomeController@index');    //公司主页
 Route::group(['prefix'=>'c/{cid}','namespace'=>'Company'], function(){
     //首页路由
     Route::get('/','HomeController@index');

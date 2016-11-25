@@ -14,12 +14,10 @@
             <tr>
                 <td class="field_name"><label>分类：</label></td>
                 <td>
-                    <select name="cate">
-                    @if($model->cates())
-                        @foreach($model->cates() as $cate)
-                             <option value="{{ $cate->id }}">{{ $cate->name }}</option>
+                    <select name="cate" required>
+                        @foreach($model['cates2'] as $kcate=>$vcate)
+                             <option value="{{ $kcate }}">{{ $vcate }}</option>
                         @endforeach
-                    @endif
                     </select>
                 </td>
             </tr>

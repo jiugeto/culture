@@ -34,16 +34,16 @@
         </tr>
         <tr>
             <td>兴趣爱好：</td>
-            <td>{{ $data->getHobbyName() }}</td>
+            <td>{{$data->getHobbyName()}}</td>
         </tr>
         <tr>
             <td>身高：</td>
             <td>{{ $data->height }} cm</td>
         </tr>
-        <tr>
-            <td>职务：</td>
-            <td>{{ $data->job }}</td>
-        </tr>
+        {{--<tr>--}}
+            {{--<td>职务：</td>--}}
+            {{--<td>{{ $data->job }}</td>--}}
+        {{--</tr>--}}
         <tr>
             <td>创建时间：</td>
             <td>{{ $data->createTime() }}</td>

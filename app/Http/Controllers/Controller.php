@@ -18,6 +18,7 @@ abstract class Controller extends BaseController
     protected $uploadSizeLimit = 1024*1023*1;       //上传文件大小限制 1M
     protected $uploadVideoSizeLimit = 1024*1023*50;       //上传文件大小限制 50M
     protected $userid;
+    protected $userType;
     protected $cid;
     protected $person;
     protected $company;

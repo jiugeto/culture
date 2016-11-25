@@ -70,11 +70,11 @@
             </tr>
             <tr><td></td></tr>
 
-            <tr>
-                <td class="field_name"><label>职务：</label></td>
-                <td><input type="text" class="field_value" placeholder="至少2个字符" minlength="2" required name="job"/></td>
-            </tr>
-            <tr><td></td></tr>
+            {{--<tr>--}}
+                {{--<td class="field_name"><label>职务：</label></td>--}}
+                {{--<td><input type="text" class="field_value" placeholder="至少2个字符" minlength="2" required name="job"/></td>--}}
+            {{--</tr>--}}
+            {{--<tr><td></td></tr>--}}
 
             <tr><td colspan="2" style="text-align:center;">
                     <button class="companybtn" onclick="history.go(-1)">返 &nbsp;&nbsp;&nbsp;回</button>

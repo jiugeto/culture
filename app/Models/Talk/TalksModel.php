@@ -2,6 +2,7 @@
 namespace App\Models\Talk;
 
 use App\Models\BaseModel;
+use App\Models\UserModel;
 
 class TalksModel extends BaseModel
 {

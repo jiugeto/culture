@@ -15,12 +15,10 @@
             <tr>
                 <td class="field_name"><label>分类：</label></td>
                 <td>
-                    <select name="cate">
-                    @if($model->cates())
-                        @foreach($model->cates() as $cate)
-                             <option value="{{ $cate->id }}" {{ $data->cate_id==$cate->id ? 'selected' : '' }}>{{ $cate->name }}</option>
+                    <select name="cate" required>
+                        @foreach($model['cates2'] as $kcate=>$vcate)
+                             <option value="{{ $kcate }}" {{ $data->cate_id==$kcate ? 'selected' : '' }}>{{ $vcate }}</option>
                         @endforeach
-                    @endif
                     </select>
                 </td>
             </tr>

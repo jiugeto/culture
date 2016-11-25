@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Member;
 use Illuminate\Http\Request;
 use App\Models\StaffModel;
 
-class StaffController extends BaseController
+class ActorController extends BaseController
 {
     /**
      * 系统后台租赁管理
@@ -14,9 +14,9 @@ class StaffController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->lists['func']['name'] = '娱乐管理';
-        $this->lists['func']['url'] = 'entertain';
-        $this->lists['create']['name'] = '添加人员';
+        $this->lists['func']['name'] = '艺人管理';
+        $this->lists['func']['url'] = 'actor';
+        $this->lists['create']['name'] = '添加艺人';
         $this->model = new StaffModel();
     }
 
@@ -27,12 +27,12 @@ class StaffController extends BaseController
         $result = [
             'datas'=> $this->query($genre,0),
             'model'=> $this->model,
-            'prefix_url'=> DOMAIN.'member/staff',
+            'prefix_url'=> DOMAIN.'member/actor',
             'lists'=> $this->lists,
             'curr'=> $curr,
             'genre'=> 0,
         ];
-        return view('member.staff.index', $result);
+        return view('member.actor.index', $result);
     }
 
     public function trash($genre=0)
@@ -42,12 +42,12 @@ class StaffController extends BaseController
         $result = [
             'datas'=> $this->query($genre,1),
             'model'=> $this->model,
-            'prefix_url'=> DOMAIN.'member/staff',
+            'prefix_url'=> DOMAIN.'member/actor/trash',
             'lists'=> $this->lists,
             'curr'=> $curr,
             'genre'=> 0,
         ];
-        return view('member.staff.index', $result);
+        return view('member.actor.index', $result);
     }
 
     public function create()
@@ -60,7 +60,7 @@ class StaffController extends BaseController
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
-        return view('member.staff.create', $result);
+        return view('member.actor.create', $result);
     }
 
     public function store(Request $request)
@@ -73,7 +73,7 @@ class StaffController extends BaseController
         $staffModel = StaffModel::where($data)->first();
         \App\Models\Home\SearchModel::change($staffModel,7,'create');
 
-        return redirect(DOMAIN.'member/staff');
+        return redirect(DOMAIN.'member/actor');
     }
 
     public function edit($id)
@@ -87,7 +87,7 @@ class StaffController extends BaseController
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
-        return view('member.staff.edit', $result);
+        return view('member.actor.edit', $result);
     }
 
     public function update(Request $request,$id)
@@ -100,7 +100,7 @@ class StaffController extends BaseController
         $staffModel = StaffModel::where('id',$id)->first();
         \App\Models\Home\SearchModel::change($staffModel,7,'update');
 
-        return redirect(DOMAIN.'member/staff');
+        return redirect(DOMAIN.'member/actor');
     }
 
     public function show($id)
@@ -113,36 +113,31 @@ class StaffController extends BaseController
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
-        return view('member.staff.show', $result);
+        return view('member.actor.show', $result);
     }
 
     public function destroy($id)
     {
         StaffModel::where('id',$id)->update(['del'=> 1]);
-        return redirect(DOMAIN.'member/staff');
+        return redirect(DOMAIN.'member/actor');
     }
 
     public function restore($id)
     {
         StaffModel::where('id',$id)->update(['del'=> 0]);
-        return redirect(DOMAIN.'member/staff/trash');
+        return redirect(DOMAIN.'member/actor/trash');
     }
 
     public function forceDelete($id)
     {
         StaffModel::where('id',$id)->delete();
-        return redirect(DOMAIN.'member/staff/trash');
+        return redirect(DOMAIN.'member/actor/trash');
     }
 
 
 
 
 
-    /**
-     * ===================
-     * 以下是公用方法
-     * ===================
-     */
 
     /**
      * 收集数据
@@ -158,7 +153,7 @@ class StaffController extends BaseController
             'education'=> $request->education,
             'school'=> $request->school,
             'hobby'=> implode(',',$request->hobby),
-            'job'=> $request->job,
+//            'job'=> $request->job,
             'height'=> $request->height,
         ];
         return $entertain;

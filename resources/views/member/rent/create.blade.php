@@ -6,13 +6,13 @@
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <table class="table_create">
             <tr>
-                <td><label>设备名称 / Name：</label></td>
+                <td class="field_name"><label>设备名称：</label></td>
                 <td><input type="text" placeholder="至少2个字符" minlength="2" required name="name"/></td>
             </tr>
             {{--<tr><td></td></tr>--}}
 
             <tr>
-                <td><label>供求关系 / Genre：</label></td>
+                <td class="field_name"><label>供求关系：</label></td>
                 <td>
                     <label><input type="radio" name="genre" value="1" checked/> 租赁供应&nbsp;&nbsp;</label>
                     <label><input type="radio" name="genre" value="2"/> 租赁需求&nbsp;&nbsp;</label>
@@ -21,7 +21,7 @@
             {{--<tr><td></td></tr>--}}
 
             <tr>
-                <td><label>设备类型 / Type：</label></td>
+                <td class="field_name"><label>设备类型：</label></td>
                 <td>
                     <select name="type">
                         @foreach($model['types'] as $ktype=>$vtype)
@@ -33,7 +33,7 @@
             {{--<tr><td></td></tr>--}}
 
             <tr>
-                <td><label>简介 / Introduce：</label></td>
+                <td class="field_name"><label>简介：</label></td>
                 <td>
                     <textarea name="intro" cols="50" rows="5"></textarea>
                     {{--@include('UEditor::head')
@@ -55,7 +55,7 @@
             {{--<tr><td></td></tr>--}}
 
             <tr>
-                <td><label>价格 / Pricce：</label></td>
+                <td class="field_name"><label>价格：</label></td>
                 <td><input type="text" placeholder="数字" pattern="^(\d+)|(\d+\.\d{2})$" required name="price"/></td>
             </tr>
             {{--<tr><td></td></tr>--}}

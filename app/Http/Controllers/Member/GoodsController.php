@@ -1,25 +1,27 @@
 <?php
 namespace App\Http\Controllers\Member;
 
-use Illuminate\Http\Request;
+use App\Models\CategoryModel;
 use App\Models\GoodsModel;
+use Illuminate\Http\Request;
 
-class CompanyDController extends BaseGoodsController
+class GoodsController extends BaseController
 {
     /**
-     * 企业需求
+     * 个人会员需求管理
      * goods 商品、货物，代表文化类产品
      */
 
+    protected $cateModels;
     //产品主体：1个人需求，2设计师供应，3企业需求，4企业供应
-    protected $type = 3;
+    protected $type = 1;
 
     public function __construct()
     {
         parent::__construct();
-        $this->lists['func']['name'] = '企业需求';
-        $this->lists['func']['url'] = 'companyD';
-        $this->lists['create']['name'] = '发布需求';
+        $this->lists['func']['name'] = '视频管理';
+        $this->lists['func']['url'] = 'goods';
+        $this->lists['create']['name'] = '发布视频';
         $this->model = new GoodsModel();
     }
 
@@ -29,11 +31,11 @@ class CompanyDController extends BaseGoodsController
         $curr['url'] = $this->lists['']['url'];
         $result = [
             'datas'=> $this->query($del=0,$this->type),
-            'prefix_url'=> DOMAIN.'member/companyD',
+            'prefix_url'=> DOMAIN.'member/goods',
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
-        return view('member.companySD.index', $result);
+        return view('member.goods.index', $result);
     }
 
     public function trash()
@@ -41,12 +43,12 @@ class CompanyDController extends BaseGoodsController
         $curr['name'] = $this->lists['trash']['name'];
         $curr['url'] = $this->lists['trash']['url'];
         $result = [
-            'datas'=> $this->query($del=0,$this->type),
-            'prefix_url'=> DOMAIN.'member/companyD/trash',
+            'datas'=> $this->query($del=1,$this->type),
+            'prefix_url'=> DOMAIN.'member/goods/trash',
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
-        return view('member.companySD.index', $result);
+        return view('member.goods.index', $result);
     }
 
     public function create()
@@ -55,10 +57,12 @@ class CompanyDController extends BaseGoodsController
         $curr['url'] = $this->lists['create']['url'];
         $result = [
             'model'=> $this->model,
+            'pics'=> $this->model->pics($this->userid),
+            'videos'=> $this->model->videos($this->userid),
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
-        return view('member.companySD.create', $result);
+        return view('member.goods.create', $result);
     }
 
     public function store(Request $request)
@@ -71,7 +75,7 @@ class CompanyDController extends BaseGoodsController
         $goodsModel = GoodsModel::where($data)->first();
         \App\Models\Home\SearchModel::change($goodsModel,2,'create');
 
-        return redirect(DOMAIN.'member/companyD');
+        return redirect(DOMAIN.'member/goods');
     }
 
     public function edit($id)
@@ -84,10 +88,10 @@ class CompanyDController extends BaseGoodsController
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
-        return view('member.companySD.edit', $result);
+        return view('member.goods.edit', $result);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
         $data = $this->getData($request,$this->type);
         $data['updated_at'] = time();
@@ -97,39 +101,70 @@ class CompanyDController extends BaseGoodsController
         $goodsModel = GoodsModel::where('id',$id)->first();
         \App\Models\Home\SearchModel::change($goodsModel,2,'update');
 
-        return redirect(DOMAIN.'member/companyD');
+
+        return redirect(DOMAIN.'member/goods');
     }
 
     public function show($id)
     {
         $curr['name'] = $this->lists['show']['name'];
         $curr['url'] = $this->lists['show']['url'];
-        $data = GoodsModel::find($id);
         $result = [
-            'data'=> $data,
+            'data'=> GoodsModel::find($id),
             'model'=> $this->model,
-            'types'=> $this->model['types'],
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
-        return view('member.companySD.show', $result);
+        return view('member.goods.show', $result);
     }
 
     public function destroy($id)
     {
         GoodsModel::where('id',$id)->update(['del'=> 1]);
-        return redirect(DOMAIN.'member/companyD');
+        return redirect(DOMAIN.'member/goods');
     }
 
     public function restore($id)
     {
         GoodsModel::where('id',$id)->update(['del'=> 0]);
-        return redirect(DOMAIN.'member/companyD/trash');
+        return redirect(DOMAIN.'member/goods/trash');
     }
 
     public function forceDelete($id)
     {
         GoodsModel::where('id',$id)->delete();
-        return redirect(DOMAIN.'member/companyD/trash');
+        return redirect(DOMAIN.'member/goods/trash');
+    }
+
+    /**
+     * 查询方法
+     */
+    public function query($del=0,$type)
+    {
+        $datas =  GoodsModel::where('del',$del)
+            ->where('type',$type)
+            ->orderBy('id','desc')
+            ->paginate($this->limit);
+        $datas->limit = $this->limit;
+        return $datas;
+    }
+
+    /**
+     * 收集数据
+     */
+    public function getData(Request $request,$type)
+    {
+        $goods = [
+            'name'=> $request->name,
+            'type'=> $type,
+            'cate'=> $request->cate,
+            'intro'=> $request->intro,
+            'title'=> $request->title,
+            'pic_id'=> $request->pic_id,
+            'video_id'=> $request->video_id,
+            'uid'=> $this->userid,
+            'uname'=> \Session::get('user.username'),
+        ];
+        return $goods;
     }
 }

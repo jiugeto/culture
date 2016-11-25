@@ -1,10 +1,10 @@
 @extends('member.main')
 @section('content')
     @include('member.common.crumb')
-    <div class="p_style">需求类型：
-        <a href="{{DOMAIN}}member/{{$lists['func']['url']=='personD'?'personD':'personS'}}">视频</a>
-        <a href="{{DOMAIN}}member/design">设计</a>
-    </div>
+    {{--<div class="p_style">需求类型：--}}
+        {{--<a href="{{DOMAIN}}member/{{$lists['func']['url']=='goodsD'?'goodsD':'goodsS'}}">视频</a>--}}
+        {{--<a href="{{DOMAIN}}member/design">设计</a>--}}
+    {{--</div>--}}
     <div class="hr_tab"></div>
 
     <div class="mem_tab">@include('member.common.lists')</div>
@@ -31,15 +31,9 @@
                 <td>{{ $data->getuserName() }}</td>
                 <td>{{ $data->createTime() }}</td>
                 <td>
-                    {{--@if($curr['url']=='')--}}
-                        <a href="{{DOMAIN}}product/video/{{ $data->id }}/{{ $data->video_id }}" target="_blank" class="list_btn">预览</a>
-                        <a href="{{DOMAIN}}member/personD/{{ $data->id }}" class="list_btn">查看</a>
-                        <a href="{{DOMAIN}}member/personD/{{ $data->id }}/edit" class="list_btn">编辑</a>
-                        {{--<a href="{{DOMAIN}}member/personD/{{ $data->id }}/destroy" class="list_btn">删除</a>--}}
-                    {{--@elseif($curr['url']=='trash')--}}
-                        {{--<a href="{{DOMAIN}}member/personD/{{ $data->id }}/restore" class="list_btn">还原</a>--}}
-                        {{--<a href="{{DOMAIN}}member/personD/{{ $data->id }}/forceDelete" class="list_btn">销毁记录</a>--}}
-                    {{--@endif--}}
+                    <a href="{{DOMAIN}}product/video/{{ $data->id }}/{{ $data->video_id }}" target="_blank" class="list_btn">预览</a>
+                    <a href="{{DOMAIN}}member/goods/{{ $data->id }}" class="list_btn">查看</a>
+                    <a href="{{DOMAIN}}member/goods/{{ $data->id }}/edit" class="list_btn">编辑</a>
                 </td>
             </tr>
             @endforeach

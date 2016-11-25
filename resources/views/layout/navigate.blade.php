@@ -7,7 +7,7 @@
     <div class="nav_body">
         <div><a href="/"><img src="{{PUB}}assets-home/images/logo.png" class="logo"></a></div>
         <div class="nav_qiehuan" style="display:{{explode('/',$_SERVER['REQUEST_URI'])[1]?'block':'none'}};" title="点击显示或隐藏菜单">
-            <img src="{{PUB}}assets/images/daohang.png" class="imgMiniSize"> 导航
+            <img src="{{PUB}}assets/images/daohang.png" class="imgMiniSize"> <b>导航</b>
             <span id="shang">▲</span><span id="xia" style="display:none;">▼</span>
         </div>
         <div class="nav_qh">
@@ -97,32 +97,9 @@
 
 
 <script>
+    var nav_qiehuan = $(".nav_qiehuan");
+    var nav_qh = $(".nav_qh");
     $(document).ready(function(){
-        //菜单栏切换
-        var nav_qiehuan = $(".nav_qiehuan");
-        var nav_qh = $(".nav_qh");
-        var nav_hide = $(".nav_hide");
-//        nav_qiehuan.mouseover(function(){
-//            nav_hide.show(200);
-//            nav_qiehuan.css('border-bottom','0');
-//            $("#shang").hide(); $("#xia").show();
-//        });
-//        nav_qh.mouseleave(function(){
-//            nav_hide.hide();
-//            nav_qiehuan.css('border-bottom','1px solid lightgray');
-//        });
-        nav_qiehuan.click(function(){
-            if (nav_hide[0].style.display=='none') {
-                nav_hide.show(200);
-                nav_qiehuan.css('border-bottom','0');
-                $("#shang").hide(); $("#xia").show();
-            } else {
-                nav_hide.hide(200);
-                nav_qiehuan.css('border-bottom','1px solid lightgray');
-                $("#shang").show(); $("#xia").hide();
-            }
-        });
-
         //根据浏览器宽度设置菜单位置
         var clientWidth = document.body.clientWidth;
         nav_qiehuan.css('position','fixed');
@@ -172,6 +149,19 @@
             nav_right.css('position','fixed');
             nav_right.css('right',(clientWidth-1000)/2+'px');
             nav_right.css('top',55+'px');
+        }
+    });
+    //菜单栏切换
+    var nav_hide = $(".nav_hide");
+    nav_qiehuan.click(function(){
+        if (nav_hide[0].style.display=='none') {
+            nav_hide.show(200);
+            nav_qiehuan.css('border-bottom','0');
+            $("#shang").hide(); $("#xia").show();
+        } else {
+            nav_hide.hide(200);
+            nav_qiehuan.css('border-bottom','1px solid lightgray');
+            $("#shang").show(); $("#xia").hide();
         }
     });
 </script>

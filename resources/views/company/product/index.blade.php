@@ -2,16 +2,18 @@
 @section('content')
     <div class="com_product">
         {{--<p class="crumb"><b>导航：</b>产品类别 > 视频 > 宣传片</p>--}}
-        <p class="com_tab">
-            <span><b>{{$curr=='product'?'样片':'花絮'}}类型：</b></span>
+        <div class="com_tab">
+            <b style="float:left;">{{$curr=='product'?'样片':'花絮'}}类型：</b>
             <input type="hidden" name="curr" value="{{ $curr }}">
 
-            <a onclick="window.location.href='{{DOMAIN}}c/{{CID}}/{{$curr}}';" class="{{ $cate==0 ? 'curr' : '' }}">所有</a>
+            <div onclick="window.location.href='{{DOMAIN}}c/{{CID}}/{{$curr}}';"
+                 class="{{ $cate==0 ? 'curr' : 'link' }}">所有类型</div>
+
             @foreach($model['cates2'] as $kcate=>$vcate)
-                <a onclick="window.location.href='{{DOMAIN}}c/{{CID}}/{{$curr}}/{{$kcate}}';"
-                   class="{{ $cate==$kcate ? 'curr' : '' }}">{{ $vcate }}</a>
+                <div onclick="window.location.href='{{DOMAIN}}c/{{CID}}/{{$curr}}/{{$kcate}}';"
+                   class="{{ $cate==$kcate ? 'curr' : 'link' }}">{{ $vcate }}</div>
             @endforeach
-        </p>
+        </div>
         <div class="com_list">
             @if(count($datas))
                 @foreach($datas as $data)
