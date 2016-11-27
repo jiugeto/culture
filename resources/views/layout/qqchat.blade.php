@@ -41,7 +41,11 @@
             <img src="{{PUB}}assets-home/images/qq_icon.png" width="16"> 斯塔克
         </a>
     </p>
-    <p class="small">周一 -- 周六<br>09:00-18:00 在线</p>
+    <p class="small">
+        Q：2857156840<br>
+        周一 -- 周六<br>
+        09:00-18:00 在线
+    </p>
 </div>
 
 {{--插入聊天窗口--}}

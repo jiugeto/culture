@@ -55,6 +55,7 @@ Route::group(['prefix'=>'/','namespace'=>'Home'],function(){
     //关于我们
     Route::any('about','AboutController@index');
     Route::get('about/join','AboutController@join');
+    Route::get('about/station','AboutController@station');
     //用户心声
     Route::resource('uservoice','UserVoiceController');
     //用户对本站的意见栏

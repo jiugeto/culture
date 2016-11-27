@@ -5,8 +5,8 @@
         {{-- 搜索 --}}
         <div class="cre_kong">&nbsp;{{--10px高度留空--}}</div>
         <div class="s_search">
-            需求类别：个人/企业
-            &nbsp;&nbsp;&nbsp;&nbsp;
+            {{--需求类别：个人/企业--}}
+            {{--&nbsp;&nbsp;&nbsp;&nbsp;--}}
             需求类型：
             <select name="genre" class="home_search">
                 @foreach($genres as $kgenre=>$vgenre)

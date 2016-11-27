@@ -27,4 +27,15 @@ class AboutController extends BaseController
         ];
         return view('home.about.join', $result);
     }
+
+    /**
+     * 关于站长
+     */
+    public function station()
+    {
+        $result = [
+            'curr_menu'=> $this->curr,
+        ];
+        return view('home.about.station', $result);
+    }
 }
