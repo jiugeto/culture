@@ -62,4 +62,34 @@ abstract class Controller extends BaseController
         define("DOMAIN",strtoupper(getenv('DOMAIN')));
         define("PUB",strtoupper(getenv('PUB')));
     }
+
+    /**
+     * 接口分页处理
+     */
+    public function getPageList($datas,$prefix_url,$limit,$pageCurr=1)
+    {
+        $currentPage = $pageCurr;                               //当前页
+        $lastPage = ($pageCurr - 1) ? ($pageCurr - 1) : 1;      //上一页
+        $total = count($datas);                                 //总记录数
+        //上一页路由
+        if ($pageCurr<=1) {
+            $previousPageUrl = $prefix_url;
+        } else {
+            $previousPageUrl = $prefix_url.'?page='.($pageCurr-1);
+        }
+        //下一页路由
+        if ($pageCurr * $limit >= count($datas)) {
+            $nextPageUrl = $prefix_url.'?page='.$pageCurr;
+        } else {
+            $nextPageUrl = $prefix_url.'?page='.($pageCurr+1);
+        }
+        return array(
+            'currentPage'   =>  $currentPage,
+            'lastPage'      =>  $lastPage,
+            'total'         =>  $total,
+            'limit'         =>  $limit,
+            'previousPageUrl'   =>  $previousPageUrl,
+            'nextPageUrl'   =>  $nextPageUrl,
+        );
+    }
 }

@@ -608,10 +608,10 @@
                 <div class="img"><img src="{{PUB}}uploads/images/2016/online1.png"></div>
                 @if(count($uservoices))
                     <div class="text">
-                        名称：{{ $uservoices[0]->getUName() }}
-                        <br>工作：{{ $uservoices[0]->work }}
+                        名称：{{ $uservoices[0]['username'] }}
+                        <br>工作：{{ $uservoices[0]['work'] }}
                     </div>
-                    <div class="con">{{ $uservoices[0]->intro }}</div>
+                    <div class="con">{{ $uservoices[0]['intro'] }}</div>
                 @else
                     <div class="text">
                         名称：XXX

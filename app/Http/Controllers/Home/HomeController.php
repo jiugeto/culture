@@ -1,10 +1,13 @@
 <?php
 namespace App\Http\Controllers\Home;
 
+use App\Api\ApiUser\ApiCompany;
+use App\Api\ApiUser\ApiUsers;
+use App\Api\ApiUser\ApiUserVoice;
 use App\Models\Base\AdModel;
 use App\Models\Base\OrderModel;
 use App\Models\Base\UserTipModel;
-use App\Models\CompanyModel;
+//use App\Models\CompanyModel;
 use App\Models\DesignModel;
 use App\Models\EntertainModel;
 use App\Models\GoodsModel;
@@ -12,8 +15,8 @@ use App\Models\IdeasModel;
 use App\Models\Online\ProductModel;
 use App\Models\RentModel;
 use App\Models\Talk\TalksModel;
-use App\Models\UserModel;
-use App\Models\Home\UserVoiceModel;
+//use App\Models\UserModel;
+//use App\Models\Home\UserVoiceModel;
 
 class HomeController extends BaseController
 {
@@ -131,9 +134,11 @@ class HomeController extends BaseController
      */
     public function getCompanys($limit)
     {
-        return CompanyModel::orderBy('sort','desc')
-                    ->orderBy('id','desc')
-                    ->paginate($limit);
+//        return CompanyModel::orderBy('sort','desc')
+//                    ->orderBy('id','desc')
+//                    ->paginate($limit);
+        $rst = ApiCompany::getCompanyList($limit);
+        return $rst['code']==0?$rst['data']:[];
     }
 
     /**
@@ -207,8 +212,10 @@ class HomeController extends BaseController
      */
     public function getCooperations($limit)
     {
-        return UserModel::whereIn('isuser',[3,4,5,6])
-                    ->paginate($limit);
+//        return UserModel::whereIn('isuser',[3,4,5,6])
+//                    ->paginate($limit);
+        $rst = ApiUsers::getUserList($limit);
+        return $rst['code']==0?$rst['data']:[];
     }
 
     /**
@@ -216,9 +223,11 @@ class HomeController extends BaseController
      */
     public function getUserVoices($limit)
     {
-        return UserVoiceModel::where('isshow',2)
-                    ->orderBy('sort','desc')
-                    ->paginate($limit);
+//        return UserVoiceModel::where('isshow',2)
+//                    ->orderBy('sort','desc')
+//                    ->paginate($limit);
+        $rst = ApiUserVoice::getUserVoiceList($limit);
+        return $rst['code']==0?$rst['data']:[];
     }
 
     /**

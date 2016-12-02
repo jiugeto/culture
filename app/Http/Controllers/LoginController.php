@@ -1,11 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-//use Illuminate\Http\Request;
-use App\Models\CompanyModel;
-use App\Models\PersonModel;
-use App\Models\UserModel;
-use App\Models\Admin\LogModel;
+use App\Api\ApiUser\ApiUsers;
 use Session;
 use Hash;
 use Illuminate\Support\Facades\Input;
@@ -25,12 +21,15 @@ class LoginController extends Controller
 
     public function dologin()
     {
-        $userModel = UserModel::where('username',Input::get('username'))->first();
-        //查看是否有此用户
-        if (!$userModel) { echo "<script>alert('没有此用户！');history.go(-1);</script>";exit; }
-        //验证密码正确否
-        if (!(Hash::check(Input::get('password'),$userModel->password))) {
-            echo "<script>alert('密码错误！');history.go(-1);</script>";exit;
+        //判断是否存在此用户
+        $rst = ApiUsers::getOneUserByUname(Input::get('username'));
+        if ($rst['code'] < 0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        } elseif ($rst['code'] == 1) {
+            //验证密码正确否
+            if (!(Hash::check(Input::get('password'),$rst['password']))) {
+                echo "<script>alert('密码错误！');history.go(-1);</script>";exit;
+            }
         }
         //查看2次密码输入是否一致
         if (Input::get('password')!=Input::get('password2')) {
@@ -41,8 +40,8 @@ class LoginController extends Controller
             'captcha' => 'required|captcha',
         ];
         $messages = [
-            'captcha.required' => '请输入验证码',
-            'captcha.captcha' => '验证码错误，请重试',
+//            'captcha.required' => '请输入验证码',
+//            'captcha.captcha' => '验证码错误，请重试',
         ];
         $validator = Validator::make(Input::all(), $rules, $messages);
         if ($validator->fails()) {
@@ -110,6 +109,7 @@ class LoginController extends Controller
     public function dologout()
     {
         //更新用户日志表
+        $rsttLog =
         LogModel::where('serial',Session::get('user.serial'))
                     ->update(['logoutTime'=> time()]);
         //去除session

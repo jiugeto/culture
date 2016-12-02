@@ -22,18 +22,29 @@
         <div class="head_right">
             {{--<a href="javascript:void(0);" onclick="show_Favorite(window.location,document.title);">加入收藏</a>--}}
             {{--<a href="javascript:void(0);"onclick="show_index(window.location);">设为首页</a>--}}
-            <a href="/" style="color:red;">淘文化首页</a>
-            {{--<select name="urlType">--}}
-                {{--<option value="/" {{explode($_SERVER['REQUEST_URI'],'/')[1]==''?'selected':''}}>淘文化首页</option>--}}
-                {{--<option value="/member" {{ explode($_SERVER['REQUEST_URI'],'/')[1]=='member' ? 'selected' : '' }}>会员后台</option>--}}
-                {{--<option value="/person/space" {{ explode($_SERVER['REQUEST_URI'],'/')[1]=='person' ? 'selected' : '' }}>个人后台</option>--}}
-            {{--</select>--}}
-            {{--<script>--}}
-                {{--$("select[name='urlType']").change(function(){--}}
-                    {{--window.location.href = $(this).val();--}}
-                {{--});--}}
-            {{--</script>--}}
+            {{--<a href="/" style="color:red;">本站首页</a>--}}
+            <select name="space" title="点击选择">
+                <option value="">本站首页</option>
+                <option value="1">跳到本站首页</option>
+                <option value="2">跳到在线创作</option>
+                <option value="3">跳到个人空间</option>
+                <option value="4">跳到话题中心</option>
+            </select>
         </div>
+        <script>
+            $("select[name='space']").change(function(){
+                var space = $(this).val();
+                var tolink = '/';
+                if (space==2) {
+                    tolink = '/online';
+                } else if (space==3) {
+                    tolink = '/person';
+                } else if (space==4) {
+                    tolink = '/talk';
+                }
+                window.location.href = tolink;
+            });
+        </script>
       </span>
     </div>
 </div>

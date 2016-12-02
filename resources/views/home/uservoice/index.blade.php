@@ -13,18 +13,20 @@
 
     <div class="opinion_con">
         <div class="opinion_list">
-            @if(count($datas))
-                @foreach($datas as $data)
+            @if(count($datas)>1)
+                @foreach($datas as $kdata=>$data)
+                    @if(is_numeric($kdata))
             <table class="record">
                 <tr>
-                    <td class="text">标题：{{ $data->name }}</td>
-                    <td class="text">用户：{{ $data->getUName() }}</td>
-                    <td class="text" style="width:300px;font-size:14px;">时间：{{ $data->createTime() }}</td>
+                    <td class="text">标题：{{ $data['name'] }}</td>
+                    <td class="text">用户：{{ $data['username'] }}</td>
+                    <td class="text" style="width:300px;font-size:14px;">时间：{{ $data['createTime'] }}</td>
                     <td class="detail">
-                        <a href="{{DOMAIN}}uservoice/{{$data->id}}" style="float:right;">查看</a>
+                        <a href="{{DOMAIN}}uservoice/{{$data['id']}}" style="float:right;">查看</a>
                     </td>
                 </tr>
             </table>
+                    @endif
                 @endforeach
             @else
             <table class="record">
@@ -32,7 +34,8 @@
             </table>
             @endif
 
-            @include('home.common.page')
+            {{--@include('home.common.page')--}}
+            @include('home.common.page2')
         </div>
     </div>
 @stop

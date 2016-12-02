@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>微文化-注册成功</title>
+    <title>微文化-注册失败</title>
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="/assets/images/icon.png">
     <link rel="stylesheet" type="text/css" href="/assets-home/css/home.css">
@@ -13,10 +13,10 @@
 
 <div class="login">
     <p style="margin:100px auto;text-align:center;font-size:20px;color:grey;">
-        注册成功！ <br>
+        注册失败！ <br>
         <b style="color:black;" id="countdown">5</b>
         秒后，页面跳转到
-        <a href="" style="color:orangered;text-decoration:none;">首页</a>
+        <a href="/" style="color:orangered;text-decoration:none;">首页</a>
     </p>
     <script>
         function count(){

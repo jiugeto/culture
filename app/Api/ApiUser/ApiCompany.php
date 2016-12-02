@@ -1,30 +1,30 @@
 <?php
-namespace App\Api;
+namespace App\Api\ApiUser;
 
 use Curl\Curl;
 
-class ApiUsers
+class ApiCompany
 {
     /**
-     * 用户数据接口
+     * 个人资料数据接口
      */
 
     /**
-     * 获取用户列表
+     * 获取公司列表
      */
-    public static function getUserInfo()
+    public static function getCompanyList($limit=null)
     {
-        $redisKey = 'userInfo';
+        $redisKey = 'companyList';
         //判断缓存有没有该数据
         if ($redisResult = ApiBase::getRedis($redisKey)) {
             return array('code' => 0, 'data' => unserialize($redisResult));
         }
         //没有，接口读取
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/user';
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/company';
         $curl = new Curl();
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
-        $curl->post($apiUrl, array(
-//            'uid' => $uid
+        $curl->post($apiUrl,array(
+            'limit' =>  $limit,
         ));
         $response = json_decode($curl->response);
         if ($response->error->code != 0) {
@@ -34,17 +34,17 @@ class ApiUsers
     }
 
     /**
-     * 由 uid 获取一条用户信息
+     * 由 uid 获取一条公司数据
      */
-    public static function getOneUser($uid)
+    public static function getCompanyInfo($uid)
     {
-        $redisKey = 'oneUserInfo';
+        $redisKey = 'companyInfo';
         //判断缓存有没有该数据
         if ($redisResult = ApiBase::getRedis($redisKey)) {
             return array('code' => 0, 'data' => unserialize($redisResult));
         }
         //没有，接口读取
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/user/oneuser';
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/company/one';
         $curl = new Curl();
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
         $curl->post($apiUrl, array(

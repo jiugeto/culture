@@ -1,5 +1,5 @@
 <?php
-namespace App\Api;
+namespace App\Api\ApiUser;
 
 use Redis;
 

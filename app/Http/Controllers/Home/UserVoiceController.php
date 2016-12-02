@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Home;
 
+use App\Api\ApiUser\ApiUserVoice;
 use App\Models\Base\UserGoldModel;
 use App\Models\Base\WalletModel;
 use App\Models\Home\UserVoiceModel;
@@ -19,10 +20,12 @@ class UserVoiceController extends BaseController
 
     public function index()
     {
+        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $prefix_url = DOMAIN.'uservoice';
         $result = [
-            'datas'=> $this->query(),
+            'datas'=> $this->query($pageCurr,$prefix_url),
             'model'=> $this->model,
-            'prefix_url'=> DOMAIN.'usevoice',
+            'prefix_url'=> $prefix_url,
         ];
         return view('home.uservoice.index', $result);
     }
@@ -38,8 +41,9 @@ class UserVoiceController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
-        $data['created_at'] = time();
-        UserVoiceModel::create($data);
+//        $data['created_at'] = time();
+//        UserVoiceModel::create($data);
+        ApiUserVoice::add($data);
 
         //成功发布后给用户随机奖励金币1-5个
         $gold = rand(1,5);
@@ -73,12 +77,15 @@ class UserVoiceController extends BaseController
         );
     }
 
-    public function query()
+    public function query($pageCurr,$prefix_url)
     {
-        $datas = UserVoiceModel::where('isshow',2)
-            ->orderBy('sort','desc')
-            ->paginate($this->limit);
-        $datas->limit = $this->limit;
+//        $datas = UserVoiceModel::where('isshow',2)
+//            ->orderBy('sort','desc')
+//            ->paginate($this->limit);
+//        $datas->limit = $this->limit;
+        $rst = ApiUserVoice::getUserVoiceList($this->limit,$pageCurr);
+        $datas = $rst['code']==0?$rst['data']:[];
+        $datas['pagelist'] = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         return $datas;
     }
 }
