@@ -7,7 +7,7 @@ use App\Models\CompanyModel;
 use App\Models\DesignModel;
 use App\Models\GoodsModel;
 use App\Models\IdeasModel;
-use App\Models\ProductModel;
+use App\Models\Online\ProductModel;
 use App\Models\RentModel;
 use App\Models\StaffModel;
 use App\Models\StoryBoardModel;
@@ -96,10 +96,10 @@ class SearchController extends BaseController
                 ->paginate($this->limit);
             $datas->url = DOMAIN.'storyboard/';
         } elseif ($genre==5) {
-            $datas = CompanyModel::whereIn('id',$searchIds)
-                ->orderBy('id','desc')
-                ->paginate($this->limit);
-            $datas->url = DOMAIN.'company/';
+//            $datas = CompanyModel::whereIn('id',$searchIds)
+//                ->orderBy('id','desc')
+//                ->paginate($this->limit);
+//            $datas->url = DOMAIN.'company/';
         } elseif ($genre==6) {
             $datas = WorksModel::whereIn('id',$searchIds)
                 ->orderBy('id','desc')
@@ -163,12 +163,12 @@ class SearchController extends BaseController
             $rst['storyboard'] = "分镜表 storyboard 没有记录！";
         }
         //公司表
-        $companys = CompanyModel::all();
-        if (count($ideas)) {
-            $rst['company'] = $this->tochange($companys,'company');
-        } else {
-            $rst['company'] = "公司表 company 没有记录！";
-        }
+//        $companys = CompanyModel::all();
+//        if (count($ideas)) {
+//            $rst['company'] = $this->tochange($companys,'company');
+//        } else {
+//            $rst['company'] = "公司表 company 没有记录！";
+//        }
         //影视作品表
         $works = WorksModel::all();
         if (count($works)) {

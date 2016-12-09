@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Member;
 
+use App\Api\ApiUser\ApiUsers;
 use App\Http\Controllers\Controller;
 use App\Models\UserModel;
 
@@ -32,8 +33,16 @@ class BaseController extends Controller
     {
         parent::__construct();
         if (!\Session::has('user')) { return redirect('/login'); }
-        $this->limit = UserModel::where('username',\Session::get('user.username'))->first()->limit;
         $this->userid = \Session::get('user.uid');
         $this->userType = \Session::get('user.userType');
+    }
+
+    /**
+     * 用户自定义参数 limit
+     */
+    public function getUserLimit()
+    {
+        $userParam = ApiUsers::getParamByUid($this->userid);
+        return $userParam['code']==0?$userParam['data']['limit']:10;
     }
 }

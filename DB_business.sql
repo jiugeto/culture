@@ -948,6 +948,7 @@ CREATE TABLE `bs_pay` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `genre` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '来自哪一张订单表：1orders，2orders_firm，3orders_pro，',
   `order_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '订单id',
+  `uid` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '支付方',
   `money` float unsigned NOT NULL DEFAULT '0' COMMENT '支付金额，单位元',
   `weal` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '福利数量，单位元',
   `isfine` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否延时赔付，视频制作订单专用，赔付付款额的10%：0不延时，1延时罚款，2罚款已经到位',
@@ -964,7 +965,7 @@ CREATE TABLE `bs_pay` (
 
 LOCK TABLES `bs_pay` WRITE;
 /*!40000 ALTER TABLE `bs_pay` DISABLE KEYS */;
-INSERT INTO `bs_pay` VALUES (1,1,4,100,0,0,1,1474005529,1474024833),(2,3,1,65,0,0,0,1475647683,0),(3,3,7,70,0,0,0,1476581293,0),(5,3,10,120,20,0,0,1476699760,0);
+INSERT INTO `bs_pay` VALUES (1,1,4,1,100,0,0,1,1474005529,1474024833),(2,3,1,1,65,0,0,0,1475647683,0),(3,3,7,1,70,0,0,0,1476581293,0),(5,3,10,1,120,20,0,0,1476699760,0);
 /*!40000 ALTER TABLE `bs_pay` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1980,7 +1981,7 @@ CREATE TABLE `bs_wallet` (
   `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updated_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户钱袋(福利)表 bs_user_wallet';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户钱袋(福利)表 bs_user_wallet';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1989,7 +1990,7 @@ CREATE TABLE `bs_wallet` (
 
 LOCK TABLES `bs_wallet` WRITE;
 /*!40000 ALTER TABLE `bs_wallet` DISABLE KEYS */;
-INSERT INTO `bs_wallet` VALUES (1,1,5,25,200,0,1476063026,1476244316);
+INSERT INTO `bs_wallet` VALUES (1,1,5,25,200,0,1476063026,1476244316),(2,24,0,0,0,0,1480747905,0);
 /*!40000 ALTER TABLE `bs_wallet` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2287,4 +2288,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-02 19:32:45
+-- Dump completed on 2016-12-09 19:33:41

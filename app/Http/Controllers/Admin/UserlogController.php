@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Admin\LogModel;
+use App\Api\ApiUser\ApiLog;
 
 class UserlogController extends BaseController
 {
@@ -21,10 +21,12 @@ class UserlogController extends BaseController
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
+        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $prefix_url = DOMAIN.'admin/userlog';
         $result = [
-            'datas'=> $this->query(),
+            'datas'=> $this->query($pageCurr,$prefix_url),
+            'prefix_url'=> $prefix_url,
             'crumb'=> $this->crumb,
-            'prefix_url'=> DOMAIN.'admin/userlog',
             'curr'=> $curr,
         ];
         return view('admin.userlog.index', $result);
@@ -34,18 +36,23 @@ class UserlogController extends BaseController
     {
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
+        $rstLog = ApiLog::show($id);
+        if ($rstLog['code']!=0) {
+            echo "<script>alert('".$rstLog['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> LogModel::find($id),
+            'data'=> $rstLog['data'],
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
         return view('admin.userlog.show', $result);
     }
 
-    public function query()
+    public function query($pageCurr,$prefix_url)
     {
-        $datas = LogModel::where('genre',1)->orderBy('id','desc')->paginate($this->limit);
-        $datas->limit = $this->limit;
+        $rst = ApiLog::getUserLogList($this->limit,$pageCurr);
+        $datas = $rst['code']==0 ? $rst['data'] : [];
+        $datas['pagelist'] = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         return $datas;
     }
 }

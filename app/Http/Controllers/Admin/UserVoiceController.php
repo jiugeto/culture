@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Models\UserVoiceModel;
+use App\Api\ApiUser\ApiUserVoice;
 use Illuminate\Http\Request;
 
 class UserVoiceController extends BaseController
@@ -22,10 +22,12 @@ class UserVoiceController extends BaseController
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
+        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $prefix_url = DOMAIN.'admin/uservoice';
         $result = [
-            'datas'=> $this->query(),
+            'datas'=> $this->query($pageCurr,$prefix_url),
             'crumb'=> $this->crumb,
-            'prefix_url'=> DOMAIN.'admin/uservoice',
+            'prefix_url'=> $prefix_url,
             'curr'=> $curr,
         ];
         return view('admin.uservoice.index', $result);
@@ -35,8 +37,12 @@ class UserVoiceController extends BaseController
     {
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
+        $rst = ApiUserVoice::show($id);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> UserVoiceModel::find($id),
+            'data'=> $rst['data'],
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -46,8 +52,11 @@ class UserVoiceController extends BaseController
     public function update(Request $request,$id)
     {
         $data = $this->getData($request);
-        $data['updated_at'] = time();
-        UserVoiceModel::where('id',$id)->update($data);
+        $data['id'] = $id;
+        $rst = ApiUserVoice::modify($data);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
         return redirect(DOMAIN.'admin/uservoice');
     }
 
@@ -55,8 +64,12 @@ class UserVoiceController extends BaseController
     {
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
+        $rst = ApiUserVoice::show($id);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> UserVoiceModel::find($id),
+            'data'=> $rst['data'],
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -72,8 +85,9 @@ class UserVoiceController extends BaseController
     public function getData(Request $request)
     {
         $data = [
-            'title'=> $request->name,
-            'content'=> $request->intro,
+            'name'=> $request->name,
+            'work'=> $request->work,
+            'intro'=> $request->intro,
         ];
         return $data;
     }
@@ -81,13 +95,11 @@ class UserVoiceController extends BaseController
     /**
      * 查询方法
      */
-    public function query($isshow=null)
+    public function query($pageCurr,$prefix_url)
     {
-        $datas = UserVoiceModel::where('isshow',$isshow)
-            ->orderBy('sort','desc')
-            ->orderBy('id','desc')
-            ->paginate($this->limit);
-        $datas->limit = $this->limit;
+        $rst = ApiUserVoice::getUserVoiceList($this->limit,$pageCurr);
+        $datas = $rst['code']==0 ? $rst['data'] : [];
+        $datas['pagelist'] = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         return $datas;
     }
 }

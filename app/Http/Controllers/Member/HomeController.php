@@ -1,6 +1,9 @@
 <?php
 namespace App\Http\Controllers\Member;
 
+use App\Api\ApiUser\ApiCompany;
+use App\Api\ApiUser\ApiUsers;
+use App\Models\BaseModel;
 use App\Models\Company\ComMainModel;
 use App\Models\CompanyModel;
 use App\Models\Base\OrderModel;
@@ -39,13 +42,17 @@ class HomeController extends BaseController
     public function user()
     {
         $uid = $this->userid ? $this->userid : 0;
-        return $uid ? UserModel::find($uid) : '';
+//        return $uid ? UserModel::find($uid) : '';
+        $rstUser = ApiUsers::getOneUser($uid);
+        return $rstUser['code']==0 ? $rstUser['data'] : [];
     }
 
     public function company()
     {
         $uid = $this->userid ? $this->userid : 0;
-        return $uid ? CompanyModel::where('uid',$uid)->first() : '';
+//        return $uid ? CompanyModel::where('uid',$uid)->first() : '';
+        $rstCompany = ApiCompany::getOneCompany($uid);
+        return $rstCompany['code']==0 ? $rstCompany['data'] : [];
     }
 
     public function companyMain()
@@ -63,7 +70,7 @@ class HomeController extends BaseController
         $userNum = array();
         if ($user=$this->user()) {
             foreach ($fields as $field) {
-                if ($v=$user->$field) { $userNum[] = $field; }
+                if ($v=$user[$field]) { $userNum[] = $field; }
             }
         }
         $userInfo['user'] = $this->user();
@@ -81,18 +88,21 @@ class HomeController extends BaseController
         $field1s = ['name','genre','area','address','yyzzid','areacode','tel','qq','web','fax','zipcode','email',];
         $field2s = ['title','keyword','description','logo',];
         $fields = array_merge($field1s,$field2s);
-        $companyNum = array(); $companyMainNum = array();
+        $companyNum = array();
+        $companyMainNum = array();
         if ($company=$this->company()) {
             foreach ($field1s as $field1) {
-                if ($v=$company->$field1) { $companyNum[] = $field1; }
+                if ($v=$company[$field1]) { $companyNum[] = $field1; }
             }
         }
         if ($companyMain=$this->companyMain()) {
             foreach ($field2s as $field2) {
-                if ($v=$companyMain->$field2) { $companyMainNum[] = $field2; }
+                if ($v=$companyMain[$field2]) { $companyMainNum[] = $field2; }
             }
         }
         $companyInfo['company'] = $this->company();
+        $model = new BaseModel();
+        $companyInfo['company']['areaName'] = $model->getAreaName($this->company()['area']);
         $companyInfo['compMain'] = $this->companyMain();
         $companyInfo['data'] = array_merge($companyNum,$companyMainNum);
         $companyInfo['field'] = $fields;

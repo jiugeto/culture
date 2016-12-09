@@ -12,7 +12,7 @@ class ApiUsers
     /**
      * 获取用户列表
      */
-    public static function getUserList($limit=null)
+    public static function getUserList($isuser=0,$isauth=0,$limit=null,$pageCurr=1)
     {
         $redisKey = 'userList';
         //判断缓存有没有该数据
@@ -24,7 +24,28 @@ class ApiUsers
         $curl = new Curl();
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
         $curl->post($apiUrl, array(
+            'isuser'    =>  $isuser,
+            'isauth'    =>  $isauth,
             'limit' =>  $limit,
+            'page'  =>  $pageCurr,
+        ));
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array('code' => 0, 'data' => ApiBase::objToArr($response->data));
+    }
+
+    /**
+     * 根据时间获取用户
+     */
+    public static function getUsersByTime($time=0)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/user/getusersbytime';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, array(
+            'time'  =>  $time,
         ));
         $response = json_decode($curl->response);
         if ($response->error->code != 0) {
@@ -95,5 +116,90 @@ class ApiUsers
             return array('code' => -1, 'msg' => $response->error->msg);
         }
         return array('code' => 0, 'data' => ApiBase::objToArr($response->data));
+    }
+
+    /**
+     * 用户登录
+     */
+    public static function doLogin($data)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/user/dologin';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, $data);
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array('code' => 0, 'data' => ApiBase::objToArr($response->data));
+    }
+
+    /**
+     * 更新用户信息
+     */
+    public static function modify($data)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/user/modify';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, $data);
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array('code' => 0, 'data' => ApiBase::objToArr($response->data));
+    }
+
+    /**
+     * 更新用户密码
+     */
+    public static function modifyPwd($data)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/user/modifyPwd';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, $data);
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array('code' => 0, 'data' => ApiBase::objToArr($response->data));
+    }
+
+    /**
+     * 获取用户自定义参数
+     */
+    public static function getParamByUid($uid)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/user/userparam';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, array(
+            'uid'   =>  $uid,
+        ));
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array('code' => 0, 'data' => ApiBase::objToArr($response->data));
+    }
+
+    /**
+     * 设置审核
+     */
+    public static function setAuth($uid,$auth)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/user/auth';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, array(
+            'uid'   =>  $uid,
+            'auth'  =>  $auth,
+        ));
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array('code' => 0, 'msg' => $response->error->msg);
     }
 }

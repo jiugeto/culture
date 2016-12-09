@@ -11,27 +11,27 @@
         <div class="am-g">
             @include('admin.common.info')
             <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
-                <form class="am-form" data-am-validator method="POST" action="{{DOMAIN}}admin/role/action/{{ $data->id }}" enctype="multipart/form-data">
+                <form class="am-form" data-am-validator method="POST" action="{{DOMAIN}}admin/role/action/{{ $data['id'] }}" enctype="multipart/form-data">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input type="hidden" name="_method" value="POST">
                     <fieldset>
                         <div class="am-form-group">
-                            <label>{{ $data->name }} 功能：</label><br>
+                            <label>{{ $data['name'] }} 功能：</label><br>
                             <b style="color:orangered;">一级：idXXX</b><br>
                             @foreach($actions as $action)
-                                @if($action->pid==0)
-                            <label><input type="checkbox" name="action[]" value="{{$action->id}}"
-                                        {{ $data->getActionId($action->id)==$action->id ? 'checked' : '' }}>
-                                {{$action->id.$action->name}}&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                @if($action['pid']==0)
+                            <label><input type="checkbox" name="action[]" value="{{$action['id']}}"
+                                        {{ in_array($action['id'],$data['actionIds']) ? 'checked' : '' }}
+                                >{{$action['id'].$action['name']}}&nbsp;&nbsp;&nbsp;&nbsp;</label>
                                 @endif
                             @endforeach
                             <br>
                             <b style="color:orangered;">二级：XXXpid</b><br>
                             @foreach($actions as $action)
-                                @if($action->pid!=0)
-                            <label><input type="checkbox" name="action[]" value="{{$action->id}}"
-                                        {{ $data->getActionId($action->id)==$action->id ? 'checked' : '' }}>
-                                {{$action->name}}({{$action->pid}})&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                @if($action['pid']!=0)
+                            <label><input type="checkbox" name="action[]" value="{{$action['id']}}"
+                                        {{ in_array($action['id'],$data['actionIds']) ? 'checked' : '' }}
+                                >{{$action['name']}}({{$action['pid']}})&nbsp;&nbsp;&nbsp;&nbsp;</label>
                                 @endif
                             @endforeach
                         </div>

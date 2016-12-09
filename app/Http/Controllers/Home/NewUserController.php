@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Home;
 class NewUserController extends BaseController
 {
     /**
-     * 网站前台租赁频道
+     * 网站前台
      */
 
     public function index()

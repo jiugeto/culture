@@ -37,30 +37,32 @@
                     </tr>
                     </thead>
                     <tbody>
-                @if($datas->total())
-                    @foreach($datas as $data)
+                @if(count($datas)>1)
+                    @foreach($datas as $kdata=>$data)
+                        @if(is_numeric($kdata))
                     <tr>
                         <td class="am-hide-sm-only"><input type="checkbox" /></td>
-                        <td class="am-hide-sm-only">{{ $data->id }}</td>
-                        <td class="am-hide-sm-only">{{ $data->uname }}</td>
-                        <td class="am-hide-sm-only">{{ $data->ip }}</td>
-                        <td class="am-hide-sm-only">{{ $data->ipaddress }}</td>
-                        <td class="am-hide-sm-only">{{ $data->loginTime() }}</td>
-                        <td class="am-hide-sm-only">{{ $data->logoutTime() }}</td>
+                        <td class="am-hide-sm-only">{{ $data['id'] }}</td>
+                        <td class="am-hide-sm-only">{{ $data['username'] }}</td>
+                        <td class="am-hide-sm-only">{{ $data['ip'] }}</td>
+                        <td class="am-hide-sm-only">{{ $data['ipaddress'] }}</td>
+                        <td class="am-hide-sm-only">{{ $data['loginTime'] }}</td>
+                        <td class="am-hide-sm-only">{{ $data['logoutTime'] }}</td>
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
-                                    <a href="{{DOMAIN}}admin/userlog/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="{{PUB}}assets/images/show.png" class="icon"> 查看</button></a>
+                                    <a href="{{DOMAIN}}admin/{{$crumb['category']['url']}}/{{$data['id']}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="{{PUB}}assets/images/show.png" class="icon"> 查看</button></a>
                                 </div>
                             </div>
                         </td>
                     </tr>
+                        @endif
                     @endforeach
                 @else @include('admin.common.norecord')
                 @endif
                     </tbody>
                 </table>
-                @include('admin.common.page')
+                @include('admin.common.page2')
             </div>
         </div>
     </div>

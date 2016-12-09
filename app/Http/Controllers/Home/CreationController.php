@@ -7,6 +7,7 @@ use App\Models\Online\OrderProductModel;
 use App\Models\Online\ProductModel;
 use App\Models\Online\ProductVideoModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CreationController extends BaseController
 {
@@ -36,7 +37,7 @@ class CreationController extends BaseController
             'cate'=> $cate,
             'orderPro'=> $orderPro,
             'orderProModel'=> $this->orderProModel,
-            'wallet'=> $wallet,
+            'wallet'=> $wallet?$wallet:'',
         ];
         return view('home.creation.index', $result);
     }

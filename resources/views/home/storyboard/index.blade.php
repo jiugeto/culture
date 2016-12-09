@@ -46,7 +46,7 @@
                     </a></div>
                 <div class="title">
                     <a href="{{DOMAIN}}storyboard/{{ $data->id }}" title="点击进入查看{{ $data->name }}">
-                        {{ $data->limits($data->name,15) }}</a>
+                        {{ str_limit($data->name,15) }}</a>
                 </div>
                 @if($data->company())<a href="">{{ $data->getComName() }}</a>@endif
                 <span class="right">

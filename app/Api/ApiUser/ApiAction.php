@@ -3,29 +3,25 @@ namespace App\Api\ApiUser;
 
 use Curl\Curl;
 
-class ApiUserVoice
+class ApiAction
 {
     /**
-     * 用户心声接口
+     * 系统后台 action 菜单接口
      */
 
     /**
-     * 心声列表
+     * 列表
      */
-    public static function getUserVoiceList($limit=null,$pageCurr=1)
+    public static function index($limit=null,$pageCurr=1,$isshow=0,$pid='')
     {
-        $redisKey = 'userVoiceList';
-        //判断缓存有没有该数据
-        if ($redisResult = ApiBase::getRedis($redisKey)) {
-            return array('code' => 0, 'data' => unserialize($redisResult));
-        }
-        //没有，接口读取
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/uservoice';
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/action';
         $curl = new Curl();
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
         $curl->post($apiUrl, array(
             'limit' =>  $limit,
             'page'  =>  $pageCurr,
+            'isshow'    =>  $isshow,
+            'pid'   =>  $pid,
         ));
         $response = json_decode($curl->response);
         if ($response->error->code != 0) {
@@ -35,11 +31,82 @@ class ApiUserVoice
     }
 
     /**
-     * 添加新心声
+     * 获取所有 action
+     */
+    public static function actionAll()
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/action/all';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, array(
+        ));
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array('code' => 0, 'data' => ApiBase::objToArr($response->data));
+    }
+
+    /**
+     * 左侧菜单
+     */
+    public static function adminMenuList($role_id=0)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/action/adminmenus';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, array(
+            'role_id'   =>  $role_id,
+        ));
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array('code' => 0, 'data' => ApiBase::objToArr($response->data));
+    }
+
+    /**
+     * 通过 pid 获取记录集合
+     */
+    public static function getActionsByPid($pid=0)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/action/getactionsbypid';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, array(
+            'pid'   =>  $pid,
+        ));
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array('code' => 0, 'data' => ApiBase::objToArr($response->data));
+    }
+
+    /**
+     * 通过 pid==id 获取一条记录
+     */
+    public static function getActionPidToId($pid)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/action/getactionpidtoid';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, array(
+            'pid'   =>  $pid,
+        ));
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array('code' => 0, 'data' => ApiBase::objToArr($response->data));
+    }
+
+    /**
+     * 新增
      */
     public static function add($data)
     {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/uservoice/add';
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/action/add';
         $curl = new Curl();
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
         $curl->post($apiUrl, $data);
@@ -51,11 +118,27 @@ class ApiUserVoice
     }
 
     /**
-     * 获取一条心声
+     * 修改
+     */
+    public static function update($data)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/action/modify';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, $data);
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array('code' => 0, 'msg' => $response->error->msg);
+    }
+
+    /**
+     * 通过 id 获取一条记录
      */
     public static function show($id)
     {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/uservoice/show';
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/action/show';
         $curl = new Curl();
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
         $curl->post($apiUrl, array(
@@ -69,113 +152,16 @@ class ApiUserVoice
     }
 
     /**
-     * 修改新心声
-     */
-    public static function modify($data)
-    {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/uservoice/modufy';
-        $curl = new Curl();
-        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
-        $curl->post($apiUrl, $data);
-        $response = json_decode($curl->response);
-        if ($response->error->code != 0) {
-            return array('code' => -1, 'msg' => $response->error->msg);
-        }
-        return array('code' => 0, 'msg' => $response->error->msg);
-    }
-
-    /**
-     * ====================
-     * 下面是用户意见的方法
-     * ====================
-     */
-
-    /**
-     * 用户意见列表
-     */
-    public static function getOpinionList($limit=null,$pageCurr=1,$isshow=0)
-    {
-        $redisKey = 'opinionList';
-        //判断缓存有没有该数据
-        if ($redisResult = ApiBase::getRedis($redisKey)) {
-            return array('code' => 0, 'data' => unserialize($redisResult));
-        }
-        //没有，接口读取
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/opinion';
-        $curl = new Curl();
-        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
-        $curl->post($apiUrl, array(
-            'limit' =>  $limit,
-            'page'  =>  $pageCurr,
-        ));
-        $response = json_decode($curl->response);
-        if ($response->error->code != 0) {
-            return array('code' => -1, 'msg' => $response->error->msg);
-        }
-        return array('code' => 0, 'data' => ApiBase::objToArr($response->data));
-    }
-
-    /**
-     * 用户意见新增
-     */
-    public static function addOpinion($data)
-    {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/opinion/add';
-        $curl = new Curl();
-        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
-        $curl->post($apiUrl, $data);
-        $response = json_decode($curl->response);
-        if ($response->error->code != 0) {
-            return array('code' => -1, 'msg' => $response->error->msg);
-        }
-        return array('code' => 0, 'msg' => $response->error->msg);
-    }
-
-    /**
-     * 用户意见修改
-     */
-    public static function modifyOpinion($data)
-    {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/opinion/modify';
-        $curl = new Curl();
-        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
-        $curl->post($apiUrl, $data);
-        $response = json_decode($curl->response);
-        if ($response->error->code != 0) {
-            return array('code' => -1, 'msg' => $response->error->msg);
-        }
-        return array('code' => 0, 'msg' => $response->error->msg);
-    }
-
-    /**
-     * 获取一条用户意见
-     */
-    public static function getOneOpinion($id)
-    {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/opinion/show';
-        $curl = new Curl();
-        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
-        $curl->post($apiUrl, array(
-            'id'    =>  $id,
-        ));
-        $response = json_decode($curl->response);
-        if ($response->error->code != 0) {
-            return array('code' => -1, 'msg' => $response->error->msg);
-        }
-        return array('code' => 0, 'data' => ApiBase::objToArr($response->data));
-    }
-
-    /**
-     * 设置用户意见删除
+     * 设置记录是否删除
      */
     public static function isdel($id,$del)
     {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/opinion/isdel';
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/action/isdel';
         $curl = new Curl();
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
         $curl->post($apiUrl, array(
             'id'    =>  $id,
-            'del'   =>  $del,
+            'del' =>  $del,
         ));
         $response = json_decode($curl->response);
         if ($response->error->code != 0) {
@@ -189,7 +175,7 @@ class ApiUserVoice
      */
     public static function delete($id)
     {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/opinion/delete';
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/action/delete';
         $curl = new Curl();
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
         $curl->post($apiUrl, array(
@@ -201,4 +187,46 @@ class ApiUserVoice
         }
         return array('code' => 0, 'msg' => $response->error->msg);
     }
+
+    /**
+     * 设置记录是否显示
+     */
+    public static function isshow($id,$isshow)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/action/isshow';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, array(
+            'id'    =>  $id,
+            'isshow'    =>  $isshow,
+        ));
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array('code' => 0, 'msg' => $response->error->msg);
+    }
+
+    /**
+     * 排序 +/-1
+     */
+    public static function sort($id,$sort)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/action/sort';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, array(
+            'id'    =>  $id,
+            'sort'    =>  $sort,
+        ));
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array('code' => 0, 'msg' => $response->error->msg);
+    }
+
+    /**
+     *
+     */
 }

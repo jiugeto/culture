@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use App\Api\ApiUser\ApiUsers;
 use App\Models\Base\PicModel;
 use App\Models\Base\VideoModel;
 use App\Models\Company\ComMainModel;
@@ -37,7 +38,9 @@ class GoodsModel extends BaseModel
 
     public function users()
     {
-        return UserModel::all();
+//        return UserModel::all();
+        $rst = ApiUsers::getUserList();
+        return $rst['code']==0 ? $rst['data'] : [];
     }
 
     public function genre()
@@ -154,8 +157,10 @@ class GoodsModel extends BaseModel
      */
     public function user()
     {
-        $userModel = UserModel::find($this->uid);
-        return $userModel ? $userModel : '';
+//        $userModel = UserModel::find($this->uid);
+//        return $userModel ? $userModel : '';
+        $rst = ApiUsers::getOneUser($this->uid);
+        return $rst['code']==0 ? $rst['data'] : [];
     }
 
     /**
@@ -163,7 +168,8 @@ class GoodsModel extends BaseModel
      */
     public function userName()
     {
-        return $this->user() ? $this->user()->username : '';
+//        return $this->user() ? $this->user()->username : '';
+        return $this->user() ? $this->user()['username'] : '';
     }
 
     /**
@@ -177,7 +183,17 @@ class GoodsModel extends BaseModel
 
     public function getComLogo()
     {
-        return $this->getUserInfo() ? $this->getUserInfo()->logo : '';
+//        return $this->getUserInfo() ? $this->getUserInfo()->logo : '';
+        $logo_id = $this->getUserInfo() ? $this->getUserInfo()->logo : '';
+        $picModel = PicModel::find($logo_id);
+        if ($picModel) {
+            if ($picModel->urlSel==1) {
+                $url = $picModel->url;
+            } elseif ($picModel->urlSel==2) {
+                $url = $picModel->url2;
+            }
+        }
+        return isset($url) ? $url : '';
     }
 
     /**
@@ -187,7 +203,9 @@ class GoodsModel extends BaseModel
     public function getNewests($arr)
     {
         if ($arr) {
-            $userModels = UserModel::whereIn('isuser',$arr)->get();
+//            $userModels = UserModel::whereIn('isuser',$arr)->get();
+            $rstUsers = ApiUsers::getUserList();
+            $userModels = $rstUsers['code']==0?$rstUsers['data']:[];
             $userIds = array();
             if ($userModels) {
                 foreach ($userModels as $userModel) {
@@ -219,8 +237,10 @@ class GoodsModel extends BaseModel
      */
     public function userType()
     {
-        $userModel = UserModel::find($this->uid);
-        return $userModel ? $userModel->isuser : '';
+//        $userModel = UserModel::find($this->uid);
+//        return $userModel ? $userModel->isuser : '';
+        $rstUser = ApiUsers::getOneUser($this->uid);
+        return $rstUser['code']==0 ? $rstUser['data'] : [];
     }
 
     /**

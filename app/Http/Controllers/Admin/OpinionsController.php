@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Home\OpinionModel;
+use App\Api\ApiUser\ApiUserVoice;
 use Illuminate\Http\Request;
 
 class OpinionsController extends BaseController
@@ -22,9 +22,11 @@ class OpinionsController extends BaseController
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
+        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $prefix_url = DOMAIN.'admin/opinions';
         $result = [
-            'datas'=> $this->query($isshow),
-            'prefix_url'=> DOMAIN.'admin/opinions',
+            'datas'=> $this->query($isshow,$pageCurr,$prefix_url),
+            'prefix_url'=> $prefix_url,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
             'isshow'=> $isshow,
@@ -36,8 +38,12 @@ class OpinionsController extends BaseController
     {
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
+        $rst = ApiUserVoice::getOneOpinion($id);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> OpinionModel::find($id),
+            'data'=> $rst['data'],
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -46,8 +52,12 @@ class OpinionsController extends BaseController
 
     public function update(Request $request,$id)
     {
-        $data = ['isshow'=>$request->isshow];
-        OpinionModel::where('id',$id)->update($data);
+        $data = $request->all();
+        $data['id'] = $id;
+        $rst = ApiUserVoice::modifyOpinion($data);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
         return redirect(DOMAIN.'admin/opinions');
     }
 
@@ -55,8 +65,12 @@ class OpinionsController extends BaseController
     {
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
+        $rst = ApiUserVoice::getOneOpinion($id);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> OpinionModel::find($id),
+            'data'=> $rst['data'],
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -65,31 +79,36 @@ class OpinionsController extends BaseController
 
     public function destroy($id)
     {
-        OpinionModel::where('id',$id)->update(['del'=> 1]);
+        $rst = ApiUserVoice::isdel($id,1);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
         return redirect(DOMAIN.'admin/opinions');
     }
 
     public function restore($id)
     {
-        OpinionModel::where('id',$id)->update(['del'=> 0]);
+        $rst = ApiUserVoice::isdel($id,0);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
         return redirect(DOMAIN.'admin/opinions/trash');
     }
 
     public function forceDelete($id)
     {
-        OpinionModel::where('id',$id)->delete;
+        $rst = ApiUserVoice::delete($id);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
         return redirect(DOMAIN.'admin/opinions/trash');
     }
 
-    public function query($isshow)
+    public function query($isshow,$pageCurr,$prefix_url)
     {
-        if ($isshow) {
-            $datas = OpinionModel::where('isshow',$isshow)
-                ->paginate($this->limit);
-        } else {
-            $datas = OpinionModel::paginate($this->limit);
-        }
-        $datas->limit = $this->limit;
+        $rst = ApiUserVoice::getOpinionList($this->limit,$pageCurr,$isshow);
+        $datas = $rst['code']==0 ? $rst['data'] : [];
+        $datas['pagelist'] = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         return $datas;
     }
 }

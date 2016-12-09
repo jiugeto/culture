@@ -1,9 +1,9 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Admin\RoleActionModel;
+use App\Api\ApiUser\ApiAction;
+use App\Api\ApiUser\ApiAdmin;
 use Illuminate\Http\Request;
-use App\Models\Admin\RoleModel;
 
 class RoleController extends BaseController
 {
@@ -17,15 +17,16 @@ class RoleController extends BaseController
         $this->crumb['']['name'] = '角色列表';
         $this->crumb['category']['name'] = '角色管理';
         $this->crumb['category']['url'] = 'role';
-        $this->model = new RoleModel();
     }
 
     public function index()
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
+        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $prefix_url = DOMAIN.'admin/role';
         $result = [
-            'datas'=> $this->query(),
+            'datas'=> $this->query($pageCurr,$prefix_url),
             'prefix_url'=> DOMAIN.'admin/role',
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -47,8 +48,10 @@ class RoleController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
-        $data['created_at'] = time();
-        RoleModel::create($data);
+        $rst = ApiAdmin::addRole($data);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
         return redirect(DOMAIN.'admin/role');
     }
 
@@ -56,8 +59,12 @@ class RoleController extends BaseController
     {
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
+        $rst = ApiAdmin::roleShow($id);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> RoleModel::find($id),
+            'data'=> $rst['data'],
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -68,8 +75,12 @@ class RoleController extends BaseController
     {
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
+        $rst = ApiAdmin::roleShow($id);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> RoleModel::find($id),
+            'data'=> $rst['data'],
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -79,14 +90,21 @@ class RoleController extends BaseController
     public function update(Request $request,$id)
     {
         $data = $this->getData($request);
-        $data['updated_at'] = time();
-        RoleModel::where('id',$id)->update($data);
+        $data['id'] = $id;
+        $rst = ApiAdmin::modifyRole($data);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
         return redirect(DOMAIN.'admin/role');
     }
 
     public function forceDelete($id)
     {
-        RoleModel::where('id',$id)->delete();
+        $rst = ApiAdmin::deleteRole($id);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN.'admin/role');
     }
 
     /**
@@ -96,9 +114,19 @@ class RoleController extends BaseController
     {
         $curr['name'] = '权限编辑';
         $curr['url'] = $this->crumb['edit']['url'];
+        $rstRole = ApiAdmin::roleShow($id);
+        if ($rstRole['code']!=0) {
+            echo "<script>alert('".$rstRole['msg']."');history.go(-1);</script>";exit;
+        }
+        $rstActions = ApiAction::actionAll();
+        if ($rstActions['code']!=0) {
+            echo "<script>alert('".$rstActions['msg']."');history.go(-1);</script>";exit;
+        }
+//        dd($rstRole,$rstActions['data']);
         $result = [
-            'data'=> RoleModel::find($id),
-            'actions'=> $this->model->getActions(),
+            'data'=> $rstRole['data'],
+//            'actions'=> $this->model->getActions(),
+            'actions'=> $rstActions['data'],
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -113,36 +141,18 @@ class RoleController extends BaseController
         if (!$request->action) {
             echo "<script>alert('操作必选！');history.go(-1);</script>";exit;
         }
-        $roleActions = RoleActionModel::where('role_id',$id)->get();
-        //多余的就删除
-        foreach ($roleActions as $roleAction) {
-            if (!in_array($roleAction->action_id,$request->action)) {
-                RoleActionModel::where('id',$roleAction->id)->delete();
-            }
+        $data = $request->all();
+        $data['role_id'] = $id;
+        $rst = ApiAdmin::setRoleAction($data);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');</script>";exit;
         }
-        //没有的就添加
-        foreach ($request->action as $action) {
-            if (!RoleActionModel::where('role_id',$id)->where('action_id',$action)->first()) {
-                $data = [
-                    'role_id'=> $id,
-                    'action_id'=> $action,
-                    'created_at'=> time(),
-                ];
-                RoleActionModel::create($data);
-            }
-        }
-        return redirect(DOMAIN.'admin/role');
+        return redirect(DOMAIN."admin/role");
     }
 
 
 
 
-
-    /**
-     * =====================
-     * 以下是公用方法
-     * =====================
-     */
 
     /**
      * 收集数据
@@ -160,11 +170,14 @@ class RoleController extends BaseController
     /**
      * 查询方法
      */
-    public function query()
+    public function query($pageCurr,$prefix_url)
     {
-        $datas = RoleModel::orderBy('id','asc')
-            ->paginate($this->limit);
-        $datas->limit = $this->limit;
+//        $datas = RoleModel::orderBy('id','asc')
+//            ->paginate($this->limit);
+//        $datas->limit = $this->limit;
+        $rst = ApiAdmin::roleList($this->limit,$pageCurr);
+        $datas = $rst['code']==0?$rst['data']:[];
+        $datas['pagelist'] = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         return $datas;
     }
 }

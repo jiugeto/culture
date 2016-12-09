@@ -32,15 +32,15 @@
                 @if(count($users['datas']))
                     @foreach($users['datas'] as $data)
                 <tr>
-                    <td>{{ $data->id }}</td>
-                    <td>{{ $data->username }}</td>
-                    <td><a href="#">{{ $data->isuser() }}</a></td>
-                    <td><span class="am-badge am-badge-success">{{ $data->createTime() }}</span></td>
+                    <td>{{ $data['id'] }}</td>
+                    <td>{{ $data['username'] }}</td>
+                    <td><a href="#">{{ $data['userType'] }}</a></td>
+                    <td><span class="am-badge am-badge-success">{{ $data['createTime'] }}</span></td>
                     <td>
                         <div class="am-dropdown" data-am-dropdown>
                             <button class="am-btn am-btn-default am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle><span class="am-icon-cog"></span> <span class="am-icon-caret-down"></span></button>
                             <ul class="am-dropdown-content">
-                                <li><a href="{{DOMAIN}}admin/user/{{$data->id}}">查看</a></li>
+                                <li><a href="{{DOMAIN}}admin/user/{{$data['id']}}">查看</a></li>
                             </ul>
                         </div>
                     </td>

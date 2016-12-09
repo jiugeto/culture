@@ -13,8 +13,7 @@ class GoodsController extends BaseController
      */
 
     protected $cateModels;
-    //产品主体：1个人需求，2设计师供应，3企业需求，4企业供应
-    protected $type = 1;
+    //产品主体type：1个人需求，2设计师供应，3企业需求，4企业供应
 
     public function __construct()
     {
@@ -30,7 +29,7 @@ class GoodsController extends BaseController
         $curr['name'] = $this->lists['']['name'];
         $curr['url'] = $this->lists['']['url'];
         $result = [
-            'datas'=> $this->query($del=0,$this->type),
+            'datas'=> $this->query($del=0),
             'prefix_url'=> DOMAIN.'member/goods',
             'lists'=> $this->lists,
             'curr'=> $curr,
@@ -43,7 +42,7 @@ class GoodsController extends BaseController
         $curr['name'] = $this->lists['trash']['name'];
         $curr['url'] = $this->lists['trash']['url'];
         $result = [
-            'datas'=> $this->query($del=1,$this->type),
+            'datas'=> $this->query($del=1),
             'prefix_url'=> DOMAIN.'member/goods/trash',
             'lists'=> $this->lists,
             'curr'=> $curr,
@@ -139,10 +138,10 @@ class GoodsController extends BaseController
     /**
      * 查询方法
      */
-    public function query($del=0,$type)
+    public function query($del=0)
     {
         $datas =  GoodsModel::where('del',$del)
-            ->where('type',$type)
+            ->where('uid',$this->userid)
             ->orderBy('id','desc')
             ->paginate($this->limit);
         $datas->limit = $this->limit;

@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Api\ApiUser\ApiLog;
 use App\Api\ApiUser\ApiUsers;
 use App\Tools;
 use Session;
@@ -26,11 +27,6 @@ class RegisterController extends Controller
 //        if (count(UserModel::where('ip',Tools::getIp())->get())==3) {
 //            echo "<script>alert('此用户已经注册过，不要重复注册！');history.go(-1);</script>";exit;
 //        }
-        //判断是否存在此用户
-        $rstUser = ApiUsers::getOneUserByUname(Input::get('username'));
-        if ($rstUser['code'] != 0) {
-            echo "<script>alert('".$rstUser['msg']."');history.go(-1);</script>";exit;
-        }
         //查看2次密码输入是否一致
         if (Input::get('password')!=Input::get('password2')) {
             echo "<script>alert('2次密码输入不一致！');history.go(-1);</script>";exit;
@@ -38,15 +34,15 @@ class RegisterController extends Controller
         //验证码验证
         $rules = [];
         $messages = [
-//            'captcha.required' => '请输入验证码',
-//            'captcha.captcha' => '验证码错误，请重试',
+            'captcha.required' => '请输入验证码',
+            'captcha.captcha' => '验证码错误，请重试',
         ];
         $validator = Validator::make(Input::all(), $rules, $messages);
         if ($validator->fails()) {
             echo "<script>alert('验证码错误！');history.go(-1);</script>";exit;
         }
 
-        //数据写入用户表
+        //接口验证数据，写入用户表，或者返回错误信息
         $ip = Tools::getIp();
         $data = [
             'username'=> Input::get('username'),
@@ -56,10 +52,12 @@ class RegisterController extends Controller
             //以下用户日志用
             'ipaddress'=> Tools::getCityByIp($ip),
             'genre'=>   1,      //1代表用户,2代表管理员
+            'action'=> $_SERVER['REQUEST_URI'],
         ];
         $rstRegist = ApiUsers::doRegist($data);
         if ($rstRegist['code'] != 0) {
-            return redirect(DOMAIN.'regist/fail');
+            echo "<script>alert('".$rstRegist['msg']."');history.go(-1);</script>";exit;
+//            return redirect(DOMAIN.'regist/fail');
         }
 
         //放入session
@@ -77,15 +75,17 @@ class RegisterController extends Controller
         return redirect(DOMAIN.'regist/success');
     }
 
-//    public function getPerson($uid){}
-
-//    public function getCompany($uid){}
-
+    /**
+     * 成功页面
+     */
     public function success()
     {
         return view('loginOrRegist.success');
     }
 
+    /**
+     * 失败页面
+     */
     public function fail()
     {
         return view('loginOrRegist.success');

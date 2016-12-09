@@ -7,10 +7,18 @@
 
     <h3 class="center">福利中心</h3>
     <table class="table_create table_show" cellspacing="0" cellpadding="0">
+        @if(!$data->ispay())
+        <tr>
+            <td class="field_name" width="200">新用户福利：</td>
+            <td>
+                <a href="{{DOMAIN}}member/wallet/gettip/1/200" class="list_btn">未领取？去签到</a>
+            </td>
+        </tr>
+        @endif
         <tr>
             <td class="field_name" width="200">签到奖励总数：</td>
             <td>{{ $data->sign }} 个 &nbsp;
-                <a href="{{DOMAIN}}person/sign" target="_blank" class="list_btn">去签到</a>
+                <a href="{{DOMAIN}}person/sign" target="_blank" class="list_btn">去领取</a>
             </td>
         </tr>
         <tr>

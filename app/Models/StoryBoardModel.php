@@ -1,6 +1,8 @@
 <?php
 namespace App\Models;
 
+use App\Api\ApiUser\ApiCompany;
+use App\Api\ApiUser\ApiUsers;
 use App\Models\Base\PicModel;
 
 class StoryBoardModel extends BaseModel
@@ -32,26 +34,31 @@ class StoryBoardModel extends BaseModel
     public function user()
     {
         $uid = $this->uid ? $this->uid : '0';
-        $userModel = UserModel::find($uid);
-        return $userModel ? $userModel->username : '无';
+//        $userModel = UserModel::find($uid);
+//        return $userModel ? $userModel->username : '无';
+        $rstUser = ApiUsers::getOneUser($uid);
+        return $rstUser['code']==0 ? $rstUser['data']['username'] : '';
     }
 
     public function company()
     {
         $uid = $this->uid ? $this->uid : '0';
-        $companyModel = CompanyModel::where('uid',$uid)->first();
-        return $companyModel ? $companyModel : '';
+//        $companyModel = CompanyModel::where('uid',$uid)->first();
+//        return $companyModel ? $companyModel : '';
+        $rstCompany = ApiCompany::getOneCompany($uid);
+        return $rstCompany['code']==0 ? $rstCompany['data'] : [];
     }
 
     public function getComName()
     {
-        return $this->company() ? $this->limits($this->company()->name,5) : '';
+//        return $this->company() ? $this->limits($this->company()->name,5) : '';
+        return $this->company() ? str_limit($this->company()['name'],10) : '';
     }
 
-    public function limits($name,$length)
-    {
-        return mb_strlen($name)>$length ? mb_substr($name,0,$length,'utf-8') : $name;
-    }
+//    public function limits($name,$length)
+//    {
+//        return mb_strlen($name)>$length ? mb_substr($name,0,$length,'utf-8') : $name;
+//    }
 
     public function thumb()
     {

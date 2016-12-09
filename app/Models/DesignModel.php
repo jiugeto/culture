@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use App\Api\ApiUser\ApiUsers;
 use App\Models\Base\PicModel;
 
 class DesignModel extends BaseModel
@@ -34,13 +35,16 @@ class DesignModel extends BaseModel
     public function user()
     {
         $uid = $this->uid ? $this->uid : 0;
-        $userModel = UserModel::find($uid);
-        return $userModel ? $userModel : '';
+//        $userModel = UserModel::find($uid);
+//        return $userModel ? $userModel : '';
+        $rstUser = ApiUsers::getOneUser($uid);
+        return $rstUser['code']==0 ? $rstUser['data'] : [];
     }
 
     public function UserName()
     {
-        return $this->user() ? $this->user()->username : '';
+//        return $this->user() ? $this->user()->username : '';
+        return $this->user() ? $this->user()['username'] : '';
     }
 
     public function money()

@@ -39,7 +39,7 @@
         总价 = 渲染价 + 制作价
 
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        优先使用福利(元)：{{Session::has('user')?$wallet->weal:0}}
+        优先使用福利(元)：{{(Session::has('user')&&$wallet)?$wallet->weal:0}}
         <a href="{{DOMAIN}}member/wallet" target="_blank">去兑换福利</a>
         <br><br>
 

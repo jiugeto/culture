@@ -61,7 +61,7 @@
                                         {{ str_limit($data->intro,40) }}</textarea></div>
                             </td>
                             <td>
-                                <div class="comName">公司：{{ $data->getCompanyName() }}</div>
+                                <div class="comName">公司：{{ $data->getCompanyName($data->uid) }}</div>
                                 <p><a href="{{DOMAIN}}entertain/{{ $data->id }}" class="toshow">详情</a></p>
                             </td>
                         @elseif($genre0==2)
@@ -72,7 +72,7 @@
                                     {{ str_limit($data->intro,40) }}</textarea></div>
                             </td>
                             <td>
-                                <div class="comName">公司：{{ $data->getCompanyName() }}</div>
+                                <div class="comName">公司：{{ $data->getCompanyName($data->uid) }}</div>
                                 <p><a href="{{DOMAIN}}entertain/staff/show/{{ $data->id }}" class="toshow">详情</a></p>
                             </td>
                         @elseif($genre0==3)
@@ -83,7 +83,7 @@
                                     {{ str_limit($data->intro,40) }}</textarea></div>
                             </td>
                             <td>
-                                <div class="comName">公司：{{ $data->getCompanyName() }}</div>
+                                <div class="comName">公司：{{ $data->getCompanyName($data->uid) }}</div>
                                 <p><a href="{{DOMAIN}}entertain/works/show/{{ $data->id }}" class="toshow">详情</a></p>
                             </td>
                         @endif

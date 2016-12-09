@@ -1,10 +1,9 @@
 <?php
 namespace App\Http\ViewComposers;
 
+use App\Api\ApiUser\ApiAction;
 use Illuminate\Contracts\View\View;
-use App\Models\Admin\ActionModel;
 use App\Tools;
-//use Illuminate\Support\Facades\DB;
 
 class AdminMenuComposer
 {
@@ -19,11 +18,23 @@ class AdminMenuComposer
 
     public static function getActions()
     {
-        return Tools::getChild(
-//                ActionModel::where('isshow',2)
-//                ->orderBy('sort','desc')
-//                ->get(),
-                ActionModel::getAdminMenus(),
-            $pid=0);
+//        return Tools::getChild(ActionModel::getAdminMenus(),$pid=0);
+        $rstAction = ApiAction::adminMenuList(\Session::get('admin.role_id'));
+        return AdminMenuComposer::getChild($rstAction['data'],$pid=0);
+    }
+
+    /**
+     * 数组子id重组
+     */
+    public static function getChild($arrs,$pid=0){
+        $list = array();
+        foreach ($arrs as $v){
+            if ($v['pid'] == $pid) {
+                //找到子节点,继续找该子节点的后代节点
+                $v['child'] = AdminMenuComposer::getChild($arrs,$v['id']);
+                $list[] = $v;
+            }
+        }
+        return $list;
     }
 }

@@ -12,7 +12,7 @@ class ApiCompany
     /**
      * 获取公司列表
      */
-    public static function getCompanyList($limit=null)
+    public static function getCompanyList($limit=null,$pageCurr=1,$genre=0)
     {
         $redisKey = 'companyList';
         //判断缓存有没有该数据
@@ -25,10 +25,12 @@ class ApiCompany
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
         $curl->post($apiUrl,array(
             'limit' =>  $limit,
+            'page'  =>  $pageCurr,
+            'genre' =>  $genre,
         ));
         $response = json_decode($curl->response);
         if ($response->error->code != 0) {
-            return array('code' => -2, 'msg' => $response);
+            return array('code' => -2, 'msg' => $response->error->msg);
         }
         return array('code' => 0, 'data' => ApiBase::objToArr($response->data));
     }
@@ -36,7 +38,7 @@ class ApiCompany
     /**
      * 由 uid 获取一条公司数据
      */
-    public static function getCompanyInfo($uid)
+    public static function getOneCompany($uid)
     {
         $redisKey = 'companyInfo';
         //判断缓存有没有该数据
@@ -52,7 +54,23 @@ class ApiCompany
         ));
         $response = json_decode($curl->response);
         if ($response->error->code != 0) {
-            return array('code' => -2, 'msg' => $response);
+            return array('code' => -2, 'msg' => $response->error->msg);
+        }
+        return array('code' => 0, 'data' => ApiBase::objToArr($response->data));
+    }
+
+    /**
+     * 新增公司记录
+     */
+    public static function add($data)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/company/add';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, $data);
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -2, 'msg' => $response->error->msg);
         }
         return array('code' => 0, 'data' => ApiBase::objToArr($response->data));
     }

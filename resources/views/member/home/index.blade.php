@@ -38,12 +38,12 @@
             <div class="detail">详情</div>
             <div class="userInfoDetail">
             @if($user=$userInfo['user'])
-                <div>用户名：{{ $user->username }}</div>
-                <div>Email：<br><span style="font-size:12px;">{{ $user->email }}</span></div>
-                <div>QQ：{{ $user->qq }}</div>
-                <div>手机：{{ $user->mobile }}</div>
-                <div>地址：<br><span style="font-size:12px;">{{ $user->address }}</span></div>
-                <div>上次登录：<br><span style="font-size:12px;">{{ $user->lastLogin() }}</span></div>
+                <div>用户名：{{ $user['username'] }}</div>
+                <div>Email：<br><span style="font-size:12px;">{{ $user['email'] }}</span></div>
+                <div>QQ：{{ $user['qq'] }}</div>
+                <div>手机：{{ $user['mobile'] }}</div>
+                <div>地址：<br><span style="font-size:12px;">{{ $user['address'] }}</span></div>
+                <div>上次登录：<br><span style="font-size:12px;">{{ $user['lastLogin'] }}</span></div>
                 <div>&nbsp;</div>
                 <a class="close" style="bottom:20px;left:0;" onclick="$('.userInfoDetail').hide();">关闭</a>
             @endif
@@ -84,15 +84,15 @@
     </div>
     @if($company=$companyInfo['company'])
     <div class="company_detail">
-        <div>公司名称：{{ $company->name }}</div>
-        <div>企业类型：{{ $company->genreName() }}</div>
-        <div>所在地区：{{ $company->getAreaName() }}</div>
-        <div>营业执照编号：{{ $company->yyzzid }}</div>
-        <div>服务电话：{{ $company->tel }}</div>
-        <div>企业QQ：{{ $company->qq }}</div>
-        <div>公司网址：{{ $company->web }}</div>
-        <div>传真：{{ $company->fax }}</div>
-        <div>企业邮箱：{{ $company->email }}</div>
+        <div>公司名称：{{ $company['name'] }}</div>
+        <div>企业类型：{{ $company['genreName'] }}</div>
+        <div>所在地区：{{--{{ $company->getAreaName() }}--}} {{ $company['areaName'] }}</div>
+        <div>营业执照编号：{{ $company['yyzzid'] }}</div>
+        <div>服务电话：{{ $company['tel'] }}</div>
+        <div>企业QQ：{{ $company['qq'] }}</div>
+        <div>公司网址：{{ $company['web'] }}</div>
+        <div>传真：{{ $company['fax'] }}</div>
+        <div>企业邮箱：{{ $company['email'] }}</div>
         <a class="close" onclick="$('.company_detail').hide();">关闭</a>
     </div>
     @endif

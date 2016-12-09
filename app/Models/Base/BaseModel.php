@@ -1,6 +1,8 @@
 <?php
 namespace App\Models\Base;
 
+use App\Api\ApiUser\ApiCompany;
+use App\Api\ApiUser\ApiUsers;
 use App\Models\Company\ComMainModel;
 use App\Models\CompanyModel;
 use App\Models\UserModel;
@@ -93,7 +95,8 @@ class BaseModel extends Model
     public function getBuyName()
     {
         $userModel = $this->getUser($this->buyer);
-        return $userModel ? $userModel->username : '';
+//        return $userModel ? $userModel->username : '';
+        return $userModel ? $userModel['username'] : '';
     }
 
     /**
@@ -101,13 +104,16 @@ class BaseModel extends Model
      */
     public function getUser($uid=null)
     {
-        $userInfo = UserModel::find($uid);
-        return $userInfo ? $userInfo : '';
+//        $userInfo = UserModel::find($uid);
+//        return $userInfo ? $userInfo : '';
+        $rstUser = ApiUsers::getOneUser($uid);
+        return $rstUser['code']==0 ? $rstUser['data'] : [];
     }
 
     public function getUserName($uid=null)
     {
-       return $this->getUser($uid) ? $this->getUser($uid)->username : '';
+//       return $this->getUser($uid) ? $this->getUser($uid)->username : '';
+       return $this->getUser($uid) ? $this->getUser($uid)['username'] : '';
     }
 
     /**
@@ -115,8 +121,10 @@ class BaseModel extends Model
      */
     public function getCompany($uid=null)
     {
-        $companyInfo = CompanyModel::where('uid',$uid)->first();
-        return $companyInfo ? $companyInfo : '';
+//        $companyInfo = CompanyModel::where('uid',$uid)->first();
+//        return $companyInfo ? $companyInfo : '';
+        $rstCompany = ApiCompany::getOneCompany($uid);
+        return $rstCompany['code']==0 ? $rstCompany['data'] : [];
     }
 
     public function getCompanyMain($uid=null)
@@ -127,7 +135,8 @@ class BaseModel extends Model
 
     public function getCompanyName($uid=null)
     {
-        return $this->getCompany($uid) ? $this->getCompany($uid)->name : '';
+//        return $this->getCompany($uid) ? $this->getCompany($uid)->name : '';
+        return $this->getCompany($uid) ? $this->getCompany($uid)['name'] : '';
     }
 
     /**

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Api\ApiUser\ApiAdmin;
 use Illuminate\Http\Request;
-use App\Models\Admin\AdminModel;
-use App\Models\Admin\RoleModel;
+//use App\Models\Admin\AdminModel;
+//use App\Models\Admin\RoleModel;
 use Hash;
 
 class AdminController extends BaseController
@@ -25,9 +26,11 @@ class AdminController extends BaseController
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
+        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $prefix_url = DOMAIN.'admin/admin';
         $result = [
-            'datas'=> $this->query(),
-            'prefix_url'=> DOMAIN.'admin/admin',
+            'datas'=> $this->query($pageCurr,$prefix_url),
+            'prefix_url'=> $prefix_url,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -39,7 +42,7 @@ class AdminController extends BaseController
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
-            'roleModels'=> RoleModel::all(),
+            'roleModels'=> ApiAdmin::allRoles(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -49,8 +52,10 @@ class AdminController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
-        $data['created_at'] = time();
-        AdminModel::create($data);
+        $rst = ApiAdmin::addAdmin($data);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
         return redirect(DOMAIN.'admin/admin');
     }
 
@@ -58,8 +63,12 @@ class AdminController extends BaseController
     {
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
+        $rstAdmin = ApiAdmin::getOneAdmin($id);
+        if ($rstAdmin['code']!=0) {
+            echo "<script>alert('".$rstAdmin['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> AdminModel::find($id),
+            'data'=> $rstAdmin['data'],
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -70,9 +79,11 @@ class AdminController extends BaseController
     {
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
+        $rstAdmin = ApiAdmin::getOneAdmin($id);
+        $data = $rstAdmin['code']==0 ? $rstAdmin['data'] : [];
         $result = [
-            'data'=> AdminModel::find($id),
-            'roleModels'=> RoleModel::all(),
+            'data'=> $data,
+            'roleModels'=> ApiAdmin::allRoles(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -82,8 +93,10 @@ class AdminController extends BaseController
     public function update(Request $request,$id)
     {
         $data = $this->getData($request);
-        $data['updated_at'] = time();
-        AdminModel::where('id',$id)->update($data);
+        $rst = ApiAdmin::modifyAdmin($data);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
         return redirect(DOMAIN.'admin/admin');
     }
 
@@ -91,8 +104,10 @@ class AdminController extends BaseController
     {
         $curr['name'] = '重置密码';
         $curr['url'] = 'pwd';
+        $rstAdmin = ApiAdmin::getOneAdmin($id);
+        $data = $rstAdmin['code']==0 ? $rstAdmin['data'] : [];
         $result = [
-            'data'=> AdminModel::find($id),
+            'data'=> $data,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -101,31 +116,24 @@ class AdminController extends BaseController
 
     public function setPwd(Request $request,$id)
     {
-        $adminModel = AdminModel::find($id);
-        if (!Hash::check($request->pwd1,$adminModel->password) || $request->pwd1!=$adminModel->pwd) {
-            echo "<script>alert('老密码错误！');history.go(-1);</script>";exit;
-        }
-        if ($request->pwd1!=$request->pwd2) {
-            echo "<script>alert('2次老密码不一致！');history.go(-1);</script>";exit;
-        }
         $data = [
             'password'=> Hash::make($request->pwd3),
             'pwd'=> $request->pwd3,
-            'updated_at'=> time(),
+            'id'=> $id,
         ];
-        AdminModel::where('id',$id)->update($data);
+        $rst = ApiAdmin::modifyAdminPwd($data);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
         return redirect(DOMAIN.'admin/admin');
     }
 
-//    public function destroy($id)
-//    {
-//        AdminModel::where('id',$id)->update(['del'=>1]);
-//        return redirect(DOMAIN.'admin/admin');
-//    }
-
     public function forceDelete($id)
     {
-        AdminModel::where('id',$id)->delete();
+        $rst = ApiAdmin::deleteAdmin($id);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
         return redirect(DOMAIN.'admin/admin');
     }
 
@@ -138,17 +146,16 @@ class AdminController extends BaseController
         return array(
             'username'=> $request->username,
             'realname'=> $request->realname,
-//            'password'=> $request->password,
-//            'email'=> $request->email,
             'role_id'=> $request->role_id,
             'intro'=> $request->intro,
         );
     }
 
-    public function query()
+    public function query($pageCurr,$prefix_url)
     {
-        $datas = AdminModel::orderBy('id','desc')->paginate($this->limit);
-        $datas->limit = $this->limit;
+        $rst = ApiAdmin::getAdminList($this->limit,$pageCurr);
+        $datas = $rst['code']==0 ? $rst['data'] : [];
+        $datas['pagelist'] = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         return $datas;
     }
 }

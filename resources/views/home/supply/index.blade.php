@@ -8,7 +8,7 @@
             公司类型：
             <select name="genre" class="home_search">
                 <option value="0" {{ $genre==0 ? 'selected' : '' }}>所有</option>
-                @foreach($model['genres'] as $kgenre=>$vgenre)
+                @foreach($genres as $kgenre=>$vgenre)
                     <option value="{{ $kgenre }}" {{ $genre==$kgenre ? 'selected' : '' }}>{{ $vgenre }}</option>
                 @endforeach
             </select>
@@ -29,24 +29,26 @@
         {{-- 列表 --}}
         <div class="cre_kong">&nbsp;{{--10px高度留空--}}</div>
         <div class="s_list">
-            @if(count($datas))
-                @foreach($datas as $data)
+            @if(count($datas)>2)
+                @foreach($datas as $kdata=>$data)
+                    @if(is_numeric($kdata))
             <table class="record">
                 <tr>
-                    <td>公司名称：{{ str_limit($data->name,20) }}</td>
-                    <td>公司类型：{{ $data->genreName() }}</td>
-                    <td>地址：{{ str_limit($data->address,20) }}</td>
+                    <td>公司名称：{{ str_limit($data['name'],20) }}</td>
+                    <td>公司类型：{{ $data['genreName'] }}</td>
+                    <td>地址：{{ str_limit($data['address'],20) }}</td>
                 </tr>
                 <tr>
-                    <td>地区：{{ $data->getAreaName($data->area) }}</td>
-                    <td>时间：{{ $data->createTime() }}</td>
+                    <td>地区：{{ $areaModel->getAreaName($data['area']) }}</td>
+                    <td>时间：{{ $data['createTime'] }}</td>
                     {{--<td><a href="{{DOMAIN}}supply/{{ $data->id }}" class="toshow">详情</a></td>--}}
-                    <td><a href="{{DOMAIN}}c/{{ $data->id }}" class="toshow">主页</a></td>
+                    <td><a href="{{DOMAIN}}c/{{ $data['id'] }}" class="toshow">主页</a></td>
                 </tr>
             </table>
+                    @endif
                 @endforeach
             @endif
-            @include('home.common.page')
+            @include('home.common.page2')
         </div>
         <div class="s_right">
             @if(count($ads))

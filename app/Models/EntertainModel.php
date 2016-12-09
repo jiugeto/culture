@@ -1,6 +1,9 @@
 <?php
 namespace App\Models;
 
+use App\Api\ApiUser\ApiCompany;
+use App\Api\ApiUser\ApiUsers;
+
 class EntertainModel extends BaseModel
 {
     protected $table = 'bs_entertains';
@@ -35,8 +38,10 @@ class EntertainModel extends BaseModel
     public function user()
     {
         $uid = $this->uid ? $this->uid : 0;
-        $userModel = UserModel::find($uid);
-        return $userModel ? $userModel : '';
+//        $userModel = UserModel::find($uid);
+//        return $userModel ? $userModel : '';
+        $rstUser = ApiUsers::getOneUser($uid);
+        return $rstUser['code']==0 ? $rstUser['data'] : [];
     }
 
     /**
@@ -45,8 +50,10 @@ class EntertainModel extends BaseModel
     public function company()
     {
         $uid = $this->uid ? $this->uid : 0;
-        $companyModel = CompanyModel::where('uid',$uid)->first();
-        return $companyModel ? $companyModel : '';
+//        $companyModel = CompanyModel::where('uid',$uid)->first();
+//        return $companyModel ? $companyModel : '';
+        $rstCompany = ApiCompany::getOneCompany($uid);
+        return $rstCompany['code']==0 ? $rstCompany['data'] : [];
     }
 
     /**
@@ -54,9 +61,9 @@ class EntertainModel extends BaseModel
      */
     public function getUName()
     {
-        $name = $this->company() ? $this->company()->name : '';
+        $name = $this->company() ? $this->company()['name'] : '';
         if (!$name) {
-            $name = $this->user() ? $this->user()->username : '';
+            $name = $this->user() ? $this->user()['username'] : '';
         }
         return $name;
     }

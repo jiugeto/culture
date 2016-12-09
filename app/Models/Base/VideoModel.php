@@ -1,6 +1,7 @@
 <?php
 namespace App\Models\Base;
 
+use App\Api\ApiUser\ApiUsers;
 use App\Models\UserParamsModel;
 
 class VideoModel extends BaseModel
@@ -31,8 +32,10 @@ class VideoModel extends BaseModel
     public function isplay($uid)
     {
         $uid = $uid ? $uid : 0;
-        $userParam = UserParamsModel::find($uid);
-        return $userParam ? $userParam->leplay : 0;
+//        $userParam = UserParamsModel::find($uid);
+//        return $userParam ? $userParam->leplay : 0;
+        $rstParam = ApiUsers::getParamByUid($uid);
+        return $rstParam['code']==0 ? $rstParam['data']['leplay'] : 0;
     }
 
     public function pics($uid=0)

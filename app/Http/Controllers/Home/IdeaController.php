@@ -41,10 +41,6 @@ class IdeaController extends BaseController
             'userid'=> $this->userid,
             'cate'=> $cate,
         ];
-//        dd(\App\Api\ApiUsers::getOneUser(1));
-//        dd(\App\Api\ApiPerson::getPersonInfo(1));
-//        dd(\App\Api\ApiCompany::getCompanyInfo(1));
-        dd(\App\Api\ApiCompany::getCompanyList());
         return view('home.idea.index', $result);
     }
 

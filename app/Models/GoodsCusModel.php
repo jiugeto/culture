@@ -1,6 +1,8 @@
 <?php
 namespace App\Models;
 
+use App\Api\ApiUser\ApiUsers;
+
 class GoodsCusModel extends BaseModel
 {
     /**
@@ -41,8 +43,10 @@ class GoodsCusModel extends BaseModel
      */
    public function getSupplyName()
    {
-       $userModel = UserModel::find($this->supply);
-       return $userModel ? $userModel->username : '未定';
+//       $userModel = UserModel::find($this->supply);
+//       return $userModel ? $userModel->username : '未定';
+       $rstUser = ApiUsers::getOneUser($this->supply);
+       return $rstUser['code']==0 ? $rstUser['data']['username'] : '未定';
    }
 
     /**

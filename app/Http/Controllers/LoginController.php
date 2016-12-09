@@ -1,7 +1,11 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Api\ApiUser\ApiCompany;
+use App\Api\ApiUser\ApiLog;
+use App\Api\ApiUser\ApiPerson;
 use App\Api\ApiUser\ApiUsers;
+use App\Tools;
 use Session;
 use Hash;
 use Illuminate\Support\Facades\Input;
@@ -21,16 +25,6 @@ class LoginController extends Controller
 
     public function dologin()
     {
-        //判断是否存在此用户
-        $rst = ApiUsers::getOneUserByUname(Input::get('username'));
-        if ($rst['code'] < 0) {
-            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
-        } elseif ($rst['code'] == 1) {
-            //验证密码正确否
-            if (!(Hash::check(Input::get('password'),$rst['password']))) {
-                echo "<script>alert('密码错误！');history.go(-1);</script>";exit;
-            }
-        }
         //查看2次密码输入是否一致
         if (Input::get('password')!=Input::get('password2')) {
             echo "<script>alert('2次密码输入不一致！');history.go(-1);</script>";exit;
@@ -40,68 +34,74 @@ class LoginController extends Controller
             'captcha' => 'required|captcha',
         ];
         $messages = [
-//            'captcha.required' => '请输入验证码',
-//            'captcha.captcha' => '验证码错误，请重试',
+            'captcha.required' => '请输入验证码',
+            'captcha.captcha' => '验证码错误，请重试',
         ];
         $validator = Validator::make(Input::all(), $rules, $messages);
         if ($validator->fails()) {
             echo "<script>alert('验证码错误！');history.go(-1);</script>";exit;
         }
+
+        //接口验证数据，写入用户表，或者返回错误信息
+        $ip = Tools::getIp();
+        $data = [
+            'username'=> Input::get('username'),
+            'password'=> Hash::make(Input::get('password')),
+            'pwd'=> Input::get('password'),
+            'ip'=> $ip,
+            //以下用户日志用
+            'ipaddress'=> Tools::getCityByIp($ip),
+            'genre'=>   1,      //1代表用户,2代表管理员
+            'action'=> $_SERVER['REQUEST_URI'],
+        ];
+        $rstLogin = ApiUsers::doLogin($data);
+        if ($rstLogin['code'] != 0) {
+            //验证密码正确否
+            if (!(Hash::check(Input::get('password'),$rstLogin['password']))) {
+                echo "<script>alert('密码错误！');history.go(-1);</script>";exit;
+            }
+            echo "<script>alert('".$rstLogin['msg']."');history.go(-1);</script>";exit;
+//            return redirect(DOMAIN.'regist/fail');
+        }
+
         //个人资料
-        if (in_array($userModel->isuser,[1,2,4,50])) {
-            $personModel = PersonModel::where('uid',$userModel->id)->first();
-            $persons['per_id'] = $personModel->id;
-            $persons['realname'] = $personModel->realname;
-            $persons['sex'] = $personModel->sex;
-            $persons['idcard'] = $personModel->idcard;
-            $persons['idfront'] = $personModel->idfront;
+        if (in_array($rstLogin['data']['isuser'],[1,2,4,50])) {
+            $personInfo = ApiPerson::getPersonInfo($rstLogin['data']['id']);
+            if ($personInfo['code'] != 0) { $person = array(); }
+            $person['per_id'] = $personInfo['data']['id'];
+            $person['realname'] = $personInfo['data']['realname'];
+            $person['sex'] = $personInfo['data']['sex'];
+            $person['idcard'] = $personInfo['data']['idcard'];
+            $person['idfront'] = $personInfo['data']['idfront'];
         }
-        $userperson = isset($persons) ? serialize($persons) : [];
+        $userperson = isset($person) ? serialize($person) : [];
         //企业资料
-        if (in_array($userModel->isuser,[3,5,6,7,50])) {
-            $companyModel = CompanyModel::where('uid',$userModel->id)->first();
-            $companys['cid'] = $companyModel->id;
-            $companys['name'] = $companyModel->name;
-            $companys['area'] = $companyModel->area;
-            $companys['address'] = $companyModel->address;
-            $companys['yyzzid'] = $companyModel->yyzzid;
+        if (in_array($rstLogin['data']['isuser'],[3,5,6,7,50])) {
+            $companyInfo = ApiCompany::getOneCompany($rstLogin['data']['id']);
+            if ($companyInfo['code'] != 0) { $company = array(); }
+            $company['cid'] = $companyInfo['data']['id'];
+            $company['name'] = $companyInfo['data']['name'];
+            $company['area'] = $companyInfo['data']['area'];
+            $company['address'] = $companyInfo['data']['address'];
+            $company['yyzzid'] = $companyInfo['data']['yyzzid'];
         }
-        $usercompany = isset($companys) ? serialize($companys) : [];
+        $usercompany = isset($company) ? serialize($company) : [];
 
         $serial = date('YmdHis',time()).rand(0,10000);
         $userInfo = [
-            'uid'=> $userModel->id,
+            'uid'=> $rstLogin['data']['id'],
             'username'=> Input::get('username'),
-            'email'=> $userModel->email,
-            'userType'=> $userModel->isuser,
+            'email'=> $rstLogin['data']['email'],
+            'userType'=> $rstLogin['data']['isuser'],
             'serial'=> $serial,
-            'area'=> $userModel->area,
-            'address'=> $userModel->address,
-            'cid'=> isset($companyModel)?$companyModel->id:'',
+            'area'=> $rstLogin['data']['area'],
+            'address'=> $rstLogin['data']['address'],
+            'cid'=> isset($companyInfo['data'])?$companyInfo['data']['id']:0,
             'loginTime'=> time(),
             'person'=> $userperson,
             'company'=> $usercompany,
         ];
         Session::put('user',$userInfo);
-
-        //登陆加入用户日志表
-        $ip = \App\Tools::getIp();
-        $ipaddress = \App\Tools::getCityByIp($ip);
-        $userlog = [
-            'uid'=> $userModel->id,
-            'uname'=> Input::get('username'),
-            'genre'=> 1,    //1代表用户
-            'serial'=> $serial,
-            'ip'=> $ip,
-            'ipaddress'=> $ipaddress,
-            'action'=> $_SERVER['REQUEST_URI'],
-            'loginTime'=> time(),
-            'created_at'=> $userModel->created_at,
-        ];
-        LogModel::create($userlog);
-
-        //最近登录更新
-        UserModel::where('id',$userModel->id)->update(['lastLogin'=> time()]);
 
         return redirect(DOMAIN.'member');
     }
@@ -109,9 +109,10 @@ class LoginController extends Controller
     public function dologout()
     {
         //更新用户日志表
-        $rsttLog =
-        LogModel::where('serial',Session::get('user.serial'))
-                    ->update(['logoutTime'=> time()]);
+        $rstLog = ApiLog::logout(Session::get('user.serial'));
+        if ($rstLog['code']!=0) {
+            echo "<script>alert('".$rstLog['msg']."');history.go(-1);</script>";exit;
+        }
         //去除session
         Session::forget('user');
         return redirect(DOMAIN.'login');

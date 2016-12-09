@@ -13,7 +13,6 @@
                 <form class="am-form" data-am-validator method="POST" action="{{DOMAIN}}admin/action" enctype="multipart/form-data">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input type="hidden" name="pid" value="{{ $parent['id'] }}">
-                    {{--<label>本级是{{$parent['id']==0?'0级操作':$parent['name'].'的子操作'}}</label>--}}
                     <label>本级是@if($parent['id']==0)'0级操作'@else{{$parent['name'].'的子操作'}}@endif</label>
                     <fieldset>
                         <div class="am-form-group">

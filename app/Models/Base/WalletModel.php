@@ -29,4 +29,13 @@ class WalletModel extends BaseModel
         $goldCount = $walletModel->gold+$gold;
         WalletModel::where('uid',$uid)->update(['gold'=> $goldCount]);
     }
+
+    /**
+     * 判断是否已经支付过
+     */
+    public function isPay()
+    {
+        $payModel = PayModel::where('uid',$this->uid)->where('ispay',1)->first();
+        return ($payModel||$this->tip||$this->weal) ? 1 : 0;
+    }
 }

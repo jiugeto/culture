@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Member;
 
+use App\Api\ApiUser\ApiGold;
 use App\Models\Base\UserGoldModel;
 use App\Models\Base\UserTipModel;
 use App\Models\Base\WalletModel;
@@ -28,11 +29,13 @@ class WalletController extends BaseController
     {
         $curr['name'] = '福利中心';
         $curr['url'] = $this->lists['']['url'];
+        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $prefix_url = DOMAIN.'member/wallet';
         $result = [
             'data'=> $this->query(),
-            'golds'=> $this->getGolds(),
+            'golds'=> $this->getGolds($pageCurr,$prefix_url),
             'tips'=> $this->getTips(),
-            'prefix_url'=> DOMAIN.'member/wallet',
+            'prefix_url'=> $prefix_url,
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -142,7 +145,7 @@ class WalletController extends BaseController
         if (!WalletModel::where('uid',$this->userid)->first()) {
             $data = [
                 'uid'=> $this->userid,
-                'weal'=> 200,
+//                'weal'=> 200,       //给个默认值，200福利
                 'created_at'=> time(),
             ];
             WalletModel::create($data);
@@ -157,12 +160,15 @@ class WalletController extends BaseController
     /**
      * 金币查询
      */
-    public function getGolds()
+    public function getGolds($pageCurr,$prefix_url)
     {
-        $datas = UserGoldModel::where('uid',$this->userid)
-            ->orderBy('id','desc')
-            ->paginate($this->limit);
-        $datas->limit = $this->limit;
+//        $datas = UserGoldModel::where('uid',$this->userid)
+//            ->orderBy('id','desc')
+//            ->paginate($this->limit);
+//        $datas->limit = $this->limit;
+        $rst = ApiGold::getGoldList($this->limit,$pageCurr,$this->userid);
+        $datas = $rst['code']==0?$rst['data']:[];
+        $datas['pagelist'] = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         return $datas;
     }
 

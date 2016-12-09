@@ -5,7 +5,7 @@
         <a href="{{DOMAIN}}member">会员后台</a> / 会员设置 / 资料设置
     </div>
 
-    <form data-am-validator method="POST" action="{{DOMAIN}}member/setting/{{ $data->id }}" enctype="multipart/form-data">
+    <form data-am-validator method="POST" action="{{DOMAIN}}member/setting/{{ $data['id'] }}" enctype="multipart/form-data">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="_method" value="POST">
 
@@ -16,43 +16,46 @@
                 </td></tr>
             <tr>
                 <td style="width:40%;"><label>用户名：</label></td>
-                <td>{{ $data->username }}
+                <td>{{ $data['username'] }}
                     {{--<input type="text" placeholder="至少2个字符" minlength="2" required name="username" value="{{ $data->username }}"/>--}}
                 </td>
             </tr>
             {{--<tr><td>&nbsp;</td></tr>--}}
             <tr>
                 <td><label>邮箱：</label></td>
-                <td><input type="text" placeholder="例：123@qq.com" pattern="^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" name="email" value="{{ $data->email }}"/></td>
+                <td><input type="text" placeholder="例：123@qq.com" pattern="^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" name="email" value="{{ $data['email'] }}"/></td>
             </tr>
             {{--<tr><td>&nbsp;</td></tr>--}}
             <tr>
                 <td><label>qq：</label></td>
-                <td><input type="text" name="qq" value="{{ $data->qq }}"/></td>
+                <td><input type="text" name="qq" value="{{ $data['qq'] }}"/></td>
             </tr>
             {{--<tr><td>&nbsp;</td></tr>--}}
             <tr>
                 <td><label>电话：</label></td>
-                <td><input type="text" name="tel" value="{{ $data->tel }}"/></td>
+                <td><input type="text" name="tel" value="{{ $data['tel'] }}"/></td>
             </tr>
             {{--<tr><td>&nbsp;</td></tr>--}}
             <tr>
                 <td><label>手机：</label></td>
-                <td><input type="text" name="mobile" value="{{ $data->mobile }}"/></td>
+                <td><input type="text" name="mobile" value="{{ $data['mobile'] }}"/></td>
             </tr>
             {{--<tr><td>&nbsp;</td></tr>--}}
+            @if(in_array($data['isuser'],[1,50]))
             <tr>
                 <td><label>用户类型<span class="star">(*)</span>：</label></td>
                 <td>
                     @foreach($isusers as $key=>$isuser)
-                        <label><input type="radio" class="radio" name="isuser" value="{{$key}}" onclick="change(this.value);" {{ $data->isuser==$key ? 'checked' : '' }}> {{ $isuser }}</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <label><input type="radio" class="radio" name="isuser" value="{{$key}}" onclick="change(this.value);" {{ $data['isuser']==$key ? 'checked' : '' }}> {{ $isuser }}</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         @if($key%3==0) <br> @endif
                     @endforeach
                 </td>
             </tr>
+            @endif
             {{--<tr><td>&nbsp;</td></tr>--}}
         </table>
 
+        @if(in_array($data['isuser'],[1,50]))
         {{--个人信息--}}
         <table class="table_create mem_person" style="display:none;">
             <tr><td colspan="2">
@@ -109,6 +112,7 @@
             </tr>
             {{--<tr><td>&nbsp;</td></tr>--}}
         </table>
+        @endif
         <script>
             function change(value){
 //                alert(value);
