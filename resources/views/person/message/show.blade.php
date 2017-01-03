@@ -21,7 +21,7 @@
                 <tr>
                     <td>内容：</td>
                     <td>
-                        <textarea readonly> &nbsp;{{ $data->intro }}</textarea>
+                        <textarea readonly style="border:1px solid ghostwhite;outline:none;"> &nbsp;{{ $data->intro }}</textarea>
                     </td>
                 </tr>
                 <tr>

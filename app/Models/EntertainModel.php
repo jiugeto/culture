@@ -38,8 +38,6 @@ class EntertainModel extends BaseModel
     public function user()
     {
         $uid = $this->uid ? $this->uid : 0;
-//        $userModel = UserModel::find($uid);
-//        return $userModel ? $userModel : '';
         $rstUser = ApiUsers::getOneUser($uid);
         return $rstUser['code']==0 ? $rstUser['data'] : [];
     }
@@ -50,8 +48,6 @@ class EntertainModel extends BaseModel
     public function company()
     {
         $uid = $this->uid ? $this->uid : 0;
-//        $companyModel = CompanyModel::where('uid',$uid)->first();
-//        return $companyModel ? $companyModel : '';
         $rstCompany = ApiCompany::getOneCompany($uid);
         return $rstCompany['code']==0 ? $rstCompany['data'] : [];
     }

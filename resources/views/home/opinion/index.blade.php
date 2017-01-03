@@ -15,9 +15,10 @@
         <div class="s_search">
             意见类型：
             <select name="status" class="s_select">
-                @foreach($model['statuss'] as $kstatus=>$vstatus)
-                <option value="{{ $kstatus }}" {{ $status==$kstatus ? 'selected' : '' }}>{{ $vstatus }}</option>
-                @endforeach
+                <option value="0" {{ $status==0 ? 'selected' : '' }}>所有</option>
+                <option value="1" {{ $status==1 ? 'selected' : '' }}>新意见</option>
+                <option value="2" {{ $status==2 ? 'selected' : '' }}>处理中</option>
+                <option value="4" {{ $status==5 ? 'selected' : '' }}>满意</option>
             </select>
             <a href="{{DOMAIN}}opinion/create" class="opinion_create">发布意见</a>
             <script>
@@ -33,7 +34,7 @@
                     if($(this).val()==0){
                         window.location.href = '{{DOMAIN}}opinion';
                     } else {
-                        window.location.href = '{{DOMAIN}}'+$(this).val()+'/opinion';
+                        window.location.href = '{{DOMAIN}}opinion/s/'+$(this).val();
                     }
                 });
             </script>
@@ -41,24 +42,26 @@
 
         {{-- 意见列表 --}}
         <div class="opinion_list">
-            @if(count($datas))
-                @foreach($datas as $data)
+            @if(count($datas)>1)
+                @foreach($datas as $kdata=>$data)
+                    @if(is_numeric($kdata))
             <table class="record">
                 <tr>
-                    <td class="text">标题：{{ $data->name }}</td>
-                    <td class="text">状态：{{ $data->status() }}</td>
-                    <td class="text">用户：{{ $data->getUName() }}</td>
-                    <td class="text" style="width:300px;font-size:14px;">时间：{{ $data->createTime() }}</td>
+                    <td class="text">标题：{{ $data['name'] }}</td>
+                    <td class="text">状态：{{ $data['statusName'] }}</td>
+                    <td class="text">用户：{{ $data['username'] }}</td>
+                    <td class="text" style="width:300px;font-size:14px;">时间：{{ $data['createTime'] }}</td>
                     <td class="detail">
-                        @if($data->status==1 && $data->uid==Session::get('user.uid'))
-                            <a href="{{DOMAIN}}opinion/{{$data->id}}/edit" style="float:right;">修改</a>
-                        @elseif($data->status==2 && $data->uid==Session::get('user.uid'))
-                            <a href="{{DOMAIN}}opinion/status/{{$data->id}}" style="float:right;">去评价</a>
+                        @if($data['status']==1 && $data['uid']==Session::get('user.uid'))
+                            {{--<a href="{{DOMAIN}}opinion/{{$data['id']}}/edit" style="float:right;">修改</a>--}}
+                        @elseif($data['status']==3 && $data['uid']==Session::get('user.uid'))
+                            <a href="{{DOMAIN}}opinion/status/{{$data['id']}}" style="float:right;">去评价</a>
                         @endif
-                        <a href="{{DOMAIN}}opinion/{{$data->id}}" style="float:right;">查看</a>
+                        <a href="{{DOMAIN}}opinion/{{$data['id']}}" style="float:right;">查看</a>
                     </td>
                 </tr>
             </table>
+                    @endif
                 @endforeach
             @else
             <table class="record">
@@ -66,7 +69,7 @@
             </table>
             @endif
 
-            @include('home.common.page')
+            @include('home.common.page2')
         </div>
     </div>
 @stop

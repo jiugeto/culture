@@ -1,6 +1,9 @@
 <?php
 namespace App\Http\Controllers\Person;
 
+use App\Api\ApiUser\ApiPerson;
+use App\Api\ApiUser\ApiUsers;
+use App\Models\BaseModel;
 use App\Models\DesignModel;
 use App\Models\GoodsModel;
 use App\Models\Base\MessageModel;
@@ -8,7 +11,6 @@ use App\Models\Base\OrderModel;
 use App\Models\Online\OrderProductModel;
 use App\Models\Base\PicModel;
 use App\Models\Online\ProductModel;
-use App\Models\UserModel;
 
 class SpaceController extends BaseController
 {
@@ -33,6 +35,8 @@ class SpaceController extends BaseController
             'products'=> $this->products($p_type),
             'messages'=> $this->messages(),
             'designs'=> $this->designs($d_type),
+            'frields'=> $this->getFrields(4),
+            'model'=> new BaseModel(),
             'g_type'=> $g_type,
             'p_type'=> $p_type,
             'd_type'=> $d_type,
@@ -87,8 +91,7 @@ class SpaceController extends BaseController
     {
         if ($p_type==1) {
             $buyerIds = array();
-            $buyers = OrderProductModel::where('del',0)
-                ->where('buyer',$this->userid)
+            $buyers = OrderProductModel::where('uid',$this->userid)
                 ->where('isshow',1)
                 ->get();
             if (count($buyers)) {
@@ -96,15 +99,13 @@ class SpaceController extends BaseController
                     $buyerIds[] = $buyer->id;
                 }
             }
-            $datas = ProductModel::where('del',0)
-                ->whereIn('uid',$buyerIds)
+            $datas = ProductModel::whereIn('uid',$buyerIds)
                 ->where('isshow',1)
                 ->orderBy('sort','desc')
                 ->orderBy('id','desc')
                 ->paginate(10);
         } else if ($p_type==2) {
-            $datas = ProductModel::where('del',0)
-                ->where('uid',$this->userid)
+            $datas = ProductModel::where('uid',$this->userid)
                 ->where('isshow',1)
                 ->orderBy('sort','desc')
                 ->orderBy('id','desc')
@@ -154,5 +155,14 @@ class SpaceController extends BaseController
                 ->paginate(4);
         }
         return $datas;
+    }
+
+    /**
+     * 显示4个好友
+     */
+    public function getFrields($limit)
+    {
+        $rst = ApiPerson::getUserFrields($this->userid,$limit);
+        return $rst['code']==0 ? $rst['data'] : [];
     }
 }

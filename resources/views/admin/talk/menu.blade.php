@@ -10,6 +10,12 @@
                     <img src="{{PUB}}assets/images/add.png" class="icon"> 添加专栏
                 </button>
             </a>
+            @elseif($crumb['category']['url']=='talk')
+            <a href="{{DOMAIN}}admin/talk/create">
+                <button type="button" class="am-btn am-btn-default">
+                    <img src="{{PUB}}assets/images/add.png" class="icon"> 添加话题
+                </button>
+            </a>
             @endif
             <a href="{{DOMAIN}}admin/talk">
                 <button type="button" class="am-btn am-btn-default">
@@ -32,12 +38,12 @@
         </span>
     </div>
     <script>
-        //u代表用户简写
+        //s代表用户简写
         function search(uname){
             if (uname=='') {
                 window.location.href = '{{DOMAIN}}admin/theme';
             } else {
-                window.location.href = '{{DOMAIN}}admin/theme/u/'+uname;
+                window.location.href = '{{DOMAIN}}admin/theme/s/'+uname;
             }
         }
     </script>

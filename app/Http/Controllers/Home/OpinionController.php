@@ -1,9 +1,9 @@
 <?php
 namespace App\Http\Controllers\Home;
 
-use App\Models\Base\UserGoldModel;
-use App\Models\Base\WalletModel;
-use App\Models\Home\OpinionModel;
+use App\Api\ApiUser\ApiGold;
+use App\Api\ApiUser\ApiOpinion;
+use App\Api\ApiUser\ApiWallet;
 use Illuminate\Http\Request;
 
 class OpinionController extends BaseController
@@ -17,15 +17,16 @@ class OpinionController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->model = new OpinionModel();
     }
 
     public function index($status=0)
     {
+        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $prefix_url = DOMAIN.'opinion';
         $result = [
-            'datas'=> $this->query($status),
+            'datas'=> $this->query($status,$pageCurr,$prefix_url),
             'model'=> $this->model,
-            'prefix_url'=> DOMAIN.'opinion',
+            'prefix_url'=> $prefix_url,
             'curr_menu'=> $this->url_curr,
             'status'=> $status,
         ];
@@ -35,14 +36,13 @@ class OpinionController extends BaseController
     public function create()
     {
         if (!\Session::has('user')) {
-            echo "<script>alert('你还没有登录！');history.go(-1);</script>";
+            echo "<script>alert('你还没有登录！');window.location.href='/login';</script>";
         }
-        //限制用户每日发布意见的数量
-        $datas = OpinionModel::where('uid',$this->userid)
-            ->where('created_at','>',strtotime(date('Ymd',time()).'000000'))
-            ->where('created_at','<',strtotime(date('Ymd',time()).'235959'))
-            ->get();
-        if (count($datas)) {
+        //限制用户每日发布意见的数量 <=5
+        $from = strtotime(date('Ymd',time()).'000000');
+        $to = strtotime(date('Ymd',time()).'235959');
+        $rstOpinion = ApiOpinion::getOpinionsByTime($this->userid,$from,$to);
+        if ($rstOpinion['code']==0 && count($rstOpinion['data'])>=5) {
             echo "<script>alert('今日意见发布已达上限！');history.go(-1);</script>";
         }
         $result = [
@@ -55,23 +55,30 @@ class OpinionController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
-        $data['created_at'] = time();
-        OpinionModel::create($data);
+        $rstOpinion = ApiOpinion::addOpinion($data);
+        if ($rstOpinion['code']!=0) {
+            echo "<script>alert('".$rstOpinion['msg']."');history.go(-1);</script>";exit;
+        }
 
-        //成功发布后给用户随机奖励金币1-5个
-        $data['gold1'] = rand(1,5);
-        UserGoldModel::setGold($this->userid,1,$data['gold1']);
-        //计算金币总数
-        if (isset($data['gold1'])) { WalletModel::setGold($this->userid,$data['gold1']); }
+        //成功发布后给用户随机奖励金币1-5个，并计算金币总数
+        //金币奖励：1建议发布奖励1-5，2建议评价奖励6-10，3用户心声奖励1-5，4订单好评奖励5，
+        $rstGold = ApiGold::add($this->userid,1);
+        if ($rstGold['code']!=0) {
+            echo "<script>alert('".$rstGold['msg']."');history.go(-1);</script>";exit;
+        }
 
         return redirect(DOMAIN.'opinion');
     }
 
     public function show($id)
     {
-        $this->menus['show'] = '意见详情';
+        $this->lists['show'] = '意见详情';
+        $rst = ApiOpinion::getOneOpinion($id);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> OpinionModel::find($id),
+            'data'=> $rst['data'],
             'curr_menu'=> $this->url_curr,
             'curr'=> 'show',
         ];
@@ -81,11 +88,15 @@ class OpinionController extends BaseController
     public function edit($id)
     {
         if (!\Session::has('user')) {
-            echo "<script>alert('你还没有登录！');history.go(-1);</script>";
+            echo "<script>alert('未登录！');history.go(-1);</script>";
         }
-        $this->menus['edit'] = '修改意见';
+        $this->lists['edit'] = '修改意见';
+        $rst = ApiOpinion::getOneOpinion($id);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> OpinionModel::find($id),
+            'data'=> $rst['data'],
             'curr_menu'=> $this->url_curr,
             'curr'=> 'edit',
         ];
@@ -95,8 +106,11 @@ class OpinionController extends BaseController
     public function update(Request $request,$id)
     {
         $data = $this->getData($request,$id);
-        $data['updated_at'] = time();
-        OpinionModel::where('id',$id)->update($data);
+        $data['id'] = $id;
+        $rst = ApiOpinion::modifyOpinion($data);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
         return redirect(DOMAIN.'opinion');
     }
 
@@ -105,9 +119,13 @@ class OpinionController extends BaseController
         if (!\Session::has('user')) {
             echo "<script>alert('你还没有登录！');history.go(-1);</script>";
         }
-        $this->menus['edit'] = '意见评价';
+        $this->lists['edit'] = '意见评价';
+        $rst = ApiOpinion::getOneOpinion($id);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> OpinionModel::find($id),
+            'data'=> $rst['data'],
             'curr_menu'=> $this->url_curr,
             'curr'=> 'edit',
         ];
@@ -116,23 +134,21 @@ class OpinionController extends BaseController
 
     public function setStatus(Request $request,$id)
     {
-        if ($request->status==3 && !$request->remarks) {
+        if ($request->status==4 && !$request->remarks) {
             echo "<script>alert('请填写不满意缘由！');history.go(-1);</script>";exit;
         }
-        $data = [
-            'status'=> $request->status,
-            'remarks'=> $request->remarks,
-            'updated_at'=> time(),
-        ];
-        OpinionModel::where('id',$id)->update($data);
-
-        //成功发布后给用户随机奖励金币10-15个
-        if ($request->status==4) {
-            $data['gold2'] = rand(10,15);
-            UserGoldModel::setGold($this->userid,2,$data['gold2']);
+        $rstOpinion = ApiOpinion::setStatus($id,$request->status,$request->remarks);
+        if ($rstOpinion['code']!=0) {
+            echo "<script>alert('".$rstOpinion['msg']."');history.go(-1);</script>";exit;
         }
-        //计算金币总数
-        if (isset($data['gold2'])) { WalletModel::setGold($this->userid,$data['gold2']); }
+        //状态满意后给用户随机奖励金币10-15个
+        //金币奖励：1建议发布奖励1-5，2建议评价奖励6-10，3用户心声奖励1-5，4订单好评奖励5，
+        if ($request->status==4) {
+            $rstGold = ApiGold::add($this->userid,2);
+            if ($rstGold['code']!=0) {
+                echo "<script>alert('".$rstGold['msg']."');history.go(-1);</script>";exit;
+            }
+        }
 
         return redirect(DOMAIN.'opinion');
     }
@@ -147,13 +163,16 @@ class OpinionController extends BaseController
     public function getData(Request $request,$id=null)
     {
         //判断内容有无
+        if (!$this->userid) {
+            echo "<script>alert('未登录！');history.go(-1);</script>";exit;
+        }
         if (!isset($request->intro)) {
             echo "<script>alert('内容不能为空！');history.go(-1);</script>";exit;
         }
         $data = [
             'name'=> $request->name,
             'intro'=> $request->intro,
-            'uid'=> \Session::has('user')?\Session::get('user.uid'):0,
+            'uid'=> $this->userid,
         ];
         return $data;
     }
@@ -161,29 +180,11 @@ class OpinionController extends BaseController
     /**
      * 查询方法，提取对本站的意见
      */
-    public function query($status)
+    public function query($status,$pageCurr,$prefix_url)
     {
-        if ($status==0) {
-            //所有意见
-            $datas = OpinionModel::where('isshow', 2)
-                ->paginate($this->limit);
-        } elseif ($status==1) {
-            //未处理
-            $datas = OpinionModel::where('isshow', 2)
-                ->where('status',1)
-                ->paginate($this->limit);
-        } elseif ($status==2) {
-            //已处理
-            $datas = OpinionModel::where('isshow', 1)
-                ->where('status','>',3)
-                ->paginate($this->limit);
-        } elseif ($status==4) {
-            //处理并且满意
-            $datas = OpinionModel::where('isshow', 1)
-                ->where('status',5)
-                ->paginate($this->limit);
-        }
-        $datas->limit = $this->limit;
+        $rst = ApiOpinion::getOpinionList($this->limit,$pageCurr,$status);
+        $datas = $rst['code']==0?$rst['data']:[];
+        $datas['pagelist'] = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         return $datas;
     }
 }

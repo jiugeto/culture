@@ -17,34 +17,37 @@
         </div>
       </span>
       <span class="header_right">
-        <div class="head_right"><a href="/online">在线创作</a></div>
-        <div class="head_right"><a href="/newuser">新手点这里</a></div>
         <div class="head_right">
+            {{--<a href="/online">在线创作</a>--}}
+            <a href="{{env('ONLINE_DOMAIN')}}" target="_blank">在线创作</a>
+        </div>
+        <div class="head_right"><a href="/newuser">新手点这里</a></div>
+        {{--<div class="head_right">--}}
             {{--<a href="javascript:void(0);" onclick="show_Favorite(window.location,document.title);">加入收藏</a>--}}
             {{--<a href="javascript:void(0);"onclick="show_index(window.location);">设为首页</a>--}}
             {{--<a href="/" style="color:red;">本站首页</a>--}}
-            <select name="space" title="点击选择">
-                <option value="">本站首页</option>
-                <option value="1">跳到本站首页</option>
-                <option value="2">跳到在线创作</option>
-                <option value="3">跳到个人空间</option>
-                <option value="4">跳到话题中心</option>
-            </select>
-        </div>
-        <script>
-            $("select[name='space']").change(function(){
-                var space = $(this).val();
-                var tolink = '/';
-                if (space==2) {
-                    tolink = '/online';
-                } else if (space==3) {
-                    tolink = '/person';
-                } else if (space==4) {
-                    tolink = '/talk';
-                }
-                window.location.href = tolink;
-            });
-        </script>
+            {{--<select name="space" title="点击选择" style="outline:none;">--}}
+                {{--<option value="">本站首页</option>--}}
+                {{--<option value="1">跳到本站首页</option>--}}
+                {{--<option value="2">跳到在线创作</option>--}}
+                {{--<option value="3">跳到个人空间</option>--}}
+                {{--<option value="4">跳到话题中心</option>--}}
+            {{--</select>--}}
+        {{--</div>--}}
+        {{--<script>--}}
+            {{--$("select[name='space']").change(function(){--}}
+                {{--var space = $(this).val();--}}
+                {{--var tolink = '/';--}}
+                {{--if (space==2) {--}}
+                    {{--tolink = '{{env('ONLINE_DOMAIN')}}';--}}
+                {{--} else if (space==3) {--}}
+                    {{--tolink = '/person';--}}
+                {{--} else if (space==4) {--}}
+                    {{--tolink = '{{env('TALK_DOMAIN')}}';--}}
+                {{--}--}}
+                {{--window.location.href = tolink;--}}
+            {{--});--}}
+        {{--</script>--}}
       </span>
     </div>
 </div>

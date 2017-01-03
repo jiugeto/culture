@@ -4,7 +4,7 @@
         @include('person.partials.top')
         <div class="per_list">
             <p class="title">发送消息</p>
-            <form method="POST" action="{{DOMAIN}}person/message" enctype="multipart/form-data" class="list">
+            <form method="POST" action="{{DOMAIN}}person/message" enctype="multipart/form-data" class="list" style="width:748px;">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 {{--<h4 style="text-align:center;">发送消息</h4>--}}
                 <table class="tform">
@@ -38,7 +38,8 @@
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align:center;">
-                            <a onclick="history.go(-1);">返回上一页</a>
+                            {{--<a onclick="history.go(-1);">返回上一页</a>--}}
+                            <button type="button" class="companybtn" onclick="history.go(-1);">返回上一页</button>
                             <button type="submit" class="companybtn" name="submit" value="nosend">保存草稿</button>
                             <button type="submit" class="companybtn" name="submit" value="send">开始发送</button>
                         </td>

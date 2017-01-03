@@ -48,8 +48,13 @@
                         </div>
 
                         <div class="am-form-group">
-                            <label>图片 / Picture：</label>
-                            @include('admin.common.piclist')
+                            <label>图片 / Picture：</label><br>
+                            @if($data->img)
+                                <img src="{{ $data->img }}" width="300">
+                                <div style="margin:5px 0;border-bottom:1px dashed lightgrey;"></div>
+                            @endif
+                            <label>重新上传：</label><br>
+                            @include('admin.common.uploadimg')
                         </div>
 
                         <div class="am-form-group">

@@ -67,37 +67,41 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::resource('goods','GoodsController');
     //内部产品管理
         //在线动画路由
+    Route::get('product/{id}/{isshow}','ProductController@setIsShow');
     Route::post('product/{id}','ProductController@update');
     Route::resource('product','ProductController');
         //离线动画路由
-    Route::get('proVideo/pre/{id}','ProductVideoController@pre');   //预览视频
-    Route::resource('proVideo','ProductVideoController');
-        //动画设置路由
-    Route::post('{pro_id}/proLayer/{id}','ProductLayerController@update');
-    Route::resource('{pro_id}/proLayer','ProductLayerController');
-        //图片文字路由
-    Route::post('{pro_id}/{layerid}/proCon/{id}','ProductConController@update');
-    Route::resource('{pro_id}/{layerid}/proCon','ProductConController');
-        //图层路由
-    Route::post('{pro_id}/{layerid}/proAttr/{id}','ProductAttrController@update');
-    Route::resource('{pro_id}/{layerid}/proAttr','ProductAttrController');
-        //属性动画路由
-    Route::post('{pro_id}/{layerid}/proLayerAttr/{id}','ProductLayerAttrController@update');
-    Route::resource('{pro_id}/{layerid}/proLayerAttr','ProductLayerAttrController');
-        //实时创作路由
-    Route::post('{pro_id}/creation/addLayer','ProCreationController@insertLayer');      //动画设置添加
-    Route::post('{pro_id}/creation/editLayer/{layerid}','ProCreationController@updateLayer');      //动画设置修改
-    Route::get('{pro_id}/creation/addLayerAttr/{layerid}/{con_id}/{genre}/{attrSel}/{per}/{val}','ProCreationController@insertLayerAttr');      //动画关键帧添加
-    Route::get('{pro_id}/creation/editLayerAttr/{layerid}/{con_id}/{genre}/{layerAttrId}/{attrSel}/{per}/{val}','ProCreationController@updateLayerAttr');      //动画关键帧修改
-    Route::post('{pro_id}/creation/editCon/{con_id}','ProCreationController@updateCon');      //图文修改
-    Route::post('{pro_id}/creation/addCon','ProCreationController@insertCon');      //图文添加
-    Route::post('{pro_id}/creation/editAttr/{attrid}','ProCreationController@updateAttr');      //属性修改
-    Route::get('{pro_id}/creation','ProCreationController@index');      //预览、编辑
-    Route::get('{pro_id}/creation/{layerid}/{con_id}/{genre}','ProCreationController@index');
-    Route::get('{pro_id}/creation/edit','ProCreationController@edit');  //修改页面，默认第一条图文
-    Route::get('{pro_id}/creation/edit/{layerid}/{con_id}/{genre}','ProCreationController@edit');
-    Route::get('{pro_id}/pro/play/{layerid}/{con_id}/{genre}','ProCreationController@play');       //动画模板
-    Route::get('{pro_id}/pro/edit/{layerid}/{con_id}/{genre}','ProCreationController@play2');
+//    Route::get('provideo/pre/{id}','ProductVideoController@pre');   //预览视频
+    Route::get('provideo/clear','ProductVideoController@clearTable');
+    Route::post('provideo/{id}','ProductVideoController@update');
+    Route::get('provideo/s/{genre}','ProductVideoController@index');
+    Route::resource('provideo','ProductVideoController');
+//        //动画设置路由
+//    Route::post('{pro_id}/proLayer/{id}','ProductLayerController@update');
+//    Route::resource('{pro_id}/proLayer','ProductLayerController');
+//        //图片文字路由
+//    Route::post('{pro_id}/{layerid}/proCon/{id}','ProductConController@update');
+//    Route::resource('{pro_id}/{layerid}/proCon','ProductConController');
+//        //图层路由
+//    Route::post('{pro_id}/{layerid}/proAttr/{id}','ProductAttrController@update');
+//    Route::resource('{pro_id}/{layerid}/proAttr','ProductAttrController');
+//        //属性动画路由
+//    Route::post('{pro_id}/{layerid}/proLayerAttr/{id}','ProductLayerAttrController@update');
+//    Route::resource('{pro_id}/{layerid}/proLayerAttr','ProductLayerAttrController');
+//        //实时创作路由
+//    Route::post('{pro_id}/creation/addLayer','ProCreationController@insertLayer');      //动画设置添加
+//    Route::post('{pro_id}/creation/editLayer/{layerid}','ProCreationController@updateLayer');      //动画设置修改
+//    Route::get('{pro_id}/creation/addLayerAttr/{layerid}/{con_id}/{genre}/{attrSel}/{per}/{val}','ProCreationController@insertLayerAttr');      //动画关键帧添加
+//    Route::get('{pro_id}/creation/editLayerAttr/{layerid}/{con_id}/{genre}/{layerAttrId}/{attrSel}/{per}/{val}','ProCreationController@updateLayerAttr');      //动画关键帧修改
+//    Route::post('{pro_id}/creation/editCon/{con_id}','ProCreationController@updateCon');      //图文修改
+//    Route::post('{pro_id}/creation/addCon','ProCreationController@insertCon');      //图文添加
+//    Route::post('{pro_id}/creation/editAttr/{attrid}','ProCreationController@updateAttr');      //属性修改
+//    Route::get('{pro_id}/creation','ProCreationController@index');      //预览、编辑
+//    Route::get('{pro_id}/creation/{layerid}/{con_id}/{genre}','ProCreationController@index');
+//    Route::get('{pro_id}/creation/edit','ProCreationController@edit');  //修改页面，默认第一条图文
+//    Route::get('{pro_id}/creation/edit/{layerid}/{con_id}/{genre}','ProCreationController@edit');
+//    Route::get('{pro_id}/pro/play/{layerid}/{con_id}/{genre}','ProCreationController@play');       //动画模板
+//    Route::get('{pro_id}/pro/edit/{layerid}/{con_id}/{genre}','ProCreationController@play2');
     //租赁路由
     Route::post('rent/{id}','RentController@update');
     Route::resource('rent','RentController');
@@ -131,23 +135,15 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::post('uservoice/{id}','UserVoiceController@update');
     Route::resource('uservoice','UserVoiceController');
         //用户意见管理
+    Route::get('opinions/clear','OpinionsController@clearTable');     //清空表
     Route::post('opinions/{id}','OpinionsController@update');
     Route::get('opinions/{id}/destroy','OpinionsController@destroy');
     Route::get('opinions/{id}/restore','OpinionsController@restore');
     Route::get('opinions/{id}/forceDelete','OpinionsController@forceDelete');
     Route::get('opinions/trash','OpinionsController@trash');
     Route::get('opinions/{isshow}/trash','OpinionsController@trash');
-    Route::get('{isshow}/opinions','OpinionsController@index');
+    Route::get('opinions/s/{isshow}','OpinionsController@index');
     Route::resource('opinions','OpinionsController');
-        //图片管理
-    Route::post('pic/{id}','PicController@update');
-    Route::get('pic/create/{id}','PicController@create');
-    Route::resource('pic','PicController');
-        //视频管理
-    Route::get('video/pre/{id}','VideoController@pre');
-    Route::get('video/uploadWay','VideoController@uploadWay');
-    Route::post('video/{id}','VideoController@update');
-    Route::resource('video','VideoController');
     //用户日志管理
     Route::resource('userlog','UserlogController');
     Route::resource('adminlog','AdminlogController');
@@ -157,6 +153,7 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     //企业页面功能管理
         //企业主页路由
     Route::post('commain/{id}','ComMainController@update');
+    Route::get('commain/isshow/{id}/{isshow}','ComMainController@setIsShow');
     Route::resource('commain','ComMainController');
         //企业模块路由
     Route::post('commodule/{id}','ComModuleController@update');
@@ -187,11 +184,14 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::get('storyboard/trash','StoryBoardController@trash');
     Route::resource('storyboard','StoryBoardController');
         //话题管理
-    Route::get('talk/c/{uname}','TalkController@index');
+    Route::post('talk/{id}','TalkController@update');
+    Route::get('talk/isdel/{id}/{del}','TalkController@isdel');
+    Route::get('talk/s/{uname}','TalkController@index');        //s代表检索
     Route::resource('talk','TalkController');
         //话题专题管理
     Route::post('theme/{id}','ThemeController@update');
-    Route::get('theme/u/{uname}','ThemeController@index');      //u代表用户简写
+    Route::get('theme/isdel/{id}/{del}','ThemeController@isdel');
+    Route::get('theme/s/{uname}','ThemeController@index');      //s代表检索
     Route::resource('theme','ThemeController');
     //订单管理
         //订单路由
@@ -203,18 +203,18 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::post('orderfirm/{id}','OrderFirmController@update');
     Route::resource('orderfirm','OrderFirmController');
         //在线订单路由
-    Route::get('orderpro/backGold/{id}/{uid}','OrderProductController@setBackGold');
-    Route::get('orderpro/money/{id}/{money}','OrderProductController@setMoney');
-    Route::get('orderpro/status/{id}/{status}','OrderProductController@setStatus');
-    Route::get('orderpro/isshow/{id}/{isshow}','OrderProductController@setShow');
-    Route::post('orderpro/{id}','OrderProductController@update');
-    Route::get('orderpro/s/{isshow}/{status}','OrderProductController@index');      //s代表检索
-    Route::resource('orderpro','OrderProductController');
+    Route::get('ordercre/status/{id}/{status}','OrderCreController@setStatus');
+    Route::get('ordercre/isshow/{id}/{isshow}','OrderCreController@setShow');
+    Route::post('ordercre/{id}','OrderCreController@update');
+    Route::get('ordercre/s/{isshow}/{status}','OrdercreController@index');      //s代表检索
+    Route::get('ordercre/clear','OrderCreController@clearTable');
+    Route::resource('ordercre','OrderCreController');
     //钱包管理
     Route::post('wallet/weal/{id}','WalletController@setWeal');
     Route::get('wallet/toweal/{id}/{type}','WalletController@getWeal');
     Route::get('tip','WalletController@tipList');
     Route::get('gold','WalletController@goldList');
     Route::get('sign','WalletController@signList');
+    Route::post('wallet/{id}','WalletController@update');
     Route::resource('wallet','WalletController');
 });

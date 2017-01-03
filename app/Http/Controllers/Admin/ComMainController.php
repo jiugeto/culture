@@ -36,11 +36,9 @@ class ComMainController extends BaseController
 
     public function create()
     {
-//        if (count(ComMainModel::all())) { echo "<script>alert('已有默认记录！');history.go(-1);</script>";exit; }
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
-            'pics'=> PicModel::all(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -61,7 +59,6 @@ class ComMainController extends BaseController
         $curr['url'] = $this->crumb['edit']['url'];
         $result = [
             'data'=> ComMainModel::find($id),
-            'pics'=> PicModel::all(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -89,6 +86,18 @@ class ComMainController extends BaseController
             'curr'=> $curr,
         ];
         return view('admin.commain.show', $result);
+    }
+
+    /**
+     * 设置是否隐藏
+     */
+    public function setIsShow($id,$isshow)
+    {
+        if (!$id || !in_array($isshow,[1,2])) {
+            echo "<script>alert('参数有误！');history.go(-1);</script>";exit;
+        }
+        ComMainModel::where('id',$id)->update(['isshow'=> $isshow]);
+        return redirect(DOMAIN.'admin/commain');
     }
 
 

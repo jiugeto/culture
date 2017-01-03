@@ -10,8 +10,8 @@
                     <td>原来头像：</td>
                     <td>
                         <div class="head">
-                            @if($user->head)
-                                <img src="{{ $user->head() }}">
+                            @if($user['head'])
+                                <img src="{{ $user['headImg'] }}">
                             @else
                                 <div class="nopic">无</div>
                             @endif
@@ -30,16 +30,17 @@
                         <div class="pic_list">
                             @if(count($pics))
                                 @foreach($pics as $pic)
-                            <div class="img {{$pic->id==$user->head?'img_curr':''}}" onclick="getPic({{$pic->id}});" title="点击获取该图片">
+                            <div class="img {{$pic->id==$user['head']?'img_curr':''}}" onclick="getPic({{$pic->id}});" title="点击获取该图片">
                                 <img src="{{ $pic->url }}"
                                      style="@if($size=$pic->getPicSize($pic,$w=100,$h=100)) width:{{$size['w']}}px;height:{{$size['h']}}px; @endif">
                                 <div class="bianhao">编号：{{ $pic->id }}</div>
                             </div>
                                 @endforeach
                             @endif
+                            <div class="pic_list_sure"><a>确定图片 编号
+                                <span id="addpicid" class="red">{{ $user['head'] ? $user['head'] : 0 }}</span>
+                            </a></div>
                         </div>
-                        <br>
-                        <a class="pic_list_sure">确定图片 编号<span id="addpicid" class="red">{{ $user->head ? $user->head : 0 }}</span></a>
                     </td>
                 </tr>
                 <tr><td colspan="2"><div style="padding:5px 0;border-bottom:1px solid ghostwhite;"></div></td></tr>

@@ -147,7 +147,7 @@ class ApiUsers
         if ($response->error->code != 0) {
             return array('code' => -1, 'msg' => $response->error->msg);
         }
-        return array('code' => 0, 'data' => ApiBase::objToArr($response->data));
+        return array('code' => 0, 'msg' => $response->error->msg);
     }
 
     /**
@@ -155,7 +155,7 @@ class ApiUsers
      */
     public static function modifyPwd($data)
     {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/user/modifyPwd';
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/user/modifypwd';
         $curl = new Curl();
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
         $curl->post($apiUrl, $data);
@@ -163,8 +163,52 @@ class ApiUsers
         if ($response->error->code != 0) {
             return array('code' => -1, 'msg' => $response->error->msg);
         }
-        return array('code' => 0, 'data' => ApiBase::objToArr($response->data));
+        return array('code' => 0, 'msg' => $response->error->msg);
     }
+
+    /**
+     * 设置审核
+     */
+    public static function setAuth($uid,$auth)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/user/auth';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, array(
+            'uid'   =>  $uid,
+            'auth'  =>  $auth,
+        ));
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array('code' => 0, 'msg' => $response->error->msg);
+    }
+
+    /**
+     * 换头像
+     */
+    public static function setHead($uid,$head)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/user/head';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, array(
+            'uid'   =>  $uid,
+            'pic_id'  =>  $head,
+        ));
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array('code' => 0, 'msg' => $response->error->msg);
+    }
+
+    /**
+     * ====================
+     * 下面是用户参数方法
+     * ====================
+     */
 
     /**
      * 获取用户自定义参数
@@ -185,17 +229,14 @@ class ApiUsers
     }
 
     /**
-     * 设置审核
+     * 设置个人后台顶部背景图
      */
-    public static function setAuth($uid,$auth)
+    public static function setPersonTopBg($data)
     {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/user/auth';
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/userparam/persontopbg';
         $curl = new Curl();
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
-        $curl->post($apiUrl, array(
-            'uid'   =>  $uid,
-            'auth'  =>  $auth,
-        ));
+        $curl->post($apiUrl, $data);
         $response = json_decode($curl->response);
         if ($response->error->code != 0) {
             return array('code' => -1, 'msg' => $response->error->msg);

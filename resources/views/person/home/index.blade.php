@@ -36,13 +36,19 @@
             </script>
 
             <span class="right">
-                @if($user->head())
-                <img src="{{ $user->head() }}">
+                @if($user['headImg'])
+                <div style="width:40px;height:40px;overflow:hidden;float:left;position:relative;top:-12px;">
+                    <img src="{{ $user['headImg']}}" style="
+                        @if($size=$model->getImgSize($user['head'],$w=40,$h=40))
+                            width:{{$size['w']}}px;height:{{$size['h']}}px;
+                        @endif
+                        ">
+                </div>
                 @else
                 <img src="{{DOMAIN}}assets/images/person.png">
                 @endif
                 {{ \Session::has('user') ? \Session::get('user.username') : '' }}
-                <a href="{{DOMAIN}}person/space" class="userinfo">个人资料</a>
+                <a href="{{DOMAIN}}person/space" class="userinfo">个人空间</a>
             </span>
         </div>
 

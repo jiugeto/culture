@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Online\ProductModel;
+use App\Api\ApiOnline\ApiProduct;
 use Illuminate\Http\Request;
 
 class ProductController extends BaseController
@@ -16,16 +16,17 @@ class ProductController extends BaseController
         $this->crumb['']['name'] = '产品列表';
         $this->crumb['category']['name'] = '产品管理';
         $this->crumb['category']['url'] = 'product';
-        $this->model = new ProductModel();
     }
 
     public function index()
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
+        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $prefix_url = DOMAIN.'admin/product';
         $result = [
-            'datas'=> $this->query(),
-            'prefix_url'=> DOMAIN.'admin/product',
+            'datas'=> $this->query($pageCurr,$prefix_url),
+            'prefix_url'=> $prefix_url,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -36,7 +37,12 @@ class ProductController extends BaseController
     {
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
+        $rst = ApiProduct::getModel();
+        if ($rst['code']!=0) {
+            echo "<script>alert('获取有误！');history.go(-1);</script>";exit;
+        }
         $result = [
+            'model'=> $rst['model'],
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -46,12 +52,14 @@ class ProductController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
-        $data['created_at'] = time();
-        ProductModel::create($data);
+        $rst = ApiProduct::add($data);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
 
-        //插入搜索表
-        $productModel = ProductModel::where($data)->first();
-        \App\Models\Home\SearchModel::change($productModel,1,'create');
+//        //插入搜索表
+//        $productModel = ProductModel::where($data)->first();
+//        \App\Models\Home\SearchModel::change($productModel,1,'create');
 
         return redirect(DOMAIN.'admin/product');
     }
@@ -60,8 +68,13 @@ class ProductController extends BaseController
     {
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
+        $rst = ApiProduct::show($id);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> ProductModel::find($id),
+            'data'=> $rst['data'],
+            'model'=> $rst['model'],
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -71,12 +84,14 @@ class ProductController extends BaseController
     public function update(Request $request, $id)
     {
         $data = $this->getData($request);
-        $data['updated_at'] = time();
-        ProductModel::where('id',$id)->update($data);
+        $data['id'] = $id;
+//        $data['updated_at'] = time();
+//        ProductModel::where('id',$id)->update($data);
+//        $rst = ApiProduct::;
 
-        //更新搜索表
-        $productModel = ProductModel::where('id',$id)->first();
-        \App\Models\Home\SearchModel::change($productModel,1,'update');
+//        //更新搜索表
+//        $productModel = ProductModel::where('id',$id)->first();
+//        \App\Models\Home\SearchModel::change($productModel,1,'update');
 
         return redirect(DOMAIN.'admin/product');
     }
@@ -85,26 +100,27 @@ class ProductController extends BaseController
     {
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
+        $rst = ApiProduct::show($id);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> ProductModel::find($id),
+            'data'=> $rst['data'],
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
         return view('admin.product.show', $result);
     }
 
-//    public function destroy($id)
-//    {
-//        ProductModel::where('id',$id)->update(['del'=> 1]);
-//        return redirect(DOMAIN.'admin/product');
-//    }
-//
-//    public function restore($id)
-//    {
-//        ProductModel::where('id',$id)->update(['del'=> 0]);
-//        return redirect(DOMAIN.'admin/product/trash');
-//    }
-//
+    public function setIsShow($id,$isshow)
+    {
+        $rst = ApiProduct::isShow($id,$isshow);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN.'admin/product');
+    }
+
 //    public function forceDelete($id)
 //    {
 //        ProductModel::where('id',$id)->delete();
@@ -128,6 +144,7 @@ class ProductController extends BaseController
     {
         $product = [
             'name'=> $request->name,
+            'cate'=> $request->cate,
             'intro'=> $request->intro,
             'sort'=> $request->sort,
             'istop'=> $request->istop,
@@ -139,11 +156,11 @@ class ProductController extends BaseController
     /**
      * 查询方法
      */
-    public function query()
+    public function query($pageCurr,$prefix_url)
     {
-        $datas = ProductModel::orderBy('id','desc')
-            ->paginate($this->limit);
-        $datas->limit = $this->limit;
+        $rst = ApiProduct::getProductsList($this->limit,$pageCurr);
+        $datas = $rst['code']==0?$rst['data']:[];
+        $datas['pagelist'] = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         return $datas;
     }
 }

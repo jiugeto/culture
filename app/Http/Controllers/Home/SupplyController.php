@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Home;
 
 use App\Api\ApiUser\ApiCompany;
-use App\Models\Base\BaseModel;
+use App\Models\BaseModel;
 
 class SupplyController extends BaseController
 {
@@ -31,7 +31,7 @@ class SupplyController extends BaseController
             'datas'=> $this->query($genre,$pageCurr,$prefix_url),
             'prefix_url'=> $prefix_url,
             'genres'=> $this->genres,
-            'areaModel'=> new BaseModel(),
+            'model'=> new BaseModel(),
             'ads'=> $this->ads(),
             'lists'=> $this->list,
             'curr_menu'=> $this->curr,

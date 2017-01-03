@@ -10,7 +10,7 @@
                 {{--<a href="{{DOMAIN}}person/pic/{{ $data->id }}">--}}
                     <div class="per_waterfall">
                         <div class="img">
-                            <img src="{{ $data->url }}" style="@if($size=$data->getPicSize($data,$w=148,$h=100)) width:{{$size['w']}}px;height:{{$size['h']}}px; @endif">
+                            <img src="{{ $data->getUrl() }}" style="@if($size=$data->getPicSize($data,$w=148,$h=100)) width:{{$size['w']}}px;height:{{$size['h']}}px; @endif">
                         </div>
                         <p class="text">{{ $data->name }}</p>
                     </div>

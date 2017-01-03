@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Member;
 use App\Api\ApiUser\ApiCompany;
 use App\Api\ApiUser\ApiPerson;
 use App\Api\ApiUser\ApiUsers;
+use App\Models\Base\AreaModel;
 use Illuminate\Http\Request;
 use Hash;
 use Session;
@@ -29,19 +30,25 @@ class SettingController extends BaseController
     public function show()
     {
         $rstUser = ApiUsers::getOneUser($this->userid);
-        $data = $rstUser['code']==0 ? $rstUser['data'] : [];
+        if ($rstUser['code']==0) {
+            $data =  $rstUser['data'];
+            $data['areaName'] = AreaModel::getAreaStr($rstUser['data']['area']);
+        }
         if ($rstUser['code']==0 && in_array($data['isuser'],[1,2,4,50])) {
             $rstPerson = ApiPerson::getPersonInfo($rstUser['data']['id']);
-            $personModel = $rstPerson['code']==0 ? $rstPerson['data'] : [];
+            $personArr = $rstPerson['code']==0 ? $rstPerson['data'] : [];
         }
         if($rstUser['code']==0 && in_array($data['isuser'],[3,5,6,7,50])) {
             $rstCompany = ApiCompany::getOneCompany($rstUser['data']['id']);
-            $companyModel = $rstCompany['code']==0 ? $rstCompany['data'] : [];
+            if ($rstCompany['code']==0) {
+                $companyArr =  $rstCompany['data'];
+                $companyArr['areaName'] = AreaModel::getAreaStr($rstCompany['data']['area']);
+            }
         }
         $result = [
             'data'=> $data,
-            'personModel'=> isset($personModel) ? $personModel : [],
-            'companyModel'=> isset($companyModel) ? $companyModel : [],
+            'personArr'=> isset($personArr) ? $personArr : [],
+            'companyArr'=> isset($companyArr) ? $companyArr : [],
             'lists'=> $this->lists,
         ];
         return view('member.setting.show', $result);
@@ -195,9 +202,9 @@ class SettingController extends BaseController
     public function info($id)
     {
         $rstUser = ApiUsers::getOneUser($id);
-        $userModel = $rstUser['code']==0 ? $rstUser['data'] : [];
+        $userArr = $rstUser['code']==0 ? $rstUser['data'] : [];
         $result = [
-            'data'=> $userModel,
+            'data'=> $userArr,
             'lists'=> $this->lists,
             'curr_list'=> '',
         ];

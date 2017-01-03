@@ -1,22 +1,20 @@
 <?php
 namespace App\Http\Controllers\Home;
 
+use App\Api\ApiOnline\ApiProduct;
+use App\Api\ApiTalk\ApiTalk;
 use App\Api\ApiUser\ApiCompany;
+use App\Api\ApiUser\ApiTip;
 use App\Api\ApiUser\ApiUsers;
 use App\Api\ApiUser\ApiUserVoice;
 use App\Models\Base\AdModel;
 use App\Models\Base\OrderModel;
-use App\Models\Base\UserTipModel;
-//use App\Models\CompanyModel;
+use App\Models\BaseModel;
 use App\Models\DesignModel;
 use App\Models\EntertainModel;
 use App\Models\GoodsModel;
 use App\Models\IdeasModel;
-use App\Models\Online\ProductModel;
 use App\Models\RentModel;
-use App\Models\Talk\TalksModel;
-//use App\Models\UserModel;
-//use App\Models\Home\UserVoiceModel;
 
 class HomeController extends BaseController
 {
@@ -33,6 +31,12 @@ class HomeController extends BaseController
 
     public function index()
     {
+//        $size = $this->getPpts(1)[0]->getImgSize($this->getPpts(1)[0]->img,100,40);
+//        dd($size);
+//        echo "<div style='width:100px;height:40px;border:1px solid orangered;overflow:hidden'>";
+//        echo "<img src='".$this->getPpts(1)[0]->img."' style='width:".$size['w']."px;height:".$size['h']."px;'>";
+//        echo "</div>";
+//        exit;
         $result = [
             'ppts'=> $this->getPpts(9),      //首页轮播大图
             'ideas'=> $this->getIdeas(3),
@@ -95,14 +99,13 @@ class HomeController extends BaseController
      */
     public function getTalks($limit)
     {
-        $datas =  TalksModel::where(['del'=>0, 'isshow'=>1])
-                    ->orderBy('sort','desc')
-                    ->orderBy('id','desc')
-                    ->paginate($limit);
-        static $number = 1;
-        if (count($datas)) {
-            foreach ($datas as $data) { $data->number = $number ++; }
-        }
+        $rst = ApiTalk::index($limit,1);
+        $datas = $rst['code']==0?$rst['data']:[];
+//        $datas['pagelist'] = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
+//        static $number = 1;
+//        if (count($datas)>1) {
+//            foreach ($datas as $data) { $data['pagelist']['number'] = $number ++; }
+//        }
         return $datas;
     }
 
@@ -111,10 +114,12 @@ class HomeController extends BaseController
      */
     public function getProducts($limit)
     {
-        return ProductModel::where('isshow',1)
-                    ->orderBy('sort','desc')
-                    ->orderBy('id','desc')
-                    ->paginate($limit);
+//        return ProductModel::where('isshow',1)
+//                    ->orderBy('sort','desc')
+//                    ->orderBy('id','desc')
+//                    ->paginate($limit);
+        $rst = ApiProduct::getProductsList($limit);
+        return $rst['code']==0 ? $rst['data'] : [];
     }
 
     /**
@@ -235,14 +240,16 @@ class HomeController extends BaseController
      */
     public function getTip()
     {
-        //新人红包
-        $newModel = new UserTipModel();
-        $new = UserTipModel::where('uid',$this->userid)
-            ->where('type',1)
-            ->first();
-        if (!$new) {
-            $tip['key'] = 1;
-            $tip['name'] = $newModel['types'][1];
+        //type：1新人红包
+        $uid = $this->userid?$this->userid:0;
+        $type = 1;
+        $rst = ApiTip::getTipByUid($uid,$type);
+        $datas = $rst['code']==0?$rst['data']:[];
+        if (!$datas) {
+            $tip['key'] = $type;
+//            $tip['name'] = $datas['typeName'];
+//            $tip['val'] = $datas['tip'];
+            $tip['name'] = '新人红包';
             $tip['val'] = 200;
         }
         return isset($tip) ? $tip : [];

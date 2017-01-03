@@ -1,10 +1,9 @@
 <?php
 namespace App\Http\Controllers\Home;
 
+use App\Api\ApiUser\ApiGold;
 use App\Api\ApiUser\ApiUserVoice;
-use App\Models\Base\UserGoldModel;
-use App\Models\Base\WalletModel;
-use App\Models\Home\UserVoiceModel;
+use App\Api\ApiUser\ApiWallet;
 use Illuminate\Http\Request;
 
 class UserVoiceController extends BaseController
@@ -41,23 +40,29 @@ class UserVoiceController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
-//        $data['created_at'] = time();
-//        UserVoiceModel::create($data);
-        ApiUserVoice::add($data);
+        $rst = ApiUserVoice::add($data);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
 
         //成功发布后给用户随机奖励金币1-5个
-        $gold = rand(1,5);
-        UserGoldModel::setGold($this->userid,3,$gold);
-        //计算金币总数
-        if ($gold) { WalletModel::setGold($this->userid,$gold); }
+        //金币奖励：1建议发布奖励1-5，2建议评价奖励6-10，3用户心声奖励1-5，4订单好评奖励5，
+        $rstGold = ApiGold::add($this->userid,3);
+        if ($rstGold['code']!=0) {
+            echo "<script>alert('".$rstGold['msg']."');history.go(-1);</script>";exit;
+        }
 
         return redirect(DOMAIN.'uservoice');
     }
 
     public function show($id)
     {
+        $rst = ApiUserVoice::show($id);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> UserVoiceModel::find($id),
+            'data'=> $rst['data'],
         ];
         return view('home.uservoice.show', $result);
     }
@@ -79,10 +84,6 @@ class UserVoiceController extends BaseController
 
     public function query($pageCurr,$prefix_url)
     {
-//        $datas = UserVoiceModel::where('isshow',2)
-//            ->orderBy('sort','desc')
-//            ->paginate($this->limit);
-//        $datas->limit = $this->limit;
         $rst = ApiUserVoice::getUserVoiceList($this->limit,$pageCurr);
         $datas = $rst['code']==0?$rst['data']:[];
         $datas['pagelist'] = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);

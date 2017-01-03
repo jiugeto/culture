@@ -35,10 +35,7 @@
 
                         <div class="am-form-group">
                             <label>logo / Logo：</label>
-                            @include('admin.common.piclist')
-                            {{--<input type="text" placeholder="本地logo地址" readonly name="url_file">--}}
-                            {{--<input type="button" value="[找图]" onclick="path.click()" class="am-btn am-btn-primary">--}}
-                            {{--<input type="file" id="path" style="display:none" onchange="url_file.value=this.value;" name="url_ori">--}}
+                            @include('admin.common.uploadimg')
                         </div>
 
                         <div class="am-form-group">

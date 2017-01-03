@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Person;
 
 use App\Models\Base\MessageModel;
+use App\Models\BaseModel;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
 
@@ -21,6 +22,12 @@ class MessageController extends BaseController
 
     public function index($m=1)
     {
+        //设置已查看
+        MessageModel::where('del',0)
+            ->where('sender','<>',$this->userid)
+            ->where('accept',$this->userid)
+            ->where('status',2)
+            ->update(['status'=>3]);
         //$m：1收件箱，2发件箱，3草稿箱，4回收站
         if ($m==1) { $url0 = ''; }
         elseif ($m==2) { $url0 = '/outbox'; }
@@ -29,6 +36,7 @@ class MessageController extends BaseController
         $result = [
             'datas'=> $this->query($m),
             'prefix_url'=> DOMAIN.'person'.$url0,
+            'model'=>new BaseModel(),
             'links'=> $this->links,
             'user'=> $this->user,
             'curr'=> $this->curr,
@@ -58,9 +66,10 @@ class MessageController extends BaseController
     public function edit($id)
     {
         $result = [
-            'links'=> $this->links,
             'data'=> MessageModel::find($id),
+            'model'=>new BaseModel(),
             'user'=> $this->user,
+            'links'=> $this->links,
             'curr'=> $this->curr,
         ];
         return view('person.message.edit', $result);
@@ -76,10 +85,17 @@ class MessageController extends BaseController
 
     public function show($id)
     {
+        //设置已阅读
+        MessageModel::where('del',0)
+            ->where('sender','<>',$this->userid)
+            ->where('accept',$this->userid)
+            ->where('status',3)
+            ->update(['status'=>4]);
         $result = [
-            'links'=> $this->links,
             'data'=> MessageModel::find($id),
+            'model'=>new BaseModel(),
             'user'=> $this->user,
+            'links'=> $this->links,
             'curr'=> $this->curr,
         ];
         return view('person.message.show', $result);

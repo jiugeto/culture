@@ -31,7 +31,6 @@ class HomeController extends BaseController
             'orderInfo'=> $this->orderInfo(),
             'curr_list'=> 'member',
         ];
-//        dd($this->userInfo(),$this->companyInfo());
         return view('member.home.index', $result);
     }
 
@@ -100,9 +99,12 @@ class HomeController extends BaseController
                 if ($v=$companyMain[$field2]) { $companyMainNum[] = $field2; }
             }
         }
-        $companyInfo['company'] = $this->company();
-        $model = new BaseModel();
-        $companyInfo['company']['areaName'] = $model->getAreaName($this->company()['area']);
+        if ($companyInfo['company'] = $this->company()) {
+            $model = new BaseModel();
+            $companyInfo['company']['areaName'] = $model->getAreaName($this->company()['area']);
+        } else {
+            $companyInfo['company']['areaName'] = '';
+        }
         $companyInfo['compMain'] = $this->companyMain();
         $companyInfo['data'] = array_merge($companyNum,$companyMainNum);
         $companyInfo['field'] = $fields;

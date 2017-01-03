@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Base\VisitlogModel;
+use App\Models\Company\VisitlogModel;
 
 class VisitlogController extends BaseController
 {

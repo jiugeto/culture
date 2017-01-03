@@ -1,12 +1,12 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
+use App\Api\ApiOnline\ApiOrderPro;
 use App\Api\ApiUser\ApiLog;
 use App\Api\ApiUser\ApiUsers;
 use App\Http\Requests;
 use App\Models\Base\OrderFirmModel;
 use App\Models\Base\OrderModel;
-use App\Models\Online\OrderProductModel;
 
 class HomeController extends BaseController
 {
@@ -37,12 +37,6 @@ class HomeController extends BaseController
         //所有用户
         $rstUsers_all = ApiUsers::getUsersByTime('');
         $users_all = $rstUsers_all['code']==0 ? $rstUsers_all['data'] : [];
-//        $users_week = LogModel::where('loginTime','>',time()-3600*24*7)
-//            ->distinct('uid')
-//            ->get();
-//        $users_hour = LogModel::where('loginTime','>',time()-3600)
-//            ->distinct('uid')
-//            ->get();
         //一周内登录
         $rstUsers_week = ApiLog::getLogsByTime(1,time()-3600*24*7);
         $users_week = $rstUsers_week['code']==0 ? $rstUsers_week['data'] : [];
@@ -50,10 +44,6 @@ class HomeController extends BaseController
         $rstUsers_hour = ApiLog::getLogsByTime(1,time()-3600);
         $users_hour = $rstUsers_hour['code']==0 ? $rstUsers_hour['data'] : [];
         //最新注册用户
-//        $datas = UserModel::where('isauth','>',0)
-//            ->where('created_at','>',)
-//            ->orderBy('id','desc')
-//            ->paginate($this->limit);
         $rstUsers = ApiUsers::getUsersByTime(time()-3600*24*7);
         $datas = $rstUsers['code']==0 ?$rstUsers['data'] : [];
         if (!count($datas)) {
@@ -70,12 +60,13 @@ class HomeController extends BaseController
 
     public function orders()
     {
-        $orders_create = OrderProductModel::all();
+        $rstOrder_C = ApiOrderPro::getOrders();
+        $orders_create = $rstOrder_C['code']==0 ? $rstOrder_C['data'] : [];
         $orders_all = OrderModel::all();
         $orders_firm = OrderFirmModel::all();
         //各个订单
-        $orders_C = OrderProductModel::where('isshow',1)
-            ->paginate($this->limit);
+        $rstOrders_C = ApiOrderPro::index($this->limit,1,0,0,1);
+        $orders_C = $rstOrders_C['code']==0 ? $rstOrders_C['data'] : [];
         $orders_A = OrderModel::where('del',0)
             ->where('isshow',1)
             ->paginate($this->limit);

@@ -1,6 +1,8 @@
 <?php
 namespace App\Models\Base;
 
+use App\Models\BaseModel;
+
 class MessageModel extends BaseModel
 {
     protected $table = 'bs_message';
@@ -32,13 +34,13 @@ class MessageModel extends BaseModel
     public function senderName()
     {
         $sender = $this->sender ? $this->sender : 0;
-        return $this->getUser($sender) ? $this->getUser($sender)->username : '';
+        return $this->getUser($sender) ? $this->getUser($sender)['username'] : '';
     }
 
     public function acceptName()
     {
         $accept = $this->accept ? $this->accept : 0;
-        return $this->getUser($accept) ? $this->getUser($accept)->username : '';
+        return $this->getUser($accept) ? $this->getUser($accept)['username'] : '';
     }
 
     public function senderTime()

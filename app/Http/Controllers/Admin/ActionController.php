@@ -53,7 +53,6 @@ class ActionController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
-//        ActionModel::create($data);
         $rst = ApiAction::add($data);
         if ($rst['code']!=0) {
             echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
@@ -98,6 +97,7 @@ class ActionController extends BaseController
     public function update(Request $request, $id)
     {
         $data = $this->getData($request);
+        $data['id'] = $id;
         $rst = ApiAction::update($data);
         if ($rst['code']!=0) {
             echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;

@@ -4,26 +4,28 @@
         @include('person.partials.top')
         <div class="per_list">
             <p class="title">密码修改</p>
-            <form method="POST" action="{{DOMAIN}}person/user/pwd/{{ $user->id }}" enctype="multipart/form-data" class="list">
+            <form method="POST" enctype="multipart/form-data" action="{{DOMAIN}}person/user/pwd/{{ $user['id'] }}"
+                  class="list" style="width:748px;">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="_method" value="POST">
                 <h4 style="text-align:center;">更新密码</h4>
                 <table class="tform">
                     <tr>
                         <td width="120">老密码：</td>
-                        <td><input type="text" name="oldpwd"></td>
-                    </tr>
-                    <tr>
-                        <td width="120">再次输入：</td>
-                        <td><input type="text" name="oldpwd2"></td>
+                        <td><input type="text" placeholder="老密码" pattern="^[0-9a-zA-Z]{6,20}$" required name="oldpwd"></td>
                     </tr>
                     <tr>
                         <td width="120">新密码：</td>
-                        <td><input type="text" name="newpwd"></td>
+                        <td><input type="text" placeholder="新密码" pattern="^[0-9a-zA-Z]{6,20}$" required name="newpwd"></td>
+                    </tr>
+                    <tr>
+                        <td width="120">再次新密码：</td>
+                        <td><input type="text" placeholder="再次输入新密码" pattern="^[0-9a-zA-Z]{6,20}$" required name="newpwd2"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align:center;">
-                            <a onclick="history.go(-1);">返回上一页</a>
+                            {{--<a onclick="history.go(-1);">返回上一页</a>--}}
+                            <button type="button" class="companybtn" onclick="history.go(-1);">返回上一页</button>
                             <button type="submit" class="companybtn">保存修改</button>
                         </td>
                     </tr>

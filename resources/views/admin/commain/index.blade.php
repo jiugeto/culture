@@ -30,16 +30,21 @@
                         <td class="am-hide-sm-only"><a href="{{DOMAIN}}admin/commain/{{$data->id}}">
                                 {{ str_limit($data->name,20) }}</a></td>
                         <td class="am-hide-sm-only">
-                            @if($data->logo)<img src="{{ $data->getLogo() }}" style="width:50px;">@else 无logo @endif
+                            @if($data->logo)<img src="{{ $data->logo }}" style="width:50px;">@else 无logo @endif
                         </td>
-                        <td class="am-hide-sm-only">{{ $data->isshow==1 ? '显示' : '不显示' }}</td>
-                        <td class="am-hide-sm-only">{{ $data->istop ? '置顶' : '不置顶' }}</td>
+                        <td class="am-hide-sm-only">{{ $data->isshow() }}</td>
+                        <td class="am-hide-sm-only">{{ $data->istop() }}</td>
                         <td class="am-hide-sm-only">{{ $data->createTime() }}</td>
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
                                     <a href="{{DOMAIN}}admin/commain/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="{{PUB}}assets/images/show.png" class="icon"> 查看</button></a>
                                     <a href="{{DOMAIN}}admin/commain/{{$data->id}}/edit"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 编辑</button></a>
+                                    @if($data->isshow==2)
+                                    <a href="{{DOMAIN}}admin/commain/isshow/{{$data->id}}/1"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 去隐藏</button></a>
+                                    @else
+                                    <a href="{{DOMAIN}}admin/commain/isshow/{{$data->id}}/2"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 去显示</button></a>
+                                    @endif
                                 </div>
                             </div>
                         </td>

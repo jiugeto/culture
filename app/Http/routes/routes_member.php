@@ -46,9 +46,10 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
     Route::get('proCus/{id}/cus','ProductCusController@cuslist');
     Route::resource('proCus','ProductCusController');
     //在线定制
-    Route::post('proVideo/{id}','ProductVideoController@update');
-    Route::get('proVideo/pre/{id}','ProductVideoController@pre');   //预览视频
-    Route::resource('proVideo','ProductVideoController');
+    Route::post('provideo/{id}','ProductVideoController@update');
+//    Route::get('provideo/pre/{id}','ProductVideoController@pre');   //预览视频
+    Route::get('provideo/trash','ProductVideoController@trash');
+    Route::resource('provideo','ProductVideoController');
     //供求管理
         //视频管理
     Route::post('goods/{id}','GoodsController@update');

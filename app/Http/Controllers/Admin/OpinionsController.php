@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
+use App\Api\ApiUser\ApiOpinion;
 use App\Api\ApiUser\ApiUserVoice;
 use Illuminate\Http\Request;
 
@@ -38,7 +39,7 @@ class OpinionsController extends BaseController
     {
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
-        $rst = ApiUserVoice::getOneOpinion($id);
+        $rst = ApiOpinion::getOneOpinion($id);
         if ($rst['code']!=0) {
             echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
         }
@@ -54,7 +55,7 @@ class OpinionsController extends BaseController
     {
         $data = $request->all();
         $data['id'] = $id;
-        $rst = ApiUserVoice::modifyOpinion($data);
+        $rst = ApiOpinion::modifyOpinion($data);
         if ($rst['code']!=0) {
             echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
         }
@@ -65,7 +66,7 @@ class OpinionsController extends BaseController
     {
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
-        $rst = ApiUserVoice::getOneOpinion($id);
+        $rst = ApiOpinion::getOneOpinion($id);
         if ($rst['code']!=0) {
             echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
         }
@@ -79,7 +80,7 @@ class OpinionsController extends BaseController
 
     public function destroy($id)
     {
-        $rst = ApiUserVoice::isdel($id,1);
+        $rst = ApiOpinion::isdel($id,1);
         if ($rst['code']!=0) {
             echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
         }
@@ -88,7 +89,7 @@ class OpinionsController extends BaseController
 
     public function restore($id)
     {
-        $rst = ApiUserVoice::isdel($id,0);
+        $rst = ApiOpinion::isdel($id,0);
         if ($rst['code']!=0) {
             echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
         }
@@ -97,7 +98,7 @@ class OpinionsController extends BaseController
 
     public function forceDelete($id)
     {
-        $rst = ApiUserVoice::delete($id);
+        $rst = ApiOpinion::delete($id);
         if ($rst['code']!=0) {
             echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
         }
@@ -106,9 +107,26 @@ class OpinionsController extends BaseController
 
     public function query($isshow,$pageCurr,$prefix_url)
     {
-        $rst = ApiUserVoice::getOpinionList($this->limit,$pageCurr,$isshow);
+        $rst = ApiOpinion::getOpinionList($this->limit,$pageCurr,$isshow);
         $datas = $rst['code']==0 ? $rst['data'] : [];
         $datas['pagelist'] = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         return $datas;
+    }
+
+    /**
+     * 清空表
+     */
+    public function clearTable()
+    {
+        if (\Session::get('admin.username')!='jiuge') {
+            echo "<script>alert('权限不足！');history.go(-1);</script>";exit;
+        } elseif (env('APP_ENV')!='local' && env('APP_DEBUG')!='true') {
+            echo "<script>alert('本地调试模式才能清表！');history.go(-1);</script>";exit;
+        }
+        $rst = ApiOpinion::clearTable();
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN.'admin/opinions');
     }
 }

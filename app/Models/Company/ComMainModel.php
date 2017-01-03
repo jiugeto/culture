@@ -1,8 +1,8 @@
 <?php
 namespace App\Models\Company;
 
+use App\Api\ApiUser\ApiCompany;
 use App\Models\BaseModel;
-use App\Models\Base\PicModel;
 
 class ComMainModel extends BaseModel
 {
@@ -12,7 +12,7 @@ class ComMainModel extends BaseModel
 
     protected $table = 'com_main';
     protected $fillable = [
-        'id','uid','cid','name','title','keyword','description','logo','layout_home','skin','sort','istop','isshow','isshow2','created_at','updated_at',
+        'id','uid','name','title','keyword','description','logo','layout_home','skin','sort','istop','isshow','created_at','updated_at',
     ];
 
     //公司首页布局开关：serviceSwitch服务开关，newsSwitch新闻开关，productSwitch产品开关，parternerSwitch合作伙伴，introSwitch公司简介，
@@ -33,6 +33,12 @@ class ComMainModel extends BaseModel
     protected $skinNames = [
         1=>'深灰色','黑色','深红色','深绿色','深蓝色','深橙色','紫色','深紫色',
     ];
+    protected $isshows = [
+        1=>'不显示','显示'
+    ];
+    protected $istops = [
+        '不置顶','置顶'
+    ];
 
     public function getSkin()
     {
@@ -46,33 +52,17 @@ class ComMainModel extends BaseModel
 
     public function company()
     {
-        return $this->cid ? \App\Models\CompanyModel::find($this->cid) : '';
+        $rst = ApiCompany::show($this->cid);
+        return $rst['code']==0 ? $rst['data'] : [];
     }
 
-    /**
-     * 得到公司logo
-     */
-    public function logo()
+    public function isshow()
     {
-        $pic_id = $this->logo ? $this->logo : 0;
-        $picModel = PicModel::find($pic_id);
-        return $picModel ? $picModel : '';
+        return array_key_exists($this->isshow,$this->isshows) ? $this->isshows[$this->isshow] : '';
     }
 
-    /**
-     * 公司logo链接
-     */
-    public function getLogo()
+    public function istop()
     {
-
-        return $this->logo() ? $this->logo()->getUrl() : '';
-    }
-
-    /**
-     * 得到logo图片名称
-     */
-    public function getPicName()
-    {
-        return $this->logo() ? $this->logo()->name : '';
+        return array_key_exists($this->istop,$this->istops) ? $this->isshows[$this->isshow] : '';
     }
 }

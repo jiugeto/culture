@@ -15,29 +15,29 @@
         <table class="table_create table_show" cellspacing="0" cellpadding="0">
             <tr>
                 <td width="100">意见名称：</td>
-                <td>{{ $data->name }}</td>
+                <td>{{ $data['name'] }}</td>
             </tr>
             <tr>
                 <td>内容：</td>
-                <td><div class="div_content">{!! $data->intro !!}</div></td>
+                <td><div class="div_content">{!! $data['intro'] !!}</div></td>
             </tr>
             <tr>
                 <td>用户名称：</td>
-                <td>{{ $data->getUName() }}</td>
+                <td>{{ $data['username'] }}</td>
             </tr>
             <tr>
                 <td>意见状态：</td>
-                <td>{{ $data->status() }}</td>
+                <td>{{ $data['statusName'] }}</td>
             </tr>
-            @if($data->status>2)
+            @if($data['status']==4)
             <tr>
                 <td>留言：</td>
-                <td>{!! $data->remarks !!}</td>
+                <td>{!! $data['remarks'] !!}</td>
             </tr>
             @endif
             <tr>
                 <td>发布时间：</td>
-                <td>{{ $data->createTime() }}</td>
+                <td>{{ $data['createTime'] }}</td>
             </tr>
             <tr><td class="center" colspan="2" style="border:0;cursor:pointer;">
                     {{--<a class="list_btn" onclick="history.go(-1)">返回</a>--}}

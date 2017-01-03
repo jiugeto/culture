@@ -60,7 +60,7 @@
 
                         <div class="am-form-group">
                             <label>缩略图 / Thumb：</label>
-                            @include('admin.common.piclist')
+                            @include('admin.common.#piclist')
                         </div>
 
                         <div class="am-form-group">

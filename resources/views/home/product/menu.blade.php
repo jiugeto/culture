@@ -8,7 +8,7 @@
         @if(count($ppts))
             @foreach($ppts as $ppt)
                 <a href="{{ $ppt->link }}" title="{{ $ppt->name }}" id="ppt_{{$ppt->id}}">
-                    <img src="{{ $ppt->getPicUrl() }}">
+                    <img src="{{ $ppt->img }}">
                 </a>
             @endforeach
         @endif
@@ -20,7 +20,7 @@
             @if(count($ppts))
                 @foreach($ppts as $kppt=>$ppt)
                     <li class="{{$kppt==0?'curr':''}}" onmouseover="over({{$ppt->id}})">
-                        <img src="{{$ppt->getPicUrl()}}">
+                        <img src="{{$ppt->img}}">
                     </li>
                 @endforeach
             @endif

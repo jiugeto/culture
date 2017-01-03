@@ -5,7 +5,7 @@
     {{--分镜来一个瀑布流--}}
     <link rel="stylesheet" type="text/css" href="{{PUB}}assets-home/css/waterfall.css">
     <div class="pbl_title">
-        分镜：
+        标签：
         {{--<a href="{{DOMAIN}}storyboard" class="{{ $way=='' ? 'star' : '' }}">全部</a>--}}
         {{--<a href="{{DOMAIN}}storyboard/w/1" class="{{ $way=='isnew' ? 'star' : '' }}">最新</a>--}}
         {{--<a href="{{DOMAIN}}storyboard/w/2" class="{{ $way=='ishot' ? 'star' : '' }}">热门</a>--}}
@@ -27,11 +27,19 @@
         var cate = $("input[name='cate']");
         function getWay(w){
             way[0].value = w;
-            window.location.href = '{{DOMAIN}}storyboard/w/'+way.val()+'/'+cate.val();
+            if (w==0) {
+                window.location.href = '{{DOMAIN}}storyboard';
+            } else {
+                window.location.href = '{{DOMAIN}}storyboard/s/'+way.val()+'/'+cate.val();
+            }
         }
         function getCate(c){
             cate[0].value = c;
-            window.location.href = '{{DOMAIN}}storyboard/w/'+way.val()+'/'+cate.val();
+            if (c==0) {
+                window.location.href = '{{DOMAIN}}storyboard';
+            } else {
+                window.location.href = '{{DOMAIN}}storyboard/s/'+way.val()+'/'+cate.val();
+            }
         }
     </script>
 
@@ -42,7 +50,7 @@
             <div class="pbl_in">
                 <div class="img">
                     <a href="{{DOMAIN}}storyboard/{{ $data->id }}" title="点击进入查看{{ $data->name }}">
-                        <img src="{{ $data->thumb() }}">
+                        <img src="{{ $data->thumb }}">
                     </a></div>
                 <div class="title">
                     <a href="{{DOMAIN}}storyboard/{{ $data->id }}" title="点击进入查看{{ $data->name }}">

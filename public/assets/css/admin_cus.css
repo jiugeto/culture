@@ -68,6 +68,7 @@ a:hover.increase,a:hover.reduce { background:white; }
 
 /*=== 系统后台详情页面的内容 ===*/
 .admin_show_con {
+    padding:5px 10px;
     width:400px;height:200px;
     border:1px solid lightgrey;
     overflow:auto;

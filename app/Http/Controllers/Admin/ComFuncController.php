@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Company\ComModuleModel;
-use App\Models\Base\PicModel;
+use App\Tools;
 use Illuminate\Http\Request;
 use App\Models\Company\ComFuncModel;
 
@@ -45,7 +45,6 @@ class ComFuncController extends BaseController
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
             'modules'=> ComModuleModel::all(),
-            'pics'=> PicModel::all(),
             'model'=> $this->model,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -57,6 +56,12 @@ class ComFuncController extends BaseController
     {
         $data = $this->getData($request);
         $data['created_at'] = time();
+        //处理缩略图
+        $rstThumb = Tools::getAddrByUploadImg($request,$this->uploadSizeLimit);
+        if (!$rstThumb) {
+            echo "<script>alert('没有图片！');history.go(-1);</script>";exit;
+        }
+        $data['img'] = $rstThumb;
         ComFuncModel::create($data);
         return redirect(DOMAIN.'admin/comfunc');
     }
@@ -68,7 +73,6 @@ class ComFuncController extends BaseController
         $result = [
             'data'=> ComFuncModel::find($id),
             'modules'=> ComModuleModel::all(),
-            'pics'=> PicModel::all(),
             'model'=> $this->model,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -80,6 +84,18 @@ class ComFuncController extends BaseController
     {
         $data = $this->getData($request);
         $data['updated_at'] = time();
+        //处理缩略图
+        $model = ComModuleModel::find($id);
+        $rstImg = Tools::getAddrByUploadImg($request,$this->uploadSizeLimit);
+        if (!$rstImg) {
+            $img = $model->img;
+        } else {
+            $img = $rstImg;
+            if ($model->img) {
+                unlink(ltrim($model->img,'/'));
+            }
+        }
+        $data['img'] = $img;
         ComFuncModel::where('id',$id)->update($data);
         return redirect(DOMAIN.'admin/comfunc');
     }
@@ -91,7 +107,6 @@ class ComFuncController extends BaseController
         $result = [
             'data'=> ComFuncModel::find($id),
             'modules'=> ComModuleModel::all(),
-            'pics'=> PicModel::all(),
             'model'=> $this->model,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -118,9 +133,7 @@ class ComFuncController extends BaseController
         $data = [
             'name'=> $request->name,
             'type'=> $request->type,
-//            'genre'=> $request->genre,
             'module_id'=> $request->module_id,
-            'pic_id'=> $request->pic_id?$request->pic_id:0,
             'intro'=> $request->intro,
             'small'=> $request->small,
             'sort'=> $request->sort,

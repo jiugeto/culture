@@ -1,9 +1,9 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Models\UserModel;
+use App\Api\ApiTalk\ApiTheme;
+use App\Api\ApiUser\ApiUsers;
 use Illuminate\Http\Request;
-use App\Models\Talk\ThemeModel;
 
 class ThemeController extends BaseController
 {
@@ -14,22 +14,23 @@ class ThemeController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->model = new ThemeModel();
         $this->crumb['']['name'] = '专栏列表';
         $this->crumb['category']['name'] = '专栏管理';
         $this->crumb['category']['url'] = 'theme';
     }
 
-    public function index($uname=0)
+    public function index($uname='')
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
+        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $prefix_url = DOMAIN.'admin/theme';
         $result = [
-            'datas'=> $this->query($uname),
-            'prefix_url'=> DOMAIN.'admin/theme',
+            'datas'=> $this->query($pageCurr,$prefix_url,$uname),
+            'prefix_url'=> $prefix_url,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
-            'uname'=> $uname ? $uname :'',
+            'uname'=> $uname ? $uname : '',
         ];
         return view('admin.theme.index', $result);
     }
@@ -47,11 +48,11 @@ class ThemeController extends BaseController
 
     public function store(Request $request)
     {
-        $themeModel = ThemeModel::where('name',$request->name)->first();
-        if ($themeModel) { echo "<script>alert('已有同名专题，请重命名！');history.go(-1);</script>";exit; }
         $data = $this->getData($request);
-        $data['created_at'] = time();
-        ThemeModel::create($data);
+        $rst = ApiTheme::add($data);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
         return redirect(DOMAIN.'admin/theme');
     }
 
@@ -59,8 +60,12 @@ class ThemeController extends BaseController
     {
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
+        $rst = ApiTheme::show($id);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> ThemeModel::find($id),
+            'data'=> $rst['data'],
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -70,8 +75,11 @@ class ThemeController extends BaseController
     public function update(Request $request,$id)
     {
         $data = $this->getData($request);
-        $data['updated_at'] = time();
-        ThemeModel::where('id',$id)->update($data);
+        $data['id'] = $id;
+        $rst = ApiTheme::modify($data);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
         return redirect(DOMAIN.'admin/theme');
     }
 
@@ -79,53 +87,75 @@ class ThemeController extends BaseController
     {
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
+        $rst = ApiTheme::show($id);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> ThemeModel::find($id),
+            'data'=> $rst['data'],
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
         return view('admin.theme.show', $result);
     }
 
-
-
-
-
-    public function query($uname)
+    /**
+     * 设置删除
+     */
+    public function isdel($id,$del)
     {
-        if ($uname && $uname!='本站') {
-            $datas = ThemeModel::where('uname','like','%'.$uname.'%')
-                ->orderBy('sort','desc')
-                ->orderBy('id','desc')
-                ->paginate($this->limit);
-        } else {
-            $datas = ThemeModel::orderBy('sort','desc')
-                ->orderBy('id','desc')
-                ->paginate($this->limit);
+        $rst = ApiTheme::isdel($id,$del);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
         }
-        $datas->limit = $this->limit;
-        return $datas;
+        return redirect(DOMAIN.'admin/theme');
     }
+
+    /**
+     * 销毁记录
+     */
+    public function delete($id)
+    {
+        $rst = ApiTheme::delete($id);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN.'admin/theme');
+    }
+
+
+
+
 
     public function getData(Request $request)
     {
+        if (!$request->uname || $request->uname=='本站') {
+            $uname = '本站';
+            $uid = 0;
+        } else {
+            $rstUser = ApiUsers::getOneUserByUname($request->uname);
+            if ($rstUser['code']!=0) {
+                echo "<script>alert('用户不存在！');history.go(-1);</script>";exit;
+            }
+            $uname = $request->uname;
+            $uid = $rstUser['id'];
+        }
         if (!$request->name || !$request->intro) {
             echo "<script>alert('专题名称、内容必填！');history.go(-1);</script>";exit;
         }
-        if ($request->username && strlen($request->username)<2) {
-            echo "<script>alert('用户名必须大于等于2的字符！');history.go(-1);</script>";exit;
-        }
-        if ($uname=$request->username) {
-            $userModel = UserModel::where('username',$uname)->first();
-            if (!$userModel) { echo "<script>alert('没有此用户！');history.go(-1);</script>";exit; }
-        }
         return array(
-            'name'=> $request->name,
-            'uid'=> ($request->username&&isset($userModel)&&$userModel)?$userModel->id:0,
-            'uname'=> ($request->username&&isset($userModel)&&$userModel)?$userModel->username:'',
-            'intro'=> $request->intro,
-            'sort'=> $request->sort,
-            'isshow'=> $request->isshow,
+            'name'  =>  $request->name,
+            'intro' =>  $request->intro,
+            'uid'   =>  $uid,
+            'uname' =>  $uname,
         );
+    }
+
+    public function query($pageCurr,$prefix_url,$uname)
+    {
+        $rst = ApiTheme::index($this->limit,$pageCurr,$uname);
+        $datas = $rst['code']==0 ? $rst['data'] : [];
+        $datas['pagelist'] = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
+        return $datas;
     }
 }

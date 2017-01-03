@@ -48,7 +48,7 @@
 
                         <div class="am-form-group">
                             <label>图片 / Picture：</label>
-                            @include('admin.common.piclist')
+                            @include('admin.common.uploadimg')
                         </div>
 
                         <div class="am-form-group">

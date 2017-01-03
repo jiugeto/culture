@@ -137,8 +137,8 @@ class Tools
             $filePath = $folderName.$safeName;
             return $filePath;
         } else {
-            echo "你的图片格式不对，请选择图片。";
-            return view('admin.index');
+            echo "你的图片格式不对，请选择图片。";exit;
+//            return view('admin.index');
         }
     }
 
@@ -166,8 +166,8 @@ class Tools
             $filePath = $folderName.$safeName;
             return $filePath;
         } else {
-            echo "你的文件格式不对，请重新选择。";
-            return view('admin.index');
+            echo "你的文件格式不对，请重新选择。";exit;
+//            return view('admin.index');
         }
     }
 
@@ -221,6 +221,34 @@ class Tools
                 ->resize($width, $height)
                 ->save($thumb_path);
             return '/'.$thumb_path;
+        }
+    }
+
+    /**
+     * 图片上传处理，返回上传后的图片地址链接
+     */
+    public static function getAddrByUploadImg($request,$uploadSizeLimit)
+    {
+        if($request->hasFile('url_ori')){  //判断文件存在
+            //验证图片大小
+            foreach ($_FILES as $pic) {
+                if ($pic['size'] > $uploadSizeLimit) {
+                    echo "<script>alert('对不起，你上传的文件大于1M，请重新选择');history.go(-1);</script>";exit;
+                }
+            }
+            $file = $request->file('url_ori');  //获取文件
+            return Tools::upload($file);
+//            $config = [
+//                'fileField' => 'url_ori',    //文件域字段名
+//                'allowFiles'=> $this->pic_suffixs,   //允许上传的文件后辍
+//                'maxSize'   => $this->uploadSizeLimit, //允许上传文件的大小5M 单位 b
+//                'nameFormat'=> $this->pic_path,
+//            ];
+//            $rst = Uploader::save($config, $request);
+//            if ($rst['state']=='SUCCESS') { $data['url_ori'] = $rst['url']; }
+//            else { echo "<script>alert('图片上传错误，".$rst['state']."！');history.go(-1);</script>";exit; }
+        } else {
+            return false;
         }
     }
 

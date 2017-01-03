@@ -1,6 +1,7 @@
 <?php
 namespace App\Models\Company;
 
+use App\Api\ApiUser\ApiCompany;
 use App\Models\BaseModel;
 
 class ComModuleModel extends BaseModel
@@ -25,16 +26,18 @@ class ComModuleModel extends BaseModel
 
     public function company()
     {
-        return $this->cid ? \App\Models\CompanyModel::find($this->cid)->cname : '本站';
+        $rstCompany = ApiCompany::show($this->cid);
+        return $rstCompany['code']==0 ? $rstCompany['data']['name'] : '本站';
+
     }
 
     public function genre()
     {
-        return $this->genre ? $this->genres[$this->genre] : '';
+        return array_key_exists($this->genre,$this->genres) ? $this->genres[$this->genre] : '';
     }
 
     public function isshow()
     {
-        return $this->isshow ? $this->isshows[$this->isshow] : '';
+        return array_key_exists($this->isshow,$this->isshows) ? $this->isshows[$this->isshow]: '';
     }
 }

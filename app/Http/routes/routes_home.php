@@ -21,23 +21,23 @@ Route::group(['prefix'=>'/','namespace'=>'Home'],function(){
     Route::post('product/addProCus','ProductController@insertProCus');    //新增片源
     Route::post('product/addCus','ProductController@insertCus');    //申请片源
     //在线作品
-    Route::post('creation/addEffect','CreationController@insertEffect');     //效果定制添加
-    Route::post('creation/editLayer/{id}','CreationController@updateLayer');     //动画模板修改意见更新
-    Route::get('creation/edit/{id}','CreationController@editLayer');     //动画模板修改意见
-    Route::get('creation/s/{genre}/{cate}/{order}','CreationController@index');     //用户的成片列表
-    Route::get('creation/s/{genre}/{cate}','CreationController@index');
+//    Route::post('creation/addEffect','CreationController@insertEffect');     //效果定制添加
+//    Route::post('creation/editLayer/{id}','CreationController@updateLayer');     //动画模板修改意见更新
+//    Route::get('creation/edit/{id}','CreationController@editLayer');     //动画模板修改意见
+    Route::get('creation/s/{genre}/{cate}/{isorder}','CreationController@index');
+//    Route::get('creation/s/{genre}/{cate}','CreationController@index');
     Route::get('creation','CreationController@index');
     Route::get('creation/pre/{id}','CreationController@pre');
     //分镜画面
     Route::get('storyboard/like/{way}/{id}','StoryBoardController@like');
     Route::get('storyboard/{id}','StoryBoardController@show');
-    Route::get('storyboard/w/{way}/{cate}','StoryBoardController@index');      //w条件检索方式
+    Route::get('storyboard/s/{way}/{cate}','StoryBoardController@index');      //w条件检索方式
     Route::any('storyboard','StoryBoardController@index');
     //供应单位
-    Route::get('{genre}/supply','SupplyController@index');
+    Route::get('supply/s/{genre}','SupplyController@index');
     Route::any('supply','SupplyController@index');
     //需求信息
-    Route::get('demand/genre/{genre}','DemandController@index');
+    Route::get('demand/s/{genre}','DemandController@index');
     Route::any('demand','DemandController@index');
     //娱乐频道
     Route::get('entertain/{genre0}/{genre}','EntertainController@index');
@@ -62,33 +62,33 @@ Route::group(['prefix'=>'/','namespace'=>'Home'],function(){
     Route::post('opinion/status/{id}','OpinionController@setStatus');
     Route::get('opinion/status/{id}','OpinionController@getStatus');
     Route::post('opinion/{id}','OpinionController@update');
-    Route::get('{status}/opinion','OpinionController@index');
+    Route::get('opinion/s/{status}','OpinionController@index');
     Route::resource('opinion','OpinionController');
     //创意路由
     Route::get('idea/click/{id}/{click}','IdeaController@click');
     Route::get('idea/collect/{id}/{collect}','IdeaController@collect');
     Route::get('idea/cate/{cate}','IdeaController@index');
     Route::resource('idea','IdeaController');
-    //话题路由
-    Route::post('talk/{id}','TalkController@update');
-    Route::get('talk/mytalk','TalkController@mytalk');
-    Route::get('talk/follow','TalkController@follow');
-    Route::get('talk/collect','TalkController@collect');
-    Route::get('talk/tofollow','TalkController@tofollow');
-    Route::get('talk/tothank','TalkController@tothank');
-    Route::get('talk/toclick','TalkController@toclick');
-    Route::get('talk/toshare','TalkController@toshare');
-    Route::get('talk/toreport','TalkController@toreport');
-    Route::get('talk/tocollect','TalkController@tocollect');
-    Route::get('talk/mycollect/{id}','TalkController@tomycollect');
-    Route::get('talk/{id}/destroy','TalkController@destroy');
-    Route::get('talk/{id}/restore','TalkController@restore');
-    Route::get('talk/{id}/forceDelete','TalkController@forceDelete');
-    Route::get('talk/theme/{themeid}','TalkController@index');
-    Route::resource('talk','TalkController');
-    //话题专栏路由
-    Route::get('theme/u/{uid}','ThemeController@index');
-    Route::resource('theme','ThemeController');
+//    //话题路由
+//    Route::post('talk/{id}','TalkController@update');
+//    Route::get('talk/mytalk','TalkController@mytalk');
+//    Route::get('talk/follow','TalkController@follow');
+//    Route::get('talk/collect','TalkController@collect');
+//    Route::get('talk/tofollow','TalkController@tofollow');
+//    Route::get('talk/tothank','TalkController@tothank');
+//    Route::get('talk/toclick','TalkController@toclick');
+//    Route::get('talk/toshare','TalkController@toshare');
+//    Route::get('talk/toreport','TalkController@toreport');
+//    Route::get('talk/tocollect','TalkController@tocollect');
+//    Route::get('talk/mycollect/{id}','TalkController@tomycollect');
+//    Route::get('talk/{id}/destroy','TalkController@destroy');
+//    Route::get('talk/{id}/restore','TalkController@restore');
+//    Route::get('talk/{id}/forceDelete','TalkController@forceDelete');
+//    Route::get('talk/theme/{themeid}','TalkController@index');
+//    Route::resource('talk','TalkController');
+//    //话题专栏路由
+//    Route::get('theme/u/{uid}','ThemeController@index');
+//    Route::resource('theme','ThemeController');
     //新手帮助路由
     Route::resource('newuser','NewUserController');
     //搜索栏

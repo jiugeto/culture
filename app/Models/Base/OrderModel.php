@@ -1,6 +1,7 @@
 <?php
 namespace App\Models\Base;
 
+use App\Models\BaseModel;
 use App\Models\GoodsModel;
 use App\Models\IdeasModel;
 use App\Models\StoryBoardModel;

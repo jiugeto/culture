@@ -29,7 +29,8 @@ return [
     |
     */
 
-    'lifetime' => 120,
+//    'lifetime' => 120,    //默认2小时
+    'lifetime' => 720,    //设置12小时
 
     'expire_on_close' => false,
 
@@ -135,7 +136,8 @@ return [
     |
     */
 
-    'domain' => null,
+//    'domain' => null,                 //默认当前域名
+    'domain' => 'jiugewenhua.com',      //改为主域名
 
     /*
     |--------------------------------------------------------------------------

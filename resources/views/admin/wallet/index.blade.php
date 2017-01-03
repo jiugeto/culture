@@ -49,34 +49,37 @@
                     </tr>
                     </thead>
                     <tbody>
-                @if($datas->total())
-                    @foreach($datas as $data)
+                @if(count($datas)>1)
+                    @foreach($datas as $kdata=>$data)
+                        @if(is_numeric($kdata))
                     <tr>
                         <td class="am-hide-sm-only"><input type="checkbox" /></td>
-                        <td class="am-hide-sm-only">{{ $data->id }}</td>
-                        <td class="am-hide-sm-only">{{ $data->getUName() }}</td>
-                        <td class="am-hide-sm-only">{{ $data->sign }}</td>
-                        <td class="am-hide-sm-only">{{ $data->gold }}</td>
-                        <td class="am-hide-sm-only">{{ $data->tip }}</td>
-                        <td class="am-hide-sm-only">{{ $data->weal }}</td>
-                        <td class="am-hide-sm-only">{{ $data->createTime() }}</td>
+                        <td class="am-hide-sm-only">{{ $data['id'] }}</td>
+                        <td class="am-hide-sm-only">{{ $data['username'] }}</td>
+                        <td class="am-hide-sm-only">{{ $data['sign'] }}</td>
+                        <td class="am-hide-sm-only">{{ $data['gold'] }}</td>
+                        <td class="am-hide-sm-only">{{ $data['tip'] }}</td>
+                        <td class="am-hide-sm-only">{{ $data['weal'] }}</td>
+                        <td class="am-hide-sm-only">{{ $data['createTime'] }}</td>
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
-                                    <a href="{{DOMAIN}}admin/wallet/toweal/{{$data->id}}/1"><button class="am-btn am-btn-default am-btn-xs am-text-secondary">签到换福利</button></a>
-                                    <a href="{{DOMAIN}}admin/wallet/toweal/{{$data->id}}/2"><button class="am-btn am-btn-default am-btn-xs am-text-secondary">金币换福利</button></a>
-                                    <a href="{{DOMAIN}}admin/wallet/toweal/{{$data->id}}/3"><button class="am-btn am-btn-default am-btn-xs am-text-secondary">红包换福利</button></a>
+                                    <a href="{{DOMAIN}}admin/wallet/{{$data['id']}}/edit"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 编辑</button></a>
+                                    <a href="{{DOMAIN}}admin/wallet/toweal/{{$data['id']}}/1"><button class="am-btn am-btn-default am-btn-xs am-text-secondary">签到换福利</button></a>
+                                    <a href="{{DOMAIN}}admin/wallet/toweal/{{$data['id']}}/2"><button class="am-btn am-btn-default am-btn-xs am-text-secondary">金币换福利</button></a>
+                                    <a href="{{DOMAIN}}admin/wallet/toweal/{{$data['id']}}/3"><button class="am-btn am-btn-default am-btn-xs am-text-secondary">红包换福利</button></a>
                                 </div>
                             </div>
                         </td>
                     </tr>
+                        @endif
                     @endforeach
                 @else @include('admin.common.norecord')
                 @endif
                     </tbody>
                 </table>
-                <p style="font-size:12px;">注意：福利可用于支付，{{$datas->signByWeal}}签到=1福利，{{$datas->goldByWeal}}金币=1福利，{{$datas->tipByWeal}}红包=1福利</p>
-                @include('admin.common.page')
+                <p style="font-size:12px;">注意：福利可用于支付，{{$signByWeal}}签到=1福利，{{$goldByWeal}}金币=1福利，{{$tipByWeal}}红包=1福利</p>
+                @include('admin.common.page2')
             </div>
         </div>
     </div>

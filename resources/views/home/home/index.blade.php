@@ -6,7 +6,7 @@
             @if(count($ppts))
                 @foreach($ppts as $ppt)
             <li id="ppt_{{ $ppt->id }}">
-                <a href="{{ $ppt->link }}" title="{{ $ppt->name }}"><img src="{{ $ppt->getPicUrl() }}"></a>
+                <a href="{{ $ppt->link }}" title="{{ $ppt->name }}"><img src="{{ $ppt->img }}"></a>
             </li>
                 @endforeach
             @endif
@@ -21,7 +21,7 @@
             <ul class="ppt_change_pic">
                 @if($ppts)
                     @foreach($ppts as $ppt)
-                <li id="ppt_thumb_{{ $ppt->id }}" onmouseover="move({{ $ppt->id }})"><img src="{{ $ppt->getPicUrl() }}" title="{{ $ppt->name }}"></li>
+                <li id="ppt_thumb_{{ $ppt->id }}" onmouseover="move({{ $ppt->id }})"><img src="{{ $ppt->img }}" title="{{ $ppt->name }}"></li>
                     @endforeach
                 @endif
                 @if(count($ppts))
@@ -50,75 +50,7 @@
     <!-- 广告PPT -->
 
     <div class="content">
-        <!-- 推荐创意 -->
-        <div class="idea">
-            <p class="floor">
-                <img src="/assets-home/images/floor_red.png" class="floor_img">
-                <span class="floor_text">{{ $number[1] }}F</span>
-                <span class="floor_text2">&nbsp;{{ $floors[$number[1]] }}</span>
-                <span class="more" onclick="window.location.href='/idea';">>更多</span>
-            </p>
-            <div class="idea_con">
-                <div class="left">
-                @if(count($ideas))
-                    @foreach($ideas as $idea)
-                    <table>
-                        <tr>
-                            <td class="title">{{ $idea->name }}</td>
-                            <td colspan="2">{{ strip_tags($idea->content) }}</td>
-                        </tr>
-                        <tr><td class="title"></td></tr>
-                    </table>
-                    @endforeach
-                @endif
-                </div>
-                <div class="right">
-                @if(count($ideas))
-                    @foreach($ideas as $idea)
-                    <div>
-                        <span style="color:red;">{{ $idea->number }}</span>.
-                        {{ $idea->name }}
-                        <span class="right_time">{{ explode(' ',$idea->created_at)[0] }}</span>
-                    </div>
-                    @endforeach
-                @endif
-                </div>
-            </div>
-        </div>
-        <br style="clear:both;"><br>
-
-        <!-- 最新话题 -->
-        <div class="talk">
-            <p class="floor">
-                <img src="{{DOMAIN}}assets-home/images/floor_red.png" class="floor_img">
-                <span class="floor_text">{{ $number[2] }}F</span>
-                <span class="floor_text2">&nbsp;{{ $floors[$number[2]] }}</span>
-                <span class="more" onclick="window.location.href='/talk';">>更多</span>
-            </p>
-            <div class="talk_con">
-                <div class="left">
-                @if(count($talks))
-                    @foreach($talks as $talk)
-                    <div>
-                        <span style="color:red;">{{ $talk->number }}</span>.
-                        {{ $talk->name }}
-                        <span class="right_time">{{ explode(' ',$talk->created_at)[0] }}</span>
-                    </div>
-                    @endforeach
-                @endif
-                </div>
-                <div class="right">
-                @if(count($talks))
-                    @foreach($talks as $talk)
-                    <div>{{ strip_tags($talk->content) }}</div>
-                    @endforeach
-                @endif
-                </div>
-            </div>
-        </div>
-        <br style="clear:both;"><br>
-
-        <!-- 在线创作 -->
+        <!-- 在线作品 -->
         <div class="online">
             <p class="floor">
                 <img src="{{DOMAIN}}assets-home/images/floor_red.png" class="floor_img">
@@ -127,47 +59,47 @@
                 <span class="more" onclick="window.location.href='/creation';">>更多</span>
             </p>
             <div class="online_con">
+                @if(count($products))
                 <div class="online_first">
                     <a href="" title="online1">
-                        <div class="con_img"><img src="{{DOMAIN}}uploads/images/2016/online1.png"></div>
+                        <div class="con_img">
+                            {{--<img src="{{DOMAIN}}uploads/images/2016/online1.png">--}}
+                            @if($products[0]['thumb'])
+                                <img src="{{$products[0]['thumb']}}" style="
+                                    {{--@if($size=$model->getImgSize($products[0]['gif'],$w=260,$h=250))--}}
+                                        {{--width:{{$size['w']}}px;height:{{$size['h']}}px;--}}
+                                    {{--@endif--}}
+                                ">
+                            @endif
+                        </div>
                     </a>
                 </div>
+                @endif
+                @if(count($products))
+                    @foreach($products as $product)
                 <div class="online_div">
                     <a href="" title="online1">
-                        <div class="con_img"><img src="{{DOMAIN}}uploads/images/2016/online2.png"></div>
-                        <div class="con_text"><a href="">样片</a></div>
+                        <div class="con_img">
+                            {{--<img src="{{DOMAIN}}uploads/images/2016/online2.png">--}}
+                            @if($product['thumb'])
+                                <img src="{{$product['thumb']}}" style="
+                                    {{--@if($size=$model->getImgSize($product['gif'],$w=175,$h=100))--}}
+                                        {{--width:{{$size['w']}}px;height:{{$size['h']}}px;--}}
+                                    {{--@endif--}}
+                                ">
+                            @endif
+                        </div>
+                        <div class="con_text"><a href="">{{$product['name']}}</a></div>
                     </a>
                 </div>
-                <div class="online_div">
-                    <a href="" title="online1">
-                        <div class="con_img"><img src="{{DOMAIN}}uploads/images/2016/online3.png"></div>
-                        <div class="con_text"><a href="">样片</a></div>
-                    </a>
-                </div>
-                <div class="online_div">
-                    <a href="" title="online1">
-                        <div class="con_img"><img src="{{DOMAIN}}uploads/images/2016/online4.png"></div>
-                        <div class="con_text"><a href="">样片</a></div>
-                    </a>
-                </div>
-                <div class="online_div">
-                    <a href="" title="online1">
-                        <div class="con_img"><img src="{{DOMAIN}}uploads/images/2016/online2.png"></div>
-                        <div class="con_text"><a href="">样片</a></div>
-                    </a>
-                </div>
-                <div class="online_div">
-                    <a href="" title="online1">
-                        <div class="con_img"><img src="{{DOMAIN}}uploads/images/2016/online3.png"></div>
-                        <div class="con_text"><a href="">样片</a></div>
-                    </a>
-                </div>
-                <div class="online_div">
-                    <a href="" title="online1">
-                        <div class="con_img"><img src="{{DOMAIN}}uploads/images/2016/online4.png"></div>
-                        <div class="con_text"><a href="">样片</a></div>
-                    </a>
-                </div>
+                    @endforeach
+                @endif
+                {{--<div class="online_div">--}}
+                    {{--<a href="" title="online1">--}}
+                        {{--<div class="con_img"><img src="{{DOMAIN}}uploads/images/2016/online3.png"></div>--}}
+                        {{--<div class="con_text"><a href="">样片</a></div>--}}
+                    {{--</a>--}}
+                {{--</div>--}}
             </div>
         </div>
         {{-- 精选 --}}
@@ -179,7 +111,7 @@
         {{--</div>--}}
         <br style="clear:both;"><br>
 
-        <!-- 特色产品：产品样片 -->
+        <!-- 特色产品=>产品样片 -->
         <div class="trait">
             <p class="floor">
                 <img src="{{DOMAIN}}assets-home/images/floor_red.png" class="floor_img">
@@ -192,7 +124,9 @@
                 @foreach($goods as $good)
                     <div class="img" onmouseover="over({{ $good->id }})" onmouseout="out({{ $good->id }})">
                         <a href="{{DOMAIN}}product/video/{{ $good->id }}/{{ $good->video_id }}" title="查看详情：{{ $good->title() }}">
-                            <img src="{{ $good->getPicUrl() }}" style="@if($size=$good->getPicSize($w=148,$h=100)) width:{{$size['w']}}px; height:{{$size['h']}}px; @endif">
+                            <img src="{{ $good->getPicUrl() }}" style="
+                                @if($size=$good->getPicSize($w=148,$h=100)) width:{{$size['w']}}px; height:{{$size['h']}}px; @endif
+                            ">
                         </a>
                         <div class="text" style="top:0;pointer-events:none;" id="goodText_{{ $good->id }}">
                             <div>{{ $good->name }}</div>
@@ -225,7 +159,7 @@
         </div>
         <br style="clear:both;">
         
-        <!-- 热门品牌：供应单位 -->
+        <!-- 热门品牌=>供应单位 -->
         <div class="hot">
             <p class="floor">
                 <img src="{{DOMAIN}}assets-home/images/floor_red.png" class="floor_img">
@@ -524,6 +458,78 @@
         </div>
         <br style="clear:both;">
 
+        <!-- 推荐创意 -->
+        <div class="idea">
+            <p class="floor">
+                <img src="/assets-home/images/floor_red.png" class="floor_img">
+                <span class="floor_text">{{ $number[1] }}F</span>
+                <span class="floor_text2">&nbsp;{{ $floors[$number[1]] }}</span>
+                <span class="more" onclick="window.location.href='/idea';">>更多</span>
+            </p>
+            <div class="idea_con">
+                <div class="left">
+                    @if(count($ideas))
+                        @foreach($ideas as $idea)
+                            <table>
+                                <tr>
+                                    <td class="title">{{ $idea->name }}</td>
+                                    <td colspan="2">{{ strip_tags($idea->content) }}</td>
+                                </tr>
+                                <tr><td class="title"></td></tr>
+                            </table>
+                        @endforeach
+                    @endif
+                </div>
+                <div class="right">
+                    @if(count($ideas))
+                        @foreach($ideas as $idea)
+                            <div>
+                                <span style="color:red;">{{ $idea->number }}</span>.
+                                {{ $idea->name }}
+                                <span class="right_time">{{ explode(' ',$idea->created_at)[0] }}</span>
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
+            </div>
+        </div>
+        <br style="clear:both;"><br>
+
+        <!-- 最新话题 -->
+        {{--<div class="talk">--}}
+            {{--<p class="floor">--}}
+                {{--<img src="{{DOMAIN}}assets-home/images/floor_red.png" class="floor_img">--}}
+                {{--<span class="floor_text">{{ $number[2] }}F</span>--}}
+                {{--<span class="floor_text2">&nbsp;{{ $floors[$number[2]] }}</span>--}}
+                {{--<span class="more" onclick="window.location.href='/talk';">>更多</span>--}}
+            {{--</p>--}}
+            {{--<div class="talk_con">--}}
+                {{--<div class="left">--}}
+                    {{--@if(count($talks)>1)--}}
+                        {{--@foreach($talks as $ktalk=>$talk)--}}
+                            {{--@if(is_numeric($ktalk))--}}
+                            {{--<div>--}}
+                                {{--<span style="color:red;">{{ $talk['id'] }}</span>.--}}
+                                {{--{{ $talk['name'] }}--}}
+                                {{--<span class="right_time">{{ explode(' ',$talk['created_at'])[0] }}</span>--}}
+                            {{--</div>--}}
+                            {{--@endif--}}
+                        {{--@endforeach--}}
+                    {{--@endif--}}
+                {{--</div>--}}
+                {{--<div class="right">--}}
+                    {{--@if(count($talks)>1)--}}
+                        {{--@foreach($talks as $ktalk=>$talk)--}}
+                            {{--@if(is_numeric($ktalk))--}}
+                            {{--<div>{{ strip_tags($talk['intro']) }}</div>--}}
+                            {{--@endif--}}
+                        {{--@endforeach--}}
+                    {{--@endif--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+        {{--<br style="clear:both;"><br>--}}
+
         <!-- 实时数据 -->
         <div class="realtime">
             <p class="floor">
@@ -566,35 +572,20 @@
         <br style="clear:both;">
 
         <!-- 合作机构 -->
-        <div class="cooperation">
-            <p class="floor">
-                <img src="{{PUB}}assets-home/images/floor_red.png" class="floor_img">
-                <span class="floor_text">{{ $number[12] }}F</span>
-                <span class="floor_text2">&nbsp;{{ $floors[$number[12]] }}</span>
+        {{--<div class="cooperation">--}}
+            {{--<p class="floor">--}}
+                {{--<img src="{{PUB}}assets-home/images/floor_red.png" class="floor_img">--}}
+                {{--<span class="floor_text">{{ $number[12] }}F</span>--}}
+                {{--<span class="floor_text2">&nbsp;{{ $floors[$number[12]] }}</span>--}}
                 {{--<span class="more" onclick="window.location.href='/coopertion';">>更多</span>--}}
-            </p>
-            <div class="cooperation_con">
-                <div class="img">
-                    <a href=""><img src="{{PUB}}uploads/images/2016/online1.png"></a>
-                </div>
-                <div class="img">
-                    <a href=""><img src="{{PUB}}uploads/images/2016/online1.png"></a>
-                </div>
-                <div class="img">
-                    <a href=""><img src="{{PUB}}uploads/images/2016/online1.png"></a>
-                </div>
-                <div class="img">
-                    <a href=""><img src="{{PUB}}uploads/images/2016/online1.png"></a>
-                </div>
-                <div class="img">
-                    <a href=""><img src="{{PUB}}uploads/images/2016/online1.png"></a>
-                </div>
-                <div class="img">
-                    <a href=""><img src="{{PUB}}uploads/images/2016/online1.png"></a>
-                </div>
-            </div>
-        </div>
-        <br style="clear:both;">
+            {{--</p>--}}
+            {{--<div class="cooperation_con">--}}
+                {{--<div class="img">--}}
+                    {{--<a href=""><img src="{{PUB}}uploads/images/2016/online1.png"></a>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+        {{--<br style="clear:both;">--}}
 
         <!-- 用户心声 -->
         <div class="voice">
@@ -608,8 +599,9 @@
                 <div class="img"><img src="{{PUB}}uploads/images/2016/online1.png"></div>
                 @if(count($uservoices))
                     <div class="text">
-                        名称：{{ $uservoices[0]['username'] }}
-                        <br>工作：{{ $uservoices[0]['work'] }}
+                        <p style="margin:0;padding-bottom:5px;">名称：{{ $uservoices[0]['username'] }}</p>
+                        {{--<p style="margin:0;padding-bottom:5px;">类型：{{ $uservoices[0]['userType'] }}</p>--}}
+                        <p style="margin:0;padding-bottom:5px;">工作：{{ $uservoices[0]['work'] }}</p>
                     </div>
                     <div class="con">{{ $uservoices[0]['intro'] }}</div>
                 @else

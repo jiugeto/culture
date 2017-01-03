@@ -72,6 +72,16 @@
     font-size:15px;
 }
 .cre_cate a:hover,.cre_cate a.curr { color:orangered; }
+.cre_cate a.add {
+    padding:2px 10px;
+    color:ghostwhite;
+    border:1px solid red;
+    background:orangered;
+}
+.cre_cate a:hover.add {
+    color:white;
+    background:red;
+}
 
 
 /*===== 在线片源 =====*/
@@ -98,6 +108,12 @@
     color:orangered;
     border:1px solid orangered;
 }
+.source a:hover .cre_con div.dh {
+    color:white;
+    font-weight:bold;
+    text-shadow:1px 1px black;
+    display:block;
+}
 .source .img {
     width:190px;height:110px;
     color:rgb(240,240,240);
@@ -107,6 +123,14 @@
     background:rgb(230,230,230);
     overflow:hidden;
 }
+.source .cre_con .dh {
+    font-size:18px;
+    background:rgba(0,0,0,0.3);
+    /*filter:alpha(opacity=30); -moz-opacity:0.3; -khtml-opacity:0.3; opacity:0.3;*/
+    position:relative;top:-200px;
+    display:none;
+}
+.source .cre_con .dh span:hover { color:orangered; }
 .source img { height:200px; }
 .source .text { text-align:center; }
 .cre_cate text { margin:0 auto;width:100%; }

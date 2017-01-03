@@ -78,8 +78,9 @@
                 {{--<a href="">资料</a><br>--}}
                 {{--<a href="">退出</a>--}}
             {{--</div>--}}
-            &nbsp;&nbsp;<a href="/idea" style="color:red;">创意</a>
-            &nbsp;&nbsp;<a href="/talk" style="color:red;">话题</a>
+            {{--&nbsp;&nbsp;<a href="/idea" style="color:red;">创意</a>--}}
+            {{--&nbsp;&nbsp;<a href="/talk" style="color:red;">话题</a>--}}
+            &nbsp;&nbsp;<a href="{{env('TALK_DOMAIN')}}" target="_blank">话题论坛</a>
             &nbsp;&nbsp;<a href="/opinion" style="padding:5px 20px;color:white;background:red;" id="opinion">用户建议</a>
         </span>
         <div class="navigate">

@@ -6,6 +6,7 @@ use Redis;
 class ApiBase
 {
     /**
+     * 用户、管理员、活动、财务接口
      * API公用文件
      */
 
@@ -14,7 +15,8 @@ class ApiBase
      */
     public static function getApiKey()
     {
-        return env('API_KEY', '3TTN5JUf8uLcC3ZxIrszuO9isduc3IKO');
+//        return env('API_KEY', '3TTN5JUf8uLcC3ZxIrszuO9isduc3IKO');
+        return '3TTN5JUf8uLcC3ZxIrszuO9isduc3IKO';
     }
 
     /**
@@ -22,7 +24,8 @@ class ApiBase
      */
     public static function getApiCurl()
     {
-        return env('API_CURL', 'http://www.cul_user.com');
+//        return env('API_CURL', 'user.jiugewenhua.com');
+        return 'user_api.jiugewenhua.com';
     }
 
     /**

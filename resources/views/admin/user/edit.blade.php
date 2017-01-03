@@ -67,7 +67,7 @@
 
                         <div class="am-form-group">
                             <label>头像 / Head：</label>
-                            <br>自定义
+                            {{--<br>自定义--}}
                         </div>
 
                         <button type="submit" class="am-btn am-btn-primary">保存修改</button>

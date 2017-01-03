@@ -5,25 +5,25 @@
         <a href="/member">会员后台</a> / 会员设置 / 更新密码
     </div>
 
-    <form data-am-validator method="POST" action="{{DOMAIN}}member/setting/updatepwd/{{ $data->id }}" enctype="multipart/form-data">
+    <form data-am-validator method="POST" action="{{DOMAIN}}member/setting/updatepwd/{{ $data['id'] }}" enctype="multipart/form-data">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="_method" value="POST">
 
         <table class="table_create">
             {{--密码--}}
             {{--<tr><td colspan="2"><div class="div_hr"></div></td></tr>--}}
-            <tr><td colspan="2"><p class="center"><b>密码修改</b></p></td></tr>
+            <tr class="field_name"><td colspan="2"><p class="center"><b>密码修改</b></p></td></tr>
             <tr>
-                <td style="width:40%;"><label>用户名 / User Name：</label></td>
-                <td>{{ $data->username }}</td>
+                <td class="field_name" style="width:40%;"><label>用户名：</label></td>
+                <td>{{ $data['username'] }}</td>
             </tr>
             {{--<tr><td>&nbsp;</td></tr>--}}
             <tr>
-                <td><label>旧密码 / PWD：</label></td>
+                <td class="field_name"><label>旧密码：</label></td>
                 <td><input type="text" placeholder="6-12字符" minlength="2" maxlength="12" name="password"/></td>
             </tr>
             <tr>
-                <td><label>新密码 / PWD：</label></td>
+                <td class="field_name"><label>新密码：</label></td>
                 <td><input type="text" placeholder="6-12字符" minlength="2" maxlength="12" name="password2"/></td>
             </tr>
             <tr><td>&nbsp;</td></tr>

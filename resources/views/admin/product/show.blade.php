@@ -15,47 +15,47 @@
                 <tbody id="tbody-alert">
                 <tr>
                     <td class="am-hide-sm-only">编号 / Id：</td>
-                    <td>{{ $data->id }}</td>
+                    <td>{{ $data['id'] }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">产品名称 / Name：</td>
-                    <td>{{ $data->name }}</td>
+                    <td>{{ $data['name'] }}</td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">类型 / Genre：</td>
-                    <td>{{ $data->genre() }}</td>
+                    <td class="am-hide-sm-only">产品类型 / Category：</td>
+                    <td>{{ $data['cateName'] }}</td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">图片 / Picture：</td>
-                    <td><img src="{{ $data->gif }}"></td>
+                    <td class="am-hide-sm-only">缩略图 / Picture：</td>
+                    <td><img src="{{ $data['thumb'] }}" width="300"></td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">介绍 / Introduce：</td>
-                    <td>{{ $data->intro }}</td>
+                    <td>{{ $data['intro'] }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">用户名称 / User Name：</td>
-                    <td>{{ $data->uname }}</td>
+                    <td>{{ $data['uname'] }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">是否置顶 / Is Top：</td>
-                    <td>{{ $data->istop() }}</td>
+                    <td>{{ $data['isTopName'] }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">排序 / Sort：</td>
-                    <td>{{ $data->sort }}</td>
+                    <td>{{ $data['sort'] }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">前台是否显示 / Is Show：</td>
-                    <td>{{ $data->isshow() }}</td>
+                    <td>{{ $data['isShowName'] }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">创建时间 / Create Time：</td>
-                    <td>{{ $data->createTime() }}</td>
+                    <td>{{ $data['createTime'] }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">修改时间 / Update Time：</td>
-                    <td>{{ $data->updateTime() }}</td>
+                    <td>{{ $data['updateTime'] }}</td>
                 </tr>
                 </tbody>
             </table>

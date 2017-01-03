@@ -24,7 +24,7 @@
                         if ($(this).val()==1) {
                             window.location.href = '{{DOMAIN}}demand';
                         } else {
-                            window.location.href = '{{DOMAIN}}demand/genre/'+$(this).val();
+                            window.location.href = '{{DOMAIN}}demand/s/'+$(this).val();
                         }
                     });
                 });

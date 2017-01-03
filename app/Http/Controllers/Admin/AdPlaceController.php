@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Models\ActionModel;
-use App\Models\AdPlaceModel;
+use App\Models\Base\AdPlaceModel;
 
 class AdPlaceController extends BaseController
 {

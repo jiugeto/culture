@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Person;
 
+use App\Models\BaseModel;
 use App\Models\DesignModel;
 
 class DesignController extends BaseController
@@ -23,6 +24,7 @@ class DesignController extends BaseController
             'datas'=> $this->query(),
             'prefix_url'=> DOMAIN.'person/design',
             'user'=> $this->user,
+            'model'=> new BaseModel(),
             'links'=> $this->links,
             'curr'=> $this->curr,
         ];

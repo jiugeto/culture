@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Person;
 
+use App\Models\BaseModel;
 use App\Models\GoodsModel;
 use App\Models\Base\VideoModel;
 
@@ -24,6 +25,7 @@ class VideoController extends BaseController
             'datas'=> $this->query(),
             'prefix_url'=> DOMAIN.'person/video',
             'user'=> $this->user,
+            'model'=> new BaseModel(),
             'links'=> $this->links,
             'curr'=> $this->curr,
         ];

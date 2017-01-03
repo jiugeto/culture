@@ -41,15 +41,15 @@
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">前台是否显示 / Show：</td>
-                    <td>{{ $data->isshow ? '显示' : '不显示' }}</td>
+                    <td>{{ $data->isshow() }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">创建时间 / Create Time：</td>
-                    <td>{{ $data->created_at }}</td>
+                    <td>{{ $data->createTime() }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">修改时间 / Update Time：</td>
-                    <td>{{ $data->updated_at!='0000-00-00 00:00:00' ? $data->updated_at : '未修改' }}</td>
+                    <td>{{ $data->updateTime() }}</td>
                 </tr>
                 </tbody>
             </table>

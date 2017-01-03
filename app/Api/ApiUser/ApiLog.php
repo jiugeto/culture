@@ -131,4 +131,40 @@ class ApiLog
         }
         return array('code' => 0, 'data' => ApiBase::objToArr($response->data));
     }
+
+    /**
+     * 获取注册的 ip、地址
+     */
+    public static function getRegistLog($uid)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/log/first';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, array(
+            'uid'    =>  $uid,
+        ));
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array('code' => 0, 'data' => ApiBase::objToArr($response->data));
+    }
+
+    /**
+     * 获取前一次用户访问的 ip、地址
+     */
+    public static function getLastLog($uid)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/log/last';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, array(
+            'uid'    =>  $uid,
+        ));
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array('code' => 0, 'data' => ApiBase::objToArr($response->data));
+    }
 }

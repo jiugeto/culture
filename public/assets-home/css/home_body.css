@@ -98,6 +98,7 @@
 }
 .online_div .con_img {
     width:100%;height:100px;
+    background:gainsboro;
     overflow:hidden;
 }
 .online_div img { width:180px; }
@@ -152,6 +153,7 @@
 .trait_con .img {
     margin-right:4px;
     width:148px;height:100px;
+    background:gainsboro;
     overflow:hidden;
     float:left;
 }
@@ -523,7 +525,7 @@
 }
 .usertip .tip .circle {
     width:80px; height:80px;
-    border-radius:40px;
+    border-radius:80px;
     border:5px solid orange;
     text-align:center;
     line-height:80px;

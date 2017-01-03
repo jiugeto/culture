@@ -1,6 +1,8 @@
 <?php
 namespace App\Models;
 
+use App\Api\ApiUser\ApiCompany;
+
 class LinkModel extends BaseModel
 {
     protected $table = 'bs_links';
@@ -40,6 +42,7 @@ class LinkModel extends BaseModel
     {
         return LinkModel::where('cid', 0)
                 ->where('type_id', 1)
+                ->where('isshow', 1)
                 ->orderBy('sort','desc')
                 ->get();
     }
@@ -51,8 +54,9 @@ class LinkModel extends BaseModel
     {
         return LinkModel::where('cid', 0)
                 ->where('type_id', 2)
+                ->where('isshow', 1)
                 ->orderBy('sort','desc')
-                ->paginate(11);
+                ->paginate(10);
     }
 
     /**
@@ -62,12 +66,14 @@ class LinkModel extends BaseModel
     {
         return LinkModel::where('cid', 0)
                 ->where('type_id', 3)
+                ->where('isshow', 1)
                 ->orderBy('sort','desc')
                 ->paginate(10);
     }
 
     public function company()
     {
-        return $this->cid ? CompanyModel::find($this->id) : '本网站';
+        $companyArr = ApiCompany::getOneCompany($this->cid);
+        return $companyArr['code']==0 ? $companyArr['data'] : '本网站';
     }
 }

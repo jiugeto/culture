@@ -1,9 +1,9 @@
 <?php
 namespace App\Http\Controllers\Person;
 
+use App\Models\BaseModel;
 use App\Models\GoodsModel;
 use App\Models\Online\ProductModel;
-use App\Models\UserModel;
 
 class HomeController extends BaseController
 {
@@ -32,7 +32,8 @@ class HomeController extends BaseController
             'prefix_url'=> $prefix_url,
             'goodsModel'=> $this->goodsModel,
             'productModel'=> $this->productModel,
-            'user'=> UserModel::find($this->userid),
+            'model'=> new BaseModel(),
+            'user'=> $this->user,
             'from'=> $from,
             'type'=> $type,
         ];

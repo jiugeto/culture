@@ -32,7 +32,11 @@ class ApiCompany
         if ($response->error->code != 0) {
             return array('code' => -2, 'msg' => $response->error->msg);
         }
-        return array('code' => 0, 'data' => ApiBase::objToArr($response->data));
+        return array(
+            'code' => 0,
+            'model' => ApiBase::objToArr($response->model),
+            'data' => ApiBase::objToArr($response->data),
+        );
     }
 
     /**
@@ -40,7 +44,7 @@ class ApiCompany
      */
     public static function getOneCompany($uid)
     {
-        $redisKey = 'companyInfo';
+        $redisKey = 'companyByUid';
         //判断缓存有没有该数据
         if ($redisResult = ApiBase::getRedis($redisKey)) {
             return array('code' => 0, 'data' => unserialize($redisResult));
@@ -56,7 +60,11 @@ class ApiCompany
         if ($response->error->code != 0) {
             return array('code' => -2, 'msg' => $response->error->msg);
         }
-        return array('code' => 0, 'data' => ApiBase::objToArr($response->data));
+        return array(
+            'code' => 0,
+            'model' => ApiBase::objToArr($response->model),
+            'data' => ApiBase::objToArr($response->data),
+        );
     }
 
     /**
@@ -72,6 +80,28 @@ class ApiCompany
         if ($response->error->code != 0) {
             return array('code' => -2, 'msg' => $response->error->msg);
         }
-        return array('code' => 0, 'data' => ApiBase::objToArr($response->data));
+        return array('code' => 0, 'msg' => $response->error->msg);
+    }
+
+    /**
+     * 通过 cid 获取一条记录
+     */
+    public static function show($id)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/company/show';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, array(
+            'id' => $id
+        ));
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -2, 'msg' => $response->error->msg);
+        }
+        return array(
+            'code' => 0,
+            'model' => ApiBase::objToArr($response->model),
+            'data' => ApiBase::objToArr($response->data),
+        );
     }
 }

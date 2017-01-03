@@ -52,12 +52,13 @@
         ]
     },
     "config": {
-        "preferred-install": "dist"
+        "preferred-install": "dist",
+        "secure-http": false
     },
     "repositories": {
         "packagist": {
             "type": "composer",
-            "url": "http://packagist.phpcomposer.com"
+            "url": "https://packagist.phpcomposer.com"
         }
     }
 }

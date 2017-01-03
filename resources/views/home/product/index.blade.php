@@ -25,7 +25,7 @@
             {{--大图--}}
             <div class="pro_big">
                 @if(count($recommends))
-                    <div class="img"><img src="{{ $recommends[0]->getPicUrl() }}"></div>
+                    <div class="img"><img src="{{ $recommends[0]->thumb }}"></div>
                     <a href="{{DOMAIN}}product/{{ $recommend->id }}">{{ $recommends[0]->name }}</a>
                 @else
                     <div class="img"><div class="none">无</div></div>
@@ -38,7 +38,7 @@
                     @foreach($recommends as $recommend)
                 <div class="img_text">
                     <div class="img">
-                        <a href="{{DOMAIN}}product/{{ $recommend->id }}"><img src="{{ $recommend->getPicUrl() }}"></a>
+                        <a href="{{DOMAIN}}product/{{ $recommend->id }}"><img src="{{ $recommend->thumb }}"></a>
                     </div>
                     <div class="text"><a href="{{DOMAIN}}product/{{ $recommend->id }}">{{ $recommend->name }}</a></div>
                 </div>
@@ -67,7 +67,13 @@
                     @foreach($model->getNewests([]) as $newest)
                 <div class="img_text">
                     <div class="img">
-                        <a href="{{DOMAIN}}product/{{ $newest->id }}"><img src="{{ $newest->getPicUrl() }}" style="@if($size=$newest->getPicSize($w=150,$h=125)) width:{{$size['w']}}px;height:{{$size['h']}}px; @endif"></a>
+                        <a href="{{DOMAIN}}product/{{ $newest->id }}">
+                            <img src="{{ $newest->thumb }}" style="
+                                {{--@if($size=$newest->getPicSize($w=150,$h=125)) --}}
+                                    {{--width:{{$size['w']}}px;height:{{$size['h']}}px; --}}
+                                {{--@endif--}}
+                            ">
+                        </a>
                     </div>
                     <div class="text">
                         <a href="{{DOMAIN}}product/{{ $newest->id }}">{{ $newest->name }}</a>
@@ -95,8 +101,14 @@
                         @foreach($model->getNewests([2,4,5,6]) as $newest)
                     <div class="img_text">
                         {{--<div class="img_num"> 1 </div>--}}
-                        <div class="img"><a href="{{DOMAIN}}product/{{ $newest->id }}">
-                                <img src="{{ $newest->getPicUrl() }}" style="@if($size=$newest->getPicSize($w=150,$h=125)) width:{{$size['w']}}px;height:{{$size['h']}}px; @endif"></a>
+                        <div class="img">
+                            <a href="{{DOMAIN}}product/{{ $newest->id }}">
+                                <img src="{{ $newest->thumb }}" style="
+                                    {{--@if($size=$newest->getPicSize($w=150,$h=125)) --}}
+                                        {{--width:{{$size['w']}}px;height:{{$size['h']}}px; --}}
+                                    {{--@endif--}}
+                                ">
+                            </a>
                         </div>
                         <a href="{{DOMAIN}}product/{{ $newest->id }}">{{ str_limit($newest->name,10) }}</a>
                         <a href="" class="click">点击<span>{{ $newest->click }}</span></a>
@@ -106,9 +118,9 @@
                     @if(count($model->getNewests([2,4,5,6]))<7)
                         @for($i=0;$i<7-count($model->getNewests([2,4,5,6]));++$i)
                     <div class="img_text">
-                        {{--<div class="img_num"> 1 </div>--}}
+                        <div class="img_num"> 1 </div>
                         <div class="img">
-                            {{--<a href=""><div class="none">无</div></a>--}}
+                            <a href=""><div class="none">无</div></a>
                         </div>
                         <a href="">无最新样片</a>
                         <a href="" class="click">点击<span>0</span></a>
@@ -125,7 +137,15 @@
                         @foreach($model->getNewests([1,3]) as $newest)
                     <div class="img_text">
                         {{--<div class="img_num"> 1 </div>--}}
-                        <div class="img"><a href="{{DOMAIN}}product/{{ $newest->id }}"><img src="{{ $newest->getPicUrl() }}" style="@if($size=$newest->getPicSize($w=150,$h=125)) width:{{$size['w']}}px;height:{{$size['h']}}px; @endif"></a></div>
+                        <div class="img">
+                            <a href="{{DOMAIN}}product/{{ $newest->id }}">
+                                <img src="{{ $newest->thumb }}" style="
+                                    {{--@if($size=$newest->getPicSize($w=150,$h=125)) --}}
+                                        {{--width:{{$size['w']}}px;height:{{$size['h']}}px; --}}
+                                    {{--@endif--}}
+                                ">
+                            </a>
+                        </div>
                         <a href="{{DOMAIN}}product/{{ $newest->id }}">{{ str_limit($newest->name,10) }}</a>
                         <a href="" class="click">点击<span>{{ $newest->click }}</span></a>
                     </div>
@@ -174,7 +194,11 @@
                     <div class="img_text">
                         <div class="img">
                             <a href="{{DOMAIN}}product/{{ $good->id }}">
-                                <img src="{{ $good->getPicUrl() }}" style="@if($size=$good->getPicSize($w=150,$h=125)) width:{{$size['w']}}px;height:{{$size['h']}}px; @endif">
+                                <img src="{{ $good->thumb }}" style="
+                                    {{--@if($size=$good->getPicSize($w=150,$h=125)) --}}
+                                        {{--width:{{$size['w']}}px;height:{{$size['h']}}px; --}}
+                                    {{--@endif--}}
+                                ">
                             </a>
                         </div>
                         <a href="">{{ $good->name }}</a>

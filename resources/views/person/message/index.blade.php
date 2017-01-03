@@ -7,7 +7,7 @@
                 @if($m==1) @elseif($m==2)/ 发件箱 @elseif($m==3)/ 草稿箱 @elseif($m==4)/ 回收站 @endif
                 <a href="{{DOMAIN}}person/message/create">发送消息</a>
             </p>
-            <div class="list" @if(count($datas)<2)style="height:240px;"@endif>
+            <div class="list" style="width:748px;@if(count($datas)<2)height:240px;@endif">
                 {{--<p id="search">--}}
                     {{--时间选择--}}
                     {{--<select name="time">--}}

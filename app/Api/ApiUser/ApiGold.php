@@ -37,17 +37,21 @@ class ApiGold
 
     /**
      * 新增金币
+     * type：1建议发布奖励1-5，2建议评价奖励6-10，3用户心声奖励1-5，4订单好评奖励5，
      */
-    public static function add($data)
+    public static function add($uid,$genre)
     {
         $apiUrl = ApiBase::getApiCurl() . '/api/v1/gold/add';
         $curl = new Curl();
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
-        $curl->post($apiUrl, $data);
+        $curl->post($apiUrl, array(
+            'uid'   =>  $uid,
+            'genre'  =>  $genre,
+        ));
         $response = json_decode($curl->response);
         if ($response->error->code != 0) {
             return array('code' => -1, 'msg' => $response->error->msg);
         }
-        return array('code' => 0, 'data' => ApiBase::objToArr($response->data));
+        return array('code' => 0, 'msg' => $response->error->msg);
     }
 }

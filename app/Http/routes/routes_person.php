@@ -38,7 +38,12 @@ Route::group(['prefix'=>'person','middleware' =>'MemberAuth','namespace'=>'Perso
     //设计管理
     Route::resource('design','DesignController');
     //好友管理
+    Route::post('frield/apply','FrieldController@getApply');        //申请好友
+    Route::get('frield/pass/{id}','FrieldController@getPass');      //通过
+    Route::post('frield/refuse','FrieldController@getRefuse');      //拒绝
     Route::get('frield/m/{menu}','FrieldController@index');
+    Route::get('frield/new','FrieldController@newFrields');
+    Route::get('frield/{m}/{id}','FrieldController@show');
     Route::resource('frield','FrieldController');
     //个人后台皮肤管理
     Route::get('skin/pic/{pic_id}','SkinController@setTopBg');

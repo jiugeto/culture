@@ -1,7 +1,9 @@
 <?php
 namespace App\Http\Controllers\Person;
 
-use App\Models\UserParamsModel;
+use App\Api\ApiUser\ApiUsers;
+use App\Models\Base\PicModel;
+use App\Models\BaseModel;
 
 class SkinController extends BaseController
 {
@@ -14,14 +16,16 @@ class SkinController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->model = new UserParamsModel();
     }
 
     public function index()
     {
+        $picModel = PicModel::where('uid',$this->userid)->get();
         $result = [
             'data'=> $this->query(),
-            'pics'=> $this->model->pics($this->userid),
+//            'pics'=> $this->model->pics($this->userid),
+            'pics'=> $picModel,
+            'model'=> new BaseModel(),
             'user'=> $this->user,
             'links'=> $this->links,
             'curr'=> $this->curr,
@@ -31,7 +35,15 @@ class SkinController extends BaseController
 
     public function setTopBg($pic_id)
     {
-        UserParamsModel::where('uid',$this->userid)->update(['per_top_bg_img'=> $pic_id]);
+//        UserParamsModel::where('uid',$this->userid)->update(['per_top_bg_img'=> $pic_id]);
+        $data = [
+            'uid'   =>  $this->userid,
+            'pic_id'    =>  $pic_id,
+        ];
+        $rst = ApiUsers::setPersonTopBg($data);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
         return redirect(DOMAIN.'person/skin');
     }
 
@@ -41,6 +53,8 @@ class SkinController extends BaseController
 
     public function query()
     {
-        return UserParamsModel::where('uid',$this->userid)->first();
+//        return UserParamsModel::where('uid',$this->userid)->first();
+        $rst = ApiUsers::getParamByUid($this->userid);
+        return $rst['code']==0 ? $rst['data'] : [];
     }
 }

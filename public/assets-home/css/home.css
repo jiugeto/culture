@@ -67,7 +67,7 @@ body {
 }
 .nav_body div { float:left; }
 .nav_right {
-    width:310px;
+    width:260px;
     /*position:absolute;top:50px;right:200px;*/
     float:right;
 }
@@ -116,13 +116,13 @@ a.curr {
     border:1px solid lightgray;
     background:white;
     cursor:pointer;
-    position:fixed;z-index:120;top:33px;left:300px;
+    position:fixed;z-index:120;top:25px;left:300px;
 }
 .nav_qiehuan b:hover { color:orangered; }
 .nav_qh {
     background:white;
     border:1px solid lightgrey;
-    position:fixed;z-index:115;top:94px;left:200px;
+    position:fixed;z-index:115;top:86px;left:200px;
 }
 .nav_hide {
     margin:2px auto;

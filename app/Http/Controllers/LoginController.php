@@ -67,25 +67,31 @@ class LoginController extends Controller
         //个人资料
         if (in_array($rstLogin['data']['isuser'],[1,2,4,50])) {
             $personInfo = ApiPerson::getPersonInfo($rstLogin['data']['id']);
-            if ($personInfo['code'] != 0) { $person = array(); }
-            $person['per_id'] = $personInfo['data']['id'];
-            $person['realname'] = $personInfo['data']['realname'];
-            $person['sex'] = $personInfo['data']['sex'];
-            $person['idcard'] = $personInfo['data']['idcard'];
-            $person['idfront'] = $personInfo['data']['idfront'];
+            if ($personInfo['code'] != 0) {
+                $person = array();
+            } else {
+                $person['per_id'] = $personInfo['data']['id'];
+                $person['realname'] = $personInfo['data']['realname'];
+                $person['sex'] = $personInfo['data']['sex'];
+                $person['idcard'] = $personInfo['data']['idcard'];
+                $person['idfront'] = $personInfo['data']['idfront'];
+            }
         }
-        $userperson = isset($person) ? serialize($person) : [];
+//        $userperson = isset($person) ? serialize($person) : [];
         //企业资料
         if (in_array($rstLogin['data']['isuser'],[3,5,6,7,50])) {
             $companyInfo = ApiCompany::getOneCompany($rstLogin['data']['id']);
-            if ($companyInfo['code'] != 0) { $company = array(); }
-            $company['cid'] = $companyInfo['data']['id'];
-            $company['name'] = $companyInfo['data']['name'];
-            $company['area'] = $companyInfo['data']['area'];
-            $company['address'] = $companyInfo['data']['address'];
-            $company['yyzzid'] = $companyInfo['data']['yyzzid'];
+            if ($companyInfo['code'] != 0) {
+                $company = array();
+            } else {
+                $company['cid'] = $companyInfo['data']['id'];
+                $company['name'] = $companyInfo['data']['name'];
+                $company['area'] = $companyInfo['data']['area'];
+                $company['address'] = $companyInfo['data']['address'];
+                $company['yyzzid'] = $companyInfo['data']['yyzzid'];
+            }
         }
-        $usercompany = isset($company) ? serialize($company) : [];
+//        $usercompany = isset($company) ? serialize($company) : [];
 
         $serial = date('YmdHis',time()).rand(0,10000);
         $userInfo = [
@@ -98,10 +104,15 @@ class LoginController extends Controller
             'address'=> $rstLogin['data']['address'],
             'cid'=> isset($companyInfo['data'])?$companyInfo['data']['id']:0,
             'loginTime'=> time(),
-            'person'=> $userperson,
-            'company'=> $usercompany,
+            'person'=> $person,
+            'company'=> $company,
         ];
+        $userInfo['cookie'] = $_COOKIE;
         Session::put('user',$userInfo);
+        \Cookie::make('user', $userInfo, 720);       //cookie12小时
+
+        //将session放入redis
+        \Redis::setex('cul_session', $this->redisTime*60, serialize($userInfo));
 
         return redirect(DOMAIN.'member');
     }
@@ -115,6 +126,8 @@ class LoginController extends Controller
         }
         //去除session
         Session::forget('user');
+        \Cookie::forget('user');
+        \Redis::del('cul_session');
         return redirect(DOMAIN.'login');
     }
 }

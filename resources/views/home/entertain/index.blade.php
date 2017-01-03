@@ -46,8 +46,8 @@
                         </td>
                         <td>
                             <div class="img">
-                                @if(count($data->getPics()))
-                                    <img src="{{ $pic[0]->getPicUrl() }}">
+                                @if($data->thumb)
+                                    <img src="{{ $data->thumb }}">
                                 @else
                                     <div style="width:280px;height:500px;background:rgb(250,250,250);"></div>
                                 @endif

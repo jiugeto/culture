@@ -1,9 +1,10 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
+use App\Api\ApiTalk\ApiTalk;
+use App\Api\ApiTalk\ApiTheme;
+use App\Api\ApiUser\ApiUsers;
 use Illuminate\Http\Request;
-use App\Models\Talk\TalksModel;
-//use Symfony\Component\HttpFoundation\Request;
 
 class TalkController extends BaseController
 {
@@ -14,7 +15,6 @@ class TalkController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->model = new TalksModel();
         $this->crumb['']['name'] = '话题列表';
         $this->crumb['category']['name'] = '话题管理';
         $this->crumb['category']['url'] = 'talk';
@@ -24,9 +24,11 @@ class TalkController extends BaseController
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
+        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $prefix_url = DOMAIN.'admin/talk';
         $result = [
-            'datas'=> $this->query($uname),
-            'prefix_url'=> DOMAIN.'admin/talk',
+            'datas'=> $this->query($pageCurr,$prefix_url,$uname),
+            'prefix_url'=> $prefix_url,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
             'uname'=> $uname ? $uname : '',
@@ -34,12 +36,47 @@ class TalkController extends BaseController
         return view('admin.talk.index', $result);
     }
 
+    public function create()
+    {
+        $curr['name'] = $this->crumb['create']['name'];
+        $curr['url'] = $this->crumb['create']['url'];
+        $rstTheme = ApiTheme::themeAll();
+        if ($rstTheme['code']!=0) {
+            echo "<script>alert('".$rstTheme['msg']."');history.go(-1);</script>";exit;
+        }
+        $result = [
+            'themes'=> $rstTheme['data'],
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.talk.create', $result);
+    }
+
+    public function store(Request $request)
+    {
+        $data = $this->getData($request);
+        $rst = ApiTalk::add($data);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN.'admin/talk');
+    }
+
     public function edit($id)
     {
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
+        $rst = ApiTalk::show($id);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
+        $rstTheme = ApiTheme::themeAll();
+        if ($rstTheme['code']!=0) {
+            echo "<script>alert('".$rstTheme['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> TalksModel::find($id),
+            'data'=> $rst['data'],
+            'themes'=> $rstTheme['data'],
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -48,7 +85,12 @@ class TalkController extends BaseController
 
     public function update(Request $request,$id)
     {
-        TalksModel::where('id',$id)->update(['isshow'=> $request->isshow]);
+        $data = $this->getData($request);
+        $data['id'] = $id;
+        $rst = ApiTalk::modify($data);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
         return redirect(DOMAIN.'admin/talk');
     }
 
@@ -56,31 +98,70 @@ class TalkController extends BaseController
     {
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
+        $rst = ApiTalk::show($id);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> TalksModel::find($id),
+            'data'=> $rst['data'],
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
         return view('admin.talk.show', $result);
     }
 
-
-
-
-
-    public function query($uname)
+    public function isdel($id,$del)
     {
-        if ($uname) {
-            $datas = TalksModel::where('uname','like','%'.$uname.'%')
-                ->orderBy('sort','desc')
-                ->orderBy('id','desc')
-                ->paginate($this->limit);
-        } else {
-            $datas = TalksModel::orderBy('sort','desc')
-                ->orderBy('id','desc')
-                ->paginate($this->limit);
+        $rst = ApiTalk::isdel($id,$del);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
         }
-        $datas->limit = $this->limit;
+        return redirect(DOMAIN.'admin/talk');
+    }
+
+    /**
+     * 销毁记录
+     */
+    public function delete($id)
+    {
+        $rst = ApiTalk::delete($id);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN.'admin/talk');
+    }
+
+
+
+
+
+    public function getData(Request $request)
+    {
+        if (!$request->uname || $request->uname=='本站') {
+            $uname = '本站';
+            $uid = 0;
+        } else {
+            $rstUser = ApiUsers::getOneUserByUname($request->uname);
+            if ($rstUser['code']!=0) {
+                echo "<script>alert('用户不存在！');history.go(-1);</script>";exit;
+            }
+            $uname = $request->uname;
+            $uid = $rstUser['id'];
+        }
+        return array(
+            'name'  =>  $request->name,
+            'themeid'   =>  $request->theme,
+            'intro' =>$request->intro,
+            'uid'   =>  $uid,
+            'uname' =>  $uname,
+        );
+    }
+
+    public function query($pageCurr,$prefix_url,$uname)
+    {
+        $rst = ApiTalk::index($this->limit,$pageCurr,$uname);
+        $datas = $rst['code']==0 ? $rst['data'] : [];
+        $datas['pagelist'] = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         return $datas;
     }
 }

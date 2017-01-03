@@ -1,6 +1,8 @@
 <?php
 namespace App\Models\Base;
 
+use App\Models\BaseModel;
+
 class AdPlaceModel extends BaseModel
 {
     protected $table = 'bs_ad_places';

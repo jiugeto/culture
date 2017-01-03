@@ -1,11 +1,8 @@
 <?php
 namespace App\Http\Controllers\Member;
 
-use App\Models\Online\OrderProductModel;
-use App\Models\Online\ProductModel;
-use App\Models\UserModel;
+use App\Api\ApiOnline\ApiProduct;
 use Illuminate\Http\Request;
-//use Illuminate\Support\Facades\Request;
 
 class ProductController extends BaseController
 {
@@ -18,45 +15,47 @@ class ProductController extends BaseController
         parent::__construct();
         $this->lists['func']['name'] = '在线动画';
         $this->lists['func']['url'] = 'product';
-//        $this->lists['create']['name'] = '开始创作';
         $this->lists['create']['name'] = '添加动画';
-        $this->model = new ProductModel();
     }
 
     public function index()
     {
         $curr['name'] = $this->lists['']['name'];
         $curr['url'] = $this->lists['']['url'];
+        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $prefix_url = DOMAIN.'member/product';
         $result = [
-            'datas'=> $this->query(),
+            'datas'=> $this->query($pageCurr,$prefix_url),
+            'prefix_url'=> $prefix_url,
             'lists'=> $this->lists,
-            'prefix_url'=> DOMAIN.'member/product',
             'curr'=> $curr,
         ];
         return view('member.product.index', $result);
     }
 
-    public function create()
-    {
-        $curr['name'] = $this->lists['create']['name'];
-        $curr['url'] = $this->lists['create']['url'];
-        $result = [
-            'model'=> $this->model,
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-        ];
-        return view('member.product.create', $result);
-    }
-
+//    public function create()
+//    {
+//        $curr['name'] = $this->lists['create']['name'];
+//        $curr['url'] = $this->lists['create']['url'];
+//        $result = [
+//            'model'=> $this->getModel(),
+//            'lists'=> $this->lists,
+//            'curr'=> $curr,
+//        ];
+//        return view('member.product.create', $result);
+//    }
+//
     public function store(Request $request)
     {
         $data = $this->getData($request);
-        $data['created_at'] = time();
-        ProductModel::create($data);
+        $rst = ApiProduct::add($data);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
 
-        //插入搜索表
-        $productModel = ProductModel::where($data)->first();
-        \App\Models\Home\SearchModel::change($productModel,1,'create');
+//        //插入搜索表
+//        $productModel = ProductModel::where($data)->first();
+//        \App\Models\Home\SearchModel::change($productModel,1,'create');
 
         return redirect(DOMAIN.'member/product');
     }
@@ -65,9 +64,13 @@ class ProductController extends BaseController
     {
         $curr['name'] = $this->lists['edit']['name'];
         $curr['url'] = $this->lists['edit']['url'];
+        $rst = ApiProduct::show($id);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> ProductModel::find($id),
-            'model'=> $this->model,
+            'data'=> $rst['data'],
+            'model'=> $this->getModel(),
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -77,12 +80,15 @@ class ProductController extends BaseController
     public function update(Request $request,$id)
     {
         $data = $this->getData($request);
-        $data['updated_at'] = time();
-        ProductModel::where('id',$id)->update($data);
+        $data['id'] = $id;
+        $rst = ApiProduct::modify($data);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
 
-        //更新搜索表
-        $productModel = ProductModel::where('id',$id)->first();
-        \App\Models\Home\SearchModel::change($productModel,1,'update');
+//        //更新搜索表
+//        $productModel = ProductModel::where('id',$id)->first();
+//        \App\Models\Home\SearchModel::change($productModel,1,'update');
 
         return redirect(DOMAIN.'member/product');
     }
@@ -91,8 +97,12 @@ class ProductController extends BaseController
     {
         $curr['name'] = $this->lists['show']['name'];
         $curr['url'] = $this->lists['show']['url'];
+        $rst = ApiProduct::show($id);
+        if ($rst['code']!=0) {
+            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> ProductModel::find($id),
+            'data'=> $rst['data'],
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -109,10 +119,10 @@ class ProductController extends BaseController
     {
         $data = [
             'name'=> $request->name,
+            'cate'=> $request->cate,
             'uid'=> $this->userid,
             'uname'=> \Session::get('user.username'),
             'intro'=> $request->intro,
-            'cate'=> $request->cate,
         ];
         return $data;
     }
@@ -120,12 +130,24 @@ class ProductController extends BaseController
     /**
      * 查询方法
      */
-    public function query()
+    public function query($pageCurr,$prefix_url)
     {
-        $datas = ProductModel::where('isshow',2)
-            ->orderBy('id','desc')
-            ->paginate($this->limit);
-        $datas->limit = $this->limit;
+//        $datas = ProductModel::where('isshow',2)
+//            ->orderBy('id','desc')
+//            ->paginate($this->limit);
+//        $datas->limit = $this->limit;
+        $rst = ApiProduct::getProductsList($this->limit,$pageCurr,0,0,2);
+        $datas = $rst['code']==0?$rst['data']:[];
+        $datas['pagelist'] = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         return $datas;
+    }
+
+    /**
+     * 获取 model
+     */
+    public function getModel()
+    {
+        $model = ApiProduct::getModel();
+        return $model['code']==0 ? $model['model'] : [];
     }
 }

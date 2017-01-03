@@ -20,14 +20,15 @@
                     </tr>
                     </thead>
                     <tbody>
-                @if($datas->total())
-                    @foreach($datas as $data)
+                @if(count($datas)>1)
+                    @foreach($datas as $kdata=>$data)
+                        @if(is_numeric($kdata))
                     <tr>
                         <td class="am-hide-sm-only"><input type="checkbox" /></td>
-                        <td class="am-hide-sm-only">{{ $data->id }}</td>
-                        <td class="am-hide-sm-only">{{ $data->getUName() }}</td>
-                        <td class="am-hide-sm-only">{{ $data->reward }}</td>
-                        <td class="am-hide-sm-only">{{ $data->createTime() }}</td>
+                        <td class="am-hide-sm-only">{{ $data['id'] }}</td>
+                        <td class="am-hide-sm-only">{{ $data['username'] }}</td>
+                        <td class="am-hide-sm-only">{{ $data['reward'] }}</td>
+                        <td class="am-hide-sm-only">{{ $data['createTime'] }}</td>
                         {{--<td class="am-hide-sm-only">--}}
                             {{--<div class="am-btn-toolbar">--}}
                                 {{--<div class="am-btn-group am-btn-group-xs">--}}
@@ -36,12 +37,13 @@
                             {{--</div>--}}
                         {{--</td>--}}
                     </tr>
+                        @endif
                     @endforeach
                 @else @include('admin.common.norecord')
                 @endif
                     </tbody>
                 </table>
-                @include('admin.common.page')
+                @include('admin.common.page2')
             </div>
         </div>
     </div>

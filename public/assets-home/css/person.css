@@ -66,6 +66,7 @@ div.per_waterfall {
 div:hover.per_waterfall { border:1px solid red; }
 .per_waterfall .img {
     width:220px; height:100px;
+    background:rgb(240,240,240);
     overflow:hidden;
 }
 div.per_waterfall .text { text-align:center;color:grey; }
@@ -213,6 +214,14 @@ div:hover.per_waterfall .text { color:red; }
     border:1px solid lightgrey;
     border-radius:3px;
 }
+.per_right1 .img .imgHidden {
+    margin:0;
+    width:50px;
+    height:50px;
+    border:0;
+    border-radius:3px;
+    overflow:hidden;
+}
 .per_right1 .friend:hover .img { border:1px solid red; }
 .per_right1 .friend:hover .nicheng { color:red; }
 .per_right1 .nicheng { margin:0;padding:0;color:grey;text-align:center; }
@@ -264,7 +273,7 @@ div:hover.per_waterfall .text { color:red; }
 .per_list .list {
     margin:0 auto;
     padding:20px;
-    width:748px;
+    width:790px;
     border:1px solid lightgrey;
     border-top:0;
     font-size:14px;
@@ -342,7 +351,11 @@ div:hover.per_waterfall .text { color:red; }
 .per_list td .pic_list div:hover.img,.per_list td .pic_list div.img_curr {
     border:1px solid red;
 }
-.per_list td .pic_list_sure { display:none; }
+.per_list td .pic_list_sure {
+    display:none;
+    position:absolute;bottom:10px;left:150px;
+    clear:both;
+}
 .per_list td .pic_list .bianhao {
     font-size:12px;
     position:relative;top:-100%;left:40%;
@@ -421,12 +434,17 @@ div:hover.per_waterfall .text { color:red; }
     background:ghostwhite;
     overflow:hidden;
 }
-.list #change_bg { color:red;cursor:pointer; }
+.list #change_bg {
+    padding:5px 10px;
+    color:red;
+    border:1px solid red;
+    cursor:pointer;
+}
 .pic_list {
     width:660px; height:300px;
     border:1px solid lightgrey;
     background:white;
-    position:relative;top:-80px;left:30px;
+    position:absolute; top:370px;
     overflow:auto;
     float:left;
     display:none;
@@ -591,3 +609,41 @@ button:hover.companybtn {
     border:1px solid red;
     color:red;
 }
+
+
+/*=== 弹窗 ===*/
+/*.tankuang {*/
+/*}*/
+/*.tankuang .mask {*/
+    /*width:100%;*/
+    /*height:100%;*/
+    /*background:black;*/
+    /*filter:alpha(opacity:30); opacity:0.3;  -moz-opacity:0.3; -khtml-opacity:0.3;*/
+    /*position:fixed; left:0; top:0; z-index:100;*/
+/*}*/
+/*.tankuang .con {*/
+    /*width:500px;*/
+    /*!*height:200px;*!*/
+    /*color:grey;*/
+    /*background:white;*/
+    /*position:fixed; left:30%; top:30%; z-index:100;*/
+/*}*/
+/*.tankuang input,.tankuang textarea {*/
+    /*padding:5px;*/
+    /*width:400px;*/
+    /*border:1px solid lightgrey;*/
+/*}*/
+/*.tankuang .con p {*/
+    /*padding:0 40px;*/
+/*}*/
+/*.tankuang .con p.tk_intro {*/
+    /*padding:5px 10px;*/
+    /*text-align:center;*/
+/*}*/
+/*.tankuang .con a {*/
+    /*padding:5px 10px;*/
+    /*color:red;*/
+    /*background:grey;*/
+    /*cursor:pointer;*/
+    /*position:absolute; left:500px; top:0;*/
+/*}*/

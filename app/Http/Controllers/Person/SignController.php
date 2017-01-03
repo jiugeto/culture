@@ -1,8 +1,9 @@
 <?php
 namespace App\Http\Controllers\Person;
 
-use App\Models\Base\UserSignModel;
+use App\Api\ApiUser\ApiSign;
 use App\Models\Base\WalletModel;
+use App\Models\BaseModel;
 
 class SignController extends BaseController
 {
@@ -33,16 +34,17 @@ class SignController extends BaseController
         }
         $month = (isset($month)&&$month) ? $month : 30;
         $this->toMonth = date('Ym',time()).$month.'235959';    //当天晚上24点
-        $this->model = new UserSignModel();
     }
 
     public function index($date='')
     {
+        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $prefix_url = DOMAIN.'person/sign';
         $result = [
-            'datas'=> $this->query($date),
+            'datas'=> $this->query($pageCurr,$prefix_url,$date),
             'month'=> $this->getMonth(),
-            'model'=> $this->model,
-            'prefix_url'=> DOMAIN.'person/sign',
+            'model'=> new BaseModel(),
+            'prefix_url'=> $prefix_url,
             'user'=> $this->user,
             'links'=> $this->links,
             'curr'=> $this->curr,
@@ -80,24 +82,38 @@ class SignController extends BaseController
     /**
      * 当天、月、总签到的用户
      */
-    public function query($date='')
+    public function query($pageCurr,$prefix_url,$date='')
     {
-        if ($date=='') {
-            $datas = UserSignModel::where('created_at','>',strtotime($this->fromtime))
-                ->where('created_at','<',strtotime($this->totime))
-                ->orderBy('id','desc')
-                ->paginate($this->limit);
-        } elseif ($date=='month') {
-            $datas = UserSignModel::where('created_at','>',strtotime($this->fromMonth))
-                ->where('created_at','<',strtotime($this->toMonth))
-                ->orderBy('id','desc')
-                ->paginate($this->limit);
-        } elseif ($date=='all') {
-            $datas = UserSignModel::orderBy('id','desc')
-                ->paginate($this->limit);
-        }
-        $datas->hasDay = $this->getDaySign() ? 1 : 0;
-        $datas->limit = $this->limit;
+//        if ($date=='') {
+//            $datas = UserSignModel::where('created_at','>',strtotime($this->fromtime))
+//                ->where('created_at','<',strtotime($this->totime))
+//                ->orderBy('id','desc')
+//                ->paginate($this->limit);
+//        } elseif ($date=='month') {
+//            $datas = UserSignModel::where('created_at','>',strtotime($this->fromMonth))
+//                ->where('created_at','<',strtotime($this->toMonth))
+//                ->orderBy('id','desc')
+//                ->paginate($this->limit);
+//        } elseif ($date=='all') {
+//            $datas = UserSignModel::orderBy('id','desc')
+//                ->paginate($this->limit);
+//        }
+//        $datas->hasDay = $this->getDaySign() ? 1 : 0;
+//        $datas->limit = $this->limit;
+//        if ($date=='') {
+//            $from = strtotime($this->fromtime);
+//            $to = strtotime($this->totime);
+//        } elseif ($date=='month') {
+//            $from = strtotime($this->fromMonth);
+//            $to = strtotime($this->toMonth);
+//        } elseif ($date=='all') {
+            $from = 0;
+            $to = 0;
+//        }
+        $rst = ApiSign::getSignListByTime($this->limit,$pageCurr,$this->userid,$from,$to);
+        $datas = $rst['code']==0?$rst['data']:[];
+        $datas['pagelist'] = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
+        $datas['pagelist']['hasDay'] = $this->getDaySign() ? 1 : 0;
         return $datas;
     }
 
@@ -106,11 +122,13 @@ class SignController extends BaseController
      */
     public function getDaySign()
     {
-        $userSign = UserSignModel::where('uid',$this->userid)
-            ->where('created_at','>',strtotime($this->fromtime))
-            ->where('created_at','<',strtotime($this->totime))
-            ->first();
-        return $userSign ? $userSign : '';
+//        $userSign = UserSignModel::where('uid',$this->userid)
+//            ->where('created_at','>',strtotime($this->fromtime))
+//            ->where('created_at','<',strtotime($this->totime))
+//            ->first();
+//        return $userSign ? $userSign : '';
+        $rst = ApiSign::getSignsByUid($this->userid,$this->fromtime,$this->totime);
+        return $rst['code']==0 ? $rst['data'] : [];
     }
 
     /**

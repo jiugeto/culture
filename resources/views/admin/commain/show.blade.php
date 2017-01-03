@@ -35,7 +35,7 @@
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">logo / Logo：</td>
-                    <td><img src="{{ $data->getLogo() }}" width="200"></td>
+                    <td><img src="{{ $data->logo }}" width="200"></td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">排序 / Sort：</td>
@@ -43,11 +43,11 @@
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">是否置顶 / Top：</td>
-                    <td>{{ $data->istop ? '置顶' : '不置定' }}</td>
+                    <td>{{ $data->istop() }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">前台是否显示 / Show：</td>
-                    <td>{{ $data->isshow ? '显示' : '不显示' }}</td>
+                    <td>{{ $data->isshow() }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">创建时间 / Create Time：</td>

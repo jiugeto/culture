@@ -1,8 +1,7 @@
 <?php
 namespace App\Http\Controllers\Member;
 
-use App\Models\Base\VideoModel;
-use App\Models\Online\ProductVideoModel;
+use App\Models\ProductVideoModel;
 use Illuminate\Http\Request;
 
 class ProductVideoController extends BaseController
@@ -14,9 +13,9 @@ class ProductVideoController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->lists['func']['name'] = '离线动画';
-        $this->lists['func']['url'] = 'proVideo';
-//        $this->lists['create']['name'] = '发布需求';
+        $this->lists['func']['name'] = '效果定制';
+        $this->lists['func']['url'] = 'provideo';
+        $this->lists['create']['name'] = '发布需求';
         $this->model = new ProductVideoModel();
     }
 
@@ -25,12 +24,25 @@ class ProductVideoController extends BaseController
         $curr['name'] = $this->lists['']['name'];
         $curr['url'] = $this->lists['']['url'];
         $result = [
-            'datas'=> $this->query(),
-            'prefix_url'=> DOMAIN.'member/proVideo',
+            'datas'=> $this->query(2),
+            'prefix_url'=> DOMAIN.'member/provideo',
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
-        return view('member.proVideo.index', $result);
+        return view('member.provideo.index', $result);
+    }
+
+    public function trash()
+    {
+        $curr['name'] = $this->lists['trash']['name'];
+        $curr['url'] = $this->lists['trash']['url'];
+        $result = [
+            'datas'=> $this->query(1),
+            'prefix_url'=> DOMAIN.'member/provideo/trash',
+            'lists'=> $this->lists,
+            'curr'=> $curr,
+        ];
+        return view('member.provideo.index', $result);
     }
 
     /**
@@ -46,7 +58,7 @@ class ProductVideoController extends BaseController
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
-        return view('member.proVideo.edit', $result);
+        return view('member.provideo.edit', $result);
     }
 
     /**
@@ -68,7 +80,7 @@ class ProductVideoController extends BaseController
             'updated_at'=> time(),
         ];
         ProductVideoModel::where('id',$id)->update($data);
-        return redirect(DOMAIN.'member/proVideo');
+        return redirect(DOMAIN.'member/provideo');
     }
 
     public function show($id)
@@ -80,7 +92,7 @@ class ProductVideoController extends BaseController
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
-        return view('member.proVideo.show', $result);
+        return view('member.provideo.show', $result);
     }
 
 
@@ -88,21 +100,22 @@ class ProductVideoController extends BaseController
 
 
 
-    public function query()
+    public function query($isshow)
     {
-        $datas = ProductVideoModel::orderBy('id','desc')
+        $datas = ProductVideoModel::where('isshow',$isshow)
+            ->orderBy('id','desc')
             ->paginate($this->limit);
         $datas->limit = $this->limit;
         return $datas;
     }
 
-    public function pre($id)
-    {
-        $proVideo = ProductVideoModel::find($id);
-        $result = [
-            'video'=> VideoModel::find($proVideo->video_id),
-            'videoName'=> $proVideo->name,
-        ];
-        return view('layout.videoPre', $result);
-    }
+//    public function pre($id)
+//    {
+//        $proVideo = ProductVideoModel::find($id);
+//        $result = [
+//            'video'=> VideoModel::find($proVideo->video_id),
+//            'videoName'=> $proVideo->name,
+//        ];
+//        return view('layout.videoPre', $result);
+//    }
 }

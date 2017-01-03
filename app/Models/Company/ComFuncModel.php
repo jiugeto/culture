@@ -1,6 +1,7 @@
 <?php
 namespace App\Models\Company;
 
+use App\Api\ApiUser\ApiCompany;
 use App\Models\BaseModel;
 use App\Models\Base\PicModel;
 use App\Models\CompanyModel;
@@ -13,7 +14,7 @@ class ComFuncModel extends BaseModel
 
     protected $table = 'com_funcs';
     protected $fillable = [
-        'id','name','cid','module_id','type','pic_id','intro','small','sort','isshow','created_at','updated_at',
+        'id','name','cid','module_id','type','img','intro','small','sort','isshow','created_at','updated_at',
     ];
     //功能类型：1简介，2历程，3新闻，4资讯，5服务，6团队，7招聘，单页
     protected $types = [
@@ -26,12 +27,13 @@ class ComFuncModel extends BaseModel
 
     public function company()
     {
-        return $this->cid ? CompanyModel::find($this->cid)->name : '';
+        $rstCompany = ApiCompany::show($this->cid);
+        return $rstCompany['code']==0 ? $rstCompany['data']['name'] : '';
     }
 
     public function type()
     {
-        return $this->type ? $this->types[$this->type] : '';
+        return array_key_exists($this->type,$this->types) ? $this->types[$this->type] : '';
     }
 
     public function genre()
@@ -42,29 +44,7 @@ class ComFuncModel extends BaseModel
 
     public function isshow()
     {
-        return $this->isshow ? $this->isshows[$this->isshow] : '';
-    }
-
-    public function pic()
-    {
-        $pic_id = $this->pic_id ? $this->pic_id : 0;
-        return $this->pic_id ? PicModel::find($pic_id) :'';
-    }
-
-    /**
-     * 获取图片名称
-     */
-    public function getPicName()
-    {
-        return $this->pic() ? $this->pic()->name : '';
-    }
-
-    /**
-     * 获取图片链接
-     */
-    public function getPicUrl()
-    {
-        return $this->pic() ? $this->pic()->url : '';
+        return array_key_exists($this->isshow,$this->isshows) ? $this->isshows[$this->isshow] : '';
     }
 
     public function small()

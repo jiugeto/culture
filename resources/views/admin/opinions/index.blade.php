@@ -6,24 +6,29 @@
             {{--@include('admin.common.menu')--}}
             <div class="am-u-sm-12 am-u-md-3">
                 <div class="am-form-group">
-                    前台显示否：
-                    <select name="isshow">
+                    <select name="isshow" style="padding:5px 10px;border:1px solid lightgrey;outline:none;">
                         <option value="0" {{ $isshow==0 ? 'selected' : '' }}>所有意见</option>
                         <option value="1" {{ $isshow==1 ? 'selected' : '' }}>前台不显示</option>
                         <option value="2" {{ $isshow==2 ? 'selected' : '' }}>前台显示</option>
                     </select>
                     <script>
-                        $(document).ready(function(){
-                            var isshow = $("select[name='isshow']");
-                            isshow.change(function(){
-                                if(isshow.val()==0){
-                                    window.location.href = '{{DOMAIN}}admin/opinions';
-                                } else {
-                                    window.location.href = '{{DOMAIN}}admin/'+isshow.val()+'/opinions';
-                                }
-                            });
+                        $("select[name='isshow']").change(function(){
+                            var isshow = $(this).val();
+                            if(isshow==0){
+                                window.location.href = '{{DOMAIN}}admin/opinions';
+                            } else {
+                                window.location.href = '{{DOMAIN}}admin/opinions/s/'+isshow;
+                            }
                         });
                     </script>
+                    @if(env('APP_ENV')=='local' && env('APP_DEBUG')=='true')
+                    <a href="{{DOMAIN}}admin/opinions/clear">
+                        <button type="button" class="am-btn am-btn-default">
+                            {{--<img src="{{PUB}}assets/images/del_red.png" class="icon">--}}
+                            <b style="color:orangered;">清空表</b>
+                        </button>
+                    </a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -64,15 +69,15 @@
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
-                                @if($curr['url']=='')
+                                {{--@if($curr['url']=='')--}}
                                     <a href="{{DOMAIN}}admin/opinions/{{$data['id']}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="{{PUB}}assets/images/show.png" class="icon"> 查看</button>
                                     </a>
                                     <a href="{{DOMAIN}}admin/opinions/{{$data['id']}}/edit"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 编辑</button></a>
-                                    <a href="{{DOMAIN}}admin/opinions/{{$data['id']}}/destroy"><button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><img src="{{PUB}}assets/images/forceDelete_red.png" class="icon"> 放入回收站</button></a>
-                                @else
-                                    <a href="{{DOMAIN}}admin/opinions/{{$data['id']}}/restore"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 还原</button></a>
-                                    <a href="{{DOMAIN}}admin/opinions/{{$data['id']}}/forceDelete"><button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><img src="{{PUB}}assets/images/forceDelete_red.png" class="icon"> 销毁</button></a>
-                                @endif
+                                    <a href="{{DOMAIN}}admin/opinions/{{$data['id']}}/destroy"><button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><img src="{{PUB}}assets/images/forceDelete_red.png" class="icon"> 去隐藏</button></a>
+                                {{--@else--}}
+                                    {{--<a href="{{DOMAIN}}admin/opinions/{{$data['id']}}/restore"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 还原</button></a>--}}
+                                    {{--<a href="{{DOMAIN}}admin/opinions/{{$data['id']}}/forceDelete"><button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><img src="{{PUB}}assets/images/forceDelete_red.png" class="icon"> 销毁</button></a>--}}
+                                {{--@endif--}}
                                 </div>
                             </div>
                         </td>

@@ -15,7 +15,7 @@ class GoodsModel extends BaseModel
 
     protected $table = 'bs_goods';
     protected $fillable = [
-        'id','name','genre','type','cate','intro','title','pic_id','video_id','money','uid','uname','click','recommend','newest','sort','isshow','isshow2','del','created_at','updated_at',
+        'id','name','genre','type','cate','intro','title','thumb','link','money','uid','uname','click','recommend','newest','sort','isshow','isshow2','del','created_at','updated_at',
     ];
     //片源类型：1产品，2花絮
     protected $genres = [
@@ -38,7 +38,6 @@ class GoodsModel extends BaseModel
 
     public function users()
     {
-//        return UserModel::all();
         $rst = ApiUsers::getUserList();
         return $rst['code']==0 ? $rst['data'] : [];
     }
@@ -56,86 +55,86 @@ class GoodsModel extends BaseModel
         return $this->type ? $this->types[$this->type] : '';
     }
 
-    /**
-     * 图片
-     */
-    public function pics($uid=null)
-    {
-        if ($uid) {
-            $picModels = PicModel::where('del',0)->where('uid',$uid)->get();
-        } else {
-            $picModels = PicModel::where('del',0)->get();
-        }
-        return $picModels;
-    }
-
-    /**
-     * 图片
-     */
-    public function pic()
-    {
-        return $this->pic_id ? PicModel::find($this->pic_id) : '';
-    }
-
-    /**
-     * 视频
-     */
-    public function videos($uid=null)
-    {
-        if ($uid) {
-            $datas = VideoModel::where('del',0)->where('uid',$uid)->get();
-        } else {
-            $datas = VideoModel::where('del',0)->get();
-        }
-        return $datas;
-    }
-
-    /**
-     * 视频
-     */
-    public function video()
-    {
-        return $this->video_id ? VideoModel::find($this->video_id) : '';
-    }
-
-    /**
-     * 图片
-     */
-    public function getPicName()
-    {
-        return $this->pic_id ? PicModel::find($this->pic_id)->name : '';
-    }
-
-    /**
-     * 获取图片链接
-     */
-    public function getPicUrl()
-    {
-        return $this->pic() ? $this->pic()->url : '';
-    }
-
-    /**
-     * 获取图片尺寸：高度100，确定宽度
-     */
-    public function getPicSize($w,$h)
-    {
-        $pic = $this->pic();
-        if ($pic && $pic->width && $pic->height) {
-            $ratio_h = $h / $pic->height;
-            //确定高度 $h，计算$w
-            $width=$ratio_h*$pic->width;
-            if ($width>$w) { $size = $width; } else  { $size = $w; }
-        }
-        return (isset($size)&&$size) ? $size : 0;
-    }
-
-    /**
-     * 获取视频链接
-     */
-    public function getVideoUrl()
-    {
-        return $this->video() ? $this->video()->url : '';
-    }
+//    /**
+//     * 图片
+//     */
+//    public function pics($uid=null)
+//    {
+//        if ($uid) {
+//            $picModels = PicModel::where('del',0)->where('uid',$uid)->get();
+//        } else {
+//            $picModels = PicModel::where('del',0)->get();
+//        }
+//        return $picModels;
+//    }
+//
+//    /**
+//     * 图片
+//     */
+//    public function pic()
+//    {
+//        return $this->pic_id ? PicModel::find($this->pic_id) : '';
+//    }
+//
+//    /**
+//     * 视频
+//     */
+//    public function videos($uid=null)
+//    {
+//        if ($uid) {
+//            $datas = VideoModel::where('del',0)->where('uid',$uid)->get();
+//        } else {
+//            $datas = VideoModel::where('del',0)->get();
+//        }
+//        return $datas;
+//    }
+//
+//    /**
+//     * 视频
+//     */
+//    public function video()
+//    {
+//        return $this->video_id ? VideoModel::find($this->video_id) : '';
+//    }
+//
+//    /**
+//     * 图片
+//     */
+//    public function getPicName()
+//    {
+//        return $this->pic_id ? PicModel::find($this->pic_id)->name : '';
+//    }
+//
+//    /**
+//     * 获取图片链接
+//     */
+//    public function getPicUrl()
+//    {
+//        return $this->pic() ? $this->pic()->url : '';
+//    }
+//
+//    /**
+//     * 获取图片尺寸：高度100，确定宽度
+//     */
+//    public function getPicSize($w,$h)
+//    {
+//        $pic = $this->pic();
+//        if ($pic && $pic->width && $pic->height) {
+//            $ratio_h = $h / $pic->height;
+//            //确定高度 $h，计算$w
+//            $width=$ratio_h*$pic->width;
+//            if ($width>$w) { $size = $width; } else  { $size = $w; }
+//        }
+//        return (isset($size)&&$size) ? $size : 0;
+//    }
+//
+//    /**
+//     * 获取视频链接
+//     */
+//    public function getVideoUrl()
+//    {
+//        return $this->video() ? $this->video()->url : '';
+//    }
 
     public function title()
     {
@@ -157,8 +156,6 @@ class GoodsModel extends BaseModel
      */
     public function user()
     {
-//        $userModel = UserModel::find($this->uid);
-//        return $userModel ? $userModel : '';
         $rst = ApiUsers::getOneUser($this->uid);
         return $rst['code']==0 ? $rst['data'] : [];
     }
@@ -168,7 +165,6 @@ class GoodsModel extends BaseModel
      */
     public function userName()
     {
-//        return $this->user() ? $this->user()->username : '';
         return $this->user() ? $this->user()['username'] : '';
     }
 
@@ -183,7 +179,6 @@ class GoodsModel extends BaseModel
 
     public function getComLogo()
     {
-//        return $this->getUserInfo() ? $this->getUserInfo()->logo : '';
         $logo_id = $this->getUserInfo() ? $this->getUserInfo()->logo : '';
         $picModel = PicModel::find($logo_id);
         if ($picModel) {
@@ -203,13 +198,12 @@ class GoodsModel extends BaseModel
     public function getNewests($arr)
     {
         if ($arr) {
-//            $userModels = UserModel::whereIn('isuser',$arr)->get();
             $rstUsers = ApiUsers::getUserList();
-            $userModels = $rstUsers['code']==0?$rstUsers['data']:[];
+            $userArr = $rstUsers['code']==0?$rstUsers['data']:[];
             $userIds = array();
-            if ($userModels) {
-                foreach ($userModels as $userModel) {
-                    $userIds[] = $userModel->id;
+            if ($userArr) {
+                foreach ($userArr as $user) {
+                    $userIds[] = $user['id'];
                 }
             }
             return GoodsModel::whereIn('uid',$userIds)
@@ -220,7 +214,6 @@ class GoodsModel extends BaseModel
                 ->orderBy('sort','desc')
                 ->orderBy('id','desc')
                 ->paginate($this->limit);
-//            ->get();
         } else {
             return GoodsModel::where('newest',1)
                 ->where('isshow',1)
@@ -237,8 +230,6 @@ class GoodsModel extends BaseModel
      */
     public function userType()
     {
-//        $userModel = UserModel::find($this->uid);
-//        return $userModel ? $userModel->isuser : '';
         $rstUser = ApiUsers::getOneUser($this->uid);
         return $rstUser['code']==0 ? $rstUser['data'] : [];
     }

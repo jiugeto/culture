@@ -19,7 +19,7 @@
                         if (genre.val()==0) {
                             window.location.href = '{{DOMAIN}}supply';
                         } else {
-                            window.location.href = '{{DOMAIN}}'+genre.val()+'/supply';
+                            window.location.href = '{{DOMAIN}}supply/s/'+genre.val();
                         }
                     });
                 });
@@ -39,7 +39,7 @@
                     <td>地址：{{ str_limit($data['address'],20) }}</td>
                 </tr>
                 <tr>
-                    <td>地区：{{ $areaModel->getAreaName($data['area']) }}</td>
+                    <td>地区：{{ $model->getAreaName($data['area']) }}</td>
                     <td>时间：{{ $data['createTime'] }}</td>
                     {{--<td><a href="{{DOMAIN}}supply/{{ $data->id }}" class="toshow">详情</a></td>--}}
                     <td><a href="{{DOMAIN}}c/{{ $data['id'] }}" class="toshow">主页</a></td>
@@ -55,7 +55,7 @@
                 @foreach($ads as $ad)
             <a href="{{ $ad->link }}">
                 <div class="img" title="{{ $ad->name }}">
-                    <img src="{{ $ad->getPicUrl() }}">
+                    <img src="{{ $ad->img }}">
                 </div>
             </a>
                 @endforeach

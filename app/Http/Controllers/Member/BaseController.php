@@ -10,24 +10,6 @@ class BaseController extends Controller
     /**
      * 会员后台基础控制器
      */
-//    protected $uid;     //登录用户的id
-
-//    protected $list = [
-//        ''=> '所有列表',
-//        'trash'=> '回收站',
-//        'create'=> [
-//                'url'=> 'create',
-//                'name'=> '创建作品',
-//            ],
-//        'edit'=> [
-//                'url'=> 'edit',
-//                'name'=> '修改作品',
-//            ],
-//        'show'=> [
-//                'url'=> 'show',
-//                'name'=> '查看详情',
-//            ],
-//    ];
 
     public function __construct()
     {
@@ -35,6 +17,7 @@ class BaseController extends Controller
         if (!\Session::has('user')) { return redirect('/login'); }
         $this->userid = \Session::get('user.uid');
         $this->userType = \Session::get('user.userType');
+//        dd(\Session::get('user'),unserialize(\Redis::get('cul_session')),$_COOKIE);
     }
 
     /**

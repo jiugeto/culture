@@ -1,11 +1,13 @@
 <?php
 namespace App\Models\Base;
 
+use App\Models\BaseModel;
+
 class AdModel extends BaseModel
 {
     protected $table = 'bs_ads';
     protected $fillable = [
-        'id','name','adplace_id','intro','pic_id','link','fromTime','toTime','uid','isauth','isshow','isuse','created_at','updated_at',
+        'id','name','adplace_id','intro','img','link','fromTime','toTime','uid','isauth','isshow','isuse','created_at','updated_at',
     ];
     protected $isauths = [
         1=>'未审核','未通过审核','通过审核',
@@ -42,18 +44,6 @@ class AdModel extends BaseModel
     public function getAdplaceName()
     {
         return $this->adplace() ? $this->adplace()->name : '';
-    }
-
-    public function pic($picid=null)
-    {
-        $picid = $picid ? $picid : $this->pic_id;
-        $picModel = PicModel::find($picid);
-        return $picModel ? $picModel : '';
-    }
-
-    public function getPicUrl()
-    {
-        return $this->pic($this->pic_id) ? $this->pic($this->pic_id)->getUrl() : '';
     }
 
     /**

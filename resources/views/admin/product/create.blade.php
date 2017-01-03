@@ -15,23 +15,27 @@
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <fieldset>
                         <div class="am-form-group">
+                            <label>用户名 / User Name：</label>
+                            <input type="text" placeholder="至少2个字符" minlength="2" maxlength="20" required name="username"/>
+                        </div>
+
+                        <div class="am-form-group">
                             <label>产品名称 / Name：</label>
-                            <input type="text" placeholder="至少2个字符" minlength="2" required name="name"/>
+                            <input type="text" placeholder="至少2个字符" minlength="2" maxlength="20" required name="name"/>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label>产品类型 / Category：</label>
+                            <select name="cate" required>
+                                @foreach($model['cates'] as $kcate=>$cate)
+                                    <option value="{{$kcate}}">{{$cate}}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div class="am-form-group">
                             <label>产品简介 / Introduce：</label>
                             <textarea name="intro" cols="50" rows="5"></textarea>
-                        </div>
-
-                        <div class="am-form-group">
-                            <label>视频宽度 / Width：(单位px)</label>
-                            <input type="text" placeholder="" pattern="^\d{3,4}$" required name="width">
-                        </div>
-
-                        <div class="am-form-group">
-                            <label>视频高度 / Height：(单位px)</label>
-                            <input type="text" placeholder="" pattern="^\d{3,4}$" required name="height">
                         </div>
 
                         <div class="am-form-group">

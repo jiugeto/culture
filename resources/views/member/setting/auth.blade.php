@@ -15,35 +15,35 @@
                     <p class="center"><b>基本设置</b>(带<span class="star">*</span>的是必填项)</p>
                 </td></tr>
             <tr>
-                <td style="width:40%;"><label>用户名：</label></td>
+                <td class="field_name" style="width:40%;"><label>用户名：</label></td>
                 <td>{{ $data['username'] }}
                     {{--<input type="text" placeholder="至少2个字符" minlength="2" required name="username" value="{{ $data->username }}"/>--}}
                 </td>
             </tr>
             {{--<tr><td>&nbsp;</td></tr>--}}
             <tr>
-                <td><label>邮箱：</label></td>
+                <td class="field_name"><label>邮箱：</label></td>
                 <td><input type="text" placeholder="例：123@qq.com" pattern="^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" name="email" value="{{ $data['email'] }}"/></td>
             </tr>
             {{--<tr><td>&nbsp;</td></tr>--}}
             <tr>
-                <td><label>qq：</label></td>
+                <td class="field_name"><label>qq：</label></td>
                 <td><input type="text" name="qq" value="{{ $data['qq'] }}"/></td>
             </tr>
             {{--<tr><td>&nbsp;</td></tr>--}}
             <tr>
-                <td><label>电话：</label></td>
+                <td class="field_name"><label>电话：</label></td>
                 <td><input type="text" name="tel" value="{{ $data['tel'] }}"/></td>
             </tr>
             {{--<tr><td>&nbsp;</td></tr>--}}
             <tr>
-                <td><label>手机：</label></td>
+                <td class="field_name"><label>手机：</label></td>
                 <td><input type="text" name="mobile" value="{{ $data['mobile'] }}"/></td>
             </tr>
             {{--<tr><td>&nbsp;</td></tr>--}}
             @if(in_array($data['isuser'],[1,50]))
             <tr>
-                <td><label>用户类型<span class="star">(*)</span>：</label></td>
+                <td class="field_name"><label>用户类型<span class="star">(*)</span>：</label></td>
                 <td>
                     @foreach($isusers as $key=>$isuser)
                         <label><input type="radio" class="radio" name="isuser" value="{{$key}}" onclick="change(this.value);" {{ $data['isuser']==$key ? 'checked' : '' }}> {{ $isuser }}</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -58,16 +58,16 @@
         @if(in_array($data['isuser'],[1,50]))
         {{--个人信息--}}
         <table class="table_create mem_person" style="display:none;">
-            <tr><td colspan="2">
+            <tr><td class="field_name" colspan="2">
                     <p class="center"><b>个人信息</b></p>
                 </td></tr>
             <tr>
-                <td><label>真实名字<span class="star">(*)</span>：</label></td>
+                <td class="field_name"><label>真实名字<span class="star">(*)</span>：</label></td>
                 <td><input type="text" name="realname" placeholder="至少2位" minlength="2"/></td>
             </tr>
             {{--<tr><td>&nbsp;</td></tr>--}}
             <tr>
-                <td><label>性别<span class="star">(*)</span>：</label></td>
+                <td class="field_name"><label>性别<span class="star">(*)</span>：</label></td>
                 <td>
                     <label><input type="radio" name="sex" value="1" checked/>男&nbsp;&nbsp;</label>
                     <label><input type="radio" name="sex" value="2"/>女&nbsp;&nbsp;</label>
@@ -75,7 +75,7 @@
             </tr>
             {{--<tr><td>&nbsp;</td></tr>--}}
             <tr>
-                <td><label>身份证<span class="star">(*)</span>：</label></td>
+                <td class="field_name"><label>身份证<span class="star">(*)</span>：</label></td>
                 <td><input type="text" name="idcard" pattern="^\d{18}|(\d{17}x)$"/></td>
             </tr>
             {{--<tr><td>&nbsp;</td></tr>--}}
@@ -92,22 +92,22 @@
                     <p class="center"><b>企业信息</b></p>
                 </td></tr>
             <tr>
-                <td><label>公司名称<span class="star">(*)</span>：</label></td>
+                <td class="field_name"><label>公司名称<span class="star">(*)</span>：</label></td>
                 <td><input type="text" name="name" placeholder="至少2个字符" minlength="2"/></td>
             </tr>
             {{--<tr><td>&nbsp;</td></tr>--}}
             <tr>
-                <td><label>地区<span class="star">(*)</span>：</label></td>
+                <td class="field_name"><label>地区<span class="star">(*)</span>：</label></td>
                 <td><input type="text" name="area"/></td>
             </tr>
             {{--<tr><td>&nbsp;</td></tr>--}}
             <tr>
-                <td><label>具体地址<span class="star">(*)</span>：</label></td>
+                <td class="field_name"><label>具体地址<span class="star">(*)</span>：</label></td>
                 <td><input type="text" name="address" placeholder="至少2位字符" minlength="2"/></td>
             </tr>
             {{--<tr><td>&nbsp;</td></tr>--}}
             <tr>
-                <td><label>营业执照号码<span class="star">(*)</span>：</label></td>
+                <td class="field_name"><label>营业执照号码<span class="star">(*)</span>：</label></td>
                 <td><input type="text" name="yyzzid"/></td>
             </tr>
             {{--<tr><td>&nbsp;</td></tr>--}}

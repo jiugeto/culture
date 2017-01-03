@@ -23,7 +23,7 @@
             @foreach($datas as $data)
             <tr>
                 {{--<td>{{ $data->id }}</td>--}}
-                <td><a href="{{DOMAIN}}member/{{$data->genre==1?'product':'proVideo'}}/{{$data->productid}}"
+                <td><a href="{{DOMAIN}}member/{{$data->genre==1?'product':'provideo'}}/{{$data->productid}}"
                        title="查看该产品信息" target="_blank" style="color:rgb(14,144,210);">
                         {{ $data->getProductName() }}</a>
                 </td>
