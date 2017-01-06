@@ -1,10 +1,9 @@
 <?php
 namespace App\Http\Controllers\Company;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController as Controller;
 use App\Models\Company\ComMainModel;
 use App\Models\Company\ComModuleModel;
-use App\Models\CompanyModel;
 use App\Models\LinkModel;
 
 class BaseController extends Controller

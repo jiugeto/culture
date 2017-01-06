@@ -8,14 +8,7 @@
 
 namespace App\Http\Middleware;
 
-//use App\Models\Admin\ActionModel;
-//use Illuminate\Support\Facades\Route;
-//use Illuminate\Support\Facades\View;
-//use Illuminate\Support\Facades\Auth;
-//use Illuminate\Support\Facades\Session;
-//use Illuminate\Http\Request;
 use Session;
-use App\Models\Admin\AdminModel;
 use Closure;
 
 class AdminAuth
@@ -23,16 +16,9 @@ class AdminAuth
     public function handle($request, Closure $next)
     {
         //判断系统后台有无此登录的用户
-        if(!Session::has('admin.username')){
+        if(!Session::has('admin')){
             return redirect('/admin/login');
         }
-//        //验证密码
-//        $username = Session::get('admin.username');
-//        $adminModel = AdminModel::where('username',$username)->first();
-//        if (!$adminModel) { return redirect('/admin/login'); }
-//        if(Session::get('admin.password')!=$adminModel->password){
-//            return redirect('/admin/login');
-//        }
         return $next($request);
     }
 }

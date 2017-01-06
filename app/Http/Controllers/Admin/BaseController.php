@@ -1,13 +1,13 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Admin\AdminModel;
 use App\Models\Admin\MenusModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Admin\ActionModel;
 use App\Models\LinkModel;
 use App\Tools;
+use Session;
+use Redis;
 
 class BaseController extends Controller
 {
@@ -58,21 +58,10 @@ class BaseController extends Controller
     public function __construct()
     {
         parent::__construct();
-        if (\Session::has('admin.username')) {
-            $this->userid = \Session::get('admin.adminid');
-        }
+        $this->setSessionInRedis();     //同步缓存中session
+        if (!Session::has('admin')) { return redirect('/admin/login'); }
+        $this->adminid = Session::get('admin.adminid');
     }
-
-//    /**
-//     * 获取权限数据列表
-//     */
-//    public function actions()
-//    {
-//        if ($actions = ActionModel::all()) {
-//            return Tools::getChild($actions,$pid=0);
-//        }
-//        return [];
-//    }
 
     /**
      * 获取链接数据列表
@@ -94,5 +83,32 @@ class BaseController extends Controller
             return Tools::getChild($menus,$pid=0);
         }
         return [];
+    }
+
+    /**
+     * 判断缓存中的session
+     */
+    public function setSessionInRedis()
+    {
+        //假如session中有，缓存中没有，则同步为有
+        if (Session::get('admin') && !Redis::get('cul_admin_session')) {
+            $adminInfo = Session::get('admin');
+            $adminInfo['cookie'] = $_COOKIE;
+            Redis::setex('cul_admin_session',$this->redisTime,serialize($adminInfo));
+        }
+        //假如session中没有，缓存中有，则同步为有
+        if (!Session::get('admin') && Redis::get('cul_admin_session')) {
+            $cul_admin_session = unserialize(Redis::get('cul_admin_session'));
+            $cul_admin_session['cookie'] = $_COOKIE;
+            if ($cul_admin_session['cookie']!=$_COOKIE) { echo 'no';exit; }
+            Session::put('admin',$cul_admin_session);
+        }
+        //更新session中的cookie值
+        if (Session::get('admin')) {
+            $adminInfo = Session::get('admin');
+            $adminInfo['cookie'] = $_COOKIE;
+            Redis::setex('cul_admin_session',$this->redisTime,serialize($adminInfo));
+            Session::put('admin',$adminInfo);
+        }
     }
 }

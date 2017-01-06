@@ -29,8 +29,7 @@ return [
     |
     */
 
-//    'lifetime' => 120,    //默认2小时
-    'lifetime' => 720,    //设置12小时
+    'lifetime' => 120,    //默认2小时
 
     'expire_on_close' => false,
 

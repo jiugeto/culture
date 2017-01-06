@@ -9,9 +9,7 @@
 namespace App\Http\Middleware;
 
 use Session;
-use App\Models\UserModel;
 use Closure;
-use Hash;
 
 class MemberAuth
 {
@@ -21,12 +19,6 @@ class MemberAuth
         if(!Session::has('user.username')){
             return redirect('/login');
         }
-//        //验证密码
-//        $username = Session::get('user.username');
-//        $userModel = UserModel::where('username',$username)->first();
-//        if(!$userModel || !(Hash::check($request->password,$userModel->password))){
-//            return redirect('/login');
-//        }
         return $next($request);
     }
 }

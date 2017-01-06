@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Company\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController as Controller;
 use App\Models\Company\ComModuleModel;
 
 class BaseController extends Controller

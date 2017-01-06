@@ -2,8 +2,8 @@
 namespace App\Http\Controllers\Member;
 
 use App\Api\ApiUser\ApiUsers;
-use App\Http\Controllers\Controller;
-use App\Models\UserModel;
+use App\Http\Controllers\BaseController as Controller;
+use Session;
 
 class BaseController extends Controller
 {
@@ -14,10 +14,9 @@ class BaseController extends Controller
     public function __construct()
     {
         parent::__construct();
-        if (!\Session::has('user')) { return redirect('/login'); }
-        $this->userid = \Session::get('user.uid');
-        $this->userType = \Session::get('user.userType');
-//        dd(\Session::get('user'),unserialize(\Redis::get('cul_session')),$_COOKIE);
+        if (!Session::has('user')) { return redirect('/login'); }
+        $this->userid = Session::get('user.uid');
+        $this->userType = Session::get('user.userType');
     }
 
     /**

@@ -4,10 +4,9 @@ namespace App\Http\Controllers\Admin;
 use App\Api\ApiUser\ApiAdmin;
 use App\Api\ApiUser\ApiLog;
 use Illuminate\Support\Facades\Input;
-use Session;
-//use App\Models\Admin\AdminModel;
-//use App\Models\Admin\LogModel;
 use Hash;
+use Session;
+use Redis;
 
 class LoginController extends BaseController
 {
@@ -25,14 +24,6 @@ class LoginController extends BaseController
     {
         $username = Input::get('username');
         $password = Input::get('password');
-        //验证
-//        $adminModel = AdminModel::where('username',$username)->first();
-//        if (!$adminModel) {
-//            echo "<script>alert('无此管理员！');history.go(-1);</script>";exit;
-//        }
-//        if ($adminModel && !Hash::check($password,$adminModel->password)) {
-//            echo "<script>alert('密码错误！');history.go(-1);</script>";exit;
-//        }
         $rstAdmin = ApiAdmin::getOneAdminByUname($username);
         if ($rstAdmin['code'] != 0) {
             echo "<script>alert('".$rstAdmin['msg']."');history.go(-1);</script>";exit;
@@ -72,19 +63,21 @@ class LoginController extends BaseController
             echo "<script>alert('管理员日志错误！');history.go(-1);</script>";exit;
         }
 
+        //将session放入redis
+        Redis::setex('cul_admin_session', $this->redisTime, serialize($adminInfo));
+
         return redirect(DOMAIN.'admin');
     }
     public function dologout()
     {
         //更新用户日志表
-        $logoutTime = time();
-//        LogModel::where('serial',Session::get('admin.serial'))->update(['logoutTime'=>$logoutTime]);
         $rstLog = ApiLog::logout(Session::get('admin.serial'));
         if (!$rstLog) {
             echo "<script>alert('".$rstLog['msg']."');history.go(-1);</script>";exit;
         }
         //去除session
         Session::forget('admin');
+        Redis::del('cul_admin_session');
         return Redirect(DOMAIN.'admin/login');
     }
 }

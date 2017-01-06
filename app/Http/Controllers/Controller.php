@@ -16,6 +16,7 @@ abstract class Controller extends BaseController
     protected $uploadSizeLimit = 1024*1023*1;       //上传文件大小限制 1M
     protected $uploadVideoSizeLimit = 1024*1023*50;       //上传文件大小限制 50M
     protected $userid = 0;
+    protected $adminid = 0;
     protected $userType;
     protected $cid;
     protected $person;
@@ -24,7 +25,7 @@ abstract class Controller extends BaseController
     protected $comPptNum = 3;     //企业宣传记录数
     protected $comJobNum = 5;     //企业工作记录数
     protected $sefLogo = '/assets/images/icon.png';        //本网站普通自己的logo地址
-    protected $redisTime = 5;       //session在redis中缓存时长，单位分钟
+    protected $redisTime = 60 * 2;       //session在redis中缓存时长，单位分钟，默认2小时
     protected $lists = [
         ''=> [
             'url'=> '',
@@ -58,9 +59,10 @@ abstract class Controller extends BaseController
 
     public function __construct()
     {
-        define("DOMAIN",strtoupper(getenv('DOMAIN')));
-        define("PUB",strtoupper(getenv('PUB')));
-        $this->setSessionInRedis();     //同步缓存中session
+//        define("DOMAIN",strtoupper(getenv('DOMAIN')));
+//        define("PUB",strtoupper(getenv('PUB')));
+        define("DOMAIN",getenv('DOMAIN'));
+        define("PUB",getenv('PUB'));
     }
 
     /**
@@ -91,31 +93,5 @@ abstract class Controller extends BaseController
             'previousPageUrl'   =>  $previousPageUrl,
             'nextPageUrl'   =>  $nextPageUrl,
         );
-    }
-
-    /**
-     * 判断缓存中的session
-     */
-    public function setSessionInRedis()
-    {
-        //假如session中有，缓存中没有，则同步为有
-        $userInfo=\Session::has('user');
-        if (is_array($userInfo) && !\Redis::get('cul_session')) {
-            $userInfo['cookie'] = $_COOKIE;
-            \Redis::setex('cul_session',$this->redisTime*60,serialize($userInfo));
-        }
-        //假如session中没有，缓存中有，则同步为有
-        if (!is_array($userInfo) && $cul_session=\Redis::get('cul_session')) {
-            $cul_session = unserialize($cul_session);
-            $cul_session['cookie'] = $_COOKIE;
-            if ($cul_session['cookie']!=$_COOKIE) { echo 'no';exit; }
-            \Session::put('user',$cul_session);
-        }
-        //更新session中的cookie值
-        if (is_array($userInfo)) {
-            $userInfo['cookie'] = $_COOKIE;
-            \Redis::setex('cul_session',$this->redisTime*60,serialize($userInfo));
-            \Session::put('user',$userInfo);
-        }
     }
 }

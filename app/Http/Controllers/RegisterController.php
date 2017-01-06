@@ -72,6 +72,9 @@ class RegisterController extends Controller
         ];
         Session::put('user',$userInfo);
 
+        //将session放入redis
+        \Redis::setex('cul_session', $this->redisTime, serialize($userInfo));
+
         return redirect(DOMAIN.'regist/success');
     }
 

@@ -109,10 +109,10 @@ class LoginController extends Controller
         ];
         $userInfo['cookie'] = $_COOKIE;
         Session::put('user',$userInfo);
-        \Cookie::make('user', $userInfo, 720);       //cookie12小时
+//        \Cookie::make('user', $userInfo, 720);       //cookie12小时
 
         //将session放入redis
-        \Redis::setex('cul_session', $this->redisTime*60, serialize($userInfo));
+        \Redis::setex('cul_session', $this->redisTime, serialize($userInfo));
 
         return redirect(DOMAIN.'member');
     }
@@ -126,7 +126,7 @@ class LoginController extends Controller
         }
         //去除session
         Session::forget('user');
-        \Cookie::forget('user');
+//        \Cookie::forget('user');
         \Redis::del('cul_session');
         return redirect(DOMAIN.'login');
     }

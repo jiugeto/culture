@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Home;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController as Controller;
 use App\Models\Home\SearchModel;
 
 class BaseController extends Controller
