@@ -30,7 +30,8 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 {{--<li><a href="">Home</a></li>--}}
-                <li><a href="">后台登陆</a></li>
+                {{--<li><a href="">后台登陆</a></li>--}}
+                <li>{{Session::has('admin')?Session::get('admin.username'):''}} 后台登陆</li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">

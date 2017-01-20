@@ -39,6 +39,3 @@ include("routes/routes_person.php");
 
 //载入企业后台路由
 include("routes/routes_company.php");
-
-//载入在线创作路由
-include("routes/routes_online.php");
