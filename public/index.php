@@ -21,6 +21,8 @@
 
 require __DIR__.'/../bootstrap/autoload.php';
 
+require __DIR__ . '/../app/Common/Common.php';        //自动加载自定义函数
+
 /*
 |--------------------------------------------------------------------------
 | Turn On The Lights

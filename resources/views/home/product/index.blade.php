@@ -13,7 +13,7 @@
                 <ul>
                     @if(count($recommends))
                         @foreach($recommends as $recommend)
-                    <li><a href="{{DOMAIN}}product/{{ $recommend->id }}">{{ $recommend->name }}</a></li>
+                    <li><a href="{{DOMAIN}}product/{{ $recommend['id'] }}">{{ $recommend['name'] }}</a></li>
                         @endforeach
                     @else
                         @for($i=0;$i<4-count($recommends);++$i)
@@ -25,8 +25,8 @@
             {{--大图--}}
             <div class="pro_big">
                 @if(count($recommends))
-                    <div class="img"><img src="{{ $recommends[0]->thumb }}"></div>
-                    <a href="{{DOMAIN}}product/{{ $recommend->id }}">{{ $recommends[0]->name }}</a>
+                    <div class="img"><img src="{{ $recommends[0]['thumb'] }}"></div>
+                    <a href="{{DOMAIN}}product/{{ $recommend['id'] }}">{{ $recommends[0]['name'] }}</a>
                 @else
                     <div class="img"><div class="none">无</div></div>
                     <a href="">没有推荐大图</a>
@@ -38,9 +38,9 @@
                     @foreach($recommends as $recommend)
                 <div class="img_text">
                     <div class="img">
-                        <a href="{{DOMAIN}}product/{{ $recommend->id }}"><img src="{{ $recommend->thumb }}"></a>
+                        <a href="{{DOMAIN}}product/{{ $recommend['id'] }}"><img src="{{ $recommend['thumb'] }}"></a>
                     </div>
-                    <div class="text"><a href="{{DOMAIN}}product/{{ $recommend->id }}">{{ $recommend->name }}</a></div>
+                    <div class="text"><a href="{{DOMAIN}}product/{{ $recommend['id'] }}">{{ $recommend['name'] }}</a></div>
                 </div>
                     @endforeach
                 @endif
@@ -63,12 +63,12 @@
             <div class="title">最新的样片</div>
             {{-- 原创视频 --}}
             <div class="original">
-                @if(count($model->getNewests([])))
-                    @foreach($model->getNewests([]) as $newest)
+                @if(count($newests))
+                    @foreach($newests as $newest)
                 <div class="img_text">
                     <div class="img">
-                        <a href="{{DOMAIN}}product/{{ $newest->id }}">
-                            <img src="{{ $newest->thumb }}" style="
+                        <a href="{{DOMAIN}}product/{{ $newest['id'] }}">
+                            <img src="{{ $newest['thumb'] }}" style="
                                 {{--@if($size=$newest->getPicSize($w=150,$h=125)) --}}
                                     {{--width:{{$size['w']}}px;height:{{$size['h']}}px; --}}
                                 {{--@endif--}}
@@ -76,14 +76,14 @@
                         </a>
                     </div>
                     <div class="text">
-                        <a href="{{DOMAIN}}product/{{ $newest->id }}">{{ $newest->name }}</a>
-                        <span style="color:red;float:right;">{{ $newest->click }}</span>
+                        <a href="{{DOMAIN}}product/{{ $newest['id'] }}">{{ $newest['name'] }}</a>
+                        <span style="color:red;float:right;">{{ $newest['click'] }}</span>
                     </div>
                 </div>
                     @endforeach
                 @endif
-                @if(count($model->getNewests([]))<8)
-                    @for($i=0;$i<8-count($model->getNewests([]));++$i)
+                @if(count($newests)<8)
+                    @for($i=0;$i<8-count($newests);++$i)
                 <div class="img_text">
                     <div class="img">
                         <a href=""><div class="none">无</div></a>
@@ -97,26 +97,26 @@
             <div class="pro_com">
                 <div class="privateInfo">
                     <div class="title">公司</div>
-                    @if(count($model->getNewests([2,4,5,6])))
-                        @foreach($model->getNewests([2,4,5,6]) as $newest)
+                    @if(count($comNewests))
+                        @foreach($comNewests as $newest)
                     <div class="img_text">
                         {{--<div class="img_num"> 1 </div>--}}
                         <div class="img">
-                            <a href="{{DOMAIN}}product/{{ $newest->id }}">
-                                <img src="{{ $newest->thumb }}" style="
+                            <a href="{{DOMAIN}}product/{{ $newest['id'] }}">
+                                <img src="{{ $newest['thumb'] }}" style="
                                     {{--@if($size=$newest->getPicSize($w=150,$h=125)) --}}
                                         {{--width:{{$size['w']}}px;height:{{$size['h']}}px; --}}
                                     {{--@endif--}}
                                 ">
                             </a>
                         </div>
-                        <a href="{{DOMAIN}}product/{{ $newest->id }}">{{ str_limit($newest->name,10) }}</a>
-                        <a href="" class="click">点击<span>{{ $newest->click }}</span></a>
+                        <a href="{{DOMAIN}}product/{{ $newest['id'] }}">{{ str_limit($newest['name'],10) }}</a>
+                        <a href="" class="click">点击<span>{{ $newest['click'] }}</span></a>
                     </div>
                         @endforeach
                     @endif
-                    @if(count($model->getNewests([2,4,5,6]))<7)
-                        @for($i=0;$i<7-count($model->getNewests([2,4,5,6]));++$i)
+                    @if(count($comNewests)<7)
+                        @for($i=0;$i<7-count($comNewests);++$i)
                     <div class="img_text">
                         <div class="img_num"> 1 </div>
                         <div class="img">
@@ -132,27 +132,27 @@
             {{-- 设计师信息 --}}
             <div class="pro_per">
                 <div class="privateInfo">
-                    <div class="title">个人</div>
-                    @if(count($model->getNewests([1,3])))
-                        @foreach($model->getNewests([1,3]) as $newest)
+                    <div class="title">设计师</div>
+                    @if(count($pNewests))
+                        @foreach($pNewests as $newest)
                     <div class="img_text">
                         {{--<div class="img_num"> 1 </div>--}}
                         <div class="img">
-                            <a href="{{DOMAIN}}product/{{ $newest->id }}">
-                                <img src="{{ $newest->thumb }}" style="
+                            <a href="{{DOMAIN}}product/{{ $newest['id'] }}">
+                                <img src="{{ $newest['thumb'] }}" style="
                                     {{--@if($size=$newest->getPicSize($w=150,$h=125)) --}}
                                         {{--width:{{$size['w']}}px;height:{{$size['h']}}px; --}}
                                     {{--@endif--}}
                                 ">
                             </a>
                         </div>
-                        <a href="{{DOMAIN}}product/{{ $newest->id }}">{{ str_limit($newest->name,10) }}</a>
-                        <a href="" class="click">点击<span>{{ $newest->click }}</span></a>
+                        <a href="{{DOMAIN}}product/{{ $newest['id'] }}">{{ str_limit($newest['name'],10) }}</a>
+                        <a href="" class="click">点击<span>{{ $newest['click'] }}</span></a>
                     </div>
                         @endforeach
                     @endif
-                    @if(count($model->getNewests([1,3]))<7)
-                        @for($i=0;$i<7-count($model->getNewests([1,3]));++$i)
+                    @if(count($pNewests)<7)
+                        @for($i=0;$i<7-count($pNewests);++$i)
                     <div class="img_text">
                         {{--<div class="img_num"> 1 </div>--}}
                         <div class="img">
@@ -185,29 +185,27 @@
         {{--<br style="clear:both;"><br>--}}
 
         {{-- 宣传片 --}}
-        @foreach($model['cates2'] as $kcate=>$vcate)
-            @if(count($model->getGoodsByCate($kcate,5)) && $goods=$model->getGoodsByCate($kcate,5))
+        @if(count($xuanchuans))
         <div class="pro_floor">
-            <div class="title">{{ $vcate }}</div>
+            <div class="title">宣传片</div>
             <div class="pro_cate">
-                @foreach($goods as $good)
+                @foreach($xuanchuans as $xuanchuan)
                     <div class="img_text">
                         <div class="img">
-                            <a href="{{DOMAIN}}product/{{ $good->id }}">
-                                <img src="{{ $good->thumb }}" style="
+                            <a href="{{DOMAIN}}product/{{ $xuanchuan['id'] }}">
+                                <img src="{{ $xuanchuan['thumb'] }}" style="
                                     {{--@if($size=$good->getPicSize($w=150,$h=125)) --}}
                                         {{--width:{{$size['w']}}px;height:{{$size['h']}}px; --}}
                                     {{--@endif--}}
                                 ">
                             </a>
                         </div>
-                        <a href="">{{ $good->name }}</a>
+                        <a href="">{{ $xuanchuan['name'] }}</a>
                     </div>
                 @endforeach
             </div>
         </div>
         <br style="clear:both;"><br>
-            @endif
-        @endforeach
+        @endif
     </div>
 @stop

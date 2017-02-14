@@ -1,10 +1,8 @@
 <?php
 namespace App\Http\ViewComposers;
 
+use App\Api\ApiBusiness\ApiLink;
 use Illuminate\Contracts\View\View;
-use App\Models\LinkModel;
-use App\Tools;
-//use Illuminate\Support\Facades\DB;
 
 class FooterComposer
 {
@@ -19,6 +17,7 @@ class FooterComposer
 
     public static function getFooters()
     {
-        return Tools::getChild(LinkModel::footers(),$pid=0);
+        $apiLink = ApiLink::footer(5,0,2);
+        return $apiLink['code']==0 ? $apiLink['data'] : [];
     }
 }

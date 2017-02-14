@@ -9,7 +9,7 @@
             分类：
             <select name="cate" class="home_search">
                 <option value="0" {{ $cate==0 ? 'selected' : '' }}>所有</option>
-                @foreach($model['cates1'] as $kcate=>$vcate)
+                @foreach($model['cates'] as $kcate=>$vcate)
                     <option value="{{ $kcate }}" {{ $cate==$kcate ? 'selected' : '' }}>{{ $vcate }}</option>
                 @endforeach
             </select>
@@ -33,47 +33,43 @@
         <div class="de_list">
             <table class="record">
             @if(count($datas))
-                @foreach($datas as $kdata=>$data)
+                @foreach($datas as $data)
                     <tr>
                         <td rowspan="3">
-                            <a href="{{DOMAIN}}design/{{ $data->id }}" title="{{ $data->name }}">
+                            <a href="{{DOMAIN}}design/{{ $data['id'] }}" title="{{ $data['name'] }}">
                                 <div class="img">
-                                @if(count($data->getPics()))
-                                    <img src="{{ $pic[0]->getPicUrl() }}">
-                                @else
-                                    <div style="width:280px;height:500px;background:rgb(250,250,250);"></div>
-                                @endif
+                                @if(count($data['thumb'])) <img src="{{ $data['thumb'] }}">@endif
                             </div></a>
                         </td>
-                        <td class="text1"><b><a href="{{DOMAIN}}design/{{ $data->id }}">{{ $data->name }}</a></b>
-                            <a href="{{DOMAIN}}design/{{ $data->id }}" class="a_to_show">详情</a>
+                        <td class="text1"><b><a href="{{DOMAIN}}design/{{ $data['id'] }}">{{ $data['name'] }}</a></b>
+                            <a href="{{DOMAIN}}design/{{ $data['id'] }}" class="a_to_show">详情</a>
                         </td>
                     </tr>
                     <tr>
                         <td class="text2">
-                            发布者：{{ $data->getUserName() }}
+                            发布者：{{ UserNameById($data['uid']) }}
                             &nbsp;&nbsp;&nbsp;&nbsp;
-                            浏览次数：{{ $data->click }}
+                            浏览次数：{{ $data['click'] }}
                             &nbsp;&nbsp;&nbsp;&nbsp;
-                            发布时间：{{ $data->createTime() }}
+                            发布时间：{{ $data['createTime'] }}
                         </td>
                     </tr>
                     <tr>
                         <td class="text3">
-                            <textarea cols="50" rows="2" readonly class="index_intro">{{ str_limit($data->intro,80) }}</textarea>
+                            <textarea cols="50" rows="2" readonly class="index_intro">{{ str_limit($data['intro'],80) }}</textarea>
                         </td>
                     </tr>
-                    @if($kdata!=1 && $kdata!=count($datas)-1)
-                        <tr><td colspan="10"><div style="height:10px;border-top:1px dashed lightgrey;">&nbsp;</div></td></tr>
-                    @endif
+                    {{--@if($kdata!=1 && $kdata!=count($datas)-1)--}}
+                        {{--<tr><td colspan="10"><div style="height:10px;border-top:1px dashed lightgrey;">&nbsp;</div></td></tr>--}}
+                    {{--@endif--}}
                 @endforeach
             @else <tr><td colspan="2"><div style="width:700px;text-align:center;">没有记录</div></td></tr>
             @endif
             </table>
         </div>
-        <div style="position:relative;top:20px;left:-100px;">@include('home.common.page')</div>
+        <div style="position:relative;top:20px;left:-100px;">@include('home.common.page2')</div>
 
-        <div class="de_right">
+        <div class="de_right" style="margin-top:-50px;">
             {{--<div class="cate">--}}
                 {{--<div class="title">分类信息</div>--}}
                 {{--<div class="con">--}}
@@ -83,15 +79,15 @@
             {{--</div>--}}
             @if(count($ads))
                 @foreach($ads as $ad)
-                    <a href="{{ $ad->link }}">
-                        <div class="img" title="{{ $ad->name }}">
-                            <img src="{{ $ad->getPicUrl() }}">
+                    <a href="{{ $ad['link'] }}">
+                        <div class="img" title="{{ $ad['name'] }}">
+                            <img src="{{ $ad['img'] }}">
                         </div>
                     </a>
                 @endforeach
             @endif
-            @if(count($ads)<$ads->limit)
-                @for($i=0;$i<$ads->limit-Count($ads);++$i)
+            @if(count($ads)<2)
+                @for($i=0;$i<2-Count($ads);++$i)
                     <div class="img"></div>
                 @endfor
             @endif

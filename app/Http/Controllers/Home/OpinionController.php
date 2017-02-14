@@ -23,12 +23,15 @@ class OpinionController extends BaseController
     {
         $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
         $prefix_url = DOMAIN.'opinion';
+        $datas = $this->query($status,$pageCurr);
+        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query($status,$pageCurr,$prefix_url),
-            'model'=> $this->model,
-            'prefix_url'=> $prefix_url,
-            'curr_menu'=> $this->url_curr,
-            'status'=> $status,
+            'datas' => $datas,
+            'pagelist' => $pagelist,
+            'model' => $this->model,
+            'prefix_url' => $prefix_url,
+            'curr_menu' => $this->url_curr,
+            'status' => $status,
         ];
         return view('home.opinion.index', $result);
     }
@@ -180,11 +183,10 @@ class OpinionController extends BaseController
     /**
      * 查询方法，提取对本站的意见
      */
-    public function query($status,$pageCurr,$prefix_url)
+    public function query($status,$pageCurr)
     {
         $rst = ApiOpinion::getOpinionList($this->limit,$pageCurr,$status);
-        $datas = $rst['code']==0?$rst['data']:[];
-        $datas['pagelist'] = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
+        $datas = $rst['code']==0 ? $rst['data'] : [];
         return $datas;
     }
 }

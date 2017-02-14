@@ -64,9 +64,9 @@
                     @endif
                 @endforeach
             @else
-            <table class="record">
-                <tr><td colspan="10" class="center">没有记录</td></tr>
-            </table>
+                <table class="record">
+                    <tr><td colspan="10" class="center" style="color:grey;">没有记录</td></tr>
+                </table>
             @endif
 
             @include('home.common.page2')

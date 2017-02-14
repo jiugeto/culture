@@ -1,10 +1,8 @@
 <?php
 namespace App\Http\ViewComposers;
 
+use App\Api\ApiBusiness\ApiLink;
 use Illuminate\Contracts\View\View;
-use App\Models\LinkModel;
-use App\Tools;
-//use Illuminate\Support\Facades\DB;
 
 class HeaderComposer
 {
@@ -19,6 +17,7 @@ class HeaderComposer
 
     public static function getHeaders()
     {
-        return Tools::getChild(LinkModel::headers(),$pid=0);
+        $apiLink = ApiLink::header(5,0,2);
+        return $apiLink['code']==0 ? $apiLink['data'] : [];
     }
 }

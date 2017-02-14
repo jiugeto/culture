@@ -5,14 +5,11 @@
         <ul class="ppt_pic">
             @if(count($ppts))
                 @foreach($ppts as $ppt)
-            <li id="ppt_{{ $ppt->id }}">
-                <a href="{{ $ppt->link }}" title="{{ $ppt->name }}"><img src="{{ $ppt->img }}"></a>
+            <li id="ppt_{{ $ppt['id'] }}">
+                <a href="{{ $ppt['link'] }}" title="{{ $ppt['name'] }}"><img src="{{ $ppt['img'] }}"></a>
             </li>
                 @endforeach
             @endif
-            {{--<li><a href="" title="ppt"><img src="{{PUB}}uploads/images/2016/ppt.png"></a></li>--}}
-            {{--<li><a href="" title="ppt2"><img src="{{PUB}}uploads/images/2016/ppt2.png"></a></li>--}}
-            {{--<li></li>--}}
         </ul>
         <div class="ppt_change">
             <div class="ppt_change_bg"></div>
@@ -21,18 +18,14 @@
             <ul class="ppt_change_pic">
                 @if($ppts)
                     @foreach($ppts as $ppt)
-                <li id="ppt_thumb_{{ $ppt->id }}" onmouseover="move({{ $ppt->id }})"><img src="{{ $ppt->img }}" title="{{ $ppt->name }}"></li>
+                <li id="ppt_thumb_{{ $ppt['id'] }}" onmouseover="move({{ $ppt['id'] }})"><img src="{{ $ppt['img'] }}" title="{{ $ppt['name'] }}"></li>
                     @endforeach
                 @endif
                 @if(count($ppts))
-                    @for($i=0;$i<$ppts->limit-count($ppts);++$i)
+                    @for($i=0;$i<$pptslimit-count($ppts);++$i)
                 <li><div style="width:100px;height:50px;background:gainsboro;color:ghostwhite;text-align:center;line-height:50px;">空白</div></li>
                     @endfor
                 @endif
-                {{--<a href=""><li><img src="{{PUB}}uploads/images/2016/ppt.png"></li></a>--}}
-                {{--<a href=""><li><img src="{{PUB}}uploads/images/2016/ppt2.png"></li></a>--}}
-                {{--<a href=""><li><img src="{{PUB}}uploads/images/2016/ppt.png"></li></a>--}}
-                {{--<a href=""><li><img src="{{PUB}}uploads/images/2016/ppt2.png"></li></a>--}}
             </ul>
         </div>
     </div>
@@ -41,7 +34,11 @@
             var clientWidth = document.body.clientWidth;
             $(".ppt").css('width',clientWidth);
         });
-
+        //改变浏览器大小触发事件
+        window.onresize = function(){
+            var clientWidth = document.body.clientWidth;
+            $(".ppt").css('width',clientWidth);
+        }
         function move(ppt_id){
             $(".ppt_pic > li").hide(); $("#ppt_"+ppt_id).show();
             $(".ppt_change_pic > li").removeClass('curr'); $("#ppt_thumb_"+ppt_id).addClass('curr');
@@ -63,7 +60,6 @@
                 <div class="online_first">
                     <a href="" title="online1">
                         <div class="con_img">
-                            {{--<img src="{{DOMAIN}}uploads/images/2016/online1.png">--}}
                             @if($products[0]['thumb'])
                                 <img src="{{$products[0]['thumb']}}" style="
                                     {{--@if($size=$model->getImgSize($products[0]['gif'],$w=260,$h=250))--}}
@@ -80,7 +76,6 @@
                 <div class="online_div">
                     <a href="" title="online1">
                         <div class="con_img">
-                            {{--<img src="{{DOMAIN}}uploads/images/2016/online2.png">--}}
                             @if($product['thumb'])
                                 <img src="{{$product['thumb']}}" style="
                                     {{--@if($size=$model->getImgSize($product['gif'],$w=175,$h=100))--}}
@@ -94,12 +89,36 @@
                 </div>
                     @endforeach
                 @endif
-                {{--<div class="online_div">--}}
-                    {{--<a href="" title="online1">--}}
-                        {{--<div class="con_img"><img src="{{DOMAIN}}uploads/images/2016/online3.png"></div>--}}
-                        {{--<div class="con_text"><a href="">样片</a></div>--}}
-                    {{--</a>--}}
-                {{--</div>--}}
+                <div class="online_first">
+                    <a href="" title="online1">
+                        <div class="con_img"><img src="{{DOMAIN}}uploads/images/2016/online3.png"></div>
+                        <div class="con_text"><a href="">样片</a></div>
+                    </a>
+                </div>
+                <div class="online_div">
+                    <a href="" title="online1">
+                        <div class="con_img"><img src="{{DOMAIN}}uploads/images/2016/online3.png"></div>
+                        <div class="con_text"><a href="">样片</a></div>
+                    </a>
+                </div>
+                <div class="online_div">
+                    <a href="" title="online1">
+                        <div class="con_img"><img src="{{DOMAIN}}uploads/images/2016/online3.png"></div>
+                        <div class="con_text"><a href="">样片</a></div>
+                    </a>
+                </div>
+                <div class="online_div">
+                    <a href="" title="online1">
+                        <div class="con_img"><img src="{{DOMAIN}}uploads/images/2016/online3.png"></div>
+                        <div class="con_text"><a href="">样片</a></div>
+                    </a>
+                </div>
+                <div class="online_div">
+                    <a href="" title="online1">
+                        <div class="con_img"><img src="{{DOMAIN}}uploads/images/2016/online3.png"></div>
+                        <div class="con_text"><a href="">样片</a></div>
+                    </a>
+                </div>
             </div>
         </div>
         {{-- 精选 --}}
@@ -122,14 +141,14 @@
             <div class="trait_con">
                 @if(count($goods))
                 @foreach($goods as $good)
-                    <div class="img" onmouseover="over({{ $good->id }})" onmouseout="out({{ $good->id }})">
-                        <a href="{{DOMAIN}}product/video/{{ $good->id }}/{{ $good->video_id }}" title="查看详情：{{ $good->title() }}">
-                            <img src="{{ $good->getPicUrl() }}" style="
-                                @if($size=$good->getPicSize($w=148,$h=100)) width:{{$size['w']}}px; height:{{$size['h']}}px; @endif
-                            ">
+                    <div class="img" onmouseover="over({{ $good['id'] }})" onmouseout="out({{ $good['id'] }})">
+                        <a href="{{DOMAIN}}product/video/{{ $good['id'] }}/{{ $good['video_id'] }}" title="查看详情：{{ $good['titleName'] }}">
+                            <img src="{{ $good['thumb'] }}" width="148" height="100"
+                                 {{--style="@if($size=$good->getPicSize($w=148,$h=100)) width:{{$size['w']}}px; height:{{$size['h']}}px; @endif"--}}
+                            >
                         </a>
-                        <div class="text" style="top:0;pointer-events:none;" id="goodText_{{ $good->id }}">
-                            <div>{{ $good->name }}</div>
+                        <div class="text" style="top:0;pointer-events:none;" id="goodText_{{ $good['id'] }}">
+                            <div>{{ $good['name'] }}</div>
                             <div>
                                 <span style="float:left;">点击 0</span>
                                 <span style="float:right;">喜欢 0</span>
@@ -138,11 +157,13 @@
                     </div>
                 @endforeach
                 @endif
-                <script>
-                    function over(id){ $("#goodText_"+id).animate({top:'-40px'},100); }
-                    function out(id){ $("#goodText_"+id).animate({top:'0px'},100); }
-                </script>
-                @if(count($goods)<6)
+                @if(count($goods)<12)
+                <div class="img"><a href=""><img src="{{DOMAIN}}uploads/images/2016/online1.png"></a></div>
+                <div class="img"><a href=""><img src="{{DOMAIN}}uploads/images/2016/online1.png"></a></div>
+                <div class="img"><a href=""><img src="{{DOMAIN}}uploads/images/2016/online1.png"></a></div>
+                <div class="img"><a href=""><img src="{{DOMAIN}}uploads/images/2016/online1.png"></a></div>
+                <div class="img"><a href=""><img src="{{DOMAIN}}uploads/images/2016/online1.png"></a></div>
+                <div class="img"><a href=""><img src="{{DOMAIN}}uploads/images/2016/online1.png"></a></div>
                 <div class="img"><a href=""><img src="{{DOMAIN}}uploads/images/2016/online1.png"></a></div>
                 <div class="img"><a href=""><img src="{{DOMAIN}}uploads/images/2016/online1.png"></a></div>
                 <div class="img"><a href=""><img src="{{DOMAIN}}uploads/images/2016/online1.png"></a></div>
@@ -151,61 +172,60 @@
                 <div class="img"><a href=""><img src="{{DOMAIN}}uploads/images/2016/online1.png"></a></div>
                 @endif
             </div>
-            {{--箭头--}}
-            <div class="arrow">
-                <div class="con_left"> ◀ </div>
-                <div class="con_right"> ▶ </div>
-            </div>
-        </div>
-        <br style="clear:both;">
-        
-        <!-- 热门品牌=>供应单位 -->
-        <div class="hot">
-            <p class="floor">
-                <img src="{{DOMAIN}}assets-home/images/floor_red.png" class="floor_img">
-                <span class="floor_text">{{ $number[5] }}F</span>
-                <span class="floor_text2">&nbsp;{{ $floors[$number[5]] }}</span>
-                <span class="more" onclick="window.location.href='/supply';">>更多</span>
-            </p>
-            <div class="trait_con">
-                <div class="img"><a href=""><img src="{{DOMAIN}}uploads/images/2016/online1.png"></a></div>
-                <div class="img"><a href=""><img src="{{DOMAIN}}uploads/images/2016/online1.png"></a></div>
-                <div class="img"><a href=""><img src="{{DOMAIN}}uploads/images/2016/online1.png"></a></div>
-                <div class="img"><a href=""><img src="{{DOMAIN}}uploads/images/2016/online1.png"></a></div>
-                <div class="img"><a href=""><img src="{{DOMAIN}}uploads/images/2016/online1.png"></a></div>
-                <div class="img"><a href=""><img src="{{DOMAIN}}uploads/images/2016/online1.png"></a></div>
-            </div>
-            {{--箭头--}}
-            <div class="arrow">
-                <div class="con_left"> ◀ </div>
-                <div class="con_right"> ▶ </div>
-            </div>
+            <script>
+                function over(id){ $("#goodText_"+id).animate({top:'-40px'},100); }
+                function out(id){ $("#goodText_"+id).animate({top:'0px'},100); }
+            </script>
         </div>
         <br style="clear:both;">
 
-        <!-- 推荐产品 -->
-        <div class="recommend">
-            <p class="floor">
-                <img src="{{PUB}}assets-home/images/floor_red.png" class="floor_img">
-                <span class="floor_text">{{ $number[6] }}F</span>
-                <span class="floor_text2">&nbsp;{{ $floors[$number[6]] }}</span>
-                <span class="more" onclick="window.location.href='/product';">>更多</span>
-            </p>
-            <div class="trait_con">
-                <div class="img"><a href=""><img src="{{PUB}}uploads/images/2016/online1.png"></a></div>
-                <div class="img"><a href=""><img src="{{PUB}}uploads/images/2016/online1.png"></a></div>
-                <div class="img"><a href=""><img src="{{PUB}}uploads/images/2016/online1.png"></a></div>
-                <div class="img"><a href=""><img src="{{PUB}}uploads/images/2016/online1.png"></a></div>
-                <div class="img"><a href=""><img src="{{PUB}}uploads/images/2016/online1.png"></a></div>
-                <div class="img"><a href=""><img src="{{PUB}}uploads/images/2016/online1.png"></a></div>
-            </div>
+        <!-- 热门品牌=>供应单位 -->
+        {{--<div class="hot">--}}
+            {{--<p class="floor">--}}
+                {{--<img src="{{DOMAIN}}assets-home/images/floor_red.png" class="floor_img">--}}
+                {{--<span class="floor_text">{{ $number[5] }}F</span>--}}
+                {{--<span class="floor_text2">&nbsp;{{ $floors[$number[5]] }}</span>--}}
+                {{--<span class="more" onclick="window.location.href='/supply';">>更多</span>--}}
+            {{--</p>--}}
+            {{--<div class="trait_con">--}}
+                {{--<div class="img"><a href=""><img src="{{DOMAIN}}uploads/images/2016/online1.png"></a></div>--}}
+                {{--<div class="img"><a href=""><img src="{{DOMAIN}}uploads/images/2016/online1.png"></a></div>--}}
+                {{--<div class="img"><a href=""><img src="{{DOMAIN}}uploads/images/2016/online1.png"></a></div>--}}
+                {{--<div class="img"><a href=""><img src="{{DOMAIN}}uploads/images/2016/online1.png"></a></div>--}}
+                {{--<div class="img"><a href=""><img src="{{DOMAIN}}uploads/images/2016/online1.png"></a></div>--}}
+                {{--<div class="img"><a href=""><img src="{{DOMAIN}}uploads/images/2016/online1.png"></a></div>--}}
+            {{--</div>--}}
             {{--箭头--}}
-            <div class="arrow">
-                <div class="con_left"> ◀ </div>
-                <div class="con_right"> ▶ </div>
-            </div>
-        </div>
-        <br style="clear:both;">
+            {{--<div class="arrow">--}}
+                {{--<div class="con_left"> ◀ </div>--}}
+                {{--<div class="con_right"> ▶ </div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+        {{--<br style="clear:both;">--}}
+
+        <!-- 推荐产品 -->
+        {{--<div class="recommend">--}}
+            {{--<p class="floor">--}}
+                {{--<img src="{{PUB}}assets-home/images/floor_red.png" class="floor_img">--}}
+                {{--<span class="floor_text">{{ $number[6] }}F</span>--}}
+                {{--<span class="floor_text2">&nbsp;{{ $floors[$number[6]] }}</span>--}}
+                {{--<span class="more" onclick="window.location.href='/product';">>更多</span>--}}
+            {{--</p>--}}
+            {{--<div class="trait_con">--}}
+                {{--<div class="img"><a href=""><img src="{{PUB}}uploads/images/2016/online1.png"></a></div>--}}
+                {{--<div class="img"><a href=""><img src="{{PUB}}uploads/images/2016/online1.png"></a></div>--}}
+                {{--<div class="img"><a href=""><img src="{{PUB}}uploads/images/2016/online1.png"></a></div>--}}
+                {{--<div class="img"><a href=""><img src="{{PUB}}uploads/images/2016/online1.png"></a></div>--}}
+                {{--<div class="img"><a href=""><img src="{{PUB}}uploads/images/2016/online1.png"></a></div>--}}
+                {{--<div class="img"><a href=""><img src="{{PUB}}uploads/images/2016/online1.png"></a></div>--}}
+            {{--</div>--}}
+            {{--箭头--}}
+            {{--<div class="arrow">--}}
+                {{--<div class="con_left"> ◀ </div>--}}
+                {{--<div class="con_right"> ▶ </div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+        {{--<br style="clear:both;">--}}
 
         <!-- 样片需求 -->
         <div class="demand">
@@ -268,57 +288,57 @@
         <br style="clear:both;">
 
         <!-- 娱乐信息：演员、广告、媒体等 -->
-        <div class="fun">
-            <p class="floor">
-                <img src="{{PUB}}assets-home/images/floor_red.png" class="floor_img">
-                <span class="floor_text">{{ $number[8] }}F</span>
-                <span class="floor_text2">&nbsp;{{ $floors[$number[8]] }}</span>
-                <span class="more" onclick="window.location.href='{{DOMAIN}}entertain';">>更多</span>
-            </p>
-            <div class="fun_con">
-                <div class="img_text">
-                    <div class="img">
-                        <a href=""><img src="{{PUB}}uploads/images/2016/online1.png"></a>
-                    </div>
-                    <div class="con_text"><a href="">娱乐娱乐</a></div>
-                </div>
-                <div class="img_text">
-                    <div class="img">
-                        <a href=""><img src="{{PUB}}uploads/images/2016/online1.png"></a>
-                    </div>
-                    <div class="con_text"><a href="">娱乐娱乐</a></div>
-                </div>
-                <div class="img_text">
-                    <div class="img">
-                        <a href=""><img src="{{PUB}}uploads/images/2016/online1.png"></a>
-                    </div>
-                    <div class="con_text"><a href="">娱乐娱乐</a></div>
-                </div>
-                <div class="img_text">
-                    <div class="img">
-                        <a href=""><img src="{{PUB}}uploads/images/2016/online1.png"></a>
-                    </div>
-                    <div class="con_text"><a href="">娱乐娱乐</a></div>
-                </div>
-                <div class="img_text">
-                    <div class="img">
-                        <a href=""><img src="{{PUB}}uploads/images/2016/online1.png"></a>
-                    </div>
-                    <div class="con_text"><a href="">娱乐娱乐</a></div>
-                </div>
-            </div>
-        </div>
+        {{--<div class="fun">--}}
+            {{--<p class="floor">--}}
+                {{--<img src="{{PUB}}assets-home/images/floor_red.png" class="floor_img">--}}
+                {{--<span class="floor_text">{{ $number[8] }}F</span>--}}
+                {{--<span class="floor_text2">&nbsp;{{ $floors[$number[8]] }}</span>--}}
+                {{--<span class="more" onclick="window.location.href='{{DOMAIN}}entertain';">>更多</span>--}}
+            {{--</p>--}}
+            {{--<div class="fun_con">--}}
+                {{--<div class="img_text">--}}
+                    {{--<div class="img">--}}
+                        {{--<a href=""><img src="{{PUB}}uploads/images/2016/online1.png"></a>--}}
+                    {{--</div>--}}
+                    {{--<div class="con_text"><a href="">娱乐娱乐</a></div>--}}
+                {{--</div>--}}
+                {{--<div class="img_text">--}}
+                    {{--<div class="img">--}}
+                        {{--<a href=""><img src="{{PUB}}uploads/images/2016/online1.png"></a>--}}
+                    {{--</div>--}}
+                    {{--<div class="con_text"><a href="">娱乐娱乐</a></div>--}}
+                {{--</div>--}}
+                {{--<div class="img_text">--}}
+                    {{--<div class="img">--}}
+                        {{--<a href=""><img src="{{PUB}}uploads/images/2016/online1.png"></a>--}}
+                    {{--</div>--}}
+                    {{--<div class="con_text"><a href="">娱乐娱乐</a></div>--}}
+                {{--</div>--}}
+                {{--<div class="img_text">--}}
+                    {{--<div class="img">--}}
+                        {{--<a href=""><img src="{{PUB}}uploads/images/2016/online1.png"></a>--}}
+                    {{--</div>--}}
+                    {{--<div class="con_text"><a href="">娱乐娱乐</a></div>--}}
+                {{--</div>--}}
+                {{--<div class="img_text">--}}
+                    {{--<div class="img">--}}
+                        {{--<a href=""><img src="{{PUB}}uploads/images/2016/online1.png"></a>--}}
+                    {{--</div>--}}
+                    {{--<div class="con_text"><a href="">娱乐娱乐</a></div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
         {{--独家--}}
-        <div class="sole">
-            <p>独家策划</p>
-            <div class="img_text">
-                <div class="img">
-                    <a href=""><img src="{{PUB}}uploads/images/2016/online1.png"></a>
-                </div>
-                <div class="con_text"><a href="">娱乐娱乐</a></div>
-            </div>
-        </div>
-        <br style="clear:both;"><br>
+        {{--<div class="sole">--}}
+            {{--<p>独家策划</p>--}}
+            {{--<div class="img_text">--}}
+                {{--<div class="img">--}}
+                    {{--<a href=""><img src="{{PUB}}uploads/images/2016/online1.png"></a>--}}
+                {{--</div>--}}
+                {{--<div class="con_text"><a href="">娱乐娱乐</a></div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+        {{--<br style="clear:both;"><br>--}}
 
         <!-- 租赁信息：拍摄器材 -->
         <div class="rent">
@@ -472,8 +492,8 @@
                         @foreach($ideas as $idea)
                             <table>
                                 <tr>
-                                    <td class="title">{{ $idea->name }}</td>
-                                    <td colspan="2">{{ strip_tags($idea->content) }}</td>
+                                    <td class="title">{{ $idea['name'] }}</td>
+                                    <td colspan="2">{{ $idea['intro'] }}</td>
                                 </tr>
                                 <tr><td class="title"></td></tr>
                             </table>
@@ -484,9 +504,9 @@
                     @if(count($ideas))
                         @foreach($ideas as $idea)
                             <div>
-                                <span style="color:red;">{{ $idea->number }}</span>.
-                                {{ $idea->name }}
-                                <span class="right_time">{{ explode(' ',$idea->created_at)[0] }}</span>
+                                <span style="color:red;">{{ $idea['number'] }}</span>.
+                                {{ $idea['name'] }}
+                                <span class="right_time">{{ explode(' ',$idea['created_at'])[0] }}</span>
                             </div>
                         @endforeach
                     @endif
@@ -544,25 +564,41 @@
                     <li class="t">名称</li>
                     <li class="t">类型</li>
                     <li class="t">用户</li>
-                    <li class="t">价格</li>
+                    <li class="t">价格(元)</li>
                     <li class="t">状态</li>
                     <li class="t">时间</li>
                 </ul>
                 <div class="con_wrap">
                     <div class="animate">
-                        @if(count($orders))
-                            @foreach($orders as $order)
+                        {{--在线创作渲染订单--}}
+                        @if(count($onlineOrders))
+                            @foreach($onlineOrders as $order)
                         <ul>
-                            <li class="t">{{ substr($order->serial,4) }}</li>
-                            <li class="t">{{ $order->name }}</li>
-                            <li class="t">{{ $order->genreName() }}</li>
-                            <li class="t">{{ $order->buyerName }}</li>
-                            <li class="t">{{ $order->getMoney() }}</li>
-                            <li class="t">{{ $order->statusName() }}</li>
-                            <li class="t">{{ date('Y-m-d',$order->created_at) }}</li>
+                            <li class="t">{{ substr($order['serial'],4) }}</li>
+                            <li class="t">{{ $order['pname'] }}</li>
+                            <li class="t">{{ $order['cateName'] }}</li>
+                            <li class="t">{{ $order['uname'] }}</li>
+                            <li class="t">{{ $order['money'] }}</li>
+                            <li class="t">{{ $order['statusName'] }}</li>
+                            <li class="t">{{ $order['createTime'] }}</li>
                         </ul>
                             @endforeach
-                        @else
+                        @endif
+                        {{--主体业务订单--}}
+                        @if(count($mainOrders))
+                            @foreach($mainOrders as $order)
+                        <ul>
+                            <li class="t">{{ substr($order['serial'],4) }}</li>
+                            <li class="t">{{ $order['name'] }}</li>
+                            <li class="t">{{ $order['genreName'] }}</li>
+                            <li class="t">{{ $order['buyerName'] }}</li>
+                            <li class="t">0</li>
+                            <li class="t">{{ $order['statusName'] }}</li>
+                            <li class="t">{{ $order['createTime'] }}</li>
+                        </ul>
+                            @endforeach
+                        @endif
+                        @if(!count($onlineOrders)&&!count($mainOrders))
                             <ul><li class="t" style="width:100%;">没有记录</li></ul>
                         @endif
                     </div>
@@ -615,6 +651,8 @@
         </div>
         <!-- 空白 -->
         <div class="content_kongbai">&nbsp;</div>
+
+        @include('layout.qqchat')
 
         {{--给用户发红包--}}
         @if($usertip)

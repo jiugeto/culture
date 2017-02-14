@@ -40,75 +40,73 @@
             @if(count($datas))
                 @foreach($datas as $kdata=>$data)
                     <tr>
-                        <td><div style="color:lightgrey;text-align:center;">{{ date('Y',$data->created_at) }}
-                                <div style="border-bottom:1px solid lightgrey;"></div>{{ date('m',$data->created_at) }}
+                        <td><div style="color:lightgrey;text-align:center;">{{ date('Y',$data['created_at']) }}
+                                <div style="border-bottom:1px solid lightgrey;"></div>{{ date('m',$data['created_at']) }}
                             </div>
                         </td>
                         <td>
                             <div class="img">
-                                @if($data->thumb)
-                                    <img src="{{ $data->thumb }}">
-                                @else
-                                    <div style="width:280px;height:500px;background:rgb(250,250,250);"></div>
+                                @if($data['thumb']) <img src="{{ $data['thumb'] }}">
+                                @else <div style="width:280px;height:500px;background:rgb(250,250,250);"></div>
                                 @endif
                             </div>
                         </td>
                         @if($genre0==1)
                             {{--公司列表--}}
                             <td>
-                                <div class="title"><b>标题：{{ $data->title }}</b></div>
+                                <div class="title"><b>标题：{{ $data['title'] }}</b></div>
                                 <div class="con"><textarea cols="40" rows="2" readonly class="index_intro">
-                                        {{ str_limit($data->intro,40) }}</textarea></div>
+                                        {{ str_limit($data['intro'],40) }}</textarea></div>
                             </td>
                             <td>
-                                <div class="comName">公司：{{ $data->getCompanyName($data->uid) }}</div>
-                                <p><a href="{{DOMAIN}}entertain/{{ $data->id }}" class="toshow">详情</a></p>
+                                <div class="comName">公司：{{ ComNameByUid($data['uid']) }}</div>
+                                <p><a href="{{DOMAIN}}entertain/{{ $data['id'] }}" class="toshow">详情</a></p>
                             </td>
                         @elseif($genre0==2)
                             {{--人员--}}
                             <td>
-                                <div class="title"><b>艺名：{{ $data->name }}</b></div>
+                                <div class="title"><b>艺名：{{ $data['name'] }}</b></div>
                                 <div class="con"><textarea cols="40" rows="2" readonly style="border:0;resize:none;">
                                     {{ str_limit($data->intro,40) }}</textarea></div>
                             </td>
                             <td>
-                                <div class="comName">公司：{{ $data->getCompanyName($data->uid) }}</div>
-                                <p><a href="{{DOMAIN}}entertain/staff/show/{{ $data->id }}" class="toshow">详情</a></p>
+                                <div class="comName">公司：{{ ComNameByUid($data['uid']) }}</div>
+                                <p><a href="{{DOMAIN}}entertain/staff/show/{{ $data['id'] }}" class="toshow">详情</a></p>
                             </td>
                         @elseif($genre0==3)
                             {{--人员--}}
                             <td>
-                                <div class="title"><b>影视作品：{{ $data->name }}</b></div>
+                                <div class="title"><b>影视作品：{{ $data['name'] }}</b></div>
                                 <div class="con"><textarea cols="40" rows="2" readonly style="border:0;resize:none;">
-                                    {{ str_limit($data->intro,40) }}</textarea></div>
+                                    {{ str_limit($data['intro'],40) }}</textarea></div>
                             </td>
                             <td>
-                                <div class="comName">公司：{{ $data->getCompanyName($data->uid) }}</div>
-                                <p><a href="{{DOMAIN}}entertain/works/show/{{ $data->id }}" class="toshow">详情</a></p>
+                                <div class="comName">公司：{{ ComNameByUid($data['uid']) }}</div>
+                                <p><a href="{{DOMAIN}}entertain/works/show/{{ $data['id'] }}" class="toshow">详情</a></p>
                             </td>
                         @endif
                     </tr>
-                    @if($kdata!=1 && $kdata!=count($datas)-1)
+                    @if($kdata!=1 && $kdata!=count($datas))
                     <tr><td colspan="10"><div style="height:10px;border-top:1px dashed lightgrey;">&nbsp;</div></td></tr>
                     @endif
                 @endforeach
-            @else @include('home.common.norecord')
+            @else <p style="text-align:center;">没有记录</p>
             @endif
             </table>
-            @include('home.common.page')
+            @include('home.common.page2')
         </div>
         <div class="e_right">
             @if(count($ads))
                 @foreach($ads as $ad)
-                    <a href="{{ $ad->link }}">
-                        <div class="img" title="{{ $ad->name }}">
-                            <img src="{{ $ad->getPicUrl() }}">
+                    <a href="{{ $ad['link'] }}">
+                        <div class="img" title="{{ $ad['name'] }}">
+                            <img src="{{ $ad['img'] }}">
                         </div>
                     </a>
                 @endforeach
             @endif
-            @if(count($ads)<$ads->limit)
-                @for($i=0;$i<$ads->limit-Count($ads);++$i)
+            @if(count($ads)<2)
+                @for($i=0;$i<2-Count($ads);++$i)
                     <div class="img"></div>
                 @endfor
             @endif

@@ -40,7 +40,7 @@
         @else {{DOMAIN}}creation
         @endif
     " class="{{$cate==0?'curr':''}}">全部</a>
-    @foreach($model['cates2'] as $kcate=>$vcate)
+    @foreach($model['cates'] as $kcate=>$vcate)
         <a href="{{DOMAIN}}creation/s/{{$genre}}/{{$kcate}}/{{$isOrder}}" class="{{$cate==$kcate?'curr':''}}">{{ $vcate }}</a>
     @endforeach
 </div>

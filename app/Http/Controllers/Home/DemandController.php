@@ -1,12 +1,13 @@
 <?php
 namespace App\Http\Controllers\Home;
 
-use App\Models\DesignModel;
-use App\Models\EntertainModel;
-use App\Models\GoodsModel;
-use App\Models\IdeasModel;
-use App\Models\RentModel;
-use App\Models\StoryBoardModel;
+use App\Api\ApiBusiness\ApiAd;
+use App\Api\ApiBusiness\ApiDesign;
+use App\Api\ApiBusiness\ApiGoods;
+use App\Api\ApiBusiness\ApiIdea;
+use App\Api\ApiBusiness\ApiRent;
+use App\Api\ApiBusiness\ApiStaff;
+use App\Api\ApiBusiness\ApiStoryBoard;
 
 class DemandController extends BaseController
 {
@@ -16,19 +17,7 @@ class DemandController extends BaseController
 
     protected $curr = 'demand';
     protected $genres = [
-        1=>'创意剧本','分镜需求','人员需求','设备需求','设计需求',
-    ];
-    //具体分类genre1：适合视频、创意、分镜
-    protected $genre1s = [
-        1=>'',
-    ];
-    //具体分类genre4：适合娱乐、设备
-    protected $genre4s = [
-        1=>'',
-    ];
-    //具体分类genre6：适合设计
-    protected $genre6s = [
-        1=>'',
+        /*1=>'视频',*/2=>'创意','分镜','人员','设备','设计',
     ];
 
     public function __construct()
@@ -36,17 +25,21 @@ class DemandController extends BaseController
         parent::__construct();
     }
 
-    public function index($genre=1)
+    public function index($genre=2)
     {
+        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $prefix_url = DOMAIN.'demand';
+        $datas = $this->query($genre,$pageCurr);
+        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query($genre),
+            'datas'=> $datas,
+            'prefix_url' => $prefix_url,
+            'pagelist' => $pagelist,
             'ads'=> $this->ads(),
             'lists'=> $this->list,
             'curr_menu'=> $this->curr,
+//            'model'=> $this->getModel($genre),
             'genres'=> $this->genres,
-            'genre1s'=> $this->genre1s,
-            'genre4s'=> $this->genre4s,
-            'genre6s'=> $this->genre6s,
             'genre'=> $genre,
 
         ];
@@ -57,74 +50,55 @@ class DemandController extends BaseController
 
 
 
-    public function query($genre)
+    public function query($genre,$pageCurr=1)
     {
-        if ($genre==1) {
+        /*if ($genre==1) {
             //视频需求，type==1、3是需求
-            $datas = GoodsModel::whereIn('type',[1,3])
-                ->where('isshow',1)
-                ->where('isshow2',1)
-                ->where('del',0)
-                ->orderBy('sort','desc')
-                ->orderBy('id','desc')
-                ->paginate($this->limit);
-        } elseif ($genre==2) {
+            $apiData = ApiGoods::index($this->limit,$pageCurr,[1,3],0,2,0,0);
+        } else*/if ($genre==2) {
             //创意剧本，genre==2是需求
-            $datas = IdeasModel::where('genre',2)
-                ->where('isshow',1)
-                ->where('del',0)
-                ->orderBy('sort','desc')
-                ->orderBy('id','desc')
-                ->paginate($this->limit);
+            $apiData = ApiIdea::index($this->limit,$pageCurr,0,2);
         } elseif ($genre==3) {
-            //分镜需求，genre==2是需求
-            $datas = StoryBoardModel::where('genre',2)
-                ->where('isshow',1)
-                ->where('isshow2',1)
-                ->where('del',0)
-                ->orderBy('sort','desc')
-                ->orderBy('sort2','desc')
-                ->orderBy('id','desc')
-                ->paginate($this->limit);
+            //分镜需求，genre==3是需求
+            $apiData = ApiStoryBoard::index($this->limit,$pageCurr,0,2,0);
         } elseif ($genre==4) {
-            //演员需求，genre==2是需求
-            $datas = EntertainModel::where('genre',2)
-                ->where('del',0)
-                ->orderBy('sort','desc')
-                ->orderBy('id','desc')
-                ->paginate($this->limit);
+            //人员需求，genre==4是需求
+            $apiData = ApiStaff::index($this->limit,$pageCurr,0,2,0,2,0);
         } elseif ($genre==5) {
-            //设备需求，genre==2是需求
-            $datas = RentModel::where('genre',2)
-                ->where('del',0)
-                ->orderBy('sort','desc')
-                ->orderBy('id','desc')
-                ->paginate($this->limit);
-        } elseif ($genre==6) {
-            //设计需求，genre==2是需求
-            $datas = DesignModel::where('genre',2)
-                ->where('del',0)
-                ->orderBy('sort','desc')
-                ->orderBy('id','desc')
-                ->paginate($this->limit);
+            //设备需求，genre==5是需求
+            $apiData = ApiRent::index($this->limit,$pageCurr,0,2,0,2,0);
+        } else {
+            //设计需求，genre==6是需求
+            $apiData = ApiDesign::index($this->limit,$pageCurr,[2,4],2,0);
         }
-        $datas->limit = $this->limit;
-        return $datas;
+        return $apiData['code']==0 ? $apiData['data'] : [];
     }
 
     public function ads()
     {
-        //adplace_id==3，前台需求页面右侧
-        $limit = 2;
-        $ads = \App\Models\Base\AdModel::where('uid',0)
-            ->where('adplace_id',3)
-            ->where('isuse',1)
-            ->where('isshow',1)
-            ->where('fromTime','<',time())
-            ->where('toTime','>',time())
-            ->orderBy('sort','desc')
-            ->paginate($limit);
-        $ads->limit = $limit;
-        return $ads;
+        //adplace_id==3，前台需求页面右侧，limit==2
+        $apiAd = ApiAd::index(2,1,0,3,0,0,1,2);
+        return $apiAd['code']==0 ? $apiAd['data'] : [];
+    }
+
+    /**
+     * 获取 goodsModel
+     */
+    public function getModel($genre)
+    {
+        if ($genre==1) {
+            $apiModel = ApiGoods::getModel();
+        } elseif ($genre==2) {
+            $apiModel = ApiIdea::getModel();
+        } elseif ($genre==3) {
+            $apiModel = ApiStoryBoard::getModel();
+        } elseif ($genre==4) {
+            $apiModel = ApiStaff::getModel();
+        } elseif ($genre==5) {
+            $apiModel = ApiRent::getModel();
+        } else {
+            $apiModel = ApiDesign::getModel();
+        }
+        return $apiModel['code']==0 ? $apiModel['model'] : [];
     }
 }

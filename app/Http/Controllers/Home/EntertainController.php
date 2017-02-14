@@ -1,6 +1,10 @@
 <?php
 namespace App\Http\Controllers\Home;
 
+use App\Api\ApiBusiness\ApiAd;
+use App\Api\ApiBusiness\ApiEntertain;
+use App\Api\ApiBusiness\ApiStaff;
+use App\Api\ApiBusiness\ApiWorks;
 use App\Models\EntertainModel;
 use App\Models\StaffModel;
 use App\Models\WorksModel;
@@ -12,28 +16,34 @@ class EntertainController extends BaseController
      */
 
     protected $curr = 'entertain';
-    protected $staffModel;
 
     public function __construct()
     {
         parent::__construct();
-        $this->staffModel = new StaffModel();
     }
 
     public function index($genre0=1,$genre=0)
     {
-        if ($genre0==1) { $prefix_url = DOMAIN.'entertain'; }
-        elseif ($genre0==2) { $prefix_url = DOMAIN.'entertain/2/0'; }
-        elseif ($genre0==3) { $prefix_url = DOMAIN.'entertain/3/0'; }
+        if ($genre0==1) {
+            $prefix_url = DOMAIN.'entertain';
+        } elseif ($genre0==2) {
+            $prefix_url = DOMAIN.'entertain/2/0';
+        } else {
+            $prefix_url = DOMAIN.'entertain/3/0';
+        }
+        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $datas = $this->query($genre0,$genre,$pageCurr);
+        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query($genre0,$genre),
-            'ads'=> $this->ads(),
-            'lists'=> $this->list,
-            'staffModel'=> $this->staffModel,
-            'prefix_url'=> $prefix_url,
-            'curr_menu'=> $this->curr,
-            'genre0'=> $genre0,
-            'genre'=> $genre,
+            'datas'     => $datas,
+            'pagelist'  => $pagelist,
+            'ads'       => $this->ads(),
+            'lists'     => $this->list,
+            'staffModel'    => $this->getStaffModel(),
+            'prefix_url'    => $prefix_url,
+            'curr_menu' => $this->curr,
+            'genre0'    => $genre0,
+            'genre'     => $genre,
         ];
         return view('home.entertain.index', $result);
     }
@@ -42,13 +52,16 @@ class EntertainController extends BaseController
     {
         $submenu['url'] = 'show';
         $submenu['name'] = '公司详情';
-        $data = EntertainModel::find($id);
+        $apiEntertain = ApiEntertain::show($id);
+        if ($apiEntertain['code']!==0) {
+            echo "<script>alert('".$apiEntertain['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
             'lists'=> $this->list,
-            'data'=> $data,
+            'data'=> $apiEntertain['data'],
             'curr_menu'=> $this->curr,
             'curr_submenu'=> $submenu,
-            'uid'=> $data->uid,
+            'uid'=> $apiEntertain['data']['uid'],
         ];
         return view('home.entertain.show', $result);
     }
@@ -57,13 +70,16 @@ class EntertainController extends BaseController
     {
         $submenu['url'] = 'show';
         $submenu['name'] = '人员详情';
-        $data = StaffModel::find($id);
+        $apiStaff = ApiStaff::show($id);
+        if ($apiStaff['code']!==0) {
+            echo "<script>alert('".$apiStaff['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> $data,
+            'data'=> $apiStaff['data'],
             'lists'=> $this->list,
             'curr_menu'=> $this->curr,
             'curr_submenu'=> $submenu,
-            'uid'=> $data->uid,
+            'uid'=> $apiStaff['data']['uid'],
         ];
         return view('home.entertain.staffShow', $result);
     }
@@ -72,13 +88,16 @@ class EntertainController extends BaseController
     {
         $submenu['url'] = 'show';
         $submenu['name'] = '作品详情';
-        $data = WorksModel::find($id);
+        $apiWorks = ApiWorks::show($id);
+        if ($apiWorks['code']!==0) {
+            echo "<script>alert('".$apiWorks['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> $data,
+            'data'=> $apiWorks['data'],
             'lists'=> $this->list,
             'curr_menu'=> $this->curr,
             'curr_submenu'=> $submenu,
-            'uid'=> $data->uid,
+            'uid'=> $apiWorks['data']['uid'],
         ];
         return view('home.entertain.worksShow', $result);
     }
@@ -87,55 +106,34 @@ class EntertainController extends BaseController
 
 
 
-    public function query($genre0,$genre)
+    /**
+     * 只显示供应的
+     */
+    public function query($genre0,$genre,$pageCurr)
     {
-        //只显示供应的
         if ($genre0==1) {
-            $datas = EntertainModel::where('del',0)
-                ->where('genre',1)
-                ->where('isshow',1)
-                ->orderBy('sort','desc')
-                ->orderBy('id','desc')
-                ->paginate($this->limit);
+            $apiData = ApiEntertain::index($this->limit,$pageCurr,0,1,2,0);
         } elseif ($genre0==2) {
-            if ($genre) {
-                $datas = StaffModel::where('del',0)
-                    ->where('genre',$genre)
-                    ->where('isshow',1)
-                    ->orderBy('sort','desc')
-                    ->orderBy('id','desc')
-                    ->paginate($this->limit);
-            } else {
-                $datas = StaffModel::where('del',0)
-                    ->where('isshow',1)
-                    ->orderBy('sort','desc')
-                    ->orderBy('id','desc')
-                    ->paginate($this->limit);
-            }
-        } elseif ($genre0==3) {
-            $datas = WorksModel::where('del',0)
-                ->where('isshow',1)
-                ->orderBy('sort','desc')
-                ->orderBy('id','desc')
-                ->paginate($this->limit);
+            $apiData = ApiStaff::index($this->limit,$pageCurr,0,$genre,0,2,0);
+        } else {
+            $apiData = ApiWorks::index($this->limit,$pageCurr,0,0,2,0);
         }
-        $datas->limit = $this->limit;
-        return $datas;
+        return $apiData['code']==0 ? $apiData['data'] : [];
     }
 
     public function ads()
     {
-        //adplace_id==4，前台娱乐页面右侧
-        $limit = 1;
-        $ads = \App\Models\Base\AdModel::where('uid',0)
-            ->where('adplace_id',4)
-            ->where('isuse',1)
-            ->where('isshow',1)
-            ->where('fromTime','<',time())
-            ->where('toTime','>',time())
-            ->orderBy('sort','desc')
-            ->paginate($limit);
-        $ads->limit = $limit;
-        return $ads;
+        //adplace_id==4，前台娱乐页面右侧，limit==1
+        $apiAd = ApiAd::index(1,1,0,4,0,0,1,2);
+        return $apiAd['code']==0 ? $apiAd['data'] : [];
+    }
+
+    /**
+     * 获取 model
+     */
+    public function getStaffModel()
+    {
+        $apiStaff = ApiStaff::getModel();
+        return $apiStaff['code']==0 ? $apiStaff['model'] : [];
     }
 }

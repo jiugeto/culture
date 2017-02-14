@@ -31,7 +31,7 @@
         <div class="title" style="padding-top:30px;border:0;">
             <a href="{{DOMAIN}}theme/create" id="apply">专栏申请</a>
         </div>
-        @include('home.common.page')
+        @include('home.common.#page')
     </div>
     <div style="height:100px;">{{--空白--}}</div>
 @stop

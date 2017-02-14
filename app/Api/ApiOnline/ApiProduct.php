@@ -37,7 +37,6 @@ class ApiProduct
         return array(
             'code' => 0,
             'data' => ApiBase::objToArr($response->data),
-            'model' =>  ApiBase::objToArr($response->model),
         );
     }
 
@@ -59,7 +58,6 @@ class ApiProduct
         return array(
             'code' => 0,
             'data' => ApiBase::objToArr($response->data),
-            'model' =>  ApiBase::objToArr($response->model),
         );
     }
 

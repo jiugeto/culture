@@ -159,15 +159,15 @@ table.goodCus td {
     position:fixed; left:0; top:0; z-index:100;
 }
 .tankuang .con {
-    width:500px;
-    /*height:200px;*/
+    padding:20px 0;
+    width:600px;
     color:grey;
     background:white;
-    position:fixed; left:30%; top:30%; z-index:100;
+    position:fixed; left:28%; top:200px; z-index:100;
 }
 .tankuang input,.tankuang textarea {
     padding:5px;
-    width:400px;
+    width:500px;
     border:1px solid lightgrey;
 }
 .tankuang .con p {
@@ -178,9 +178,11 @@ table.goodCus td {
     text-align:center;
 }
 .tankuang .con a {
-    padding:5px 10px;
+    padding:10px 20px;
     color:red;
     background:grey;
     cursor:pointer;
-    position:absolute; left:500px; top:0;
+    position:absolute; left:600px; top:0;
 }
+.tankuang .con a:hover { color:white; }
+.tankuang .con button[type='submit'] { margin:10px 220px; }

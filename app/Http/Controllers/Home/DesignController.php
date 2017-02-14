@@ -1,7 +1,8 @@
 <?php
 namespace App\Http\Controllers\Home;
 
-use App\Models\DesignModel;
+use App\Api\ApiBusiness\ApiAd;
+use App\Api\ApiBusiness\ApiDesign;
 
 class DesignController extends BaseController
 {
@@ -14,31 +15,38 @@ class DesignController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->model = new DesignModel();
     }
 
     public function index($cate=0)
     {
+        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $prefix_url = DOMAIN.'supply';
+        $datas = $this->query($pageCurr,$cate);
+        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query($cate),
-            'prefix_url'=> DOMAIN.'design',
-            'ads'=> $this->ads(),
-            'lists'=> $this->list,
-            'model'=> $this->model,
-            'curr_menu'=> $this->curr,
-            'cate'=> $cate,
+            'datas' => $datas,
+            'pagelist' => $pagelist,
+            'prefix_url'    => DOMAIN.'design',
+            'ads'   => $this->ads(),
+            'lists' => $this->list,
+            'model' => $this->getModel(),
+            'curr_menu' => $this->curr,
+            'cate'  => $cate,
         ];
         return view('home.design.index', $result);
     }
 
     public function show($id)
     {
-        $data = DesignModel::find($id);
+        $apiDesign = ApiDesign::show($id);
+        if ($apiDesign['code']!=0) {
+            echo "<script>alert('".$apiDesign['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
             'lists'=> $this->list,
-            'data'=> $data,
+            'data'=> $apiDesign['data'],
             'curr_menu'=> $this->curr,
-            'uid'=> $data->uid,
+            'uid'=> $apiDesign['data']['uid'],
         ];
         return view('home.design.show', $result);
     }
@@ -47,35 +55,25 @@ class DesignController extends BaseController
 
 
 
-    public function query($cate)
+    public function query($pageCurr,$cate)
     {
-        if ($cate) {
-            $datas = DesignModel::where('del',0)
-                ->where('genre',1)
-                ->where('cate',$cate)
-                ->paginate($this->limit);
-        } else {
-            $datas = DesignModel::where('del',0)
-                ->where('genre',1)
-                ->paginate($this->limit);
-        }
-        $datas->limit = $this->limit;
-        return $datas;
+        $apiDesign = ApiDesign::index($this->limit,$pageCurr,0,1,$cate,2,0);
+        return $apiDesign['code']==0 ? $apiDesign['data'] : [];
     }
 
     public function ads()
     {
-        //adplace_id==5，前台设计页面右侧
-        $limit = 2;
-        $ads = \App\Models\Base\AdModel::where('uid',0)
-            ->where('adplace_id',5)
-            ->where('isuse',1)
-            ->where('isshow',1)
-            ->where('fromTime','<',time())
-            ->where('toTime','>',time())
-            ->orderBy('sort','desc')
-            ->paginate($limit);
-        $ads->limit = $limit;
-        return $ads;
+        //adplace_id==5，前台设计页面右侧，limit==2
+        $apiAd = ApiAd::index(2,1,0,5,0,0,1,2);
+        return $apiAd['code']==0 ? $apiAd['data'] : [];
+    }
+
+    /**
+     * 获取 model
+     */
+    public function getModel()
+    {
+        $apiDesign = ApiDesign::getModel();
+        return $apiDesign['code']==0 ? $apiDesign['model'] : [];
     }
 }

@@ -15,6 +15,6 @@
             @endforeach
         @else <div class="title">暂无主题</div>
         @endif
-        @include('home.common.page')
+        @include('home.common.#page')
     </div>
 @stop

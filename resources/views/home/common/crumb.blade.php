@@ -7,8 +7,8 @@
             <a href="/">首页</a> /
             {{--意见、话题等导航--}}
             @foreach($navigates as $navigate)
-                @if($curr_menu==$navigate->link)<a href="/{{$curr_menu}}">{{ $navigate->name }}</a>@endif
-                @if($navigate->link=='opinion' && $curr_menu=='opinion')
+                @if($curr_menu==$navigate['link'])<a href="/{{$curr_menu}}">{{ $navigate['name'] }}</a>@endif
+                @if($navigate['link']=='opinion' && $curr_menu=='opinion')
                     @if(!isset($isreply))
                         @if(isset($curr)&&$curr=='create')/ <a href="opinion/create">发布新意见</a>@endif
                         @if(isset($curr)&&$curr=='edit')/ 修改意见@endif

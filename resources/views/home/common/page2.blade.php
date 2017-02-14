@@ -14,30 +14,30 @@
 </style>
 <div class="p_out">
     <a href="{{ $prefix_url }}">首页</a>
-    <a href="{{ $datas['pagelist']['previousPageUrl'] }}">上一页</a>
-    <a href="{{ $prefix_url }}?page={{ $datas['pagelist']['currentPage'] }}">{{ $datas['pagelist']['currentPage'] }}</a>
-    @if($datas['pagelist']['lastPage']>$datas['pagelist']['currentPage'])
-        @if(ceil($datas['pagelist']['total']/$datas['pagelist']['limit'])>$datas['pagelist']['currentPage'])
-            <a href="{{ $prefix_url }}?page={{ $datas['pagelist']['currentPage']+1 }}">{{ $datas['pagelist']['currentPage']+1 }}</a>
+    <a href="{{ $pagelist['previousPageUrl'] }}">上一页</a>
+    <a href="{{ $prefix_url }}?page={{ $pagelist['currentPage'] }}">{{ $pagelist['currentPage'] }}</a>
+    @if($pagelist['lastPage']>$pagelist['currentPage'])
+        @if(ceil($pagelist['total']/$pagelist['limit'])>$pagelist['currentPage'])
+            <a href="{{ $prefix_url }}?page={{ $pagelist['currentPage']+1 }}">{{ $pagelist['currentPage']+1 }}</a>
         @endif
-        @if(ceil($datas['pagelist']['total']/$datas['pagelist']['limit'])>$datas['pagelist']['currentPage']+1)
-            <a href="{{ $prefix_url }}?page={{ $datas['pagelist']['currentPage']+2 }}">{{ $datas['pagelist']['currentPage']+2 }}</a>
+        @if(ceil($pagelist['total']/$pagelist['limit'])>$pagelist['currentPage']+1)
+            <a href="{{ $prefix_url }}?page={{ $pagelist['currentPage']+2 }}">{{ $pagelist['currentPage']+2 }}</a>
         @endif
-        @if(ceil($datas['pagelist']['total']/$datas['pagelist']['limit'])>$datas['pagelist']['currentPage']+3)
-            <a href="{{ $prefix_url }}?page={{ $datas['pagelist']['currentPage']+3 }}">{{ $datas['pagelist']['currentPage']+3 }}</a>
+        @if(ceil($pagelist['total']/$pagelist['limit'])>$pagelist['currentPage']+3)
+            <a href="{{ $prefix_url }}?page={{ $pagelist['currentPage']+3 }}">{{ $pagelist['currentPage']+3 }}</a>
         @endif
     @endif
-    <a href="{{ $datas['pagelist']['nextPageUrl'] }}">下一页</a>
-    <a href="{{ $prefix_url }}/?page={{$datas['pagelist']['lastPage']}}">尾页</a>
+    <a href="{{ $pagelist['nextPageUrl'] }}">下一页</a>
+    <a href="{{ $prefix_url }}/?page={{$pagelist['lastPage']}}">尾页</a>
 
     &nbsp;&nbsp;&nbsp;&nbsp;
     跳到
-    <input type="text" name="page" value="{{ $datas['pagelist']['currentPage'] }}">
-    <input type="hidden" name="last_page" value="{{ $datas['pagelist']['lastPage'] }}">
+    <input type="text" name="page" value="{{ $pagelist['currentPage'] }}">
+    <input type="hidden" name="last_page" value="{{ $pagelist['lastPage'] }}">
     <input type="hidden" name="prefix_url" value="{{ $prefix_url }}">
     <a onclick="getPage()">确定</a>
 
-    <p>每页 {{ $datas['pagelist']['limit'] }} 条记录，共 {{ $datas['pagelist']['lastPage'] }} 页，共 {{ $datas['pagelist']['total'] }} 条有效记录，当前是第 {{ $datas['pagelist']['currentPage'] }} 页</p>
+    <p>每页 {{ $pagelist['limit'] }} 条记录，共 {{ $pagelist['lastPage'] }} 页，共 {{ $pagelist['total'] }} 条有效记录，当前是第 {{ $pagelist['currentPage'] }} 页</p>
 </div>
 
 <script>

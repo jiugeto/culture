@@ -12,7 +12,7 @@ class ApiOrderPro
     /**
      * 列表
      */
-    public static function index($limit=0,$pageCurr=1,$uid=0,$cate=0,$isshow=0,$status=0)
+    public static function index($limit,$pageCurr=1,$uid=0,$cate=0,$isshow=2,$status=0)
     {
         $redisKey = 'orderProList';
         //判断缓存有没有该数据
@@ -38,7 +38,6 @@ class ApiOrderPro
         return array(
             'code' => 0,
             'data' => ApiBase::objToArr($response->data),
-            'model' => ApiBase::objToArr($response->model),
         );
     }
 
@@ -66,7 +65,6 @@ class ApiOrderPro
         }
         return array(
             'code' => 0,
-            'model' => ApiBase::objToArr($response->model),
             'data' => ApiBase::objToArr($response->data),
         );
     }
@@ -120,7 +118,6 @@ class ApiOrderPro
         }
         return array(
             'code' => 0,
-            'model' => ApiBase::objToArr($response->model),
             'data' => ApiBase::objToArr($response->data),
             );
     }
@@ -194,7 +191,10 @@ class ApiOrderPro
         if ($response->error->code != 0) {
             return array('code' => -1, 'msg' => $response->error->msg);
         }
-        return array('code' => 0, 'model' => ApiBase::objToArr($response->model));
+        return array(
+            'code' => 0,
+            'model' => ApiBase::objToArr($response->model),
+            );
     }
 
     public static function clearTable($uname)

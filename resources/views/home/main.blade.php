@@ -35,6 +35,6 @@
 
     @include('layout.footer')
 
-    @include('layout.qqchat')
+    {{--@include('layout.qqchat')--}}
 </body>
 </html>

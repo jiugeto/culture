@@ -7,21 +7,22 @@
         {{--<div class="head_left">欢迎来逛逛</div>--}}
         <div class="head_left">
             @if(Session::has('user.username'))
-                <a href="/member">{{ Session::get('user.username') }}</a>
-                <a href="/member" target="_blank">会员中心</a>
-                <a href="/login/dologout">退出</a>
+                <a href="{{DOMAIN}}member">{{ Session::get('user.username') }}</a>
+                <a href="{{DOMAIN}}member" target="_blank">会员中心</a>
+                <a href="{{DOMAIN}}login/dologout">退出</a>
             @else
-                <a href="/regist">免费注册</a>
-                <a href="/login">登录</a>
+                <a href="{{DOMAIN}}regist">免费注册</a>
+                <a href="{{DOMAIN}}login">登录</a>
             @endif
         </div>
       </span>
       <span class="header_right">
         <div class="head_right">
             {{--<a href="/online">在线创作</a>--}}
+            <a href="{{env('TALK_DOMAIN')}}" target="_blank">话题论坛</a>
             <a href="{{env('ONLINE_DOMAIN')}}" target="_blank">在线创作</a>
         </div>
-        <div class="head_right"><a href="/newuser">新手点这里</a></div>
+        <div class="head_right"><a href="{{DOMAIN}}newuser">新手点这里</a></div>
         {{--<div class="head_right">--}}
             {{--<a href="javascript:void(0);" onclick="show_Favorite(window.location,document.title);">加入收藏</a>--}}
             {{--<a href="javascript:void(0);"onclick="show_index(window.location);">设为首页</a>--}}

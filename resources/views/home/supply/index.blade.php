@@ -5,10 +5,10 @@
         {{-- 搜索 --}}
         <div class="cre_kong">&nbsp;{{--10px高度留空--}}</div>
         <div class="s_search">
-            公司类型：
+            类型：
             <select name="genre" class="home_search">
                 <option value="0" {{ $genre==0 ? 'selected' : '' }}>所有</option>
-                @foreach($genres as $kgenre=>$vgenre)
+                @foreach($model['genres'] as $kgenre=>$vgenre)
                     <option value="{{ $kgenre }}" {{ $genre==$kgenre ? 'selected' : '' }}>{{ $vgenre }}</option>
                 @endforeach
             </select>
@@ -29,9 +29,8 @@
         {{-- 列表 --}}
         <div class="cre_kong">&nbsp;{{--10px高度留空--}}</div>
         <div class="s_list">
-            @if(count($datas)>2)
-                @foreach($datas as $kdata=>$data)
-                    @if(is_numeric($kdata))
+            @if(count($datas))
+                @foreach($datas as $data)
             <table class="record">
                 <tr>
                     <td>公司名称：{{ str_limit($data['name'],20) }}</td>
@@ -39,13 +38,13 @@
                     <td>地址：{{ str_limit($data['address'],20) }}</td>
                 </tr>
                 <tr>
-                    <td>地区：{{ $model->getAreaName($data['area']) }}</td>
+                    {{--<td>地区：{{ $data['area'] }}</td>--}}
+                    <td>地区：{{ AreaNameByid($data['area'],2) }}</td>
                     <td>时间：{{ $data['createTime'] }}</td>
                     {{--<td><a href="{{DOMAIN}}supply/{{ $data->id }}" class="toshow">详情</a></td>--}}
                     <td><a href="{{DOMAIN}}c/{{ $data['id'] }}" class="toshow">主页</a></td>
                 </tr>
             </table>
-                    @endif
                 @endforeach
             @endif
             @include('home.common.page2')
@@ -53,15 +52,15 @@
         <div class="s_right">
             @if(count($ads))
                 @foreach($ads as $ad)
-            <a href="{{ $ad->link }}">
-                <div class="img" title="{{ $ad->name }}">
-                    <img src="{{ $ad->img }}">
+            <a href="{{ $ad['link'] }}">
+                <div class="img" title="{{ $ad['name'] }}">
+                    <img src="{{ $ad['img'] }}">
                 </div>
             </a>
                 @endforeach
             @endif
-            @if(count($ads)<$ads->limit)
-                @for($i=0;$i<$ads->limit-Count($ads);++$i)
+            @if(count($ads)<2)
+                @for($i=0;$i<2-Count($ads);++$i)
                 <div class="img"></div>
                 @endfor
             @endif

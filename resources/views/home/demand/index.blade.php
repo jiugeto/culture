@@ -5,8 +5,6 @@
         {{-- 搜索 --}}
         <div class="cre_kong">&nbsp;{{--10px高度留空--}}</div>
         <div class="s_search">
-            {{--需求类别：个人/企业--}}
-            {{--&nbsp;&nbsp;&nbsp;&nbsp;--}}
             需求类型：
             <select name="genre" class="home_search">
                 @foreach($genres as $kgenre=>$vgenre)
@@ -21,7 +19,7 @@
             <script>
                 $(document).ready(function(){
                     $("select[name='genre']").change(function(){
-                        if ($(this).val()==1) {
+                        if ($(this).val()==2) {
                             window.location.href = '{{DOMAIN}}demand';
                         } else {
                             window.location.href = '{{DOMAIN}}demand/s/'+$(this).val();
@@ -34,36 +32,41 @@
         {{-- 列表 --}}
         <div class="cre_kong">&nbsp;{{--10px高度留空--}}</div>
         <div class="s_list">
+            @if(count($datas))
+                @foreach($datas as $data)
             <table class="record">
-                @if(count($datas))
-                    @foreach($datas as $data)
                 <tr>
-                    <td>需求名称：{{ $data->name }}</td>
-                    <td>需求方：{{ Session::has('user') ? $data->userName() : '登录可见' }}</td>
-                    <td>地区：{{ Session::has('user') ? $data->areaName() : '登录可见' }}</td>
+                    <td>需求名称：{{ $data['name'] }}</td>
+                    <td>需求方：{{ Session::has('user') ? $data['uname'] : '登录可见' }}</td>
+                    <td>地区：{{ Session::has('user') ? AreaNameByid($data['area']) : '登录可见' }}</td>
                 </tr>
                 <tr>
-                    <td>需求类型：</td>
-                    <td>时间：</td>
-                    <td><a href="{{DOMAIN}}demand/{{ $data->id }}" class="toshow">详情</a></td>
+                    <td>需求类型：
+                        @if($genre==1)视频@elseif($genre==2)创意@elseif($genre==3)分镜@elseif($genre==4)人员
+                        @elseif($genre==4)设备@else设计@endif
+                    </td>
+                    <td>时间：{{$data['createTime']}}</td>
+                    <td><a href="{{DOMAIN}}demand/{{ $data['id'] }}" class="toshow">详情</a></td>
                 </tr>
-                    @endforeach
-                @else @include('home.common.norecord')
-                @endif
             </table>
+                @endforeach
+            @else
+                <p style="text-align:center;color:grey;">
+                    没有@if($genre==1)视频@elseif($genre==2)创意@elseif($genre==3)分镜@elseif($genre==4)人员@elseif($genre==4)设备@else设计@endif记录</p>
+            @endif
         </div>
-        <div class="s_right">
+        <div class="s_right" style="margin-top:-15px;">
             @if(count($ads))
                 @foreach($ads as $ad)
-                    <a href="{{ $ad->link }}">
-                        <div class="img" title="{{ $ad->name }}">
-                            <img src="{{ $ad->getPicUrl() }}">
+                    <a href="{{ $ad['link'] }}">
+                        <div class="img" title="{{ $ad['name'] }}">
+                            <img src="{{ $ad['img'] }}">
                         </div>
                     </a>
                 @endforeach
             @endif
-            @if(count($ads)<$ads->limit)
-                @for($i=0;$i<$ads->limit-Count($ads);++$i)
+            @if(count($ads)<2)
+                @for($i=0;$i<2-count($ads);++$i)
                     <div class="img"></div>
                 @endfor
             @endif

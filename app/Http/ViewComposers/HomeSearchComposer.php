@@ -14,8 +14,8 @@ class HomeSearchComposer
     public function compose(View $view)
     {
         $view->with('searchs', array(
-            'genres'=>$this::getSearchGenres(),
-            'hotwords'=>$this->getSearchKeyWords()
+//            'genres'    =>  $this::getSearchGenres(),
+//            'hotwords'  =>  $this->getSearchKeyWords()
         ));
     }
 

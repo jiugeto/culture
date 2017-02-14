@@ -17,9 +17,8 @@
                 <b>{{!$isOrder?'在线片源':'用户成品'}}</b>
             </div>
             <div class="source">
-                @if(count($datas)>1)
+                @if(count($datas))
                     @foreach($datas as $kdata=>$data)
-                        @if(is_numeric($kdata))
                 <a href="javascript:void(0);" title="点击查看">
                     <div class="cre_con">
                         <div class="img">
@@ -34,11 +33,10 @@
                         <input type="hidden" name="link{{$data['id']}}" value="{{$data['link']}}">
                     </div>
                 </a>
-                        @endif
                     @endforeach
                 @endif
-                @if(!$isOrder && count($datas)-1<$datas['pagelist']['limit'])
-                    @for($i=0;$i<$datas['pagelist']['limit']+1-count($datas);++$i)
+                @if(!$isOrder && count($datas)<$pagelist['limit'])
+                    @for($i=0;$i<$pagelist['limit']-count($datas);++$i)
                 <div class="cre_con">
                     <div class="img">+</div>
                     <div class="text">待添加</div>

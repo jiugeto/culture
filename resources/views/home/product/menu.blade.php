@@ -2,30 +2,34 @@
 
 
 {{-- 产品广告位 --}}
+@if($ptype==1)
 <div class="pro_ad">
     <div class="pro_ad_pic">
-        {{--<img src="{{PUB}}uploads/images/2016/ppt.png">--}}
         @if(count($ppts))
             @foreach($ppts as $ppt)
-                <a href="{{ $ppt->link }}" title="{{ $ppt->name }}" id="ppt_{{$ppt->id}}">
-                    <img src="{{ $ppt->img }}">
+                <a href="{{ $ppt['link'] }}" title="{{ $ppt['name'] }}" id="ppt_{{$ppt['id']}}">
+                    <img src="{{ $ppt['img'] }}">
                 </a>
             @endforeach
+        @endif
+        @if(count($ppts)<9)
+            <a href="javascript:;" title="待添加">
+                <div style="width:100%;height:100%;background:gainsboro;color:grey;text-align:center;line-height:200px;">待添加</div>
+            </a>
         @endif
     </div>
     <div class="pro_ad_change">
         <div class="ppt_change_bg"></div>
         <ul class="ppt_change_pic">
-            {{--<li><img src="{{PUB}}uploads/images/2016/ppt.png"></li>--}}
             @if(count($ppts))
                 @foreach($ppts as $kppt=>$ppt)
-                    <li class="{{$kppt==0?'curr':''}}" onmouseover="over({{$ppt->id}})">
-                        <img src="{{$ppt->img}}">
+                    <li class="{{$kppt==0?'curr':''}}" onmouseover="over({{$ppt['id']}})">
+                        <img src="{{$ppt['img']}}">
                     </li>
                 @endforeach
             @endif
-            @if(count($ppts))
-                @for($i=0;$i<$ppts->limit-count($ppts);++$i)
+            @if(count($ppts)<9)
+                @for($i=0;$i<9-count($ppts);++$i)
                     <li>+</li>
                 @endfor
             @endif
@@ -38,6 +42,7 @@
         $(".pro_ad_pic > a").hide(); $("#ppt_"+pptid).show();
     }
 </script>
+@endif
 
 {{--插入选择--}}
 <div class="cre_kong">&nbsp;</div>

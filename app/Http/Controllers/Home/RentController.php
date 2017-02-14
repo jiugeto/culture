@@ -1,7 +1,8 @@
 <?php
 namespace App\Http\Controllers\Home;
 
-use App\Models\RentModel;
+use App\Api\ApiBusiness\ApiAd;
+use App\Api\ApiBusiness\ApiRent;
 
 class RentController extends BaseController
 {
@@ -14,7 +15,6 @@ class RentController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->model = new RentModel();
     }
 
     public function index($type=0,$fromMoney=0,$toMoney=0)
@@ -23,15 +23,20 @@ class RentController extends BaseController
         if (!is_numeric($fromMoney) || !is_numeric($toMoney)) {
             echo "<script>alert('租金格式错误！');history.go(-1);</script>";exit;
         }
+        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $prefix_url = DOMAIN.'rent';
+        $datas = $this->query($pageCurr,$type,$fromMoney,$toMoney);
+        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query($type,$fromMoney,$toMoney),
-            'model'=> $this->model,
-            'ads'=> $this->ads(),
-            'lists'=> $this->list,
-            'curr_menu'=> $this->curr,
-            'type'=> $type,
-            'fromMoney'=> $fromMoney,
-            'toMoney'=> $toMoney,
+            'datas' => $datas,
+            'pagelist' => $pagelist,
+            'model' => $this->getModel(),
+            'ads' => $this->ads(),
+            'lists' => $this->list,
+            'curr_menu' => $this->curr,
+            'type' => $type,
+            'fromMoney' => $fromMoney,
+            'toMoney' => $toMoney,
         ];
         return view('home.rent.index', $result);
     }
@@ -40,13 +45,16 @@ class RentController extends BaseController
     {
         $submenu['url'] = 'show';
         $submenu['name'] = '详情';
-        $data = RentModel::find($id);
+        $apiRent = ApiRent::show($id);
+        if ($apiRent['code']!=0) {
+            echo "<script>alert('".$apiRent['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
             'lists'=> $this->list,
-            'data'=> $data,
+            'data'=> $apiRent['data'],
             'curr_menu'=> $this->curr,
             'curr_submenu'=> $submenu,
-            'uid'=> $data->uid,
+            'uid'=> $apiRent['data']['uid'],
         ];
         return view('home.rent.show', $result);
     }
@@ -54,43 +62,25 @@ class RentController extends BaseController
 
 
 
-    public function query($type,$fromMoney,$toMoney)
+    public function query($pageCurr,$type,$fromMoney,$toMoney)
     {
-        if ($type) {
-            $datas = RentModel::where('genre',1)
-                ->where('del',0)
-                ->where('type',$type)
-                ->where('money','>',$fromMoney)
-                ->where('money','<',$toMoney)
-                ->orderBy('sort','desc')
-                ->orderBy('id','desc')
-                ->paginate($this->limit);
-        } else {
-            $datas = RentModel::where('genre',1)
-                ->where('del',0)
-                ->where('money','>',$fromMoney)
-                ->where('money','<',$toMoney)
-                ->orderBy('sort','desc')
-                ->orderBy('id','desc')
-                ->paginate($this->limit);
-        }
-        $datas->limit = $this->limit;
-        return $datas;
+        $apiRent = ApiRent::getRentsByMoney($this->limit,$pageCurr,$type,$fromMoney,$toMoney);
+        return $apiRent['code']==0 ? $apiRent['data'] : [];
     }
 
     public function ads()
     {
-        //adplace_id==4，前台租赁页面右侧
-        $limit = 3;
-        $ads = \App\Models\Base\AdModel::where('uid',0)
-            ->where('adplace_id',4)
-            ->where('isuse',1)
-            ->where('isshow',1)
-            ->where('fromTime','<',time())
-            ->where('toTime','>',time())
-            ->orderBy('sort','desc')
-            ->paginate($limit);
-        $ads->limit = $limit;
-        return $ads;
+        //adplace_id==4，前台租赁页面右侧，limit==3
+        $apiAd = ApiAd::index(3,1,0,3,0,0,1,2);
+        return $apiAd['code']==0 ? $apiAd['data'] : [];
+    }
+
+    /**
+     * 获取 model
+     */
+    public function getModel()
+    {
+        $apiCompany = ApiRent::getModel();
+        return $apiCompany['code']==0 ? $apiCompany['model'] : [];
     }
 }

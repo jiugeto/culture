@@ -19,6 +19,7 @@
 .de_list .record {}
 .de_list .img {
     width:250px;height:100px;
+    background:#f7f7f7;
     overflow:hidden;
 }
 .de_list td.text1,.de_list td.text2,.de_list td.text3 {
@@ -44,7 +45,7 @@
 
 
 /*=== 右侧 ===*/
-.de_right { margin-top:-35px;width:280px; }
+.de_right { width:280px; }
 .de_right .cate {
     width:260px;height:300px;
     border:1px solid rgb(240,240,240);

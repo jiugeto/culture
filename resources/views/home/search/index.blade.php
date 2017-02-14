@@ -52,6 +52,6 @@
                 @endfor
             @endif
         </div>
-        @include('home.common.page')
+        @include('home.common.#page')
     </div>
 @stop

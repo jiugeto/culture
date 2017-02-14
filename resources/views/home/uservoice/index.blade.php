@@ -34,7 +34,6 @@
             </table>
             @endif
 
-            {{--@include('home.common.page')--}}
             @include('home.common.page2')
         </div>
     </div>

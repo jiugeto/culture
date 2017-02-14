@@ -1,10 +1,8 @@
 <?php
 namespace App\Http\ViewComposers;
 
+use App\Api\ApiBusiness\ApiLink;
 use Illuminate\Contracts\View\View;
-use App\Models\LinkModel;
-use App\Tools;
-//use Illuminate\Support\Facades\DB;
 
 class NavigateComposer
 {
@@ -19,6 +17,7 @@ class NavigateComposer
 
     public static function getNavigates()
     {
-        return Tools::getChild(LinkModel::navigates(),$pid=0);
+        $apiLink = ApiLink::navigate(10,0,2);
+        return $apiLink['code']==0 ? $apiLink['data'] : [];
     }
 }

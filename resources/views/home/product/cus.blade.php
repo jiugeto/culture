@@ -2,14 +2,13 @@
 @section('content')
     <script src="{{PUB}}assets/js/jquery-1.10.2.min.js"></script>
     @include('home.common.crumb')
-    <div style="height:2px;">{{--空白--}}</div>
     <div class="pro_content">
         @include('home.product.menu')
 
         <div class="pro_floor">
             <div class="title">
                 定做的片源
-                <a onclick="addProCus();" style="color:orangered;float:right;cursor:pointer;">添加新片源</a>
+                <a title="点击去添加新的片源需求" onclick="addProCus();" style="color:orangered;float:right;cursor:pointer;">添加片源需求</a>
             </div>
             <div class="cre_source" style="padding:0;">
                 <table class="goodCus">
@@ -18,7 +17,7 @@
                         <td width="200">描述</td>
                         <td>需求方</td>
                         <td>预算</td>
-                        <td>提供数</td>
+                        {{--<td>竞价企业</td>--}}
                         <td>供应方</td>
                         <td>发布时间</td>
                         <td width="100">操作</td>
@@ -33,7 +32,7 @@
                             </td>
                             <td>{{ $data->getUName() }}</td>
                             <td>{{ $data->getMoney1() }}</td>
-                            <td>{{ count($data->getGoodCustoms(10)) }}</td>
+                            {{--<td>{{ count($data->getGoodCustoms(10)) }}</td>--}}
                             <td>{{ $data->getSupplyName() }}</td>
                             <td>{{ date('Y年m月d日',$data->created_at) }}</td>
                             <td>
@@ -44,11 +43,12 @@
                             </td>
                         </tr>
                     @endforeach
+                @else <tr><td colspan="10">没有记录</td></tr>
                 @endif
                 </table>
             </div>
             <br>
-            @include('home.common.page')
+            @include('home.common.page2')
         </div>
         <br style="clear:both;"><br>
     </div>
@@ -59,7 +59,7 @@
         <div class="mask"></div>
         <div class="con">
             <p class="tk_intro"></p>
-            <a onclick="$('.tankuang').hide(200);">X</a>
+            <a title="关闭" onclick="$('.tankuang').hide(200);">X</a>
         </div>
     </div>
     <div class="tankuang" id="addProCus">
@@ -77,9 +77,9 @@
                 <p>价格预算：<br>
                     <input type="text" placeholder="片源预算，单位元" pattern="^\d+$" name="money">
                 </p>
-                <button type="submit" class="homebtn" style="margin:20px 150px;">立即申请</button>
+                <button type="submit" class="homebtn">立即申请</button>
             </form>
-            <a onclick="$('.tankuang').hide(200);">X</a>
+            <a title="关闭" onclick="$('.tankuang').hide(200);">X</a>
         </div>
     </div>
     <div class="tankuang" id="addCus">
@@ -101,9 +101,9 @@
                 <p>制作周期(单位天)：<br>
                     <input type="text" pattern="^[1-9]|([1-9]\d+)$" required name="time">
                 </p>
-                <button type="submit" class="homebtn" style="margin:20px 150px;">立即申请</button>
+                <button type="submit" class="homebtn">立即申请</button>
             </form>
-            <a onclick="$('.tankuang').hide(200);">X</a>
+            <a title="关闭" onclick="$('.tankuang').hide(200);">X</a>
         </div>
     </div>
 

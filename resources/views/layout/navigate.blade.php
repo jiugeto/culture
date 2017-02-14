@@ -13,13 +13,13 @@
         <div class="nav_qh">
             <div class="nav_hide" style="display:none;">
                 @foreach($navigates as $navigate)
-                    <a href="{{ $navigate->link }}" class="@if(isset($curr_menu) && $curr_menu==ltrim($navigate->link,'/')) curr @else nav_a @endif" title="{{ $navigate->title }}">{{ $navigate->name }}</a>
+                    <a href="{{ $navigate['link'] }}" class="@if(isset($curr_menu) && $curr_menu==ltrim($navigate['link'],'/')) curr @else nav_a @endif" title="{{ $navigate['title'] }}">{{ $navigate['name'] }}</a>
                 @endforeach
             </div>
         </div>
 
         <div class="search">
-            <input type="text" class="search_input" style="height:{{explode('/',$_SERVER['REQUEST_URI'])[1]=='member'?42:40}}px;" name="global_search" placeholder="找啥呢？来试试" value="{{ isset($keyword) ? $keyword : '' }}">
+            <input type="text" class="search_input" style="height:{{explode('/',$_SERVER['REQUEST_URI'])[1]=='member'?42:40}}px;" name="global_search" placeholder="{{--找啥呢？来试试--}}暂不可用" value="{{ isset($keyword) ? $keyword : '' }}">
             <input type="hidden" name="global_search_genre" value="{{isset($searchGenre)?$searchGenre:1}}">
             <input type="submit" class="search_text" value="搜 索" onclick="getSearch()">
             <div class="search_sel" style="top:{{explode('/',$_SERVER['REQUEST_URI'])[1]=='member'?10:5}}px;">
@@ -32,24 +32,24 @@
                         <span class="curr_sel_text">{{isset($searchGenre)?$searchs['genres'][$searchGenre]:'创作'}}</span>
                         <img src="{{PUB}}assets-home/images/sel_down.png">
                     </div>
-                    @if(count($searchs['genres']))
-                        @foreach($searchs['genres'] as $ks=>$vsearch)
-                            <div class="sel_one" style="padding:4px 8px" onclick="getSearchGenre({{$ks}})">
-                                {{ $vsearch }}
-                                <input type="hidden" name="searchGenreName_{{$ks}}" value="{{ $vsearch }}">
-                            </div>
-                        @endforeach
-                    @endif
+                    {{--@if(count($searchs['genres']))--}}
+                        {{--@foreach($searchs['genres'] as $ks=>$vsearch)--}}
+                            {{--<div class="sel_one" style="padding:4px 8px" onclick="getSearchGenre({{$ks}})">--}}
+                                {{--{{ $vsearch }}--}}
+                                {{--<input type="hidden" name="searchGenreName_{{$ks}}" value="{{ $vsearch }}">--}}
+                            {{--</div>--}}
+                        {{--@endforeach--}}
+                    {{--@endif--}}
                 </div>
             </div>
         </div>
-        <div class="keyword_pos">热门词汇：
-            @if(count($searchs['hotwords'])&&$hotwords=$searchs['hotwords'])
-                @foreach($hotwords as $hotword)
-                    <a onclick="getKeyword({{$hotword->id}})" title="{{$hotword->keyword}}">
-                        {{ str_limit($hotword->keyword,5) }}</a> &nbsp;
-                @endforeach
-            @endif
+        <div class="keyword_pos">热门词汇：暂不可用
+            {{--@if(count($searchs['hotwords'])&&$hotwords=$searchs['hotwords'])--}}
+                {{--@foreach($hotwords as $hotword)--}}
+                    {{--<a onclick="getKeyword({{$hotword->id}})" title="{{$hotword->keyword}}">--}}
+                        {{--{{ str_limit($hotword->keyword,5) }}</a> &nbsp;--}}
+                {{--@endforeach--}}
+            {{--@endif--}}
         </div>
         <script>
             //关于搜索
@@ -58,16 +58,16 @@
                 $(".curr_sel_text").html(searchGenreName);
                 $("input[name='global_search_genre']")[0].value = key;
             }
-            function getSearch(){
-                var globalSearchGenre = $("input[name='global_search_genre']").val();
-                var keyword = $("input[name='global_search']").val();
-                if (keyword=='') {
-                    alert('没有填写关键字，将跳转到首页！');
-                    window.location.href = '{{DOMAIN}}';
-                } else {
-                    window.location.href = '{{DOMAIN}}s/'+globalSearchGenre+'/'+keyword;
-                }
-            }
+            {{--function getSearch(){--}}
+                {{--var globalSearchGenre = $("input[name='global_search_genre']").val();--}}
+                {{--var keyword = $("input[name='global_search']").val();--}}
+                {{--if (keyword=='') {--}}
+                    {{--alert('没有填写关键字，将跳转到首页！');--}}
+                    {{--window.location.href = '{{DOMAIN}}';--}}
+                {{--} else {--}}
+                    {{--window.location.href = '{{DOMAIN}}s/'+globalSearchGenre+'/'+keyword;--}}
+                {{--}--}}
+            {{--}--}}
         </script>
 
         <span class="nav_right">
@@ -80,15 +80,13 @@
             {{--</div>--}}
             {{--&nbsp;&nbsp;<a href="/idea" style="color:red;">创意</a>--}}
             {{--&nbsp;&nbsp;<a href="/talk" style="color:red;">话题</a>--}}
-            &nbsp;&nbsp;<a href="{{env('TALK_DOMAIN')}}" target="_blank">话题论坛</a>
-            &nbsp;&nbsp;<a href="/opinion" style="padding:5px 20px;color:white;background:red;" id="opinion">用户建议</a>
+            {{--&nbsp;<a href="{{env('TALK_DOMAIN')}}" target="_blank">话题论坛</a>--}}
+            &nbsp;<a href="{{DOMAIN}}opinion" style="padding:5px 10px;color:white;background:red;" id="opinion">用户建议</a>
         </span>
         <div class="navigate">
             <div class="navigate_a" style="display:{{explode('/',$_SERVER['REQUEST_URI'])[1]?'none':'block'}};">
-                @foreach($navigates as $kn=>$navigate)
-                    @if($kn<10)
-                    <a href="{{ $navigate->link }}" class="@if(isset($curr_menu) && $curr_menu==ltrim($navigate->link,'/')) curr @else nav_a @endif" title="{{ $navigate->title }}">{{ $navigate->name }}</a>
-                    @endif
+                @foreach($navigates as $navigate)
+                    <a href="{{ $navigate['link'] }}" class="@if(isset($curr_menu) && $curr_menu==ltrim($navigate['link'],'/')) curr @else nav_a @endif" title="{{ $navigate['title'] }}">{{ $navigate['name'] }}</a>
                 @endforeach
             </div>
         </div>
