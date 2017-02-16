@@ -1,8 +1,8 @@
 <?php
 namespace App\Http\Controllers\Member;
 
+use App\Api\ApiBusiness\ApiIdea;
 use Illuminate\Http\Request;
-use App\Models\IdeasModel;
 
 class IdeaController extends BaseController
 {
@@ -16,41 +16,45 @@ class IdeaController extends BaseController
         $this->lists['func']['name'] = '创意管理';
         $this->lists['func']['url'] = 'idea';
         $this->lists['create']['name'] = '新的创意';
-        $this->model = new IdeasModel();
     }
 
-    public function index($cate_id=0)
+    public function index($cate=0)
     {
         $curr['name'] = $this->lists['']['name'];
         $curr['url'] = $this->lists['']['url'];
+        $pageCurr = isset($_POST['pageCurr']) ? $_POST['pageCurr'] : 1;
+        $prefix_url = DOMAIN.'member/idea';
+        $datas = $this->query($pageCurr,$cate);
+        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query($del=0,$cate_id),
-            'prefix_url'=> DOMAIN.'member/idea',
-            'lists'=> $this->lists,
-            'curr'=> $curr,
+            'datas' => $datas,
+            'pagelist' => $pagelist,
+            'prefix_url' => $prefix_url,
+            'lists' => $this->lists,
+            'curr' => $curr,
         ];
         return view('member.idea.index', $result);
     }
 
-    public function trash($cate_id=0)
-    {
-        $curr['name'] = $this->lists['trash']['name'];
-        $curr['url'] = $this->lists['trash']['url'];
-        $result = [
-            'datas'=> $this->query($del=1,$cate_id),
-            'prefix_url'=> DOMAIN.'member/idea/trash',
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-        ];
-        return view('member.idea.index', $result);
-    }
+//    public function trash($cate_id=0)
+//    {
+//        $curr['name'] = $this->lists['trash']['name'];
+//        $curr['url'] = $this->lists['trash']['url'];
+//        $result = [
+//            'datas'=> $this->query($del=1,$cate_id),
+//            'prefix_url'=> DOMAIN.'member/idea/trash',
+//            'lists'=> $this->lists,
+//            'curr'=> $curr,
+//        ];
+//        return view('member.idea.index', $result);
+//    }
 
     public function create()
     {
         $curr['name'] = $this->lists['create']['name'];
         $curr['url'] = $this->lists['create']['url'];
         $result = [
-            'model'=> $this->model,
+            'model'=> $this->getModel(),
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -60,13 +64,13 @@ class IdeaController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
-        $data['created_at'] = time();
-        IdeasModel::create($data);
-
-        //插入搜索表
-        $ideaModel = IdeasModel::where($data)->first();
-        \App\Models\Home\SearchModel::change($ideaModel,3,'create');
-
+        $apiIdea = ApiIdea::add($data);
+        if ($apiIdea['code']!=0) {
+            echo "<script>alert('".$apiIdea['msg']."');history.go(-1);</script>";exit;
+        }
+//        //插入搜索表
+//        $ideaModel = IdeasModel::where($data)->first();
+//        \App\Models\Home\SearchModel::change($ideaModel,3,'create');
 //        //将自己加入查看权限表
 //        $ideaModel = IdeasModel::where($data)->first();
 //        IdeasShowModel::create(['ideaid'=>$ideaModel->id,'uid'=>$this->userid,'created_at'=>date('Y-m-d H:i:s',time())]);
@@ -77,9 +81,13 @@ class IdeaController extends BaseController
     {
         $curr['name'] = $this->lists['edit']['name'];
         $curr['url'] = $this->lists['edit']['url'];
+        $apiIdea = ApiIdea::show($id);
+        if ($apiIdea['code']!=0) {
+            echo "<script>alert('".$apiIdea['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> IdeasModel::find($id),
-            'model'=> $this->model,
+            'data'=> $apiIdea['data'],
+            'model'=> $this->getModel(),
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -89,13 +97,14 @@ class IdeaController extends BaseController
     public function update(Request $request,$id)
     {
         $data = $this->getData($request);
-        $data['updated_at'] = time();
-        IdeasModel::where('id',$id)->update($data);
-
-        //更新搜索表
-        $ideaModel = IdeasModel::where('id',$id)->first();
-        \App\Models\Home\SearchModel::change($ideaModel,3,'update');
-
+        $data['id'] = $id;
+        $apiIdea = ApiIdea::modify($data);
+        if ($apiIdea['code']!=0) {
+            echo "<script>alert('".$apiIdea['msg']."');history.go(-1);</script>";exit;
+        }
+//        //更新搜索表
+//        $ideaModel = IdeasModel::where('id',$id)->first();
+//        \App\Models\Home\SearchModel::change($ideaModel,3,'update');
         return redirect(DOMAIN.'member/idea');
     }
 
@@ -103,52 +112,49 @@ class IdeaController extends BaseController
     {
         $curr['name'] = $this->lists['show']['name'];
         $curr['url'] = $this->lists['show']['url'];
+        $apiIdea = ApiIdea::show($id);
+        if ($apiIdea['code']!=0) {
+            echo "<script>alert('".$apiIdea['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> IdeasModel::find($id),
+            'data'=> $apiIdea['data'],
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
         return view('member.idea.show', $result);
     }
 
-    public function destroy($id)
-    {
-        IdeasModel::where('id',$id)->update(['del'=> 1]);
-        return redirect(DOMAIN.'member/idea');
-    }
-
-    public function restore($id)
-    {
-        IdeasModel::where('id',$id)->update(['del'=> 0]);
-        return redirect(DOMAIN.'member/idea/trash');
-    }
-
-    public function forceDelete($id)
-    {
-        IdeasModel::where('id',$id)->delete();
-        return redirect(DOMAIN.'member/idea/trash');
-    }
-
-    /**
-     * 权限列表
-     */
-    public function ideaShow($id)
-    {
-        $curr['name'] = '用户列表';
-        $curr['url'] = $this->lists['show']['url'];
-        $result = [
-//            'users'=> IdeasShowModel::where('ideaid',$id)->get(),
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-        ];
-        return view('member.idea.userList', $result);
-    }
+//    public function destroy($id)
+//    {
+//        IdeasModel::where('id',$id)->update(['del'=> 1]);
+//        return redirect(DOMAIN.'member/idea');
+//    }
+//
+//    public function restore($id)
+//    {
+//        IdeasModel::where('id',$id)->update(['del'=> 0]);
+//        return redirect(DOMAIN.'member/idea/trash');
+//    }
+//
+//    public function forceDelete($id)
+//    {
+//        IdeasModel::where('id',$id)->delete();
+//        return redirect(DOMAIN.'member/idea/trash');
+//    }
 
 //    /**
-//     * 设置创意权限
+//     * 权限列表
 //     */
-//    public function setIdeaShow($id)
+//    public function ideaShow($id)
 //    {
+//        $curr['name'] = '用户列表';
+//        $curr['url'] = $this->lists['show']['url'];
+//        $result = [
+////            'users'=> IdeasShowModel::where('ideaid',$id)->get(),
+//            'lists'=> $this->lists,
+//            'curr'=> $curr,
+//        ];
+//        return view('member.idea.userList', $result);
 //    }
 
 
@@ -160,36 +166,36 @@ class IdeaController extends BaseController
      */
     public function getData(Request $request)
     {
-        if (!$request->intro2) {
+        if (!$request->intro) {
             echo "<script>alert('内容简介不能为空！');history.go(-1);</script>";exit;
         }
-        if (!$request->intro) {
+        if (!$request->detail) {
             echo "<script>alert('内容不能为空！');history.go(-1);</script>";exit;
         }
         $data = [
             'name'=> $request->name,
-            'cate_id'=> $request->cate_id,
-            'intro'=> $request->intro2,
-            'iscon'=> $request->iscon,
-            'content'=> $request->intro,
-            'uid'=> \Session::get('user.uid'),
+            'genre'=> $request->genre,
+            'cate'=> $request->cate,
+            'intro'=> $request->intro,
+            'isdetail'=> $request->isdetail,
+            'detail'=> $request->detail,
+            'uid'=> $this->userid,
         ];
         return $data;
     }
 
-    public function query($del,$cate_id)
+    public function query($pageCurr,$cate)
     {
-        if ($cate_id) {
-            $datas = IdeasModel::where('del',$del)
-                ->where('cate_id',$cate_id)
-                ->orderBy('id','desc')
-                ->paginate($this->limit);
-        } else {
-            $datas = IdeasModel::where('del',$del)
-                ->orderBy('id','desc')
-                ->paginate($this->limit);
-        }
-        $datas->limit = $this->limit;
-        return $datas;
+        $apiIdea = ApiIdea::index($this->limit,$pageCurr,$this->userid,$cate,2,0);
+        return $apiIdea['code']==0 ? $apiIdea['data'] : [];
+    }
+
+    /**
+     * 获取 model
+     */
+    public function getModel()
+    {
+        $apiModel = ApiIdea::getModel();
+        return $apiModel['code']==0 ? $apiModel['model'] : [];
     }
 }

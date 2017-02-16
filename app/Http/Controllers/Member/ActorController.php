@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Member;
 
+use App\Api\ApiBusiness\ApiStaff;
 use Illuminate\Http\Request;
-use App\Models\StaffModel;
 
 class ActorController extends BaseController
 {
@@ -17,46 +17,49 @@ class ActorController extends BaseController
         $this->lists['func']['name'] = '艺人管理';
         $this->lists['func']['url'] = 'actor';
         $this->lists['create']['name'] = '添加艺人';
-        $this->model = new StaffModel();
     }
 
     public function index($genre=0)
     {
         $curr['name'] = $this->lists['']['name'];
         $curr['url'] = $this->lists['']['url'];
+        $pageCurr = isset($_POST['pageCurr']) ? $_POST['pageCurr'] : 1;
+        $prefix_url = DOMAIN.'member/idea';
+        $datas = $this->query($pageCurr,$genre);
+        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query($genre,0),
-            'model'=> $this->model,
-            'prefix_url'=> DOMAIN.'member/actor',
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-            'genre'=> 0,
+            'datas' => $this->query($pageCurr,$genre),
+            'pagelist' => $pagelist,
+            'model' => $this->getModel(),
+            'prefix_url' => DOMAIN.'member/actor',
+            'lists' => $this->lists,
+            'curr' => $curr,
+            'genre' => 0,
         ];
         return view('member.actor.index', $result);
     }
 
-    public function trash($genre=0)
-    {
-        $curr['name'] = $this->lists['trash']['name'];
-        $curr['url'] = $this->lists['trash']['url'];
-        $result = [
-            'datas'=> $this->query($genre,1),
-            'model'=> $this->model,
-            'prefix_url'=> DOMAIN.'member/actor/trash',
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-            'genre'=> 0,
-        ];
-        return view('member.actor.index', $result);
-    }
+//    public function trash($genre=0)
+//    {
+//        $curr['name'] = $this->lists['trash']['name'];
+//        $curr['url'] = $this->lists['trash']['url'];
+//        $result = [
+//            'datas'=> $this->query($genre,1),
+//            'model'=> $this->model,
+//            'prefix_url'=> DOMAIN.'member/actor/trash',
+//            'lists'=> $this->lists,
+//            'curr'=> $curr,
+//            'genre'=> 0,
+//        ];
+//        return view('member.actor.index', $result);
+//    }
 
     public function create()
     {
         $curr['name'] = $this->lists['create']['name'];
         $curr['url'] = $this->lists['create']['url'];
         $result = [
-            'model'=> $this->model,
-            'educations'=> $this->model['educations'],
+            'model'=> $this->getModel(),
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -66,13 +69,13 @@ class ActorController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
-        $data['created_at'] = time();
-        StaffModel::create($data);
-
-        //插入搜索表
-        $staffModel = StaffModel::where($data)->first();
-        \App\Models\Home\SearchModel::change($staffModel,7,'create');
-
+        $apiActor = ApiStaff::add($data);
+        if ($apiActor['code']!=0) {
+            echo "<script>alert('".$apiActor['msg']."');history.go(-1);</script>";exit;
+        }
+//        //插入搜索表
+//        $staffModel = StaffModel::where($data)->first();
+//        \App\Models\Home\SearchModel::change($staffModel,7,'create');
         return redirect(DOMAIN.'member/actor');
     }
 
@@ -80,10 +83,13 @@ class ActorController extends BaseController
     {
         $curr['name'] = $this->lists['edit']['name'];
         $curr['url'] = $this->lists['edit']['url'];
+        $apiActor = ApiStaff::show($id);
+        if ($apiActor['code']!=0) {
+            echo "<script>alert('".$apiActor['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> StaffModel::find($id),
-            'model'=> $this->model,
-            'educations'=> $this->model['educations'],
+            'data'=> $apiActor['data'],
+            'model'=> $this->getModel(),
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -93,13 +99,14 @@ class ActorController extends BaseController
     public function update(Request $request,$id)
     {
         $data = $this->getData($request);
-        $data['updated_at'] = time();
-        StaffModel::where('id',$id)->update($data);
-
-        //更新搜索表
-        $staffModel = StaffModel::where('id',$id)->first();
-        \App\Models\Home\SearchModel::change($staffModel,7,'update');
-
+        $data['id'] = $id;
+        $apiActor = ApiStaff::modify($data);
+        if ($apiActor['code']!=0) {
+            echo "<script>alert('".$apiActor['msg']."');history.go(-1);</script>";exit;
+        }
+//        //更新搜索表
+//        $staffModel = StaffModel::where('id',$id)->first();
+//        \App\Models\Home\SearchModel::change($staffModel,7,'update');
         return redirect(DOMAIN.'member/actor');
     }
 
@@ -107,32 +114,36 @@ class ActorController extends BaseController
     {
         $curr['name'] = $this->lists['show']['name'];
         $curr['url'] = $this->lists['show']['url'];
+        $apiActor = ApiStaff::show($id);
+        if ($apiActor['code']!=0) {
+            echo "<script>alert('".$apiActor['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> StaffModel::find($id),
-            'educations'=> $this->model['educations'],
+            'data'=> $apiActor['data'],
+            'model'=> $this->getModel(),
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
         return view('member.actor.show', $result);
     }
 
-    public function destroy($id)
-    {
-        StaffModel::where('id',$id)->update(['del'=> 1]);
-        return redirect(DOMAIN.'member/actor');
-    }
-
-    public function restore($id)
-    {
-        StaffModel::where('id',$id)->update(['del'=> 0]);
-        return redirect(DOMAIN.'member/actor/trash');
-    }
-
-    public function forceDelete($id)
-    {
-        StaffModel::where('id',$id)->delete();
-        return redirect(DOMAIN.'member/actor/trash');
-    }
+//    public function destroy($id)
+//    {
+//        StaffModel::where('id',$id)->update(['del'=> 1]);
+//        return redirect(DOMAIN.'member/actor');
+//    }
+//
+//    public function restore($id)
+//    {
+//        StaffModel::where('id',$id)->update(['del'=> 0]);
+//        return redirect(DOMAIN.'member/actor/trash');
+//    }
+//
+//    public function forceDelete($id)
+//    {
+//        StaffModel::where('id',$id)->delete();
+//        return redirect(DOMAIN.'member/actor/trash');
+//    }
 
 
 
@@ -145,36 +156,36 @@ class ActorController extends BaseController
     public function getData(Request $request)
     {
         if (!$request->hobby) { echo "<script>alert('请填写兴趣！');history.go(-1);</script>";exit; }
-        $entertain = [
-            'name'=> $request->name,
-            'sex'=> $request->sex,
-            'realname'=> $request->realname,
-            'origin'=> $request->origin,
-            'education'=> $request->education,
-            'school'=> $request->school,
-            'hobby'=> implode(',',$request->hobby),
-//            'job'=> $request->job,
-            'height'=> $request->height,
+        $data = [
+            'name'  => $request->name,
+            'sex'   => $request->sex,
+            'realname'  => $request->realname,
+            'origin'    => $request->origin,
+            'edu'       => $request->edu,
+            'school'    => $request->school,
+            'hobby'     => implode(',',$request->hobby),
+            'height'    => $request->height,
+            'type'      => 1,    //1代表演员
+            'uid'       => $this->userid,
         ];
-        return $entertain;
+        return $data;
     }
 
     /**
      * 查询方法
      */
-    public function query($genre,$del)
+    public function query($pageCurr,$genre)
     {
-        if ($genre) {
-            $datas =  StaffModel::where('del',$del)
-                ->where('genre',$genre)
-                ->orderBy('id','desc')
-                ->paginate($this->limit);
-        } else {
-            $datas =  StaffModel::where('del',$del)
-                ->orderBy('id','desc')
-                ->paginate($this->limit);
-        }
-        $datas->limit = $this->limit;
-        return $datas;
+        $apiActor = ApiStaff::index($this->limit,$pageCurr,$this->userid,$genre,0,2,0);
+        return $apiActor['code']==0 ? $apiActor['data'] : [];
+    }
+
+    /**
+     * 获取 model
+     */
+    public function getModel()
+    {
+        $apiModel = ApiStaff::getModel();
+        return $apiModel['code']==0 ? $apiModel['model'] : [];
     }
 }

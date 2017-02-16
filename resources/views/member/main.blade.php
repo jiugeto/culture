@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="{{PUB}}assets-home/css/home.css">
     <link rel="stylesheet" type="text/css" href="{{PUB}}assets-home/css/member.css">
     <link rel="stylesheet" type="text/css" href="{{PUB}}assets/css/video.css">
+    <link rel="stylesheet" type="text/css" href="{{PUB}}assets-home/css/creation.css">
     <script src="{{PUB}}assets/js/jquery-1.10.2.min.js"></script>
 </head>
 <body>

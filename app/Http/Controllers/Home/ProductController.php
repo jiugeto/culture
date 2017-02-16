@@ -208,7 +208,7 @@ class ProductController extends BaseController
      */
     public function query($ptype,$pageCurr)
     {
-        $apiGoods = ApiGoods::index($this->limit,$pageCurr,$ptype,0,2,0,0);
+        $apiGoods = ApiGoods::index($this->limit,$pageCurr,0,$ptype,0,0,2,0,0);
         return $apiGoods['code']==0 ? $apiGoods['data'] : [];
     }
 
@@ -217,7 +217,7 @@ class ProductController extends BaseController
      */
     public function queryR()
     {
-        $apiGoods = ApiGoods::index($this->limit,1,0,0,2,1,0);
+        $apiGoods = ApiGoods::index($this->limit,1,0,0,0,0,2,1,0);
         return $apiGoods['code']==0 ? $apiGoods['data'] : [];
     }
 
@@ -226,7 +226,7 @@ class ProductController extends BaseController
      */
     public function queryNew()
     {
-        $apiGoods = ApiGoods::index($this->limit,1,0,0,2,0,1);
+        $apiGoods = ApiGoods::index($this->limit,1,0,0,0,0,2,0,1);
         return $apiGoods['code']==0 ? $apiGoods['data'] : [];
     }
 
@@ -235,7 +235,7 @@ class ProductController extends BaseController
      */
     public function queryNewType($type)
     {
-        $apiGoods = ApiGoods::index($this->limit,1,$type,0,2,0,1);
+        $apiGoods = ApiGoods::index($this->limit,1,0,$type,0,0,2,0,1);
         return $apiGoods['code']==0 ? $apiGoods['data'] : [];
     }
 
@@ -244,7 +244,7 @@ class ProductController extends BaseController
      */
     public function getGoodsByCate($cate,$limit)
     {
-        $apiGoods = ApiGoods::getGoodsByCate($cate,$limit);
+        $apiGoods = ApiGoods::index($limit,1,0,0,$cate,0,2,0,0);
         return $apiGoods['code']==0 ? $apiGoods['data'] : [];
     }
 

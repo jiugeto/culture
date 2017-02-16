@@ -209,7 +209,7 @@ div:hover.search_sel .sel_more { display:block; }
     font-size:12px;
     color:grey;
     overflow:hidden;
-    position:relative;top:60px;left:-255px;
+    position:relative;top:65px;left:-255px;
 }
 .keyword_pos a { color:grey;cursor:pointer; }
 .keyword_pos a:hover { color:orangered; }

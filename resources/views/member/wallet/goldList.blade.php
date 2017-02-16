@@ -3,7 +3,7 @@
     {{--@include('member.common.crumb')--}}
     <div class="mem_crumb">
         <a href="{{DOMAIN}}member">会员后台</a> /
-        <a href="{{DOMAIN}}member/wallet">会员福利</a> / 金币列表
+        <a href="{{DOMAIN}}member/wallet">会员福利</a> / 金币记录
     </div>
     <div class="mem_tab">
         <ul>
@@ -13,8 +13,9 @@
     <div class="hr_tab"></div>
     <div class="list_kongbai">&nbsp;</div>
     <div class="list">
-        <table class="list_tab">
+        <table class="list_tab" style="text-align:center;">
             <tr>
+                <td>用户名</td>
                 <td>奖励类型</td>
                 <td>奖励个数</td>
                 <td>创建时间</td>
@@ -22,14 +23,15 @@
         @if(count($datas))
             @foreach($datas as $data)
             <tr>
-                <td>{{ $data->genreName() }}</td>
-                <td>{{ $data->gold }}</td>
-                <td>{{ $data->createTime() }}</td>
+                <td>{{UserNameById($data['uid'])}}</td>
+                <td>{{$data['genreName']}}</td>
+                <td>{{$data['gold']}}</td>
+                <td>{{$data['createTime']}}</td>
             </tr>
             @endforeach
-        @else @include('member.common.norecord')
+        @else <tr><td colspan="10" style="text-align:center;">没有记录</td></tr>
         @endif
         </table>
-        @include('member.common.page')
+        @include('member.common.page2')
     </div>
 @stop

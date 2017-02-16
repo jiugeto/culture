@@ -6,21 +6,21 @@
 
 
 <div>
-    每页 {{ $datas['pagelist']['limit'] }} 条记录，共 {{ $datas['pagelist']['lastPage'] }} 页，共 {{ $datas['pagelist']['total'] }} 条记录，当前是第 {{ $datas['pagelist']['currentPage'] }} 页
+    每页 {{ $pagelist['limit'] }} 条记录，共 {{ $pagelist['lastPage'] }} 页，共 {{ $pagelist['total'] }} 条记录，当前是第 {{ $pagelist['currentPage'] }} 页
     <div style="margin:5px auto;">
         <ul class="ul_css">
-            @if ($datas['pagelist']['currentPage'] > 1 && $datas['pagelist']['currentPage'] != 1)
+            @if ($pagelist['currentPage'] > 1 && $pagelist['currentPage'] != 1)
                 <li class="li_css"><a href="{{ $prefix_url }}">首页</a></li>
-            @elseif ($datas['pagelist']['currentPage'] == 1 && $datas['pagelist']['currentPage'] == 1)
+            @elseif ($pagelist['currentPage'] == 1 && $pagelist['currentPage'] == 1)
             @endif
-            @if ($datas['pagelist']['lastPage'] > 1 && $datas['pagelist']['currentPage'] != 1)
-                <li class="li_css"><a href="{{ $datas['pagelist']['previousPageUrl'] }}">«上一页</a></li>
-            @elseif ($datas['pagelist']['currentPage'] == 1)
+            @if ($pagelist['lastPage'] > 1 && $pagelist['currentPage'] != 1)
+                <li class="li_css"><a href="{{ $pagelist['previousPageUrl'] }}">«上一页</a></li>
+            @elseif ($pagelist['currentPage'] == 1)
             @endif
-            @if ($datas['pagelist']['lastPage'] > 1 && $datas['pagelist']['currentPage'] != $datas['pagelist']['lastPage'])
-                <li class="li_css"><a href="{{ $datas['pagelist']['nextPageUrl'] }}">下一页»</a></li>
-                <li class="li_css"><a href="{{ $prefix_url.'/?page='.$datas['pagelist']['lastPage'] }}">尾页</a></li>
-            @elseif ($datas['pagelist']['currentPage'] == $datas['pagelist']['lastPage'])
+            @if ($pagelist['lastPage'] > 1 && $pagelist['currentPage'] != $pagelist['lastPage'])
+                <li class="li_css"><a href="{{ $pagelist['nextPageUrl'] }}">下一页»</a></li>
+                <li class="li_css"><a href="{{ $prefix_url.'/?page='.$pagelist['lastPage'] }}">尾页</a></li>
+            @elseif ($pagelist['currentPage'] == $pagelist['lastPage'])
             @endif
         </ul>
     </div>

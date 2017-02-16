@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Member;
 
+use App\Api\ApiBusiness\ApiStoryBoard;
 use Illuminate\Http\Request;
 use App\Models\StoryBoardModel;
 
@@ -13,7 +14,6 @@ class StoryBoardController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->model = new StoryBoardModel();
         //面包屑处理
         $this->lists['func']['name'] = '分镜管理';
         $this->lists['func']['url'] = 'storyboard';
@@ -25,37 +25,41 @@ class StoryBoardController extends BaseController
     {
         $curr['name'] = $this->lists['']['name'];
         $curr['url'] = $this->lists['']['url'];
+        $pageCurr = isset($_POST['pageCurr']) ? $_POST['pageCurr'] : 1;
+        $prefix_url = DOMAIN.'member/storyboard';
+        $datas = $this->query($pageCurr,0);
+        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query($del=0),
-            'prefix_url'=> DOMAIN.'member/storyboard',
-            'lists'=> $this->lists,
-            'curr'=> $curr,
+            'datas' => $datas,
+            'pagelist' => $pagelist,
+            'prefix_url' => $prefix_url,
+            'lists' => $this->lists,
+            'curr' => $curr,
         ];
         return view('member.storyboard.index', $result);
     }
 
-    public function trash()
-    {
-        $curr['name'] = $this->lists['trash']['name'];
-        $curr['url'] = $this->lists['trash']['url'];
-        $result = [
-            'datas'=> $this->query($del=1),
-            'prefix_url'=> DOMAIN.'member/storyboard/trash',
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-        ];
-        return view('member.storyboard.index', $result);
-    }
+//    public function trash()
+//    {
+//        $curr['name'] = $this->lists['trash']['name'];
+//        $curr['url'] = $this->lists['trash']['url'];
+//        $result = [
+//            'datas'=> $this->query($del=1),
+//            'prefix_url'=> DOMAIN.'member/storyboard/trash',
+//            'lists'=> $this->lists,
+//            'curr'=> $curr,
+//        ];
+//        return view('member.storyboard.index', $result);
+//    }
 
     public function create()
     {
         $curr['name'] = $this->lists['create']['name'];
         $curr['url'] = $this->lists['create']['url'];
         $result = [
-            'model'=> $this->model,
-            'prefix_url'=> DOMAIN.'member/storyboard',
-            'lists'=> $this->lists,
-            'curr'=> $curr,
+            'model' => $this->getModel(),
+            'lists' => $this->lists,
+            'curr' => $curr,
         ];
         return view('member.storyboard.create', $result);
     }
@@ -63,13 +67,13 @@ class StoryBoardController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
-        $data['created_at'] = time();
-        StoryBoardModel::create($data);
-
-        //插入搜索表
-        $storyBoardModel = StoryBoardModel::where($data)->first();
-        \App\Models\Home\SearchModel::change($storyBoardModel,4,'create');
-
+        $apiSB = ApiStoryBoard::add($data);
+        if ($apiSB['code']!=0) {
+            echo "<script>alert('".$apiSB['msg']."');history.go(-1);</script>";exit;
+        }
+//        //插入搜索表
+//        $storyBoardModel = StoryBoardModel::where($data)->first();
+//        \App\Models\Home\SearchModel::change($storyBoardModel,4,'create');
         return redirect(DOMAIN.'member/storyboard');
     }
 
@@ -77,11 +81,15 @@ class StoryBoardController extends BaseController
     {
         $curr['name'] = $this->lists['edit']['name'];
         $curr['url'] = $this->lists['edit']['url'];
+        $apiSB = ApiStoryBoard::show($id);
+        if ($apiSB['code']!=0) {
+            echo "<script>alert('".$apiSB['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> StoryBoardModel::find($id),
-            'model'=> $this->model,
-            'lists'=> $this->lists,
-            'curr'=> $curr,
+            'data' => $apiSB['data'],
+            'model' => $this->getModel(),
+            'lists' => $this->lists,
+            'curr' => $curr,
         ];
         return view('member.storyboard.edit', $result);
     }
@@ -89,13 +97,14 @@ class StoryBoardController extends BaseController
     public function update(Request $request,$id)
     {
         $data = $this->getData($request);
-        $data['updated_at'] = time();
-        StoryBoardModel::where('id',$id)->update($data);
-
-        //更新搜索表
-        $storyBoardModel = StoryBoardModel::where('id',$id)->first();
-        \App\Models\Home\SearchModel::change($storyBoardModel,4,'update');
-
+        $data['id'] = $id;
+        $apiSB = ApiStoryBoard::modify($data);
+        if ($apiSB['code']!=0) {
+            echo "<script>alert('".$apiSB['msg']."');history.go(-1);</script>";exit;
+        }
+//        //更新搜索表
+//        $storyBoardModel = StoryBoardModel::where('id',$id)->first();
+//        \App\Models\Home\SearchModel::change($storyBoardModel,4,'update');
         return redirect(DOMAIN.'member/storyboard');
     }
 
@@ -103,57 +112,70 @@ class StoryBoardController extends BaseController
     {
         $curr['name'] = $this->lists['show']['name'];
         $curr['url'] = $this->lists['show']['url'];
+        $apiSB = ApiStoryBoard::show($id);
+        if ($apiSB['code']!=0) {
+            echo "<script>alert('".$apiSB['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> StoryBoardModel::find($id),
-            'model'=> $this->model,
-            'lists'=> $this->lists,
-            'curr'=> $curr,
+            'data' => $apiSB['data'],
+            'model' => $this->getModel(),
+            'lists' => $this->lists,
+            'curr' => $curr,
         ];
         return view('member.storyboard.show', $result);
     }
 
-    public function destroy($id)
-    {
-        StoryBoardModel::where('id',$id)->update(['del'=> 1]);
-        return redirect(DOMAIN.'member/storyboard');
-    }
-
-    public function restore($id)
-    {
-        StoryBoardModel::where('id',$id)->update(['del'=> 0]);
-        return redirect(DOMAIN.'member/storyboard/trash');
-    }
-
-    public function forceDelete($id)
-    {
-        StoryBoardModel::where('id',$id)->delete();
-        return redirect(DOMAIN.'member/storyboard/trash');
-    }
+//    public function destroy($id)
+//    {
+//        StoryBoardModel::where('id',$id)->update(['del'=> 1]);
+//        return redirect(DOMAIN.'member/storyboard');
+//    }
+//
+//    public function restore($id)
+//    {
+//        StoryBoardModel::where('id',$id)->update(['del'=> 0]);
+//        return redirect(DOMAIN.'member/storyboard/trash');
+//    }
+//
+//    public function forceDelete($id)
+//    {
+//        StoryBoardModel::where('id',$id)->delete();
+//        return redirect(DOMAIN.'member/storyboard/trash');
+//    }
 
     public function getData(Request $request)
     {
-        $uid = $this->userid ? $this->userid : 0;
-        if (!$request->intro) { echo "<script>alert('内容不能空！');history.go(-1);</script>";exit; }
+        if (!$request->genre) {
+            echo "<script>alert('供求必选！');history.go(-1);</script>";exit;
+        }
+        if (!$request->intro) {
+            echo "<script>alert('内容不能空！');history.go(-1);</script>";exit;
+        }
         $data = [
-            'name'=> $request->name,
-            'cate_id'=> $request->cate,
-            'intro'=> $request->intro,
-            'money'=> $request->money,
-            'uid'=> $uid,
-            'sort2'=> $request->sort2,
-            'isshow2'=> $request->isshow2,
+            'name'  =>  $request->name,
+            'genre'  =>  $request->genre,
+            'cate'  =>  $request->cate,
+            'intro' =>  $request->intro,
+            'money' =>  $request->money,
+            'uid'   =>  $this->userid,
+            'uname' =>  \Session::get('user.username'),
         ];
         return $data;
     }
 
-    public function query($del)
+    public function query($pageCurr,$del)
     {
-        $datas = StoryBoardModel::where('del',$del)
-            ->where('isshow',1)
-            ->orderBy('sort','desc')
-            ->orderBy('id','desc')
-            ->paginate($this->limit);
-        $datas->limit = $this->limit;
-        return $datas;
+        $uid = $this->userType==50 ? 0 : $this->userid;
+        $apiSB = ApiStoryBoard::index($this->limit,$pageCurr,$uid,2,0);
+        return $apiSB['code']==0 ? $apiSB['data'] : [];
+    }
+
+    /**
+     * 获取 model
+     */
+    public function getModel()
+    {
+        $apiModel = ApiStoryBoard::getModel();
+        return $apiModel['code']==0 ? $apiModel['model'] : [];
     }
 }

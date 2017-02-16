@@ -11,50 +11,40 @@
             </tr>
 
             <tr>
+                <td class="field_name"><label>供求关系：</label></td>
+                <td>
+                    <label><input type="radio" class="radio" name="genre" value="1" checked> 作者&nbsp;&nbsp;</label>
+                    <label><input type="radio" class="radio" name="genre" value="2"> 读者&nbsp;&nbsp;</label>
+                </td>
+            </tr>
+
+            <tr>
                 <td class="field_name"><label>分类：</label></td>
                 <td>
                     <select name="cate" required>
-                        @if(count($model['cates2']))
-                            @foreach($model['cates2'] as $kcate=>$vcate)
-                                <option value="{{ $kcate }}">{{ $vcate }}</option>
-                            @endforeach
-                        @endif
+                        @foreach($model['cates'] as $kcate=>$vcate)
+                            <option value="{{ $kcate }}">{{ $vcate }}</option>
+                        @endforeach
                     </select>
                 </td>
             </tr>
 
             <tr>
                 <td class="field_name"><label>内容简介：</label></td>
-                <td><textarea name="intro2" cols="50" rows="5"></textarea></td>
+                <td><textarea name="intro" cols="50" rows="5"></textarea></td>
             </tr>
 
             <tr>
-                <td class="field_name"><label>前台是否显示：</label></td>
+                <td class="field_name"><label>细节显示：</label></td>
                 <td>
-                    <label><input type="radio" class="radio" name="iscon" value="0" checked> 不显示&nbsp;&nbsp;</label>
-                    <label><input type="radio" class="radio" name="iscon" value="1"> 显示&nbsp;&nbsp;</label>
+                    <label><input type="radio" class="radio" name="isdetail" value="1" checked> 不显示&nbsp;&nbsp;</label>
+                    <label><input type="radio" class="radio" name="isdetail" value="2"> 显示&nbsp;&nbsp;</label>
                 </td>
             </tr>
 
             <tr>
-                <td class="field_name"><label>内容：</label></td>
-                <td style="position:relative;z-index:10;">
-                    @include('member.common.editor')
-                    {{--@include('UEditor::head')--}}
-                    {{--<script id="container" name="intro" type="text/plain"></script>--}}
-                    {{--<!-- 实例化编辑器 -->--}}
-                    {{--<script type="text/javascript">--}}
-                        {{--var ue = UE.getEditor('container',{--}}
-                            {{--initialFrameWidth:400,--}}
-                            {{--initialFrameHeight:200,--}}
-                            {{--toolbars:[['redo','undo','bold','italic','underline','strikethrough','horizontal','forecolor','fontfamily','fontsize','priview','directionality','paragraph','insertimage','magefloat','searchreplace','pasteplain','help']]--}}
-                        {{--});--}}
-                        {{--ue.ready(function() {--}}
-                            {{--//此处为支持laravel5 csrf ,根据实际情况修改,目的就是设置 _token 值.--}}
-                            {{--ue.execCommand('serverparam', '_token', '{{ csrf_token() }}');--}}
-                        {{--});--}}
-                    {{--</script>--}}
-                </td>
+                <td class="field_name"><label>内容细节：</label></td>
+                <td><textarea name="detail" cols="40" rows="5"></textarea></td>
             </tr>
 
             <tr><td colspan="10" style="text-align:center;">

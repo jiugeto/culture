@@ -30,19 +30,18 @@ class SettingController extends BaseController
     public function show()
     {
         $rstUser = ApiUsers::getOneUser($this->userid);
-        if ($rstUser['code']==0) {
-            $data =  $rstUser['data'];
-            $data['areaName'] = AreaModel::getAreaStr($rstUser['data']['area']);
-        }
-        if ($rstUser['code']==0 && in_array($data['isuser'],[1,2,4,50])) {
+        if ($rstUser['code']!=0) { echo "'没有会员记录！'"; }
+        $data =  $rstUser['data'];
+        $data['areaName'] = AreaNameByid($rstUser['data']['area']);
+        if (in_array($rstUser['data']['isuser'],[1,2,4,50])) {
             $rstPerson = ApiPerson::getPersonInfo($rstUser['data']['id']);
             $personArr = $rstPerson['code']==0 ? $rstPerson['data'] : [];
         }
-        if($rstUser['code']==0 && in_array($data['isuser'],[3,5,6,7,50])) {
+        if(in_array($rstUser['data']['isuser'],[3,5,6,7,50])) {
             $rstCompany = ApiCompany::getOneCompany($rstUser['data']['id']);
             if ($rstCompany['code']==0) {
                 $companyArr =  $rstCompany['data'];
-                $companyArr['areaName'] = AreaModel::getAreaStr($rstCompany['data']['area']);
+                $companyArr['areaName'] = AreaNameByid($rstCompany['data']['area']);
             }
         }
         $result = [

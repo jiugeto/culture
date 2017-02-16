@@ -63,11 +63,11 @@
                 </td>
             </tr>
             @endforeach
-        @else @include('member.common.norecord')
+        @else @include('member.common.#norecord')
         @endif
         </table>
         <p>注意：总价格 = 渲染价格 + 修改价格，下单-》定价-》付款-》制作-》成交-》评价-》本站返利</p>
-        @include('member.common.page')
+        @include('member.common.#page')
     </div>
 
     {{--弹出框：支付的二维码、设置评价--}}

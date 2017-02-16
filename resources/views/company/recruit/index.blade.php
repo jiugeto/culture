@@ -20,7 +20,7 @@
                         <td class="four_text">{{ $data->updated_at=='0000-00-00 00:00:00' ? $data->created_at : $data->updated_at }}</td>
                     </tr>
                     @endforeach
-                @else @include('member.common.norecord')
+                @else @include('member.common.#norecord')
                 @endif
             </table>
             <p>

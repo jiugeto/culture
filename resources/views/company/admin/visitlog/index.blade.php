@@ -28,7 +28,7 @@
                 </td>
             </tr>
                 @endforeach
-            @else @include('member.common.norecord')
+            @else @include('member.common.#norecord')
             @endif
             <p></p>
         </table>

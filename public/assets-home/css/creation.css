@@ -185,4 +185,14 @@ table.goodCus td {
     position:absolute; left:600px; top:0;
 }
 .tankuang .con a:hover { color:white; }
-.tankuang .con button[type='submit'] { margin:10px 220px; }
+.tankuang .con button[type='submit'] {
+    margin:10px 220px;
+    padding:5px 20px;
+    border:1px solid orangered;
+    border-radius:3px;
+    color:white;
+    font-family:'微软雅黑';
+    font-size:20px;
+    background:orangered;
+    cursor:pointer;
+}

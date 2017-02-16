@@ -30,6 +30,28 @@ class ApiOrder
     }
 
     /**
+     * 通过 uid 获取订单列表
+     */
+    public static function getOrdersByUid($uid,$status=[])
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/order/ordersbyuid';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, array(
+            'uid'   =>  $uid,
+            'status'    =>  $status,
+        ));
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array(
+            'code' => 0,
+            'data' => ApiBase::objToArr($response->data),
+        );
+    }
+
+    /**
      * 获取 model
      */
     public static function getModel()

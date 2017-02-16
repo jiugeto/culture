@@ -33,6 +33,29 @@ class ApiStaff
         );
     }
 
+    /**
+     * 通过 uid 获取艺人列表
+     */
+    public static function getStaffsByUid($uid,$genre,$type)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/staff/staffsbyuid';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, array(
+            'uid'   =>  $uid,
+            'genre' =>  $genre,
+            'type'  =>  $type,
+        ));
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array(
+            'code' => 0,
+            'data' => ApiBase::objToArr($response->data),
+        );
+    }
+
     public static function show($id)
     {
         $apiUrl = ApiBase::getApiCurl() . '/api/v1/staff/show';
@@ -48,6 +71,38 @@ class ApiStaff
         return array(
             'code' => 0,
             'data' => ApiBase::objToArr($response->data),
+        );
+    }
+
+    public static function add($data)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/staff/add';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, $data);
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array(
+            'code' => 0,
+            'msg' => $response->error->msg,
+        );
+    }
+
+    public static function modify($data)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/staff/modify';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, $data);
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array(
+            'code' => 0,
+            'msg' => $response->error->msg,
         );
     }
 

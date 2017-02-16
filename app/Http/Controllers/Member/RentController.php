@@ -1,7 +1,8 @@
 <?php
 namespace App\Http\Controllers\Member;
 
-use App\Models\RentModel;
+use App\Api\ApiBusiness\ApiRent;
+use App\Api\ApiUser\ApiUsers;
 use Illuminate\Http\Request;
 
 class RentController extends BaseController
@@ -17,43 +18,47 @@ class RentController extends BaseController
         $this->lists['func']['name'] = '租赁管理';
         $this->lists['func']['url'] = 'rent';
         $this->lists['create']['name'] = '租赁发布';
-        $this->model = new RentModel();
     }
 
-    public function index($genre=0,$type=0)
+    public function index($type=0)
     {
         $curr['name'] = $this->lists['']['name'];
         $curr['url'] = $this->lists['']['url'];
+        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $prefix_url = DOMAIN.'member/goods';
+        $datas = $this->query($pageCurr,0,$type);
+        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query($del=0,$genre,$type),
-            'model'=> $this->model,
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-            'genre'=> $genre,
-            'type'=> $type,
+            'datas' => $datas,
+            'pagelist' => $pagelist,
+            'prefix_url' => $prefix_url,
+            'model' => $this->getModel(),
+            'lists' => $this->lists,
+            'curr' => $curr,
+            'type' => $type,
         ];
         return view('member.rent.index', $result);
     }
 
-    public function trash($genre=0)
-    {
-        $curr['name'] = $this->lists['trash']['name'];
-        $curr['url'] = $this->lists['trash']['url'];
-        $result = [
-            'datas'=> $this->query($del=1,$genre),
-            'genre'=> $genre,
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-        ];
-        return view('member.rent.index', $result);
-    }
+//    public function trash($genre=0)
+//    {
+//        $curr['name'] = $this->lists['trash']['name'];
+//        $curr['url'] = $this->lists['trash']['url'];
+//        $result = [
+//            'datas'=> $this->query($del=1,$genre),
+//            'genre'=> $genre,
+//            'lists'=> $this->lists,
+//            'curr'=> $curr,
+//        ];
+//        return view('member.rent.index', $result);
+//    }
 
     public function create()
     {
         $curr['name'] = $this->lists['create']['name'];
         $curr['url'] = $this->lists['create']['url'];
         $result = [
-            'model'=> $this->model,
+            'model'=> $this->getModel(),
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -63,13 +68,13 @@ class RentController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
-        $data['created_at'] = time();
-        RentModel::create($data);
-
-        //插入搜索表
-        $rentModel = RentModel::where($data)->first();
-        \App\Models\Home\SearchModel::change($rentModel,8,'create');
-
+        $apiRent = ApiRent::add($data);
+        if ($apiRent['code']!=0) {
+            echo "<script>alert('".$apiRent['msg']."');history.go(-1);</script>";exit;
+        }
+//        //插入搜索表
+//        $rentModel = RentModel::where($data)->first();
+//        \App\Models\Home\SearchModel::change($rentModel,8,'create');
         return redirect(DOMAIN.'member/rent');
     }
 
@@ -77,9 +82,13 @@ class RentController extends BaseController
     {
         $curr['name'] = $this->lists['edit']['name'];
         $curr['url'] = $this->lists['edit']['url'];
+        $apiRent = ApiRent::show($id);
+        if ($apiRent['code']!=0) {
+            echo "<script>alert('".$apiRent['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> RentModel::find($id),
-            'model'=> $this->model,
+            'data'=> $apiRent['data'],
+            'model'=> $this->getModel(),
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -89,13 +98,14 @@ class RentController extends BaseController
     public function update(Request $request, $id)
     {
         $data = $this->getData($request);
-        $data['updated_at'] = time();
-        RentModel::where('id',$id)->update($data);
-
-        //更新搜索表
-        $rentModel = RentModel::where('id',$id)->first();
-        \App\Models\Home\SearchModel::change($rentModel,8,'update');
-
+        $data['id'] = $id;
+        $apiRent = ApiRent::modify($data);
+        if ($apiRent['code']!=0) {
+            echo "<script>alert('".$apiRent['msg']."');history.go(-1);</script>";exit;
+        }
+//        //更新搜索表
+//        $rentModel = RentModel::where('id',$id)->first();
+//        \App\Models\Home\SearchModel::change($rentModel,8,'update');
         return redirect(DOMAIN.'member/rent');
     }
 
@@ -103,31 +113,35 @@ class RentController extends BaseController
     {
         $curr['name'] = $this->lists['show']['name'];
         $curr['url'] = $this->lists['show']['url'];
+        $apiRent = ApiRent::show($id);
+        if ($apiRent['code']!=0) {
+            echo "<script>alert('".$apiRent['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> RentModel::find($id),
+            'data'=> $apiRent['data'],
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
         return view('member.rent.show', $result);
     }
 
-    public function destroy($id)
-    {
-        RentModel::where('id',$id)->update(['del'=> 1]);
-        return redirect(DOMAIN.'member/rent');
-    }
-
-    public function restore($id)
-    {
-        RentModel::where('id',$id)->update(['del'=> 0]);
-        return redirect(DOMAIN.'member/rent/trash');
-    }
-
-    public function forceDelete($id)
-    {
-        RentModel::where('id',$id)->delete();
-        return redirect(DOMAIN.'member/rent/trash');
-    }
+//    public function destroy($id)
+//    {
+//        RentModel::where('id',$id)->update(['del'=> 1]);
+//        return redirect(DOMAIN.'member/rent');
+//    }
+//
+//    public function restore($id)
+//    {
+//        RentModel::where('id',$id)->update(['del'=> 0]);
+//        return redirect(DOMAIN.'member/rent/trash');
+//    }
+//
+//    public function forceDelete($id)
+//    {
+//        RentModel::where('id',$id)->delete();
+//        return redirect(DOMAIN.'member/rent/trash');
+//    }
 
 
 
@@ -138,16 +152,13 @@ class RentController extends BaseController
      */
     public function getData(Request $request)
     {
-        $data = $request->all();
-        //uid暂时为0
-        $data['uid'] = 0;
         $rent = [
-            'name'=> $data['name'],
-            'genre'=> $data['genre'],
-            'type'=> $data['type'],
-            'intro'=> $data['intro'],
-            'uid'=> $data['uid'],
-            'money'=> $data['price'],
+            'name'=> $request->name,
+            'genre'=> $this->getGenre(),
+            'type'=> $request->type,
+            'intro'=> $request->intro,
+            'uid'=> $this->userid,
+            'money'=> $request->money,
         ];
         return $rent;
     }
@@ -155,30 +166,36 @@ class RentController extends BaseController
     /**
      * 查询方法
      */
-    public function query($del,$genre,$type)
+    public function query($pageCurr,$del,$type)
     {
-        if ($genre && $type) {
-            $datas = RentModel::where('del',$del)
-                ->where('genre',$genre)
-                ->where('type',$type)
-                ->orderBy('id','desc')
-                ->paginate($this->limit);
-        } elseif ($genre && !$type) {
-            $datas = RentModel::where('del',$del)
-                ->where('genre',$genre)
-                ->orderBy('id','desc')
-                ->paginate($this->limit);
-        } elseif (!$genre && $type) {
-            $datas = RentModel::where('del',$del)
-                ->where('type',$type)
-                ->orderBy('id','desc')
-                ->paginate($this->limit);
-        } elseif (!$genre && !$type) {
-            $datas = RentModel::where('del',$del)
-                ->orderBy('id','desc')
-                ->paginate($this->limit);
+        $genre = in_array($this->userid,[1]) ? 0 : $this->getGenre();
+        $apiRent = ApiRent::index($this->limit,$pageCurr,$this->userid,$genre,$type,2,$del);
+        return $apiRent['code']==0 ? $apiRent['data'] : [];
+    }
+
+    /**
+     * 获取 model
+     */
+    public function getModel()
+    {
+        $apiModel = ApiRent::getModel();
+        return $apiModel['code']==0 ? $apiModel['model'] : [];
+    }
+
+    /**
+     * 判断用户类型
+     */
+    public function getGenre()
+    {
+        $apiUser = ApiUsers::getOneUser($this->userid);
+        if ($apiUser['code']!=0) {
+            echo "<script>alert('".$apiUser['msg']."');history.go(-1);</script>";exit;
         }
-        $datas->limit = $this->limit;
-        return $datas;
+        if ($apiUser['data']['isuser']==7) {
+            $genre = 1;     //租赁供应
+        } else {
+            $genre = 2;     //租赁需求
+        }
+        return $genre;
     }
 }

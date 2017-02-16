@@ -12,7 +12,7 @@ class ApiSign
     /**
      * 签到列表
      */
-    public static function getSignList($limit=null,$pageCurr=1,$uid=0)
+    public static function index($limit=0,$pageCurr=1,$uid=0)
     {
         $redisKey = 'userSignList';
         //判断缓存有没有该数据

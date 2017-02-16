@@ -61,7 +61,6 @@ class LoginController extends Controller
                 echo "<script>alert('密码错误！');history.go(-1);</script>";exit;
             }
             echo "<script>alert('".$rstLogin['msg']."');history.go(-1);</script>";exit;
-//            return redirect(DOMAIN.'regist/fail');
         }
 
         //个人资料
@@ -77,7 +76,6 @@ class LoginController extends Controller
                 $person['idfront'] = $personInfo['data']['idfront'];
             }
         }
-//        $userperson = isset($person) ? serialize($person) : [];
         //企业资料
         if (in_array($rstLogin['data']['isuser'],[3,5,6,7,50])) {
             $companyInfo = ApiCompany::getOneCompany($rstLogin['data']['id']);
@@ -91,7 +89,6 @@ class LoginController extends Controller
                 $company['yyzzid'] = $companyInfo['data']['yyzzid'];
             }
         }
-//        $usercompany = isset($company) ? serialize($company) : [];
 
         $serial = date('YmdHis',time()).rand(0,10000);
         $userInfo = [
@@ -109,7 +106,6 @@ class LoginController extends Controller
         ];
         $userInfo['cookie'] = $_COOKIE;
         Session::put('user',$userInfo);
-//        \Cookie::make('user', $userInfo, 720);       //cookie12小时
 
         //将session放入redis
         \Redis::setex('cul_session', $this->redisTime, serialize($userInfo));
@@ -126,7 +122,6 @@ class LoginController extends Controller
         }
         //去除session
         Session::forget('user');
-//        \Cookie::forget('user');
         \Redis::del('cul_session');
         return redirect(DOMAIN.'login');
     }

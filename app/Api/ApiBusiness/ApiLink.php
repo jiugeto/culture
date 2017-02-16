@@ -31,7 +31,7 @@ class ApiLink
             return array('code' => -1, 'msg' => $response->error->msg);
         }
         $headerArr = ApiBase::objToArr($response->data);
-//        ApiBase::setRedis($redisKey,$headerArr);
+        ApiBase::setRedis($redisKey,$headerArr);
         return array(
             'code' => 0,
             'data' => $headerArr,
@@ -60,7 +60,7 @@ class ApiLink
             return array('code' => -1, 'msg' => $response->error->msg);
         }
         $navArr = ApiBase::objToArr($response->data);
-//        ApiBase::setRedis($redisKey,$navArr);
+        ApiBase::setRedis($redisKey,$navArr);
         return array(
             'code' => 0,
             'data' => $navArr,
@@ -89,7 +89,7 @@ class ApiLink
             return array('code' => -1, 'msg' => $response->error->msg);
         }
         $footerArr = ApiBase::objToArr($response->data);
-//        ApiBase::setRedis($redisKey,$footerArr);
+        ApiBase::setRedis($redisKey,$footerArr);
         return array(
             'code' => 0,
             'data' => $footerArr,

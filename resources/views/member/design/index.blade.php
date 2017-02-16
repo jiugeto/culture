@@ -22,31 +22,31 @@
             <tr>
                 <td>编号</td>
                 <td>设计名称</td>
-                {{--<td>供求类别</td>--}}
+                <td>供求</td>
                 <td>价格</td>
                 <td>发布人</td>
                 <td>创建时间</td>
                 <td>操作</td>
             </tr>
-        @if($datas->total())
+        @if(count($datas))
             @foreach($datas as $data)
             <tr>
-                <td>{{ $data->id }}</td>
-                <td>{{ $data->name }}</td>
-                {{--<td>{{ $data->genreName() }}</td>--}}
-                <td>{{ $data->money() }}</td>
-                <td>{{ $data->getUserName() }}</td>
-                <td>{{ $data->createTime() }}</td>
+                <td>{{ $data['id'] }}</td>
+                <td>{{ $data['name'] }}</td>
+                <td>{{ $data['genreName'] }}</td>
+                <td>{{ $data['money'] }}</td>
+                <td>{{ UserNameById($data['uid']) }}</td>
+                <td>{{ $data['createTime'] }}</td>
                 <td>
-                    <a href="{{DOMAIN}}member/designPerS/{{ $data->id }}" class="list_btn">查看</a>
-                    <a href="{{DOMAIN}}member/designPerS/{{ $data->id }}/edit" class="list_btn">编辑</a>
+                    <a href="{{DOMAIN}}member/design/{{ $data['id'] }}" class="list_btn">查看</a>
+                    <a href="{{DOMAIN}}member/design/{{ $data['id'] }}/edit" class="list_btn">编辑</a>
                     {{--<a href="{{DOMAIN}}member/designPerS/{{ $data->id }}/destroy" class="list_btn">删除</a>--}}
                 </td>
             </tr>
             @endforeach
-        @else @include('member.common.norecord')
+        @else <tr><td colspan="10" style="text-align:center;">没有记录</td></tr>
         @endif
         </table>
-        @include('member.common.page')
+        @include('member.common.page2')
     </div>
 @stop

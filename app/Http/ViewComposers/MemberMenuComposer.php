@@ -1,11 +1,8 @@
 <?php
 namespace App\Http\ViewComposers;
 
+use App\Api\ApiBusiness\ApiMenu;
 use Illuminate\Contracts\View\View;
-use App\Models\Admin\ActionModel;
-use App\Models\Admin\MenusModel;
-use App\Tools;
-//use Illuminate\Support\Facades\DB;
 
 class MemberMenuComposer
 {
@@ -20,6 +17,8 @@ class MemberMenuComposer
 
     public static function getMemberMenus()
     {
-        return Tools::getChild(MenusModel::MemberMenus(),$pid=0);
+        //菜单类型type：1会员后台member，2个人后台person，3企业后台company
+        $apiMenu = ApiMenu::getMenusByType(1);
+        return $apiMenu['code']==0 ? $apiMenu['data'] : [];
     }
 }

@@ -13,3 +13,10 @@ function UserNameById($uid)
     $apiUser = ApiUsers::getOneUser($uid);
     return $apiUser['code']==0 ? $apiUser['data']['username'] : '';
 }
+
+//通过uid，判断用户类型
+function UserTypeByid($uid)
+{
+    $apiUser = ApiUsers::getOneUser($uid);
+    return $apiUser['code']==0 ? $apiUser['data']['isuser'] : '';
+}

@@ -142,11 +142,11 @@
                 @if(count($goods))
                 @foreach($goods as $good)
                     <div class="img" onmouseover="over({{ $good['id'] }})" onmouseout="out({{ $good['id'] }})">
-                        <a href="{{DOMAIN}}product/video/{{ $good['id'] }}/{{ $good['video_id'] }}" title="查看详情：{{ $good['titleName'] }}">
+                        {{--<a href="{{DOMAIN}}product/video/{{ $good['id'] }}/{{ $good['video_id'] }}" title="查看详情：{{ $good['name'] }}">--}}
                             <img src="{{ $good['thumb'] }}" width="148" height="100"
                                  {{--style="@if($size=$good->getPicSize($w=148,$h=100)) width:{{$size['w']}}px; height:{{$size['h']}}px; @endif"--}}
                             >
-                        </a>
+                        {{--</a>--}}
                         <div class="text" style="top:0;pointer-events:none;" id="goodText_{{ $good['id'] }}">
                             <div>{{ $good['name'] }}</div>
                             <div>
@@ -651,8 +651,6 @@
         </div>
         <!-- 空白 -->
         <div class="content_kongbai">&nbsp;</div>
-
-        @include('layout.qqchat')
 
         {{--给用户发红包--}}
         @if($usertip)

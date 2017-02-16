@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Member;
 
+use App\Api\ApiBusiness\ApiEntertain;
+use App\Api\ApiBusiness\ApiStaff;
+use App\Api\ApiUser\ApiUsers;
 use Illuminate\Http\Request;
-use App\Models\EntertainModel;
+use Session;
 
 class EntertainController extends BaseController
 {
@@ -11,58 +14,54 @@ class EntertainController extends BaseController
      * 系统后台租赁管理
      */
 
-    protected $genre;
-
     public function __construct()
     {
         parent::__construct();
         $this->lists['func']['name'] = '娱乐管理';
         $this->lists['func']['url'] = 'entertain';
         $this->lists['create']['name'] = '娱乐发布';
-        $this->model = new EntertainModel();
-        if (!in_array($this->userType,[6])) {
-            //普通企业、广告公司、租赁公司、超级用户
-            $this->genre = 2;       //需求
-        } elseif (in_array($this->userType,[6,50])) {
-            //影视公司、超级用户
-            $this->genre = 1;       //供应
-        }
     }
 
     public function index()
     {
         $curr['name'] = $this->lists['']['name'];
         $curr['url'] = $this->lists['']['url'];
+        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $prefix_url = DOMAIN.'member/entertain';
+        $datas = $this->query($pageCurr);
+        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query($del=0,$this->genre),
-            'prefix_url'=> DOMAIN.'member/entertain',
-            'lists'=> $this->lists,
-            'curr'=> $curr,
+            'datas' => $datas,
+            'pagelist' => $pagelist,
+            'prefix_url' => $prefix_url,
+            'lists' => $this->lists,
+            'curr' => $curr,
         ];
         return view('member.entertain.index', $result);
     }
 
-    public function trash($genre=0)
-    {
-        $curr['name'] = $this->lists['trash']['name'];
-        $curr['url'] = $this->lists['trash']['url'];
-        $result = [
-            'datas'=> $this->query($del=1,$this->genre),
-            'prefix_url'=> DOMAIN.'member/entertain',
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-            'genre'=> $genre,
-        ];
-        return view('member.entertain.index', $result);
-    }
+//    public function trash($genre=0)
+//    {
+//        $curr['name'] = $this->lists['trash']['name'];
+//        $curr['url'] = $this->lists['trash']['url'];
+//        $result = [
+//            'datas'=> $this->query($del=1,$this->genre),
+//            'prefix_url'=> DOMAIN.'member/entertain',
+//            'lists'=> $this->lists,
+//            'curr'=> $curr,
+//            'genre'=> $genre,
+//        ];
+//        return view('member.entertain.index', $result);
+//    }
 
     public function create()
     {
         $curr['name'] = $this->lists['create']['name'];
         $curr['url'] = $this->lists['create']['url'];
         $result = [
-            'lists'=> $this->lists,
-            'curr'=> $curr,
+            'staffs' => $this->getStaffs(),
+            'lists' => $this->lists,
+            'curr' => $curr,
         ];
         return view('member.entertain.create', $result);
     }
@@ -70,9 +69,10 @@ class EntertainController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
-        $data['genre'] = $this->genre;
-        $data['created_at'] = time();
-        EntertainModel::create($data);
+        $apiEntertain = ApiEntertain::add($data);
+        if ($apiEntertain['code']!=0) {
+            echo "<script>alert('".$apiEntertain['msg']."');history.go(-1);</script>";exit;
+        }
         return redirect(DOMAIN.'member/entertain');
     }
 
@@ -80,8 +80,13 @@ class EntertainController extends BaseController
     {
         $curr['name'] = $this->lists['edit']['name'];
         $curr['url'] = $this->lists['edit']['url'];
+        $apiEntertain = ApiEntertain::show($id);
+        if ($apiEntertain['code']!=0) {
+            echo "<script>alert('".$apiEntertain['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> EntertainModel::find($id),
+            'data'=> $apiEntertain['data'],
+            'staffs' => $this->getStaffs(),
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -91,8 +96,11 @@ class EntertainController extends BaseController
     public function update(Request $request,$id)
     {
         $data = $this->getData($request);
-        $data['updated_at'] = time();
-        EntertainModel::where('id',$id)->update($data);
+        $data['id'] = $id;
+        $apiEntertain = ApiEntertain::modify($data);
+        if ($apiEntertain['code']!=0) {
+            echo "<script>alert('".$apiEntertain['msg']."');history.go(-1);</script>";exit;
+        }
         return redirect(DOMAIN.'member/entertain');
     }
 
@@ -100,55 +108,55 @@ class EntertainController extends BaseController
     {
         $curr['name'] = $this->lists['show']['name'];
         $curr['url'] = $this->lists['show']['url'];
+        $apiEntertain = ApiEntertain::show($id);
+        if ($apiEntertain['code']!=0) {
+            echo "<script>alert('".$apiEntertain['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> EntertainModel::find($id),
+            'data'=> $apiEntertain['data'],
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
         return view('member.entertain.show', $result);
     }
 
-    public function destroy($id)
-    {
-        EntertainModel::where('id',$id)->update(['del'=> 1]);
-        return redirect(DOMAIN.'member/entertain');
-    }
-
-    public function restore($id)
-    {
-        EntertainModel::where('id',$id)->update(['del'=> 0]);
-        return redirect(DOMAIN.'member/entertain/trash');
-    }
-
-    public function forceDelete($id)
-    {
-        EntertainModel::where('id',$id)->delete();
-        return redirect(DOMAIN.'member/entertain/trash');
-    }
-
-
+//    public function destroy($id)
+//    {
+//        EntertainModel::where('id',$id)->update(['del'=> 1]);
+//        return redirect(DOMAIN.'member/entertain');
+//    }
+//
+//    public function restore($id)
+//    {
+//        EntertainModel::where('id',$id)->update(['del'=> 0]);
+//        return redirect(DOMAIN.'member/entertain/trash');
+//    }
+//
+//    public function forceDelete($id)
+//    {
+//        EntertainModel::where('id',$id)->delete();
+//        return redirect(DOMAIN.'member/entertain/trash');
+//    }
 
 
 
-    /**
-     * ===================
-     * 以下是公用方法
-     * ===================
-     */
+
 
     /**
      * 收集数据
      */
     public function getData(Request $request)
     {
-        $data = $request->all();
-        //uname 转为 uid
-        $data['uid'] = 0;       //测试，暂为0
+        if (!$request->actor) {
+            echo "<script>alert('演员必选！');history.go(-1);</script>";exit;
+        }
         $entertain = [
-            'title'=> $data['title'],
-            'genre'=> $this->genre,
-            'content'=> $data['content'],
-            'uid'=> $data['uid'],
+            'title' => $request->title,
+            'genre' => $this->getGenre(),
+            'intro' => $request->intro,
+            'uid'   => $this->userid,
+            'uname' =>  Session::get('user.username'),
+            'staff'    =>  implode(',',$request->actor),
         ];
         return $entertain;
     }
@@ -156,19 +164,35 @@ class EntertainController extends BaseController
     /**
      * 查询方法
      */
-    public function query($del=0,$genre)
+    public function query($pageCurr)
     {
-        if ($genre) {
-            $datas =  EntertainModel::where('del',$del)
-                ->where('genre',$genre)
-                ->orderBy('id','desc')
-                ->paginate($this->limit);
+        $uid = $this->userType==50 ? 0 : $this->userid;
+        $genre = $this->userType==50 ? 0 : $this->getGenre();
+        $apiEntertain = ApiEntertain::index($this->limit,$pageCurr,$uid,$genre,2,0);
+        return $apiEntertain['code']==0 ? $apiEntertain['data'] : [];
+    }
+
+    /**
+     * 判断用户类型
+     */
+    public function getGenre()
+    {
+        if ($this->userType==6) {
+            //影视公司
+            $genre = 1;       //供应
         } else {
-            $datas =  EntertainModel::where('del',$del)
-                ->orderBy('id','desc')
-                ->paginate($this->limit);
+            //普通企业、广告公司、租赁公司、超级用户
+            $genre = 2;       //需求
         }
-        $datas->limit = $this->limit;
-        return $datas;
+        return isset($genre) ? $genre : 0;
+    }
+
+    /**
+     * 通过 uid 获取艺人列表
+     */
+    public function getStaffs()
+    {
+        $apiStaffs = ApiStaff::getStaffsByUid($this->userid,0,1);
+        return $apiStaffs['code']==0 ? $apiStaffs['data'] : [];
     }
 }

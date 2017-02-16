@@ -24,11 +24,14 @@ class ProductController extends BaseController
         $curr['url'] = $this->lists['']['url'];
         $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
         $prefix_url = DOMAIN.'member/product';
+        $datas = $this->query($pageCurr);
+        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query($pageCurr,$prefix_url),
-            'prefix_url'=> $prefix_url,
-            'lists'=> $this->lists,
-            'curr'=> $curr,
+            'datas' => $this->query($pageCurr),
+            'prefix_url' => $prefix_url,
+            'pagelist' => $pagelist,
+            'lists' => $this->lists,
+            'curr' => $curr,
         ];
         return view('member.product.index', $result);
     }
@@ -52,11 +55,9 @@ class ProductController extends BaseController
         if ($rst['code']!=0) {
             echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
         }
-
 //        //插入搜索表
 //        $productModel = ProductModel::where($data)->first();
 //        \App\Models\Home\SearchModel::change($productModel,1,'create');
-
         return redirect(DOMAIN.'member/product');
     }
 
@@ -85,11 +86,9 @@ class ProductController extends BaseController
         if ($rst['code']!=0) {
             echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
         }
-
 //        //更新搜索表
 //        $productModel = ProductModel::where('id',$id)->first();
 //        \App\Models\Home\SearchModel::change($productModel,1,'update');
-
         return redirect(DOMAIN.'member/product');
     }
 
@@ -130,15 +129,10 @@ class ProductController extends BaseController
     /**
      * 查询方法
      */
-    public function query($pageCurr,$prefix_url)
+    public function query($pageCurr)
     {
-//        $datas = ProductModel::where('isshow',2)
-//            ->orderBy('id','desc')
-//            ->paginate($this->limit);
-//        $datas->limit = $this->limit;
         $rst = ApiProduct::getProductsList($this->limit,$pageCurr,0,0,2);
-        $datas = $rst['code']==0?$rst['data']:[];
-        $datas['pagelist'] = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
+        $datas = $rst['code']==0 ? $rst['data'] : [];
         return $datas;
     }
 

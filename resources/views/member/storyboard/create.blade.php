@@ -9,62 +9,35 @@
                 <td class="field_name"><label>分镜名称：</label></td>
                 <td><input type="text" placeholder="至少2个字符" minlength="2" required name="name"/></td>
             </tr>
-            <tr><td></td></tr>
+
+            <tr>
+                <td class="field_name"><label>供求关系：</label></td>
+                <td>
+                    <label><input type="radio" class="radio" name="genre" value="1"> 供应&nbsp;&nbsp;</label>
+                    <label><input type="radio" class="radio" name="genre" value="2"> 需求&nbsp;&nbsp;</label>
+                </td>
+            </tr>
 
             <tr>
                 <td class="field_name"><label>分类：</label></td>
                 <td>
                     <select name="cate" required>
-                        @foreach($model['cates2'] as $kcate=>$vcate)
-                             <option value="{{ $kcate }}">{{ $vcate }}</option>
+                        @foreach($model['cates'] as $k=>$vcate)
+                             <option value="{{ $k }}">{{ $vcate }}</option>
                         @endforeach
                     </select>
                 </td>
             </tr>
-            <tr><td></td></tr>
 
             <tr>
                 <td class="field_name"><label>简介：</label></td>
-                <td style="position:relative;z-index:0;">
-                    {{--<textarea name="intro" cols="50" rows="5"></textarea>--}}
-                    @include('UEditor::head')
-                    <script id="container" name="intro" type="text/plain"></script>
-                    <!-- 实例化编辑器 -->
-                    <script type="text/javascript">
-                        var ue = UE.getEditor('container',{
-                            initialFrameWidth:400,
-                            initialFrameHeight:100,
-                                    toolbars:[['redo','undo','bold','italic','underline','strikethrough','horizontal','forecolor','fontfamily','fontsize','priview','directionality','paragraph','imagefloat','insertimage','searchreplace','pasteplain','help']]
-                        });
-                        ue.ready(function() {
-                            //此处为支持laravel5 csrf ,根据实际情况修改,目的就是设置 _token 值.
-                            ue.execCommand('serverparam', '_token', '{{ csrf_token() }}');
-                        });
-                    </script>
-                </td>
+                <td><textarea name="intro" cols="50" rows="5" required></textarea></td>
             </tr>
-            <tr><td></td></tr>
 
             <tr>
-                <td class="field_name"><label>价格：</label></td>
-                <td><input type="text" placeholder="数字" pattern="^(\d+)|(\d+\.\d{2})$" name="money"/></td>
+                <td class="field_name"><label>价格(元)：</label></td>
+                <td><input type="text" placeholder="数字" pattern="^\d+$" required name="money"/></td>
             </tr>
-            <tr><td></td></tr>
-
-            <tr>
-                <td class="field_name"><label>排序：</label></td>
-                <td><input type="text" placeholder="数字" pattern="^\d+$" required name="sort2" value="10"/></td>
-            </tr>
-            <tr><td></td></tr>
-
-            <tr>
-                <td class="field_name"><label>前台是否显示：</label></td>
-                <td>
-                    <label><input type="radio" class="radio" name="isshow2" value="0"> 不显示&nbsp;&nbsp;</label>
-                    <label><input type="radio" class="radio" name="isshow2" value="1" checked> 显示&nbsp;&nbsp;</label>
-                </td>
-            </tr>
-            <tr><td></td></tr>
 
             <tr><td colspan="2" style="text-align:center;">
                     <button class="companybtn" onclick="history.go(-1)">返 &nbsp;&nbsp;&nbsp;回</button>

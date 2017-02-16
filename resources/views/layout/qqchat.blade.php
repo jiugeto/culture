@@ -2,8 +2,10 @@
 
 
 <style>
-    .qqchat { margin:20px;padding:10px 0;width:120px;color:grey;background:rgba(200,200,200,0.5);
-        position:fixed;right:0;bottom:150px; }
+    .qqchat { margin:20px;padding:10px 20px;width:120px;color:black;
+        position:fixed;right:60px;bottom:150px; }
+    .qqchat #bg { width:120px;height:120px;background:#c8c8c8;filter:alpha(opacity=40);-moz-opacity:0.4;opacity:0.4;
+        position:absolute;top:0px;z-index:-1; }
     .qqchat b { padding:0 10px; }
     .qqchat p { margin:0;padding:5px 0; }
     .qqchat a { padding:2px 25px;text-decoration:none;color:orangered; }
@@ -32,6 +34,7 @@
 </style>
 
 <div class="qqchat">
+    <div id="bg"></div>
     @if(isset($zspChat))
     <p class="duihua" title="点击聊天" onclick="getChat();"><b>对话</b></p>
     @endif

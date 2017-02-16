@@ -7,6 +7,7 @@
 //    return 'home';
 //});
 
+
 Route::group(['prefix'=>'/','namespace'=>'Home'],function(){
     //前台首页路由
     Route::get('/','HomeController@index');

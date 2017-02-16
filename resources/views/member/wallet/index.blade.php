@@ -1,89 +1,91 @@
 @extends('member.main')
 @section('content')
-    {{--@include('member.common.crumb')--}}
     <div class="mem_crumb">
         <a href="{{DOMAIN}}member">会员后台</a> / 会员福利
     </div>
 
     <h3 class="center">福利中心</h3>
     <table class="table_create table_show" cellspacing="0" cellpadding="0">
-        @if(!$data->ispay())
+        {{--@if(!$data->ispay())--}}
+        {{--<tr>--}}
+            {{--<td class="field_name" width="200">新用户福利：</td>--}}
+            {{--<td>--}}
+                {{--<a href="{{DOMAIN}}member/wallet/gettip/1/200" class="list_btn">未领取？去签到</a>--}}
+            {{--</td>--}}
+        {{--</tr>--}}
+        {{--@endif--}}
         <tr>
-            <td class="field_name" width="200">新用户福利：</td>
-            <td>
-                <a href="{{DOMAIN}}member/wallet/gettip/1/200" class="list_btn">未领取？去签到</a>
-            </td>
-        </tr>
-        @endif
-        <tr>
-            <td class="field_name" width="200">签到奖励总数：</td>
-            <td>{{ $data->sign }} 个 &nbsp;
-                <a href="{{DOMAIN}}person/sign" target="_blank" class="list_btn">去领取</a>
+            <td class="field_name" width="200">签到总数：</td>
+            <td>{{ $data['sign'] }} 个 &nbsp;
+                {{--<a href="{{DOMAIN}}person/sign" class="list_btn">签到列表</a>--}}
+                <a href="{{DOMAIN}}member/sign" class="list_btn">签到记录</a>
             </td>
         </tr>
         <tr>
             <td class="field_name" style="width:100px;">金币总数：</td>
-            <td>{{ $data->gold }} 个 &nbsp;
-                <a href="{{DOMAIN}}member/gold" target="_blank" class="list_btn">金币列表</a>
+            <td>{{ $data['gold'] }} 个 &nbsp;
+                <a href="{{DOMAIN}}member/gold" class="list_btn">金币记录</a>
             </td>
         </tr>
         <tr>
             <td class="field_name" width="200">红包总额：</td>
-            <td>{{ $data->tip }} 元 &nbsp;
-                <a href="{{DOMAIN}}member/tip" target="_blank" class="list_btn">红包列表</a>
+            <td>{{ $data['tip'] }} 元 &nbsp;
+                <a href="{{DOMAIN}}member/tip" class="list_btn">红包记录</a>
             </td>
         </tr>
         <tr>
             <td class="field_name">福利额度：</td>
-            <td>{{ $data->weal }} 元
-                <small style="color:lightgrey;font-size:12px;">(用于消费，不可套现)</small>
+            <td>{{ $data['weal'] }} 元 &nbsp;
+                {{--<small style="color:lightgrey;font-size:12px;">(用于消费，不可套现)</small>--}}
+                <a href="{{DOMAIN}}member/wallet/toweal" class="list_btn">兑换记录</a>
+                <a href="{{DOMAIN}}member/wallet/useweal" class="list_btn">使用记录</a>
             </td>
         </tr>
         <tr>
             <td class="field_name">签到兑换福利：</td>
             <td width="500">
-                <input type="text" style="width:100px" placeholder="{{$data->sign}}签到起" name="signToWeal">×{{$data->signByWeal}}个签到
-                <input type="hidden" name="sign" value="{{ $data->sign }}">
-                <input type="hidden" name="signByWeal" value="{{ $data->signByWeal }}">
+                <input type="text" style="width:100px" placeholder="{{$data['signByWeal']}}签到起" name="signToWeal">×{{$data['signByWeal']}}个签到
+                <input type="hidden" name="sign" value="{{ $data['sign'] }}">
+                <input type="hidden" name="signByWeal" value="{{ $data['signByWeal'] }}">
                 &nbsp;&nbsp;
                 <a class="list_btn" onclick="getWealBySign()">确定兑换</a>
-                <br><small style="color:lightgrey;font-size:12px;">(每{{$data->signByWeal}}签到兑换1元福利，{{$data->sign}}个签到可兑换)</small>
+                <br><small style="color:lightgrey;font-size:12px;">(每{{$data['signByWeal']}}签到兑换1元福利，{{$data['sign']}}个签到可兑换)</small>
             </td>
         </tr>
         <tr>
             <td class="field_name">金币兑换福利：</td>
             <td width="500">
-                <input type="text" style="width:100px" placeholder="{{$data->gold}}金币起" name="goldToWeal">×{{$data->goldByWeal}}个签到
-                <input type="hidden" name="gold" value="{{ $data->gold }}">
-                <input type="hidden" name="goldByWeal" value="{{ $data->goldByWeal }}">
+                <input type="text" style="width:100px" placeholder="{{$data['goldByWeal']}}金币起" name="goldToWeal">×{{$data['goldByWeal']}}个签到
+                <input type="hidden" name="gold" value="{{ $data['gold'] }}">
+                <input type="hidden" name="goldByWeal" value="{{ $data['goldByWeal'] }}">
                 &nbsp;&nbsp;
                 <a class="list_btn" onclick="getWealByGold()">确定兑换</a>
-                <br><small style="color:lightgrey;font-size:12px;">(每{{$data->goldByWeal}}签到兑换1元福利，{{$data->gold}}个金币可兑换)</small>
+                <br><small style="color:lightgrey;font-size:12px;">(每{{$data['goldByWeal']}}金币兑换1元福利，{{$data['gold']}}个金币可兑换)</small>
             </td>
         </tr>
         <tr>
             <td class="field_name">红包兑换福利：</td>
             <td width="500">
-                <input type="text" style="width:100px" placeholder="{{$data->tip}}金币起" name="goldToWeal">×{{$data->tipByWeal}}个签到
-                <input type="hidden" name="tip" value="{{ $data->tip }}">
-                <input type="hidden" name="tipByWeal" value="{{ $data->tipByWeal }}">
+                <input type="text" style="width:100px" placeholder="{{$data['tipByWeal']}}额度起" name="goldToWeal">×{{$data['tipByWeal']}}个签到
+                <input type="hidden" name="tip" value="{{ $data['tip'] }}">
+                <input type="hidden" name="tipByWeal" value="{{ $data['tipByWeal'] }}">
                 &nbsp;&nbsp;
                 <a class="list_btn" onclick="getWealByTip()">确定兑换</a>
-                <br><small style="color:lightgrey;font-size:12px;">(每{{$data->tipByWeal}}签到兑换1元福利，{{$data->tip}}个金币可兑换)</small>
+                <br><small style="color:lightgrey;font-size:12px;">(每{{$data['tipByWeal']}}红包额度兑换1元福利，{{$data['tip']}}个额度可兑换)</small>
             </td>
         </tr>
         <tr>
             <td class="field_name">创建时间：</td>
-            <td>{{ $data->createTime() }}</td>
+            <td>{{ $data['createTime'] }}</td>
         </tr>
         <tr>
-            <td class="field_name">更新时间：</td>
-            <td>{{ $data->updateTime() }}</td>
+            <td class="field_name">最后更新：</td>
+            <td>{{ $data['updateTime'] }}</td>
         </tr>
-        {{--<tr><td class="center" colspan="2" style="border:0;cursor:pointer;">--}}
+        <tr><td class="center" colspan="2" style="border:0;cursor:pointer;">
                 {{--<a class="list_btn" onclick="history.go(-1)">返回</a>--}}
-                {{--<button class="companybtn" onclick="history.go(-1)">返 &nbsp;回</button>--}}
-            {{--</td></tr>--}}
+                <button class="companybtn" onclick="history.go(-1)">返 &nbsp;回</button>
+            </td></tr>
     </table>
 
     <script>

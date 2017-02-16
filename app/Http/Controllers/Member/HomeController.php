@@ -1,13 +1,10 @@
 <?php
 namespace App\Http\Controllers\Member;
 
+use App\Api\ApiBusiness\ApiComMain;
+use App\Api\ApiBusiness\ApiOrder;
 use App\Api\ApiUser\ApiCompany;
 use App\Api\ApiUser\ApiUsers;
-use App\Models\BaseModel;
-use App\Models\Company\ComMainModel;
-use App\Models\CompanyModel;
-use App\Models\Base\OrderModel;
-use App\Models\UserModel;
 
 class HomeController extends BaseController
 {
@@ -41,7 +38,6 @@ class HomeController extends BaseController
     public function user()
     {
         $uid = $this->userid ? $this->userid : 0;
-//        return $uid ? UserModel::find($uid) : '';
         $rstUser = ApiUsers::getOneUser($uid);
         return $rstUser['code']==0 ? $rstUser['data'] : [];
     }
@@ -49,15 +45,14 @@ class HomeController extends BaseController
     public function company()
     {
         $uid = $this->userid ? $this->userid : 0;
-//        return $uid ? CompanyModel::where('uid',$uid)->first() : '';
         $rstCompany = ApiCompany::getOneCompany($uid);
         return $rstCompany['code']==0 ? $rstCompany['data'] : [];
     }
 
     public function companyMain()
     {
-        $uid = $this->userid ? $this->userid : 0;
-        return $uid ? ComMainModel::where('uid',$uid)->first() : '';
+        $apiComMain = ApiComMain::getOneByUid($this->userid);
+        return $apiComMain['code']==0 ? $apiComMain['data'] : [];
     }
 
     /**
@@ -100,8 +95,7 @@ class HomeController extends BaseController
             }
         }
         if ($companyInfo['company'] = $this->company()) {
-            $model = new BaseModel();
-            $companyInfo['company']['areaName'] = $model->getAreaName($this->company()['area']);
+            $companyInfo['company']['areaName'] = AreaNameByid($this->company()['area']);
         } else {
             $companyInfo['company']['areaName'] = '';
         }
@@ -117,9 +111,10 @@ class HomeController extends BaseController
      */
     public function orderInfo()
     {
-        $uid = $this->userid ? $this->userid : 0;
-        $orders = OrderModel::where('buyer',$uid)->get();
-        $orderSuccess = OrderModel::where('buyer',$uid)->where('status','>',11)->get();
+        $apiOrder = ApiOrder::getOrdersByUid($this->userid,0);
+        $apiOrderSuccess = ApiOrder::getOrdersByUid($this->userid,[12,13]);
+        $orders = $apiOrder['code']==0 ? $apiOrder['data'] : [];
+        $orderSuccess = $apiOrderSuccess['code']==0 ? $apiOrderSuccess['data'] : [];
         $orderInfo['order'] = $orders;
         $orderInfo['per'] = count($orders) ? intval(count($orderSuccess)/count($orders)*100) : 0;
         return $orderInfo;

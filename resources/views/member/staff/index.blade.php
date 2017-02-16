@@ -51,9 +51,9 @@
                 </td>
             </tr>
             @endforeach
-        @else @include('member.common.norecord')
+        @else @include('member.common.#norecord')
         @endif
         </table>
-        @include('member.common.page')
+        @include('member.common.#page')
     </div>
 @stop

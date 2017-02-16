@@ -12,7 +12,7 @@ class ApiGold
     /**
      * 金币列表
      */
-    public static function getGoldList($limit=null,$pageCurr=1,$uid=0)
+    public static function index($limit,$pageCurr=1,$uid=0)
     {
         $redisKey = 'userGoldList';
         //判断缓存有没有该数据

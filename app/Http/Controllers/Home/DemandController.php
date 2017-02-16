@@ -54,7 +54,7 @@ class DemandController extends BaseController
     {
         /*if ($genre==1) {
             //视频需求，type==1、3是需求
-            $apiData = ApiGoods::index($this->limit,$pageCurr,[1,3],0,2,0,0);
+            $apiData = ApiGoods::index($this->limit,$pageCurr,0,[1,3],0,0,2,0,0);
         } else*/if ($genre==2) {
             //创意剧本，genre==2是需求
             $apiData = ApiIdea::index($this->limit,$pageCurr,0,2);

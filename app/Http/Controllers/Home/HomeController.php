@@ -96,7 +96,7 @@ class HomeController extends BaseController
      */
     public function getGoods($limit)
     {
-        $apiGoods = ApiGoods::index($limit,1,array(2,4),0,2,0,0);
+        $apiGoods = ApiGoods::index($limit,1,0,array(2,4),0,0,2,0,0);
         return $apiGoods['code']==0 ? $apiGoods['data'] : [];
     }
 
@@ -114,7 +114,7 @@ class HomeController extends BaseController
      */
     public function getRecommendProducts($limit)
     {
-        $apiGoods = ApiGoods::index($limit,1,array(2,4),0,2,1,0);
+        $apiGoods = ApiGoods::index($limit,1,0,array(2,4),0,0,2,1,0);
         return $apiGoods['code']==0 ? $apiGoods['data'] : [];
     }
 
@@ -123,7 +123,7 @@ class HomeController extends BaseController
      */
     public function getDemands($limit)
     {
-        $apiGoods = ApiGoods::index($limit,1,array(1,3),0,2,0,0);
+        $apiGoods = ApiGoods::index($limit,1,0,array(1,3),0,0,2,0,0);
         return $apiGoods['code']==0 ? $apiGoods['data'] : [];
     }
 

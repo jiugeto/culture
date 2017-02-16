@@ -18,13 +18,4 @@ class BaseController extends Controller
         $this->userid = Session::get('user.uid');
         $this->userType = Session::get('user.userType');
     }
-
-    /**
-     * 用户自定义参数 limit
-     */
-    public function getUserLimit()
-    {
-        $userParam = ApiUsers::getParamByUid($this->userid);
-        return $userParam['code']==0?$userParam['data']['limit']:10;
-    }
 }

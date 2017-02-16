@@ -1,6 +1,5 @@
 <?php namespace App\Http\Controllers;
 
-//use Illuminate\Foundation\Bus\DispatchesCommands;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -8,11 +7,11 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 
 abstract class Controller extends BaseController
 {
-//    use DispatchesCommands, ValidatesRequests;
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     protected $limit = 20;       //每页显示记录数
     protected $model;       //数据模型
+    protected $suffix_img = ["png", "jpg", "gif", "bmp", "jpeg", "jpe"];       //允许上传的图片后缀
     protected $uploadSizeLimit = 1024*1023*1;       //上传文件大小限制 1M
     protected $uploadVideoSizeLimit = 1024*1023*50;       //上传文件大小限制 50M
     protected $userid = 0;
@@ -59,8 +58,6 @@ abstract class Controller extends BaseController
 
     public function __construct()
     {
-//        define("DOMAIN",strtoupper(getenv('DOMAIN')));
-//        define("PUB",strtoupper(getenv('PUB')));
         define("DOMAIN",getenv('DOMAIN'));
         define("PUB",getenv('PUB'));
     }
@@ -93,5 +90,29 @@ abstract class Controller extends BaseController
             'previousPageUrl'   =>  $previousPageUrl,
             'nextPageUrl'   =>  $nextPageUrl,
         );
+    }
+
+    /**
+     * 图片上传
+     */
+    public function uploadOnlyImg($file,$path='')
+    {
+        //假如有，干掉老图片
+        if ($path && file_exists($path)) { unlink($path); }
+        //上传图片
+        if($file->isValid()){
+            $allowed_extensions = $this->suffix_img;
+            if ($file->getClientOriginalExtension() && !in_array($file->getClientOriginalExtension(), $allowed_extensions)) {
+                return array('code'=>-2, 'msg'=>'你的图片格式不对！');
+            }
+            $extension       = $file->getClientOriginalExtension() ?: 'png';
+            $folderName      = '/uploads/images/'.date('Y-m-d', time()).'/';
+            $destinationPath = public_path().$folderName;
+            $safeName        = uniqid().'.'.$extension;
+            $file->move($destinationPath, $safeName);
+            $filePath = rtrim(DOMAIN,'/').$folderName.$safeName;
+            return array('code'=>0, 'data'=>$filePath);
+        }
+        return array('code'=>-1, 'msg'=>'图片上传错误！');
     }
 }

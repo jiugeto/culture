@@ -27,7 +27,6 @@ class ApiWallet
         }
         return array(
             'code' => 0,
-            'model' => ApiBase::objToArr($response->model),
             'data' => ApiBase::objToArr($response->data),
         );
     }
@@ -49,9 +48,29 @@ class ApiWallet
         }
         return array(
             'code' => 0,
-            'model' => ApiBase::objToArr($response->model),
             'data' => ApiBase::objToArr($response->data),
         );
+    }
+
+    /**
+     * 通过 id 获取一条记录
+     */
+    public static function show($id)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/wallet/show';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, array(
+            'id'   =>  $id,
+        ));
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array(
+            'code' => 0,
+            'data' => ApiBase::objToArr($response->data),
+            );
     }
 
     /**
@@ -71,7 +90,7 @@ class ApiWallet
     }
 
     /**
-     * 添加钱包
+     * 修改钱包
      */
     public static function modify($data)
     {
@@ -108,15 +127,32 @@ class ApiWallet
     }
 
     /**
-     * 通过 id 获取一条记录
+     * 获取福利兑换记录
      */
-    public static function show($id)
+    public static function getConvertRecord($uid)
     {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/wallet/show';
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/wallet/getconvert';
         $curl = new Curl();
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
         $curl->post($apiUrl, array(
-            'id'   =>  $id,
+            'uid'   =>  $uid,
+        ));
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array(
+            'code' => 0,
+            'data' => ApiBase::objToArr($response->data),
+        );
+    }
+
+    public static function getModel()
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/wallet/getmodel';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, array(
         ));
         $response = json_decode($curl->response);
         if ($response->error->code != 0) {
@@ -125,6 +161,6 @@ class ApiWallet
         return array(
             'code' => 0,
             'model' => ApiBase::objToArr($response->model),
-            'data' => ApiBase::objToArr($response->data),);
+        );
     }
 }

@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Member;
 
-use App\Models\ProductVideoModel;
+use App\Api\ApiBusiness\ApiProVideo;
 use Illuminate\Http\Request;
 
 class ProductVideoController extends BaseController
@@ -16,31 +16,22 @@ class ProductVideoController extends BaseController
         $this->lists['func']['name'] = '效果定制';
         $this->lists['func']['url'] = 'provideo';
         $this->lists['create']['name'] = '发布需求';
-        $this->model = new ProductVideoModel();
     }
 
     public function index()
     {
         $curr['name'] = $this->lists['']['name'];
         $curr['url'] = $this->lists['']['url'];
+        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $prefix_url = DOMAIN.'member/provideo';
+        $datas = $this->query($pageCurr,2);
+        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query(2),
-            'prefix_url'=> DOMAIN.'member/provideo',
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-        ];
-        return view('member.provideo.index', $result);
-    }
-
-    public function trash()
-    {
-        $curr['name'] = $this->lists['trash']['name'];
-        $curr['url'] = $this->lists['trash']['url'];
-        $result = [
-            'datas'=> $this->query(1),
-            'prefix_url'=> DOMAIN.'member/provideo/trash',
-            'lists'=> $this->lists,
-            'curr'=> $curr,
+            'datas' => $datas,
+            'prefix_url' => $prefix_url,
+            'pagelist' => $pagelist,
+            'lists' => $this->lists,
+            'curr' => $curr,
         ];
         return view('member.provideo.index', $result);
     }
@@ -52,6 +43,7 @@ class ProductVideoController extends BaseController
     {
         $curr['name'] = $this->lists['edit']['name'];
         $curr['url'] = $this->lists['edit']['url'];
+        $apiProVideo = ApiProVideo::show();
         $result = [
             'data'=> ProductVideoModel::find($id),
             'model'=> $this->model,
@@ -100,13 +92,10 @@ class ProductVideoController extends BaseController
 
 
 
-    public function query($isshow)
+    public function query($pageCurr,$isshow)
     {
-        $datas = ProductVideoModel::where('isshow',$isshow)
-            ->orderBy('id','desc')
-            ->paginate($this->limit);
-        $datas->limit = $this->limit;
-        return $datas;
+        $apiProVideo = ApiProVideo::index($this->limit,$pageCurr,0,0,$this->userid,$isshow);
+        return $apiProVideo['code']==0 ? $apiProVideo['data'] : [];
     }
 
 //    public function pre($id)

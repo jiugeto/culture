@@ -3,7 +3,7 @@
 
 <ul>
     @foreach($lists as $klist=>$list)
-        @if(in_array($klist,['','trash']))
+        @if(in_array($klist,['',/*'trash'*/]))
             <a href="/member/{{$lists['func']['url']}}/{{$klist}}"
                style="color:{{$klist==$curr['url']?'red':'black'}};">
                 <li>{{$lists[$klist]['name']}}</li>
