@@ -6,185 +6,185 @@
     <table class="table_create table_show" cellspacing="0" cellpadding="0">
         <tr>
             <td class="field_name" style="width:100px;">订单名称：</td>
-            <td>{{ $data->name }}</td>
+            <td>{{ $data['name'] }}</td>
         </tr>
         <tr>
             <td class="field_name">类型：</td>
-            <td>{{ $data->genreName() }}</td>
+            <td>{{ $data['genreName'] }}</td>
         </tr>
         @if($data->buyer==$userid)
         <tr>
             <td class="field_name">供应方：</td>
-            <td>{{ $data->sellerName }}</td>
+            <td>{{ $data['sellerName'] }}</td>
         </tr>
         @elseif($data->seller==$userid)
         <tr>
             <td class="field_name">需求方：</td>
-            <td>{{ $data->buyerName }}</td>
+            <td>{{ $data['uname'] }}</td>
         </tr>
         @endif
         <tr>
             <td class="field_name">状态：</td>
-            <td>{{ $data->statusName() }}</td>
+            <td>{{ $data['statusName'] }}</td>
         </tr>
 
-    @if($data->status>1)
-        @if(in_array($data->genre,[1,2]))
+    @if($data['status']>1)
+        @if(in_array($data['genre'],[1,2]))
         <tr>
             <td class="field_name">创意交易价格：</td>
             <td class="statusbtn">
-                @if($data->status==3)
-                    @if($data->buyer==$userid)
-                        <input type="text" placeholder="0代表免费" pattern="^\d+$" name="pay"> 元
-                        &nbsp;<a class="tshow" onclick="getSureMoney(1)">价格确定</a>
-                    @else <span class="star">双方实际定价中</span>
-                    @endif
-                @elseif($data->status>=4 && $data->getMoney())
-                    {{ $data->getMoney() ? $data->getMoney().'元' : '免费' }}
-                    @if($data->getPayStatus())
-                        &nbsp;&nbsp;<b style="color:red;font-size:12px;">{{ $data->getPayName() }}</b>
-                    @endif
-                    @if($data->buyer==$userid)
-                        &nbsp;<a class="tshow paycode">支付二维码</a>
-                    @elseif($data->seller==$userid && !$data->getPayStatus())
-                        <br><br><a class="tshow" href="{{DOMAIN}}member/order/getPay/{{$data->id}}/0/1">确定收款</a>
-                    @endif
-                @endif
+                {{--@if($data['status']==3)--}}
+                    {{--@if($data['uid']==$userid)--}}
+                        {{--<input type="text" placeholder="0代表免费" pattern="^\d+$" name="pay"> 元--}}
+                        {{--&nbsp;<a class="tshow" onclick="getSureMoney(1)">价格确定</a>--}}
+                    {{--@else <span class="star">双方实际定价中</span>--}}
+                    {{--@endif--}}
+                {{--@elseif($data['status']>=4 && $data->getMoney())--}}
+                    {{--{{ $data->getMoney() ? $data->getMoney().'元' : '免费' }}--}}
+                    {{--@if($data->getPayStatus())--}}
+                        {{--&nbsp;&nbsp;<b style="color:red;font-size:12px;">{{ $data->getPayName() }}</b>--}}
+                    {{--@endif--}}
+                    {{--@if($data->buyer==$userid)--}}
+                        {{--&nbsp;<a class="tshow paycode">支付二维码</a>--}}
+                    {{--@elseif($data->seller==$userid && !$data->getPayStatus())--}}
+                        {{--<br><br><a class="tshow" href="{{DOMAIN}}member/order/getPay/{{$data->id}}/0/1">确定收款</a>--}}
+                    {{--@endif--}}
+                {{--@endif--}}
             </td>
         </tr>
-        @elseif(in_array($data->genre,[3,4]))
+        @elseif(in_array($data['genre'],[3,4]))
         <tr>
             <td class="field_name">分镜交易价格：</td>
             <td class="statusbtn">
-                @if($data->status==3 && !$data->getMoney())
-                    @if($data->buyer==$userid)
-                        <input type="text" placeholder="0代表免费" pattern="^\d+$" name="pay"> 元
-                        &nbsp;<a class="tshow" onclick="getSureMoney(2)">价格确定</a>
-                    @else <span class="star">双方实际定价中</span>
-                    @endif
-                @elseif($data->status>=4 && $data->getMoney())
-                    {{ $data->getMoney() ? $data->getMoney() : '免费' }}
-                    @if($data->getPayStatus())
-                        &nbsp;&nbsp;<b style="color:red;font-size:12px;">{{ $data->getPayName() }}</b>
-                    @endif
-                    @if($data->buyer==$userid)
-                        &nbsp;<a class="tshow paycode">支付二维码</a>
-                    @elseif($data->seller==$userid && !$data->getPayStatus())
-                        <br><br><a class="tshow" href="{{DOMAIN}}member/order/getPay/{{$data->id}}/0/1">确定收款</a>
-                    @endif
-                @endif
+                {{--@if($data->status==3 && !$data->getMoney())--}}
+                    {{--@if($data->buyer==$userid)--}}
+                        {{--<input type="text" placeholder="0代表免费" pattern="^\d+$" name="pay"> 元--}}
+                        {{--&nbsp;<a class="tshow" onclick="getSureMoney(2)">价格确定</a>--}}
+                    {{--@else <span class="star">双方实际定价中</span>--}}
+                    {{--@endif--}}
+                {{--@elseif($data->status>=4 && $data->getMoney())--}}
+                    {{--{{ $data->getMoney() ? $data->getMoney() : '免费' }}--}}
+                    {{--@if($data->getPayStatus())--}}
+                        {{--&nbsp;&nbsp;<b style="color:red;font-size:12px;">{{ $data->getPayName() }}</b>--}}
+                    {{--@endif--}}
+                    {{--@if($data->buyer==$userid)--}}
+                        {{--&nbsp;<a class="tshow paycode">支付二维码</a>--}}
+                    {{--@elseif($data->seller==$userid && !$data->getPayStatus())--}}
+                        {{--<br><br><a class="tshow" href="{{DOMAIN}}member/order/getPay/{{$data->id}}/0/1">确定收款</a>--}}
+                    {{--@endif--}}
+                {{--@endif--}}
             </td>
         </tr>
-        @elseif(in_array($data->genre,[5,6]))
+        @elseif(in_array($data['genre'],[5,6]))
         <tr>
             <td class="field_name">分期首款：</td>
             <td class="statusbtn">
-                @if($data->status==3)
-                    @if($data->buyer==$userid)
-                        <input type="text" placeholder="一期收费" pattern="^([1-9])|([1-9]\d+)$" required name="pay"> 元
-                        &nbsp;<a class="tshow" onclick="getSureMoney(3)">价格确定</a>
-                    @else <span class="star">双方实际定价中</span>
-                    @endif
-                @elseif($data->status>=4)
-                    {{ $data->getMoney(0) }}元
-                    @if($data->getPayStatus(0))
-                        &nbsp;&nbsp;<b style="color:red;font-size:12px;">{{ $data->getPayName() }}</b>
-                    @endif
-                    @if($data->buyer==$userid)
-                        &nbsp;<a class="tshow paycode">支付二维码</a>
-                    @elseif($data->seller==$userid && !$data->getPayStatus(0))
-                        <br><br><a class="tshow" href="{{DOMAIN}}member/order/getPay/{{$data->id}}/1/1">确定收款</a>
-                    @endif
-                @endif
-                @if($data->status==5)
-                    <span class="orange">效果协商中</span>
-                @elseif($data->status>3)
-                    <span class="green">效果已协商</span>
-                @endif
+                {{--@if($data->status==3)--}}
+                    {{--@if($data->buyer==$userid)--}}
+                        {{--<input type="text" placeholder="一期收费" pattern="^([1-9])|([1-9]\d+)$" required name="pay"> 元--}}
+                        {{--&nbsp;<a class="tshow" onclick="getSureMoney(3)">价格确定</a>--}}
+                    {{--@else <span class="star">双方实际定价中</span>--}}
+                    {{--@endif--}}
+                {{--@elseif($data->status>=4)--}}
+                    {{--{{ $data->getMoney(0) }}元--}}
+                    {{--@if($data->getPayStatus(0))--}}
+                        {{--&nbsp;&nbsp;<b style="color:red;font-size:12px;">{{ $data->getPayName() }}</b>--}}
+                    {{--@endif--}}
+                    {{--@if($data->buyer==$userid)--}}
+                        {{--&nbsp;<a class="tshow paycode">支付二维码</a>--}}
+                    {{--@elseif($data->seller==$userid && !$data->getPayStatus(0))--}}
+                        {{--<br><br><a class="tshow" href="{{DOMAIN}}member/order/getPay/{{$data->id}}/1/1">确定收款</a>--}}
+                    {{--@endif--}}
+                {{--@endif--}}
+                {{--@if($data->status==5)--}}
+                    {{--<span class="orange">效果协商中</span>--}}
+                {{--@elseif($data->status>3)--}}
+                    {{--<span class="green">效果已协商</span>--}}
+                {{--@endif--}}
             </td>
         </tr>
         <tr>
             <td class="field_name">二期付款：</td>
             <td class="statusbtn">
-                @if($data->status==5)
-                    @if($data->buyer==$userid)
-                        <input type="text" placeholder="二期收费" pattern="^([1-9])|([1-9]\d+)$" required name="pay"> 元
-                        &nbsp;<a class="tshow" onclick="getSureMoney(4)">价格确定</a>
-                    @else <span class="star">双方实际定价中</span>
-                    @endif
-                @elseif($data->status>6)
-                    {{ $data->getMoney(1) }}元
-                    @if($data->getPayStatus(1))
-                        &nbsp;&nbsp;<b style="color:red;font-size:12px;">{{ $data->getPayName() }}</b>
-                    @endif
-                    @if($data->buyer==$userid)
-                        &nbsp;<a class="tshow paycode">支付二维码</a>
-                    @elseif($data->seller==$userid && !$data->getPayStatus(1))
-                        <br><br><a class="tshow" href="{{DOMAIN}}member/order/getPay/{{$data->id}}/2/1">确定收款</a>
-                    @endif
-                @else 无
-                @endif
-                @if($data->status==6)
-                    <span class="orange">效果待确定</span>
-                @elseif($data->status>6)
-                    <span class="green">效果已确定</span>
-                @endif
+                {{--@if($data->status==5)--}}
+                    {{--@if($data->buyer==$userid)--}}
+                        {{--<input type="text" placeholder="二期收费" pattern="^([1-9])|([1-9]\d+)$" required name="pay"> 元--}}
+                        {{--&nbsp;<a class="tshow" onclick="getSureMoney(4)">价格确定</a>--}}
+                    {{--@else <span class="star">双方实际定价中</span>--}}
+                    {{--@endif--}}
+                {{--@elseif($data->status>6)--}}
+                    {{--{{ $data->getMoney(1) }}元--}}
+                    {{--@if($data->getPayStatus(1))--}}
+                        {{--&nbsp;&nbsp;<b style="color:red;font-size:12px;">{{ $data->getPayName() }}</b>--}}
+                    {{--@endif--}}
+                    {{--@if($data->buyer==$userid)--}}
+                        {{--&nbsp;<a class="tshow paycode">支付二维码</a>--}}
+                    {{--@elseif($data->seller==$userid && !$data->getPayStatus(1))--}}
+                        {{--<br><br><a class="tshow" href="{{DOMAIN}}member/order/getPay/{{$data->id}}/2/1">确定收款</a>--}}
+                    {{--@endif--}}
+                {{--@else 无--}}
+                {{--@endif--}}
+                {{--@if($data->status==6)--}}
+                    {{--<span class="orange">效果待确定</span>--}}
+                {{--@elseif($data->status>6)--}}
+                    {{--<span class="green">效果已确定</span>--}}
+                {{--@endif--}}
             </td>
         </tr>
         <tr>
             <td class="field_name">三期付款：</td>
             <td class="statusbtn">
-                @if($data->status==6)
-                    @if($data->buyer==$userid)
-                        <input type="text" placeholder="三期收费" pattern="^([1-9])|([1-9]\d+)$" required name="pay"> 元
-                        &nbsp;<a class="tshow" onclick="getSureMoney(5)">价格确定</a>
-                    @else <span class="star">双方实际定价中</span>
-                    @endif
-                @elseif($data->status>6)
-                    {{ $data->getMoney(2) }}元
-                    @if($data->getPayStatus(2))
-                        &nbsp;&nbsp;<b style="color:red;font-size:12px;">{{ $data->getPayName() }}</b>
-                    @endif
-                    @if($data->buyer==$userid)
-                        &nbsp;<a class="tshow paycode">支付二维码</a>
-                    @elseif($data->seller==$userid && !$data->getPayStatus(2))
-                        <br><br><a class="tshow" href="{{DOMAIN}}member/order/getPay/{{$data->id}}/3/1">确定收款</a>
-                    @endif
-                @else 无
-                @endif
-                @if($data->status==7)
-                    <span class="orange">成片待确定</span>
-                @elseif($data->status>7)
-                    <span class="green">成片已确定</span>
-                @endif
+                {{--@if($data->status==6)--}}
+                    {{--@if($data->buyer==$userid)--}}
+                        {{--<input type="text" placeholder="三期收费" pattern="^([1-9])|([1-9]\d+)$" required name="pay"> 元--}}
+                        {{--&nbsp;<a class="tshow" onclick="getSureMoney(5)">价格确定</a>--}}
+                    {{--@else <span class="star">双方实际定价中</span>--}}
+                    {{--@endif--}}
+                {{--@elseif($data->status>6)--}}
+                    {{--{{ $data->getMoney(2) }}元--}}
+                    {{--@if($data->getPayStatus(2))--}}
+                        {{--&nbsp;&nbsp;<b style="color:red;font-size:12px;">{{ $data->getPayName() }}</b>--}}
+                    {{--@endif--}}
+                    {{--@if($data->buyer==$userid)--}}
+                        {{--&nbsp;<a class="tshow paycode">支付二维码</a>--}}
+                    {{--@elseif($data->seller==$userid && !$data->getPayStatus(2))--}}
+                        {{--<br><br><a class="tshow" href="{{DOMAIN}}member/order/getPay/{{$data->id}}/3/1">确定收款</a>--}}
+                    {{--@endif--}}
+                {{--@else 无--}}
+                {{--@endif--}}
+                {{--@if($data->status==7)--}}
+                    {{--<span class="orange">成片待确定</span>--}}
+                {{--@elseif($data->status>7)--}}
+                    {{--<span class="green">成片已确定</span>--}}
+                {{--@endif--}}
             </td>
         </tr>
         <tr>
             <td class="field_name">分期尾款：</td>
             <td class="statusbtn">
-                @if($data->status==8)
-                    @if($data->buyer==$userid)
-                        <input type="text" placeholder="四期收费" pattern="^([1-9])|([1-9]\d+)$" required name="pay"> 元
-                        &nbsp;<a class="tshow" onclick="getSureMoney(6)">价格确定</a>
-                    @else <span class="star">双方实际定价中</span>
-                    @endif
-                @elseif($data->status>8)
-                    {{ $data->getMoney(3) }}元
-                    @if($data->getPayStatus(3))
-                        &nbsp;&nbsp;<b style="color:red;font-size:12px;">{{ $data->getPayName() }}</b>
-                    @endif
-                    @if($data->buyer==$userid)
-                        &nbsp;<a class="tshow paycode">支付二维码</a>
-                    @elseif($data->seller==$userid && !$data->getPayStatus(3))
-                        <br><br><a class="tshow" href="{{DOMAIN}}member/order/getPay/{{$data->id}}/4/1">确定收款</a>
-                    @endif
-                @else 无
-                @endif
-                @if($data->status==9)
-                    <span class="orange">待出片</span>
-                @elseif($data->status>9)
-                    <span class="green">已出片</span>
-                @endif
+                {{--@if($data->status==8)--}}
+                    {{--@if($data->buyer==$userid)--}}
+                        {{--<input type="text" placeholder="四期收费" pattern="^([1-9])|([1-9]\d+)$" required name="pay"> 元--}}
+                        {{--&nbsp;<a class="tshow" onclick="getSureMoney(6)">价格确定</a>--}}
+                    {{--@else <span class="star">双方实际定价中</span>--}}
+                    {{--@endif--}}
+                {{--@elseif($data->status>8)--}}
+                    {{--{{ $data->getMoney(3) }}元--}}
+                    {{--@if($data->getPayStatus(3))--}}
+                        {{--&nbsp;&nbsp;<b style="color:red;font-size:12px;">{{ $data->getPayName() }}</b>--}}
+                    {{--@endif--}}
+                    {{--@if($data->buyer==$userid)--}}
+                        {{--&nbsp;<a class="tshow paycode">支付二维码</a>--}}
+                    {{--@elseif($data->seller==$userid && !$data->getPayStatus(3))--}}
+                        {{--<br><br><a class="tshow" href="{{DOMAIN}}member/order/getPay/{{$data->id}}/4/1">确定收款</a>--}}
+                    {{--@endif--}}
+                {{--@else 无--}}
+                {{--@endif--}}
+                {{--@if($data->status==9)--}}
+                    {{--<span class="orange">待出片</span>--}}
+                {{--@elseif($data->status>9)--}}
+                    {{--<span class="green">已出片</span>--}}
+                {{--@endif--}}
             </td>
         </tr>
         @endif
@@ -192,40 +192,40 @@
 
         <tr>
             <td class="field_name">创建时间：</td>
-            <td>{{ $data->createTime() }}</td>
+            <td>{{ $data['createTime'] }}</td>
         </tr>
-    @if(in_array($data->genre,[1,2,3,4]))
-        <tr>
-            <td class="field_name">付款时间：</td>
-            <td>{{ $data->getCreateTime() }}</td>
-        </tr>
-    @elseif(in_array($data->genre,[5,6]))
-        @if($data->status==2)
-        <tr>
-            <td class="field_name">首款时间：</td>
-            <td>{{ $data->getCreateTime(0) }}</td>
-        </tr>
-        @elseif($data->status==4)
-        <tr>
-            <td class="field_name">二期付款时间：</td>
-            <td>{{ $data->getCreateTime(1) }}</td>
-        </tr>
-        @elseif($data->status==6)
-        <tr>
-            <td class="field_name">三期付款时间：</td>
-            <td>{{ $data->getCreateTime(2) }}</td>
-        </tr>
-        @elseif($data->status==7)
-        <tr>
-            <td class="field_name">尾款时间：</td>
-            <td>{{ $data->getCreateTime(3) }}</td>
-        </tr>
-        @endif
-    @endif
+    {{--@if(in_array($data->genre,[1,2,3,4]))--}}
+        {{--<tr>--}}
+            {{--<td class="field_name">付款时间：</td>--}}
+            {{--<td>{{ $data->getCreateTime() }}</td>--}}
+        {{--</tr>--}}
+    {{--@elseif(in_array($data->genre,[5,6]))--}}
+        {{--@if($data->status==2)--}}
+        {{--<tr>--}}
+            {{--<td class="field_name">首款时间：</td>--}}
+            {{--<td>{{ $data->getCreateTime(0) }}</td>--}}
+        {{--</tr>--}}
+        {{--@elseif($data->status==4)--}}
+        {{--<tr>--}}
+            {{--<td class="field_name">二期付款时间：</td>--}}
+            {{--<td>{{ $data->getCreateTime(1) }}</td>--}}
+        {{--</tr>--}}
+        {{--@elseif($data->status==6)--}}
+        {{--<tr>--}}
+            {{--<td class="field_name">三期付款时间：</td>--}}
+            {{--<td>{{ $data->getCreateTime(2) }}</td>--}}
+        {{--</tr>--}}
+        {{--@elseif($data->status==7)--}}
+        {{--<tr>--}}
+            {{--<td class="field_name">尾款时间：</td>--}}
+            {{--<td>{{ $data->getCreateTime(3) }}</td>--}}
+        {{--</tr>--}}
+        {{--@endif--}}
+    {{--@endif--}}
     </table>
 
     <p style="padding:0 20px;">
-        <b>{{ $data->buyer==$userid ? '供应方' : '需求方' }}联系方式</b>：
+        <b>{{ $data['uid']==$userid ? '供应方' : '需求方' }}联系方式</b>：
         <a class="tshow" id="open" title="展开用户信息">[+]</a>
         <a class="tshow" id="close" style="display:none;" title="收起用户信息">[-]</a>
         <script>
@@ -237,31 +237,31 @@
     </p>
     <table class="table_create table_show" cellspacing="0" cellpadding="0" id="userinfo" style="display:none;">
         <tr>
-            <td class="field_name">{{ $data->buyer==$userid ? '供应方' : '需求方' }}名称：</td>
-            <td>{{ $userInfo->username }}</td>
+            <td class="field_name">{{ $data['uid']==$userid ? '供应方' : '需求方' }}名称：</td>
+            <td>{{ $userInfo['username'] }}</td>
         </tr>
         <tr>
             <td class="field_name">联系方式：</td>
-            <td>{{ $userInfo->mobile }}</td>
+            <td>{{ $userInfo['mobile'] }}</td>
         </tr>
         <tr>
             <td class="field_name">QQ：</td>
-            <td>{{ $userInfo->qq }}</td>
+            <td>{{ $userInfo['qq'] }}</td>
         </tr>
         <tr>
             <td class="field_name">支付宝：</td>
-            <td>{{ $userInfo->zfb }}</td>
+            <td>{{ $userInfo['zfb'] }}</td>
         </tr>
         <tr>
             <td class="field_name">地址：</td>
-            <td>{{ $userInfo->address }}</td>
+            <td>{{ $userInfo['address'] }}</td>
         </tr>
-        @if($userInfo->company($userInfo->id))
-        <tr>
-            <td class="field_name">{{ $data->buyer==$userid ? '供应方' : '需求方' }}公司：</td>
-            <td>{{ $userInfo->company($userInfo->id)->name }}</td>
-        </tr>
-        @endif
+        {{--@if($userInfo->company($userInfo->id))--}}
+        {{--<tr>--}}
+            {{--<td class="field_name">{{ $data->buyer==$userid ? '供应方' : '需求方' }}公司：</td>--}}
+            {{--<td>{{ $userInfo->company($userInfo->id)->name }}</td>--}}
+        {{--</tr>--}}
+        {{--@endif--}}
     </table>
 
     <table class="table_create table_show" cellspacing="0" cellpadding="0">
@@ -269,39 +269,39 @@
             <td class="status_line">
                 <div class="title">订单状态线：
                     <span id="statustext0">
-                        @if(in_array($data->genre,[1,2,3,4]))
-                            {{ $model['status1s'][$data->status] }}
-                        @elseif(in_array($data->genre,[5,6]))
-                            {{ $model['status2s'][$data->status] }}
-                        @elseif(in_array($data->genre,[7,8,9,10,11,12]))
-                            {{ $model['status3s'][$data->status] }}
-                        @endif
+                        {{--@if(in_array($data['genre'],[1,2,3,4]))--}}
+                            {{--{{ $model['status1s'][$data->status] }}--}}
+                        {{--@elseif(in_array($data['genre'],[5,6]))--}}
+                            {{--{{ $model['status2s'][$data->status] }}--}}
+                        {{--@elseif(in_array($data['genre'],[7,8,9,10,11,12]))--}}
+                            {{--{{ $model['status3s'][$data->status] }}--}}
+                        {{--@endif--}}
                     </span>
                 </div>
                 <div class="con">
                     <div class="pos">
-                    @if(in_array($data->genre,[1,2,3,4]))
-                        @foreach($model['status1s'] as $kstatus=>$status)
-                        <a class="tshow" id="status{{ $kstatus }}">
-                            <div style="background:{{$data->status==$kstatus?'rgba(255,0,255,1)':'rgba(220,220,220,1)'}};"></div>
-                            <span id="statustext{{ $kstatus }}" style="display:{{$data->status==$kstatus?'block':'none'}};">{{ $status }}</span>
-                        </a>
-                        @endforeach
-                    @elseif(in_array($data->genre,[5,6]))
-                        @foreach($model['status2s'] as $kstatus=>$status)
-                        <a class="tshow" id="status2_{{ $kstatus }}">
-                            <div style="background:{{$data->status==$kstatus?'rgba(255,0,255,1)':'rgba(220,220,220,1)'}};"></div>
-                            <span id="statustext2_{{ $kstatus }}" style="display:{{$data->status==$kstatus?'block':'none'}};">{{ $status }}</span>
-                        </a>
-                        @endforeach
-                    @elseif(in_array($data->genre,[6,7,8,9,10,11,12]))
-                        @foreach($model['status3s'] as $kstatus=>$status)
-                        <a class="tshow" id="status2_{{ $kstatus }}">
-                            <div style="background:{{$data->status==$kstatus?'rgba(255,0,255,1)':'rgba(220,220,220,1)'}};"></div>
-                            <span id="statustext3_{{ $kstatus }}" style="display:{{$data->status==$kstatus?'block':'none'}};">{{ $status }}</span>
-                        </a>
-                        @endforeach
-                    @endif
+                    {{--@if(in_array($data->genre,[1,2,3,4]))--}}
+                        {{--@foreach($model['status1s'] as $kstatus=>$status)--}}
+                        {{--<a class="tshow" id="status{{ $kstatus }}">--}}
+                            {{--<div style="background:{{$data->status==$kstatus?'rgba(255,0,255,1)':'rgba(220,220,220,1)'}};"></div>--}}
+                            {{--<span id="statustext{{ $kstatus }}" style="display:{{$data->status==$kstatus?'block':'none'}};">{{ $status }}</span>--}}
+                        {{--</a>--}}
+                        {{--@endforeach--}}
+                    {{--@elseif(in_array($data->genre,[5,6]))--}}
+                        {{--@foreach($model['status2s'] as $kstatus=>$status)--}}
+                        {{--<a class="tshow" id="status2_{{ $kstatus }}">--}}
+                            {{--<div style="background:{{$data->status==$kstatus?'rgba(255,0,255,1)':'rgba(220,220,220,1)'}};"></div>--}}
+                            {{--<span id="statustext2_{{ $kstatus }}" style="display:{{$data->status==$kstatus?'block':'none'}};">{{ $status }}</span>--}}
+                        {{--</a>--}}
+                        {{--@endforeach--}}
+                    {{--@elseif(in_array($data->genre,[6,7,8,9,10,11,12]))--}}
+                        {{--@foreach($model['status3s'] as $kstatus=>$status)--}}
+                        {{--<a class="tshow" id="status2_{{ $kstatus }}">--}}
+                            {{--<div style="background:{{$data->status==$kstatus?'rgba(255,0,255,1)':'rgba(220,220,220,1)'}};"></div>--}}
+                            {{--<span id="statustext3_{{ $kstatus }}" style="display:{{$data->status==$kstatus?'block':'none'}};">{{ $status }}</span>--}}
+                        {{--</a>--}}
+                        {{--@endforeach--}}
+                    {{--@endif--}}
                     </div>
                 </div>
             </td>
@@ -311,51 +311,51 @@
     <table class="table_create table_show" cellspacing="0" cellpadding="0">
         <tr><td class="center" colspan="2" style="border:0;cursor:pointer;">
                 <button class="companybtn" onclick="history.go(-1)">返 &nbsp;回</button>
-                @if($data->status==1)
-                    <a class="tshow" id="sure" title="{{ $data->statusbtn() }}"><button class="companybtn">确认订单</button></a>
-                    <a class="tshow" id="refuse" title="{{ $data->statusbtn() }}"><button class="companybtn">拒绝订单</button></a>
-                @endif
-                @if(in_array($data->genre,[1,2,3,4]))
-                    @if(in_array($data->status,[3,4,5,6,7]))
-                    <a class="tshow" id="tostatus" title="{{ $data->statusbtn() }}">
-                        <button class="companybtn">
-                            @if(in_array($data->status,[4,5]) && $data->getMoney())办理订单
-                            @elseif($data->status==6)确认收到
-                            @elseif($data->status==7)订单成功
-                            @endif
-                        </button></a>
-                    @endif
-                @endif
-                @if(in_array($data->status,[2,11]))
-                    <a class="tshow" id="false" title="{{ $data->statusbtn() }}失败">
-                        <button class="companybtn">订单失败</button></a>
-                @elseif(in_array($data->status,[11]))
-                    <a class="tshow" id="success" title="{{ $data->statusbtn() }}失败">
-                        <button class="companybtn">订单成功</button></a>
-                @elseif(in_array($data->status,[12,13]))
-                    <a class="tshow" id="next"><button class="companybtn">继续流程</button></a>
-                @endif
+                {{--@if($data->status==1)--}}
+                    {{--<a class="tshow" id="sure" title="{{ $data->statusbtn() }}"><button class="companybtn">确认订单</button></a>--}}
+                    {{--<a class="tshow" id="refuse" title="{{ $data->statusbtn() }}"><button class="companybtn">拒绝订单</button></a>--}}
+                {{--@endif--}}
+                {{--@if(in_array($data->genre,[1,2,3,4]))--}}
+                    {{--@if(in_array($data->status,[3,4,5,6,7]))--}}
+                    {{--<a class="tshow" id="tostatus" title="{{ $data->statusbtn() }}">--}}
+                        {{--<button class="companybtn">--}}
+                            {{--@if(in_array($data->status,[4,5]) && $data->getMoney())办理订单--}}
+                            {{--@elseif($data->status==6)确认收到--}}
+                            {{--@elseif($data->status==7)订单成功--}}
+                            {{--@endif--}}
+                        {{--</button></a>--}}
+                    {{--@endif--}}
+                {{--@endif--}}
+                {{--@if(in_array($data->status,[2,11]))--}}
+                    {{--<a class="tshow" id="false" title="{{ $data->statusbtn() }}失败">--}}
+                        {{--<button class="companybtn">订单失败</button></a>--}}
+                {{--@elseif(in_array($data->status,[11]))--}}
+                    {{--<a class="tshow" id="success" title="{{ $data->statusbtn() }}失败">--}}
+                        {{--<button class="companybtn">订单成功</button></a>--}}
+                {{--@elseif(in_array($data->status,[12,13]))--}}
+                    {{--<a class="tshow" id="next"><button class="companybtn">继续流程</button></a>--}}
+                {{--@endif--}}
             </td></tr>
     </table>
-    <input type="hidden" name="id" value="{{ $data->id }}">
-    <input type="hidden" name="genre" value="{{ $data->genre }}">
-    <input type="hidden" name="status" value="{{ $data->status }}">
-    <input type="hidden" name="money" value="{{ $data->getMoney() }}">
-    <input type="hidden" name="realMoney1" value="{{ $data->getMoney(0) }}">
-    <input type="hidden" name="realMoney2" value="{{ $data->getMoney(1) }}">
-    <input type="hidden" name="realMoney3" value="{{ $data->getMoney(2) }}">
-    <input type="hidden" name="realMoney4" value="{{ $data->getMoney(3) }}">
-    <input type="hidden" name="payStatus" value="{{ $data->getPayStatus() }}">
-    <input type="hidden" name="payStatus1" value="{{ $data->getPayStatus(0) }}">
-    <input type="hidden" name="payStatus2" value="{{ $data->getPayStatus(1) }}">
-    <input type="hidden" name="payStatus3" value="{{ $data->getPayStatus(2) }}">
-    <input type="hidden" name="payStatus4" value="{{ $data->getPayStatus(3) }}">
-    <input type="hidden" name="_token" value="{{csrf_token()}}">
+    {{--<input type="hidden" name="id" value="{{ $data->id }}">--}}
+    {{--<input type="hidden" name="genre" value="{{ $data->genre }}">--}}
+    {{--<input type="hidden" name="status" value="{{ $data->status }}">--}}
+    {{--<input type="hidden" name="money" value="{{ $data->getMoney() }}">--}}
+    {{--<input type="hidden" name="realMoney1" value="{{ $data->getMoney(0) }}">--}}
+    {{--<input type="hidden" name="realMoney2" value="{{ $data->getMoney(1) }}">--}}
+    {{--<input type="hidden" name="realMoney3" value="{{ $data->getMoney(2) }}">--}}
+    {{--<input type="hidden" name="realMoney4" value="{{ $data->getMoney(3) }}">--}}
+    {{--<input type="hidden" name="payStatus" value="{{ $data->getPayStatus() }}">--}}
+    {{--<input type="hidden" name="payStatus1" value="{{ $data->getPayStatus(0) }}">--}}
+    {{--<input type="hidden" name="payStatus2" value="{{ $data->getPayStatus(1) }}">--}}
+    {{--<input type="hidden" name="payStatus3" value="{{ $data->getPayStatus(2) }}">--}}
+    {{--<input type="hidden" name="payStatus4" value="{{ $data->getPayStatus(3) }}">--}}
+    {{--<input type="hidden" name="_token" value="{{csrf_token()}}">--}}
     {{--弹出窗口--}}
     <div class="popup">
-        @if(in_array($data->genre,[1,2]))
+        @if(in_array($data['genre'],[1,2]))
         <a class="tshow" href="/storyboard" id="story">分镜流程</a>
-        @elseif(in_array($data->genre,[1,2,3,4]))
+        @elseif(in_array($data['genre'],[1,2,3,4]))
         <a class="tshow" href="/product" id="video">视频流程</a>
         @endif
         <a class="tshow close" onclick="$('.popup').hide();">X</a>
@@ -366,14 +366,14 @@
         <a class="tshow close" onclick="$('.popup').hide();">X</a>
     </div>
     {{--支付的二维码--}}
-    @if($data->buyer==$userid)
-    <div class="popup3" style="display:{{$data->getPayStatus()?'none':'block'}};">
-        <img src="{{PUB}}assets-home/images/cul_paycode.png">
-        <div style="text-align:center;">斯塔克(科幻-视觉控)</div>
-        <div class="close">确 定</div>
-        <a class="tshow close" onclick="$('.popup').hide();">X</a>
-    </div>
-    @endif
+    {{--@if($data['uid']==$userid)--}}
+    {{--<div class="popup3" style="display:{{$data->getPayStatus()?'none':'block'}};">--}}
+        {{--<img src="{{PUB}}assets-home/images/cul_paycode.png">--}}
+        {{--<div style="text-align:center;">斯塔克(科幻-视觉控)</div>--}}
+        {{--<div class="close">确 定</div>--}}
+        {{--<a class="tshow close" onclick="$('.popup').hide();">X</a>--}}
+    {{--</div>--}}
+    {{--@endif--}}
 
     <script>
         $.ajaxSetup({headers : {'X-CSRF-TOKEN':$('input[name="_token"]').val()}});

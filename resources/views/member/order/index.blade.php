@@ -1,7 +1,6 @@
 @extends('member.main')
 @section('content')
     @include('member.common.crumb')
-    {{--<div class="mem_tab">@include('member.common.lists')</div>--}}
     <div class="hr_tab"></div>
     <!-- 空白 -->
     <div class="list_kongbai">&nbsp;</div>
@@ -16,19 +15,19 @@
                 <td>创建时间</td>
                 <td>操作</td>
             </tr>
-        @if($datas->total())
+        @if(count($datas))
             @foreach($datas as $data)
             <tr>
-                <td>{{ $data->id }}</td>
-                <td><a href="{{DOMAIN}}member/order">{{ $data->name }}</a></td>
-                <td>{{ $data->genreName() }}</td>
-                <td>{{ $data->buyerName }}</td>
-                <td>{{ $data->sellerName }}</td>
-                <td>{{ $data->createTime() }}</td>
+                <td>{{$data['id']}}</td>
+                <td><a href="{{DOMAIN}}member/order">{{$data['name']}}</a></td>
+                <td>{{$data['genreName']}}</td>
+                <td>{{$data['uname']}}</td>
+                <td>{{$data['sellerName']}}</td>
+                <td>{{$data['createTime']}}</td>
                 <td>
                     {{--@if($curr['url']=='')--}}
                         {{--<a href="{{DOMAIN}}member/order/{{ $data->id }}/pre" class="list_btn">预览</a>--}}
-                        <a href="{{DOMAIN}}member/order/{{ $data->id }}" class="list_btn">查看</a>
+                        <a href="{{DOMAIN}}member/order/{{$data['id']}}" class="list_btn">查看</a>
                         {{--<a href="{{DOMAIN}}member/order/{{ $data->id }}/edit" class="list_btn">编辑</a>--}}
                         {{--<a href="{{DOMAIN}}member/order/{{ $data->id }}/destroy" class="list_btn">删除</a>--}}
                     {{--@elseif($curr['url']=='trash')--}}
@@ -38,9 +37,9 @@
                 </td>
             </tr>
             @endforeach
-        @else @include('member.common.#norecord')
+        @else <tr><td colspan="10" style="text-align:center;">没有记录</td></tr>
         @endif
         </table>
-        @include('member.common.#page')
+        @include('member.common.page2')
     </div>
 @stop
