@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers\Member;
 
+use App\Api\ApiBusiness\ApiOrder;
+use App\Api\ApiOnline\ApiOrderPro;
 use App\Api\ApiUser\ApiGold;
 use App\Api\ApiUser\ApiSign;
 use App\Api\ApiUser\ApiTip;
@@ -183,6 +185,35 @@ class WalletController extends BaseController
             'curr'=> $curr,
         ];
         return view('member.wallet.convertList', $result);
+    }
+
+    /**
+     * 通过 uid 获取福利使用记录
+     */
+    public function getUseWeal($o=1)
+    {
+        $curr['name'] = '福利中心 - 福利使用记录';
+        $curr['url'] = $this->lists['']['url'];
+        $pageCurr = isset($_POST['pageCurr']) ? $_POST['pageCurr'] : 1;
+        $prefix_url = DOMAIN.'member/wallet/useweal';
+        if ($o==1) {
+            $apiOrder = ApiOrderPro::getOrdersByWeal($this->limit,$pageCurr,$this->userid,0,2,0);
+            $prefix_url = $prefix_url.'/1';
+        } else if ($o=2) {
+            $apiOrder = ApiOrder::getOrdersByWeal($this->limit,$pageCurr,$this->userid,2,0);
+            $prefix_url = $prefix_url.'/2';
+        }
+        $datas = $apiOrder['code']==0 ? $apiOrder['data'] : [];
+        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
+        $result = [
+            'datas' => $datas,
+            'pagelist' => $pagelist,
+            'prefix_url' => $prefix_url,
+            'lists'=> $this->lists,
+            'curr'=> $curr,
+            'o' => $o,
+        ];
+        return view('member.wallet.usewealList', $result);
     }
 
 

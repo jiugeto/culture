@@ -139,6 +139,7 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
     Route::get('gold','WalletController@goldList');         //金币列表
     Route::get('tip','WalletController@tipList');           //红包列表
     Route::get('wallet/toweal','WalletController@getToWeal');           //福利兑换记录
+    Route::get('wallet/useweal/{order}','WalletController@getUseWeal');         //福利兑换记录
     Route::get('wallet/signtoweal/{sign}','WalletController@setWealBySign');    //兑换签到
     Route::get('wallet/goldtoweal/{gold}','WalletController@setWealByGold');    //金币兑换
     Route::get('wallet/tiptoweal/{tip}','WalletController@setWealByTip');       //红包兑换

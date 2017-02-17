@@ -1,12 +1,8 @@
 <?php
 namespace App\Http\Controllers\Member;
 
+use App\Api\ApiBusiness\ApiOrder;
 use Illuminate\Http\Request;
-use App\Models\Base\PayModel;
-use App\Models\CompanyModel;
-use App\Models\Base\OrderModel;
-use App\Models\UserModel;
-use App\Models\UserParamsModel;
 use Illuminate\Support\Facades\Request as AjaxRequest;
 use Illuminate\Support\Facades\Input;
 
@@ -19,21 +15,23 @@ class OrderController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->model = new OrderModel();
         //面包屑处理
         $this->lists['func']['name'] = '订单管理';
         $this->lists['func']['url'] = 'order';
-//        $this->lists['create']['name'] = '添加类型';
-//        $this->lists['edit']['name'] = '修改分类';
     }
 
     public function index()
     {
         $curr['name'] = $this->lists['']['name'] = '订单列表';
         $curr['url'] = $this->lists['']['url'];
+        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $prefix_url = DOMAIN.'member/order';
+        $datas = $this->query($pageCurr);
+        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query(),
-            'prefix_url'=> DOMAIN.'member/order',
+            'datas' => $this->query($pageCurr),
+            'prefix_url' => $prefix_url,
+            'pagelist' => $pagelist,
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -243,13 +241,9 @@ class OrderController extends BaseController
         return redirect(DOMAIN.'member/order/'.$id);
     }
 
-    public function query()
+    public function query($pageCurr)
     {
-        $datas = OrderModel::where('del',0)
-            ->where('isshow',1)
-            ->orderBy('id','desc')
-            ->paginate($this->limit);
-        $datas->limit = $this->limit;
-        return $datas;
+        $apiOrder = ApiOrder::index($this->limit,$pageCurr,2,0);
+        return $apiOrder['code']==0 ? $apiOrder['data'] : [];
     }
 }

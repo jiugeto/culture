@@ -201,7 +201,7 @@ a:hover li.a_li,a li.a_li_curr {
     padding:0 10px 10px 10px;
     border-bottom:1px solid lightgrey;
 }
-.mem_tab a:hover li { color:red; }
+.mem_tab a:hover li,.mem_tab a.curr:hover li { color:red; }
 .p_style {
     margin:10px 20px;
     color:gray;
@@ -221,7 +221,10 @@ a:hover li.a_li,a li.a_li_curr {
     margin:5px 20px;
     font-size:12px;
 }
-.list_tab { width:100%;border-collapse:collapse; }
+.list_tab {
+    width:100%;
+    border-collapse:collapse;
+}
 .list_tab tr {
     border-top:1px solid lightgrey;
     border-bottom:1px solid lightgrey;

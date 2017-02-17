@@ -38,7 +38,7 @@
             <td>{{ $data['weal'] }} 元 &nbsp;
                 {{--<small style="color:lightgrey;font-size:12px;">(用于消费，不可套现)</small>--}}
                 <a href="{{DOMAIN}}member/wallet/toweal" class="list_btn">兑换记录</a>
-                <a href="{{DOMAIN}}member/wallet/useweal" class="list_btn">使用记录</a>
+                <a href="{{DOMAIN}}member/wallet/useweal/1" class="list_btn">使用记录</a>
             </td>
         </tr>
         <tr>
