@@ -23,7 +23,7 @@ class ApiBase
      */
     public static function getApiCurl()
     {
-        return 'business_api.jiugewenhua.com';
+        return 'business_api.jiuge_wenhua.com';
     }
 
     /**

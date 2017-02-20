@@ -591,7 +591,7 @@
                             <li class="t">{{ substr($order['serial'],4) }}</li>
                             <li class="t">{{ $order['name'] }}</li>
                             <li class="t">{{ $order['genreName'] }}</li>
-                            <li class="t">{{ $order['buyerName'] }}</li>
+                            <li class="t">{{ $order['uname'] }}</li>
                             <li class="t">0</li>
                             <li class="t">{{ $order['statusName'] }}</li>
                             <li class="t">{{ $order['createTime'] }}</li>
