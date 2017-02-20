@@ -1,7 +1,10 @@
-/vendor
-/node_modules
-#Homestead.yaml
-#Homestead.json
+/vendor/
 .env
-
 .idea/
+/public/uploads/*
+/storage/
+/test/
+/app/Api/ApiBusiness/ApiBase.php
+/app/Api/ApiOnline/ApiBase.php
+/app/Api/ApiTalk/ApiBase.php
+/app/Api/ApiUser/ApiBase.php
