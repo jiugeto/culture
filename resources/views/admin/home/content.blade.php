@@ -8,12 +8,12 @@
     <ul class="am-avg-sm-1 am-avg-md-4 am-margin am-padding am-text-center admin-content-list">
         <li><a href="{{DOMAIN}}admin/user" class="am-text-secondary">
                 <span class="am-icon-btn am-icon-user-md"></span>
-                <br/>一周内/在线/注册用户<br/> {{$users['week']}}/{{$users['hour']}}/{{$users['all']}}
+                <br/>今日/一周内/注册用户<br/> {{$users['day']}}/{{$users['week']}}/{{$users['all']}}
             </a>
         </li>
         <li><a href="{{DOMAIN}}admin/order" class="am-text-warning">
                 <span class="am-icon-btn am-icon-briefcase"></span>
-                <br/>创作/交易/售后订单<br/> {{$orders['create']}}/{{$orders['all']}}/{{$orders['firm']}}
+                <br/>创作/主体订单<br/> {{count($orders['create'])}}/{{count($orders['main'])}}
             </a>
         </li>
     </ul>
@@ -46,7 +46,7 @@
                     </td>
                 </tr>
                     @endforeach
-                @else @include('admin.common.norecord')
+                @else <tr><td colspan="10" style="text-align:center;">没有记录</td></tr>
                 @endif
                 </tbody>
             </table>
@@ -64,66 +64,31 @@
                         <tr>
                             <td>编号</td>
                             <td>申请方</td>
-                            <td>发布方</td>
-                            <td>价格</td>
+                            <td>价格(元)</td>
                             <td>状态</td>
                             <td>时间</td>
                             <td>操作</td>
                         </tr>
                         <tr><td colspan="10" style="border-top:1px solid lightgrey;"></td></tr>
-                        @if(count($orders['ordersC']))
-                            @foreach($orders['ordersC'] as $orderC)
+                        @if(count($orders['create']))
+                            @foreach($orders['create'] as $order)
                             <tr>
-                                <td>{{$orderC->id}}</td>
-                                <td>{{$orderC->buyerName}}</td>
-                                <td>{{$orderC->sellerName}}</td>
-                                <td>{{$orderC->getMoney()}}</td>
-                                <td>{{$orderC->getStatusName()}}</td>
-                                <td>{{date("Y年m月d日",$orderC->created_at)}}</td>
-                                <td><a href="{{DOMAIN}}admin/orderpro/{{$orderC->id}}"
+                                <td>{{$order['id']}}</td>
+                                <td>{{$order['uname']}}</td>
+                                <td>{{$order['money']}}</td>
+                                <td>{{$order['statusName']}}</td>
+                                <td>{{$order['createTime']}}</td>
+                                <td><a href="{{DOMAIN}}admin/orderpro/{{$order['id']}}"
                                        class="am-btn am-btn-default am-btn-xs" style="padding:3px 15px;">查看</a></td>
                             </tr>
                             @endforeach
-                        @else @include('admin.common.norecord')
-                        @endif
-                    </table>
-                </div>
-            </div>
-            {{--售后订单--}}
-            <div class="am-panel am-panel-default">
-                <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-1'}">售后订单<span class="am-icon-chevron-down am-fr" ></span></div>
-                <div class="am-panel-bd am-collapse am-in" id="collapse-panel-1">
-                    <table style="width:100%;font-size:14px;">
-                        <tr>
-                            <td>编号</td>
-                            <td>申请方</td>
-                            <td>发布方</td>
-                            <td>价格</td>
-                            <td>状态</td>
-                            <td>时间</td>
-                            <td>操作</td>
-                        </tr>
-                        <tr><td colspan="10" style="border-top:1px solid lightgrey;"></td></tr>
-                        @if(count($orders['ordersF']))
-                            @foreach($orders['ordersF'] as $orderF)
-                            <tr>
-                                <td>{{$orderF->id}}</td>
-                                <td>{{$orderF->buyerName}}</td>
-                                <td>{{$orderF->sellerName}}</td>
-                                <td>{{$orderF->getMoney()}}</td>
-                                <td>{{$orderF->statusName()}}</td>
-                                <td>{{date("Y年m月d日",$orderF->created_at)}}</td>
-                                <td><a href="{{DOMAIN}}admin/orderfirm/{{$orderF->id}}"
-                                       class="am-btn am-btn-default am-btn-xs" style="padding:3px 15px;">查看</a></td>
-                            </tr>
-                            @endforeach
-                        @else @include('admin.common.norecord')
+                        @else <tr><td colspan="10" style="text-align:center;">没有记录</td></tr>
                         @endif
                     </table>
                 </div>
             </div>
         </div>
-        {{--横向列表：创意、分镜、样片订单--}}
+        {{--横向列表：创意、分镜、样片等等主体业务订单--}}
         <div class="am-u-md-6">
             <div class="am-panel am-panel-default">
                 <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-2'}">交易订单<span class="am-icon-chevron-down am-fr" ></span></div>
@@ -133,26 +98,26 @@
                             <td>编号</td>
                             <td>申请方</td>
                             <td>发布方</td>
-                            <td>价格</td>
+                            <td>价格(元)</td>
                             <td>状态</td>
                             <td>时间</td>
                             <td>操作</td>
                         </tr>
                         <tr><td colspan="10" style="border-top:1px solid lightgrey;"></td></tr>
-                        @if(count($orders['ordersA']))
-                            @foreach($orders['ordersA'] as $orderA)
+                        @if(count($orders['main']))
+                            @foreach($orders['main'] as $order)
                         <tr>
-                            <td>{{$orderA->id}}</td>
-                            <td>{{$orderA->buyerName}}</td>
-                            <td>{{$orderA->sellerName}}</td>
-                            <td>{{$orderA->getMoney()}}</td>
-                            <td>{{$orderA->statusName()}}</td>
-                            <td>{{date("Y年m月d日",$orderA->created_at)}}</td>
-                            <td><a href="{{DOMAIN}}admin/order/{{$orderA->id}}"
+                            <td>{{$order['id']}}</td>
+                            <td>{{UserNameById($order['uid'])}}</td>
+                            <td>{{$order['sellerName']}}</td>
+                            <td>{{$order['money']}}</td>
+                            <td>{{$order['statusName']}}</td>
+                            <td>{{$order['createTime']}}</td>
+                            <td><a href="{{DOMAIN}}admin/order/{{$order['id']}}"
                                    class="am-btn am-btn-default am-btn-xs" style="padding:3px 15px;">查看</a></td>
                         </tr>
                             @endforeach
-                        @else @include('admin.common.norecord')
+                        @else <tr><td colspan="10" style="text-align:center;">没有记录</td></tr>
                         @endif
                     </table>
                 </div>

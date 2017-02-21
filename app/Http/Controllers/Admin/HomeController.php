@@ -1,12 +1,11 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
+use App\Api\ApiBusiness\ApiOrder;
 use App\Api\ApiOnline\ApiOrderPro;
 use App\Api\ApiUser\ApiLog;
 use App\Api\ApiUser\ApiUsers;
 use App\Http\Requests;
-use App\Models\Base\OrderFirmModel;
-use App\Models\Base\OrderModel;
 
 class HomeController extends BaseController
 {
@@ -41,8 +40,8 @@ class HomeController extends BaseController
         $rstUsers_week = ApiLog::getLogsByTime(1,time()-3600*24*7);
         $users_week = $rstUsers_week['code']==0 ? $rstUsers_week['data'] : [];
         //今天登录
-        $rstUsers_hour = ApiLog::getLogsByTime(1,time()-3600);
-        $users_hour = $rstUsers_hour['code']==0 ? $rstUsers_hour['data'] : [];
+        $rstUsers_day = ApiLog::getLogsByTime(1,time()-3600);
+        $users_day = $rstUsers_day['code']==0 ? $rstUsers_day['data'] : [];
         //最新注册用户
         $rstUsers = ApiUsers::getUsersByTime(time()-3600*24*7);
         $datas = $rstUsers['code']==0 ?$rstUsers['data'] : [];
@@ -54,32 +53,19 @@ class HomeController extends BaseController
             'datas'=> $datas,
             'all'=> count($users_all),
             'week'=> count($users_week),
-            'hour'=> count($users_hour),
+            'day'=> count($users_day),
         );
     }
 
     public function orders()
     {
-        $rstOrder_C = ApiOrderPro::getOrders();
-        $orders_create = $rstOrder_C['code']==0 ? $rstOrder_C['data'] : [];
-        $orders_all = OrderModel::all();
-        $orders_firm = OrderFirmModel::all();
-        //各个订单
-        $rstOrders_C = ApiOrderPro::index($this->limit,1,0,0,1);
-        $orders_C = $rstOrders_C['code']==0 ? $rstOrders_C['data'] : [];
-        $orders_A = OrderModel::where('del',0)
-            ->where('isshow',1)
-            ->paginate($this->limit);
-        $orders_F = OrderFirmModel::where('del',0)
-            ->where('isshow',1)
-            ->paginate($this->limit);
+        $apiOrder_C = ApiOrderPro::getOrders(0,0);
+        $orders_create = $apiOrder_C['code']==0 ? $apiOrder_C['data'] : [];
+        $apiOrder_Main = ApiOrder::getOrdersByLimit(0,0);
+        $orders_main = $apiOrder_Main['code']==0 ? $apiOrder_Main['data'] : [];
         return array(
-            'create'=> count($orders_create),
-            'all'=> count($orders_all),
-            'firm'=> count($orders_firm),
-            'ordersC'=> $orders_C,
-            'ordersA'=> $orders_A,
-            'ordersF'=> $orders_F,
+            'create'=> $orders_create,
+            'main'=> $orders_main,
         );
     }
 }

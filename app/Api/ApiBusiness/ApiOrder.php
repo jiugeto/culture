@@ -77,6 +77,28 @@ class ApiOrder
         );
     }
 
+    /**
+     * 通过 uid、limit 获取列表
+     */
+    public static function getOrdersByLimit($uid=0,$limit=0)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/order/ordersbylimit';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, array(
+            'uid'       =>  $uid,
+            'limit'     =>  $limit,
+        ));
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array(
+            'code' => 0,
+            'data' => ApiBase::objToArr($response->data),
+        );
+    }
+
     public static function show($id)
     {
         $apiUrl = ApiBase::getApiCurl() . '/api/v1/order/show';

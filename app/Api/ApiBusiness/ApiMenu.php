@@ -34,4 +34,25 @@ class ApiMenu
             'data' => $menuArr,
         );
     }
+
+
+    /**
+     * 用户后台、企业后台、个人后台、总后台菜单权限接口
+     */
+    public static function getAuthList()
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/menu/auth';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, array(
+        ));
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array(
+            'code' => 0,
+            'data' => ApiBase::objToArr($response->data),
+        );
+    }
 }

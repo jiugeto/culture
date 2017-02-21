@@ -1,8 +1,6 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Admin\MenusModel;
-use App\Models\Admin\AuthModel;
 use Illuminate\Http\Request;
 
 class AuthsController extends BaseController
@@ -17,7 +15,6 @@ class AuthsController extends BaseController
         $this->crumb['']['name'] = '用户权限列表';
         $this->crumb['category']['name'] = '用户权限管理';
         $this->crumb['category']['url'] = 'auth';
-        $this->model = new AuthModel();
     }
 
     public function index()
