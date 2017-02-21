@@ -44,7 +44,7 @@
                     </tr>
                         @endif
                     @endforeach
-                @else @include('admin.common.norecord')
+                @else @include('admin.common.#norecord')
                 @endif
                     </tbody>
                 </table>

@@ -66,7 +66,7 @@
                         <td class="am-hide-sm-only">更新时间 / Update Time：</td>
                         <td>{{ $data->updated_at }}</td>
                     </tr>
-                    @else @include('admin.common.norecord')
+                    @else @include('admin.common.#norecord')
                     @endif
                     </tbody>
                 </table>

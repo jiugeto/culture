@@ -122,7 +122,7 @@
                     <td class="am-hide-sm-only">认证时间：</td>
                     <td><{{ $companyArr['createTime'] }}</td>
                 </tr>
-            @else @include('admin.common.norecord')
+            @else @include('admin.common.#norecord')
             @endif
                 </tbody>
             </table>

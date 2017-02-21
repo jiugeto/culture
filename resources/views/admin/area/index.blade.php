@@ -47,11 +47,11 @@
                         {{--</td>--}}
                     </tr>
                     @endforeach
-                @else @include('admin.common.norecord')
+                @else @include('admin.common.#norecord')
                 @endif
                     </tbody>
                 </table>
-                @include('admin.common.page')
+                @include('admin.common.#page')
             </div>
         </div>
     </div>

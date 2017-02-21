@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Api\ApiBusiness\ApiMenu;
 use Illuminate\Http\Request;
-use App\Models\Admin\MenusModel;
 
 class MenusController extends BaseController
 {
@@ -14,7 +14,6 @@ class MenusController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->model = new MenusModel();
         $this->crumb['category']['name'] = '前台控制菜单';
         $this->crumb['category']['url'] = 'menus';
         $this->crumb['']['name'] = '前台菜单列表';
@@ -24,14 +23,19 @@ class MenusController extends BaseController
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
+        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $prefix_url = DOMAIN.'admin/menus';
+        $datas = $this->query($pageCurr,$type,$isshow);
+        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query($type,$isshow),
-            'prefix_url'=> DOMAIN.'admin/menus',
-            'types'=> $this->model['types'],
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
-            'type'=> $type,
-            'isshow'=> $isshow,
+            'datas' => $datas,
+            'pagelist' => $pagelist,
+            'prefix_url' => $prefix_url,
+            'model' => $this->getmodel(),
+            'crumb' => $this->crumb,
+            'curr' => $curr,
+            'type' => $type,
+            'isshow' => $isshow,
         ];
         return view('admin.menus.index', $result);
     }
@@ -41,8 +45,8 @@ class MenusController extends BaseController
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
-            'pids'=> $this->parents(),
-            'types'=> $this->model['types'],
+            'parents'=> $this->parents(),
+            'model'=> $this->getModel(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -52,8 +56,12 @@ class MenusController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
-        $data['created_at'] = time();
-        MenusModel::create($data);
+//        $data['created_at'] = time();
+//        MenusModel::create($data);
+        $apiMenu = ApiMenu::addMenu($data);
+        if ($apiMenu['code']!=0) {
+            echo "<script>alert('".$apiMenu['msg']."');history.go(-1);</script>";exit;
+        }
         return redirect(DOMAIN.'admin/menus');
     }
 
@@ -61,9 +69,13 @@ class MenusController extends BaseController
     {
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
+        $apiMenu = ApiMenu::show($id);
+        if ($apiMenu['code']!=0) {
+            echo "<script>alert('".$apiMenu['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> MenusModel::find($id),
-            'types'=> $this->model['types'],
+            'data'=> $apiMenu['data'],
+            'model'=> $this->getModel(),
             'crumb'=> $this->crumb,
         ];
         return view('admin.menus.show', $result);
@@ -73,8 +85,12 @@ class MenusController extends BaseController
     {
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
+        $apiMenu = ApiMenu::show($id);
+        if ($apiMenu['code']!=0) {
+            echo "<script>alert('".$apiMenu['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> MenusModel::find($id),
+            'data'=> $apiMenu['data'],
             'pids'=> $this->parents(),
             'types'=> $this->model['types'],
             'crumb'=> $this->crumb,
@@ -94,6 +110,7 @@ class MenusController extends BaseController
     public function forceDelete($id)
     {
         MenusModel::find($id)->delete();
+        return redirect(DOMAIN.'admin/menus');
     }
 
     /**
@@ -101,7 +118,10 @@ class MenusController extends BaseController
      */
     public function setIsShow($id,$isshow)
     {
-        MenusModel::where('id',$id)->update(['isshow'=> $isshow]);
+        $apiMenu = ApiMenu::setShow($id,$isshow);
+        if ($apiMenu['code']!=0) {
+            echo "<script>alert('".$apiMenu['msg']."');history.go(-1);</script>";exit;
+        }
         return redirect(DOMAIN.'admin/menus');
     }
 
@@ -109,11 +129,7 @@ class MenusController extends BaseController
 
 
 
-    /**
-     * ==========================
-     * 一下是公用方法
-     * ==========================
-     */
+
 
     /**
      * 收集数据
@@ -121,10 +137,6 @@ class MenusController extends BaseController
     public function getData(Request $request)
     {
         $data = $request->all();
-        //pid判断
-//        if (!$data['pid1'] &&!$data['pid2'] &&!$data['pid3']) {
-//            echo "<script>alert('父id必选！');history.go(-1);</script>";exit;
-//        }
         if ($data['pid1']) { $data['pid'] = $data['pid1']; }
         if ($data['pid2']) { $data['pid'] = $data['pid2']; }
         if ($data['pid3']) { $data['pid'] = $data['pid3']; }
@@ -142,8 +154,8 @@ class MenusController extends BaseController
             'action'=> $data['action'],
             'style_class'=> $data['style_class'],
             'pid'=> $data['pid'],
-            'isshow'=> $data['isshow'],
-            'sort'=> $data['sort'],
+//            'isshow'=> $data['isshow'],
+//            'sort'=> $data['sort'],
         ];
         return $data;
     }
@@ -153,7 +165,8 @@ class MenusController extends BaseController
      */
     public function parents()
     {
-        return MenusModel::where('pid',0)->get();
+        $apiMenu = ApiMenu::getMenuParent();
+        return $apiMenu['code']==0 ? $apiMenu['data'] : [];
     }
 
 //    /**
@@ -174,30 +187,18 @@ class MenusController extends BaseController
     /**
      *查询方法
      */
-    public function query($type,$isshow)
+    public function query($pageCurr,$type,$isshow)
     {
-        if ($type && $isshow) {
-            $datas =  MenusModel::where('type',$type)
-                ->where('isshow',$isshow)
-                ->orderBy('id','desc')
-                ->orderBy('sort','desc')
-                ->paginate($this->limit);
-        } elseif (!$type && $isshow) {
-            $datas =  MenusModel::where('isshow',$isshow)
-                ->orderBy('id','desc')
-                ->orderBy('sort','desc')
-                ->paginate($this->limit);
-        } elseif ($type && !$isshow) {
-            $datas =  MenusModel::where('type',$type)
-                ->orderBy('id','desc')
-                ->orderBy('sort','desc')
-                ->paginate($this->limit);
-        } elseif (!$type && !$isshow) {
-            $datas =  MenusModel::orderBy('id','desc')
-                ->orderBy('sort','desc')
-                ->paginate($this->limit);
-        }
-        $datas->limit = $this->limit;
-        return $datas;
+        $apiMenu = ApiMenu::index($this->limit,$pageCurr,$type,$isshow);
+        return $apiMenu['code']==0 ? $apiMenu['data'] : [];
+    }
+
+    /**
+     * 获取 model
+     */
+    public function getModel()
+    {
+        $apiModel = ApiMenu::getMenuModel();
+        return $apiModel['code']==0 ? $apiModel['model'] : [];
     }
 }

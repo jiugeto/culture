@@ -21,8 +21,8 @@
                         <div class="am-form-group">
                             <label>菜单类型 / Type：</label>
                             <select name="type" required>
-                                @foreach($types as $kt=>$type)
-                                    <option value="{{ $kt }}">{{ $type }}</option>
+                                @foreach($model['types'] as $k=>$type)
+                                    <option value="{{ $k }}">{{ $type }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -31,25 +31,25 @@
                             <label>父级菜单 / Pid：</label>
                             <select name="pid1" id="pid1">
                                 <option value="0">-0级菜单-</option>
-                                @foreach($pids as $pid)
-                                    @if($pid->type==1)
-                                    <option value="{{ $pid->id }}">{{ $pid->name }}</option>
+                                @foreach($parents as $parent)
+                                    @if($parent['type']==1)
+                                        <option value="{{ $parent['id'] }}">{{ $parent['name'] }}</option>
                                     @endif
                                 @endforeach
                             </select>
                             <select name="pid2" id="pid2" style="display:none;">
                                 <option value="0">-0级菜单-</option>
-                                @foreach($pids as $pid)
-                                    @if($pid->type==2)
-                                    <option value="{{ $pid->id }}">{{ $pid->name }}</option>
+                                @foreach($parents as $parent)
+                                    @if($parent['type']==2)
+                                        <option value="{{ $parent['id'] }}">{{ $parent['name'] }}</option>
                                     @endif
                                 @endforeach
                             </select>
                             <select name="pid3" id="pid3" style="display:none;">
                                 <option value="0">-0级菜单-</option>
-                                @foreach($pids as $pid)
-                                    @if($pid->type==3)
-                                    <option value="{{ $pid->id }}">{{ $pid->name }}</option>
+                                @foreach($parents as $parent)
+                                    @if($parent['type']==3)
+                                        <option value="{{ $parent['id'] }}">{{ $parent['name'] }}</option>
                                     @endif
                                 @endforeach
                             </select>
@@ -103,16 +103,16 @@
                             <textarea name="intro" cols="50" rows="5"></textarea>
                         </div>
 
-                        <div class="am-form-group">
-                            <label>会员后台是否显示 / Is Show：</label>
-                            <label><input type="radio" name="isshow" value="1"/> 不显示&nbsp;&nbsp;</label>
-                            <label><input type="radio" name="isshow" value="2" checked/> 显示&nbsp;&nbsp;</label>
-                        </div>
+                        {{--<div class="am-form-group">--}}
+                            {{--<label>会员后台是否显示 / Is Show：</label>--}}
+                            {{--<label><input type="radio" name="isshow" value="1"/> 不显示&nbsp;&nbsp;</label>--}}
+                            {{--<label><input type="radio" name="isshow" value="2" checked/> 显示&nbsp;&nbsp;</label>--}}
+                        {{--</div>--}}
 
-                        <div class="am-form-group">
-                            <label>排序 / Sort：</label>
-                            <input type="text" pattern="^\d+$" name="sort" required value="10"/>
-                        </div>
+                        {{--<div class="am-form-group">--}}
+                            {{--<label>排序 / Sort：</label>--}}
+                            {{--<input type="text" pattern="^\d+$" name="sort" required value="10"/>--}}
+                        {{--</div>--}}
 
                         <button type="submit" class="am-btn am-btn-primary">保存添加</button>
                     </fieldset>

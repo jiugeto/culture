@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
+use App\Api\ApiBusiness\ApiMenu;
 use Illuminate\Http\Request;
 
 class AuthsController extends BaseController
@@ -22,9 +23,18 @@ class AuthsController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $result = [
-            'model'=> $this->model,
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
+            'menuModel' => $this->getAuthModel(),
+            'auths0' => $this->getAuthsByUserType(0),
+            'auths1' => $this->getAuthsByUserType(1),
+            'auths2' => $this->getAuthsByUserType(2),
+            'auths3' => $this->getAuthsByUserType(3),
+            'auths4' => $this->getAuthsByUserType(4),
+            'auths5' => $this->getAuthsByUserType(5),
+            'auths6' => $this->getAuthsByUserType(6),
+            'auths7' => $this->getAuthsByUserType(7),
+            'auths8' => $this->getAuthsByUserType(50),
+            'crumb' => $this->crumb,
+            'curr' => $curr,
         ];
         return view('admin.auth.index', $result);
     }
@@ -33,11 +43,17 @@ class AuthsController extends BaseController
     {
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
+        if ($menus=$this->getAuthsByUserType($auth)) {
+            foreach ($menus as $menu) { $menuIds[] = $menu['menu']; }
+        }
         $result = [
-            'model'=> $this->model,
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
-            'auth'=> $auth,
+            'menusM' => $this->getMenus(1),
+            'menusP' => $this->getMenus(2),
+            'menusC' => $this->getMenus(3),
+            'menuIds' => isset($menuIds) ? $menuIds : [],
+            'crumb' => $this->crumb,
+            'curr' => $curr,
+            'auth' => $auth,
         ];
         return view('admin.auth.edit', $result);
     }
@@ -50,18 +66,13 @@ class AuthsController extends BaseController
         if (!$request->menu) {
             echo "<script>alert('功能必选！');history.go(-1);</script>";exit;
         }
-        foreach ($request->menu as $menu) {
-            //多余的话删除
-            $authModels = AuthModel::where('auth',$auth)->get();
-            foreach ($authModels as $authModel) {
-                if (!in_array($authModel->menu,$request->menu)) {
-                    AuthModel::where('id',$authModel->id)->delete();
-                }
-            }
-            //没有的话添加
-            if (!AuthModel::where('auth',$auth)->where('menu',$menu)->first()) {
-                $this->insertDB($auth,$menu);
-            }
+        $data = [
+            'auth'  =>  $request->auth,
+            'menu'  =>  $request->menu,
+        ];
+        $apiMenu = ApiMenu::setAuth($data);
+        if ($apiMenu['code']!=0) {
+            echo "<script>alert('".$apiMenu['msg']."');history.go(-1);</script>";exit;
         }
         return redirect(DOMAIN.'admin/auth');
     }
@@ -70,13 +81,31 @@ class AuthsController extends BaseController
 
 
 
-    public function insertDB($auth,$menu)
+
+    /**
+     * 获取权限 model
+     */
+    public function getAuthModel()
     {
-        $data = [
-            'auth'=> $auth,
-            'menu'=> $menu,
-            'created_at'=> time(),
-        ];
-        AuthModel::create($data);
+        $apiModel = ApiMenu::getAuthModel();
+        return $apiModel['code']==0 ? $apiModel['model'] : [];
+    }
+
+    /**
+     * 根据 usertype 获取权限
+     */
+    public function getAuthsByUserType($userType)
+    {
+        $apiAuth = ApiMenu::getAuthsByUserType($userType);
+        return $apiAuth['code']==0 ? $apiAuth['data'] : [];
+    }
+
+    /**
+     * 获取菜单列表
+     */
+    public function getMenus($userType=0)
+    {
+        $apiMenu = ApiMenu::getMenusByType($userType);
+        return $apiMenu['code']==0 ? $apiMenu['data'] : [];
     }
 }
