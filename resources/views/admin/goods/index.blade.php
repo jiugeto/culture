@@ -15,23 +15,30 @@
                         </div>
                         <div class="am-btn-group am-btn-group-xs list_select" style="float:right;">
                             发布单位
-                            <select name="type">
-                                <option value="0" {{ $type==0 ? 'selected' : '' }}>所有</option>
-                                @foreach($types as $ktype=>$vtype)
-                                    <option value="{{ $ktype }}" {{ $type==$ktype ? 'selected' : '' }}>{{ $vtype }}</option>
+                            <select name="genre" onchange="getSel()">
+                                <option value="0" {{ $genre==0 ? 'selected' : '' }}>所有</option>
+                                @foreach($model['genres'] as $k=>$vgenre)
+                                    <option value="{{ $k }}" {{ $genre==$k ? 'selected' : '' }}>{{ $vgenre }}</option>
+                                @endforeach
+                            </select>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            样片类型
+                            <select name="cate" onchange="getSel()">
+                                <option value="0" {{ $cate==0 ? 'selected' : '' }}>所有</option>
+                                @foreach($model['cates'] as $k=>$vcate)
+                                    <option value="{{ $k }}" {{ $cate==$k ? 'selected' : '' }}>{{ $vcate }}</option>
                                 @endforeach
                             </select>
                             <script>
-                                $(document).ready(function(){
-                                    $("select[name='type']").change(function(){
-                                        if(this.value==0){
-                                            window.location.href = '{{DOMAIN}}admin/goods';
-                                        }
-                                        if(this.value!=0){
-                                            window.location.href = '{{DOMAIN}}admin/'+this.value+'/goods';
-                                        }
-                                    });
-                                });
+                                function getSel() {
+                                    var genre = $("select[name='genre']").val();
+                                    var cate = $("select[name='cate']").val();
+                                    if(genre==0 && cate==0){
+                                        window.location.href = '{{DOMAIN}}admin/goods';
+                                    } else {
+                                        window.location.href = '{{DOMAIN}}admin/goods/s/'+genre+'/'+cate;
+                                    }
+                                }
                             </script>
                         </div>
                     {{--</div>--}}
@@ -55,26 +62,24 @@
                     </tr>
                     </thead>
                     <tbody>
-                @if($datas->total())
+                @if(count($datas))
                     @foreach($datas as $data)
                     <tr>
                         <td class="am-hide-sm-only"><input type="checkbox" /></td>
-                        <td class="am-hide-sm-only">{{ $data->id }}</td>
-                        <td class="am-hide-sm-only"><a href="{{DOMAIN}}admin/goods/{{$data->id}}">
-                                @if(mb_strlen($data->name)>6)
-                                    {{ mb_substr($data->name,0,5,'utf-8').'...' }}
-                                @else {{ $data->name }}
-                                @endif
-                            </a></td>
-                        <td class="am-hide-sm-only">{{ $data->cate_id }}</td>
-                        <td class="am-hide-sm-only">{{ $data->type() }}</td>
-                        <td class="am-hide-sm-only">{{ $data->created_at }}</td>
+                        <td class="am-hide-sm-only">{{ $data['id'] }}</td>
+                        <td class="am-hide-sm-only"><a href="{{DOMAIN}}admin/goods/{{$data['id']}}">
+                                {{str_limit($data['name'],10)}}</a></td>
+                        <td class="am-hide-sm-only">{{ $data['genreName'] }}</td>
+                        <td class="am-hide-sm-only">{{ $data['cateName'] }}</td>
+                        <td class="am-hide-sm-only">{{ $data['createTime'] }}</td>
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
-                                    <a href="{{DOMAIN}}admin/goods/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="{{PUB}}assets/images/show.png" class="icon"> 查看</button></a>
+                                    <a href="{{DOMAIN}}admin/goods/{{$data['id']}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="{{PUB}}assets/images/show.png" class="icon"> 查看</button></a>
                                 {{--@if($crumb['']['url']=='')--}}
-                                    <a href="{{DOMAIN}}admin/goods/{{$data->id}}/edit"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 编辑</button></a>
+                                    <a href="{{DOMAIN}}admin/goods/{{$data['id']}}/edit"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 编辑</button></a>
+                                    <a href="{{DOMAIN}}admin/goods/thumb/{{$data['id']}}"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 缩略图</button></a>
+                                    <a href="{{DOMAIN}}admin/goods/link/{{$data['id']}}"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 视频链接</button></a>
                                     {{--<a href="{{DOMAIN}}admin/function/{{$data->id}}/forceDelete"><button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><img src="{{PUB}}assets/images/del_red.png" class="icon"> 放入回收站</button></a>--}}
                                 {{--@endif--}}
                                 {{--@if($crumb['trash']['url']=='trash')--}}
@@ -86,11 +91,11 @@
                         </td>
                     </tr>
                     @endforeach
-                @else @include('admin.common.#norecord')
+                @else <tr><td colspan="10" style="text-align:center;">没有记录</td></tr>
                 @endif
                     </tbody>
                 </table>
-                @include('admin.common.#page')
+                @include('admin.common.page2')
             </div>
         </div>
     </div>

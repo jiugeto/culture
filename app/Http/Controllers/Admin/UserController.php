@@ -39,35 +39,37 @@ class UserController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
         $prefix_url = DOMAIN.'admin/user';
+        $datas = $this->query($isuser,$isauth,$pageCurr);
+        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query($isuser,$isauth,$pageCurr,$prefix_url),
-            'prefix_url'=> $prefix_url,
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
-            'isusers'=> $this->isusers,
-            'isuser'=> $isuser,
-            'isauth'=> $isauth,
+            'datas' => $datas,
+            'pagelist' => $pagelist,
+            'prefix_url' => $prefix_url,
+            'crumb' => $this->crumb,
+            'curr' => $curr,
+            'isusers' => $this->isusers,
+            'isuser' => $isuser,
+            'isauth' => $isauth,
         ];
         return view('admin.user.index', $result);
     }
 
-    public function create()
-    {
-        $curr['name'] = $this->crumb['create']['name'];
-        $curr['url'] = $this->crumb['create']['url'];
-        $result = [
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
-        ];
-        return view('admin.user.create', $result);
-    }
-
-    public function store(Request $request)
-    {
-        $data = $request->all();
-        dd($data);
-        $rstUser = ApiUsers::doRegist($data);
-    }
+//    public function create()
+//    {
+//        $curr['name'] = $this->crumb['create']['name'];
+//        $curr['url'] = $this->crumb['create']['url'];
+//        $result = [
+//            'crumb'=> $this->crumb,
+//            'curr'=> $curr,
+//        ];
+//        return view('admin.user.create', $result);
+//    }
+//
+//    public function store(Request $request)
+//    {
+//        $data = $request->all();
+//        $rstUser = ApiUsers::doRegist($data);
+//    }
 
     public function show($id)
     {
@@ -98,12 +100,12 @@ class UserController extends BaseController
     {
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
-        $rstUser = ApiUsers::getOneUser($id);
-        if ($rstUser['code']!=0) {
-            echo "<script>alert('".$rstUser['msg']."');history.go(-1);</script>";exit;
+        $apiUser = ApiUsers::getOneUser($id);
+        if ($apiUser['code']!=0) {
+            echo "<script>alert('".$apiUser['msg']."');history.go(-1);</script>";exit;
         }
         $result = [
-            'data'=> $rstUser['data'],
+            'data'=> $apiUser['data'],
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -112,10 +114,20 @@ class UserController extends BaseController
 
     public function update(Request $request,$id)
     {
-//        UserModel::where('id',$id)->update(['limit'=> $request->limit]);
-        $data = $request->all();
-        $data['id'] = $id;
-        dd($data);
+        $data = [
+            'id'    =>  $id,
+            'username'  =>  $request->username,
+            'email' =>  $request->email,
+            'qq'    =>  $request->qq,
+            'tel'   =>  $request->tel,
+            'mobile'    =>  $request->mobile,
+            'address'   =>  $request->address,
+            'area'      =>  AreaIdByName($request->areaName),
+        ];
+        $apiUser = ApiUsers::modify($data);
+        if ($apiUser['code']!=0) {
+            echo "<script>alert('".$apiUser['msg']."');history.go(-1);</script>";exit;
+        }
         return redirect(DOMAIN.'admin/user');
     }
 
@@ -128,10 +140,9 @@ class UserController extends BaseController
      */
     public function toauth($id)
     {
-//        UserModel::where('id',$id)->update(['isauth'=> 3]);
-        $rstUser = ApiUsers::setAuth($id,3);
-        if ($rstUser['code']!=0) {
-            echo "<script>alert('".$rstUser['msg']."');history.go(-1);</script>";exit;
+        $apiUser = ApiUsers::setAuth($id,3);
+        if ($apiUser['code']!=0) {
+            echo "<script>alert('".$apiUser['msg']."');history.go(-1);</script>";exit;
         }
         return redirect(DOMAIN.'admin/user');
     }
@@ -140,7 +151,6 @@ class UserController extends BaseController
      */
     public function noauth($id)
     {
-//        UserModel::where('id',$id)->update(['isauth'=>2]);
         $rstUser = ApiUsers::setAuth($id,2);
         if ($rstUser['code']!=0) {
             echo "<script>alert('".$rstUser['msg']."');history.go(-1);</script>";exit;
@@ -148,38 +158,18 @@ class UserController extends BaseController
         return redirect(DOMAIN.'admin/user');
     }
 
-    public function query($isuser,$isauth,$pageCurr,$prefix_url)
+    public function query($isuser,$isauth,$pageCurr)
     {
-        $rst = ApiUsers::getUserList($isuser,$isauth,$this->limit,$pageCurr);
-        $datas = $rst['code']==0 ? $rst['data'] : [];
-        $datas['pagelist'] = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
-        return $datas;
+        $apiUser = ApiUsers::getUserList($isuser,$isauth,$this->limit,$pageCurr);
+        return $apiUser['code']==0 ? $apiUser['data'] : [];
     }
 
-//    /**
-//     * +1 increase
-//     */
-//    public function increase($id)
-//    {
-//        UserModel::where('id', $id)->increment('limit', 1);
-//        return redirect('/admin/user');
-//    }
-//
-//    /**
-//     * +1 increase
-//     */
-//    public function reduce($id)
-//    {
-//        UserModel::where('id', $id)->increment('limit', -1);
-//        return redirect('/admin/user');
-//    }
-//
-//    /**
-//     * 修改limit
-//     */
-//    public function limit($id,$limit)
-//    {
-//        UserModel::where('id', $id)->update(['limit'=>$limit]);
-//        return redirect('/admin/user');
-//    }
+    /**
+     * 获取 model
+     */
+    public function getModel()
+    {
+        $apiModel = ApiUsers::getModel();
+        return $apiModel['code']==0 ? $apiModel['data'] : [];
+    }
 }

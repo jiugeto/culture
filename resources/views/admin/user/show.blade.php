@@ -43,6 +43,14 @@
                     <td>{{ $data['mobile'] }}</td>
                 </tr>
                 <tr>
+                    <td class="am-hide-sm-only">具体地址 / Address：</td>
+                    <td>{{ $data['address'] }}</td>
+                </tr>
+                <tr>
+                    <td class="am-hide-sm-only">城市 / City：</td>
+                    <td>{{ AreaNameByid($data['area']) }}</td>
+                </tr>
+                <tr>
                     <td class="am-hide-sm-only">审核情况 / Is Auth：</td>
                     <td>{{ $data['authType'] }}</td>
                 </tr>
@@ -54,10 +62,6 @@
                     <td class="am-hide-sm-only">是否vip  / Is VIP：</td>
                     <td>{{ $data['vip'] }}</td>
                 </tr>
-                {{--<tr>--}}
-                    {{--<td class="am-hide-sm-only">列表每页显示记录数  / Limit：</td>--}}
-                    {{--<td>{{ $data->limit }}</td>--}}
-                {{--</tr>--}}
                 <tr>
                     <td class="am-hide-sm-only">创建时间 / Create Time：</td>
                     <td>{{ $data['createTime'] }}</td>

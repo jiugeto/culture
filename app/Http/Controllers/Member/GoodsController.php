@@ -216,11 +216,12 @@ class GoodsController extends BaseController
             $genre = 4;  //企业供应
         }
         $data = [
-            'name'=> $request->name,
-            'genre'=> $genre,
-            'cate'=> $request->cate,
-            'intro'=> $request->intro,
-            'uid'=> $this->userid,
+            'name'  =>  $request->name,
+            'genre' =>  $genre,
+            'cate'  =>  $request->cate,
+            'intro' =>  $request->intro,
+            'money' =>  $request->money,
+            'uid'   =>  $this->userid,
             'uname'=> \Session::get('user.username'),
         ];
         return $data;

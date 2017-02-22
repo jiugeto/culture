@@ -10,11 +10,10 @@
                 <option value="2" {{ $isshow==2?'selected':'' }}>显示</option>
             </select>
             <select name="pid" style="padding:2px 10px;border:1px solid lightgrey;">
-                @if($parents)
                 @foreach($parents as $parent)
-                <option value="{{ $parent['id'] }}" {{ $pid==$parent['pid']?'selected':'' }}>{{ $parent['name'] }}</option>
+                    <option value="{{ $parent['id'] }}" {{ $pid==$parent['pid']?'selected':'' }}>
+                        {{ $parent['name'] }}</option>
                 @endforeach
-                @endif
             </select>
             <script>
                 $("select[name='isshow']").change(function(){
@@ -56,9 +55,8 @@
                     </tr>
                     </thead>
                     <tbody>
-                @if(count($datas) > 1)
-                    @foreach($datas as $kdata=>$data)
-                        @if(is_numeric($kdata))
+                @if(count($datas))
+                    @foreach($datas as $data)
                     <tr>
                         <td class="am-hide-sm-only"><input type="checkbox" /></td>
                         <td class="am-hide-sm-only">{{ $data['id'] }}</td>
@@ -91,9 +89,8 @@
                             </div>
                         </td>
                     </tr>
-                        @endif
                     @endforeach
-                @else @include('admin.common.#norecord')
+                @else <tr><td colspan="10" style="text-align:center;">没有记录</td></tr>
                 @endif
                     </tbody>
                 </table>

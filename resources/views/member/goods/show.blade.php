@@ -35,6 +35,10 @@
             <td>{{ $data['uname'] }}</td>
         </tr>
         <tr>
+            <td>估价：</td>
+            <td>{{ $data['money'] }}</td>
+        </tr>
+        <tr>
             <td>创建时间：</td>
             <td>{{ $data['createTime'] }}</td>
         </tr>

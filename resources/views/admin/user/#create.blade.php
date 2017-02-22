@@ -39,37 +39,38 @@
 
                         <div class="am-form-group">
                             <label>邮箱 / Email：</label>
-                            <br>自定义
-                            {{--<input type="text" placeholder="你的邮箱" pattern="^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$" required name="email"/>--}}
+                            {{--<br>自定义--}}
+                            <input type="text" placeholder="例：12345@qq.com" pattern="^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$" required name="email"/>
                         </div>
 
                         <div class="am-form-group">
                             <label>QQ / QQ：</label>
-                            <br>自定义
-                            {{--<input type="text" placeholder="qq号码" name="qq"/>--}}
+                            {{--<br>自定义--}}
+                            <input type="text" placeholder="qq号码" name="qq"/>
                         </div>
 
                         <div class="am-form-group">
                             <label>电话 / Telphone：</label>
-                            <br>自定义
-                            {{--<input type="text" placeholder="座机号码" pattern="^\d+$" name="tel"/>--}}
+                            {{--<br>自定义--}}
+                            <input type="text" placeholder="座机号码" pattern="^\d+$" name="tel"/>
                         </div>
 
                         <div class="am-form-group">
                             <label>手机 / Mobile：</label>
-                            <br>自定义
-                            {{--<input type="text" placeholder="手机号码" pattern="^\d+$" name="tel"/>--}}
+                            {{--<br>自定义--}}
+                            <input type="text" placeholder="手机号码" pattern="^\d+$" name="tel"/>
                         </div>
 
                         <div class="am-form-group">
                             <label>城市 / City：</label>
-                            <br>自定义
+                            {{--<br>自定义--}}
+                            <input type="text" placeholder="城市" name="city"/>
                         </div>
 
                         <div class="am-form-group">
                             <label>地址 / Address：</label>
-                            <br>自定义
-                            {{--<input type="text" placeholder="住址" minlength="2" maxlength="20" name="address"/>--}}
+                            {{--<br>自定义--}}
+                            <input type="text" placeholder="住址" minlength="2" maxlength="20" name="address"/>
                         </div>
 
                         <div class="am-form-group">

@@ -45,10 +45,10 @@ class MenusController extends BaseController
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
-            'parents'=> $this->parents(),
-            'model'=> $this->getModel(),
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
+            'parents' => $this->parents(),
+            'model' => $this->getModel(),
+            'crumb' => $this->crumb,
+            'curr' => $curr,
         ];
         return view('admin.menus.create', $result);
     }
@@ -56,8 +56,6 @@ class MenusController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
-//        $data['created_at'] = time();
-//        MenusModel::create($data);
         $apiMenu = ApiMenu::addMenu($data);
         if ($apiMenu['code']!=0) {
             echo "<script>alert('".$apiMenu['msg']."');history.go(-1);</script>";exit;
@@ -74,9 +72,9 @@ class MenusController extends BaseController
             echo "<script>alert('".$apiMenu['msg']."');history.go(-1);</script>";exit;
         }
         $result = [
-            'data'=> $apiMenu['data'],
-            'model'=> $this->getModel(),
-            'crumb'=> $this->crumb,
+            'data' => $apiMenu['data'],
+            'model' => $this->getModel(),
+            'crumb' => $this->crumb,
         ];
         return view('admin.menus.show', $result);
     }
@@ -90,11 +88,11 @@ class MenusController extends BaseController
             echo "<script>alert('".$apiMenu['msg']."');history.go(-1);</script>";exit;
         }
         $result = [
-            'data'=> $apiMenu['data'],
-            'pids'=> $this->parents(),
-            'types'=> $this->model['types'],
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
+            'data' => $apiMenu['data'],
+            'parents' => $this->parents(),
+            'model' => $this->getModel(),
+            'crumb' => $this->crumb,
+            'curr' => $curr,
         ];
         return view('admin.menus.edit', $result);
     }
@@ -102,8 +100,11 @@ class MenusController extends BaseController
     public function update(Request $request, $id)
     {
         $data = $this->getData($request);
-        $data['updated_at'] = time();
-        MenusModel::where('id',$id)->update($data);
+        $data['id'] = $id;
+        $apiMenu = ApiMenu::modifyMenu($data);
+        if ($apiMenu['code']!=0) {
+            echo "<script>alert('".$apiMenu['msg']."');history.go(-1);</script>";exit;
+        }
         return redirect(DOMAIN.'admin/menus');
     }
 
@@ -154,8 +155,8 @@ class MenusController extends BaseController
             'action'=> $data['action'],
             'style_class'=> $data['style_class'],
             'pid'=> $data['pid'],
+            'sort'=> $data['sort'],
 //            'isshow'=> $data['isshow'],
-//            'sort'=> $data['sort'],
         ];
         return $data;
     }

@@ -62,7 +62,7 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::get('user/s/{isauth}/{isuser}','UserController@index');
     Route::resource('user','UserController');
     //作品管理（制作公司和设计师的）
-    Route::get('{type}/goods','GoodsController@index');
+    Route::get('goods/s/{genre}/{cate}','GoodsController@index');
     Route::post('goods/{id}','GoodsController@update');
     Route::resource('goods','GoodsController');
     //内部产品管理

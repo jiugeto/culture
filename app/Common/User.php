@@ -1,7 +1,7 @@
 <?php
 
 /**
- * 用户函数，获取用户相关信息，前缀 User
+ * 用户函数，获取用户相关信息，函数名：User + 结果 + By + 添加
  */
 
 use App\Api\ApiUser\ApiUsers;
@@ -15,8 +15,15 @@ function UserNameById($uid)
 }
 
 //通过uid，判断用户类型
-function UserTypeByid($uid)
+function UserTypeById($uid)
 {
     $apiUser = ApiUsers::getOneUser($uid);
     return $apiUser['code']==0 ? $apiUser['data']['isuser'] : '';
+}
+
+//通过uname，获取记录
+function UserIdByUname($uname)
+{
+    $apiUser = ApiUsers::getOneUserByUname($uname);
+    return $apiUser['code']==0 ? $apiUser['data']['id'] : '';
 }

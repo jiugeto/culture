@@ -32,6 +32,11 @@
             </tr>
             <tr><td></td></tr>
 
+            <tr>
+                <td class="field_name"><label>价格(元)：</label></td>
+                <td><input type="text" class="field_value" placeholder="用户估价" pattern="^\d+$" required name="money" value="{{$data['money']}}"/></td>
+            </tr>
+
             <tr><td colspan="2" style="text-align:center;">
                     <button class="companybtn" onclick="history.go(-1)">返 &nbsp;&nbsp;&nbsp;回</button>
                     <button type="submit" class="companybtn">保存修改</button>

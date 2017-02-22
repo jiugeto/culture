@@ -61,6 +61,10 @@
                     <td>{{ $data['isshowName'] }}</td>
                 </tr>
                 <tr>
+                    <td class="am-hide-sm-only">排序 / Sort：</td>
+                    <td>{{ $data['sort'] }}</td>
+                </tr>
+                <tr>
                     <td class="am-hide-sm-only">创建时间 / Create Time：</td>
                     <td>{{ $data['createTime'] }}</td>
                 </tr>

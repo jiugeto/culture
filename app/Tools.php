@@ -299,7 +299,8 @@ class Tools
                 $address = $response['content']['address'];
             }
         } elseif ($ip && substr($ip,0,7)=='192.168') {
-            $address = '浙江省 杭州市 滨江区';
+//            $address = '浙江省 杭州市 滨江区';
+            $address = '浙江省 杭州市 西湖区';
         } elseif (!$ip) {
             $address = '未知';
         }

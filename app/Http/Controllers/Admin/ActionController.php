@@ -25,15 +25,18 @@ class ActionController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
         $prefix_url = DOMAIN.'admin/action';
+        $datas = $this->query($isshow,$pid,$pageCurr,$prefix_url);
+        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         $rstPid = ApiAction::getActionsByPid(0);
         $result = [
-            'datas'=> $this->query($isshow,$pid,$pageCurr,$prefix_url),
-            'parents'=> $rstPid['code']==0?$rstPid['data']:[],
-            'prefix_url'=> DOMAIN.'admin/action',
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
-            'isshow'=> $isshow,
-            'pid'=> $pid,
+            'datas' => $datas,
+            'pagelist' => $pagelist,
+            'prefix_url' => $prefix_url,
+            'parents' => $rstPid['code']==0?$rstPid['data']:[],
+            'crumb' => $this->crumb,
+            'curr' => $curr,
+            'isshow' => $isshow,
+            'pid' => $pid,
         ];
         return view('admin.action.index', $result);
     }
@@ -107,7 +110,6 @@ class ActionController extends BaseController
 
     public function destroy($id)
     {
-//        ActionModel::where('id',$id)->update(array('del'=> 1));
         $rst = ApiAction::isdel($id,1);
         if ($rst['code']!=0) {
             echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
@@ -117,7 +119,6 @@ class ActionController extends BaseController
 
     public function restore($id)
     {
-//        ActionModel::where('id',$id)->update(array('del'=> 0));
         $rst = ApiAction::isdel($id,0);
         if ($rst['code']!=0) {
             echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
@@ -127,7 +128,6 @@ class ActionController extends BaseController
 
     public function forceDelete($id)
     {
-//        ActionModel::where('id',$id)->delete();
         $rst = ApiAction::delete($id);
         if ($rst['code']!=0) {
             echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
@@ -140,8 +140,6 @@ class ActionController extends BaseController
      */
     public function setIsShow($id,$pid,$isshow)
     {
-//        $action = ActionModel::find($id);
-//        ActionModel::where('id',$id)->update(['isshow'=> $isshow]);
         $rst = ApiAction::isshow($id,$isshow);
         if ($rst['code']!=0) {
             echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
@@ -187,7 +185,6 @@ class ActionController extends BaseController
     public function parent($pid)
     {
         if ($pid) {        //获取上级操作名称
-//            $pname = ActionModel::where('id',$pid)->first()->name;
             $rstParent = ApiAction::getActionPidToId($pid);
             $pname = $rstParent['code']==0?$rstParent['data']['name']:'';
         } else {
@@ -201,34 +198,10 @@ class ActionController extends BaseController
     /**
      *查询方法
      */
-    public function query($isshow,$pid,$pageCurr,$prefix_url)
+    public function query($isshow,$pid,$pageCurr)
     {
-//        if (!$isshow && !$pid) {
-//            $datas = ActionModel::orderBy('sort','desc')
-//                ->orderBy('id','desc')
-//                ->paginate($this->limit);
-//        } elseif ($isshow && !$pid) {
-//            $datas = ActionModel::where('isshow',$isshow)
-//                ->orderBy('sort','desc')
-//                ->orderBy('id','desc')
-//                ->paginate($this->limit);
-//        } elseif (!$isshow && $pid) {
-//            $datas = ActionModel::where('pid',$pid)
-//                ->orderBy('sort','desc')
-//                ->orderBy('id','desc')
-//                ->paginate($this->limit);
-//        } elseif ($isshow && $pid) {
-//            $datas = ActionModel::where('isshow',$isshow)
-//                ->where('pid',$pid)
-//                ->orderBy('sort','desc')
-//                ->orderBy('id','desc')
-//                ->paginate($this->limit);
-//        }
-//        $datas->limit = $this->limit;
         $rstActions = ApiAction::index($this->limit,$pageCurr,$isshow,$pid);
-        $datas = $rstActions['code']==0?$rstActions['data']:[];
-        $datas['pagelist'] = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
-        return $datas;
+        return $rstActions['code']==0?$rstActions['data']:[];
     }
 
     /**
@@ -236,7 +209,6 @@ class ActionController extends BaseController
      */
     public function increase($id)
     {
-//        ActionModel::where('id', $id)->increment('sort', 1);
         $rst = ApiAction::sort($id,1);
         if ($rst['code']!=0) {
             echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
@@ -249,10 +221,6 @@ class ActionController extends BaseController
      */
     public function reduce($id)
     {
-//        $action = ActionModel::find($id);
-//        if ($action->sort > 0) {
-//            ActionModel::where('id', $id)->increment('sort', -1);
-//        }
         $rst = ApiAction::sort($id,-1);
         if ($rst['code']!=0) {
             echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;

@@ -23,13 +23,16 @@ class UserlogController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
         $prefix_url = DOMAIN.'admin/userlog';
+        $datas = $this->query($pageCurr);
+        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query($pageCurr,$prefix_url),
-            'prefix_url'=> $prefix_url,
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
+            'datas' => $datas,
+            'pagelist' => $pagelist,
+            'prefix_url' => $prefix_url,
+            'crumb' => $this->crumb,
+            'curr' => $curr,
         ];
-        return view('admin.userlog.index', $result);
+        return view('admin.log.index', $result);
     }
 
     public function show($id)
@@ -45,14 +48,12 @@ class UserlogController extends BaseController
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
-        return view('admin.userlog.show', $result);
+        return view('admin.log.show', $result);
     }
 
-    public function query($pageCurr,$prefix_url)
+    public function query($pageCurr)
     {
         $rst = ApiLog::getUserLogList($this->limit,$pageCurr);
-        $datas = $rst['code']==0 ? $rst['data'] : [];
-        $datas['pagelist'] = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
-        return $datas;
+        return $rst['code']==0 ? $rst['data'] : [];
     }
 }

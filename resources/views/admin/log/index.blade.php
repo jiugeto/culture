@@ -37,9 +37,8 @@
                     </tr>
                     </thead>
                     <tbody>
-                @if(count($datas)>1)
+                @if(count($datas))
                     @foreach($datas as $kdata=>$data)
-                        @if(is_numeric($kdata))
                     <tr>
                         <td class="am-hide-sm-only"><input type="checkbox" /></td>
                         <td class="am-hide-sm-only">{{ $data['id'] }}</td>
@@ -56,9 +55,8 @@
                             </div>
                         </td>
                     </tr>
-                        @endif
                     @endforeach
-                @else @include('admin.common.#norecord')
+                @else <tr><td colspan="10" style="text-align:center;">没有记录</td></tr>
                 @endif
                     </tbody>
                 </table>
