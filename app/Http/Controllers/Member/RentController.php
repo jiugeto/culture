@@ -68,6 +68,7 @@ class RentController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
+        dd($data);
         $apiRent = ApiRent::add($data);
         if ($apiRent['code']!=0) {
             echo "<script>alert('".$apiRent['msg']."');history.go(-1);</script>";exit;
@@ -152,15 +153,45 @@ class RentController extends BaseController
      */
     public function getData(Request $request)
     {
-        $rent = [
-            'name'=> $request->name,
-            'genre'=> $this->getGenre(),
-            'type'=> $request->type,
-            'intro'=> $request->intro,
-            'uid'=> $this->userid,
-            'money'=> $request->money,
+        //日期验证
+        if (!$request->from_y && !$request->from_m && !$request->from_d) { $from = 0; }
+        if (!$request->to_y && !$request->to_m && !$request->to_d) { $to = 0; }
+        if ($request->from_y) {
+            if (!$request->from_m || !$request->from_d) {
+                echo "<script>alert('起始日期格式有误！');history.go(-1);</script>";exit;
+            }
+            $from = $request->from_y.'-'.$request->from_m.'-'.$request->from_d;
+        }
+        if ($request->to_y) {
+            if (!$request->to_m || !$request->to_d) {
+                echo "<script>alert('结束日期格式有误！');history.go(-1);</script>";exit;
+            }
+            $to = $request->to_y.'-'.$request->to_m.'-'.$request->to_d;
+        }
+        $fromtime = (isset($from)&&$from) ? strtotime($from) : 0;
+        $totime = (isset($to)&&$to) ? strtotime($to) : 0;
+        if ((!$fromtime&&$totime) || ($fromtime&&!$totime)) {
+            echo "<script>alert('起始、结束时间须同时选择！');history.go(-1);</script>";exit;
+        } else if ($fromtime > $totime) {
+            echo "<script>alert('结束时间不能早于起始时间！');history.go(-1);</script>";exit;
+        }
+        //获取用户信息
+        $apiUser = ApiUsers::getOneUser($this->userid);
+        if ($apiUser['code']!=0) {
+            echo "<script>alert('用户不存在！');history.go(-1);</script>";exit;
+        }
+        $data = [
+            'name'  =>  $request->name,
+            'genre' =>  $this->getGenre(),
+            'type'  =>  $request->type,
+            'intro' =>  $request->intro,
+            'uid'   =>  $this->userid,
+            'money' =>  $request->money,
+            'fromtime'  =>  $fromtime,
+            'totime'    =>  $totime,
+            'area'      =>  $apiUser['data']['area'],
         ];
-        return $rent;
+        return $data;
     }
 
     /**

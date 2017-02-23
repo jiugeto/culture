@@ -38,25 +38,3 @@
         <a title="关闭" onclick="getClose()">X</a>
     </div>
 </div>
-<div class="popup" id="link">
-    <div class="mask"></div>
-    <div class="content">
-        <form id="formlink" action="" method="POST" enctype="multipart/form-data" data-am-validator>
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <input type="hidden" name="_method" value="POST">
-            <p style="text-align:center;" class="pname">产品 视频链接更新</p>
-            <p>链接类型：
-                <select name="linkType">
-                    @foreach($model['linkTypes'] as $k=>$linkType)
-                        <option value="{{$k}}">{{$linkType}}</option>
-                    @endforeach
-                </select>
-            </p>
-            <p>视频链接：
-                <input type="text" placeholder="输入视频链接，可以去视频门户网复制过来" required minlength="2" name="link">
-            </p>
-            <button type="submit" class="homebtn">立即更新</button>
-        </form>
-        <a title="关闭" onclick="getClose()">X</a>
-    </div>
-</div>

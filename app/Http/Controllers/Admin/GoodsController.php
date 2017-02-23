@@ -106,6 +106,88 @@ class GoodsController extends BaseController
         return view('admin.goods.show', $result);
     }
 
+    /**
+     * 设置缩略图
+     */
+    public function setThumb(Request $request,$id)
+    {
+        if (!isset($request->url_ori)) {
+            echo "<script>alert('未上传图片！');history.go(-1);</script>";exit;
+        }
+        //判断老图片
+        $apiGood = ApiGoods::show($id);
+        if ($apiGood['code']!=0) {
+            echo "<script>alert('".$apiGood['msg']."');history.go(-1);</script>";exit;
+        }
+        if ($thumbOld=$apiGood['data']['thumb']) {
+            $thumbArr = explode('/',$thumbOld);
+            unset($thumbArr[0]); unset($thumbArr[1]); unset($thumbArr[2]);
+            $path = implode('/',$thumbArr);
+        }
+        $pathOld = isset($path) ? $path : '';
+        //上传图片
+        $rstArr=$this->uploadOnlyImg($request->url_ori,$pathOld);
+        if ($rstArr['code']!=0) {
+            echo "<script>alert('".$rstArr['msg']."');history.go(-1);</script>";exit;
+        }
+        $thumb = $rstArr['data'];
+        $data = [
+            'thumb' =>  isset($thumb) ? $thumb : '',
+            'id'    =>  $id,
+        ];
+        $apiGoods = ApiGoods::setThumb($data);
+        if ($apiGoods['code']!=0) {
+            echo "<script>alert('".$apiGoods['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN.'admin/goods');
+    }
+
+    /**
+     * 设置视频链接
+     */
+    public function setLink(Request $request,$id)
+    {
+        $linkType = $request->linkType;
+        $link = $request->link;
+        if (!$linkType || !$link || !$id) {
+            echo "<script>alert('数据有误！');history.go(-1);</script>";exit;
+        }
+        if ($linkType==1 && (mb_substr($link,0,4)!='http'||mb_substr($link,mb_strlen($link)-4,4)!='.swf')) {
+            echo "<script>alert('Flash代码格式有误！');history.go(-1);</script>";exit;
+        } elseif ($linkType==2 && mb_substr($link,0,6)!='<embed') {
+            echo "<script>alert('html代码格式有误！');history.go(-1);</script>";exit;
+        } elseif ($linkType==3 && mb_substr($link,0,7)!='<iframe') {
+            echo "<script>alert('html代码格式有误！');history.go(-1);</script>";exit;
+        }
+        $apiGood = ApiGoods::show($id);
+        if ($apiGood['code']!=0) {
+            echo "<script>alert('".$apiGood['msg']."');history.go(-1);</script>";exit;
+        }
+        $data = [
+            'id'    =>  $id,
+            'linkType'  =>  $linkType,
+            'link'  =>  $link,
+            'uid'   =>  $apiGood['data']['uid'],
+        ];
+        $apiGoods = ApiGoods::setLink($data);
+        if ($apiGoods['code']!=0) {
+            echo "<script>alert('".$apiGoods['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN.'admin/goods');
+    }
+
+    /**
+     * 设置显示/隐藏
+     */
+    public function setShow($id,$isshow)
+    {
+        $apiGoods = ApiGoods::setShow($id,$isshow);
+        if ($apiGoods['code']!=0) {
+            echo "<script>alert('".$apiGoods['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN.'admin/goods');
+    }
+
 
 
 
@@ -144,7 +226,7 @@ class GoodsController extends BaseController
      */
     public function query($pageCurr,$genre,$cate=0)
     {
-        $apiGoods = ApiGoods::index($this->limit,$pageCurr,0,$genre,$cate,0,2,0,0);
+        $apiGoods = ApiGoods::index($this->limit,$pageCurr,0,$genre,$cate,0,0,0,0);
         return $apiGoods['code']==0 ? $apiGoods['data'] : [];
     }
 

@@ -64,6 +64,9 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     //作品管理（制作公司和设计师的）
     Route::get('goods/s/{genre}/{cate}','GoodsController@index');
     Route::post('goods/{id}','GoodsController@update');
+    Route::post('goods/thumb/{id}','GoodsController@setThumb');
+    Route::post('goods/link/{id}','GoodsController@setLink');
+    Route::get('goods/setshow/{id}/{isshow}','GoodsController@setShow');
     Route::resource('goods','GoodsController');
     //内部产品管理
         //在线动画路由
@@ -104,6 +107,8 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
 //    Route::get('{pro_id}/pro/edit/{layerid}/{con_id}/{genre}','ProCreationController@play2');
     //租赁路由
     Route::post('rent/{id}','RentController@update');
+    Route::get('rent/s/{genre}/{type}','RentController@index');
+    Route::post('rent/thumb/{id}','RentController@setThumb');
     Route::resource('rent','RentController');
     //娱乐路由
     Route::post('entertain/{id}','EntertainController@update');

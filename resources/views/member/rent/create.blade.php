@@ -29,8 +29,26 @@
             </tr>
 
             <tr>
-                <td class="field_name"><label>价格(元)：</label></td>
+                <td class="field_name"><label>租金(元)：</label></td>
                 <td><input type="text" placeholder="数字" pattern="^\d+$" required name="money"/></td>
+            </tr>
+
+            <tr>
+                <td class="field_name"><label>租赁起始时间：</label></td>
+                <td>
+                    <input type="text" placeholder="如：2016" pattern="^[1-9]\d{3}$" name="from_y" style="width:60px"/> 年
+                    <input type="text" placeholder="如：01" pattern="^\d{1,2}$" minlength="1" maxlength="12" name="from_m" style="width:40px"/> 月
+                    <input type="text" placeholder="如：01" pattern="^\d{1,2}$" minlength="1" maxlength="31" name="from_d" style="width:40px"/> 日
+                </td>
+            </tr>
+
+            <tr>
+                <td class="field_name"><label>租赁结束时间：</label></td>
+                <td>
+                    <input type="text" placeholder="如：2016" pattern="^[1-9]\d{3}$" name="to_y" style="width:60px"/> 年
+                    <input type="text" placeholder="如：01" pattern="^\d{1,2}$" minlength="1" maxlength="12" name="to_m" style="width:40px"/> 月
+                    <input type="text" placeholder="如：01" pattern="^\d{1,2}$" minlength="1" maxlength="31" name="to_d" style="width:40px"/> 日
+                </td>
             </tr>
 
             <tr><td colspan="2" style="text-align:center;">
