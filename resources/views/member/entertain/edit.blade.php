@@ -30,6 +30,18 @@
                 </td>
             </tr>
 
+            <tr>
+                <td class="field_name"><label>选择作品：</label></td>
+                <td>@if(count($works))
+                        @foreach($works as $work)
+                            <label><input type="checkbox" name="work[]" value="{{$work['id']}}" style="width:15px;height:15px;"
+                                  @if(in_array($work['id'],$data['works'])) checked @endif
+                                 >{{$work['name']}}&nbsp;&nbsp;&nbsp;&nbsp; </label>
+                        @endforeach
+                    @endif
+                </td>
+            </tr>
+
             <tr><td colspan="2" style="text-align:center;">
                     <button class="companybtn" onclick="history.go(-1)">返 回</button>
                     <button type="submit" class="companybtn">保存修改</button>

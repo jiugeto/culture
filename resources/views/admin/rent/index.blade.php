@@ -57,6 +57,7 @@
                         <th class="table-title">设备名称</th>
                         <th class="table-type">供求类型</th>
                         <th class="table-type">设备类型</th>
+                        <th class="table-type">缩略图</th>
                         <th class="table-type">租金(元)</th>
                         <th class="table-type">有效期</th>
                         <th class="table-type">地区</th>
@@ -76,6 +77,11 @@
                         </td>
                         <td class="am-hide-sm-only">{{$data['genreName'] }}</td>
                         <td class="am-hide-sm-only">{{$data['typeName'] }}</td>
+                        <td class="am-hide-sm-only">
+                            @if($data['thumb'])<img src="{{$data['thumb']}}" width="30">
+                            @else /
+                            @endif
+                        </td>
                         <td class="am-hide-sm-only">{{$data['money']}}</td>
                         <td class="am-hide-sm-only">
                             @if($data['fromtime']&&$data['totime'])
@@ -94,7 +100,14 @@
                                     <a href="{{DOMAIN}}admin/rent/{{$data['id']}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="{{PUB}}assets/images/show.png" class="icon"> 查看</button></a>
                                     <a href="{{DOMAIN}}admin/rent/{{$data['id']}}/edit"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 编辑</button></a>
                                     <a href="javascript:;" onclick="getThumb({{$data['id']}})"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 缩略图</button></a>
+                                    <div style="height:2px;"></div>
+                                    @if($data['isshow']==1)
+                                    <a href="{{DOMAIN}}admin/rent/isshow/{{$data['id']}}/2"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 显示</button></a>
+                                    @else
+                                    <a href="{{DOMAIN}}admin/rent/isshow/{{$data['id']}}/1"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 隐藏</button></a>
+                                    @endif
                                     {{--<a href="{{DOMAIN}}admin/rent/{{$data->id}}/forceDelete"><button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><img src="{{PUB}}assets/images/forceDelete_red.png" class="icon"> 销毁记录</button></a>--}}
+                                    <input type="hidden" name="name_{{$data['id']}}" value="{{$data['name']}}">
                                 </div>
                             </div>
                         </td>

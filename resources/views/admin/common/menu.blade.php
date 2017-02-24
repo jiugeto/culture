@@ -12,14 +12,14 @@
                         {{ $crumb['create']['name'] }}
                     </button>
                 </a>
-                @if(!in_array($crumb['category']['url'],$crumb['notrash']))
-                <a href="{{DOMAIN}}admin/{{$crumb['category']['url']}}/{{$crumb['trash']['url']}}">
-                    <button type="button" class="am-btn am-btn-default">
-                        <img src="{{PUB}}assets/images/del.png" class="icon">
-                        {{ $crumb['trash']['name'] }}
-                    </button>
-                </a>
-                @endif
+                {{--@if(!in_array($crumb['category']['url'],$crumb['notrash']))--}}
+                {{--<a href="{{DOMAIN}}admin/{{$crumb['category']['url']}}/{{$crumb['trash']['url']}}">--}}
+                    {{--<button type="button" class="am-btn am-btn-default">--}}
+                        {{--<img src="{{PUB}}assets/images/del.png" class="icon">--}}
+                        {{--{{ $crumb['trash']['name'] }}--}}
+                    {{--</button>--}}
+                {{--</a>--}}
+                {{--@endif--}}
             @else
                 <a href="{{DOMAIN}}admin/{{$crumb['category']['url']}}">
                     <button type="button" class="am-btn am-btn-default">

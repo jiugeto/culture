@@ -128,6 +128,28 @@ class ApiRent
     }
 
     /**
+     * 设置是否显示
+     */
+    public static function setShow($id,$isshow)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/rent/setshow';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, array(
+            'id'    =>  $id,
+            'isshow'    =>  $isshow,
+        ));
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array(
+            'code' => 0,
+            'msg' => $response->error->msg,
+        );
+    }
+
+    /**
      * 获取 model
      */
     public static function getModel()

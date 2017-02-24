@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Member;
 
 use App\Api\ApiBusiness\ApiEntertain;
+use App\Api\ApiBusiness\ApiGoods;
 use App\Api\ApiBusiness\ApiStaff;
 use App\Api\ApiUser\ApiUsers;
 use Illuminate\Http\Request;
@@ -60,6 +61,7 @@ class EntertainController extends BaseController
         $curr['url'] = $this->lists['create']['url'];
         $result = [
             'staffs' => $this->getStaffs(),
+            'works' => $this->getWorks(),
             'lists' => $this->lists,
             'curr' => $curr,
         ];
@@ -87,6 +89,7 @@ class EntertainController extends BaseController
         $result = [
             'data'=> $apiEntertain['data'],
             'staffs' => $this->getStaffs(),
+            'works' => $this->getWorks(),
             'lists'=> $this->lists,
             'curr'=> $curr,
         ];
@@ -147,16 +150,16 @@ class EntertainController extends BaseController
      */
     public function getData(Request $request)
     {
-        if (!$request->actor) {
-            echo "<script>alert('演员必选！');history.go(-1);</script>";exit;
-        }
+        $actor = $request->actor ? implode(',',$request->actor) : '';
+        $work = $request->work ? implode(',',$request->work) : '';
         $entertain = [
             'title' => $request->title,
             'genre' => $this->getGenre(),
             'intro' => $request->intro,
             'uid'   => $this->userid,
             'uname' =>  Session::get('user.username'),
-            'staff'    =>  implode(',',$request->actor),
+            'staff' =>  $actor,
+            'work'  =>  $work,
         ];
         return $entertain;
     }
@@ -194,5 +197,14 @@ class EntertainController extends BaseController
     {
         $apiStaffs = ApiStaff::getStaffsByUid($this->userid,0,1);
         return $apiStaffs['code']==0 ? $apiStaffs['data'] : [];
+    }
+
+    /**
+     * 通过 uid 获取艺作品列表
+     */
+    public function getWorks()
+    {
+        $apiGoods = ApiGoods::getGoodsByUid($this->userid,4,0);
+        return $apiGoods['code']==0 ? $apiGoods['data'] : [];
     }
 }

@@ -109,22 +109,25 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::post('rent/{id}','RentController@update');
     Route::get('rent/s/{genre}/{type}','RentController@index');
     Route::post('rent/thumb/{id}','RentController@setThumb');
+    Route::post('rent/setshow/{id}/{isshow}','RentController@setShow');
     Route::resource('rent','RentController');
     //娱乐路由
     Route::post('entertain/{id}','EntertainController@update');
+    Route::post('entertain/thumb/{id}','EntertainController@setThumb');
+    Route::get('entertain/show/{id}/{isshow}','EntertainController@setShow');
     Route::resource('entertain','EntertainController');
-        //娱乐员工管理
-    Route::get('staff/{id}/destroy','StaffController@destroy');
-    Route::get('staff/{id}/restore','StaffController@restore');
-    Route::get('staff/{id}/forceDelete','StaffController@forceDelete');
+        //人员管理
+//    Route::get('staff/{id}/destroy','StaffController@destroy');
+//    Route::get('staff/{id}/restore','StaffController@restore');
+//    Route::get('staff/{id}/forceDelete','StaffController@forceDelete');
     Route::post('staff/{id}','StaffController@update');
     Route::resource('staff','StaffController');
         //作品管理
-    Route::get('works/{id}/destroy','WorksController@destroy');
-    Route::get('works/{id}/restore','WorksController@restore');
-    Route::get('works/{id}/forceDelete','WorksController@forceDelete');
-    Route::get('works/{id}/sort/{sort}','WorksController@sort');
-    Route::resource('works','WorksController');
+//    Route::get('works/{id}/destroy','WorksController@destroy');
+//    Route::get('works/{id}/restore','WorksController@restore');
+//    Route::get('works/{id}/forceDelete','WorksController@forceDelete');
+//    Route::get('works/{id}/sort/{sort}','WorksController@sort');
+//    Route::resource('works','WorksController');
     //设计路由
     Route::post('design/{id}','DesignController@update');
     Route::get('design/trash','DesignController@trash');

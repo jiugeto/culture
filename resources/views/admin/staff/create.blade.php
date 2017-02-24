@@ -36,9 +36,9 @@
 
                         <div class="am-form-group">
                             <label>学历 / Education：</label>
-                            <select name="education" required>
-                            @foreach($model['educations'] as $keducation=>$education)
-                                <option value="{{ $keducation }}">{{ $education }}</option>
+                            <select name="edu" required>
+                            @foreach($model['edus'] as $k=>$vedu)
+                                <option value="{{ $k }}">{{ $vedu }}</option>
                             @endforeach
                             </select>
                         </div>
@@ -50,8 +50,8 @@
 
                         <div class="am-form-group">
                             <label>兴趣爱好 / Hobby：</label><br>
-                            @foreach($model['hobbys'] as $khobby=>$hobby)
-                                <label><input type="checkbox" name="hobby[]" value="{{ $khobby }}"/> {{ $hobby }}&nbsp;&nbsp;</label>
+                            @foreach($model['hobbys'] as $k=>$vhobby)
+                                <label><input type="checkbox" name="hobby[]" value="{{ $k }}"/> {{ $vhobby }}&nbsp;&nbsp;</label>
                             @endforeach
                         </div>
 

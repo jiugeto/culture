@@ -143,6 +143,14 @@ class RentController extends BaseController
         return redirect(DOMAIN.'admin/rent');
     }
 
+    /**
+     * 设置是否显示
+     */
+    public function setShow($id,$isshow)
+    {
+        $apiRent = ApiRent::setShow();
+    }
+
 
 
 
