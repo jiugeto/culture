@@ -130,7 +130,9 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
 //    Route::resource('works','WorksController');
     //设计路由
     Route::post('design/{id}','DesignController@update');
-    Route::get('design/trash','DesignController@trash');
+    Route::post('design/thumb/{id}','DesignController@setThumb');
+    Route::get('design/show/{id}/{isshow}','DesignController@setShow');
+//    Route::get('design/trash','DesignController@trash');
     Route::resource('design','DesignController');
     //功能管理
         //消息管理

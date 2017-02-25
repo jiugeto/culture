@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Api\ApiBusiness\ApiDesign;
+use App\Api\ApiUser\ApiUsers;
 use Illuminate\Http\Request;
-use App\Models\DesignModel;
 
 class DesignController extends BaseController
 {
@@ -14,7 +15,6 @@ class DesignController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->model = new DesignModel();
         $this->crumb['']['name'] = '设计列表';
         $this->crumb['category']['name'] = '设计管理';
         $this->crumb['category']['url'] = 'design';
@@ -24,34 +24,39 @@ class DesignController extends BaseController
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
+        $pageCurr = isset($_POST['pageCurr']) ? $_POST['pageCurr'] : 1;
+        $prefix_url = DOMAIN.'admin/design';
+        $datas = $this->query($pageCurr,0);
+        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query($del=0),
-            'prefix_url'=> DOMAIN.'admin/design',
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
+            'datas' => $datas,
+            'pagelist' => $pagelist,
+            'prefix_url' => $prefix_url,
+            'crumb' => $this->crumb,
+            'curr' => $curr,
         ];
         return view('admin.design.index', $result);
     }
 
-    public function trash()
-    {
-        $curr['name'] = $this->crumb['trash']['name'];
-        $curr['url'] = $this->crumb['trash']['url'];
-        $result = [
-            'datas'=> $this->query($del=0),
-            'prefix_url'=> DOMAIN.'admin/design/trash',
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
-        ];
-        return view('admin.design.index', $result);
-    }
+//    public function trash()
+//    {
+//        $curr['name'] = $this->crumb['trash']['name'];
+//        $curr['url'] = $this->crumb['trash']['url'];
+//        $result = [
+//            'datas'=> $this->query($del=0),
+//            'prefix_url'=> DOMAIN.'admin/design/trash',
+//            'crumb'=> $this->crumb,
+//            'curr'=> $curr,
+//        ];
+//        return view('admin.design.index', $result);
+//    }
 
     public function create()
     {
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
-            'model'=> $this->model,
+            'model'=> $this->getModel(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -61,8 +66,10 @@ class DesignController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
-        $data['created_at'] = time();
-        DesignModel::create($data);
+        $apiDesign = ApiDesign::add($data);
+        if ($apiDesign['code']!=0) {
+            echo "<script>alert('".$apiDesign['msg']."');history.go(-1);</script>";exit;
+        }
         return redirect(DOMAIN.'admin/design');
     }
 
@@ -70,11 +77,15 @@ class DesignController extends BaseController
     {
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
+        $apiDesign = ApiDesign::show($id);
+        if ($apiDesign['code']!=0) {
+            echo "<script>alert('".$apiDesign['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> DesignModel::find($id),
-            'model'=> $this->model,
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
+            'data' => $apiDesign['data'],
+            'model' => $this->getModel(),
+            'crumb' => $this->crumb,
+            'curr' => $curr,
         ];
         return view('admin.design.edit', $result);
     }
@@ -82,62 +93,130 @@ class DesignController extends BaseController
     public function update(Request $request,$id)
     {
         $data = $this->getData($request);
-        $data['updated_at'] = time();
-        DesignModel::where('id',$id)->update($data);
+        $data['id'] = $id;
+        $apiDesign = ApiDesign::modify($data);
+        if ($apiDesign['code']!=0) {
+            echo "<script>alert('".$apiDesign['msg']."');history.go(-1);</script>";exit;
+        }
         return redirect(DOMAIN.'admin/design');
     }
 
     public function show($id)
     {
-        $data = DesignModel::find($id);
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
+        $apiDesign = ApiDesign::show($id);
+        if ($apiDesign['code']!=0) {
+            echo "<script>alert('".$apiDesign['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> $data,
+            'data'=> $apiDesign['data'],
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
         return view('admin.design.show', $result);
     }
 
-
-
-
+    /**
+     * 设置缩略图
+     */
+    public function setThumb(Request $request,$id)
+    {
+        if (!isset($request->url_ori)) {
+            echo "<script>alert('未上传图片！');history.go(-1);</script>";exit;
+        }
+        //判断老图片
+        $apiDesign = ApiDesign::show($id);
+        if ($apiDesign['code']!=0) {
+            echo "<script>alert('".$apiDesign['msg']."');history.go(-1);</script>";exit;
+        }
+        if ($thumbOld=$apiDesign['data']['thumb']) {
+            $thumbArr = explode('/',$thumbOld);
+            unset($thumbArr[0]); unset($thumbArr[1]); unset($thumbArr[2]);
+            $path = implode('/',$thumbArr);
+        }
+        $pathOld = isset($path) ? $path : '';
+        //上传图片
+        $rstArr=$this->uploadOnlyImg($request->url_ori,$pathOld);
+        if ($rstArr['code']!=0) {
+            echo "<script>alert('".$rstArr['msg']."');history.go(-1);</script>";exit;
+        }
+        $thumb = $rstArr['data'];
+        $data = [
+            'thumb' =>  isset($thumb) ? $thumb : '',
+            'id'    =>  $id,
+        ];
+        $apiDesign2 = ApiDesign::setThumb($data);
+        if ($apiDesign2['code']!=0) {
+            echo "<script>alert('".$apiDesign2['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN.'admin/design');
+    }
 
     /**
-     * ===================
-     * 以下是公用方法
-     * ===================
+     * 设置是否显示
      */
+    public function setShow($id,$isshow)
+    {
+        $apiDesign = ApiDesign::setShow($id,$isshow);
+        if ($apiDesign['code']!=0) {
+            echo "<script>alert('".$apiDesign['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN.'admin/design');
+    }
+
+
+
+
+
 
     /**
      * 收集数据
      */
     public function getData(Request $request)
     {
-        $data = $request->all();
-        //由用户名称得到用户ID
-        if (!$data['uname']) { $data['uid'] = 0; }
-        $design = [
-            'name'=> $data['name'],
-            'genre'=> $data['genre'],
-            'type_id'=> $data['type_id'],
-            'uid'=> $data['uid'],
-            'intro'=> $data['intro'],
-            'price'=> $data['price'],
-        ];
-        return $design;
+        $apiUser = ApiUsers::getOneUserByUname($request->uname);
+        if ($apiUser['code']!=0) {
+            echo "<script>alert('".$apiUser['msg']."');history.go(-1);</script>";exit;
+        }
+        $userType = $apiUser['data']['isuser'];
+        if ($userType==4) {
+            $genre = 1;     //个人供应
+        } else if (in_array($userType,[1,2])) {
+            $genre = 2;     //个人需求
+        } else if ($userType==8) {
+            $genre = 3;     //公司供应，待添加
+        } else if (in_array($userType,[3,5,6,7])) {
+            $genre = 4;     //企业需求
+        } else if ($userType==50) {
+            $genre = 0;     //超级用户
+        }
+        return array(
+            'name'  =>  $request->name,
+            'genre' =>  $genre,
+            'cate'  =>  $request->cate,
+            'uid'   =>  $apiUser['data']['id'],
+            'intro' =>  $request->intro,
+            'detail'    =>  $request->detail,
+            'money' =>  $request->money,
+        );
     }
 
     /**
      * 查询方法
      */
-    public function query($del=0)
+    public function query($pageCurr,$del)
     {
-        $datas = DesignModel::where('del',$del)
-            ->orderBy('id','desc')
-            ->paginate($this->limit);
-        $datas->limit = $this->limit;
-        return $datas;
+        $apiDesign = ApiDesign::index($this->limit,$pageCurr,0,0,0,0,$del);
+        return $apiDesign['code']==0 ? $apiDesign['data'] : [];
+    }
+
+    /**
+     * 获取 model
+     */
+    public function getModel()
+    {
+        $apiModel = ApiDesign::getModel();
+        return $apiModel['code']==0 ? $apiModel['model'] : [];
     }
 }

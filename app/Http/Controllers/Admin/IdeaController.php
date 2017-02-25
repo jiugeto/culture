@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Models\IdeasModel;
+use App\Api\ApiBusiness\ApiIdea;
 use Illuminate\Http\Request;
 
 class IdeaController extends BaseController
@@ -22,11 +22,16 @@ class IdeaController extends BaseController
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
+        $pageCurr = isset($_POST['pageCurr']) ? $_POST['pageCurr'] : 1;
+        $prefix_url = DOMAIN.'admin/idea';
+        $datas = $this->query($pageCurr,0);
+        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query(),
-            'crumb'=> $this->crumb,
-            'prefix_url'=> DOMAIN.'admin/idea',
-            'curr'=> $curr,
+            'datas' => $datas,
+            'pagelist' => $pagelist,
+            'prefix_url' => $prefix_url,
+            'crumb' => $this->crumb,
+            'curr' => $curr,
         ];
         return view('admin.idea.index', $result);
     }
@@ -66,12 +71,9 @@ class IdeaController extends BaseController
     }
 
 
-    public function query()
+    public function query($pageCurr,$del)
     {
-        $datas = IdeasModel::where('del',0)
-            ->orderBy('id','desc')
-            ->paginate($this->limit);
-        $datas->limit = $this->limit;
-        return $datas;
+        $apiIdea = ApiIdea::index($this->limit,$pageCurr,0,0,0,$del);
+        return $apiIdea['code']==0 ? $apiIdea['data'] : [];
     }
 }

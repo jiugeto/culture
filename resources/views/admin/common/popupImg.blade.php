@@ -10,7 +10,7 @@
     }
     .content {
         padding:20px;width:550px;color:grey;background:white;
-        position:fixed;left:35%;top:200px;z-index:100;
+        position:fixed;left:35%;top:150px;z-index:100;
     }
     .content select,.content input { padding:10px;width:450px;border:1px solid lightgrey; }
     .content p { padding:0 20px; }
