@@ -7,3 +7,5 @@ app/Api/ApiBusiness/ApiBase.php
 app/Api/ApiOnline/ApiBase.php
 app/Api/ApiTalk/ApiBase.php
 app/Api/ApiUser/ApiBase.php
+config/session.php
+public/uploads/
