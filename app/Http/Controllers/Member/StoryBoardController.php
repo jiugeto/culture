@@ -156,6 +156,7 @@ class StoryBoardController extends BaseController
             'genre'  =>  $request->genre,
             'cate'  =>  $request->cate,
             'intro' =>  $request->intro,
+            'detail'=>  $request->detail,
             'money' =>  $request->money,
             'uid'   =>  $this->userid,
             'uname' =>  \Session::get('user.username'),
@@ -166,7 +167,7 @@ class StoryBoardController extends BaseController
     public function query($pageCurr,$del)
     {
         $uid = $this->userType==50 ? 0 : $this->userid;
-        $apiSB = ApiStoryBoard::index($this->limit,$pageCurr,$uid,2,0);
+        $apiSB = ApiStoryBoard::index($this->limit,$pageCurr,$uid,2,$del);
         return $apiSB['code']==0 ? $apiSB['data'] : [];
     }
 

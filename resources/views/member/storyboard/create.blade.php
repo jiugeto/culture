@@ -35,6 +35,11 @@
             </tr>
 
             <tr>
+                <td class="field_name"><label>详情内容：</label></td>
+                <td><textarea name="detail" cols="50" rows="5" required></textarea></td>
+            </tr>
+
+            <tr>
                 <td class="field_name"><label>价格(元)：</label></td>
                 <td><input type="text" placeholder="数字" pattern="^\d+$" required name="money"/></td>
             </tr>

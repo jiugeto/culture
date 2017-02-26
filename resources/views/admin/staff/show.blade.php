@@ -21,6 +21,18 @@
                     <td>{{$data['name']}}</td>
                 </tr>
                 <tr>
+                    <td class="am-hide-sm-only">供求 / Genre：</td>
+                    <td>{{$data['genreName']}}</td>
+                </tr>
+                <tr>
+                    <td class="am-hide-sm-only">职员类型 / Type：</td>
+                    <td>{{$data['typeName']}}</td>
+                </tr>
+                <tr>
+                    <td class="am-hide-sm-only">发布方 / User Name：</td>
+                    <td>{{UserNameById($data['uid'])}}</td>
+                </tr>
+                <tr>
                     <td class="am-hide-sm-only">真实姓名 / Name2：</td>
                     <td>{{$data['realname']}}</td>
                 </tr>
@@ -38,7 +50,7 @@
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">地区 / Area：</td>
-                    <td>{{$data['area']}}</td>
+                    <td>{{AreaNameByid($data['area'])}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">毕业学校 / School：</td>

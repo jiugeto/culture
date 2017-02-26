@@ -180,6 +180,7 @@ class IdeaController extends BaseController
             'isdetail'=> $request->isdetail,
             'detail'=> $request->detail,
             'uid'=> $this->userid,
+            'money' =>  $request->money,
         ];
         return $data;
     }

@@ -29,7 +29,7 @@
 
                         <div class="am-form-group">
                             <label>发布方 / User Name：</label>
-                            <input type="text" placeholder="用户名称" minlength="2" maxlength="20" name="uname">
+                            <input type="text" placeholder="用户名称" minlength="2" maxlength="20" required name="uname">
                         </div>
 
                         <div class="am-form-group">

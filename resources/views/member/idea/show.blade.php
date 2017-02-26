@@ -24,6 +24,10 @@
             <td>{{$data['detail']}}</td>
         </tr>
         <tr>
+            <td>价格(元)：</td>
+            <td>{{$data['money']}}</td>
+        </tr>
+        <tr>
             <td>发布者：</td>
             <td>{{ UserNameById($data['uid']) }}</td>
         </tr>

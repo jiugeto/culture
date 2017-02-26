@@ -23,13 +23,14 @@
             </div>
             <div class="am-form-group">
                 <select name="genre" style="margin-right:20px;padding:5px 10px;border:1px solid lightgrey;float:right;">
+                    <option value="0" {{$genre==0?'selected':''}}>所有</option>
                     <option value="2" {{$genre==2?'selected':''}}>效果定制</option>
                     <option value="1" {{$genre==1?'selected':''}}>动画定制</option>
                 </select>
                 <script>
                     $("select[name='genre']").change(function(){
                         var genre = $(this).val();
-                        if (genre==2) {
+                        if (genre==0) {
                             window.location.href = '{{DOMAIN}}admin/provideo';
                         } else {
                             window.location.href = '{{DOMAIN}}admin/provideo/s/'+genre;
@@ -60,27 +61,29 @@
                     @foreach($datas as $data)
                     <tr>
                         <td class="am-hide-sm-only"><input type="checkbox" /></td>
-                        <td class="am-hide-sm-only">{{ $data->id }}</td>
-                        <td class="am-hide-sm-only"><a href="{{DOMAIN}}admin/proVideo/{{$data->id}}">{{ $data->name }}</a></td>
-                        <td class="am-hide-sm-only">{{ $data->getGenreName() }}</td>
-                        <td class="am-hide-sm-only">{{ $data->getCate() }}</td>
-                        <td class="am-hide-sm-only">{{ $data->getUName() }}</td>
-                        <td class="am-hide-sm-only">{{ $data->createTime() }}</td>
+                        <td class="am-hide-sm-only">{{$data['id']}}</td>
+                        <td class="am-hide-sm-only"><a href="{{DOMAIN}}admin/proVideo/{{$data['id']}}">{{$data['name']}}</a></td>
+                        <td class="am-hide-sm-only">{{$data['genreName']}}</td>
+                        <td class="am-hide-sm-only">{{$data['cateName']}}</td>
+                        <td class="am-hide-sm-only">{{UserNameById($data['uid'])}}</td>
+                        <td class="am-hide-sm-only">{{$data['createTime']}}</td>
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
-                                    <a href="{{DOMAIN}}admin/proVideo/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="{{PUB}}assets/images/show.png" class="icon"> 查看</button></a>
-                                    <a href="{{DOMAIN}}admin/provideo/{{$data->id}}/edit"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 编辑</button></a>
+                                    <a href="{{DOMAIN}}admin/proVideo/{{$data['id']}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="{{PUB}}assets/images/show.png" class="icon"> 查看</button></a>
+                                    <a href="{{DOMAIN}}admin/provideo/{{$data['id']}}/edit"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 编辑</button></a>
+                                    <a href="{{DOMAIN}}admin/provideo/thumb/{{$data['id']}}"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 缩略图</button></a>
+                                    <a href="{{DOMAIN}}admin/provideo/link/{{$data['id']}}"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 视频链接</button></a>
                                 </div>
                             </div>
                         </td>
                     </tr>
                     @endforeach
-                @else @include('admin.common.#norecord')
+                @else <tr><td colspan="10" style="text-align:center;">没有记录</td></tr>
                 @endif
                     </tbody>
                 </table>
-                @include('admin.common.#page')
+                @include('admin.common.page2')
             </div>
         </div>
     </div>

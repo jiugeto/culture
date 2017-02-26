@@ -3,7 +3,7 @@
     <div class="admin-content">
         @include('admin.common.crumb')
         <div class="am-g">
-            @include('admin.common.menu')
+            {{--@include('admin.common.menu')--}}
         </div>
         <hr>
 
@@ -25,9 +25,8 @@
                     </tr>
                     </thead>
                     <tbody>
-                @if(count($datas)>1)
-                    @foreach($datas as $kdata=>$data)
-                        @if(is_numeric($kdata))
+                @if(count($datas))
+                    @foreach($datas as $data)
                     <tr>
                         <td class="am-hide-sm-only"><input type="checkbox" /></td>
                         <td class="am-hide-sm-only">{{ $data['id'] }}</td>
@@ -61,9 +60,8 @@
                             </div>
                         </td>
                     </tr>
-                        @endif
                     @endforeach
-                @else @include('admin.common.#norecord')
+                @else <tr><td colspan="10" style="text-align:center;">没有记录</td></tr>
                 @endif
                     </tbody>
                 </table>

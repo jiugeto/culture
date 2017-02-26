@@ -3,8 +3,7 @@
 <div class="admin-content">
     @include('admin.common.crumb')
     <div class="am-g">
-        {{--@include('admin.common.menu')--}}
-        {{--@include('admin.type.search')--}}
+        @include('admin.common.menu')
     </div>
     <hr/>
 
@@ -15,43 +14,55 @@
                 <tbody id="tbody-alert">
                 <tr>
                     <td class="am-hide-sm-only">编号 / Id：</td>
-                    <td>{{ $data->id }}</td>
+                    <td>{{$data['id']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">创意名称 / Name：</td>
-                    <td>{{ $data->name }}</td>
+                    <td>{{$data['name']}}</td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">发布人 / User：</td>
-                    <td>{{ $data->uid }}</td>
+                    <td class="am-hide-sm-only">供求类型 / Genre：</td>
+                    <td>{{$data['genreName']}}</td>
+                </tr>
+                <tr>
+                    <td class="am-hide-sm-only">创意类型 / Category：</td>
+                    <td>{{$data['cateName']}}</td>
+                </tr>
+                <tr>
+                    <td class="am-hide-sm-only">简介 / Introduce：</td>
+                    <td>{{$data['intro']}}</td>
+                </tr>
+                <tr>
+                    <td class="am-hide-sm-only">详情是否显示 / Is Detail：</td>
+                    <td>{{$data['isdetailName']}}</td>
+                </tr>
+                <tr>
+                    <td class="am-hide-sm-only">简介 / Introduce：</td>
+                    <td>{{$data['detail']}}</td>
+                </tr>
+                <tr>
+                    <td class="am-hide-sm-only">价格(元) / Price：</td>
+                    <td>{{$data['money']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">浏览次数 / Reads：</td>
-                    <td>{{ count($data->read()) }}</td>
+                    <td>{{$data['read']}}</td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">点赞次数 / Clicks：</td>
-                    <td>{{ count($data->click()) }}</td>
-                </tr>
-                <tr>
-                    <td class="am-hide-sm-only">收藏次数 / Collect：</td>
-                    <td>{{ count($data->collect()) }}</td>
+                    <td class="am-hide-sm-only">发布人 / User：</td>
+                    <td>{{UserNameById($data['uid'])}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">前台列表是否显示 / Is Show：</td>
-                    <td>{{ $data->isshow ? '显示' : '不显示' }}</td>
+                    <td>{{$data['isshowName']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">创建时间 / Create Time：</td>
-                    <td>{{ $data->created_at }}</td>
+                    <td>{{$data['createTime']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">修改时间 / Update Time：</td>
-                    <td>{{ $data->updated_at }}</td>
-                </tr>
-                <tr>
-                    <td class="am-hide-sm-only">修改时间 / Update Time：</td>
-                    <td>{{ $data->updated_at!='0000-00-00' ? $data->updated_at : '未修改' }}</td>
+                    <td>{{$data['updateTime']}}</td>
                 </tr>
                 </tbody>
             </table>

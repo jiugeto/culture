@@ -47,6 +47,11 @@
                 <td><textarea name="detail" cols="40" rows="5"></textarea></td>
             </tr>
 
+            <tr>
+                <td class="field_name"><label>价格(元)：</label></td>
+                <td><input type="text" placeholder="0表示免费" pattern="^\d+$" required name="money"/></td>
+            </tr>
+
             <tr><td colspan="10" style="text-align:center;">
                     <button class="companybtn" onclick="history.go(-1)">返&nbsp; 回</button>
                     <button type="submit" class="companybtn">保存添加</button>

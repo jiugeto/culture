@@ -19,6 +19,15 @@
                         </div>
 
                         <div class="am-form-group">
+                            <label>职员类型 / Type：</label>
+                            <select name="type" required>
+                                @foreach($model['types'] as $k=>$vtype)
+                                    <option value="{{$k}}">{{$vtype}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="am-form-group">
                             <label>性别 / Sex：</label>
                             <label><input type="radio" class="radio" name="sex" value="1" checked/> 男&nbsp;&nbsp;</label>
                             <label><input type="radio" class="radio" name="sex" value="2"/> 女&nbsp;&nbsp;</label>
@@ -38,7 +47,7 @@
                             <label>学历 / Education：</label>
                             <select name="edu" required>
                             @foreach($model['edus'] as $k=>$vedu)
-                                <option value="{{ $k }}">{{ $vedu }}</option>
+                                <option value="{{ $k }}">{{$vedu}}</option>
                             @endforeach
                             </select>
                         </div>
@@ -57,7 +66,7 @@
 
                         <div class="am-form-group">
                             <label>身高 / Height：(单位cm)</label>
-                            <input type="text" placeholder="数字，单位cm" pattern="^([1-9]\d)|([1-9]\d{2})$" required name="height"/>
+                            <input type="text" placeholder="数字，单位cm" pattern="^[1-9]\d{2}$" required name="height"/>
                         </div>
 
                         {{--<div class="am-form-group">--}}

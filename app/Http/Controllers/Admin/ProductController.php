@@ -24,11 +24,14 @@ class ProductController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
         $prefix_url = DOMAIN.'admin/product';
+        $datas = $this->query($pageCurr);
+        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query($pageCurr,$prefix_url),
-            'prefix_url'=> $prefix_url,
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
+            'datas' => $datas,
+            'pagelist' => $pagelist,
+            'prefix_url' => $prefix_url,
+            'crumb' => $this->crumb,
+            'curr' => $curr,
         ];
         return view('admin.product.index', $result);
     }
@@ -156,11 +159,9 @@ class ProductController extends BaseController
     /**
      * 查询方法
      */
-    public function query($pageCurr,$prefix_url)
+    public function query($pageCurr)
     {
         $rst = ApiProduct::getProductsList($this->limit,$pageCurr);
-        $datas = $rst['code']==0?$rst['data']:[];
-        $datas['pagelist'] = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
-        return $datas;
+        return $rst['code']==0 ? $rst['data'] : [];
     }
 }

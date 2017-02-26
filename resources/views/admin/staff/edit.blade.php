@@ -20,6 +20,20 @@
                         </div>
 
                         <div class="am-form-group">
+                            <label>职员类型 / Type：</label>
+                            <select name="type" required>
+                                @foreach($model['types'] as $k=>$vtype)
+                                    <option value="{{$k}}" {{$data['type']==$k?'selected':''}}>{{$vtype}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label>发布方 / User Name：</label>
+                            <input type="text" placeholder="至少2个字符" minlength="2" required name="uname" value="{{UserNameById($data['uid'])}}"/>
+                        </div>
+
+                        <div class="am-form-group">
                             <label>性别 / Sex：</label>
                             <label><input type="radio" class="radio" name="sex" value="1" {{$data['sex']==1?'checked':''}}/> 男&nbsp;&nbsp;</label>
                             <label><input type="radio" class="radio" name="sex" value="2" {{$data['sex']==2?'checked':''}}/> 女&nbsp;&nbsp;</label>
@@ -39,26 +53,26 @@
                             <label>学历 / Education：</label>
                             <select name="education" required>
                             @foreach($model['edus'] as $k=>$vedu)
-                                <option value="{{$k}}" {{$data->edu==$k?'selected':''}}>{{$vedu}}</option>
+                                <option value="{{$k}}" {{$data['education']==$k?'selected':''}}>{{$vedu}}</option>
                             @endforeach
                             </select>
                         </div>
 
                         <div class="am-form-group">
                             <label>毕业学校 / School：</label>
-                            <input type="text" placeholder="至少2个字符" minlength="2" required name="school" value="{{$data['school']'}}"/>
+                            <input type="text" placeholder="至少2个字符" minlength="2" required name="school" value="{{$data['school']}}"/>
                         </div>
 
                         <div class="am-form-group">
                             <label>兴趣爱好 / Hobby：</label><br>
                             @foreach($model['hobbys'] as $k=>$vhobby)
-                                <label><input type="checkbox" name="hobby[]" value="{{$k}}" @if($data['hobby'] && in_array($k,$data['hobbys'])){{'checked'}}@endif/> {{ $vhobby }}&nbsp;&nbsp;</label>
+                                <label><input type="checkbox" name="hobby[]" value="{{$k}}" @if($data['hobby']&&in_array($k,$data['hobbys'])){{'checked'}}@endif/> {{$vhobby}}&nbsp;&nbsp;</label>
                             @endforeach
                         </div>
 
                         <div class="am-form-group">
                             <label>身高 / Height：(单位cm)</label>
-                            <input type="text" placeholder="数字，单位cm" pattern="^([1-9]\d)|([1-9]\d{2})$" required name="height" value="{{ $data->height }}"/>
+                            <input type="text" placeholder="数字，单位cm" pattern="^([1-9]\d)|([1-9]\d{2})$" required name="height" value="{{$data['height']}}"/>
                         </div>
 
                         {{--<div class="am-form-group">--}}

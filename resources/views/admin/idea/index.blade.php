@@ -2,6 +2,9 @@
 @section('content')
     <div class="admin-content">
         @include('admin.common.crumb')
+        <div class="am-g">
+            @include('admin.common.menu')
+        </div>
 
         <div class="am-g">
             <div class="am-u-sm-12">
@@ -34,8 +37,13 @@
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
                                     <a href="{{DOMAIN}}admin/idea/{{$data['id']}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="{{PUB}}assets/images/show.png" class="icon"> 查看</button></a>
-                                {{--@if($crumb['']['url']=='')--}}
                                     <a href="{{DOMAIN}}admin/idea/{{$data['id']}}/edit"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 编辑</button></a>
+                                    @if($data['isshow']==1)
+                                    <a href="{{DOMAIN}}admin/idea/show/{{$data['id']}}/2"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 去显示</button></a>
+                                    @else
+                                    <a href="{{DOMAIN}}admin/idea/show/{{$data['id']}}/1"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 去隐藏</button></a>
+                                    @endif
+                                {{--@if($crumb['']['url']=='')--}}
                                     {{--<a href="{{DOMAIN}}admin/idea/{{$data->id}}/forceDelete"><button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><img src="{{PUB}}assets/images/del_red.png" class="icon"> 放入回收站</button></a>--}}
                                 {{--@endif--}}
                                 {{--@if($crumb['trash']['url']=='trash')--}}

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Api\ApiBusiness\ApiStaff;
+use App\Api\ApiUser\ApiUsers;
 use Illuminate\Http\Request;
 
 class StaffController extends BaseController
@@ -53,8 +54,10 @@ class StaffController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
-        $data['created_at'] = time();
-        StaffModel::create($data);
+        $apiStaff = ApiStaff::add($data);
+        if ($apiStaff['code']!=0) {
+            echo "<script>alert('".$apiStaff['msg']."');history.go(-1);</script>";exit;
+        }
         return redirect(DOMAIN.'admin/staff');
     }
 
@@ -78,8 +81,11 @@ class StaffController extends BaseController
     public function update(Request $request,$id)
     {
         $data = $this->getData($request);
-        $data['updated_at'] = time();
-        StaffModel::where('id',$id)->update($data);
+        $data['id'] = $id;
+        $apiStaff = ApiStaff::modify($data);
+        if ($apiStaff['code']!=0) {
+            echo "<script>alert('".$apiStaff['msg']."');history.go(-1);</script>";exit;
+        }
         return redirect(DOMAIN.'admin/staff');
     }
 
@@ -129,16 +135,31 @@ class StaffController extends BaseController
 
     public function getData(Request $request)
     {
-        if (!$request->hobby) { echo "<script>alert('请选择兴趣！');history.go(-1);</script>";exit; }
+        $apiUser = ApiUsers::getOneUserByUname($request->uname);
+        if ($apiUser['code']!=0) {
+            echo "<script>alert('发方人填写错误！');history.go(-1);</script>";exit;
+        }
+        $userType = $apiUser['data']['isuser'];
+        if ($userType==6) {
+            $genre = 1;     //供应：影视公司
+        } else {
+            $genre = 2;     //需求
+        }
+        if (!$request->hobby) {
+            echo "<script>alert('请选择兴趣！');history.go(-1);</script>";exit;
+        }
         return array(
-            'name'=> $request->name,
-            'sex'=> $request->sex,
-            'realname'=> $request->realname,
-            'origin'=> $request->origin,
-            'education'=> $request->education,
-            'school'=> $request->school,
-            'hobby'=> implode(',',$request->hobby),
-            'height'=> $request->height,
+            'name'      =>  $request->name,
+            'sex'       =>  $request->sex,
+            'realname'  =>  $request->realname,
+            'origin'    =>  $request->origin,
+            'edu' =>  $request->education,
+            'school'    =>  $request->school,
+            'hobby'     =>  implode(',',$request->hobby),
+            'height'    =>  $request->height,
+            'type'      =>  $request->type,
+            'genre'     =>  $genre,
+            'uid'       =>  $apiUser['data']['id'],
         );
     }
 

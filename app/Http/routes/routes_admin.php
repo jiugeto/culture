@@ -185,13 +185,16 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::resource('place','AdPlaceController');
         //创意管理
     Route::post('idea/{id}','IdeaController@update');
+    Route::get('idea/show/{id}/{isshow}','IdeaController@setShow');
     Route::resource('idea','IdeaController');
         //分镜管理
     Route::post('storyboard/{id}','StoryBoardController@update');
-    Route::get('storyboard/{id}/destroy','StoryBoardController@destroy');
-    Route::get('storyboard/{id}/restore','StoryBoardController@restore');
-    Route::get('storyboard/{id}/forceDelete','StoryBoardController@forceDelete');
-    Route::get('storyboard/trash','StoryBoardController@trash');
+    Route::post('storyboard/thumb/{id}','StoryBoardController@setThumb');
+    Route::get('storyboard/show/{id}/{isshow}','StoryBoardController@setShow');
+//    Route::get('storyboard/{id}/destroy','StoryBoardController@destroy');
+//    Route::get('storyboard/{id}/restore','StoryBoardController@restore');
+//    Route::get('storyboard/{id}/forceDelete','StoryBoardController@forceDelete');
+//    Route::get('storyboard/trash','StoryBoardController@trash');
     Route::resource('storyboard','StoryBoardController');
         //话题管理
     Route::post('talk/{id}','TalkController@update');

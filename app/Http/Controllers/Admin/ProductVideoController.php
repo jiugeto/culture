@@ -1,10 +1,10 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
+use App\Api\ApiBusiness\ApiProVideo;
 use App\Api\ApiUser\ApiUsers;
-use App\Tools;
-use App\Models\ProductVideoModel;
 use Illuminate\Http\Request;
+use App\Tools;
 
 class ProductVideoController extends BaseController
 {
@@ -18,19 +18,23 @@ class ProductVideoController extends BaseController
         $this->crumb['']['name'] = '效果动画';
         $this->crumb['category']['name'] = '效果动画';
         $this->crumb['category']['url'] = 'provideo';
-        $this->model = new ProductVideoModel();
     }
 
-    public function index($genre=2)
+    public function index($genre=0)
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
+        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $prefix_url = DOMAIN.'admin/provideo';
+        $datas = $this->query($pageCurr,$genre);
+        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query($genre),
-            'prefix_url'=> DOMAIN.'admin/provideo',
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
-            'genre'=> $genre,
+            'datas' => $datas,
+            'pagelist' => $pagelist,
+            'prefix_url' => $prefix_url,
+            'crumb' => $this->crumb,
+            'curr' => $curr,
+            'genre' => $genre,
         ];
         return view('admin.provideo.index', $result);
     }
@@ -40,7 +44,7 @@ class ProductVideoController extends BaseController
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
-            'model'=> $this->model,
+            'model'=> $this->getModel(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -49,16 +53,11 @@ class ProductVideoController extends BaseController
 
     public function store(Request $request)
     {
-        dd($request->all());
         $data = $this->getData($request);
-        $data['created_at'] = time();
-        //处理缩略图
-        $rstThumb = Tools::getAddrByUploadImg($request,$this->uploadSizeLimit);
-        if (!$rstThumb) {
-            echo "<script>alert('没有图片！');history.go(-1);</script>";exit;
+        $apiProVideo = ApiProVideo::add($data);
+        if ($apiProVideo['code']!=0) {
+            echo "<script>alert('".$apiProVideo['msg']."');history.go(-1);</script>";exit;
         }
-        $data['thumb'] = $rstThumb;
-        ProductVideoModel::create($data);
         return redirect(DOMAIN.'admin/provideo');
     }
 
@@ -66,9 +65,13 @@ class ProductVideoController extends BaseController
     {
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
+        $apiProVideo = ApiProVideo::show($id);
+        if ($apiProVideo['code']!=0) {
+            echo "<script>alert('".$apiProVideo['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> ProductVideoModel::find($id),
-            'model'=> $this->model,
+            'data'=> $apiProVideo['data'],
+            'model'=> $this->getModel(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -100,12 +103,42 @@ class ProductVideoController extends BaseController
     {
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
+        $apiProVideo = ApiProVideo::show($id);
+        if ($apiProVideo['code']!=0) {
+            echo "<script>alert('".$apiProVideo['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> ProductVideoModel::find($id),
+            'data'=> $apiProVideo['data'],
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
         return view('admin.provideo.show', $result);
+    }
+
+    /**
+     * 设置缩略图
+     */
+    public function setThumb(Request $request,$id)
+    {
+    }
+
+    /**
+     * 设置视频链接
+     */
+    public function setLink(Request $request,$id)
+    {
+        //linkType：1Flash代码，2html代码，3通用代码，4其他网址链接
+        $linkType = $request->linkType;
+        $link = $request->link;
+        if ($linkType==1 && mb_substr($link,mb_strlen($link)-4,4)!='.swf') {
+            echo "<script>alert('Flash代码的格式有误！');history.go(-1);</script>";exit;
+        } elseif ($linkType==2 && mb_substr($link,0,6)!='<embed') {
+            echo "<script>alert('html代码的格式有误！');history.go(-1);</script>";exit;
+        } elseif ($linkType==3 && mb_substr($link,0,7)!='<iframe') {
+            echo "<script>alert('通用代码的格式有误！');history.go(-1);</script>";exit;
+        } elseif ($linkType==4 && mb_substr($link,0,4)!='http') {
+            echo "<script>alert('其他网址链接的格式有误！');history.go(-1);</script>";exit;
+        }
     }
 
     /**
@@ -140,40 +173,23 @@ class ProductVideoController extends BaseController
     public function getData(Request $request)
     {
         //验证用户
-        $rstUser = ApiUsers::getOneUserByUname($request->username);
+        $rstUser = ApiUsers::getOneUserByUname($request->uname);
         if ($rstUser['code']!=0) {
             echo "<script>alert('".$rstUser['msg']."');history.go(-1);</script>";exit;
-        }
-        //linkType：1Flash代码，2html代码，3通用代码，4其他网址链接
-        $linkType = $request->linkType;
-        $link = $request->link;
-        if ($linkType==1 && mb_substr($link,mb_strlen($link)-4,4)!='.swf') {
-            echo "<script>alert('Flash代码的格式有误！');history.go(-1);</script>";exit;
-        } elseif ($linkType==2 && mb_substr($link,0,6)!='<embed') {
-            echo "<script>alert('html代码的格式有误！');history.go(-1);</script>";exit;
-        } elseif ($linkType==3 && mb_substr($link,0,7)!='<iframe') {
-            echo "<script>alert('通用代码的格式有误！');history.go(-1);</script>";exit;
-        } elseif ($linkType==4 && mb_substr($link,0,4)!='http') {
-            echo "<script>alert('其他网址链接的格式有误！');history.go(-1);</script>";exit;
         }
         return array(
             'name'  =>  $request->name,
             'genre' =>  $request->genre,
-            'uid' =>  $rstUser['data']['id'],
+            'uid'   =>  $rstUser['data']['id'],
             'cate'  =>  $request->cate,
             'intro' =>  $request->intro,
-            'linkType'  =>  $linkType,
-            'link'  =>  $link,
         );
     }
 
-    public function query($genre)
+    public function query($pageCurr,$genre)
     {
-        $datas = ProductVideoModel::where('genre',$genre)
-            ->orderBy('id','desc')
-            ->paginate($this->limit);
-        $datas->limit = $this->limit;
-        return $datas;
+        $apiProVideo = ApiProVideo::index($this->limit,$pageCurr,$genre,0,0,0);
+        return $apiProVideo['code']==0 ? $apiProVideo['data'] : [];
     }
 
 //    public function pre($id)
@@ -185,4 +201,13 @@ class ProductVideoController extends BaseController
 //        ];
 //        return view('layout.videoPre', $result);
 //    }
+
+    /**
+     * 获取 model
+     */
+    public function getModel()
+    {
+        $apiModel = ApiProVideo::getModel();
+        return $apiModel['code']==0 ? $apiModel['model'] : [];
+    }
 }

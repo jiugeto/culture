@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\StoryBoardModel;
-use App\Models\UserModel;
+use App\Api\ApiBusiness\ApiStoryBoard;
+use App\Api\ApiUser\ApiUsers;
 use Illuminate\Http\Request;
 
 class StoryBoardController extends BaseController
@@ -15,7 +15,6 @@ class StoryBoardController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->model = new StoryBoardModel();
         $this->crumb['']['name'] = '人员列表';
         $this->crumb['category']['name'] = '人员管理';
         $this->crumb['category']['url'] = 'storyboard';
@@ -25,36 +24,41 @@ class StoryBoardController extends BaseController
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
+        $pageCurr = isset($_POST['pageCurr']) ? $_POST['pageCurr'] : 1;
+        $prefix_url = DOMAIN.'admin/staff';
+        $datas = $this->query($pageCurr,0);
+        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query($del=0),
+            'datas' => $datas,
+            'pagelist' => $pagelist,
             'prefix_url'=> DOMAIN.'admin/storyboard',
-            'model'=> $this->model,
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
+            'model' => $this->model,
+            'crumb' => $this->crumb,
+            'curr' => $curr,
         ];
         return view('admin.storyboard.index', $result);
     }
 
-    public function trash()
-    {
-        $curr['name'] = $this->crumb['trash']['name'];
-        $curr['url'] = $this->crumb['trash']['url'];
-        $result = [
-            'datas'=> $this->query($del=1),
-            'prefix_url'=> DOMAIN.'admin/storyboard/trash',
-            'model'=> $this->model,
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
-        ];
-        return view('admin.storyboard.index', $result);
-    }
+//    public function trash()
+//    {
+//        $curr['name'] = $this->crumb['trash']['name'];
+//        $curr['url'] = $this->crumb['trash']['url'];
+//        $result = [
+//            'datas'=> $this->query($del=1),
+//            'prefix_url'=> DOMAIN.'admin/storyboard/trash',
+//            'model'=> $this->model,
+//            'crumb'=> $this->crumb,
+//            'curr'=> $curr,
+//        ];
+//        return view('admin.storyboard.index', $result);
+//    }
 
     public function create()
     {
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
-            'model'=> $this->model,
+            'model'=> $this->getModel(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -64,8 +68,10 @@ class StoryBoardController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
-        $data['created_at'] = time();
-        StoryBoardModel::create($data);
+        $apiSB = ApiStoryBoard::add($data);
+        if ($apiSB['code']!=0) {
+            echo "<script>alert('".$apiSB['msg']."');history.go(-1);</script>";exit;
+        }
         return redirect(DOMAIN.'admin/storyboard');
     }
 
@@ -73,9 +79,13 @@ class StoryBoardController extends BaseController
     {
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
+        $apiSB = ApiStoryBoard::show($id);
+        if ($apiSB['code']!=0) {
+            echo "<script>alert('".$apiSB['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> StoryBoardModel::find($id),
-            'model'=> $this->model,
+            'data'=> $apiSB['data'],
+            'model'=> $this->getModel(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -85,8 +95,11 @@ class StoryBoardController extends BaseController
     public function update(Request $request,$id)
     {
         $data = $this->getData($request);
-        $data['updated_at'] = time();
-        StoryBoardModel::where('id',$id)->update($data);
+        $data['id'] = $id;
+        $apiSB = ApiStoryBoard::modify($data);
+        if ($apiSB['code']!=0) {
+            echo "<script>alert('".$apiSB['msg']."');history.go(-1);</script>";exit;
+        }
         return redirect(DOMAIN.'admin/storyboard');
     }
 
@@ -94,76 +107,119 @@ class StoryBoardController extends BaseController
     {
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
+        $apiSB = ApiStoryBoard::show($id);
+        if ($apiSB['code']!=0) {
+            echo "<script>alert('".$apiSB['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> StoryBoardModel::find($id),
-            'model'=> $this->model,
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
+            'data' => $apiSB['data'],
+            'model' => $this->getModel(),
+            'crumb' => $this->crumb,
+            'curr' => $curr,
         ];
         return view('admin.storyboard.show', $result);
     }
 
-    public function destroy($id)
+    /**
+     * 设置缩略图
+     */
+    public function setThumb(Request $request,$id)
     {
-        StoryBoardModel::where('id',$id)->update(['del'=> 1]);
+        if (!isset($request->url_ori)) {
+            echo "<script>alert('未上传图片！');history.go(-1);</script>";exit;
+        }
+        //判断老图片
+        $apiSB = ApiStoryBoard::show($id);
+        if ($apiSB['code']!=0) {
+            echo "<script>alert('".$apiSB['msg']."');history.go(-1);</script>";exit;
+        }
+        if ($thumbOld=$apiSB['data']['thumb']) {
+            $thumbArr = explode('/',$thumbOld);
+            unset($thumbArr[0]); unset($thumbArr[1]); unset($thumbArr[2]);
+            $path = implode('/',$thumbArr);
+        }
+        $pathOld = isset($path) ? $path : '';
+        //上传图片
+        $rstArr=$this->uploadOnlyImg($request->url_ori,$pathOld);
+        if ($rstArr['code']!=0) {
+            echo "<script>alert('".$rstArr['msg']."');history.go(-1);</script>";exit;
+        }
+        $thumb = $rstArr['data'];
+        $data = [
+            'thumb' =>  isset($thumb) ? $thumb : '',
+            'id'    =>  $id,
+        ];
+        $apiSB2 = ApiStoryBoard::setThumb($data);
+        if ($apiSB2['code']!=0) {
+            echo "<script>alert('".$apiSB2['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN.'admin/design');
+    }
+
+    /**
+     * 设置是否显示
+     */
+    public function setShow($id,$isshow)
+    {
+        $apiSB = ApiStoryBoard::setShow($id,$isshow);
+        if ($apiSB['code']!=0) {
+            echo "<script>alert('".$apiSB['msg']."');history.go(-1);</script>";exit;
+        }
         return redirect(DOMAIN.'admin/storyboard');
     }
 
-    public function restore($id)
-    {
-        StoryBoardModel::where('id',$id)->update(['del'=> 0]);
-        return redirect(DOMAIN.'admin/storyboard/trash');
-    }
+//    public function destroy($id)
+//    {
+//        StoryBoardModel::where('id',$id)->update(['del'=> 1]);
+//        return redirect(DOMAIN.'admin/storyboard');
+//    }
+//
+//    public function restore($id)
+//    {
+//        StoryBoardModel::where('id',$id)->update(['del'=> 0]);
+//        return redirect(DOMAIN.'admin/storyboard/trash');
+//    }
+//
+//    public function forceDelete($id)
+//    {
+//        StoryBoardModel::where('id',$id)->delete();
+//        return redirect(DOMAIN.'admin/storyboard/trash');
+//    }
 
-    public function forceDelete($id)
-    {
-        StoryBoardModel::where('id',$id)->delete();
-        return redirect(DOMAIN.'admin/storyboard/trash');
-    }
 
 
 
-
-    public function query($del=0)
-    {
-        $datas = StoryBoardModel::where('del',$del)
-            ->where('isshow',1)
-            ->orderBy('sort','desc')
-            ->orderBy('id','desc')
-            ->paginate($this->limit);
-        $datas->limit = $this->limit;
-        return $datas;
-    }
 
     public function getData(Request $request)
     {
-        if (!$request->name) {
-            echo "<script>alert('分镜名称必填！');history.go(-1);</script>";exit;
-        }
-        if (!$request->genre || !$request->cate || !$request->thumb) {
-            echo "<script>alert('供求类别、分镜类型、缩略图必选！');history.go(-1);</script>";exit;
-        }
-        if (!$request->intro || !$request->detail || !$request->money) {
-            echo "<script>alert('分镜简介、详情必填！');history.go(-1);</script>";exit;
-        }
-        if ($uname=$request->name) {
-            if (strlen($uname)<2) { echo "<script>alert('用户名称不少于2个字符！');history.go(-1);</script>";exit; }
-            $userModel = UserModel::where('username',$uname)->first();
-            $userName = $userModel ? $userModel->username : '';
+        $apiUser = ApiUsers::getOneUserByUname($request->uname);
+        if ($apiUser['code']!=0) {
+            echo "<script>alert('".$apiUser['msg']."');history.go(-1);</script>";exit;
         }
         return array(
-            'name'=> $request->name,
-            'genre'=> $request->genre,
-            'cate'=> $request->cate,
-            'thumb'=> $request->thumb,
-            'intro'=> $request->intro,
-            'detail'=> $request->detail,
-            'money'=> $request->money,
-            'uname'=> isset($userName) ? $userName : '',
-            'sort'=> $request->sort,
-            'isnew'=> $request->isnew,
-            'ishot'=> $request->ishot,
-            'isshow'=> $request->isshow,
+            'name'  =>  $request->name,
+            'genre' =>  $request->genre,
+            'cate'  =>  $request->cate,
+            'intro' =>  $request->intro,
+            'detail'    =>  $request->detail,
+            'money'     =>  $request->money,
+            'uid'       =>  $apiUser['data']['id'],
+            'uname'     =>  $request->uname,
         );
+    }
+
+    public function query($pageCurr,$del)
+    {
+        $apiSB = ApiStoryBoard::index($this->limit,$pageCurr,0,0,$del);
+        return $apiSB['code']==0 ? $apiSB['data'] : [];
+    }
+
+    /**
+     * 获取 model
+     */
+    public function getModel()
+    {
+        $apiModel = ApiStoryBoard::getModel();
+        return $apiModel['code']==0 ? $apiModel['model'] : [];
     }
 }

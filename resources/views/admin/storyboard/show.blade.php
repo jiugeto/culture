@@ -14,55 +14,55 @@
                 <tbody id="tbody-alert">
                 <tr>
                     <td class="am-hide-sm-only">编号 / Id：</td>
-                    <td>{{ $data->id }}</td>
+                    <td>{{$data['id']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">分镜名称 / Name：</td>
-                    <td>{{ $data->name }}</td>
+                    <td>{{$data['name']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">供求类型 / Genre：</td>
-                    <td>{{ $data->genreName() }}</td>
+                    <td>{{$data['genreName']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">分镜类型 / Category：</td>
-                    <td>{{ $data->getCateName() }}</td>
+                    <td>{{$data['cateName']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">缩略图 / Small Picture：</td>
-                    <td><img src="{{ $data->thumb() }}" style="width:100%;"></td>
+                    <td><img src="{{$data['thumb']}}" style="width:100%;"></td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">详情 / Detail：</td>
-                    <td>{!! $data->detail !!}</td>
+                    <td>{{$data['detail']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">用户 / User Name：</td>
-                    <td>{{ $data->uname }}</td>
+                    <td>{{$data['uname']}}</td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">价格 / Money：</td>
-                    <td>{{ $data->money() }}</td>
+                    <td class="am-hide-sm-only">价格(元) / Money：</td>
+                    <td>{{$data['money']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">是否最新 / Is New：</td>
-                    <td>{{ $data->isnew() }}</td>
+                    <td>{{$data['isnewName']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">是否最热 / Is Hot：</td>
-                    <td>{{ $data->ishot() }}</td>
+                    <td>{{$data['ishotName']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">前台显示否 / Is Show：</td>
-                    <td>{{ $data->isshow() }}</td>
+                    <td>{{$data['isshowName']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">创建时间 / Create Time：</td>
-                    <td>{{ $data->createTime() }}</td>
+                    <td>{{$data['createTime']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">修改时间 / Update Time：</td>
-                    <td>{{ $data->updateTime() }}</td>
+                    <td>{{$data['updateTime']}}</td>
                 </tr>
                 </tbody>
             </table>
