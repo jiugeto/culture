@@ -109,14 +109,14 @@ class ApiOpinion
     /**
      * 设置用户意见删除
      */
-    public static function isdel($id,$del)
+    public static function setShow($id,$isshow)
     {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/opinion/isdel';
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/opinion/setshow';
         $curl = new Curl();
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
         $curl->post($apiUrl, array(
             'id'    =>  $id,
-            'del'   =>  $del,
+            'isshow'    =>  $isshow,
         ));
         $response = json_decode($curl->response);
         if ($response->error->code != 0) {

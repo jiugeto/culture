@@ -75,9 +75,12 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::resource('product','ProductController');
         //离线动画路由
 //    Route::get('provideo/pre/{id}','ProductVideoController@pre');   //预览视频
-    Route::get('provideo/clear','ProductVideoController@clearTable');
     Route::post('provideo/{id}','ProductVideoController@update');
     Route::get('provideo/s/{genre}','ProductVideoController@index');
+    Route::post('provideo/thumb/{id}','ProductVideoController@setThumb');
+    Route::post('provideo/link/{id}','ProductVideoController@setLink');
+    Route::get('provideo/show/{id}/{isshow}','ProductVideoController@setShow');
+    Route::get('provideo/clear','ProductVideoController@clearTable');
     Route::resource('provideo','ProductVideoController');
 //        //动画设置路由
 //    Route::post('{pro_id}/proLayer/{id}','ProductLayerController@update');
@@ -140,6 +143,7 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::resource('message','MessageController');
         //链接管理
     Route::post('link/{id}','LinkController@update');
+    Route::get('link/s/{type}','LinkController@index');
     Route::resource('link','LinkController');
         //心声管理
     Route::post('uservoice/{id}','UserVoiceController@update');
@@ -147,12 +151,13 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
         //用户意见管理
     Route::get('opinions/clear','OpinionsController@clearTable');     //清空表
     Route::post('opinions/{id}','OpinionsController@update');
-    Route::get('opinions/{id}/destroy','OpinionsController@destroy');
-    Route::get('opinions/{id}/restore','OpinionsController@restore');
-    Route::get('opinions/{id}/forceDelete','OpinionsController@forceDelete');
-    Route::get('opinions/trash','OpinionsController@trash');
-    Route::get('opinions/{isshow}/trash','OpinionsController@trash');
+//    Route::get('opinions/{id}/destroy','OpinionsController@destroy');
+//    Route::get('opinions/{id}/restore','OpinionsController@restore');
+//    Route::get('opinions/{id}/forceDelete','OpinionsController@forceDelete');
+//    Route::get('opinions/trash','OpinionsController@trash');
+//    Route::get('opinions/{isshow}/trash','OpinionsController@trash');
     Route::get('opinions/s/{isshow}','OpinionsController@index');
+    Route::get('opinions/show/{id}/{isshow}','OpinionsController@setShow');
     Route::resource('opinions','OpinionsController');
     //用户日志管理
     Route::resource('userlog','UserlogController');

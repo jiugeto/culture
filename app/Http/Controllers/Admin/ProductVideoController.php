@@ -32,6 +32,7 @@ class ProductVideoController extends BaseController
             'datas' => $datas,
             'pagelist' => $pagelist,
             'prefix_url' => $prefix_url,
+            'model' => $this->getModel(),
             'crumb' => $this->crumb,
             'curr' => $curr,
             'genre' => $genre,
@@ -80,22 +81,12 @@ class ProductVideoController extends BaseController
 
     public function update(Request $request,$id)
     {
-        dd($request->all());
         $data = $this->getData($request);
-        $data['updated_at'] = time();
-        //处理缩略图
-        $model = ProductVideoModel::find($id);
-        $rstThumb = Tools::getAddrByUploadImg($request,$this->uploadSizeLimit);
-        if (!$rstThumb) {
-            $thumb = $model->thumb;
-        } else {
-            $thumb = $rstThumb;
-            if ($model->thumb) {
-                unlink(ltrim($model->thumb,'/'));
-            }
+        $data['id'] = $id;
+        $apiProVideo = ApiProVideo::modify($data);
+        if ($apiProVideo['code']!=0) {
+            echo "<script>alert('".$apiProVideo['msg']."');history.go(-1);</script>";exit;
         }
-        $data['thumb'] = $thumb;
-        ProductVideoModel::where('id',$id)->update($data);
         return redirect(DOMAIN.'admin/provideo');
     }
 
@@ -120,6 +111,35 @@ class ProductVideoController extends BaseController
      */
     public function setThumb(Request $request,$id)
     {
+        if (!isset($request->url_ori)) {
+            echo "<script>alert('未上传图片！');history.go(-1);</script>";exit;
+        }
+        //判断老图片
+        $apiProVideo = ApiProVideo::show($id);
+        if ($apiProVideo['code']!=0) {
+            echo "<script>alert('".$apiProVideo['msg']."');history.go(-1);</script>";exit;
+        }
+        if ($thumbOld=$apiProVideo['data']['thumb']) {
+            $thumbArr = explode('/',$thumbOld);
+            unset($thumbArr[0]); unset($thumbArr[1]); unset($thumbArr[2]);
+            $path = implode('/',$thumbArr);
+        }
+        $pathOld = isset($path) ? $path : '';
+        //上传图片
+        $rstArr=$this->uploadOnlyImg($request->url_ori,$pathOld);
+        if ($rstArr['code']!=0) {
+            echo "<script>alert('".$rstArr['msg']."');history.go(-1);</script>";exit;
+        }
+        $thumb = $rstArr['data'];
+        $data = [
+            'thumb' =>  isset($thumb) ? $thumb : '',
+            'id'    =>  $id,
+        ];
+        $apiProVideo2 = ApiProVideo::setThumb($data);
+        if ($apiProVideo2['code']!=0) {
+            echo "<script>alert('".$apiProVideo2['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN.'admin/provideo');
     }
 
     /**
@@ -139,31 +159,41 @@ class ProductVideoController extends BaseController
         } elseif ($linkType==4 && mb_substr($link,0,4)!='http') {
             echo "<script>alert('其他网址链接的格式有误！');history.go(-1);</script>";exit;
         }
+        $data = [
+            'id'    =>  $id,
+            'linkType'  =>  $linkType,
+            'link'  =>  $link,
+        ];
+        $apiProVideo = ApiProVideo::setLink($data);
+        if ($apiProVideo['code']!=0) {
+            echo "<script>alert('".$apiProVideo['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN.'admin/provideo');
     }
 
     /**
      * 设置是否显示
      */
-    public function setIsShow($id,$isshow)
+    public function setShow($id,$isshow)
     {
-        if (!$id || !in_array($isshow,[0,1,2])) {
-            echo "<script>alert('参数有误！');history.go(-1);</script>";exit;
+        $apiProVideo = ApiProVideo::setShow($id,$isshow);
+        if ($apiProVideo['code']!=0) {
+            echo "<script>alert('".$apiProVideo['msg']."');history.go(-1);</script>";exit;
         }
-        ProductVideoModel::where('id',$id)->update(['isshow'=> $isshow]);
         return redirect(DOMAIN.'admin/provideo');
     }
 
-    /**
-     * 清空数据表
-     */
-    public function clearTable()
-    {
-        if (env('APP_ENV')!='local' || env('APP_DEBUG')!='true' || \Session::get('admin.username')!='jiuge') {
-            echo "<script>alert('没有权限！');history.go(-1);</script>";exit;
-        }
-        ProductVideoModel::truncate();
-        return redirect(DOMAIN.'admin/provideo');
-    }
+//    /**
+//     * 清空数据表
+//     */
+//    public function clearTable()
+//    {
+//        if (env('APP_ENV')!='local' || env('APP_DEBUG')!='true' || \Session::get('admin.username')!='jiuge') {
+//            echo "<script>alert('没有权限！');history.go(-1);</script>";exit;
+//        }
+//        ProductVideoModel::truncate();
+//        return redirect(DOMAIN.'admin/provideo');
+//    }
 
 
 

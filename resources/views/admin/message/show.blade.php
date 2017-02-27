@@ -14,44 +14,43 @@
                 <tbody id="tbody-alert">
                 <tr>
                     <td class="am-hide-sm-only">编号 / Id：</td>
-                    <td>{{ $data['id'] }}</td>
+                    <td>{{$data['id']}}</td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">意见名称 / Name：</td>
-                    <td>{{ $data['name'] }}</td>
+                    <td class="am-hide-sm-only">消息标题 / Title：</td>
+                    <td>{{$data['title']}}</td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">内容 / Content：</td>
-                    <td>
-                        {{--<div class="div_content">{{$data['intro']}}</div>--}}
-                        <textarea cols="80" rows="10" class="textarea_show">{{$data['intro']}}</textarea>
-                    </td>
+                    <td class="am-hide-sm-only">消息类型 / Genre：</td>
+                    <td>{{$data['genreName']}}</td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">用户名称 / User Id：</td>
-                    <td>{{ $data['username'] }}</td>
+                    <td class="am-hide-sm-only">内容 / Introduce：</td>
+                    <td>{{$data['intro']}}</td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">意见状态 / Status：</td>
-                    <td>{{ $data['statusName'] }}</td>
+                    <td class="am-hide-sm-only">发送人 / Sender：</td>
+                    <td>{{UserNameById($data['sender'])}}</td>
                 </tr>
-                {{--@if($data->remarks)--}}
                 <tr>
-                    <td class="am-hide-sm-only">不满意缘由 / Remarks：</td>
-                    <td>{{ $data['remarks'] }}</td>
+                    <td class="am-hide-sm-only">发送时间 / Sender Time：</td>
+                    <td>{{$data['getSenderTime']}}</td>
                 </tr>
-                {{--@endif--}}
                 <tr>
-                    <td class="am-hide-sm-only">前台是否显示 / Is Show：</td>
-                    <td>{{ $data['isShowName'] }}</td>
+                    <td class="am-hide-sm-only">接收人 / Accept：</td>
+                    <td>{{UserNameById($data['accept'])}}</td>
+                </tr>
+                <tr>
+                    <td class="am-hide-sm-only">发送时间 / Accept Time：</td>
+                    <td>{{$data['getAcceptTime']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">创建时间 / Create Time：</td>
-                    <td>{{ $data['createTime'] }}</td>
+                    <td>{{$data['createTime']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">更新时间 / Update Time：</td>
-                    <td>{{ $data['updateTime'] }}</td>
+                    <td>{{$data['updateTime']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only" colspan="2">

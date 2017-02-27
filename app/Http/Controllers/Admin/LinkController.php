@@ -1,8 +1,8 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
+use App\Api\ApiBusiness\ApiLink;
 use Illuminate\Http\Request;
-use App\Models\LinkModel;
 
 class LinkController extends BaseController
 {
@@ -13,23 +13,28 @@ class LinkController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->model = new LinkModel();
         $this->crumb['']['name'] = '链接列表';
         $this->crumb['category']['name'] = '链接管理';
         $this->crumb['category']['url'] = 'link';
         $this->crumb['prefix'] = '链接';
     }
 
-    public function index()
+    public function index($type=0)
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
+        $pageCurr = isset($_POST['pageCurr']) ? $_POST['pageCurr'] : 1;
+        $prefix_url = DOMAIN.'admin/link';
+        $datas = $this->query($pageCurr,$type);
+        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query(),
-            'types'=> $this->model['types'],
-            'prefix_url'=> DOMAIN.'admin/link',
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
+            'datas' => $datas,
+            'pagelist' => $pagelist,
+            'prefix_url' => $prefix_url,
+            'model' => $this->getModel(),
+            'crumb' => $this->crumb,
+            'curr' => $curr,
+            'type' => $type,
         ];
         return view('admin.link.index', $result);
     }
@@ -81,12 +86,15 @@ class LinkController extends BaseController
 
     public function show($id)
     {
-        $data = LinkModel::find($id);
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
+        $apiLink = ApiLink::show($id);
+        if ($apiLink['code']!=0) {
+            echo "<script>alert('".$apiLink['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> $data,
-            'types'=> $this->model['types'],
+            'data'=> $apiLink['data'],
+            'model'=> $this->getModel(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -97,18 +105,6 @@ class LinkController extends BaseController
 
 
 
-    /**
-     * ==========================
-     * 一下是公用方法
-     * ==========================
-     */
-
-    public function query()
-    {
-        $datas = LinkModel::paginate($this->limit);
-        $datas->limit = $this->limit;
-        return $datas;
-    }
 
     /**
      * 收集数据
@@ -118,36 +114,28 @@ class LinkController extends BaseController
         $data = $request->all();
         if (!$data['title']) { $data['title'] = ''; }
         if (!$data['intro']) { $data['intro'] = ''; }
-        if ($data['cid']==0 && $data['type_id']==2 && mb_substr($data['link'],0,1,'utf-8')!='/') { $data['link'] = '/'.$data['link']; }
-//        //获取图片文件名
-//        $data['url_ori'] = '';
-//        if($request->hasFile('url_ori')){  //判断文件存在
-//            //验证图片大小
-//            foreach ($_FILES as $pic) {
-//                if ($pic['size'] > $this->uploadSizeLimit) {
-//                    echo "<script>alert(\"对不起，你上传的图片过大，请重新选择\");history.go(-1);</script>";exit;
-//                }
-//            }
-//            $file = $request->file('url_ori');  //获取文件
-//            $data['url_ori'] = $this->upload($file);
-//        }
-        //pic为0时，display_way不能为2
-//        if (!$data['url_ori'] && $data['display_way']==2) {
-//            echo "<script>alert(\"对不起，您未上传图片，不能以图片方式显示在前台，请重新选择\");history.go(-1);</script>";exit;
-//        }
         $data = [
             'name'=> $data['name'],
             'cid'=> 0,      //0代表本网站
             'title'=> $data['title'],
             'type_id'=> $data['type_id'],
-//            'pic'=> $data['url_ori'],
             'intro'=> $data['intro'],
-            'link'=> $data['link'],
-            'display_way'=> $data['display_way'],
-            'isshow'=> $data['isshow'],
-            'pid'=> $data['pid'],
-            'sort'=> $data['sort'],
         ];
         return $data;
+    }
+
+    public function query($pageCurr,$type)
+    {
+        $apiLink = ApiLink::index($this->limit,$pageCurr,0,$type,0);
+        return $apiLink['code']==0 ? $apiLink['data'] : [];
+    }
+
+    /**
+     * 获取 model
+     */
+    public function getModel()
+    {
+        $apiModel = ApiLink::getModel();
+        return $apiModel['code']==0 ? $apiModel['model'] : [];
     }
 }

@@ -74,6 +74,13 @@ a:hover.increase,a:hover.reduce { background:white; }
     overflow:auto;
 }
 .admin_show_img_size { width:500px; }
+.textarea_show {
+    border:0;
+    background:0;
+    overflow:auto;
+    outline:none;
+    resize:none;
+}
 /*=== 系统后台详情页面的内容 ===*/
 
 

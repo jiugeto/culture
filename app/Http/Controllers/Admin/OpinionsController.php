@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Api\ApiUser\ApiOpinion;
+use App\Api\ApiUser\ApiUsers;
 use App\Api\ApiUser\ApiUserVoice;
 use Illuminate\Http\Request;
 
@@ -25,26 +26,50 @@ class OpinionsController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
         $prefix_url = DOMAIN.'admin/opinions';
+        $datas = $this->query($isshow,$pageCurr);
+        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query($isshow,$pageCurr,$prefix_url),
-            'prefix_url'=> $prefix_url,
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
-            'isshow'=> $isshow,
+            'datas' => $datas,
+            'pagelist' => $pagelist,
+            'prefix_url' => $prefix_url,
+            'crumb' => $this->crumb,
+            'curr' => $curr,
+            'isshow' => $isshow,
         ];
         return view('admin.opinions.index', $result);
+    }
+
+    public function create()
+    {
+        $curr['name'] = $this->crumb['create']['name'];
+        $curr['url'] = $this->crumb['create']['url'];
+        $result = [
+            'crumb'=> $this->crumb,
+            'curr'=> $curr,
+        ];
+        return view('admin.opinions.create', $result);
+    }
+
+    public function store(Request $request)
+    {
+        $data = $this->getData($request);
+        $apiOpinion = ApiOpinion::addOpinion($data);
+        if ($apiOpinion['code']!=0) {
+            echo "<script>alert('".$apiOpinion['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN.'admin/opinions');
     }
 
     public function edit($id)
     {
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
-        $rst = ApiOpinion::getOneOpinion($id);
-        if ($rst['code']!=0) {
-            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        $apiOpinion = ApiOpinion::getOneOpinion($id);
+        if ($apiOpinion['code']!=0) {
+            echo "<script>alert('".$apiOpinion['msg']."');history.go(-1);</script>";exit;
         }
         $result = [
-            'data'=> $rst['data'],
+            'data'=> $apiOpinion['data'],
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -53,11 +78,11 @@ class OpinionsController extends BaseController
 
     public function update(Request $request,$id)
     {
-        $data = $request->all();
+        $data = $this->getData($request);
         $data['id'] = $id;
-        $rst = ApiOpinion::modifyOpinion($data);
-        if ($rst['code']!=0) {
-            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        $apiOpinion = ApiOpinion::modifyOpinion($data);
+        if ($apiOpinion['code']!=0) {
+            echo "<script>alert('".$apiOpinion['msg']."');history.go(-1);</script>";exit;
         }
         return redirect(DOMAIN.'admin/opinions');
     }
@@ -66,51 +91,78 @@ class OpinionsController extends BaseController
     {
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
-        $rst = ApiOpinion::getOneOpinion($id);
-        if ($rst['code']!=0) {
-            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        $apiOpinion = ApiOpinion::getOneOpinion($id);
+        if ($apiOpinion['code']!=0) {
+            echo "<script>alert('".$apiOpinion['msg']."');history.go(-1);</script>";exit;
         }
         $result = [
-            'data'=> $rst['data'],
+            'data'=> $apiOpinion['data'],
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
         return view('admin.opinions.show', $result);
     }
 
-    public function destroy($id)
+    /**
+     * 设置是否显示
+     */
+    public function setShow($id,$isshow)
     {
-        $rst = ApiOpinion::isdel($id,1);
-        if ($rst['code']!=0) {
-            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        $apiOpinion = ApiOpinion::setShow($id,$isshow);
+        if ($apiOpinion['code']!=0) {
+            echo "<script>alert('".$apiOpinion['msg']."');history.go(-1);</script>";exit;
         }
         return redirect(DOMAIN.'admin/opinions');
     }
 
-    public function restore($id)
+//    public function destroy($id)
+//    {
+//        $rst = ApiOpinion::isdel($id,1);
+//        if ($rst['code']!=0) {
+//            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+//        }
+//        return redirect(DOMAIN.'admin/opinions');
+//    }
+//
+//    public function restore($id)
+//    {
+//        $rst = ApiOpinion::isdel($id,0);
+//        if ($rst['code']!=0) {
+//            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+//        }
+//        return redirect(DOMAIN.'admin/opinions/trash');
+//    }
+//
+//    public function forceDelete($id)
+//    {
+//        $rst = ApiOpinion::delete($id);
+//        if ($rst['code']!=0) {
+//            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+//        }
+//        return redirect(DOMAIN.'admin/opinions/trash');
+//    }
+
+
+
+
+
+    public function getData(Request $request)
     {
-        $rst = ApiOpinion::isdel($id,0);
-        if ($rst['code']!=0) {
-            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        $apiUser = ApiUsers::getOneUserByUname($request->uname);
+        if ($apiUser['code']!=0) {
+            echo "<script>alert('".$apiUser['msg']."');history.go(-1);</script>";exit;
         }
-        return redirect(DOMAIN.'admin/opinions/trash');
+        return array(
+            'name'  =>  $request->name,
+            'intro' =>  $request->intro,
+            'uid'   =>  $apiUser['data']['id'],
+        );
     }
 
-    public function forceDelete($id)
-    {
-        $rst = ApiOpinion::delete($id);
-        if ($rst['code']!=0) {
-            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
-        }
-        return redirect(DOMAIN.'admin/opinions/trash');
-    }
-
-    public function query($isshow,$pageCurr,$prefix_url)
+    public function query($isshow,$pageCurr)
     {
         $rst = ApiOpinion::getOpinionList($this->limit,$pageCurr,$isshow);
-        $datas = $rst['code']==0 ? $rst['data'] : [];
-        $datas['pagelist'] = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
-        return $datas;
+        return $rst['code']==0 ? $rst['data'] : [];
     }
 
     /**

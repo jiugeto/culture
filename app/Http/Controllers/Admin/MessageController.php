@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Base\MessageModel;
+use App\Api\ApiBusiness\ApiMessage;
 
 class MessageController extends BaseController
 {
@@ -21,26 +21,47 @@ class MessageController extends BaseController
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
+        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $prefix_url = DOMAIN.'admin/message';
+        $datas = $this->query($pageCurr,0);
+        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query(0),
-            'prefix_url'=> DOMAIN.'admin/message',
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
+            'datas' => $datas,
+            'pagelist' => $pagelist,
+            'prefix_url' => $prefix_url,
+            'crumb' => $this->crumb,
+            'curr' => $curr,
         ];
         return view('admin.message.index', $result);
     }
 
-    public function trash()
+//    public function trash()
+//    {
+//        $curr['name'] = $this->crumb['trash']['name'];
+//        $curr['url'] = $this->crumb['trash']['url'];
+//        $result = [
+//            'datas'=> $this->query(0),
+//            'prefix_url'=> DOMAIN.'admin/message/trash',
+//            'crumb'=> $this->crumb,
+//            'curr'=> $curr,
+//        ];
+//        return view('admin.message.index', $result);
+//    }
+
+    public function show($id)
     {
-        $curr['name'] = $this->crumb['trash']['name'];
-        $curr['url'] = $this->crumb['trash']['url'];
+        $curr['name'] = $this->crumb['show']['name'];
+        $curr['url'] = $this->crumb['show']['url'];
+        $apiMsg = ApiMessage::show($id);
+        if ($apiMsg['code']!=0) {
+            echo "<script>alert('".$apiMsg['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'datas'=> $this->query(0),
-            'prefix_url'=> DOMAIN.'admin/message/trash',
+            'data'=> $apiMsg['data'],
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
-        return view('admin.message.index', $result);
+        return view('admin.message.show', $result);
     }
 
 
@@ -50,10 +71,9 @@ class MessageController extends BaseController
     /**
      * 查询方法
      */
-    public function query($del=0)
+    public function query($pageCurr,$del)
     {
-        $datas = MessageModel::where('del',$del)->paginate($this->limit);
-        $datas->limit = $this->limit;
-       return $datas;
+        $apiMsg = ApiMessage::index($this->limit,$pageCurr,0,0,$del);
+        return $apiMsg['code']==0 ? $apiMsg['data'] : [];
     }
 }
