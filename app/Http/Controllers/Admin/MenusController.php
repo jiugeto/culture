@@ -25,8 +25,13 @@ class MenusController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
         $prefix_url = DOMAIN.'admin/menus';
-        $datas = $this->query($pageCurr,$type,$isshow);
-        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
+        $apiMenu = ApiMenu::index($this->limit,$pageCurr,$type,$isshow);
+        if ($apiMenu['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiMenu['data']; $total = $apiMenu['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
             'datas' => $datas,
             'pagelist' => $pagelist,
@@ -167,30 +172,6 @@ class MenusController extends BaseController
     public function parents()
     {
         $apiMenu = ApiMenu::getMenuParent();
-        return $apiMenu['code']==0 ? $apiMenu['data'] : [];
-    }
-
-//    /**
-//     * 得到父操作
-//     */
-//    public function parent($pid)
-//    {
-//        if ($pid) {        //获取上级操作名称
-//            $pname = MenusModel::where('id',$pid)->first()->name;
-//        } else {
-//            $pname = '0级操作';
-//        }
-//        $parent['id'] = $pid;
-//        $parent['name'] = $pname;
-//        return $parent;
-//    }
-
-    /**
-     *查询方法
-     */
-    public function query($pageCurr,$type,$isshow)
-    {
-        $apiMenu = ApiMenu::index($this->limit,$pageCurr,$type,$isshow);
         return $apiMenu['code']==0 ? $apiMenu['data'] : [];
     }
 

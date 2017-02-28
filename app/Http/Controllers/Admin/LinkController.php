@@ -2,6 +2,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Api\ApiBusiness\ApiLink;
+use App\Api\ApiUser\ApiCompany;
+use App\Api\ApiUser\ApiUsers;
 use Illuminate\Http\Request;
 
 class LinkController extends BaseController
@@ -43,10 +45,13 @@ class LinkController extends BaseController
     {
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
+        $apiLink = ApiLink::getLinksByPid(0);
+        if ($apiLink['code']!=0) {
+            echo "<script>alert('".$apiLink['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'plinks'=> LinkModel::where('pid',0)->get(),      //得到父链接
-            'types'=> $this->model['types'],
-            'pics'=> $this->model->pic(),
+            'plinks'=> $apiLink['data'],      //得到父链接
+            'model'=> $this->getModel(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -56,8 +61,10 @@ class LinkController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
-        $data['created_at'] = time();
-        LinkModel::create($data);
+        $apiLink = ApiLink::add($data);
+        if ($apiLink['code']!=0) {
+            echo "<script>alert('".$apiLink['msg']."');history.go(-1);</script>";exit;
+        }
         return redirect(DOMAIN.'admin/link');
     }
 
@@ -65,11 +72,19 @@ class LinkController extends BaseController
     {
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
+        $apiLink = ApiLink::getLinksByPid(0);
+        if ($apiLink['code']!=0) {
+            echo "<script>alert('".$apiLink['msg']."');history.go(-1);</script>";exit;
+        }
+        $apiLink2 = ApiLink::show($id);
+        if ($apiLink2['code']!=0) {
+            echo "<script>alert('".$apiLink2['msg']."');history.go(-1);</script>";exit;
+        }
         $result =[
-            'plinks'=> LinkModel::where('pid',0)->get(),      //得到父链接
-            'pics'=> $this->model->pic(),
+            'plinks'=> $apiLink['data'],      //得到父链接
+            'model'=> $this->getModel(),
             'types'=> $this->model['types'],
-            'data'=> LinkModel::find($id),
+            'data'=> $apiLink2['data'],
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -79,8 +94,11 @@ class LinkController extends BaseController
     public function update(Request $request, $id)
     {
         $data = $this->getData($request);
-        $data['updated_at'] = time();
-        LinkModel::where('id',$id)->update($data);
+        $data['id'] = $id;
+        $apiLink = ApiLink::modify($data);
+        if ($apiLink['code']!=0) {
+            echo "<script>alert('".$apiLink['msg']."');history.go(-1);</script>";exit;
+        }
         return redirect(DOMAIN.'admin/link');
     }
 
@@ -101,6 +119,54 @@ class LinkController extends BaseController
         return view('admin.link.show', $result);
     }
 
+    /**
+     * 设置图片
+     */
+    public function setThumb(Request $request,$id)
+    {
+        if (!isset($request->url_ori)) {
+            echo "<script>alert('未上传图片！');history.go(-1);</script>";exit;
+        }
+        //判断老图片
+        $apiLink = ApiLink::show($id);
+        if ($apiLink['code']!=0) {
+            echo "<script>alert('".$apiLink['msg']."');history.go(-1);</script>";exit;
+        }
+        if ($thumbOld=$apiLink['data']['thumb']) {
+            $thumbArr = explode('/',$thumbOld);
+            unset($thumbArr[0]); unset($thumbArr[1]); unset($thumbArr[2]);
+            $path = implode('/',$thumbArr);
+        }
+        $pathOld = isset($path) ? $path : '';
+        //上传图片
+        $rstArr=$this->uploadOnlyImg($request->url_ori,$pathOld);
+        if ($rstArr['code']!=0) {
+            echo "<script>alert('".$rstArr['msg']."');history.go(-1);</script>";exit;
+        }
+        $thumb = $rstArr['data'];
+        $data = [
+            'thumb' =>  isset($thumb) ? $thumb : '',
+            'id'    =>  $id,
+        ];
+        $apiLink2 = ApiLink::setThumb($data);
+        if ($apiLink2['code']!=0) {
+            echo "<script>alert('".$apiLink2['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN.'admin/link');
+    }
+
+    /**
+     * 设置是否显示
+     */
+    public function setShow($id,$isshow)
+    {
+        $apiLink = ApiLink::setShow($id,$isshow);
+        if ($apiLink['code']!=0) {
+            echo "<script>alert('".$apiLink['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN.'admin/link');
+    }
+
 
 
 
@@ -111,15 +177,25 @@ class LinkController extends BaseController
      */
     public function getData(Request $request)
     {
-        $data = $request->all();
-        if (!$data['title']) { $data['title'] = ''; }
-        if (!$data['intro']) { $data['intro'] = ''; }
+        //判断cid
+        if (!$request->cname) {
+            $cid = 0;       //代表本站
+        } else {
+            $apiCompany = ApiCompany::getOneByCname($request->cname);
+            if ($apiCompany['code']!=0) {
+                echo "<script>alert('发布方填写错误！');history.go(-1);</script>";exit;
+            }
+            $cid = $apiCompany['data']['id'];
+        }
         $data = [
-            'name'=> $data['name'],
-            'cid'=> 0,      //0代表本网站
-            'title'=> $data['title'],
-            'type_id'=> $data['type_id'],
-            'intro'=> $data['intro'],
+            'name'  =>  $request->name,
+            'display_way'   =>  $request->display_way,
+            'cid'   =>  $cid,      //0代表本网站
+            'title' =>  $request->title,
+            'type'  =>  $request->type,
+            'intro' =>  $request->intro,
+            'link'  =>  $request->link,
+            'pid'   =>  $request->pid,
         ];
         return $data;
     }

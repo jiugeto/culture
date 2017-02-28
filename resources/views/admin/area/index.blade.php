@@ -25,16 +25,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                @if($datas->total())
+                @if(count($datas))
                     @foreach($datas as $data)
                     <tr>
                         <td class="am-hide-sm-only"><input type="checkbox" /></td>
-                        <td class="am-hide-sm-only">{{ $data->id }}</td>
-                        <td class="am-hide-sm-only">{{ $data->cityname }}</td>
-                        <td class="am-hide-sm-only">{{ $data->parentid }}</td>
-                        <td class="am-hide-sm-only">{{ $data->nocode }}</td>
-                        <td class="am-hide-sm-only">{{ $data->zipcode }}</td>
-                        <td class="am-hide-sm-only">{{ $data->weathercode }}</td>
+                        <td class="am-hide-sm-only">{{$data['id']}}</td>
+                        <td class="am-hide-sm-only">{{$data['cityname']}}</td>
+                        <td class="am-hide-sm-only">{{$data['parentid']}}</td>
+                        <td class="am-hide-sm-only">{{$data['nocode']}}</td>
+                        <td class="am-hide-sm-only">{{$data['zipcode']}}</td>
+                        <td class="am-hide-sm-only">{{$data['weathercode']}}</td>
                         {{--<td class="am-hide-sm-only">{{ $data->created_at }}</td>--}}
                         {{--<td class="am-hide-sm-only">--}}
                             {{--<div class="am-btn-toolbar">--}}
@@ -47,11 +47,11 @@
                         {{--</td>--}}
                     </tr>
                     @endforeach
-                @else @include('admin.common.#norecord')
+                @else <tr><td colspan="10" style="text-align:center;">没有记录</td></tr>
                 @endif
                     </tbody>
                 </table>
-                @include('admin.common.#page')
+                @include('admin.common.page2')
             </div>
         </div>
     </div>

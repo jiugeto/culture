@@ -25,8 +25,13 @@ class ActionController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
         $prefix_url = DOMAIN.'admin/action';
-        $datas = $this->query($isshow,$pid,$pageCurr,$prefix_url);
-        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
+        $apiActions = ApiAction::index($this->limit,$pageCurr,$isshow,$pid);
+        if ($apiActions['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiActions['data']; $total = $apiActions['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $rstPid = ApiAction::getActionsByPid(0);
         $result = [
             'datas' => $datas,
@@ -151,11 +156,7 @@ class ActionController extends BaseController
 
 
 
-    /**
-     * ==========================
-     * 一下是公用方法
-     * ==========================
-     */
+
 
     /**
      * 收集数据
@@ -193,15 +194,6 @@ class ActionController extends BaseController
         $parent['id'] = $pid;
         $parent['name'] = $pname;
         return $parent;
-    }
-
-    /**
-     *查询方法
-     */
-    public function query($isshow,$pid,$pageCurr)
-    {
-        $rstActions = ApiAction::index($this->limit,$pageCurr,$isshow,$pid);
-        return $rstActions['code']==0?$rstActions['data']:[];
     }
 
     /**

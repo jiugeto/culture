@@ -28,11 +28,19 @@ class AdminController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
         $prefix_url = DOMAIN.'admin/admin';
+        $apiAdmin = ApiAdmin::getAdminList($this->limit,$pageCurr);
+        if ($apiAdmin['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiAdmin['data']; $total = $apiAdmin['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query($pageCurr,$prefix_url),
-            'prefix_url'=> $prefix_url,
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
+            'datas' => $datas,
+            'pagelist' => $pagelist,
+            'prefix_url' => $prefix_url,
+            'crumb' => $this->crumb,
+            'curr' => $curr,
         ];
         return view('admin.admin.index', $result);
     }
@@ -153,9 +161,6 @@ class AdminController extends BaseController
 
     public function query($pageCurr,$prefix_url)
     {
-        $rst = ApiAdmin::getAdminList($this->limit,$pageCurr);
-        $datas = $rst['code']==0 ? $rst['data'] : [];
-        $datas['pagelist'] = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         return $datas;
     }
 }

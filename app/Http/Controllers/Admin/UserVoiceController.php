@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
+use App\Api\ApiUser\ApiUsers;
 use App\Api\ApiUser\ApiUserVoice;
 use Illuminate\Http\Request;
 
@@ -24,11 +25,14 @@ class UserVoiceController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
         $prefix_url = DOMAIN.'admin/uservoice';
+        $datas = $this->query($pageCurr);
+        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query($pageCurr,$prefix_url),
-            'crumb'=> $this->crumb,
-            'prefix_url'=> $prefix_url,
-            'curr'=> $curr,
+            'datas' => $datas,
+            'pagelist' => $pagelist,
+            'prefix_url' => $prefix_url,
+            'crumb' => $this->crumb,
+            'curr' => $curr,
         ];
         return view('admin.uservoice.index', $result);
     }
@@ -76,6 +80,18 @@ class UserVoiceController extends BaseController
         return view('admin.uservoice.show', $result);
     }
 
+    /**
+     * 设置是否显示
+     */
+    public function setShow($id,$isshow)
+    {
+        $apiUserVoice = ApiUserVoice::setShow($id,$isshow);
+        if ($apiUserVoice['code']!=0) {
+            echo "<script>alert('".$apiUserVoice['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN.'admin/uservoice');
+    }
+
 
 
 
@@ -84,10 +100,15 @@ class UserVoiceController extends BaseController
      */
     public function getData(Request $request)
     {
+        $apiUser = ApiUsers::getOneUserByUname($request->uname);
+        if ($apiUser['code']!=0) {
+            echo "<script>alert('".$apiUser['msg']."');history.go(-1);</script>";exit;
+        }
         $data = [
-            'name'=> $request->name,
-            'work'=> $request->work,
-            'intro'=> $request->intro,
+            'name'  =>  $request->name,
+            'work'  =>  $request->work,
+            'intro' =>  $request->intro,
+            'uid'   =>  $apiUser['data']['id'],
         ];
         return $data;
     }
@@ -95,11 +116,9 @@ class UserVoiceController extends BaseController
     /**
      * 查询方法
      */
-    public function query($pageCurr,$prefix_url)
+    public function query($pageCurr)
     {
-        $rst = ApiUserVoice::getUserVoiceList($this->limit,$pageCurr);
-        $datas = $rst['code']==0 ? $rst['data'] : [];
-        $datas['pagelist'] = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
-        return $datas;
+        $rst = ApiUserVoice::getUserVoiceList($this->limit,$pageCurr,0,0);
+        return $rst['code']==0 ? $rst['data'] : [];
     }
 }

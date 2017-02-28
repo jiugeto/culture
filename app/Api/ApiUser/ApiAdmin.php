@@ -9,7 +9,7 @@ class ApiAdmin
      * 管理员接口
      */
 
-    public static function getAdminList($limit=null,$pageCurr=1)
+    public static function getAdminList($limit,$pageCurr=1)
     {
         $apiUrl = ApiBase::getApiCurl() . '/api/v1/admin';
         $curl = new Curl();
@@ -22,7 +22,11 @@ class ApiAdmin
         if ($response->error->code != 0) {
             return array('code' => -1, 'msg' => $response->error->msg);
         }
-        return array('code' => 0, 'data' => ApiBase::objToArr($response->data));
+        return array(
+            'code' => 0,
+            'data' => ApiBase::objToArr($response->data),
+            'pagelist' => ApiBase::objToArr($response->pagelist),
+            );
     }
 
     /**
@@ -154,7 +158,11 @@ class ApiAdmin
         if ($response->error->code != 0) {
             return array('code' => -1, 'msg' => $response->error->msg);
         }
-        return array('code' => 0, 'data' => ApiBase::objToArr($response->data));
+        return array(
+            'code' => 0,
+            'data' => ApiBase::objToArr($response->data),
+            'pagelist' => ApiBase::objToArr($response->pagelist),
+            );
     }
 
     /**

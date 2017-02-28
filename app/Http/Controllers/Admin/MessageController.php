@@ -64,6 +64,18 @@ class MessageController extends BaseController
         return view('admin.message.show', $result);
     }
 
+    /**
+     * 设置是否显示
+     */
+    public function setShow($id,$isshow)
+    {
+        $apiMsg = ApiMessage::setShow($id,$isshow);
+        if ($apiMsg['code']!=0) {
+            echo "<script>alert('".$apiMsg['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN.'admin/message');
+    }
+
 
 
 
@@ -73,7 +85,7 @@ class MessageController extends BaseController
      */
     public function query($pageCurr,$del)
     {
-        $apiMsg = ApiMessage::index($this->limit,$pageCurr,0,0,$del);
+        $apiMsg = ApiMessage::index($this->limit,$pageCurr,0,0,0,$del);
         return $apiMsg['code']==0 ? $apiMsg['data'] : [];
     }
 }

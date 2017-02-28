@@ -139,14 +139,18 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::resource('design','DesignController');
     //功能管理
         //消息管理
-    Route::get('message/trash','MessageController@trash');
+//    Route::get('message/trash','MessageController@trash');
+    Route::get('message/show/{id}/show','MessageController@setShow');
     Route::resource('message','MessageController');
         //链接管理
     Route::post('link/{id}','LinkController@update');
     Route::get('link/s/{type}','LinkController@index');
+    Route::post('link/thumb/{id}','LinkController@setThumb');
+    Route::get('link/show/{id}/{isshow}','LinkController@setShow');
     Route::resource('link','LinkController');
         //心声管理
     Route::post('uservoice/{id}','UserVoiceController@update');
+    Route::get('uservoice/show/{id}/{isshow}','UserVoiceController@setShow');
     Route::resource('uservoice','UserVoiceController');
         //用户意见管理
     Route::get('opinions/clear','OpinionsController@clearTable');     //清空表

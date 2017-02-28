@@ -25,11 +25,19 @@ class RoleController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
         $prefix_url = DOMAIN.'admin/role';
+        $apiAdmin = ApiAdmin::roleList($this->limit,$pageCurr);
+        if ($apiAdmin['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiAdmin['data']; $total = $apiAdmin['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query($pageCurr,$prefix_url),
-            'prefix_url'=> DOMAIN.'admin/role',
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
+            'datas' => $datas,
+            'pagelist' => $pagelist,
+            'prefix_url' => $prefix_url,
+            'crumb' => $this->crumb,
+            'curr' => $curr,
         ];
         return view('admin.role.index', $result);
     }
@@ -165,19 +173,5 @@ class RoleController extends BaseController
             'uid'=> $this->userid,
         ];
         return $data;
-    }
-
-    /**
-     * 查询方法
-     */
-    public function query($pageCurr,$prefix_url)
-    {
-//        $datas = RoleModel::orderBy('id','asc')
-//            ->paginate($this->limit);
-//        $datas->limit = $this->limit;
-        $rst = ApiAdmin::roleList($this->limit,$pageCurr);
-        $datas = $rst['code']==0?$rst['data']:[];
-        $datas['pagelist'] = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
-        return $datas;
     }
 }

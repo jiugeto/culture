@@ -4,7 +4,6 @@
         @include('admin.common.crumb')
         <div class="am-g">
             @include('admin.common.menu')
-            {{--@include('admin.type.search')--}}
         </div>
         <hr/>
 
@@ -16,7 +15,24 @@
                     <fieldset>
                         <div class="am-form-group">
                             <label>链接名称 / Name：</label>
-                            <input type="text" placeholder="至少2个字符" minlength="2" required name="name"/>
+                            <input type="text" placeholder="至少2个字符" minlength="2" maxlength="20" required name="name"/>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label>显示方式 / Way：</label>
+                            <label><input type="radio" name="display_way" value="1" checked>文字方式显示&nbsp;&nbsp;</label>
+                            <label><input type="radio" name="display_way" value="2">图片方式显示&nbsp;&nbsp;</label>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label>图片id / Picture：</label>
+                            {{--<script src="{{PUB}}assets/js/local_pre.js"></script>--}}
+                            {{--<input type="text" placeholder="本地图片地址" readonly name="url_file">--}}
+                            {{--<input type="button" value="[找图]" onclick="path.click()" class="am-btn am-btn-primary">--}}
+                            {{--<input type="file" id="path" style="display:none"--}}
+                                   {{--onchange="url_file.value=this.value;loadImageFile();" name="url_ori">--}}
+                            {{--<div id="preview" style="margin:5px;width:300px;height:150px;border:1px dotted #5bc0de;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);"></div>--}}
+                            先添加，在上传图片。
                         </div>
 
                         <div class="am-form-group">
@@ -25,24 +41,22 @@
                         </div>
 
                         <div class="am-form-group">
-                            <label>链接类型 / Type：
-                                {{--<a href="/admin/type/create/{{'网站链接-type_id'}}">[+添加类别]</a>--}}
-                            </label>
-                            <select name="type_id">
-                                @foreach($types as $kt=>$type)
-                                    <option value="{{ $kt }}">{{ $type }}</option>
+                            <label>链接类型 / Type：</label>
+                            <select name="type" onchange="getType(this.value)">
+                                @foreach($model['types'] as $k=>$vtype)
+                                    <option value="{{$k}}">{{$vtype}}</option>
                                 @endforeach
                             </select>
                         </div>
 
                         <div class="am-form-group">
-                            <label>图片id / Picture：
-                                {{--(无满意图片？<a href="/admin/pic/create">此处添加</a>)--}}
-                            </label>
-                            <select name="pic_id">
-                                <option value="0">-请选择-</option>
-                                @foreach($pics as $pic)
-                                    <option value="{{ $pic->id }}">{{ $pic->name }}：<img src="{{ $data->url }}" class="pic_size_small"></option>
+                            <label>父链接 / Parent：</label>
+                            <select name="pid" required>
+                                <option value="0">0级链接</option>
+                                @foreach($plinks as $plink)
+                                    @if($plink['type']==1)
+                                    <option value="{{$plink['id']}}">{{$plink['name']}}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
@@ -54,34 +68,12 @@
 
                         <div class="am-form-group">
                             <label>访问链接地址 / Link：</label>
-                            <input type="text" placeholder="至少2个字符('/'代表首页)" minlength="2" required name="link"/>
+                            <input type="text" placeholder="至少2个字符('/'代表首页)" required name="link"/>
                         </div>
 
                         <div class="am-form-group">
-                            <label>显示方式 / Way：</label>
-                            <label><input type="radio" name="display_way" value="1" checked>文字方式显示&nbsp;&nbsp;</label>
-                            <label><input type="radio" name="display_way" value="2">图片方式显示&nbsp;&nbsp;</label>
-                        </div>
-
-                        <div class="am-form-group">
-                            <label>前台是否显示 / Is Show：</label>
-                            <label><input type="radio" name="isshow" value="0">在前台不显示&nbsp;&nbsp;</label>
-                            <label><input type="radio" name="isshow" value="1" checked>在前台显示&nbsp;&nbsp;</label>
-                        </div>
-
-                        <div class="am-form-group">
-                            <label>父链接 / Parent：</label>
-                            <select name="pid" required>
-                                <option value="0">0级链接</option>
-                                @foreach($plinks as $plink)
-                                    <option value="{{ $plink->id }}">{{ $plink->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="am-form-group">
-                            <label>排序数字 / Sort：</label>
-                            <input type="text" placeholder="例：10" pattern="^\d+$" required name="sort" value="10"/>
+                            <label>发布公司 / Company Name：</label>
+                            <input type="text" placeholder="公司名称，不填代表本站" name="cname"/>
                         </div>
 
                         <button type="submit" class="am-btn am-btn-primary">保存添加</button>
@@ -90,5 +82,29 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function getType(type){
+            var html = '';
+            html += '<option value="0">0级链接</option>';
+            html += '@foreach($plinks as $plink)';
+            if (type==1) {
+                html += '@if($plink['type']==1)';
+                html += '<option value="{{$plink['id']}}">{{$plink['name']}}</option>';
+                html += '@endif';
+            } else if (type==2) {
+                html += '@if($plink['type']==2)';
+                html += '<option value="{{$plink['id']}}">{{$plink['name']}}</option>';
+                html += '@endif';
+            } else if (type==3) {
+                html += '@if($plink['type']==3)';
+                html += '<option value="{{$plink['id']}}">{{$plink['name']}}</option>';
+                html += '@endif';
+            }
+            html += '@endforeach';
+            html += '';
+            $("select[name='pid']").html(html);
+        }
+    </script>
 @stop
 

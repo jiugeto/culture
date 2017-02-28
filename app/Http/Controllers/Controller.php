@@ -65,11 +65,10 @@ abstract class Controller extends BaseController
     /**
      * 接口分页处理
      */
-    public function getPageList($datas,$prefix_url,$limit,$pageCurr=1)
+    public function getPageList($total,$prefix_url,$limit,$pageCurr=1)
     {
-        $currentPage = $pageCurr;                               //当前页
-        $lastPage = ($pageCurr - 1) ? ($pageCurr - 1) : 1;      //上一页
-        $total = count($datas);                                 //总记录数
+        $currentPage = $pageCurr;               //当前页
+        $lastPage = ceil($total / $limit);      //尾页
         //上一页路由
         if ($pageCurr<=1) {
             $previousPageUrl = $prefix_url;
@@ -77,7 +76,7 @@ abstract class Controller extends BaseController
             $previousPageUrl = $prefix_url.'?page='.($pageCurr-1);
         }
         //下一页路由
-        if ($pageCurr * $limit >= count($datas)) {
+        if ($pageCurr * $limit >= $total) {
             $nextPageUrl = $prefix_url.'?page='.$pageCurr;
         } else {
             $nextPageUrl = $prefix_url.'?page='.($pageCurr+1);

@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Base\AreaModel;
+use App\Api\ApiBusiness\ApiArea;
 use Illuminate\Http\Request;
 
 class AreaController extends BaseController
@@ -22,12 +22,23 @@ class AreaController extends BaseController
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
+        $pageCurr = isset($_GET['page'])?$_GET['page']:1;
+        $prefix_url = DOMAIN.'admin/area';
+        $apiArea = ApiArea::index($this->limit,$pageCurr);
+        if ($apiArea['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiArea['data']; $total = $apiArea['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query(),
-            'prefix_url'=> DOMAIN.'admin/area',
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
+            'datas' => $datas,
+            'pagelist' => $pagelist,
+            'prefix_url' => $prefix_url,
+            'crumb' => $this->crumb,
+            'curr' => $curr,
         ];
+//        dd($pagelist);
         return view('admin.area.index', $result);
     }
 
@@ -44,28 +55,5 @@ class AreaController extends BaseController
         return view('admin.area.edit', $result);
     }
 
-    public function update(Request $request,$id){}
-
-
-
-
-    /**
-     * 收集数据
-     */
-    public function getData(Request $request)
-    {
-        $data = [
-        ];
-        return $data;
-    }
-
-    /**
-     * 查询方法
-     */
-    public function query()
-    {
-        $datas = AreaModel::paginate($this->limit);
-        $datas->limit = $this->limit;
-        return $datas;
-    }
+//    public function update(Request $request,$id){}
 }

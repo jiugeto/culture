@@ -27,11 +27,11 @@
                     </tr>
                     <tr>
                         <td class="am-hide-sm-only">类型 / Type：</td>
-                        <td>{{$data['type']}}</td>
+                        <td>{{$data['typeName']}}</td>
                     </tr>
                     <tr>
                         <td class="am-hide-sm-only">图片 / Picture：</td>
-                        <td></td>
+                        <td>@if($data['thumb'])<img src="{{$data['thumb']}}" width="300">@else/@endif</td>
                     </tr>
                     <tr>
                         <td class="am-hide-sm-only">介绍 / Introduce：</td>
@@ -39,31 +39,31 @@
                     </tr>
                     <tr>
                         <td class="am-hide-sm-only">访问路径地址 / Url：</td>
-                        <td>{{$data->link}}</td>
+                        <td>{{$data['link']}}</td>
                     </tr>
                     <tr>
                         <td class="am-hide-sm-only">显示方式 / Way：</td>
-                        <td>{{$data->way}}</td>
+                        <td>{{$data['wayName']}}</td>
                     </tr>
                     <tr>
                         <td class="am-hide-sm-only">前台显示否 / Is Show：</td>
-                        <td>{{$data->isshow}}</td>
+                        <td>{{$data['isshowName']}}</td>
                     </tr>
                     <tr>
                         <td class="am-hide-sm-only">父id / Parent Id：</td>
-                        <td>{{$data->pid}}</td>
+                        <td>{{$data['pid']}}</td>
                     </tr>
                     <tr>
                         <td class="am-hide-sm-only">排序 / Sort：</td>
-                        <td>{{$data->sort}}</td>
+                        <td>{{$data['sort']}}</td>
                     </tr>
                     <tr>
                         <td class="am-hide-sm-only">添加时间 / Create Time：</td>
-                        <td>{{$data->created_at}}</td>
+                        <td>{{$data['createTime']}}</td>
                     </tr>
                     <tr>
                         <td class="am-hide-sm-only">更新时间 / Update Time：</td>
-                        <td>{{$data->updated_at}}</td>
+                        <td>{{$data['updateTime']}}</td>
                     </tr>
                     </tbody>
                 </table>

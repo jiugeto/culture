@@ -33,7 +33,10 @@ class ApiUserVoice
         if ($response->error->code != 0) {
             return array('code' => -1, 'msg' => $response->error->msg);
         }
-        return array('code' => 0, 'data' => ApiBase::objToArr($response->data));
+        return array(
+            'code' => 0,
+            'data' => ApiBase::objToArr($response->data),
+            );
     }
 
     /**
@@ -49,7 +52,10 @@ class ApiUserVoice
         if ($response->error->code != 0) {
             return array('code' => -1, 'msg' => $response->error->msg);
         }
-        return array('code' => 0, 'msg' => $response->error->msg);
+        return array(
+            'code' => 0,
+            'msg' => $response->error->msg,
+            );
     }
 
     /**
@@ -67,7 +73,10 @@ class ApiUserVoice
         if ($response->error->code != 0) {
             return array('code' => -1, 'msg' => $response->error->msg);
         }
-        return array('code' => 0, 'data' => ApiBase::objToArr($response->data));
+        return array(
+            'code' => 0,
+            'data' => ApiBase::objToArr($response->data),
+            );
     }
 
     /**
@@ -75,7 +84,7 @@ class ApiUserVoice
      */
     public static function modify($data)
     {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/uservoice/modufy';
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/uservoice/modify';
         $curl = new Curl();
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
         $curl->post($apiUrl, $data);
@@ -83,7 +92,32 @@ class ApiUserVoice
         if ($response->error->code != 0) {
             return array('code' => -1, 'msg' => $response->error->msg);
         }
-        return array('code' => 0, 'msg' => $response->error->msg);
+        return array(
+            'code' => 0,
+            'msg' => $response->error->msg,
+            );
+    }
+
+    /**
+     * 设置是否显示
+     */
+    public static function setShow($id,$isshow)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/uservoice/setshow';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, array(
+            'id'    =>  $id,
+            'isshow'    =>  $isshow,
+        ));
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array(
+            'code' => 0,
+            'msg' => $response->error->msg,
+            );
     }
 
     /**

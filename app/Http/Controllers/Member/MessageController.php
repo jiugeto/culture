@@ -228,7 +228,7 @@ class MessageController extends BaseController
         } elseif ($list==2) {
             $status = 2;
         }
-        $apiMsg = ApiMessage::index($this->limit,$pageCurr,$genre,$status,0);
+        $apiMsg = ApiMessage::index($this->limit,$pageCurr,$genre,$status,2,0);
         return $apiMsg['code']==0 ? $apiMsg['data'] : [];
     }
 }

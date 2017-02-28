@@ -4,7 +4,6 @@
         @include('admin.common.crumb')
         <div class="am-g">
             @include('admin.common.menu')
-            {{--@include('admin.type.search')--}}
         </div>
 
         <div class="am-g">
@@ -21,15 +20,15 @@
                     </tr>
                     </thead>
                     <tbody>
-                @if(count($datas)>1)
-                    @foreach($datas as $kdata=>$data)
-                        @if(is_numeric($kdata))
+                @if(count($datas))
+                    @foreach($datas as $data)
                     <tr>
                         <td class="am-hide-sm-only"><input type="checkbox" /></td>
-                        <td class="am-hide-sm-only">{{ $data['id'] }}</td>
-                        <td class="am-hide-sm-only"><a href="{{DOMAIN}}admin/admin/{{$data['id']}}">{{ $data['username'] }}</a></td>
-                        <td class="am-hide-sm-only">{{ $data['roleName'] }}</td>
-                        <td class="am-hide-sm-only">{{ $data['createTime'] }}</td>
+                        <td class="am-hide-sm-only">{{$data['id'] }}</td>
+                        <td class="am-hide-sm-only"><a href="{{DOMAIN}}admin/admin/{{$data['id']}}">
+                                {{$data['username']}}</a></td>
+                        <td class="am-hide-sm-only">{{$data['roleName']}}</td>
+                        <td class="am-hide-sm-only">{{$data['createTime']}}</td>
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
@@ -41,9 +40,8 @@
                             </div>
                         </td>
                     </tr>
-                        @endif
                     @endforeach
-                @else @include('admin.common.#norecord')
+                @else <tr><td colspan="10" style="text-align:center;">没有记录</td></tr>
                 @endif
                     </tbody>
                 </table>

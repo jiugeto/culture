@@ -9,7 +9,7 @@ class ApiMessage
      * 消息接口
      */
 
-    public static function index($limit,$pageCurr,$genre=0,$status=0,$del=0)
+    public static function index($limit,$pageCurr,$genre=0,$status=0,$isshow=2,$del=0)
     {
         $apiUrl = ApiBase::getApiCurl() . '/api/v1/message';
         $curl = new Curl();
@@ -19,6 +19,7 @@ class ApiMessage
             'page'      =>  $pageCurr,
             'genre'     =>  $genre,
             'status'    =>  $status,
+            'isshow'    =>  $isshow,
             'del'       =>  $del,
         ));
         $response = json_decode($curl->response);
@@ -62,6 +63,28 @@ class ApiMessage
         return array(
             'code' => 0,
             'data' => ApiBase::objToArr($response->data),
+        );
+    }
+
+    /**
+     * 设置是否显示
+     */
+    public static function setShow($id,$isshow)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/message/setshow';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, array(
+            'id'    =>  $id,
+            'isshow'    =>  $isshow,
+        ));
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array(
+            'code' => 0,
+            'msg' => $response->error->msg,
         );
     }
 }
