@@ -23,7 +23,7 @@ class ThemeController extends BaseController
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
-        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
         $prefix_url = DOMAIN.'admin/theme';
         $result = [
             'datas'=> $this->query($pageCurr,$prefix_url,$uname),

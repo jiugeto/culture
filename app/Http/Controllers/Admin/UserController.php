@@ -37,7 +37,7 @@ class UserController extends BaseController
             $curr['name'] = '通过';
         }
         $curr['url'] = $this->crumb['']['url'];
-        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
         $prefix_url = DOMAIN.'admin/user';
         $apiUser = ApiUsers::getUserList($isuser,$isauth,$this->limit,$pageCurr);
         if ($apiUser['code']!=0) {

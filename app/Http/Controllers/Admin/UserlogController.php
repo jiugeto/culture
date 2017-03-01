@@ -21,7 +21,7 @@ class UserlogController extends BaseController
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
-        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
         $prefix_url = DOMAIN.'admin/userlog';
         $apiLog = ApiLog::getUserLogList($this->limit,$pageCurr);
         if ($apiLog['code']!=0) {

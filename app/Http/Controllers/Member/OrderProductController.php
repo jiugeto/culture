@@ -22,7 +22,7 @@ class OrderProductController extends BaseController
     {
         $curr['name'] = $this->lists['']['name'] = '创作订单';
         $curr['url'] = $this->lists['']['url'];
-        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
         $prefix_url = DOMAIN.'member/orderpro';
         $datas = $this->query($pageCurr);
         $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);

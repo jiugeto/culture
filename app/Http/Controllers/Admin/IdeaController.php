@@ -23,7 +23,7 @@ class IdeaController extends BaseController
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
-        $pageCurr = isset($_POST['pageCurr']) ? $_POST['pageCurr'] : 1;
+        $pageCurr = isset($_GET['pageCurr']) ? $_GET['pageCurr'] : 1;
         $prefix_url = DOMAIN.'admin/idea';
         $apiIdea = ApiIdea::index($this->limit,$pageCurr,0,0,0,0);
         if ($apiIdea['code']!=0) {

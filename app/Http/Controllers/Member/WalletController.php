@@ -49,7 +49,7 @@ class WalletController extends BaseController
         $curr['name'] = '福利中心 - 签到记录';
         $curr['url'] = $this->lists['']['url'];
         $prefix_url = DOMAIN.'member/sign';
-        $pageCurr = isset($_POST['pageCurr']) ? $_POST['pageCurr'] : 1;
+        $pageCurr = isset($_GET['pageCurr']) ? $_GET['pageCurr'] : 1;
         $datas = $this->getSigns($pageCurr,$prefix_url);
         $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         $result = [
@@ -70,7 +70,7 @@ class WalletController extends BaseController
         $curr['name'] = '福利中心 - 金币记录';
         $curr['url'] = $this->lists['']['url'];
         $prefix_url = DOMAIN.'member/gold';
-        $pageCurr = isset($_POST['pageCurr']) ? $_POST['pageCurr'] : 1;
+        $pageCurr = isset($_GET['pageCurr']) ? $_GET['pageCurr'] : 1;
         $datas = $this->getGolds($pageCurr);
         $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         $result = [
@@ -91,7 +91,7 @@ class WalletController extends BaseController
         $curr['name'] = '福利中心 - 红包记录';
         $curr['url'] = $this->lists['']['url'];
         $prefix_url = DOMAIN.'member/tip';
-        $pageCurr = isset($_POST['pageCurr']) ? $_POST['pageCurr'] : 1;
+        $pageCurr = isset($_GET['pageCurr']) ? $_GET['pageCurr'] : 1;
         $datas = $this->getTips($pageCurr);
         $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         $result = [
@@ -174,7 +174,7 @@ class WalletController extends BaseController
         $curr['url'] = $this->lists['']['url'];
         $apiWallet = ApiWallet::getConvertRecord($this->userid);
         $prefix_url = DOMAIN.'member/wallet/toweal';
-        $pageCurr = isset($_POST['pageCurr']) ? $_POST['pageCurr'] : 1;
+        $pageCurr = isset($_GET['pageCurr']) ? $_GET['pageCurr'] : 1;
         $datas = $apiWallet['code']==0 ? $apiWallet['data'] : [];
         $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
         $result = [
@@ -194,7 +194,7 @@ class WalletController extends BaseController
     {
         $curr['name'] = '福利中心 - 福利使用记录';
         $curr['url'] = $this->lists['']['url'];
-        $pageCurr = isset($_POST['pageCurr']) ? $_POST['pageCurr'] : 1;
+        $pageCurr = isset($_GET['pageCurr']) ? $_GET['pageCurr'] : 1;
         $prefix_url = DOMAIN.'member/wallet/useweal';
         if ($o==1) {
             $apiOrder = ApiOrderPro::getOrdersByWeal($this->limit,$pageCurr,$this->userid,0,2,0);

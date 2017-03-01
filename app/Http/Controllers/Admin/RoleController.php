@@ -23,7 +23,7 @@ class RoleController extends BaseController
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
-        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
         $prefix_url = DOMAIN.'admin/role';
         $apiAdmin = ApiAdmin::roleList($this->limit,$pageCurr);
         if ($apiAdmin['code']!=0) {

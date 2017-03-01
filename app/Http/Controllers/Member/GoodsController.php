@@ -23,7 +23,7 @@ class GoodsController extends BaseController
     {
         $curr['name'] = $this->lists['']['name'];
         $curr['url'] = $this->lists['']['url'];
-        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
         $prefix_url = DOMAIN.'member/goods';
         $datas = $this->query($pageCurr,0);
         $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
