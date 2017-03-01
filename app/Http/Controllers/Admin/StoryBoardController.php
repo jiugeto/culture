@@ -15,8 +15,8 @@ class StoryBoardController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->crumb['']['name'] = '人员列表';
-        $this->crumb['category']['name'] = '人员管理';
+        $this->crumb['']['name'] = '分镜列表';
+        $this->crumb['category']['name'] = '分镜管理';
         $this->crumb['category']['url'] = 'storyboard';
     }
 
@@ -25,13 +25,18 @@ class StoryBoardController extends BaseController
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $pageCurr = isset($_POST['pageCurr']) ? $_POST['pageCurr'] : 1;
-        $prefix_url = DOMAIN.'admin/staff';
-        $datas = $this->query($pageCurr,0);
-        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
+        $prefix_url = DOMAIN.'admin/storyboard';
+        $apiSB = ApiStoryBoard::index($this->limit,$pageCurr,0,0,0);
+        if ($apiSB['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiSB['data']; $total = $apiSB['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
             'datas' => $datas,
             'pagelist' => $pagelist,
-            'prefix_url'=> DOMAIN.'admin/storyboard',
+            'prefix_url'=> $prefix_url,
             'model' => $this->model,
             'crumb' => $this->crumb,
             'curr' => $curr,
@@ -206,12 +211,6 @@ class StoryBoardController extends BaseController
             'uid'       =>  $apiUser['data']['id'],
             'uname'     =>  $request->uname,
         );
-    }
-
-    public function query($pageCurr,$del)
-    {
-        $apiSB = ApiStoryBoard::index($this->limit,$pageCurr,0,0,$del);
-        return $apiSB['code']==0 ? $apiSB['data'] : [];
     }
 
     /**

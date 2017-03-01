@@ -26,8 +26,13 @@ class RentController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $pageCurr = isset($_POST['pageCurr']) ? $_POST['pageCurr'] : 1;
         $prefix_url = DOMAIN.'admin/rent';
-        $datas = $this->query($pageCurr,$genre,$type,0);
-        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
+        $apiRent = ApiRent::index($this->limit,$pageCurr,0,$genre,$type,0,0);
+        if ($apiRent['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiRent['data']; $total = $apiRent['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
             'datas' => $datas,
             'pagelist' => $pagelist,
@@ -189,15 +194,6 @@ class RentController extends BaseController
             'area'      =>  $apiUser['data']['area'],
         ];
         return $data;
-    }
-
-    /**
-     * 查询方法
-     */
-    public function query($pageCurr,$genre,$type,$del)
-    {
-        $apiRent = ApiRent::index($this->limit,$pageCurr,0,$genre,$type,0,$del);
-        return $apiRent['code']==0 ? $apiRent['data'] : [];
     }
 
     /**

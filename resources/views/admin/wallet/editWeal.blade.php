@@ -8,13 +8,14 @@
         <div class="am-g">
             @include('admin.common.info')
             <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
-                <form class="am-form" data-am-validator method="POST" action="{{DOMAIN}}admin/wallet/weal/{{ $data['id'] }}" enctype="multipart/form-data">
+                <form class="am-form" data-am-validator method="POST" action="{{DOMAIN}}admin/wallet/weal/{{$data['id']}}" enctype="multipart/form-data">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input type="hidden" name="_method" value="POST">
-                    <input type="hidden" name="type" value="{{ $type }}">
+                    <input type="hidden" name="type" value="{{$type}}">
+                    <input type="hidden" name="uid" value="{{$data['uid']}}">
                     <fieldset>
                         <div class="am-form-group">
-                            <label>用户名称 / User Name：{{ $data['username'] }}</label>
+                            <label>用户名称 / User Name：{{$data['username']}}</label>
                             <br><label>@if($type==1)签到@elseif($type==2)金币@elseif($type==3)红包@endif兑换福利</label>
                             <br><label>
                                 当前@if($type==1)签到 {{$data['sign']}}

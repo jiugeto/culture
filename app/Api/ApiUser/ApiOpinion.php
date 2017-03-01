@@ -33,7 +33,35 @@ class ApiOpinion
         if ($response->error->code != 0) {
             return array('code' => -1, 'msg' => $response->error->msg);
         }
-        return array('code' => 0, 'data' => ApiBase::objToArr($response->data));
+        return array(
+            'code' => 0,
+            'data' => ApiBase::objToArr($response->data),
+            'pagelist'  =>  ApiBase::objToArr($response->pagelist),
+        );
+    }
+
+    /**
+     * 根据 uid、fromtime、toTime 获取意见集合
+     */
+    public static function getOpinionsByTime($uid,$from,$to)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/opinion/opinionsbytime';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, array(
+            'uid'   =>  $uid,
+            'from'  =>  $from,
+            'to'    =>  $to,
+        ));
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array(
+            'code' => 0,
+            'data' => ApiBase::objToArr($response->data),
+            'pagelist'  =>  ApiBase::objToArr($response->pagelist),
+        );
     }
 
     /**
@@ -66,26 +94,6 @@ class ApiOpinion
             return array('code' => -1, 'msg' => $response->error->msg);
         }
         return array('code' => 0, 'msg' => $response->error->msg);
-    }
-
-    /**
-     * 根据 uid、fromtime、toTime 获取意见集合
-     */
-    public static function getOpinionsByTime($uid,$from,$to)
-    {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/opinion/opinionsbytime';
-        $curl = new Curl();
-        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
-        $curl->post($apiUrl, array(
-            'uid'   =>  $uid,
-            'from'  =>  $from,
-            'to'    =>  $to,
-        ));
-        $response = json_decode($curl->response);
-        if ($response->error->code != 0) {
-            return array('code' => -1, 'msg' => $response->error->msg);
-        }
-        return array('code' => 0, 'data' => ApiBase::objToArr($response->data));
     }
 
     /**

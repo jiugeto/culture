@@ -16,17 +16,15 @@
                     <fieldset>
                         <div class="am-form-group">
                             <label>广告位名称 / Ad Place：</label>
-                            <input type="text" placeholder="至少2个字符" minlength="2" required name="name"/>
+                            <input type="text" placeholder="至少2个字符" minlength="2" maxlength="20" required name="name"/>
                         </div>
 
                         <div class="am-form-group">
                             <label>广告位平台 / Plat：</label>
-                            <select name="plat">
-                                @if(count($model['plats']))
-                                    @foreach($model['plats'] as $kplat=>$plat)
-                                        <option value="{{ $kplat }}">{{ $plat }}</option>
-                                    @endforeach
-                                @endif
+                            <select name="plat" required>
+                                @foreach($model['plats'] as $k=>$vplat)
+                                    <option value="{{$k}}">{{$vplat}}</option>
+                                @endforeach
                             </select>
                         </div>
 
@@ -47,7 +45,7 @@
 
                         <div class="am-form-group">
                             <label>价格 / Price：</label>
-                            <input type="text" placeholder="输入数字" pattern="^(\d+)|(\d+\.\d{1,2})$" required name="price"/>
+                            <input type="text" placeholder="输入数字" pattern="^\d+$" required name="money"/>
                         </div>
 
                         <div class="am-form-group">

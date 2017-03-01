@@ -26,8 +26,13 @@ class DesignController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $pageCurr = isset($_POST['pageCurr']) ? $_POST['pageCurr'] : 1;
         $prefix_url = DOMAIN.'admin/design';
-        $datas = $this->query($pageCurr,0);
-        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
+        $apiDesign = ApiDesign::index($this->limit,$pageCurr,0,0,0,0,0);
+        if ($apiDesign['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiDesign['data']; $total = $apiDesign['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
             'datas' => $datas,
             'pagelist' => $pagelist,
@@ -200,15 +205,6 @@ class DesignController extends BaseController
             'detail'    =>  $request->detail,
             'money' =>  $request->money,
         );
-    }
-
-    /**
-     * 查询方法
-     */
-    public function query($pageCurr,$del)
-    {
-        $apiDesign = ApiDesign::index($this->limit,$pageCurr,0,0,0,0,$del);
-        return $apiDesign['code']==0 ? $apiDesign['data'] : [];
     }
 
     /**

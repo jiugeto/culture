@@ -30,8 +30,13 @@ class EntertainController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $pageCurr = isset($_POST['pageCurr']) ? $_POST['pageCurr'] : 1;
         $prefix_url = DOMAIN.'admin/entertain';
-        $datas = $this->query($pageCurr,0);
-        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
+        $apiET = ApiEntertain::index($this->limit,$pageCurr,0,0,0,0);
+        if ($apiET['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiET['data']; $total = $apiET['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
             'datas' => $datas,
             'pagelist' => $pagelist,
@@ -195,15 +200,6 @@ class EntertainController extends BaseController
             'staff' =>  $staff,
             'work'  =>  $work,
         );
-    }
-
-    /**
-     * 查询方法
-     */
-    public function query($pageCurr,$del)
-    {
-        $apiET = ApiEntertain::index($this->limit,$pageCurr,0,0,0,$del);
-        return $apiET['code']==0 ? $apiET['data'] : [];
     }
 
     /**

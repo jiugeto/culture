@@ -49,18 +49,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                @if(count($datas)>1)
-                    @foreach($datas as $kdata=>$data)
-                        @if(is_numeric($kdata))
-                    <tr>
+                @if(count($datas))
+                    @foreach($datas as $data)
                         <td class="am-hide-sm-only"><input type="checkbox" /></td>
-                        <td class="am-hide-sm-only">{{ $data['id'] }}</td>
-                        <td class="am-hide-sm-only">{{ $data['username'] }}</td>
-                        <td class="am-hide-sm-only">{{ $data['sign'] }}</td>
-                        <td class="am-hide-sm-only">{{ $data['gold'] }}</td>
-                        <td class="am-hide-sm-only">{{ $data['tip'] }}</td>
-                        <td class="am-hide-sm-only">{{ $data['weal'] }}</td>
-                        <td class="am-hide-sm-only">{{ $data['createTime'] }}</td>
+                        <td class="am-hide-sm-only">{{$data['id']}}</td>
+                        <td class="am-hide-sm-only">{{$data['username']}}</td>
+                        <td class="am-hide-sm-only">{{$data['sign']}}</td>
+                        <td class="am-hide-sm-only">{{$data['gold']}}</td>
+                        <td class="am-hide-sm-only">{{$data['tip']}}</td>
+                        <td class="am-hide-sm-only">{{$data['weal']}}</td>
+                        <td class="am-hide-sm-only">{{$data['createTime']}}</td>
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
@@ -72,9 +70,8 @@
                             </div>
                         </td>
                     </tr>
-                        @endif
                     @endforeach
-                @else @include('admin.common.#norecord')
+                @else <re><td colspan="10" style="text-align:center;">没有记录</td></re>
                 @endif
                     </tbody>
                 </table>

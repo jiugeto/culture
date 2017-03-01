@@ -23,8 +23,13 @@ class AdminlogController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
         $prefix_url = DOMAIN.'admin/adminlog';
-        $datas = $this->query($pageCurr);
-        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
+        $apiLog = ApiLog::getAdminLogList($this->limit,$pageCurr);
+        if ($apiLog['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiLog['data']; $total = $apiLog['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
             'datas' => $datas,
             'pagelist' => $pagelist,
@@ -49,11 +54,5 @@ class AdminlogController extends BaseController
             'curr'=> $curr,
         ];
         return view('admin.log.show', $result);
-    }
-
-    public function query($pageCurr)
-    {
-        $rst = ApiLog::getAdminLogList($this->limit,$pageCurr);
-        return $rst['code']==0 ? $rst['data'] : [];
     }
 }

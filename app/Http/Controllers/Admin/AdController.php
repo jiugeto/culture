@@ -1,9 +1,9 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Base\AdModel;
-use App\Models\Base\AdPlaceModel;
-use App\Models\Base\PicModel;
+use App\Api\ApiBusiness\ApiAd;
+use App\Api\ApiBusiness\ApiAdPlace;
+use App\Api\ApiUser\ApiUsers;
 use Illuminate\Http\Request;
 
 class AdController extends BaseController
@@ -18,18 +18,27 @@ class AdController extends BaseController
         $this->crumb['']['name'] = '广告列表';
         $this->crumb['category']['name'] = '广告管理';
         $this->crumb['category']['url'] = 'ad';
-        $this->model = new AdModel();
     }
 
     public function index()
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
+        $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
+        $prefix_url = DOMAIN.'admin/ad';
+        $apiAd = ApiAd::index($this->limit,$pageCurr,0,0,0,0,0,0);
+        if ($apiAd['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiAd['data']; $total = $apiAd['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query(),
-            'prefix_url'=> DOMAIN.'admin/ad',
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
+            'datas' => $datas,
+            'pagelist' => $pagelist,
+            'prefix_url' => $prefix_url,
+            'crumb' => $this->crumb,
+            'curr' => $curr,
         ];
         return view('admin.ad.index', $result);
     }
@@ -39,8 +48,8 @@ class AdController extends BaseController
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
-            'model'=> $this->model,
-            'pics'=> PicModel::all(),
+            'model'=> $this->getModel(),
+            'adplaces' => $this->getAdPlaces(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -51,13 +60,11 @@ class AdController extends BaseController
     {
         $data = $this->getData($request);
         //广告位的广告数量限制
-        $adplaceModel = AdPlaceModel::find($data['adplace_id']);
-        $adModels = AdModel::where('adplace_id',$data['adplace_id'])->get();
-        if ($adplaceModel && count($adModels)>=$adplaceModel->number) {
-            echo "<script>alert('该广告位的广告数量最多".$adplaceModel->number."个，已到上限！');history.go(-1);</script>";exit;
+        //?????
+        $apiAd = ApiAd::add($data);
+        if ($apiAd['code']!=0) {
+            echo "<script>alert('".$apiAd['msg']."');history.go(-1);</script>";exit;
         }
-        $data['created_at'] = time();
-        AdModel::create($data);
         return redirect(DOMAIN.'admin/ad');
     }
 
@@ -65,12 +72,16 @@ class AdController extends BaseController
     {
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
+        $apiAd = ApiAd::show($id);
+        if ($apiAd['code']!=0) {
+            echo "<script>alert('".$apiAd['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> AdModel::find($id),
-            'model'=> $this->model,
-            'pics'=> PicModel::all(),
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
+            'data' => $apiAd['data'],
+            'model' => $this->getModel(),
+            'adplaces' => $this->getAdPlaces(),
+            'crumb' => $this->crumb,
+            'curr' => $curr,
         ];
         return view('admin.ad.edit', $result);
     }
@@ -78,8 +89,11 @@ class AdController extends BaseController
     public function update(Request $request,$id)
     {
         $data = $this->getData($request);
-        $data['updated_at'] = time();
-        AdModel::where('id',$id)->update($data);
+        $data['id'] = $id;
+        $apiAd = ApiAd::modify($data);
+        if ($apiAd['code']!=0) {
+            echo "<script>alert('".$apiAd['msg']."');history.go(-1);</script>";exit;
+        }
         return redirect(DOMAIN.'admin/ad');
     }
 
@@ -87,19 +101,22 @@ class AdController extends BaseController
     {
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
+        $apiAd = ApiAd::show($id);
+        if ($apiAd['code']!=0) {
+            echo "<script>alert('".$apiAd['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> AdModel::find($id),
-            'model'=> $this->model,
-//            'pics'=> PicModel::all(),
+            'data'=> $apiAd['data'],
+            'model'=> $this->getModel(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
         return view('admin.ad.show', $result);
     }
 
-    public function setUse($id,$use)
+    public function setUse($id,$isuse)
     {
-        AdModel::where('id',$id)->update(array('isuse'=> $use));
+        $apiAd = ApiAd::setUse($id,$isuse);
         return redirect(DOMAIN.'admin/ad');
     }
 
@@ -109,39 +126,42 @@ class AdController extends BaseController
 
     public function getData(Request $request)
     {
-        if (!$request->name || !$request->adplace || !$request->pic_id || !$request->fromTime || !$request->toTime) {
-            echo "<script>alert('广告名称、广告位、图片、有效时间必填选！');history.go(-1);</script>";exit;
-        }
-        //判断广告位尺寸和图片尺寸
-        $picModel = PicModel::find($request->pic_id);
-        $adPlaceModel = AdPlaceModel::find($request->adplace);
-        if ($picModel->width < $adPlaceModel->width) {
-            echo "<script>alert('所选图片宽度小于广告位宽度！');history.go(-1);</script>";exit;
-        }
-        if ($picModel->height < $adPlaceModel->height) {
-            echo "<script>alert('所选图片高度小于广告位高度！');history.go(-1);</script>";exit;
+        if (!$request->name || !$request->adplace) {
+            echo "<script>alert('广告名称、广告位必填选！');history.go(-1);</script>";exit;
         }
         if (strtotime($request->fromTime) > strtotime($request->toTime)) {
             echo "<script>alert('有效结束时间不能早于开始时间！');history.go(-1);</script>";exit;
         }
+        $apiUser = ApiUsers::getOneUserByUname($request->uname);
+        if ($apiUser['code']!=0) {
+            echo "<script>alert('".$apiUser['msg']."');history.go(-1);</script>";exit;
+        }
         return array(
             'name'=> $request->name,
-            'adplace_id'=> $request->adplace,
+            'adplace'=> $request->adplace,
             'intro'=> $request->intro,
-            'pic_id'=> $request->pic_id,
             'link'=> $request->link,
             'fromTime'=> strtotime($request->fromTime.'000000'),
             'toTime'=> strtotime($request->toTime.'235959'),
-            //uid==0，则是系统添加
-//            'uid'=> $this->userid,
+            'uid'=> $apiUser['data']['id'],
         );
     }
 
-    public function query()
+    /**
+     * 获取 model
+     */
+    public function getModel()
     {
-        $datas = AdModel::orderBy('id','desc')
-            ->paginate($this->limit);
-        $datas->limit = $this->limit;
-        return $datas;
+        $apiModel = ApiAd::getModel();
+        return $apiModel['code']==0 ? $apiModel['model'] : [];
+    }
+
+    /**
+     * 获取广告位
+     */
+    public function getAdPlaces()
+    {
+        $apiAdPlace = ApiAdPlace::getAdPlaceAll();
+        return $apiAdPlace['code']==0 ? $apiAdPlace['data'] : [];
     }
 }

@@ -32,7 +32,11 @@ class ApiSign
         if ($response->error->code != 0) {
             return array('code' => -1, 'msg' => $response->error->msg);
         }
-        return array('code' => 0, 'data' => ApiBase::objToArr($response->data));
+        return array(
+            'code' => 0,
+            'data' => ApiBase::objToArr($response->data),
+            'pagelist'  =>  ApiBase::objToArr($response->pagelist),
+            );
     }
 
     /**
@@ -70,7 +74,11 @@ class ApiSign
         if ($response->error->code != 0) {
             return array('code' => -1, 'msg' => $response->error->msg);
         }
-        return array('code' => 0, 'data' => ApiBase::objToArr($response->data));
+        return array(
+            'code' => 0,
+            'data' => ApiBase::objToArr($response->data),
+            'pagelist'  =>  ApiBase::objToArr($response->pagelist),
+            );
     }
 
     /**
@@ -92,7 +100,11 @@ class ApiSign
         if ($response->error->code != 0) {
             return array('code' => -1, 'msg' => $response->error->msg);
         }
-        return array('code' => 0, 'data' => ApiBase::objToArr($response->data));
+        return array(
+            'code' => 0,
+            'data' => ApiBase::objToArr($response->data),
+            'pagelist'  =>  ApiBase::objToArr($response->pagelist),
+            );
     }
 
     /**

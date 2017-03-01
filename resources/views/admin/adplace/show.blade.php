@@ -14,42 +14,42 @@
                 <tbody id="tbody-alert">
                 <tr>
                     <td class="am-hide-sm-only">编号 / Id：</td>
-                    <td>{{ $data->id }}</td>
+                    <td>{{$data['id']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">广告位名称 / Name：</td>
-                    <td>{{ $data->name }}</td>
+                    <td>{{$data['name']}}</td>
                 </tr>
                     <td class="am-hide-sm-only">平台 / Plat：</td>
-                    <td>{{ $data->getPlat() }}</td>
+                    <td>{{$data['platName']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">介绍 / Introduce：</td>
-                    <td>{{ $data->intro }}</td>
+                    <td>{{$data['intro']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">宽度 / Width：(单位：px)</td>
-                    <td>{{ $data->width }}</td>
+                    <td>{{$data['width']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">高度 / Height：(单位：px)</td>
-                    <td>{{ $data->height }}</td>
+                    <td>{{$data['height']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">价格 / Price：(单位：元)</td>
-                    <td>{{ $data->price }}</td>
+                    <td>{{$data['money']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">数量 / Number：(单位：个)</td>
-                    <td>{{ $data->number }}</td>
+                    <td>{{$data['number']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">创建时间 / Create Time：</td>
-                    <td>{{ $data->createTime() }}</td>
+                    <td>{{$data['createTime']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">修改时间 / Update Time：</td>
-                    <td>{{ $data->updateTime() }}</td>
+                    <td>{{$data['updateTime']}}</td>
                 </tr>
                 </tbody>
             </table>

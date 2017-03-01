@@ -23,8 +23,13 @@ class MessageController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
         $prefix_url = DOMAIN.'admin/message';
-        $datas = $this->query($pageCurr,0);
-        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
+        $apiMsg = ApiMessage::index($this->limit,$pageCurr,0,0,0,0);
+        if ($apiMsg['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiMsg['data']; $total = $apiMsg['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
             'datas' => $datas,
             'pagelist' => $pagelist,
@@ -74,18 +79,5 @@ class MessageController extends BaseController
             echo "<script>alert('".$apiMsg['msg']."');history.go(-1);</script>";exit;
         }
         return redirect(DOMAIN.'admin/message');
-    }
-
-
-
-
-
-    /**
-     * 查询方法
-     */
-    public function query($pageCurr,$del)
-    {
-        $apiMsg = ApiMessage::index($this->limit,$pageCurr,0,0,0,$del);
-        return $apiMsg['code']==0 ? $apiMsg['data'] : [];
     }
 }

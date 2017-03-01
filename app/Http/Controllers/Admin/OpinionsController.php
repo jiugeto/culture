@@ -26,8 +26,13 @@ class OpinionsController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
         $prefix_url = DOMAIN.'admin/opinions';
-        $datas = $this->query($isshow,$pageCurr);
-        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
+        $apiOpinion = ApiOpinion::getOpinionList($this->limit,$pageCurr,$isshow);
+        if ($apiOpinion['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiOpinion['data']; $total = $apiOpinion['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
             'datas' => $datas,
             'pagelist' => $pagelist,
@@ -157,12 +162,6 @@ class OpinionsController extends BaseController
             'intro' =>  $request->intro,
             'uid'   =>  $apiUser['data']['id'],
         );
-    }
-
-    public function query($isshow,$pageCurr)
-    {
-        $rst = ApiOpinion::getOpinionList($this->limit,$pageCurr,$isshow);
-        return $rst['code']==0 ? $rst['data'] : [];
     }
 
     /**

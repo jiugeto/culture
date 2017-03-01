@@ -24,8 +24,13 @@ class GoodsController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
         $prefix_url = DOMAIN.'admin/goods';
-        $datas = $this->query($pageCurr,$genre,$cate);
-        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
+        $apiGoods = ApiGoods::index($this->limit,$pageCurr,0,$genre,$cate,0,0,0,0);
+        if ($apiGoods['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiGoods['data']; $total = $apiGoods['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
             'datas' => $datas,
             'pagelist' => $pagelist,
@@ -219,15 +224,6 @@ class GoodsController extends BaseController
             'uid'   =>  $uid,
             'uname' =>  $request->uname
         );
-    }
-
-    /**
-     * 查询方法
-     */
-    public function query($pageCurr,$genre,$cate=0)
-    {
-        $apiGoods = ApiGoods::index($this->limit,$pageCurr,0,$genre,$cate,0,0,0,0);
-        return $apiGoods['code']==0 ? $apiGoods['data'] : [];
     }
 
     /**

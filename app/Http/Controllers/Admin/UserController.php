@@ -39,8 +39,13 @@ class UserController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
         $prefix_url = DOMAIN.'admin/user';
-        $datas = $this->query($isuser,$isauth,$pageCurr);
-        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
+        $apiUser = ApiUsers::getUserList($isuser,$isauth,$this->limit,$pageCurr);
+        if ($apiUser['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiUser['data']; $total = $apiUser['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
             'datas' => $datas,
             'pagelist' => $pagelist,
@@ -156,12 +161,6 @@ class UserController extends BaseController
             echo "<script>alert('".$rstUser['msg']."');history.go(-1);</script>";exit;
         }
         return redirect(DOMAIN.'admin/user');
-    }
-
-    public function query($isuser,$isauth,$pageCurr)
-    {
-        $apiUser = ApiUsers::getUserList($isuser,$isauth,$this->limit,$pageCurr);
-        return $apiUser['code']==0 ? $apiUser['data'] : [];
     }
 
     /**

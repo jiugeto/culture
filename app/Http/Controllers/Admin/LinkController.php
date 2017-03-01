@@ -27,8 +27,13 @@ class LinkController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $pageCurr = isset($_POST['pageCurr']) ? $_POST['pageCurr'] : 1;
         $prefix_url = DOMAIN.'admin/link';
-        $datas = $this->query($pageCurr,$type);
-        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
+        $apiLink = ApiLink::index($this->limit,$pageCurr,0,$type,0);
+        if ($apiLink['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiLink['data']; $total = $apiLink['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
             'datas' => $datas,
             'pagelist' => $pagelist,
@@ -198,12 +203,6 @@ class LinkController extends BaseController
             'pid'   =>  $request->pid,
         ];
         return $data;
-    }
-
-    public function query($pageCurr,$type)
-    {
-        $apiLink = ApiLink::index($this->limit,$pageCurr,0,$type,0);
-        return $apiLink['code']==0 ? $apiLink['data'] : [];
     }
 
     /**

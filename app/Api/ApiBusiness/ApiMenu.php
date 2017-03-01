@@ -58,6 +58,7 @@ class ApiMenu
         return array(
             'code' => 0,
             'data' => $menuArr,
+            'pagelist'  =>  ApiBase::objToArr($response->pagelist),
         );
     }
 

@@ -31,6 +31,79 @@ class ApiAd
         return array(
             'code' => 0,
             'data' => ApiBase::objToArr($response->data),
+            'pagelist'  =>  ApiBase::objToArr($response->pagelist),
+            );
+    }
+
+    public static function show($id)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/ad/show';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, array(
+            'id'    =>  $id,
+        ));
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array(
+            'code' => 0,
+            'data' => ApiBase::objToArr($response->data),
+            );
+    }
+
+    public static function add($data)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/ad/add';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, $data);
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array(
+            'code' => 0,
+            'msg' => $response->error->msg,
+            );
+    }
+
+    public static function modify($data)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/ad/modify';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, $data);
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array(
+            'code' => 0,
+            'msg' => $response->error->msg,
+        );
+    }
+
+    /**
+     * 设置是否启用
+     */
+    public static function setUse($id,$isuse)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/ad/setuse';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, array(
+            'id'    =>  $id,
+            'isuse' =>  $isuse,
+        ));
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array(
+            'code' => 0,
+            'msg' => $response->error->msg,
         );
     }
 

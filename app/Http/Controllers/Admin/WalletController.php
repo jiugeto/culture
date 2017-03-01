@@ -14,8 +14,8 @@ class WalletController extends BaseController
      * 系统后台财务管理
      */
 
-    protected $signByWeal = 30;     //签到兑换倍数
-    protected $goldByWeal = 10;     //金币兑换倍数
+    protected $signByWeal = 10;     //签到兑换倍数
+    protected $goldByWeal = 30;     //金币兑换倍数
     protected $tipByWeal = 1;     //红包兑换倍数
 
     public function __construct()
@@ -30,16 +30,24 @@ class WalletController extends BaseController
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
-        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
         $prefix_url = DOMAIN.'admin/wallet';
+        $apiWallet = ApiWallet::index($this->limit,$pageCurr);
+        if ($apiWallet['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiWallet['data']; $total = $apiWallet['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query($pageCurr,$prefix_url),
-            'prefix_url'=> $prefix_url,
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
-            'signByWeal'=> $this->signByWeal,
-            'goldByWeal'=> $this->goldByWeal,
-            'tipByWeal'=> $this->tipByWeal,
+            'datas' => $datas,
+            'pagelist' => $pagelist,
+            'prefix_url' => $prefix_url,
+            'crumb' => $this->crumb,
+            'curr' => $curr,
+            'signByWeal' => $this->signByWeal,
+            'goldByWeal' => $this->goldByWeal,
+            'tipByWeal' => $this->tipByWeal,
         ];
         return view('admin.wallet.index', $result);
     }
@@ -120,13 +128,21 @@ class WalletController extends BaseController
     {
         $curr['name'] = '签到列表';
         $curr['url'] = $this->crumb['']['url'];
-        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
         $prefix_url = DOMAIN.'admin/sign';
+        $apiSign = ApiSign::index($this->limit,$pageCurr,0);
+        if ($apiSign['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiSign['data']; $total = $apiSign['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->getSigns($pageCurr,$prefix_url),
-            'prefix_url'=> $prefix_url,
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
+            'datas' => $datas,
+            'pagelist' => $pagelist,
+            'prefix_url' => $prefix_url,
+            'crumb' => $this->crumb,
+            'curr' => $curr,
         ];
         return view('admin.wallet.signList', $result);
     }
@@ -138,13 +154,21 @@ class WalletController extends BaseController
     {
         $curr['name'] = '金币列表';
         $curr['url'] = $this->crumb['']['url'];
-        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
         $prefix_url = DOMAIN.'admin/gold';
+        $apiGold = ApiGold::index($this->limit,$pageCurr,0);
+        if ($apiGold['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiGold['data']; $total = $apiGold['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->getGolds($pageCurr,$prefix_url),
-            'prefix_url'=> $prefix_url,
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
+            'datas' => $datas,
+            'pagelist' => $pagelist,
+            'prefix_url' => $prefix_url,
+            'crumb' => $this->crumb,
+            'curr' => $curr,
         ];
         return view('admin.wallet.goldList', $result);
     }
@@ -156,13 +180,21 @@ class WalletController extends BaseController
     {
         $curr['name'] = '红包列表';
         $curr['url'] = $this->crumb['']['url'];
-        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
         $prefix_url = DOMAIN.'admin/tip';
+        $apiTip = ApiTip::index($this->limit,$pageCurr);
+        if ($apiTip['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiTip['data']; $total = $apiTip['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->getTips($pageCurr,$prefix_url),
-            'prefix_url'=> $prefix_url,
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
+            'datas' => $datas,
+            'pagelist' => $pagelist,
+            'prefix_url' => $prefix_url,
+            'crumb' => $this->crumb,
+            'curr' => $curr,
         ];
         return view('admin.wallet.tipList', $result);
     }
@@ -174,18 +206,18 @@ class WalletController extends BaseController
     {
         $curr['name'] = '兑换福利';
         $curr['url'] = $this->crumb['edit']['url'];
-        $rst = ApiWallet::show($id);
-        if ($rst['code']!=0) {
-            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        $apiWallet = ApiWallet::show($id);
+        if ($apiWallet['code']!=0) {
+            echo "<script>alert('".$apiWallet['msg']."');history.go(-1);</script>";exit;
         }
         $result = [
-            'data'=> $rst['data'],
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
-            'type'=> $type,
-            'signByWeal'=> $this->signByWeal,
-            'goldByWeal'=> $this->goldByWeal,
-            'tipByWeal'=> $this->tipByWeal,
+            'data' => $apiWallet['data'],
+            'crumb' => $this->crumb,
+            'curr' => $curr,
+            'type' => $type,
+            'signByWeal' => $this->signByWeal,
+            'goldByWeal' => $this->goldByWeal,
+            'tipByWeal' => $this->tipByWeal,
         ];
         return view('admin.wallet.editWeal', $result);
     }
@@ -196,73 +228,10 @@ class WalletController extends BaseController
     public function setWeal(Request $request,$id)
     {
         if (!$request->num) { echo "<script>alert('数量必填！');history.go(-1);</script>";exit; }
-        $wallet = WalletModel::find($id);
-        if ($request->type==1) {
-            $signCount = $request->num * $this->signByWeal;
-            $data = [
-                'sign'=> $wallet->sign - $signCount,
-                'weal'=> $wallet->weal + $request->num,
-            ];
-        } else if ($request->type==2) {
-            $goldCount = $request->num * $this->goldByWeal;
-            $data = [
-                'gold'=> $wallet->gold - $goldCount,
-                'weal'=> $wallet->weal + $request->num,
-            ];
-        } else if ($request->type==3) {
-            $tipCount = $request->num * $this->tipByWeal;
-            $data = [
-                'tip'=> $wallet->tip - $tipCount,
-                'weal'=> $wallet->weal + $request->num,
-            ];
+        $apiWallet = ApiWallet::updateWeal($request->uid,$request->type,$request->num);
+        if ($apiWallet['code']!=0) {
+            echo "<script>alert('".$apiWallet['msg']."');history.go(-1);</script>";exit;
         }
-        WalletModel::where('id',$id)->update($data);
         return redirect(DOMAIN.'admin/wallet');
-    }
-
-
-
-
-
-
-    public function query($pageCurr,$prefix_url)
-    {
-        $rst = ApiWallet::index($this->limit,$pageCurr);
-        $datas = $rst['code']==0?$rst['data']:[];
-        $datas['pagelist'] = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
-        return $datas;
-    }
-
-    public function getSigns($pageCurr,$prefix_url)
-    {
-//        $datas = UserSignModel::orderBy('id','desc')
-//            ->paginate($this->limit);
-//        $datas->limit = $this->limit;
-        $rst = ApiSign::getSignList($this->limit,$pageCurr);
-        $datas = $rst['code']==0?$rst['data']:[];
-        $datas['pagelist'] = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
-        return $datas;
-    }
-
-    public function getGolds($pageCurr,$prefix_url)
-    {
-//        $datas = UserGoldModel::orderBy('id','desc')
-//            ->paginate($this->limit);
-//        $datas->limit = $this->limit;
-        $rst = ApiGold::getGoldList($this->limit,$pageCurr);
-        $datas = $rst['code']==0?$rst['data']:[];
-        $datas['pagelist'] = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
-        return $datas;
-    }
-
-    public function getTips($pageCurr,$prefix_url)
-    {
-//        $datas = UserTipModel::orderBy('id','desc')
-//            ->paginate($this->limit);
-//        $datas->limit = $this->limit;
-        $rst = ApiTip::index($this->limit,$pageCurr);
-        $datas = $rst['code']==0?$rst['data']:[];
-        $datas['pagelist'] = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
-        return $datas;
     }
 }

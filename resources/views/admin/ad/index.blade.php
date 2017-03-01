@@ -24,32 +24,33 @@
                     </tr>
                     </thead>
                     <tbody>
-                @if($datas->total())
+                @if(count($datas))
                     @foreach($datas as $data)
                     <tr>
                         {{--<td class="am-hide-sm-only"><input type="checkbox" /></td>--}}
-                        <td class="am-hide-sm-only">{{ $data->id }}</td>
-                        <td class="am-hide-sm-only"><a href="{{DOMAIN}}admin/ad/{{$data->id}}">{{ $data->name }}</a></td>
-                        <td class="am-hide-sm-only">{{ $data->getAdplaceName() }}</td>
-                        <td class="am-hide-sm-only">{{ $data->isauth() }}</td>
-                        <td class="am-hide-sm-only">{{ $data->getUName() }}</td>
-                        <td class="am-hide-sm-only">{{ $data->period() }}</td>
-                        <td class="am-hide-sm-only">{{ $data->createTime() }}</td>
+                        <td class="am-hide-sm-only">{{$data['id']}}</td>
+                        <td class="am-hide-sm-only"><a href="{{DOMAIN}}admin/ad/{{$data['id']}}">
+                                {{$data['name']}}</a></td>
+                        <td class="am-hide-sm-only">{{$data['adplaceName']}}</td>
+                        <td class="am-hide-sm-only">{{$data['isauth']}}</td>
+                        <td class="am-hide-sm-only">{{UserNameById($data['uid'])}}</td>
+                        <td class="am-hide-sm-only">{{$data['period']}}</td>
+                        <td class="am-hide-sm-only">{{$data['createTime']}}</td>
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
-                                    <a href="{{DOMAIN}}admin/ad/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/show.png" class="icon"> 查看</button></a>
-                                    <a href="{{DOMAIN}}admin/ad/{{$data->id}}/edit"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 编辑</button></a>
-                                    @if($data->isuse)
-                                    <a href="{{DOMAIN}}admin/ad/use/{{$data->id}}/0">
+                                    <a href="{{DOMAIN}}admin/ad/{{$data['id']}}"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/show.png" class="icon"> 查看</button></a>
+                                    <a href="{{DOMAIN}}admin/ad/{{$data['id']}}/edit"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 编辑</button></a>
+                                    @if($data['isuse']==1)
+                                    <a href="{{DOMAIN}}admin/ad/use/{{$data['id']}}/2">
                                         <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only">
-                                            <span class="am-icon-ban"></span> 暂停
+                                            <span class="am-icon-ban"></span> 开启
                                         </button>
                                     </a>
                                     @else
-                                    <a href="{{DOMAIN}}admin/ad/use/{{$data->id}}/1">
+                                    <a href="{{DOMAIN}}admin/ad/use/{{$data['id']}}/1">
                                         <button class="am-btn am-btn-default am-btn-xs am-text-success am-hide-sm-only">
-                                            <span class="am-icon-play"></span> 开启
+                                            <span class="am-icon-play"></span> 暂停
                                         </button>
                                     </a>
                                     @endif
@@ -59,11 +60,11 @@
                         </td>
                     </tr>
                     @endforeach
-                @else @include('admin.common.#norecord')
+                @else <tr><td colspan="10" style="text-align:center;">没有记录</td></tr>
                 @endif
                     </tbody>
                 </table>
-                @include('admin.common.#page')
+                @include('admin.common.page2')
             </div>
         </div>
     </div>

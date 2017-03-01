@@ -22,11 +22,11 @@
                         <div class="am-form-group">
                             <label>所属广告位 / Ad Place：</label>
                             <select name="adplace" required>
-                                @if(count($model->adplaces()))
-                                    @foreach($model->adplaces() as $adplace)
-                                <option value="{{ $adplace->id }}">
-                                    {{ $adplace->name.'('.$adplace->width.'*'.$adplace->height.')' }}</option>
-                                    @endforeach
+                                @if(count($adplaces))
+                                @foreach($adplaces as $adplace)
+                                    <option value="{{$adplace['id']}}">
+                                        {{$adplace['name'].'('.$adplace['width'].'*'.$adplace['height'].')'}}</option>
+                                @endforeach
                                 @endif
                             </select>
                         </div>
@@ -38,19 +38,7 @@
 
                         <div class="am-form-group">
                             <label>显示图片 / Thumb：</label>
-                            <a onclick="piclist()">图片列表<span id="open">展开</span><span id="close" style="display:none;">关闭</span></a>
-                            <input type="hidden" pattern="^\d+$" name="pic_id"/>
-                            <input type="text" placeholder="选择图片" minlength="2" name="pic_name"/>
-                            <div class="pic_list">
-                                @if(count($pics))
-                                    @foreach($pics as $pic)
-                                <div class="img" onclick="getPic('{{ $pic->id.'-'.$pic->name.'-'.$pic->width.'-'.$pic->height }}')"
-                                     title="点击选择图片({{ $pic->width }}*{{ $pic->height }})">
-                                    <img src="{{ $pic->url }}">
-                                </div>
-                                    @endforeach
-                                @endif
-                            </div>
+                            先添加，在上传图片。
                         </div>
 
                         <div class="am-form-group">
@@ -66,6 +54,11 @@
                         <div class="am-form-group">
                             <label>有效时间结束 / End：</label>
                             <input type="text" placeholder="点击选择日期" class="form-datetime am-form-field" data-am-datepicker="{format: 'yyyy-mm-dd'}" name="toTime"/>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label>发布单位 / Company Name：</label>
+                            <input type="text" placeholder="广告位发布方" minlength="2" maxlength="20" required name="uname"/>
                         </div>
 
                         <button type="submit" class="am-btn am-btn-primary">保存添加</button>

@@ -14,11 +14,11 @@ class ApiGold
      */
     public static function index($limit,$pageCurr=1,$uid=0)
     {
-        $redisKey = 'userGoldList';
-        //判断缓存有没有该数据
-        if ($redisResult = ApiBase::getRedis($redisKey)) {
-            return array('code' => 0, 'data' => unserialize($redisResult));
-        }
+//        $redisKey = 'userGoldList';
+//        //判断缓存有没有该数据
+//        if ($redisResult = ApiBase::getRedis($redisKey)) {
+//            return array('code' => 0, 'data' => unserialize($redisResult));
+//        }
         //没有，接口读取
         $apiUrl = ApiBase::getApiCurl() . '/api/v1/gold';
         $curl = new Curl();
@@ -32,7 +32,11 @@ class ApiGold
         if ($response->error->code != 0) {
             return array('code' => -1, 'msg' => $response->error->msg);
         }
-        return array('code' => 0, 'data' => ApiBase::objToArr($response->data));
+        return array(
+            'code' => 0,
+            'data' => ApiBase::objToArr($response->data),
+            'pagelist' => ApiBase::objToArr($response->pagelist),
+            );
     }
 
     /**

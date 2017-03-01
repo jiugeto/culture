@@ -28,6 +28,7 @@ class ApiWallet
         return array(
             'code' => 0,
             'data' => ApiBase::objToArr($response->data),
+            'pagelist'  =>  ApiBase::objToArr($response->pagelist),
         );
     }
 
@@ -49,6 +50,7 @@ class ApiWallet
         return array(
             'code' => 0,
             'data' => ApiBase::objToArr($response->data),
+            'pagelist'  =>  ApiBase::objToArr($response->pagelist),
         );
     }
 
@@ -107,7 +109,7 @@ class ApiWallet
 
     /**
      * type：1sign，2gold，3tip
-     * 通过 sign、gold、tip 更新福利 weal 总数
+     * 通过 sign、gold、tip 兑换更新福利 weal 总数
      */
     public static function updateWeal($uid,$type,$number=0)
     {

@@ -14,55 +14,55 @@
                 <tbody id="tbody-alert">
                 <tr>
                     <td class="am-hide-sm-only">编号 / Id：</td>
-                    <td>{{ $data->id }}</td>
+                    <td>{{$data['id']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">广告名称 / Ad Name：</td>
-                    <td>{{ $data->username }}</td>
+                    <td>{{$data['name']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">所在广告位 / Ad Place：</td>
-                    <td>{{ $data->getAdplaceName() }}</td>
+                    <td>{{$data['adplaceName']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">广告说明 / Introduce：</td>
-                    <td>{{ $data->intro }}</td>
+                    <td><textarea cols="50" rows="10" readonly class="textarea_show">{{$data['intro']}}</textarea></td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">显示图片 / Thumb：</td>
-                    <td>{{ $data->getPicUrl() }}</td>
+                    <td>{{$data['img']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">跳转链接 / Link：</td>
-                    <td>{{ $data->link }}</td>
+                    <td>{{$data['link']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">有效时间 / Period：</td>
-                    <td>{{ $data->fromTime() }} - {{ $data->toTime() }}</td>
+                    <td>{{$data['fromTimeName']}} - {{$data['toTimeName']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">使用的企业 / Company：</td>
-                    <td>{{ $data->getUName() }}</td>
+                    <td>{{ComNameByUid($data['uid'])}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">状态 / Period：</td>
-                    <td>{{ $data->period() }}</td>
+                    <td>{{$data['period']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">是否显示 / Is Show：</td>
-                    <td>{{ $data->isshow() }}</td>
+                    <td>{{$data['isshowName']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">是否启用 / Is Use：</td>
-                    <td>{{ $data->isuse() }}</td>
+                    <td>{{$data['isuseName']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">创建时间 / Create Time：</td>
-                    <td>{{ $data->createTime() }}</td>
+                    <td>{{$data['createTime']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">修改时间 / Update Time：</td>
-                    <td>{{ $data->updateTime() }}</td>
+                    <td>{{$data['updateTime']}}</td>
                 </tr>
                 </tbody>
             </table>

@@ -25,8 +25,13 @@ class UserVoiceController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
         $prefix_url = DOMAIN.'admin/uservoice';
-        $datas = $this->query($pageCurr);
-        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
+        $apiUserVoice = ApiUserVoice::getUserVoiceList($this->limit,$pageCurr,0,0);
+        if ($apiUserVoice['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiUserVoice['data']; $total = $apiUserVoice['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
             'datas' => $datas,
             'pagelist' => $pagelist,
@@ -111,14 +116,5 @@ class UserVoiceController extends BaseController
             'uid'   =>  $apiUser['data']['id'],
         ];
         return $data;
-    }
-
-    /**
-     * 查询方法
-     */
-    public function query($pageCurr)
-    {
-        $rst = ApiUserVoice::getUserVoiceList($this->limit,$pageCurr,0,0);
-        return $rst['code']==0 ? $rst['data'] : [];
     }
 }
