@@ -27,7 +27,8 @@ class ApiOrder
         return array(
             'code' => 0,
             'data' => ApiBase::objToArr($response->data),
-        );
+            'pagelist' => ApiBase::objToArr($response->pagelist),
+            );
     }
 
     /**
@@ -49,7 +50,7 @@ class ApiOrder
         return array(
             'code' => 0,
             'data' => ApiBase::objToArr($response->data),
-        );
+            );
     }
 
     /**
@@ -74,7 +75,8 @@ class ApiOrder
         return array(
             'code' => 0,
             'data' => ApiBase::objToArr($response->data),
-        );
+            'pagelist' => ApiBase::objToArr($response->pagelist),
+            );
     }
 
     /**

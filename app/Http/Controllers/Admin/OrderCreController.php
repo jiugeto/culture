@@ -24,16 +24,24 @@ class OrderCreController extends BaseController
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
-        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
         $prefix_url = DOMAIN.'admin/ordercre';
+        $apiOrderPro = ApiOrderPro::index($this->limit,$pageCurr,0,0,$isshow,$status);
+        if ($apiOrderPro['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiOrderPro['data']; $total = $apiOrderPro['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query($pageCurr,$prefix_url,$isshow,$status),
-            'model'=> $this->getModel(),
-            'prefix_url'=> $prefix_url,
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
-            'isshow'=> $isshow,
-            'status'=> $status,
+            'datas' => $datas,
+            'pagelist' => $pagelist,
+            'model' => $this->getModel(),
+            'prefix_url' => $prefix_url,
+            'crumb' => $this->crumb,
+            'curr' => $curr,
+            'isshow' => $isshow,
+            'status' => $status,
         ];
         return view('admin.ordercre.index', $result);
     }
@@ -197,13 +205,7 @@ class OrderCreController extends BaseController
 
 
 
-    public function query($pageCurr,$prefix_url,$isshow,$status)
-    {
-        $rst = ApiOrderPro::index($this->limit,$pageCurr,0,0,$isshow,$status);
-        $datas = $rst['code']==0?$rst['data']:[];
-        $datas['pagelist'] = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
-        return $datas;
-    }
+
 
     public function getModel()
     {

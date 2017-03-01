@@ -1,8 +1,8 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
+use App\Api\ApiBusiness\ApiOrder;
 use Illuminate\Http\Request;
-use App\Models\Base\OrderModel;
 
 class OrderController extends BaseController
 {
@@ -13,7 +13,6 @@ class OrderController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->model = new OrderModel();
         $this->crumb['']['name'] = '订单列表';
         $this->crumb['category']['name'] = '订单管理';
         $this->crumb['category']['url'] = 'order';
@@ -23,13 +22,23 @@ class OrderController extends BaseController
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
+        $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
+        $prefix_url = DOMAIN.'admin/order';
+        $apiOrder = ApiOrder::index($this->limit,$pageCurr,$isshow,0);
+        if ($apiOrder['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiOrder['data']; $total = $apiOrder['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query($del=0,$isshow),
-            'prefix_url'=> DOMAIN.'admin/order',
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
-            'del'=> $del,
-            'isshow'=> $isshow,
+            'datas' => $datas,
+            'pagelist' => $pagelist,
+            'prefix_url' => $prefix_url,
+            'crumb' => $this->crumb,
+            'curr' => $curr,
+            'del' => 0,
+            'isshow' => $isshow,
         ];
         return view('admin.order.index', $result);
     }
