@@ -2,6 +2,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Api\ApiOnline\ApiProduct;
+use App\Api\ApiOnline\ApiTemp;
+use App\Api\ApiUser\ApiUsers;
 use Illuminate\Http\Request;
 
 class ProductController extends BaseController
@@ -22,10 +24,15 @@ class ProductController extends BaseController
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
-        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
         $prefix_url = DOMAIN.'admin/product';
-        $datas = $this->query($pageCurr);
-        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
+        $apiProduct = ApiProduct::getProductsList($this->limit,$pageCurr,0,0,0);
+        if ($apiProduct['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiProduct['data']; $total = $apiProduct['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
             'datas' => $datas,
             'pagelist' => $pagelist,
@@ -40,12 +47,8 @@ class ProductController extends BaseController
     {
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
-        $rst = ApiProduct::getModel();
-        if ($rst['code']!=0) {
-            echo "<script>alert('获取有误！');history.go(-1);</script>";exit;
-        }
         $result = [
-            'model'=> $rst['model'],
+            'temps' => $this->getTemps(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -59,11 +62,9 @@ class ProductController extends BaseController
         if ($rst['code']!=0) {
             echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
         }
-
 //        //插入搜索表
 //        $productModel = ProductModel::where($data)->first();
 //        \App\Models\Home\SearchModel::change($productModel,1,'create');
-
         return redirect(DOMAIN.'admin/product');
     }
 
@@ -71,13 +72,13 @@ class ProductController extends BaseController
     {
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
-        $rst = ApiProduct::show($id);
-        if ($rst['code']!=0) {
-            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        $apiProduct = ApiProduct::show($id);
+        if ($apiProduct['code']!=0) {
+            echo "<script>alert('".$apiProduct['msg']."');history.go(-1);</script>";exit;
         }
         $result = [
-            'data'=> $rst['data'],
-            'model'=> $rst['model'],
+            'data'=> $apiProduct['data'],
+            'model'=> $this->getModel(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -91,11 +92,9 @@ class ProductController extends BaseController
 //        $data['updated_at'] = time();
 //        ProductModel::where('id',$id)->update($data);
 //        $rst = ApiProduct::;
-
 //        //更新搜索表
 //        $productModel = ProductModel::where('id',$id)->first();
 //        \App\Models\Home\SearchModel::change($productModel,1,'update');
-
         return redirect(DOMAIN.'admin/product');
     }
 
@@ -115,9 +114,9 @@ class ProductController extends BaseController
         return view('admin.product.show', $result);
     }
 
-    public function setIsShow($id,$isshow)
+    public function setShow($id,$isshow)
     {
-        $rst = ApiProduct::isShow($id,$isshow);
+        $rst = ApiProduct::setShow($id,$isshow);
         if ($rst['code']!=0) {
             echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
         }
@@ -134,34 +133,41 @@ class ProductController extends BaseController
 
 
 
-    /**
-     * =================
-     * 一下是公用方法
-     * =================
-     */
+
 
     /**
      * 收集数据
      */
     public function getData(Request $request)
     {
-        $product = [
-            'name'=> $request->name,
-            'cate'=> $request->cate,
-            'intro'=> $request->intro,
-            'sort'=> $request->sort,
-            'istop'=> $request->istop,
-            'isshow'=> $request->isshow,
-        ];
-        return $product;
+        $apiUser = ApiUsers::getOneUserByUname($request->uname);
+        if ($apiUser['code']!=0) {
+            echo "<script>alert('".$apiUser['msg']."');history.go(-1);</script>";exit;
+        }
+        return array(
+            'name'      =>  $request->name,
+            'tempid'    =>  $request->tempid,
+            'intro'     =>  $request->intro,
+            'uid'       =>  $apiUser['data']['id'],
+            'uname'     =>  $request->uname,
+        );
     }
 
     /**
-     * 查询方法
+     * 获取 model
      */
-    public function query($pageCurr)
+    public function getModel()
     {
-        $rst = ApiProduct::getProductsList($this->limit,$pageCurr);
-        return $rst['code']==0 ? $rst['data'] : [];
+        $apiModel = ApiProduct::getModel();
+        return $apiModel['code']==0 ? $apiModel['model'] : [];
+    }
+
+    /**
+     * 获取所有模板
+     */
+    public function getTemps()
+    {
+        $apiTemp = ApiTemp::getTempAll();
+        return $apiTemp['code']==0 ? $apiTemp['data'] : [];
     }
 }

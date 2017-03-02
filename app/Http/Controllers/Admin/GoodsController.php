@@ -140,9 +140,9 @@ class GoodsController extends BaseController
             'thumb' =>  isset($thumb) ? $thumb : '',
             'id'    =>  $id,
         ];
-        $apiGoods = ApiGoods::setThumb($data);
-        if ($apiGoods['code']!=0) {
-            echo "<script>alert('".$apiGoods['msg']."');history.go(-1);</script>";exit;
+        $apiGoods2 = ApiGoods::setThumb($data);
+        if ($apiGoods2['code']!=0) {
+            echo "<script>alert('".$apiGoods2['msg']."');history.go(-1);</script>";exit;
         }
         return redirect(DOMAIN.'admin/goods');
     }

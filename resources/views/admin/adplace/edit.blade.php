@@ -53,6 +53,11 @@
                             <input type="text" placeholder="输入数字" pattern="^\d+$" required name="number" value="{{$data['number']}}"/>
                         </div>
 
+                        <div class="am-form-group">
+                            <label>发布方 / User Name：</label>
+                            <input type="text" placeholder="发布方 ,不填写表示本站" name="uname" value="{{UserNameById($data['uid'])}}"/>
+                        </div>
+
                         <button type="submit" class="am-btn am-btn-primary">保存修改</button>
                     </fieldset>
                 </form>

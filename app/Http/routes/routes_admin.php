@@ -68,12 +68,17 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::post('goods/link/{id}','GoodsController@setLink');
     Route::get('goods/setshow/{id}/{isshow}','GoodsController@setShow');
     Route::resource('goods','GoodsController');
-    //内部产品管理
-        //在线动画路由
-    Route::get('product/{id}/{isshow}','ProductController@setIsShow');
+    //在线模板路由
+    Route::post('temp/{id}','ProTempController@update');
+    Route::post('temp/thumb/{id}','ProTempController@setThumb');
+    Route::post('temp/link/{id}','ProTempController@setLink');
+    Route::get('temp/setshow/{id}/{isshow}','ProTempController@setShow');
+    Route::resource('temp','ProTempController');
+    //在线动画路由
     Route::post('product/{id}','ProductController@update');
+    Route::get('product/setshow/{id}/{isshow}','ProductController@setShow');
     Route::resource('product','ProductController');
-        //离线动画路由
+    //离线动画路由
 //    Route::get('provideo/pre/{id}','ProductVideoController@pre');   //预览视频
     Route::post('provideo/{id}','ProductVideoController@update');
     Route::get('provideo/s/{genre}','ProductVideoController@index');
@@ -82,32 +87,6 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::get('provideo/show/{id}/{isshow}','ProductVideoController@setShow');
     Route::get('provideo/clear','ProductVideoController@clearTable');
     Route::resource('provideo','ProductVideoController');
-//        //动画设置路由
-//    Route::post('{pro_id}/proLayer/{id}','ProductLayerController@update');
-//    Route::resource('{pro_id}/proLayer','ProductLayerController');
-//        //图片文字路由
-//    Route::post('{pro_id}/{layerid}/proCon/{id}','ProductConController@update');
-//    Route::resource('{pro_id}/{layerid}/proCon','ProductConController');
-//        //图层路由
-//    Route::post('{pro_id}/{layerid}/proAttr/{id}','ProductAttrController@update');
-//    Route::resource('{pro_id}/{layerid}/proAttr','ProductAttrController');
-//        //属性动画路由
-//    Route::post('{pro_id}/{layerid}/proLayerAttr/{id}','ProductLayerAttrController@update');
-//    Route::resource('{pro_id}/{layerid}/proLayerAttr','ProductLayerAttrController');
-//        //实时创作路由
-//    Route::post('{pro_id}/creation/addLayer','ProCreationController@insertLayer');      //动画设置添加
-//    Route::post('{pro_id}/creation/editLayer/{layerid}','ProCreationController@updateLayer');      //动画设置修改
-//    Route::get('{pro_id}/creation/addLayerAttr/{layerid}/{con_id}/{genre}/{attrSel}/{per}/{val}','ProCreationController@insertLayerAttr');      //动画关键帧添加
-//    Route::get('{pro_id}/creation/editLayerAttr/{layerid}/{con_id}/{genre}/{layerAttrId}/{attrSel}/{per}/{val}','ProCreationController@updateLayerAttr');      //动画关键帧修改
-//    Route::post('{pro_id}/creation/editCon/{con_id}','ProCreationController@updateCon');      //图文修改
-//    Route::post('{pro_id}/creation/addCon','ProCreationController@insertCon');      //图文添加
-//    Route::post('{pro_id}/creation/editAttr/{attrid}','ProCreationController@updateAttr');      //属性修改
-//    Route::get('{pro_id}/creation','ProCreationController@index');      //预览、编辑
-//    Route::get('{pro_id}/creation/{layerid}/{con_id}/{genre}','ProCreationController@index');
-//    Route::get('{pro_id}/creation/edit','ProCreationController@edit');  //修改页面，默认第一条图文
-//    Route::get('{pro_id}/creation/edit/{layerid}/{con_id}/{genre}','ProCreationController@edit');
-//    Route::get('{pro_id}/pro/play/{layerid}/{con_id}/{genre}','ProCreationController@play');       //动画模板
-//    Route::get('{pro_id}/pro/edit/{layerid}/{con_id}/{genre}','ProCreationController@play2');
     //租赁路由
     Route::post('rent/{id}','RentController@update');
     Route::get('rent/s/{genre}/{type}','RentController@index');
@@ -125,12 +104,6 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
 //    Route::get('staff/{id}/forceDelete','StaffController@forceDelete');
     Route::post('staff/{id}','StaffController@update');
     Route::resource('staff','StaffController');
-        //作品管理
-//    Route::get('works/{id}/destroy','WorksController@destroy');
-//    Route::get('works/{id}/restore','WorksController@restore');
-//    Route::get('works/{id}/forceDelete','WorksController@forceDelete');
-//    Route::get('works/{id}/sort/{sort}','WorksController@sort');
-//    Route::resource('works','WorksController');
     //设计路由
     Route::post('design/{id}','DesignController@update');
     Route::post('design/thumb/{id}','DesignController@setThumb');
@@ -188,6 +161,7 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
         //广告管理
     Route::post('ad/{id}','AdController@update');
     Route::get('ad/use/{id}/{use}','AdController@setUse');
+    Route::post('ad/thumb/{id}','AdController@setThumb');
     Route::resource('ad','AdController');
         //广告位管理
     Route::post('place/{id}','AdPlaceController@update');

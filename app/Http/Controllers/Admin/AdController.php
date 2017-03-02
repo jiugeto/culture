@@ -114,9 +114,48 @@ class AdController extends BaseController
         return view('admin.ad.show', $result);
     }
 
+    /**
+     * 设置图片
+     */
+    public function setThumb(Request $request,$id)
+    {
+        if (!isset($request->url_ori)) {
+            echo "<script>alert('未上传图片！');history.go(-1);</script>";exit;
+        }
+        //判断老图片
+        $apiAd = ApiAd::show($id);
+        if ($apiAd['code']!=0) {
+            echo "<script>alert('".$apiAd['msg']."');history.go(-1);</script>";exit;
+        }
+        if ($thumbOld=$apiAd['data']['thumb']) {
+            $thumbArr = explode('/',$thumbOld);
+            unset($thumbArr[0]); unset($thumbArr[1]); unset($thumbArr[2]);
+            $path = implode('/',$thumbArr);
+        }
+        $pathOld = isset($path) ? $path : '';
+        //上传图片
+        $rstArr=$this->uploadOnlyImg($request->url_ori,$pathOld);
+        if ($rstArr['code']!=0) {
+            echo "<script>alert('".$rstArr['msg']."');history.go(-1);</script>";exit;
+        }
+        $thumb = $rstArr['data'];
+        $data = [
+            'id'    =>  $id,
+            'thumb' =>  isset($thumb) ? $thumb : '',
+        ];
+        $apiAd = ApiAd::setThumb($data);
+        if ($apiAd['code']!=0) {
+            echo "<script>alert('".$apiAd['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN.'admin/ad');
+    }
+
     public function setUse($id,$isuse)
     {
         $apiAd = ApiAd::setUse($id,$isuse);
+        if ($apiAd['code']!=0) {
+            echo "<script>alert('".$apiAd['msg']."');history.go(-1);</script>";exit;
+        }
         return redirect(DOMAIN.'admin/ad');
     }
 

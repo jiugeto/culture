@@ -17,31 +17,32 @@
                     <td>{{$data['id']}}</td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">广告位名称 / Name：</td>
+                    <td class="am-hide-sm-only">模板名称 / Name：</td>
                     <td>{{$data['name']}}</td>
                 </tr>
-                    <td class="am-hide-sm-only">平台 / Plat：</td>
-                    <td>{{$data['platName']}}</td>
+                <tr>
+                    <td class="am-hide-sm-only">类型 / Category：</td>
+                    <td>{{$data['cateName']}}</td>
+                </tr>
+                <tr>
+                    <td class="am-hide-sm-only">序号 / Serial：</td>
+                    <td>{{$data['serial']}}</td>
+                </tr>
+                <tr>
+                    <td class="am-hide-sm-only">缩略图 / Picture：</td>
+                    <td><img src="{{$data['thumb']}}" width="300"></td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">介绍 / Introduce：</td>
                     <td><textarea cols="50" rows="10" readonly class="textarea_show">{{$data['intro']}}</textarea></td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">宽度 / Width：(单位：px)</td>
-                    <td>{{$data['width']}}</td>
+                    <td class="am-hide-sm-only">视频链接类型 / Video Link Type：</td>
+                    <td>{{$data['linkTypeName']}}</td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">高度 / Height：(单位：px)</td>
-                    <td>{{$data['height']}}</td>
-                </tr>
-                <tr>
-                    <td class="am-hide-sm-only">价格 / Price：(单位：元)</td>
-                    <td>{{$data['money']}}</td>
-                </tr>
-                <tr>
-                    <td class="am-hide-sm-only">数量 / Number：(单位：个)</td>
-                    <td>{{$data['number']}}</td>
+                    <td class="am-hide-sm-only">视频链接 / Video Link：</td>
+                    <td><div style="width:500px;">{{$data['link']}}</div></td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">创建时间 / Create Time：</td>
@@ -53,7 +54,6 @@
                 </tr>
                 </tbody>
             </table>
-            <button class="am-btn am-btn-primary" onclick="history.go(-1);">返回</button>
         </div>
     </div>
 @stop

@@ -78,13 +78,16 @@ class AdPlaceController extends BaseController
         return view('admin.adplace.edit', $result);
     }
 
-//    public function update(Request $request, $id)
-//    {
-//        $data = $this->getData($request);
-//        $data['updated_at'] = time();
-//        AdPlaceModel::where('id',$id)->update($data);
-//        return redirect(DOMAIN.'admin/place');
-//    }
+    public function update(Request $request, $id)
+    {
+        $data = $this->getData($request);
+        $data['id'] = $id;
+        $apiAdPlace = ApiAdPlace::modify($data);
+        if ($apiAdPlace['code']!=0) {
+            echo "<script>alert('".$apiAdPlace['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN.'admin/place');
+    }
 
     public function show($id)
     {
@@ -108,20 +111,25 @@ class AdPlaceController extends BaseController
 
     public function getData(Request $request)
     {
-        if (!$request->name || !$request->width || !$request->height || !$request->money || !$request->number) {
-            echo "<script>alert('广告位名称、宽度、高度、价格、数量必填！');history.go(-1);</script>";exit;
+        if (!$request->name || !$request->width || !$request->height || !$request->number) {
+            echo "<script>alert('广告位名称、宽度、高度、数量必填！');history.go(-1);</script>";exit;
         }
-        $apiUser = ApiUsers::getOneUserByUname($request->uname);
-        if ($apiUser['code']!=0) {
-            echo "<script>alert('".$apiUser['msg']."');history.go(-1);</script>";exit;
+        if (!$request->uname) {
+            $uid = 0;       //不填写表示本站
+        } else {
+            $apiUser = ApiUsers::getOneUserByUname($request->uname);
+            if ($apiUser['code']!=0) {
+                echo "<script>alert('".$apiUser['msg']."');history.go(-1);</script>";exit;
+            }
+            $uid = $apiUser['data']['id'];
         }
        return array(
            'name'=> $request->name,
            'intro'=> $request->intro,
            'width'=> $request->width,
            'height'=> $request->height,
-           'money'=> $request->price,
-           'uid'=> $apiUser['data']['id'],
+           'money'=> $request->money,
+           'uid'=> $uid,
            'number'=> $request->number,
        );
     }

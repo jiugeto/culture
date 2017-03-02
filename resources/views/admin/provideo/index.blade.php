@@ -11,13 +11,13 @@
                                 <img src="{{PUB}}assets/images/add.png" class="icon"> 添加
                             </button>
                         </a>
-                        @if(env('APP_ENV')=='local' && env('APP_DEBUG')=='true' && Session::get('admin.username')=='jiuge')
-                        <a href="{{DOMAIN}}admin/provideo/clear">
-                            <button type="button" class="am-btn am-btn-default">
-                                <b style="color:orangered;">清空表</b>
-                            </button>
-                        </a>
-                        @endif
+                        {{--@if(env('APP_ENV')=='local' && env('APP_DEBUG')=='true' && Session::get('admin.username')=='jiuge')--}}
+                        {{--<a href="{{DOMAIN}}admin/provideo/clear">--}}
+                            {{--<button type="button" class="am-btn am-btn-default">--}}
+                                {{--<b style="color:orangered;">清空表</b>--}}
+                            {{--</button>--}}
+                        {{--</a>--}}
+                        {{--@endif--}}
                     </div>
                 </div>
             </div>

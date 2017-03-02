@@ -75,7 +75,7 @@ a:hover.increase,a:hover.reduce { background:white; }
 }
 .admin_show_img_size { width:500px; }
 .textarea_show {
-    border:0;
+    border:1px solid ghostwhite;
     background:0;
     overflow:auto;
     outline:none;

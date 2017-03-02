@@ -53,6 +53,11 @@
                             <input type="text" placeholder="输入数字" pattern="^\d+$" required name="number"/>
                         </div>
 
+                        <div class="am-form-group">
+                            <label>发布方 / User Name：</label>
+                            <input type="text" placeholder="发布方，不填写表示本站" name="uname"/>
+                        </div>
+
                         <button type="submit" class="am-btn am-btn-primary">保存添加</button>
                     </fieldset>
                 </form>

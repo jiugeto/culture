@@ -4,7 +4,6 @@
         @include('admin.common.crumb')
         <div class="am-g">
             @include('admin.common.menu')
-            {{--@include('admin.type.search')--}}
         </div>
 
         <div class="am-g">
@@ -16,9 +15,10 @@
                         <th class="table-id">ID</th>
                         <th class="table-title">广告名称</th>
                         <th class="table-title">所在广告位</th>
-                        <th class="table-type">审核状态</th>
+                        <th class="table-type">图片</th>
                         <th class="table-type">投放企业</th>
                         <th class="table-type">投放状态</th>
+                        <th class="table-type">审核状态</th>
                         <th class="table-date am-hide-sm-only">创建时间</th>
                         <th class="table-set">操作</th>
                     </tr>
@@ -32,15 +32,19 @@
                         <td class="am-hide-sm-only"><a href="{{DOMAIN}}admin/ad/{{$data['id']}}">
                                 {{$data['name']}}</a></td>
                         <td class="am-hide-sm-only">{{$data['adplaceName']}}</td>
-                        <td class="am-hide-sm-only">{{$data['isauth']}}</td>
+                        <td class="am-hide-sm-only">
+                            @if($data['img'])<img src="{{$data['img']}}" width="30">@else/@endif
+                        </td>
                         <td class="am-hide-sm-only">{{UserNameById($data['uid'])}}</td>
                         <td class="am-hide-sm-only">{{$data['period']}}</td>
+                        <td class="am-hide-sm-only">{{$data['isauthName']}}</td>
                         <td class="am-hide-sm-only">{{$data['createTime']}}</td>
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
                                     <a href="{{DOMAIN}}admin/ad/{{$data['id']}}"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/show.png" class="icon"> 查看</button></a>
                                     <a href="{{DOMAIN}}admin/ad/{{$data['id']}}/edit"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 编辑</button></a>
+                                    <a href="javascript:;" onclick="getThumb({{$data['id']}})"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 图片</button></a>
                                     @if($data['isuse']==1)
                                     <a href="{{DOMAIN}}admin/ad/use/{{$data['id']}}/2">
                                         <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only">
@@ -68,4 +72,16 @@
             </div>
         </div>
     </div>
+
+    @include('admin.common.popupImg')
+
+    <script>
+        function getThumb(id){
+            var name = $("input[name='name_"+id+"']").val();
+            $(".pname").html(name+' 缩略图更新');
+            $("#formthumb").attr('action','{{DOMAIN}}admin/ad/thumb/'+id);
+            $("#thumb").show(200);
+        }
+        function getClose(){ $('.popup').hide(200); }
+    </script>
 @stop

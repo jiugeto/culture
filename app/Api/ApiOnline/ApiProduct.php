@@ -14,11 +14,11 @@ class ApiProduct
      */
     public static function getProductsList($limit=0,$pageCurr=1,$uid=0,$cate=0,$isshow=0)
     {
-        $redisKey = 'productList';
-        //判断缓存有没有该数据
-        if ($redisResult = ApiBase::getRedis($redisKey)) {
-            return array('code' => 0, 'data' => unserialize($redisResult));
-        }
+//        $redisKey = 'productList';
+//        //判断缓存有没有该数据
+//        if ($redisResult = ApiBase::getRedis($redisKey)) {
+//            return array('code' => 0, 'data' => unserialize($redisResult));
+//        }
         //没有，接口读取
         $apiUrl = ApiBase::getApiCurl() . '/api/v1/product';
         $curl = new Curl();
@@ -37,6 +37,7 @@ class ApiProduct
         return array(
             'code' => 0,
             'data' => ApiBase::objToArr($response->data),
+            'pagelist'  =>   ApiBase::objToArr($response->pagelist),
         );
     }
 
@@ -96,9 +97,9 @@ class ApiProduct
     /**
      *  设置是否删除
      */
-    public static function isShow($id,$isshow)
+    public static function setShow($id,$isshow)
     {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/product/isshow';
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/product/setshow';
         $curl = new Curl();
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
         $curl->post($apiUrl, array(

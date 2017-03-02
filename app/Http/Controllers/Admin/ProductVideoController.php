@@ -26,8 +26,13 @@ class ProductVideoController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
         $prefix_url = DOMAIN.'admin/provideo';
-        $datas = $this->query($pageCurr,$genre);
-        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
+        $apiProVideo = ApiProVideo::index($this->limit,$pageCurr,$genre,0,0,0);
+        if ($apiProVideo['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiProVideo['data']; $total = $apiProVideo['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
             'datas' => $datas,
             'pagelist' => $pagelist,
@@ -215,22 +220,6 @@ class ProductVideoController extends BaseController
             'intro' =>  $request->intro,
         );
     }
-
-    public function query($pageCurr,$genre)
-    {
-        $apiProVideo = ApiProVideo::index($this->limit,$pageCurr,$genre,0,0,0);
-        return $apiProVideo['code']==0 ? $apiProVideo['data'] : [];
-    }
-
-//    public function pre($id)
-//    {
-//        $proVideo = ProductVideoModel::find($id);
-//        $result = [
-//            'video'=> VideoModel::find($proVideo->video_id),
-//            'videoName'=> $proVideo->name,
-//        ];
-//        return view('layout.videoPre', $result);
-//    }
 
     /**
      * 获取 model
