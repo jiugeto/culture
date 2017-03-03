@@ -66,7 +66,7 @@
                                     @else
                                     <a href="{{DOMAIN}}admin/product/setshow/{{$data['id']}}/2"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 去显示</button></a>
                                     @endif
-                                    <a href="{{env('ONLINE_DOMAIN')}}admin/t/{{$data['id']}}/layer" target="_blank"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 创作界面</button></a>
+                                    <a href="{{env('ONLINE_DOMAIN')}}admin/pro/{{$data['id']}}/layer" target="_blank"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 创作界面</button></a>
                                 </div>
                             </div>
                         </td>
