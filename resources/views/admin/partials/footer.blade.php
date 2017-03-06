@@ -2,5 +2,8 @@
 
 <footer>
     <hr>
-    <p class="am-padding-left list_center">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+    <p class="am-padding-left list_center">
+        {{--© 2014 AllMobilize, Inc. Licensed under MIT license.--}}
+        About Video To Making.
+    </p>
 </footer>

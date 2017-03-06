@@ -14,31 +14,31 @@
                 <tbody id="tbody-alert">
                 <tr>
                     <td class="am-hide-sm-only">编号 / Id：</td>
-                    <td>{{ $data['id'] }}</td>
+                    <td>{{$data['id']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">话题名称 / Name：</td>
-                    <td>{{ $data['name'] }}</td>
+                    <td>{{$data['name']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">内容  / Introduce：</td>
-                    <td>{!! $data['intro'] !!}</td>
+                    <td><textarea cols="80" rows="10" class="textarea_show" readonly>{{$data['intro']}}</textarea></td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">发布人 / User：</td>
-                    <td>{{ $data['uname'] }}</td>
+                    <td>{{$data['uname'] }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">阅读量 / Read：</td>
-                    <td>{{ $data['read'] }}</td>
+                    <td>{{$data['read'] }}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">点赞次数 / Click：</td>
-                    <td>{{ $data['clickNum'] }}</td>
+                    <td>{{$data['clickNum']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">关注着 / Follow：</td>
-                    <td>{{ $data['followNum'] }}</td>
+                    <td>{{$data['followNum']}}</td>
                 </tr>
                 {{--<tr>--}}
                     {{--<td class="am-hide-sm-only">感谢人 / Thank：</td>--}}
@@ -58,11 +58,11 @@
                 {{--</tr>--}}
                 <tr>
                     <td class="am-hide-sm-only">创建时间 / Create Time：</td>
-                    <td>{{ $data['createTime'] }}</td>
+                    <td>{{$data['createTime']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">修改时间 / Update Time：</td>
-                    <td>{{ $data['updateTime'] }}</td>
+                    <td>{{$data['updateTime']}}</td>
                 </tr>
                 </tbody>
             </table>

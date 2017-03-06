@@ -34,8 +34,8 @@ class ApiTalk
         }
         return array(
             'code' => 0,
-            'model' => ApiBase::objToArr($response->model),
             'data' => ApiBase::objToArr($response->data),
+            'pagelist' => ApiBase::objToArr($response->pagelist),
         );
     }
 
@@ -88,7 +88,6 @@ class ApiTalk
         }
         return array(
             'code' => 0,
-            'model' => ApiBase::objToArr($response->model),
             'data' => ApiBase::objToArr($response->data),
         );
     }

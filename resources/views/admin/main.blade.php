@@ -36,7 +36,7 @@
         <div class="am-panel-bd">
           <p><span class="am-icon-tag"></span> wiki</p>
           {{--<p>Welcome to the Amaze UI wiki!</p>--}}
-          <p>Welcome to MicroCulture!</p>
+          <p>Welcome to ZuoShiPin!</p>
         </div>
       </div>
     </div>

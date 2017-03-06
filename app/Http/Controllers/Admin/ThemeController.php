@@ -25,12 +25,20 @@ class ThemeController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
         $prefix_url = DOMAIN.'admin/theme';
+        $apiTheme = ApiTheme::index($this->limit,$pageCurr,$uname);
+        if ($apiTheme['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiTheme['data']; $total = $apiTheme['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query($pageCurr,$prefix_url,$uname),
-            'prefix_url'=> $prefix_url,
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
-            'uname'=> $uname ? $uname : '',
+            'datas' => $datas,
+            'pagelist' => $pagelist,
+            'prefix_url' => $prefix_url,
+            'crumb' => $this->crumb,
+            'curr' => $curr,
+            'uname' => $uname ? $uname : '',
         ];
         return view('admin.theme.index', $result);
     }
@@ -149,13 +157,5 @@ class ThemeController extends BaseController
             'uid'   =>  $uid,
             'uname' =>  $uname,
         );
-    }
-
-    public function query($pageCurr,$prefix_url,$uname)
-    {
-        $rst = ApiTheme::index($this->limit,$pageCurr,$uname);
-        $datas = $rst['code']==0 ? $rst['data'] : [];
-        $datas['pagelist'] = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
-        return $datas;
     }
 }
