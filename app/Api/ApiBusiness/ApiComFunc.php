@@ -3,21 +3,22 @@ namespace App\Api\ApiBusiness;
 
 use Curl\Curl;
 
-class ApiComVisitLog
+class ApiComFunc
 {
     /**
-     * 公司访问日志
+     * 公司功能接口
      */
 
-    public static function index($limit,$pageCurr=1,$cid=0)
+    public static function index($limit,$pageCurr=1,$cid=0,$isshow=2)
     {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/com/visit';
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/com/func';
         $curl = new Curl();
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
         $curl->post($apiUrl, array(
             'limit'     =>  $limit,
             'page'      =>  $pageCurr,
-            'cid'    =>  $cid,
+            'cid'       =>  $cid,
+            'isshow'    =>  $isshow,
         ));
         $response = json_decode($curl->response);
         if ($response->error->code != 0) {
@@ -32,7 +33,7 @@ class ApiComVisitLog
 
     public static function show($id)
     {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/com/visit/show';
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/com/func/show';
         $curl = new Curl();
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
         $curl->post($apiUrl, array(
@@ -48,14 +49,12 @@ class ApiComVisitLog
         );
     }
 
-    public static function add($data){}
-
     /**
      * 获取 model
      */
     public static function getModel()
     {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/com/visit/getmodel';
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/com/func/getmodel';
         $curl = new Curl();
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
         $curl->post($apiUrl, array(
@@ -66,7 +65,7 @@ class ApiComVisitLog
         }
         return array(
             'code' => 0,
-            'msg' => $response->error->msg,
+            'model' => ApiBase::objToArr($response->model),
         );
     }
 }

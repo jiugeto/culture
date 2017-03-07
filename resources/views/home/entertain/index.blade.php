@@ -36,7 +36,7 @@
 
         {{-- 列表 --}}
         <div class="e_list">
-            <table class="record">
+            <table class="record" @if(!count($datas))style="border:0;"@endif>
             @if(count($datas))
                 @foreach($datas as $kdata=>$data)
                     <tr>

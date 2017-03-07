@@ -23,10 +23,15 @@ class RentController extends BaseController
         if (!is_numeric($fromMoney) || !is_numeric($toMoney)) {
             echo "<script>alert('租金格式错误！');history.go(-1);</script>";exit;
         }
-        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
         $prefix_url = DOMAIN.'rent';
-        $datas = $this->query($pageCurr,$type,$fromMoney,$toMoney);
-        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
+        $apiRent = ApiRent::getRentsByMoney($this->limit,$pageCurr,$type,$fromMoney,$toMoney);
+        if ($apiRent['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiRent['data']; $total = $apiRent['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
             'datas' => $datas,
             'pagelist' => $pagelist,
@@ -62,11 +67,7 @@ class RentController extends BaseController
 
 
 
-    public function query($pageCurr,$type,$fromMoney,$toMoney)
-    {
-        $apiRent = ApiRent::getRentsByMoney($this->limit,$pageCurr,$type,$fromMoney,$toMoney);
-        return $apiRent['code']==0 ? $apiRent['data'] : [];
-    }
+
 
     public function ads()
     {

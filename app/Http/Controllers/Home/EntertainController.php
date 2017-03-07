@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Home;
 
 use App\Api\ApiBusiness\ApiAd;
 use App\Api\ApiBusiness\ApiEntertain;
+use App\Api\ApiBusiness\ApiGoods;
 use App\Api\ApiBusiness\ApiStaff;
 use App\Api\ApiBusiness\ApiWorks;
 use App\Models\EntertainModel;
@@ -31,9 +32,20 @@ class EntertainController extends BaseController
         } else {
             $prefix_url = DOMAIN.'entertain/3/0';
         }
-        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
-        $datas = $this->query($genre0,$genre,$pageCurr);
-        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
+        $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
+        if ($genre0==1) {
+            $apiData = ApiEntertain::index($this->limit,$pageCurr,0,1,2,0);
+        } elseif ($genre0==2) {
+            $apiData = ApiStaff::index($this->limit,$pageCurr,0,$genre,0,2,0);
+        } else {
+            $apiData = ApiGoods::index($this->limit,$pageCurr,0,0,0,0,2,0,0);
+        }
+        if (isset($apiData)&&$apiData['code']!=0) {
+            $datas = $apiData['data']; $total = $apiData['pagelist']['total'];
+        } else {
+            $datas = array(); $total = 0;
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
             'datas'     => $datas,
             'pagelist'  => $pagelist,
@@ -106,20 +118,7 @@ class EntertainController extends BaseController
 
 
 
-    /**
-     * 只显示供应的
-     */
-    public function query($genre0,$genre,$pageCurr)
-    {
-        if ($genre0==1) {
-            $apiData = ApiEntertain::index($this->limit,$pageCurr,0,1,2,0);
-        } elseif ($genre0==2) {
-            $apiData = ApiStaff::index($this->limit,$pageCurr,0,$genre,0,2,0);
-        } else {
-            $apiData = ApiWorks::index($this->limit,$pageCurr,0,0,2,0);
-        }
-        return $apiData['code']==0 ? $apiData['data'] : [];
-    }
+
 
     public function ads()
     {

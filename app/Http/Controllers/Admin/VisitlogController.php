@@ -23,11 +23,11 @@ class VisitlogController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
         $prefix_url = DOMAIN.'admin/visit';
-        $apiVisitlog = ApiComVisitLog::index($this->limit,$pageCurr,0);
-        if ($apiVisitlog['code']!=0) {
+        $apiVisit = ApiComVisitLog::index($this->limit,$pageCurr,0);
+        if ($apiVisit['code']!=0) {
             $datas = array(); $total = 0;
         } else {
-            $datas = $apiVisitlog['data']; $total = $apiVisitlog['pagelist']['total'];
+            $datas = $apiVisit['data']; $total = $apiVisit['pagelist']['total'];
         }
         $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
@@ -46,10 +46,14 @@ class VisitlogController extends BaseController
     {
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
+        $apiVisit = ApiComVisitLog::show($id);
+        if ($apiVisit['code']!=0) {
+            echo "<script>alert('".$apiVisit['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> VisitlogModel::find($id),
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
+            'data' => $apiVisit['data'],
+            'crumb' => $this->crumb,
+            'curr' => $curr,
         ];
         return view('admin.visitlog.show', $result);
     }

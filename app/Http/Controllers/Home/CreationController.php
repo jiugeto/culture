@@ -21,24 +21,37 @@ class CreationController extends BaseController
     {
         $rstWallet = ApiWallet::getWalletByUid($this->userid);
         $wallet = $rstWallet['code']==0 ? $rstWallet['data'] : [];
-        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
         if ($genre==1 && !$cate && !$isOrder) {
             $prefix_url = DOMAIN.'creation';
         } else {
             $prefix_url = DOMAIN.'creation/s/'.$genre.'/'.$cate.'/'.$isOrder;
         }
-        $datas = $this->query($genre,$cate,$isOrder,$pageCurr);
-        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
+        if ($genre==1) {
+            if (!$isOrder) {
+                $apiProduct = ApiProduct::getProductsList($this->limit,$pageCurr,0,$cate);
+            } else {
+                $apiProduct = ApiOrderPro::index($this->limit,$pageCurr,0,$cate);
+            }
+        } elseif (in_array($genre,[2,3])) {
+            $apiProduct = ApiProVideo::index($this->limit,$pageCurr,$genre,$cate,0,2);
+        }
+        if (isset($apiProduct)&&$apiProduct['code']==0) {
+            $datas = $apiProduct['data']; $total = $apiProduct['pagelist']['total'];
+        } else {
+            $datas = array(); $total = 0;
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $datas,
-            'prefix_url'=> $prefix_url,
-            'pagelist'=> $pagelist,
-            'model'=> $this->getModel(),
-            'curr_menu'=> 'creation',
-            'genre'=> $genre,
-            'cate'=> $cate,
-            'isOrder'=> $isOrder,
-            'wallet'=> $wallet,
+            'datas' => $datas,
+            'prefix_url' => $prefix_url,
+            'pagelist' => $pagelist,
+            'model' => $this->getModel(),
+            'curr_menu' => 'creation',
+            'genre' => $genre,
+            'cate' => $cate,
+            'isOrder' => $isOrder,
+            'wallet' => $wallet,
         ];
         $view = $genre==1 ? 'index' : 'cus';
         return view('home.creation.'.$view, $result);
@@ -49,19 +62,7 @@ class CreationController extends BaseController
 
 
 
-    public function query($genre,$cate,$isOrder,$pageCurr)
-    {
-        if ($genre==1) {
-            if (!$isOrder) {
-                $rst = ApiProduct::getProductsList($this->limit,$pageCurr,0,$cate);
-            } else {
-                $rst = ApiOrderPro::index($this->limit,$pageCurr,0,$cate);
-            }
-        } elseif (in_array($genre,[2,3])) {
-            $rst = ApiProVideo::index($this->limit,$pageCurr,$genre,$cate,0,2);
-        }
-        return $rst['code']==0?$rst['data']:[];
-    }
+
 
     /**
      * 获取 model

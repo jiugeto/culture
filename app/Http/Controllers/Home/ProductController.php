@@ -30,23 +30,28 @@ class ProductController extends BaseController
             $view = 'cus';
             $prefix_url = DOMAIN.'product/s/2';
         }
-        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
-        $datas = $this->query($ptype,$pageCurr);
-        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
+        $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
+        $apiGoods = ApiGoods::index($this->limit,$pageCurr,0,$ptype,0,0,2,0,0);
+        if ($apiGoods['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiGoods['data']; $total = $apiGoods['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'lists'=> $this->list,
-            'datas'=> $datas,
-            'pagelist'=> $pagelist,
-            'prefix_url'=> $prefix_url,
-            'ppts'=> $this->ppts(9),
-            'recommends'=> $this->queryR(),
-            'newests'=> $this->queryNew(),
-            'comNewests'=> $this->queryNewType(4),
-            'pNewests'=> $this->queryNewType(2),
-            'xuanchuans'=> $this->getGoodsByCate(5,5),    //宣传片
-            'curr_menu'=> $this->curr,
+            'lists' => $this->list,
+            'datas' => $datas,
+            'pagelist' => $pagelist,
+            'prefix_url' => $prefix_url,
+            'ppts' => $this->ppts(9),
+            'recommends' => $this->queryR(),
+            'newests' => $this->queryNew(),
+            'comNewests' => $this->queryNewType(4),
+            'pNewests' => $this->queryNewType(2),
+            'xuanchuans' => $this->getGoodsByCate(5,5),    //宣传片
+            'curr_menu' => $this->curr,
 //            'model'=> $this->getModel(),
-            'ptype'=> $ptype,
+            'ptype' => $ptype,
         ];
         return view('home.product.'.$view, $result);
     }
@@ -203,14 +208,7 @@ class ProductController extends BaseController
 
 
 
-    /**
-     * 供应方样片查询
-     */
-    public function query($ptype,$pageCurr)
-    {
-        $apiGoods = ApiGoods::index($this->limit,$pageCurr,0,$ptype,0,0,2,0,0);
-        return $apiGoods['code']==0 ? $apiGoods['data'] : [];
-    }
+
 
     /**
      * 推荐样片

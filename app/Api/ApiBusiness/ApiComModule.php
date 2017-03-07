@@ -3,20 +3,21 @@ namespace App\Api\ApiBusiness;
 
 use Curl\Curl;
 
-class ApiComMain
+class ApiComModule
 {
     /**
-     * 客户公司信息接口
+     * 公司模块接口
      */
 
-    public static function index($limit,$pageCurr=1,$isshow=2)
+    public static function index($limit,$pageCurr=1,$cid=0,$isshow=2)
     {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/com/main';
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/com/module';
         $curl = new Curl();
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
         $curl->post($apiUrl, array(
             'limit'     =>  $limit,
             'page'      =>  $pageCurr,
+            'cid'       =>  $cid,
             'isshow'    =>  $isshow,
         ));
         $response = json_decode($curl->response);
@@ -26,19 +27,17 @@ class ApiComMain
         return array(
             'code' => 0,
             'data' => ApiBase::objToArr($response->data),
+            'pagelist' => ApiBase::objToArr($response->pagelist),
         );
     }
 
-    /**
-     * 通过 uid 获取客户公司信息
-     */
-    public static function getOneByUid($uid)
+    public static function show($id)
     {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/com/main/onebyuid';
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/com/module/show';
         $curl = new Curl();
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
         $curl->post($apiUrl, array(
-            'uid'   =>  $uid,
+            'id'    =>  $id,
         ));
         $response = json_decode($curl->response);
         if ($response->error->code != 0) {
@@ -50,12 +49,44 @@ class ApiComMain
         );
     }
 
+    public static function add($data)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/com/module/add';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, $data);
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array(
+            'code' => 0,
+            'msg' => $response->error->msg,
+        );
+    }
+
+    public static function modify($data)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/com/module/modify';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, $data);
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array(
+            'code' => 0,
+            'msg' => $response->error->msg,
+        );
+    }
+
     /**
      * 获取 model
      */
     public static function getModel()
     {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/com/main/getmodel';
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/com/module/getmodel';
         $curl = new Curl();
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
         $curl->post($apiUrl, array(

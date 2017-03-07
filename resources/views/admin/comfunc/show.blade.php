@@ -17,55 +17,47 @@
                 <tbody id="tbody-alert">
                 <tr>
                     <td class="am-hide-sm-only">编号 / Id：</td>
-                    <td>{{ $data->id }}</td>
+                    <td>{{$data['id']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">功能名称 / Name：</td>
-                    <td>{{ $data->name }}</td>
+                    <td>{{$data['name']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">公司名称 / Company Name：</td>
-                    <td>{{ $data->company() }}</td>
+                    <td>{{ComNameById($data['cid'])}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">功能类型 / Type：</td>
-                    <td>{{ $data->type() }}</td>
+                    <td>{{$data['typeName']}}</td>
                 </tr>
-                <tr>
-                    <td class="am-hide-sm-only">类型 / Genre：</td>
-                    <td>{{ $data->genre() }}</td>
-                </tr>
+                {{--<tr>--}}
+                    {{--<td class="am-hide-sm-only">类型 / Genre：</td>--}}
+                    {{--<td>{{$data['genreName']}}</td>--}}
+                {{--</tr>--}}
                 <tr>
                     <td class="am-hide-sm-only">所属模块 / Genre：</td>
-                    <td>{{ $data->getModuleName() }}</td>
+                    <td>{{$data['moduleName']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">内容 / Introduce：</td>
-                    <td><div class="admin_show_con">{!! $data->intro !!}</div></td>
+                    <td><div class="admin_show_con">{{$data['intro']}}</div></td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">小字 /  Small：</td>
                     <td>
-                        @if($data->small)
-                            @foreach(explode('|',$data->small) as $small) {{ $small }} <br> @endforeach
+                        @if($data['small'])
+                            @foreach(explode('|',$data['small']) as $small) {{$small}} <br> @endforeach
                         @endif
                     </td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">排序 / Sort：</td>
-                    <td>{{ $data->sort }}</td>
-                </tr>
-                <tr>
-                    <td class="am-hide-sm-only">前台是否显示 / Show：</td>
-                    <td>{{ $data->isshow ? '显示' : '不显示' }}</td>
-                </tr>
-                <tr>
                     <td class="am-hide-sm-only">创建时间 / Create Time：</td>
-                    <td>{{ $data->createTime() }}</td>
+                    <td>{{$data['createTime']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">修改时间 / Update Time：</td>
-                    <td>{{ $data->updateTime() }}</td>
+                    <td>{{$data['updateTime']}}</td>
                 </tr>
                 </tbody>
             </table>

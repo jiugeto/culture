@@ -56,38 +56,38 @@
                         <th class="table-title">用户名</th>
                         <th class="table-type">企业名称</th>
                         <th class="table-type">当天访问次数</th>
-                        <th class="table-type">当天访问时长</th>
+                        {{--<th class="table-type">当天访问时长</th>--}}
                         <th class="table-date am-hide-sm-only">首次访问时间</th>
                         <th class="table-date am-hide-sm-only">最后访问时间</th>
                         <th class="table-set">操作</th>
                     </tr>
                     </thead>
                     <tbody>
-                @if($datas->total())
+                @if(count($datas))
                     @foreach($datas as $data)
                     <tr>
                         <td class="am-hide-sm-only"><input type="checkbox" /></td>
-                        <td class="am-hide-sm-only">{{ $data->id }}</td>
-                        <td class="am-hide-sm-only">{{ $data->getVisitName() }}</td>
-                        <td class="am-hide-sm-only">{{ $data->getCName() }}</td>
-                        <td class="am-hide-sm-only">{{ $data->dayCount }}</td>
-                        <td class="am-hide-sm-only">{{ $data->getTimeCount() }}</td>
-                        <td class="am-hide-sm-only">{{ $data->loginTime() }}</td>
-                        <td class="am-hide-sm-only">{{ $data->logoutTime() }}</td>
+                        <td class="am-hide-sm-only">{{$data['id']}}</td>
+                        <td class="am-hide-sm-only">{{$data['uname']}}</td>
+                        <td class="am-hide-sm-only">{{$data['cname']}}</td>
+                        <td class="am-hide-sm-only">{{$data['dayCount']}}</td>
+                        {{--<td class="am-hide-sm-only">{{$data->getTimeCount}}</td>--}}
+                        <td class="am-hide-sm-only">{{$data['loginTimeStr']}}</td>
+                        <td class="am-hide-sm-only">{{$data['logoutTimeStr']}}</td>
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
-                                    <a href="{{DOMAIN}}admin/visit/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="{{PUB}}assets/images/show.png" class="icon"> 查看</button></a>
+                                    <a href="{{DOMAIN}}admin/visit/{{$data['id']}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="{{PUB}}assets/images/show.png" class="icon"> 查看</button></a>
                                 </div>
                             </div>
                         </td>
                     </tr>
                     @endforeach
-                @else @include('admin.common.#norecord')
+                @else <tr><td colspan="10" style="text-align:center;">没有记录</td></tr>
                 @endif
                     </tbody>
                 </table>
-                @include('admin.common.#page')
+                @include('admin.common.page2')
             </div>
         </div>
     </div>

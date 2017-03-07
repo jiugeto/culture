@@ -26,10 +26,15 @@ class IdeaController extends BaseController
 
     public function index($cate=0)
     {
-        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
         $prefix_url = DOMAIN.'idea';
-        $datas = $this->query($cate,$pageCurr);
-        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
+        $apiIdea = ApiIdea::index($this->limit,$pageCurr,0,$cate,2,0);
+        if ($apiIdea['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiIdea['data']; $total = $apiIdea['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
             'datas' => $datas,
             'pagelist' => $pagelist,
@@ -115,11 +120,7 @@ class IdeaController extends BaseController
 //    }
 
 
-    public function query($cate,$pageCurr)
-    {
-        $apiIdea = ApiIdea::index($this->limit,$pageCurr,0,$cate,2,0);
-        return $apiIdea['code']==0 ? $apiIdea['data'] : [];
-    }
+
 
     /**
      * 获取 model

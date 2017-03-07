@@ -15,23 +15,21 @@
                     <fieldset>
                         <div class="am-form-group">
                             <label>模块名称 / Name：</label>
-                            <input type="text" placeholder="至少2个字符" minlength="2" required name="name"/>
+                            <input type="text" placeholder="至少2个字符" minlength="2" maxlength="20" required name="name"/>
                         </div>
 
                         <div class="am-form-group">
                             <label>类型 / genre：</label>
                             <select name="genre" required>
-                                @if(count($model['genres']))
-                                    @foreach($model['genres'] as $kgenre=>$genre)
-                                        <option value="{{ $kgenre }}">{{ $genre }}</option>
-                                    @endforeach
-                                @endif
+                                @foreach($model['genres'] as $k=>$vgenre)
+                                    <option value="{{$k}}">{{$vgenre}}</option>
+                                @endforeach
                             </select>
                         </div>
 
                         <div class="am-form-group">
                             <label>内容 / intro：</label>
-                            <textarea placeholder="模块内容" minlength="2" required name="intro" cols="50" rows="5"></textarea>
+                            <textarea placeholder="模块内容" minlength="2" maxlength="255" required name="intro" cols="50" rows="5"></textarea>
                             {{--@include('UEditor::head')--}}
                             {{--<script id="container" name="intro" type="text/plain"></script>--}}
                             {{--<script type="text/javascript">--}}
@@ -48,14 +46,8 @@
                         </div>
 
                         <div class="am-form-group">
-                            <label>企业控制排序 / Sort：</label>
-                            <input type="text" pattern="^\d+$" required name="sort" value="10">
-                        </div>
-
-                        <div class="am-form-group">
-                            <label>企业控制前台是否显示 / Is Show：</label>
-                            <label><input type="radio" name="isshow" value="0"> 不显示&nbsp;&nbsp;</label>
-                            <label><input type="radio" name="isshow" value="1" checked> 显示&nbsp;&nbsp;</label>
+                            <label>公司名称 / Name：</label>
+                            <input type="text" placeholder="公司名称" minlength="2" maxlength="20" required name="cname"/>
                         </div>
 
                         <button type="submit" class="am-btn am-btn-primary">保存添加</button>

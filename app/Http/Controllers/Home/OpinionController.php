@@ -21,10 +21,15 @@ class OpinionController extends BaseController
 
     public function index($status=0)
     {
-        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
         $prefix_url = DOMAIN.'opinion';
-        $datas = $this->query($status,$pageCurr);
-        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
+        $apiOpinion = ApiOpinion::getOpinionList($this->limit,$pageCurr,$status);
+        if ($apiOpinion['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiOpinion['data']; $total = $apiOpinion['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
             'datas' => $datas,
             'pagelist' => $pagelist,
@@ -178,15 +183,5 @@ class OpinionController extends BaseController
             'uid'=> $this->userid,
         ];
         return $data;
-    }
-
-    /**
-     * 查询方法，提取对本站的意见
-     */
-    public function query($status,$pageCurr)
-    {
-        $rst = ApiOpinion::getOpinionList($this->limit,$pageCurr,$status);
-        $datas = $rst['code']==0 ? $rst['data'] : [];
-        return $datas;
     }
 }

@@ -15,47 +15,35 @@
                 <tbody id="tbody-alert">
                 <tr>
                     <td class="am-hide-sm-only">编号 / Id：</td>
-                    <td>{{ $data->id }}</td>
+                    <td>{{$data['id']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">公司名称 / Company Name：</td>
-                    <td>{{ $data->name }}</td>
-                </tr>
-                <tr>
-                    <td class="am-hide-sm-only">鼠标移动显示 / OverMouse：</td>
-                    <td>{{ $data->title }}</td>
-                </tr>
-                <tr>
-                    <td class="am-hide-sm-only">关键字 / Keyword：</td>
-                    <td>{{ $data->keyword }}</td>
-                </tr>
-                <tr>
-                    <td class="am-hide-sm-only">描述 / Description：</td>
-                    <td>{{ $data->description }}</td>
+                    <td>{{$data['name']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">logo / Logo：</td>
-                    <td><img src="{{ $data->logo }}" width="200"></td>
+                    <td>@if($data['logo'])<img src="{{$data['logo']}}" width="300">@else/@endif</td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">排序 / Sort：</td>
-                    <td>{{ $data->sort }}</td>
+                    <td class="am-hide-sm-only">皮肤 / Skin：</td>
+                    <td>@if($data['skin'])<img src="{{$data['skin']}}" width="300">@else/@endif</td>
                 </tr>
                 <tr>
-                    <td class="am-hide-sm-only">是否置顶 / Top：</td>
-                    <td>{{ $data->istop() }}</td>
-                </tr>
-                <tr>
-                    <td class="am-hide-sm-only">前台是否显示 / Show：</td>
-                    <td>{{ $data->isshow() }}</td>
+                    <td class="am-hide-sm-only">公司前台模块开关 / Layout：</td>
+                    <td>@if($layouts=$data['layoutArr'])
+                            @foreach($layouts as $layout) {{$layout}}<br> @endforeach
+                        @else 默认
+                        @endif
+                    </td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">创建时间 / Create Time：</td>
-                    <td>{{ $data->createTime() }}</td>
+                    <td>{{$data['createTime']}}</td>
                 </tr>
                 <tr>
                     <td class="am-hide-sm-only">修改时间 / Update Time：</td>
-                    <td>{{ $data->updateTime() }}</td>
+                    <td>{{$data['updateTime']}}</td>
                 </tr>
                 </tbody>
             </table>

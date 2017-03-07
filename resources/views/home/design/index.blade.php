@@ -59,9 +59,11 @@
                             <textarea cols="50" rows="2" readonly class="index_intro">{{ str_limit($data['intro'],80) }}</textarea>
                         </td>
                     </tr>
-                    {{--@if($kdata!=1 && $kdata!=count($datas)-1)--}}
-                        {{--<tr><td colspan="10"><div style="height:10px;border-top:1px dashed lightgrey;">&nbsp;</div></td></tr>--}}
-                    {{--@endif--}}
+                    @if(count($datas)>1)
+                        <tr><td colspan="10">
+                                <div style="margin:10px;border-top:1px dashed lightgrey;"></div>
+                            </td></tr>
+                    @endif
                 @endforeach
             @else <tr><td colspan="2"><div style="width:700px;text-align:center;">没有记录</div></td></tr>
             @endif

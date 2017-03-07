@@ -20,10 +20,15 @@ class StoryBoardController extends BaseController
     public function index($way=0,$cate=0)
     {
 //        $this->isnew();
-        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
         $prefix_url = DOMAIN.'storyboard';
-        $datas = $this->query($pageCurr,$way,$cate);
-        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
+        $apiSB = ApiStoryBoard::getSBsByWay($this->limit,$pageCurr,$this->genre,$cate,$way);
+        if ($apiSB['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiSB['data']; $total = $apiSB['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
             'datas' => $datas,
             'pagelist' => $pagelist,
@@ -103,11 +108,7 @@ class StoryBoardController extends BaseController
 //        elseif ($way==1) { return redirect('/storyboard'); }
 //    }
 
-    public function query($pageCurr,$way,$cate)
-    {
-        $apiSB = ApiStoryBoard::getSBsByWay($this->limit,$pageCurr,$this->genre,$cate,$way);
-        return $apiSB['code']==0 ? $apiSB['data'] : [];
-    }
+
 
     /**
      * 获取 model

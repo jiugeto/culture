@@ -19,10 +19,15 @@ class UserVoiceController extends BaseController
 
     public function index()
     {
-        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
         $prefix_url = DOMAIN.'uservoice';
-        $datas = $this->query($pageCurr);
-        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
+        $apiUserVoice = ApiUserVoice::getUserVoiceList($this->limit,$pageCurr);
+        if ($apiUserVoice['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiUserVoice['data']; $total = $apiUserVoice['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
             'datas' => $datas,
             'pagelist' => $pagelist,
@@ -85,12 +90,7 @@ class UserVoiceController extends BaseController
         );
     }
 
-    public function query($pageCurr)
-    {
-        $rst = ApiUserVoice::getUserVoiceList($this->limit,$pageCurr);
-        $datas = $rst['code']==0 ? $rst['data'] : [];
-        return $datas;
-    }
+
 
     /**
      * 获取 model

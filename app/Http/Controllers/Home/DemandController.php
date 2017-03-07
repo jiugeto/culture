@@ -27,31 +27,8 @@ class DemandController extends BaseController
 
     public function index($genre=2)
     {
-        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
         $prefix_url = DOMAIN.'demand';
-        $datas = $this->query($genre,$pageCurr);
-        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
-        $result = [
-            'datas'=> $datas,
-            'prefix_url' => $prefix_url,
-            'pagelist' => $pagelist,
-            'ads'=> $this->ads(),
-            'lists'=> $this->list,
-            'curr_menu'=> $this->curr,
-//            'model'=> $this->getModel($genre),
-            'genres'=> $this->genres,
-            'genre'=> $genre,
-
-        ];
-        return view('home.demand.index', $result);
-    }
-
-
-
-
-
-    public function query($genre,$pageCurr=1)
-    {
         /*if ($genre==1) {
             //视频需求，type==1、3是需求
             $apiData = ApiGoods::index($this->limit,$pageCurr,0,[1,3],0,0,2,0,0);
@@ -71,8 +48,32 @@ class DemandController extends BaseController
             //设计需求，genre==6是需求
             $apiData = ApiDesign::index($this->limit,$pageCurr,[2,4],2,0);
         }
-        return $apiData['code']==0 ? $apiData['data'] : [];
+        if ($apiData['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiData['data']; $total = $apiData['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
+        $result = [
+            'datas' => $datas,
+            'prefix_url' => $prefix_url,
+            'pagelist' => $pagelist,
+            'ads' => $this->ads(),
+            'lists' => $this->list,
+            'curr_menu' => $this->curr,
+//            'model' => $this->getModel($genre),
+            'genres' => $this->genres,
+            'genre' => $genre,
+
+        ];
+        return view('home.demand.index', $result);
     }
+
+
+
+
+
+
 
     public function ads()
     {

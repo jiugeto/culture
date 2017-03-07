@@ -20,30 +20,30 @@
                     </tr>
                     </thead>
                     <tbody>
-                @if($datas->total())
+                @if(count($datas))
                     @foreach($datas as $data)
                     <tr>
                         <td class="am-hide-sm-only"><input type="checkbox" /></td>
-                        <td class="am-hide-sm-only">{{ $data->id }}</td>
-                        <td class="am-hide-sm-only"><a href="{{DOMAIN}}admin/commodule/{{$data->id}}">
-                                {{ str_limit($data->name,20) }}</a></td>
-                        <td class="am-hide-sm-only">{{ $data->company() }}</td>
-                        <td class="am-hide-sm-only">{{ $data->createTime() }}</td>
+                        <td class="am-hide-sm-only">{{$data['id']}}</td>
+                        <td class="am-hide-sm-only"><a href="{{DOMAIN}}admin/commodule/{{$data['id']}}">
+                                {{str_limit($data['name'],20)}}</a></td>
+                        <td class="am-hide-sm-only">{{ComNameById($data['cid'])}}</td>
+                        <td class="am-hide-sm-only">{{$data['createTime']}}</td>
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
-                                    <a href="{{DOMAIN}}admin/commodule/{{$data->id}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="{{PUB}}assets/images/show.png" class="icon"> 查看</button></a>
-                                    <a href="{{DOMAIN}}admin/commodule/{{$data->id}}/edit"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 编辑</button></a>
+                                    <a href="{{DOMAIN}}admin/commodule/{{$data['id']}}"><button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><img src="{{PUB}}assets/images/show.png" class="icon"> 查看</button></a>
+                                    <a href="{{DOMAIN}}admin/commodule/{{$data['id']}}/edit"><button class="am-btn am-btn-default am-btn-xs am-text-secondary"><img src="{{PUB}}assets/images/edit.png" class="icon"> 编辑</button></a>
                                 </div>
                             </div>
                         </td>
                     </tr>
                     @endforeach
-                @else @include('admin.common.#norecord')
+                @else <tr><td colspan="10" style="text-align:center;">没有记录</td></tr>
                 @endif
                     </tbody>
                 </table>
-                @include('admin.common.#page')
+                @include('admin.common.page2')
             </div>
         </div>
     </div>

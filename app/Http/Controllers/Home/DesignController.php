@@ -20,13 +20,18 @@ class DesignController extends BaseController
     public function index($cate=0)
     {
         $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
-        $prefix_url = DOMAIN.'supply';
-        $datas = $this->query($pageCurr,$cate);
-        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
+        $prefix_url = DOMAIN.'design';
+        $apiDesign = ApiDesign::index($this->limit,$pageCurr,0,1,$cate,2,0);
+        if ($apiDesign['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiDesign['data']; $total = $apiDesign['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
             'datas' => $datas,
             'pagelist' => $pagelist,
-            'prefix_url'    => DOMAIN.'design',
+            'prefix_url' => $prefix_url,
             'ads'   => $this->ads(),
             'lists' => $this->list,
             'model' => $this->getModel(),
@@ -55,11 +60,7 @@ class DesignController extends BaseController
 
 
 
-    public function query($pageCurr,$cate)
-    {
-        $apiDesign = ApiDesign::index($this->limit,$pageCurr,0,1,$cate,2,0);
-        return $apiDesign['code']==0 ? $apiDesign['data'] : [];
-    }
+
 
     public function ads()
     {

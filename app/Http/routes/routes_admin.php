@@ -145,7 +145,7 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     //企业页面功能管理
         //企业主页路由
     Route::post('commain/{id}','ComMainController@update');
-    Route::get('commain/isshow/{id}/{isshow}','ComMainController@setIsShow');
+    Route::post('commain/logo/{id}','ComMainController@setLogo');
     Route::resource('commain','ComMainController');
         //企业模块路由
     Route::post('commodule/{id}','ComModuleController@update');

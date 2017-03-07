@@ -51,8 +51,8 @@
         <div class="online">
             <p class="floor">
                 <img src="{{DOMAIN}}assets-home/images/floor_red.png" class="floor_img">
-                <span class="floor_text">{{ $number[3] }}F</span>
-                <span class="floor_text2">&nbsp;{{ $floors[$number[3]] }}</span>
+                <span class="floor_text">{{ $number[1] }}F</span>
+                <span class="floor_text2">&nbsp;{{ $floors[$number[1]] }}</span>
                 <span class="more" onclick="window.location.href='/creation';">>更多</span>
             </p>
             <div class="online_con">
@@ -89,12 +89,12 @@
                 </div>
                     @endforeach
                 @endif
-                <div class="online_first">
-                    <a href="" title="online1">
-                        <div class="con_img"><img src="{{DOMAIN}}uploads/images/2016/online3.png"></div>
-                        <div class="con_text"><a href="">样片</a></div>
-                    </a>
-                </div>
+                {{--<div class="online_first">--}}
+                    {{--<a href="" title="online1">--}}
+                        {{--<div class="con_img"><img src="{{DOMAIN}}uploads/images/2016/online3.png"></div>--}}
+                        {{--<div class="con_text"><a href="">样片</a></div>--}}
+                    {{--</a>--}}
+                {{--</div>--}}
                 <div class="online_div">
                     <a href="" title="online1">
                         <div class="con_img"><img src="{{DOMAIN}}uploads/images/2016/online3.png"></div>

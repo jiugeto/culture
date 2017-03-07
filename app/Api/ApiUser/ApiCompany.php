@@ -12,7 +12,7 @@ class ApiCompany
     /**
      * 获取公司列表
      */
-    public static function getCompanyList($limit=null,$pageCurr=1,$genre=0)
+    public static function getCompanyList($limit,$pageCurr=1,$genre=0)
     {
         $redisKey = 'companyList';
         //判断缓存有没有该数据
@@ -35,6 +35,7 @@ class ApiCompany
         return array(
             'code' => 0,
             'data' => ApiBase::objToArr($response->data),
+            'pagelist' => ApiBase::objToArr($response->pagelist),
         );
     }
 
@@ -70,11 +71,32 @@ class ApiCompany
      */
     public static function getOneByCname($cname)
     {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/company/onebycid';
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/company/onebycname';
         $curl = new Curl();
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
         $curl->post($apiUrl, array(
             'cname' => $cname,
+        ));
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -2, 'msg' => $response->error->msg);
+        }
+        return array(
+            'code' => 0,
+            'data' => ApiBase::objToArr($response->data),
+        );
+    }
+
+    /**
+     * 通过 cid 获取一条记录
+     */
+    public static function show($id)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/company/show';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, array(
+            'id' => $id
         ));
         $response = json_decode($curl->response);
         if ($response->error->code != 0) {
@@ -103,24 +125,69 @@ class ApiCompany
     }
 
     /**
-     * 通过 cid 获取一条记录
+     * 更新公司记录
      */
-    public static function show($id)
+    public static function modify($data)
     {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/company/show';
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/company/modify';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, $data);
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -2, 'msg' => $response->error->msg);
+        }
+        return array('code' => 0, 'msg' => $response->error->msg);
+    }
+
+    /**
+     * 设置公司logo
+     */
+    public static function setLogo($data)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/company/setlogo';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, $data);
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -2, 'msg' => $response->error->msg);
+        }
+        return array('code' => 0, 'msg' => $response->error->msg);
+    }
+
+    /**
+     * 设置公司皮肤
+     */
+    public static function setSkin($skin)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/company/setskin';
         $curl = new Curl();
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
         $curl->post($apiUrl, array(
-            'id' => $id
+            'skin'  =>  $skin,
         ));
         $response = json_decode($curl->response);
         if ($response->error->code != 0) {
             return array('code' => -2, 'msg' => $response->error->msg);
         }
-        return array(
-            'code' => 0,
-            'data' => ApiBase::objToArr($response->data),
-        );
+        return array('code' => 0, 'msg' => $response->error->msg);
+    }
+
+    /**
+     * 设置公司页面布局开关
+     */
+    public static function setLayout($data)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/company/setlayout';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, $data);
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -2, 'msg' => $response->error->msg);
+        }
+        return array('code' => 0, 'msg' => $response->error->msg);
     }
 
     /**

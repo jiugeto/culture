@@ -19,10 +19,15 @@ class SupplyController extends BaseController
 
     public function index($genre=0)
     {
-        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
         $prefix_url = DOMAIN.'supply';
-        $datas = $this->query($genre,$pageCurr);
-        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
+        $apiCompany = ApiCompany::getCompanyList($this->limit,$pageCurr,$genre);
+        if ($apiCompany['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiCompany['data']; $total = $apiCompany['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
             'datas' => $datas,
             'prefix_url' => $prefix_url,
@@ -40,12 +45,7 @@ class SupplyController extends BaseController
 
 
 
-    public function query($genre,$pageCurr)
-    {
-        $rst = ApiCompany::getCompanyList($this->limit,$pageCurr,$genre);
-        $datas = $rst['code']==0?$rst['data']:[];
-        return $datas;
-    }
+
 
     public function ads()
     {
