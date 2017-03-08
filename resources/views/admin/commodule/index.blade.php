@@ -27,7 +27,7 @@
                         <td class="am-hide-sm-only">{{$data['id']}}</td>
                         <td class="am-hide-sm-only"><a href="{{DOMAIN}}admin/commodule/{{$data['id']}}">
                                 {{str_limit($data['name'],20)}}</a></td>
-                        <td class="am-hide-sm-only">{{ComNameById($data['cid'])}}</td>
+                        <td class="am-hide-sm-only">{{$data['cid']?ComNameById($data['cid']):'本站'}}</td>
                         <td class="am-hide-sm-only">{{$data['createTime']}}</td>
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">

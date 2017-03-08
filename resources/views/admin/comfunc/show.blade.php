@@ -31,10 +31,6 @@
                     <td class="am-hide-sm-only">功能类型 / Type：</td>
                     <td>{{$data['typeName']}}</td>
                 </tr>
-                {{--<tr>--}}
-                    {{--<td class="am-hide-sm-only">类型 / Genre：</td>--}}
-                    {{--<td>{{$data['genreName']}}</td>--}}
-                {{--</tr>--}}
                 <tr>
                     <td class="am-hide-sm-only">所属模块 / Genre：</td>
                     <td>{{$data['moduleName']}}</td>

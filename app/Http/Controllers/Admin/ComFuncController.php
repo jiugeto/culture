@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Api\ApiBusiness\ApiComFunc;
+use App\Api\ApiBusiness\ApiComModule;
+use App\Api\ApiUser\ApiCompany;
 use App\Tools;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request as AjaxRequest;
+use Illuminate\Support\Facades\Input;
 
 class ComFuncController extends BaseController
 {
@@ -45,17 +49,17 @@ class ComFuncController extends BaseController
 
     public function create()
     {
-//        //记录数限制
-//        if (count(ComFuncModel::all())>$this->firmNum-1) {
-//            echo "<script>alert('已满".$this->firmNum."条记录！');history.go(-1);</script>";exit;
-//        }
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
+//        //记录数限制
+//        if (count($this->getModules())>$this->firmNum-1) {
+//            echo "<script>alert('已满".$this->firmNum."条记录！');history.go(-1);</script>";exit;
+//        }
         $result = [
-            'modules'=> ComModuleModel::all(),
-            'model'=> $this->model,
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
+            'modules' => $this->getModules(),
+            'model' => $this->getModel(),
+            'crumb' => $this->crumb,
+            'curr' => $curr,
         ];
         return view('admin.comfunc.create', $result);
     }
@@ -63,14 +67,6 @@ class ComFuncController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
-        $data['created_at'] = time();
-        //处理缩略图
-        $rstThumb = Tools::getAddrByUploadImg($request,$this->uploadSizeLimit);
-        if (!$rstThumb) {
-            echo "<script>alert('没有图片！');history.go(-1);</script>";exit;
-        }
-        $data['img'] = $rstThumb;
-        ComFuncModel::create($data);
         return redirect(DOMAIN.'admin/comfunc');
     }
 
@@ -80,7 +76,6 @@ class ComFuncController extends BaseController
         $curr['url'] = $this->crumb['edit']['url'];
         $result = [
             'data'=> ComFuncModel::find($id),
-            'modules'=> ComModuleModel::all(),
             'model'=> $this->model,
             'crumb'=> $this->crumb,
             'curr'=> $curr,
@@ -91,20 +86,6 @@ class ComFuncController extends BaseController
     public function update(Request $request,$id)
     {
         $data = $this->getData($request);
-        $data['updated_at'] = time();
-        //处理缩略图
-        $model = ComModuleModel::find($id);
-        $rstImg = Tools::getAddrByUploadImg($request,$this->uploadSizeLimit);
-        if (!$rstImg) {
-            $img = $model->img;
-        } else {
-            $img = $rstImg;
-            if ($model->img) {
-                unlink(ltrim($model->img,'/'));
-            }
-        }
-        $data['img'] = $img;
-        ComFuncModel::where('id',$id)->update($data);
         return redirect(DOMAIN.'admin/comfunc');
     }
 
@@ -125,11 +106,43 @@ class ComFuncController extends BaseController
         return view('admin.comfunc.show', $result);
     }
 
-    public function forceDelete($id)
+    /**
+     * ajax更新公司模块
+     */
+    public function setInit(Request $request)
     {
-        ComFuncModel::where('id',$id)->delete();
-        return redirect(DOMAIN.'admin/comfunc');
+        if (AjaxRequest::ajax()) {
+            $cname = $request->cname;
+            if (!$cname) {
+                echo json_encode(array('code'=>'-2', 'msg' => '参数有误！'));exit;
+            }
+            $apiCompany = ApiCompany::getOneByCname($cname);
+            if ($apiCompany['code']!=0) {
+                echo json_encode(array('code'=>'-3', 'msg' => '没有此公司！'));exit;
+            }
+            $apiFunc = ApiComFunc::setInit($apiCompany['data']['id']);
+            if ($apiFunc['code']!=0) {
+                echo json_encode(array('code'=>'-4', 'msg' => $apiFunc['msg']));exit;
+            }
+            $html = "";
+            foreach ($apiFunc['data'] as $func) {
+                $html .= "<option value='".$func['id']."'>".$func['name']."</option>";
+            }
+            echo json_encode(array('code'=>'0', 'data' => $html));exit;
+//            $apiModule = ApiComModule::initModule($apiCompany['data']['id']);
+//            if ($apiModule['code']!=0) {
+//                echo json_encode(array('code'=>'-4', 'msg' => $apiModule['msg']));exit;
+//            }
+//            echo json_encode(array('code'=>'0', 'data' => $apiModule['data']));exit;
+        }
+        echo json_encode(array('code'=>'-1', 'msg' => '数据错误！'));exit;
     }
+
+//    public function forceDelete($id)
+//    {
+//        ComFuncModel::where('id',$id)->delete();
+//        return redirect(DOMAIN.'admin/comfunc');
+//    }
 
 
 
@@ -139,16 +152,14 @@ class ComFuncController extends BaseController
      */
     public function getData(Request $request)
     {
-        if (!$request->intro) { echo "<script>alert('内容必填！');history.go(-1);</script>";exit; }
-        if ($request->small && mb_substr($request->small,-1,1,'utf-8')!='|') { $request->small = $request->small.'|'; }
+        if ($request->small && mb_substr($request->small,-1,1,'utf-8')!='|') {
+            $request->small = $request->small.'|';
+        }
         $data = [
             'name'=> $request->name,
-            'type'=> $request->type,
             'module_id'=> $request->module_id,
             'intro'=> $request->intro,
             'small'=> $request->small,
-            'sort'=> $request->sort,
-            'isshow'=> $request->isshow,
         ];
         return $data;
     }
@@ -160,5 +171,14 @@ class ComFuncController extends BaseController
     {
         $apiModel = ApiComFunc::getModel();
         return $apiModel['code']==0 ? $apiModel['model'] : [];
+    }
+
+    /**
+     * 获取所有模块
+     */
+    public function getModules()
+    {
+        $apiModules = ApiComModule::getModulesByCid(0,2);
+        return $apiModules['code']==0 ? $apiModules['data'] : [];
     }
 }

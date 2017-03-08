@@ -14,6 +14,12 @@
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <fieldset>
                         <div class="am-form-group">
+                            <label>公司名称 / Name：</label>
+                            <input type="text" placeholder="公司名称，不填则新增模块" name="cname"
+                                   onchange="init(this.value)"/>
+                        </div>
+
+                        <div class="am-form-group">
                             <label>模块名称 / Name：</label>
                             <input type="text" placeholder="至少2个字符" minlength="2" maxlength="20" required name="name"/>
                         </div>
@@ -45,16 +51,27 @@
                             {{--</script>--}}
                         </div>
 
-                        <div class="am-form-group">
-                            <label>公司名称 / Name：</label>
-                            <input type="text" placeholder="公司名称" minlength="2" maxlength="20" required name="cname"/>
-                        </div>
-
                         <button type="submit" class="am-btn am-btn-primary">保存添加</button>
                     </fieldset>
                 </form>
             </div>
         </div>
     </div>
+
+    <script>
+        function init(cname){
+            $.ajaxSetup({headers : {'X-CSRF-TOKEN':$('input[name="_token"]').val()}});
+            $.ajax({
+                type: 'POST',
+                url: '{{DOMAIN}}admin/commodule/init',
+                data: {'cname':cname},
+                dataType: 'json',
+                success: function(data) {
+                    if (data.code!=0) { alert(data.msg);return; }
+//                    alert(data.data);
+                }
+            });
+        }
+    </script>
 @stop
 

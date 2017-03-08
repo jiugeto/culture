@@ -26,7 +26,7 @@
                                 <img src="{{ $data['thumb'] }}" width="300">
                                 <div style="margin:5px 0;border-bottom:1px dashed lightgrey;"></div>
                             @endif
-                            @include('admin.common.uploadimg')
+                            @include('admin.common.#uploadimg')
                         </div>
 
                         <br>

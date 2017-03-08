@@ -14,6 +14,12 @@
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <fieldset>
                         <div class="am-form-group">
+                            <label>公司名称 / Company Name：</label>
+                            <input type="text" placeholder="公司名称，不填则本站新增模块" name="cname"
+                                   onchange="init(this.value)">
+                        </div>
+
+                        <div class="am-form-group">
                             <label>功能名称 / Name：</label>
                             <input type="text" placeholder="至少2个字符" minlength="2" required name="name"/>
                         </div>
@@ -23,19 +29,7 @@
                             <select name="module_id" required>
                                 @if(count($modules))
                                     @foreach($modules as $module)
-                                    <option value="{{ $module->id }}">
-                                        {{ $module->name }}</option>
-                                    @endforeach
-                                @endif
-                            </select>
-                        </div>
-
-                        <div class="am-form-group">
-                            <label>类型 / Type：</label>
-                            <select name="type" required>
-                                @if(count($model['types']))
-                                    @foreach($model['types'] as $ktype=>$type)
-                                    <option value="{{ $ktype }}">{{ $type }}</option>
+                                    <option value="{{$module['id']}}">{{$module['name']}}</option>
                                     @endforeach
                                 @endif
                             </select>
@@ -43,28 +37,18 @@
 
                         <div class="am-form-group">
                             <label>内容 / intro：</label>
-                            @include('admin.common.editor')
+                            <textarea name="intro" cols="80" rows="10" required></textarea>
                         </div>
 
                         <div class="am-form-group">
                             <label>图片 / Picture：</label>
-                            @include('admin.common.uploadimg')
+                            先添加，在上传图片。
                         </div>
 
                         <div class="am-form-group">
                             <label>小字 / Small：</label>
-                            <input type="text" placeholder="小字/数字/合作伙伴，多组用|隔开" name="small">
-                        </div>
-
-                        <div class="am-form-group">
-                            <label>企业控制排序 / Sort：</label>
-                            <input type="text" pattern="^\d+$" required name="sort" value="10">
-                        </div>
-
-                        <div class="am-form-group">
-                            <label>企业控制前台是否显示 / Is Show：</label>
-                            <label><input type="radio" name="isshow" value="0"> 不显示&nbsp;&nbsp;</label>
-                            <label><input type="radio" name="isshow" value="1" checked> 显示&nbsp;&nbsp;</label>
+                            {{--<input type="text" placeholder="小字/数字/合作伙伴，多组用|隔开" name="small">--}}
+                            <textarea name="small" cols="80" rows="10" placeholder="小字/数字/合作伙伴，多组用|隔开"></textarea>
                         </div>
 
                         <button type="submit" class="am-btn am-btn-primary">保存添加</button>
@@ -73,5 +57,21 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function init(cname){
+            $.ajaxSetup({headers : {'X-CSRF-TOKEN':$('input[name="_token"]').val()}});
+            $.ajax({
+                type: 'POST',
+                url: '{{DOMAIN}}admin/comfunc/init',
+                data: {'cname':cname},
+                dataType: 'json',
+                success: function(data) {
+                    if (data.code!=0) { alert(data.msg);return; }
+//                    alert(data.data);
+                }
+            });
+        }
+    </script>
 @stop
 

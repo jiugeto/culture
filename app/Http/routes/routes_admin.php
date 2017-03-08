@@ -148,9 +148,11 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::post('commain/logo/{id}','ComMainController@setLogo');
     Route::resource('commain','ComMainController');
         //企业模块路由
+    Route::post('commodule/init','ComModuleController@setInit');
     Route::post('commodule/{id}','ComModuleController@update');
     Route::resource('commodule','ComModuleController');
         //企业功能路由
+    Route::post('comfunc/init','ComFuncController@setInit');
     Route::post('comfunc/{id}','ComFuncController@update');
     Route::resource('comfunc','ComFuncController');
         //访问日志路由

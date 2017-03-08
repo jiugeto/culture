@@ -31,6 +31,50 @@ class ApiComModule
         );
     }
 
+    /**
+     * 根据 cid 获取所有模块
+     */
+    public static function getModulesByCid($cid=0,$isshow=2)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/com/module/modulesbycid';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, array(
+            'cid'       =>  $cid,
+            'isshow'    =>  $isshow,
+        ));
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array(
+            'code' => 0,
+            'data' => ApiBase::objToArr($response->data),
+        );
+    }
+
+    /**
+     * 通过 cid、genre 获取记录
+     */
+    public static function getModuleByGenre($cid,$genre)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/com/module/modulebygenre';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, array(
+            'cid'       =>  $cid,
+            'genre'     =>  $genre,
+        ));
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array(
+            'code' => 0,
+            'data' => ApiBase::objToArr($response->data),
+        );
+    }
+
     public static function show($id)
     {
         $apiUrl = ApiBase::getApiCurl() . '/api/v1/com/module/show';
@@ -78,6 +122,28 @@ class ApiComModule
         return array(
             'code' => 0,
             'msg' => $response->error->msg,
+        );
+    }
+
+    /**
+     * 初始化模块
+     */
+    public static function initModule($cid)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/com/module/init';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, array(
+            'cid'   =>  $cid,
+        ));
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array(
+            'code' => 0,
+            'data' => ApiBase::objToArr($response->data),
+//            'msg' => $response->error->msg,
         );
     }
 

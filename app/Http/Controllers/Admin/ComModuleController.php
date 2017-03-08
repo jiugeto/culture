@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Api\ApiBusiness\ApiComModule;
 use App\Api\ApiUser\ApiCompany;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request as AjaxRequest;
+use Illuminate\Support\Facades\Input;
 
 class ComModuleController extends BaseController
 {
@@ -58,6 +60,11 @@ class ComModuleController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
+        //判断模块是否存在
+        $apiModule2 = ApiComModule::getModuleByGenre($data['cid'],$data['genre']);
+        if ($apiModule2['code']==0) {
+            echo "<script>alert('已存在该记录！');history.go(-1);</script>";exit;
+        }
         $apiModule = ApiComModule::add($data);
         if ($apiModule['code']!=0) {
             echo "<script>alert('".$apiModule['msg']."');history.go(-1);</script>";exit;
@@ -110,6 +117,33 @@ class ComModuleController extends BaseController
         return view('admin.commodule.show', $result);
     }
 
+    /**
+     * ajax更新公司模块
+     */
+    public function setInit(Request $request)
+    {
+        if (AjaxRequest::ajax()) {
+            $cname = $request->cname;
+            if (!$cname) {
+                echo json_encode(array('code'=>'-2', 'msg' => '参数有误！'));exit;
+            }
+            $apiCompany = ApiCompany::getOneByCname($cname);
+            if ($apiCompany['code']!=0) {
+                echo json_encode(array('code'=>'-3', 'msg' => '没有此公司！'));exit;
+            }
+            $apiModule = ApiComModule::initModule($apiCompany['data']['id']);
+            if ($apiModule['code']!=0) {
+                echo json_encode(array('code'=>'-4', 'msg' => $apiModule['msg']));exit;
+            }
+            echo json_encode(array('code'=>'0', 'data' => $apiModule['data']));exit;
+//            foreach ($apiModule['data'] as $module) {
+//                $html = "<p>".$module['id'].'-'.$module['name']."</p>";
+//            }
+//            echo json_encode(array('code'=>'0', 'data' => $html));exit;
+        }
+        echo json_encode(array('code'=>'-1', 'msg' => '数据错误！'));exit;
+    }
+
 //    public function forceDelete($id)
 //    {
 //        ComModuleModel::where('id',$id)->delete();
@@ -124,15 +158,17 @@ class ComModuleController extends BaseController
      */
     public function getData(Request $request)
     {
-        $apiCompany = ApiCompany::getOneByCname($request->cname);
-        if ($apiCompany['code']!=0) {
-            echo "<script>alert('".$apiCompany['msg']."');history.go(-1);</script>";exit;
+        if ($request->cname) {
+            $apiCompany = ApiCompany::getOneByCname($request->cname);
+            if ($apiCompany['code']!=0) {
+                echo "<script>alert('".$apiCompany['msg']."');history.go(-1);</script>";exit;
+            }
         }
         return array(
             'name'  =>  $request->name,
             'genre' =>  $request->genre,
             'intro' =>  $request->intro,
-            'cid'   =>  $apiCompany['data']['id'],
+            'cid'   =>  (isset($apiCompany)&&$apiCompany['code']==0) ? $apiCompany['data']['id'] : 0,
         );
     }
 
