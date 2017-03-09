@@ -16,7 +16,7 @@
                     <fieldset>
                         <div class="am-form-group">
                             <label>公司名称 / Name：</label>
-                            <input type="text" placeholder="公司名称" name="cname" value="{{ComNameById($data['cid'])}}" onchange="init(this.value)"/>
+                            <input type="text" placeholder="公司名称" name="cname" value="{{ComNameById($data['cid'])}}"/>
                         </div>
 
                         <div class="am-form-group">
@@ -59,21 +59,5 @@
             </div>
         </div>
     </div>
-
-    <script>
-        function init(cname){
-            $.ajaxSetup({headers : {'X-CSRF-TOKEN':$('input[name="_token"]').val()}});
-            $.ajax({
-                type: 'POST',
-                url: '{{DOMAIN}}admin/commodule/init',
-                data: {'cname':cname},
-                dataType: 'json',
-                success: function(data) {
-                    if (data.code!=0) { alert(data.msg);return; }
-//                    alert(data.data);
-                }
-            });
-        }
-    </script>
 @stop
 

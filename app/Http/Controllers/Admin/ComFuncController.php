@@ -56,8 +56,7 @@ class ComFuncController extends BaseController
 //            echo "<script>alert('已满".$this->firmNum."条记录！');history.go(-1);</script>";exit;
 //        }
         $result = [
-            'modules' => $this->getModules(),
-            'model' => $this->getModel(),
+            'modules' => $this->getModules(0),
             'crumb' => $this->crumb,
             'curr' => $curr,
         ];
@@ -67,6 +66,10 @@ class ComFuncController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
+        $apiFunc = ApiComFunc::add($data);
+        if ($apiFunc['code']!=0) {
+            echo "<script>alert('".$apiFunc['msg']."');history.go(-1);</script>";exit;
+        }
         return redirect(DOMAIN.'admin/comfunc');
     }
 
@@ -74,11 +77,15 @@ class ComFuncController extends BaseController
     {
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
+        $apiFunc = ApiComFunc::show($id);
+        if ($apiFunc['code']!=0) {
+            echo "<script>alert('".$apiFunc['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> ComFuncModel::find($id),
-            'model'=> $this->model,
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
+            'data' => $apiFunc['data'],
+            'modules' => $this->getModules($apiFunc['data']['cid']),
+            'crumb' => $this->crumb,
+            'curr' => $curr,
         ];
         return view('admin.comfunc.edit', $result);
     }
@@ -86,6 +93,11 @@ class ComFuncController extends BaseController
     public function update(Request $request,$id)
     {
         $data = $this->getData($request);
+        $data['id'] = $id;
+        $apiFunc = ApiComFunc::modify($data);
+        if ($apiFunc['code']!=0) {
+            echo "<script>alert('".$apiFunc['msg']."');history.go(-1);</script>";exit;
+        }
         return redirect(DOMAIN.'admin/comfunc');
     }
 
@@ -120,7 +132,7 @@ class ComFuncController extends BaseController
             if ($apiCompany['code']!=0) {
                 echo json_encode(array('code'=>'-3', 'msg' => '没有此公司！'));exit;
             }
-            $apiFunc = ApiComFunc::setInit($apiCompany['data']['id']);
+            $apiFunc = ApiComFunc::initFunc($apiCompany['data']['id']);
             if ($apiFunc['code']!=0) {
                 echo json_encode(array('code'=>'-4', 'msg' => $apiFunc['msg']));exit;
             }
@@ -152,14 +164,25 @@ class ComFuncController extends BaseController
      */
     public function getData(Request $request)
     {
+        $apiCompany = ApiCompany::getOneByCname($request->cname);
+        if ($apiCompany['code']!=0) {
+            echo "<script>alert('".$apiCompany['msg']."');history.go(-1);</script>";exit;
+        }
+        if (mb_strlen($request->intro,'gbk') > 255) {
+            echo "<script>alert('可输入字数已超过255！');history.go(-1);</script>";exit;
+        }
+        if (mb_strlen($request->intro,'gbk') > 1000) {
+            echo "<script>alert('可输入字数已超过1000！');history.go(-1);</script>";exit;
+        }
         if ($request->small && mb_substr($request->small,-1,1,'utf-8')!='|') {
             $request->small = $request->small.'|';
         }
         $data = [
-            'name'=> $request->name,
-            'module_id'=> $request->module_id,
-            'intro'=> $request->intro,
-            'small'=> $request->small,
+            'name'      =>  $request->name,
+            'module_id' =>  $request->module_id,
+            'intro'     =>  $request->intro,
+            'small'     =>  $request->small,
+            'cid'       =>  $apiCompany['data']['id'],
         ];
         return $data;
     }
@@ -176,9 +199,9 @@ class ComFuncController extends BaseController
     /**
      * 获取所有模块
      */
-    public function getModules()
+    public function getModules($cid)
     {
-        $apiModules = ApiComModule::getModulesByCid(0,2);
+        $apiModules = ApiComModule::getModulesByCid($cid,2);
         return $apiModules['code']==0 ? $apiModules['data'] : [];
     }
 }

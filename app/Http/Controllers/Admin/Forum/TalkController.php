@@ -1,11 +1,12 @@
 <?php
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Forum;
 
+use App\Api\ApiTalk\ApiTalk;
 use App\Api\ApiTalk\ApiTheme;
 use App\Api\ApiUser\ApiUsers;
 use Illuminate\Http\Request;
 
-class ThemeController extends BaseController
+class TalkController extends BaseController
 {
     /**
      * 网站链接管理
@@ -14,22 +15,22 @@ class ThemeController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->crumb['']['name'] = '专栏列表';
-        $this->crumb['category']['name'] = '专栏管理';
-        $this->crumb['category']['url'] = 'theme';
+        $this->crumb['']['name'] = '话题列表';
+        $this->crumb['category']['name'] = '话题';
+        $this->crumb['category']['url'] = 'talk';
     }
 
-    public function index($uname='')
+    public function index($uname=0)
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
-        $prefix_url = DOMAIN.'admin/theme';
-        $apiTheme = ApiTheme::index($this->limit,$pageCurr,$uname);
-        if ($apiTheme['code']!=0) {
+        $prefix_url = DOMAIN.'admin/talk';
+        $apiTalk = ApiTalk::index($this->limit,$pageCurr,$uname);
+        if ($apiTalk['code']!=0) {
             $datas = array(); $total = 0;
         } else {
-            $datas = $apiTheme['data']; $total = $apiTheme['pagelist']['total'];
+            $datas = $apiTalk['data']; $total = $apiTalk['pagelist']['total'];
         }
         $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
@@ -40,62 +41,72 @@ class ThemeController extends BaseController
             'curr' => $curr,
             'uname' => $uname ? $uname : '',
         ];
-        return view('admin.theme.index', $result);
+        return view('admin.forum.talk.index', $result);
     }
 
     public function create()
     {
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
+        $rstTheme = ApiTheme::themeAll();
+        if ($rstTheme['code']!=0) {
+            echo "<script>alert('".$rstTheme['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
+            'themes'=> $rstTheme['data'],
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
-        return view('admin.theme.create', $result);
+        return view('admin.forum.talk.create', $result);
     }
 
     public function store(Request $request)
     {
         $data = $this->getData($request);
-        $rst = ApiTheme::add($data);
+        $rst = ApiTalk::add($data);
         if ($rst['code']!=0) {
             echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
         }
-        return redirect(DOMAIN.'admin/theme');
+        return redirect(DOMAIN.'admin/talk');
     }
 
     public function edit($id)
     {
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
-        $rst = ApiTheme::show($id);
+        $rst = ApiTalk::show($id);
         if ($rst['code']!=0) {
             echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
         }
+        $rstTheme = ApiTheme::themeAll();
+        if ($rstTheme['code']!=0) {
+            echo "<script>alert('".$rstTheme['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
             'data'=> $rst['data'],
+            'themes'=> $rstTheme['data'],
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
-        return view('admin.theme.edit', $result);
+        return view('admin.forum.talk.edit', $result);
     }
 
     public function update(Request $request,$id)
     {
         $data = $this->getData($request);
         $data['id'] = $id;
-        $rst = ApiTheme::modify($data);
+        $rst = ApiTalk::modify($data);
         if ($rst['code']!=0) {
             echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
         }
-        return redirect(DOMAIN.'admin/theme');
+        return redirect(DOMAIN.'admin/talk');
     }
 
     public function show($id)
     {
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
-        $rst = ApiTheme::show($id);
+        $rst = ApiTalk::show($id);
         if ($rst['code']!=0) {
             echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
         }
@@ -104,19 +115,16 @@ class ThemeController extends BaseController
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
-        return view('admin.theme.show', $result);
+        return view('admin.forum.talk.show', $result);
     }
 
-    /**
-     * 设置删除
-     */
     public function isdel($id,$del)
     {
-        $rst = ApiTheme::isdel($id,$del);
+        $rst = ApiTalk::isdel($id,$del);
         if ($rst['code']!=0) {
             echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
         }
-        return redirect(DOMAIN.'admin/theme');
+        return redirect(DOMAIN.'admin/talk');
     }
 
     /**
@@ -124,11 +132,11 @@ class ThemeController extends BaseController
      */
     public function delete($id)
     {
-        $rst = ApiTheme::delete($id);
+        $rst = ApiTalk::delete($id);
         if ($rst['code']!=0) {
             echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
         }
-        return redirect(DOMAIN.'admin/theme');
+        return redirect(DOMAIN.'admin/talk');
     }
 
 
@@ -148,12 +156,10 @@ class ThemeController extends BaseController
             $uname = $request->uname;
             $uid = $rstUser['id'];
         }
-        if (!$request->name || !$request->intro) {
-            echo "<script>alert('专题名称、内容必填！');history.go(-1);</script>";exit;
-        }
         return array(
             'name'  =>  $request->name,
-            'intro' =>  $request->intro,
+            'themeid'   =>  $request->theme,
+            'intro' =>$request->intro,
             'uid'   =>  $uid,
             'uname' =>  $uname,
         );

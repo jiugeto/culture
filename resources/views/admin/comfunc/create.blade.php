@@ -15,8 +15,7 @@
                     <fieldset>
                         <div class="am-form-group">
                             <label>公司名称 / Company Name：</label>
-                            <input type="text" placeholder="公司名称，不填则本站新增模块" name="cname"
-                                   onchange="init(this.value)">
+                            <input type="text" placeholder="公司名称，不填则本站新增模块" minlength="2" maxlength="20" name="cname">
                         </div>
 
                         <div class="am-form-group">
@@ -36,8 +35,8 @@
                         </div>
 
                         <div class="am-form-group">
-                            <label>内容 / intro：</label>
-                            <textarea name="intro" cols="80" rows="10" required></textarea>
+                            <label>内容 / intro：</label> 最多输入255
+                            <textarea name="intro" cols="80" rows="10" required maxlength="50"></textarea>
                         </div>
 
                         <div class="am-form-group">
@@ -46,9 +45,9 @@
                         </div>
 
                         <div class="am-form-group">
-                            <label>小字 / Small：</label>
+                            <label>小字 / Small：</label> 最多输入1000
                             {{--<input type="text" placeholder="小字/数字/合作伙伴，多组用|隔开" name="small">--}}
-                            <textarea name="small" cols="80" rows="10" placeholder="小字/数字/合作伙伴，多组用|隔开"></textarea>
+                            <textarea name="small" cols="80" rows="10" placeholder="小字/数字/合作伙伴/联系方式，多组用|隔开"></textarea>
                         </div>
 
                         <button type="submit" class="am-btn am-btn-primary">保存添加</button>
@@ -69,6 +68,7 @@
                 success: function(data) {
                     if (data.code!=0) { alert(data.msg);return; }
 //                    alert(data.data);
+                    $("select[name='module_id']").html(data.data);
                 }
             });
         }

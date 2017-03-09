@@ -139,40 +139,39 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     //用户日志管理
     Route::resource('userlog','UserlogController');
     Route::resource('adminlog','AdminlogController');
-        //地区管理
+    //地区管理
     Route::post('area/{id}','AreaController@update');
     Route::resource('area','AreaController');
     //企业页面功能管理
-        //企业主页路由
+    //企业主页路由
     Route::post('commain/{id}','ComMainController@update');
     Route::post('commain/logo/{id}','ComMainController@setLogo');
     Route::resource('commain','ComMainController');
-        //企业模块路由
+    //企业模块路由
     Route::post('commodule/init','ComModuleController@setInit');
     Route::post('commodule/{id}','ComModuleController@update');
     Route::resource('commodule','ComModuleController');
-        //企业功能路由
+    //企业功能路由
     Route::post('comfunc/init','ComFuncController@setInit');
     Route::post('comfunc/{id}','ComFuncController@update');
     Route::resource('comfunc','ComFuncController');
-        //访问日志路由
+    //访问日志路由
     Route::post('visit/{id}','VisitlogController@update');
     Route::get('visit/u/{g}/{uname}','VisitlogController@index');
     Route::resource('visit','VisitlogController');
-    //广告路由
-        //广告管理
+    //广告管理
     Route::post('ad/{id}','AdController@update');
     Route::get('ad/use/{id}/{use}','AdController@setUse');
     Route::post('ad/thumb/{id}','AdController@setThumb');
     Route::resource('ad','AdController');
-        //广告位管理
+    //广告位管理
     Route::post('place/{id}','AdPlaceController@update');
     Route::resource('place','AdPlaceController');
-        //创意管理
+    //创意管理
     Route::post('idea/{id}','IdeaController@update');
     Route::get('idea/show/{id}/{isshow}','IdeaController@setShow');
     Route::resource('idea','IdeaController');
-        //分镜管理
+    //分镜管理
     Route::post('storyboard/{id}','StoryBoardController@update');
     Route::post('storyboard/thumb/{id}','StoryBoardController@setThumb');
     Route::get('storyboard/show/{id}/{isshow}','StoryBoardController@setShow');
@@ -181,26 +180,15 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
 //    Route::get('storyboard/{id}/forceDelete','StoryBoardController@forceDelete');
 //    Route::get('storyboard/trash','StoryBoardController@trash');
     Route::resource('storyboard','StoryBoardController');
-        //话题管理
-    Route::post('talk/{id}','TalkController@update');
-    Route::get('talk/isdel/{id}/{del}','TalkController@isdel');
-    Route::get('talk/s/{uname}','TalkController@index');        //s代表检索
-    Route::resource('talk','TalkController');
-        //话题专题管理
-    Route::post('theme/{id}','ThemeController@update');
-    Route::get('theme/isdel/{id}/{del}','ThemeController@isdel');
-    Route::get('theme/s/{uname}','ThemeController@index');      //s代表检索
-    Route::resource('theme','ThemeController');
-    //订单管理
-        //订单路由
+    //订单路由
     Route::get('order/{del}/{isshow}','OrderController@index');
     Route::post('order/{id}','OrderController@update');
     Route::resource('order','OrderController');
-        //售后路由
+    //售后路由
     Route::get('orderfirm/{del}/{isshow}','OrderFirmController@index');
     Route::post('orderfirm/{id}','OrderFirmController@update');
     Route::resource('orderfirm','OrderFirmController');
-        //在线订单路由
+    //在线订单路由
     Route::get('ordercre/status/{id}/{status}','OrderCreController@setStatus');
     Route::get('ordercre/isshow/{id}/{isshow}','OrderCreController@setShow');
     Route::post('ordercre/{id}','OrderCreController@update');
@@ -215,4 +203,20 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::get('sign','WalletController@signList');
     Route::post('wallet/{id}','WalletController@update');
     Route::resource('wallet','WalletController');
+
+    /**
+     * 论坛路由
+     */
+    Route::group(['prefix' => '/','namespace'=>'Forum'], function(){
+        //专栏路由
+        Route::resource('topic','TopicController');
+        //类别管理
+        Route::post('cate/{id}','CateController@update');
+        Route::resource('cate','CateController');
+        //话题管理
+        Route::post('talk/{id}','TalkController@update');
+        Route::get('talk/isdel/{id}/{del}','TalkController@isdel');
+        Route::get('talk/s/{uname}','TalkController@index');        //s代表检索
+        Route::resource('talk','TalkController');
+    });
 });
