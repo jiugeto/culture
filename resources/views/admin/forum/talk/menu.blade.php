@@ -27,23 +27,23 @@
         </div>
     </div>
 </div>
-@if($_SERVER['REQUEST_URI']=='/admin/talk')
-<div class="am-u-sm-12 am-u-md-3">
-    <div class="am-input-group am-input-group-sm">
-        <input type="text" class="am-form-field" placeholder="输入用户名称，可不填" name="uname" value="{{ $uname }}">
-        <span class="am-input-group-btn">
-            <button type="button" class="am-btn am-btn-default" onclick="search($('input[name=uname]').val())">搜索</button>
-        </span>
-    </div>
-    <script>
-        //s代表用户简写
-        function search(uname){
-            if (uname=='') {
-                window.location.href = '{{DOMAIN}}admin/theme';
-            } else {
-                window.location.href = '{{DOMAIN}}admin/theme/s/'+uname;
-            }
-        }
-    </script>
-</div>
-@endif
+{{--@if($_SERVER['REQUEST_URI']=='/admin/talk')--}}
+{{--<div class="am-u-sm-12 am-u-md-3">--}}
+    {{--<div class="am-input-group am-input-group-sm">--}}
+        {{--<input type="text" class="am-form-field" placeholder="输入用户名称，可不填" name="uname" value="{{ $uname }}">--}}
+        {{--<span class="am-input-group-btn">--}}
+            {{--<button type="button" class="am-btn am-btn-default" onclick="search($('input[name=uname]').val())">搜索</button>--}}
+        {{--</span>--}}
+    {{--</div>--}}
+    {{--<script>--}}
+        {{--//s代表用户简写--}}
+        {{--function search(uname){--}}
+            {{--if (uname=='') {--}}
+                {{--window.location.href = '{{DOMAIN}}admin/theme';--}}
+            {{--} else {--}}
+                {{--window.location.href = '{{DOMAIN}}admin/theme/s/'+uname;--}}
+            {{--}--}}
+        {{--}--}}
+    {{--</script>--}}
+{{--</div>--}}
+{{--@endif--}}

@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin\Forum;
 
-use App\Api\ApiTalk\ApiTheme;
+use App\Api\ApiTalk\ApiCate;
 use App\Api\ApiUser\ApiUsers;
 use Illuminate\Http\Request;
 
@@ -19,17 +19,17 @@ class CateController extends BaseController
         $this->crumb['category']['url'] = 'cate';
     }
 
-    public function index($uname='')
+    public function index()
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
-        $prefix_url = DOMAIN.'admin/theme';
-        $apiTheme = ApiTheme::index($this->limit,$pageCurr,$uname);
-        if ($apiTheme['code']!=0) {
+        $prefix_url = DOMAIN.'admin/cate';
+        $apiCate = ApiCate::index($this->limit,$pageCurr);
+        if ($apiCate['code']!=0) {
             $datas = array(); $total = 0;
         } else {
-            $datas = $apiTheme['data']; $total = $apiTheme['pagelist']['total'];
+            $datas = $apiCate['data']; $total = $apiCate['pagelist']['total'];
         }
         $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
@@ -38,9 +38,8 @@ class CateController extends BaseController
             'prefix_url' => $prefix_url,
             'crumb' => $this->crumb,
             'curr' => $curr,
-            'uname' => $uname ? $uname : '',
         ];
-        return view('admin.forum.theme.index', $result);
+        return view('admin.forum.cate.index', $result);
     }
 
     public function create()
@@ -51,24 +50,24 @@ class CateController extends BaseController
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
-        return view('admin.forum.theme.create', $result);
+        return view('admin.forum.cate.create', $result);
     }
 
     public function store(Request $request)
     {
         $data = $this->getData($request);
-        $rst = ApiTheme::add($data);
+        $rst = ApiCate::add($data);
         if ($rst['code']!=0) {
             echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
         }
-        return redirect(DOMAIN.'admin/theme');
+        return redirect(DOMAIN.'admin/cate');
     }
 
     public function edit($id)
     {
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
-        $rst = ApiTheme::show($id);
+        $rst = ApiCate::show($id);
         if ($rst['code']!=0) {
             echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
         }
@@ -77,25 +76,25 @@ class CateController extends BaseController
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
-        return view('admin.forum.theme.edit', $result);
+        return view('admin.forum.cate.edit', $result);
     }
 
     public function update(Request $request,$id)
     {
         $data = $this->getData($request);
         $data['id'] = $id;
-        $rst = ApiTheme::modify($data);
+        $rst = ApiCate::modify($data);
         if ($rst['code']!=0) {
             echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
         }
-        return redirect(DOMAIN.'admin/theme');
+        return redirect(DOMAIN.'admin/cate');
     }
 
     public function show($id)
     {
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
-        $rst = ApiTheme::show($id);
+        $rst = ApiCate::show($id);
         if ($rst['code']!=0) {
             echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
         }
@@ -104,31 +103,7 @@ class CateController extends BaseController
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
-        return view('admin.forum.theme.show', $result);
-    }
-
-    /**
-     * 设置删除
-     */
-    public function isdel($id,$del)
-    {
-        $rst = ApiTheme::isdel($id,$del);
-        if ($rst['code']!=0) {
-            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
-        }
-        return redirect(DOMAIN.'admin/theme');
-    }
-
-    /**
-     * 销毁记录
-     */
-    public function delete($id)
-    {
-        $rst = ApiTheme::delete($id);
-        if ($rst['code']!=0) {
-            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
-        }
-        return redirect(DOMAIN.'admin/theme');
+        return view('admin.forum.cate.show', $result);
     }
 
 
@@ -137,25 +112,9 @@ class CateController extends BaseController
 
     public function getData(Request $request)
     {
-        if (!$request->uname || $request->uname=='本站') {
-            $uname = '本站';
-            $uid = 0;
-        } else {
-            $rstUser = ApiUsers::getOneUserByUname($request->uname);
-            if ($rstUser['code']!=0) {
-                echo "<script>alert('用户不存在！');history.go(-1);</script>";exit;
-            }
-            $uname = $request->uname;
-            $uid = $rstUser['id'];
-        }
-        if (!$request->name || !$request->intro) {
-            echo "<script>alert('专题名称、内容必填！');history.go(-1);</script>";exit;
-        }
         return array(
             'name'  =>  $request->name,
             'intro' =>  $request->intro,
-            'uid'   =>  $uid,
-            'uname' =>  $uname,
         );
     }
 }

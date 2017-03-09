@@ -203,12 +203,13 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::get('sign','WalletController@signList');
     Route::post('wallet/{id}','WalletController@update');
     Route::resource('wallet','WalletController');
-
     /**
+     * **********
      * 论坛路由
      */
     Route::group(['prefix' => '/','namespace'=>'Forum'], function(){
         //专栏路由
+        Route::post('topic','TopicController@update');
         Route::resource('topic','TopicController');
         //类别管理
         Route::post('cate/{id}','CateController@update');

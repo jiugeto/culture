@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Admin\Forum;
 
 use App\Api\ApiTalk\ApiTopic;
+use Illuminate\Http\Request;
 
 class TopicController extends BaseController
 {
@@ -42,12 +43,61 @@ class TopicController extends BaseController
 
     public function create()
     {
-        $curr['name'] = $this->crumb['']['name'];
-        $curr['url'] = $this->crumb['']['url'];
+        $curr['name'] = $this->crumb['create']['name'];
+        $curr['url'] = $this->crumb['create']['url'];
         $result = [
             'crumb' => $this->crumb,
             'curr' => $curr,
         ];
-        return view('admin.forum.topic.index', $result);
+        return view('admin.forum.topic.create', $result);
+    }
+
+    public function store(Request $request)
+    {
+        $data = $this->getData($request);
+        $apiTopic = ApiTopic::add($data);
+        if ($apiTopic['code']!=0) {
+            echo "<script>alert('".$apiTopic['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN.'admin/topic');
+    }
+
+    public function edit($id)
+    {
+        $curr['name'] = $this->crumb['edit']['name'];
+        $curr['url'] = $this->crumb['edit']['url'];
+        $apiTopic = ApiTopic::show($id);
+        if ($apiTopic['code']!=0) {
+            echo "<script>alert('".$apiTopic['msg']."');history.go(-1);</script>";exit;
+        }
+        $result = [
+            'data' => $apiTopic['data'],
+            'crumb' => $this->crumb,
+            'curr' => $curr,
+        ];
+        return view('admin.forum.topic.edit', $result);
+    }
+
+    public function update(Request $request,$id)
+    {
+        $data = $this->getData($request);
+        $data['id'] = $id;
+        $apiTopic = ApiTopic::modify($data);
+        if ($apiTopic['code']!=0) {
+            echo "<script>alert('".$apiTopic['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN.'admin/topic');
+    }
+
+
+
+
+
+    public function getData(Request $request)
+    {
+        return array(
+            'name'  =>  $request->name,
+            'intro' =>  $request->intro,
+        );
     }
 }
