@@ -3,7 +3,7 @@
     <div class="admin-content">
         @include('admin.common.crumb')
         <div class="am-g">
-            @include('admin.forum.talk.menu')
+            @include('admin.forum.menu')
         </div>
 
         <div class="am-g">
@@ -14,6 +14,7 @@
                         <th class="table-check"><input type="checkbox"/></th>
                         <th class="table-id">ID</th>
                         <th class="table-title">专栏名称</th>
+                        <th class="table-title">排序</th>
                         <th class="table-date am-hide-sm-only">添加时间</th>
                         <th class="table-set">操作</th>
                     </tr>
@@ -27,6 +28,7 @@
                         <td class="am-hide-sm-only">
                             <a href="{{DOMAIN}}admin/topic/{{$data['id']}}">
                                 {{$data['name']}}</a></td>
+                        <td class="am-hide-sm-only">{{$data['sort']}}</td>
                         <td class="am-hide-sm-only">{{$data['createTime']}}</td>
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">

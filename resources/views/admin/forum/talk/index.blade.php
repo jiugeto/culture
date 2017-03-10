@@ -3,7 +3,7 @@
     <div class="admin-content">
         @include('admin.common.crumb')
         <div class="am-g">
-            @include('admin.forum.talk.menu')
+            @include('admin.forum.menu')
         </div>
 
         <div class="am-g">

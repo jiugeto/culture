@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Admin\Forum;
 
 use App\Api\ApiTalk\ApiCate;
+use App\Api\ApiTalk\ApiTopic;
 use App\Api\ApiUser\ApiUsers;
 use Illuminate\Http\Request;
 
@@ -47,6 +48,8 @@ class CateController extends BaseController
         $curr['name'] = $this->crumb['create']['name'];
         $curr['url'] = $this->crumb['create']['url'];
         $result = [
+            'cates' => $this->getParent(0),
+            'topics' => $this->getTopicAll(),
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -56,9 +59,9 @@ class CateController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
-        $rst = ApiCate::add($data);
-        if ($rst['code']!=0) {
-            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        $apiCate = ApiCate::add($data);
+        if ($apiCate['code']!=0) {
+            echo "<script>alert('".$apiCate['msg']."');history.go(-1);</script>";exit;
         }
         return redirect(DOMAIN.'admin/cate');
     }
@@ -67,14 +70,16 @@ class CateController extends BaseController
     {
         $curr['name'] = $this->crumb['edit']['name'];
         $curr['url'] = $this->crumb['edit']['url'];
-        $rst = ApiCate::show($id);
-        if ($rst['code']!=0) {
-            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        $apiCate = ApiCate::show($id);
+        if ($apiCate['code']!=0) {
+            echo "<script>alert('".$apiCate['msg']."');history.go(-1);</script>";exit;
         }
         $result = [
-            'data'=> $rst['data'],
-            'crumb'=> $this->crumb,
-            'curr'=> $curr,
+            'data' => $apiCate['data'],
+            'cates' => $this->getParent(0),
+            'topics' => $this->getTopicAll(),
+            'crumb' => $this->crumb,
+            'curr' => $curr,
         ];
         return view('admin.forum.cate.edit', $result);
     }
@@ -83,9 +88,9 @@ class CateController extends BaseController
     {
         $data = $this->getData($request);
         $data['id'] = $id;
-        $rst = ApiCate::modify($data);
-        if ($rst['code']!=0) {
-            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        $apiCate = ApiCate::modify($data);
+        if ($apiCate['code']!=0) {
+            echo "<script>alert('".$apiCate['msg']."');history.go(-1);</script>";exit;
         }
         return redirect(DOMAIN.'admin/cate');
     }
@@ -94,12 +99,12 @@ class CateController extends BaseController
     {
         $curr['name'] = $this->crumb['show']['name'];
         $curr['url'] = $this->crumb['show']['url'];
-        $rst = ApiCate::show($id);
-        if ($rst['code']!=0) {
-            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        $apiCate = ApiCate::show($id);
+        if ($apiCate['code']!=0) {
+            echo "<script>alert('".$apiCate['msg']."');history.go(-1);</script>";exit;
         }
         $result = [
-            'data'=> $rst['data'],
+            'data'=> $apiCate['data'],
             'crumb'=> $this->crumb,
             'curr'=> $curr,
         ];
@@ -112,9 +117,35 @@ class CateController extends BaseController
 
     public function getData(Request $request)
     {
+        if ($request->pid!=0) {
+            $apiTopic = ApiTopic::show($request->pid);
+            if ($apiTopic['code']!=0) {
+                echo "<script>alert('".$apiTopic['msg']."');history.go(-1);</script>";exit;
+            }
+            $topic_id = $apiTopic['data']['id'];
+        } else {
+            $topic_id = $request->topic_id;
+        }
         return array(
             'name'  =>  $request->name,
             'intro' =>  $request->intro,
+            'pid'   =>  $request->pid,
+            'topic_id'  =>  $topic_id,
         );
+    }
+
+    public function getParent($pid=0)
+    {
+        $apiCate = ApiCate::getCatesByPid($pid);
+        return $apiCate['code']==0 ? $apiCate['data'] : [];
+    }
+
+    /**
+     * 获取所有专栏
+     */
+    public function getTopicAll()
+    {
+        $apiTopic = ApiTopic::all();
+        return $apiTopic['code']==0 ? $apiTopic['data'] : [];
     }
 }

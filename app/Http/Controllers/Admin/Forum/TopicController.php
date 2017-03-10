@@ -82,6 +82,7 @@ class TopicController extends BaseController
     {
         $data = $this->getData($request);
         $data['id'] = $id;
+        $data['sort'] = $request->sort;
         $apiTopic = ApiTopic::modify($data);
         if ($apiTopic['code']!=0) {
             echo "<script>alert('".$apiTopic['msg']."');history.go(-1);</script>";exit;

@@ -11,7 +11,7 @@ class ApiCate
 
     public static function index($limit,$pageCurr=1)
     {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/category';
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/cate';
         $curl = new Curl();
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
         $curl->post($apiUrl, array(
@@ -19,7 +19,6 @@ class ApiCate
             'page'  =>  $pageCurr,
         ));
         $response = json_decode($curl->response);
-        dd('123',$response);
         if ($response->error->code != 0) {
             return array('code' => -1, 'msg' => $response->error->msg);
         }
