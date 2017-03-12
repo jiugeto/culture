@@ -213,11 +213,12 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
         Route::resource('topic','TopicController');
         //类别管理
         Route::post('cate/{id}','CateController@update');
+        Route::get('cate/s/{topic}','CateController@index');
         Route::resource('cate','CateController');
         //话题管理
         Route::post('talk/{id}','TalkController@update');
-        Route::get('talk/isdel/{id}/{del}','TalkController@isdel');
-        Route::get('talk/s/{uname}','TalkController@index');        //s代表检索
+//        Route::get('talk/isdel/{id}/{del}','TalkController@isdel');
+        Route::get('talk/s/{cate}','TalkController@index');        //s代表检索
         Route::resource('talk','TalkController');
     });
 });

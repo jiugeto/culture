@@ -12,13 +12,13 @@ class ApiTalk
     /**
      * 列表
      */
-    public static function index($limit=0,$pageCurr=1,$uname='')
+    public static function index($limit=0,$pageCurr=1,$topic=0,$cate=0)
     {
-        $redisKey = 'talkList';
-        //判断缓存有没有该数据
-        if ($redisResult = ApiBase::getRedis($redisKey)) {
-            return array('code' => 0, 'data' => unserialize($redisResult));
-        }
+//        $redisKey = 'talkList';
+//        //判断缓存有没有该数据
+//        if ($redisResult = ApiBase::getRedis($redisKey)) {
+//            return array('code' => 0, 'data' => unserialize($redisResult));
+//        }
         //没有，接口读取
         $apiUrl = ApiBase::getApiCurl() . '/api/v1/talk';
         $curl = new Curl();
@@ -26,7 +26,8 @@ class ApiTalk
         $curl->post($apiUrl, array(
             'limit' =>  $limit,
             'page'  =>  $pageCurr,
-            'uname' =>  $uname,
+            'topic' =>  $topic,
+            'cate'  =>  $cate,
         ));
         $response = json_decode($curl->response);
         if ($response->error->code != 0) {

@@ -20,13 +20,13 @@ class CateController extends BaseController
         $this->crumb['category']['url'] = 'cate';
     }
 
-    public function index()
+    public function index($topic=0)
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
         $prefix_url = DOMAIN.'admin/cate';
-        $apiCate = ApiCate::index($this->limit,$pageCurr);
+        $apiCate = ApiCate::index($this->limit,$pageCurr,$topic);
         if ($apiCate['code']!=0) {
             $datas = array(); $total = 0;
         } else {
@@ -37,8 +37,10 @@ class CateController extends BaseController
             'datas' => $datas,
             'pagelist' => $pagelist,
             'prefix_url' => $prefix_url,
+            'topics' => $this->getTopicAll(),
             'crumb' => $this->crumb,
             'curr' => $curr,
+            'topic' => $topic,
         ];
         return view('admin.forum.cate.index', $result);
     }

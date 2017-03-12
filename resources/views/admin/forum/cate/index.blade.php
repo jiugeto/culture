@@ -2,8 +2,31 @@
 @section('content')
     <div class="admin-content">
         @include('admin.common.crumb')
-        <div class="am-g">
+        <div class="am-g" style="margin:0 20px;">
             @include('admin.forum.menu')
+            <span style="margin-right:40px;color:grey;float:right;">
+            专栏：
+            <select name="topic" style="padding:5px 15px;border:1px solid #cccccc;"
+                    onchange="getTopic(this.value)">
+                <option value="0" {{$topic==0?'selected':''}}>所有</option>
+                @if(count($topics))
+                    @foreach($topics as $vtopic)
+                        <option value="{{$vtopic['id']}}"
+                                {{$topic==$vtopic['id']?'selected':''}}>
+                            {{$vtopic['name']}}</option>
+                    @endforeach
+                @endif
+            </select>
+        </span>
+            <script>
+                function getTopic(topic){
+                    if (topic==0) {
+                        window.location.href = '{{DOMAIN}}admin/cate';
+                    } else {
+                        window.location.href = '{{DOMAIN}}admin/cate/s/'+topic;
+                    }
+                }
+            </script>
         </div>
 
         <div class="am-g">

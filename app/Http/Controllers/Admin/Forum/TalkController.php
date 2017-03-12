@@ -20,13 +20,13 @@ class TalkController extends BaseController
         $this->crumb['category']['url'] = 'talk';
     }
 
-    public function index($uname=0)
+    public function index($cate=0)
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
         $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
         $prefix_url = DOMAIN.'admin/talk';
-        $apiTalk = ApiTalk::index($this->limit,$pageCurr,$uname);
+        $apiTalk = ApiTalk::index($this->limit,$pageCurr,$cate);
         if ($apiTalk['code']!=0) {
             $datas = array(); $total = 0;
         } else {
@@ -39,7 +39,6 @@ class TalkController extends BaseController
             'prefix_url' => $prefix_url,
             'crumb' => $this->crumb,
             'curr' => $curr,
-            'uname' => $uname ? $uname : '',
         ];
         return view('admin.forum.talk.index', $result);
     }
