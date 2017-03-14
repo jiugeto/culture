@@ -9,7 +9,7 @@ class ApiCate
      * 话题专栏接口
      */
 
-    public static function index($limit,$pageCurr=1,$topic=0)
+    public static function index($limit,$pageCurr=1,$topic=0,$uid=0)
     {
         $apiUrl = ApiBase::getApiCurl() . '/api/v1/cate';
         $curl = new Curl();
@@ -17,7 +17,8 @@ class ApiCate
         $curl->post($apiUrl, array(
             'limit' =>  $limit,
             'page'  =>  $pageCurr,
-            'topic' =>  $topic,
+            'topic_id' =>  $topic,
+            'uid'   =>  $uid,
         ));
         $response = json_decode($curl->response);
         if ($response->error->code != 0) {

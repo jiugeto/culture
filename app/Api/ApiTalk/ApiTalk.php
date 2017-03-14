@@ -12,7 +12,7 @@ class ApiTalk
     /**
      * 列表
      */
-    public static function index($limit=0,$pageCurr=1,$topic=0,$cate=0)
+    public static function index($limit=0,$pageCurr=1,$topic=0,$cate=0,$uid=0)
     {
 //        $redisKey = 'talkList';
 //        //判断缓存有没有该数据
@@ -28,6 +28,7 @@ class ApiTalk
             'page'  =>  $pageCurr,
             'topic' =>  $topic,
             'cate'  =>  $cate,
+            'uid'   =>  $uid,
         ));
         $response = json_decode($curl->response);
         if ($response->error->code != 0) {

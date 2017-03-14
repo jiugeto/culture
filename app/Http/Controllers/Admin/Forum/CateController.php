@@ -26,7 +26,7 @@ class CateController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
         $prefix_url = DOMAIN.'admin/cate';
-        $apiCate = ApiCate::index($this->limit,$pageCurr,$topic);
+        $apiCate = ApiCate::index($this->limit,$pageCurr,$topic,0);
         if ($apiCate['code']!=0) {
             $datas = array(); $total = 0;
         } else {

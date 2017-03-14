@@ -24,7 +24,7 @@ class TopicController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
         $prefix_url = DOMAIN.'admin/topic';
-        $apiTopic = ApiTopic::index($this->limit,$pageCurr);
+        $apiTopic = ApiTopic::index($this->limit,$pageCurr,0);
         if ($apiTopic['code']!=0) {
             $datas = array(); $total = 0;
         } else {

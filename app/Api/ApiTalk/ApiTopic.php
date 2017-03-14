@@ -9,7 +9,7 @@ class ApiTopic
      * 专栏接口
      */
 
-    public static function index($limit,$pageCurr=1)
+    public static function index($limit,$pageCurr=1,$uid=0)
     {
         $apiUrl = ApiBase::getApiCurl() . '/api/v1/topic';
         $curl = new Curl();
@@ -17,6 +17,7 @@ class ApiTopic
         $curl->post($apiUrl, array(
             'limit' =>  $limit,
             'page'  =>  $pageCurr,
+            'uid'   =>  $uid,
         ));
         $response = json_decode($curl->response);
         if ($response->error->code != 0) {
