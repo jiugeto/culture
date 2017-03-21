@@ -75,7 +75,6 @@ class ApiTip
         return array(
             'code' => 0,
             'data' => ApiBase::objToArr($response->data),
-            'pagelist'  =>  ApiBase::objToArr($response->pagelist),
             );
     }
 }
