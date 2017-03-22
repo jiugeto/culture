@@ -16,7 +16,7 @@ class ApiMenu
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
         $curl->post($apiUrl, array(
             'limit'     =>  $limit,
-            'pageCurr'  =>  $pageCurr,
+            'page'      =>  $pageCurr,
             'type'      =>  $type,
             'isshow'    =>  $isshow,
         ));

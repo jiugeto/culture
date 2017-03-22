@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers\Member;
 
-use App\Api\ApiBusiness\ApiComMain;
 use App\Api\ApiBusiness\ApiOrder;
 use App\Api\ApiUser\ApiCompany;
 use App\Api\ApiUser\ApiUsers;
@@ -49,12 +48,6 @@ class HomeController extends BaseController
         return $rstCompany['code']==0 ? $rstCompany['data'] : [];
     }
 
-    public function companyMain()
-    {
-        $apiComMain = ApiComMain::getOneByUid($this->userid);
-        return $apiComMain['code']==0 ? $apiComMain['data'] : [];
-    }
-
     /**
      * 用户资料百分比
      */
@@ -79,19 +72,12 @@ class HomeController extends BaseController
      */
     public function companyInfo()
     {
-        $field1s = ['name','genre','area','address','yyzzid','areacode','tel','qq','web','fax','zipcode','email',];
-        $field2s = ['title','keyword','description','logo',];
-        $fields = array_merge($field1s,$field2s);
+        $fields = ['name','genre','area','address','yyzzid','areacode','tel','qq','web','fax','zipcode','email','logo',];
         $companyNum = array();
         $companyMainNum = array();
         if ($company=$this->company()) {
-            foreach ($field1s as $field1) {
-                if ($v=$company[$field1]) { $companyNum[] = $field1; }
-            }
-        }
-        if ($companyMain=$this->companyMain()) {
-            foreach ($field2s as $field2) {
-                if ($v=$companyMain[$field2]) { $companyMainNum[] = $field2; }
+            foreach ($fields as $field) {
+                if ($v=$company[$field]) { $companyNum[] = $field; }
             }
         }
         if ($companyInfo['company'] = $this->company()) {
@@ -99,7 +85,6 @@ class HomeController extends BaseController
         } else {
             $companyInfo['company']['areaName'] = '';
         }
-        $companyInfo['compMain'] = $this->companyMain();
         $companyInfo['data'] = array_merge($companyNum,$companyMainNum);
         $companyInfo['field'] = $fields;
         $companyInfo['per'] = intval(count($companyInfo['data'])/count($companyInfo['field'])*100);

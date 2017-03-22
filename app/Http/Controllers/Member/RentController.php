@@ -24,10 +24,19 @@ class RentController extends BaseController
     {
         $curr['name'] = $this->lists['']['name'];
         $curr['url'] = $this->lists['']['url'];
-        $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
-        $prefix_url = DOMAIN.'member/goods';
-        $datas = $this->query($pageCurr,0,$type);
-        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
+        $pageCurr = isset($_GET['page'])?$_GET['page']:1;
+        if (!$type) {
+            $prefix_url = DOMAIN.'member/rent';
+        } else {
+            $prefix_url = DOMAIN.'member/rent/s/'.$type;
+        }
+        $apiRent = ApiRent::index($this->limit,$pageCurr,$this->userid,$this->getGenre(),$type,2,0);
+        if ($apiRent['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiRent['data']; $total = $apiRent['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
             'datas' => $datas,
             'pagelist' => $pagelist,
@@ -39,19 +48,6 @@ class RentController extends BaseController
         ];
         return view('member.rent.index', $result);
     }
-
-//    public function trash($genre=0)
-//    {
-//        $curr['name'] = $this->lists['trash']['name'];
-//        $curr['url'] = $this->lists['trash']['url'];
-//        $result = [
-//            'datas'=> $this->query($del=1,$genre),
-//            'genre'=> $genre,
-//            'lists'=> $this->lists,
-//            'curr'=> $curr,
-//        ];
-//        return view('member.rent.index', $result);
-//    }
 
     public function create()
     {
@@ -68,14 +64,10 @@ class RentController extends BaseController
     public function store(Request $request)
     {
         $data = $this->getData($request);
-        dd($data);
         $apiRent = ApiRent::add($data);
         if ($apiRent['code']!=0) {
             echo "<script>alert('".$apiRent['msg']."');history.go(-1);</script>";exit;
         }
-//        //插入搜索表
-//        $rentModel = RentModel::where($data)->first();
-//        \App\Models\Home\SearchModel::change($rentModel,8,'create');
         return redirect(DOMAIN.'member/rent');
     }
 
@@ -104,9 +96,6 @@ class RentController extends BaseController
         if ($apiRent['code']!=0) {
             echo "<script>alert('".$apiRent['msg']."');history.go(-1);</script>";exit;
         }
-//        //更新搜索表
-//        $rentModel = RentModel::where('id',$id)->first();
-//        \App\Models\Home\SearchModel::change($rentModel,8,'update');
         return redirect(DOMAIN.'member/rent');
     }
 
@@ -125,24 +114,6 @@ class RentController extends BaseController
         ];
         return view('member.rent.show', $result);
     }
-
-//    public function destroy($id)
-//    {
-//        RentModel::where('id',$id)->update(['del'=> 1]);
-//        return redirect(DOMAIN.'member/rent');
-//    }
-//
-//    public function restore($id)
-//    {
-//        RentModel::where('id',$id)->update(['del'=> 0]);
-//        return redirect(DOMAIN.'member/rent/trash');
-//    }
-//
-//    public function forceDelete($id)
-//    {
-//        RentModel::where('id',$id)->delete();
-//        return redirect(DOMAIN.'member/rent/trash');
-//    }
 
 
 
@@ -194,15 +165,6 @@ class RentController extends BaseController
         return $data;
     }
 
-    /**
-     * 查询方法
-     */
-    public function query($pageCurr,$del,$type)
-    {
-        $genre = in_array($this->userid,[1]) ? 0 : $this->getGenre();
-        $apiRent = ApiRent::index($this->limit,$pageCurr,$this->userid,$genre,$type,2,$del);
-        return $apiRent['code']==0 ? $apiRent['data'] : [];
-    }
 
     /**
      * 获取 model

@@ -1,13 +1,15 @@
 @extends('member.main')
 @section('content')
     @include('member.common.crumb')
-    {{--<div class="p_style">需求类型：--}}
-        {{--<a href="{{DOMAIN}}member/{{$lists['func']['url']=='goodsD'?'goodsD':'goodsS'}}">视频</a>--}}
-        {{--<a href="{{DOMAIN}}member/design">设计</a>--}}
-    {{--</div>--}}
     <div class="hr_tab"></div>
-
-    <div class="mem_tab">@include('member.common.lists')</div>
+    <div class="mem_tab">
+        <ul>
+            <a href=""><li>&nbsp;</li></a>
+        </ul>
+        <div class="mem_create">
+            <a href="{{DOMAIN}}member/{{$lists['func']['url']}}/create">{{$lists['create']['name']}}</a>
+        </div>
+    </div>
     <div class="hr_tab"></div>
 
     <!-- 空白 -->
@@ -19,23 +21,20 @@
                 <td>需求名称</td>
                 <td>分类</td>
                 <td>缩略图</td>
-                <td>发布人</td>
                 <td>创建时间</td>
                 <td>操作</td>
             </tr>
         @if(count($datas))
             @foreach($datas as $data)
             <tr>
-                <td>{{ $data['id'] }}</td>
-                <td>{{ str_limit($data['name'],20) }}</td>
-                <td>{{ $data['cateName'] }}</td>
+                <td>{{$data['id']}}</td>
+                <td>{{str_limit($data['name'],20)}}</td>
+                <td>{{$data['cateName']}}</td>
                 <td><img src="{{$data['thumb']}}" width="50"></td>
-                <td>{{ $data['uname'] }}</td>
-                <td>{{ $data['createTime'] }}</td>
+                <td>{{$data['createTime']}}</td>
                 <td>
-                    {{--<a href="{{DOMAIN}}product/video/{{ $data->id }}/{{ $data->video_id }}" target="_blank" class="list_btn">预览</a>--}}
-                    <a href="{{DOMAIN}}member/goods/{{ $data['id'] }}" class="list_btn">查看</a>
-                    <a href="{{DOMAIN}}member/goods/{{ $data['id'] }}/edit" class="list_btn">编辑</a>
+                    <a href="{{DOMAIN}}member/{{$lists['func']['url']}}/{{$data['id']}}" class="list_btn">查看</a>
+                    <a href="{{DOMAIN}}member/{{$lists['func']['url']}}/{{$data['id']}}/edit" class="list_btn">编辑</a>
                     <a href="javascript:;" class="list_btn" onclick="getThumb({{$data['id']}})">缩略图</a>
                     <a href="javascript:;" class="list_btn" onclick="getLink({{$data['id']}})">视频链接</a>
                     <input type="hidden" name="name_{{$data['id']}}" value="{{$data['name']}}">
@@ -88,13 +87,13 @@
         function getThumb(id){
             var name = $("input[name='name_"+id+"']").val();
             $(".pname").html(name+' 缩略图更新');
-            $("#formthumb").attr('action','{{DOMAIN}}member/goods/thumb/'+id);
+            $("#formthumb").attr('action','{{DOMAIN}}member/{{$lists['func']['url']}}/thumb/'+id);
             $("#thumb").show(200);
         }
         function getLink(id){
             var name = $("input[name='name_"+id+"']").val();
             $(".pname").html(name+' 视频链接更新');
-            $("#formlink").attr('action','{{DOMAIN}}member/goods/link/'+id);
+            $("#formlink").attr('action','{{DOMAIN}}member/{{$lists['func']['url']}}/link/'+id);
             $("#link").show(200);
         }
         function getClose(){ $('.tankuang').hide(200); }

@@ -23,8 +23,12 @@ class MenusController extends BaseController
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
-        $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
-        $prefix_url = DOMAIN.'admin/menus';
+        $pageCurr = isset($_GET['page'])?$_GET['page']:1;
+        if (!$type && !$isshow) {
+            $prefix_url = DOMAIN.'admin/menus';
+        } else {
+            $prefix_url = DOMAIN.'admin/menus/s/'.$type.'/'.$isshow;
+        }
         $apiMenu = ApiMenu::index($this->limit,$pageCurr,$type,$isshow);
         if ($apiMenu['code']!=0) {
             $datas = array(); $total = 0;

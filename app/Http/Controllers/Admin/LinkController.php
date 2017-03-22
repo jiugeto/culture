@@ -25,7 +25,7 @@ class LinkController extends BaseController
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
-        $pageCurr = isset($_GET['pageCurr']) ? $_GET['pageCurr'] : 1;
+        $pageCurr = isset($_GET['page'])?$_GET['page']:1;
         $prefix_url = DOMAIN.'admin/link';
         $apiLink = ApiLink::index($this->limit,$pageCurr,0,$type,0);
         if ($apiLink['code']!=0) {

@@ -23,7 +23,7 @@ class ActionController extends BaseController
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
-        $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
+        $pageCurr = isset($_GET['page'])?$_GET['page']:1;
         $prefix_url = DOMAIN.'admin/action';
         $apiActions = ApiAction::index($this->limit,$pageCurr,$isshow,$pid);
         if ($apiActions['code']!=0) {

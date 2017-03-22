@@ -3,14 +3,13 @@
     @include('member.common.crumb')
     <div class="mem_tab">
         <ul>
-            <a href="{{DOMAIN}}member/entertain" style="color:{{$curr['url']==''?'red':'black'}};"><li>所有列表</li></a>
-            <li>|</li>
-            {{--<a href="{{DOMAIN}}member/entertain/trash" style="color:{{$curr['url']=='trash'?'red':'black'}};"><li>回收站</li></a>--}}
-            {{--<li>|</li>--}}
+            <a href="{{DOMAIN}}member/entertain" style="color:red;"><li>娱乐列表</li></a>
             <a href="{{DOMAIN}}member/actor"><li>艺人列表</li></a>
-            <li>|</li>
+            <a href="{{DOMAIN}}member/video"><li>作品列表</li></a>
         </ul>
-        <div class="mem_create"><a href="{{DOMAIN}}member/{{$lists['func']['url']}}/create">{{$lists['create']['name']}}</a></div>
+        <div class="mem_create">
+            <a href="{{DOMAIN}}member/{{$lists['func']['url']}}/create">{{$lists['create']['name']}}</a>
+        </div>
     </div>
     <div class="hr_tab"></div>
     <!-- 空白 -->
@@ -27,19 +26,13 @@
         @if(count($datas))
             @foreach($datas as $data)
             <tr>
-                <td>{{ $data['id'] }}</td>
-                <td>{{ $data['title'] }}</td>
-                <td>{{ $data['uname'] }}</td>
-                <td>{{ $data['createTime'] }}</td>
+                <td>{{$data['id']}}</td>
+                <td>{{$data['title']}}</td>
+                <td>{{$data['uname']}}</td>
+                <td>{{$data['createTime']}}</td>
                 <td>
-                    {{--@if($curr['url']=='')--}}
-                    <a href="{{DOMAIN}}member/entertain/{{ $data['id'] }}" class="list_btn">查看</a>
-                    <a href="{{DOMAIN}}member/entertain/{{ $data['id'] }}/edit" class="list_btn">编辑</a>
-                    {{--<a href="{{DOMAIN}}member/entertain/{{ $data->id }}/destroy" class="list_btn">删除</a>--}}
-                    {{--@else--}}
-                    {{--<a href="{{DOMAIN}}member/entertain/{{ $data->id }}/restore" class="list_btn">还原</a>--}}
-                    {{--<a href="{{DOMAIN}}member/entertain/{{ $data->id }}/forceDelete" class="list_btn">销毁</a>--}}
-                    {{--@endif--}}
+                    <a href="{{DOMAIN}}member/entertain/{{$data['id']}}" class="list_btn">查看</a>
+                    <a href="{{DOMAIN}}member/entertain/{{$data['id']}}/edit" class="list_btn">编辑</a>
                 </td>
             </tr>
             @endforeach

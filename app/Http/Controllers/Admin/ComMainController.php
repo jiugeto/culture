@@ -23,7 +23,7 @@ class ComMainController extends BaseController
     {
         $curr['name'] = $this->crumb['']['name'];
         $curr['url'] = $this->crumb['']['url'];
-        $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
+        $pageCurr = isset($_GET['page'])?$_GET['page']:1;
         $prefix_url = DOMAIN.'admin/commain';
         $apiCompany = ApiCompany::getCompanyList($this->limit,$pageCurr,0);
         if ($apiCompany['code']!=0) {

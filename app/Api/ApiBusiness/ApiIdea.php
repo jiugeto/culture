@@ -9,7 +9,7 @@ class ApiIdea
      * 创意接口
      */
 
-    public static function index($limit,$pageCurr=1,$uid=0,$cate=0,$isshow=2,$del=0)
+    public static function index($limit,$pageCurr=1,$uid=0,$genre=0,$cate=0,$isshow=2,$del=0)
     {
         $apiUrl = ApiBase::getApiCurl() . '/api/v1/idea';
         $curl = new Curl();
@@ -19,6 +19,7 @@ class ApiIdea
             'page'  =>  $pageCurr,
             'uid'   =>  $uid,
             'isshow'    =>  $isshow,
+            'genre'     =>  $genre,
             'cate'  =>  $cate,
             'del'   =>  $del,
         ));

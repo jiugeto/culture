@@ -1,32 +1,49 @@
 <?php
 namespace App\Http\Controllers\Member;
+
 use App\Api\ApiBusiness\ApiGoods;
 use App\Api\ApiUser\ApiUsers;
 use Illuminate\Http\Request;
 
-class GoodsController extends BaseController
+class PartController extends BaseController
 {
     /**
-     * 个人会员需求管理
-     * goods 商品、货物，代表文化类产品
+     * 动画管理
      */
+
+    protected $genre;
+    protected $genreName;
 
     public function __construct()
     {
         parent::__construct();
-        $this->lists['func']['name'] = '视频管理';
-        $this->lists['func']['url'] = 'goods';
-        $this->lists['create']['name'] = '发布视频';
+        $this->lists['func']['name'] = '动画管理';
+        $this->lists['func']['url'] = 'part';
+        $this->lists['create']['name'] = '发布动画';
+        if ($this->userType==50) {
+            $this->genre = [1,2];
+        } elseif (in_array($this->userType,[4,5,6])) {
+            $this->genre = 1;
+            $this->genreName = "动画供应";
+        } else {
+            $this->genre = 2;
+            $this->genreName = "动画需求";
+        }
     }
 
-    public function index()
+    public function index($cate=0)
     {
         $curr['name'] = $this->lists['']['name'];
         $curr['url'] = $this->lists['']['url'];
-        $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
-        $prefix_url = DOMAIN.'member/goods';
-        $datas = $this->query($pageCurr,0);
-        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
+        $pageCurr = isset($_GET['page'])?$_GET['page']:1;
+        $prefix_url = DOMAIN.'member/part';
+        $apiGoods = ApiGoods::index($this->limit,$pageCurr,$this->userid,$this->genre,$cate,0,2);
+        if ($apiGoods['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiGoods['data']; $total = $apiGoods['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
             'datas' => $datas,
             'pagelist' => $pagelist,
@@ -57,10 +74,7 @@ class GoodsController extends BaseController
         if ($apiGoods['code']!=0) {
             echo "<script>alert('".$apiGoods['msg']."');history.go(-1);</script>";exit;
         }
-//        //插入搜索表
-//        $goodsModel = GoodsModel::where($data)->first();
-//        \App\Models\Home\SearchModel::change($goodsModel,2,'create');
-        return redirect(DOMAIN.'member/goods');
+        return redirect(DOMAIN.'member/part');
     }
 
     public function edit($id)
@@ -88,10 +102,7 @@ class GoodsController extends BaseController
         if ($apiGoods['code']!=0) {
             echo "<script>alert('".$apiGoods['msg']."');history.go(-1);</script>";exit;
         }
-//        //更新搜索表
-//        $goodsModel = GoodsModel::where('id',$id)->first();
-//        \App\Models\Home\SearchModel::change($goodsModel,2,'update');
-        return redirect(DOMAIN.'member/goods');
+        return redirect(DOMAIN.'member/part');
     }
 
     public function show($id)
@@ -145,7 +156,7 @@ class GoodsController extends BaseController
         if ($apiGoods['code']!=0) {
             echo "<script>alert('".$apiGoods['msg']."');history.go(-1);</script>";exit;
         }
-        return redirect(DOMAIN.'member/goods');
+        return redirect(DOMAIN.'member/part');
     }
 
     /**
@@ -175,26 +186,8 @@ class GoodsController extends BaseController
         if ($apiGoods['code']!=0) {
             echo "<script>alert('".$apiGoods['msg']."');history.go(-1);</script>";exit;
         }
-        return redirect(DOMAIN.'member/goods');
+        return redirect(DOMAIN.'member/part');
     }
-
-//    public function destroy($id)
-//    {
-//        GoodsModel::where('id',$id)->update(['del'=> 1]);
-//        return redirect(DOMAIN.'member/goods');
-//    }
-//
-//    public function restore($id)
-//    {
-//        GoodsModel::where('id',$id)->update(['del'=> 0]);
-//        return redirect(DOMAIN.'member/goods/trash');
-//    }
-//
-//    public function forceDelete($id)
-//    {
-//        GoodsModel::where('id',$id)->delete();
-//        return redirect(DOMAIN.'member/goods/trash');
-//    }
 
     /**
      * 收集数据
@@ -205,35 +198,15 @@ class GoodsController extends BaseController
         if ($apiUser['code']!=0) {
             echo "<script>alert('".$apiUser['msg']."');history.go(-1);</script>";exit;
         }
-        $userType = $apiUser['data']['isuser'];
-        if (in_array($userType,[1,2])) {
-            $genre = 1;  //个人需求
-        } elseif ($userType==4) {
-            $genre = 2;  //个人供应
-        } elseif (in_array($userType,[3,7])) {
-            $genre = 3;  //企业需求
-        } else {
-            $genre = 4;  //企业供应
-        }
         $data = [
             'name'  =>  $request->name,
-            'genre' =>  $genre,
+            'genre' =>  $this->genre,
             'cate'  =>  $request->cate,
             'intro' =>  $request->intro,
             'money' =>  $request->money,
             'uid'   =>  $this->userid,
-            'uname'=> \Session::get('user.username'),
         ];
         return $data;
-    }
-
-    /**
-     * 查询方法
-     */
-    public function query($pageCurr,$del)
-    {
-        $apiGoods = ApiGoods::index($this->limit,$pageCurr,$this->userid,0,0,$del,2,0,0);
-        return $apiGoods['code']==0 ? $apiGoods['data'] : [];
     }
 
     /**

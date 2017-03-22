@@ -9,7 +9,7 @@ class ApiGoods
      * 产品接口
      */
 
-    public static function index($limit,$pageCurr=1,$uid=0,$genre=0,$cate=0,$del=0,$isshow=2,$recommend=0,$newest=0)
+    public static function index($limit,$pageCurr=1,$uid=0,$genre=0,$cate=0,$del=0,$isshow=2)
     {
         $apiUrl = ApiBase::getApiCurl() . '/api/v1/goods';
         $curl = new Curl();
@@ -22,8 +22,6 @@ class ApiGoods
             'cate'      =>  $cate,
             'del'       =>  $del,
             'isshow'    =>  $isshow,
-            'recommend' =>  $recommend,
-            'newest'    =>  $newest,
         ));
         $response = json_decode($curl->response);
         if ($response->error->code != 0) {

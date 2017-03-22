@@ -5,11 +5,10 @@
         <div class="am-g">
             @include('admin.common.menu')
             <select name="type" style="padding:2px 10px;border:1px solid lightgrey;">
-                <option value="0">所有</option>
+                <option value="0" {{$type==0?'selected':''}}>所有</option>
                 @foreach($model['types'] as $k=>$vtype)
-                    <option value="{{ $k }}"
-                            {{ $type==$k ? 'selected' : '' }}>
-                        {{ $vtype }}</option>
+                    <option value="{{$k}}" {{$type==$k?'selected':''}}>
+                        {{$vtype}}</option>
                 @endforeach
             </select>
             <select name="isshow" style="padding:2px 10px;border:1px solid lightgrey;">
@@ -49,8 +48,9 @@
                         <th class="table-title">菜单名称</th>
                         <th class="table-title">菜单类型</th>
                         <th class="table-type">控制器名称</th>
-                        <th class="table-author am-hide-sm-only">父ID</th>
+                        <th class="table-author am-hide-sm-only">父级</th>
                         <th class="table-author am-hide-sm-only" width="80">会员后台是否显示</th>
+                        <th class="table-author am-hide-sm-only">排序</th>
                         <th class="table-date am-hide-sm-only">添加时间</th>
                         <th class="table-set">操作</th>
                     </tr>
@@ -60,17 +60,16 @@
                     @foreach($datas as $data)
                     <tr>
                         <td class="am-hide-sm-only"><input type="checkbox" /></td>
-                        <td class="am-hide-sm-only">{{ $data['id'] }}</td>
-                        <td class="am-hide-sm-only"><a href="{{DOMAIN}}admin/menus/{{$data['id']}}">{{ $data['name'] }}</a></td>
+                        <td class="am-hide-sm-only">{{$data['id']}}</td>
                         <td class="am-hide-sm-only">
-                            @foreach($model['types'] as $k=>$type)
-                                @if($data['type']==$k) {{ $type }} @endif
-                            @endforeach
+                            <a href="{{DOMAIN}}admin/menus/{{$data['id']}}">{{$data['name']}}</a>
                         </td>
-                        <td class="am-hide-sm-only">{{ $data['controller_prefix'].'Controller' }}</td>
-                        <td class="am-hide-sm-only">{{ $data['pid'] }}</td>
-                        <td class="am-hide-sm-only">{{ $data['isshowName'] }}</td>
-                        <td class="am-hide-sm-only">{{ $data['createTime'] }}</td>
+                        <td class="am-hide-sm-only">{{$data['typeName']}}</td>
+                        <td class="am-hide-sm-only">{{$data['controller']}}</td>
+                        <td class="am-hide-sm-only">{{$data['parentName']}}</td>
+                        <td class="am-hide-sm-only">{{$data['isshowName']}}</td>
+                        <td class="am-hide-sm-only">{{$data['sort']}}</td>
+                        <td class="am-hide-sm-only">{{$data['createTime']}}</td>
                         <td class="am-hide-sm-only">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">

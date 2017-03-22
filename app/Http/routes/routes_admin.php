@@ -12,25 +12,23 @@ Route::group(['prefix' => 'admin','namespace'=>'Admin'], function(){
  * 这里是系统后台路由
  */
 Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'],function(){
-//Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
     //系统后台首页路由
     Route::get('/','HomeController@index');
     Route::get('home','HomeController@index');
-    //权限管理
-        //管理员路由
+    //管理员路由
     Route::post('admin/{id}','AdminController@update');
     Route::get('admin/{id}/forceDelete','AdminController@forceDelete');
     Route::get('admin/pwd/{id}','AdminController@pwd');
     Route::post('admin/setpwd/{id}','AdminController@setPwd');
     Route::resource('admin','AdminController');
-        //角色路由
+    //角色路由
     Route::post('role/{id}','RoleController@update');
     Route::get('role/{id}/forceDelete','RoleController@forceDelete');
     Route::resource('role','RoleController');
-        //权限操作路由
+    //权限操作路由
     Route::post('role/action/{id}','RoleController@setRoleAction');
     Route::get('role/action/{id}','RoleController@getRoleAction');
-        //操作路由
+    //操作路由
     Route::get('action/create/{pid}','ActionController@create');
     Route::post('action/{id}','ActionController@update');
     Route::get('action/increase/{id}','ActionController@increase');
@@ -41,18 +39,17 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::get('action/isshow/{id}/{pid}/{isshow}','ActionController@setIsShow');
     Route::get('action/s/{isshow}/{pid}','ActionController@index');         //s代表检索
     Route::resource('action','ActionController');
-        //用户权限分配
+    //用户权限分配
     Route::post('auth/getAuth/{auth}','AuthsController@setAuth');
     Route::get('auth/edit/{auth}','AuthsController@edit');
     Route::resource('auth','AuthsController');
-        //前台左侧菜单链接功能
+    //前台左侧菜单链接功能
     Route::post('menus/{id}','MenusController@update');
-    Route::get('menus/{id}/forceDelete','MenusController@forceDelete');
+//    Route::get('menus/{id}/forceDelete','MenusController@forceDelete');
     Route::get('menus/s/{type}/{isshow}','MenusController@index');      //s代表检索
     Route::get('menus/isshow/{id}/{isshow}','MenusController@setIsShow');
     Route::resource('menus','MenusController');
-    //资料审核
-        //会员管理
+    //会员管理
     Route::get('user/toauth/{id}','UserController@toauth');
     Route::get('user/noauth/{id}','UserController@noauth');
     Route::get('user/increase/{id}','UserController@increase');
@@ -99,20 +96,15 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::get('entertain/show/{id}/{isshow}','EntertainController@setShow');
     Route::resource('entertain','EntertainController');
         //人员管理
-//    Route::get('staff/{id}/destroy','StaffController@destroy');
-//    Route::get('staff/{id}/restore','StaffController@restore');
-//    Route::get('staff/{id}/forceDelete','StaffController@forceDelete');
     Route::post('staff/{id}','StaffController@update');
     Route::resource('staff','StaffController');
     //设计路由
     Route::post('design/{id}','DesignController@update');
     Route::post('design/thumb/{id}','DesignController@setThumb');
     Route::get('design/show/{id}/{isshow}','DesignController@setShow');
-//    Route::get('design/trash','DesignController@trash');
     Route::resource('design','DesignController');
     //功能管理
         //消息管理
-//    Route::get('message/trash','MessageController@trash');
     Route::get('message/show/{id}/show','MessageController@setShow');
     Route::resource('message','MessageController');
         //链接管理
@@ -128,11 +120,6 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
         //用户意见管理
     Route::get('opinions/clear','OpinionsController@clearTable');     //清空表
     Route::post('opinions/{id}','OpinionsController@update');
-//    Route::get('opinions/{id}/destroy','OpinionsController@destroy');
-//    Route::get('opinions/{id}/restore','OpinionsController@restore');
-//    Route::get('opinions/{id}/forceDelete','OpinionsController@forceDelete');
-//    Route::get('opinions/trash','OpinionsController@trash');
-//    Route::get('opinions/{isshow}/trash','OpinionsController@trash');
     Route::get('opinions/s/{isshow}','OpinionsController@index');
     Route::get('opinions/show/{id}/{isshow}','OpinionsController@setShow');
     Route::resource('opinions','OpinionsController');
@@ -171,15 +158,6 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
     Route::post('idea/{id}','IdeaController@update');
     Route::get('idea/show/{id}/{isshow}','IdeaController@setShow');
     Route::resource('idea','IdeaController');
-    //分镜管理
-    Route::post('storyboard/{id}','StoryBoardController@update');
-    Route::post('storyboard/thumb/{id}','StoryBoardController@setThumb');
-    Route::get('storyboard/show/{id}/{isshow}','StoryBoardController@setShow');
-//    Route::get('storyboard/{id}/destroy','StoryBoardController@destroy');
-//    Route::get('storyboard/{id}/restore','StoryBoardController@restore');
-//    Route::get('storyboard/{id}/forceDelete','StoryBoardController@forceDelete');
-//    Route::get('storyboard/trash','StoryBoardController@trash');
-    Route::resource('storyboard','StoryBoardController');
     //订单路由
     Route::get('order/{del}/{isshow}','OrderController@index');
     Route::post('order/{id}','OrderController@update');
@@ -217,7 +195,6 @@ Route::group(['prefix'=>'admin','middleware' => 'AdminAuth','namespace'=>'Admin'
         Route::resource('cate','CateController');
         //话题管理
         Route::post('talk/{id}','TalkController@update');
-//        Route::get('talk/isdel/{id}/{del}','TalkController@isdel');
         Route::get('talk/s/{cate}','TalkController@index');        //s代表检索
         Route::resource('talk','TalkController');
     });

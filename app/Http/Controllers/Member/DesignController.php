@@ -22,7 +22,7 @@ class DesignController extends BaseController
     {
         $curr['name'] = $this->lists['']['name'];
         $curr['url'] = $this->lists['']['url'];
-        $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
+        $pageCurr = isset($_GET['page'])?$_GET['page']:1;
         $prefix_url = DOMAIN.'member/design';
         $datas = $this->query($pageCurr,$cate);
         $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);

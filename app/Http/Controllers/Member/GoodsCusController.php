@@ -23,7 +23,7 @@ class GoodsCusController extends BaseController
     {
         $curr['name'] = $this->lists['']['name'];
         $curr['url'] = $this->lists['']['url'];
-        $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
+        $pageCurr = isset($_GET['page'])?$_GET['page']:1;
         $prefix_url = DOMAIN.'member/procus';
         $datas = $this->query($pageCurr);
         $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);

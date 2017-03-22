@@ -1,30 +1,43 @@
 <?php
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Member;
 
 use App\Api\ApiBusiness\ApiGoods;
+use App\Api\ApiUser\ApiUsers;
 use Illuminate\Http\Request;
 
-class GoodsController extends BaseController
+class VideoController extends BaseController
 {
     /**
-     * 系统后台作品（制作公司和设计师的）管理
+     * 视频管理
      */
+
+    protected $genre;
+    protected $genreName;
 
     public function __construct()
     {
         parent::__construct();
-        $this->crumb['']['name'] = '作品列表';
-        $this->crumb['category']['name'] = '用户作品';
-        $this->crumb['category']['url'] = 'goods';
+        $this->lists['func']['name'] = '视频管理';
+        $this->lists['func']['url'] = 'video';
+        $this->lists['create']['name'] = '发布视频';
+        if ($this->userType==50) {
+            $this->genre = [3,4];
+        } elseif (in_array($this->userType,[4,5,6])) {
+            $this->genre = 3;
+            $this->genreName = "视频供应";
+        } else {
+            $this->genre = 4;
+            $this->genreName = "视频需求";
+        }
     }
 
-    public function index($genre=0,$cate=0)
+    public function index($cate=0)
     {
-        $curr['name'] = $this->crumb['']['name'];
-        $curr['url'] = $this->crumb['']['url'];
+        $curr['name'] = $this->lists['']['name'];
+        $curr['url'] = $this->lists['']['url'];
         $pageCurr = isset($_GET['page'])?$_GET['page']:1;
-        $prefix_url = DOMAIN.'admin/goods';
-        $apiGoods = ApiGoods::index($this->limit,$pageCurr,0,$genre,$cate,0,0,0,0);
+        $prefix_url = DOMAIN.'member/video';
+        $apiGoods = ApiGoods::index($this->limit,$pageCurr,$this->userid,$this->genre,$cate,0,2);
         if ($apiGoods['code']!=0) {
             $datas = array(); $total = 0;
         } else {
@@ -35,25 +48,23 @@ class GoodsController extends BaseController
             'datas' => $datas,
             'pagelist' => $pagelist,
             'prefix_url' => $prefix_url,
-            'crumb' => $this->crumb,
-            'curr' => $curr,
             'model' => $this->getModel(),
-            'genre' => $genre,
-            'cate' => $cate,
+            'lists' => $this->lists,
+            'curr' => $curr,
         ];
-        return view('admin.goods.index', $result);
+        return view('member.goods.index', $result);
     }
 
     public function create()
     {
-        $curr['name'] = $this->crumb['create']['name'];
-        $curr['url'] = $this->crumb['create']['url'];
+        $curr['name'] = $this->lists['create']['name'];
+        $curr['url'] = $this->lists['create']['url'];
         $result = [
             'model'=> $this->getModel(),
-            'crumb'=> $this->crumb,
+            'lists'=> $this->lists,
             'curr'=> $curr,
         ];
-        return view('admin.goods.create', $result);
+        return view('member.goods.create', $result);
     }
 
     public function store(Request $request)
@@ -63,13 +74,13 @@ class GoodsController extends BaseController
         if ($apiGoods['code']!=0) {
             echo "<script>alert('".$apiGoods['msg']."');history.go(-1);</script>";exit;
         }
-        return redirect(DOMAIN.'admin/goods');
+        return redirect(DOMAIN.'member/video');
     }
 
     public function edit($id)
     {
-        $curr['name'] = $this->crumb['edit']['name'];
-        $curr['url'] = $this->crumb['edit']['url'];
+        $curr['name'] = $this->lists['edit']['name'];
+        $curr['url'] = $this->lists['edit']['url'];
         $apiGoods = ApiGoods::show($id);
         if ($apiGoods['code']!=0) {
             echo "<script>alert('".$apiGoods['msg']."');history.go(-1);</script>";exit;
@@ -77,10 +88,10 @@ class GoodsController extends BaseController
         $result = [
             'data'=> $apiGoods['data'],
             'model'=> $this->getModel(),
-            'crumb'=> $this->crumb,
+            'lists'=> $this->lists,
             'curr'=> $curr,
         ];
-        return view('admin.goods.edit', $result);
+        return view('member.goods.edit', $result);
     }
 
     public function update(Request $request,$id)
@@ -91,13 +102,13 @@ class GoodsController extends BaseController
         if ($apiGoods['code']!=0) {
             echo "<script>alert('".$apiGoods['msg']."');history.go(-1);</script>";exit;
         }
-        return redirect(DOMAIN.'admin/goods');
+        return redirect(DOMAIN.'member/video');
     }
 
     public function show($id)
     {
-        $curr['name'] = $this->crumb['trash']['name'];
-        $curr['url'] = $this->crumb['trash']['url'];
+        $curr['name'] = $this->lists['show']['name'];
+        $curr['url'] = $this->lists['show']['url'];
         $apiGoods = ApiGoods::show($id);
         if ($apiGoods['code']!=0) {
             echo "<script>alert('".$apiGoods['msg']."');history.go(-1);</script>";exit;
@@ -105,10 +116,10 @@ class GoodsController extends BaseController
         $result = [
             'data'=> $apiGoods['data'],
             'model'=> $this->getModel(),
-            'crumb'=> $this->crumb,
+            'lists'=> $this->lists,
             'curr'=> $curr,
         ];
-        return view('admin.goods.show', $result);
+        return view('member.goods.show', $result);
     }
 
     /**
@@ -118,33 +129,34 @@ class GoodsController extends BaseController
     {
         if (!isset($request->url_ori)) {
             echo "<script>alert('未上传图片！');history.go(-1);</script>";exit;
+        } else {
+            //获取老图片地址
+            $apiGood = ApiGoods::show($id);
+            if ($apiGood['code']!=0) {
+                echo "<script>alert('".$apiGood['msg']."');history.go(-1);</script>";exit;
+            }
+            if ($thumbOld=$apiGood['data']['thumb']) {
+                $thumbArr = explode('/',$thumbOld);
+                unset($thumbArr[0]); unset($thumbArr[1]); unset($thumbArr[2]);
+                $path = implode('/',$thumbArr);
+            }
+            $pathOld = isset($path) ? $path : '';
+            //上传图片
+            $rstArr=$this->uploadOnlyImg($request->url_ori,$pathOld);
+            if ($rstArr['code']!=0) {
+                echo "<script>alert('".$rstArr['msg']."');history.go(-1);</script>";exit;
+            }
+            $thumb = $rstArr['data'];
         }
-        //判断老图片
-        $apiGood = ApiGoods::show($id);
-        if ($apiGood['code']!=0) {
-            echo "<script>alert('".$apiGood['msg']."');history.go(-1);</script>";exit;
-        }
-        if ($thumbOld=$apiGood['data']['thumb']) {
-            $thumbArr = explode('/',$thumbOld);
-            unset($thumbArr[0]); unset($thumbArr[1]); unset($thumbArr[2]);
-            $path = implode('/',$thumbArr);
-        }
-        $pathOld = isset($path) ? $path : '';
-        //上传图片
-        $rstArr=$this->uploadOnlyImg($request->url_ori,$pathOld);
-        if ($rstArr['code']!=0) {
-            echo "<script>alert('".$rstArr['msg']."');history.go(-1);</script>";exit;
-        }
-        $thumb = $rstArr['data'];
         $data = [
             'thumb' =>  isset($thumb) ? $thumb : '',
             'id'    =>  $id,
         ];
-        $apiGoods2 = ApiGoods::setThumb($data);
-        if ($apiGoods2['code']!=0) {
-            echo "<script>alert('".$apiGoods2['msg']."');history.go(-1);</script>";exit;
+        $apiGoods = ApiGoods::setThumb($data);
+        if ($apiGoods['code']!=0) {
+            echo "<script>alert('".$apiGoods['msg']."');history.go(-1);</script>";exit;
         }
-        return redirect(DOMAIN.'admin/goods');
+        return redirect(DOMAIN.'member/video');
     }
 
     /**
@@ -164,65 +176,37 @@ class GoodsController extends BaseController
         } elseif ($linkType==3 && mb_substr($link,0,7)!='<iframe') {
             echo "<script>alert('html代码格式有误！');history.go(-1);</script>";exit;
         }
-        $apiGood = ApiGoods::show($id);
-        if ($apiGood['code']!=0) {
-            echo "<script>alert('".$apiGood['msg']."');history.go(-1);</script>";exit;
-        }
         $data = [
             'id'    =>  $id,
             'linkType'  =>  $linkType,
             'link'  =>  $link,
-            'uid'   =>  $apiGood['data']['uid'],
+            'uid'   =>  $this->userid,
         ];
         $apiGoods = ApiGoods::setLink($data);
         if ($apiGoods['code']!=0) {
             echo "<script>alert('".$apiGoods['msg']."');history.go(-1);</script>";exit;
         }
-        return redirect(DOMAIN.'admin/goods');
+        return redirect(DOMAIN.'member/video');
     }
 
     /**
-     * 设置显示/隐藏
+     * 收集数据
      */
-    public function setShow($id,$isshow)
-    {
-        $apiGoods = ApiGoods::setShow($id,$isshow);
-        if ($apiGoods['code']!=0) {
-            echo "<script>alert('".$apiGoods['msg']."');history.go(-1);</script>";exit;
-        }
-        return redirect(DOMAIN.'admin/goods');
-    }
-
-
-
-
-
     public function getData(Request $request)
     {
-        $uid = UserIdByUname($request->uname);
-        if (!$uid) {
-            echo "<script>alert('用户必选！');history.go(-1);</script>";exit;
+        $apiUser = ApiUsers::getOneUser($this->userid);
+        if ($apiUser['code']!=0) {
+            echo "<script>alert('".$apiUser['msg']."');history.go(-1);</script>";exit;
         }
-        $userType = UserTypeById($uid);
-        if (in_array($userType,[1,2])) {
-            $genre = 1;     //个人需求
-        } elseif ($userType==4) {
-            $genre = 2;     //个人供应
-        } elseif (in_array($userType,[3,7])) {
-            $genre = 3;     //企业需求
-        } elseif (in_array($userType,[5,6])) {
-            $genre = 4;     //企业供应
-        } else {
-            $genre = 1;     //userType==50，超级用户默认1
-        }
-        return array(
+        $data = [
             'name'  =>  $request->name,
-            'genre' =>  $genre,
+            'genre' =>  $this->genre,
             'cate'  =>  $request->cate,
             'intro' =>  $request->intro,
             'money' =>  $request->money,
-            'uid'   =>  $uid,
-        );
+            'uid'   =>  $this->userid,
+        ];
+        return $data;
     }
 
     /**
@@ -231,6 +215,6 @@ class GoodsController extends BaseController
     public function getModel()
     {
         $apiModel = ApiGoods::getModel();
-        return $apiModel['code']==0 ? $apiModel['model'] : '';
+        return $apiModel['code']==0 ? $apiModel['model'] : [];
     }
 }
