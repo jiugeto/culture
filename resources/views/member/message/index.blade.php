@@ -3,19 +3,12 @@
     @include('member.common.crumb')
     <div class="mem_tab">
         <ul>
-            {{--<a href="{{DOMAIN}}member/message/s/1" style="color:{{$list==1?'red':'black'}};">--}}
-                {{--<li>草稿箱</li>--}}
-            {{--</a>--}}
-            {{--<li>|</li>--}}
-            <a href="{{DOMAIN}}member/message" style="color:{{$list==1?'red':'black'}};">
-                <li>收件箱</li>
+            <a href="{{DOMAIN}}member/message">
+                <li class="{{$list==1?'curr':''}}">收件箱</li>
             </a>
-            <li>|</li>
-            <a href="{{DOMAIN}}member/message/s/2" style="color:{{$list==2?'red':'black'}};">
-                <li>发件箱</li>
+            <a href="{{DOMAIN}}member/message/s/2">
+                <li class="{{$list==2?'curr':''}}">发件箱</li>
             </a>
-            <li>|</li>
-            {{--<a @if($frieldId)href="{{DOMAIN}}member/message/chat/{{$frieldId}}" target="_blank"@endif><li>即时窗口</li></a>--}}
         </ul>
         <div class="mem_create"><a href="javascript:;" onclick="getSender()">发消息</a></div>
     </div>

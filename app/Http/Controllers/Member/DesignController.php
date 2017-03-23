@@ -10,12 +10,25 @@ class DesignController extends BaseController
      * 会员后台：设计管理
      */
 
+    protected $genre;
+
     public function __construct()
     {
         parent::__construct();
         $this->lists['func']['name'] = '设计管理';
         $this->lists['func']['url'] = 'design';
         $this->lists['create']['name'] = '设计发布';
+        /*if ($this->userType==50) {       //超级用户
+            $this->genre = 0;
+        } else */if ($this->userType==4) {       //4设计师
+            $this->genre = 1;
+        } else if ($this->userType==8) {        //设计公司
+            $this->genre = 3;
+        } else if (in_array($this->userType,[3,5,6,7])) {        //其他公司
+            $this->genre = 4;
+        } else {        //其他用户
+            $this->genre = 2;
+        }
     }
 
     public function index($cate=0)
@@ -23,9 +36,18 @@ class DesignController extends BaseController
         $curr['name'] = $this->lists['']['name'];
         $curr['url'] = $this->lists['']['url'];
         $pageCurr = isset($_GET['page'])?$_GET['page']:1;
-        $prefix_url = DOMAIN.'member/design';
-        $datas = $this->query($pageCurr,$cate);
-        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
+        if (!$cate) {
+            $prefix_url = DOMAIN.'member/design';
+        } else {
+            $prefix_url = DOMAIN.'member/design/s/'.$cate;
+        }
+        $apiDesign = ApiDesign::index($this->limit,$pageCurr,$this->userid,$this->genre,$cate,2,0);
+        if ($apiDesign['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiDesign['data']; $total = $apiDesign['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
             'datas' => $datas,
             'pagelist' => $pagelist,
@@ -36,20 +58,6 @@ class DesignController extends BaseController
         ];
         return view('member.design.index', $result);
     }
-
-//    public function trash($cate=0)
-//    {
-//        $curr['name'] = $this->lists['trash']['name'];
-//        $curr['url'] = $this->lists['trash']['url'];
-//        $result = [
-//            'datas'=> $this->query($this->genre,$del=1,$cate),
-//            'model'=> $this->model,
-//            'prefix_url'=> DOMAIN.'member/design/trash',
-//            'lists'=> $this->lists,
-//            'curr'=> $curr,
-//        ];
-//        return view('member.design.index', $result);
-//    }
 
     public function create()
     {
@@ -70,9 +78,6 @@ class DesignController extends BaseController
         if ($apiDesign['code']!=0) {
             echo "<script>alert('".$apiDesign['msg']."');history.go(-1);</script>";exit;
         }
-//        //插入搜索表
-//        $designModel = DesignModel::where($data)->first();
-//        \App\Models\Home\SearchModel::change($designModel,9,'create');
         return redirect(DOMAIN.'member/design');
     }
 
@@ -101,9 +106,6 @@ class DesignController extends BaseController
         if ($apiDesign['code']!=0) {
             echo "<script>alert('".$apiDesign['msg']."');history.go(-1);</script>";exit;
         }
-//        //更新搜索表
-//        $designModel = DesignModel::where('id',$id)->first();
-//        \App\Models\Home\SearchModel::change($designModel,9,'update');
         return redirect(DOMAIN.'member/design');
     }
 
@@ -124,12 +126,6 @@ class DesignController extends BaseController
         return view('member.design.show', $result);
     }
 
-//    public function destroy($id)
-//    {
-//        DesignModel::where('id',$id)->update(array('del'=> 1));
-//        return redirect(DOMAIN.'member/design');
-//    }
-
 
 
 
@@ -138,20 +134,13 @@ class DesignController extends BaseController
     {
         return array(
             'name'=> $request->name,
-            'genre'=> $request->genre,
+            'genre'=> $this->genre,
             'cate'=> $request->cate,
             'intro'=> $request->intro,
             'detail'=> $request->detail,
             'money'=> $request->money,
             'uid'=> $this->userid,
         );
-    }
-
-    public function query($pageCurr,$cate)
-    {
-        $uid = $this->userType==50 ? 0 : $this->userid;
-        $apiDesign = ApiDesign::index($this->limit,$pageCurr,$uid,0,$cate,2,0);
-        return $apiDesign['code']==0 ? $apiDesign['data'] : [];
     }
 
     /**

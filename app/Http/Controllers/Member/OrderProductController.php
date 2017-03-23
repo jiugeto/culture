@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class OrderProductController extends BaseController
 {
     /**
-     *  会员后台 订单流程管理
+     *  创作订单流程管理
      */
 
     public function __construct()
@@ -24,8 +24,13 @@ class OrderProductController extends BaseController
         $curr['url'] = $this->lists['']['url'];
         $pageCurr = isset($_GET['page'])?$_GET['page']:1;
         $prefix_url = DOMAIN.'member/orderpro';
-        $datas = $this->query($pageCurr);
-        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
+        $apiOrder = ApiOrderPro::index($this->limit,$pageCurr,$this->userid,0,2,0);
+        if ($apiOrder['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiOrder['data']; $total = $apiOrder['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
             'datas' => $datas,
             'prefix_url' => $prefix_url,
@@ -71,17 +76,5 @@ class OrderProductController extends BaseController
             WalletModel::where('uid',$this->userid)->increment('gold',$backGold);
         }
         return redirect(DOMAIN.'member/orderpro');
-    }
-
-
-
-
-
-
-    public function query($pageCurr)
-    {
-        $uid = $this->userType==50 ? 0 : $this->userid;
-        $apiOrder = ApiOrderPro::index($this->limit,$pageCurr,$uid,0,2,0);
-        return $apiOrder['code']==0 ? $apiOrder['data'] : [];
     }
 }

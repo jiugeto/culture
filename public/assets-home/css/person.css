@@ -20,7 +20,7 @@
     border-bottom:1px solid rgb(240,240,240);
 }
 .per_menu select {
-    padding:1px 2px;
+    padding:2px 5px;
     border:1px solid rgb(230,230,230);
     font-weight:bold;
     font-size:16px;
@@ -48,6 +48,12 @@
     background:grey;
 }
 .per_menu a:hover.userinfo { background:darkred; }
+.per_menu .userhead {
+    width:40px; height:40px;
+    overflow:hidden;
+    float:left;
+    position:relative; top:-12px;
+}
 .per_work {
     margin:5px;
     padding:5px;
@@ -66,7 +72,10 @@ div.per_waterfall {
 div:hover.per_waterfall { border:1px solid red; }
 .per_waterfall .img {
     width:220px; height:100px;
-    background:rgb(240,240,240);
+    text-align:center;
+    color:#cccccc;
+    line-height:100px;
+    background:#e5e5e5;
     overflow:hidden;
 }
 div.per_waterfall .text { text-align:center;color:grey; }
@@ -98,7 +107,7 @@ div:hover.per_waterfall .text { color:red; }
     padding-left:10px;
     padding-bottom:10px;
     width:988px;height:100px;
-    border:1px solid /*lightblue*/lightgrey;
+    border:1px solid lightgrey;
     color:rgb(14,144,210);
     background:url(../../uploads/images/2016/ppt.png);
 }
@@ -122,7 +131,7 @@ div:hover.per_waterfall .text { color:red; }
 .per_left td a:hover { color:red; }
 .per_left .cometo { color:grey;font-weight:bold; }
 /*页面左边布局*/
-.per_left1,.per_left2,.per_left3 { width:196px; }
+.per_left1,.per_left2 { width:196px; }
 .per_left1 { height:210px; }
 .per_left1 .img {
     margin:10px auto;
@@ -139,22 +148,12 @@ div:hover.per_waterfall .text { color:red; }
     border:0;
     color:rgb(14,144,210);
 }
-.per_left2 { height:200px; }
-.per_left3 { height:206px; }
-.per_left3 .img {
-    margin:5px 0 0 6px;
-    width:55px; height:50px;
-    overflow:hidden;
-    float:left;
-    cursor:pointer;
-}
-.per_left3 .img:hover { border:1px solid red; }
+.per_left2 { height:300px; }
 /*页面中间布局*/
 .per_center { width:590px; }
 .per_center table { margin:5px; }
 .per_center td { padding:0 10px;color:grey;font-size:14px; }
-.per_center1,.per_center2,.per_center3 { width:576px; }
-/*.per_center1 { height:50px; }*/
+.per_center1,.per_center2 { width:576px; }
 .per_center2 { height:200px; }
 .per_center2 span:hover { color:red;cursor:pointer; }
 .per_center2 a:hover .img { border:1px solid red; }
@@ -168,30 +167,13 @@ div:hover.per_waterfall .text { color:red; }
 .per_center2 .video .img {
     margin:0 auto;margin-top:5px;
     width:100px;height:50px;
+    background:#e5e5e5;
     overflow:hidden;
 }
 .per_center2 .video .vname {
     padding:0;
     text-align:center;
     color:grey;
-}
-.per_center3 { height:186px; }
-.per_center3 .message {
-    margin:10px; margin-bottom:0;
-    width:550px;height:60px;
-    border:1px solid rgb(250,250,250);
-    border-bottom:1px dashed lightgrey;
-    color:grey;
-}
-.per_center3 .message p { padding:0 20px;float:right; }
-.per_center3 textarea {
-    width:550px;
-    border:0;
-    border-bottom:1px dotted rgb(250,250,250);
-    color:grey;
-    background:white;
-    resize:none;
-    overflow:hidden;
 }
 /*页面右侧布局*/
 .per_right { margin-left:5px;width:192px; }
@@ -213,6 +195,7 @@ div:hover.per_waterfall .text { color:red; }
     width:50px; height:50px;
     border:1px solid lightgrey;
     border-radius:3px;
+    background:#e5e5e5;
 }
 .per_right1 .img .imgHidden {
     margin:0;
@@ -231,6 +214,7 @@ div:hover.per_waterfall .text { color:red; }
 .per_right3 .img {
     margin:5px 0 0 8px;
     width:80px; height:100px;
+    background:#e5e5e5;
     overflow:hidden;
     float:left;
 }
@@ -334,32 +318,6 @@ div:hover.per_waterfall .text { color:red; }
     cursor:pointer;
 }
 .per_list td a:hover { border:1px solid red;color:red; }
-.per_list td .pic_list {
-    width:550px; height:325px;
-    border:1px solid lightgrey;
-    overflow:auto;
-    display:none;
-}
-.per_list td .pic_list div.img {
-    margin-left:5px; margin-top:5px;
-    width:100px; height:100px;
-    border:1px solid white;
-    overflow:hidden;
-    cursor:pointer;
-    float:left;
-}
-.per_list td .pic_list div:hover.img,.per_list td .pic_list div.img_curr {
-    border:1px solid red;
-}
-.per_list td .pic_list_sure {
-    display:none;
-    position:absolute;bottom:10px;left:150px;
-    clear:both;
-}
-.per_list td .pic_list .bianhao {
-    font-size:12px;
-    position:relative;top:-100%;left:40%;
-}
 .per_list .message {
     margin:20px 10px;
     width:720px;height:65px;
@@ -437,27 +395,6 @@ div:hover.per_waterfall .text { color:red; }
 .list #change_bg {
     padding:5px 10px;
     color:red;
-    border:1px solid red;
-    cursor:pointer;
-}
-.pic_list {
-    width:660px; height:300px;
-    border:1px solid lightgrey;
-    background:white;
-    position:absolute; top:370px;
-    overflow:auto;
-    float:left;
-    display:none;
-}
-.pic_list .img {
-    margin-top:5px; margin-left:5px;
-    width:100px; height:50px;
-    border:1px solid gainsboro;
-    background:whitesmoke;
-    overflow:hidden;
-    float:left;
-}
-.pic_list div:hover.img {
     border:1px solid red;
     cursor:pointer;
 }
@@ -546,6 +483,7 @@ a { cursor:pointer; }
 }
 .per_right_head .img {
     width:120px; height:100px;
+    background:#e5e5e5;
     overflow:hidden;
 }
 .per_right_head .title {
@@ -609,41 +547,14 @@ button:hover.companybtn {
     border:1px solid red;
     color:red;
 }
-
-
-/*=== 弹窗 ===*/
-/*.tankuang {*/
-/*}*/
-/*.tankuang .mask {*/
-    /*width:100%;*/
-    /*height:100%;*/
-    /*background:black;*/
-    /*filter:alpha(opacity:30); opacity:0.3;  -moz-opacity:0.3; -khtml-opacity:0.3;*/
-    /*position:fixed; left:0; top:0; z-index:100;*/
-/*}*/
-/*.tankuang .con {*/
-    /*width:500px;*/
-    /*!*height:200px;*!*/
-    /*color:grey;*/
-    /*background:white;*/
-    /*position:fixed; left:30%; top:30%; z-index:100;*/
-/*}*/
-/*.tankuang input,.tankuang textarea {*/
-    /*padding:5px;*/
-    /*width:400px;*/
-    /*border:1px solid lightgrey;*/
-/*}*/
-/*.tankuang .con p {*/
-    /*padding:0 40px;*/
-/*}*/
-/*.tankuang .con p.tk_intro {*/
-    /*padding:5px 10px;*/
-    /*text-align:center;*/
-/*}*/
-/*.tankuang .con a {*/
-    /*padding:5px 10px;*/
-    /*color:red;*/
-    /*background:grey;*/
-    /*cursor:pointer;*/
-    /*position:absolute; left:500px; top:0;*/
-/*}*/
+#sethead input {
+    padding:5px 20px;
+    border:1px solid #cccccc;
+    color:#808080;
+    background:none;
+    cursor:pointer;
+}
+#sethead input[type="submit"]:hover {
+    border:1px solid #ff4466;
+    color:#ff4466;
+}

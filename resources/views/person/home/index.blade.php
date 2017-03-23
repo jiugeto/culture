@@ -10,44 +10,19 @@
             {{--s代表检索--}}
             片源类型:
             <select name="from">
-                <option value="1" {{ $from==1 ? 'selected' : '' }}>在线创作</option>
-                <option value="2" {{ $from==2 ? 'selected' : '' }}>会员作品</option>
+                <option value="1" {{$from==1?'selected':''}}>在线创作</option>
+                <option value="2" {{$from==2?'selected':''}}>会员作品</option>
             </select>
-            <a href="{{DOMAIN}}person/s/{{$from}}/0" class="{{ $type==0 ? 'curr' : '' }}">所有</a>
-            @if($from==1)
-                @foreach($goodsModel['types'] as $ktype=>$vtype)
-                    @if(in_array($ktype,[2,4]))
-                    <a href="{{DOMAIN}}person/s/{{$from}}/{{$ktype}}" class="{{ $type==$ktype ? 'curr' : '' }}">{{ mb_substr($vtype,0,mb_strlen($vtype)-2,'utf-8') }}</a>
-                    @endif
-                @endforeach
-            @elseif($from==2)
-                @foreach($productModel['genres'] as $kgenre=>$vgenre)
-                    <a href="{{DOMAIN}}person/s/{{$from}}/{{ $kgenre }}" class="{{ $type==$kgenre ? 'curr' : '' }}">{{ mb_substr($vgenre,0,mb_strlen($vgenre)-2,'utf-8') }}</a>
-                @endforeach
-            @endif
-            <script>
-                $("select[name='from']").change(function(){
-                    if ($(this).val()==1) {
-                        window.location.href = '{{DOMAIN}}person';
-                    } else if ($(this).val()==2) {
-                        window.location.href = '{{DOMAIN}}person/s/2/0';
-                    }
-                });
-            </script>
 
             <span class="right">
-                @if($user['headImg'])
-                <div style="width:40px;height:40px;overflow:hidden;float:left;position:relative;top:-12px;">
-                    <img src="{{ $user['headImg']}}" style="
-                        @if($size=$model->getImgSize($user['head'],$w=40,$h=40))
-                            width:{{$size['w']}}px;height:{{$size['h']}}px;
-                        @endif
-                        ">
+                @if($user['head'])
+                <div class="userhead">
+                    <img src="{{$user['head']}}" width="20">
                 </div>
                 @else
-                <img src="{{DOMAIN}}assets/images/person.png">
+                <img src="{{PUB}}assets/images/person.png">
                 @endif
-                {{ \Session::has('user') ? \Session::get('user.username') : '' }}
+                {{Session::has('user')?Session::get('user.username'):''}}
                 <a href="{{DOMAIN}}person/space" class="userinfo">个人空间</a>
             </span>
         </div>
@@ -57,26 +32,14 @@
         <div class="per_work">
             @if(count($datas))
                 @foreach($datas as $data)
-            <a href="{{DOMAIN}}person/@if($from==1){{'goods'}}@else{{'product'}}@endif/{{ $data->id }}">
+            <a href="{{DOMAIN}}person/@if($from==1){{'goods'}}@else{{'product'}}@endif/{{$data['id']}}">
                 <div class="per_waterfall">
                     <div class="img">
-                    @if($data->pic())
-                        <img src="{{ $data->getPicUrl() }}" style="
-                        @if($from==1)
-                            @if($size=$data->getPicSize($w=148,$h=100))
-                                width:{{$size['w']}}px;height:{{$size['h']}}px;
-                            @endif
-                        @elseif($from==2)
-                            @if($size=$data->getUserPicSize($data->pic(),$w=148,$h=100))
-                                width:{{$size['w']}}px;height:{{$size['h']}}px;
-                            @endif
-                        @endif
-                        ">
-                    @else
-                        <div style="width:220px;height:120px;background:rgb(240,240,240);"></div>
+                    @if($data['thumb'])
+                        <img src="{{$data['thumb']}}">
                     @endif
                     </div>
-                    <p class="text">{{ $data->name }}</p>
+                    <p class="text">{{$data['name']}}</p>
                 </div>
             </a>
                 @endforeach
@@ -84,11 +47,8 @@
             @if(count($datas)<16)
                 @for($i=0;$i<16-count($datas);++$i)
             <a href="">
-                <div class="per_waterfall" {{--onclick="window.location.href='';"--}}>
-                    <div class="img">
-                        {{--<img src="{{DOMAIN}}uploads/images/2016/online1.png">--}}
-                        <div style="width:220px;height:120px;color:lightgrey;text-align:center;line-height:100px;background:rgb(240,240,240);">无</div>
-                    </div>
+                <div class="per_waterfall">
+                    <div class="img">无</div>
                     <p class="text">暂无</p>
                 </div>
             </a>
@@ -99,6 +59,6 @@
 
     {{--分页--}}
     <div style="margin:0 auto;margin-top:20px;width:1000px;">
-        @include('person.common.page')
+        @include('person.common.page2')
     </div>
 @stop

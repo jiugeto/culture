@@ -2,7 +2,7 @@
 @section('content')
     @include('member.common.crumb')
 
-    <form data-am-validator method="POST" action="{{DOMAIN}}member/{{ $lists['func']['url'] }}" enctype="multipart/form-data">
+    <form data-am-validator method="POST" action="{{DOMAIN}}member/design" enctype="multipart/form-data">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <h3 class="center">{{$lists['func']['name']}} 添加页</h3>
         <table class="table_create">
@@ -12,19 +12,11 @@
             </tr>
 
             <tr>
-                <td class="field_name"><label>供求：</label></td>
-                <td>
-                    <label><input type="radio" name="genre" value="1" checked/> 供应&nbsp;&nbsp;</label>
-                    <label><input type="radio" name="genre" value="2"/> 需求&nbsp;&nbsp;</label>
-                </td>
-            </tr>
-
-            <tr>
                 <td class="field_name"><label>设计类型：</label></td>
                 <td>
                     <select name="cate" required>
                     @foreach($model['cates'] as $k=>$vcate)
-                        <option value="{{ $k }}">{{ $vcate }}</option>
+                        <option value="{{$k}}">{{$vcate}}</option>
                     @endforeach
                     </select>
                 </td>

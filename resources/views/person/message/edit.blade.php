@@ -1,7 +1,7 @@
 @extends('person.main')
 @section('content')
     <div class="per_body" style="border:0;height:700px;background:0;">
-        @include('person.partials.top')
+        @include('person.common.top')
         <div class="per_list">
             <p class="title">修改消息</p>
             <form method="POST" action="{{DOMAIN}}person/message/{{ $data->id }}" enctype="multipart/form-data" class="list">

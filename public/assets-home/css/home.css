@@ -227,6 +227,15 @@ div:hover.search_sel .sel_more { display:block; }
     width:100%;height:110px;
     clear:both;
 }
+/*会员后台详情页面*/
+.textarea_show {
+    width:200px;
+    border:1px solid ghostwhite;
+    background:0;
+    overflow:auto;
+    outline:none;
+    resize:none;
+}
 /*=======body 内容主题========*/
 
 

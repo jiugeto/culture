@@ -1,14 +1,13 @@
 <?php
 namespace App\Http\Controllers\Person;
 
+use App\Api\ApiBusiness\ApiMessage;
 use App\Api\ApiUser\ApiLog;
 use App\Api\ApiUser\ApiPerson;
 use App\Api\ApiUser\ApiSign;
 use App\Api\ApiUser\ApiUsers;
-use App\Models\Base\PicModel;
-use App\Models\Base\MessageModel;
-use App\Models\BaseModel;
 use Illuminate\Http\Request;
+use Session;
 use Hash;
 
 class UserController extends BaseController
@@ -18,27 +17,24 @@ class UserController extends BaseController
      */
 
     protected $curr = 'user';
-    protected $picModel;
 
     public function __construct()
     {
         parent::__construct();
-        $this->picModel = new BaseModel();
     }
 
     public function index()
     {
+        $apiMsg = ApiMessage::index(10,1,0,0,2,0);
         $result = [
-            'user'=> $this->user,
-            'frields'=> $this->frields(),
-            'messages'=> $this->messages(),
-//            'talks'=> $this->talks(),
-            'signs'=> $this->signs(),
-            'userRegistLog'=> $this->firstLog(),
-            'userLastLog'=> $this->lastLog(),
-            'model'=> $this->picModel,
-            'links'=> $this->links,
-            'curr'=> $this->curr,
+            'user' => $this->user,
+            'frields' => $this->frields(),
+            'signs' => $this->signs(),
+            'userRegistLog' => $this->firstLog(),
+            'userLastLog' => $this->lastLog(),
+            'messageNum' => $apiMsg['code']==0 ? $apiMsg['pagelist']['total'] : 0,
+            'links' => $this->links,
+            'curr' => $this->curr,
         ];
         return view('person.user.index', $result);
     }
@@ -46,20 +42,27 @@ class UserController extends BaseController
     public function getHead()
     {
         $result = [
-            'user'=> $this->user,
-            'pics'=> PicModel::where('uid',$this->userid)->get(),
-            'links'=> $this->links,
-            'curr'=> $this->curr,
+            'user' => $this->user,
+            'links' => $this->links,
+            'curr' => $this->curr,
         ];
         return view('person.user.edithead', $result);
     }
 
-    public function setHead($picid)
+    public function setHead(Request $request)
     {
-//        UserModel::where('id',$this->userid)->update(array('head'=> $picid));
-        $rst = ApiUsers::setHead($this->userid,$picid);
-        if ($rst['code']!=0) {
-            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        if (!isset($request->head)) {
+            echo "<script>alert('未上传图片！');history.go(-1);</script>";exit;
+        }
+        $oldThumbArr = array();
+        $apiUser = ApiUsers::getOneUser(Session::get('user.uid'));
+        if ($apiUser['code']==0 && $apiUser['data']['head']) {
+            $oldThumbArr[] = $apiUser['data']['head'];
+        }
+        $thumb = $this->uploadOnlyImg($request,'head',$oldThumbArr);
+        $apiUser2 = ApiUsers::setHead($this->userid,$thumb);
+        if ($apiUser2['code']!=0) {
+            echo "<script>alert('".$apiUser2['msg']."');history.go(-1);</script>";exit;
         }
         return redirect(DOMAIN.'person/user');
     }
@@ -67,10 +70,9 @@ class UserController extends BaseController
     public function edit()
     {
         $result = [
-            'user'=> $this->user,
-            'model'=> $this->picModel,
-            'links'=> $this->links,
-            'curr'=> $this->curr,
+            'user' => $this->user,
+            'links' => $this->links,
+            'curr' => $this->curr,
         ];
         return view('person.user.edit', $result);
     }
@@ -78,7 +80,6 @@ class UserController extends BaseController
     public function update(Request $request,$id)
     {
         $data = $this->getData($request);
-//        UserModel::where('id',$id)->update($data);
         $data['id'] = $id;
         $rst = ApiUsers::modify($data);
         if ($rst['code']!=0) {
@@ -90,10 +91,9 @@ class UserController extends BaseController
     public function getPwd()
     {
         $result = [
-            'user'=> $this->user,
-            'model'=> $this->picModel,
-            'links'=> $this->links,
-            'curr'=> $this->curr,
+            'user' => $this->user,
+            'links' => $this->links,
+            'curr' => $this->curr,
         ];
         return view('person.user.editpwd', $result);
     }
@@ -115,20 +115,17 @@ class UserController extends BaseController
         if (!(Hash::check($request->oldpwd,$rstUser['data']['password']))) {
             echo "<script>alert('老密码错误！');history.go(-1);</script>";exit;
         }
-//        $data = array('password'=> Hash::make($request->newpwd), 'pwd'=>$request->newpwd);
-//        UserModel::where('id',$id)->update($data);
         $data = [
-            'id'        =>  $id,
+            'id'    =>  $id,
             'newpwdhash'    =>  Hash::make($request->newpwd),
-            'newpwd'    =>  $request->newpwd,
+            'newpwd'        =>  $request->newpwd,
         ];
         $rst = ApiUsers::modifyPwd($data);
         if ($rst['code']!=0) {
             echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
         }
-//        return redirect(DOMAIN.'person/user');
         //去除session
-        \Session::forget('user');
+        Session::forget('user');
         return redirect(DOMAIN.'login');
     }
 
@@ -143,14 +140,14 @@ class UserController extends BaseController
             echo "<script>alert('用户名要求2-20个字符！');history.go(-1);</script>";exit;
         }
         return array(
-            'username'=> $request->username,
-            'email'=> $request->email,
-            'qq'=> $request->qq,
-            'tel'=> $request->tel,
-            'mobile'=> $request->mobile,
-            'area'=> $request->area,
-            'address'=> $request->address,
-            'isuser'=> 0,
+            'username' => $request->username,
+            'email' => $request->email,
+            'qq' => $request->qq,
+            'tel' => $request->tel,
+            'mobile' => $request->mobile,
+            'area' => $request->area,
+            'address' => $request->address,
+//            'isuser' => 0,
         );
     }
 
@@ -159,36 +156,8 @@ class UserController extends BaseController
      */
     public function frields()
     {
-//        return UserFrieldModel::where('del',0)
-//            ->where(function($query){
-//                $query->where('uid',$this->userid)
-//                    ->where('frield_id',$this->userid);
-//            })
-//            ->where('isauth',2)
-//            ->get();
         $rst = ApiPerson::getUserFrields($this->userid,$this->limit);
         return $rst['code']==0 ? $rst['data'] : [];
-    }
-
-    /**
-     * 留言数量
-     */
-    public function messages()
-    {
-        return MessageModel::where('del',0)
-            ->where('accept',$this->userid)
-            ->where('status','>',2)
-            ->get();
-    }
-
-    /**
-     * 话题数量
-     */
-    public function talks()
-    {
-        return TalksModel::where('del',0)
-            ->where('uid',$this->userid)
-            ->get();
     }
 
     /**

@@ -2,7 +2,13 @@
 @section('content')
     @include('member.common.crumb')
     <div class="mem_tab">
-        @include('member.common.lists')
+        {{--@include('member.common.lists')--}}
+        <ul>
+            <a href=""><li>&nbsp;</li></a>
+        </ul>
+        <div class="mem_create">
+            <a href="{{DOMAIN}}member/{{$lists['func']['url']}}/create">{{$lists['create']['name']}}</a>
+        </div>
     </div>
     <div class="hr_tab"></div>
     <!-- 空白 -->
@@ -24,14 +30,8 @@
                 <td>{{ $data['sexName'] }}</td>
                 <td>{{ $data['createTime'] }}</td>
                 <td>
-                {{--@if($curr=='')--}}
                     <a href="{{DOMAIN}}member/actor/{{ $data['id'] }}" class="list_btn">查看</a>
                     <a href="{{DOMAIN}}member/actor/{{ $data['id'] }}/edit" class="list_btn">编辑</a>
-                    {{--<a href="{{DOMAIN}}member/actor/{{ $data['id'] }}/destroy" class="list_btn">删除</a>--}}
-                {{--@else--}}
-                    {{--<a href="{{DOMAIN}}member/actor/{{ $data['id'] }}/restore" class="list_btn">还原</a>--}}
-                    {{--<a href="{{DOMAIN}}member/actor/{{ $data['id'] }}/forceDelete" class="list_btn">销毁</a>--}}
-                {{--@endif--}}
                 </td>
             </tr>
             @endforeach

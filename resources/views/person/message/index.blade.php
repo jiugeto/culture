@@ -1,7 +1,7 @@
 @extends('person.main')
 @section('content')
     <div class="per_body" style="border:0;height:700px;background:0;">
-        @include('person.partials.top')
+        @include('person.common.top')
         <div class="per_list">
             <p class="title">消息列表
                 @if($m==1) @elseif($m==2)/ 发件箱 @elseif($m==3)/ 草稿箱 @elseif($m==4)/ 回收站 @endif

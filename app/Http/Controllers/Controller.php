@@ -5,6 +5,8 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
+use Illuminate\Http\Request;
+
 abstract class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
@@ -92,17 +94,15 @@ abstract class Controller extends BaseController
     }
 
     /**
-     * 图片上传
+     * 上传方法，并处理文件
      */
-    public function uploadOnlyImg($file,$path='')
+    public function upload($file)
     {
-        //假如有，干掉老图片
-        if ($path && file_exists($path)) { unlink($path); }
-        //上传图片
         if($file->isValid()){
             $allowed_extensions = $this->suffix_img;
-            if ($file->getClientOriginalExtension() && !in_array($file->getClientOriginalExtension(), $allowed_extensions)) {
-                return array('code'=>-2, 'msg'=>'你的图片格式不对！');
+            if ($file->getClientOriginalExtension() &&
+                !in_array($file->getClientOriginalExtension(), $allowed_extensions)) {
+                echo "<script>alert('你的图片格式不对！');history.go(-1);</script>";exit;
             }
             $extension       = $file->getClientOriginalExtension() ?: 'png';
             $folderName      = '/uploads/images/'.date('Y-m-d', time()).'/';
@@ -110,8 +110,31 @@ abstract class Controller extends BaseController
             $safeName        = uniqid().'.'.$extension;
             $file->move($destinationPath, $safeName);
             $filePath = rtrim(DOMAIN,'/').$folderName.$safeName;
-            return array('code'=>0, 'data'=>$filePath);
+            return $filePath;
+        } else {
+            return "没有图片！";
         }
-        return array('code'=>-1, 'msg'=>'图片上传错误！');
+    }
+
+    /**
+     * 只上传图片，返回图片地址
+     */
+    public function uploadOnlyImg(Request $request,$imgName='url_ori',$oldImgArr=[])
+    {
+        if($request->hasFile($imgName)){        //判断图片存在
+            //去除老图片
+            if ($oldImgArr) {
+                foreach ($oldImgArr as $oldImg) { unlink($oldImg); }
+            }
+            foreach ($_FILES as $img) {
+                if ($img['size'] > $this->uploadSizeLimit) {
+                    echo "<script>alert('上传的图片不能大于1M，请重新选择！');history.go(-1);</script>";exit;
+                }
+            }
+            $file = $request->file($imgName);           //获取图片
+            return $this->upload($file);
+        } else {
+            return '';
+        }
     }
 }

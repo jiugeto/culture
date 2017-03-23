@@ -2,7 +2,7 @@
 @section('content')
     @include('member.common.crumb')
 
-    <form data-am-validator method="POST" action="{{DOMAIN}}member/design/{{ $data['id'] }}" enctype="multipart/form-data">
+    <form data-am-validator method="POST" action="{{DOMAIN}}member/design/{{$data['id']}}" enctype="multipart/form-data">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="method" value="POST">
         <h3 class="center">{{$lists['func']['name']}} 修改页</h3>
@@ -13,21 +13,11 @@
             </tr>
 
             <tr>
-                <td class="field_name"><label>供求：</label></td>
-                <td>
-                    <label><input type="radio" name="genre" value="1"
-                                {{ $data['genre']==1 ? 'checked' : '' }}/> 供应&nbsp;&nbsp;</label>
-                    <label><input type="radio" name="genre" value="2"
-                                {{ $data['genre']==2 ? 'checked' : '' }}/> 需求&nbsp;&nbsp;</label>
-                </td>
-            </tr>
-
-            <tr>
                 <td class="field_name"><label>设计类型：</label></td>
                 <td>
                     <select name="cate" required>
                     @foreach($model['cates'] as $k=>$vcate)
-                        <option value="{{ $k }}" {{ $data['cate']==$k ? 'selected' : '' }}>{{ $vcate }}</option>
+                        <option value="{{$k}}" {{$data['cate']==$k?'selected':''}}>{{ $vcate }}</option>
                     @endforeach
                     </select>
                 </td>

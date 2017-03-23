@@ -78,6 +78,7 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
     Route::resource('idea','IdeaController');
     //设计管理
     Route::post('design/{id}','DesignController@update');
+    Route::get('design/s/{cate}','DesignController@index');
     Route::resource('design','DesignController');
     //消息管理
     Route::get('message/s/{list}','MessageController@index');

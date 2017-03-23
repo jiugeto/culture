@@ -1,7 +1,7 @@
 @extends('person.main')
 @section('content')
     <div class="per_body" style="border:0;height:1000px;background:0;">
-        @include('person.partials.top')
+        @include('person.common.top')
         <div class="per_list">
             <p class="title">相册列表</p>
             <div class="list l_pic">

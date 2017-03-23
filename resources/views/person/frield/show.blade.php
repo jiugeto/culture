@@ -1,7 +1,7 @@
 @extends('person.main')
 @section('content')
     <div class="per_body" style="border:0;height:700px;background:0;">
-        @include('person.partials.top')
+        @include('person.common.top')
         <div class="per_list">
             <p class="title">@if($m==0)我的好友@elseif($m==1)新的申请@elseif($m==2)寻找好友@endif</p>
             <div class="list" style="width:748px;">

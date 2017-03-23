@@ -27,10 +27,15 @@ class OrderController extends BaseController
         $curr['url'] = $this->lists['']['url'];
         $pageCurr = isset($_GET['page'])?$_GET['page']:1;
         $prefix_url = DOMAIN.'member/order';
-        $datas = $this->query($pageCurr);
-        $pagelist = $this->getPageList($datas,$prefix_url,$this->limit,$pageCurr);
+        $apiOrder = ApiOrder::index($this->limit,$pageCurr,2,0);
+        if ($apiOrder['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiOrder['data']; $total = $apiOrder['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas' => $this->query($pageCurr),
+            'datas' => $datas,
             'prefix_url' => $prefix_url,
             'pagelist' => $pagelist,
             'lists'=> $this->lists,
@@ -240,10 +245,4 @@ class OrderController extends BaseController
 //        }
 //        return redirect(DOMAIN.'member/order/'.$id);
 //    }
-
-    public function query($pageCurr)
-    {
-        $apiOrder = ApiOrder::index($this->limit,$pageCurr,2,0);
-        return $apiOrder['code']==0 ? $apiOrder['data'] : [];
-    }
 }

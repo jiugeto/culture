@@ -1,16 +1,13 @@
 <?php
 namespace App\Http\Controllers\Person;
 
+use App\Api\ApiBusiness\ApiDesign;
+use App\Api\ApiBusiness\ApiGoods;
+use App\Api\ApiOnline\ApiProduct;
+use App\Api\ApiTalk\ApiTalk;
 use App\Api\ApiUser\ApiPerson;
-use App\Api\ApiUser\ApiUsers;
-use App\Models\BaseModel;
-use App\Models\DesignModel;
-use App\Models\GoodsModel;
-use App\Models\Base\MessageModel;
-use App\Models\Base\OrderModel;
-use App\Models\Online\OrderProductModel;
-use App\Models\Base\PicModel;
-use App\Models\Online\ProductModel;
+use App\Api\ApiUser\ApiSign;
+use App\Api\ApiUser\ApiWallet;
 
 class SpaceController extends BaseController
 {
@@ -25,22 +22,28 @@ class SpaceController extends BaseController
         parent::__construct();
     }
 
-    public function index($g_type=0,$p_type=1,$d_type=1)
+    public function index()
     {
+        $apiGoods = ApiGoods::index(10,1,$this->userid,0,0,0,2);
+        $apiProduct = ApiProduct::getProductsList(10,1,$this->userid,0,2);
+        $apiDesign = ApiDesign::index(4,1,$this->userid,0,0,2,0);
+        $apiWallet = ApiWallet::getWalletByUid($this->userid);
+        $apiIntegral = ApiTalk::getIntegralList($this->userid);
         $result = [
-            'links'=> $this->links,
-            'user'=> $this->user,
-            'pics'=> $this->pics(),
-            'goods'=> $this->goods($g_type),
-            'products'=> $this->products($p_type),
-            'messages'=> $this->messages(),
-            'designs'=> $this->designs($d_type),
-            'frields'=> $this->getFrields(4),
-            'model'=> new BaseModel(),
-            'g_type'=> $g_type,
-            'p_type'=> $p_type,
-            'd_type'=> $d_type,
-            'curr'=> $this->curr,
+            'links'     =>  $this->links,
+            'user'      =>  $this->user,
+            'frields'   =>  $this->getFrields(4),
+            'goods'     =>  $apiGoods['code']==0 ? $apiGoods['data'] : [],
+            'goodsNum'  =>  $apiGoods['code']==0 ? $apiGoods['pagelist']['total'] : 0,
+            'products'  =>  $apiProduct['code']==0 ? $apiProduct['data'] : [],
+            'productNum'    =>  $apiProduct['code']==0 ? $apiProduct['pagelist']['total'] : 0,
+            'designs'   =>  $apiDesign['code']==0 ? $apiDesign['data'] : [],
+            'designNum' =>  $apiDesign['code']==0 ? $apiDesign['pagelist']['total'] : 0,
+            'signNum'   =>  $apiWallet['code']==0 ? $apiWallet['data']['sign'] : 0,
+            'goldNum'   =>  $apiWallet['code']==0 ? $apiWallet['data']['gold'] : 0,
+            'tipNum'    =>  $apiWallet['code']==0 ? $apiWallet['data']['tip'] : 0,
+            'integralNum'   =>  $apiIntegral['code']==0 ? $apiIntegral['data']['integral'] : 0,
+            'curr'      =>  $this->curr,
         ];
         return view('person.space.index', $result);
     }
@@ -50,112 +53,10 @@ class SpaceController extends BaseController
 
 
 
-    public function pics()
-    {
-        $uid = $this->userid ? $this->userid : 0;
-        $picModels = PicModel::where('uid',$uid)->paginate(9);
-        return $picModels ? $picModels : [];
-    }
 
-    /**
-     * 发布的作品
-     */
-    public function goods($g_type)
-    {
-        if ($g_type) {
-            $datas = GoodsModel::where('del',0)
-                ->where('genre',1)          //产品系列
-                ->where('type',$g_type)
-                ->where('isshow',1)
-                ->where('isshow2',1)
-                ->orderBy('sort','desc')
-                ->orderBy('id','desc')
-                ->paginate(10);
-        } else {
-            $datas = GoodsModel::where('del',0)
-                ->where('genre',1)          //产品系列
-                ->whereIn('type',[2,4])     //供应
-                ->where('isshow',1)
-                ->where('isshow2',1)
-                ->orderBy('sort','desc')
-                ->orderBy('id','desc')
-                ->paginate(10);
-        }
-        return $datas;
-    }
 
-    /**
-     * 在线创作的作品
-     */
-    public function products($p_type=1)
-    {
-        if ($p_type==1) {
-            $buyerIds = array();
-            $buyers = OrderProductModel::where('uid',$this->userid)
-                ->where('isshow',1)
-                ->get();
-            if (count($buyers)) {
-                foreach ($buyers as $buyer) {
-                    $buyerIds[] = $buyer->id;
-                }
-            }
-            $datas = ProductModel::whereIn('uid',$buyerIds)
-                ->where('isshow',1)
-                ->orderBy('sort','desc')
-                ->orderBy('id','desc')
-                ->paginate(10);
-        } else if ($p_type==2) {
-            $datas = ProductModel::where('uid',$this->userid)
-                ->where('isshow',1)
-                ->orderBy('sort','desc')
-                ->orderBy('id','desc')
-                ->paginate(10);
-        }
-        return $datas;
-    }
 
-    /**
-     * 留言板，消息
-     */
-    public function messages()
-    {
-        return MessageModel::where('del',0)
-            ->where('accept',$this->userid)
-            ->orderBy('id','desc')
-            ->paginate(2);
-    }
 
-    /**
-     * 设计
-     */
-    public function designs($d_type=1)
-    {
-        if ($d_type==1) {
-            $buyerIds = array();
-            $buyers = OrderModel::where('del',0)
-                ->whereIn('genre',[1,2])
-                ->where('buyer',$this->userid)
-                ->where('isshow',1)
-                ->get();
-            if (count($buyers)) {
-                foreach ($buyers as $buyer) {
-                    $buyerIds[] = $buyer->id;
-                }
-            }
-            $datas = DesignModel::where('del',0)
-                ->whereIn('uid',$buyerIds)
-                ->orderBy('sort','desc')
-                ->orderBy('id','desc')
-                ->paginate(4);
-        } else if ($d_type==2) {
-            $datas = DesignModel::where('del',0)
-                ->where('uid',$this->userid)
-                ->orderBy('sort','desc')
-                ->orderBy('id','desc')
-                ->paginate(4);
-        }
-        return $datas;
-    }
 
     /**
      * 显示4个好友

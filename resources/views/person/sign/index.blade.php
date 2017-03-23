@@ -1,7 +1,7 @@
 @extends('person.main')
 @section('content')
     <div class="per_body" style="border:0;height:1100px;background:0;">
-        @include('person.partials.top')
+        @include('person.common.top')
         <div class="per_list">
             <p class="title">每日签到</p>
             <div class="list" style="width:748px;">

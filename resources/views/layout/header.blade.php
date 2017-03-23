@@ -7,8 +7,7 @@
         {{--<div class="head_left">欢迎来逛逛</div>--}}
         <div class="head_left">
             @if(Session::has('user.username'))
-                <a href="{{DOMAIN}}member">{{ Session::get('user.username') }}</a>
-                <a href="{{DOMAIN}}member" target="_blank">会员中心</a>
+                <a href="{{DOMAIN}}member">会员：{{ Session::get('user.username') }}</a> &nbsp;
                 <a href="{{DOMAIN}}login/dologout">退出</a>
             @else
                 <a href="{{DOMAIN}}regist">免费注册</a>

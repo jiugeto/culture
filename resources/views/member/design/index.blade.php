@@ -1,18 +1,15 @@
 @extends('member.main')
 @section('content')
     @include('member.common.crumb')
-    <div class="p_style">供求类型：
-        @if(in_array($lists['func']['url'],['designPerS','designPerD']))
-        <a href="{{DOMAIN}}member/designPerS" style="color:{{$lists['func']['url']=='designPerS'?'red':'grey'}};"><b>设计供应</b></a>&nbsp;
-        <a href="{{DOMAIN}}member/designPerD" style="color:{{$lists['func']['url']=='designPerD'?'red':'grey'}};"><b>设计需求</b></a>
-        @elseif(in_array($lists['func']['url'],['designComS','designComD']))
-        <a href="{{DOMAIN}}member/designPerS" style="color:{{$lists['func']['url']=='designComS'?'red':'grey'}};"><b>设计供应</b></a>&nbsp;
-        <a href="{{DOMAIN}}member/designPerD" style="color:{{$lists['func']['url']=='designComD'?'red':'grey'}};"><b>设计需求</b></a>
-        @endif
-    </div>
     <div class="hr_tab"></div>
-
-    <div class="mem_tab">@include('member.common.lists')</div>
+    <div class="mem_tab">
+        <ul>
+            <a href=""><li>&nbsp;</li></a>
+        </ul>
+        <div class="mem_create">
+            <a href="{{DOMAIN}}member/{{$lists['func']['url']}}/create">{{$lists['create']['name']}}</a>
+        </div>
+    </div>
     <div class="hr_tab"></div>
 
     <!-- 空白 -->
@@ -22,25 +19,20 @@
             <tr>
                 <td>编号</td>
                 <td>设计名称</td>
-                <td>供求</td>
                 <td>价格</td>
-                <td>发布人</td>
                 <td>创建时间</td>
                 <td>操作</td>
             </tr>
         @if(count($datas))
             @foreach($datas as $data)
             <tr>
-                <td>{{ $data['id'] }}</td>
-                <td>{{ $data['name'] }}</td>
-                <td>{{ $data['genreName'] }}</td>
-                <td>{{ $data['money'] }}</td>
-                <td>{{ UserNameById($data['uid']) }}</td>
-                <td>{{ $data['createTime'] }}</td>
+                <td>{{$data['id']}}</td>
+                <td>{{$data['name']}}</td>
+                <td>{{$data['money'] }}</td>
+                <td>{{$data['createTime']}}</td>
                 <td>
-                    <a href="{{DOMAIN}}member/design/{{ $data['id'] }}" class="list_btn">查看</a>
-                    <a href="{{DOMAIN}}member/design/{{ $data['id'] }}/edit" class="list_btn">编辑</a>
-                    {{--<a href="{{DOMAIN}}member/designPerS/{{ $data->id }}/destroy" class="list_btn">删除</a>--}}
+                    <a href="{{DOMAIN}}member/design/{{$data['id']}}" class="list_btn">查看</a>
+                    <a href="{{DOMAIN}}member/design/{{$data['id']}}/edit" class="list_btn">编辑</a>
                 </td>
             </tr>
             @endforeach

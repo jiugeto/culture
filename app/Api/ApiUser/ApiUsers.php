@@ -203,48 +203,8 @@ class ApiUsers
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
         $curl->post($apiUrl, array(
             'uid'   =>  $uid,
-            'pic_id'  =>  $head,
+            'head'  =>  $head,
         ));
-        $response = json_decode($curl->response);
-        if ($response->error->code != 0) {
-            return array('code' => -1, 'msg' => $response->error->msg);
-        }
-        return array('code' => 0, 'msg' => $response->error->msg);
-    }
-
-    /**
-     * ====================
-     * 下面是用户参数方法
-     * ====================
-     */
-
-    /**
-     * 获取用户自定义参数
-     */
-    public static function getParamByUid($uid)
-    {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/user/userparam';
-        $curl = new Curl();
-        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
-        $curl->post($apiUrl, array(
-            'uid'   =>  $uid,
-        ));
-        $response = json_decode($curl->response);
-        if ($response->error->code != 0) {
-            return array('code' => -1, 'msg' => $response->error->msg);
-        }
-        return array('code' => 0, 'data' => ApiBase::objToArr($response->data));
-    }
-
-    /**
-     * 设置个人后台顶部背景图
-     */
-    public static function setPersonTopBg($data)
-    {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/userparam/persontopbg';
-        $curl = new Curl();
-        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
-        $curl->post($apiUrl, $data);
         $response = json_decode($curl->response);
         if ($response->error->code != 0) {
             return array('code' => -1, 'msg' => $response->error->msg);

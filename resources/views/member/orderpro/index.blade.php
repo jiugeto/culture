@@ -8,7 +8,6 @@
         <table class="list_tab">
             <tr>
                 <td>订单名称</td>
-                <td>类型</td>
                 <td>总价格(元)</td>
                 <td>福利(元)</td>
                 <td>需支付(元)</td>
@@ -20,21 +19,16 @@
             @foreach($datas as $data)
             <tr>
                 <td>{{$data['pname']}}</td>
-                <td>{{$data['cateName']}}</td>
                 <td>{{$data['money']}}</td>
                 <td>{{$data['weal']}}</td>
                 <td>{{$data['money1']}}</td>
                 <td>{{$data['statusName']}}</td>
                 <td>{{$data['createTime']}}</td>
                 <td>
-                    <a href="{{DOMAIN}}member/orderpro/{{ $data['id'] }}" class="list_btn">查看</a>
-                    @if($data->status<=2)
-                    <a href="{{DOMAIN}}member/orderpro/{{ $data->id }}/destroy" class="list_btn">删除</a>
-                    @endif
-                    @if(in_array($data->status,[2,3]))
-                        <div style="height:10px;"></div>
-                        <a onclick="getPayCode({{$data->id}})" class="list_btn">支付码</a>
-                    @elseif($data->status==5)
+                    <a href="{{DOMAIN}}member/orderpro/{{$data['id']}}" class="list_btn">查看</a>
+                    @if(in_array($data['status'],[2,3]))
+                        <a onclick="getPayCode({{$data['id']}})" class="list_btn">支付码</a>
+                    @elseif($data['status']==5)
                         <a onclick="getComment({{$data->id}})" class="list_btn">去评价</a>
                     @endif
                 </td>
@@ -43,7 +37,7 @@
         @else <tr><td colspan="10" style="text-align:center;">没有记录</td></tr>
         @endif
         </table>
-        {{--<p>注意：总价格 = 渲染价格 + 修改价格，下单-》定价-》付款-》制作-》成交-》评价-》本站返利</p>--}}
+        <p>注意：总价格 = 渲染价格 + 修改价格，下单-》定价-》付款-》制作-》成交-》评价-》本站返利</p>
         @include('member.common.page2')
     </div>
 
