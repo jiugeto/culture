@@ -21,18 +21,8 @@ class MessageController extends BaseController
         parent::__construct();
         $this->lists['func']['name'] = '消息管理';
         $this->lists['func']['url'] = 'message';
-        if (in_array($this->userType,[1,2,4])) {
-            $this->genre = 1;     //个人消息
-        } elseif (in_array($this->userType,[3,5,6,7])) {
-            $this->genre = 2;     //企业消息
-        } else {
-            $this->genre = 0;     //超级消息
-        }
     }
 
-    /**
-     * 消息列表：收件箱
-     */
     public function index($list=1)
     {
         $curr['name'] = $this->lists['']['name'];
@@ -44,7 +34,7 @@ class MessageController extends BaseController
             $prefix_url = DOMAIN.'member/message/s/'.$list;
         }
         $status = $list==1 ? [3,4] : 2;
-        $apiMsg = ApiMessage::index($this->limit,$pageCurr,$this->genre,$status,2,0);
+        $apiMsg = ApiMessage::index($this->limit,$pageCurr,$this->userid,$list,$status,2,0);
         if ($apiMsg['code']!=0) {
             $datas = array(); $total = 0;
         } else {

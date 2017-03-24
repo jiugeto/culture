@@ -9,7 +9,8 @@ class ApiMessage
      * 消息接口
      */
 
-    public static function index($limit,$pageCurr,$genre=0,$status=0,$isshow=2,$del=0)
+    //menu==1收件箱，2发件箱
+    public static function index($limit,$pageCurr,$uid=0,$menu=1,$status=0,$isshow=2,$del=0)
     {
         $apiUrl = ApiBase::getApiCurl() . '/api/v1/message';
         $curl = new Curl();
@@ -17,7 +18,8 @@ class ApiMessage
         $curl->post($apiUrl, array(
             'limit'     =>  $limit,
             'page'      =>  $pageCurr,
-            'genre'     =>  $genre,
+            'uid'       =>  $uid,
+            'menu'      =>  $menu,
             'status'    =>  $status,
             'isshow'    =>  $isshow,
             'del'       =>  $del,

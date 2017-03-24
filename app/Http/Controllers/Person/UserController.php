@@ -25,15 +25,13 @@ class UserController extends BaseController
 
     public function index()
     {
-        $apiMsg = ApiMessage::index(10,1,0,0,2,0);
+        $apiMsg = ApiMessage::index(10,1,$this->userid,1,0,2,0);
         $result = [
-            'user' => $this->user,
             'frields' => $this->frields(),
             'signs' => $this->signs(),
             'userRegistLog' => $this->firstLog(),
             'userLastLog' => $this->lastLog(),
             'messageNum' => $apiMsg['code']==0 ? $apiMsg['pagelist']['total'] : 0,
-            'links' => $this->links,
             'curr' => $this->curr,
         ];
         return view('person.user.index', $result);
@@ -42,8 +40,6 @@ class UserController extends BaseController
     public function getHead()
     {
         $result = [
-            'user' => $this->user,
-            'links' => $this->links,
             'curr' => $this->curr,
         ];
         return view('person.user.edithead', $result);
@@ -70,8 +66,6 @@ class UserController extends BaseController
     public function edit()
     {
         $result = [
-            'user' => $this->user,
-            'links' => $this->links,
             'curr' => $this->curr,
         ];
         return view('person.user.edit', $result);
@@ -91,8 +85,6 @@ class UserController extends BaseController
     public function getPwd()
     {
         $result = [
-            'user' => $this->user,
-            'links' => $this->links,
             'curr' => $this->curr,
         ];
         return view('person.user.editpwd', $result);
@@ -147,7 +139,6 @@ class UserController extends BaseController
             'mobile' => $request->mobile,
             'area' => $request->area,
             'address' => $request->address,
-//            'isuser' => 0,
         );
     }
 

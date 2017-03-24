@@ -7,38 +7,17 @@
             <div class="list l_pic">
                 @if(count($datas))
                     @foreach($datas as $data)
-                <a href="{{DOMAIN}}person/product/pre/{{ $data->id }}" target="_blank">
+                <a href="{{DOMAIN}}person/product/pre/{{$data['id']}}" target="_blank">
                     <div class="per_waterfall">
                         <div class="img">
-                        @if($data->getPic())
-                            <img src="{{ $data->getPicUrl() }}" style="
-                            @if($size=$data->getUserPicSize($data->getPic(),$w=148,$h=100))
-                                    width:{{$size['w']}}px;height:{{$size['h']}}px;
-                            @endif
-                        ">
-                        @else
-                            <div style="width:220px;height:120px;background:rgb(240,240,240);"></div>
-                        @endif
+                        @if($data['thumb'])<img src="{{$data['thumb']}}">@endif
                         </div>
-                        <p class="text">{{ $data->name }}</p>
+                        <p class="text">{{$data['name']}}</p>
                     </div>
                 </a>
                     @endforeach
                 @endif
-                @if(count($datas)<$datas->limit)
-                    @for($i=0;$i<$datas->limit-count($datas);++$i)
-                <a href="">
-                    <div class="per_waterfall">
-                        <div class="img">
-                            <div style="width:220px;height:120px;color:lightgrey;text-align:center;line-height:100px;background:rgb(240,240,240);">无</div>
-                        </div>
-                        <p class="text">暂无</p>
-                    </div>
-                </a>
-                    @endfor
-                @endif
-                    
-                @include('person.common.page')
+                @include('person.common.page2')
             </div>
         </div>
         @include('person.common.head')

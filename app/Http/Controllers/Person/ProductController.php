@@ -1,8 +1,7 @@
 <?php
 namespace App\Http\Controllers\Person;
 
-use App\Models\Online\ProductModel;
-use App\Models\Base\VideoModel;
+use App\Api\ApiOnline\ApiProduct;
 
 class ProductController extends BaseController
 {
@@ -19,29 +18,21 @@ class ProductController extends BaseController
 
     public function index()
     {
+        $pageCurr = isset($_GET['page']) ? $_GET['page'] : 1;
+        $prefix_url = DOMAIN.'person/product';
+        $apiProduct = ApiProduct::getProductsList($this->limit,$pageCurr,$this->userid,0,2);
+        if ($apiProduct['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiProduct['data']; $total = $apiProduct['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query(),
-            'prefix_url'=> DOMAIN.'person/product',
-            'user'=> $this->user,
-            'links'=> $this->links,
-            'curr'=> $this->curr,
+            'datas' => $datas,
+            'pagelist' => $pagelist,
+            'prefix_url'=> $prefix_url,
+            'curr' => $this->curr,
         ];
         return view('person.product.index', $result);
-    }
-
-
-
-
-
-    public function query()
-    {
-        $uid = $this->userid ? $this->userid : 0;
-        $datas = ProductModel::where('del',0)
-            ->where('uid',$uid)
-            ->orderBy('sort','desc')
-            ->orderBy('id','desc')
-            ->paginate($this->limit);
-        $datas->limit = $this->limit;
-        return $datas;
     }
 }

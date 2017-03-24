@@ -7,31 +7,17 @@
             <div class="list l_pic" style="width:748px">
                 @if(count($datas))
                     @foreach($datas as $data)
-                <a href="{{DOMAIN}}person/video/pre/{{ $data->id }}" target="_blank">
+                <a href="{{DOMAIN}}person/video/pre/{{$data['id']}}" target="_blank">
                     <div class="per_waterfall">
                         <div class="img">
-                            <img src="{{ $data->getPicUrl() }}" style="
-                            {{--@if($size=$data->getUserPicSize($data->getPic(),$w=148,$h=100))width:{{$size['w']}}px;height:{{$size['h']}}px; @endif--}}
-                                    ">
+                            <img src="{{$data['thumb']}}">
                         </div>
-                        <p class="text">{{ $data->name }}</p>
+                        <p class="text">{{$data['name']}}</p>
                     </div>
                 </a>
                     @endforeach
                 @endif
-                {{--@if(count($datas)<$datas->limit)--}}
-                    {{--@for($i=0;$i<$datas->limit-count($datas);++$i)--}}
-                {{--<a href="">--}}
-                    {{--<div class="per_waterfall">--}}
-                        {{--<div class="img">--}}
-                            {{--<div style="width:220px;height:120px;background:rgb(240,240,240);"></div>--}}
-                        {{--</div>--}}
-                        {{--<p class="text">暂无</p>--}}
-                    {{--</div>--}}
-                {{--</a>--}}
-                    {{--@endfor--}}
-                {{--@endif--}}
-                <div style="clear:both;">@include('person.common.page')</div>
+                @include('person.common.page2')
             </div>
         </div>
         @include('person.common.head')

@@ -30,8 +30,6 @@ class SpaceController extends BaseController
         $apiWallet = ApiWallet::getWalletByUid($this->userid);
         $apiIntegral = ApiTalk::getIntegralList($this->userid);
         $result = [
-            'links'     =>  $this->links,
-            'user'      =>  $this->user,
             'frields'   =>  $this->getFrields(4),
             'goods'     =>  $apiGoods['code']==0 ? $apiGoods['data'] : [],
             'goodsNum'  =>  $apiGoods['code']==0 ? $apiGoods['pagelist']['total'] : 0,

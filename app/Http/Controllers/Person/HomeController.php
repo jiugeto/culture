@@ -35,7 +35,6 @@ class HomeController extends BaseController
             'datas' => $datas,
             'prefix_url' => $prefix_url,
             'pagelist' => $pagelist,
-            'user' => $this->user,
             'from' => $from,
         ];
         return view('person.home.index', $result);

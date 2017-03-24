@@ -5,6 +5,7 @@ use App\Api\ApiUser\ApiPerson;
 use App\Api\ApiUser\ApiUsers;
 use App\Http\Controllers\BaseController as Controller;
 use Session;
+use Illuminate\Support\Facades\View;
 
 class BaseController extends Controller
 {
@@ -31,7 +32,8 @@ class BaseController extends Controller
     {
         parent::__construct();
         $this->userid = Session::has('user.uid') ? Session::get('user.uid') : redirect('/login');
-        $this->user = $this->getUser($this->userid);
+        View::share('user',$this->getUser($this->userid));      //共享用户数据
+        View::share('links',$this->links);                      //共享链接数据
     }
 
     /**

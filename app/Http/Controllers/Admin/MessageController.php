@@ -23,7 +23,7 @@ class MessageController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $pageCurr = isset($_GET['page'])?$_GET['page']:1;
         $prefix_url = DOMAIN.'admin/message';
-        $apiMsg = ApiMessage::index($this->limit,$pageCurr,0,0,0,0);
+        $apiMsg = ApiMessage::index($this->limit,$pageCurr,0,0,0,0,0);
         if ($apiMsg['code']!=0) {
             $datas = array(); $total = 0;
         } else {
