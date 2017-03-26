@@ -1,10 +1,9 @@
 <?php
 namespace App\Http\Controllers\Company;
 
+use App\Api\ApiUser\ApiCompany;
 use App\Http\Controllers\BaseController as Controller;
-use App\Models\Company\ComMainModel;
-use App\Models\Company\ComModuleModel;
-use App\Models\LinkModel;
+use Session;
 
 class BaseController extends Controller
 {
@@ -23,16 +22,17 @@ class BaseController extends Controller
     public function company($cid,$url)
     {
         //判断cid
-        if (!$cid && !\Session::has('user.cid')) {
+        if (!$cid && !Session::has('user.cid')) {
             echo "<script>alert('参数错误，或者没有权限！');history.go(-1);</script>";exit;
-        } elseif ($cid && !\Session::has('user.cid')) {
+        } elseif ($cid && !Session::has('user.cid')) {
             $this->cid = $cid;
-            $this->company = CompanyModel::find($cid);
-            $this->userid = $this->company->uid;
-        } elseif ((!$cid || $cid) && \Session::has('user.cid')) {
-            $this->userid = \Session::get('user.uid');
-            $this->cid = \Session::get('user.cid');
-            $this->company = unserialize(\Session::get('user.company'));
+            $apiCompany = ApiCompany::show($cid);
+            $this->company = $apiCompany['code']==0 ? $apiCompany['data'] : [];
+            $this->userid = $this->company ? $this->company['uid'] : 0;
+        } elseif ((!$cid || $cid) && Session::has('user.cid')) {
+            $this->userid = Session::get('user.uid');
+            $this->cid = Session::get('user.cid');
+            $this->company = Session::get('user.company');
         }
         define('CID',$this->cid);
         //公司页面访问日志刷新频率

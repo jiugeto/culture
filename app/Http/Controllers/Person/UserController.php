@@ -133,11 +133,11 @@ class UserController extends BaseController
         }
         return array(
             'username' => $request->username,
-            'email' => $request->email,
+//            'email' => $request->email,
             'qq' => $request->qq,
             'tel' => $request->tel,
             'mobile' => $request->mobile,
-            'area' => $request->area,
+//            'area' => $request->area,
             'address' => $request->address,
         );
     }

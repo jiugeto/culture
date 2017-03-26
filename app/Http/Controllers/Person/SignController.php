@@ -12,16 +12,10 @@ class SignController extends BaseController
      */
 
     protected $curr = 'sign';
-    protected $fromtime;    //当天凌晨0点
-    protected $totime;      //当天晚上24点
-    protected $fromMonth;   //当月1号凌晨0点
-    protected $toMonth;     //当月最后一天晚上24点
 
     public function __construct()
     {
         parent::__construct();
-        $this->fromtime = strtotime(date('Ymd',time()).'000000');
-        $this->totime = strtotime(date('Ymd',time()).'595959');
     }
 
     public function index()
@@ -39,58 +33,32 @@ class SignController extends BaseController
             'datas' => $datas,
             'pagelist' => $pagelist,
             'prefix_url' => $prefix_url,
-            'hasDay' => $this->getDaySign(),
+            'hasDay' => $this->getTodaySign(),
             'months' => $this->getMonths(),
             'curr' => $this->curr,
         ];
-//        dd($this->getMonths());
         return view('person.sign.index', $result);
     }
 
-    public function add($day)
+    public function store()
     {
-        if ($this->getDaySign()) {
-            echo "<script>alert('今天已经签到过了！');history.go(-1);</script>";exit;
+        $apiSign = ApiSign::add($this->userid);
+        if ($apiSign['code']!=0) {
+            echo "<script>alert('".$apiSign['msg']."');history.go(-1);</script>";exit;
         }
-        if (ltrim(date('d',time()),'0')!=$day) {
-            echo "<script>alert('点击的不是今天签到日期！');history.go(-1);</script>";exit;
-        }
-        $reward = rand(1,10);
-        $data = [
-            'uid'=> $this->userid,
-            'reward'=> $reward,
-            'created_at'=> time(),
-        ];
-        UserSignModel::create($data);
-        //奖励加入总数
-        $userParam = WalletModel::where('uid',$this->userid)->first();
-        WalletModel::where('id',$userParam->id)->update(['sign'=> $userParam->sign+$reward]);
         return redirect(DOMAIN.'person/sign');
     }
 
     /**
      * 查询当前用户当天签到情况
      */
-    public function getDaySign()
+    public function getTodaySign()
     {
-        $apiSign = ApiSign::getSignsByUid($this->userid,$this->fromtime,$this->totime);
+        $fromtime = strtotime(date('Ymd',time()).'000000');
+        $totime = strtotime(date('Ymd',time()).'595959');
+        $apiSign = ApiSign::getSignsByUid($this->userid,$fromtime,$totime);
         return $apiSign['code']==0 ? 1 : 0;
     }
-
-//    /**
-//     * 计算当前月天数
-//     */
-//    public function getMonthCurr()
-//    {
-//        return array(
-//            'count'=> (isset($month)&&$month) ? $month : 30,
-//            'date'=> date('Y-m',time()),
-//            'year'=> date('Y',time()),
-//            'month'=> date('m',time()),
-//            'day'=> ltrim(date('d',time()),'0'),
-//            'week'=> date('w',time()),
-//        );
-//    }
 
     /**
      * 计算当月日期情况
@@ -100,26 +68,30 @@ class SignController extends BaseController
         $nianfen = date('Y',time());
         $yuefen = date('m',time());
         if ($yuefen==2) {
-            $month = $nianfen%4==0 ? 29 : 28;
+            $monthCount = $nianfen%4==0 ? 29 : 28;
         } elseif (in_array($yuefen,[1,3,5,7,8,10,12])) {
-            $month = 31;
+            $monthCount = 31;
         } elseif (in_array($yuefen,[4,6,9,11])) {
-            $month = 30;
+            $monthCount = 30;
         } else {
-            $month = 30;
+            $monthCount = 30;
         }
+        //计算当月日历情况
+        $monthArr = array();
         $index = 0;
-        for ($i=1;$i<=$month;++$i) {
+        for ($i=1;$i<=$monthCount;++$i) {
             $i = $i<10 ? '0'.$i : $i;
             $week = date('w',strtotime(date('Ym',time()).$i));
             $day['day'] = $i;
             $day['week'] = $week;
+            //计算是否签到
+            $fromtime = strtotime(date('Y-m',time()).'-'.$i.' 00:00:00');
+            $totime = strtotime(date('Y-m',time()).'-'.$i.' 24:59:59');
+            $apiSign = ApiSign::getSignsByUid($this->userid,$fromtime,$totime);
+            $day['hasSign'] = $apiSign['code']==0 ? 1 : 0;
             $monthArr[$index][$week] = $day;
             if ($week==6) { $index ++; }
         }
-//        foreach ($months as $k=>$value) {
-//            foreach ($value as $val) { $monthArr[$k][] = $val; }
-//        }
         return $monthArr;
     }
 }

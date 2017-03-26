@@ -43,10 +43,9 @@ Route::group(['prefix'=>'person','middleware' =>'MemberAuth','namespace'=>'Perso
     Route::get('frield/{m}/{id}','FrieldController@show');
     Route::resource('frield','FrieldController');
     //个人后台皮肤管理
-    Route::get('skin/pic/{pic_id}','SkinController@setTopBg');
+    Route::get('skin/spacetopbg','SkinController@setSpaceTopBg');
     Route::resource('skin','SkinController');
     //个人签到管理
-    Route::get('sign/add/{day}','SignController@add');
-//    Route::get('sign/{date}','SignController@index');
+    Route::get('sign/add','SignController@store');
     Route::resource('sign','SignController');
 });

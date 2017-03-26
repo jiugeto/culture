@@ -2,8 +2,7 @@
 namespace App\Http\Controllers\Person;
 
 use App\Api\ApiUser\ApiUsers;
-use App\Models\Base\PicModel;
-use App\Models\BaseModel;
+use Illuminate\Http\Request;
 
 class SkinController extends BaseController
 {
@@ -20,41 +19,26 @@ class SkinController extends BaseController
 
     public function index()
     {
-        $picModel = PicModel::where('uid',$this->userid)->get();
+        $apiBg = ApiUsers::getOneUser($this->userid);
         $result = [
-            'data'=> $this->query(),
-//            'pics'=> $this->model->pics($this->userid),
-            'pics'=> $picModel,
-            'model'=> new BaseModel(),
-            'user'=> $this->user,
-            'links'=> $this->links,
+            'spaceTopBg'=> $apiBg['code']==0 ? $apiBg['data']['spaceTopBg'] : '',
             'curr'=> $this->curr,
         ];
         return view('person.skin.index', $result);
     }
 
-    public function setTopBg($pic_id)
+    public function setSpaceTopBg(Request $request)
     {
-//        UserParamsModel::where('uid',$this->userid)->update(['per_top_bg_img'=> $pic_id]);
-        $data = [
-            'uid'   =>  $this->userid,
-            'pic_id'    =>  $pic_id,
-        ];
-        $rst = ApiUsers::setPersonTopBg($data);
-        if ($rst['code']!=0) {
-            echo "<script>alert('".$rst['msg']."');history.go(-1);</script>";exit;
+        if (!isset($request->spacetopbg)) {
+            echo "<script>alert('未上传图片！');history.go(-1);</script>";exit;
+        }
+        $apiUser = ApiUsers::getOneUser($this->userid);
+        $thumbOldArr[] = $apiUser['data']['spaceTopBg'];
+        $thumb = $this->uploadOnlyImg($request,'spacetopbg',$thumbOldArr);
+        $apiBg = ApiUsers::setPersonTopBg($this->userid,$thumb);
+        if ($apiBg['code']!=0) {
+            echo "<script>alert('".$apiBg['msg']."');history.go(-1);</script>";exit;
         }
         return redirect(DOMAIN.'person/skin');
-    }
-
-
-
-
-
-    public function query()
-    {
-//        return UserParamsModel::where('uid',$this->userid)->first();
-        $rst = ApiUsers::getParamByUid($this->userid);
-        return $rst['code']==0 ? $rst['data'] : [];
     }
 }

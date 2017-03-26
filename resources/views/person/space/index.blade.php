@@ -8,10 +8,9 @@
         <div class="per_left">
             <div class="per_left1">
                 <p class="title">头像</p>
-                <div class="img">
-                @if($user && $user['head'])
-                    <img src="{{$user['head']}}" width="120">
-                @endif
+                <div class="img"
+                     @if(!$user['head'])style="background:#e5e5e5;"@endif>
+                @if($user['head'])<img src="{{$user['head']}}" width="120">@endif
                 </div>
                 <div class="nicheng">{{$user['username']}}</div>
                 <table cellpadding="0" cellspacing="0">
@@ -45,12 +44,19 @@
                     </tr>
                     <tr>
                         <td>红包：{{$tipNum}}</td>
+                    </tr>
+                </table>
+                <p class="cometo">话题统计</p>
+                <table cellpadding="0" cellspacing="0" style="width:90%;">
+                    <tr>
                         <td>积分：{{$integralNum}}</td>
                     </tr>
                 </table>
                 <p class="cometo">交流统计</p>
                 <table cellpadding="0" cellspacing="0" style="width:90%;">
-                    <tr><td>好友：0</td><td></td></tr>
+                    <tr>
+                        <td>好友：0</td>
+                    </tr>
                 </table>
             </div>
         </div>
@@ -59,7 +65,7 @@
         <div class="per_center">
             <div class="per_center1">
                 <p class="title">资料 <a href="{{DOMAIN}}person/user/{{$user['id']}}/edit">编辑资料</a></p>
-                <table cellpadding="0" cellspacing="0" width="100%">
+                <table cellpadding="0" cellspacing="0" width="100%" id="centerinfo">
                     <tr>
                         <td>用户名称：{{$user['username']}}</td>
                         <td>真实姓名：{{$user['realname']}}</td>
@@ -67,6 +73,10 @@
                     <tr>
                         <td>性别：{{$user['sexName']}}</td>
                         <td>地区：{{$user['areaName']}}</td>
+                    </tr>
+                    <tr>
+                        <td>QQ：{{$user['qq']}}</td>
+                        <td>电话：{{$user['tel']}}</td>
                     </tr>
                 </table>
             </div>

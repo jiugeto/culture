@@ -5,7 +5,6 @@
     margin:10px auto;
     margin-top:40px;
     width:1000px;
-    height:900px;
     background:rgb(252,252,252);
     border:1px solid rgb(230,230,230);
     font-size:20px;
@@ -136,9 +135,7 @@ div:hover.per_waterfall .text { color:red; }
 .per_left1 .img {
     margin:10px auto;
     margin-bottom:0px;
-    /*padding:2px;*/
     width:120px; height:100px;
-    /*border:1px solid lightgrey;*/
     overflow:hidden;
 }
 .per_left1 .nicheng {
@@ -154,6 +151,10 @@ div:hover.per_waterfall .text { color:red; }
 .per_center table { margin:5px; }
 .per_center td { padding:0 10px;color:grey;font-size:14px; }
 .per_center1,.per_center2 { width:576px; }
+.per_center1 table#centerinfo td {
+    padding-top:5px;
+    padding-bottom:5px;
+}
 .per_center2 { height:200px; }
 .per_center2 span:hover { color:red;cursor:pointer; }
 .per_center2 a:hover .img { border:1px solid red; }
@@ -396,29 +397,20 @@ div:hover.per_waterfall .text { color:red; }
     background:ghostwhite;
     overflow:hidden;
 }
-.list #change_bg {
-    padding:5px 10px;
-    color:red;
-    border:1px solid red;
-    cursor:pointer;
-}
-.blue { color:rgb(14,144,210); }
-.red { color:red; }
-a { cursor:pointer; }
+.list a {  }
 /*用户签到列表*/
 .list table.rili { width:100%; }
 .list table.rili th {
     padding:5px 0;
-    background:#f2f2f2;
+    background:#f0f0f0;
 }
 .list table.rili td {
     margin:0;
     padding:20px 0;
+    width:100px;
     text-align:center;
-    background:#fcfcfc;
-}
-.list table.rili td.today {
-    background:#64c8ff;
+    background:#f7f7f7;
+    cursor:pointer;
 }
 .list .usersign {
     width:100%;

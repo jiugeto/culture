@@ -1,11 +1,6 @@
 <?php
 namespace App\Http\Controllers\Company;
 
-use App\Models\Company\ComFuncModel;
-use App\Models\Company\ComMainModel;
-use App\Models\GoodsModel;
-use App\Models\LinkModel;
-
 class HomeController extends BaseController
 {
     /**
@@ -22,7 +17,6 @@ class HomeController extends BaseController
     public function index($cid=0)
     {
         $company = $this->company($cid,$this->list['func']['url']);
-//        dd($this->getLayoutHomeSwitchs($company['cid']));
         $result = [
             'ppts'=> $this->getPpts($company['uid'],$limit=10),
             'comMain'=> $this->getComMain($company['cid']),
