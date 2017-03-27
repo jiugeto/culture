@@ -25,7 +25,7 @@ abstract class Controller extends BaseController
     protected $firmNum = 3;     //企业服务记录数
     protected $comPptNum = 3;     //企业宣传记录数
     protected $comJobNum = 5;     //企业工作记录数
-    protected $sefLogo = '/assets/images/icon.png';        //本网站普通自己的logo地址
+    protected $sefLogo = '/assets/images/icon.png';        //本网站自己的logo地址
     protected $redisTime = 60 * 60 * 2;       //session在redis中缓存时长，单位秒，默认2小时
     protected $lists = [
         ''=> [

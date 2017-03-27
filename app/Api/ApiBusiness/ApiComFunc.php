@@ -9,7 +9,7 @@ class ApiComFunc
      * 公司功能接口
      */
 
-    public static function index($limit,$pageCurr=1,$cid=0,$isshow=2)
+    public static function index($limit,$pageCurr=1,$cid=0,$module=0,$isshow=2)
     {
         $apiUrl = ApiBase::getApiCurl() . '/api/v1/com/func';
         $curl = new Curl();
@@ -18,6 +18,7 @@ class ApiComFunc
             'limit'     =>  $limit,
             'page'      =>  $pageCurr,
             'cid'       =>  $cid,
+            'module'    =>  $module,
             'isshow'    =>  $isshow,
         ));
         $response = json_decode($curl->response);

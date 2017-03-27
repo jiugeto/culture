@@ -29,7 +29,7 @@
     list-style:none;
     float:right;
 }
-.com_center a:hover li,.com_center li.curr { background:rgba(30,30,30,0.5); }
+.com_center a:hover li,.com_center li.curr { background:#000000; }
 /*===== 顶部菜单栏 =====*/
 
 

@@ -9,7 +9,7 @@ class ApiLink
      * 链接接口
      */
 
-    public static function index($limit,$pageCurr,$cid=0,$type=0,$isshow=2)
+    public static function index($limit,$pageCurr,$cid=0,$type=0,$isshow=2,$sortid='desc')
     {
         $apiUrl = ApiBase::getApiCurl() . '/api/v1/link';
         $curl = new Curl();
@@ -20,6 +20,7 @@ class ApiLink
             'cid'   =>  $cid,
             'type'  =>  $type,
             'isshow'    =>  $isshow,
+            'sortid'  =>  $sortid,
         ));
         $response = json_decode($curl->response);
         if ($response->error->code != 0) {
@@ -32,7 +33,7 @@ class ApiLink
         );
     }
 
-    public static function header($limit,$cid,$isshow=0)
+    public static function header($limit,$cid,$isshow=0,$sortid='desc')
     {
         $redisKey = 'culture_header';
         //判断缓存有没有该数据
@@ -49,6 +50,7 @@ class ApiLink
             'cid'   =>  $cid,
             'type'  =>  1,
             'isshow'    =>  $isshow,
+            'sortid'  =>  $sortid,
         ));
         $response = json_decode($curl->response);
         if ($response->error->code != 0) {
@@ -62,7 +64,7 @@ class ApiLink
         );
     }
 
-    public static function navigate($limit,$cid,$isshow=0)
+    public static function navigate($limit,$cid,$isshow=0,$sortid='desc')
     {
         $redisKey = 'culture_navigate';
         //判断缓存有没有该数据
@@ -79,6 +81,7 @@ class ApiLink
             'cid'   =>  $cid,
             'type'  =>  2,
             'isshow'    =>  $isshow,
+            'sortid'  =>  $sortid,
         ));
         $response = json_decode($curl->response);
         if ($response->error->code != 0) {
@@ -92,7 +95,7 @@ class ApiLink
         );
     }
 
-    public static function footer($limit,$cid,$isshow=0)
+    public static function footer($limit,$cid,$isshow=0,$sortid='desc')
     {
         $redisKey = 'culture_footer';
         //判断缓存有没有该数据
@@ -109,6 +112,7 @@ class ApiLink
             'cid'   =>  $cid,
             'type'  =>  3,
             'isshow'    =>  $isshow,
+            'sortid'  =>  $sortid,
         ));
         $response = json_decode($curl->response);
         if ($response->error->code != 0) {

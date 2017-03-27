@@ -18,7 +18,7 @@ class ViewServiceProvider extends ServiceProvider
         );
         //会员后台左侧菜单数据
         View::composer(
-            'member.partials.menu', 'App\Http\ViewComposers\MemberMenuComposer'
+            'member.common.menu', 'App\Http\ViewComposers\MemberMenuComposer'
         );
         //前台顶部header链接
         View::composer(

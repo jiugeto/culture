@@ -10,8 +10,9 @@
             {{--s代表检索--}}
             片源类型:
             <select name="from">
-                <option value="1" {{$from==1?'selected':''}}>在线创作</option>
-                <option value="2" {{$from==2?'selected':''}}>会员作品</option>
+                <option value="1" {{$from==1?'selected':''}}>我的创作</option>
+                <option value="2" {{$from==2?'selected':''}}>我的视频</option>
+                <option value="3" {{$from==2?'selected':''}}>我的设计</option>
             </select>
 
             <span class="right">

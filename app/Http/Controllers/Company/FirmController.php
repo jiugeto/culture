@@ -1,8 +1,7 @@
 <?php
 namespace App\Http\Controllers\Company;
 
-use App\Models\Company\ComFuncModel;
-use App\Models\Company\ComModuleModel;
+use App\Api\ApiBusiness\ApiComFunc;
 
 class FirmController extends BaseController
 {
@@ -24,32 +23,22 @@ class FirmController extends BaseController
     {
         $company = $this->company($cid,$this->list['func']['url']);
         $this->moduleid = $this->getModuleId($company['cid'],$this->genre);
+        $prefix_url = DOMAIN.'c/'.$cid.'/firm';
+        $pageCurr = isset($_GET['page']) ? $_GET['page'] : 1;
+        $apiComFunc = ApiComFunc::index($this->limit,$pageCurr,$cid,$this->moduleid,2);
+        if ($apiComFunc['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiComFunc['data']; $total = $apiComFunc['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query(),
-//            'firm'=> $this->getModule(),
-            'comMain'=> $this->getComMain($company['cid']),
-            'topmenus'=> $this->topmenus,
-            'prefix_url'=> $this->prefix_url,
+            'company' => $company,
+            'datas' => $datas,
+            'pagelist' => $pagelist,
+            'prefix_url' => $this->prefix_url,
+            'topmenus' => $this->topmenus,
         ];
         return view('company.firm.index', $result);
     }
-
-    public function query()
-    {
-        $limit = 3;
-        $datas = ComFuncModel::where('cid',$this->cid)
-                        ->where('module_id',$this->moduleid)
-                        ->where('isshow',1)
-                        ->orderBy('sort','desc')
-                        ->orderBy('id','desc')
-                        ->paginate($limit);
-        $datas->limit = $limit;
-        return $datas;
-    }
-
-//    public function getModule()
-//    {
-//        if (count($this->query())) { $firm = $this->query()[0]; }
-//        return isset($firm) ? ComModuleModel::find($firm->module_id) : '';
-//    }
 }

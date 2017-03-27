@@ -2,10 +2,9 @@
 
 
 <input type="hidden" name="_token" value="{{csrf_token()}}">
-<input type="hidden" name="cid" value="{{ CID }}">
-<input type="hidden" name="uid" value="{{ Session::has('user') ? Session::get('user.uid') : 0 }}">
-<input type="hidden" name="visit_url" value="{{ $_SERVER['REQUEST_URI'] }}">
-<input type="hidden" name="visitRate" value="{{ VISITRATE }}">
+<input type="hidden" name="cid" value="{{$company['cid']}}">
+<input type="hidden" name="uid" value="{{Session::has('user')?Session::get('user.uid'):0}}">
+<input type="hidden" name="visit_url" value="{{$_SERVER['REQUEST_URI']}}">
 <script>
     $.ajaxSetup({headers : {'X-CSRF-TOKEN':$('input[name="_token"]').val()}});
     //定时器 异步运行
@@ -17,7 +16,7 @@
         //ajax局部刷新
         $.ajax({
             type: 'POST',
-            url: '{{DOMAIN}}c/{{CID}}/visitlog/set',
+            url: '{{DOMAIN}}c/'+cid+'/visitlog/set',
             data: {'uid':uid,'cid':cid,'visit_url':visit_url},
             dataType: 'json',
             success: function(data) {

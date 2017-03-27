@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>做视频-企业{{ Session::has('user.cid')?unserialize(Session::get('user.company'))['name']:'' }}页面</title>
+    <title>做视频-企业
+        {{ Session::has('user.cid')?Session::get('user.company')['name']:'' }}
+        页面</title>
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="/assets/images/icon.png">
     <link rel="stylesheet" type="text/css" href="/assets-home/css/home.css">

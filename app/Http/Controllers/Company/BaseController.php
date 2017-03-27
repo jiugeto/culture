@@ -1,9 +1,12 @@
 <?php
 namespace App\Http\Controllers\Company;
 
+use App\Api\ApiBusiness\ApiComModule;
+use App\Api\ApiBusiness\ApiLink;
 use App\Api\ApiUser\ApiCompany;
 use App\Http\Controllers\BaseController as Controller;
 use Session;
+use Illuminate\Support\Facades\View;
 
 class BaseController extends Controller
 {
@@ -13,10 +16,13 @@ class BaseController extends Controller
 
     protected $topmenus = array();
     protected $prefix_url = '';
+//    protected $visitRate = 10;       //访问日志间隔时间10s
 
     public function __construct()
     {
         parent::__construct();
+//        View::share('topmenu',$this->getTopMenu());      //共享topmenu数据
+//        View::share('footers',$this->getFooter());       //共享footer数据
     }
 
     public function company($cid,$url)
@@ -29,42 +35,24 @@ class BaseController extends Controller
             $apiCompany = ApiCompany::show($cid);
             $this->company = $apiCompany['code']==0 ? $apiCompany['data'] : [];
             $this->userid = $this->company ? $this->company['uid'] : 0;
-        } elseif ((!$cid || $cid) && Session::has('user.cid')) {
+        } elseif (Session::has('user.cid')) {
             $this->userid = Session::get('user.uid');
             $this->cid = Session::get('user.cid');
             $this->company = Session::get('user.company');
         }
-        define('CID',$this->cid);
-        //公司页面访问日志刷新频率
-        $comMain = ComMainModel::where('cid',$this->cid)->first();
-        define('VISITRATE',$comMain->visitRate);
+//        define('VISITRATE',$this->visitRate);
         $this->getComModules($this->cid);
-        $this->topmenus = LinkModel::where('cid',$this->cid)
-            ->where('type_id', 2)
-            ->where('isshow', 1)
-            ->orderBy('sort','desc')
-            ->orderBy('id','desc')
-            ->paginate(8);
         //拼接url
         if ($url) {
-            $this->prefix_url = DOMAIN.'c/'.$this->cid.'/'.$url;
+            $this->prefix_url = '/c/'.$this->cid.'/'.$url;
         } else {
-            $this->prefix_url = DOMAIN.'c/'.$this->cid.$url;
+            $this->prefix_url = '/c/'.$this->cid.$url;
         }
         return array(
             'uid'=> $this->userid,
             'cid'=> $this->cid,
             'company'=> $this->company,
-            'topmenus'=> $this->topmenus,
         );
-    }
-
-    /**
-     * 公司基本信息
-     */
-    public function getComMain($cid)
-    {
-        return ComMainModel::where('cid',$cid)->first();
     }
 
     /**
@@ -72,7 +60,8 @@ class BaseController extends Controller
      */
     public function getComModules($cid)
     {
-        return ComModuleModel::where('cid',$cid)->get();
+        $apiComModule = ApiComModule::index($this->limit,1,$cid,2);
+        return $apiComModule['code']==0 ? $apiComModule['data'] : [];
     }
 
     /**
@@ -80,8 +69,28 @@ class BaseController extends Controller
      */
     public function getModuleId($cid,$genre)
     {
-        $moduleModel = ComModuleModel::where('cid',$cid)->where('genre',$genre)->first();
-        if (!$moduleModel) { $moduleModel = ComModuleModel::where('cid',0)->where('genre',$genre)->first(); }
-        return $moduleModel->id;
+        $apiComModule = ApiComModule::getModuleByGenre($cid,$genre);
+        if ($apiComModule['code']!=0) {
+            $apiComModule = ApiComModule::getModuleByGenre(0,$genre);
+        }
+        return $apiComModule['data']['id'];
+    }
+
+    /**
+     * 公司页面top菜单
+     */
+    public function getTopMenu($cid=0)
+    {
+        $apiLink = ApiLink::index(8,1,$cid,2,2,'desc');
+        return $apiLink['code']==0 ? $apiLink['data'] : [];
+    }
+
+    /**
+     * 公司页面footer菜单
+     */
+    public function getFooter($cid=0)
+    {
+        $apiLink = ApiLink::index(8,1,$cid,3,2,'desc');
+        return $apiLink['code']==0 ? $apiLink['data'] : [];
     }
 }

@@ -11,17 +11,17 @@ Route::group(['prefix'=>'c/{cid}','namespace'=>'Company'], function(){
     //关于公司路由
     Route::get('about','AboutController@index');
     Route::get('about/{type}','AboutController@index');
-        //新闻资讯详情
+    //新闻资讯详情
     Route::get('news/{id}','AboutController@news');
     //产品路由
     Route::get('product','ProductController@index');
     Route::get('product/{cate}','ProductController@index');
-        //花絮路由
+    //花絮路由
     Route::get('part','ProductController@part');
     Route::get('part/{cate}','ProductController@part');
-//        //产品、花絮详情
-//    Route::get('goods/{id}','ProductController@show');
-        //视频预览
+    //产品、花絮详情
+    Route::get('goods/{id}','ProductController@show');
+    //视频预览
     Route::get('video/{id}/{videoid}','ProductController@video');
     //服务路由
     Route::get('firm','FirmController@index');

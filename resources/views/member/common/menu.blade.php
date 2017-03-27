@@ -23,6 +23,23 @@
                 @endif
             @endif
         @endforeach
+            {{--以下是主页链接--}}
+        @if(Session::has('user'))
+            <a href="javascript:;">
+                <li class="a_li li_one"><img src="{{PUB}}assets/images/home.png"> 我的主页</li>
+            </a>
+            <a href="{{DOMAIN}}person/s" target="_blank">
+                <li class="a_li li_sub"> 个人主页</li>
+            </a>
+            @if(Session::get('user.cid'))
+            <a href="{{DOMAIN}}c/{{Session::get('user.cid')}}">
+                <li class="a_li li_sub"> 企业主页</li>
+            </a>
+            <a href="{{DOMAIN}}company/admin">
+                <li class="a_li li_sub"> 企业后台</li>
+            </a>
+            @endif
+        @endif
         </ul>
     </div>
 </div>

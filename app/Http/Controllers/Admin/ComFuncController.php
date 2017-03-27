@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Api\ApiBusiness\ApiComFunc;
 use App\Api\ApiBusiness\ApiComModule;
 use App\Api\ApiUser\ApiCompany;
-use App\Tools;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Request as AjaxRequest;
 use Illuminate\Support\Facades\Input;
@@ -30,7 +29,7 @@ class ComFuncController extends BaseController
         $curr['url'] = $this->crumb['']['url'];
         $pageCurr = isset($_GET['page'])?$_GET['page']:1;
         $prefix_url = DOMAIN.'admin/comfunc';
-        $apiFunc = ApiComFunc::index($this->limit,$pageCurr,0,0);
+        $apiFunc = ApiComFunc::index($this->limit,$pageCurr,0,0,0);
         if ($apiFunc['code']!=0) {
             $datas = array(); $total = 0;
         } else {

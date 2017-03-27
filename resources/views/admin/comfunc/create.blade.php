@@ -15,7 +15,7 @@
                     <fieldset>
                         <div class="am-form-group">
                             <label>公司名称 / Company Name：</label>
-                            <input type="text" placeholder="公司名称，不填则本站新增模块" minlength="2" maxlength="20" name="cname">
+                            <input type="text" placeholder="公司名称，不填则本站新增模块" minlength="2" maxlength="20" name="cname" onchange="init(this.value)">
                         </div>
 
                         <div class="am-form-group">

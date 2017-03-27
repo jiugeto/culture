@@ -11,6 +11,6 @@
                 <a href="{{ $footer['link'] }}" title="{{ $footer['title'] }}">{{ $footer['name'] }}</a>
             @endforeach
         </p>
-        <p class="footer_beizhu">{{--Copyright © 2016-2020--}} zuoshiping.com {{--All Rights Reserved 版权所有 微文化--}}</p>
+        {{--<p class="footer_beizhu">Copyright © 2016-2020 zuoshiping.com All Rights Reserved 版权所有 微文化</p>--}}
     </div>
 </div>
