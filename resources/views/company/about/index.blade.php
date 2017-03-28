@@ -3,52 +3,52 @@
     <div class="com_about">
         <span class="left">
             <div class="about_con">
-            @if(in_array($type,[1,2]))
-                <div class="star">{{ $data->name }}</div>
-                <div class="con">
-                    <img src="{{ $data->getPicUrl() }}" style="
-                         @if($size=$data->getUserPicSize($data->pic(),$w=500,$h=150))
-                             width:{{$size['w']}}px;height:{{$size['h']}}px;
-                         @endif
-                    ">
+            @if(count($datas))
+            @foreach($datas as $k=>$data)
+                <div class="star" id="star_{{$data['id']}}" style="display:{{$k==0?'block':'none'}}">
+                    {{$data['name']}}
+                    <span style="color:#e5e5e5;font-size:12px;">{{$data['createTime']}}</span>
                 </div>
-                <div class="con">{!! $data->intro !!}</div>
-            @elseif(in_array($type,[3,4]))
-                <div class="star">{{ $type==3 ? '公司新闻' : '行业资讯' }}</div>
-                @if(count($datas))
-                    @foreach($datas as $data)
-                <div class="newslist" title="点击进入 {{ $data->name }}"
-                     onclick="window.location.href='{{DOMAIN}}c/{{CID}}/news/{{$data->id}}';">
-                    <div class="img">
-                    @if($data->pic_id)
-                        <img src="{{ $data->getPicUrl() }}" style="
-                            @if($size=$data->getUserPicSize($data->pic(),$w=100,$h=40))
-                                width:{{$size['w']}}px;height:{{$size['h']}}px;
-                            @endif
-                                ">
-                    @else 待添加
+                <div class="con" id="con_{{$data['id']}}" style="display:{{$k==0?'block':'none'}}">
+                    @if($data['thumb'])
+                    <div class="img"><img src="{{$data['thumb']}}"></div>
                     @endif
-                    </div>
-                    <div class="text">{{ $data->name }}</div>
-                    <div class="text" style="float:right;">{{ $data->createTime() }}</div>
+                    {{$data['intro']}}
                 </div>
-                    @endforeach
-                @endif
+            @endforeach
+            @else 待填写...
             @endif
             </div>
         </span>
         <span class="right">
             <div class="about_a">
-            @foreach($model['types'] as $ktype=>$vtype)
-                @if($ktype==1)
-                <div class="{{ $type==$ktype?'curr':'' }}"
-                     onclick="window.location.href='{{DOMAIN}}c/{{CID}}/about';"> ▶ {{ '公司'.$vtype }}</div>
-                @elseif(in_array($ktype,[2,3,4]))
-                <div class="{{ $type==$ktype?'curr':'' }}"
-                     onclick="window.location.href='{{DOMAIN}}c/{{CID}}/about/{{$ktype}}';"> ▶ {{ '公司'.$vtype }}</div>
+                <div class="{{$genre==1?'curr':''}}"
+                     onclick="window.location.href='{{DOMAIN}}c/{{$company['id']}}/about';"> ▶ 公司介绍</div>
+                <div class="{{$genre==2?'curr':''}}"
+                     onclick="window.location.href='{{DOMAIN}}c/{{$company['id']}}/about/s/2';"> ▶ 公司历程</div>
+                <div class="{{$genre==3?'curr':''}}"
+                     onclick="window.location.href='{{DOMAIN}}c/{{$company['id']}}/about/s/3';"> ▶ 公司新闻</div>
+                <div class="{{$genre==4?'curr':''}}"
+                     onclick="window.location.href='{{DOMAIN}}c/{{$company['id']}}/about/s/4';"> ▶ 行业资讯</div>
+            </div>
+            <div class="about_func">
+                <p>标题：</p>
+                @if($datas)
+                    @foreach($datas as $data)
+                    <p class="funcName" id="funcName_{{$data['id']}}" title="点击显示 {{$data['name']}}">
+                        <a href="javascript:;" onclick="getFunc({{$data['id']}})">{{$data['name']}}</a>
+                    </p>
+                    @endforeach
                 @endif
-            @endforeach
             </div>
         </span>
     </div>
+
+    <script>
+        function getFunc(id){
+            $(".star").hide(); $(".con").hide();
+            $("#star_"+id).show(); $("#con_"+id).show();
+            $(".funcName").css('color','#808080'); $("#funcName_"+id).css('color','#ff4466');
+        }
+    </script>
 @stop

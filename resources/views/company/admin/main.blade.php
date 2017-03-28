@@ -24,6 +24,6 @@
 
         <div class="content_kongbai" style="height:50px;">&nbsp;</div>
     </div>
-    @include('company.partials.footer')
+    @include('company.common.footer')
 </body>
 </html>

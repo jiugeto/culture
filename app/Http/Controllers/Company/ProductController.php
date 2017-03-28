@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Company;
 
-use App\Models\GoodsModel;
+use App\Api\ApiBusiness\ApiGoods;
 
 class ProductController extends BaseController
 {
@@ -12,9 +12,6 @@ class ProductController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->model = new GoodsModel();
-//        $this->list['func']['name'] = '产品';
-//        $this->list['func']['url'] = 'product';
     }
 
     public function index($cid,$cate=0)
@@ -22,14 +19,22 @@ class ProductController extends BaseController
         $list['func']['name'] = '产品';
         $list['func']['url'] = 'product';
         $company = $this->company($cid,$list['func']['url']);
+        $cid = $company['company']['id'];
+        $pageCurr = isset($_GET['page']) ? $_GET['page'] : 1;
+        $apiGoods = ApiGoods::index($this->limit,$pageCurr,$company['company']['uid'],0,$cid,0,2);
+        if ($apiGoods['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiGoods['data']; $total = $apiGoods['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$this->prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query($company['uid'],$genre=1,$cate),
-            'model'=> $this->model,
-            'comMain'=> $this->getComMain($company['cid']),
-            'topmenus'=> $this->topmenus,
-            'prefix_url'=> $this->prefix_url,
-            'curr'=> $list['func']['url'],
-            'cate'=> $cate,
+            'datas' => $datas,
+            'pagelist' => $pagelist,
+            'prefix_url' => $this->prefix_url,
+            'model' => $this->getModel(),
+            'curr' => $list['func']['url'],
+            'cate' => $cate,
         ];
         return view('company.product.index', $result);
     }
@@ -39,6 +44,7 @@ class ProductController extends BaseController
      */
     public function part($cid,$cate=0)
     {
+        dd('未处理');
         $list['func']['name'] = '花絮';
         $list['func']['url'] = 'part';
         $company = $this->company($cid,$list['func']['url']);
@@ -54,56 +60,28 @@ class ProductController extends BaseController
         return view('company.product.index', $result);
     }
 
+//    /**
+//     * 视频预览
+//     */
+//    public function video($cid,$id,$videoid)
+//    {
+//        $company = \App\Models\CompanyModel::find($cid);
+//        $data = GoodsModel::find($id);
+//        $result = [
+//            'data'=> $data,
+//            'video'=> \App\Models\Base\VideoModel::find($videoid),
+//            'uid'=> $company->uid,
+//            'videoName'=> $data->name,
+//        ];
+//        return view('layout.videoPre', $result);
+//    }
+
     /**
-     * 视频预览
+     * 获取 model
      */
-    public function video($cid,$id,$videoid)
+    public function getModel()
     {
-        $company = \App\Models\CompanyModel::find($cid);
-        $data = GoodsModel::find($id);
-        $result = [
-            'data'=> $data,
-            'video'=> \App\Models\Base\VideoModel::find($videoid),
-            'uid'=> $company->uid,
-            'videoName'=> $data->name,
-        ];
-        return view('layout.videoPre', $result);
-    }
-
-
-
-
-
-    public function query($uid,$genre,$cate)
-    {
-        $limit = 20;
-        if ($cate) {
-            $datas = GoodsModel::where('uid',$uid)
-                ->where('del',0)
-                //genre==1代表产品
-                ->where('genre',$genre)
-                //type==4代表企业供应
-                ->where('type',4)
-                ->where('cate',$cate)
-                ->where('isshow',1)
-                ->where('isshow2',1)
-                ->orderBy('sort','desc')
-                ->orderBy('id','desc')
-                ->paginate($limit);
-        } else {
-            $datas = GoodsModel::where('uid',$uid)
-                ->where('del',0)
-                //genre==1代表产品
-                ->where('genre',$genre)
-                //type==4代表企业供应
-                ->where('type',4)
-                ->where('isshow',1)
-                ->where('isshow2',1)
-                ->orderBy('sort','desc')
-                ->orderBy('id','desc')
-                ->paginate($limit);
-        }
-        $datas->limit = $limit;
-        return $datas;
+        $apiModel = ApiGoods::getModel();
+        return $apiModel['code']==0 ? $apiModel['model'] : [];
     }
 }

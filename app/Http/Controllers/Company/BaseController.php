@@ -1,11 +1,11 @@
 <?php
 namespace App\Http\Controllers\Company;
 
+use App\Api\ApiBusiness\ApiComFunc;
 use App\Api\ApiBusiness\ApiComModule;
 use App\Api\ApiBusiness\ApiLink;
 use App\Api\ApiUser\ApiCompany;
 use App\Http\Controllers\BaseController as Controller;
-use Session;
 use Illuminate\Support\Facades\View;
 
 class BaseController extends Controller
@@ -16,31 +16,23 @@ class BaseController extends Controller
 
     protected $topmenus = array();
     protected $prefix_url = '';
-//    protected $visitRate = 10;       //访问日志间隔时间10s
 
     public function __construct()
     {
         parent::__construct();
-//        View::share('topmenu',$this->getTopMenu());      //共享topmenu数据
-//        View::share('footers',$this->getFooter());       //共享footer数据
     }
 
     public function company($cid,$url)
     {
         //判断cid
-        if (!$cid && !Session::has('user.cid')) {
+        if (!$cid) {
             echo "<script>alert('参数错误，或者没有权限！');history.go(-1);</script>";exit;
-        } elseif ($cid && !Session::has('user.cid')) {
+        } else {
             $this->cid = $cid;
             $apiCompany = ApiCompany::show($cid);
             $this->company = $apiCompany['code']==0 ? $apiCompany['data'] : [];
             $this->userid = $this->company ? $this->company['uid'] : 0;
-        } elseif (Session::has('user.cid')) {
-            $this->userid = Session::get('user.uid');
-            $this->cid = Session::get('user.cid');
-            $this->company = Session::get('user.company');
         }
-//        define('VISITRATE',$this->visitRate);
         $this->getComModules($this->cid);
         //拼接url
         if ($url) {
@@ -48,9 +40,11 @@ class BaseController extends Controller
         } else {
             $this->prefix_url = '/c/'.$this->cid.$url;
         }
+        View::share('company',$this->company);                //共享company数据
+        View::share('topmenus',$this->getTopMenu($cid));      //共享topmenu数据
+        View::share('footLinks',$this->getFooter($cid));      //共享footer数据
         return array(
             'uid'=> $this->userid,
-            'cid'=> $this->cid,
             'company'=> $this->company,
         );
     }
@@ -65,15 +59,26 @@ class BaseController extends Controller
     }
 
     /**
-     * 获取所属模块id
+     * 企业功能
      */
-    public function getModuleId($cid,$genre)
+    public function getFuncs($cid,$limit,$genre,$pageCurr=1)
     {
         $apiComModule = ApiComModule::getModuleByGenre($cid,$genre);
         if ($apiComModule['code']!=0) {
             $apiComModule = ApiComModule::getModuleByGenre(0,$genre);
         }
-        return $apiComModule['data']['id'];
+        $module = $apiComModule['data']['id'];
+        $apiComFunc = ApiComFunc::index($limit,1,$cid,$module,2);
+        if ($apiComFunc['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiComFunc['data']; $total = $apiComFunc['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$this->prefix_url,$limit,$pageCurr);
+        return array(
+            'datas' =>  $datas,
+            'pagelist'  =>  $pagelist,
+        );
     }
 
     /**

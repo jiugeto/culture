@@ -11,12 +11,11 @@
                 <div class="onlyone">
                     <div class="title">{{$data['name']}}</div>
                     @if($data['thumb'])
-                    <div class="img"><img src="{{$data['thumb']}}"></div>
-                    @else <div class="img">待添加</div>
+                        <div class="img"><img src="{{$data['thumb']}}"></div>
                     @endif
                     <p>{{strip_tags($data['intro'])}}</p>
-                    @if($data['small'])
-                        @foreach($data['small'] as $small)<p>{{$small}}</p>@endforeach
+                    @if($data['smallArr'])
+                        @foreach($data['smallArr'] as $small)<p>{{$small}}</p>@endforeach
                     @endif
                 </div>
             </span>

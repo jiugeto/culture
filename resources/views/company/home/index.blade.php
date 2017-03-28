@@ -1,7 +1,8 @@
 @extends('company.main')
 @section('content')
     @if(!$switchs || ($switchs&&$switchs['pptSwitch']['value']))
-    <div class="com_ppt" @if($skin)style="background:{{$skin}};border:1px solid {{$skin}};"@endif>
+    <div class="com_ppt"
+         @if($company['skin'])style="background:{{$company['skin']}};border:1px solid {{$company['skin']}};"@endif>
         <div class="com_ad">
             @if(count($ppts))
                 @foreach($ppts as $kppt=>$ppt)
@@ -17,7 +18,7 @@
                 {{--@endfor--}}
             {{--@endif--}}
         </div>
-        <div class="com_ppt_point" @if($skin)style="background:{{$skin}};"@endif>
+        <div class="com_ppt_point" @if($company['skin'])style="background:{{$company['skin']}};"@endif>
             {{--<ul style="width:{{$ppts->limit/10*400}}px;">--}}
             {{--@if(count($ppts)<$ppts->limit)--}}
                 {{--@for($i=0;$i<$ppts->limit-count($ppts);++$i)--}}
@@ -39,7 +40,7 @@
     <div class="fengexian">{{--分割线--}}</div>
     <div class="com_floor1">
         <p class="bigtitle">→ OUR SERVICE 服务项目
-            <span class="float_right"><a href="{{DOMAIN}}c/{{$company['cid']}}/firm">更多</a></span>
+            <span class="float_right"><a href="{{DOMAIN}}c/{{$company['id']}}/firm">更多</a></span>
         </p>
         <div class="com_floor">
             @if(count($firms))
@@ -71,7 +72,7 @@
     @if(!$switchs || ($switchs&&$switchs['newsSwitch']['value']))
     <div class="fengexian">{{--分割线--}}</div>
     <div class="com_floor2">
-        <p class="bigtitle">→ OUR NEWS 新闻资讯 <span class="float_right"><a href="{{DOMAIN}}c/{{$company['cid']}}/about/3">更多</a></span></p>
+        <p class="bigtitle">→ OUR NEWS 新闻资讯 <span class="float_right"><a href="{{DOMAIN}}c/{{$company['id']}}/about/3">更多</a></span></p>
         <div class="com_floor">
             {{--图片是最新的新闻显示--}}
             <div class="com_news">
@@ -130,7 +131,7 @@
     <div class="fengexian">{{--分割线--}}</div>
     <div class="com_floor3">
         <p class="bigtitle">→ OUR PRODUCT 公司作品
-            <span class="float_right"><a href="{{DOMAIN}}c/{{$company['cid']}}/product">更多</a></span>
+            <span class="float_right"><a href="{{DOMAIN}}c/{{$company['id']}}/product">更多</a></span>
         </p>
         <div class="com_product">
             {{--<div class="com_tab">--}}
@@ -170,7 +171,7 @@
     <div class="fengexian">{{--分割线--}}</div>
     <div class="com_floor4">
         <p class="bigtitle">→ OUR PARTERNERS 合作伙伴
-            <span class="float_right"><a href="{{DOMAIN}}c/{{$company['cid']}}/parterner">更多</a></span>
+            <span class="float_right"><a href="{{DOMAIN}}c/{{$company['id']}}/parterner">更多</a></span>
         </p>
         <div class="com_parterner">
             @if(count($parterners))

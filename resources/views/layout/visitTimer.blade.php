@@ -2,7 +2,7 @@
 
 
 <input type="hidden" name="_token" value="{{csrf_token()}}">
-<input type="hidden" name="cid" value="{{$company['cid']}}">
+<input type="hidden" name="cid" value="{{$company['id']}}">
 <input type="hidden" name="uid" value="{{Session::has('user')?Session::get('user.uid'):0}}">
 <input type="hidden" name="visit_url" value="{{$_SERVER['REQUEST_URI']}}">
 <script>

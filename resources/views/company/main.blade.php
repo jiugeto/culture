@@ -14,7 +14,7 @@
 <body>
     @include('layout.header')
     @include('layout.visitTimer')
-    @include('company.partials.top')
+    @include('company.common.top')
     <div class="content_kongbai" style="height:100px;">&nbsp;</div>
     <div class="mem_con">
         <!-- 中间内容 -->
@@ -29,6 +29,6 @@
         </div>
         <!-- 中间内容 -->
     </div>
-    @include('company.partials.footer')
+    @include('company.common.footer')
 </body>
 </html>

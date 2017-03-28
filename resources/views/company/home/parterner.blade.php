@@ -31,7 +31,7 @@
                 @endfor
             @endif
         </div>
-        @include('company.partials.page')
+        @include('company.common.#page')
     </div>
 
     <script>
