@@ -7,7 +7,7 @@
             <a href=""><img src=""></a>
         </p>
         <p class="com_footer_text">
-            <a href="">首页</a>
+            <a href="">底部链接</a>
         </p>
         <p class="com_footer_beizhu">Copyright © 2016-2020 mougongsi.com All Rights Reserved 版权所有 某公司</p>
     </div>

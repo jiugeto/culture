@@ -15,12 +15,7 @@ Route::group(['prefix'=>'c/{cid}','namespace'=>'Company'], function(){
     Route::get('product','ProductController@index');
     Route::get('product/s/{cate}','ProductController@index');
     //花絮路由
-    Route::get('part','ProductController@part');
-//    Route::get('part/s/{cate}','ProductController@part');
-    //产品、花絮详情
-    Route::get('goods/{id}','ProductController@show');
-    //视频预览
-    Route::get('video/{id}/{videoid}','ProductController@video');
+    Route::get('huaxu','ProHuaxuController@index');
     //服务路由
     Route::get('firm','FirmController@index');
     //团队路由
@@ -30,16 +25,15 @@ Route::group(['prefix'=>'c/{cid}','namespace'=>'Company'], function(){
     //联系方式路由
     Route::get('contact','ContactController@index');
     //合作伙伴路由
-    Route::get('parterner','HomeController@parterner');
-    Route::get('parterner/{id}','HomeController@partShow');
+    Route::get('parterner','HomeController@getParternerList');
     //访问日志路由
-    Route::post('visitlog/set','VisitlogController@setVisit');
+//    Route::post('visitlog/set','VisitlogController@setVisit');
 });
 
 
-Route::group(['prefix'=>'company','middleware' =>'MemberAuth','namespace'=>'Company'], function(){
+Route::group(['prefix'=>'c/{cid}','middleware' =>'MemberAuth','namespace'=>'Company'], function(){
     //企业后台控制
-    Route::group(['prefix'=>'admin','namespace'=>'Admin'], function(){
+    Route::group(['prefix'=>'back','namespace'=>'Admin'], function(){
         //后台首页路由
         Route::get('/','HomeController@index');
         Route::get('home','HomeController@index');

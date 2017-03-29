@@ -1,9 +1,9 @@
 <?php
 namespace App\Http\Controllers\Company;
 
-use App\Api\ApiBusiness\ApiGoods;
+use App\Api\ApiBusiness\ApiGoodsHuaxu;
 
-class ProductController extends BaseController
+class ProHuaxuController extends BaseController
 {
     /**
      * 企业后台产品
@@ -19,13 +19,13 @@ class ProductController extends BaseController
         $list['func']['name'] = '产品';
         $list['func']['url'] = 'product';
         $company = $this->company($cid,$list['func']['url']);
-        $cid = $company['company']['id'];
+        $uid = $company['company']['uid'];
         $pageCurr = isset($_GET['page']) ? $_GET['page'] : 1;
-        $apiGoods = ApiGoods::index($this->limit,$pageCurr,$company['company']['uid'],0,$cid,0,2);
-        if ($apiGoods['code']!=0) {
+        $apiHuaxu = ApiGoodsHuaxu::index($this->limit,$pageCurr,0,$uid,0);
+        if ($apiHuaxu['code']!=0) {
             $datas = array(); $total = 0;
         } else {
-            $datas = $apiGoods['data']; $total = $apiGoods['pagelist']['total'];
+            $datas = $apiHuaxu['data']; $total = $apiHuaxu['pagelist']['total'];
         }
         $pagelist = $this->getPageList($total,$this->prefix_url,$this->limit,$pageCurr);
         $result = [
@@ -36,7 +36,7 @@ class ProductController extends BaseController
             'curr' => $list['func']['url'],
             'cate' => $cate,
         ];
-        return view('company.product.index', $result);
+        return view('company.huaxu.index', $result);
     }
 
     /**
@@ -44,7 +44,7 @@ class ProductController extends BaseController
      */
     public function getModel()
     {
-        $apiModel = ApiGoods::getModel();
+        $apiModel = ApiGoodsHuaxu::getModel();
         return $apiModel['code']==0 ? $apiModel['model'] : [];
     }
 }

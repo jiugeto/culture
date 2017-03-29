@@ -22,7 +22,7 @@ class TeamController extends BaseController
         $company = $this->company($cid,$this->list['func']['url']);
         $cid = $company['company']['id'];
         $pageCurr = isset($_GET['page']) ? $_GET['page'] : 1;
-        $apiFunc = $this->getFuncs($cid,5,6,$pageCurr);
+        $apiFunc = $this->getFuncs($cid,6,6,$pageCurr);
         $result = [
             'datas' => $apiFunc['datas'],
             'pagelist' => $apiFunc['pagelist'],

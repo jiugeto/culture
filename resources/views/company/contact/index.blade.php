@@ -11,14 +11,14 @@
     <!--百度地图容器-->
     <div style="width:100%;height:550px;border:#ccc solid 1px;" id="dituContent"></div>
     <p>
-        公司名称：{{ $data->name }} &nbsp;&nbsp;&nbsp;&nbsp;
-        地址：{{ $data->address }} &nbsp;&nbsp;&nbsp;&nbsp;
-        电话： {{ $data->tel }} &nbsp;&nbsp;&nbsp;&nbsp;
-        QQ： {{ $data->qq }} &nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="hidden" name="companyname" value="{{ $data->name }}">
-        <input type="hidden" name="address" value="{{ $data->address }}">
-        <input type="hidden" name="axis_x" value="{{ $data->getPointX() }}">
-        <input type="hidden" name="axis_y" value="{{ $data->getPointY() }}">
+        公司名称：{{$data['name']}} &nbsp;&nbsp;&nbsp;&nbsp;
+        地址：{{$data['address']}} &nbsp;&nbsp;&nbsp;&nbsp;
+        电话： {{$data['tel']}} &nbsp;&nbsp;&nbsp;&nbsp;
+        QQ： {{$data['qq']}} &nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="hidden" name="companyname" value="{{$data['name']}}">
+        <input type="hidden" name="address" value="{{$data['address']}}">
+        <input type="hidden" name="axis_x" value="{{$data['pointx']}}">
+        <input type="hidden" name="axis_y" value="{{$data['pointy']}}">
     </p>
 
     <script type="text/javascript">

@@ -7,7 +7,7 @@ use Illuminate\Contracts\View\View;
 class FooterComposer
 {
     /**
-     * 绑定系统后台左侧菜单的数据
+     * 网站底部链接的数据
      */
 
     public function compose(View $view)

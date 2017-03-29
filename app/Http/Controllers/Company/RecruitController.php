@@ -1,10 +1,6 @@
 <?php
 namespace App\Http\Controllers\Company;
 
-use App\Models\Company\ComModuleModel;
-use App\Models\Company\ComFuncModel;
-use App\Models\CompanyModel;
-
 class RecruitController extends BaseController
 {
     /**
@@ -21,34 +17,14 @@ class RecruitController extends BaseController
     public function index($cid)
     {
         $company = $this->company($cid,$this->list['func']['url']);
-        $companyModel = CompanyModel::find($company['cid']);
+        $cid = $company['company']['id'];
+        $pageCurr = isset($_GET['page']) ? $_GET['page'] : 1;
+        $apiFunc = $this->getFuncs($cid,5,7,$pageCurr);
         $result = [
-            'datas'=> $this->query($company['cid']),
-//            'job'=> $this->getModule($company['cid']),
-            'company'=> $companyModel,
-            'comMain'=> $this->getComMain($company['cid']),
-            'topmenus'=> $this->topmenus,
-            'prefix_url'=> $this->prefix_url,
+            'datas' => $apiFunc['datas'],
+            'pagelist' => $apiFunc['pagelist'],
+            'prefix_url' => $this->prefix_url,
         ];
         return view('company.recruit.index', $result);
     }
-
-    public function query($cid)
-    {
-        $limit = 10;
-        $datas = ComFuncModel::where('cid',$cid)
-                    ->where('module_id',4)
-                    ->where('isshow',1)
-                    ->orderBy('sort','desc')
-                    ->orderBy('id','desc')
-                    ->paginate($limit);
-        $datas->limit = $limit;
-        return $datas;
-    }
-
-//    public function getModule($cid)
-//    {
-//        if (count($this->query($cid))) { $job = $this->query($cid)[0]; }
-//        return isset($job) ? ComModuleModel::find($job->module_id) : '';
-//    }
 }

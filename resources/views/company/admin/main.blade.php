@@ -12,10 +12,10 @@
 </head>
 <body>
     @include('layout.header')
-    @include('company.admin.partials.top')
+    @include('company.admin.common.top')
     <div class="content_kongbai" style="height:105px;">&nbsp;</div>
     <div class="com_admin_con">
-        @include('company.admin.partials.left')
+        @include('company.admin.common.left')
 
         <div class="com_admin_right">
             {{--@include('company.admin.common.crumb')--}}
@@ -24,6 +24,6 @@
 
         <div class="content_kongbai" style="height:50px;">&nbsp;</div>
     </div>
-    @include('company.common.footer')
+    @include('layout.footer')
 </body>
 </html>

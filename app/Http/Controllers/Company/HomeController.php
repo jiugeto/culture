@@ -21,10 +21,12 @@ class HomeController extends BaseController
     {
         $company = $this->company($cid,$this->list['func']['url']);
         $cid = $company['company']['id'];
-        $apiAd = ApiAd::index(10,1,$company['uid'],5,time(),time(),1,2);
+        $pptNum = 10;
+        $apiAd = ApiAd::index($pptNum,1,$company['uid'],5,time(),time(),1,2);
         $apiGoods = ApiGoods::index(4,1,$company['uid'],0,0,0,2);
         $result = [
             'ppts' => $apiAd['code']==0 ? $apiAd['data'] : [],
+            'pptNum' => $pptNum,
             'firms' => $this->getFuncs($cid,4,5)['datas'],
             'news' => $this->getFuncs($cid,8,3)['datas'],
             'infos' => $this->getFuncs($cid,8,4)['datas'],
@@ -36,26 +38,23 @@ class HomeController extends BaseController
         return view('company.home.index', $result);
     }
 
-//    /**
-//     * 合作伙伴列表
-//     */
-//    public function parterner($cid)
-//    {
-//        $limit = 20;
-//        $moduleid = 5;      //5代表合作伙伴
-//        $company = $this->company($cid,$this->list['func']['url']);
-//        $datas = ComFuncModel::where('cid',$company['cid'])
-//            ->where('module_id',$moduleid)
-//            ->paginate($limit);
-//        $datas->limit = $limit;
-//        $result = [
-//            'datas'=> $datas,
-//            'comMain'=> $this->getComMain($company['cid']),
-//            'topmenus'=> $this->topmenus,
-//            'prefix_url'=> $this->prefix_url,
-//        ];
-//        return view('company.home.parterner', $result);
-//    }
+    /**
+     * 合作伙伴列表
+     */
+    public function getParternerList($cid)
+    {
+        $company = $this->company($cid,$this->list['func']['url']);
+        $cid = $company['company']['id'];
+        $pageCurr = isset($_GET['page']) ? $_GET['page'] : 1;
+        $apiFunc = $this->getFuncs($cid,$this->limit,8,$pageCurr);
+        $result = [
+            'datas' => $apiFunc['datas'],
+            'pagelist' => $apiFunc['pagelist'],
+            'prefix_url' => $this->prefix_url,
+            'limit' => $this->limit,
+        ];
+        return view('company.home.parterner', $result);
+    }
 
 //    /**
 //     * 合作伙伴大列表

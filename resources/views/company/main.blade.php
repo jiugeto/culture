@@ -29,6 +29,6 @@
         </div>
         <!-- 中间内容 -->
     </div>
-    @include('company.common.footer')
+    @include('layout.footer')
 </body>
 </html>

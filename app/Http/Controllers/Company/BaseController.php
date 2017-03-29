@@ -42,7 +42,7 @@ class BaseController extends Controller
         }
         View::share('company',$this->company);                //共享company数据
         View::share('topmenus',$this->getTopMenu($cid));      //共享topmenu数据
-        View::share('footLinks',$this->getFooter($cid));      //共享footer数据
+        View::share('footLinks',$this->getFootLinks($cid));   //共享foot数据
         return array(
             'uid'=> $this->userid,
             'company'=> $this->company,
@@ -93,7 +93,7 @@ class BaseController extends Controller
     /**
      * 公司页面footer菜单
      */
-    public function getFooter($cid=0)
+    public function getFootLinks($cid=0)
     {
         $apiLink = ApiLink::index(8,1,$cid,3,2,'desc');
         return $apiLink['code']==0 ? $apiLink['data'] : [];

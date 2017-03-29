@@ -1,9 +1,6 @@
 <?php
 namespace App\Http\Controllers\Company;
 
-use App\Models\Company\ComFuncModel;
-use App\Models\CompanyModel;
-
 class ContactController extends BaseController
 {
     /**
@@ -19,14 +16,17 @@ class ContactController extends BaseController
 
     public function index($cid)
     {
-        $key = 'Tj1ciyqmG0quiNgpr0nmAimUCCMB5qMk';      //自己申请的百度地图api的key
+        $mapkey = 'Tj1ciyqmG0quiNgpr0nmAimUCCMB5qMk';      //自己申请的百度地图api的key
         $company = $this->company($cid,$this->list['func']['url']);
+//        $cid = $company['company']['id'];
+//        $pageCurr = isset($_GET['page']) ? $_GET['page'] : 1;
+//        $apiFunc = $this->getFuncs($cid,5,9,$pageCurr);
+//        $data = $apiFunc['datas'][0];
         $result = [
-            'data'=> CompanyModel::find($company['cid']),
-            'comMain'=> $this->getComMain($company['cid']),
-            'topmenus'=> $this->topmenus,
-            'prefix_url'=> $this->prefix_url,
-            'ak'=> $key,
+            'data' => $company['company'],
+//            'pagelist' => $apiFunc['pagelist'],
+            'prefix_url' => $this->prefix_url,
+            'ak' => $mapkey,
         ];
         return view('company.contact.index', $result);
     }

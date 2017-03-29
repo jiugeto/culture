@@ -5,27 +5,27 @@
          @if($company['skin'])style="background:{{$company['skin']}};border:1px solid {{$company['skin']}};"@endif>
         <div class="com_ad">
             @if(count($ppts))
-                @foreach($ppts as $kppt=>$ppt)
+                @foreach($ppts as $ppt)
                 <a href="{{$ppt['link']}}" title="{{$ppt['name']}}">
                     <div class="img" id="ppt_{{$ppt['id']}}"><img src="{{$ppt['img']}}"></div>
                 </a>
                 @endforeach
             @endif
 
-            {{--@if(count($ppts)<$ppts->limit)--}}
-                {{--@for($i=0;$i<$ppts->limit-count($ppts);++$i)--}}
-                {{--<div class="img" id="ppt_{{$i}}">广告待添加 {{$i+1}}</div>--}}
-                {{--@endfor--}}
-            {{--@endif--}}
+            @if(count($ppts)<$pptNum)
+                @for($i=0;$i<$pptNum-count($ppts);++$i)
+                <div class="img" id="ppt_{{$i}}">PPT待添加 {{$i+1}}</div>
+                @endfor
+            @endif
         </div>
         <div class="com_ppt_point" @if($company['skin'])style="background:{{$company['skin']}};"@endif>
-            {{--<ul style="width:{{$ppts->limit/10*400}}px;">--}}
-            {{--@if(count($ppts)<$ppts->limit)--}}
-                {{--@for($i=0;$i<$ppts->limit-count($ppts);++$i)--}}
-                    {{--<li class="{{ $i==0?'li_curr':'' }}" id="li_{{$i}}" onmouseover="move({{$i}})"></li>--}}
-                {{--@endfor--}}
-            {{--@endif--}}
-            {{--</ul>--}}
+            <ul style="width:400px;">
+            @if(count($ppts)<$pptNum)
+                @for($i=0;$i<$pptNum-count($ppts);++$i)
+                    <li class="{{$i==0?'li_curr':''}}" id="li_{{$i}}" onmouseover="move({{$i}})"></li>
+                @endfor
+            @endif
+            </ul>
         </div>
         <script>
             function move(i){
@@ -176,7 +176,7 @@
         <div class="com_parterner">
             @if(count($parterners))
                 @foreach($parterners as $parterner)
-            <a href="" title="{{$parterner['name']}}">
+            <a href="javascript:;" title="{{$parterner['name']}}">
                 <div class="com_par">
                     <div class="img"><img src="{{$parterner['thumb']}}"></div>
                 </div>

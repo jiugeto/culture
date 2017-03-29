@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Company\Admin;
 
 use App\Http\Controllers\BaseController as Controller;
-use App\Models\Company\ComModuleModel;
+use Session;
 
 class BaseController extends Controller
 {
@@ -47,24 +47,10 @@ class BaseController extends Controller
     public function __construct()
     {
         parent::__construct();
-        if (\Session::has('user.cid')) { $this->cid = \Session::get('user.cid'); }
-        $this->userid = \Session::get('user.uid');
-        if (\Session::has('user.company')) {
-            $this->company = unserialize(\Session::get('user.company'));
-//            $this->cid = $this->company['cid'];
-        } else {
-//            echo "<script>alert('你还木有做公司认证！');</script>";exit;
-//            return redirect(DOMAIN.'member/setting/'.$this->userid.'/auth');
+        if (Session::has('user.cid')) { $this->cid = Session::get('user.cid'); }
+        $this->userid = Session::get('user.uid');
+        if (Session::has('user.company')) {
+            $this->company = Session::get('user.company');
         }
-    }
-
-    /**
-     * 获取所属模块id
-     */
-    public function getModuleId($genre)
-    {
-        $moduleModel = ComModuleModel::where('cid',$this->cid)->where('genre',$genre)->first();
-        if (!$moduleModel) { $moduleModel = ComModuleModel::where('cid',0)->where('genre',$genre)->first(); }
-        return $moduleModel->id;
     }
 }

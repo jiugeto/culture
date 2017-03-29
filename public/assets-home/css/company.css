@@ -383,25 +383,32 @@ span.float_right a:hover { text-decoration:underline; }
     color:grey;
     text-align:center;
     line-height:398px;
-    background:gainsboro;
     overflow:hidden;
 }
 .com_team_con .onlyone .text {
     padding:10px 5px;
+    height:100px;
     text-align:center;
     color:white;
-    background:rgba(50,50,50,0.3);
-    position:relative; top:0;
+    background:#000000;
+    filter:alpha(opacity=50); -moz-opacity:0.5; -khtml-opacity: 0.5; opacity: 0.5;
+    position:relative; top:-100px;
+    display:none;
 }
+.com_team_con a:hover .text { display:block; }
 /*===== 团队列表页面 =====*/
 
 
 
 /*===== 招聘列表页面 =====*/
 .com_recruit_con {}
-.com_recruit_con table { margin:20px auto;width:80%; }
+.com_recruit_con table {
+    margin:20px auto;
+    width:80%;
+    color:#808080;
+}
 .com_recruit_con table,.com_recruit_con td {
-    border:1px solid lightgrey;
+    border:1px solid #e5e5e5;
 }
 .com_recruit_con td {
     padding:5px 20px;
