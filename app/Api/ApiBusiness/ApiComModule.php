@@ -126,6 +126,50 @@ class ApiComModule
     }
 
     /**
+     * 设置是否显示
+     */
+    public static function setShow($moduleid,$isshow)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/com/module/setshow';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, array(
+            'id'    =>  $moduleid,
+            'isshow'    =>  $isshow,
+        ));
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array(
+            'code' => 0,
+            'msg' => $response->error->msg,
+        );
+    }
+
+    /**
+     * 设置是否显示
+     */
+    public static function setSort($moduleid,$sort)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/com/module/setsort';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, array(
+            'id'    =>  $moduleid,
+            'sort'  =>  $sort,
+        ));
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array(
+            'code' => 0,
+            'msg' => $response->error->msg,
+        );
+    }
+
+    /**
      * 初始化模块
      */
     public static function initModule($cid)

@@ -143,29 +143,14 @@ class ApiCompany
     /**
      * 设置公司logo
      */
-    public static function setLogo($data)
+    public static function setLogo($cid,$logo)
     {
         $apiUrl = ApiBase::getApiCurl() . '/api/v1/company/setlogo';
         $curl = new Curl();
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
-        $curl->post($apiUrl, $data);
-        $response = json_decode($curl->response);
-        if ($response->error->code != 0) {
-            return array('code' => -2, 'msg' => $response->error->msg);
-        }
-        return array('code' => 0, 'msg' => $response->error->msg);
-    }
-
-    /**
-     * 设置公司皮肤
-     */
-    public static function setSkin($skin)
-    {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/company/setskin';
-        $curl = new Curl();
-        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
         $curl->post($apiUrl, array(
-            'skin'  =>  $skin,
+            'cid'   =>  $cid,
+            'logo'  =>  $logo,
         ));
         $response = json_decode($curl->response);
         if ($response->error->code != 0) {
@@ -177,12 +162,34 @@ class ApiCompany
     /**
      * 设置公司页面布局开关
      */
-    public static function setLayout($data)
+    public static function setLayout($cid,$layout)
     {
         $apiUrl = ApiBase::getApiCurl() . '/api/v1/company/setlayout';
         $curl = new Curl();
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
-        $curl->post($apiUrl, $data);
+        $curl->post($apiUrl, array(
+            'cid'   =>  $cid,
+            'layout'    =>  $layout,
+        ));
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -2, 'msg' => $response->error->msg);
+        }
+        return array('code' => 0, 'msg' => $response->error->msg);
+    }
+
+    /**
+     * 设置公司皮肤
+     */
+    public static function setSkin($cid,$skin)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/company/setskin';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, array(
+            'cid'   =>  $cid,
+            'skin'  =>  $skin,
+        ));
         $response = json_decode($curl->response);
         if ($response->error->code != 0) {
             return array('code' => -2, 'msg' => $response->error->msg);

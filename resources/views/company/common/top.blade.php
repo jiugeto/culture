@@ -14,8 +14,8 @@
             </a>
         </div>
         <ul>
-            @if(Session::has('user.cid') && Session::get('user.cid')==$company['cid'])
-            <a href="{{DOMAIN}}company/admin"><li>后台</li></a>
+            @if(Session::has('user.cid') && Session::get('user.cid')==$company['id'])
+            <a href="{{DOMAIN}}com/back"><li>后台</li></a>
             @endif
             @if($topmenus)
             @foreach($topmenus as $topmenu)

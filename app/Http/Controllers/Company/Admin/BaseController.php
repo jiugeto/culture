@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Company\Admin;
 
 use App\Http\Controllers\BaseController as Controller;
 use Session;
+use Illuminate\Support\Facades\View;
 
 class BaseController extends Controller
 {
@@ -49,8 +50,11 @@ class BaseController extends Controller
         parent::__construct();
         if (Session::has('user.cid')) { $this->cid = Session::get('user.cid'); }
         $this->userid = Session::get('user.uid');
+        $this->cid = Session::get('user.cid');
         if (Session::has('user.company')) {
             $this->company = Session::get('user.company');
         }
+        View::share('company',$this->company);                             //共享公司数据
+        define("DOMAIN_C_BACK",DOMAIN."com/back/");                        //公司请求链接前缀
     }
 }

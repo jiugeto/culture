@@ -1,6 +1,6 @@
 @extends('company.main')
 @section('content')
-    @if(!$switchs || ($switchs&&$switchs['pptSwitch']['value']))
+    @if(!$switchs || ($switchs&&$switchs['ppt']))
     <div class="com_ppt"
          @if($company['skin'])style="background:{{$company['skin']}};border:1px solid {{$company['skin']}};"@endif>
         <div class="com_ad">
@@ -34,10 +34,10 @@
             }
         </script>
     </div>
+    <div class="fengexian">{{--分割线--}}</div>
     @endif
 
-    @if(!$switchs || ($switchs&&$switchs['serviceSwitch']['value']))
-    <div class="fengexian">{{--分割线--}}</div>
+    @if(!$switchs || ($switchs&&$switchs['service']))
     <div class="com_floor1">
         <p class="bigtitle">→ OUR SERVICE 服务项目
             <span class="float_right"><a href="{{DOMAIN}}c/{{$company['id']}}/firm">更多</a></span>
@@ -67,10 +67,10 @@
             @endif
         </div>
     </div>
+    <div class="fengexian">{{--分割线--}}</div>
     @endif
 
-    @if(!$switchs || ($switchs&&$switchs['newsSwitch']['value']))
-    <div class="fengexian">{{--分割线--}}</div>
+    @if(!$switchs || ($switchs&&$switchs['news']))
     <div class="com_floor2">
         <p class="bigtitle">→ OUR NEWS 新闻资讯 <span class="float_right"><a href="{{DOMAIN}}c/{{$company['id']}}/about/3">更多</a></span></p>
         <div class="com_floor">
@@ -125,10 +125,10 @@
             </div>
         </div>
     </div>
+    <div class="fengexian">{{--分割线--}}</div>
     @endif
 
-    @if(!$switchs || ($switchs&&$switchs['productSwitch']['value']))
-    <div class="fengexian">{{--分割线--}}</div>
+    @if(!$switchs || ($switchs&&$switchs['product']))
     <div class="com_floor3">
         <p class="bigtitle">→ OUR PRODUCT 公司作品
             <span class="float_right"><a href="{{DOMAIN}}c/{{$company['id']}}/product">更多</a></span>
@@ -165,10 +165,10 @@
             </div>
         </div>
     </div>
+    <div class="fengexian">{{--分割线--}}</div>
     @endif
 
-    @if(!$switchs || ($switchs&&$switchs['parternerSwitch']['value']))
-    <div class="fengexian">{{--分割线--}}</div>
+    @if(!$switchs || ($switchs&&$switchs['parterner']))
     <div class="com_floor4">
         <p class="bigtitle">→ OUR PARTERNERS 合作伙伴
             <span class="float_right"><a href="{{DOMAIN}}c/{{$company['id']}}/parterner">更多</a></span>
@@ -194,10 +194,10 @@
             @endif
         </div>
     </div>
+    <div class="fengexian">{{--分割线--}}</div>
     @endif
 
-    @if(!$switchs || ($switchs&&$switchs['footLinkSwitch']['value']))
-    <div class="fengexian">{{--分割线--}}</div>
+    @if(!$switchs || ($switchs&&$switchs['footLink']))
     <div class="com_buttom">
         <div class="foot">
             @if(count($footLinks))

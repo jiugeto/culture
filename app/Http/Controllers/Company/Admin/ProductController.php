@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Company\Admin;
 
-use App\Models\GoodsModel;
+use App\Api\ApiBusiness\ApiGoods;
 use Illuminate\Http\Request;
 
 class ProductController extends BaseController
@@ -17,20 +17,33 @@ class ProductController extends BaseController
         $this->lists['category']['url'] = 'content';
         $this->lists['func']['name'] = '产品编辑';
         $this->lists['func']['url'] = 'product';
-        $this->model = new GoodsModel();
     }
 
     public function index($cate=0)
     {
         $curr['name'] = $this->lists['']['name'];
         $curr['url'] = $this->lists['']['url'];
+        $pageCurr = isset($_GET['page']) ? $_GET['page'] : 1;
+        if (!$cate) {
+            $prefix_url = DOMAIN_C_BACK.'product';
+        } else {
+            $prefix_url = DOMAIN_C_BACK.'product/s/'.$cate;
+        }
+        $apiGoods = ApiGoods::index($this->limit,$pageCurr,$this->userid,[1,3],0,0,2);
+        if ($apiGoods['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiGoods['data']; $total = $apiGoods['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query($del=0,$cate),
-            'model'=> $this->model,
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-            'curr_func'=> $this->lists['func']['url'],
-            'cate'=> $cate,
+            'datas' => $datas,
+            'pagelist' => $pagelist,
+            'model' => $this->model,
+            'lists' => $this->lists,
+            'curr' => $curr,
+            'curr_func' => $this->lists['func']['url'],
+            'cate' => $cate,
         ];
         return view('company.admin.product.index', $result);
     }
@@ -156,24 +169,11 @@ class ProductController extends BaseController
     }
 
     /**
-     * 查询方法
+     * 获取 model
      */
-    public function query($del=0,$cate=0)
+    public function getModel()
     {
-        //说明：genre==1产品，2花絮；type==1个人需求，2个人供应，3企业需求，4企业供应
-        if ($cate) {
-            $datas = GoodsModel::where('uid',$this->userid)
-                ->where('del',$del)
-                ->where('cate',$cate)
-                ->where(array('genre'=>1, 'type'=>4))
-                ->paginate($this->limit);
-        } else {
-            $datas = GoodsModel::where('uid',$this->userid)
-                ->where('del',$del)
-                ->where(array('genre'=>1, 'type'=>4))
-                ->paginate($this->limit);
-        }
-        $datas->limit = $this->limit;
-        return $datas;
+        $apiModel = ApiGoods::getModel();
+        return $apiModel['code']==0 ? $apiModel['model'] : [];
     }
 }

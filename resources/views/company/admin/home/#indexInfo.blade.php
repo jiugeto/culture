@@ -25,7 +25,7 @@
             <span onclick="window.location.href='{{DOMAIN}}company/admin/link';" class="com_info">详情</span>
             <div class="bottom"><div class="top4"></div></div>
         </div>
-        {{--<br>--}}
-        {{--<div class="com_space"><a href="">更多</a></div>--}}
+        <br>
+        <div class="com_space"><a href="">更多</a></div>
     </div>
 @stop

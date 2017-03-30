@@ -35,7 +35,7 @@
             <a href="{{DOMAIN}}c/{{Session::get('user.cid')}}">
                 <li class="a_li li_sub"> 企业主页</li>
             </a>
-            <a href="{{DOMAIN}}c/{{Session::get('user.cid')}}/back">
+            <a href="{{DOMAIN}}com/back">
                 <li class="a_li li_sub"> 企业后台</li>
             </a>
             @endif
