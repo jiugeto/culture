@@ -3,7 +3,6 @@
     @include('company.admin.common.crumb')
 
     <div class="com_admin_list">
-        @include('company.admin.product.menu')
         <table cellspacing="0">
             <tr>
                 <td>序号</td>
@@ -37,6 +36,6 @@
             @else @include('member.common.#norecord')
             @endif
         </table>
-        <div style="margin:10px 20px;">@include('company.admin.common.page')</div>
+        <div style="margin:10px 20px;">@include('company.admin.common.#page')</div>
     </div>
 @stop

@@ -3,7 +3,7 @@
     @include('company.admin.common.crumb')
 
     <div class="com_admin_list">
-        <form data-am-validator method="POST" action="{{DOMAIN}}company/admin/job" enctype="multipart/form-data">
+        <form data-am-validator method="POST" action="{{DOMAIN_C_BACK}}job" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" name="type" value="5">{{--招聘type==5--}}
             <input type="hidden" name="genre" value="1">{{--招聘genre==1--}}

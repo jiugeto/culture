@@ -3,7 +3,7 @@
     @include('company.admin.common.crumb')
 
     <div class="com_admin_list">
-        <form data-am-validator method="POST" action="/company/admin/singlemodule" enctype="multipart/form-data">
+        <form data-am-validator method="POST" action="{{DOMAIN_C_BACK}}singlemodule" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <table class="table_create">
                 <tr>

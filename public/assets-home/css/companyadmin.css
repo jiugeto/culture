@@ -139,6 +139,7 @@
     margin:5px; margin-top:-10px;
     width:830px;
     height:958px;
+    color:#808080;
     background:#fafafa;
 }
 .com_admin_list table {
@@ -258,6 +259,7 @@ select {
     color:red;
     text-decoration:underline;
 }
+.com_admin_list .center { text-align:center; }
 /*===== 右部分列表 =====*/
 
 

@@ -25,10 +25,10 @@ class LoginController extends Controller
 
     public function dologin()
     {
-        //查看2次密码输入是否一致
-        if (Input::get('password')!=Input::get('password2')) {
-            echo "<script>alert('2次密码输入不一致！');history.go(-1);</script>";exit;
-        }
+//        //查看2次密码输入是否一致
+//        if (Input::get('password')!=Input::get('password2')) {
+//            echo "<script>alert('2次密码输入不一致！');history.go(-1);</script>";exit;
+//        }
         //验证码验证
         $rules = [
             'captcha' => 'required|captcha',

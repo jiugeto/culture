@@ -4,29 +4,29 @@ namespace App\Http\Controllers\Company\Admin;
 use App\Models\Company\ComFuncModel;
 use Illuminate\Http\Request;
 
-class TeamController extends BaseFuncController
+class TeamController extends BaseController
 {
     /**
      *  公司团队
      */
 
-    protected $type = 6;        //5代表类型团队
-    protected $moduleGnere = 3;        //3代表模块团队
+    protected $genre = 6;        //模块类型
 
     public function __construct()
     {
         parent::__construct();
         $this->lists['func']['name'] = '团队编辑';
         $this->lists['func']['url'] = 'team';
-        $this->module = $this->getModuleId($this->moduleGnere);
     }
 
     public function index()
     {
         $curr['name'] = $this->lists['']['name'];
         $curr['url'] = $this->lists['']['url'];
+        $pageCurr = isset($_GET['page']) ? $_GET['page'] : 1;
+        $prefix_url = DOMAIN_C_BACK.'team';
         $result = [
-            'datas' => $this->query($this->module,$this->type),
+            'datas' => $this->getFuncs($this->cid,$this->genre,$this->limit,$pageCurr,$prefix_url),
             'lists' => $this->lists,
             'curr' => $curr,
             'curr_func' => $this->lists['func']['url'],
@@ -39,9 +39,8 @@ class TeamController extends BaseFuncController
         $curr['name'] = $this->lists['create']['name'];
         $curr['url'] = $this->lists['create']['url'];
         $result = [
-            'pics'=> $this->pics,
-            'lists'=> $this->lists,
-            'curr'=> $curr,
+            'lists' => $this->lists,
+            'curr' => $curr,
             'curr_func' => $this->lists['func']['url'],
         ];
         return view('company.admin.team.create', $result);

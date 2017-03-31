@@ -3,7 +3,7 @@
     @include('company.admin.common.crumb')
 
     <div class="com_admin_list">
-        <form data-am-validator method="POST" action="{{DOMAIN}}company/admin/ppt" enctype="multipart/form-data">
+        <form data-am-validator method="POST" action="{{DOMAIN_C_BACK}}ppt" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <table class="table_create">
                 <tr>
@@ -28,7 +28,7 @@
                 <tr>
                     <td class="field_name"><label>图片：</label></td>
                     <td class="right">
-                        @include('company.admin.common.piclist')
+                        @include('company.admin.common.#piclist')
                     </td>
                 </tr>
 

@@ -63,7 +63,7 @@ class ContactController extends BaseController
             'address'=> $request->address,
         ];
         CompanyModel::where('id',$id)->update($data);
-        return redirect(DOMAIN.'company/admin/contact');
+        return redirect(DOMAIN_C_BACK.'contact');
     }
 
     /**

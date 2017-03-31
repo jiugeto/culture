@@ -57,11 +57,9 @@ Route::group(['prefix'=>'com','middleware' =>'MemberAuth','namespace'=>'Company'
         Route::get('about/t/{type}','AboutController@index');
         Route::resource('about','AboutController');
         //产品路由
-        Route::get('product/trash','ProductController@trash');
-        Route::get('product/{id}/destroy','ProductController@destroy');
-        Route::get('product/{id}/restore','ProductController@restore');
-        Route::get('product/{id}/forceDelete','ProductController@forceDelete');
         Route::post('product/{id}','ProductController@update');
+        Route::post('product/thumb/{id}','ProductController@setThumb');
+        Route::post('product/link/{id}','ProductController@setLink');
         Route::get('product/s/{cate}','ProductController@index');
         Route::resource('product','ProductController');
         //团队路由

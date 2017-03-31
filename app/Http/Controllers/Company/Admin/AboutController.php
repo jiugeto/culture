@@ -59,7 +59,7 @@ class AboutController extends BaseFuncController
         $data = $this->getData($request,$this->module);
         $data['created_at'] = time();
         ComFuncModel::create($data);
-        return redirect('/company/admin/about');
+        return redirect(DOMAIN_C_BACK.'about');
     }
 
     public function edit($id)

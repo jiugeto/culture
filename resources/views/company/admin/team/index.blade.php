@@ -4,7 +4,9 @@
 
     <div class="com_admin_list">
         <div class="search_type" style="height:20px;border:0;">
-            <span class="create_right"><a href="{{DOMAIN}}company/admin/team/create" class="list_btn">添加员工</a></span>
+            <span class="create_right">
+                <a href="{{DOMAIN}}company/admin/team/create" class="list_btn">添加员工</a>
+            </span>
         </div>
         <table cellspacing="0">
             <tr>
@@ -33,6 +35,6 @@
             @else @include('member.common.#norecord')
             @endif
         </table>
-        <div style="margin:10px 20px;">@include('company.admin.common.page')</div>
+        <div style="margin:10px 20px;">@include('company.admin.common.#page')</div>
     </div>
 @stop

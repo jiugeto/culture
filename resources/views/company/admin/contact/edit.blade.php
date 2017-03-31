@@ -3,7 +3,7 @@
     @include('company.admin.common.crumb')
 
     <div class="com_admin_list">
-        <form data-am-validator method="POST" action="{{DOMAIN}}company/admin/contact/{{ $data->id }}" enctype="multipart/form-data">
+        <form data-am-validator method="POST" action="{{DOMAIN_C_BACK}}contact/{{ $data->id }}" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" name="_method" value="POST">
             <table class="table_create">

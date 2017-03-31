@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Company\Admin;
 
 use App\Api\ApiBusiness\ApiGoods;
 use Illuminate\Http\Request;
+use Session;
 
 class ProductController extends BaseController
 {
@@ -39,25 +40,12 @@ class ProductController extends BaseController
         $result = [
             'datas' => $datas,
             'pagelist' => $pagelist,
-            'model' => $this->model,
+            'prefix_url' => $prefix_url,
+            'model' => $this->getModel(),
             'lists' => $this->lists,
             'curr' => $curr,
             'curr_func' => $this->lists['func']['url'],
             'cate' => $cate,
-        ];
-        return view('company.admin.product.index', $result);
-    }
-
-    public function trash($cate=0)
-    {
-        $curr['name'] = $this->lists['trash']['name'];
-        $curr['url'] = $this->lists['trash']['url'];
-        $result = [
-            'datas'=> $this->query($del=1,$cate),
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-            'curr_func'=> $this->lists['func']['url'],
-            'cate'=> $cate,
         ];
         return view('company.admin.product.index', $result);
     }
@@ -67,36 +55,38 @@ class ProductController extends BaseController
         $curr['name'] = $this->lists['create']['name'];
         $curr['url'] = $this->lists['create']['url'];
         $result = [
-            'model'=> $this->model,
-            'pics'=> $this->model->pics($this->userid),
-            'videos'=> $this->model->videos($this->userid),
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-            'curr_func'=> $this->lists['func']['url'],
+            'model' => $this->getModel(),
+            'lists' => $this->lists,
+            'curr' => $curr,
+            'curr_func' => $this->lists['func']['url'],
         ];
         return view('company.admin.product.create', $result);
     }
 
     public function store(Request $request)
     {
-       $data = $this->getData($request);
-       $data['created_at'] = time();
-       GoodsModel::create($data);
-       return redirect(DOMAIN.'company/admin/product');
+        $data = $this->getData($request);
+        $apiGoods = ApiGoods::add($data);
+        if ($apiGoods['code']!=0) {
+            echo "<script>alert('".$apiGoods['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN_C_BACK.'product');
     }
 
     public function edit($id)
     {
         $curr['name'] = $this->lists['edit']['name'];
         $curr['url'] = $this->lists['edit']['url'];
+        $apiGoods = ApiGoods::show($id);
+        if ($apiGoods['code']!=0) {
+            echo "<script>alert('".$apiGoods['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> GoodsModel::find($id),
-            'model'=> $this->model,
-            'pics'=> $this->model->pics($this->userid),
-            'videos'=> $this->model->videos($this->userid),
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-            'curr_func'=> $this->lists['func']['url'],
+            'data' => $apiGoods['data'],
+            'model' => $this->getModel(),
+            'lists' => $this->lists,
+            'curr' => $curr,
+            'curr_func' => $this->lists['func']['url'],
         ];
         return view('company.admin.product.edit', $result);
     }
@@ -104,43 +94,86 @@ class ProductController extends BaseController
     public function update(Request $request,$id)
     {
         $data = $this->getData($request);
-        $data['updated_at'] = time();
-        GoodsModel::where('id',$id)->update($data);
-        return redirect(DOMAIN.'company/admin/product');
+        $data['id'] = $id;
+        $apiGoods = ApiGoods::modify($data);
+        if ($apiGoods['code']!=0) {
+            echo "<script>alert('".$apiGoods['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN_C_BACK.'product');
     }
 
     public function show($id)
     {
         $curr['name'] = $this->lists['show']['name'];
         $curr['url'] = $this->lists['show']['url'];
+        $apiGoods = ApiGoods::show($id);
+        if ($apiGoods['code']!=0) {
+            echo "<script>alert('".$apiGoods['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> GoodsModel::find($id),
-            'model'=> $this->model,
-            'pics'=> $this->model->pics($this->userid),
-            'videos'=> $this->model->videos($this->userid),
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-            'curr_func'=> $this->lists['func']['url'],
+            'data' => $apiGoods['data'],
+            'model' => $this->getModel(),
+            'lists' => $this->lists,
+            'curr' => $curr,
+            'curr_func' => $this->lists['func']['url'],
         ];
         return view('company.admin.product.show', $result);
     }
 
-    public function destroy($id)
+    /**
+     * 设置缩略图
+     */
+    public function setThumb(Request $request,$id)
     {
-        GoodsModel::where('id',$id)->update(array('del'=> 1));
-        return redirect(DOMAIN.'company/admin/product');
+        if (!isset($request->url_ori)) {
+            echo "<script>alert('没有上传图片！');history.go(-1);</script>";exit;
+        }
+        //获取老图链接
+        $apiGoods2 = ApiGoods::show($id);
+        if ($apiGoods2['code']!=0) {
+            echo "<script>alert('".$apiGoods2['msg']."');history.go(-1);</script>";exit;
+        }
+        $thumbOldArr[] = $apiGoods2['data']['thumb'] ? $apiGoods2['data']['thumb'] : [];
+        $thumb = $this->uploadOnlyImg($request,'url_ori',$thumbOldArr);
+        $data = [
+            'id'    =>  $id,
+            'thumb' =>  $thumb,
+        ];
+        $apiGoods = ApiGoods::setThumb($data);
+        if ($apiGoods['code']!=0) {
+            echo "<script>alert('".$apiGoods['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN_C_BACK.'product');
     }
 
-    public function restore($id)
+    /**
+     * 设置视频链接
+     */
+    public function setLink(Request $request,$id)
     {
-        GoodsModel::where('id',$id)->update(array('del'=> 0));
-        return redirect(DOMAIN.'company/admin/product');
-    }
-
-    public function forceDelete($id)
-    {
-        GoodsModel::where('id',$id)->delete();
-        return redirect(DOMAIN.'company/admin/product');
+        $linkType = $request->linkType;
+        $link = $request->link;
+        if (!$linkType || !$link || !$id) {
+            echo "<script>alert('数据有误！');history.go(-1);</script>";exit;
+        }
+        if ($linkType==1 && (mb_substr($link,0,4)!='http'||mb_substr($link,mb_strlen($link)-4,4)!='.swf')) {
+            echo "<script>alert('Flash代码格式有误！');history.go(-1);</script>";exit;
+        } elseif ($linkType==2 && mb_substr($link,0,6)!='<embed') {
+            echo "<script>alert('html代码格式有误！');history.go(-1);</script>";exit;
+        } elseif ($linkType==3 && mb_substr($link,0,7)!='<iframe') {
+            echo "<script>alert('html代码格式有误！');history.go(-1);</script>";exit;
+        }
+        $data = [
+            'id'    =>  $id,
+            'linkType'  =>  $linkType,
+            'link'  =>  $link,
+            'uid'   =>  $this->userid,
+        ];
+        $apiGoods = ApiGoods::setLink($data);
+        if ($apiGoods['code']!=0) {
+            echo "<script>alert('".$apiGoods['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN_C_BACK.'product');
     }
 
 
@@ -152,20 +185,16 @@ class ProductController extends BaseController
      */
     public function getData(Request $request)
     {
-        $data = [
-            'name'=> $request->name,
-            'genre'=> 1,     //1代表产品，2代表花絮
-            'type'=> 4,     //1个人需求，2个人供应，3企业需求，4企业供应
-            'cate'=> $request->cate_id,
-            'intro'=> $request->intro,
-            'title'=> $request->title,
-            'pic_id'=> $request->pic_id,
-            'video_id'=> $request->video_id,
-            'uid'=> $this->userid,
-            'uname'=> \Session::get('user.username'),
-            'isshow2'=> $request->isshow2,
-        ];
-        return $data;
+        //1动画片段供应，2动画片段需求，3视频供应，4视频需求，
+        return array(
+            'name'      =>  $request->name,
+            'genre'     =>  $request->genre,
+            'cate'      =>  $request->cate,
+            'intro'     =>  $request->intro,
+            'uid'       =>  $this->userid,
+            'uname'     =>  Session::get('user.username'),
+            'money'     =>  $request->money,
+        );
     }
 
     /**

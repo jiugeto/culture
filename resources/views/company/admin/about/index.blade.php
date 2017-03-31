@@ -41,7 +41,7 @@
             @else @include('member.common.#norecord')
             @endif
         </table>
-        <div style="margin:10px 20px;">@include('company.admin.common.page')</div>
+        <div style="margin:10px 20px;">@include('company.admin.common.#page')</div>
     </div>
 
     <script>

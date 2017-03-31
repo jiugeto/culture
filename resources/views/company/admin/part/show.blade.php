@@ -4,7 +4,6 @@
 
     <div class="com_admin_list">
         <h3 class="center pos">{{ $lists['func']['name'] }}详情页</h3>
-        @include('company.admin.product.pshow')
     </div>
 @stop
 

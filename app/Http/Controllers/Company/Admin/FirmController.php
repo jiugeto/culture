@@ -56,7 +56,7 @@ class FirmController extends BaseFuncController
         $data['type'] = $this->type;
         $data['created_at'] = time();
         ComFuncModel::create($data);
-        return redirect(DOMAIN.'company/admin/firms');
+        return redirect(DOMAIN_C_BACK.'firms');
     }
 
     public function edit($id)

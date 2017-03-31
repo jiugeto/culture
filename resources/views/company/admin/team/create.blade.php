@@ -3,7 +3,7 @@
     @include('company.admin.common.crumb')
 
     <div class="com_admin_list">
-        <form data-am-validator method="POST" action="/company/admin/team" enctype="multipart/form-data">
+        <form data-am-validator method="POST" action="{{DOMAIN_C_BACK}}team" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" name="type" value="4">{{--团队type==4--}}
             <input type="hidden" name="genre" value="1">{{--团队genre==1--}}
@@ -23,7 +23,7 @@
                 <tr>
                     <td class="field_name"><label>图片：</label></td>
                     <td class="right">
-                        @include('company.admin.common.piclist')
+                        @include('company.admin.common.#piclist')
                     </td>
                 </tr>
 
