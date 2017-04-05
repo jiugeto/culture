@@ -1,34 +1,38 @@
 <?php
 namespace App\Http\Controllers\Company\Admin;
 
-use App\Models\Company\ComFuncModel;
-use App\Models\Company\ComModuleModel;
+use App\Api\ApiBusiness\ApiComFunc;
 use Illuminate\Http\Request;
 
-class AboutController extends BaseFuncController
+class AboutController extends BaseController
 {
     /**
      *  关于公司
      */
+
+    protected $genre = 1;        //模块类型
 
     public function __construct()
     {
         parent::__construct();
         $this->lists['func']['name'] = '关于公司';
         $this->lists['func']['url'] = 'about';
-        $this->module = $this->getModuleId($genre=1);
     }
 
-    public function index($type=0)
+    public function index()
     {
         $curr['name'] = $this->lists['']['name'];
         $curr['url'] = $this->lists['']['url'];
+        $pageCurr = isset($_GET['page']) ? $_GET['page'] : 1;
+        $prefix_url = DOMAIN_C_BACK.'about';
+        $rstFunc = $this->getFuncs($this->cid,$this->genre,$this->limit,$pageCurr,$prefix_url);
         $result = [
-            'datas'=> $this->query($this->module,$type),
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-            'curr_func'=> $this->lists['func']['url'],
-            'type'=> $type,
+            'datas' => $rstFunc['datas'],
+            'pagelist' => $rstFunc['pagelist'],
+            'prefix_url' => $prefix_url,
+            'lists' => $this->lists,
+            'curr' => $curr,
+            'curr_func' => $this->lists['func']['url'],
         ];
         return view('company.admin.about.index', $result);
     }
@@ -38,27 +42,21 @@ class AboutController extends BaseFuncController
         $curr['name'] = $this->lists['create']['name'];
         $curr['url'] = $this->lists['create']['url'];
         $result = [
-            'model'=> $this->model,
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-            'curr_func'=> $this->lists['func']['url'],
+            'model' => $this->model,
+            'lists' => $this->lists,
+            'curr' => $curr,
+            'curr_func' => $this->lists['func']['url'],
         ];
         return view('company.admin.about.create', $result);
     }
 
     public function store(Request $request)
     {
-        //排除简介的唯一性
-        if (in_array($request->type,[1,2])) {
-            $aboutModel = ComFuncModel::where('cid',$this->cid)
-                ->where('module_id',$this->module)
-                ->where('type',$request->type)
-                ->first();
-            if ($aboutModel) { echo "<script>alert('已有公司简介或公司历程！');history.go(-1);</script>";exit; }
+        $data = $this->getData($request,$this->genre);
+        $apiFunc = ApiComFunc::add($data);
+        if ($apiFunc['code']!=0) {
+            echo "<script>alert('".$apiFunc['msg']."');history.go(-1);</script>";exit;
         }
-        $data = $this->getData($request,$this->module);
-        $data['created_at'] = time();
-        ComFuncModel::create($data);
         return redirect(DOMAIN_C_BACK.'about');
     }
 
@@ -66,34 +64,45 @@ class AboutController extends BaseFuncController
     {
         $curr['name'] = $this->lists['edit']['name'];
         $curr['url'] = $this->lists['edit']['url'];
+        $apiFunc = ApiComFunc::show($id);
+        if ($apiFunc['code']!=0) {
+            echo "<script>alert('".$apiFunc['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> ComFuncModel::find($id),
-            'model'=> $this->model,
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-            'curr_func'=> $this->lists['func']['url'],
+            'data' => $apiFunc['data'],
+            'model' => $this->model,
+            'lists' => $this->lists,
+            'curr' => $curr,
+            'curr_func' => $this->lists['func']['url'],
         ];
         return view('company.admin.about.edit', $result);
     }
 
     public function update(Request $request,$id)
     {
-        $data = $this->getData($request,$this->module);
-        $data['updated_at'] = time();
-        ComFuncModel::where('id',$id)->update($data);
-        return redirect('/company/admin/about');
+        $data = $this->getData($request,$this->genre);
+        $data['id'] = $id;
+        $apiFunc = ApiComFunc::add($data);
+        if ($apiFunc['code']!=0) {
+            echo "<script>alert('".$apiFunc['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN_C_BACK.'about');
     }
 
     public function show($id)
     {
         $curr['name'] = $this->lists['show']['name'];
         $curr['url'] = $this->lists['show']['url'];
+        $apiFunc = ApiComFunc::show($id);
+        if ($apiFunc['code']!=0) {
+            echo "<script>alert('".$apiFunc['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> ComFuncModel::find($id),
-            'model'=> $this->model,
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-            'curr_func'=> $this->lists['func']['url'],
+            'data' => $apiFunc['data'],
+            'model' => $this->model,
+            'lists' => $this->lists,
+            'curr' => $curr,
+            'curr_func' => $this->lists['func']['url'],
         ];
         return view('company.admin.about.show', $result);
     }

@@ -20,14 +20,14 @@
 
         <div id="map"></div>
         <div class="text">
-            <p>{{ $data->name }}</p>
+            <p>{{$data['name']}}</p>
             <p><label>重新精准定位地址</label>
-                <br>地区：{{ $data->getAreaName($data->area) }}
-                <br>地址：{{ $data->address }}
+                <br>地区：{{AreaNameByid($data['area'])}}
+                <br>地址：{{$data['address']}}
             </p>
             <p class="small">=>用法：在地图上找到您确定的位置单击，然后点击“确定”按钮即可 <br>建议地图放到最大再确定，更加精确</p>
             <p><a id="submit" class="a_link">确定</a>
-                <a class="a_link" onclick="window.location.href='{{DOMAIN}}company/admin/contact';">返回</a>
+                <a class="a_link" onclick="window.location.href='{{DOMAIN_C_BACK}}contact';">返回</a>
             </p>
 
             <script>
@@ -36,7 +36,7 @@
                     var jing_du = $("#jing_du");
                     var wei_du = $("#wei_du");
                     $("#submit").click(function(){
-                        window.location.href = '{{DOMAIN}}company/admin/contact/map/'+jing_du.html()+'/'+wei_du.html();
+                        window.location.href = '{{DOMAIN_C_BACK}}contact/map/{{$data['id']}}/'+jing_du.html()+'/'+wei_du.html();
                     });
                 });
             </script>
@@ -49,13 +49,13 @@
                 纬度 <span id="wei_du"></span>
             </div>
 
-            <input type="hidden" name="id" value="{{ $data->id }}">
-            <input type="hidden" name="name" value="{{ $data->name }}">
-            <input type="hidden" name="tel" value="{{ $data->tel }}">
-            <input type="hidden" name="email" value="{{ $data->email }}">
-            <input type="hidden" name="area" value="{{ $data->area }}">
-            <input type="hidden" name="axis_x" value="{{ $pointer['lng'] }}">
-            <input type="hidden" name="axis_y" value="{{ $pointer['lat'] }}">
+            <input type="hidden" name="id" value="{{$data['id']}}">
+            <input type="hidden" name="name" value="{{$data['name']}}">
+            <input type="hidden" name="tel" value="{{$data['tel']}}">
+            <input type="hidden" name="email" value="{{$data['email']}}">
+            <input type="hidden" name="area" value="{{$data['area']}}">
+            <input type="hidden" name="axis_x" value="{{$pointer['lng'] }}">
+            <input type="hidden" name="axis_y" value="{{$pointer['lat'] }}">
         </div>
     </div>
 

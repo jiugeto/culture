@@ -58,7 +58,7 @@
 }
 .com_admin_left a .menu {
     padding:10px 23px;
-    border-left:2px solid #c8c8c8;
+    border-left:2px solid #808080;
     border-bottom:1px solid lightgrey;
 }
 .com_admin_left a:hover .menu,.com_admin_left a .curr {
@@ -242,13 +242,6 @@ select {
     border-radius:3px;
 }
 .com_admin_list .table_create label.clickradio { cursor:pointer; }
-.com_admin_list .table_create .img {
-    width:500px; height:400px;
-    border:0;
-    background:0;
-    overflow:auto;
-}
-.com_admin_list .table_create .img:hover { border:0; }
 .com_admin_list a.job {
     margin:0 5px;
     color:#0e90d2;
@@ -260,6 +253,17 @@ select {
     text-decoration:underline;
 }
 .com_admin_list .center { text-align:center; }
+.com_admin_list table.companyinfo a {
+    color:#808080;
+    text-decoration:none;
+}
+.com_admin_list table.companyinfo a:hover { color:#ff4466; }
+.com_admin_list table.companyinfo td {
+    padding-left:50px;
+    width:400px;
+    text-align:left;
+    border:0;
+}
 /*===== 右部分列表 =====*/
 
 

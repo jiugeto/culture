@@ -6,6 +6,7 @@ use App\Api\ApiBusiness\ApiComModule;
 use App\Http\Controllers\BaseController as Controller;
 use Session;
 use Illuminate\Support\Facades\View;
+use Illuminate\Http\Request;
 
 class BaseController extends Controller
 {
@@ -82,6 +83,35 @@ class BaseController extends Controller
         return array(
             'datas' =>  $datas,
             'pagelist'  =>  $pagelist,
+        );
+    }
+
+    /**
+     * 收集功能数据
+     */
+    public function getData(Request $request,$genre)
+    {
+        if (!$this->cid) {
+            echo "<script>alert('非企业或者未登录！');history.go(-1);</script>";exit;
+        }
+        $apiModule = ApiComModule::getModuleByGenre($this->cid,$genre);
+        if ($apiModule['code']!=0) {
+            echo "<script>alert('没有记录！');history.go(-1);</script>";exit;
+        }
+        $module = $apiModule['data']['id'];
+        if (in_array($genre,[6,9])) {
+            $small = '';
+        } else if ($genre==7) {
+            $small = $request->small;
+        } else {
+            $small = '';
+        }
+        return array(
+            'name'  =>  $request->name,
+            'cid'   =>  $this->cid,
+            'module_id' =>  $module,
+            'intro' =>  $request->intro,
+            'small' =>  $small,
         );
     }
 }

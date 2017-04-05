@@ -54,7 +54,6 @@ Route::group(['prefix'=>'com','middleware' =>'MemberAuth','namespace'=>'Company'
         Route::resource('content','ContentController');
         //关于公司路由：公司简介、公司历程、公司新闻、行业资讯、
         Route::post('about/{id}','AboutController@update');
-        Route::get('about/t/{type}','AboutController@index');
         Route::resource('about','AboutController');
         //产品路由
         Route::post('product/{id}','ProductController@update');
@@ -69,8 +68,8 @@ Route::group(['prefix'=>'com','middleware' =>'MemberAuth','namespace'=>'Company'
         Route::post('job/{id}','JobController@update');
         Route::resource('job','JobController');
         //联系路由
-        Route::get('contact/map','ContactController@map');      //地图路由
-        Route::get('contact/map/{x}/{y}','ContactController@setPoint');
+        Route::get('contact/map/{id}','ContactController@map');      //地图路由
+        Route::get('contact/map/{id}/{x}/{y}','ContactController@setPoint');
         Route::post('contact/{id}','ContactController@update');
         Route::resource('contact','ContactController');
         //服务路由

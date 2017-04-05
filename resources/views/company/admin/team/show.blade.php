@@ -3,43 +3,36 @@
     @include('company.admin.common.crumb')
 
     <div class="com_admin_list">
-        <h3 class="center pos">{{ $lists['func']['name'] }}详情页</h3>
+        <h3 class="center pos">{{$lists['func']['name']}}详情页</h3>
         <table class="table_create" cellspacing="0" cellpadding="0">
             <tr>
                 <td class="field_name">员工名称：</td>
-                <td>{{ $data->name }}</td>
+                <td>{{$data['name']}}</td>
             </tr>
-            @if($data->pic_id)
             <tr>
                 <td class="field_name">图片：</td>
-                <td><div class="img"><img src="{{ $data->getPicUrl() }}" style="@if($size=$data->getUserPicSize($data->pic(),$w=150,$h=$data->pic()->height))width:{{$size['w']}}px;height:{{$size['h']}}px;@endif"></div></td>
+                <td>
+                    @if($data['thumb'])
+                    <img src="{{$data['thumb']}}" width="300">
+                    @else /
+                    @endif
+                </td>
             </tr>
-            @endif
             <tr>
                 <td class="field_name">介绍：</td>
-                <td><div class="admin_show_con">{!! $data->intro !!}</div></td>
-            </tr>
-            <tr>
-                <td class="field_name">排序：</td>
-                <td>{{ $data->sort }}</td>
-            </tr>
-            <tr>
-                <td class="field_name">企业前台显示否：</td>
-                <td>{{ $data->isshow() }}</td>
+                <td><div class="admin_show_con">{{$data['intro']}}</div></td>
             </tr>
             <tr>
                 <td class="field_name">创建时间：</td>
-                <td>{{ $data->createTime() }}</td>
+                <td>{{$data['createTime']}}</td>
             </tr>
             <tr>
                 <td class="field_name">更新时间：</td>
-                <td>{{ $data->updateTime() }}</td>
+                <td>{{$data['updateTime']}}</td>
             </tr>
 
             <tr><td class="center" colspan="3" style="border:0;cursor:pointer;">
-                    <a href="/company/admin/intro/{{$data->id}}/edit">
-                        <button class="companybtn">修&nbsp;&nbsp;改</button></a>
-                    <a><button class="companybtn" onclick="history.go(-1)">返&nbsp;&nbsp;回</button></a>
+                    <button class="companybtn" onclick="history.go(-1)">返&nbsp;&nbsp;回</button></a>
                 </td></tr>
         </table>
     </div>

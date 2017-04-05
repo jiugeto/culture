@@ -3,41 +3,22 @@
     @include('company.admin.common.crumb')
 
     <div class="com_admin_list">
-        <form data-am-validator method="POST" action="{{DOMAIN_C_BACK}}team/{{ $data->id }}" enctype="multipart/form-data">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <form data-am-validator method="POST" action="{{DOMAIN_C_BACK}}team/{{$data['id']}}" enctype="multipart/form-data">
+            <input type="hidden" name="_token" value="{{csrf_token()}}">
             <input type="hidden" name="_method" value="POST">
-            <input type="hidden" name="type" value="4">{{--团队type==4--}}
-            <input type="hidden" name="genre" value="1">{{--团队genre==1--}}
             <table class="table_create">
                 <tr>
                     <td class="field_name"><label>员工名称：</label></td>
-                    <td class="right"><input type="text" class="field_value" placeholder="至少2位" minlength="2" name="name" value="{{ $data->name }}"/></td>
+                    <td class="right">
+                        <input type="text" class="field_value" placeholder="至少2位" minlength="2" name="name" 
+                               value="{{$data['name']}}"/>
+                    </td>
                 </tr>
 
                 <tr>
                     <td class="field_name"><label>介绍：</label></td>
-                    <td class="right" style="position:relative;z-index:0;">
-                        @include('company.admin.common.editor')
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="field_name"><label>图片：</label></td>
                     <td class="right">
-                        @include('company.admin.common.#piclist')
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="field_name"><label>排序：</label></td>
-                    <td class="right"><input type="text" class="field_value" pattern="^\d+$" name="sort" value="{{ $data->sort }}"/></td>
-                </tr>
-
-                <tr>
-                    <td class="field_name"><label>前台公司页面显示否：</label></td>
-                    <td class="right">
-                        <label><input type="radio" name="isshow" value="0" {{ $data->isshow==0 ? 'checked' : '' }}> 不显示&nbsp;&nbsp;</label>
-                        <label><input type="radio" name="isshow" value="1" {{ $data->isshow==1 ? 'checked' : '' }}> 显示&nbsp;&nbsp;</label>
+                        <textarea name="intro" cols="50" rows="10" style="resize:none;">{{$data['intro']}}</textarea>
                     </td>
                 </tr>
 

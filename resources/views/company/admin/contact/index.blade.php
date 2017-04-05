@@ -3,48 +3,59 @@
     @include('company.admin.common.crumb')
 
     <div class="com_admin_list">
-        <h3 class="center pos">{{ $lists['func']['name'] }}详情页</h3>
-        <table class="table_create" cellspacing="0" cellpadding="0">
+        <div style="height:20px;"></div>
+        <table class="companyinfo">
             <tr>
-                <td class="field_name">公司座机：</td>
-                <td>{{ $data->areacode.'-'.$data->tel }}</td>
+                <td colspan="2">公司类型：{{$company['genreName']}}</td>
             </tr>
             <tr>
-                <td class="field_name">企业QQ：</td>
-                <td>{{ $data->qq }}</td>
+                <td>公司电话：{{$company['tel']}}</td>
+                <td>QQ：{{$company['qq']}}</td>
             </tr>
             <tr>
-                <td class="field_name">公司网址：</td>
-                <td>{{ $data->web }}</td>
+                <td>城市：{{AreaNameByid($company['area'])}}</td>
+                <td>地址公司：{{$company['address']}}</td>
             </tr>
             <tr>
-                <td class="field_name">传真：</td>
-                <td>{{ $data->fax }}</td>
+                <td>邮箱地址：{{$company['email']}}</td>
+                <td width="500">logo：{{$company['logo']}}</td>
             </tr>
             <tr>
-                <td class="field_name">邮编：</td>
-                <td>{{ $data->zipcode }}</td>
+                <td colspan="2">坐标：
+                    <span style="font-size:12px;">{{$company['point']}}</span>
+                    <a href="{{DOMAIN_C_BACK}}contact/map/{{$company['id']}}">坐标设置</a>
+                </td>
             </tr>
-            <tr>
-                <td class="field_name">企业邮箱：</td>
-                <td>{{ $data->email }}</td>
-            </tr>
-            <tr>
-                <td class="field_name">所在城市：</td>
-                <td>{{ $data->getAreaName($data->area) }}</td>
-            </tr>
-            <tr>
-                <td class="field_name">具体地址：</td>
-                <td>{{ $data->address }}</td>
-            </tr>
-
-            <tr><td class="center" colspan="2" style="border:0;cursor:pointer;">
-                    <a href="{{DOMAIN}}company/admin/contact/map"><button class="companybtn">地图定位</button></a>
-                    <a href="{{DOMAIN}}company/admin/contact/{{$data->id}}/edit">
-                        <button class="companybtn">修&nbsp;&nbsp;改</button></a>
-                    <a><button class="companybtn" onclick="history.go(-1)">返&nbsp;&nbsp;回</button></a>
-                </td></tr>
         </table>
+        <hr>
+        <div class="search_type" style="height:20px;border:0;">
+            <span class="create_right">
+                <a href="{{DOMAIN_C_BACK}}contact/create" class="list_btn">添加其他联系方式</a>
+            </span>
+        </div>
+        <table cellspacing="0">
+            <tr>
+                <td>联系方式</td>
+                <td>联系内容</td>
+                <td width="150">创建时间</td>
+                <td>操作</td>
+            </tr>
+            <tr><td colspan="10"></td></tr>
+            @if(count($datas))
+                @foreach($datas as $data)
+            <tr>
+                <td>{{$data['name']}}</td>
+                <td>{{str_limit($data['intro'],20)}}</td>
+                <td>{{$data['createTime']}}</td>
+                <td>
+                    <a href="{{DOMAIN_C_BACK}}contact/{{$data['id']}}" class="list_btn">查看</a>
+                    <a href="{{DOMAIN_C_BACK}}contact/{{$data['id']}}/edit" class="list_btn">编辑</a>
+                </td>
+            </tr>
+                @endforeach
+            @else <tr><td colspan="10" style="text-align:center;">没有记录</td></tr>
+            @endif
+        </table>
+        {{--@include('company.admin.common.page2')--}}
     </div>
 @stop
-

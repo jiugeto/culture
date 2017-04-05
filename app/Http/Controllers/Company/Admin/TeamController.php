@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Company\Admin;
 
-use App\Models\Company\ComFuncModel;
+use App\Api\ApiBusiness\ApiComFunc;
 use Illuminate\Http\Request;
 
 class TeamController extends BaseController
@@ -25,8 +25,11 @@ class TeamController extends BaseController
         $curr['url'] = $this->lists['']['url'];
         $pageCurr = isset($_GET['page']) ? $_GET['page'] : 1;
         $prefix_url = DOMAIN_C_BACK.'team';
+        $rstFunc = $this->getFuncs($this->cid,$this->genre,$this->limit,$pageCurr,$prefix_url);
         $result = [
-            'datas' => $this->getFuncs($this->cid,$this->genre,$this->limit,$pageCurr,$prefix_url),
+            'datas' => $rstFunc['datas'],
+            'pagelist' => $rstFunc['pagelist'],
+            'prefix_url' => $prefix_url,
             'lists' => $this->lists,
             'curr' => $curr,
             'curr_func' => $this->lists['func']['url'],
@@ -48,22 +51,26 @@ class TeamController extends BaseController
 
     public function store(Request $request)
     {
-        $data = $this->getData($request,$this->module);
-        $data['type'] = $this->type;
-        $data['created_at'] = time();
-        ComFuncModel::create($data);
-        return redirect(DOMAIN.'company/admin/team');
+        $data = $this->getData($request,$this->genre);
+        $apiFunc = ApiComFunc::add($data);
+        if ($apiFunc['code']!=0) {
+            echo "<script>alert('".$apiFunc['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN_C_BACK.'team');
     }
 
     public function edit($id)
     {
         $curr['name'] = $this->lists['edit']['name'];
         $curr['url'] = $this->lists['edit']['url'];
+        $apiFunc = ApiComFunc::show($id);
+        if ($apiFunc['code']!=0) {
+            echo "<script>alert('".$apiFunc['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> ComFuncModel::find($id),
-            'pics'=> $this->pics,
-            'lists'=> $this->lists,
-            'curr'=> $curr,
+            'data' => $apiFunc['data'],
+            'lists' => $this->lists,
+            'curr' => $curr,
             'curr_func' => $this->lists['func']['url'],
         ];
         return view('company.admin.team.edit', $result);
@@ -71,22 +78,27 @@ class TeamController extends BaseController
 
     public function update(Request $request,$id)
     {
-        $data = $this->getData($request,$this->module);
-        $data['type'] = $this->type;
-        $data['updated_at'] = time();
-        ComFuncModel::where('id',$id)->update($data);
-        return redirect(DOMAIN.'company/admin/team');
+        $data = $this->getData($request,$this->genre);
+        $data['id'] = $id;
+        $apiFunc = ApiComFunc::modify($data);
+        if ($apiFunc['code']!=0) {
+            echo "<script>alert('".$apiFunc['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN_C_BACK.'team');
     }
 
     public function show($id)
     {
         $curr['name'] = $this->lists['show']['name'];
         $curr['url'] = $this->lists['show']['url'];
+        $apiFunc = ApiComFunc::show($id);
+        if ($apiFunc['code']!=0) {
+            echo "<script>alert('".$apiFunc['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> ComFuncModel::find($id),
-            'pics'=> $this->pics,
-            'lists'=> $this->lists,
-            'curr'=> $curr,
+            'data' => $apiFunc['data'],
+            'lists' => $this->lists,
+            'curr' => $curr,
             'curr_func' => $this->lists['func']['url'],
         ];
         return view('company.admin.team.show', $result);

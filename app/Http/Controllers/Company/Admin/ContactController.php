@@ -1,16 +1,17 @@
 <?php
 namespace App\Http\Controllers\Company\Admin;
 
-use App\Models\Base\AreaModel;
-use App\Models\CompanyModel;
+use App\Api\ApiBusiness\ApiComFunc;
+use App\Api\ApiUser\ApiCompany;
 use Illuminate\Http\Request;
 
 class ContactController extends BaseController
 {
     /**
-     * 企业开展后台，招聘管理
+     * 企业开展后台，联系编辑
      */
 
+    protected $genre = 9;        //模块类型
     protected $curr_url = 'contact';
 
     public function __construct()
@@ -26,25 +27,60 @@ class ContactController extends BaseController
     {
         $curr['name'] = $this->lists['show']['name'];
         $curr['url'] = $this->lists['show']['url'];
+        $pageCurr = isset($_GET['page']) ? $_GET['page'] : 1;
+        $prefix_url = DOMAIN_C_BACK.'team';
+        $rstFunc = $this->getFuncs($this->cid,$this->genre,$this->limit,$pageCurr,$prefix_url);
+        //获取公司信息
+        $apiCompany = ApiCompany::show($this->cid);
+        if ($apiCompany['code']!=0) {
+            echo "<script>alert('".$apiCompany['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> $this->query(),
-            'lists'=> $this->lists,
-            'curr'=> $curr,
+            'company' => $apiCompany['data'],
+            'datas' => $rstFunc['datas'],
+            'pagelist' => $rstFunc['pagelist'],
+            'prefix_url' => $prefix_url,
+            'lists' => $this->lists,
+            'curr' => $curr,
             'curr_func' => $this->lists['func']['url'],
         ];
         return view('company.admin.contact.index', $result);
+    }
+
+    public function create()
+    {
+        $curr['name'] = $this->lists['create']['name'];
+        $curr['url'] = $this->lists['create']['url'];
+        $result = [
+            'lists' => $this->lists,
+            'curr' => $curr,
+            'curr_func' => $this->lists['func']['url'],
+        ];
+        return view('company.admin.contact.create', $result);
+    }
+
+    public function store(Request $request)
+    {
+        $data = $this->getData($request,$this->genre);
+        $apiFunc = ApiComFunc::add($data);
+        if ($apiFunc['code']!=0) {
+            echo "<script>alert('".$apiFunc['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN_C_BACK.'contact');
     }
 
     public function edit($id)
     {
         $curr['name'] = $this->lists['edit']['name'];
         $curr['url'] = $this->lists['edit']['url'];
-        $data = CompanyModel::find($id);
-        if ($data->tel) {}
+        $apiFunc = ApiComFunc::show($id);
+        if ($apiFunc['code']!=0) {
+            echo "<script>alert('".$apiFunc['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> $data,
-            'lists'=> $this->lists,
-            'curr'=> $curr,
+            'data' => $apiFunc['data'],
+            'lists' => $this->lists,
+            'curr' => $curr,
             'curr_func' => $this->lists['func']['url'],
         ];
         return view('company.admin.contact.edit', $result);
@@ -52,33 +88,49 @@ class ContactController extends BaseController
 
     public function update(Request $request,$id)
     {
-        $data = [
-            'areacode'=> $request->areacode,
-            'tel'=> $request->tel,
-            'qq'=> $request->qq,
-            'web'=> $request->web,
-            'fax'=> $request->fax,
-            'zipcode'=> $request->zipcode,
-            'email'=> $request->email,
-            'address'=> $request->address,
-        ];
-        CompanyModel::where('id',$id)->update($data);
+        $data = $this->getData($request,$this->genre);
+        $data['id'] = $id;
+        $apiFunc = ApiComFunc::modify($data);
+        if ($apiFunc['code']!=0) {
+            echo "<script>alert('".$apiFunc['msg']."');history.go(-1);</script>";exit;
+        }
         return redirect(DOMAIN_C_BACK.'contact');
+    }
+
+    public function show($id)
+    {
+        $curr['name'] = $this->lists['show']['name'];
+        $curr['url'] = $this->lists['show']['url'];
+        $apiFunc = ApiComFunc::show($id);
+        if ($apiFunc['code']!=0) {
+            echo "<script>alert('".$apiFunc['msg']."');history.go(-1);</script>";exit;
+        }
+        $result = [
+            'data' => $apiFunc['data'],
+            'lists' => $this->lists,
+            'curr' => $curr,
+            'curr_func' => $this->lists['func']['url'],
+        ];
+        return view('company.admin.contact.show', $result);
     }
 
     /**
      * 地图页面
      */
-    public function map()
+    public function map($cid)
     {
-        $company = CompanyModel::find(\Session::get('user.cid'));
+        $apiCompany = ApiCompany::show($cid);
+        if ($apiCompany['code']!=0) {
+            echo "<script>alert('".$apiCompany['msg']."');history.go(-1);</script>";exit;
+        }
         $key = 'Tj1ciyqmG0quiNgpr0nmAimUCCMB5qMk';      //自己申请的百度地图api的key
-        if ($company->point) {
-            $pointer = explode(',',$company->point);
+        $company = $apiCompany['data'];
+        if ($company['point']) {
+            $pointer = explode(',',$company['point']);
             $point['lng'] = $pointer[0];
             $point['lat'] = $pointer[1];
         } else {
-            $point = $this->getPoint($company->area,$company->address,$key);
+            $point = $this->getPoint($company['area'],$company['address'],$key);
         }
         $result = [
             'pointer'=> $point,
@@ -136,14 +188,5 @@ class ContactController extends BaseController
         $point = $x.','.$y;
         CompanyModel::where('id',\Session::get('user.cid'))->update(['point'=> $point, 'updated_at'=> time()]);
         return redirect(DOMAIN.'company/admin/contact/map');
-    }
-
-
-
-
-
-    public function query()
-    {
-        return CompanyModel::where('uid',$this->userid)->first();
     }
 }
