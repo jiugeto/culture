@@ -1,8 +1,8 @@
 <?php
 namespace App\Http\Controllers\Company\Admin;
 
-use App\Models\Base\AdModel;
-use App\Models\Base\PicModel;
+use App\Api\ApiBusiness\ApiAd;
+use App\Api\ApiBusiness\ApiAdPlace;
 use Illuminate\Http\Request;
 
 class PptController extends BaseController
@@ -18,31 +18,28 @@ class PptController extends BaseController
         $this->lists['category']['url'] = 'content';
         $this->lists['func']['name'] = '宣传编辑';
         $this->lists['func']['url'] = 'ppt';
-        $this->model = new AdModel();
     }
 
     public function index()
     {
         $curr['name'] = $this->lists['']['name'];
         $curr['url'] = $this->lists['']['url'];
+        $pageCurr = isset($_GET['page']) ? $_GET['page'] : 1;
+        $prefix_url = DOMAIN_C_BACK.'ppt';
+        $apiPpt = ApiAd::index($this->limit,$pageCurr,$this->userid,0,0,0,0,2);
+        if ($apiPpt['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiPpt['data']; $total = $apiPpt['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query($isuse=1),
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-            'curr_func'=> $this->lists['func']['url'],
-        ];
-        return view('company.admin.ppt.index', $result);
-    }
-
-    public function trash()
-    {
-        $curr['name'] = $this->lists['trash']['name'];
-        $curr['url'] = $this->lists['trash']['url'];
-        $result = [
-            'datas'=> $this->query($isuse=0),
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-            'curr_func'=> $this->lists['func']['url'],
+            'datas' => $datas,
+            'pagelist' => $pagelist,
+            'prefix_url' => $prefix_url,
+            'lists' => $this->lists,
+            'curr' => $curr,
+            'curr_func' => $this->lists['func']['url'],
         ];
         return view('company.admin.ppt.index', $result);
     }
@@ -52,53 +49,70 @@ class PptController extends BaseController
         $curr['name'] = $this->lists['create']['name'];
         $curr['url'] = $this->lists['create']['url'];
         $result = [
-            'adplaces'=> $this->model->userAdplaces($this->userid),
-            'pics'=> PicModel::where('uid',$this->userid)->get(),
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-            'curr_func'=> $this->lists['func']['url'],
+            'lists' => $this->lists,
+            'curr' => $curr,
+            'curr_func' => $this->lists['func']['url'],
+            'adplaces' => $this->getAdPlaces(),
+            'dayCount' => $this->getDayCountByMonth(),
         ];
         return view('company.admin.ppt.create', $result);
     }
 
     public function store(Request $request)
     {
-        $data = $this->getData($request);
-        $data['created_at'] = date('Y-m-d H:i:s', time());
-        AdModel::create($data);
-        return redirect(DOMAIN.'company/admin/ppt');
+        $data = $this->getPptData($request);
+        $apiAd = ApiAd::add($data);
+        if ($apiAd['code']!=0) {
+            echo "<script>alert('没有记录！');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN_C_BACK.'ppt');
     }
 
     public function edit($id)
     {
         $curr['name'] = $this->lists['edit']['name'];
         $curr['url'] = $this->lists['edit']['url'];
+        $apiAd = ApiAd::show($id);
+        if ($apiAd['code']!=0) {
+            echo "<script>alert('没有记录！');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> AdModel::find($id),
-            'pics'=> PicModel::where('uid',$this->userid)->get(),
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-            'curr_func'=> $this->lists['func']['url'],
+            'data' => $apiAd['data'],
+            'lists' => $this->lists,
+            'curr' => $curr,
+            'curr_func' => $this->lists['func']['url'],
+            'adplaces' => $this->getAdPlaces(),
+            'dayCount' => $this->getDayCountByMonth(),
         ];
         return view('company.admin.ppt.edit', $result);
     }
 
-    public function destroy($id)
+    public function update(Request $request,$id)
     {
-        AdModel::where('id',$id)->update(['del'=> 1]);
-        return redirect(DOMAIN.'company/admin/ppt');
+        $data = $this->getPptData($request);
+        $data['id'] = $id;
+        $apiAd = ApiAd::modify($data);
+        if ($apiAd['code']!=0) {
+            echo "<script>alert('没有记录！');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN_C_BACK.'ppt');
     }
 
-    public function restore($id)
+    public function show($id)
     {
-        AdModel::where('id',$id)->update(['del'=> 0]);
-        return redirect(DOMAIN.'company/admin/ppt/trash');
-    }
-
-    public function forceDelete($id)
-    {
-        AdModel::where('id',$id)->delete();
-        return redirect(DOMAIN.'company/admin/ppt/trash');
+        $curr['name'] = $this->lists['show']['name'];
+        $curr['url'] = $this->lists['show']['url'];
+        $apiAd = ApiAd::show($id);
+        if ($apiAd['code']!=0) {
+            echo "<script>alert('没有记录！');history.go(-1);</script>";exit;
+        }
+        $result = [
+            'data' => $apiAd['data'],
+            'lists' => $this->lists,
+            'curr' => $curr,
+            'curr_func' => $this->lists['func']['url'],
+        ];
+        return view('company.admin.ppt.show', $result);
     }
 
 
@@ -107,31 +121,55 @@ class PptController extends BaseController
     /**
      * 收集数据
      */
-    public function getData(Request $request)
+    public function getPptData(Request $request)
     {
-        $data = [
-            'pic_id'=> $request->pic_id,
-            'cid'=> $this->cid,
-            'title'=> $request->title,
-            'url'=> $request->url,
-            'sort2'=> $request->sort2,
-            'isshow2'=> $request->isshow2,
-        ];
-        return $data;
+        if ($request->isperiod==0) {
+            $fromTime = 0; $toTime = 0;
+        } else {
+            if (!$request->from_y || !$request->from_m || !$request->from_d) {
+                echo "<script>alert('起始年月日未填写完整！');history.go(-1);</script>";exit;
+            }
+            if (!$request->to_y || !$request->to_m || !$request->to_d) {
+                echo "<script>alert('结束年月日未填写完整！');history.go(-1);</script>";exit;
+            }
+            $fromTimeStr = $request->from_y . $request->from_m . $request->from_d;
+            $toTimeStr = $request->to_y . $request->to_m . $request->to_d;
+            $fromTime = strtotime($fromTimeStr);
+            $toTime = strtotime($toTimeStr);
+        }
+        return array(
+            'name'          =>  $request->name,
+            'adplace'   =>  $request->adplace,
+            'intro'     =>  $request->intro,
+            'link'      =>  $request->link,
+            'fromTime'  =>  $fromTime,
+            'toTime'    =>  $toTime,
+            'uid'       =>  $this->userid,
+        );
     }
 
     /**
-     * 查询方法
+     * 获取该企业所有广告位
      */
-    public function query($isuse=1)
+    public function getAdPlaces()
     {
-        $datas = AdModel::where('uid',$this->userid)
-            ->where('isuse',$isuse)
-            ->where('isshow',1)
-            ->orderBy('sort','desc')
-            ->orderBy('id','desc')
-            ->paginate($this->limit);
-        $datas->limit = $this->limit;
-        return $datas;
+        $apiAdPlace = ApiAdPlace::index(100,1,0);
+        return $apiAdPlace['code']==0 ? $apiAdPlace['data'] : [];
+    }
+
+    /**
+     * 计算当前月份
+     */
+    public function getDayCountByMonth()
+    {
+        $yue = date('m',time());
+        if (in_array($yue,[1,3,5,7,8,10,12])) {
+            $count = 31;
+        } else if (in_array($yue,[6,9,11])) {
+            $count = 30;
+        } else  if ($yue==2) {
+            $count = 28;
+        }
+        return isset($count) ? $count : 30;
     }
 }

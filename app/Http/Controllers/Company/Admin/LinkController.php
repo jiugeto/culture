@@ -1,8 +1,7 @@
 <?php
 namespace App\Http\Controllers\Company\Admin;
 
-use App\Models\LinkModel;
-use App\Models\Base\PicModel;
+use App\Api\ApiBusiness\ApiLink;
 use Illuminate\Http\Request;
 
 class LinkController extends BaseController
@@ -16,19 +15,28 @@ class LinkController extends BaseController
         parent::__construct();
         $this->lists['func']['name'] = '链接管理';
         $this->lists['func']['url'] = 'link';
-        $this->model = new LinkModel();
     }
 
     public function index()
     {
         $curr['name'] = $this->lists['']['name'];
         $curr['url'] = $this->lists['']['url'];
+        $pageCurr = isset($_GET['page']) ? $_GET['page'] : 1;
+        $prefix_url = DOMAIN_C_BACK.'link';
+        $apiLink = ApiLink::index($this->limit,$pageCurr,$this->cid,0,0);
+        if ($apiLink['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiLink['data']; $total = $apiLink['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query(),
-            'lists'=> $this->lists,
-            'prefix_url'=> DOMAIN.'company/admin/link',
-            'curr'=> $curr,
-            'curr_func'=> $this->lists['func']['url'],
+            'datas' => $datas,
+            'prefix_url' => $prefix_url,
+            'pagelist' => $pagelist,
+            'lists' => $this->lists,
+            'curr' => $curr,
+            'curr_func' => $this->lists['func']['url'],
         ];
         return view('company.admin.link.index', $result);
     }

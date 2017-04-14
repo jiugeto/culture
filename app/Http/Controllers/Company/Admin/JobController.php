@@ -42,7 +42,6 @@ class JobController extends BaseController
         $curr['name'] = $this->lists['create']['name'];
         $curr['url'] = $this->lists['create']['url'];
         $result = [
-            'model'=> $this->model,
             'lists'=> $this->lists,
             'curr'=> $curr,
             'curr_func' => $this->lists['func']['url'],

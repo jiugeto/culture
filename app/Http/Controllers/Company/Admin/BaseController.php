@@ -99,7 +99,12 @@ class BaseController extends Controller
             echo "<script>alert('没有记录！');history.go(-1);</script>";exit;
         }
         $module = $apiModule['data']['id'];
-        if (in_array($genre,[6,9])) {
+        if ($genre=5) {
+            if (!$request->small) {
+                echo "<script>alert('小字必填！');history.go(-1);</script>";exit;
+            }
+            $small = $request->small;
+        } else if (in_array($genre,[6,9])) {
             $small = '';
         } else if ($genre==7) {
             $small = $request->small;

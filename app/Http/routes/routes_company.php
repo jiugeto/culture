@@ -87,10 +87,6 @@ Route::group(['prefix'=>'com','middleware' =>'MemberAuth','namespace'=>'Company'
         Route::get('part/cate/{cate}','PartController@index');
         Route::resource('part','PartController');
         //宣传编辑
-        Route::get('ppt/trash','PptController@trash');
-        Route::get('ppt/{id}/destroy','PptController@destroy');
-        Route::get('ppt/{id}/restore','PptController@restore');
-        Route::get('ppt/{id}/forceDelete','PptController@forceDelete');
         Route::post('ppt/{id}','PptController@update');
         Route::resource('ppt','PptController');
         //链接管理
