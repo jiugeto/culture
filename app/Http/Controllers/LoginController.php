@@ -89,7 +89,7 @@ class LoginController extends Controller
                 $company['yyzzid'] = $companyInfo['data']['yyzzid'];
                 $company['logo'] = $companyInfo['data']['logo'];
                 $company['skin'] = $companyInfo['data']['skin'];
-                $company['layout'] = $companyInfo['data']['layout'];
+                $company['layout'] = $companyInfo['data']['layout'] ? unserialize($companyInfo['data']['layout']) : [];
             }
         }
 

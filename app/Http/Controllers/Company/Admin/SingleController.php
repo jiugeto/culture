@@ -1,9 +1,9 @@
 <?php
 namespace App\Http\Controllers\Company\Admin;
 
+use App\Api\ApiBusiness\ApiComFunc;
+use App\Api\ApiBusiness\ApiComModule;
 use Illuminate\Http\Request;
-use App\Models\Company\ComFuncModel;
-use App\Models\Company\ComModuleModel;
 
 class SingleController extends BaseController
 {
@@ -18,20 +18,29 @@ class SingleController extends BaseController
         parent::__construct();
         $this->lists['func']['name'] = '其他页面';
         $this->lists['func']['url'] = 'single';
-        $this->model = new ComFuncModel();
     }
 
     public function index()
     {
         $curr['name'] = $this->lists['']['name'];
         $curr['url'] = $this->lists['']['url'];
+        $pageCurr = isset($_GET['page']) ? $_GET['page'] : 1;
+        $prefix_url = DOMAIN_C_BACK.'single';
+        $apiSingle = ApiComFunc::getSingleList($this->limit,$pageCurr,$this->cid,0,0);
+        if ($apiSingle['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiSingle['data']; $total = $apiSingle['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query(),
-            'modules'=> $this->model->singelModules($this->cid),
-            'lists'=> $this->lists,
-            'prefix_url'=> DOMAIN.'company/admin/single',
-            'curr'=> $curr,
-            'curr_func'=> $this->lists['func']['url'],
+            'datas' => $datas,
+            'prefix_url' => $prefix_url,
+            'pagelist' => $pagelist,
+            'modules' => $this->getSingleModules(),
+            'lists' => $this->lists,
+            'curr' => $curr,
+            'curr_func' => $this->lists['func']['url'],
         ];
         return view('company.admin.single.index', $result);
     }
@@ -39,61 +48,73 @@ class SingleController extends BaseController
     public function create()
     {
         //判断有无该公司的扩展单页
-        if (!count(ComModuleModel::where('cid',$this->cid)->get())) {
-            echo "<script>alert('没有单页模，先去添加模块！');history.go(-1);</script>";exit;
+        $apiModule = ApiComModule::index($this->limit,1,$this->cid,0);
+        if ($apiModule['code']!=0) {
+            echo "<script>alert('没有单页模模块，请添加！');history.go(-1);</script>";exit;
         }
         $curr['name'] = $this->lists['create']['name'];
         $curr['url'] = $this->lists['create']['url'];
         $result = [
-            'modules'=> $this->model->singelModules($this->cid),
-            'model'=> $this->model,
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-            'curr_func'=> $this->lists['func']['url'],
+            'modules' => $this->getSingleModules(),
+            'lists' => $this->lists,
+            'curr' => $curr,
+            'curr_func' => $this->lists['func']['url'],
         ];
         return view('company.admin.single.create', $result);
     }
 
     public function store(Request $request)
     {
-        $data = $this->getData($request);
-        $data['created_at'] = time();
-        ComFuncModel::create($data);
-      return redirect('/company/admin/single');
+        $data = $this->getSingleData($request);
+        $apiSingle = ApiComFunc::add($data);
+        if ($apiSingle['code']!=0) {
+            echo "<script>alert('".$apiSingle['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN_C_BACK.'single');
     }
 
     public function edit($id)
     {
         $curr['name'] = $this->lists['edit']['name'];
         $curr['url'] = $this->lists['edit']['url'];
+        $apiSingle = ApiComFunc::show($id);
+        if ($apiSingle['code']!=0) {
+            echo "<script>alert('".$apiSingle['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> ComFuncModel::find($id),
-            'modules'=> $this->model->singelModules($this->cid),
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-            'curr_func'=> $this->lists['func']['url'],
+            'data' => $apiSingle['data'],
+            'modules' => $this->getSingleModules(),
+            'lists' => $this->lists,
+            'curr' => $curr,
+            'curr_func' => $this->lists['func']['url'],
         ];
         return view('company.admin.single.edit', $result);
     }
 
     public function update(Request $request,$id)
     {
-        $data = $this->getData($request);
-        $data['updated_at'] = time();
-        ComFuncModel::where('id',$id)->update($data);
-        return redirect('/company/admin/single');
+        $data = $this->getSingleData($request);
+        $data['id'] = $id;
+        $apiSingle = ApiComFunc::modify($data);
+        if ($apiSingle['code']!=0) {
+            echo "<script>alert('".$apiSingle['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN_C_BACK.'single');
     }
 
     public function show($id)
     {
         $curr['name'] = $this->lists['show']['name'];
         $curr['url'] = $this->lists['show']['url'];
+        $apiSingle = ApiComFunc::show($id);
+        if ($apiSingle['code']!=0) {
+            echo "<script>alert('".$apiSingle['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> ComFuncModel::find($id),
-            'modules'=> $this->model->singelModules($this->cid),
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-            'curr_func'=> $this->lists['func']['url'],
+            'data' => $apiSingle['data'],
+            'lists' => $this->lists,
+            'curr' => $curr,
+            'curr_func' => $this->lists['func']['url'],
         ];
         return view('company.admin.single.show', $result);
     }
@@ -101,30 +122,25 @@ class SingleController extends BaseController
 
 
 
-    public function getData(Request $request)
+    public function getSingleData(Request $request)
     {
         if (!$request->intro) { echo "<script>alert('比如不能空！');history.go(-1);</script>";exit; }
         $data = [
-            'name'=> $request->name,
-            'cid'=> $this->cid,
-            'module_id'=> $request->module_id,
-            'genre'=> $this->genre,
-            'intro'=> $request->intro,
-            'sort'=> $request->sort,
-            'isshow'=> $request->isshow,
+            'name'  =>  $request->name,
+            'cid'   =>  $this->cid,
+            'module_id' =>  $request->module_id,
+            'intro' =>  $request->intro,
+            'small' =>  '',
         ];
         return $data;
     }
 
-    public function query()
+    /**
+     * 获取该企业所有单页模块
+     */
+    public function getSingleModules()
     {
-        $datas = ComFuncModel::where('cid',$this->cid)
-            //type>20，为其他单页
-            ->where('type','>',20)
-            ->orderBy('sort','desc')
-            ->orderBy('id','desc')
-            ->paginate($this->limit);
-        $datas->limit = $this->limit;
-        return $datas;
+        $apiSingleModule = ApiComModule::getSingleModuleList(1000,1,$this->cid,0);
+        return $apiSingleModule['code']==0 ? $apiSingleModule['data'] : [];
     }
 }

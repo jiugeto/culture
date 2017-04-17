@@ -280,4 +280,11 @@ table.radio {
 }
 table.radio td { text-align:left; }
 table.radio td.first { border-right:1px solid #f0f0f0; }
+.textarea_show {
+    border:1px solid ghostwhite;
+    background:0;
+    overflow:auto;
+    outline:none;
+    resize:none;
+}
 /*=== 企业后台详情页面的内容 ===*/

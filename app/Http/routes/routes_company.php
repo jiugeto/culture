@@ -79,10 +79,6 @@ Route::group(['prefix'=>'com','middleware' =>'MemberAuth','namespace'=>'Company'
         Route::post('news/{id}','NewsController@update');
         Route::resource('news','NewsController');
         //花絮路由
-        Route::get('part/trash','PartController@trash');
-        Route::get('part/{id}/destroy','PartController@destroy');
-        Route::get('part/{id}/restore','PartController@restore');
-        Route::get('part/{id}/forceDelete','PartController@forceDelete');
         Route::post('part/{id}','PartController@update');
         Route::get('part/cate/{cate}','PartController@index');
         Route::resource('part','PartController');

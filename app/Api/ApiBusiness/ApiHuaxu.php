@@ -3,23 +3,24 @@ namespace App\Api\ApiBusiness;
 
 use Curl\Curl;
 
-class ApiComFunc
+class ApiHuaxu
 {
     /**
-     * 公司功能接口
+     * 视频制作花絮接口
      */
 
-    public static function index($limit,$pageCurr=1,$cid=0,$module=0,$isshow=2)
+    public static function index($limit,$pageCurr=1,$uid=0,$genre=0,$del=0)
     {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/com/func';
+        //花絮类型 genre：1样片花絮，2故事脚本花絮，3租赁花絮，4娱乐花絮，5设计花絮
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/huaxu';
         $curl = new Curl();
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
         $curl->post($apiUrl, array(
             'limit'     =>  $limit,
             'page'      =>  $pageCurr,
-            'cid'       =>  $cid,
-            'module'    =>  $module,
-            'isshow'    =>  $isshow,
+            'uid'       =>  $uid,
+            'genre'     =>  $genre,
+            'del'       =>  $del,
         ));
         $response = json_decode($curl->response);
         if ($response->error->code != 0) {
@@ -28,57 +29,13 @@ class ApiComFunc
         return array(
             'code' => 0,
             'data' => ApiBase::objToArr($response->data),
-            'pagelist' => ApiBase::objToArr($response->pagelist),
-        );
-    }
-
-    /**
-     * 获取单页功能
-     */
-    public static function getSingleList($limit,$pageCurr=1,$cid=0,$module=0,$isshow=2)
-    {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/com/single';
-        $curl = new Curl();
-        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
-        $curl->post($apiUrl, array(
-            'limit'     =>  $limit,
-            'page'      =>  $pageCurr,
-            'cid'       =>  $cid,
-            'module'    =>  $module,
-            'isshow'    =>  $isshow,
-        ));
-        $response = json_decode($curl->response);
-        if ($response->error->code != 0) {
-            return array('code' => -1, 'msg' => $response->error->msg);
-        }
-        return array(
-            'code' => 0,
-            'data' => ApiBase::objToArr($response->data),
-            'pagelist' => ApiBase::objToArr($response->pagelist),
-        );
-    }
-
-    public static function show($id)
-    {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/com/func/show';
-        $curl = new Curl();
-        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
-        $curl->post($apiUrl, array(
-            'id'    =>  $id,
-        ));
-        $response = json_decode($curl->response);
-        if ($response->error->code != 0) {
-            return array('code' => -1, 'msg' => $response->error->msg);
-        }
-        return array(
-            'code' => 0,
-            'data' => ApiBase::objToArr($response->data),
+            'pagelist'  =>  ApiBase::objToArr($response->pagelist),
         );
     }
 
     public static function add($data)
     {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/com/func/add';
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/huaxu/add';
         $curl = new Curl();
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
         $curl->post($apiUrl, $data);
@@ -94,7 +51,7 @@ class ApiComFunc
 
     public static function modify($data)
     {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/com/func/modify';
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/huaxu/modify';
         $curl = new Curl();
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
         $curl->post($apiUrl, $data);
@@ -108,16 +65,13 @@ class ApiComFunc
         );
     }
 
-    /**
-     * 初始化功能
-     */
-    public static function initFunc($cid)
+    public static function show($id)
     {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/com/func/init';
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/huaxu/show';
         $curl = new Curl();
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
         $curl->post($apiUrl, array(
-            'cid'   =>  $cid,
+            'id'    =>  $id,
         ));
         $response = json_decode($curl->response);
         if ($response->error->code != 0) {
@@ -126,7 +80,6 @@ class ApiComFunc
         return array(
             'code' => 0,
             'data' => ApiBase::objToArr($response->data),
-//            'msg' => $response->error->msg,
         );
     }
 
@@ -135,7 +88,7 @@ class ApiComFunc
      */
     public static function getModel()
     {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/com/func/getmodel';
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/huaxu/getmodel';
         $curl = new Curl();
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
         $curl->post($apiUrl, array(

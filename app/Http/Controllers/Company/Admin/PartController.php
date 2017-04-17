@@ -1,14 +1,17 @@
 <?php
 namespace App\Http\Controllers\Company\Admin;
 
-use App\Models\GoodsModel;
+use App\Api\ApiBusiness\ApiHuaxu;
 use Illuminate\Http\Request;
+use Session;
 
 class PartController extends BaseController
 {
     /**
-     * 企业开展后台，产品管理
+     * 企业后台，花絮管理
      */
+
+    protected $genre;       //噶类型
 
     public function __construct()
     {
@@ -17,35 +20,30 @@ class PartController extends BaseController
         $this->lists['category']['url'] = 'content';
         $this->lists['func']['name'] = '花絮编辑';
         $this->lists['func']['url'] = 'part';
-        $this->model = new GoodsModel();
+        $this->genre = $this->getHuaxuType();
     }
 
     public function index($cate=0)
     {
         $curr['name'] = $this->lists['']['name'];
         $curr['url'] = $this->lists['']['url'];
+        $pageCurr = isset($_GET['page']) ? $_GET['page'] : 1;
+        $prefix_url = DOMAIN_C_BACK.'part';
+        $apiHuaxu = ApiHuaxu::index($this->limit,$pageCurr,$this->userid,$this->genre,0);
+        if ($apiHuaxu['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiHuaxu['data']; $total = $apiHuaxu['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query($del=0,$cate),
-            'model'=> $this->model,
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-            'curr_func'=> $this->lists['func']['url'],
-            'cate'=> $cate,
-        ];
-        return view('company.admin.part.index', $result);
-    }
-
-    public function trash($cate=0)
-    {
-        $curr['name'] = $this->lists['trash']['name'];
-        $curr['url'] = $this->lists['trash']['url'];
-        $result = [
-            'datas'=> $this->query($del=1,$cate),
-            'model'=> $this->model,
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-            'curr_func'=> $this->lists['func']['url'],
-            'cate'=> $cate,
+            'datas' => $datas,
+            'pagelist' => $pagelist,
+            'prefix_url' => $prefix_url,
+            'lists' => $this->lists,
+            'curr' => $curr,
+            'curr_func' => $this->lists['func']['url'],
+            'cate' => $cate,
         ];
         return view('company.admin.part.index', $result);
     }
@@ -55,80 +53,67 @@ class PartController extends BaseController
         $curr['name'] = $this->lists['create']['name'];
         $curr['url'] = $this->lists['create']['url'];
         $result = [
-            'model'=> $this->model,
-            'pics'=> $this->model->pics($this->userid),
-            'videos'=> $this->model->videos($this->userid),
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-            'curr_func'=> $this->lists['func']['url'],
+            'model' => $this->getModel(),
+            'lists' => $this->lists,
+            'curr' => $curr,
+            'curr_func' => $this->lists['func']['url'],
         ];
         return view('company.admin.part.create', $result);
     }
 
     public function store(Request $request)
     {
-       $data = $this->getData($request);
-       $data['created_at'] = time();
-       GoodsModel::create($data);
-       return redirect(DOMAIN.'company/admin/part');
+        $data = $this->getPartData($request);
+        $apiHuaxu = ApiHuaxu::add($data);
+        if ($apiHuaxu['code']!=0) {
+            echo "<script>alert('".$apiHuaxu['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN_C_BACK.'part');
     }
 
     public function edit($id)
     {
         $curr['name'] = $this->lists['edit']['name'];
         $curr['url'] = $this->lists['edit']['url'];
+        $apiHuaxu = ApiHuaxu::show($id);
+        if ($apiHuaxu['code']!=0) {
+            echo "<script>alert('".$apiHuaxu['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> GoodsModel::find($id),
-            'model'=> $this->model,
-            'pics'=> $this->model->pics($this->userid),
-            'videos'=> $this->model->videos($this->userid),
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-            'curr_func'=> $this->lists['func']['url'],
+            'data' => $apiHuaxu['data'],
+            'model' => $this->getModel(),
+            'lists' => $this->lists,
+            'curr' => $curr,
+            'curr_func' => $this->lists['func']['url'],
         ];
         return view('company.admin.part.edit', $result);
     }
 
     public function update(Request $request,$id)
     {
-        $data = $this->getData($request);
-        $data['updated_at'] = time();
-        GoodsModel::where('id',$id)->update($data);
-        return redirect(DOMAIN.'company/admin/part');
+        $data = $this->getPartData($request);
+        $apiHuaxu = ApiHuaxu::modify($data);
+        if ($apiHuaxu['code']!=0) {
+            echo "<script>alert('".$apiHuaxu['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN_C_BACK.'part');
     }
 
     public function show($id)
     {
         $curr['name'] = $this->lists['show']['name'];
         $curr['url'] = $this->lists['show']['url'];
+        $apiHuaxu = ApiHuaxu::show($id);
+        if ($apiHuaxu['code']!=0) {
+            echo "<script>alert('".$apiHuaxu['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> GoodsModel::find($id),
-            'model'=> $this->model,
-            'pics'=> $this->model->pics($this->userid),
-            'videos'=> $this->model->videos($this->userid),
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-            'curr_func'=> $this->lists['func']['url'],
+            'data' => $apiHuaxu['data'],
+            'lists' => $this->lists,
+            'curr' => $curr,
+            'curr_func' => $this->lists['func']['url'],
         ];
         return view('company.admin.part.show', $result);
-    }
-
-    public function destroy($id)
-    {
-        GoodsModel::where('id',$id)->update(array('del'=> 1));
-        return redirect(DOMAIN.'company/admin/part');
-    }
-
-    public function restore($id)
-    {
-        GoodsModel::where('id',$id)->update(array('del'=> 0));
-        return redirect(DOMAIN.'company/admin/part');
-    }
-
-    public function forceDelete($id)
-    {
-        GoodsModel::where('id',$id)->delete();
-        return redirect(DOMAIN.'company/admin/part');
     }
 
 
@@ -138,43 +123,47 @@ class PartController extends BaseController
     /**
      * 收集数据
      */
-    public function getData(Request $request)
+    public function getPartData(Request $request)
     {
-        $data = [
-            'name'=> $request->name,
-            'genre'=> 2,     //1代表产品，2代表花絮
-            'type'=> 4,     //1个人需求，2个人供应，3企业需求，4企业供应
-            'cate_id'=> $request->cate_id,
-            'intro'=> $request->intro,
-            'title'=> $request->title,
-            'pic_id'=> $request->pic_id,
-            'video_id'=> $request->video_id,
-            'uid'=> $this->userid,
-            'uname'=> \Session::get('user.username'),
-            'isshow2'=> $request->isshow2,
-        ];
-        return $data;
+        return array(
+            'genre'     =>  $request->genre,
+            'name'      =>  $request->name,
+            'intro'     =>  $request->intro,
+            'uid'       =>  $this->userid,
+            'uname'     =>  Session::get('user.username'),
+        );
     }
 
     /**
-     * 查询方法
+     * 获取 model
      */
-    public function query($del=0,$cate=0)
+    public function getModel()
     {
-        //说明：genre==1产品，2花絮；type==1个人需求，2个人供应，3企业需求，4企业供应
-        if ($cate) {
-            $datas = GoodsModel::where('uid',$this->userid)
-                ->where('del',$del)
-                ->where('cate',$cate)
-                ->where(array('genre'=>2, 'type'=>4))
-                ->paginate($this->limit);
+        $apiModel = ApiHuaxu::getModel();
+        return $apiModel['code']==0 ? $apiModel['model'] : [];
+    }
+
+    /**
+     * 由公司类型确定花絮类型
+     */
+    public function getHuaxuType()
+    {
+        //会员身份：1普通用户，2个人会员，3普通企业，4设计师，5广告公司，6影视公司，7租赁公司，8设计公司，50超级用户
+        //花絮类型：1样片花絮，2故事脚本花絮，3租赁花絮，4娱乐花絮，5设计花絮
+        $type = Session::get('user.userType');
+        if ($type==5) {
+            $huaxuType = array(1,2);
+        } else if ($type==6) {
+            $huaxuType = array(1,2,4);
+        } else if ($type==7) {
+            $huaxuType = array(3);
+        } else if ($type==8) {
+            $huaxuType = array(5);
+        } else if ($type==50) {
+            $huaxuType = array(1,2,3,4,5);
         } else {
-            $datas = GoodsModel::where('uid',$this->userid)
-                ->where('del',$del)
-                ->where(array('genre'=>2, 'type'=>4))
-                ->paginate($this->limit);
+            $huaxuType = array();
         }
-        $datas->limit = $this->limit;
-        return $datas;
+        return $huaxuType;
     }
 }

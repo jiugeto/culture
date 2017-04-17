@@ -3,12 +3,18 @@
     @include('company.admin.common.crumb')
 
     <div class="com_admin_list">
+        <div class="search_type">
+            <h4 style="text-align:center;">花絮列表</h4>
+            &nbsp;
+            <span class="create_right">
+                <a href="{{DOMAIN_C_BACK}}part/create" class="list_btn">发布花絮</a>
+            </span>
+        </div>
         <table cellspacing="0">
             <tr>
                 <td>序号</td>
                 <td>花絮名称</td>
                 <td>花絮类型</td>
-                <td>在前台公司页面显示否</td>
                 <td>创建时间</td>
                 <td>操作</td>
             </tr>
@@ -16,26 +22,20 @@
             @if(count($datas))
                 @foreach($datas as $data)
             <tr>
-                <td>{{ $data->id }}</td>
-                <td><a href="/company/admin/product/{{ $data['id'] }}" class="list_a">{{ $data->name ? $data->name : '企业默认信息' }}</a></td>
-                <td>{{ $data->cate()?$data->cate()->name:'' }}</td>
-                <td>{{ $data->isshow2 ? '显示' : '不显示' }}</td>
-                <td>{{ $data->created_at }}</td>
+                <td>{{$data['id']}}</td>
+                <td><a href="{{DOMAIN_C_BACK}}part/{{$data['id']}}" class="list_a">{{$data['name']}}</a></td>
+                <td>{{$data['genreName']}}</td>
+                <td>{{$data['createTime']}}</td>
                 <td>
-                @if($curr['url']!='trash')
-                    <a href="/company/admin/product/{{ $data['id'] }}" class="list_btn">查看</a>
-                    <a href="/company/admin/product/{{ $data['id'] }}/edit" class="list_btn">编辑</a>
-                    <a href="/company/admin/product/{{ $data['id'] }}/destroy" class="list_btn">删除</a>
-                @else
-                    <a href="/company/admin/product/{{ $data['id'] }}/restore" class="list_btn">还原</a>
-                    <a href="/company/admin/product/{{ $data['id'] }}/forceDelete" class="list_btn">销毁</a>
-                @endif
+                    <a href="{{DOMAIN_C_BACK}}part/{{$data['id']}}" class="list_btn">查看</a>
+                    <a href="{{DOMAIN_C_BACK}}part/{{$data['id']}}/edit" class="list_btn">编辑</a>
+                    <a href="javascript:;" class="list_btn" onclick="alert('缩略图！');">缩略图</a>
                 </td>
             </tr>
                 @endforeach
-            @else @include('member.common.#norecord')
+            @else <tr><td colspan="10" style="text-align:center;">没有记录</td></tr>
             @endif
         </table>
-        <div style="margin:10px 20px;">@include('company.admin.common.#page')</div>
+        @include('company.admin.common.page2')
     </div>
 @stop

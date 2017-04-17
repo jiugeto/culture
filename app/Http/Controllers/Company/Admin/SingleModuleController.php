@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Company\Admin;
 
-use App\Models\Company\ComModuleModel;
+use App\Api\ApiBusiness\ApiComModule;
 use Illuminate\Http\Request;
 
 class SingleModuleController extends BaseController
@@ -10,7 +10,7 @@ class SingleModuleController extends BaseController
      * 企业后台 其他页面（单页）
      */
 
-    protected $genre = 21;       //21代表新加的单页
+    protected $genre = 51;       //模块类型
 
     public function __construct()
     {
@@ -23,12 +23,22 @@ class SingleModuleController extends BaseController
     {
         $curr['name'] = $this->lists['']['name'];
         $curr['url'] = $this->lists['']['url'];
+        $pageCurr = isset($_GET['page']) ? $_GET['page'] : 1;
+        $prefix_url = DOMAIN_C_BACK.'singlemodule';
+        $apiSingleModule = ApiComModule::getSingleModuleList($this->limit,$pageCurr,$this->cid,0);
+        if ($apiSingleModule['code']!=0) {
+            $datas = array(); $total = 0;
+        } else {
+            $datas = $apiSingleModule['data']; $total = $apiSingleModule['pagelist']['total'];
+        }
+        $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
         $result = [
-            'datas'=> $this->query(),
-            'lists'=> $this->lists,
-            'prefix_url'=> DOMAIN.'company/admin/singlemodule',
-            'curr'=> $curr,
-            'curr_func'=> $this->lists['func']['url'],
+            'datas' => $datas,
+            'prefix_url' => $prefix_url,
+            'pagelist' => $pagelist,
+            'lists' => $this->lists,
+            'curr' => $curr,
+            'curr_func' => $this->lists['func']['url'],
         ];
         return view('company.admin.singlemodule.index', $result);
     }
@@ -38,51 +48,64 @@ class SingleModuleController extends BaseController
         $curr['name'] = $this->lists['create']['name'];
         $curr['url'] = $this->lists['create']['url'];
         $result = [
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-            'curr_func'=> $this->lists['func']['url'],
+            'lists' => $this->lists,
+            'curr' => $curr,
+            'curr_func' => $this->lists['func']['url'],
         ];
         return view('company.admin.singlemodule.create', $result);
     }
 
     public function store(Request $request)
     {
-        $data = $this->getData($request);
-        $data['created_at'] = time();
-        ComModuleModel::create($data);
-        return redirect(DOMAIN.'company/admin/singlemodule');
+        $data = $this->getSingleModuleData($request);
+        $apiModule = ApiComModule::add($data);
+        if ($apiModule['code']!=0) {
+            echo "<script>alert('".$apiModule['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN_C_BACK.'singlemodule');
     }
 
     public function edit($id)
     {
         $curr['name'] = $this->lists['edit']['name'];
         $curr['url'] = $this->lists['edit']['url'];
+        $apiModule = ApiComModule::show($id);
+        if ($apiModule['code']!=0) {
+            echo "<script>alert('".$apiModule['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> ComModuleModel::find($id),
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-            'curr_func'=> $this->lists['func']['url'],
+            'data' => $apiModule['data'],
+            'lists' => $this->lists,
+            'curr' => $curr,
+            'curr_func' => $this->lists['func']['url'],
         ];
         return view('company.admin.singlemodule.edit', $result);
     }
 
     public function update(Request $request,$id)
     {
-        $data = $this->getData($request);
-        $data['updated_at'] = time();
-        ComModuleModel::where('id',$id)->update($data);
-        return redirect(DOMAIN.'company/admin/singlemodule');
+        $data = $this->getSingleModuleData($request);
+        $data['id'] = $id;
+        $apiModule = ApiComModule::modify($data);
+        if ($apiModule['code']!=0) {
+            echo "<script>alert('".$apiModule['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN_C_BACK.'singlemodule');
     }
 
     public function show($id)
     {
         $curr['name'] = $this->lists['show']['name'];
         $curr['url'] = $this->lists['show']['url'];
+        $apiModule = ApiComModule::show($id);
+        if ($apiModule['code']!=0) {
+            echo "<script>alert('".$apiModule['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> ComModuleModel::find($id),
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-            'curr_func'=> $this->lists['func']['url'],
+            'data' => $apiModule['data'],
+            'lists' => $this->lists,
+            'curr' => $curr,
+            'curr_func' => $this->lists['func']['url'],
         ];
         return view('company.admin.singlemodule.show', $result);
     }
@@ -90,28 +113,14 @@ class SingleModuleController extends BaseController
 
 
 
-    public function getData(Request $request)
+    public function getSingleModuleData(Request $request)
     {
         if (!$request->intro) { echo "<script>alert('内容不能空！');history.go(-1);</script>";exit; }
-        $data = [
-            'name'=> $request->name,
-            'genre'=> $this->genre,
-            'cid'=> $this->cid,
-            'intro'=> $request->intro,
-            'sort'=> $request->sort,
-            'isshow'=> $request->isshow,
-        ];
-        return $data;
-    }
-
-    public function query()
-    {
-        $datas = ComModuleModel::where('genre',$this->genre)
-                ->where('cid',$this->cid)
-                ->orderBy('sort','desc')
-                ->orderBy('id','desc')
-                ->paginate($this->limit);
-        $datas->limit = $this->limit;
-        return $datas;
+        return array(
+            'name'  =>  $request->name,
+            'genre' =>  51,
+            'cid'   =>  $this->cid,
+            'intro' =>  $request->intro,
+        );
     }
 }

@@ -14,8 +14,6 @@ class LayoutController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->lists['category']['name'] = '公司信息';
-        $this->lists['category']['url'] = 'cominfo';
         $this->lists['func']['name'] = '页面布局';
         $this->lists['func']['url'] = 'layout';
     }

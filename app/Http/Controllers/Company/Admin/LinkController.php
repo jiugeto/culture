@@ -46,8 +46,7 @@ class LinkController extends BaseController
         $curr['name'] = $this->lists['create']['name'];
         $curr['url'] = $this->lists['create']['url'];
         $result = [
-            'pics'=> PicModel::where('uid',$this->userid)->get(),
-            'types'=> $this->model['types'],
+            'model'=> $this->getModel(),
             'lists'=> $this->lists,
             'curr'=> $curr,
             'curr_func'=> $this->lists['func']['url'],
@@ -57,46 +56,56 @@ class LinkController extends BaseController
 
     public function store(Request $request)
     {
-        $data = $this->getData($request);
-        $data['created_at'] = time();
-        LinkModel::create($data);
-        return redirect('/company/admin/link');
+        $data = $this->getLinkData($request);
+        $apiLink = ApiLink::add($data);
+        if ($apiLink['code']!=0) {
+            echo "<script>alert('".$apiLink['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN_C_BACK.'link');
     }
 
     public function edit($id)
     {
         $curr['name'] = $this->lists['edit']['name'];
         $curr['url'] = $this->lists['edit']['url'];
+        $apiLink = ApiLink::show($id);
+        if ($apiLink['code']!=0) {
+            echo "<script>alert('".$apiLink['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> LinkModel::find($id),
-            'pics'=> PicModel::where('uid',$this->userid)->get(),
-            'types'=> $this->model['types'],
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-            'curr_func'=> $this->lists['func']['url'],
+            'data' => $apiLink['data'],
+            'model' => $this->getModel(),
+            'lists' => $this->lists,
+            'curr' => $curr,
+            'curr_func' => $this->lists['func']['url'],
         ];
         return view('company.admin.link.edit', $result);
     }
 
     public function update(Request $request,$id)
     {
-        $data = $this->getData($request);
-        $data['updated_at'] = time();
-        LinkModel::where('id',$id)->update($data);
-        return redirect('/company/admin/link');
+        $data = $this->getLinkData($request);
+        $data['id'] = $id;
+        $apiLink = ApiLink::modify($data);
+        if ($apiLink['code']!=0) {
+            echo "<script>alert('".$apiLink['msg']."');history.go(-1);</script>";exit;
+        }
+        return redirect(DOMAIN_C_BACK.'link');
     }
 
     public function show($id)
     {
         $curr['name'] = $this->lists['show']['name'];
         $curr['url'] = $this->lists['show']['url'];
+        $apiLink = ApiLink::show($id);
+        if ($apiLink['code']!=0) {
+            echo "<script>alert('".$apiLink['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'data'=> LinkModel::find($id),
-            'pics'=> PicModel::where('uid',$this->userid)->get(),
-            'types'=> $this->model['types'],
-            'lists'=> $this->lists,
-            'curr'=> $curr,
-            'curr_func'=> $this->lists['func']['url'],
+            'data' => $apiLink['data'],
+            'lists' => $this->lists,
+            'curr' => $curr,
+            'curr_func' => $this->lists['func']['url'],
         ];
         return view('company.admin.link.show', $result);
     }
@@ -104,30 +113,26 @@ class LinkController extends BaseController
 
 
 
-    public function getData(Request $request)
+    public function getLinkData(Request $request)
     {
-        $data = [
-            'name'=> $request->name,
-            'cid'=> $this->cid,
-            'type_id'=> $request->type_id,
-            'pic_id'=> $request->pic_id,
-            'intro'=> isset($request->intro) ? $request->intro : '',
-            'link'=> $request->link,
-            'display_way'=> $request->display_way,
-            'sort'=> $request->sort,
-            'isshow'=> $request->isshow,
-        ];
-        return $data;
+        return array(
+            'name'  =>  $request->name,
+            'display_way'   =>  $request->display_way,
+            'cid'   =>  $this->cid,
+            'type'  =>  $request->type,
+            'title' =>  $request->title,
+            'intro' =>  $request->intro,
+            'link'  =>  $request->link,
+            'pid'   =>  0,
+        );
     }
 
-    public function query()
+    /**
+     * 获取 model
+     */
+    public function getModel()
     {
-        $datas = LinkModel::where('cid',$this->cid)
-                ->where('type_id', 2)
-                ->orderBy('sort','desc')
-                ->orderBy('id','desc')
-                ->paginate($this->limit);
-        $datas->limit = $this->limit;
-        return $datas;
+        $apiModel = ApiLink::getModel();
+        return $apiModel['code']==0 ? $apiModel['model'] : [];
     }
 }
