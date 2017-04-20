@@ -89,7 +89,7 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
     Route::get('order/getPay/{id}/{cate}/{status}','OrderController@setPayStatus');
     Route::get('order/{id}/{status}','OrderController@setStatus');
     Route::post('order/tosure','OrderController@tosure');
-    Route::post('order/create','OrderController@create');
+    Route::post('order/add','OrderController@store');
     Route::resource('order','OrderController');
     //在线创作路由
     Route::get('orderpro/comment/{id}/{comment}/{backGold}','OrderProductController@setComment');

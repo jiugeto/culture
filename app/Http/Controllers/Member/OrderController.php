@@ -1,7 +1,12 @@
 <?php
 namespace App\Http\Controllers\Member;
 
+use App\Api\ApiBusiness\ApiDesign;
+use App\Api\ApiBusiness\ApiGoods;
+use App\Api\ApiBusiness\ApiIdea;
 use App\Api\ApiBusiness\ApiOrder;
+use App\Api\ApiBusiness\ApiRent;
+use App\Api\ApiBusiness\ApiStaff;
 use App\Api\ApiUser\ApiUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Request as AjaxRequest;
@@ -47,58 +52,67 @@ class OrderController extends BaseController
     /**
      * 前台下的订单，这里统一处理
      */
-//    public function create()
-//    {
-//        if (AjaxRequest::ajax()) {
-//            $data = Input::all();
-//            //假如已有类似订单
-//            $order = OrderModel::where(['genre'=>$data['genre'], 'fromid'=>$data['id']])->first();
-//            if (count($order)) {
-//                echo json_encode(array('code'=>'-2', 'message' =>'你已经申请此订单，不能重复申请！'));exit;
-//            }
-//
-//            //1创意供应，2创意需求，3分镜供应，4分镜需求，5视频供应，6视频需求，7娱乐供应，8娱乐需求，9演员供应，10演员需求，1租赁供应，12租赁需求
-//            if (in_array($data['genre'],[1,2])) {
-//                $ideaModel = \App\Models\IdeasModel::find($data['id']);
-//                $productname = $ideaModel->name;
-//                $sellerid = $ideaModel->uid;
-//            } elseif (in_array($data['genre'],[3,4])) {
-//                $storyBoardModel = \App\Models\StoryBoardModel::find($data['id']);
-//                $productname = $storyBoardModel->name;
-//                $sellerid = $storyBoardModel->uid;
-//            } elseif (in_array($data['genre'],[5,6])) {
-//                $videoModel = \App\Models\Base\VideoModel::find($data['id']);
-//                $productname = $videoModel->name;
-//                $sellerid = $videoModel->uid;
-//            }
-//            //获取供应方信息
-//            $userModel = UserModel::find($sellerid);
-//            //插入订单表
-//            $order = [
-//                'name'=> $productname,
-//                'serial'=> date('YmdHis',time()).rand(0,10000),
-//                'genre'=> $data['genre'],
-//                'fromid'=> $data['id'],
-//                'seller'=> $sellerid,
-//                'sellerName'=> $userModel->username,
-//                'buyer'=> $this->userid,
-//                'buyerName'=> \Session::get('user.username'),
-//                'status'=> 1,
-//                'created_at'=> time(),
-//            ];
-//            OrderModel::create($order);
-//            //插入支付表
-//            $orderModel = OrderModel::where($order)->first();
-//            $pay = [
-//                'genre'=> 1,    //1订单表，2售后服务，3在线创作订单
-//                'order_id'=> $orderModel->id,
-//                'created_at'=> time(),
-//            ];
-//            PayModel::create($pay);
-//            echo json_encode(array('code'=>'0', 'message' =>'操作成功！'));exit;
-//        }
-//        echo json_encode(array('code'=>'-1', 'message' =>'非法操作!'));exit;
-//    }
+    public function store()
+    {
+        if (AjaxRequest::ajax()) {
+            $genre = Input::get('genre');
+            $fromid = Input::get('id');
+            $uid = Input::get('uid');
+            if (!$genre || !$uid) {
+                echo json_encode(array('code'=>-2, 'message' =>'参数有误！！'));exit;
+            }
+            /**
+             * 订单来源类型genre：
+             * 1故事供应，2故事需求，3动画供应，4动画需求，5视频供应，6视频需求，
+             * 7人员供应，8人员需求，9租赁供应，10租赁需求，11设计供应，12设计需求，
+             */
+            if (in_array($genre,[1,2])) {
+                $apiData = ApiIdea::show($fromid);
+            } else if (in_array($genre,[3,4,5,6])) {
+                $apiData = ApiGoods::show($fromid);
+            } else if (in_array($genre,[7,8])) {
+                $apiData = ApiStaff::show($fromid);
+            } else if (in_array($genre,[9,10])) {
+                $apiData = ApiRent::show($fromid);
+            } else if (in_array($genre,[11,12])) {
+                $apiData = ApiDesign::show($fromid);
+            } else {
+                $apiData = ApiGoods::show($fromid);
+            }
+            //获取供求双方信息
+            if (in_array($genre,[1,3,5,7,9,11])) {
+                $buyer = $uid; $seller = $this->userid;
+            } else {
+                $seller = $uid; $buyer = $this->userid;
+            }
+            $apiBuyer = ApiUsers::getOneUser($buyer);
+            $apiSeller = ApiUsers::getOneUser($seller);
+            if ($apiBuyer['code']!=0 || $apiSeller['code']!=0) {
+                echo json_encode(array('code'=>-3, 'message' =>'用户或商家信息错误！'));exit;
+            }
+            //假如已有类似订单
+            $hasOrder = ApiOrder::getOneByGenre($genre,$fromid,$buyer,$seller);
+            if ($hasOrder['code']==0) {
+                echo json_encode(array('code'=>-4, 'message' =>'你已经申请此订单，不能重复申请！'));exit;
+            }
+            //插入订单表
+            $data = [
+                'name'      =>  $apiData['data']['name'],
+                'genre'     =>  $genre,
+                'fromid'    =>  $fromid,
+                'seller'    =>  $seller,
+                'sellerName'=>  $apiSeller['data']['username'],
+                'buyer'     =>  $this->userid,
+                'buyerName' =>  $apiBuyer['data']['username'],
+            ];
+            $apiOrder = ApiOrder::add($data);
+            if ($apiOrder['code']!=0) {
+                echo json_encode(array('code'=>-5, 'message' =>$apiOrder['msg']));exit;
+            }
+            echo json_encode(array('code'=>0, 'message' =>'操作成功！'));exit;
+        }
+        echo json_encode(array('code'=>-1, 'message' =>'非法操作!'));exit;
+    }
 
     public function show($id)
     {

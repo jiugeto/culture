@@ -17,7 +17,7 @@
 </head>
 <body>
 {{--浏览器问题--}}
-@include('layout.browser')
+{{--@include('layout.browser')--}}
 {{--浏览器问题--}}
 
     @include('layout.header')

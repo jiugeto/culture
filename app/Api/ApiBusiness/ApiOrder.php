@@ -101,6 +101,31 @@ class ApiOrder
         );
     }
 
+    /**
+     * 获取唯一订单记录
+     * 通过 genre、fromid、uid、seller、
+     */
+    public static function getOneByGenre($genre,$fromid,$uid,$seller)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/order/onebygenre';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, array(
+            'genre'     =>  $genre,
+            'fromid'    =>  $fromid,
+            'uid'       =>  $uid,
+            'seller'    =>  $seller,
+        ));
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array(
+            'code' => 0,
+            'data' => ApiBase::objToArr($response->data),
+        );
+    }
+
     public static function show($id)
     {
         $apiUrl = ApiBase::getApiCurl() . '/api/v1/order/show';
@@ -116,6 +141,22 @@ class ApiOrder
         return array(
             'code' => 0,
             'data' => ApiBase::objToArr($response->data),
+        );
+    }
+
+    public static function add($data)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/order/show';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, $data);
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array(
+            'code' => 0,
+            'msg' => $response->error->msg,
         );
     }
 

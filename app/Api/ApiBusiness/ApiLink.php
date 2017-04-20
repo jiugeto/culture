@@ -64,7 +64,7 @@ class ApiLink
         );
     }
 
-    public static function navigate($limit,$cid,$isshow=0,$sortid='desc')
+    public static function navigate($limit,$cid,$isshow=0,$sortid='asc')
     {
         $redisKey = 'culture_navigate';
         //判断缓存有没有该数据
