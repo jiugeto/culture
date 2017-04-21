@@ -139,7 +139,9 @@
 .s_right .img {
     margin:5px auto;
     width:270px; height:300px;
-    background:rgb(250,250,250);
+    color:#c8c8c8;
+    text-align:center;
+    background:#fafafa;
     overflow:hidden;
 }
 /*娱乐广告entertain*/
@@ -151,6 +153,6 @@
 .e_right .img {
     margin:5px auto;
     width:270px; height:500px;
-    background:rgb(250,250,250);
+    background:#fafafa;
     overflow:hidden;
 }

@@ -77,7 +77,7 @@
                     </div>
                     <div class="text">
                         <a href="{{DOMAIN}}product/{{ $newest['id'] }}">{{ $newest['name'] }}</a>
-                        <span style="color:red;float:right;">{{ $newest['click'] }}</span>
+                        {{--<span style="color:red;float:right;">{{ $newest['click'] }}</span>--}}
                     </div>
                 </div>
                     @endforeach
@@ -111,7 +111,7 @@
                             </a>
                         </div>
                         <a href="{{DOMAIN}}product/{{ $newest['id'] }}">{{ str_limit($newest['name'],10) }}</a>
-                        <a href="" class="click">点击<span>{{ $newest['click'] }}</span></a>
+                        {{--<a href="" class="click">点击<span>{{ $newest['click'] }}</span></a>--}}
                     </div>
                         @endforeach
                     @endif
@@ -147,7 +147,7 @@
                             </a>
                         </div>
                         <a href="{{DOMAIN}}product/{{ $newest['id'] }}">{{ str_limit($newest['name'],10) }}</a>
-                        <a href="" class="click">点击<span>{{ $newest['click'] }}</span></a>
+                        {{--<a href="" class="click">点击<span>{{ $newest['click'] }}</span></a>--}}
                     </div>
                         @endforeach
                     @endif
@@ -159,7 +159,7 @@
                             {{--<a href=""><div class="none">无</div></a>--}}
                         </div>
                         <a href="">无最新样片</a>
-                        <a href="" class="click">点击<span>0</span></a>
+                        {{--<a href="" class="click">点击<span>0</span></a>--}}
                     </div>
                         @endfor
                     @endif

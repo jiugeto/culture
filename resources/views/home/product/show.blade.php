@@ -53,7 +53,7 @@
         </span>
         <input type="hidden" name="id" value="{{ $data->id }}">
         {{--发布方信息--}}
-        @include('home.common.info')
+        @include('home.common.userinfo')
     </div>
 
     <script>

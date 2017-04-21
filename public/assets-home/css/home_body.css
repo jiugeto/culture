@@ -18,7 +18,7 @@
 .ppt_change_bg {
     width:100%;height:60px;
     background:black;
-    filter:alpha(opacity=10);opacity:0.10;
+    filter:alpha(opacity=10); opacity:0.10;
 }
 .ppt_change_pic {
     position:absolute;bottom:-12px;left:-35px;
@@ -53,13 +53,17 @@
 
 
 /*=======在线创作========*/
-.floor { clear:both;border-bottom:2px solid ghostwhite; }
+.floor {
+    clear:both;
+    border-bottom:2px solid ghostwhite;
+}
 .floor span.more {
-    float:right;
+    /*float:right;*/
     cursor:pointer;
     color:grey;
     font-size:16px;
     border-bottom:1px solid grey;
+    position:relative; left:700px;
 }
 .floor_img { width:60px; }
 .floor_text {
@@ -178,10 +182,12 @@
 
 
 /*===== 产品需求(样片需求) =====*/
-.demand,.list,.demand_con .img,.img_num { float:left; }
+.demand,.list,.demand_con .img,.img_num {
+    position:relative;
+    float:left;
+}
 .demand_con {
-    width:760px;height:280px;
-    /*border:1px solid red;*/
+    width:760px; height:280px;
 }
 .demand_con .img {
     margin-right:4px;
@@ -199,7 +205,6 @@
 }
 .list p,.sole p,.sole p,.rentinfo p {
     padding:5px;
-    /*border-bottom:2px solid rgb(250,250,250);*/
 }
 .list_div {
     background:rgb(250,250,250);
@@ -313,20 +318,21 @@
 }
 .realtime ul.title li { background:lightgrey; }
 .con_wrap {
-    width:995px;height:200px;
+    width:990px;height:200px;
     border:1px solid lightgrey;
     border-top:0;
     position:relative;top:-20px;
     overflow:hidden;
 }
 .con_wrap .animate {
-    margin-top:5px;
-    padding:2px 0;
     color:grey;
     font-size:14px;
+    position:relative; top:10px;
 }
-.realtime_con .t { width:141.5px; }
-.animate li { border-bottom:1px dashed lightgrey; }
+.realtime_con .t { width:141px; }
+.animate li {
+    border-bottom:1px dashed lightgrey;
+}
 
 
 /*===== 合作单位 =====*/
@@ -474,12 +480,12 @@
 
 /*===== 给用户的红包 =====*/
 .usertip {
-    position:fixed;top:0;left:0;z-index:1000;
+    position:fixed; top:0; left:0; z-index:1000;
 }
 .usertip .bg {
     width:100%; height:100%;
-    background:rgba(0,0,0,0.3);
-    position:fixed;top:0;left:0;
+    background:black; filter:alpha(opacity=30); opacity:0.3;
+    position:fixed; top:0; left:0;
 }
 .usertip .tip {
     width:500px;
@@ -491,7 +497,7 @@
 .usertip .tip .top {
     width:500px; height:20px;
     border-radius:10px;
-    background:rgb(200,0,0);
+    background:#c80000;
     border-bottom-left-radius:0;
     border-bottom-right-radius:0;
 }

@@ -25,16 +25,12 @@ Route::group(['prefix'=>'/','namespace'=>'Home'],function(){
     Route::get('creation/s/{genre}/{cate}/{isorder}','CreationController@index');
     Route::get('creation','CreationController@index');
     Route::get('creation/pre/{id}','CreationController@pre');
-    //分镜画面
-    Route::get('storyboard/like/{way}/{id}','StoryBoardController@like');
-    Route::get('storyboard/{id}','StoryBoardController@show');
-    Route::get('storyboard/s/{way}/{cate}','StoryBoardController@index');      //w条件检索方式
-    Route::get('storyboard','StoryBoardController@index');
     //供应单位
     Route::get('supply/s/{genre}','SupplyController@index');
     Route::get('supply','SupplyController@index');
     //需求信息
     Route::get('demand/s/{genre}','DemandController@index');
+    Route::get('demand/{genre}/{id}','DemandController@getShowByGenre');
     Route::get('demand','DemandController@index');
     //娱乐频道
     Route::get('entertain/{genre0}/{genre}','EntertainController@index');
@@ -47,7 +43,7 @@ Route::group(['prefix'=>'/','namespace'=>'Home'],function(){
     Route::get('rent/s/{type}/{from}/{to}','RentController@index');     //s代表检索
     Route::resource('rent','RentController');
     //设计频道
-    Route::get('design/cate/{cate}','DesignController@index');
+    Route::get('design/s/{cate}','DesignController@index');     //s代表检索
     Route::resource('design','DesignController');
     //关于我们
     Route::get('about','AboutController@index');

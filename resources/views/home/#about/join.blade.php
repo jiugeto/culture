@@ -19,7 +19,7 @@
         <p>站长相信：广采良言、用心聆听，将事情做好，把用户服务好，自然有回报。</p>
         <p>欢迎志同道合者来参与。</p>
 
-        @include('home.about.menu')
+        @include('home.#about.menu')
     </div>
     <div style="height:300px;">{{--空白--}}</div>
 @stop

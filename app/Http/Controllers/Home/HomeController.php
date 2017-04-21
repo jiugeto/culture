@@ -33,7 +33,6 @@ class HomeController extends BaseController
             'ppts'=> $this->getPpts(9),      //首页轮播大图
             'pptslimit'=> 9,                 //轮播图个数限制
             'ideas'=> $this->getIdeas(3),
-//            'talks'=> $this->getTalks(3),
             'products'=> $this->getProducts(10),        //在线创作
             'goods'=> $this->getGoods(6),               //视频
             'companys'=> $this->getCompanys(6),
@@ -72,15 +71,6 @@ class HomeController extends BaseController
         $apiIdea = ApiIdea::index($limit,1,0,0,2,0);
         return $apiIdea['code']==0 ? $apiIdea['data'] : [];
     }
-
-//    /**
-//     * 获取话题
-//     */
-//    public function getTalks($limit)
-//    {
-//        $apiTalk = ApiTalk::index($limit,1);
-//        return $apiTalk['code']==0 ? $apiTalk['data'] : [];
-//    }
 
     /**
      * 获取在线创作

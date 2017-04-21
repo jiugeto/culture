@@ -3,11 +3,10 @@ namespace App\Http\Controllers\Home;
 
 use App\Api\ApiBusiness\ApiAd;
 use App\Api\ApiBusiness\ApiDesign;
-use App\Api\ApiBusiness\ApiGoods;
 use App\Api\ApiBusiness\ApiIdea;
 use App\Api\ApiBusiness\ApiRent;
 use App\Api\ApiBusiness\ApiStaff;
-use App\Api\ApiBusiness\ApiStoryBoard;
+use App\Api\ApiUser\ApiUsers;
 
 class DemandController extends BaseController
 {
@@ -17,7 +16,7 @@ class DemandController extends BaseController
 
     protected $curr = 'demand';
     protected $genres = [
-        /*1=>'视频',*/2=>'创意','分镜','人员','设备','设计',
+        1=>'人员','故事','设备','设计',
     ];
 
     public function __construct()
@@ -27,25 +26,19 @@ class DemandController extends BaseController
 
     public function index($genre=2)
     {
-        $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
+        $pageCurr = isset($_GET['page'])?$_GET['page']:1;
         $prefix_url = DOMAIN.'demand';
-        /*if ($genre==1) {
-            //视频需求，type==1、3是需求
-            $apiData = ApiGoods::index($this->limit,$pageCurr,0,[1,3],0,0,2,0,0);
-        } else*/if ($genre==2) {
-            //创意剧本，genre==2是需求
-            $apiData = ApiIdea::index($this->limit,$pageCurr,0,2);
-        } elseif ($genre==3) {
-            //分镜需求，genre==3是需求
-            $apiData = ApiStoryBoard::index($this->limit,$pageCurr,0,2,0);
-        } elseif ($genre==4) {
-            //人员需求，genre==4是需求
+        if ($genre==1) {
+            //人员需求
             $apiData = ApiStaff::index($this->limit,$pageCurr,0,2,0,2,0);
-        } elseif ($genre==5) {
-            //设备需求，genre==5是需求
+        } else if ($genre==2) {
+            //故事需求
+            $apiData = ApiIdea::index($this->limit,$pageCurr,0,2);
+        } else if ($genre==3) {
+            //设备需求
             $apiData = ApiRent::index($this->limit,$pageCurr,0,2,0,2,0);
         } else {
-            //设计需求，genre==6是需求
+            //设计需求
             $apiData = ApiDesign::index($this->limit,$pageCurr,[2,4],2,0);
         }
         if ($apiData['code']!=0) {
@@ -61,12 +54,46 @@ class DemandController extends BaseController
             'ads' => $this->ads(),
             'lists' => $this->list,
             'curr_menu' => $this->curr,
-//            'model' => $this->getModel($genre),
             'genres' => $this->genres,
             'genre' => $genre,
 
         ];
         return view('home.demand.index', $result);
+    }
+
+    public function getShowByGenre($genre,$id)
+    {
+        if (!$genre || !$id) {
+            echo "<script>alert('参数错误！');history.go(-1);</script>";exit;
+        }
+        if ($genre==1) {
+            $apiData = ApiStaff::show($id);
+            $genreName = '人员';
+        } else if ($genre==2) {
+            $apiData = ApiIdea::show($id);
+            $genreName = '故事';
+        } else if ($genre==3) {
+            $apiData = ApiRent::show($id);
+            $genreName = '租赁';
+        } else {
+            $apiData = ApiDesign::show($id);
+            $genreName = '设计';
+        }
+        if ($apiData['code']!=0) {
+            echo "<script>alert('没有记录！');history.go(-1);</script>";exit;
+        }
+        //获取需求者信息
+        $apiUser = ApiUsers::getOneUser($apiData['data']['uid']);
+        if ($apiUser['code']!=0) {
+            echo "<script>alert('需求用户不存在！');history.go(-1);</script>";exit;
+        }
+        $result = [
+            'data' => $apiData['data'],
+            'genre' => $genre,
+            'genreName' => $genreName,
+            'userInfo' => $apiUser['data'],
+        ];
+        return view('home.demand.show',$result);
     }
 
 
@@ -80,26 +107,5 @@ class DemandController extends BaseController
         //adplace_id==3，前台需求页面右侧，limit==2
         $apiAd = ApiAd::index(2,1,0,3,0,0,1,2);
         return $apiAd['code']==0 ? $apiAd['data'] : [];
-    }
-
-    /**
-     * 获取 goodsModel
-     */
-    public function getModel($genre)
-    {
-        if ($genre==1) {
-            $apiModel = ApiGoods::getModel();
-        } elseif ($genre==2) {
-            $apiModel = ApiIdea::getModel();
-        } elseif ($genre==3) {
-            $apiModel = ApiStoryBoard::getModel();
-        } elseif ($genre==4) {
-            $apiModel = ApiStaff::getModel();
-        } elseif ($genre==5) {
-            $apiModel = ApiRent::getModel();
-        } else {
-            $apiModel = ApiDesign::getModel();
-        }
-        return $apiModel['code']==0 ? $apiModel['model'] : [];
     }
 }

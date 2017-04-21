@@ -16,7 +16,7 @@
         </p>
         <p>站长用过：maya、c4d、max、ae、edius、ps等影视特效制作软件，php、mysql、apache、nginx、linux、redis、memcache等网站相关技术。</p>
 
-        @include('home.about.menu')
+        @include('home.#about.menu')
     </div>
     <div style="height:300px;">{{--空白--}}</div>
 @stop

@@ -4,24 +4,27 @@
 /*===== 顶部菜单栏 =====*/
 .com_top {
     width:100%;height:80px;
-    background:rgb(50,50,50);
+    background:#323232;
+    border-bottom:2px solid #c8c8c8;
     position:fixed;top:15px;z-index:10;
-    border-bottom:2px solid rgb(200,200,200);
 }
-.com_logo { float:left; }
-.com_logo div.img {
-    margin:0 auto;
-    width:150px;
-    height:65px;
-    overflow:hidden;
-}
-.com_logo_size { height:50px; }
-.com_logo img { padding:7px 5px; }
 .com_center { margin:0 auto;width:1000px; }
 .com_center a {
     color:white;
     font-size:20px;
+    text-decoration:none;
+    cursor:pointer;
 }
+.com_center .img {
+    margin:0 auto;
+    width:150px;
+    height:65px;
+    overflow:hidden;
+    float:left;
+    position:relative; top:10px;
+}
+.com_logo_size { height:50px; }
+.com_center img { padding:7px 5px; }
 .com_center li {
     margin-right:2px;
     padding:20px 15px;
@@ -30,6 +33,11 @@
     float:right;
 }
 .com_center a:hover li,.com_center li.curr { background:#000000; }
+.com_center ul {
+    width:660px;
+    float:right;
+    position:relative;
+}
 /*===== 顶部菜单栏 =====*/
 
 

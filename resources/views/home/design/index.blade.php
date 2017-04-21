@@ -8,9 +8,9 @@
         <div class="s_search">
             分类：
             <select name="cate" class="home_search">
-                <option value="0" {{ $cate==0 ? 'selected' : '' }}>所有</option>
-                @foreach($model['cates'] as $kcate=>$vcate)
-                    <option value="{{ $kcate }}" {{ $cate==$kcate ? 'selected' : '' }}>{{ $vcate }}</option>
+                <option value="0" {{$cate==0?'selected':''}}>所有</option>
+                @foreach($model['cates'] as $k=>$vcate)
+                    <option value="{{$k}}" {{$cate==$k?'selected':''}}>{{$vcate}}</option>
                 @endforeach
             </select>
         </div>
@@ -20,7 +20,7 @@
                 if (cate==0) {
                     window.location.href = '{{DOMAIN}}design';
                 } else {
-                    window.location.href = '{{DOMAIN}}design/cate/'+cate;
+                    window.location.href = '{{DOMAIN}}design/s/'+cate;
                 }
             });
         </script>
@@ -36,32 +36,32 @@
                 @foreach($datas as $data)
                     <tr>
                         <td rowspan="3">
-                            <a href="{{DOMAIN}}design/{{ $data['id'] }}" title="{{ $data['name'] }}">
+                            <a href="{{DOMAIN}}design/{{$data['id']}}" title="{{$data['name']}}">
                                 <div class="img">
-                                @if(count($data['thumb'])) <img src="{{ $data['thumb'] }}">@endif
+                                @if(count($data['thumb'])) <img src="{{$data['thumb']}}">@endif
                             </div></a>
                         </td>
-                        <td class="text1"><b><a href="{{DOMAIN}}design/{{ $data['id'] }}">{{ $data['name'] }}</a></b>
-                            <a href="{{DOMAIN}}design/{{ $data['id'] }}" class="a_to_show">详情</a>
+                        <td class="text1"><b><a href="{{DOMAIN}}design/{{$data['id']}}">{{$data['name']}}</a></b>
+                            <a href="{{DOMAIN}}design/{{$data['id']}}" class="a_to_show">详情</a>
                         </td>
                     </tr>
                     <tr>
                         <td class="text2">
-                            发布者：{{ UserNameById($data['uid']) }}
+                            发布者：{{UserNameById($data['uid'])}}
                             &nbsp;&nbsp;&nbsp;&nbsp;
-                            浏览次数：{{ $data['click'] }}
+                            浏览次数：{{$data['click']}}
                             &nbsp;&nbsp;&nbsp;&nbsp;
-                            发布时间：{{ $data['createTime'] }}
+                            发布时间：{{$data['createTime']}}
                         </td>
                     </tr>
                     <tr>
                         <td class="text3">
-                            <textarea cols="50" rows="2" readonly class="index_intro">{{ str_limit($data['intro'],80) }}</textarea>
+                            <textarea cols="50" rows="2" readonly class="index_intro">{{str_limit($data['intro'],80)}}</textarea>
                         </td>
                     </tr>
                     @if(count($datas)>1)
                         <tr><td colspan="10">
-                                <div style="margin:10px;border-top:1px dashed lightgrey;"></div>
+                                <div style="height:5px;border-top:1px dashed lightgrey;"></div>
                             </td></tr>
                     @endif
                 @endforeach
@@ -81,9 +81,9 @@
             {{--</div>--}}
             @if(count($ads))
                 @foreach($ads as $ad)
-                    <a href="{{ $ad['link'] }}">
-                        <div class="img" title="{{ $ad['name'] }}">
-                            <img src="{{ $ad['img'] }}">
+                    <a href="{{$ad['link']}}">
+                        <div class="img" title="{{$ad['name']}}">
+                            <img src="{{$ad['img']}}">
                         </div>
                     </a>
                 @endforeach

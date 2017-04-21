@@ -12,7 +12,6 @@
     <link rel="stylesheet" type="text/css" href="{{PUB}}assets-home/css/design.css">
     <link rel="stylesheet" type="text/css" href="{{PUB}}assets-home/css/about.css">
     <link rel="stylesheet" type="text/css" href="{{PUB}}assets-home/css/opinion.css">
-    <link rel="stylesheet" type="text/css" href="{{PUB}}assets-home/css/talk.css">
     <script src="{{PUB}}assets/js/jquery-1.10.2.min.js"></script>
 </head>
 <body>

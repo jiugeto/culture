@@ -19,7 +19,7 @@ class DesignController extends BaseController
 
     public function index($cate=0)
     {
-        $pageCurr = isset($_POST['pageCurr'])?$_POST['pageCurr']:1;
+        $pageCurr = isset($_POST['page'])?$_POST['page']:1;
         $prefix_url = DOMAIN.'design';
         $apiDesign = ApiDesign::index($this->limit,$pageCurr,0,1,$cate,2,0);
         if ($apiDesign['code']!=0) {

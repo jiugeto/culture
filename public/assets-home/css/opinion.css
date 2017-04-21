@@ -179,6 +179,7 @@
 .idea_show {
     margin:0 auto;
     width:1000px;
+    color:#646464;
 }
 .idea_show .idea_left { float:left; }
 .idea_show .idea_right { margin:10px;box-shadow:0 0 10px rgba(200,200,200,0.5);float:right; }

@@ -86,7 +86,7 @@
         <div class="navigate">
             <div class="navigate_a" style="display:{{explode('/',$_SERVER['REQUEST_URI'])[1]?'none':'block'}};">
                 @foreach($navigates as $navigate)
-                    <a href="{{ $navigate['link'] }}" class="@if(isset($curr_menu) && $curr_menu==ltrim($navigate['link'],'/')) curr @else nav_a @endif" title="{{ $navigate['title'] }}">{{ $navigate['name'] }}</a>
+                    <a href="{{ $navigate['link'] }}" class="@if(isset($curr_menu) && $curr_menu==ltrim($navigate['link'],'/')) curr @else nav_a @endif" title="{{$navigate['title']}}">{{$navigate['name']}}</a>
                 @endforeach
             </div>
         </div>

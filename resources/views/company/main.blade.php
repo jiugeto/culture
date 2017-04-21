@@ -13,7 +13,7 @@
 </head>
 <body>
     @include('layout.header')
-    @include('layout.visitTimer')
+    {{--@include('layout.visitTimer')--}}
     @include('company.common.top')
     <div class="content_kongbai" style="height:100px;">&nbsp;</div>
     <div class="mem_con">

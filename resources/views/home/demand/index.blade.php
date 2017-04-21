@@ -6,26 +6,12 @@
         <div class="cre_kong">&nbsp;{{--10px高度留空--}}</div>
         <div class="s_search">
             需求类型：
-            <select name="genre" class="home_search">
-                @foreach($genres as $kgenre=>$vgenre)
-                <option value="{{ $kgenre }}" {{ $genre==$kgenre ? 'selected' : '' }}>{{ $vgenre }}</option>
+            <select name="genre" class="home_search" onchange="getSel(this.value)">
+                @foreach($genres as $k=>$vgenre)
+                <option value="{{$k}}" {{$genre==$k?'selected':''}}>{{$vgenre}}</option>
                 @endforeach
             </select>
-            {{--&nbsp;&nbsp;&nbsp;&nbsp;--}}
-            {{--视频类型：--}}
-            {{--<select name="genre1" class="home_search">--}}
-                {{--<option value="0">-请选择-</option>--}}
-            {{--</select>--}}
             <script>
-                $(document).ready(function(){
-                    $("select[name='genre']").change(function(){
-                        if ($(this).val()==2) {
-                            window.location.href = '{{DOMAIN}}demand';
-                        } else {
-                            window.location.href = '{{DOMAIN}}demand/s/'+$(this).val();
-                        }
-                    });
-                });
             </script>
         </div>
 
@@ -46,28 +32,29 @@
                         @elseif($genre==4)设备@else设计@endif
                     </td>
                     <td>时间：{{$data['createTime']}}</td>
-                    <td><a href="{{DOMAIN}}demand/{{ $data['id'] }}" class="toshow">详情</a></td>
+                    <td><a href="{{DOMAIN}}demand/{{$genre}}/{{$data['id']}}" class="toshow">详情</a></td>
                 </tr>
             </table>
                 @endforeach
             @else
                 <p style="text-align:center;color:grey;">
-                    没有@if($genre==1)视频@elseif($genre==2)创意@elseif($genre==3)分镜@elseif($genre==4)人员@elseif($genre==4)设备@else设计@endif记录</p>
+                    没有@if($genre==1)人员@elseif($genre==2)故事@elseif($genre==3)设备@elseif($genre==4)设计@endif记录
+                </p>
             @endif
         </div>
         <div class="s_right" style="margin-top:-15px;">
             @if(count($ads))
                 @foreach($ads as $ad)
-                    <a href="{{ $ad['link'] }}">
-                        <div class="img" title="{{ $ad['name'] }}">
-                            <img src="{{ $ad['img'] }}">
+                    <a href="{{$ad['link']}}">
+                        <div class="img" title="{{$ad['name']}}">
+                            <img src="{{$ad['img']}}">
                         </div>
                     </a>
                 @endforeach
             @endif
             @if(count($ads)<2)
                 @for($i=0;$i<2-count($ads);++$i)
-                    <div class="img"></div>
+                    <div class="img">广告链接</div>
                 @endfor
             @endif
         </div>
@@ -75,13 +62,29 @@
     <div class="cre_kong" style="height:500px;">&nbsp;{{--10px高度留空--}}</div>
 
     <script>
+        //根据浏览器宽度设置菜单位置
         $(document).ready(function(){
-            //根据浏览器宽度设置菜单位置
             var clientWidth = document.body.clientWidth;
             var s_right = $(".s_right");
             s_right.css('position','absolute');
-            s_right.css('top',225+'px');
+            s_right.css('top',205+'px');
             s_right.css('right',(clientWidth-1000)/2+10+'px');
         });
+        //改变浏览器大小触发事件
+        window.onresize = function(){
+            var clientWidth = document.body.clientWidth;
+            var s_right = $(".s_right");
+            s_right.css('position','absolute');
+            s_right.css('top',205+'px');
+            s_right.css('right',(clientWidth-1000)/2+10+'px');
+        }
+        //需求页面检索
+        function getSel(val){
+            if (val==1) {
+                window.location.href = '{{DOMAIN}}demand';
+            } else {
+                window.location.href = '{{DOMAIN}}demand/s/'+val;
+            }
+        }
     </script>
 @stop
