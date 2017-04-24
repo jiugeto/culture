@@ -6,18 +6,6 @@
     <hr>
     <div class="nav_body">
         <div><a href="/"><img src="{{PUB}}assets-home/images/logo.png" class="logo"></a></div>
-        <div class="nav_qiehuan" style="display:{{explode('/',$_SERVER['REQUEST_URI'])[1]?'block':'none'}};" title="点击显示或隐藏菜单">
-            <img src="{{PUB}}assets/images/daohang.png" class="imgMiniSize"> <b>导航</b>
-            <span id="shang">▲</span><span id="xia" style="display:none;">▼</span>
-        </div>
-        <div class="nav_qh">
-            <div class="nav_hide" style="display:none;">
-                @foreach($navigates as $navigate)
-                    <a href="{{ $navigate['link'] }}" class="@if(isset($curr_menu) && $curr_menu==ltrim($navigate['link'],'/')) curr @else nav_a @endif" title="{{ $navigate['title'] }}">{{ $navigate['name'] }}</a>
-                @endforeach
-            </div>
-        </div>
-
         <div class="search">
             <input type="text" class="search_input" style="height:{{explode('/',$_SERVER['REQUEST_URI'])[1]=='member'?42:40}}px;" name="global_search" placeholder="{{--找啥呢？来试试--}}暂不可用" value="{{ isset($keyword) ? $keyword : '' }}">
             <input type="hidden" name="global_search_genre" value="{{isset($searchGenre)?$searchGenre:1}}">
@@ -51,40 +39,17 @@
                 {{--@endforeach--}}
             {{--@endif--}}
         </div>
-        <script>
-            //关于搜索
-            function getSearchGenre(key){
-                var searchGenreName = $("input[name='searchGenreName_"+key+"']").val();
-                $(".curr_sel_text").html(searchGenreName);
-                $("input[name='global_search_genre']")[0].value = key;
-            }
-            {{--function getSearch(){--}}
-                {{--var globalSearchGenre = $("input[name='global_search_genre']").val();--}}
-                {{--var keyword = $("input[name='global_search']").val();--}}
-                {{--if (keyword=='') {--}}
-                    {{--alert('没有填写关键字，将跳转到首页！');--}}
-                    {{--window.location.href = '{{DOMAIN}}';--}}
-                {{--} else {--}}
-                    {{--window.location.href = '{{DOMAIN}}s/'+globalSearchGenre+'/'+keyword;--}}
-                {{--}--}}
-            {{--}--}}
-        </script>
 
         <span class="nav_right">
             <a href="/{{ Session::has('user.username') ? 'member' : 'login' }}">
                 <img src="/assets/images/key.png" class="imgMiniSize">
-                {{ Session::has('user.username') ? Session::get('user.username') : '登录/注册' }}</a>&nbsp;
-            {{--<div class="login_hide">--}}
-                {{--<a href="">资料</a><br>--}}
-                {{--<a href="">退出</a>--}}
-            {{--</div>--}}
-            {{--&nbsp;&nbsp;<a href="/idea" style="color:red;">创意</a>--}}
-            {{--&nbsp;&nbsp;<a href="/talk" style="color:red;">话题</a>--}}
-            {{--&nbsp;<a href="{{env('TALK_DOMAIN')}}" target="_blank">话题论坛</a>--}}
-            &nbsp;<a href="{{DOMAIN}}opinion" style="padding:5px 10px;color:white;background:red;" id="opinion">用户建议</a>
+                {{ Session::has('user.username') ? Session::get('user.username') : '登录/注册' }}
+            </a>
+            &nbsp; &nbsp;
+            <a href="{{DOMAIN}}opinion" style="padding:5px 10px;color:white;background:red;" id="opinion">用户建议</a>
         </span>
         <div class="navigate">
-            <div class="navigate_a" style="display:{{explode('/',$_SERVER['REQUEST_URI'])[1]?'none':'block'}};">
+            <div class="navigate_a">
                 @foreach($navigates as $navigate)
                     <a href="{{ $navigate['link'] }}" class="@if(isset($curr_menu) && $curr_menu==ltrim($navigate['link'],'/')) curr @else nav_a @endif" title="{{$navigate['title']}}">{{$navigate['name']}}</a>
                 @endforeach
@@ -93,18 +58,17 @@
     </div>
 </div>
 <!-- navigate菜单导航栏 -->
+<!-- 空白 -->
+<div class="content_kongbai" id="conKongBaiByIe">&nbsp;</div>
 
 
 <script>
-    var nav_qiehuan = $(".nav_qiehuan");
-    var nav_qh = $(".nav_qh");
-    $(document).ready(function(){
-        //根据浏览器宽度设置菜单位置
+    //根据浏览器宽度设置菜单位置
+    $(document).ready(function(){ setSearch(); });
+    //改变浏览器大小触发事件
+    window.onresize = function(){ setSearch(); };
+    function setSearch(){
         var clientWidth = document.body.clientWidth;
-        nav_qiehuan.css('position','fixed');
-        nav_qiehuan.css('left',(clientWidth-1000)/2+200+'px');
-        nav_qh.css('position','fixed');
-        nav_qh.css('left',(clientWidth-1000)/2+20+'px');
         //根据浏览器设置搜索位置(IE)
         var browser = window.navigator.userAgent.indexOf("MSIE");   //判断浏览器IE系列，定左右距离
         if (browser>0) {
@@ -149,18 +113,32 @@
             nav_right.css('right',(clientWidth-1000)/2+'px');
             nav_right.css('top',55+'px');
         }
-    });
-    //菜单栏切换
-    var nav_hide = $(".nav_hide");
-    nav_qiehuan.click(function(){
-        if (nav_hide[0].style.display=='none') {
-            nav_hide.show(200);
-            nav_qiehuan.css('border-bottom','0');
-            $("#shang").hide(); $("#xia").show();
+    }
+    //navigate下面留白的浏览器兼容
+    (function isIE() {
+        var userAgent = window.navigator.userAgent; //取得浏览器的userAgent字符串
+        if (userAgent.indexOf("MSIE")>0) {
+            $("#conKongBaiByIe").css('height','135px');
+        } else if (userAgent.indexOf("Firefox")>0 || userAgent.indexOf("Chrome")>0 || userAgent.indexOf("Safari")>0 || userAgent.indexOf("Opera")>0) {
+            $("#conKongBaiByIe").css('height','148px');
         } else {
-            nav_hide.hide(200);
-            nav_qiehuan.css('border-bottom','1px solid lightgray');
-            $("#shang").show(); $("#xia").hide();
+            $("#conKongBaiByIe").css('height','135px');
         }
-    });
+    })();
+    //关于搜索
+    function getSearchGenre(key){
+        var searchGenreName = $("input[name='searchGenreName_"+key+"']").val();
+        $(".curr_sel_text").html(searchGenreName);
+        $("input[name='global_search_genre']")[0].value = key;
+    }
+    function getSearch(){
+        var globalSearchGenre = $("input[name='global_search_genre']").val();
+        var keyword = $("input[name='global_search']").val();
+        if (keyword=='') {
+            alert('没有填写关键字，将跳转到首页！');
+            window.location.href = '{{DOMAIN}}';
+        } else {
+            window.location.href = '{{DOMAIN}}s/'+globalSearchGenre+'/'+keyword;
+        }
+    }
 </script>

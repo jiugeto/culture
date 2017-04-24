@@ -128,8 +128,6 @@ class IdeaController extends BaseController
             'genre'=> $request->genre,
             'cate'=> $request->cate,
             'intro'=> $request->intro,
-            'isdetail'=> $request->isdetail,
-            'detail'=> $request->detail,
             'uid'=> $this->userid,
             'money' =>  $request->money,
         ];

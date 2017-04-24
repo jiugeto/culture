@@ -22,15 +22,9 @@
     @include('layout.header')
     @include('layout.navigate')
 
-    <!-- 空白 -->
-    <div class="content_kongbai">&nbsp;</div>
-
     <!-- 中间内容 -->
     @yield('content')
     <!-- 中间内容 -->
-
-    <!-- 空白 -->
-    <div class="content_kongbai">&nbsp;</div>
 
     @include('layout.footer')
 

@@ -14,12 +14,12 @@
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <fieldset>
                         <div class="am-form-group">
-                            <label>创意名称 / Name：</label>
+                            <label>故事名称 / Name：</label>
                             <input type="text" placeholder="至少2个字符" minlength="2" maxlength="20" required name="name"/>
                         </div>
 
                         <div class="am-form-group">
-                            <label>创意供求 / Genre：</label>
+                            <label>供求 / Genre：</label>
                             <select name="genre" required>
                             @foreach($model['genres'] as $k=>$vgenre)
                                 <option value="{{$k}}">{{$vgenre}}</option>
@@ -28,7 +28,7 @@
                         </div>
 
                         <div class="am-form-group">
-                            <label>创意类型 / Category：</label>
+                            <label>类型 / Category：</label>
                             <select name="cate" required>
                             @foreach($model['cates'] as $k=>$vcate)
                                 <option value="{{$k}}">{{$vcate}}</option>
@@ -47,21 +47,7 @@
                         </div>
 
                         <div class="am-form-group">
-                            <label>详情是否显示 / Is Detail：</label>
-                            <select name="isdetail" required>
-                                @foreach($model['isdetails'] as $k=>$visdetail)
-                                    <option value="{{$k}}">{{$visdetail}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="am-form-group">
-                            <label>详情 / Detail：</label>
-                            <textarea name="detail" cols="50" rows="10" required></textarea>
-                        </div>
-
-                        <div class="am-form-group">
-                            <label>价格 / Price：</label>
+                            <label>估计 / Price：</label>
                             <input type="text" placeholder="正整数" pattern="^\d+$" name="money" required/>
                         </div>
 

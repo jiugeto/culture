@@ -33,6 +33,8 @@
                 <td>
                     <a href="{{DOMAIN}}member/design/{{$data['id']}}" class="list_btn">查看</a>
                     <a href="{{DOMAIN}}member/design/{{$data['id']}}/edit" class="list_btn">编辑</a>
+                    <a href="javascript:;" class="list_btn" onclick="alert('缩略图！');">缩略图</a>
+                    <a href="javascript:;" class="list_btn" onclick="alert('缩略图！');">文件</a>
                 </td>
             </tr>
             @endforeach

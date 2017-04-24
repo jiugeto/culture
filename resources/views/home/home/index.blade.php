@@ -30,12 +30,11 @@
         </div>
     </div>
     <script>
-        $(document).ready(function(){
-            var clientWidth = document.body.clientWidth;
-            $(".ppt").css('width',clientWidth);
-        });
+        //PPT宽度
+        $(document).ready(function(){ setPptWidth(); });
         //改变浏览器大小触发事件
-        window.onresize = function(){
+        window.onresize = function(){ setPptWidth(); };
+        function setPptWidth(){
             var clientWidth = document.body.clientWidth;
             $(".ppt").css('width',clientWidth);
         }

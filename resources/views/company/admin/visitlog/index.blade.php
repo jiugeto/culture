@@ -3,9 +3,9 @@
     @include('company.admin.common.crumb')
 
     <div class="com_admin_list">
-        <div class="search_type" style="color:grey;">
-            &nbsp;用户访问记录，容错值 {{ $visitRate }} 秒
-        </div>
+        {{--<div class="search_type" style="color:grey;">--}}
+            {{--&nbsp;用户访问记录，容错值 {{$visitRate}} 秒--}}
+        {{--</div>--}}
         <table cellspacing="0">
             <tr>
                 <td>序号</td>
@@ -18,20 +18,20 @@
             @if(count($datas))
                 @foreach($datas as $data)
             <tr>
-                <td>{{ $data->id }}</td>
-                <td><a href="{{DOMAIN}}company/admin/visit/{{ $data->id }}" class="list_a">
-                        {{ str_limit($data->getVisitName(),20) }}</a></td>
-                <td>{{ $data->ipaddress }}</td>
-                <td>{{ $data->loginTime() }}</td>
+                <td>{{$data['id']}}</td>
+                <td><a href="{{DOMAIN}}company/admin/visit/{{$data['id']}}" class="list_a">
+                        {{str_limit($data['getVisitName'],20)}}</a></td>
+                <td>{{$data['ipaddress']}}</td>
+                <td>{{$data['loginTime']}}</td>
                 <td>
-                    <a href="{{DOMAIN}}company/admin/visit/{{ $data['id'] }}" class="list_btn">查看</a>
+                    <a href="{{DOMAIN}}company/admin/visit/{{$data['id']}}" class="list_btn">查看</a>
                 </td>
             </tr>
                 @endforeach
-            @else @include('member.common.#norecord')
+            @else <tr><td colspan="10" style="text-align:center;"></td></tr>
             @endif
             <p></p>
         </table>
-        <div style="margin:10px 20px;">@include('company.admin.common.#page')</div>
+        @include('company.admin.common.page2')
     </div>
 @stop

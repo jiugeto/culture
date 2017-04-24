@@ -1,6 +1,8 @@
 {{-- 前台页面脚部模板 --}}
 
 
+<!-- 空白 -->
+<div class="content_kongbai">&nbsp;</div>
 <div class="footer">
     <div style="height:10px;"></div>
     <div class="footer_center">

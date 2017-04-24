@@ -64,7 +64,7 @@
             @endif
             </table>
         </div>
-        <div class="s_right s_right_rent">
+        <div class="s_right">
             {{--<div class="cate"></div>--}}
             @if(count($ads))
                 @foreach($ads as $ad)
@@ -85,13 +85,26 @@
     <div class="cre_kong" style="height:850px;">&nbsp;{{--10px高度留空--}}</div>
 
     <script>
-        $(document).ready(function(){
-            //根据浏览器宽度设置菜单位置
+        //根据浏览器宽度设置菜单位置
+        $(document).ready(function(){ setAdPos(); });
+        //改变浏览器大小触发事件
+        window.onresize = function(){ setAdPos(); };
+        function setAdPos(){
             var clientWidth = document.body.clientWidth;
             var s_right = $(".s_right");
+            //取得浏览器的userAgent字符串，得出top值
+            var userAgent = window.navigator.userAgent;
+            var top;
+            if (userAgent.indexOf("MSIE")>0) {
+                top = '220px';
+            } else if (userAgent.indexOf("Firefox")>0 || userAgent.indexOf("Chrome")>0 || userAgent.indexOf("Safari")>0 || userAgent.indexOf("Opera")>0) {
+                top = '240px';
+            } else {
+                top = '220px';
+            }
             s_right.css('position','absolute');
-            s_right.css('top',225+'px');
-            s_right.css('right',(clientWidth-1000)/2+10+'px');
-        });
+            s_right.css('top',top);
+            s_right.css('right',(clientWidth-1000)/2+'px');
+        }
     </script>
 @stop

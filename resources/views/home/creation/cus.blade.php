@@ -1,6 +1,5 @@
 @extends('home.main')
 @section('content')
-    {{--@include('home.common.crumb')--}}
     <div class="s_crumb">
         <div class="crumb">
             <div class="right">
@@ -14,7 +13,10 @@
         {{-- 定制片源 --}}
         <div class="cre_source">
             <div class="title">
-                <b>@if($isOrder)用户成品@elseif(!$isOrder&&$genre==2)离线片源@elseif(!$isOrder&&$genre==3)效果定制@endif</b>
+                <b>@if($isOrder)用户成品
+                    @elseif(!$isOrder&&$genre==2)离线片源
+                    @elseif(!$isOrder&&$genre==3)效果定制
+                    @endif</b>
             </div>
             <div class="source">
                 @if(count($datas))

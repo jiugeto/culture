@@ -13,7 +13,7 @@
                     <tr>
                         <th class="table-check"><input type="checkbox"/></th>
                         <th class="table-id">ID</th>
-                        <th class="table-title">创意名称</th>
+                        <th class="table-title">故事名称</th>
                         <th class="table-type">分类</th>
                         <th class="table-type">发布人</th>
                         <th class="table-type">前台是否显示</th>

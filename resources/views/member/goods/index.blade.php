@@ -54,7 +54,7 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="_method" value="POST">
                 <p style="text-align:center;" class="pname">产品 缩略图更新</p>
-                @include('member.common.uploadImg')
+                @include('layout.uploadImg')
                 <button type="submit" class="homebtn">立即申请</button>
             </form>
             <a title="关闭" onclick="getClose()">X</a>

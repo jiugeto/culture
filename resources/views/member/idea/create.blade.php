@@ -35,19 +35,6 @@
             </tr>
 
             <tr>
-                <td class="field_name"><label>细节显示：</label></td>
-                <td>
-                    <label><input type="radio" class="radio" name="isdetail" value="1" checked> 不显示&nbsp;&nbsp;</label>
-                    <label><input type="radio" class="radio" name="isdetail" value="2"> 显示&nbsp;&nbsp;</label>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="field_name"><label>内容细节：</label></td>
-                <td><textarea name="detail" cols="40" rows="5"></textarea></td>
-            </tr>
-
-            <tr>
                 <td class="field_name"><label>价格(元)：</label></td>
                 <td><input type="text" placeholder="0表示免费" pattern="^\d+$" required name="money"/></td>
             </tr>

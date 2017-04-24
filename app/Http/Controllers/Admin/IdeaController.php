@@ -137,8 +137,6 @@ class IdeaController extends BaseController
             'cate'  =>  $request->cate,
             'uid'   =>  $apiUser['data']['id'],
             'intro' =>  $request->intro,
-            'isdetail'  =>  $request->isdetail,
-            'detail'    =>  $request->detail,
             'money'     =>  $request->money,
         );
     }

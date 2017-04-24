@@ -56,7 +56,8 @@
                     </tr>
                     <tr>
                         <td class="text3">
-                            <textarea cols="50" rows="2" readonly class="index_intro">{{str_limit($data['intro'],80)}}</textarea>
+                            <textarea cols="50" rows="2" readonly class="index_intro">
+                                {{str_limit($data['intro'],80)}}</textarea>
                         </td>
                     </tr>
                     @if(count($datas)>1)
@@ -98,13 +99,26 @@
     <div style="height:500px;">{{--空白--}}</div>
 
     <script>
-        $(document).ready(function(){
-            //根据浏览器宽度设置菜单位置
+        //根据浏览器宽度设置菜单位置
+        $(document).ready(function(){ setAdPos(); });
+        //改变浏览器大小触发事件
+        window.onresize = function(){ setAdPos(); };
+        function setAdPos(){
             var clientWidth = document.body.clientWidth;
             var de_right = $(".de_right");
+            //取得浏览器的userAgent字符串，得出top值
+            var userAgent = window.navigator.userAgent;
+            var top;
+            if (userAgent.indexOf("MSIE")>0) {
+                top = '265px';
+            } else if (userAgent.indexOf("Firefox")>0 || userAgent.indexOf("Chrome")>0 || userAgent.indexOf("Safari")>0 || userAgent.indexOf("Opera")>0) {
+                top = '280px';
+            } else {
+                top = '265px';
+            }
             de_right.css('position','absolute');
-            de_right.css('top',245+'px');
+            de_right.css('top',top);
             de_right.css('right',(clientWidth-1000)/2-15+'px');
-        });
+        }
     </script>
 @stop

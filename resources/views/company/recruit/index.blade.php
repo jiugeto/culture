@@ -20,7 +20,7 @@
                         <td class="four_text">{{$data['updateTime']}}</td>
                     </tr>
                     @endforeach
-                @else @include('member.common.#norecord')
+                @else <tr><td colspan="10" style="text-align:center;">没有记录</td></tr>
                 @endif
             </table>
             <p>

@@ -16,7 +16,7 @@ body { font-family:'微软雅黑'; }
 /*=========左侧菜单栏==========*/
 .mem_left,.mem_right {
     padding:4px 0 4px 4px;
-    background:rgb(230,230,230);
+    background:#e6e6e6;
 }
 .mem_left { border-top-left-radius:3px;border-bottom-left-radius:3px; }
 .mem_right { border-top-right-radius:3px;border-bottom-right-radius:3px; }
@@ -41,9 +41,9 @@ a:hover {}
 a li.a_li {}
 a:hover li.a_li,a li.a_li_curr {
     color:white;
-    background:rgb(255,100,0);
+    background:#ff6400;
 }
-.li_home,.li_one,.li_sub { background:rgb(245,245,245); }
+.li_home,.li_one,.li_sub { background:#f5f5f5; }
 .li_home { border-left:4px solid red; }
 .li_one {
     margin:2px 0 0 10px;
@@ -75,9 +75,9 @@ a:hover li.a_li,a li.a_li_curr {
     margin:0 auto;
     padding:5px 10px;
     width:760px;
-    border:1px solid rgb(235,235,235);
+    border:1px solid #ebebeb;
     border-radius:4px;
-    background:rgb(240,240,240);
+    background:#f0f0f0;
 }
 .mem_crumb a { font-size:16px; }
 .mem_crumb a:hover { color:red;text-decoration:underline; }
@@ -85,8 +85,8 @@ a:hover li.a_li,a li.a_li_curr {
 .chart1,.mem_info {
     margin:10px 10px 10px 0;
     width:160px;
-    border:1px solid rgb(240,240,240);
-    background:rgb(250,250,250);
+    border:1px solid #f0f0f0;
+    background:#fafafa;
     border-radius:3px;
 }
 .chart1 { float:left;margin-right:20px;height:50px; }
@@ -94,7 +94,7 @@ a:hover li.a_li,a li.a_li_curr {
 .mem_info { float:right;margin-right:20px;height:70px; }
 .mem_info .detail {
     padding:2px 60px;
-    background:rgb(240,240,240);
+    background:#f0f0f0;
     border-bottom-left-radius:3px;
     border-bottom-right-radius:3px;
     cursor:pointer;
@@ -119,10 +119,14 @@ a:hover li.a_li,a li.a_li_curr {
     border-top-left-radius:3px;
     border-bottom-left-radius:3px;
 }
-.circle1 { background:rgb(220,110,30); }
-.circle2 { background:rgb(225,200,85); }
-.circle3 { background:rgb(45,195,230); }
-.circle .text { color:white;font-size:12px;position:relative;top:-32px;left:5px; }
+.circle1 { background:#dc6e1e; }
+.circle2 { background:#e1c855; }
+.circle3 { background:#2dc3e6; }
+.circle .text {
+    color:white;
+    font-size:12px;
+    position:relative; top:-32px; left:5px;
+}
 .chart_text,.mem_user {
     padding:5px 20px;
 }
@@ -145,8 +149,8 @@ a:hover li.a_li,a li.a_li_curr {
     margin:0 auto;
     width:780px;height:80px;
     border-radius:3px;
-    border:1px solid rgb(240,240,240);
-    background:rgb(245,245,245);
+    border:1px solid #f0f0f0;
+    background:#f5f5f5;
     clear:both;
 }
 .company_detail {
@@ -154,9 +158,9 @@ a:hover li.a_li,a li.a_li_curr {
     padding:5px 20px;
     width:740px;
     border-radius:3px;
-    border:1px dashed rgb(245,245,245);
+    border:1px dashed #f5f5f5;
     color:gray;
-    background:rgb(253,253,253);
+    background:#fdfdfd;
     clear:both;
     display:none;
 }
@@ -201,7 +205,7 @@ a:hover li.a_li,a li.a_li_curr {
     clear:both;
     margin:0 10px;
     height:1px;
-    background:rgb(240,240,240);
+    background:#f0f0f0;
 }
 .list_kongbai {
     width:100%;height:5px;
@@ -242,25 +246,52 @@ a.list_btn:hover { background:darkred; }
     margin:10px auto;
     padding:10px 50px;
     width:780px;
-    border:1px solid rgb(240,240,240);
+    border:1px solid #f0f0f0;
     border-radius:3px;
 }
-.table_create .statusbtn a { padding:2px 10px;border-radius:3px;border:1px dashed lightgrey; }
-.table_create .statusbtn a:hover { color:red;border:1px solid red; }
-.table_create .statusbtn input { width:60px;padding:0 10px; }
+.table_create .statusbtn a {
+    padding:2px 10px;
+    border-radius:3px;
+    border:1px dashed lightgrey;
+}
+.table_create .statusbtn a:hover {
+    color:red;
+    border:1px solid red;
+}
+.table_create .statusbtn input {
+    width:60px;
+    padding:0 10px;
+}
 .table_create .orange { color:orangered; }
 .table_create .green { color:green; }
 .table_create td { padding:5px 10px; }
-.table_create td.field_name { width:200px;text-align:end; }
+.table_create td.field_name {
+    width:200px;
+    text-align:end;
+}
 input,textarea,select {
     border:1px solid lightgrey;
     border-radius:3px;
 }
-input,select { margin:5px 0;height:30px; }
-input.field_value { padding:2px 5px;width:300px; }
-select { font-size:16px;font-family:'微软雅黑'; }
-input.radio { position:relative;top:10px; }
-.td_border { padding:5px;border:1px dashed lightgrey; }
+input,select {
+    margin:5px 0;
+    height:30px;
+}
+input.field_value {
+    padding:2px 5px;
+    width:300px;
+}
+select {
+    font-size:16px;
+    font-family:'微软雅黑';
+}
+input.radio {
+    position:relative;top:10px;
+}
+.td_border {
+    padding:5px;
+    border:1px dashed lightgrey;
+}
 .table_create .upload {
     margin:2px;
     padding:2px 10px;
@@ -271,14 +302,18 @@ input.radio { position:relative;top:10px; }
 /*=========右侧创建窗口==========*/
 
 /*=========右侧查看窗口==========*/
-/*.table_show { border-collapse:collapse; }*/
 .table_show td {
     padding:10px 50px;
-    /*width:50%;*/
     border-bottom:1px solid lightgrey;
 }
-.table_show a.tshow,p a.tshow { color:orangered;cursor:pointer; }
-.table_show a#open,a#close { color:rgba(14,144,210,1);cursor:pointer; }
+.table_show a.tshow,p a.tshow {
+    color:orangered;
+    cursor:pointer;
+}
+.table_show a#open,a#close {
+    color:#0e90d2;
+    cursor:pointer;
+}
 .table_show a:hover#open,a:hover#close { color:red; }
 /*=========右侧查看窗口==========*/
 
@@ -287,7 +322,11 @@ input.radio { position:relative;top:10px; }
 
 
 /*=========右侧详情页面==========*/
-.table_create td.status_line { padding:0;border:0;font-family:'微软雅黑'; }
+.table_create td.status_line {
+    padding:0;
+    border:0;
+    font-family:'微软雅黑';
+}
 .status_line .title {
     margin-bottom:20px;
     text-align:center;
@@ -296,12 +335,21 @@ input.radio { position:relative;top:10px; }
     margin:10px 0;
     margin-top:30px;
     width:100%;height:2px;
-    background:rgba(240,240,240,1);
+    background:#f0f0f0;
 }
 .status_line .pos { position:relative;top:-2px; }
-.status_line .pos div { width:7px;height:7px;background:rgba(220,220,220,1);position:relative;float:left; }
-.status_line a { width:50px;font-size:12px;cursor:pointer; }
-.status_line a:hover div { background:rgba(255,0,255,1); }
+.status_line .pos div {
+    width:7px;
+    height:7px;
+    background:#dcdcdc;
+    position:relative;float:left;
+}
+.status_line a {
+    width:50px;
+    font-size:12px;
+    cursor:pointer;
+}
+.status_line a:hover div { background:#ff00ff; }
 .status_line a#status2 { position:absolute;left:90px; }
 .status_line a#status3 { position:absolute;left:170px; }
 .status_line a#status4 { position:absolute;left:250px; }
@@ -310,16 +358,12 @@ input.radio { position:relative;top:10px; }
 .status_line a#status7 { position:absolute;left:490px; }
 .status_line a#status12 { position:absolute;left:580px; }
 .status_line a#status13 { position:absolute;left:670px; }       /*凑数660改为670*/
-/*.status_line a#status2_2 { position:absolute;left:720px; }*/
-/*.status_line a#status2_3 { position:absolute;left:315px; }*/
-/*.status_line a#status2_4 { position:absolute;left:350px; }*/
-/*.status_line a#status2_5 { position:absolute;left:385px; }*/
 .status_line a span,.status_line #statustext0 {
     margin:0 5px;
     width:50px;
-    border:1px solid rgba(230,230,230,1);
+    border:1px solid #e6e6e6;
     color:grey;
-    background:rgba(240,240,240,1);
+    background:#f0f0f0;
 }
 .status_line a span {
     padding:0 5px;
@@ -336,7 +380,7 @@ input.radio { position:relative;top:10px; }
     padding:10px 20px;
     width:300px;height:50px;
     border:1px solid lightgrey;
-    box-shadow:0 0 50px rgba(200,200,200,1);
+    box-shadow:0 0 50px #c8c8c8;
     background:white;
     text-align:center;
     line-height:50px;
@@ -349,7 +393,7 @@ input.radio { position:relative;top:10px; }
     padding:10px 20px;
     width:300px;height:130px;
     border:1px solid lightgrey;
-    box-shadow:0 0 50px rgba(200,200,200,1);
+    box-shadow:0 0 50px #c8c8c8;
     background:white;
     text-align:center;
     line-height:50px;
@@ -361,7 +405,7 @@ input.radio { position:relative;top:10px; }
 }
 .popup3 {
     height:320px;
-    box-shadow:0 0 200px rgb(150,150,150);
+    box-shadow:0 0 200px #969696;
     position:fixed;top:30%;z-index:1000;
 }
 .popup3 p { line-height:30px; }
@@ -385,7 +429,8 @@ input.radio { position:relative;top:10px; }
  }
 .popup_bg {
     width:100%; height:100%;
-    background:rgba(0,0,0,0.5);
+    background:#000000;
+    filter:alpha(opacity=50); -moz-opacity:0.5; -khtml-opacity: 0.5; opacity: 0.5;
     position:fixed;top:0;left:0;z-index:1000;
     display:none;
 }

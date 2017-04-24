@@ -24,7 +24,7 @@ class DemandController extends BaseController
         parent::__construct();
     }
 
-    public function index($genre=2)
+    public function index($genre=1)
     {
         $pageCurr = isset($_GET['page'])?$_GET['page']:1;
         $prefix_url = DOMAIN.'demand';

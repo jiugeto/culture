@@ -1,6 +1,5 @@
 @extends('home.main')
 @section('content')
-    {{--@include('home.common.crumb')--}}
     <div class="s_crumb">
         <div class="crumb">
             <div class="right">
@@ -32,10 +31,6 @@
                         <td>
                             <textarea readonly class="show_intro" style="width:550px;height:50px;">{{$data['intro']}}</textarea>
                         </td>
-                    </tr>
-                    <tr>
-                        <td>设计详情：</td>
-                        <td>{!!$data['detail']!!}</td>
                     </tr>
                     <tr>
                         <td>点击量：</td>

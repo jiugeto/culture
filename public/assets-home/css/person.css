@@ -5,8 +5,8 @@
     margin:10px auto;
     margin-top:40px;
     width:1000px;
-    background:rgb(252,252,252);
-    border:1px solid rgb(230,230,230);
+    background:#fcfcfc;
+    border:1px solid #e6e6e6;
     font-size:20px;
 }
 .per_menu {
@@ -15,12 +15,11 @@
     width:965px;
     font-family:'黑体';
     font-size:16px;
-    /*font-weight:bold;*/
-    border-bottom:1px solid rgb(240,240,240);
+    border-bottom:1px solid #f0f0f0;
 }
 .per_menu select {
     padding:2px 5px;
-    border:1px solid rgb(230,230,230);
+    border:1px solid #e6e6e6;
     font-weight:bold;
     font-size:16px;
     color:grey;
@@ -56,14 +55,12 @@
 .per_work {
     margin:5px;
     padding:5px;
-    /*height:350px;*/
-    /*border-bottom:1px solid gainsboro;*/
 }
 div.per_waterfall {
     margin:10px 5px;
     padding:5px;
     width:220px; height:120px;
-    border:1px solid rgb(240,240,240);
+    border:1px solid #f0f0f0;
     background:white;
     float:left;
     cursor:pointer;
@@ -88,11 +85,8 @@ div:hover.per_waterfall .text { color:red; }
 }
 .per_left p.title,.per_center p.title,.per_right p.title {
     clear:both;
-    /*标题颜色*/
-    /*background:#fff2e5;*/
-    /*border-bottom:1px solid #ffbf80;*/
     color:grey;
-    background:rgb(245,245,245);
+    background:#f5f5f5;
     border-bottom:1px solid gainsboro;
 }
 .per_left p.title a,.per_center p.title a,.per_right p.title a,.per_list p.title a {
@@ -107,12 +101,18 @@ div:hover.per_waterfall .text { color:red; }
     padding-bottom:10px;
     width:988px;height:100px;
     border:1px solid lightgrey;
-    color:rgb(14,144,210);
+    color:#0e90d2;
     background:url(../../uploads/images/2016/ppt.png);
 }
-.per_top a { color:rgb(14,144,210);text-decoration:none; }
+.per_top a {
+    color:#0e90d2;
+    text-decoration:none;
+}
 .per_top a:hover,.per_top a.curr_link { color:red; }
-.per_top .t { margin-top:8px;font-size:14px; }
+.per_top .t {
+    margin-top:8px;
+    font-size:14px;
+}
 /*页面主体布局*/
 .per_left,.per_center,.per_right {
     height:500px;
@@ -124,11 +124,25 @@ div:hover.per_waterfall .text { color:red; }
 }
 .per_left div { margin-left:0; }
 .per_left { width:210px; }
-.per_left table { margin:0 2%;width:98%; }
-.per_left td { padding:0 10px;color:grey;font-size:14px; }
-.per_left td a { color:rgb(14,144,210);text-decoration:none;font-size:14px; }
+.per_left table {
+    margin:0 2%;
+    width:98%;
+}
+.per_left td {
+    padding:0 10px;
+    color:grey;
+    font-size:14px;
+}
+.per_left td a {
+    color:#0e90d2;
+    text-decoration:none;
+    font-size:14px;
+}
 .per_left td a:hover { color:red; }
-.per_left .cometo { color:grey;font-weight:bold; }
+.per_left .cometo {
+    color:grey;
+    font-weight:bold;
+}
 /*页面左边布局*/
 .per_left1,.per_left2 { width:196px; }
 .per_left1 { height:210px; }
@@ -143,31 +157,40 @@ div:hover.per_waterfall .text { color:red; }
     text-align:center;
     font-size:14px;
     border:0;
-    color:rgb(14,144,210);
+    color:#0e90d2;
 }
 .per_left2 { height:300px; }
 /*页面中间布局*/
 .per_center { width:590px; }
 .per_center table { margin:5px; }
-.per_center td { padding:0 10px;color:grey;font-size:14px; }
+.per_center td {
+    padding:0 10px;
+    color:grey;
+    font-size:14px;
+}
 .per_center1,.per_center2 { width:576px; }
 .per_center1 table#centerinfo td {
     padding-top:5px;
     padding-bottom:5px;
 }
 .per_center2 { height:200px; }
-.per_center2 span:hover { color:red;cursor:pointer; }
+.per_center2 span:hover {
+    color:red;
+    cursor:pointer;
+}
 .per_center2 a:hover .img { border:1px solid red; }
 .per_center2 a:hover .vname { color:red; }
 .per_center2 .video {
     margin:5px 0 0 4px;
-    width:110px;height:80px;
+    width:110px;
+    height:80px;
     border:0;
     float:left;
 }
 .per_center2 .video .img {
-    margin:0 auto;margin-top:5px;
-    width:100px;height:50px;
+    margin:0 auto; margin-top:5px;
+    width:100px;
+    height:50px;
     background:#e5e5e5;
     overflow:hidden;
 }
@@ -177,7 +200,10 @@ div:hover.per_waterfall .text { color:red; }
     color:grey;
 }
 /*页面右侧布局*/
-.per_right { margin-left:5px;width:192px; }
+.per_right {
+    margin-left:5px;
+    width:192px;
+}
 .per_right1,.per_right2,.per_right3 { width:188px; }
 .per_right1 { height:200px; }
 .per_right1 .friend {
@@ -193,7 +219,8 @@ div:hover.per_waterfall .text { color:red; }
     margin:0 auto;
     margin-top:5px;
     padding:2px;
-    width:50px; height:50px;
+    width:50px;
+    height:50px;
     border:1px solid lightgrey;
     border-radius:3px;
     background:#e5e5e5;
@@ -237,7 +264,7 @@ div:hover.per_waterfall .text { color:red; }
     float:left;
 }
 .per_list p {
-    background:rgb(245,245,245);
+    background:#f5f5f5;
     border:1px solid lightgrey;
     border-bottom:0;
 }
@@ -308,7 +335,7 @@ div:hover.per_waterfall .text { color:red; }
     width:200px;height:200px;
     text-align:center;
     line-height:200px;
-    background:rgb(240,240,240);
+    background:#f0f0f0;
     border:0;
 }
 .per_list td a {
@@ -322,8 +349,8 @@ div:hover.per_waterfall .text { color:red; }
 .per_list .message {
     margin:20px 10px;
     width:720px;height:65px;
-    border:1px solid rgb(230,230,230);
-    border-bottom:1px dashed rgb(150,150,150);
+    border:1px solid #e6e6e6;
+    border-bottom:1px dashed #969696;
     color:grey;
 }
 .per_list textarea {
@@ -344,7 +371,7 @@ div:hover.per_waterfall .text { color:red; }
 .per_list .message a {
     padding:1px 10px;
     text-decoration:none;
-    color:rgb(14,144,210);
+    color:#0e90d2;
     border:1px solid ghostwhite;
 }
 .per_list .message a:hover { border:1px solid red;color:red; }
@@ -357,7 +384,7 @@ div:hover.per_waterfall .text { color:red; }
     margin-left:20px;margin-bottom:20px;
     width:215px;height:100px;
     border-radius:5px;
-    background:rgb(252,252,252);
+    background:#fcfcfc;
     overflow:hidden;
     float:left;
 }
@@ -444,7 +471,7 @@ div:hover.per_waterfall .text { color:red; }
 }
 .per_right_head .title {
     color:grey;
-    background:rgb(245,245,245);
+    background:#f5f5f5;
     border-bottom:1px solid gainsboro;
 }
 .per_right_head .nicheng {
@@ -452,11 +479,23 @@ div:hover.per_waterfall .text { color:red; }
     text-align:center;
     font-size:14px;
     border:0;
-    color:rgb(14,144,210);
+    color:#0e90d2;
 }
-.per_right_head table { margin:0 2%;margin-bottom:5px;width:98%; }
-.per_right_head td { padding:0 10px;color:grey;font-size:14px; }
-.per_right_head td a { color:rgb(14,144,210);text-decoration:none;font-size:14px; }
+.per_right_head table {
+    margin:0 2%;
+    margin-bottom:5px;
+    width:98%;
+}
+.per_right_head td {
+    padding:0 10px;
+    color:grey;
+    font-size:14px;
+}
+.per_right_head td a {
+    color:#0e90d2;
+    text-decoration:none;
+    font-size:14px;
+}
 .per_right_head td a:hover { color:red; }
 .per_right_head .menu {
     padding:5px 20px;

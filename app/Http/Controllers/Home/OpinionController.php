@@ -21,7 +21,7 @@ class OpinionController extends BaseController
 
     public function index($status=0)
     {
-        $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
+        $pageCurr = isset($_GET['page'])?$_GET['page']:1;
         $prefix_url = DOMAIN.'opinion';
         $apiOpinion = ApiOpinion::getOpinionList($this->limit,$pageCurr,$status);
         if ($apiOpinion['code']!=0) {

@@ -52,8 +52,8 @@
 .de_right { width:280px; }
 .de_right .cate {
     width:260px;height:300px;
-    border:1px solid rgb(240,240,240);
-    background:rgb(250,250,250);
+    border:1px solid #f0f0f0;
+    background:#fafafa;
 }
 .de_right .title { padding:10px; }
 .de_right .cate .con div.de_con {
@@ -70,6 +70,6 @@
 .de_right .img {
     margin:10px 0;
     width:260px;height:500px;
-    background:rgb(250,250,250);
+    background:#fafafa;
     overflow:hidden;
 }

@@ -70,20 +70,25 @@
 
     <script>
         //根据浏览器宽度设置菜单位置
-        $(document).ready(function(){
-            var clientWidth = document.body.clientWidth;
-            var s_right = $(".s_right");
-            s_right.css('position','absolute');
-            s_right.css('top',200+'px');
-            s_right.css('right',(clientWidth-1000)/2+10+'px');
-        });
+        $(document).ready(function(){ setAdPos(); });
         //改变浏览器大小触发事件
-        window.onresize = function(){
+        window.onresize = function(){ setAdPos(); };
+        function setAdPos(){
             var clientWidth = document.body.clientWidth;
             var s_right = $(".s_right");
+            //取得浏览器的userAgent字符串，得出top值
+            var userAgent = window.navigator.userAgent;
+            var top;
+            if (userAgent.indexOf("MSIE")>0) {
+                top = '230px';
+            } else if (userAgent.indexOf("Firefox")>0 || userAgent.indexOf("Chrome")>0 || userAgent.indexOf("Safari")>0 || userAgent.indexOf("Opera")>0) {
+                top = '245px';
+            } else {
+                top = '230px';
+            }
             s_right.css('position','absolute');
-            s_right.css('top',200+'px');
-            s_right.css('right',(clientWidth-1000)/2+10+'px');
+            s_right.css('top',top);
+            s_right.css('right',(clientWidth-1000)/2+'px');
         }
     </script>
 @stop

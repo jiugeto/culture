@@ -60,10 +60,10 @@ Route::group(['prefix'=>'/','namespace'=>'Home'],function(){
     //创意路由
     Route::get('idea/click/{id}/{click}','IdeaController@click');
     Route::get('idea/collect/{id}/{collect}','IdeaController@collect');
-    Route::get('idea/cate/{cate}','IdeaController@index');
+    Route::get('idea/s/{cate}','IdeaController@index');     //s代表检索
     Route::resource('idea','IdeaController');
     //新手帮助路由
-    Route::resource('newuser','NewUserController');
+    Route::resource('help','HelpController');
     //搜索栏
     Route::get('s/{genre}/{keyword}','SearchController@index');
     Route::get('s/init','SearchController@init');      //搜索表初始化

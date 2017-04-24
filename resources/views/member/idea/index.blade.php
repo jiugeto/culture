@@ -18,7 +18,7 @@
         <table class="list_tab">
             <tr>
                 <td>编号</td>
-                <td>创意名称</td>
+                <td>故事名称</td>
                 <td>分类</td>
                 <td>创建时间</td>
                 <td>操作</td>
@@ -31,8 +31,8 @@
                 <td>{{$data['cateName']}}</td>
                 <td>{{$data['createTime']}}</td>
                 <td>
-                    <a href="{{DOMAIN}}member/idea/{{ $data['id'] }}" class="list_btn">查看</a>
-                    <a href="{{DOMAIN}}member/idea/{{ $data['id'] }}/edit" class="list_btn">编辑</a>
+                    <a href="{{DOMAIN}}member/idea/{{$data['id']}}" class="list_btn">查看</a>
+                    <a href="{{DOMAIN}}member/idea/{{$data['id']}}/edit" class="list_btn">编辑</a>
                 </td>
             </tr>
             @endforeach

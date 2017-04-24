@@ -1,6 +1,5 @@
 @extends('home.main')
 @section('content')
-    {{--@include('home.common.crumb')--}}
     <div class="s_crumb">
         <div class="crumb">
             <div class="right">
@@ -18,17 +17,18 @@
             </div>
             <div class="source">
                 @if(count($datas))
-                    @foreach($datas as $kdata=>$data)
+                    @foreach($datas as $k=>$data)
                 <a href="javascript:void(0);" title="点击查看">
                     <div class="cre_con">
                         <div class="img">
-                            <img src="{{ $data['thumb'] }}">
+                            <img src="{{$data['thumb']}}">
                             <div class="dh" @if($genre==1)style="top:-243px;"@endif>
                                 <span onclick="getPreview({{$data['id']}});" title="点击预览">预览效果</span> &nbsp;&nbsp;
-                                <span onclick="window.location.href='{{DOMAIN}}member/product/create';" title="点击去加需求">领取效果</span>
+                                <span onclick="window.location.href='{{DOMAIN}}member/product/create';"
+                                      title="点击去加需求">领取效果</span>
                             </div>
                         </div>
-                        <div class="text">{{ $isOrder?$data['pname']:$data['name'] }}</div>
+                        <div class="text">{{$isOrder?$data['pname']:$data['name']}}</div>
                         <input type="hidden" name="linkType{{$data['id']}}" value="{{$data['linkType']}}">
                         <input type="hidden" name="link{{$data['id']}}" value="{{$data['link']}}">
                     </div>
