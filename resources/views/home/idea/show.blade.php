@@ -4,7 +4,7 @@
         <div class="crumb">
             <div class="right">
                 <a href="/">首页</a> /
-                <a href="{{DOMAIN}}idea">创意</a> / 详情
+                <a href="{{DOMAIN}}idea">故事</a> / 详情
             </div>
         </div>
     </div>
@@ -21,14 +21,14 @@
             @if($userInfo)
             <div class="userinfo">
                 <p class="title"></p>
-                <p>地址：{{str_limit($userInfo['address,20)'])}}</p>
+                <p>地址：{{str_limit($userInfo['address'],20)}}</p>
                 <p>发布时间：{{$userInfo['createTime']}}</p>
             </div>
             @endif
         </span>
     </div>
     <input type="hidden" name="_token" value="{{csrf_token()}}">
-    <input type="hidden" name=genre"" value="{{$data['genre']}}">
+    <input type="hidden" name="genre" value="{{$data['genre']}}">
 
     {{--<div class="laymsg">--}}
         {{--<h4 style="text-align:center;">查看限制</h4>--}}

@@ -60,6 +60,7 @@
 <!-- navigate菜单导航栏 -->
 <!-- 空白 -->
 <div class="content_kongbai" id="conKongBaiByIe">&nbsp;</div>
+<input type="hidden" id="urlCurr" value="{{$_SERVER['REQUEST_URI']}}">
 
 
 <script>
@@ -117,12 +118,19 @@
     //navigate下面留白的浏览器兼容
     (function isIE() {
         var userAgent = window.navigator.userAgent; //取得浏览器的userAgent字符串
+        var urlCurr = $("#urlCurr").val();
         if (userAgent.indexOf("MSIE")>0) {
-            $("#conKongBaiByIe").css('height','135px');
+            if (urlCurr=='/') {
+                $("#conKongBaiByIe").css('height','100px');
+            } else {
+                $("#conKongBaiByIe").css('height','135px');
+            }
         } else if (userAgent.indexOf("Firefox")>0 || userAgent.indexOf("Chrome")>0 || userAgent.indexOf("Safari")>0 || userAgent.indexOf("Opera")>0) {
-            $("#conKongBaiByIe").css('height','148px');
-        } else {
-            $("#conKongBaiByIe").css('height','135px');
+            if (urlCurr=='/') {
+                $("#conKongBaiByIe").css('height','105px');
+            } else {
+                $("#conKongBaiByIe").css('height','148px');
+            }
         }
     })();
     //关于搜索

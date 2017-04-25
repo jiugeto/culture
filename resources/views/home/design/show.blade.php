@@ -43,7 +43,7 @@
                     <tr><td colspan="2">&nbsp;</td></tr>
                     <tr>
                         <td colspan="2" style="text-align:center;">
-                            <button class="homebtn"
+                            <button class="homebtn" title="返回上一页"
                                     onclick="window.location.href='{{DOMAIN}}design';">返 &nbsp;回</button>
                         </td>
                     </tr>

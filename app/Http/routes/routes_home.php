@@ -33,7 +33,7 @@ Route::group(['prefix'=>'/','namespace'=>'Home'],function(){
     Route::get('demand/{genre}/{id}','DemandController@getShowByGenre');
     Route::get('demand','DemandController@index');
     //娱乐频道
-    Route::get('entertain/{genre0}/{genre}','EntertainController@index');
+    Route::get('entertain/s/{genre0}/{type}','EntertainController@index');     //s代表检索
     Route::get('entertain','EntertainController@index');
     Route::get('entertain/{id}','EntertainController@show');
     Route::get('entertain/staff/show/{id}','EntertainController@staffShow');
@@ -45,10 +45,15 @@ Route::group(['prefix'=>'/','namespace'=>'Home'],function(){
     //设计频道
     Route::get('design/s/{cate}','DesignController@index');     //s代表检索
     Route::resource('design','DesignController');
+    //创意路由
+    Route::get('idea/click/{id}/{click}','IdeaController@click');
+    Route::get('idea/collect/{id}/{collect}','IdeaController@collect');
+    Route::get('idea/s/{cate}','IdeaController@index');     //s代表检索
+    Route::resource('idea','IdeaController');
     //关于我们
-    Route::get('about','AboutController@index');
-    Route::get('about/join','AboutController@join');
-    Route::get('about/station','AboutController@station');
+//    Route::get('about','AboutController@index');
+//    Route::get('about/join','AboutController@join');
+//    Route::get('about/station','AboutController@station');
     //用户心声
     Route::resource('uservoice','UserVoiceController');
     //用户对本站的意见栏
@@ -57,11 +62,6 @@ Route::group(['prefix'=>'/','namespace'=>'Home'],function(){
     Route::post('opinion/{id}','OpinionController@update');
     Route::get('opinion/s/{status}','OpinionController@index');
     Route::resource('opinion','OpinionController');
-    //创意路由
-    Route::get('idea/click/{id}/{click}','IdeaController@click');
-    Route::get('idea/collect/{id}/{collect}','IdeaController@collect');
-    Route::get('idea/s/{cate}','IdeaController@index');     //s代表检索
-    Route::resource('idea','IdeaController');
     //新手帮助路由
     Route::resource('help','HelpController');
     //搜索栏

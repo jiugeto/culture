@@ -24,7 +24,7 @@
             <a href="{{env('ONLINE_DOMAIN')}}" target="_blank">在线创作</a>
         </div>
         <div class="head_right">
-            <a href="{{DOMAIN}}help" target="_blank">新手点这里</a>
+            <a href="{{DOMAIN}}help" target="_blank">有疑问?看<span style="color:#ff4466;">帮助</span></a>
             <a href="javascript:void(0);" onclick="show_Favorite(window.location,document.title);"
                style="color:#ff4466;">加入收藏</a>
             {{--<a href="javascript:void(0);"onclick="show_index(window.location);">设为首页</a>--}}

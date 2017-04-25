@@ -6,33 +6,37 @@
         <div class="cre_kong">&nbsp;{{--10px高度留空--}}</div>
         <div class="s_search">
             搜索方式：
-            <label><input type="radio" name="genre0" value="1" {{$genre0==1?'checked':''}}
-                onclick="window.location.href='{{DOMAIN}}entertain';">讯息</label>
-            <label><input type="radio" name="genre0" value="2" {{$genre0==2?'checked':''}}
-                onclick="window.location.href='{{DOMAIN}}entertain/2/0';">人员</label>
-            <label><input type="radio" name="genre0" value="3" {{$genre0==3?'checked':''}}
-                onclick="window.location.href='{{DOMAIN}}entertain/3/0';">作品</label>
+            <label style="cursor:pointer;">
+                <input type="radio" style="border:0;" name="genre0" value="1" {{$genre0==1?'checked':''}}
+                    onclick="window.location.href='{{DOMAIN}}entertain';"> 讯息
+            </label>
+            <label style="cursor:pointer;">
+                <input type="radio" style="border:0;" name="genre0" value="2" {{$genre0==2?'checked':''}}
+                    onclick="window.location.href='{{DOMAIN}}entertain/s/2/0';"> 人员
+            </label>
+            <label style="cursor:pointer;">
+                <input type="radio" style="border:0;" name="genre0" value="3" {{$genre0==3?'checked':''}}
+                    onclick="window.location.href='{{DOMAIN}}entertain/s/3/0';"> 作品
+            </label>
             <input type="hidden" name="genre_0" value="{{$genre0}}">
             @if($genre0==2)
             &nbsp;&nbsp;&nbsp;&nbsp;
-            人员类型：
-            <select class="home_search" name="genre">
-                <option value="0" {{$genre==0?'selected':''}}>所有</option>
-                @foreach($staffModel['genres'] as $k=>$vgenre)
-                    <option value="{{$k}}" {{$genre==$k?'selected':''}}>{{$vgenre}}</option>
+            人员：
+            <select class="home_search" name="type" onchange="getSel(this.value)">
+                <option value="0" {{$type==0?'selected':''}}>所有</option>
+                @foreach($staffModel['types'] as $k=>$vtype)
+                    <option value="{{$k}}" {{$type==$k?'selected':''}}>{{$vtype}}</option>
                 @endforeach
             </select>
             <script>
-                $(document).ready(function(){
+                function getSel(val){
                     var genre0 = $("input[name='genre_0']").val();
-                    $("select[name='genre']").change(function(){
-                        if (genre0==1) {
-                            window.location.href = '{{DOMAIN}}entertain';
-                        } else if (genre0==2) {
-                            window.location.href = '{{DOMAIN}}entertain/2/'+$(this).val();
-                        }
-                    });
-                });
+                    if (genre0==1) {
+                        window.location.href = '{{DOMAIN}}entertain';
+                    } else if (genre0==2) {
+                        window.location.href = '{{DOMAIN}}entertain/s/2/'+val;
+                    }
+                }
             </script>
             @endif
         </div>

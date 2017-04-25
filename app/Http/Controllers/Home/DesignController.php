@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Home;
 
 use App\Api\ApiBusiness\ApiAd;
 use App\Api\ApiBusiness\ApiDesign;
+use App\Api\ApiUser\ApiUsers;
 
 class DesignController extends BaseController
 {
@@ -47,11 +48,16 @@ class DesignController extends BaseController
         if ($apiDesign['code']!=0) {
             echo "<script>alert('".$apiDesign['msg']."');history.go(-1);</script>";exit;
         }
+        //获取用户信息
+        $apiUser = ApiUsers::getOneUser($apiDesign['data']['uid']);
+        if ($apiUser['code']!=0) {
+            echo "<script>alert('".$apiUser['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'lists'=> $this->list,
-            'data'=> $apiDesign['data'],
-            'curr_menu'=> $this->curr,
-            'uid'=> $apiDesign['data']['uid'],
+            'lists' => $this->list,
+            'data' => $apiDesign['data'],
+            'curr_menu' => $this->curr,
+            'userInfo' => $apiUser['data'],
         ];
         return view('home.design.show', $result);
     }

@@ -37,6 +37,18 @@
     </div>
 </div>
 <script>
+    $(document).ready(function(){ setPptChangePicPos(); });
+    function setPptChangePicPos(){
+        //取得浏览器的userAgent字符串，得出top值
+        var userAgent = window.navigator.userAgent;
+        var top;
+        if (userAgent.indexOf("MSIE")>0) {
+            top = '5px';
+        } else if (userAgent.indexOf("Firefox")>0 || userAgent.indexOf("Chrome")>0 || userAgent.indexOf("Safari")>0 || userAgent.indexOf("Opera")>0) {
+            top = '-10px';
+        }
+        $(".ppt_change_pic").css('top',top);
+    }
     function over(pptid){
         $(".ppt_change_pic > li").removeClass('curr'); $(this).addClass('curr');
         $(".pro_ad_pic > a").hide(); $("#ppt_"+pptid).show();

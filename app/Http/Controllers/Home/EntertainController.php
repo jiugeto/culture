@@ -23,7 +23,7 @@ class EntertainController extends BaseController
         parent::__construct();
     }
 
-    public function index($genre0=1,$genre=0)
+    public function index($genre0=1,$type=0)
     {
         if ($genre0==1) {
             $prefix_url = DOMAIN.'entertain';
@@ -32,13 +32,13 @@ class EntertainController extends BaseController
         } else {
             $prefix_url = DOMAIN.'entertain/3/0';
         }
-        $pageCurr = isset($_GET['pageCurr'])?$_GET['pageCurr']:1;
+        $pageCurr = isset($_GET['page'])?$_GET['page']:1;
         if ($genre0==1) {
             $apiData = ApiEntertain::index($this->limit,$pageCurr,0,1,2,0);
         } elseif ($genre0==2) {
-            $apiData = ApiStaff::index($this->limit,$pageCurr,0,$genre,0,2,0);
+            $apiData = ApiStaff::index($this->limit,$pageCurr,0,1,$type,2,0);
         } else {
-            $apiData = ApiGoods::index($this->limit,$pageCurr,0,0,0,0,2,0,0);
+            $apiData = ApiGoods::index($this->limit,$pageCurr,0,1,0,0,2);
         }
         if (isset($apiData)&&$apiData['code']!=0) {
             $datas = $apiData['data']; $total = $apiData['pagelist']['total'];
@@ -55,7 +55,7 @@ class EntertainController extends BaseController
             'prefix_url'    => $prefix_url,
             'curr_menu' => $this->curr,
             'genre0'    => $genre0,
-            'genre'     => $genre,
+            'type'      => $type,
         ];
         return view('home.entertain.index', $result);
     }

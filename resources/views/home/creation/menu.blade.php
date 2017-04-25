@@ -40,8 +40,8 @@
         @else {{DOMAIN}}creation
         @endif
     " class="{{$cate==0?'curr':''}}">全部</a>
-    @foreach($model['cates'] as $kcate=>$vcate)
-        <a href="{{DOMAIN}}creation/s/{{$genre}}/{{$kcate}}/{{$isOrder}}" class="{{$cate==$kcate?'curr':''}}">{{ $vcate }}</a>
+    @foreach($model['cates'] as $k=>$vcate)
+        <a href="{{DOMAIN}}creation/s/{{$genre}}/{{$k}}/{{$isOrder}}" class="{{$cate==$k?'curr':''}}">{{$vcate}}</a>
     @endforeach
 </div>
 <div class="cre_kong">&nbsp;{{--10px高度留空--}}</div>
@@ -61,7 +61,7 @@
     {{--增加需求的链接--}}
     @if($genre==3)
     &nbsp;    <span style="color:gainsboro">|</span> &nbsp;
-    <a href="{{DOMAIN}}member/online" title="去添加效果需求"><b>添加效果需求</b></a>
+    <a href="{{DOMAIN}}member/goods" title="去添加效果需求"><b>添加效果需求</b></a>
     @endif
 </div>
 <div class="cre_kong">&nbsp;</div>

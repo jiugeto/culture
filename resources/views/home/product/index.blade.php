@@ -13,7 +13,7 @@
                 <ul>
                     @if(count($recommends))
                         @foreach($recommends as $recommend)
-                    <li><a href="{{DOMAIN}}product/{{ $recommend['id'] }}">{{ $recommend['name'] }}</a></li>
+                    <li><a href="{{DOMAIN}}product/{{$recommend['id']}}">{{$recommend['name']}}</a></li>
                         @endforeach
                     @else
                         @for($i=0;$i<4-count($recommends);++$i)
@@ -25,8 +25,8 @@
             {{--大图--}}
             <div class="pro_big">
                 @if(count($recommends))
-                    <div class="img"><img src="{{ $recommends[0]['thumb'] }}"></div>
-                    <a href="{{DOMAIN}}product/{{ $recommend['id'] }}">{{ $recommends[0]['name'] }}</a>
+                    <div class="img"><img src="{{$recommends[0]['thumb']}}"></div>
+                    <a href="{{DOMAIN}}product/{{$recommend['id']}}">{{$recommends[0]['name']}}</a>
                 @else
                     <div class="img"><div class="none">无</div></div>
                     <a href="">没有推荐大图</a>
@@ -38,9 +38,11 @@
                     @foreach($recommends as $recommend)
                 <div class="img_text">
                     <div class="img">
-                        <a href="{{DOMAIN}}product/{{ $recommend['id'] }}"><img src="{{ $recommend['thumb'] }}"></a>
+                        <a href="{{DOMAIN}}product/{{$recommend['id']}}">
+                            <img src="{{$recommend['thumb']}}" border="0">
+                        </a>
                     </div>
-                    <div class="text"><a href="{{DOMAIN}}product/{{ $recommend['id'] }}">{{ $recommend['name'] }}</a></div>
+                    <div class="text"><a href="{{DOMAIN}}product/{{$recommend['id']}}">{{$recommend['name']}}</a></div>
                 </div>
                     @endforeach
                 @endif
@@ -67,16 +69,12 @@
                     @foreach($newests as $newest)
                 <div class="img_text">
                     <div class="img">
-                        <a href="{{DOMAIN}}product/{{ $newest['id'] }}">
-                            <img src="{{ $newest['thumb'] }}" style="
-                                {{--@if($size=$newest->getPicSize($w=150,$h=125)) --}}
-                                    {{--width:{{$size['w']}}px;height:{{$size['h']}}px; --}}
-                                {{--@endif--}}
-                            ">
+                        <a href="{{DOMAIN}}product/{{$newest['id']}}">
+                            <img src="{{$newest['thumb']}}" border="0">
                         </a>
                     </div>
                     <div class="text">
-                        <a href="{{DOMAIN}}product/{{ $newest['id'] }}">{{ $newest['name'] }}</a>
+                        <a href="{{DOMAIN}}product/{{$newest['id']}}">{{$newest['name']}}</a>
                         {{--<span style="color:red;float:right;">{{ $newest['click'] }}</span>--}}
                     </div>
                 </div>
@@ -102,16 +100,12 @@
                     <div class="img_text">
                         {{--<div class="img_num"> 1 </div>--}}
                         <div class="img">
-                            <a href="{{DOMAIN}}product/{{ $newest['id'] }}">
-                                <img src="{{ $newest['thumb'] }}" style="
-                                    {{--@if($size=$newest->getPicSize($w=150,$h=125)) --}}
-                                        {{--width:{{$size['w']}}px;height:{{$size['h']}}px; --}}
-                                    {{--@endif--}}
-                                ">
+                            <a href="{{DOMAIN}}product/{{$newest['id']}}">
+                                <img src="{{$newest['thumb']}}" border="0">
                             </a>
                         </div>
-                        <a href="{{DOMAIN}}product/{{ $newest['id'] }}">{{ str_limit($newest['name'],10) }}</a>
-                        {{--<a href="" class="click">点击<span>{{ $newest['click'] }}</span></a>--}}
+                        <a href="{{DOMAIN}}product/{{$newest['id']}}">{{str_limit($newest['name'],10)}}</a>
+                        {{--<a href="" class="click">点击<span>{{$newest['click']}}</span></a>--}}
                     </div>
                         @endforeach
                     @endif
@@ -123,7 +117,7 @@
                             <a href=""><div class="none">无</div></a>
                         </div>
                         <a href="">无最新样片</a>
-                        <a href="" class="click">点击<span>0</span></a>
+                        {{--<a href="" class="click">点击<span>0</span></a>--}}
                     </div>
                         @endfor
                     @endif
@@ -138,16 +132,12 @@
                     <div class="img_text">
                         {{--<div class="img_num"> 1 </div>--}}
                         <div class="img">
-                            <a href="{{DOMAIN}}product/{{ $newest['id'] }}">
-                                <img src="{{ $newest['thumb'] }}" style="
-                                    {{--@if($size=$newest->getPicSize($w=150,$h=125)) --}}
-                                        {{--width:{{$size['w']}}px;height:{{$size['h']}}px; --}}
-                                    {{--@endif--}}
-                                ">
+                            <a href="{{DOMAIN}}product/{{$newest['id']}}">
+                                <img src="{{$newest['thumb']}}" border="0">
                             </a>
                         </div>
-                        <a href="{{DOMAIN}}product/{{ $newest['id'] }}">{{ str_limit($newest['name'],10) }}</a>
-                        {{--<a href="" class="click">点击<span>{{ $newest['click'] }}</span></a>--}}
+                        <a href="{{DOMAIN}}product/{{$newest['id']}}">{{str_limit($newest['name'],10)}}</a>
+                        {{--<a href="" class="click">点击<span>{{$newest['click']}}</span></a>--}}
                     </div>
                         @endforeach
                     @endif
@@ -192,15 +182,11 @@
                 @foreach($xuanchuans as $xuanchuan)
                     <div class="img_text">
                         <div class="img">
-                            <a href="{{DOMAIN}}product/{{ $xuanchuan['id'] }}">
-                                <img src="{{ $xuanchuan['thumb'] }}" style="
-                                    {{--@if($size=$good->getPicSize($w=150,$h=125)) --}}
-                                        {{--width:{{$size['w']}}px;height:{{$size['h']}}px; --}}
-                                    {{--@endif--}}
-                                ">
+                            <a href="{{DOMAIN}}product/{{$xuanchuan['id']}}">
+                                <img src="{{$xuanchuan['thumb']}}" border="0">
                             </a>
                         </div>
-                        <a href="">{{ $xuanchuan['name'] }}</a>
+                        <a href="">{{$xuanchuan['name']}}</a>
                     </div>
                 @endforeach
             </div>

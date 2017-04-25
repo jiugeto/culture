@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Home;
 
 use App\Api\ApiBusiness\ApiAd;
 use App\Api\ApiBusiness\ApiRent;
+use App\Api\ApiUser\ApiUsers;
 
 class RentController extends BaseController
 {
@@ -54,12 +55,17 @@ class RentController extends BaseController
         if ($apiRent['code']!=0) {
             echo "<script>alert('".$apiRent['msg']."');history.go(-1);</script>";exit;
         }
+        //获取用户信息
+        $apiUser = ApiUsers::getOneUser($apiRent['data']['uid']);
+        if ($apiUser['code']!=0) {
+            echo "<script>alert('".$apiUser['msg']."');history.go(-1);</script>";exit;
+        }
         $result = [
-            'lists'=> $this->list,
-            'data'=> $apiRent['data'],
-            'curr_menu'=> $this->curr,
-            'curr_submenu'=> $submenu,
-            'uid'=> $apiRent['data']['uid'],
+            'lists' => $this->list,
+            'data' => $apiRent['data'],
+            'curr_menu' => $this->curr,
+            'curr_submenu' => $submenu,
+            'userInfo' => $apiUser['data'],
         ];
         return view('home.rent.show', $result);
     }

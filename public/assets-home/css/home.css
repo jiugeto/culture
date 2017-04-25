@@ -68,7 +68,7 @@ body {
 .nav_body div { float:left; }
 .nav_right {
     width:200px;
-    /*position:absolute;top:50px;right:200px;*/
+    position:relative;top:-20px;
     float:right;
 }
 .nav_right a {
@@ -88,8 +88,8 @@ a:hover.nav_a {
 }
 a.curr {
     padding:11px 20px;
-    color:red;
     text-decoration:none;
+    color:red;
     border-bottom:2px solid #e34220;
 }
 .navigate { clear:both; }
@@ -99,10 +99,10 @@ a.curr {
     font-size:20px;
 }
 .navigate_a a {
-    padding:12px 14px;
+    padding:12px 10px;
     font-size:18px;
     color:#808080;
-    font-weight:bold;
+    /*font-weight:bold;*/
 }
 /*用户对本站的意见栏*/
 /*=======navigate菜单导航栏========*/
