@@ -5,7 +5,7 @@
         <div class="am-g">
             @include('admin.common.menu')
             <div class="am-btn-group am-btn-group-xs list_select" style="float:right;">
-                发布单位
+                类型：
                 <select name="type" onchange="getSel()">
                     <option value="0" {{$type==0?'selected':''}}>所有</option>
                     @foreach($model['types'] as $k=>$vtype)

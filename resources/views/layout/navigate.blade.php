@@ -7,7 +7,7 @@
     <div class="nav_body">
         <div><a href="/"><img src="{{PUB}}assets-home/images/logo.png" class="logo"></a></div>
         <div class="search">
-            <input type="text" class="search_input" style="height:{{explode('/',$_SERVER['REQUEST_URI'])[1]=='member'?42:40}}px;" name="global_search" placeholder="{{--找啥呢？来试试--}}暂不可用" value="{{ isset($keyword) ? $keyword : '' }}">
+            <input type="text" class="search_input" style="height:{{explode('/',$_SERVER['REQUEST_URI'])[1]=='member'?42:40}}px;" name="global_search" placeholder="找啥呢？来试试{{--暂不可用--}}" value="{{ isset($keyword) ? $keyword : '' }}">
             <input type="hidden" name="global_search_genre" value="{{isset($searchGenre)?$searchGenre:1}}">
             <input type="submit" class="search_text" value="搜 索" onclick="getSearch()">
             <div class="search_sel" style="top:{{explode('/',$_SERVER['REQUEST_URI'])[1]=='member'?10:5}}px;">
@@ -17,21 +17,21 @@
                 </div>
                 <div class="sel_more">
                     <div class="sel_one">
-                        <span class="curr_sel_text">{{isset($searchGenre)?$searchs['genres'][$searchGenre]:'创作'}}</span>
+                        <span class="curr_sel_text">
+                            {{isset($searchGenre)?$searchs['genres'][$searchGenre]:'创作'}}
+                        </span>
                         <img src="{{PUB}}assets-home/images/sel_down.png">
                     </div>
-                    {{--@if(count($searchs['genres']))--}}
-                        {{--@foreach($searchs['genres'] as $ks=>$vsearch)--}}
-                            {{--<div class="sel_one" style="padding:4px 8px" onclick="getSearchGenre({{$ks}})">--}}
-                                {{--{{ $vsearch }}--}}
-                                {{--<input type="hidden" name="searchGenreName_{{$ks}}" value="{{ $vsearch }}">--}}
-                            {{--</div>--}}
-                        {{--@endforeach--}}
-                    {{--@endif--}}
+                    @foreach($searchModel['genres'] as $k=>$vsearch)
+                        <div class="sel_one" style="padding:4px 8px" onclick="getSearchGenre({{$k}})">
+                            {{$vsearch}}
+                            <input type="hidden" name="searchGenreName_{{$k}}" value="{{$vsearch}}">
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
-        <div class="keyword_pos">热门词汇：暂不可用
+        <div class="keyword_pos">热门词汇：{{--暂不可用--}}
             {{--@if(count($searchs['hotwords'])&&$hotwords=$searchs['hotwords'])--}}
                 {{--@foreach($hotwords as $hotword)--}}
                     {{--<a onclick="getKeyword({{$hotword->id}})" title="{{$hotword->keyword}}">--}}
@@ -51,7 +51,7 @@
         <div class="navigate">
             <div class="navigate_a">
                 @foreach($navigates as $navigate)
-                    <a href="{{ $navigate['link'] }}" class="@if(isset($curr_menu) && $curr_menu==ltrim($navigate['link'],'/')) curr @else nav_a @endif" title="{{$navigate['title']}}">{{$navigate['name']}}</a>
+                    <a href="{{$navigate['link']}}" class="@if(isset($curr_menu) && $curr_menu==ltrim($navigate['link'],'/')) curr @else nav_a @endif" title="点击跳转到{{$navigate['name']}}">{{$navigate['name']}}</a>
                 @endforeach
             </div>
         </div>

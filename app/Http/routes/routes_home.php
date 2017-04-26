@@ -50,6 +50,12 @@ Route::group(['prefix'=>'/','namespace'=>'Home'],function(){
     Route::get('idea/collect/{id}/{collect}','IdeaController@collect');
     Route::get('idea/s/{cate}','IdeaController@index');     //s代表检索
     Route::resource('idea','IdeaController');
+    //视频投放媒介
+    Route::get('delivery/s/{genre}','DeliveryController@index');        //s代表检索
+    Route::resource('delivery','DeliveryController');
+    //配音频道
+    Route::get('dub/s/{genre}','DubController@index');          //s代表检索
+    Route::resource('dub','DubController');
     //关于我们
 //    Route::get('about','AboutController@index');
 //    Route::get('about/join','AboutController@join');

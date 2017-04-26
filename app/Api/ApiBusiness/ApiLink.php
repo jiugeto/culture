@@ -35,11 +35,11 @@ class ApiLink
 
     public static function header($limit,$cid,$isshow=0,$sortid='desc')
     {
-        $redisKey = 'culture_header';
-        //判断缓存有没有该数据
-        if ($redisResult = ApiBase::getRedis($redisKey)) {
-            return array('code' => 0, 'data' => unserialize($redisResult));
-        }
+//        $redisKey = 'culture_header';
+//        //判断缓存有没有该数据
+//        if ($redisResult = ApiBase::getRedis($redisKey)) {
+//            return array('code' => 0, 'data' => unserialize($redisResult));
+//        }
         //没有，接口读取
         $apiUrl = ApiBase::getApiCurl() . '/api/v1/link';
         $curl = new Curl();
@@ -57,20 +57,20 @@ class ApiLink
             return array('code' => -1, 'msg' => $response->error->msg);
         }
         $headerArr = ApiBase::objToArr($response->data);
-        ApiBase::setRedis($redisKey,$headerArr);
+//        ApiBase::setRedis($redisKey,$headerArr);
         return array(
             'code' => 0,
             'data' => $headerArr,
         );
     }
 
-    public static function navigate($limit,$cid,$isshow=0,$sortid='asc')
+    public static function navigate($limit,$cid,$isshow=0,$sortid='desc')
     {
-        $redisKey = 'culture_navigate';
-        //判断缓存有没有该数据
-        if ($redisResult = ApiBase::getRedis($redisKey)) {
-            return array('code' => 0, 'data' => unserialize($redisResult));
-        }
+//        $redisKey = 'culture_navigate';
+//        //判断缓存有没有该数据
+//        if ($redisResult = ApiBase::getRedis($redisKey)) {
+//            return array('code' => 0, 'data' => unserialize($redisResult));
+//        }
         //没有，接口读取
         $apiUrl = ApiBase::getApiCurl() . '/api/v1/link';
         $curl = new Curl();
@@ -88,7 +88,7 @@ class ApiLink
             return array('code' => -1, 'msg' => $response->error->msg);
         }
         $navArr = ApiBase::objToArr($response->data);
-        ApiBase::setRedis($redisKey,$navArr);
+//        ApiBase::setRedis($redisKey,$navArr);
         return array(
             'code' => 0,
             'data' => $navArr,
@@ -97,11 +97,11 @@ class ApiLink
 
     public static function footer($limit,$cid,$isshow=0,$sortid='desc')
     {
-        $redisKey = 'culture_footer';
-        //判断缓存有没有该数据
-        if ($redisResult = ApiBase::getRedis($redisKey)) {
-            return array('code' => 0, 'data' => unserialize($redisResult));
-        }
+//        $redisKey = 'culture_footer';
+//        //判断缓存有没有该数据
+//        if ($redisResult = ApiBase::getRedis($redisKey)) {
+//            return array('code' => 0, 'data' => unserialize($redisResult));
+//        }
         //没有，接口读取
         $apiUrl = ApiBase::getApiCurl() . '/api/v1/link';
         $curl = new Curl();
@@ -119,7 +119,7 @@ class ApiLink
             return array('code' => -1, 'msg' => $response->error->msg);
         }
         $footerArr = ApiBase::objToArr($response->data);
-        ApiBase::setRedis($redisKey,$footerArr);
+//        ApiBase::setRedis($redisKey,$footerArr);
         return array(
             'code' => 0,
             'data' => $footerArr,

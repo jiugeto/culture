@@ -19,7 +19,7 @@
             @endforeach
 
             {{--模块名称--}}
-            @if(isset($lists)&&array_key_exists($curr_menu,$lists))<a href="/{{ $curr_menu }}">{{ $lists[$curr_menu] }}</a>@endif
+            @if(isset($lists)&&array_key_exists($curr_menu,$lists))<a href="/{{$curr_menu}}">{{$lists[$curr_menu]}}</a>@endif
 
             {{--详情--}}
             {{ isset($curr_submenu) ? '/ '.$curr_submenu['name'] : ''   }}

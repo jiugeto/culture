@@ -38,7 +38,7 @@ class ViewServiceProvider extends ServiceProvider
         );
         //前台搜索栏
         View::composer(
-            ['layout.navigate','home.search.crumb'], 'App\Http\ViewComposers\HomeSearchComposer'
+            ['layout.navigate','home.search.crumb'], 'App\Http\ViewComposers\SearchComposer'
         );
     }
 

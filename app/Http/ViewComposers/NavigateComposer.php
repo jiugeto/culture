@@ -17,7 +17,7 @@ class NavigateComposer
 
     public static function getNavigates()
     {
-        $apiLink = ApiLink::navigate(10,0,2);
+        $apiLink = ApiLink::navigate(12,0,2);
         return $apiLink['code']==0 ? $apiLink['data'] : [];
     }
 }

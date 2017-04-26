@@ -3,15 +3,15 @@ namespace App\Api\ApiBusiness;
 
 use Curl\Curl;
 
-class ApiDub
+class ApiDelivery
 {
     /**
-     * 配音公司接口
+     * 视频投放商接口
      */
 
     public static function index($limit,$pageCurr=1,$uid=0,$genre=0,$isshow=2,$del=0)
     {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/dub';
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/delivery';
         $curl = new Curl();
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
         $curl->post($apiUrl, array(
@@ -35,7 +35,7 @@ class ApiDub
 
     public static function add($data)
     {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/dub/add';
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/delivery/add';
         $curl = new Curl();
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
         $curl->post($apiUrl, $data);
@@ -51,7 +51,7 @@ class ApiDub
 
     public static function modify($data)
     {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/dub/add';
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/delivery/add';
         $curl = new Curl();
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
         $curl->post($apiUrl, $data);
@@ -67,7 +67,7 @@ class ApiDub
 
     public static function show($id)
     {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/dub/show';
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/delivery/show';
         $curl = new Curl();
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
         $curl->post($apiUrl, array(
@@ -88,7 +88,7 @@ class ApiDub
      */
     public static function getModel()
     {
-        $apiUrl = ApiBase::getApiCurl() . '/api/v1/dub/getmodel';
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/delivery/getmodel';
         $curl = new Curl();
         $curl->setHeader('X-Authorization', ApiBase::getApiKey());
         $curl->post($apiUrl, array(
