@@ -543,6 +543,17 @@
 }
 
 
+/*====== 前台最新活动 ======*/
+.active {
+    margin-top:2px;
+    width:996px;
+    height:96px;
+    border:2px solid #f9f9f9;
+    background:#f9f9f9;
+}
+a:hover .active { border:2px solid #e6e6e6; }
+
+
 
 
 

@@ -41,7 +41,6 @@ class RegisterController extends Controller
         if ($validator->fails()) {
             echo "<script>alert('验证码错误！');history.go(-1);</script>";exit;
         }
-
         //接口验证数据，写入用户表，或者返回错误信息
         $ip = Tools::getIp();
         $data = [
@@ -59,7 +58,6 @@ class RegisterController extends Controller
             echo "<script>alert('".$rstRegist['msg']."');history.go(-1);</script>";exit;
 //            return redirect(DOMAIN.'regist/fail');
         }
-
         //放入session
         $userInfo = [
             'uid'       =>  $rstRegist['data']['id'],
@@ -71,10 +69,8 @@ class RegisterController extends Controller
             'loginTime' =>  time(),
         ];
         Session::put('user',$userInfo);
-
         //将session放入redis
         \Redis::setex('cul_session', $this->redisTime, serialize($userInfo));
-
         return redirect(DOMAIN.'regist/success');
     }
 

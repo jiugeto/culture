@@ -21,7 +21,7 @@ class ApiSearch
             'keyword'   =>  $keyword,
         ));
         $response = json_decode($curl->response);
-        dd($genre,$keyword,$response);
+        dd($limit,$pageCurr,$genre,$keyword,$response);
         if ($response->error->code != 0) {
             return array('code' => -1, 'msg' => $response->error->msg);
         }

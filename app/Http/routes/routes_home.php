@@ -56,6 +56,9 @@ Route::group(['prefix'=>'/','namespace'=>'Home'],function(){
     //配音频道
     Route::get('dub/s/{genre}','DubController@index');          //s代表检索
     Route::resource('dub','DubController');
+    //最新活动
+    Route::get('active','ActivityController@index');
+    Route::get('active/{genre}/user','ActivityController@getUserList');
     //关于我们
 //    Route::get('about','AboutController@index');
 //    Route::get('about/join','AboutController@join');

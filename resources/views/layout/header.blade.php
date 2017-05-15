@@ -21,7 +21,7 @@
             <a href="javascript:;" onclick="alert('待建设！');">特效广场</a>
             {{--<a href="javascript:;" onclick="alert('待建设！');">网站试用</a>--}}
             <a href="{{env('TALK_DOMAIN')}}" target="_blank">论坛</a>
-            <a href="{{env('ONLINE_DOMAIN')}}" target="_blank">在线创作</a>
+            <a href="{{env('ONLINE_DOMAIN')}}" target="_blank">动画</a>
         </div>
         <div class="head_right">
             <a href="{{DOMAIN}}help" target="_blank">有疑问?看<span style="color:#ff4466;">帮助</span></a>

@@ -9,7 +9,7 @@
     .p_out { width:100%;text-align:center;color:grey; }
     .p_out a { padding:2px 10px;border:1px solid lightgrey;color:grey;text-decoration:none;cursor:pointer; }
     .p_out a:hover,.p_out a:hover.curr { border:1px solid red;color:red; }
-    .p_out input { padding:2px 5px;width:15px;height:20px;border:1px solid lightgrey;text-align:center;color:grey;font-size:18px;position:relative;top:3px; }
+    .p_out input { padding:2px 5px;width:15px;height:20px;border:1px solid lightgrey;text-align:center;color:grey;font-size:18px;position:relative;top:-2px; }
     .p_out p { margin-top:10px;border:0;background:0;position:relative;top:-10px; }
 </style>
 <div class="p_out">

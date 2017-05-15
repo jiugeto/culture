@@ -155,6 +155,8 @@ return [
         App\Providers\ViewServiceProvider::class,
         //图片验证码
         Mews\Captcha\CaptchaServiceProvider::class,
+        //PHPExcel
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 
@@ -212,6 +214,7 @@ return [
         'Str'       => Illuminate\Support\Str::class,
 //        'Page'      => App\Providers\PageServiceProvider::class,
 //        'Area'      => App\Providers\AreaServiceProvider::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];

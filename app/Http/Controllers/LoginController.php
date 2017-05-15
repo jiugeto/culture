@@ -54,18 +54,17 @@ class LoginController extends Controller
             'genre'=>   1,      //1代表用户,2代表管理员
             'action'=> $_SERVER['REQUEST_URI'],
         ];
-        $rstLogin = ApiUsers::doLogin($data);
-        if ($rstLogin['code'] != 0) {
-            //验证密码正确否
-            if (!(Hash::check(Input::get('password'),$rstLogin['password']))) {
-                echo "<script>alert('密码错误！');history.go(-1);</script>";exit;
-            }
-            echo "<script>alert('".$rstLogin['msg']."');history.go(-1);</script>";exit;
+        $rstUser = ApiUsers::getOneUserByUname(Input::get('username'));
+        if ($rstUser['code']!=0) {
+            echo "<script>alert('".$rstUser['msg']."');history.go(-1);</script>";exit;
         }
-
+        //验证密码正确否
+        if (!(Hash::check(Input::get('password'),$rstUser['password']))) {
+            echo "<script>alert('密码错误！');history.go(-1);</script>";exit;
+        }
         //个人资料
-        if (in_array($rstLogin['data']['isuser'],[1,2,4,50])) {
-            $personInfo = ApiPerson::getPersonInfo($rstLogin['data']['id']);
+        if (in_array($rstUser['data']['isuser'],[1,2,4,50])) {
+            $personInfo = ApiPerson::getPersonInfo($rstUser['data']['id']);
             if ($personInfo['code'] != 0) {
                 $person = array();
             } else {
@@ -77,8 +76,8 @@ class LoginController extends Controller
             }
         }
         //企业资料
-        if (in_array($rstLogin['data']['isuser'],[3,5,6,7,50])) {
-            $companyInfo = ApiCompany::getOneCompany($rstLogin['data']['id']);
+        if (in_array($rstUser['data']['isuser'],[3,5,6,7,50])) {
+            $companyInfo = ApiCompany::getOneCompany($rstUser['data']['id']);
             if ($companyInfo['code'] != 0) {
                 $company = array();
             } else {
@@ -92,16 +91,15 @@ class LoginController extends Controller
                 $company['layout'] = $companyInfo['data']['layout'] ? unserialize($companyInfo['data']['layout']) : [];
             }
         }
-
         $serial = date('YmdHis',time()).rand(0,10000);
         $userInfo = [
-            'uid' => $rstLogin['data']['id'],
+            'uid' => $rstUser['data']['id'],
             'username' => Input::get('username'),
-            'email' => $rstLogin['data']['email'],
-            'userType' => $rstLogin['data']['isuser'],
+            'email' => $rstUser['data']['email'],
+            'userType' => $rstUser['data']['isuser'],
             'serial' => $serial,
-            'area' => $rstLogin['data']['area'],
-            'address' => $rstLogin['data']['address'],
+            'area' => $rstUser['data']['area'],
+            'address' => $rstUser['data']['address'],
             'cid' => isset($companyInfo['data'])?$companyInfo['data']['id']:0,
             'loginTime' => time(),
             'person' => isset($person) ? $person : [],
@@ -109,10 +107,8 @@ class LoginController extends Controller
         ];
         $userInfo['cookie'] = $_COOKIE;
         Session::put('user',$userInfo);
-
         //将session放入redis
         \Redis::setex('cul_session', $this->redisTime, serialize($userInfo));
-
         return redirect(DOMAIN.'member');
     }
 

@@ -3,8 +3,8 @@
 
 <style>
     .qqchat { margin:20px;padding:15px 20px;width:150px;color:black;
-        position:fixed;right:60px;bottom:150px; }
-    .qqchat #bg { width:150px;height:180px;background:#c8c8c8;
+        position:fixed;right:60px;bottom:300px; }
+    .qqchat #bg { width:150px;height:210px;background:#c8c8c8;
         filter:alpha(opacity=40);-moz-opacity:0.4;opacity:0.4;
         position:absolute;top:0px;z-index:-1; }
     .qqchat b { padding:0 10px; }
@@ -47,8 +47,12 @@
         </a>
     </p>
     <p class="small">
+        <a href="javascript:;">价格举报</a><br>
+        <a href="javascript:;">交易举报</a>
+    </p>
+    <p class="small">
         Q：2857156840<br>
-        周一 -- 周六<br>
+        周一 -- 周五<br>
         09:00-17:00 在线
     </p>
 </div>

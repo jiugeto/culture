@@ -35,7 +35,7 @@ class SearchController extends BaseController
             $sesrchs = $apiSearch['data']; $total = $apiSearch['pagelist']['total'];
         }
         $pagelist = $this->getPageList($total,$prefix_url,$this->limit,$pageCurr);
-        dd($keyword);
+        dd($sesrchs);
         $result = [
             'searchs' => $sesrchs,
             'prefix_url' => $prefix_url,

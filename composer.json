@@ -12,7 +12,8 @@
         "intervention/image": "^2.3",
         "mews/captcha": "~2.0",
         "php-curl-class/php-curl-class": "^4.8",
-        "predis/predis": "1.0.*"
+        "predis/predis": "1.0.*",
+        "maatwebsite/excel":"~2.0.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

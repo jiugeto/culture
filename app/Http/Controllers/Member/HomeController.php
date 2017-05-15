@@ -72,13 +72,20 @@ class HomeController extends BaseController
      */
     public function companyInfo()
     {
+        $company = $this->company();
+        if (!$company) {
+            return array(
+                'company'   =>  array(),
+                'data'      =>  array(),
+                'field'     =>  array(),
+                'per'       =>  0,
+            );
+        }
         $fields = ['name','genre','area','address','yyzzid','areacode','tel','qq','web','fax','zipcode','email','logo',];
         $companyNum = array();
         $companyMainNum = array();
-        if ($company=$this->company()) {
-            foreach ($fields as $field) {
-                if ($v=$company[$field]) { $companyNum[] = $field; }
-            }
+        foreach ($fields as $field) {
+            if ($v=$company[$field]) { $companyNum[] = $field; }
         }
         if ($companyInfo['company'] = $this->company()) {
             $companyInfo['company']['areaName'] = AreaNameByid($this->company()['area']);

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Home;
 use App\Api\ApiBusiness\ApiSearch;
 use Redis;
 
-class SearchController extends BaseController
+class SearchBakController extends BaseController
 {
     /**
      * 前台搜索

@@ -6,7 +6,7 @@ body { font-family:'微软雅黑'; }
 .mem_con {
     margin:0 auto;
     width:1000px;
-    position:relative;top:117px;
+    position:relative;/*top:117px;*/top:8px;
 }
 .mem_float {
     float:left;
