@@ -552,6 +552,22 @@
     background:#f9f9f9;
 }
 a:hover .active { border:2px solid #e6e6e6; }
+table.active_tb { width:100%; }
+table.active_tb th {
+    padding:5px 0;
+    background:#fafafa;
+}
+table.active_tb td {
+    padding:5px 0;
+    text-align:center;
+    border-bottom:1px dashed #fafafa;
+    cursor:pointer;
+}
+table.active_tb a {
+    color:#000000;
+    text-decoration:none;
+}
+table.active_tb a:hover { color:#ff4466; }
 
 
 

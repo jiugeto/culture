@@ -58,7 +58,7 @@ Route::group(['prefix'=>'/','namespace'=>'Home'],function(){
     Route::resource('dub','DubController');
     //最新活动
     Route::get('active','ActivityController@index');
-    Route::get('active/{genre}/user','ActivityController@getUserList');
+    Route::get('active/s/{genre}','ActivityController@getActivityList');
     //关于我们
 //    Route::get('about','AboutController@index');
 //    Route::get('about/join','AboutController@join');
