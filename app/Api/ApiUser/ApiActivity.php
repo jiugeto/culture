@@ -58,6 +58,31 @@ class ApiActivity
     }
 
     /**
+     * 通过 uid
+     * 用户领取活动列表
+     */
+    public static function getUsersByUid($limit,$pageCurr=1,$uid)
+    {
+        $apiUrl = ApiBase::getApiCurl() . '/api/v1/activityuser/listbyuid';
+        $curl = new Curl();
+        $curl->setHeader('X-Authorization', ApiBase::getApiKey());
+        $curl->post($apiUrl, array(
+            'limit' =>  $limit,
+            'page'  =>  $pageCurr,
+            'uid'   =>  $uid,
+        ));
+        $response = json_decode($curl->response);
+        if ($response->error->code != 0) {
+            return array('code' => -1, 'msg' => $response->error->msg);
+        }
+        return array(
+            'code' => 0,
+            'data' => ApiBase::objToArr($response->data),
+            'pagelist' => ApiBase::objToArr($response->pagelist),
+        );
+    }
+
+    /**
      * 用户领取活动
      */
     public static function getApply($data)

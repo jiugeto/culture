@@ -12,13 +12,13 @@
             <input type="submit" class="search_text" value="搜 索" onclick="getSearch()">
             <div class="search_sel" style="top:{{explode('/',$_SERVER['REQUEST_URI'])[1]=='member'?10:5}}px;">
                 <div class="curr_sel">
-                    <span class="curr_sel_text">{{isset($searchGenre)?$searchs['genres'][$searchGenre]:'创作'}}</span>
+                    <span class="curr_sel_text">{{isset($searchGenre)?$searchs['genres'][$searchGenre]:'动画'}}</span>
                     <img src="{{PUB}}assets-home/images/sel_down.png">
                 </div>
                 <div class="sel_more">
                     <div class="sel_one">
                         <span class="curr_sel_text">
-                            {{isset($searchGenre)?$searchs['genres'][$searchGenre]:'创作'}}
+                            {{isset($searchGenre)?$searchs['genres'][$searchGenre]:'动画'}}
                         </span>
                         <img src="{{PUB}}assets-home/images/sel_down.png">
                     </div>

@@ -109,6 +109,10 @@ Route::group(['prefix'=>'member','middleware' =>'MemberAuth','namespace'=>'Membe
     Route::get('wallet/goldtoweal/{gold}','WalletController@setWealByGold');    //金币兑换
     Route::get('wallet/tiptoweal/{tip}','WalletController@setWealByTip');       //红包兑换
     Route::resource('wallet','WalletController');
+    //配音路由
+    Route::resource('dub','DubController');
+    //视频投放路由
+    Route::resource('delivery','DeliveryController');
     //活动路由
     Route::get('active/apply/{act_id}','ActivityController@getApply');
     Route::resource('active','ActivityController');

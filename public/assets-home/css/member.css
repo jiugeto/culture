@@ -222,7 +222,11 @@ a:hover li.a_li,a li.a_li_curr {
     border-top:1px solid lightgrey;
     border-bottom:1px solid lightgrey;
 }
-.list_tab td { padding:5px;font-size:14px; }
+.list_tab td {
+    padding:5px;
+    text-align:center;
+    font-size:14px;
+}
 .list_btn {
     padding:4px 10px;
     background:orangered;
